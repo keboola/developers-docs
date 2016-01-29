@@ -55,22 +55,13 @@
 				<div class="container-fluid kbc-main-content">
 
           <ol class="pull-right breadcrumb">
+            {% assign crumbs = page.url | remove:'/index.html' | split: '/' %}
             <li><a href="/">Home</a></li>
-            {% assign crumbs = page.url | split: '/' %}
-            {% assign crumbs_total = crumbs | size | minus: 1 %}
             {% for crumb in crumbs offset: 1 %}
-              {% if forloop.index == crumbs_total %}
-                <li class="active"><a href="{{ site.baseurl }}{{ page.url }}">{{page.title}}</a></li>
-                {% else %}
-                {% assign crumb_limit = forloop.index | plus: 1 %}
-                {% capture crumb_url %}{% for c in crumbs limit: crumb_limit %}{{ c | append: '/' }}{% endfor %}{% endcapture %}
-                {% capture crumb_with_index %}{{ crumb_url | append: 'index.html' }}{% endcapture %}
-                {% capture current_page %}{{ site.baseurl }}{{ page.url }}{% endcapture %}
-                {% for p in site.pages %}
-                  {% if crumb_with_index != current_page and crumb_with_index == p.url %}
-                    <li><a href="{{ crumb_with_index }}">{{ crumb | replace:'-',' ' | capitalize}}</a></li>
-                  {% endif %}
-                {% endfor %}
+              {% if forloop.last %}
+                <li>{{ crumb | replace:'-',' ' | remove:'.html' | capitalize }}</li>
+              {% else %}
+                <li><a href="{% assign crumb_limit = forloop.index | plus: 1 %}{% for crumb in crumbs limit: crumb_limit %}{{ crumb | append: '/' }}{% endfor %}">{{ crumb | replace:'-',' ' | remove:'.html' | capitalize }}</a></li>
               {% endif %}
             {% endfor %}
           </ol>
