@@ -1,6 +1,6 @@
 ---
-title: Keboola Connection User Documentation
+title: Keboola Connection Developers Documentation
 permalink: /
 ---
 
-Keboola Connection Knowledge Base
+Keboola Connection Developers Knowledge Base
