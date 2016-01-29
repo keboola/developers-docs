@@ -1,6 +1,6 @@
 ---
 title: Automate/Common tasks
-permalink: /automation/
+permalink: /automate/
 ---
 
 ## Automate/Common tasks
