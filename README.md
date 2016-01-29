@@ -1,4 +1,4 @@
-# Keboola Connection Documentation
+# Keboola Connection Developers Documentation
 
 
 ## Documentation Development
