@@ -3,8 +3,6 @@ title: Integrate
 permalink: /integrate/
 ---
 
-## Integrate KBC
-
   - Using API
   - Storage
     - API
