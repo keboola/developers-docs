@@ -6,6 +6,5 @@ permalink: /extend/
 ## Extend
 
   - Generic extractor
-  - Custom applications
-  - Docker components
-  - [Interface](/extend/interface/)
+  - [Custom Science](/extend/custom-science/)
+  - [Docker Applications](/extend/docker-applications/)
