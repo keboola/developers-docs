@@ -43,20 +43,6 @@ The user has to:
 - optionaly enter JSON configuration in the configuration field
 
 
-#### Docker extension
-
-How to create a Custom Science application
-As a developer you need to choose an existing base docker image (preferably one of ours) and create the application logic (in the envrionment of the docker image) and the application must follow our [Docker Interface](). If you are using environments supported by [Custom Science applications](), you can use the [libraries]() provided for them. You then need to provide application run command (e.g. `php myapp.php`) and optionaly initialization commands (e.g. `composer install`). Then prepare the [checklist]() and contact us so that we register your application.
-
-Summary:
-The developer has to:
-- create git repository (and follow the rules)
-- give Keboola the [checklist]() and wait for the application to be registered
-
-The user has to:
-- create configuration of the application as if it were any other KBC component
-
-
 ## Docker extension
 Docker extension provides maximum implementation flexibility but it requires the most implementation effort from you. 
 (Dis)Advantages:
@@ -71,7 +57,8 @@ Docker extension provides maximum implementation flexibility but it requires the
 - you need to maintain your own Docker image (on dockerhub or Quay)
 
 How to create a docker extension
-As a developer you need to create your own docker image and create the application logic (in the envrionment of the docker image) and the application must follow our [Docker Interface](). Then prepare the [checklist]() and contact us so that we register your application. See the [detailed guide](/extend/docker/docker-extensions)
+As a developer you need to create your own docker image and create the application logic (in the envrionment of the docker image) and the application must follow our [Docker Interface](). 
+For the docker image you should base it on an existing base docker image (preferably one of ours) and create the application logic (in the envrionment of the docker image). If you are using environments supported by [Custom Science applications](), you can use the [libraries]() provided for them. Then prepare the [checklist]() and contact us so that we register your application. See the [detailed guide](/extend/docker/docker-extensions)
 
 Summary:
 The developer has to:
