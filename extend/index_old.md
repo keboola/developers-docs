@@ -1,6 +1,6 @@
 ---
 title: Extend
-permalink: /extend/
+permalink: /extend-old/
 ---
 
 ## Extend
