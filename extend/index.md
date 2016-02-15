@@ -5,7 +5,7 @@ permalink: /extend/
 
 ## Extend
 
-The KBC environment consists of many *components* which interoperate together (e.g. Storage, Transformations). Beside the built-in components, you can extend KBC by creating extensions. Currently, there are two types of extensions:
+The KBC environment consists of many [*components*](/architecture/) which interoperate together (e.g. Storage, Transformations). Beside the built-in components, you can extend KBC by creating extensions. Currently, there are two types of extensions:
 
 * generic extractor - a specific component designated for implementing extractors for services with REST API;
 * custom application - a component extending KBC with arbitrary code. 
