@@ -1,3 +1,8 @@
+---
+title: Docker Howto
+permalink: /extend/docker/howto/
+---
+
 ## Working with docker
 To work with docker you need a running docker machine and a docker client. If you have no server at hand with docker machine, you can run it locally. To install docker machine on Win/Mac use [Docker Toolbox](https://www.docker.com/products/docker-toolbox), for other systems see the [documentation](https://docs.docker.com/machine/install-machine/). Docker Toolbox is a Oracle VM virtualbox containing a Tinycore distribution Linux, which is really a tiny OS containing only the docker machine server. Do not get confused about the Virtualbox as it really has nothing to do with Docker, it is there just to run the docker-machine. If you [set things up](?dopsat dolu) correctly, the client runs native and you don't need to worry about the VM being there.
 

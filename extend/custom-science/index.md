@@ -38,7 +38,7 @@ Test the application in KBC. Go to *Appliations* - Add new **Custom Science appl
 [TODO:obrazek]
 
 Input mapping:
-To test the above script, you can use the [sample table]. Name of the table in the Storage is not important, but make sure to set the outputmapping name to **source.cs**
+To test the above script, you can use the [sample table]. Name of the table in the Storage is not important, but make sure to set the outputmapping name to **source.csv**
 
 The same goes for output mapping - make sure to set the source (it is the source of output mapping - i.e the result of your script) to **result.csv**.
 
@@ -72,7 +72,7 @@ You can pass the application an arbitrary set of parameters:
 	# write output
 	write.csv(data, file = "/data/out/tables/result.csv", row.names = FALSE)
 
-In the above example we take advantage of our KBC docker library. It is set of helper functions so that you don't need to worry about the [configuration format]. It does not do any complex magic, so you may read the raw format if you wish.
+In the above example we take advantage of our KBC docker library. It is set of helper functions so that you don't need to worry about the [configuration format](/extend/common-interface/config-file/). It does not do any complex magic, so you may read the raw format if you wish.
 
 ### Step 2
 Commit the code and don't forget to create a new tag in the repository.
@@ -95,7 +95,7 @@ Depending on your use case this may or may not be a problem, so the following st
 
 
 ## Additional information
-Custom science is designed to fullfill direct agreement between enduser and developer. However, if you want to offer your code to all KBC customers, you can have your application registered in our KBC App store. See the [registration process].
+Custom science is designed to fullfill direct agreement between enduser and developer. However, if you want to offer your code to all KBC customers, you can have your application registered in our KBC App store. See the [registration process](/extend/registration/).
 
 ### Comparison with transformations
 Most transformations can be turned into science application and vice versa with none or very few modifications. The KBC interface and the code used in custom science application is highly similar to the one used in transformations. 

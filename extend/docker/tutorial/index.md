@@ -1,6 +1,6 @@
 ---
 title: Docker
-permalink: /extend/docker/docker-overview/
+permalink: /extend/docker/tutorial/
 ---
 
 ## Docker
