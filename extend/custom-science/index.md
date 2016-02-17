@@ -3,20 +3,26 @@ title: Custom Science
 permalink: /extend/custom-science/
 ---
 
-## Getting started with Custom Science
-
-Custom science is an application which allows the end-user to use an arbitrary git repository as a data manipulation tool in his project. Custom science application allows the easiest (and somewhat limited) extension of KBC. Creating a custom science application requires no interaction from Keboola. See the [overview](/extend/) for comparison with other customization options.
-In custom science, all your application has to do is process tables stored input CSV files and produce result tables in CSV files. We make sure that the CSV files are created in and taken from the right places and we also make sure that your application is executed in it's own isolated environment.
+Custom science is an application which allows the end-user to use an arbitrary git repository as a data manipulation 
+tool in his project. Custom science application allows the easiest (and somewhat limited) extension of KBC. Creating 
+a custom science application requires no interaction from Keboola. See the [overview](/extend/) for comparison with 
+other customization options.
+In custom science, all your application has to do is process tables stored input CSV files and produce result tables 
+in [CSV files](/extend/common-interface/). We make sure that the CSV files are created in and taken from the right places and we also make sure 
+that your application is executed in it's own isolated environment.
 
 ## Before you start:	
-- You must have a git repository (([Github](https://github.com/) or [Bitbucket](https://bitbucket.org/) is recommended, although any other host should work as well). It is easier to start with public repository.
+- You must have a git repository ([Github](https://github.com/) or [Bitbucket](https://bitbucket.org/) is recommended, 
+although any other host should work as well). It is easier to start with public repository.
 - It is recommended that you have a KBC project, where you can test your code.
 - Choose your language (currently available are: Python and R).
 
 ## Creating a simple application
 
 ### Step 1
-Create main application file in the root of your repository. Depending on the language used, this is either **main.py** or **main.R**. Here is a minimal example:
+Create main application file in the root of your repository. Depending on the language used, 
+this is either `main.py` or [`main.R`](https://github.com/keboola/docs-custom-science-example-1/blob/master/main.R). 
+Here is a minimal example:
 
 	# read input
 	data <- read.csv("/data/in/tables/source.csv");
@@ -28,34 +34,57 @@ Create main application file in the root of your repository. Depending on the la
 	write.csv(data, file = "/data/out/tables/result.csv", row.names = FALSE)
 
 ### Step 2
-Commit and create a git tag in the repository. Yes, it is really necessary to have each version tagged and we recommend that you use [Semantic versioning](http://semver.org/).
+Commit and create a git tag (Github release) in the repository. Yes, it is really necessary to have each version tagged and we recommend 
+that you use [Semantic versioning](http://semver.org/).
 
-[TODO:obrazek]
+![Github tag screenshot](/extend/custom-science/repository-tag.png)
 
 ### Step 3
-Test the application in KBC. Go to *Appliations* - Add new **Custom Science application** (choose the one with the correct language). Add configuration in which you set input and output mapping and repository.
+Test the application in KBC. Go to *Appliations* - *New Application* - *Custom Science* (choose the one with the correct 
+language). *Add configuration* in which you set input and output mapping and repository. Create a 
+[source table](/extend/custom-science/source.csv), e.g.:
 
-[TODO:obrazek]
+| number | someText |
+| -------- | --- |
+| 10 | ab |
+| 20 | cd |
+| 25 | ed |
+| 26 | fg |
+| 30 | ij |
 
-Input mapping:
-To test the above script, you can use the [sample table]. Name of the table in the Storage is not important, but make sure to set the outputmapping name to **source.csv**
+#### Input and output mapping:
+To test the above script, you can use the above sample table. Name of the table in the *Storage* is not important, 
+but make sure to set the outputmapping name to **source.csv** - that is what we expect in 
+the [sample script](https://github.com/keboola/docs-custom-science-example-1/blob/master/main.R#L2).
 
-The same goes for output mapping - make sure to set the source (it is the source of output mapping - i.e the result of your script) to **result.csv**.
+![Input mapping configuration](/extend/custom-science/input-mapping.png)
 
-Parameters:
-Leave this empty for now
+The same goes for output mapping - make sure to set the source (it is the source of output mapping - i.e 
+the result of your script) to **result.csv** (defined 
+in [sample script](https://github.com/keboola/docs-custom-science-example-1/blob/master/main.R#L8).
 
-Runtime parameters:
-Here goes the configuration of the repository. This must be entered as a [JSON formatted](http://www.w3schools.com/json/json_syntax.asp) string.
+Leave *File input mapping* empty.
+
+#### Configuration 
+Leave *parameters* empty for now. In *Runtime parameters* enter the the configuration of the repository. 
+This must be entered as a [JSON formatted](http://www.w3schools.com/json/json_syntax.asp) string.
 
 	{
-		"repository":
-		"version":
+		"repository": "https://github.com/keboola/docs-custom-science-example-1",
+		"version": "0.0.1"
 	}
 
-By running the above configuration, you should obtain a table **out.c-customscience.test1** with the following data.
+![Application configuration example](/extend/custom-science/configuration.png)
 
-[TODO:tabulka]
+By running the above configuration, you should obtain a table **out.c-main.custom-science-example** with the following data:
+
+number | someText | double_number
+--- | --- | ---
+10 | ab | 20
+20 | cd | 40
+25 | ed | 50
+26 | fg | 52
+30 | ij | 60
 
 
 ## Adding parameters

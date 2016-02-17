@@ -1,3 +1,8 @@
+---
+title: Architecture
+permalink: /architecture/docker-bundle/
+---
+
 ### Common Custom applications properties
 Our Docker component takes care of some things, which means that the Custom application itself is simpler and generally more secure.
 - authentication - The docker component makes sure that the application is run by authorized users/tokens, It is not possible to run an application anonymously. The application will does not have access to the KBC token itself, and only limited information about the project or end-user.

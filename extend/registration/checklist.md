@@ -1,4 +1,7 @@
-# Application Submission Checklist
+---
+title: Application Submission Checklist
+permalink: /extend/registration/checklist/
+---
 
 | # | Name | Note | &#9745; | Example | 
 | --- | ----- | ---- | ---- | ---- |  
