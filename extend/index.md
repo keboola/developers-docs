@@ -13,20 +13,24 @@ starting and stopping the application, reading and writing data to KBC Storage, 
 Custom extensions must adhere to a [common interface](/extend/common-interface). There are two types of Custom extensions differing
 in the level of integration and implementation flexibility:
 
-* [custom science application](/extend/custom-science)
-* [docker extensions](/extend/docker/) 
+* Custom Science application
+* Docker extensions
 
-## Custom science application
+## Custom Science Application
 
-Custom Science application is the quickest way to integrate arbitrary code into KBC. 
-(Dis)Advantages:
+[Custom Science application](/extend/custom-science) is the quickest way to integrate arbitrary code into KBC. 
 
-* + zero developer configuration, only a git repository is needed
-* + no interaction with Keboola developers needed, no acceptance process needed
-* + you do not need to work with docker at all 
-* - only predefined envrionments (currently R and Python)
-* - poor end-user experience when configuring
-* - application cannot be branded, developer cannot modify application UI
+Advantages:
+
+* zero developer configuration, only a git repository is needed
+* no interaction with Keboola developers needed, no acceptance process needed
+* you do not need to work with docker at all 
+
+Disadvantages:
+
+* only predefined envrionments (currently R and Python)
+* poor end-user experience when configuring
+* application cannot be branded, developer cannot modify application UI
 
 A Custom Science application is in fact a special component created by us, which acts as a simple wrapper around a git repository. This means that the end-user has to provide a link to the git repository, and our system will wrap it and run it as if it were a [docker extension].
 
@@ -55,18 +59,22 @@ The user has to:
 
 ## Docker extension
 
-Docker extension provides maximum implementation flexibility but it requires the most implementation effort from you.   
-(Dis)Advantages:
+[Docker extensions](/extend/docker/) provide maximum implementation flexibility but it requires the most implementation effort from you.   
 
-* + you need to fill application checklist, Keboola must accept the application
-* + application UI can be customized (input/output mapping) and branded, documentation and extended description can be provided
-* + the application can be registered as Application, Extractor or Writer
-* + the application will be automatically offered to all KBC users
-* + application environment is completely up to you, it can also be fully private
-* + standard (customizable) UI for Custom applications can be used, or your own UI can be used
-* + can be used as extractor/writer/application
-* - the application must be registered by Keboola
-* - you need to maintain your own Docker image (on dockerhub or Quay)
+Advantages:
+
+* you need to fill application checklist, Keboola must accept the application
+* application UI can be customized (input/output mapping) and branded, documentation and extended description can be provided
+* the application can be registered as Application, Extractor or Writer
+* the application will be automatically offered to all KBC users
+* application environment is completely up to you, it can also be fully private
+* standard (customizable) UI for Custom applications can be used, or your own UI can be used
+* can be used as extractor/writer/application
+
+Disadvantages:
+
+* the application must be registered by Keboola
+* you need to maintain your own Docker image (on dockerhub or Quay)
 
 ### How to create a docker extension
 As a developer you need to create your own docker image and create the application logic (in the environment of the docker image) 
