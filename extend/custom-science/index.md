@@ -90,7 +90,12 @@ number | someText | double_number
 ## Adding parameters
 
 ###Step 1
-You can pass the application an arbitrary set of parameters:
+You can pass the application an arbitrary set of parameters, in the following example we choose to use parameter `multiplier`
+	
+	# intialize application
+	library('keboola.r.docker.application')
+	app <- DockerApplication$new('/data/')
+	app$readConfig()
 
 	# read input
 	data <- read.csv("/data/in/tables/source.csv");
@@ -101,7 +106,12 @@ You can pass the application an arbitrary set of parameters:
 	# write output
 	write.csv(data, file = "/data/out/tables/result.csv", row.names = FALSE)
 
-In the above example we take advantage of our KBC docker library. It is set of helper functions so that you don't need to worry about the [configuration format](/extend/common-interface/config-file/). It does not do any complex magic, so you may read the raw format if you wish.
+In the above example we take advantage of our [KBC docker library](/extend/custom-science/custom-science-r/). 
+It is set of helper functions so that you don't need 
+to worry about the [configuration format](/extend/common-interface/config-file/). It does not do any complex magic, 
+so you may read the raw format if you wish. We have a library available both for 
+[R language](/extend/custom-science/custom-science-r/) and
+[Python language](/extend/custom-science/custom-science-python/).
 
 ### Step 2
 Commit the code and don't forget to create a new tag in the repository.
@@ -113,29 +123,49 @@ Enter the configuration in the configuration field.
 		"multiplier": 4
 	}
 
-Note that the configuration format is arbitrary and there is no validation. You should implement parameter validation in your script, otherwise the end-user may receive confusing error messages.
+Note that the configuration format is arbitrary and there is no validation. You should implement parameter 
+validation in your script, otherwise the end-user may receive confusing error messages.
+
+![Application configuration with parameters example](/extend/custom-science/configuration-2.png)
 
 
 ## Dynamic input and output mapping
-In the above example we used static input/output mapping which means that the names of CSV files are hardcoded in the application script. There are two potential problems with this:
+In the above example we used static input/output mapping which means that the names of CSV files are hardcoded in
+ the application script. There are two potential problems with this:
+
 - the end-user has to manually set those names
 - the end-user has to create input/output mapping for each source and result file. 
-Depending on your use case this may or may not be a problem, so the following step is fully optional. Also note that if your application is getting fairly complex, you might want to checkout [Docker extensions](/extend/docker).
+
+Depending on your use case this may or may not be a problem, so the following step is fully optional. 
+Also note that if your application is getting fairly complex, you might want to checkout [Docker extensions](/extend/docker).
 
 
 ## Additional information
-Custom science is designed to fullfill direct agreement between enduser and developer. However, if you want to offer your code to all KBC customers, you can have your application registered in our KBC App store. See the [registration process](/extend/registration/).
+Custom science is designed to fullfill direct agreement between enduser and developer. However, if you want 
+to offer your code to all KBC customers, you can have your application registered in our KBC App store. 
+See the [registration process](/extend/registration/).
 
 ### Comparison with transformations
-Most transformations can be turned into science application and vice versa with none or very few modifications. The KBC interface and the code used in custom science application is highly similar to the one used in transformations. 
+Most R and Python transformations can be turned into science application and vice versa with none or very 
+few modifications. The KBC interface and the code used in custom science application is highly 
+similar to the one used in transformations. 
 
 #### Usage differences:
-- Code in transformations is visible to everyone in the KBC project. In Custom Science, the code can be stored in private repository. In case you need to hide your code, you have to use Custom Science
-- Code in transformation is tied to project. If you want to share the code across diferent projects, you must use Custom Science
-- Custom science applications are versioned externally (using tags in git repository), transformations are versioned as changes in configuration in the KBC project
+- Code in transformations is visible to everyone in the KBC project. In Custom Science, the code can be 
+stored in private repository. In case you need to hide your code, you have to use Custom Science.
+- Code in transformation is tied to project. If you want to share the code across diferent 
+projects, you must use Custom Science.
+- Custom science applications are versioned externally (using tags in git repository), transformations are
+ versioned as changes in configuration in the KBC project.
 
 #### Technical diffrences:
-- File input mapping is slightly different. In transformations, there is the option to select tags, which will be used to select files from file uploads and moved to in/user directory where only the latest file with the given tag is stored. This is a simplified version of working with input files which is not available in Custom science. To select files with some tags from file uploads use `tag: fooBar` selector in input files setting. To manualy select the latest file use the file manifests.
-- The docker images in which the applications run are not exactly the same. Although they are based on same parent image, if you want to make an exact replica of the environment, make sure to use the correct image.
+- File input mapping is slightly different. In transformations, there is the option to select tags, which
+will be used to select files from file uploads and moved to in/user directory where only the latest file 
+with the given tag is stored. This is a simplified version of working with input files which is not available
+ in Custom science. To select files with some tags from file uploads, set the tag in 
+ input files setting UI. To select the latest file with a given tag, you have to use the file manifests.
+- The docker images in which the applications run are not exactly the same. Although they are based 
+on same parent image, if you want to make an exact replica of the environment, make sure to use the correct image.
 - Custom science applications can be parametrized, Transformations have no parameters.
-- In Python and R transformations, the external packages are installed automatically, in Custom applications you need to install them issuing the respective command. 
+- In Python and R transformations, the external packages are installed automatically, 
+in Custom applications you need to install them issuing the respective command. 
