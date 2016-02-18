@@ -32,15 +32,14 @@ Disadvantages:
 * poor end-user experience when configuring
 * application cannot be branded, developer cannot modify application UI
 
-A Custom Science application is in fact a special component created by us, which acts as a simple wrapper around a git repository. This means that the end-user has to provide a link to the git repository, and our system will wrap it and run it as if it were a [docker extension].
+A Custom Science application is in fact a special component wrapping application logic in a git repository. The end-user has to provide a link to your git repository, our system will wrap it and run it as if it were a [docker extension].
 
 ### How to create a Custom Science application
-As a developer you need to create the application logic (in the supported language) and 
-the application must follow our [Docker Interface](/extend/common-interface/). Generally we provide libraries which should help you in doing that. 
-Apart from the interface rules, few additional language speficic requirements may apply (such as that there must be a 
-`main.R` file) - see the [detailed guide](/extend/custom-science/). 
+As a developer, you need to implement the application logic in Python or R.
+The application must adhere to our [Docker Interface](/extend/common-interface/). We provide libraries to help you with that.
+Few additional language specific requirements may apply (e.g., an R application must have a `main.R` file) - see the [detailed guide](/extend/custom-science/). 
 
-Then you need to instruct the end user you need to create a new configuration of the *Custom Science application*
+Then you need to instruct the end user to create a new configuration of the *Custom Science application*
  (with the specific language variant). In the configuration, the user will enter link to your git repository 
  (and optionally credentials), and then he can provide specific application configuration.
 
