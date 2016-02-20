@@ -3,94 +3,82 @@ title: Extending KBC
 permalink: /extend/
 ---
 
-The KBC environment consists of many [*components*](/architecture) which interoperate together (e.g. Storage, Transformations). Beside the built-in components, you can extend KBC by creating extensions. Currently, there are two types of extensions:
+The KBC environment consists of many built-in [*components*](/architecture) which interoperate together (e.g. Storage, Transformations and Readers). You can also create KBC extensions. Currently, there are two types of extensions available:
 
-* generic extractor - a specific component designated for implementing extractors for services with REST API;
-* custom extension - a component extending KBC with arbitrary code. 
+* Generic extractor - a specific component designated for implementing extractors for services with REST API
+* Custom extension - a component extending KBC with arbitrary code
 
-Custom extensions run inside a [docker component](/architecture/docker-bundle), which takes care of: authentication, 
-starting and stopping the application, reading and writing data to KBC Storage, and application isolation. 
-Custom extensions must adhere to a [common interface](/extend/common-interface). There are two types of Custom extensions differing
-in the level of integration and implementation flexibility:
+Custom extensions can be used as Extractors, Writers and Applications. They run inside a [Docker component](/architecture/docker-bundle) which takes care of: 
 
-* Custom Science application
-* Docker extensions
+* authentication
+* starting and stopping the application 
+* reading and writing data to KBC Storage
+* application isolation
+
+They must adhere to a [common interface](/extend/common-interface). 
+
+There are two types of Custom extensions differing in the level of integration and implementation flexibility:
+
+* Custom Science application - easier to implement, less features available
+* Docker extension
 
 ## Custom Science Application
 
-[Custom Science application](/extend/custom-science) is the quickest way to integrate arbitrary code into KBC. 
+A  [Custom Science application](/extend/custom-science) is a special component wrapping application logic in a git repository. The end-user has to provide a link to your git repository, our system will wrap it and run it as if it were a [Docker extension].
+
+Using the Custom Science application is the quickest way to integrate an arbitrary code into KBC. 
 
 Advantages:
 
-* zero developer configuration, only a git repository is needed
-* no interaction with Keboola developers needed, no acceptance process needed
-* you do not need to work with docker at all 
+* Zero developer configuration, only a git repository is needed
+* No interaction with Keboola developers needed, no acceptance process 
+* No use of Docker
 
 Disadvantages:
 
-* only predefined envrionments (currently R and Python)
-* poor end-user experience when configuring
-* application cannot be branded, developer cannot modify application UI
+* Predefined environments only (currently R and Python)
+* Poor end-user experience when configuring
+* Applications cannot be branded
+* The application UI cannot be modified by the developer
 
-A Custom Science application is in fact a special component wrapping application logic in a git repository. The end-user has to provide a link to your git repository, our system will wrap it and run it as if it were a [docker extension].
 
-### How to create a Custom Science application
-As a developer, you need to implement the application logic in Python or R.
-The application must adhere to our [Docker Interface](/extend/common-interface/). We provide libraries to help you with that.
-Few additional language specific requirements may apply (e.g., an R application must have a `main.R` file) - see the [detailed guide](/extend/custom-science/). 
 
-Then you need to instruct the end user to create a new configuration of the *Custom Science application*
- (with the specific language variant). In the configuration, the user will enter link to your git repository 
- (and optionally credentials), and then he can provide specific application configuration.
+### How to Create a Custom Science Application
+As a developer, you need to implement the application logic in Python or R. The application must adhere to our [Docker Interface](/extend/common-interface/). We provide libraries to help you with that. Few additional language specific requirements may apply (e.g., an R application must have a `main.R` file) - see the [detailed guide](/extend/custom-science/). 
 
-### Summary:
-The developer has to:
+To use your *Custom Science application*, the end user should be instructed to specify its configuration (with the specific language variant): enter the address and tag of the application git repository (with credentials if necessary), and any additional application-specific configuration.
 
-* create git repository (and follow the rules)
-* give the end-user repository address and tag, optional credentials and optional configuration
-* instruct the end-user
+#### Summary
+* The developer has to place the application into a git repository
 
-The user has to:
+* The end-user has to configure the Custom science application by entering:
 
-* create configuration of Custom science application
-* enter repository URL and code version and optionally credentials in runtime configuration field
-* optionaly enter JSON configuration in the configuration field
+  * the repository address and code version (repository credentials if necessary) in the runtime configuration field
+  * any application-specific configuration as JSON in the configuration field
 
-## Docker extension
+## Docker Extension
 
-[Docker extensions](/extend/docker/) provide maximum implementation flexibility but it requires the most implementation effort from you.   
+The [Docker extension](/extend/docker/) allows for maximum implementation flexibility. At the same time, significant implementation effort is required.   
 
 Advantages:
 
-* you need to fill application checklist, Keboola must accept the application
-* application UI can be customized (input/output mapping) and branded, documentation and extended description can be provided
-* the application can be registered as Application, Extractor or Writer
-* the application will be automatically offered to all KBC users
-* application environment is completely up to you, it can also be fully private
-* standard (customizable) UI for Custom applications can be used, or your own UI can be used
-* can be used as extractor/writer/application
+* UI can be customized (input/output mapping) 
+* Standard (customizable), or your own UI  can be used
+* Can be branded; Documentation and extended description can be provided
+* Application environment is completely up to you, it can also be fully private
+* Automatically offered to all KBC users
 
 Disadvantages:
 
-* the application must be registered by Keboola
-* you need to maintain your own Docker image (on dockerhub or Quay)
+* An application checklist must be completed; Keboola must accept the application
+* Registration by Keboola is mandatory
+* You need to maintain your own Docker image (on dockerhub or Quay)
 
-### How to create a docker extension
-As a developer you need to create your own docker image and create the application logic (in the environment of the docker image) 
-and the application must follow our [Docker Interface](/extend/common-interface/). 
-For the docker image you should base it on an existing base docker image (preferably one of ours) and create the application
-logic (in the envrionment of the docker image). If you are using environments
-supported by [Custom Science applications](/extend/custom-science/), you can use the [libraries]() 
-provided for them. Then prepare the [checklist](/extend/registration/checklist/) and contact us so 
-that we register your application. See the [detailed guide](/extend/docker/docker-extensions).
+### How to Create a Docker Extension
+As a developer, you need to create your own Docker image and create the application logic in its environment. The application must follow our [Docker Interface](/extend/common-interface/). 
+The Docker image should be based on an existing base Docker image, preferably one of ours. If you are using environments supported by [Custom Science applications](/extend/custom-science/), you can use the [libraries]() provided for them. Then prepare the [checklist](/extend/registration/checklist/) and contact us so that we register your application. See the [detailed guide](/extend/docker/docker-extensions).
 
-### Summary:
-The developer has to:
+#### Summary
+* The developer has to place the application into a git repository, create a quay or dockerhub repository, and complete Keboola's [checklist](/extend/registration/checklist/) in order for the application to be registered.
 
-* create git repository (and follow the rules)
-* create quay or dockerhub repository
-* give Keboola the [checklist](/extend/registration/checklist/) and wait for the application to be registered
-
-The user has to:
-
-* create configuration of the application as if it were any other KBC component
+* The user has to configure the application as if it were any other KBC component.
