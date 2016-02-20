@@ -22,16 +22,13 @@ There are two types of Custom extensions differing in the level of integration a
 * Custom Science application - easier to implement, less features available
 * Docker extension
 
-
-| KBC Extensions     |                                  Implementation                                  |||  User Features                                                            ||| Other                                                             ||
+| KBC EXTENSIONS     |                                  IMPLEMENTATION                                  |||  USER FEATURES                                                            ||| OTHER                                                             ||
 | ------------------ | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------- || -------------------------------------------------------------------||
-|                    | implementation complexity | application environment | knowledge of Docker required | user experience during setup | can be branded   | offered to all KBC users | UI can be customized | Keboola approval and registration required  |
-| Generic Extractor  | very easy                 | configuration only      | no                           |                              | no (coming soon) | no (coming soon)         |  ???                 | ???                                         |
-| Custom Science App | easy                      | R or Python             | no                           | poor                         | no               | no                       | no                   | no                                          |
-| Docker Extension   | medium                    | any                     | yes                          |                              | yes              | yes                      | yes                  | yes                                         |
+|                    | **Implementation Complexity** | **Application Environment** | **Knowledge of Docker Required** | **Setup User Experience** | **Brandable**   | **Offered to All Users** | **Customizable UI** | **Keboola Approval/Registration Required**  |
+| **GENERIC EXTRACTOR**  | very easy                 | configuration only      | no                           |      poor                        | no (coming soon) | no (coming soon)         |  no                 | ???                                         |
+| **CUSTOM SCIENCE** | easy                      | R or Python             | no                           | poor                         | no               | no                       | no                   | no                                          |
+| **DOCKER EXTENSION**   | medium                    | any                      | yes                          |                fully customizable              | yes              | yes                      | yes                  | yes                                         |
 | ------------------ | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------- || -------------------------------------------------------------------||
-
-
 
 
 ## Custom Science Application
@@ -94,3 +91,4 @@ The Docker image should be based on an existing base Docker image, preferably on
 * The developer has to place the application into a git repository, create a quay or dockerhub repository, and complete Keboola's [checklist](/extend/registration/checklist/) in order for the application to be registered.
 
 * The user has to configure the application as if it were any other KBC component.
+
