@@ -22,6 +22,18 @@ There are two types of Custom extensions differing in the level of integration a
 * Custom Science application - easier to implement, less features available
 * Docker extension
 
+
+| KBC Extensions     |                                  Implementation                                  |||  User Features                                                            ||| Other                                                             ||
+| ------------------ | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------- || -------------------------------------------------------------------||
+|                    | implementation complexity | application environment | knowledge of Docker required | user experience during setup | can be branded   | offered to all KBC users | UI can be customized | Keboola approval and registration required  |
+| Generic Extractor  | very easy                 | configuration only      | no                           |                              | no (coming soon) | no (coming soon)         |  ???                 | ???                                         |
+| Custom Science App | easy                      | R or Python             | no                           | poor                         | no               | no                       | no                   | no                                          |
+| Docker Extension   | medium                    | any                     | yes                          |                              | yes              | yes                      | yes                  | yes                                         |
+| ------------------ | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------- || -------------------------------------------------------------------||
+
+
+
+
 ## Custom Science Application
 
 A  [Custom Science application](/extend/custom-science) is a special component wrapping application logic in a git repository. The end-user has to provide a link to your git repository, our system will wrap it and run it as if it were a [Docker extension].
