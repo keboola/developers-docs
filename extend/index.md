@@ -22,13 +22,61 @@ There are two types of Custom extensions differing in the level of integration a
 * Custom Science application - easier to implement, less features available
 * Docker extension
 
-| KBC EXTENSIONS     |                                  IMPLEMENTATION                                  |||  USER FEATURES                                                            ||| OTHER                                                             ||
-| ------------------ | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------- || -------------------------------------------------------------------||
-|                    | **Implementation Complexity** | **Application Environment** | **Knowledge of Docker Required** | **Setup User Experience** | **Brandable**   | **Offered to All Users** | **Customizable UI** | **Keboola Approval/Registration Required**  |
-| **GENERIC EXTRACTOR**  | very easy                 | configuration only      | no                           |      poor                        | no (coming soon) | no (coming soon)         |  no                 | ???                                         |
-| **CUSTOM SCIENCE** | easy                      | R or Python             | no                           | poor                         | no               | no                       | no                   | no                                          |
-| **DOCKER EXTENSION**   | medium                    | any                      | yes                          |                fully customizable              | yes              | yes                      | yes                  | yes                                         |
-| ------------------ | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------- || -------------------------------------------------------------------||
+<table>
+  <thead>
+    <tr>
+      <th rowspan="2">KBC EXTENSIONS</th>
+      <th colspan="3" style="text-align: center;">IMPLEMENTATION</th>
+      <th colspan="4" style="text-align: center;">USER FEATURES</th>
+      <th style="text-align: center;">OTHER</th>
+    </tr>
+    <tr>
+      <th>Implementation Complexity</th>
+      <th>Application Environment</th>
+      <th>Knowledge of Docker Required</th>
+      <th>Setup User Experience</th>
+      <th>Brandable</th>
+      <th>Offered to All Users</th>
+      <th>Customizable User Interface</th>
+      <th>Keboola Approval/Registration Required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>GENERIC EXTRACTOR</th>
+      <td>very easy</td>
+      <td>configuration only</td>
+      <td>no</td>
+      <td>poor</td>
+      <td>no<br>(coming soon)</td>
+      <td>no<br>(coming soon)</td>
+      <td>no</td>
+      <td>???</td>
+    </tr>
+    <tr>
+      <th>CUSTOM SCIENCE</th>
+      <td>easy</td>
+      <td>R or Python</td>
+      <td>no</td>
+      <td>poor</td>
+      <td>no</td>
+      <td>no</td>
+      <td>no</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th>DOCKER</th>
+      <td>medium</td>
+      <td>any</td>
+      <td>yes</td>
+      <td>fully customizable</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+  </tbody>
+</table>
 
 
 ## Custom Science Application
