@@ -22,13 +22,16 @@ There are two types of Custom extensions differing in the level of integration a
 * Custom Science application - easier to implement, less features available
 * Docker extension
 
+
+The following table provides an overview of the main characteristics of KBC extensions:
+
 <table>
   <thead>
     <tr>
       <th rowspan="2">KBC EXTENSIONS</th>
-      <th colspan="3" style="text-align: center;">IMPLEMENTATION</th>
-      <th colspan="4" style="text-align: center;">USER FEATURES</th>
-      <th style="text-align: center;">OTHER</th>
+      <th colspan="3" style="text-align: center;">Implementation</th>
+      <th colspan="4" style="text-align: center;">User Features</th>
+      <th style="text-align: center;">Other</th>
     </tr>
     <tr>
       <th>Implementation Complexity</th>
@@ -43,7 +46,7 @@ There are two types of Custom extensions differing in the level of integration a
   </thead>
   <tbody>
     <tr>
-      <th>GENERIC EXTRACTOR</th>
+      <th>Generic Extractor</th>
       <td>very easy</td>
       <td>configuration only</td>
       <td>no</td>
@@ -51,10 +54,10 @@ There are two types of Custom extensions differing in the level of integration a
       <td>no<br>(coming soon)</td>
       <td>no<br>(coming soon)</td>
       <td>no</td>
-      <td>???</td>
+      <td>no</td>
     </tr>
     <tr>
-      <th>CUSTOM SCIENCE</th>
+      <th>Custom Science</th>
       <td>easy</td>
       <td>R or Python</td>
       <td>no</td>
@@ -65,7 +68,7 @@ There are two types of Custom extensions differing in the level of integration a
       <td>no</td>
     </tr>
     <tr>
-      <th>DOCKER</th>
+      <th>Docker</th>
       <td>medium</td>
       <td>any</td>
       <td>yes</td>
@@ -78,6 +81,7 @@ There are two types of Custom extensions differing in the level of integration a
   </tbody>
 </table>
 
+*Note: With the exception of Generic Extractor, all KBC Extensions can be used for creating Extractors, Applications and Writers.*
 
 ## Custom Science Application
 
