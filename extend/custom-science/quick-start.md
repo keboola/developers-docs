@@ -33,6 +33,7 @@ Commit to the repository and tag it with a [git tag](TODO) (Github release), suc
 ![Github tag screenshot](/extend/custom-science/repository-tag.png)
 
 ### Step 4 - Test the Application in KBC
+
 #### Step 4.1 - Prepare Storage 
 Create a [source table](/extend/custom-science/source.csv) in *Storage*, e.g.:
 
