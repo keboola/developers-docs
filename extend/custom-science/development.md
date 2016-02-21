@@ -66,7 +66,7 @@ for Python 2.x. This is the most secure way, but you need to encrypt password fo
 
 ## Git repository contents
 Our only requirement is that the in the root of the repository a `main.R` (for R Custom Science) or `main.py` (for Python Custom Science) 
-(which will be the actual code executed by us) must be present.
+(which will be the actual code executed by us) must be present. If this requirement cannot be honored, it can be circumvented by [registering](/registration/) the application. 
 Otherwise the repository contents are arbitrary.
 However you might want to check out specific notses for [Python](/extend/custom-science/python/) or [R](/extend/custom-science/r) regarding implementation 
 details in each language.
