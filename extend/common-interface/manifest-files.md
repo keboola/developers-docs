@@ -1,6 +1,6 @@
 ---
 title: Manifest files
-permalink: /extend/common-interface/manifest-files
+permalink: /extend/common-interface/manifest-files/
 ---
 
 A manifest file gives additional information about tables and files injected to the `/data/in` folders. I also provides a way to specify options for tables and files transferred back to Storage from `/data/out` folders. Manifest files have a `.manifest` suffix to the original file.

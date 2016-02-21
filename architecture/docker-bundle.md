@@ -1,5 +1,5 @@
 ---
-title: Architecture
+title: Docker Bundle
 permalink: /architecture/docker-bundle/
 ---
 

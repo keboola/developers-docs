@@ -1,5 +1,4 @@
 
-
 .docs-search {
   position: relative;
 margin: 0 .15vw;
@@ -31,6 +30,13 @@ input.st-default-search-input {
   font-family: Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+strong {
+  font-weight: 700;
+}
+
+.nav {
+  padding-left: 10px !important;
+}
 table { border: 1px solid black; } 
 
 td,th { border: 1px solid black; padding: 4px;}

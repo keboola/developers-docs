@@ -1,5 +1,5 @@
 ---
-title: Docker Howto
+title: Howto
 permalink: /extend/docker/howto/
 ---
 

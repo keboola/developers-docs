@@ -1,5 +1,5 @@
 ---
-title: Docker
+title: Tutorial
 permalink: /extend/docker/tutorial/
 ---
 

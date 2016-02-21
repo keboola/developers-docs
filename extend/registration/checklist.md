@@ -1,5 +1,5 @@
 ---
-title: Application Submission Checklist
+title: Submission Checklist
 permalink: /extend/registration/checklist/
 ---
 
