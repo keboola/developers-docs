@@ -10,7 +10,7 @@ permalink: /extend/registration/checklist/
 | 2 | **Application type** | One of `extractor`, `writer`, `application` | &#9744; | `extractor` |
 | 3 | **Short description** | One sentence describing your app or the app you are integrating | &#9744; | `Tailor-made predictive models (recommendation engines, propensity models and many more) in R` |
 | 4 | **Full description** | Markdown or a link to a markdown document describing what the component does (shown on the application intro page)| &#9744; |  |
-| 5 | **Application icon URL** | PNG, 32x32px and 64x64px sizes on a public URL | &#9744; | `https://d3iz2gfan5zufq.cloudfront.net/images/cloud-services/docker-demo-32-1.png` | 
+| 5 | **Application icon URL** | PNG, 32x32px and 64x64px sizes on a public *HTTPS* URL | &#9744; | `https://d3iz2gfan5zufq.cloudfront.net/images/cloud-services/docker-demo-32-1.png` | 
 | 6 | **Vendor full name** | Will be visible to end-users | &#9744; | `Company LTD` | 
 | 7 | **Vendor address** |  Will be visible to end-users  | &#9744; | `1 Connected Way, BigTown, CS` | 
 | 8 | **Email address** | Will be visible to end-users and we will send error notifications to this address | &#9744; | `info@company.com` | 

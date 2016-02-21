@@ -9,12 +9,16 @@ When you develop code for Custom Science application, the following rules must b
 - The application code must follow our [common interface](/common-interface). If possible, you can use [Python](/extend/custom-science/python/) or [R](/extend/custom-science/r) librararies. 
 - There is no interaction with Keboola (we do not have to configure/approve your code or anything else). 
 You should let the end-user know what she has to do.
+- You should provide instruction on how the appliction should be setup to the end-user. This is especially:
+ - any requirements for application configuration,
+ - If you are not supporting dynamic input/output mapping, the names of input/output files.
 
 ## Git repository configuration
 You must have a git repository ready ([Github](https://github.com/) or [Bitbucket](https://bitbucket.org/) is recommended, 
 although any other host should work as well). Both private and public repositories are supported. The repository must use tags to 
 mark releases, we recommend that you use [Semantic versioning](http://semver.org/), untagged git commits cannot be used in Custom
-Science. 
+Science. Repository information is entered into the *Runtime* configuration field when creating application confiugration. The 
+repository information is not available to the application itself. 
 
 ### Public repository
 Basic *Runtime* settings for public repository are entered in JSON format: 
@@ -32,16 +36,38 @@ Basic *Runtime* settings for public repository are entered in JSON format:
 	{
 		"repository": "https://github.com/keboola/docs-custom-science-example-1",
 		"version": "0.0.1",
-        "username": "",
-        "#password": ""
+        "username": "JohnDoe",
+        "#password": "MySecretPassword"
 	}
 
-- The Git repository can be public or private, in case of private repository `username` and `#password` must be 
-present in **runtime configuration**. In case of public repository they mustn't be present.
-[Python](/extend/custom-science/python/) or [R](/extend/custom-science/r)
-(https://github.com/keboola/python-custom-application-text-splitter).
-The password to the repository must be encrypted, plain passwords are not allowed. Application ID for encryption is `dca-custom-science-r` for R applications, `dca-custom-science-python` for Python 3.x and `dca-custom-science-python2` for Python 2.x.
-The repository of a R application must contain script `main.R` in it's root which will be the actual code executed (or it will call the actual code). See an [example repository](https://github.com/keboola/r-custom-application-transpose).
-The repository of a Python application must contain script `main.py` in it's root which will be the actual code executed (or it will source the actual code). See an [example repository](https://github.com/keboola/python-custom-application-text-splitter).
-The repository information (address, version and credentials) must be entered in the runtime configuration field. 
-If you are not supporting dynamic input/output mapping, you must instruct the end-user how to set IO mapping.
+Password to the repository must be always [encrypted](/architecture/encryption/) (plain passwords are not allowed), there are two main encryption options:
+
+- encryption on configuration save
+- encrypt password beforehand
+
+#### Encryption on save
+When you enter plaintext password into the runtime setting, it will be encrypted once the configuration is saved. After that
+the password is shown only encrypted (e.g. `KBC::ComponentProjectEncrypted==UEh3raTcaLg=`). Once the password is encrypted, it cannot be 
+decrypted. The advantage of this approach is that it is very easy to use, the obivous disadvantage is that the end-user must 
+know the password to the git repository (though only when creating the configuration).
+  
+#### Encryption beforehand
+If you require that the end-user has no access to git repository password, you must encrypt it beforehand. You must use our 
+[Encryption API](/architecture/encryption/). There are three more options here:
+
+- [Base encryption](/architecture/encryption/#base-encryption) - Encrypted values will be readable in all dockerized applications.
+- [Image encryption](/architecture/encryption/#image-encryption) - Encrypted values will be readable in all instances of the specific custom-science application,
+ In the API call, the `componentId` parameter is `dca-custom-science-r` for R applications, `dca-custom-science-python` for Python 3.x and `dca-custom-science-python2` 
+for Python 2.x. This is probably the best choice to start with in a Custom Science application.  
+- [Image configuration encryption](/architecture/encryption/#image-configuration-encryption) -Encrypted values will be readable in all instances of the 
+specific custom-science application in *a single project*,
+ In the API call, the `componentId` parameter is `dca-custom-science-r` for R applications, `dca-custom-science-python` for Python 3.x and `dca-custom-science-python2` 
+for Python 2.x. This is the most secure way, but you need to encrypt password for each project in which your Custom science application will be used.
+
+## Git repository contents
+Our only requirement is that the in the root of the repository a `main.R` (for R Custom Science) or `main.py` (for Python Custom Science) 
+(which will be the actual code executed by us) must be present.
+Otherwise the repository contents are arbitrary.
+However you might want to check out specific notses for [Python](/extend/custom-science/python/) or [R](/extend/custom-science/r) regarding implementation 
+details in each language.
+
