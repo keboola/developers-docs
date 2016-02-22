@@ -37,7 +37,15 @@ strong {
 .nav {
   padding-left: 20px !important;
 }
-table { border: 1px solid black; } 
 
-td,th { border: 1px solid black; padding: 4px;}
+table { 
+  border: 1px solid black; 
+} 
 
+td, th { 
+  border: 1px solid black; padding: 4px;
+}
+
+h2, h3, h4 {
+  font-weight: 700;
+}
