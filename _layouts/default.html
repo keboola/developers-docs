@@ -28,8 +28,20 @@
 		<div class="col-xs-9 kbc-main-header-container">
 			<div class="kbc-main-header kbc-header">
 				<div class="kbc-title">
-					<h1>Keboola Connection Developers Knowledge Base</h1>
+					<h1>{{ page.title }}</h1>
 				</div>
+                    
+          <ol class="pull-right breadcrumb">
+            {% assign crumbs = page.url | remove:'/index.html' | split: '/' %}
+            <li><a href="/">Home</a></li>
+            {% for crumb in crumbs offset: 1 %}
+              {% if forloop.last %}
+                <li>{{ crumb | replace:'-',' ' | remove:'.html' | capitalize }}</li>
+              {% else %}
+                <li><a href="{% assign crumb_limit = forloop.index | plus: 1 %}{% for crumb in crumbs limit: crumb_limit %}{{ crumb | append: '/' }}{% endfor %}">{{ crumb | replace:'-',' ' | remove:'.html' | capitalize }}</a></li>
+              {% endif %}
+            {% endfor %}
+          </ol>                    
 
 			</div>
 		</div>
@@ -48,19 +60,8 @@
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 kbc-main">
 				<div class="container-fluid kbc-main-content">
 
-          <ol class="pull-right breadcrumb">
-            {% assign crumbs = page.url | remove:'/index.html' | split: '/' %}
-            <li><a href="/">Home</a></li>
-            {% for crumb in crumbs offset: 1 %}
-              {% if forloop.last %}
-                <li>{{ crumb | replace:'-',' ' | remove:'.html' | capitalize }}</li>
-              {% else %}
-                <li><a href="{% assign crumb_limit = forloop.index | plus: 1 %}{% for crumb in crumbs limit: crumb_limit %}{{ crumb | append: '/' }}{% endfor %}">{{ crumb | replace:'-',' ' | remove:'.html' | capitalize }}</a></li>
-              {% endif %}
-            {% endfor %}
-          </ol>
-          <h2>{{ page.title }}</h2>
-					{{ content }}
+
+		 {{ content }}
 				</div>
 			</div>
 

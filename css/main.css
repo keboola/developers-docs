@@ -1,8 +1,8 @@
 
 .docs-search {
   position: relative;
-margin: 0 .15vw;
-padding: 6px;
+  margin: 0 .15vw;
+  padding: 6px;
 }
 
 .docs-search input.form-control {
@@ -48,4 +48,8 @@ td, th {
 
 h2, h3, h4 {
   font-weight: 700;
+}
+
+.kbc-main>.container-fluid {
+  padding: 15px;
 }
