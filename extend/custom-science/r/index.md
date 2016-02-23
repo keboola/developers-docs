@@ -93,6 +93,11 @@ with *runtime settings*. Supply any number of input tables.
 		"version": "0.0.1"
 	}
     
+To test the code, set arbitrary number of input/output mapping tables, just keep in mind to set same number of inputs and outputs, names of the CSV files are arbitrary.
+
+ ![Dynamic mapping screenshot](/extend/custom-science/r/dynamic-mapping.png)
+  
+    
 ## KBC package integration options
 
 ### Simple example
@@ -149,6 +154,13 @@ actual code is contained in the `doSomething()` function in
 the [`R/myPackage.R`](https://github.com/keboola/docs-custom-science-example-r-package/blob/master/R/myPackage.R) file. In the code 
 itself, there is no difference to [previous example](#simple-example).
 
+You can test the sample code with this *runtime* setting:
+
+	{
+		"repository": "https://github.com/keboola/docs-custom-science-example-r-package.git",
+		"version": "0.0.2"
+	}
+     
 #### Tests 
 Tests are organized in the [/tests/](https://github.com/keboola/docs-custom-science-example-r-package/tree/master/tests) directory which contains
 - subdirectory `data/` which contains pregenerated sample data from [sandbox](/common-interface/sandbox/).

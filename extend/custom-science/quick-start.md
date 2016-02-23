@@ -16,7 +16,7 @@ You should have a KBC project, where you can test your code.
 Create a public git repository ([Github](https://github.com/) or [Bitbucket](https://bitbucket.org/) is recommended, although any other host should work as well).
 
 ### Step 2
-In the root of your repository, create the main application file [`main.R`](https://github.com/keboola/docs-custom-science-example-1/blob/master/main.R). (In Python Custom Science App, the analogous file would be called `main.py`):
+In the root of your repository, create the main application file [`main.R`](https://github.com/keboola/docs-custom-science-example-r-basic/blob/master/main.R). (In Python Custom Science App, the analogous file would be called `main.py`):
 
 	# read input
 	data <- read.csv("/data/in/tables/source.csv");
@@ -64,7 +64,7 @@ To test the application, use the **in.c-main.custom-science-example** sample tab
 ![Input mapping configuration](/extend/custom-science/input-mapping.png)
 
 #### Step 4.4 - Output Mapping
-The same goes for output mapping: make sure to map from **result.csv** (the result of your [sample script](https://github.com/keboola/docs-custom-science-example-1/blob/master/main.R#L8)) to whatever output table you want to, let's say **out.c-main.custom-science-example**.
+The same goes for output mapping: make sure to map from **result.csv** (the result of your [sample script](https://github.com/keboola/docs-custom-science-example-r-basic/blob/master/main.R#L8)) to whatever output table you want to, let's say **out.c-main.custom-science-example**.
 
 Leave *File input mapping* empty.
 
@@ -74,8 +74,8 @@ Leave *parameters* empty for now. In *Runtime parameters* enter the the configur
 This must be entered as a [JSON formatted](http://www.w3schools.com/json/json_syntax.asp) string.
 
 	{
-		"repository": "https://github.com/keboola/docs-custom-science-example-1",
-		"version": "0.0.1"
+		"repository": "https://github.com/keboola/docs-custom-science-example-r-basic",
+		"version": "0.0.2"
 	}
 
 ![Application configuration example](/extend/custom-science/configuration.png)

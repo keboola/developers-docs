@@ -24,7 +24,7 @@ repository information is not available to the application itself.
 Basic *Runtime* settings for public repository are entered in JSON format: 
 
 	{
-		"repository": "https://github.com/keboola/docs-custom-science-example-1",
+		"repository": "https://github.com/keboola/docs-custom-science-example-basic",
 		"version": "0.0.1"
 	}
     
@@ -34,7 +34,7 @@ Basic *Runtime* settings for public repository are entered in JSON format:
 `username` field and must not be encrypted. Password must be supplied encrypted in `#password`. 
 
 	{
-		"repository": "https://github.com/keboola/docs-custom-science-example-1",
+		"repository": "https://github.com/keboola/docs-custom-science-example-basic",
 		"version": "0.0.1",
         "username": "JohnDoe",
         "#password": "MySecretPassword"
