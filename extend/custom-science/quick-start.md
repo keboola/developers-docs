@@ -3,7 +3,7 @@ title: Quick Start - Creating a Custom Science Application
 permalink: /extend/custom-science/quick-start/
 ---
 
-This tutorial guides you through the process of creating a simple Custom Science application. The application logic is trivial: it takes a table with numbers as an input, and creates another table with an extra column containing those numbers multiplied by two. A test in KBC is included.
+This tutorial guides you through the process of creating a simple Custom Science application. The application logic is trivial: it takes a table with numbers as an input, and creates another table with an extra column containing those numbers multiplied by two. A test in KBC is included. The application is then extended to accept a parameter from the end-user.
 
 The tutorial has been written for [R](/extend/custom-science/r); changes necessary for [Python](/extend/custom-science/python/) are minimal.
 
@@ -28,7 +28,8 @@ In the root of your repository, create the main application file [`main.R`](http
 	write.csv(data, file = "/data/out/tables/result.csv", row.names = FALSE)
 
 ### Step 3
-Commit to the repository and tag it with a [git tag](TODO) (Github release), such as `0.0.1`. Tagging each version is essential; we recommend using [Semantic versioning](http://semver.org/).
+Commit to the repository and tag it with a [git tag](https://git-scm.com/book/en/v2/Git-Basics-Tagging) (Github release), such as `0.0.1`. 
+Tagging each version is essential; we recommend using [Semantic versioning](http://semver.org/).
 
 ![Github tag screenshot](/extend/custom-science/repository-tag.png)
 
@@ -48,8 +49,11 @@ Create a [source table](/extend/custom-science/source.csv) in *Storage*, e.g.:
 
 Name of the table in *Storage* is not important. Let's name it **in.c-main.custom-science-example**.
 
-[TODO - add text/link explaining how to create the table]
-[TODO - the output bucket has to be created as well (but the output table will be created automatically)]
+For instructions on how to create a table, go to [TODO]().
+
+The bucket to write the output of the application to has to exist.  
+We will use the **out.c-main** bucket. 
+The output table will be created automatically.
 
 #### Step 4.2 - Create the Application
 Go to *Applications* - *New Application* - *Custom Science R*, and press *Add configuration* in which you will set the input and output mapping and repository as explained below. 
@@ -60,11 +64,10 @@ To test the application, use the **in.c-main.custom-science-example** sample tab
 ![Input mapping configuration](/extend/custom-science/input-mapping.png)
 
 #### Step 4.4 - Output Mapping
-The same goes for output mapping - make sure to map from **result.csv** (the result of your [sample script](https://github.com/keboola/docs-custom-science-example-1/blob/master/main.R#L8)) to whatever output table you want to, let's say **out.c-main.custom-science-example**.
+The same goes for output mapping: make sure to map from **result.csv** (the result of your [sample script](https://github.com/keboola/docs-custom-science-example-1/blob/master/main.R#L8)) to whatever output table you want to, let's say **out.c-main.custom-science-example**.
 
 Leave *File input mapping* empty.
 
-[TODO - screenshot as with input m.]
 
 #### Step 4.5 - Configuration 
 Leave *parameters* empty for now. In *Runtime parameters* enter the the configuration of the repository. 
@@ -90,10 +93,12 @@ number | someText | double_number
 30 | ij | 60
 
 
-## Adding parameters
+## Adding Parameters
 
-###Step 1
-You can pass the application an arbitrary set of parameters, in the following example we choose to use the `multiplier` parameter.
+You can pass the application an arbitrary set of parameters. 
+As an example, we will extend the application from the previous tutorial by allowing the user to specify the multiplier. 
+
+### Step 1
 	
 	# initialize application
 	library('keboola.r.docker.application')
@@ -112,23 +117,28 @@ You can pass the application an arbitrary set of parameters, in the following ex
 In the above example, we take advantage of our [KBC Docker R library](/extend/custom-science/r/) to work easily with the [configuration format](/extend/common-interface/config-file/). There is also a variant for [Python](/extend/custom-science/python/) available.
 
 ### Step 2
+
 Commit the code and don't forget to create a new tag in the repository.
 
-### Step 3
-Enter the configuration in the parameters field.
+### Step 3 -- Test the Application in KBC
+
+Enter the configuration in the parameters field:
 
 	{
-		"multiplier": 4
+		"multiplier": 10
 	}
 
-Enter the repository in the runtime field.
+Enter the repository in the runtime field:
+
 	{
 		"repository": "https://github.com/keboola/docs-custom-science-example-r-parameters",
-		"version": "0.0.1"
+		"version": "0.0.2"
 	}
 
 
 Note that the configuration format is arbitrary and there is no validation. You should implement parameter validation in your script, otherwise the end-user may receive confusing error messages.
+
+The following screenshot summarizes all the necessary end-user configuration:
 
 ![Application configuration with parameters example](/extend/custom-science/configuration-2.png)
 
