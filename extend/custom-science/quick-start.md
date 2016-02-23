@@ -144,9 +144,13 @@ The following screenshot summarizes all the necessary end-user configuration:
 
 
 ## Dynamic input and output mapping
-In the above example we used static input/output mapping which means that the names of CSV files are hard-coded in the application script. There are two potential problems with this:
+In the above example we used static input/output mapping which means that the names of CSV files are 
+hard-coded in the application script. There are two potential problems with this:
 
 - the end-user has to manually set those names
 - the end-user has to create the input/output mapping for each source and result file. 
 
-Depending on your use case this may or may not be a problem. In case you want to use dynamic input mapping, consult the [development guide](/extend/custom-science/development/). Also note that if your application is getting fairly complex, you might want to check out [Docker extensions](/extend/docker).
+Depending on your use case this may or may not be a problem. In case you want to use 
+dynamic input mapping, consult the [development guide](/extend/custom-science/development/). 
+Also note that if your application is getting fairly complex, 
+you might want to check out [Docker extensions](/extend/docker).

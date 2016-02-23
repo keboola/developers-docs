@@ -41,6 +41,58 @@ Call `readConfig()` to actually read and parse the configuration file. The above
     "myParmeter": "myValue"
 }
 
+### Dynamic Input/Output mapping 
+In the [previous examples](/extend/custom-science/quick-start/) we have shown applications which have hardcoded
+names of input/output tables. This example shows how to read input and output mapping specified by the end-user, 
+which is accessible in the [configuration file](/extend/common-interface/config-file/). The example below demonstrates
+how to read and write tables and table manifests. File manifests are handled the same way. For a full authoritative list
+of items returned in table list and manifest contents, see [the specification](/extend/common-interface/config-file/) 
+    
+    # intialize application
+    app <- DockerApplication$new('/data/')
+    app$readConfig()
+    
+    # get list of input tables
+    tables <- app$getInputTables()
+    for (i in 1:nrow(tables)) {
+        # get csv file name 
+        name <- tables[i, 'destination'] 
+        
+        # get csv full path and read table data
+        data <- read.csv(tables[i, 'full_path'])
+        
+        # read table metadata
+        manifest <- app$getTableManifest(name)
+        if ((length(manifest$primary_key) == 0) && (nrow(data) > 0)) {
+            # no primary key present, create one
+            data[['primary_key']] <- seq(1, nrow(data))
+        } else {
+            data[['primary_key']] <- NULL
+        }
+        # do something clever
+        names(data) <- paste0('batman_', names(data))
+        
+        # get csv file name with full path from output mapping
+        outName <- app$getExpectedOutputTables()[i, 'full_path']
+        # get file name from output mapping
+        outDestination <- app$getExpectedOutputTables()[i, 'destination']
+
+        # write output data
+        write.csv(data, file = outName, row.names = FALSE)
+        
+        # write table metadata - set new primary key
+        app$writeTableManifest(outName, destination = outDestination, primaryKey = c('batman_primary_key'))
+    }
+    
+The above code is located in [sample repository](https://github.com/keboola/docs-custom-science-example-dynamic.git), so you can use it
+with *runtime settings*. Supply any number of input tables.
+
+
+	{
+		"repository": "https://github.com/keboola/docs-custom-science-example-dynamic.git",
+		"version": "0.0.1"
+	}
+    
 ## KBC package integration options
 
 ### Simple example
@@ -95,7 +147,7 @@ package in [RStudio](https://cran.r-project.org/web/packages/roxygen2/vignettes/
 With this approach you can organize your code and name your functions in any way way to your liking. In the sample repository, the
 actual code is contained in the `doSomething()` function in 
 the [`R/myPackage.R`](https://github.com/keboola/docs-custom-science-example-r-package/blob/master/R/myPackage.R) file. In the code 
-itself, there is no difference to [previous exampl](#simple-example).
+itself, there is no difference to [previous example](#simple-example).
 
 #### Tests 
 Tests are organized in the [/tests/](https://github.com/keboola/docs-custom-science-example-r-package/tree/master/tests) directory which contains
@@ -114,9 +166,33 @@ You can run the tests localy from RStudio:
 For a more thorough tutorial on developing R packages, see the [R packages book](http://r-pkgs.had.co.nz/).
 
 
-### Package Class Example
+### Subclass Example
+This example take advantage of the [library](https://github.com/keboola/r-docker-application) RC class.
+[RC classes](http://adv-r.had.co.nz/OO-essentials.html#rc) are type of classes in R. This approach is fully comparable with the
+previous [package example](#package-example). There are no major differences or (dis)advantages. The repository again has
+to have the file `main.R` in root. The difference is that we create the RS class `CustomApplicationExample` and call
+its `run()` method.     
+ 
+    devtools::install_local('/home/')
+    library(keboola.r.custom.application.subclass)
+    app <- CustomApplicationExample$new(Sys.getenv("KBC_DATA_DIR"))
+    app$run()
+    
+The name of the class `CustomApplicationExample` is completely arbitrary and is defined in 
+[`R/myApp.R'](https://github.com/keboola/docs-custom-science-example-r-subclass/blob/master/R/myApp.R#L6). The application
+code itself is formally different as all the methods are in the class so instead of:
 
-Using the Library 
+    app <- DockerApplication$new(datadir)
+    app$readConfig()
+    data['double_number'] <- data['number'] * app$getParameters()$multiplier
+
+You use only:
+
+    readConfig()
+    data['double_number'] <- data['number'] * getParameters()$multiplier
+
+
+### Using the Library 
 
 This example shows how you can take advantage of the R docker library, the code is available in git repository. Using the package simplifies working with dynamic input and output mapping and working with table and file metadata. This approach is  useful if you already have your own code and want to use the library features. The sample script is available as non-public application dca-example-r-library. The following component specification is used for the application:
 {
