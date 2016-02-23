@@ -123,7 +123,7 @@ Enter the configuration in the parameters field.
 
 Enter the repository in the runtime field.
 	{
-		"repository": "https://github.com/keboola/docs-custom-science-example-2",
+		"repository": "https://github.com/keboola/docs-custom-science-example-r-parameters",
 		"version": "0.0.1"
 	}
 
