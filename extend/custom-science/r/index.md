@@ -137,9 +137,9 @@ Wrapping the application logic into an R package makes testing and portability m
 #### Code
 Application entrypoint is [`main.R`](https://github.com/keboola/docs-custom-science-example-r-package/blob/master/main.R) in package root folder. 
 
-    devtools::install_local('/home/')
+    devtools::load_all('/home/')
     library(keboola.r.custom.application)
-    doSomething(Sys.getenv("KBC_DATA_DIR"))
+    doSomething(Sys.getenv("KBC_DATADIR"))
 
 This installs the package from `/home/` directory. Includes the package - defined 
 in [DESCRIPTION](https://github.com/keboola/docs-custom-science-example-r-package/blob/master/DESCRIPTION#L1) file and 
@@ -158,7 +158,7 @@ You can test the sample code with this *runtime* setting:
 
 	{
 		"repository": "https://github.com/keboola/docs-custom-science-example-r-package.git",
-		"version": "0.0.2"
+		"version": "0.0.5"
 	}
      
 #### Tests 
@@ -185,9 +185,9 @@ previous [package example](#package-example). There are no major differences or 
 to have the file `main.R` in root. The difference is that we create the RS class `CustomApplicationExample` and call
 its `run()` method.     
  
-    devtools::install_local('/home/')
+    devtools::load_all('/home/')
     library(keboola.r.custom.application.subclass)
-    app <- CustomApplicationExample$new(Sys.getenv("KBC_DATA_DIR"))
+    app <- CustomApplicationExample$new(Sys.getenv("KBC_DATADIR"))
     app$run()
     
 The name of the class `CustomApplicationExample` is completely arbitrary and is defined in 
@@ -203,55 +203,9 @@ You use only:
     readConfig()
     data['double_number'] <- data['number'] * getParameters()$multiplier
 
+You can test the sample code with this *runtime* setting:
 
-### Using the Library 
-
-This example shows how you can take advantage of the R docker library, the code is available in git repository. Using the package simplifies working with dynamic input and output mapping and working with table and file metadata. This approach is  useful if you already have your own code and want to use the library features. The sample script is available as non-public application dca-example-r-library. The following component specification is used for the application:
-{
-  "definition": {
-    "type": "builder",
-    "uri": "keboola/docker-custom-r",
-    "build_options": {
-      "repository": {
-        "uri": "https://github.com/keboola/r-custom-application-example-library",
-        "type": "git"
-      },
-      "commands": [
-        "git clone {{repository}} /home/"
-      ],
-      "entry_point": "Rscript --verbose --vanilla /home/main.R",
-      "version": "0.0.2"
-    }
-  },
-  "process_timeout": 21600,
-  "memory": "8192m",
-  "configuration_format": "json"
-}
-
-Extending the library
-
-This example shows how you can use the R docker library within your own library, the code is available in git repository. Wrapping your application into a package provides nice tools to code testing, portability and deployment. In this example a custom package is created which inherits from the R package class so that it automatically has all the required functions. The sample script is available as non-public application dca-example-r-package. The following component specification is used for the application:
-{
-  "definition": {
-    "type": "builder",
-    "uri": "keboola/docker-custom-r",
-    "build_options": {
-      "repository": {
-        "uri": "https://github.com/keboola/r-custom-application-example-package",
-        "type": "git"
-      },
-      "commands": [
-        "git clone {{repository}} /home/",
-        "R CMD INSTALL --no-multiarch /home/"
-      ],
-      "entry_point": "Rscript --verbose --vanilla -e 'library(keboola.r.custom.application.example.package)' -e 'app <- CustomApplicationExample$new(\"/data/\")' -e 'app$run()'",
-      "version": "0.0.2"
-    }
-  },
-  "process_timeout": 21600,
-  "memory": "8192m",
-  "configuration_format": "json"
-}
-
- in it's root . See an [example repository](https://github.com/keboola/r-custom-application-transpose).
-
+	{
+		"repository": "https://github.com/keboola/docs-custom-science-example-r-subclass.git",
+		"version": "0.0.4"
+	}
