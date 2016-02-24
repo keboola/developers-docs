@@ -41,6 +41,8 @@ Call `readConfig()` to actually read and parse the configuration file. The above
     "myParmeter": "myValue"
 }
 
+You can obtain inline help and list of library function with by running command `?DockerApplication`.
+
 ### Dynamic Input/Output mapping 
 In the [previous examples](/extend/custom-science/quick-start/) we have shown applications which have hardcoded
 names of input/output tables. This example shows how to read input and output mapping specified by the end-user, 
