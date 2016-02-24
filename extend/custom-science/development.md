@@ -8,17 +8,17 @@ However, make sure you meet the following guidelines:
 
 - Store your application in a private or public git repository.
 - Create *Runtime* settings in the Custom Science application configuration.
-- Your application code must follow our [common interface](/common-interface). If possible, use [Python](/extend/custom-science/python/) or [R](/extend/custom-science/r) libraries. 
+- Your application code must follow our [common interface](/common-interface). If necessary, use [Python](/extend/custom-science/python/) or [R](/extend/custom-science/r) libraries. 
 - Provide the end-users with instructions on setting up the application. This particularly concerns:
  
   - Any requirements for application configuration
   - The names of input/output files in case you are not supporting dynamic input/output mapping.
 
 ## Git Repository Configuration
-Have a git repository ready ([Github](https://github.com/) or [Bitbucket](https://bitbucket.org/) are recommended, 
-although any other host should work as well). Both private and public repositories are supported. Custom Science does not allow for untagged git commits.  
-Therefore all releases must be tagged; we recommend [Semantic versioning](http://semver.org/). 
-The repository information is entered into the *Runtime* configuration field when creating the application configuration. It is not available to the application itself. 
+Have a git repository ready ([Github](https://github.com/) or [Bitbucket](https://bitbucket.org/) are recommended, although any other host should work as well). 
+Both repositories, private and public, are supported. Since Custom Science does not allow untagged git commits, all releases must be tagged; 
+we recommend [Semantic versioning](http://semver.org/). The repository information is entered into the *Runtime* configuration field when creating the application configuration. 
+It is not available to the application itself. 
 
 ### Public Repository
 The basic *Runtime* settings for a public repository are entered in JSON format: 
