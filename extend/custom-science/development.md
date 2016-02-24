@@ -7,10 +7,10 @@ When developing code for your Custom Science application, there is no interactio
 However, make sure you meet the following guidelines:
 
 - Store your application in a private or public git repository.
-- Create *Runtime* settings in the Custom Science application configuration.
 - Your application code must follow our [common interface](/common-interface). If necessary, use [Python](/extend/custom-science/python/) or [R](/extend/custom-science/r) libraries. 
 - Provide the end-users with instructions on setting up the application. This particularly concerns:
  
+  - *Runtime* settings in the Custom Science application configuration.
   - Any requirements for application configuration
   - The names of input/output files in case you are not supporting dynamic input/output mapping.
 
@@ -34,8 +34,8 @@ The *Runtime* settings for a private repository require that git credentials are
 `username` field, and an encrypted password in `#password`. 
 
 	{
-		"repository": "https://github.com/keboola/docs-custom-science-example-basic",
-		"version": "0.0.1",
+        "repository": "https://github.com/keboola/docs-custom-science-example-basic",
+        "version": "0.0.1",
         "username": "JohnDoe",
         "#password": "MySecretPassword"
 	}
