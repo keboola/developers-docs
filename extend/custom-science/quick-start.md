@@ -1,5 +1,5 @@
 ---
-title: Quick Start - Creating a Custom Science Application
+title: Quick Start 
 permalink: /extend/custom-science/quick-start/
 ---
 
@@ -136,15 +136,15 @@ Enter the repository in the runtime field:
 	}
 
 
-Note that the configuration format is arbitrary and there is no validation. You should implement parameter validation in your script, otherwise the end-user may receive confusing error messages.
+Note that the configuration format is arbitrary and there is no validation. Implement parameter validation in your script, otherwise the end-user may receive confusing error messages.
 
 The following screenshot summarizes all the necessary end-user configuration:
 
 ![Application configuration with parameters example](/extend/custom-science/configuration-2.png)
 
 
-## Dynamic input and output mapping
-In the above example we used static input/output mapping which means that the names of CSV files are 
+## Dynamic Input and Output Mapping
+In the above example, we used static input/output mapping which means that the names of CSV files are 
 hard-coded in the application script. There are two potential problems with this:
 
 - the end-user has to manually set those names
@@ -152,5 +152,4 @@ hard-coded in the application script. There are two potential problems with this
 
 Depending on your use case this may or may not be a problem. In case you want to use 
 dynamic input mapping, consult the [development guide](/extend/custom-science/development/). 
-Also note that if your application is getting fairly complex, 
-you might want to check out [Docker extensions](/extend/docker).
+If your application is more complex, go to [Docker extensions](/extend/docker).

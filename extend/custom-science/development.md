@@ -16,7 +16,7 @@ However, make sure you meet the following guidelines:
 
 ## Git Repository Configuration
 Have a git repository ready ([Github](https://github.com/) or [Bitbucket](https://bitbucket.org/) are recommended, although any other host should work as well). 
-Both repositories, private and public, are supported. Since Custom Science does not allow untagged git commits, all releases must be tagged; 
+Both repositories, private and public, are supported. KBC Custom Science configuration needs to refer to a particular tag of your repository; 
 we recommend [Semantic versioning](http://semver.org/). The repository information is entered into the *Runtime* configuration field when creating the application configuration. 
 It is not available to the application itself. 
 
@@ -30,7 +30,7 @@ The basic *Runtime* settings for a public repository are entered in JSON format:
     
 
 ### Private Repository
-The *Runtime* settings for a private repository require that git credentials are supplied too: an unencrypted username in the
+The *Runtime* settings for a private repository must include git credentials: an unencrypted username in the
 `username` field, and an encrypted password in `#password`. 
 
 	{
