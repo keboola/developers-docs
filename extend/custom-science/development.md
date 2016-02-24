@@ -15,7 +15,7 @@ However, make sure you meet the following guidelines:
   - The names of input/output files in case you are not supporting dynamic input/output mapping.
 
 ## Git Repository Configuration
-Have a git repository ready ([Github](https://github.com/) or [Bitbucket](https://bitbucket.org/) are recommended, although any other host should work as well). 
+Have a git repository ready (preferably [Github](https://github.com/) or [Bitbucket](https://bitbucket.org/), although any other host should work as well). 
 Both repositories, private and public, are supported. KBC Custom Science configuration needs to refer to a particular tag of your repository; 
 we recommend [Semantic versioning](http://semver.org/). The repository information is entered into the *Runtime* configuration field when creating the application configuration. 
 It is not available to the application itself. 
@@ -31,7 +31,7 @@ The basic *Runtime* settings for a public repository are entered in JSON format:
 
 ### Private Repository
 The *Runtime* settings for a private repository must include git credentials: an unencrypted username in the
-`username` field, and an encrypted password in `#password`. 
+`username` field, and an [encrypted](/architecture/encryption/) password in `#password`. 
 
 	{
         "repository": "https://github.com/keboola/docs-custom-science-example-basic",
@@ -40,7 +40,7 @@ The *Runtime* settings for a private repository must include git credentials: an
         "#password": "MySecretPassword"
 	}
 
-As stated above, passwords to the repository must be always [encrypted](/architecture/encryption/). There are two main encryption options available:
+There are two main encryption options available:
 
 - Encryption on configuration save
 - Encrypt password beforehand
