@@ -3,7 +3,7 @@ title: Quick Start
 permalink: /extend/custom-science/quick-start/
 ---
 
-This tutorial guides you through the process of creating a simple Custom Science application. The application logic is trivial: it takes a table with numbers as an input, and creates another table with an extra column containing those numbers multiplied by two. A test in KBC is included. The application is then extended to accept a parameter from the end-user.
+This tutorial guides you through the process of creating a simple Custom Science Application. The application logic is trivial: it takes a table with numbers as an input, and creates another table with an extra column containing those numbers multiplied by two. A test in KBC is included. The application is then extended to accept a parameter from the end-user.
 
 The tutorial has been written for [R](/extend/custom-science/r); changes necessary for [Python](/extend/custom-science/python/) are minimal.
 
@@ -136,7 +136,8 @@ Enter the repository in the runtime field:
 	}
 
 
-Note that the configuration format is arbitrary and there is no validation. Implement parameter validation in your script, otherwise the end-user may receive confusing error messages.
+Note that the configuration format is arbitrary and there is no validation. 
+Implement parameter validation in your script, otherwise the end-user may receive confusing error messages.
 
 The following screenshot summarizes all the necessary end-user configuration:
 
@@ -148,7 +149,7 @@ In the above example, we used static input/output mapping which means that the n
 hard-coded in the application script. There are two potential problems with this:
 
 - the end-user has to manually set those names
-- the end-user has to create the input/output mapping for each source and result file. 
+- the end-user has to create the input/output mapping for each source and result file 
 
 Depending on your use case this may or may not be a problem. In case you want to use 
 dynamic input mapping, consult the [development guide](/extend/custom-science/development/). 

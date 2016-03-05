@@ -3,28 +3,22 @@ title: Development Guide
 permalink: /extend/custom-science/development/
 ---
 
-When developing code for your Custom Science Application, there is no interaction with Keboola required (no code configuration/approval, etc.). 
+When developing code for your Custom Science extension, there is no interaction with Keboola required (no code configuration/approval, etc.). 
 However, make sure you meet the following guidelines:
 
-- Store your application in a private or public git repository.
+- Store your extension in a private or public git repository.
 - Your application code must follow our [common interface](/common-interface). 
 If necessary, use [Python](/extend/custom-science/python/) or [R](/extend/custom-science/r) libraries. 
-- Provide the end-users with instructions on setting up the application. This particularly concerns:
+- Provide the end-users with instructions on setting up the extension. This particularly concerns:
  
-  - *Runtime* settings in the Custom Science Application configuration.
-  - Any requirements for application configuration
-  - The names of input/output files in case you are not supporting dynamic input/output mapping.
+  - Repository information in the *Runtime* settings
+  - Requirements on extension *parameters*, if relevant 
+  - The names of input/output files in case you are not supporting dynamic input/output mapping
 
 ## Git Repository Configuration
 
-Have a git repository ready (preferably [Github](https://github.com/) or [Bitbucket](https://bitbucket.org/), 
-although any other host should work as well). 
-
-Both repositories, private and public, are supported. KBC Custom Science configuration needs to refer to a particular tag of your repository; 
-we recommend [Semantic versioning](http://semver.org/). 
-
-The repository information is entered into the *Runtime* configuration field when creating the application configuration.
-It is not available to the application itself. 
+Information about the repository with extension code, is entered into the *Runtime* configuration field when creating the extension configuration.
+It is not available to the extension itself. Both repositories, private and public, are supported. KBC Custom Science configuration needs to refer to a particular tag of your repository; we recommend [Semantic versioning](http://semver.org/). 
 
 ### Public Repository
 The basic *Runtime* settings for a public repository are entered in JSON format: 
@@ -63,11 +57,11 @@ If you do not wish the end-user to have an access to the git repository password
 [Encryption API](/architecture/encryption/). There are three more options here:
 
 - [Base encryption](/architecture/encryption/#base-encryption) - Encrypted values will be readable in all dockerized applications.
-- [Image encryption](/architecture/encryption/#image-encryption) - Encrypted values will be readable in all instances of the specific Custom Science Application.
- In the API call, the `componentId` parameter is `dca-custom-science-r` for R applications, `dca-custom-science-python` for Python 3.x, and `dca-custom-science-python2` for Python 2.x. This is probably the best choice to start with in a Custom Science Application.  
-- [Image configuration encryption](/architecture/encryption/#image-configuration-encryption) - Encrypted values will be readable in all instances of the specific Custom Science Application in *a single project*.
+- [Image encryption](/architecture/encryption/#image-encryption) - Encrypted values will be readable in all instances of the specific Custom Science extension.
+ In the API call, the `componentId` parameter is `dca-custom-science-r` for R applications, `dca-custom-science-python` for Python 3.x, and `dca-custom-science-python2` for Python 2.x. This is probably the best choice to start with in a Custom Science extension.  
+- [Image configuration encryption](/architecture/encryption/#image-configuration-encryption) - Encrypted values will be readable in all instances of the specific Custom Science extension in *a single project*.
  In the API call, the `componentId` parameter is `dca-custom-science-r` for R applications, `dca-custom-science-python` for Python 3.x, and `dca-custom-science-python2` for Python 2.x. This is the most secure way, 
- but you need to encrypt a password for each project in which your Custom Science Application will be used.
+ but you need to encrypt a password for each project in which your Custom Science extension will be used.
 
 ## Git Repository Contents
 As for the contents of your git repository, we only have a single requirement. Either `main.R` (for R Custom Science) or `main.py` (for Python Custom Science) must be present in the root of the repository. 

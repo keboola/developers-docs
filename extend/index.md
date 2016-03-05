@@ -5,7 +5,7 @@ permalink: /extend/
 
 The KBC environment consists of many built-in [*components*](/architecture) which interoperate together (e.g. Storage, Transformations and Readers). You can also create KBC extensions. Currently, there are two types of extensions available:
 
-* Generic extractor - a specific component designated for implementing extractors for services with REST API
+* [Generic extractor](todo) - a specific component designated for implementing extractors for services with REST API
 * Custom extension - a component extending KBC with arbitrary code
 
 Custom extensions can be used as Extractors, Writers and Applications. They run inside a [Docker component](/architecture/docker-bundle) which takes care of: 
@@ -19,9 +19,8 @@ They must adhere to a [common interface](/extend/common-interface).
 
 There are two types of Custom extensions differing in the level of integration and implementation flexibility:
 
-* Custom Science extension - easier to implement, less features available
-* Docker extension
-
+* [Custom Science extension](/extend/custom-science/) - easier to implement, less features available
+* [Docker extension](/extend/docker/)
 
 The following table provides an overview of the main characteristics of KBC extensions:
 
@@ -82,15 +81,3 @@ The following table provides an overview of the main characteristics of KBC exte
 </table>
 
 *Note: With the exception of Generic Extractor, all KBC Extensions can be used for creating Extractors, Applications and Writers.*
-
-
-
-
-
-Do you wish to find out more about the KBC extensions?
-
-- [Generic Extractor](TODO)
-
-- [Custom Science extensions](/extend/custom-science/)
-
-- [Docker Extensions](/extend/docker/)
