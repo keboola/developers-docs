@@ -20,7 +20,7 @@ They must adhere to a [common interface](/extend/common-interface).
 There are two types of Custom extensions differing in the level of integration and implementation flexibility:
 
 * [Custom Science extension](/extend/custom-science/) - easier to implement, less features available
-* [Docker extension](/extend/docker/)
+* [Docker extension](/extend/docker/) - maximum implementation flexibility
 
 The following table provides an overview of the main characteristics of KBC extensions:
 

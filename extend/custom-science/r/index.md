@@ -3,54 +3,60 @@ title: Custom Science R
 permalink: /extend/custom-science/r/
 ---
 
-Your R Custom Science Application can be created in multiple ways (as described below). Even though there are no known limitations to the architecture of your R code, 
-we do recommend that you use our [library](https://github.com/keboola/r-docker-application). 
-It provides useful functions for working with our [environment](/extend/common-interface/). Please note: 
+Your R Custom Science Application can be created in multiple ways (as described below). There are no known limitations to the architecture of your R code. We recommend that you use our [library](https://github.com/keboola/r-docker-application). It provides useful functions for working with our [environment](/extend/common-interface/). Please note: 
 
 - The repository of your R application must always contain the `main.R` script. 
-- All result .csv files **must be** written with the `row.names = FALSE` option (otherwise KBC cannot read the file because it contains unnamed column). @@@@@
+- All result .csv files **must be** written with the `row.names = FALSE` option (otherwise KBC cannot read the file because it contains unnamed column). 
 - The output mapping in your application is always required. Your application will always produce the tables and files listed in the output mapping (even if the files were empty).
 
 ## Packages
-To install a package, use `install.packages()`. If you wish to install a package from source, use `devtools::install_github()` (and friends) . @@@@@
+To install a package, use `install.packages('packageName')`. It is not necessary to specify the repository. If you wish to install a package from source, use `devtools::install_github()` (and friends) .
 
-When installing packages, use `install.packages('packageName')` (no need to specify the repository). Here is our current [list of pre-installed packages](https://github.com/keboola/docker-base-r-packages/blob/master/init.R#L14). To use one, go to `library()`. @@@@@ If you happen to be aware of another useful standard package to be pre-installed, please let us know.
+Here is our current [list of pre-installed packages](https://github.com/keboola/docker-base-r-packages/blob/master/init.R#L14). You can use one from `library()`. If you know of another useful standard package to pre-install,we would like to hear about it.
 
 ## Using the KBC Package
-The [R application package](https://github.com/keboola/r-docker-application) provides functions to:
+The KBC [R extension package](https://github.com/keboola/r-docker-application) provides functions to:
 
 - Read and parse the configuration file and parameters - `configData` property and `getParameters()` method.
 - List input files and tables - `getInputFiles()`, `getInputTables()` methods.
 - Work with manifests containing table and file metadata - `getTableManifest()`, `getFileManifest()`, `writeTableManifest()`, `writeFileManifest()` methods.
 - List expected outputs - `getExpectedOutputFiles()` and `getExpectedOutputTables()` methods.
 
-The library is a standard R package, [available on Github](https://github.com/keboola/r-docker-application)
- (install locally with `devtools::install_github('keboola/r-docker-application', ref = 'master')`). In the production environment, this package is available by default. 
+The library is a standard R package that is available by default in the production environment. 
+It is [available on Github](https://github.com/keboola/r-docker-application), so it can be installed locally with `devtools::install_github('keboola/r-docker-application', ref = 'master')`. 
 
-To use the library and read the user-supplied configuration parameter 'myParameter': @@@@@
+To use the library to read the user-supplied configuration parameter 'myParameter':
 
     library(keboola.r.docker.application)
+    # initialize application
     app <- keboola.r.docker.application::DockerApplication$new('/data/')
     app$readConfig()
+
+
+    # access application parameter nebo neco takovyho)
     app$getParameters()$myParameter
     
-The library contains a single [RC class](http://adv-r.had.co.nz/OO-essentials.html#rc) `DockerApplication`, a parameter of the constructor is the path to the data directory. 
-Call `readConfig()` to actually read and parse the configuration file. The above would read parameter from user-supplied configuration:
+The library contains a single [RC class](http://adv-r.had.co.nz/OO-essentials.html#rc) `DockerApplication`; a parameter of the constructor is the path to the data directory. 
+Call `readConfig()` to actually read and parse the configuration file. The above would read the `myParameter` parameter from the user-supplied configuration:
 
 {
-    "myParmeter": "myValue"
+    "myParameter": "myValue"
 }
 
 You can obtain inline help and the list of library functions by running the `?DockerApplication` command.
 
 ### Dynamic Input/Output Mapping 
-In the [previous examples](/extend/custom-science/quick-start/), we have shown applications which have names of their input/output tables hard-coded. 
+In the [Quick start tutorial](/extend/custom-science/quick-start/), we have shown applications which have names of their input/output tables hard-coded. 
 This example shows how to read input and output mapping specified by the end-user,
-which is accessible in the [configuration file](/extend/common-interface/config-file/). The example below demonstrates
+which is accessible in the [configuration file](/extend/common-interface/config-file/). It demonstrates
 how to read and write tables and table manifests. File manifests are handled the same way. For a full authoritative list
 of items returned in table list and manifest contents, see [the specification](/extend/common-interface/config-file/) 
-    
-    # intialize application
+
+Note that the ‘destination’ label in the script refers to the destination from the the mappers perspective. The input mapper takes `source` tables from user’s storage, and produces `destination` tables that become the input of the extension. The output tables of the extension are consumed by the output mapper whose `destination` are the resulting tables in Storage.
+
+
+
+    # initialize application
     app <- DockerApplication$new('/data/')
     app$readConfig()
     
@@ -71,6 +77,8 @@ of items returned in table list and manifest contents, see [the specification](/
         } else {
             data[['primary_key']] <- NULL
         }
+
+
         # do something clever
         names(data) <- paste0('batman_', names(data))
         
@@ -103,7 +111,7 @@ To test the code, set an arbitrary number of input/output mapping tables. Keep i
 ## KBC Package Integration Options
 
 ### Simple Example
-In the simplest case, you can use the code from [R transformation](/???/) to create a simple R script. It must be named `main.R`.
+In the simplest case, you can use the code from an [R transformation](/???/) to create a simple R script. It must be named `main.R`.
  To see a sample R script, go to [our repository](https://github.com/keboola/docs-custom-science-example-r-parameters). 
  Despite the fact that this approach is the simplest and quickest to do, it offers limited options for testing and is generally good only for 
  one-liners (i.e. you have an existing library which does all the work, all you need to do is execute it).
@@ -112,7 +120,7 @@ our [production environment](/extend/common-interface/environment/).
  
     library('keboola.r.docker.application')
 
-    # intialize application
+    # initialize application
     app <- DockerApplication$new('/data/')
     app$readConfig()
 
@@ -128,7 +136,8 @@ our [production environment](/extend/common-interface/environment/).
 
 ### Package Example
 This example shows how an R package can be made in order to interact with our environment, the code is available in a [git repository](https://github.com/keboola/docs-custom-science-example-package.git).
-We strongly recommend this approach over the previous [simple example](#simple-example). It is more professional. 
+We strongly recommend this approach over the previous [simple example](#simple-example). 
+
 Wrapping the application logic into an R package makes testing and portability much easier, specifically:
 
 - [Writing tests](http://r-pkgs.had.co.nz/tests.html) - [Example](https://github.com/keboola/docs-custom-science-example-package/blob/master/tests/testthat/test_main.R)
@@ -153,8 +162,8 @@ package in [RStudio](https://cran.r-project.org/web/packages/roxygen2/vignettes/
 
 With this approach, you can organize your code and name your functions as you please. In the sample repository, the
 actual code is contained in the `doSomething()` function in
-the [`R/myPackage.R`](https://github.com/keboola/docs-custom-science-example-r-package/blob/master/R/myPackage.R) file. In the code 
-itself, there is no difference to [previous example](#simple-example).
+the [`R/myPackage.R`](https://github.com/keboola/docs-custom-science-example-r-package/blob/master/R/myPackage.R) file. The code 
+itself is identical to the [previous example](#simple-example).
 
 You can test the sample code with this *runtime* setting:
 
@@ -171,18 +180,18 @@ Tests are organized in the [/tests/](https://github.com/keboola/docs-custom-scie
 by copying [config_template.R](https://github.com/keboola/docs-custom-science-example-r-package/blob/master/tests/config_template.R)
 - Subdirectory `test_that/` which contains the actual [testthat tests](http://r-pkgs.had.co.nz/tests.html)
 
-You can run the tests localy from RStudio:
+You can run the tests locally from RStudio:
  
  ![RStudio tests](/extend/custom-science/r/rstudio-tests.png)
  
-Or you can set them to run automatically on [Travis](https://travis-ci.org/) every time you push into your git repository. For that you can use the provided
+Or you can set them to run automatically using  [Travis](https://travis-ci.org/) continuous integration server every time you push into your git repository. For that you can use the provided
 [travis.yml](https://github.com/keboola/docs-custom-science-example-r-package/blob/master/.travis.yml) file.
 
 For a more thorough tutorial on developing R packages, see the [R packages book](http://r-pkgs.had.co.nz/).
 
 
 ### Subclass Example
-This example takes advantage of the [library](https://github.com/keboola/r-docker-application) RC class.
+This example defines a subclass of the `DockerApplication` RC class from the [KBC R package’s](https://github.com/keboola/r-docker-application).
 [RC classes](http://adv-r.had.co.nz/OO-essentials.html#rc) are a type of classes in R. This approach is fully comparable with the
 previous [package example](#package-example). There are no major differences or (dis)advantages. The repository again has
 to have the file `main.R` in its root. The difference is that we create the RS class `CustomApplicationExample` and call
@@ -195,13 +204,13 @@ its `run()` method.
     
 The name of the class `CustomApplicationExample` is completely arbitrary and is defined in 
 [`R/myApp.R'](https://github.com/keboola/docs-custom-science-example-r-subclass/blob/master/R/myApp.R#L6). The application
-code itself is formally different as all the methods are in the class, so instead of: @@@@@
+code itself is formally different as all the methods are in the class, so instead of:
 
     app <- DockerApplication$new(datadir)
     app$readConfig()
     data['double_number'] <- data['number'] * app$getParameters()$multiplier
 
-You use only:
+You use only within the body of `CustomApplicationExample`’s `run` method:
 
     readConfig()
     data['double_number'] <- data['number'] * getParameters()$multiplier
@@ -212,3 +221,5 @@ You can test the sample code with this *runtime* setting:
 		"repository": "https://github.com/keboola/docs-custom-science-example-r-subclass.git",
 		"version": "0.0.4"
 	}
+
+

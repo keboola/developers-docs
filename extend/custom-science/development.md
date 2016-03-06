@@ -66,7 +66,6 @@ If you do not wish the end-user to have an access to the git repository password
 ## Git Repository Contents
 As for the contents of your git repository, we only have a single requirement. Either `main.R` (for R Custom Science) or `main.py` (for Python Custom Science) must be present in the root of the repository. 
 This is the actual code executed by KBC when running the extension. 
-If this requirement cannot be met, it can be circumvented by [registering](/registration/) the extension. 
 Otherwise the repository contents are arbitrary.
 However, you might want to take a look at the specific notes on implementation details for [Python](/extend/custom-science/python/) or [R](/extend/custom-science/r).
 
