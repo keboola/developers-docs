@@ -10,7 +10,7 @@ Your R Custom Science Application can be created in multiple ways (as described 
 - The output mapping in your application is always required. Your application will always produce the tables and files listed in the output mapping (even if the files were empty).
 
 ## Packages
-To install a package, use `install.packages('packageName')`. It is not necessary to specify the repository. If you wish to install a package from source, use `devtools::install_github()` (and friends) .
+To install a package, use `install.packages('packageName')`. It is not necessary to specify the repository. If you wish to install a package from source, use `devtools::install_github()` (and friends).
 
 Here is our current [list of pre-installed packages](https://github.com/keboola/docker-base-r-packages/blob/master/init.R#L14). You can use one from `library()`. If you know of another useful standard package to pre-install,we would like to hear about it.
 
@@ -23,7 +23,7 @@ The KBC [R extension package](https://github.com/keboola/r-docker-application) p
 - List expected outputs - `getExpectedOutputFiles()` and `getExpectedOutputTables()` methods.
 
 The library is a standard R package that is available by default in the production environment. 
-It is [available on Github](https://github.com/keboola/r-docker-application), so it can be installed locally with `devtools::install_github('keboola/r-docker-application', ref = 'master')`. 
+It is [available on Github](https://github.com/keboola/r-docker-application), so it can be installed locally with `devtools::install_github('keboola/r-docker-application', ref = 'master')`.
 
 To use the library to read the user-supplied configuration parameter 'myParameter':
 
@@ -50,11 +50,9 @@ In the [Quick start tutorial](/extend/custom-science/quick-start/), we have show
 This example shows how to read input and output mapping specified by the end-user,
 which is accessible in the [configuration file](/extend/common-interface/config-file/). It demonstrates
 how to read and write tables and table manifests. File manifests are handled the same way. For a full authoritative list
-of items returned in table list and manifest contents, see [the specification](/extend/common-interface/config-file/) 
+of items returned in table list and manifest contents, see [the specification](/extend/common-interface/config-file/)
 
-Note that the ‘destination’ label in the script refers to the destination from the the mappers perspective. The input mapper takes `source` tables from user’s storage, and produces `destination` tables that become the input of the extension. The output tables of the extension are consumed by the output mapper whose `destination` are the resulting tables in Storage.
-
-
+Note that the `destination` label in the script refers to the destination from the the mappers perspective. The input mapper takes `source` tables from user's storage, and produces `destination` tables that become the input of the extension. The output tables of the extension are consumed by the output mapper whose `destination` are the resulting tables in Storage.
 
     # initialize application
     app <- DockerApplication$new('/data/')
@@ -189,9 +187,8 @@ Or you can set them to run automatically using  [Travis](https://travis-ci.org/)
 
 For a more thorough tutorial on developing R packages, see the [R packages book](http://r-pkgs.had.co.nz/).
 
-
 ### Subclass Example
-This example defines a subclass of the `DockerApplication` RC class from the [KBC R package’s](https://github.com/keboola/r-docker-application).
+This example defines a subclass of the `DockerApplication` RC class from the [KBC R package's](https://github.com/keboola/r-docker-application).
 [RC classes](http://adv-r.had.co.nz/OO-essentials.html#rc) are a type of classes in R. This approach is fully comparable with the
 previous [package example](#package-example). There are no major differences or (dis)advantages. The repository again has
 to have the file `main.R` in its root. The difference is that we create the RS class `CustomApplicationExample` and call
@@ -210,7 +207,7 @@ code itself is formally different as all the methods are in the class, so instea
     app$readConfig()
     data['double_number'] <- data['number'] * app$getParameters()$multiplier
 
-You use only within the body of `CustomApplicationExample`’s `run` method:
+You use only within the body of `CustomApplicationExample`'s `run` method:
 
     readConfig()
     data['double_number'] <- data['number'] * getParameters()$multiplier
@@ -221,5 +218,3 @@ You can test the sample code with this *runtime* setting:
 		"repository": "https://github.com/keboola/docs-custom-science-example-r-subclass.git",
 		"version": "0.0.4"
 	}
-
-
