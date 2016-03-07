@@ -4,7 +4,8 @@ permalink: /extend/docker/
 ---
 
 ## Docker Extensions
-Docker extensions allow you to extend KBC in a more flexible way than [Custom Science extensions](/extend/custom-science/). At the same time, significant implementation effort on your part is required. 
+Docker extensions allow you to extend KBC in a more flexible way than [Custom Science](/extend/custom-science/). At the same time, significant implementation effort on your part is required. In Docker extensions, the data interface is very similar to [transformations](/?/) and [Custom Science](/extend/custom-science/) - data are exchanged as CSV files in designated directories.
+
 
 Advantages:
 
@@ -20,17 +21,11 @@ Disadvantages:
 * Extension [registration](/extend/registration/)by Keboola is required
 * Maintaining your own Docker image is necessary (on dockerhub or Quay)
 
-
-If you are new to extending KBC with your own code, you might want to start by creating a simple [Custom Science extension](/extend/custom-science/) first. Any Custom Science extension can be very easily converted to a Docker extension. 
-
-In Docker extensions, the data interface is very similar to [transformations](/?/) and [Custom Science](/extend/custom-science/) - 
-data are exchanged as CSV files in designated directories.
-
 See the [overview](/extend/) for comparison with other customization options.
 
 
 ### How to Create a Docker Extension
-
+If you are new to extending KBC with your own code, you might want to start by creating a simple [Custom Science extension](/extend/custom-science/) first. Any Custom Science extension can be very easily converted to a Docker extension. 
 
 Before You Start, Make Sure to
 
@@ -102,9 +97,10 @@ To deploy the application to production, it must first be registered. Currently 
 
 There are two modes for deployment:
 
-- automatic: use tag *latest* or *master* on the docker image. If you commit code to your application repository and a([utoamtically) rebuild] the image, the next time time your application is run, it will be updated to the latest version
+- automatic: use tag *latest* or *master* on the docker image. If you commit code to your application repository and [(automatically) rebuild] the image, the next time time your application is run, it will be updated to the latest version
 - manual: use [Semantic versioning](http://semver.org/ versioning tags on your docker images. Let us know when you want to change the image tag to a new version. 
 
 At the beginning, it is probably more straightforward to work in the automatic mode because your deployment is fully automated and requires no interaction from us. Once the application gets more mature, you should probably switch to manual versioning and perhaps notify your users about modifications.
 
 Note that when you register the application, there is the option to hide that application from the application store. This is useful if you want to continue testing and developing the application without making it available to all KBC users. In such case, the application configuration can be created by accessing the URL http:///.../ or - as everything else - through the API.
+
