@@ -24,7 +24,13 @@ Each extension will receive a **Generic UI**. The generic UI will always show a 
 [TODO:doplnit moznosti IO mappingu v UI - where/tagy u FU apod]
 
 ### Hide Extension from KBC App Store
-You might want to test your extension before it is made available to all users. This is possible - the extension can be hidden from the list of all components (UI flag excludeFromNewList). However, this does not prevent anyone from using it.
-To use a non-published extension, you can create the configuration using the [component API](http://docs.keboola.apiary.io/#reference/components/create-config/create-config). Or visit directly the following URL: https://connection.keboola.com/admin/projects/{projectId}/applications/{componentId}
-When your extension is registered, you will obtain *componentId*.
+You might want to test your extension before it is made available to all users. This is possible - the extension can be 
+hidden from the list of all components (UI flag `excludeFromNewList`). 
+This is useful if you want to continue testing and developing the application without making it available to all KBC users.
+However, this does not really prevent anyone from using it.
+To use a non-published extension, you can create the configuration using 
+the [component API](http://docs.keboola.apiary.io/#reference/components/create-config/create-config). 
+Or visit directly the following URL: https://connection.keboola.com/admin/projects/{projectId}/applications/{componentId}
+*projectid* is simply the ID of your KBC project and when your extension is registered, 
+you will obtain *componentId* (e.g. _myCompany.acmeApplication_).
 
