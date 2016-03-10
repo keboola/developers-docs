@@ -1,46 +1,59 @@
 ---
 title: Working with docker
-permalink: /extend/docker/howto/
+permalink: /extend/docker/tutorial/howto/
 ---
 
-To work with docker you need a running [docker machine]() and a [docker client](). If you have no server at hand 
-with docker machine, you can run it locally. To install docker machine on Win/Mac 
+Here we will guide you through basic steps, which are necessary for developing docker images for 
+KBC - this is a very limited set of docker features, so you don't really need to know everyting 
+about the docker stack.
+We don't aim to replace the very nice official tutorials for
+[Windows](https://docs.docker.com/windows/step_one/) and [Mac OS X](https://docs.docker.com/mac/) and 
+a whole list of other [Tutorials](https://docs.docker.com/mac/).
+
+To work with docker you need a running [docker machine server](https://docs.docker.com/machine/)
+and a [docker engine client](https://docs.docker.com/engine/quickstart/). If you have no server at hand 
+with docker machine, you can run everything locally. To install docker machine on Win/Mac 
 use [Docker Toolbox](https://www.docker.com/products/docker-toolbox) (this will also install docker client), for 
 other systems see the [documentation](https://docs.docker.com/machine/install-machine/). 
-Docker Toolbox is a Oracle VM virtualbox containing a Tinycore distribution Linux, which is really a tiny OS 
-containing only the docker machine server. Do not get confused about the Virtualbox as it really has nothing 
-to do with Docker, it is there just to run the docker-machine. If you [set things up](/extend/docker/sharing-files/) 
-correctly, the client runs native and you don't need to worry about the VM being there.
+
+Docker Toolbox is actually Oracle VM VirtualBox image containing a Tinycore distribution Linux, 
+which is really a tiny OS containing only the docker machine server. Do not get confused about 
+the VirtualBox as it really has nothing to do with Docker, it is there just to run the 
+docker-machine. Apart from [some issues with sharing files](/extend/docker/sharing-files/)  
+you don't need to worry about the VM being there.
 
 ## Getting started
 If you have a ready docker machine (local or remote) and docker client, you can start playing with docker. 
 To test that everything is running correctly you can start with example 
-from [documentation](https://docs.docker.com/engine/userguide/containers/dockerizing/)
+from [documentation](https://docs.docker.com/engine/userguide/containers/dockerizing/).
+If you use DockerToolbox, start by running the following commands in 
+[Docker Quickstart Terminal](https://docs.docker.com/engine/installation/windows/#using-the-docker-quickstart-terminal):
 
-```
-docker run hello-world
-```
+    docker run hello-world
 
 or
 
-```
-docker.io/library/hello-world:latest
-```
+    docker.io/library/hello-world:latest
 
 If this works, you can use any image published in some docker 
 registry e.g. [Docker Hub](https://hub.docker.com/) or [Quay](https://quay.io/).
-If the above fails, make sure that your client is set up properly, if you are using DockerToolbox, the following might help
-- start Docker Quickstart terminal, watch for any errors, particulary certificates and network
-- if things work from Quickstart terminal, but not from normal command line, you need to verify [environment settings]() 
-(or keep using the Quickstart terminal)
-- if things work nowhere, you might want to recreate your docker machine
-- If neither helps, uninstall docker toolbox and oracle VM, reboot, and install the latest Docker toolbox version again
+If the above fails, make sure that your client is set up properly, if you are using Docker Toolbox, the following might help:
+- start *Docker Quickstart Terminal*, watch for any errors, particulary certificates and network
+- if things work from Quickstart terminal, but not from normal command line, you need to set up 
+[environment settings](https://docs.docker.com/engine/installation/windows/#using-docker-from-windows-command-prompt-cmd-exe) 
+by running `docker-machine env --shell cmd` which will give you the necessary environment variables. You can then set
+[those permanently](http://www.computerhope.com/issues/ch000549.htm). (or keep using the Quickstart Terminal)
+- if things work nowhere, you might want to 
+[recreate your docker machine](https://docs.docker.com/machine/get-started/) by running
+`docker-machine rm default` and `docker-machine create --driver=virtualbox default` 
+- If neither helps, uninstall both Docker Toolbox and Oracle VM VirtualBox, reboot, and install 
+the latest Docker toolbox version again.
 
 
-## Useful commands
-- `docker run` - run an image (create a container and run the command in `ENTRYPOINT` section of dockerfile)
-- `docker build` - build in image (execute instructions in Dockerfile and create a runnable image)
-- `docker-machine ls` - if you run your docker server localy, this will give you its IP address and state
+## Generally useful commands
+- `docker run` - run an image (create a container and run the command in `ENTRYPOINT` section of *Dockerfile*)
+- `docker build` - build in image (execute instructions in *Dockerfile* and create a runnable image)
+- `docker-machine ls` - this will give you list of running docker servers its IP address and state
 
 
 ## Creating your own image
@@ -64,68 +77,137 @@ will be executed when the image is run, this is the command that will actually r
 Note that in dockerfile, each instruction is executed in it's own shell, therefore you *MUST* use instructions
 `ENV` and `WORKDIR` to set environment variables and current directory.
 
-## Sample Image
+### Sample Image
 Create an empty directory and it create a Dockerfile with the following contents.
 
-```
-FROM centos
-ENTRYPOINT ping -c 2 example.com
-```
+    FROM quay.io/keboola/base
+    ENTRYPOINT ping -c 2 example.com
 
-The `FROM` instruction means that we start with base [centos](https://hub.docker.com/_/centos/) image. 
+The `FROM` instruction means that we start with our [base image](https://quay.io/repository/keboola/base)
+whin in turn is based on [CentOS](https://hub.docker.com/_/centos/) image. 
 Second instruction means that when you run the image, it will ping _example.com_ twice and exit. 
-When you run `docker build .` you should see an output like this:
+When you run
+ 
+    docker build .
+    
+you should see an output like this:
 
-```
-Sending build context to Docker daemon 2.048 kB
-Step 1 : FROM centos
- ---> 61b442687d68
-Step 2 : ENTRYPOINT ping -c 2 example.com
- ---> Running in d05f349a8774
- ---> 183b626b8ac6
-Removing intermediate container d05f349a8774
-Successfully built 183b626b8ac6
-```
+    Sending build context to Docker daemon 3.584 kB
+    Step 1 : FROM quay.io/keboola/base
+    latest: Pulling from keboola/base
+    a3ed95caeb02: Already exists
+    3286cdf780ef: Already exists
+    ecfdc5e942e9: Already exists
+    Digest: sha256:cbd64500481e64bff852f8a34ab7fdcd35befb03afabde29adb6cf33643f8e2d
+    Status: Downloaded newer image for quay.io/keboola/base:latest
+    ---> 4ed770742c49
+    Step 2 : ENTRYPOINT ping -c 2 example.com
+    ---> Running in 2bb58014055f
+    ---> b818507de866
+    Removing intermediate container 2bb58014055f
+    Successfully built b818507de866
 
-You can then run the image using `docker run -i 183b626b8ac6`. The switch _-i_ is important for receiving interactive output. 
-Note that image and container Ids can be abrevaited, so you can also use `docker run -i 183`
+The `b818507de866` is volatile image hash, which is used to refer to the image and can be abreviated to first three 
+characters (`b81` in this case).
+Additionally, you can name the image by passsing the `--tag` option, e.g. 
 
-Second instruction will install the _iputils_ packages. The switch _-y_ is very important because the 
-build process has to run non-interactively. When building your own image, it is very usefull to be able
- to run arbitrary commands in the image, you can do so by overriding the entrypoint using
-`docker run -i -t --entrypoint=/bin/bash 183`. 
-This will give you a shell inside the image where you can run arbitrary commands. Don't forget though that
- whatever you do will be lost once you exit (aka terminate) the container.
+    docker build --tag=my-image .
+
+When an image is built, you can then run it image using `docker run -i b81` or 
+
+    docker run -i my-image . 
+     
+The switch _-i_ is important for receiving interactive output. You should see an output like this:
+
+    docker run -i my-image
+    PING example.com (93.184.216.34) 56(84) bytes of data.
+    64 bytes from 93.184.216.34: icmp_seq=1 ttl=50 time=121 ms
+    64 bytes from 93.184.216.34: icmp_seq=2 ttl=50 time=121 ms
+
+    --- example.com ping statistics ---
+    2 packets transmitted, 2 received, 0% packet loss, time 1000ms
+    rtt min/avg/max/mdev = 121.615/121.721/121.828/0.364 ms
+
+When building your own image, it is very usefull to be able
+to run arbitrary commands in the image, you can do so by overriding the entrypoint using the `--entrypoint` 
+option (which means that your application won't execute, you'll have to run i manually). The `-t`
+ option opens interactive terminal: 
+
+    `docker run -i -t --entrypoint=/bin/bash my-image`.
 
 
-Dockerfile gotchas:
-- Make absolutely sure that the script requires no interaction.
+### Installing things
+Chances are that your application requires something special. You can install whatever you need
+using standard commands. You can create Dockerfile:
+
+    FROM quay.io/keboola/base
+    RUN yum -y install php-cli
+    ENTRYPOINT php -r "echo 'Hello world from PHP';"
+
+The `RUN` command will install the specified package `php-cli`. You can build the image with:
+
+    docker build --tag=my-image . 
+    
+And then run the image (and create a new container):
+
+    docker run -i my-image
+
+Which will give you:
+    
+    Hello world from PHP
+
+
+### Loading files into image 
+When you need to add files into your image, you do so using the *build context* (which is simply
+the directory in which *Dockerfile* is and in which you are building the image). Create a `test.php`
+file in the same directory as *Dockerfile* with the following contents: 
+
+    <?php
+
+    echo "Hello world from PHP file";
+
+Then change the Dockerfile to:
+
+    FROM quay.io/keboola/base
+    RUN yum -y install php-cli
+    COPY . /home/
+    ENTRYPOINT php /home/test.php
+
+The `COPY` command will copy the entire contents of the directory with Dockerfile into the `/home/`
+directory inside the image. The `ENTRYPOINT` command then simply executes the file when the image 
+is run. When you `docker build` and `docker run` the image, you will receive:
+
+    Hello world from PHP file
+
+
+## Dockerfile gotchas
+- Make absolutely sure that the *Dockerfile* script requires no interaction.
 - Each Dockerfile instruction runs in its own shell and there is no state maintained between them. 
-This means that having `RUN export foo=bar` makes no sense. You have to use `ENV` instruction to create environment variables.
-- When you look at [existing dockerfiles](https://github.com/keboola/docker-base-python/blob/master/Dockerfile), 
+This means that e.g. having `RUN export foo=bar` makes no sense. You have to use `ENV` instruction
+to create environment variables.
+- When you look at [existing dockerfiles](https://github.com/keboola/docker-base-php70/blob/master/Dockerfile), 
 you will realize that commands are squashed together 
-to a [single instruction](https://github.com/keboola/docker-base-python/blob/master/Dockerfile#L30). This is 
+to a [single instruction](https://github.com/keboola/docker-base-php70/blob/master/Dockerfile#L9). This is 
 done because each instruction creates a *layer* and there are a limited number of layers (layers are counted for the base 
 images too). However this approache makes debugging more complicated so you better start with having:
 
-```
-RUN instruction1
-RUN instruction2
-```
+    RUN instruction1
+    RUN instruction2
 
 and only once you are sure the image builds correctly and you are happy with the result, change this to:
 
-```
-RUN instruction1 \
-	&& instruction2
-```
+    RUN instruction1 \
+        && instruction2
 
 - When you refer to files on the internet make sure that they are available publicly, so that the image can be 
 rebuilt by a docker registry.
 - Be careful about storing private things in the image (like credentials or keys), they will remain in 
 the image unless you delete them.
-- Be sure to delete temporary files, as they bloat the image.
+- Be sure to delete temporary files, as they bloat the image. That's why we add `yum clean all` everywhere.
+- Consult 
+the [Dockerfile Best Practices](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/) 
+for more detailed information 
 
-
-## Setting up shared folders
-TODO
+The above code is available in a [sample repository](https://github.com/keboola/docs-docker-example-image).
+Now that you are able to create dockerized applications, you can get yourself familiar with
+[docker registry](/extend/docker/tutorial/automated-build). 
