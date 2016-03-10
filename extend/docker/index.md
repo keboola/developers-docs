@@ -32,19 +32,24 @@ If you are new to extending KBC with your own code, you might want to start by c
 simple [Custom Science extension](/extend/custom-science/) first. Any Custom Science extension can be very easily 
 converted to a Docker extension. 
 
-Before You Start, Make Sure to
+As a developer, you need to implement the application logic in arbitrary language and store it in a git repository. 
+The extension must adhere to our [Common Interface](/extend/common-interface/).
+We provide libraries to help you with implementation in
+ [R](https://github.com/keboola/r-docker-application) and [Python](https://github.com/keboola/python-docker-application). 
+ We also have an example application in [PHP](https://github.com/keboola/docker-demo-app). When you have your
+ application ready, you need to wrap it in a Docker image. 
 
-- Have a git repository ready; ([Github](https://github.com/) or [Bitbucket](https://bitbucket.org/) is recommended, although any other host should work as well). It is easier to start with a public repository.
-- Have a [KBC project](/overview/devel-project/), where you can test your code.
-- Get yourself acquainted with [Docker](/extend/docker/tutorial/). You should be able to at least run a Docker image.
-- Be able to send API requests. You can use an [Apiary](https://apiary.io/) client console, but we 
-recommend using [Postman](https://www.getpostman.com/) as it is 
-more convenient. If you do use Postman, you can [import a list](/overview/api/)
-of [sample requests](https://www.getpostman.com/collections/87da6ac847f5edcac776).
+A Docker extension processes input tables stored in [CSV files](/extend/common-interface/) and generates 
+result tables in CSV files.  An extractor works the same way, however, it does not read input from 
+KBC tables, but instead from its source (usualy some API). Similarly, a Writer does not generate any KBC tables. 
+We make sure the CSV files are created in and taken from the right places. 
 
-To create a simple Docker Extension on your own, go to [Quick start guide](/extend/docker/quick-start/).
+The execution of your extension happens in its own [isolated environment](/architecture/docker-bundle/).
+
+Before you (or anyone else) can use your *Docker extension*, it must be [registered](/extend/registration/) 
+
 If you are new to docker, there is a [quick introdution](/extend/docker/tutorial/) and a 
  [guide to working with docker](/extend/docker/tutorial/howto/). 
-If you need to test and debug your image, there is a guide for [running images](/extend/docker/running/) in KBC environment.
-
-
+To create a simple Docker Extension on your own, go to [Quick start guide](/extend/docker/quick-start/).
+If you need to test and debug your existing image, there is a guide 
+for [running and debugging images](/extend/docker/running/) in KBC environment.

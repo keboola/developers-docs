@@ -36,7 +36,7 @@ Tagging each version is essential; we recommend using [Semantic versioning](http
 ### Step 4 - Test the Application in KBC
 
 #### Step 4.1 - Prepare Storage 
-Create a [source table](/extend/custom-science/source.csv) in *Storage*, e.g.:
+Create a [source table](/extend/source.csv) in *Storage*, e.g.:
 
 {:.table}
 | number | someText |
