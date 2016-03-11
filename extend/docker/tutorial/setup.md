@@ -20,7 +20,8 @@ If you have a ready docker machine (local or remote) and docker client, you can 
 To test that everything is running correctly you can start with example 
 from [documentation](https://docs.docker.com/engine/userguide/containers/dockerizing/).
 If you use DockerToolbox, start by running the following commands in 
-[Docker Quickstart Terminal](https://docs.docker.com/engine/installation/windows/#using-the-docker-quickstart-terminal):
+[Docker Quickstart Terminal](https://docs.docker.com/engine/installation/windows/#using-the-docker-quickstart-terminal)
+or on the command line:
 
     docker run hello-world
 
@@ -31,6 +32,7 @@ or
 If this works, you can use any image published in some docker 
 registry e.g. [Docker Hub](https://hub.docker.com/) or [Quay](https://quay.io/).
 If the above fails, make sure that your client is set up properly, if you are using Docker Toolbox, the following might help:
+
 - start *Docker Quickstart Terminal*, watch for any errors, particulary certificates and network
 - if things work from Quickstart terminal, but not from normal command line, you need to set up 
 [environment settings](https://docs.docker.com/engine/installation/windows/#using-docker-from-windows-command-prompt-cmd-exe) 
@@ -44,13 +46,15 @@ the latest Docker toolbox version again.
 
 
 ## Generally useful commands
+
 - [`docker run`](https://docs.docker.com/engine/reference/run/) - run an 
 image (create a container and run the command in `ENTRYPOINT` section of *Dockerfile*)
 - [`docker build`](https://docs.docker.com/engine/reference/commandline/build/) - build 
 an image (execute instructions in *Dockerfile* and create a runnable image)
+- [`docker pull`](https://docs.docker.com/engine/reference/commandline/pull/) - pull
+a newer version of an image (force update of the cached copy)
 - [`docker-machine ls`](https://docs.docker.com/machine/reference/ls/) - this will give 
 you list of running docker servers its IP address and state
-
 
 ## Sharing files
 Sharing files between the host OS and the container is done using the `--volume` parameter of `docker run` command:
