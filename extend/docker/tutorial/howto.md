@@ -1,5 +1,5 @@
 ---
-title: Working with docker
+title: Howto create a dockerized application
 permalink: /extend/docker/tutorial/howto/
 ---
 
@@ -9,52 +9,7 @@ about the docker stack.
 We don't aim to replace the very nice official tutorials for
 [Windows](https://docs.docker.com/windows/step_one/) and [Mac OS X](https://docs.docker.com/mac/) and 
 a whole list of other [Tutorials](https://docs.docker.com/mac/).
-
-To work with docker you need a running [docker machine server](https://docs.docker.com/machine/)
-and a [docker engine client](https://docs.docker.com/engine/quickstart/). If you have no server at hand 
-with docker machine, you can run everything locally. To install docker machine on Win/Mac 
-use [Docker Toolbox](https://www.docker.com/products/docker-toolbox) (this will also install docker client), for 
-other systems see the [documentation](https://docs.docker.com/machine/install-machine/). 
-
-Docker Toolbox is actually Oracle VM VirtualBox image containing a Tinycore distribution Linux, 
-which is really a tiny OS containing only the docker machine server. Do not get confused about 
-the VirtualBox as it really has nothing to do with Docker, it is there just to run the 
-docker-machine. Apart from [some issues with sharing files](/extend/docker/sharing-files/)  
-you don't need to worry about the VM being there.
-
-## Getting started
-If you have a ready docker machine (local or remote) and docker client, you can start playing with docker. 
-To test that everything is running correctly you can start with example 
-from [documentation](https://docs.docker.com/engine/userguide/containers/dockerizing/).
-If you use DockerToolbox, start by running the following commands in 
-[Docker Quickstart Terminal](https://docs.docker.com/engine/installation/windows/#using-the-docker-quickstart-terminal):
-
-    docker run hello-world
-
-or
-
-    docker.io/library/hello-world:latest
-
-If this works, you can use any image published in some docker 
-registry e.g. [Docker Hub](https://hub.docker.com/) or [Quay](https://quay.io/).
-If the above fails, make sure that your client is set up properly, if you are using Docker Toolbox, the following might help:
-- start *Docker Quickstart Terminal*, watch for any errors, particulary certificates and network
-- if things work from Quickstart terminal, but not from normal command line, you need to set up 
-[environment settings](https://docs.docker.com/engine/installation/windows/#using-docker-from-windows-command-prompt-cmd-exe) 
-by running `docker-machine env --shell cmd` which will give you the necessary environment variables. You can then set
-[those permanently](http://www.computerhope.com/issues/ch000549.htm). (or keep using the Quickstart Terminal)
-- if things work nowhere, you might want to 
-[recreate your docker machine](https://docs.docker.com/machine/get-started/) by running
-`docker-machine rm default` and `docker-machine create --driver=virtualbox default` 
-- If neither helps, uninstall both Docker Toolbox and Oracle VM VirtualBox, reboot, and install 
-the latest Docker toolbox version again.
-
-
-## Generally useful commands
-- `docker run` - run an image (create a container and run the command in `ENTRYPOINT` section of *Dockerfile*)
-- `docker build` - build in image (execute instructions in *Dockerfile* and create a runnable image)
-- `docker-machine ls` - this will give you list of running docker servers its IP address and state
-
+Before you start, make sure that you have [docker installed](/extend/docker/tutorial/setup/) 
 
 ## Creating your own image
 To create your own image, you need to create a [Dockerfile](https://docs.docker.com/engine/reference/builder/). 

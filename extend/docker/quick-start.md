@@ -10,7 +10,8 @@ with an extra column containing those numbers multiplied by two. A test in KBC i
 Before You Start, Make Sure to
 - Have a git repository ready; ([Github](https://github.com/) or [Bitbucket](https://bitbucket.org/) is recommended, although any other host should work as well). It is easier to start with a public repository.
 - Have a [KBC project](/overview/devel-project/), where you can test your code.
-- Get yourself acquainted with [Docker](/extend/docker/tutorial/). You must be able to run `docker` commands.
+- Get yourself acquainted with [Docker](/extend/docker/tutorial/). You must be 
+able to [run `docker`](/extend/docker/tutorial/setup/) commands.
 - It is recommended that you are able to send API requests. You can use an [Apiary](https://apiary.io/) client console, but we 
 recommend using [Postman](https://www.getpostman.com/) as it is
 more convenient. If you do use Postman, you can [import a list](/overview/api/)
@@ -154,7 +155,7 @@ Use the following command to run the image:
 Image tag can be either the tag you supplied in the `--tag` parameter for `docker build` or the image hash you received
 when the image was build (`ded` in the above example). 
 The physical host path depends on the system you are running. If in doubt, 
-see [Setting up Docker](/extend/docker/tutorial/sharing-files/). In our example image with default installation of Docker on 
+see [Setting up Docker](/extend/docker/tutorial/setup/#sharing-files). In our example image with default installation of Docker on 
 Windows, this would be:
 
     docker run --volume=/c/Users/ondre/data/:/data/ test

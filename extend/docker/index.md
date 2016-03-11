@@ -48,8 +48,9 @@ The execution of your extension happens in its own [isolated environment](/archi
 
 Before you (or anyone else) can use your *Docker extension*, it must be [registered](/extend/registration/) 
 
-If you are new to docker, there is a [quick introdution](/extend/docker/tutorial/) and a 
- [guide to working with docker](/extend/docker/tutorial/howto/). 
+If you are new to docker, there is a [quick introdution](/extend/docker/tutorial/),
+a [guide to setting up docker](/extend/docker/tutorial/setup/) and  
+ [guide to building dockerized applications](/extend/docker/tutorial/howto/). 
 To create a simple Docker Extension on your own, go to [Quick start guide](/extend/docker/quick-start/).
-If you need to test and debug your existing image, there is a guide 
+If you need to test and debug an existing image, there is a guide 
 for [running and debugging images](/extend/docker/running/) in KBC environment.

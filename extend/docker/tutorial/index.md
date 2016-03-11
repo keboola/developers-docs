@@ -3,6 +3,7 @@ title: About docker
 permalink: /extend/docker/tutorial/
 ---
 
+
 Docker is a technology stack for running things in virutalized environments. In KBC we use a limited set of docker features,
 which are described here. For full technical description of docker, you should consult the 
 [official documentation](https://docs.docker.com/).
@@ -51,6 +52,10 @@ runs [registred](/extend/registration/) docker images. The Docker Bundle compone
 has [API](https://app.apiary.io/kebooladocker/editor) 
 which basically allows to run the docker images and encrypt arbitrary values. The Docker bundle component takes 
 care of injecting the right data, creating and runing the container, terminating the container and uploading 
-the result data to KBC Storage. Before you develop dockerized appliction for KBC, you should be able to 
+the result data to KBC Storage. 
+
+Before you attempt to run docker applications in KBC, make sure to 
+[setup your docker environment](/extend/docker/tutorial/setup).
+Before you develop dockerized appliction for KBC, you should be able to 
 [create and run dockerized applications](/extend/docker/tutorial/howto/) in your environment.
 
