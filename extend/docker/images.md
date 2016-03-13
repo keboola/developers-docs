@@ -54,6 +54,7 @@ Custom applications:
 
 ## Tags
 We use three types of tags:
+
 - `master`, `latest`: The tag is movable and always points to the latest image build 
 - `X.Y.Z`: The tags follow [Semantic versioning](http://semver.org/) and are fixed to a specific image build 
 - `X.Y.Z-a`: The `X.Y.Z` tag section refers to a specific environment version and the `a` part refers to our revision. 
