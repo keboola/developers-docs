@@ -29,7 +29,7 @@ The parameters `-e` define [environment variables](/extend/common-interface/envi
 enviroment variables on command line, take care NOT to put any spaces around `=` 
 
 ### Test it
-Get a sample [data folder](/extend/docker/data-parameters.zip) and try running:
+Use a [sample data folder](/extend/docker/data-parameters.zip), extract it into your *host folder* and try running:
 
     docker run --volume=/Users/JohnDoe/data/:/data --memory=8192m --cpu-shares=1024 --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-78 quay.io/keboola/docs-docker-example-parameters
 
@@ -43,7 +43,7 @@ You should see output:
     KBC_DATADIR: /data/
     KBC_CONFIGID: test-78
 
-And a file `destination.csv` will be created in your `data/out/tables/` directory, with contents:
+And a file `destination.csv` will be created in your *host folder* in `data/out/tables/` directory, with contents:
 
     number,someText,double_number
     10,ab,20
@@ -52,8 +52,27 @@ And a file `destination.csv` will be created in your `data/out/tables/` director
     26,fg,52
     30,ij,60
 
+If you run into any errors, you can run the image interactively:
+
+    docker run --volume=/Users/JohnDoe/data/:/data --memory=8192m --cpu-shares=1024 --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-78 -i -t --entrypoint=/bin/bash quay.io/keboola/docs-docker-example-parameters
+
+Then you can inspect the container with standard OS (CentOS) commands and/or run the script manually with
+`php /home/main.php`
+
+If you mastared this step, you can run any docker component on your machine. The following chapters describe 
+some common situations, though there are only minor differences. 
+
+## Running unregistered docker extension
+Docker extensions which are not registered do not yet have their component Id. This is somewhat limiting, because you 
+can get only sample of the data the component will receive by using 
+the [sandbox API call](/extend/common-interface/sandbox/).
 
 
+ 
+
+## Running registered docker extension
+## Running custom application
+## Running transformations 
 [![Run in Postman](https://run.pstmn.io/button.png)](https://www.getpostman.com/run-collection/7dc2e4b41225738f5411)
 
 
