@@ -84,7 +84,7 @@ with Mac OS, the shared folder is `C:/Users`
 Let's assume you have folder `C:/Users/JohnDoe/MyData` which you want to share with docker container. 
 Docker toolbox takes care of mapping the entire `C:/Users` folder into the VM in which the docker-machine server
 runs. In that VM, the folder is accesible as `/c/Users`. (You can check that by manually running the Oracle 
-VM Virtualbox, and starting the `default` virtual machine).
+VM Virtualbox, and starting/showing the `default` virtual machine; check the folder contents with `ls /c/`).
 
 ![Oracle VM Virtualbox screenshot](/extend/docker/tutorial/virtualbox.png)
 
@@ -92,4 +92,4 @@ If you want to map the `C:/Users/JohnDoe/MyData` into a `/home/mydata` folder a 
 
     docker run --volume=/c/Users/JohnDoe/MyData/:/home/mydata/ imageName 
 
-Beware that the "host path" is now case sensitive, and has to use forwar slashes (because it is not really windows path).
+Beware that the "host path" is now case sensitive, and has to use forward slashes (because it is not really windows path).

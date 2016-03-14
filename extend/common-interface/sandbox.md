@@ -85,7 +85,7 @@ When you run the request with a valid parameters, you should receive a response 
 This means that an asynchronous job has been created which will prepare the sandbox. If you are 
 curious, you can view the job progress under *Jobs* in KBC: 
 
-![Job progress screenshot](sandbox-progress.png)
+![Job progress screenshot](/extend/common-interface/sandbox-progress.png)
 
 The job will usually execute very quickly, so you might as well go straight to *Storage* - *File Uploads* in
 KBC, where you will find a `data.zip` file with sample data folder. You can now use this folder with your 
@@ -107,7 +107,7 @@ visiting the URL:
 Where you replace `{projectId}` with the Id of the project in KBC (you can find that in URL). You can then
 create configuration. The equivalent to what we have used in the [Sandbox above](#sandbox) call would be: 
 
-![Configuration screnshot](input-configuration.png)
+![Configuration screnshot](/extend/common-interface/input-configuration.png)
 
 ### Run the API request
 When you created the configuration, it was assigned a configuration Id - `sample-configuration-27` in our example.
