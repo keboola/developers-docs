@@ -5,7 +5,8 @@ permalink: /extend/custom-science/quick-start/
 
 This tutorial guides you through the process of creating a simple Custom Science Application. The application logic is trivial: it takes a table with numbers as an input, and creates another table with an extra column containing those numbers multiplied by two. A test in KBC is included. The application is then extended to accept a parameter from the end-user.
 
-The tutorial has been written for [R](/extend/custom-science/r); changes necessary for [Python](/extend/custom-science/python/) are minimal.
+The tutorial has been written for [R](/extend/custom-science/r); changes 
+necessary for [Python](/extend/custom-science/python/) are minimal.
 
 
 ### Before you start

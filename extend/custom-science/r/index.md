@@ -12,7 +12,10 @@ Your R Custom Science Application can be created in multiple ways (as described 
 ## Packages
 To install a package, use `install.packages('packageName')`. It is not necessary to specify the repository. If you wish to install a package from source, use `devtools::install_github()` (and friends).
 
-Here is our current [list of pre-installed packages](https://github.com/keboola/docker-base-r-packages/blob/master/init.R#L14). You can use one from `library()`. If you know of another useful standard package to pre-install,we would like to hear about it.
+Here is our current 
+[list of pre-installed packages](https://github.com/keboola/docker-base-r-packages/blob/master/init.R#L14). 
+You can load them with `library()` command. If you know of another useful standard package to pre-install,
+we would like to hear about it.
 
 ## Using the KBC Package
 The KBC [R extension package](https://github.com/keboola/r-docker-application) provides functions to:
@@ -33,15 +36,15 @@ To use the library to read the user-supplied configuration parameter 'myParamete
     app$readConfig()
 
 
-    # access application parameter nebo neco takovyho)
+    # access the supplied value of 'myParameter'
     app$getParameters()$myParameter
     
 The library contains a single [RC class](http://adv-r.had.co.nz/OO-essentials.html#rc) `DockerApplication`; a parameter of the constructor is the path to the data directory. 
 Call `readConfig()` to actually read and parse the configuration file. The above would read the `myParameter` parameter from the user-supplied configuration:
 
-{
-    "myParameter": "myValue"
-}
+    {
+        "myParameter": "myValue"
+    }
 
 You can obtain inline help and the list of library functions by running the `?DockerApplication` command.
 

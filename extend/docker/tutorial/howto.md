@@ -83,13 +83,16 @@ The switch _-i_ is important for receiving interactive output. You should see an
     2 packets transmitted, 2 received, 0% packet loss, time 1000ms
     rtt min/avg/max/mdev = 121.615/121.721/121.828/0.364 ms
 
+### Inspecting the image
 When building your own image, it is very usefull to be able
 to run arbitrary commands in the image, you can do so by overriding the entrypoint using the `--entrypoint` 
-option (which means that your application won't execute, you'll have to run i manually). The `-t`
- option opens interactive terminal: 
+option (which means that your application won't execute, you'll have to run it manually). The `-t`
+ option opens **i**nteractive **t**erminal: 
 
     `docker run -i -t --entrypoint=/bin/bash my-image`.
 
+The option `--entrypoint` overrides the `ENTRYPOINT` specified in the `Dockerfile`. This ensures that 
+bash shell is run instead of your application. 
 
 ### Installing things
 Chances are that your application requires something special. You can install whatever you need
