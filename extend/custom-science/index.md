@@ -38,7 +38,10 @@ A Custom Science Application processes input tables stored in [CSV files](/exten
 
 The execution of your extension happens in its own [isolated environment](/architecture/docker-bundle/).
 
-To use your *Custom Science extension*, the end user should be instructed to specify [its configuration](TODO). 
+To use your *Custom Science extension*, the end user should be instructed to specify its configuration. 
+The instructions should be on a public link, you can take inspiration from 
+[instructions](https://github.com/keboola/python-custom-application-text-splitter/blob/master/README.md)
+to our [sample application](https://github.com/keboola/python-custom-application-text-splitter). 
 
 
 To create a simple Custom Science Application on your own, go to [Quick start guide](/extend/custom-science/quick-start/).

@@ -1,0 +1,1 @@
+Asynchronni joby, rozdil mezi Joby v Syrupu a ve Storage API

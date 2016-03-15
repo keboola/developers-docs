@@ -9,11 +9,13 @@ for KBC on your own computer, you need to
 manually supply the application with [data folder and configuration file](/extend/common-interface/). 
 
 To create a sample data folder, you need to use 
-[docker-bundle](/overview/api/docker-bundle/) API, which offers two calls:
+[docker-bundle](/overview/api/docker-bundle/) API, which offers three calls:
 - [create sandbox](http://docs.kebooladocker.apiary.io/#reference/sandbox/sandbox)
 - [input data](http://docs.kebooladocker.apiary.io/#reference/sandbox/input-data/create-an-input-job)
+- [dry run](http://docs.kebooladocker.apiary.io/#reference/dry-run) 
 
-The main difference between those two is that the *create sandbox* call can be used even with components 
+The *dry run* call is useful only for debugging [registered extensions](/extend/docker/#debugging).
+The main difference between those first two is that the *create sandbox* call can be used even with components 
 which are not yet [registered](/extend/registration/). The *input data* API call must be used with components
 which are already registred. The structure of the body of both API calls is same.
 Before you start you need a [KBC project](/overview/devel-project/). We recommend that you use

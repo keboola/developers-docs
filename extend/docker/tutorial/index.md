@@ -50,12 +50,25 @@ and *master* both point to the same (latest) build and are movable. Please note 
 We have wrapped docker in our [Docker bundle component](/overview/docker-bundle/). The component 
 runs [registred](/extend/registration/) docker images. The Docker Bundle component 
 has [API](https://app.apiary.io/kebooladocker/editor) 
-which basically allows to run the docker images and encrypt arbitrary values. The Docker bundle component takes 
+which basically allows to run the docker images and encrypt arbitrary values. The 
+[Docker bundle component](/overview/docker-bundle/) takes 
 care of injecting the right data, creating and runing the container, terminating the container and uploading 
-the result data to KBC Storage. 
+the result data to KBC Storage. All images which are supposed to be run in KBC must have an `ENTRYPOINT`. 
+We also recommned that you base your image on [one of our images](/extend/docker/images/).
 
 Before you attempt to run docker applications in KBC, make sure to 
 [setup your docker environment](/extend/docker/tutorial/setup).
 Before you develop dockerized appliction for KBC, you should be able to 
 [create and run dockerized applications](/extend/docker/tutorial/howto/) in your environment.
+
+If you are already familiar with docker, you can jump straight into example application 
+application code [in PHP](https://github.com/keboola/docker-demo-app).
+The demo application itself is started by a single script 
+[`/src/run.php`](https://github.com/keboola/docker-demo-app/blob/master/src/run.php). 
+The application can exist independently (without Docker), contains unit and functional tests.
+The repository contains also the Docker image definition in 
+[**Dockerfile**](https://github.com/keboola/docker-demo-app/blob/master/Dockerfile). Docker image definition prepares the 
+docker environment including the application. A hook from Dockerhub builds the docker image automatically on every commit.  
+A similar application is also available [in Python](https://github.com/keboola/python-custom-application-text-splitter).
+
 

@@ -40,6 +40,7 @@ The following table provides an overview of the main characteristics of KBC exte
       <th>Brandable</th>
       <th>Offered to All Users</th>
       <th>Customizable User Interface</th>
+      <th>OAuth2 support</th>
       <th>Keboola Approval/Registration Required</th>
     </tr>
   </thead>
@@ -53,6 +54,7 @@ The following table provides an overview of the main characteristics of KBC exte
       <td>no<br>(coming soon)</td>
       <td>no<br>(coming soon)</td>
       <td>no</td>
+      <td>yes</td>
       <td>no</td>
     </tr>
     <tr>
@@ -61,6 +63,7 @@ The following table provides an overview of the main characteristics of KBC exte
       <td>R or Python</td>
       <td>no</td>
       <td>poor</td>
+      <td>no</td>
       <td>no</td>
       <td>no</td>
       <td>no</td>
@@ -76,8 +79,10 @@ The following table provides an overview of the main characteristics of KBC exte
       <td>yes</td>
       <td>yes</td>
       <td>yes</td>
+      <td>yes</td>
     </tr>
   </tbody>
 </table>
 
-*Note: With the exception of Generic Extractor, all KBC Extensions can be used for creating Extractors, Applications and Writers.*
+*Note: With the exception of Generic Extractor, all KBC Extensions can be used for creating Extractors, 
+Applications and Writers.*

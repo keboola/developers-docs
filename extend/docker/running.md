@@ -210,3 +210,27 @@ To run Python transformations use:
  
 The transformation will run automatically and produce results. If you want to get interactively into
 the container, use the [`--entrypoint`](/docker/tutorial/howto/) parameter. 
+
+
+### Debugging
+
+For debugging purposes it is possible to obtain the [sandbox](/extend/common-interface/sandbox/). 
+There are three API calls for that purpose:
+  
+  - [Sandbox](http://docs.kebooladocker.apiary.io/#reference/sandbox/sandbox/create-a-sandbox-job)
+  - [Input](http://docs.kebooladocker.apiary.io/#reference/sandbox/input-data/create-an-input-job)
+  - [Dry run](http://docs.kebooladocker.apiary.io/#reference/sandbox/dry-run/create-a-dry-run-job)
+
+The [Sandbox](http://docs.kebooladocker.apiary.io/#reference/sandbox) API call is useful for obtaining a 
+sample environment configuration when starting with development of a new Docker Extension or
+Custom Science extension. 
+
+The [Input](http://docs.kebooladocker.apiary.io/#reference/input) API call is useful for obtaining an 
+environment configuration for a registered Docker extension (without encryption) or Transformations 
+
+The [Dry run](http://docs.kebooladocker.apiary.io/#reference/dry-run) API call is the last step.
+It will do everything except output mapping and is therefore useful for debugging an existing application
+in production without modifying and files and tables in KBC project.
+
+
+

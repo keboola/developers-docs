@@ -87,12 +87,57 @@ The switch _-i_ is important for receiving interactive output. You should see an
 When building your own image, it is very usefull to be able
 to run arbitrary commands in the image, you can do so by overriding the entrypoint using the `--entrypoint` 
 option (which means that your application won't execute, you'll have to run it manually). The `-t`
- option opens **i**nteractive **t**erminal: 
+option opens **i**nteractive **t**erminal: 
 
     `docker run -i -t --entrypoint=/bin/bash my-image`.
 
 The option `--entrypoint` overrides the `ENTRYPOINT` specified in the `Dockerfile`. This ensures that 
-bash shell is run instead of your application. 
+bash shell is run instead of your application. You then have to run the command previously defined
+entrypoint manually. 
+
+It is also possible to inspect a running container. Assume you have the following `Dockerfile`:
+
+    FROM quay.io/keboola/base
+    ENTRYPOINT ping example.com
+ 
+When you build it using:
+    
+    docker build --tag=my-image .
+    
+Then run the image (create a new container and run the image entrypoint in it):
+
+    docker run my-image
+    
+Open a new command line window and run:
+
+    docker ps
+    
+This will show you a list of running containers - something like:
+
+    CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS               NAMES
+    dafd708d0d7e        my-image            "/bin/sh -c 'ping exa"   58 seconds ago      Up 57 seconds                           jolly_rosalind
+
+The important part is *container ID*. You can then run an arbitrary command in the running container with
+the following command:
+
+    docker exec *container_id* *command*
+
+E.g.
+
+    docker exec -i -t daf /bin/bash
+
+Will execute **i**nteractive **t**erminal with bash shell in the container *daf* (container ID can 
+be shortened to first 3 letters). You can verify that `ping` is still running by: 
+
+    ps -A
+    
+Which will give you something like:
+    
+    PID     TTY     TIME        CMD
+    1 ?             00:00:01    ping
+    25 ?            00:00:00    bash
+    41 ?            00:00:00    ps
+   
 
 ### Installing things
 Chances are that your application requires something special. You can install whatever you need

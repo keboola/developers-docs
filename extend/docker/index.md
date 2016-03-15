@@ -17,6 +17,7 @@ Advantages:
 * Branding possible; Documentation and extended description can be provided
 * Arbitrary application environment; can be fully private
 * Automatically offered to all KBC users
+* Support for OAuth2
 
 Disadvantages:
 
@@ -37,7 +38,9 @@ The extension must adhere to our [Common Interface](/extend/common-interface/).
 We provide libraries to help you with implementation in
  [R](https://github.com/keboola/r-docker-application) and [Python](https://github.com/keboola/python-docker-application). 
  We also have an example application in [PHP](https://github.com/keboola/docker-demo-app). When you have your
- application ready, you need to wrap it in a Docker image. 
+ application ready, you need to wrap it in a Docker image.  All images which are supposed to be run in KBC
+  must have an `ENTRYPOINT`. 
+We also recommned that you base your image on [one of our images](/extend/docker/images/).
 
 A Docker extension processes input tables stored in [CSV files](/extend/common-interface/) and generates 
 result tables in CSV files.  An extractor works the same way, however, it does not read input from 

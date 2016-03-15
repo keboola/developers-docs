@@ -1,18 +1,51 @@
 ---
 title: Encryption
-permalink: /architecture/encryption/
+permalink: /overview/encryption/
 ---
 
+Many of [KBC components](/architecture/) provide Encryption API. The principle of the API is that it encrypts sensitive values 
+which are supposed to be securely stored and decrypted inside the components itself. This means that the encryption 
+keys are stored inside the components and are not accessible to API users. This also means that there is no decryptions
+API and there is no way the end-user can decrypt the encrypted values. Furthermore the encrypted values are not 
+transferable between components (this may be a bit confusing in case of components which encapsulate other 
+components, such as [docker component](/architecture/docker-bundle/). Also note that encryption keys are 
+different in production and development, so values encrypted on development server will not be readable 
+on production (and vice versa). 
 
-Many of [KBC components](/architecture) provide Encryption API. The principle of the API is that it encrypts values which are supposed to
-be securely stored and decrypted inside the components itself. This means that the encryption keys are stored inside the components and are not 
-accessible to API users. This also means that there is no decryption API and there is no way the end-user can decrypt the encrypted values.
-Furthermore the encrypted values are not transferable between components (this may be a bit confusing in case of components which encapsulate 
-other components, such as [docker component](/architecture/docker-bundle/). Also note that encryption keys are different in production and 
-development, so values encrypted on development server will not be readable on production (and vice versa). 
+Decryption is only executed when serializing configuration to the configuration file for the Docker container. 
+The decrypted data will be stored on the Docker host drive and will be deleted after the container finishes. 
+Your application will always read the decrypted data.   
 
-## Encrypting data
-The encryption API can encrypt either strings or arbitrary JSON data. In case of strings, the whole string is encrypted. In case of JSON data,
+## UI interaction
+When saving arbitrary configuration data (this applies especially to [Custom science](/extend/custom-science/) and
+[Docker extensions](/extend/docker/) marked values marked by `#` character are automatically encrypted. 
+
+This means that when saving a value:
+
+![Configuration editor Screenshot](/overview/encryption-1.png)
+
+Once you save the value, you will receive:
+
+![Configuration editor Screenshot](/overview/encryption-2.png)
+
+Once the configuration has been saved, the value is encrypted and there is no way to decrypt it (only the 
+application will receive the decrypted value). When encrypting a configuration as in the above example, 
+note that what values are encrypted is defined by the application. I.e. you cannot freely encrypt any value unless
+the application explicitly supports it. For example, if the application states that it requires configuration:
+
+    {
+        'username': 'JohnDoe',
+        '#password': 'password'
+    }
+
+It means that the password will always be encrypted and the username will not be encrypted. You generally cannot
+pass `#username`, because the application does not expect such key to exist (although it's value will be decrypted
+normally). Internally, the [Encrypt and Store configuration API call](http://docs.kebooladocker.apiary.io/#reference/encrypt/encrypt-and-store-configuration/save-configuration)
+is used
+
+## Encrypting data with API
+The encryption API can encrypt either strings or arbitrary JSON data. In case of strings, the whole string is 
+encrypted. In case of JSON data,
 only keys which start with `#` character and they are scalar, are encrypted. Therefore, encrypting a JSON structure e.g.:
 
     {
@@ -47,14 +80,13 @@ If you happen to receive the error:
 
     This API call is only supported for components that use the 'encrypt' flag.
     
-ask a Keboola Developer to enable encryption for your application.
+ask a Keboola Developer to enable encryption for your [docker extension](/extend/docker/), for 
+[Custom Science](/).
 
-You can use sample Postman requests from collection: 
-[https://www.getpostman.com/collections/87da6ac847f5edcac776](https://www.getpostman.com/collections/87da6ac847f5edcac776) 
-(see [introduction](/architecture/api/) for instructions on importing this to postman):
+You can use sample Postman requests from collection 
+[![Run in Postman](https://run.pstmn.io/button.png)](https://www.getpostman.com/run-collection/7dc2e4b41225738f5411)
 
 ![Postman screenshot](/architecture/encryption-postman.png)
-
 
 
 ## Encryption Options
