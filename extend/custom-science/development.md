@@ -7,18 +7,25 @@ When developing code for your Custom Science extension, there is no interaction 
 However, make sure you meet the following guidelines:
 
 - Store your extension in a private or public git repository.
-- Your application code must follow our [common interface](/common-interface). 
-If necessary, use [Python](/extend/custom-science/python/) or [R](/extend/custom-science/r) libraries. 
+- Your application code must follow our [common interface](/extend/common-interface/). 
+If necessary, use [Python](/extend/custom-science/python/) or [R](/extend/custom-science/r/) libraries. 
 - Provide the end-users with instructions on setting up the extension. This particularly concerns:
  
   - Repository information in the *Runtime* settings
   - Requirements on extension *parameters*, if relevant 
   - The names of input/output files in case you are not supporting dynamic input/output mapping
 
+## Application environment
+The git repository will be cloned into `/home/` directory. The current directory will be `/data/`. 
+The `/data/` directory is reserved for input and output mapping files. For full description see 
+[common interface](/extend/common-interface/).
+
 ## Git Repository Configuration
 
-Information about the repository with extension code, is entered into the *Runtime* configuration field when creating the extension configuration.
-It is not available to the extension itself. Both repositories, private and public, are supported. KBC Custom Science configuration needs to refer to a particular tag of your repository; we recommend [Semantic versioning](http://semver.org/). 
+Information about the repository with extension code, is entered into the *Runtime* configuration field when 
+creating the extension configuration. It is not available to the extension itself. Both repositories, private 
+and public, are supported. KBC Custom Science configuration needs to refer to a particular tag of your repository; 
+we recommend [Semantic versioning](http://semver.org/). 
 
 ### Public Repository
 The basic *Runtime* settings for a public repository are entered in JSON format: 

@@ -37,7 +37,8 @@ The predefined data exchange folder structure is following
     
 This folder structure is always available to your application. Current directory will always be set to
 `/data/`, so the above folders can be accessed both with absolute paths and relative paths (e.g. `in/tables`) 
-
+Do not put arbitrary files in the `/data/` directory as they will be uploaded into the user project 
+(or cause errors in output mapping). For working or temporary files, use either the `/home/` or `/tmp/` directory.
 
 ### `/data/in/tables`
 

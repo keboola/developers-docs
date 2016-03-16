@@ -8,6 +8,18 @@ running [Docker](/extend/docker/tutorial) images in Keboola Connection.
 By developing functionality in Docker you'll focus only on the application logic, all communication 
 with Storage API will be handled by Docker bundle.
 
+KBC responsibility is:
+Create application instance from the repository specified by 3rd party developer (this is done by building a docker image and running a docker container from it).
+Provide the application instance with the configuration file in JSON or YAML format (/data/ directory).
+Provide the application instance with source data files in predefined directories - this corresponds to input mapping in the UI (/data/ directory).  
+Run the application instance with a command specified by the 3rd party developer (see below).
+Ensure isolation of the application instance - the application cannot access any other tables/files from the project outside those specified in input mapping, the application cannot access data of any other application, nor its data can by accessed by any other application. The application can however connect to outside internet.
+Grab the specified outputs of the application and feed them to KBC Storage (this corresponds to output mapping in the UI)
+Application responsibility is:
+Read the configuration and source tables in CSV format and files (if specified).
+Write the results to predefined directories and files.
+Properly handle success/error results by setting appropriate exit code.
+
 ## Workflow
 
 What happens before and after running a Docker container.

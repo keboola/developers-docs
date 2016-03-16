@@ -25,7 +25,8 @@ Disadvantages:
 * The UI cannot be modified by the developer
 
 For comparison with other customization options, see the [overview](/extend/) of KBC extensions.
-
+Note: Custom science are internally implemented as [Docker extensions](/extend/docker/), in which you are only required
+to provide the application logic, without having to maintain the docker images.
 
 ### How to Create a Custom Science Extension
 
