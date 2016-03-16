@@ -7,18 +7,23 @@ Keboola Base Images are Docker images which serve as a base for applications wri
 They have no entrypoint and they do not contain any application logic.
 We highly encourage you to use those, unless you have some special requirements.
 
-In Keboola, we use both [Docker Hub](https://hub.docker.com/) and [Quay](https://quay.io/) registry. 
-In both registries, our account is called *Keboola*, therefore our images are `keboola/base` and `quay.io/keboola/base`, respectively.
+In Keboola, we use both [Docker Hub](https://hub.docker.com/r/keboola/) 
+and [Quay](https://quay.io/organization/keboola) registry. 
+In both registries, our account is called *Keboola*, therefore our 
+images are `keboola/base` and `quay.io/keboola/base`, respectively.
 Some images are present in both registries.  
 As long as the same tag is used, they refer to the exact same build and 
 are freely interchangeable. In that case, you should use the one in the same registry as your image. 
 
 
 ## Base images
-- [base](https://quay.io/repository/keboola/base), [Dockerfile](https://github.com/keboola/docker-base) - Base image for 
+- [base Quay](https://quay.io/repository/keboola/base), 
+[base DockeHub](https://hub.docker.com/r/keboola/base/), [Dockerfile](https://github.com/keboola/docker-base) - Base image for 
 all other images, contains CentOS7, uses tags `master`, `latest`.
 - R Language
-  - [docker-base-r](https://quay.io/repository/keboola/docker-base-r), [Dockerfile](https://github.com/keboola/docker-base-r) -
+  - [docker-base-r Quay](https://quay.io/repository/keboola/docker-base-r)
+  - [docker-base-r DockerHub](https://hub.docker.com/r/keboola/docker-base-r/)
+, [Dockerfile](https://github.com/keboola/docker-base-r) -
 Base image for all R images, uses tags `X.Y.Z-a`, see [below](#tags) 
   - [docker-base-r-packages] (https://quay.io/repository/keboola/docker-base-r-packages), 
  [Dockerfile](https://github.com/keboola/docker-base-r-packages) - Base image with installed common 
@@ -27,9 +32,14 @@ Base image for all R images, uses tags `X.Y.Z-a`, see [below](#tags)
   - [base-python](https://quay.io/repository/keboola/base-python), [Dockerfile](https://github.com/keboola/docker-base-python) -
  Base image for all Python images, uses `X.Y.Z-a` tags (see [below](#tags))
 - PHP Language
-  - [docker-base-php56] (https://quay.io/repository/keboola/docker-base-php56), 
+  - [docker-base-php55](https://hub.docker.com/r/keboola/base-php55/), 
+ [Dockerfile](https://github.com/keboola/docker-base-php55/) 
+  - [docker-base-php56 Quay](https://quay.io/repository/keboola/docker-base-php56),
+ [docker-base-php56 DockerHub](https://hub.docker.com/r/keboola/base-php56/), 
  [Dockerfile](https://github.com/keboola/docker-base-php56) - Base image for all PHP 5.6 images, uses `X.Y.Z` tags .
-  - [base-php70](https://quay.io/repository/keboola/base-php70), [Dockerfile](https://github.com/keboola/docker-base-php70) -
+  - [base-php70 Quay](https://quay.io/repository/keboola/base-php70),
+ [base-php70 DockerHub](https://hub.docker.com/r/keboola/base-php70/), 
+ [Dockerfile](https://github.com/keboola/docker-base-php70) -
  Base image for all PHP 7.0 images, uses `master` and `latest` tags 
 - Ruby Language
   - [base-ruby](https://quay.io/repository/keboola/base-ruby), [Dockerfile](https://github.com/keboola/docker-base-ruby) -
