@@ -15,10 +15,21 @@ If necessary, use [Python](/extend/custom-science/python/) or [R](/extend/custom
   - Requirements on extension *parameters*, if relevant 
   - The names of input/output files in case you are not supporting dynamic input/output mapping
 
+See [example instructions](https://github.com/keboola/python-custom-application-text-splitter/blob/master/README.md).
+
 ## Application environment
 The git repository will be cloned into `/home/` directory. The current directory will be `/data/`. 
 The `/data/` directory is reserved for input and output mapping files. For full description see 
 [common interface](/extend/common-interface/).
+
+A single application corresponds to a single source code repository, so multiple end-users will use the 
+same code. Should each customer use slightly different code, you can use the KBC_PROJECTID environment 
+variable, the exact project in which the application is running can be identified. 
+The end-user has no way to modify this value, so the control is fully on your side.
+if (Sys.getenv("KBC_PROJECTID") != '123')  {
+    stop("Invalid project Id")
+}
+
 
 ## Git Repository Configuration
 

@@ -14,6 +14,11 @@ To create a sample data folder, you need to use
 - [input data](http://docs.kebooladocker.apiary.io/#reference/sandbox/input-data/create-an-input-job)
 - [dry run](http://docs.kebooladocker.apiary.io/#reference/dry-run) 
 
+The API calls will resolve and validate the input mapping and create a configuration file. 
+Then they will archive the whole `/data/` folder and upload it to your KBC project.
+None of theese API calls will write any tables or files other than the archive, 
+so they are very safe to run. 
+
 The *dry run* call is useful only for debugging [registered extensions](/extend/docker/#debugging).
 The main difference between those first two is that the *create sandbox* call can be used even with components 
 which are not yet [registered](/extend/registration/). The *input data* API call must be used with components

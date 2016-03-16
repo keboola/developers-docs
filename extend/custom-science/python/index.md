@@ -88,6 +88,10 @@ to shorten up the CSV manipulation code.
 The library is a standard Python package that is available by default in the production environment. 
 It is [available on Github](https://github.com/keboola/python-docker-application), so it can be installed 
 locally with `pip install git+git://github.com/keboola/python-docker-application.git`.
+A generated [documentation](https://github.com/keboola/python-docker-application/blob/master/doc/keboola.docker.html) 
+is available for the package, actual working example can be found in our 
+[sample application](https://github.com/keboola/python-custom-application-text-splitter/blob/master/main.py). 
+Also note, that the library does no special magic, it is just mean to simplify things a bit for you. 
 
 To use the library to read the user-supplied configuration parameter 'myParameter':
 
@@ -226,3 +230,26 @@ inputs and outputs. The names of the CSV files are arbitrary.
 
 ![Dynamic mapping screenshot](/extend/custom-science/python/dynamic-mapping.png)
   
+## Error Handling
+An important part of the application is handling errors. By 
+[the specification](/extend/common-interface/environment/), we assume that command return 
+code: 0 = no error, 1 = user error (shown to the end-user in KBC), > 1 = application error 
+(the end-user will receive only a generic message). To achieve this in your python application 
+you can follow the pattern from the 
+[sample application](https://github.com/keboola/python-custom-application-text-splitter/blob/master/main.py), where 
+the actual application is a reusable class and the `main.py` runner is handling the errors:
+
+    try:
+        app = textSplitter.App()
+        app.run()
+    except ValueError as err:
+        print(err, file=sys.stderr)
+        sys.exit(1)
+    except Exception as err:
+        print(err, file=sys.stderr)
+        traceback.print_exc(file=sys.stderr)
+        sys.exit(2)
+        
+In this case, we consider everything derived from `ValueError` as an error which should be shown to the end-user. 
+Every other error will lead to a generic message and only developers will see the details. You can of 
+course modify this logic to your liking.
