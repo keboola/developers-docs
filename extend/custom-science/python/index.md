@@ -12,7 +12,7 @@ with our [environment](/extend/common-interface/). Please note:
 - The output mapping in your application is always required. Your application will always produce the tables and
  files listed in the output mapping (even if the files were empty).
 
-If you are starting with Custom Science, consider going thru the 
+If you are starting with Custom Science, consider going through the 
 [Quickstart](/extend/custom-science/quick-start/). 
 You can also have a look at an [example repository](https://github.com/keboola/python-custom-application-text-splitter).
 
@@ -26,16 +26,16 @@ To install a custom package, use:
 Here is our current 
 [list of pre-installed packages](https://github.com/keboola/docker-custom-python/blob/master/Dockerfile#L22). 
 You can use those with `import`. If you know of another useful standard package to pre-install, we would like
- to hear about it.
+to hear about it.
  
 ## Reading and Writing files
-Tables from Storage are imported to Python script from CSV files. The CSV files can be read by standard python
+Tables from Storage are imported to the Python script from CSV files. The CSV files can be read by standard python
 functions from the [csv packages](https://docs.python.org/3/library/csv.html). You can read the CSV files either 
 to vectors (numbered columns) or to dictionaries (named columns). The directory structure follows our general 
 [docker interface](/extend/common-interface/) - so 
 input tables are stored as CSV files in `in/tables/`, output tables are stored in `out/tables/`.
 It is recommended to explicitly specify the CSV formatting options.
-Below is code for basic reading and writing files, it is also available in our 
+Below is the code for basic reading and writing files, it is also available in our 
 [git repository](https://github.com/keboola/docs-custom-science-example-python-basic)   
 
     import csv
@@ -59,7 +59,7 @@ Below is code for basic reading and writing files, it is also available in our
             writer.writerow({'number': row['number'], 'someText': row['someText'], 'double_number': int(row['number']) * 2})
 
 
-The above example shows how to process the file line-by-line, this is the most memory-efficient way which 
+The above example shows how to process the file line-by-line; this is the most memory-efficient way which 
 allows you to process data files of any size. The expression 
 `lazyLines = (line.replace('\0', '') for line in inFile)` is a 
 [Generator](https://wiki.python.org/moin/Generators) which makes sure that
@@ -83,7 +83,7 @@ The KBC [Python extension package](https://github.com/keboola/python-docker-appl
 - Work with manifests containing table and file metadata - `getTableManifest()`, `getFileManifest()`, `writeTableManifest()`, `writeFileManifest()` methods.
 - List expected outputs - `getExpectedOutputFiles()` and `getExpectedOutputTables()` methods.
 
-Additionally it also defines a KBC [CSV dialect](https://docs.python.org/3/library/csv.html#csv-fmt-params)
+Additionally, it also defines a KBC [CSV dialect](https://docs.python.org/3/library/csv.html#csv-fmt-params)
 to shorten up the CSV manipulation code.
 The library is a standard Python package that is available by default in the production environment. 
 It is [available on Github](https://github.com/keboola/python-docker-application), so it can be installed 
@@ -91,7 +91,7 @@ locally with `pip install git+git://github.com/keboola/python-docker-application
 A generated [documentation](https://github.com/keboola/python-docker-application/blob/master/doc/keboola.docker.html) 
 is available for the package, actual working example can be found in our 
 [sample application](https://github.com/keboola/python-custom-application-text-splitter/blob/master/main.py). 
-Also note, that the library does no special magic, it is just mean to simplify things a bit for you. 
+Also note that the library does no special magic, it is just a mean to simplify things a bit for you. 
 
 To use the library to read the user-supplied configuration parameter 'myParameter':
 
@@ -111,7 +111,7 @@ The above would read the `myParameter` parameter from the user-supplied configur
         "myParameter": "myValue"
     }
 
-Example of the above approach is available 
+An example of the above approach is available 
 in [our repository](https://github.com/keboola/docs-custom-science-example-python-parameters).  
 
     import csv
@@ -135,7 +135,7 @@ in [our repository](https://github.com/keboola/docs-custom-science-example-pytho
             writer.writerow({'number': row['number'], 'someText': row['someText'], 'double_number': int(row['number']) * multiplier})
 
 Note that we also simplified reading and writing of the CSV files using `dialect='kbc'` option. The dialect is 
-registred automatically when the `Config` class is initialized.
+registered automatically when the `Config` class is initialized.
 You can test the code with the following runtime configuration:
 
 	{
@@ -250,6 +250,6 @@ the actual application is a reusable class and the `main.py` runner is handling 
         traceback.print_exc(file=sys.stderr)
         sys.exit(2)
         
-In this case, we consider everything derived from `ValueError` as an error which should be shown to the end-user. 
-Every other error will lead to a generic message and only developers will see the details. You can of 
-course modify this logic to your liking.
+In this case, we consider everything derived from `ValueError` to be an error which should be shown to the end-user. 
+Every other error will lead to a generic message and only developers will see the details. You can, of 
+course, modify this logic to your liking.
