@@ -305,7 +305,7 @@ file (only makes sense with `incremental: true`).
 
 ### Files
 You can also download files from file uploads using an 
-[ElasticSearch query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax) 
+[Elasticsearch query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax) 
 or filtering using tags. Note that the results of a file mapping are limited to 10 files (to prevent accidental downloads). 
 If you need more files you can use multiple file mappings.  
 

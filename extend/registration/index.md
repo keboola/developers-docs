@@ -62,7 +62,7 @@ This flag provides a UI for setting table output mapping. With this UI you can s
 This flag provides a UI for setting file input mapping. With this UI you can set:
 
 - *file tags* - select files by file tags listed in *File Uploads*
-- *query* - [ElasticSearch query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax)
+- *query* - [Elasticsearch query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax)
 to select files from *File Uploads*
 - *processed tags* - used for [incremental processing](/extend/common-interface/#incremental-processing)
 
