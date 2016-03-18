@@ -23,24 +23,25 @@ of [sample requests](https://www.getpostman.com/collections/87da6ac847f5edcac776
 In the root of your repository, create a PHP script named 
 [`main.php`](https://github.com/keboola/docs-docker-example-basic/blob/master/main.php) with the following contents:
 
-{: .highlight .language-php}
-    <?php
+{% highlight php %}
+<?php
 
-    $fhIn = fopen('/data/in/tables/source.csv', 'r');
-    $fhOut = fopen('/data/out/tables/destination.csv', 'w');
+$fhIn = fopen('/data/in/tables/source.csv', 'r');
+$fhOut = fopen('/data/out/tables/destination.csv', 'w');
 
-    $header = fgetcsv($fhIn);
-    $numberIndex = array_search('number', $header);
-    fputcsv($fhOut, array_merge($header, ['double_number']));
+$header = fgetcsv($fhIn);
+$numberIndex = array_search('number', $header);
+fputcsv($fhOut, array_merge($header, ['double_number']));
 
-    while ($row = fgetcsv($fhIn)) {
-        $row[] = $row[$numberIndex] * 2;
-        fputcsv($fhOut, $row);
-    }
+while ($row = fgetcsv($fhIn)) {
+    $row[] = $row[$numberIndex] * 2;
+    fputcsv($fhOut, $row);
+}
 
-    fclose($fhIn);
-    fclose($fhOut);
-    echo "All done";
+fclose($fhIn);
+fclose($fhOut);
+echo "All done";
+{% endhighlight %}
     
 As mentioned above, this script reads a CSV file, takes a column named
 _numbre_, multiplies it's value by 2 and adds the new values as a new column. 
@@ -72,7 +73,7 @@ To create your own image, create a file named
 [`Dockerfile`](https://github.com/keboola/docs-docker-example-basic/blob/master/Dockerfile) in the same directory as the 
 application code (in the root of your repository). 
 
-	FROM quay.io/keboola/docker-base-php56:0.0.2
+    FROM quay.io/keboola/docker-base-php56:0.0.2
     COPY . /home/
     ENTRYPOINT php /home/main.php
 
@@ -111,32 +112,33 @@ archive which contains a [/data/ folder](/extend/common-interface/) with tables 
 configuration depending on the request body. In the request, you need to enter a configuration format which 
 you choose to be either `Yaml` or `JSON`. A sample request to `https://syrup.keboola.com/docker/sandbox?format=json`:
 
-{: .highlight .language-json}
-    {
-        "config": "my-test-config",
-        "configData": {
-            "storage": {
-                "input": {
-                    "tables": [
-                        {
-                            "source": "in.c-main.test",
-                            "destination": "source.csv"
-                        }
-                    ]
-                },
-                "output": {
-                    "tables": [
-                        {
-                            "source": "destination.csv",
-                            "destination": "out.c-main.test"
-                        }            		
-                    ]
-                }
+{% highlight json %}
+{
+    "config": "my-test-config",
+    "configData": {
+        "storage": {
+            "input": {
+                "tables": [
+                    {
+                        "source": "in.c-main.test",
+                        "destination": "source.csv"
+                    }
+                ]
             },
-            "parameters": {
+            "output": {
+                "tables": [
+                    {
+                        "source": "destination.csv",
+                        "destination": "out.c-main.test"
+                    }                    
+                ]
             }
+        },
+        "parameters": {
         }
     }
+}
+{% endhighlight %}
  
 The sample request corresponds to the following setting in the UI (though the UI for your component will become 
 available only when your extension is complete and [registered](/extend/registration/)).

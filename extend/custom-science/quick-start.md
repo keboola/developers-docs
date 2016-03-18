@@ -19,14 +19,14 @@ Create a public git repository ([Github](https://github.com/) or [Bitbucket](htt
 ### Step 2
 In the root of your repository, create the main application file [`main.R`](https://github.com/keboola/docs-custom-science-example-r-basic/blob/master/main.R). (In Python Custom Science App, the analogous file would be called `main.py`):
 
-	# read input
-	data <- read.csv("/data/in/tables/source.csv");
+    # read input
+    data <- read.csv("/data/in/tables/source.csv");
 
-	# do something 
-	data['double_number'] <- data['number'] * 2
+    # do something 
+    data['double_number'] <- data['number'] * 2
 
-	# write output
-	write.csv(data, file = "/data/out/tables/result.csv", row.names = FALSE)
+    # write output
+    write.csv(data, file = "/data/out/tables/result.csv", row.names = FALSE)
 
 ### Step 3
 Commit to the repository and tag it with a [git tag](https://git-scm.com/book/en/v2/Git-Basics-Tagging) (Github release), such as `0.0.1`. 
@@ -76,10 +76,10 @@ Leave *File input mapping* empty.
 Leave *parameters* empty for now. In *Runtime parameters* enter the the configuration of the repository. 
 This must be entered as a [JSON formatted](http://www.w3schools.com/json/json_syntax.asp) string.
 
-	{
-		"repository": "https://github.com/keboola/docs-custom-science-example-r-basic",
-		"version": "0.0.2"
-	}
+    {
+        "repository": "https://github.com/keboola/docs-custom-science-example-r-basic",
+        "version": "0.0.2"
+    }
 
 {: .image-popup}
 ![Application configuration example](/extend/custom-science/configuration.png)
@@ -103,20 +103,20 @@ You can pass the application an arbitrary set of parameters.
 As an example, we will extend the application from the previous tutorial by allowing the user to specify the multiplier. 
 
 ### Step 1
-	
-	# initialize application
-	library('keboola.r.docker.application')
-	app <- DockerApplication$new('/data/')
-	app$readConfig()
+    
+    # initialize application
+    library('keboola.r.docker.application')
+    app <- DockerApplication$new('/data/')
+    app$readConfig()
 
-	# read input
-	data <- read.csv("/data/in/tables/source.csv");
+    # read input
+    data <- read.csv("/data/in/tables/source.csv");
 
-	# do something 
-	data['double_number'] <- data['number'] * app$getParameters()$multiplier
+    # do something 
+    data['double_number'] <- data['number'] * app$getParameters()$multiplier
 
-	# write output
-	write.csv(data, file = "/data/out/tables/result.csv", row.names = FALSE)
+    # write output
+    write.csv(data, file = "/data/out/tables/result.csv", row.names = FALSE)
 
 In the above example, we take advantage of our [KBC Docker R library](/extend/custom-science/r/) to work easily with the [configuration format](/extend/common-interface/config-file/). There is also a variant for [Python](/extend/custom-science/python/) available.
 
@@ -128,16 +128,16 @@ Commit the code and don't forget to create a new tag in the repository.
 
 Enter the configuration in the parameters field:
 
-	{
-		"multiplier": 10
-	}
+    {
+        "multiplier": 10
+    }
 
 Enter the repository in the runtime field:
 
-	{
-		"repository": "https://github.com/keboola/docs-custom-science-example-r-parameters",
-		"version": "0.0.2"
-	}
+    {
+        "repository": "https://github.com/keboola/docs-custom-science-example-r-parameters",
+        "version": "0.0.2"
+    }
 
 
 Note that the configuration format is arbitrary and there is no validation. 

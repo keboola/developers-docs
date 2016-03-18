@@ -47,24 +47,25 @@ You can get a [collection of sample](/overview/api/) requests in Postman
 here: [![Run in Postman](https://run.pstmn.io/button.png)](https://www.getpostman.com/run-collection/7dc2e4b41225738f5411)
 There is a request *Sandbox introduction*, with the following JSON contents in body:  
 
-{: .highlight .language-json}
-    {
-        "configData": {
-            "storage": {
-                "input": {
-                    "tables": [
-                        {
-                            "source": "in.c-main.test",
-                            "destination": "source.csv"
-                        }
-                    ]
-                },
-            }
-            "parameters": {
-                "multiplier": 4
-            }
+{% highlight json %}
+{
+    "configData": {
+        "storage": {
+            "input": {
+                "tables": [
+                    {
+                        "source": "in.c-main.test",
+                        "destination": "source.csv"
+                    }
+                ]
+            },
+        }
+        "parameters": {
+            "multiplier": 4
         }
     }
+}
+{% endhighlight %}
     
 The node `configData.storage.input.tables.source` refers to existing table ID (the table we created
 in previous step) in Storage. The node `configData.storage.input.tables.destination` refers to the
@@ -85,12 +86,13 @@ Enter your Storage API token under into *Headers* - *X-StorageAPI-Token*.
 
 When you run the request with a valid parameters, you should receive a response simirlar to this:
 
-{: .highlight .language-json}
-    {
-        "id": "176883685",
-        "url": "https://syrup.keboola.com/queue/job/176883685",
-        "status": "waiting"
-    }
+{% highlight json %}
+{
+    "id": "176883685",
+    "url": "https://syrup.keboola.com/queue/job/176883685",
+    "status": "waiting"
+}
+{% endhighlight %}
  
 This means that an asynchronous job has been created which will prepare the sandbox. If you are 
 curious, you can view the job progress under *Jobs* in KBC: 
@@ -130,10 +132,11 @@ You can see a the sample request *Input data Introduction* in [our collection of
 
 The request body is:
 
-{: .highlight .language-json}
-    {
-        "config": "sample-configuration-27"
-    }
+{% highlight json %}
+{
+    "config": "sample-configuration-27"
+}
+{% endhighlight %}
 
 Where you need to replace `sample-configuration-27` with your own configuration ID. The request URL is:
 https://syrup.keboola.com/docker/keboola.docs-docker-example-parameters/input/

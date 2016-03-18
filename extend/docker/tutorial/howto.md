@@ -35,9 +35,10 @@ Note that in dockerfile, each instruction is executed in it's own shell, therefo
 ### Sample Image
 Create an empty directory and it create a Dockerfile with the following contents.
 
-{: .highlight .language-dockerfile}
-    FROM quay.io/keboola/base
-    ENTRYPOINT ping -c 2 example.com
+{% highlight dockerfile %}
+FROM quay.io/keboola/base
+ENTRYPOINT ping -c 2 example.com
+{% endhighlight %}
 
 The `FROM` instruction means that we start with our [base image](https://quay.io/repository/keboola/base)
 whin in turn is based on [CentOS](https://hub.docker.com/_/centos/) image. 
@@ -98,9 +99,10 @@ entrypoint manually.
 
 It is also possible to inspect a running container. Assume you have the following `Dockerfile`:
 
-{: .highlight .language-dockerfile}
-    FROM quay.io/keboola/base
-    ENTRYPOINT ping example.com
+{% highlight dockerfile %}
+FROM quay.io/keboola/base
+ENTRYPOINT ping example.com
+{% endhighlight %}
  
 When you build it using:
     
@@ -145,10 +147,11 @@ Which will give you something like:
 Chances are that your application requires something special. You can install whatever you need
 using standard commands. You can create Dockerfile:
 
-{: .highlight .language-dockerfile}
-    FROM quay.io/keboola/base
-    RUN yum -y install php-cli
-    ENTRYPOINT php -r "echo 'Hello world from PHP';"
+{% highlight dockerfile %}
+FROM quay.io/keboola/base
+RUN yum -y install php-cli
+ENTRYPOINT php -r "echo 'Hello world from PHP';"
+{% endhighlight %}
 
 The `RUN` command will install the specified package `php-cli`. You can build the image with:
 
@@ -168,18 +171,20 @@ When you need to add files into your image, you do so using the *build context* 
 the directory in which *Dockerfile* is and in which you are building the image). Create a `test.php`
 file in the same directory as *Dockerfile* with the following contents: 
 
-{: .highlight .language-php}
-    <?php
+{% highlight php %}
+<?php
 
-    echo "Hello world from PHP file";
+echo "Hello world from PHP file";
+{% endhighlight %}
 
 Then change the Dockerfile to:
 
-{: .highlight .language-dockerfile}
-    FROM quay.io/keboola/base
-    RUN yum -y install php-cli
-    COPY . /home/
-    ENTRYPOINT php /home/test.php
+{% highlight dockerfile %}
+FROM quay.io/keboola/base
+RUN yum -y install php-cli
+COPY . /home/
+ENTRYPOINT php /home/test.php
+{% endhighlight %}
 
 The `COPY` command will copy the entire contents of the directory with Dockerfile into the `/home/`
 directory inside the image. The `ENTRYPOINT` command then simply executes the file when the image 
@@ -204,9 +209,10 @@ images too). However this approache makes debugging more complicated so you bett
 
 and only once you are sure the image builds correctly and you are happy with the result, change this to:
 
-{: .highlight .language-dockerfile}
-    RUN instruction1 \
-        && instruction2
+{% highlight dockerfile %}
+RUN instruction1 \
+    && instruction2
+{% endhighlight %}        
 
 - When you refer to files on the internet make sure that they are available publicly, so that the image can be 
 rebuilt by a docker registry.

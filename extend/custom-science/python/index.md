@@ -20,8 +20,9 @@ You can also have a look at an [example repository](https://github.com/keboola/p
 ## Packages
 To install a custom package, use: 
 
-{: .highlight .language-python}
-    pip.main(['install', '--disable-pip-version-check', '--no-cache-dir', '--cert=/tmp/cacert.pem', 'packageName'])
+{% highlight python %}
+pip.main(['install', '--disable-pip-version-check', '--no-cache-dir', '--cert=/tmp/cacert.pem', 'packageName'])
+{% endhighlight %}
  
 
 Here is our current 
@@ -39,26 +40,27 @@ It is recommended to explicitly specify the CSV formatting options.
 Below is the code for basic reading and writing files, it is also available in our 
 [git repository](https://github.com/keboola/docs-custom-science-example-python-basic)   
 
-{: .highlight .language-python}
-    import csv
+{% highlight python %}
+import csv
 
-    # CSV format settings
-    csvlt = '\n'
-    csvdel = ','
-    csvquo = '"'
+# CSV format settings
+csvlt = '\n'
+csvdel = ','
+csvquo = '"'
 
-    # open the input and output files
-    with open('in/tables/source.csv', mode='rt', encoding='utf-8') as inFile, open('out/tables/destination.csv', mode='wt', encoding='utf-8') as outFile:
-        # write output file header
-        writer = csv.DictWriter(outFile, fieldnames = ['number', 'someText', 'double_number'], lineterminator=csvlt, delimiter = csvdel, quotechar = csvquo)
-        writer.writeheader()
+# open the input and output files
+with open('in/tables/source.csv', mode='rt', encoding='utf-8') as inFile, open('out/tables/destination.csv', mode='wt', encoding='utf-8') as outFile:
+    # write output file header
+    writer = csv.DictWriter(outFile, fieldnames = ['number', 'someText', 'double_number'], lineterminator=csvlt, delimiter = csvdel, quotechar = csvquo)
+    writer.writeheader()
 
-        # read input file line-by-line
-        lazyLines = (line.replace('\0', '') for line in inFile)
-        csvReader = csv.DictReader(lazyLines, lineterminator=csvlt, delimiter = csvdel, quotechar = csvquo)
-        for row in csvReader:
-            # do something and write row
-            writer.writerow({'number': row['number'], 'someText': row['someText'], 'double_number': int(row['number']) * 2})
+    # read input file line-by-line
+    lazyLines = (line.replace('\0', '') for line in inFile)
+    csvReader = csv.DictReader(lazyLines, lineterminator=csvlt, delimiter = csvdel, quotechar = csvquo)
+    for row in csvReader:
+        # do something and write row
+        writer.writerow({'number': row['number'], 'someText': row['someText'], 'double_number': int(row['number']) * 2})
+{% endhighlight %}
 
 
 The above example shows how to process the file line-by-line; this is the most memory-efficient way which 
@@ -71,11 +73,12 @@ It is also important to use `encoding='utf-8'` when reading and writing files.
 To test the above code, you can use a sample [source table](/extend/source.csv) in *Storage* and the
 following *runtime* configuration:
 
-{: .highlight .language-json}
-	{
-		"repository": "https://github.com/keboola/docs-custom-science-example-python-basic",
-		"version": "1.0.5"
-	}
+{% highlight json %}
+{
+    "repository": "https://github.com/keboola/docs-custom-science-example-python-basic",
+    "version": "1.0.5"
+}
+{% endhighlight %}
 
 
 ## Using the KBC Package
@@ -98,64 +101,69 @@ Also note that the library does no special magic, it is just a mean to simplify 
 
 To use the library to read the user-supplied configuration parameter 'myParameter':
 
-{: .highlight .language-python}
-    from keboola import docker
-    
-    # initialize application
-    cfg = docker.Config('/data/')
-    params = cfg.getParameters()
+{% highlight python %}
+from keboola import docker
 
-    # access the supplied value of 'myParameter'
-    app$getParameters()$myParameter
+# initialize application
+cfg = docker.Config('/data/')
+params = cfg.getParameters()
+
+# access the supplied value of 'myParameter'
+app$getParameters()$myParameter
+{% endhighlight %}
 
 The library contains a single class `Config`; a parameter of the constructor is the path to the data directory. 
 The above would read the `myParameter` parameter from the user-supplied configuration:
 
-{: .highlight .language-json}
-    {
-        "myParameter": "myValue"
-    }
+{% highlight json %}
+{
+    "myParameter": "myValue"
+}
+{% endhighlight %}
 
 An example of the above approach is available 
 in [our repository](https://github.com/keboola/docs-custom-science-example-python-parameters).  
 
-{: .highlight .language-python}
-    import csv
-    from keboola import docker
+{% highlight python %}
+import csv
+from keboola import docker
 
-    # initialize the application and read parameter 'multiplier'
-    cfg = docker.Config('/data/')
-    multiplier = cfg.getParameters()['multiplier']
+# initialize the application and read parameter 'multiplier'
+cfg = docker.Config('/data/')
+multiplier = cfg.getParameters()['multiplier']
 
-    # open the input and output files
-    with open('in/tables/source.csv', mode='rt', encoding='utf-8') as inFile, open('out/tables/destination.csv', mode='wt', encoding='utf-8') as outFile:
-        # write output file header
-        writer = csv.DictWriter(outFile, fieldnames = ['number', 'someText', 'double_number'], dialect='kbc')
-        writer.writeheader()
+# open the input and output files
+with open('in/tables/source.csv', mode='rt', encoding='utf-8') as inFile, open('out/tables/destination.csv', mode='wt', encoding='utf-8') as outFile:
+    # write output file header
+    writer = csv.DictWriter(outFile, fieldnames = ['number', 'someText', 'double_number'], dialect='kbc')
+    writer.writeheader()
 
-        # read input file line-by-line
-        lazyLines = (line.replace('\0', '') for line in inFile)
-        csvReader = csv.DictReader(lazyLines, dialect='kbc')
-        for row in csvReader:
-            # do something and write row
-            writer.writerow({'number': row['number'], 'someText': row['someText'], 'double_number': int(row['number']) * multiplier})
+    # read input file line-by-line
+    lazyLines = (line.replace('\0', '') for line in inFile)
+    csvReader = csv.DictReader(lazyLines, dialect='kbc')
+    for row in csvReader:
+        # do something and write row
+        writer.writerow({'number': row['number'], 'someText': row['someText'], 'double_number': int(row['number']) * multiplier})
+{% endhighlight %}        
 
 Note that we also simplified reading and writing of the CSV files using `dialect='kbc'` option. The dialect is 
 registered automatically when the `Config` class is initialized.
 You can test the code with the following runtime configuration:
 
-{: .highlight .language-json}
-	{
-		"repository": "https://github.com/keboola/docs-custom-science-example-python-parameters",
-		"version": "1.0.0"
-	}
+{% highlight json %}
+{
+    "repository": "https://github.com/keboola/docs-custom-science-example-python-parameters",
+    "version": "1.0.0"
+}
+{% endhighlight %}
     
 And with the following parameters:
 
-{: .highlight .language-json}
-    {
-        "multiplier": 10
-    }
+{% highlight json %}
+{
+    "multiplier": 10
+}
+{% endhighlight %}
 
 
 ### Dynamic Input/Output Mapping 
@@ -171,69 +179,71 @@ The input mapper takes `source` tables from user's storage, and produces `destin
 the input of your extension. The output tables of your extension are consumed by the output mapper 
 whose `destination` are the resulting tables in Storage.
 
-{: .highlight .language-python}
-    import csv
-    from keboola import docker
+{% highlight python %}
+import csv
+from keboola import docker
 
-    # initialize cfglication
-    cfg = docker.Config('/data/')
+# initialize cfglication
+cfg = docker.Config('/data/')
 
-    # get list of input tables
-    tables = cfg.getInputTables()
+# get list of input tables
+tables = cfg.getInputTables()
+i = 0
+for table in tables:
+    # get csv file name 
+    inName = table['destination'] 
+    
+    # read input table metadata
+    manifest = cfg.getTableManifest(inName)
+
+    # get csv file name with full path from output mcfging
+    outName = cfg.getExpectedOutputTables()[i]['full_path']
+
+    # get file name from output mcfging
+    outDestination = cfg.getExpectedOutputTables()[i]['destination']
+
+    # get csv full path and read table data
     i = 0
-    for table in tables:
-        # get csv file name 
-        inName = table['destination'] 
+    with open(table['full_path'], mode='rt', encoding='utf-8') as inFile, open(outName, mode='wt', encoding='utf-8') as outFile:
+        # read input file line-by-line
+        lazyLines = (line.replace('\0', '') for line in inFile)
+        csvReader = csv.DictReader(lazyLines, dialect='kbc')
+        headers = csvReader.fieldnames
+        headers.extend(['primaryKey'])
         
-        # read input table metadata
-        manifest = cfg.getTableManifest(inName)
+        # write output file header
+        writer = csv.DictWriter(outFile, fieldnames = headers, dialect='kbc')
+        writer.writeheader()
 
-        # get csv file name with full path from output mcfging
-        outName = cfg.getExpectedOutputTables()[i]['full_path']
+        for row in csvReader:
+            # if there is no primary key
+            if (len(manifest['primary_key']) == 0):
+                i = i + 1
+                row['primaryKey'] = i
+            else:
+                row['primaryKey'] = NULL
 
-        # get file name from output mcfging
-        outDestination = cfg.getExpectedOutputTables()[i]['destination']
+            writer.writerow(row)
 
-        # get csv full path and read table data
-        i = 0
-        with open(table['full_path'], mode='rt', encoding='utf-8') as inFile, open(outName, mode='wt', encoding='utf-8') as outFile:
-            # read input file line-by-line
-            lazyLines = (line.replace('\0', '') for line in inFile)
-            csvReader = csv.DictReader(lazyLines, dialect='kbc')
-            headers = csvReader.fieldnames
-            headers.extend(['primaryKey'])
-            
-            # write output file header
-            writer = csv.DictWriter(outFile, fieldnames = headers, dialect='kbc')
-            writer.writeheader()
+    if (len(manifest['primary_key']) == 0):
+        pk = ['primaryKey']
+    else:
+        pk = manifest['primary_key']
 
-            for row in csvReader:
-                # if there is no primary key
-                if (len(manifest['primary_key']) == 0):
-                    i = i + 1
-                    row['primaryKey'] = i
-                else:
-                    row['primaryKey'] = NULL
-    
-                writer.writerow(row)
-    
-        if (len(manifest['primary_key']) == 0):
-            pk = ['primaryKey']
-        else:
-            pk = manifest['primary_key']
-
-        # write table metadata - set new primary key
-        cfg.writeTableManifest(outName, destination = outDestination, primaryKey = pk)
+    # write table metadata - set new primary key
+    cfg.writeTableManifest(outName, destination = outDestination, primaryKey = pk)
+{% endhighlight %}    
 
     
 The above code is located in a [sample repository](https://github.com/keboola/docs-custom-science-example-python-dynamic.git), 
 so you can use it with the *runtime settings*. Supply any number of input tables.
 
-{: .highlight .language-json}
-    {
-        "repository": "https://github.com/keboola/docs-custom-science-example-python-dynamic.git",
-        "version": "1.0.2"
-    }
+{% highlight json %}
+{
+    "repository": "https://github.com/keboola/docs-custom-science-example-python-dynamic.git",
+    "version": "1.0.2"
+}
+{% endhighlight %}
     
 To test the code, set an arbitrary number of input/output mapping tables. Keep in mind to set the same number of 
 inputs and outputs. The names of the CSV files are arbitrary.
@@ -250,17 +260,18 @@ you can follow the pattern from the
 [sample application](https://github.com/keboola/python-custom-application-text-splitter/blob/master/main.py), where 
 the actual application is a reusable class and the `main.py` runner is handling the errors:
 
-{: .highlight .language-python}
-    try:
-        app = textSplitter.App()
-        app.run()
-    except ValueError as err:
-        print(err, file=sys.stderr)
-        sys.exit(1)
-    except Exception as err:
-        print(err, file=sys.stderr)
-        traceback.print_exc(file=sys.stderr)
-        sys.exit(2)
+{% highlight python %}
+try:
+    app = textSplitter.App()
+    app.run()
+except ValueError as err:
+    print(err, file=sys.stderr)
+    sys.exit(1)
+except Exception as err:
+    print(err, file=sys.stderr)
+    traceback.print_exc(file=sys.stderr)
+    sys.exit(2)
+{% endhighlight %}    
         
 In this case, we consider everything derived from `ValueError` to be an error which should be shown to the end-user. 
 Every other error will lead to a generic message and only developers will see the details. You can, of 

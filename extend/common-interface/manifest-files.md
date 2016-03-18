@@ -33,60 +33,64 @@ with ID `in.c-docker-demo.data` will be downloaded into
 '/in/tables/in.c-docker-demo.data.csv.manifest' will be created with the following 
 contents (provided that the chosen format is JSON):
 
-{: .highlight .language-json}
-    {
-        "id": "in.c-docker-demo.data",
-        "uri": "https://connection.keboola.com//v2/storage/tables/in.c-docker-demo.data",
-        "name": "data",
-        "primary_key": [],
-        "indexed_columns": [],
-        "created": "2015-01-25T01:35:14+0100",
-        "last_change_date": "2015-01-25T01:35:14+0100",
-        "last_import_date": "2015-01-25T01:35:14+0100",
-        "rows_count": 2,
-        "data_size_bytes": 32768,
-        "is_alias": false,
-        "columns": [
-            "id",
-            "name",
-            "text"
-        ],
-        "attributes": []
-    }
+{% highlight json %}
+{
+    "id": "in.c-docker-demo.data",
+    "uri": "https://connection.keboola.com//v2/storage/tables/in.c-docker-demo.data",
+    "name": "data",
+    "primary_key": [],
+    "indexed_columns": [],
+    "created": "2015-01-25T01:35:14+0100",
+    "last_change_date": "2015-01-25T01:35:14+0100",
+    "last_import_date": "2015-01-25T01:35:14+0100",
+    "rows_count": 2,
+    "data_size_bytes": 32768,
+    "is_alias": false,
+    "columns": [
+        "id",
+        "name",
+        "text"
+    ],
+    "attributes": []
+}
+{% endhighlight %}
 
 The node `name` refers to the name of the component configuration.
 Note that `data_size_bytes` and `rows_count` are estimated values by the database server and they may be 
 significantly off (especially right after the table is created). The node `attributes` contains
 additonal [table attributes](https://help.keboola.com/????). If used, it has the structure:
 
-{: .highlight .language-json}
-    atrributes: [
-        {
-            "name": "attributeName",
-            "value": "attributeValue",
-            "protected": false
-        }
-    ]
+{% highlight json %}
+atrributes: [
+    {
+        "name": "attributeName",
+        "value": "attributeValue",
+        "protected": false
+    }
+]
+{% endhighlight %}
 
 #### `/data/out/tables` manifests
 
 The output table manifests set options for transferring the table to Storage.
 
-{: .highlight .language-json}
-    {
-        "destination": "out.c-main.Leads",
-        "incremental": true,
-        "primary_key": ["column1", "column2"],
-        "delimiter": "\t",
-        "enclosure": "\""
-    }
+{% highlight json %}
+{
+    "destination": "out.c-main.Leads",
+    "incremental": true,
+    "primary_key": ["column1", "column2"],
+    "delimiter": "\t",
+    "enclosure": "\""
+}
+{% endhighlight %}
     
 Additonally the following options can be specified:
 
-{: .highlight .language-json}
-        "delete_where_column": "column name",
-        "delete_where_values": ["value1", "value2"],
-        "delete_where_operator": "eq"
+{% highlight json %}
+"delete_where_column": "column name",
+"delete_where_values": ["value1", "value2"],
+"delete_where_operator": "eq"
+{% endhighlight %}
     
 Which will cause to be the specified rows deleted from the source table before the new 
 table is imported, see [Example](/extend/common-interface/config-file/#output-mapping-delete-rows).
@@ -97,41 +101,43 @@ table is imported, see [Example](/extend/common-interface/config-file/#output-ma
 
 The input file manifests store metadata about the downloaded file.
 
-{: .highlight .language-json}
-    {
-        "id": 75807657,
-        "created": "2015-01-14T00:47:00+0100",
-        "is_public": false,
-        "is_sliced": false,
-        "is_encrypted": true,
-        "name": "fooBar.jpg",
-        "size_bytes": 563416,
-        "tags": [
-            "tag1",
-            "tag2"
-        ],
-        "max_age_days": 180,
-        "creator_token": {
-            "id": 3800,
-            "description": "ondrej.hlavacek@keboola.com"
-        }
+{% highlight json %}
+{
+    "id": 75807657,
+    "created": "2015-01-14T00:47:00+0100",
+    "is_public": false,
+    "is_sliced": false,
+    "is_encrypted": true,
+    "name": "fooBar.jpg",
+    "size_bytes": 563416,
+    "tags": [
+        "tag1",
+        "tag2"
+    ],
+    "max_age_days": 180,
+    "creator_token": {
+        "id": 3800,
+        "description": "ondrej.hlavacek@keboola.com"
     }
+}
+{% endhighlight %}
 
 #### `/data/out/files` manifests
 
 The output file manifests set options for transferring the file to Storage.
 
-{: .highlight .language-json}
-    {
-        "is_public": true,
-        "is_permanent": true,
-        "is_encrypted": true,
-        "notify": false,
-        "tags": [
-            "image",
-            "pie-chart"
-        ]
-    }
+{% highlight json %}
+{
+    "is_public": true,
+    "is_permanent": true,
+    "is_encrypted": true,
+    "notify": false,
+    "tags": [
+        "image",
+        "pie-chart"
+    ]
+}
+{% endhighlight %}
 
 These parameters can be used (taken from [Storage API File Import](http://docs.keboola.apiary.io/#files)):
 If `is_permnanent` is false, then the file will be automatically deleted after 180 days. When `notify` is

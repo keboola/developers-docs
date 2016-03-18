@@ -35,11 +35,12 @@ application will receive the decrypted value). When encrypting a configuration a
 note that what values are encrypted is defined by the application. I.e. you cannot freely encrypt any value unless
 the application explicitly supports it. For example, if the application states that it requires configuration:
 
-{: .highlight .language-json}
-    {
-        "username": "JohnDoe",
-        "#password": "password"
-    }
+{% highlight json %}
+{
+    "username": "JohnDoe",
+    "#password": "password"
+}
+{% endhighlight %}
 
 It means that the password will always be encrypted and the username will not be encrypted. You generally cannot
 pass `#username`, because the application does not expect such key to exist (although it's value will be decrypted
@@ -51,25 +52,27 @@ The encryption API can encrypt either strings or arbitrary JSON data. In case of
 encrypted. In case of JSON data,
 only keys which start with `#` character and they are scalar, are encrypted. Therefore, encrypting a JSON structure e.g.:
 
-{: .highlight .language-json}
-    {
-        "foo": "bar",
-        "#encryptMe": "secret",
-        "#encryptMeToo": {
-            "another": "secret"
-        }
+{% highlight json %}
+{
+    "foo": "bar",
+    "#encryptMe": "secret",
+    "#encryptMeToo": {
+        "another": "secret"
     }
+}
+{% endhighlight %}
 
 yields:
 
-{: .highlight .language-json}
-    {
-        "foo": "bar",
-        "#encryptMe": "KBC::Encrypted==ENCODEDSTRING==",
-        "#encryptMeToo": {
-            "another": "secret"
-        }
+{% highlight json %}
+{
+    "foo": "bar",
+    "#encryptMe": "KBC::Encrypted==ENCODEDSTRING==",
+    "#encryptMeToo": {
+        "another": "secret"
     }
+}
+{% endhighlight %}
 
 
 If you want to encrypt e.g. only password The body of the request is simply the text string you want to encrypt (no JSON or quotation is used). e.g. encrypting:

@@ -15,45 +15,47 @@ This feature is available only for [registered extensions](/extend/registration/
 You must create a configuration for the given component and project in OAuth API V2. 
 The `OAUTH_API_ID` is the id provided when storing authorization via OAuth API V2.
 
-{: .highlight .language-json}
-    {
+{% highlight json %}
+{
 
-        "storage": { ... },
-        "parameters": { ... },
-        "authorization": {
-            "oauth_api": {
-                "id": "{OAUTH_API_ID}"
-            }
+    "storage": { ... },
+    "parameters": { ... },
+    "authorization": {
+        "oauth_api": {
+            "id": "{OAUTH_API_ID}"
         }
     }
+}
+{% endhighlight %}
 
 ## Authorize
 [Docker Bundle](/overview/docker-bundle/) then retrieves, decrypts and injects the credentials to the 
 configuration file in the `authorization.oauth_api.credentials` attribute.
 
-{: .highlight .language-json}
-    {
-        "storage": { ... }
-        "parameters": { ... }
-        "authorization": {
-            "oauth_api": {
-                "id": "{OAUTH_API_ID}",
-                "credentials": {
-                    "id": "main",
-                    "authorizedFor": "Myself",
-                    "creator": {
-                        "id": "1234",
-                        "description": "me@keboola.com"
-                    },
-                    "created": "2016-01-31 00:13:30",
-                    "oauthVersion": "2.0",
-                    "appKey": "w51u7j30oghe412",
-                    "#data": "KBC::Encrypted==ENCODEDSTRING==",
-                    "#appSecret": "KBC::Encrypted==ENCODEDSTRING=="
-                }
+{% highlight json %}
+{
+    "storage": { ... }
+    "parameters": { ... }
+    "authorization": {
+        "oauth_api": {
+            "id": "{OAUTH_API_ID}",
+            "credentials": {
+                "id": "main",
+                "authorizedFor": "Myself",
+                "creator": {
+                    "id": "1234",
+                    "description": "me@keboola.com"
+                },
+                "created": "2016-01-31 00:13:30",
+                "oauthVersion": "2.0",
+                "appKey": "w51u7j30oghe412",
+                "#data": "KBC::Encrypted==ENCODEDSTRING==",
+                "#appSecret": "KBC::Encrypted==ENCODEDSTRING=="
             }
         }
     }
+}
+{% endhighlight %}
 
 Configuration node `authorization.oauth_api.credentials.#data` stores the response from 
 the authorized API as a raw string. You need to parse the string accordingly as OAuth API V2 has intentionally  

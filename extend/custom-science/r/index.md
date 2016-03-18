@@ -36,7 +36,6 @@ library(keboola.r.docker.application)
 app <- keboola.r.docker.application::DockerApplication$new('/data/')
 app$readConfig()
 
-
 # access the supplied value of 'myParameter'
 app$getParameters()$myParameter
 {% endhighlight %}
@@ -44,9 +43,11 @@ app$getParameters()$myParameter
 The library contains a single [RC class](http://adv-r.had.co.nz/OO-essentials.html#rc) `DockerApplication`; a parameter of the constructor is the path to the data directory. 
 Call `readConfig()` to actually read and parse the configuration file. The above would read the `myParameter` parameter from the user-supplied configuration:
 
+{% highlight json %}
     {
         "myParameter": "myValue"
     }
+{% endhighlight %}
 
 You can obtain inline help and the list of library functions by running the `?DockerApplication` command.
 
@@ -102,10 +103,10 @@ for (i in 1:nrow(tables)) {
 The above code is located in a [sample repository](https://github.com/keboola/docs-custom-science-example-dynamic.git), so you can use it
 with the *runtime settings*. Supply any number of input tables.
 
-	{
-		"repository": "https://github.com/keboola/docs-custom-science-example-dynamic.git",
-		"version": "0.0.1"
-	}
+    {
+        "repository": "https://github.com/keboola/docs-custom-science-example-dynamic.git",
+        "version": "0.0.1"
+    }
     
 To test the code, set an arbitrary number of input/output mapping tables. Keep in mind to set the same number of inputs and outputs. The names of the CSV files are arbitrary.
 
@@ -233,8 +234,9 @@ data['double_number'] <- data['number'] * getParameters()$multiplier
 
 You can test the sample code with this *runtime* setting:
 
-
+{% highlight json %}
     {
         "repository": "https://github.com/keboola/docs-custom-science-example-r-subclass.git",
         "version": "0.0.4"
     }
+{% endhighlight %}    
