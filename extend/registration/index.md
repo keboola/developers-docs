@@ -27,6 +27,10 @@ DockerHub offers 1 free private repository per account.
 
 Quay.io offers convenient robot accounts. Provide us with a robot `username` and `token` with read-only access to the desired repository and we're good to go.
 
+{: .image-popup}
+![Quay.io screenshot](/extend/registration/quayioprivate.png)
+
+
 Private Quay.io repositories are paid.
 
 ## Registration
