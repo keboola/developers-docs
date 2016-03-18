@@ -15,6 +15,8 @@ extensions one can build are:
 - *Writers* to push data into new systems and consumption methods
 - *Applications* that further enrich the data or add value in new ways
 
+![Overview of KBC Components](/kbc-structure.png)
+
 By building extensions for KBC, you get easy access to data from many sources, and simple path to 
 deliver the data back to your customers. Your app or algorithm suddenly becomes available to all 
 existing Keboola Connection subscribers and implementation partners, allowing you to focus only on 
