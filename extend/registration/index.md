@@ -46,7 +46,7 @@ This flag provides a UI for setting the table input mapping. With this UI you ca
 ![Table input detail screenshot](/extend/registration/table-input-2.png)
 
 #### tableOutput
-This flag provides a UI for setting table output mapping. With this UI you can set:
+This flag provides a UI for setting the table output mapping. With this UI you can set:
 
 - *source* - the name of the .csv file retrieved from the application
 - *destination* - the name of the table in Storage, the destination bucket should exist already
@@ -59,9 +59,9 @@ This flag provides a UI for setting table output mapping. With this UI you can s
 ![Table output detail screenshot](/extend/registration/table-output-2.png)
 
 #### fileInput
-This flag provides a UI for setting file input mapping. With this UI you can set:
+This flag provides a UI for setting the file input mapping. With this UI you can set:
 
-- *file tags* - select files by file tags listed in *File Uploads*
+- *file tags* - select files by the file tags listed in *File Uploads*
 - *query* - [ElasticSearch query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax)
 to select files from *File Uploads*
 - *processed tags* - used for [incremental processing](/extend/common-interface/#incremental-processing)
@@ -70,10 +70,10 @@ to select files from *File Uploads*
 ![File input detail screenshot](/extend/registration/file-input-2.png)
 
 #### fileOutput
-This flag provides a UI for setting file output mapping. With this UI you can set:
+This flag provides a UI for setting the file output mapping. With this UI you can set:
 
 - *source* - the name of the file produced by the application
-- *file tags* - file tags assigned to the produced file
+- *file tags* - the file tags assigned to the produced file
 - *is public* - the file is accessible to anyone knowing its URL
 - *is permanent* - the file won't be deleted after 180 days
 
@@ -84,8 +84,8 @@ This flag provides a UI for setting file output mapping. With this UI you can se
 If you want to test your extension before making it available to all users, it can be 
 hidden from the list of all components (UI flag `excludeFromNewList`). 
 However, this does not really prevent anyone from using it.
-To use a non-published extension, create the configuration using 
+To use a non-published extension, create the configuration with 
 the [component API](http://docs.keboola.apiary.io/#reference/components/create-config/create-config). 
 Or visit directly the following URL: https://connection.keboola.com/admin/projects/{projectId}/applications/{componentId}.
-The *projectid* is simply your KBC project ID. The *componentId* (e.g. _myCompany.acmeApplication_) is provided upon your extension registration.
+The *projectid* is your KBC project ID. The *componentId* (e.g. _myCompany.acmeApplication_) is provided upon your extension registration.
 

@@ -50,7 +50,7 @@ You can obtain inline help and the list of library functions by running the `?Do
 
 ### Dynamic Input/Output Mapping 
 In the [Quick start tutorial](/extend/custom-science/quick-start/), we have shown applications which have names of their input/output tables hard-coded. 
-This example shows how to read input and output mapping specified by the end-user,
+This example shows how to read the input and output mapping specified by the end-user,
 which is accessible in the [configuration file](/extend/common-interface/config-file/). It demonstrates
 how to read and write tables and table manifests. File manifests are handled the same way. For a full authoritative list
 of items returned in table list and manifest contents, see [the specification](/extend/common-interface/config-file/)
