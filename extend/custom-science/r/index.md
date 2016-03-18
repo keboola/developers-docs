@@ -59,45 +59,45 @@ of items returned in table list and manifest contents, see [the specification](/
 
 Note that the `destination` label in the script refers to the destination from the the mappers perspective. The input mapper takes `source` tables from user's storage, and produces `destination` tables that become the input of the extension. The output tables of the extension are consumed by the output mapper whose `destination` are the resulting tables in Storage.
 
-```r
-    # initialize application
-    app <- DockerApplication$new('/data/')
-    app$readConfig()
+{% highlight r %}
+# initialize application
+app <- DockerApplication$new('/data/')
+app$readConfig()
+
+# get list of input tables
+tables <- app$getInputTables()
+for (i in 1:nrow(tables)) {
+    # get csv file name 
+    name <- tables[i, 'destination'] 
     
-    # get list of input tables
-    tables <- app$getInputTables()
-    for (i in 1:nrow(tables)) {
-        # get csv file name 
-        name <- tables[i, 'destination'] 
-        
-        # get csv full path and read table data
-        data <- read.csv(tables[i, 'full_path'])
-        
-        # read table metadata
-        manifest <- app$getTableManifest(name)
-        if ((length(manifest$primary_key) == 0) && (nrow(data) > 0)) {
-            # no primary key present, create one
-            data[['primary_key']] <- seq(1, nrow(data))
-        } else {
-            data[['primary_key']] <- NULL
-        }
+    # get csv full path and read table data
+    data <- read.csv(tables[i, 'full_path'])
     
-    
-        # do something clever
-        names(data) <- paste0('batman_', names(data))
-        
-        # get csv file name with full path from output mapping
-        outName <- app$getExpectedOutputTables()[i, 'full_path']
-        # get file name from output mapping
-        outDestination <- app$getExpectedOutputTables()[i, 'destination']
-    
-        # write output data
-        write.csv(data, file = outName, row.names = FALSE)
-        
-        # write table metadata - set new primary key
-        app$writeTableManifest(outName, destination = outDestination, primaryKey = c('batman_primary_key'))
+    # read table metadata
+    manifest <- app$getTableManifest(name)
+    if ((length(manifest$primary_key) == 0) && (nrow(data) > 0)) {
+        # no primary key present, create one
+        data[['primary_key']] <- seq(1, nrow(data))
+    } else {
+        data[['primary_key']] <- NULL
     }
-```
+
+
+    # do something clever
+    names(data) <- paste0('batman_', names(data))
+    
+    # get csv file name with full path from output mapping
+    outName <- app$getExpectedOutputTables()[i, 'full_path']
+    # get file name from output mapping
+    outDestination <- app$getExpectedOutputTables()[i, 'destination']
+
+    # write output data
+    write.csv(data, file = outName, row.names = FALSE)
+    
+    # write table metadata - set new primary key
+    app$writeTableManifest(outName, destination = outDestination, primaryKey = c('batman_primary_key'))
+}
+{% endhighlight %}
     
 The above code is located in a [sample repository](https://github.com/keboola/docs-custom-science-example-dynamic.git), so you can use it
 with the *runtime settings*. Supply any number of input tables.
@@ -175,12 +175,12 @@ itself is identical to the [previous example](#simple-example).
 
 You can test the sample code with this *runtime* setting:
 
-```json
-	{
-		"repository": "https://github.com/keboola/docs-custom-science-example-r-package.git",
-		"version": "0.0.5"
-	}
-```
+{% highlight json %}
+    {
+        "repository": "https://github.com/keboola/docs-custom-science-example-r-package.git",
+        "version": "0.0.5"
+    }
+{% endhighlight %}
      
 #### Tests 
 Tests are organized in the [/tests/](https://github.com/keboola/docs-custom-science-example-r-package/tree/master/tests) directory which contains:
