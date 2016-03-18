@@ -175,11 +175,12 @@ itself is identical to the [previous example](#simple-example).
 
 You can test the sample code with this *runtime* setting:
 
-{: .highlight .language-json}
+```json
 	{
 		"repository": "https://github.com/keboola/docs-custom-science-example-r-package.git",
 		"version": "0.0.5"
 	}
+```
      
 #### Tests 
 Tests are organized in the [/tests/](https://github.com/keboola/docs-custom-science-example-r-package/tree/master/tests) directory which contains:
