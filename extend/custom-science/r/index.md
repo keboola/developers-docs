@@ -59,7 +59,7 @@ of items returned in table list and manifest contents, see [the specification](/
 
 Note that the `destination` label in the script refers to the destination from the the mappers perspective. The input mapper takes `source` tables from user's storage, and produces `destination` tables that become the input of the extension. The output tables of the extension are consumed by the output mapper whose `destination` are the resulting tables in Storage.
 
-{: .highlight .language-r}
+```r
     # initialize application
     app <- DockerApplication$new('/data/')
     app$readConfig()
@@ -81,8 +81,8 @@ Note that the `destination` label in the script refers to the destination from t
         } else {
             data[['primary_key']] <- NULL
         }
-
-
+    
+    
         # do something clever
         names(data) <- paste0('batman_', names(data))
         
@@ -90,13 +90,14 @@ Note that the `destination` label in the script refers to the destination from t
         outName <- app$getExpectedOutputTables()[i, 'full_path']
         # get file name from output mapping
         outDestination <- app$getExpectedOutputTables()[i, 'destination']
-
+    
         # write output data
         write.csv(data, file = outName, row.names = FALSE)
         
         # write table metadata - set new primary key
         app$writeTableManifest(outName, destination = outDestination, primaryKey = c('batman_primary_key'))
     }
+```
     
 The above code is located in a [sample repository](https://github.com/keboola/docs-custom-science-example-dynamic.git), so you can use it
 with the *runtime settings*. Supply any number of input tables.
