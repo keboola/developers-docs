@@ -14,8 +14,20 @@ That being said, any KBC user can use any registered component, unless:
 - the component itself limits where it can run (in what projects and for which users)
 
 ## Using a Private Repository
-If your image cannot be public, you can use a private docker repository. If you decide to do so, please provide 
-us with your `email`, `username`, `password` and `server` properties from the login credentials.
+
+If your image cannot be public, you can use a private docker repository on both DockerHub and Quay.io.
+
+### DockerHub
+
+Access to private DockerHub repositories requires an account, so please provide us with your `email`, `username`, `password` and `server` properties from the login credentials. Better yet - create a new user, that has access to the desired repository and surrender it to us. 
+
+DockerHub offers 1 free private repository per account.
+
+### Quay.io
+
+Quay.io offers convenient robot accounts. Provide us with a robot `username` and `token` with read-only access to the desired repository and we're good to go.
+
+Private Quay.io repositories are paid.
 
 ## Registration
 The registration process is simple, but it must be done by Keboola. To register your extension, 
