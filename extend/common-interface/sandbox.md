@@ -35,6 +35,7 @@ You can use the [sample table](/extend/source.csv). In the following example, we
 table will be stored in bucket `in.c-main` and the table name is `test`. The table ID is therefore
 `in.c-main.test`.
 
+{: .image-popup}
 ![Storage Screenshot](/extend/commmon-interface/sandbox-data.png)
 
 You will also need your Storage API token, which you can found by clicking the icon at the top right corner.
@@ -92,6 +93,7 @@ When you run the request with a valid parameters, you should receive a response 
 This means that an asynchronous job has been created which will prepare the sandbox. If you are 
 curious, you can view the job progress under *Jobs* in KBC: 
 
+{: .image-popup}
 ![Job progress screenshot](/extend/common-interface/sandbox-progress.png)
 
 The job will usually execute very quickly, so you might as well go straight to *Storage* - *File Uploads* in
@@ -114,6 +116,7 @@ visiting the URL:
 Where you replace `{projectId}` with the Id of the project in KBC (you can find that in URL). You can then
 create configuration. The equivalent to what we have used in the [Sandbox above](#sandbox) call would be: 
 
+{: .image-popup}
 ![Configuration screnshot](/extend/common-interface/input-configuration.png)
 
 ### Run the API request

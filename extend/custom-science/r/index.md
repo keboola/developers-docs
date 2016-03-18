@@ -106,7 +106,8 @@ with the *runtime settings*. Supply any number of input tables.
     
 To test the code, set an arbitrary number of input/output mapping tables. Keep in mind to set the same number of inputs and outputs. The names of the CSV files are arbitrary.
 
- ![Dynamic mapping screenshot](/extend/custom-science/r/dynamic-mapping.png)
+{: .image-popup}
+![Dynamic mapping screenshot](/extend/custom-science/r/dynamic-mapping.png)
   
     
 ## KBC Package Integration Options
@@ -182,8 +183,9 @@ by copying [config_template.R](https://github.com/keboola/docs-custom-science-ex
 - Subdirectory `test_that/` which contains the actual [testthat tests](http://r-pkgs.had.co.nz/tests.html)
 
 You can run the tests locally from RStudio:
- 
- ![RStudio tests](/extend/custom-science/r/rstudio-tests.png)
+
+{: .image-popup} 
+![RStudio tests](/extend/custom-science/r/rstudio-tests.png)
  
 Or you can set them to run automatically using  [Travis](https://travis-ci.org/) continuous integration server every time you push into your git repository. For that you can use the provided
 [travis.yml](https://github.com/keboola/docs-custom-science-example-r-package/blob/master/.travis.yml) file.

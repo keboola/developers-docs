@@ -22,10 +22,12 @@ When saving arbitrary configuration data (this applies especially to [Custom sci
 
 This means that when saving a value:
 
+{: .image-popup}
 ![Configuration editor Screenshot](/overview/encryption-1.png)
 
 Once you save the value, you will receive:
 
+{: .image-popup}
 ![Configuration editor Screenshot](/overview/encryption-2.png)
 
 Once the configuration has been saved, the value is encrypted and there is no way to decrypt it (only the 
@@ -86,6 +88,7 @@ ask a Keboola Developer to enable encryption for your [docker extension](/extend
 You can use sample Postman requests from collection 
 [![Run in Postman](https://run.pstmn.io/button.png)](https://www.getpostman.com/run-collection/7dc2e4b41225738f5411)
 
+{: .image-popup}
 ![Postman screenshot](/architecture/encryption-postman.png)
 
 

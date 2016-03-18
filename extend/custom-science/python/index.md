@@ -228,6 +228,7 @@ so you can use it with the *runtime settings*. Supply any number of input tables
 To test the code, set an arbitrary number of input/output mapping tables. Keep in mind to set the same number of 
 inputs and outputs. The names of the CSV files are arbitrary.
 
+{: .image-popup}
 ![Dynamic mapping screenshot](/extend/custom-science/python/dynamic-mapping.png)
   
 ## Error Handling

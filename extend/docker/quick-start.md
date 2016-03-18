@@ -92,7 +92,8 @@ On command line, navigate to the directory with your repository in issue the com
 
 _Don't forget the dot at the end_. The command should produce similar output to the below one:
 
- ![Docker build output](/extend/docker/build-output.png)
+{: .image-popup}
+![Docker build output](/extend/docker/build-output.png)
 
 Out of that output, the most important thing is *Successfully built ded5321d5ba5* which gives us a 
 hash of the new image `ded5321d5ba5`, which can be abreviated to first 3 characters, so we can
@@ -138,6 +139,7 @@ you choose to be either `Yaml` or `JSON`. A sample request to `https://syrup.keb
 The sample request corresponds to the following setting in the UI (though the UI for your component will become 
 available only when your extension is complete and [registered](/extend/registration/)).
 
+{: .image-popup}
 ![Configuration Screenshot](/extend/docker/configuration-sample.png) 
 
 Alternatively - to quickly get the picture, you can download a [random sample data folder](/extend/docker/data.zip),

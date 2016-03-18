@@ -40,32 +40,38 @@ created in [tutorial](/extend/docker/tutorial/howto/).
 
 Create account and organization, and then *Create New Repository*:
 
+{: .image-popup}
 ![Create Repository](/extend/docker/tutorial/quay-intro.png)
 
 In repository configuration, select to link to Github repository: 
 
+{: .image-popup}
 ![Repository configuration](/extend/docker/tutorial/quay-new-repository.png)
 
 Then link the image repository to github repository
 (you can also use our sample repository 
 [https://github.com/keboola/docs-docker-example-basic](https://github.com/keboola/docs-docker-example-basic):
- 
+
+{: .image-popup} 
 ![Link repositories](/extend/docker/tutorial/quay-link-repository.png)
 
 Then configure the build trigger. The easiest is to set the trigger to `All Branches and Tags` which 
 will trigger image rebuild on every commit to the respository. A more solid approach is 
 to set the build trigger only to a specified branch e.g `heads/master`:
-  
+
+{: .image-popup}  
 ![Configure build trigger for branch](/extend/docker/tutorial/quay-build-trigger-master.png)
 
 Alterantive option is to configure the trigger to a specific tag. If you are using 
 Semantic versioning, the you can user regular expresssion `^tags/[0-9]+\.[0-9]+\.[0-9]+$`.
 In that case an image will be rebuild only when you create a new tag.
  
+{: .image-popup}
 ![Configure build trigger for tag](/extend/docker/tutorial/quay-build-trigger-tag.png)
 
 Regardless of which aproache you tak, you can then finish seting up the trigger by completeing the wizard:
 
+{: .image-popup}
 ![Configure build trigger](/extend/docker/tutorial/quay-build-trigger.png)
 
 Pushing a new commit or creating a new tag (depedning on the trigger setting) into the git repository will now

@@ -86,6 +86,7 @@ Docker toolbox takes care of mapping the entire `C:/Users` folder into the VM in
 runs. In that VM, the folder is accesible as `/c/Users`. (You can check that by manually running the Oracle 
 VM Virtualbox, and starting/showing the `default` virtual machine; check the folder contents with `ls /c/`).
 
+{: .image-popup}
 ![Oracle VM Virtualbox screenshot](/extend/docker/tutorial/virtualbox.png)
 
 If you want to map the `C:/Users/JohnDoe/MyData` into a `/home/mydata` folder a container, you therefore have to write

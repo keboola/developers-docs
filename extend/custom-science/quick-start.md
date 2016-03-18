@@ -32,6 +32,7 @@ In the root of your repository, create the main application file [`main.R`](http
 Commit to the repository and tag it with a [git tag](https://git-scm.com/book/en/v2/Git-Basics-Tagging) (Github release), such as `0.0.1`. 
 Tagging each version is essential; we recommend using [Semantic versioning](http://semver.org/).
 
+{: .image-popup}
 ![Github tag screenshot](/extend/custom-science/repository-tag.png)
 
 ### Step 4 - Test the Application in KBC
@@ -62,6 +63,7 @@ Go to *Applications* - *New Application* - *Custom Science R*, and press *Add co
 #### Step 4.3 - Input Mapping
 To test the application, use the **in.c-main.custom-science-example** sample table as input. Make sure to set the input mapping name to **source.csv** - that is what we expect in the [sample script](https://github.com/keboola/docs-custom-science-example-/blob/master/main.R#L2).
 
+{: .image-popup}
 ![Input mapping configuration](/extend/custom-science/input-mapping.png)
 
 #### Step 4.4 - Output Mapping
@@ -79,6 +81,7 @@ This must be entered as a [JSON formatted](http://www.w3schools.com/json/json_sy
 		"version": "0.0.2"
 	}
 
+{: .image-popup}
 ![Application configuration example](/extend/custom-science/configuration.png)
 
 #### Step 4.6 - Run the Application
@@ -142,6 +145,7 @@ Implement parameter validation in your script, otherwise the end-user may receiv
 
 The following screenshot summarizes all the necessary end-user configuration:
 
+{: .image-popup}
 ![Application configuration with parameters example](/extend/custom-science/configuration-2.png)
 
 
