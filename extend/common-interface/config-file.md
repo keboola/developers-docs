@@ -78,6 +78,7 @@ If you want to manually pass configuration options in the API request, be sure t
 
 Sample configuration file might look like this:
 
+{: .highlight .language-json}
     {
         "storage": {
             "input": {
@@ -159,6 +160,7 @@ The tables element in configuration of **output mapping** is an array and suppor
 Download tables `in.c-ex-salesforce.Leads` and `in.c-ex-salesforce.Accounts` to `/data/tables/in/leads.csv` 
 and `/data/tables/in/accounts.csv`
 
+{: .highlight .language-json}
     {
         "storage": {
             "input": {
@@ -178,6 +180,7 @@ and `/data/tables/in/accounts.csv`
     
 In an API request this would be passed as:
 
+{: .highlight .language-json}
     {
         "configData": {
             "storage": {
@@ -201,6 +204,7 @@ In an API request this would be passed as:
 #### Input mapping - Incremental load
 Download 2 days of data from table `in.c-storage.StoredData` to `/data/tables/in/in.c-storage.StoredData`
 
+{: .highlight .language-json}
     {
         "storage": {
             "input": {
@@ -216,6 +220,7 @@ Download 2 days of data from table `in.c-storage.StoredData` to `/data/tables/in
 
 #### Input mapping - Select columns
 
+{: .highlight .language-json}
     {
         "storage": {
             "input": {
@@ -231,6 +236,7 @@ Download 2 days of data from table `in.c-storage.StoredData` to `/data/tables/in
 
 #### Input mapping - Filtered table
 
+{: .highlight .language-json}
     {
         "storage": {
             "input": {
@@ -250,6 +256,7 @@ Download 2 days of data from table `in.c-storage.StoredData` to `/data/tables/in
 ### Output mapping - Basic
 Upload `/data/out/tables/out.c-main.data.csv` to `out.c-main.data`
 
+{: .highlight .language-json}
     {
         "storage": {
             "output": {
@@ -267,6 +274,7 @@ Upload `/data/out/tables/out.c-main.data.csv` to `out.c-main.data`
 Upload `/data/out/tables/data.csv` to `out.c-main.data`.
 with a primary key and incrementally.
 
+{: .highlight .language-json}
     {
         "storage": {
             "output": {
@@ -286,6 +294,7 @@ with a primary key and incrementally.
 Delete data from `destination` table before uploading the CSV 
 file (only makes sense with `incremental: true`).
 
+{: .highlight .language-json}
     {
         "storage": {
             "output": {
@@ -315,6 +324,7 @@ The name of each file has the format `fileId_fileName`. Each file will also cont
 
 #### Input mapping - Query
 
+{: .highlight .language-json}
     {
         "storage": {
             "input": {
@@ -331,10 +341,10 @@ The name of each file has the format `fileId_fileName`. Each file will also cont
 Will download with files with matching `.zip` **and** having tag `docker-demo`, depdending on the contents of your 
 *File uploads* in *Storage*, this may produce something like:
 
-/data/in/files/75807542_fooBar.zip
-/data/in/files/75807542_fooBar.zip.manifest
-/data/in/files/75807657_fooBarBaz.zip
-/data/in/files/75807657_fooBarBaz.zip.manifest		
+    /data/in/files/75807542_fooBar.zip
+    /data/in/files/75807542_fooBar.zip.manifest
+    /data/in/files/75807657_fooBarBaz.zip
+    /data/in/files/75807657_fooBarBaz.zip.manifest		
  
 #### Input mapping - Run Id
 You can also use `filter_by_run_id` option to select only files which are related to the job 
@@ -343,18 +353,19 @@ satisfy the filter (either `tags` or `query`) *and* were uploaded by a parent jo
 or parent runId). This allows you to further limit downloaded files only to thoose related to a 
 current chain of jobs.
 
-{
-    "storage": {
-        "input": {
-            "files": [
-                {
-                    "tags": ["fooBar"],
-                    "filter_by_run_id": true
-                }
-            ]
+{: .highlight .language-json}
+    {
+        "storage": {
+            "input": {
+                "files": [
+                    {
+                        "tags": ["fooBar"],
+                        "filter_by_run_id": true
+                    }
+                ]
+            }
         }
     }
-}
 
 This will download only file which have the tag `fooBar` and were produced by a parent job to
 the currently running docker.
@@ -363,6 +374,7 @@ the currently running docker.
 You can define additional properties for uploaded files in the output mapping configuration. If 
 that file is not present in the `/data/out/files` folder, an error will be throws. 
 
+{: .highlight .language-json}
     {
         "storage": {
             "output": {
@@ -390,7 +402,8 @@ The former can be achieved by using proper
 [ElasticSearch query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax)  
 and the latter is achieved using the `processed_tags` setting. `processed_tags` setting is an array of tags
 which will be added to the *input* files once they are downloaded. A sample contents of `configData`:
-   
+
+{: .highlight .language-json}   
     {
         "storage": {
             "input": {

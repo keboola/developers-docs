@@ -35,6 +35,7 @@ Note that in dockerfile, each instruction is executed in it's own shell, therefo
 ### Sample Image
 Create an empty directory and it create a Dockerfile with the following contents.
 
+{: .highlight .language-dockerfile}
     FROM quay.io/keboola/base
     ENTRYPOINT ping -c 2 example.com
 
@@ -97,6 +98,7 @@ entrypoint manually.
 
 It is also possible to inspect a running container. Assume you have the following `Dockerfile`:
 
+{: .highlight .language-dockerfile}
     FROM quay.io/keboola/base
     ENTRYPOINT ping example.com
  
@@ -143,6 +145,7 @@ Which will give you something like:
 Chances are that your application requires something special. You can install whatever you need
 using standard commands. You can create Dockerfile:
 
+{: .highlight .language-dockerfile}
     FROM quay.io/keboola/base
     RUN yum -y install php-cli
     ENTRYPOINT php -r "echo 'Hello world from PHP';"
@@ -165,12 +168,14 @@ When you need to add files into your image, you do so using the *build context* 
 the directory in which *Dockerfile* is and in which you are building the image). Create a `test.php`
 file in the same directory as *Dockerfile* with the following contents: 
 
+{: .highlight .language-php}
     <?php
 
     echo "Hello world from PHP file";
 
 Then change the Dockerfile to:
 
+{: .highlight .language-dockerfile}
     FROM quay.io/keboola/base
     RUN yum -y install php-cli
     COPY . /home/
@@ -199,6 +204,7 @@ images too). However this approache makes debugging more complicated so you bett
 
 and only once you are sure the image builds correctly and you are happy with the result, change this to:
 
+{: .highlight .language-dockerfile}
     RUN instruction1 \
         && instruction2
 

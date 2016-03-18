@@ -19,7 +19,8 @@ You can also have a look at an [example repository](https://github.com/keboola/p
 
 ## Packages
 To install a custom package, use: 
-    
+
+{: .highlight .language-python}
     pip.main(['install', '--disable-pip-version-check', '--no-cache-dir', '--cert=/tmp/cacert.pem', 'packageName'])
  
 
@@ -38,6 +39,7 @@ It is recommended to explicitly specify the CSV formatting options.
 Below is the code for basic reading and writing files, it is also available in our 
 [git repository](https://github.com/keboola/docs-custom-science-example-python-basic)   
 
+{: .highlight .language-python}
     import csv
 
     # CSV format settings
@@ -69,6 +71,7 @@ It is also important to use `encoding='utf-8'` when reading and writing files.
 To test the above code, you can use a sample [source table](/extend/source.csv) in *Storage* and the
 following *runtime* configuration:
 
+{: .highlight .language-json}
 	{
 		"repository": "https://github.com/keboola/docs-custom-science-example-python-basic",
 		"version": "1.0.5"
@@ -95,6 +98,7 @@ Also note that the library does no special magic, it is just a mean to simplify 
 
 To use the library to read the user-supplied configuration parameter 'myParameter':
 
+{: .highlight .language-python}
     from keboola import docker
     
     # initialize application
@@ -107,6 +111,7 @@ To use the library to read the user-supplied configuration parameter 'myParamete
 The library contains a single class `Config`; a parameter of the constructor is the path to the data directory. 
 The above would read the `myParameter` parameter from the user-supplied configuration:
 
+{: .highlight .language-json}
     {
         "myParameter": "myValue"
     }
@@ -114,6 +119,7 @@ The above would read the `myParameter` parameter from the user-supplied configur
 An example of the above approach is available 
 in [our repository](https://github.com/keboola/docs-custom-science-example-python-parameters).  
 
+{: .highlight .language-python}
     import csv
     from keboola import docker
 
@@ -138,6 +144,7 @@ Note that we also simplified reading and writing of the CSV files using `dialect
 registered automatically when the `Config` class is initialized.
 You can test the code with the following runtime configuration:
 
+{: .highlight .language-json}
 	{
 		"repository": "https://github.com/keboola/docs-custom-science-example-python-parameters",
 		"version": "1.0.0"
@@ -145,6 +152,7 @@ You can test the code with the following runtime configuration:
     
 And with the following parameters:
 
+{: .highlight .language-json}
     {
         "multiplier": 10
     }
@@ -163,6 +171,7 @@ The input mapper takes `source` tables from user's storage, and produces `destin
 the input of your extension. The output tables of your extension are consumed by the output mapper 
 whose `destination` are the resulting tables in Storage.
 
+{: .highlight .language-python}
     import csv
     from keboola import docker
 
@@ -220,9 +229,10 @@ whose `destination` are the resulting tables in Storage.
 The above code is located in a [sample repository](https://github.com/keboola/docs-custom-science-example-python-dynamic.git), 
 so you can use it with the *runtime settings*. Supply any number of input tables.
 
+{: .highlight .language-json}
     {
-    "repository": "https://github.com/keboola/docs-custom-science-example-python-dynamic.git",
-    "version": "1.0.2"
+        "repository": "https://github.com/keboola/docs-custom-science-example-python-dynamic.git",
+        "version": "1.0.2"
     }
     
 To test the code, set an arbitrary number of input/output mapping tables. Keep in mind to set the same number of 
@@ -240,6 +250,7 @@ you can follow the pattern from the
 [sample application](https://github.com/keboola/python-custom-application-text-splitter/blob/master/main.py), where 
 the actual application is a reusable class and the `main.py` runner is handling the errors:
 
+{: .highlight .language-python}
     try:
         app = textSplitter.App()
         app.run()

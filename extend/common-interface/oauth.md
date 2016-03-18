@@ -15,6 +15,7 @@ This feature is available only for [registered extensions](/extend/registration/
 You must create a configuration for the given component and project in OAuth API V2. 
 The `OAUTH_API_ID` is the id provided when storing authorization via OAuth API V2.
 
+{: .highlight .language-json}
     {
 
         "storage": { ... },
@@ -30,6 +31,7 @@ The `OAUTH_API_ID` is the id provided when storing authorization via OAuth API V
 [Docker Bundle](/overview/docker-bundle/) then retrieves, decrypts and injects the credentials to the 
 configuration file in the `authorization.oauth_api.credentials` attribute.
 
+{: .highlight .language-json}
     {
         "storage": { ... }
         "parameters": { ... }

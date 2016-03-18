@@ -30,6 +30,7 @@ It is [available on Github](https://github.com/keboola/r-docker-application), so
 
 To use the library to read the user-supplied configuration parameter 'myParameter':
 
+{: .highlight .language-r}
     library(keboola.r.docker.application)
     # initialize application
     app <- keboola.r.docker.application::DockerApplication$new('/data/')
@@ -42,6 +43,7 @@ To use the library to read the user-supplied configuration parameter 'myParamete
 The library contains a single [RC class](http://adv-r.had.co.nz/OO-essentials.html#rc) `DockerApplication`; a parameter of the constructor is the path to the data directory. 
 Call `readConfig()` to actually read and parse the configuration file. The above would read the `myParameter` parameter from the user-supplied configuration:
 
+{: .highlight .language-json}
     {
         "myParameter": "myValue"
     }
@@ -57,6 +59,7 @@ of items returned in table list and manifest contents, see [the specification](/
 
 Note that the `destination` label in the script refers to the destination from the the mappers perspective. The input mapper takes `source` tables from user's storage, and produces `destination` tables that become the input of the extension. The output tables of the extension are consumed by the output mapper whose `destination` are the resulting tables in Storage.
 
+{: .highlight .language-r}
     # initialize application
     app <- DockerApplication$new('/data/')
     app$readConfig()
@@ -98,7 +101,7 @@ Note that the `destination` label in the script refers to the destination from t
 The above code is located in a [sample repository](https://github.com/keboola/docs-custom-science-example-dynamic.git), so you can use it
 with the *runtime settings*. Supply any number of input tables.
 
-
+{: .highlight .language-json}
 	{
 		"repository": "https://github.com/keboola/docs-custom-science-example-dynamic.git",
 		"version": "0.0.1"
@@ -120,6 +123,7 @@ In the simplest case, you can use the code from an [R transformation](/???/) to 
 In the example below, we supply value `/data/` to the constructor as the data directory, as that will be always true in 
 our [production environment](/extend/common-interface/environment/).   
  
+ {: .highlight .language-r}
     library('keboola.r.docker.application')
 
     # initialize application
@@ -150,6 +154,7 @@ Wrapping the application logic into an R package makes testing and portability m
 #### Code
 The application EntryPoint is [`main.R`](https://github.com/keboola/docs-custom-science-example-r-package/blob/master/main.R) in the package root folder. 
 
+{: .highlight .language-r}
     devtools::load_all('/home/')
     library(keboola.r.custom.application)
     doSomething(Sys.getenv("KBC_DATADIR"))
@@ -169,6 +174,7 @@ itself is identical to the [previous example](#simple-example).
 
 You can test the sample code with this *runtime* setting:
 
+{: .highlight .language-json}
 	{
 		"repository": "https://github.com/keboola/docs-custom-science-example-r-package.git",
 		"version": "0.0.5"
@@ -199,6 +205,7 @@ previous [package example](#package-example). There are no major differences or 
 to have the file `main.R` in its root. The difference is that we create the RS class `CustomApplicationExample` and call
 its `run()` method.     
  
+{: .highlight .language-r}
     devtools::load_all('/home/')
     library(keboola.r.custom.application.subclass)
     app <- CustomApplicationExample$new(Sys.getenv("KBC_DATADIR"))
@@ -208,17 +215,20 @@ The name of the class `CustomApplicationExample` is completely arbitrary and is 
 [`R/myApp.R'](https://github.com/keboola/docs-custom-science-example-r-subclass/blob/master/R/myApp.R#L6). The application
 code itself is formally different as all the methods are in the class, so instead of:
 
+{: .highlight .language-r}
     app <- DockerApplication$new(datadir)
     app$readConfig()
     data['double_number'] <- data['number'] * app$getParameters()$multiplier
 
 You use only within the body of `CustomApplicationExample`'s `run` method:
 
+{: .highlight .language-r}
     readConfig()
     data['double_number'] <- data['number'] * getParameters()$multiplier
 
 You can test the sample code with this *runtime* setting:
 
+{: .highlight .language-json}
 	{
 		"repository": "https://github.com/keboola/docs-custom-science-example-r-subclass.git",
 		"version": "0.0.4"

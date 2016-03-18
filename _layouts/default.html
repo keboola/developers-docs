@@ -79,15 +79,18 @@ s	<link rel="stylesheet" href="https://d3qqa9wia2dvbu.cloudfront.net/v0.1.77-0-g
     _st('install','tM-dZKs7DADT5bRod7bF','2.0.0');
   </script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/highlight.min.js"></script>
   <script src="/assets/js/magnific-popup.js"></script>
+  <script src="/assets/js/highlight.pack.js"></script>
   <script type="text/javascript">
     $(document).ready(function() {
       $('.image-popup').magnificPopup({type:'image', delegate:'img',
         callbacks: {
           elementParse: function(item) { item.src = item.el.attr('src'); }
         }});
-      $('pre code').each(function (i, block) {
+      hljs.configure({
+        tabReplace: '    '
+      });
+      $('pre.highlight code').each(function (i, block) {
         hljs.highlightBlock(block);
       });
     });

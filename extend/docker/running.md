@@ -26,7 +26,7 @@ please make sure to check that this is the current version in the docker reposit
 ## Basic run
 Basic run command that we use is:
 
-    `docker run --volume=/Users/JohnDoe/data/:/data --memory=8192m --cpu-shares=1024 --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-78 quay.io/keboola/docs-docker-example-parameters
+    docker run --volume=/Users/JohnDoe/data/:/data --memory=8192m --cpu-shares=1024 --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-78 quay.io/keboola/docs-docker-example-parameters
 
 The `--volume` parameter makes sure that a `/data/` folder will be mounted into the image. This is used
 to inject the input data and configuration into the image. Make sure not to put any spaces around `:`
@@ -87,7 +87,7 @@ more configuration options. The request URL is e.g. `https://syrup.keboola.com/d
 
 To run the component use a command line, e.g: 
 
-    `docker run --volume=/Users/JohnDoe/data/:/data --memory=8192m --cpu-shares=1024 
+    docker run --volume=/Users/JohnDoe/data/:/data --memory=8192m --cpu-shares=1024 
     --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ 
     -e KBC_CONFIGID=test-78 quay.io/keboola/docs-example-parameters
 

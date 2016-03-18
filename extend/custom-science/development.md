@@ -26,9 +26,11 @@ A single application corresponds to a single source code repository, so multiple
 same code. Should each customer use slightly different code, you can use the KBC_PROJECTID environment 
 variable, the exact project in which the application is running can be identified. 
 The end-user has no way to modify this value, so the control is fully on your side.
-if (Sys.getenv("KBC_PROJECTID") != '123')  {
-    stop("Invalid project Id")
-}
+
+{: .highlight .language-r}
+    if (Sys.getenv("KBC_PROJECTID") != '123')  {
+        stop("Invalid project Id")
+    }
 
 
 ## Git Repository Configuration
@@ -41,6 +43,7 @@ we recommend [Semantic versioning](http://semver.org/).
 ### Public Repository
 The basic *Runtime* settings for a public repository are entered in JSON format: 
 
+{: .highlight .language-json}
 	{
 		"repository": "https://github.com/keboola/docs-custom-science-example-basic",
 		"version": "0.0.1"
@@ -51,6 +54,7 @@ The basic *Runtime* settings for a public repository are entered in JSON format:
 The *Runtime* settings for a private repository must include git credentials: an unencrypted username in the
 `username` field, and an [encrypted](/architecture/encryption/) password in `#password`. 
 
+{: .highlight .language-json}
 	{
         "repository": "https://github.com/keboola/docs-custom-science-example-basic",
         "version": "0.0.1",

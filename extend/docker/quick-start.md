@@ -23,6 +23,7 @@ of [sample requests](https://www.getpostman.com/collections/87da6ac847f5edcac776
 In the root of your repository, create a PHP script named 
 [`main.php`](https://github.com/keboola/docs-docker-example-basic/blob/master/main.php) with the following contents:
 
+{: .highlight .language-php}
     <?php
 
     $fhIn = fopen('/data/in/tables/source.csv', 'r');
@@ -110,6 +111,7 @@ archive which contains a [/data/ folder](/extend/common-interface/) with tables 
 configuration depending on the request body. In the request, you need to enter a configuration format which 
 you choose to be either `Yaml` or `JSON`. A sample request to `https://syrup.keboola.com/docker/sandbox?format=json`:
 
+{: .highlight .language-json}
     {
         "config": "my-test-config",
         "configData": {

@@ -35,9 +35,10 @@ application will receive the decrypted value). When encrypting a configuration a
 note that what values are encrypted is defined by the application. I.e. you cannot freely encrypt any value unless
 the application explicitly supports it. For example, if the application states that it requires configuration:
 
+{: .highlight .language-json}
     {
-        'username': 'JohnDoe',
-        '#password': 'password'
+        "username": "JohnDoe",
+        "#password": "password"
     }
 
 It means that the password will always be encrypted and the username will not be encrypted. You generally cannot
@@ -50,6 +51,7 @@ The encryption API can encrypt either strings or arbitrary JSON data. In case of
 encrypted. In case of JSON data,
 only keys which start with `#` character and they are scalar, are encrypted. Therefore, encrypting a JSON structure e.g.:
 
+{: .highlight .language-json}
     {
         "foo": "bar",
         "#encryptMe": "secret",
@@ -60,6 +62,7 @@ only keys which start with `#` character and they are scalar, are encrypted. The
 
 yields:
 
+{: .highlight .language-json}
     {
         "foo": "bar",
         "#encryptMe": "KBC::Encrypted==ENCODEDSTRING==",

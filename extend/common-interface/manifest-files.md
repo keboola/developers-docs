@@ -33,6 +33,7 @@ with ID `in.c-docker-demo.data` will be downloaded into
 '/in/tables/in.c-docker-demo.data.csv.manifest' will be created with the following 
 contents (provided that the chosen format is JSON):
 
+{: .highlight .language-json}
     {
         "id": "in.c-docker-demo.data",
         "uri": "https://connection.keboola.com//v2/storage/tables/in.c-docker-demo.data",
@@ -58,6 +59,7 @@ Note that `data_size_bytes` and `rows_count` are estimated values by the databas
 significantly off (especially right after the table is created). The node `attributes` contains
 additonal [table attributes](https://help.keboola.com/????). If used, it has the structure:
 
+{: .highlight .language-json}
     atrributes: [
         {
             "name": "attributeName",
@@ -70,6 +72,7 @@ additonal [table attributes](https://help.keboola.com/????). If used, it has the
 
 The output table manifests set options for transferring the table to Storage.
 
+{: .highlight .language-json}
     {
         "destination": "out.c-main.Leads",
         "incremental": true,
@@ -80,6 +83,7 @@ The output table manifests set options for transferring the table to Storage.
     
 Additonally the following options can be specified:
 
+{: .highlight .language-json}
         "delete_where_column": "column name",
         "delete_where_values": ["value1", "value2"],
         "delete_where_operator": "eq"
@@ -93,6 +97,7 @@ table is imported, see [Example](/extend/common-interface/config-file/#output-ma
 
 The input file manifests store metadata about the downloaded file.
 
+{: .highlight .language-json}
     {
         "id": 75807657,
         "created": "2015-01-14T00:47:00+0100",
@@ -116,6 +121,7 @@ The input file manifests store metadata about the downloaded file.
 
 The output file manifests set options for transferring the file to Storage.
 
+{: .highlight .language-json}
     {
         "is_public": true,
         "is_permanent": true,
