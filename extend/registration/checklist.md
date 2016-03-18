@@ -15,7 +15,7 @@ permalink: /extend/registration/checklist/
 | 7 | **Vendor address** |  Will be visible to end-users  | &#9744; | `1 Connected Way, BigTown, CS` | 
 | 8 | **Email address** | Will be visible to end-users and we will send error notifications to this address | &#9744; | `info@company.com` | 
 | 9 | **License agreement URL** | Can be included in your public source repository | &#9744; | `https://github.com/org/reponame/master/blob/LICENSE.md` |
-| 10 | **Docker image URL** | Currently supported are DockerHub (public and private) and Quay (public) | &#9744; | `https://hub.docker.com/r/keboola/docker-demo` |
+| 10 | **Docker image URL** | Currently supported are DockerHub (public and private) and Quay (public, private) | &#9744; | `https://hub.docker.com/r/keboola/docker-demo` |
 | 11 | **Docker image tag** | Tag of the image in the Docker repository; typically `latest` or `master` or `1.0.0` | &#9744; | `latest` |
 | 12 | **Required memory**  | Maximum memory your image will use | &#9744; | `512M` |
 | 13 | **Processing timeout**  | Maximum processing time in seconds | &#9744; | `3600` |
