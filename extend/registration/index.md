@@ -26,6 +26,9 @@ DockerHub offers 1 free private repository per account.
 
 Quay.io offers convenient robot accounts. Provide us with a robot `username` and `token` with a read-only access to the desired repository and we're good to go.
 
+{: .image-popup}
+![Quay.io screenshot](/extend/registration/quayioprivate.png)
+ 
 Private Quay.io repositories are paid.
  
 ## Registration
@@ -42,6 +45,7 @@ the options is shown below:
 This provides a basic textarea for setting extension parameters as a JSON, the textarea has 
 JSON validation and syntax highlighting.
 
+{: .image-popup}
 ![Generic configuration screenshot](/extend/registration/configuration.png)
 
 #### tableInput
@@ -53,7 +57,10 @@ This flag provides a UI for setting the table input mapping. With this UI you ca
 - *days* - load only rows modified in the specified number of days; useful for incremental loads
 - *data filter* - a simple filter for selecting specified rows only
 
+{: .image-popup}
 ![Table input screenshot](/extend/registration/table-input-1.png)
+
+{: .image-popup}
 ![Table input detail screenshot](/extend/registration/table-input-2.png)
 
 #### tableOutput
@@ -65,8 +72,10 @@ This flag provides a UI for setting the table output mapping. With this UI you c
 - *primary key* - set the primary key for your destination table - multiple columns are allowed
 - *delete rows* - delete some rows from the destination table using a simple filter
 
-
+{: .image-popup}
 ![Table output screenshot](/extend/registration/table-output-1.png)
+
+{: .image-popup}
 ![Table output detail screenshot](/extend/registration/table-output-2.png)
 
 #### fileInput
@@ -77,7 +86,10 @@ This flag provides a UI for setting the file input mapping. With this UI you can
 to select files from *File Uploads*
 - *processed tags* - used for [incremental processing](/extend/common-interface/#incremental-processing)
 
+{: .image-popup}
 ![File input screenshot](/extend/registration/file-input-1.png)
+
+{: .image-popup}
 ![File input detail screenshot](/extend/registration/file-input-2.png)
 
 #### fileOutput
@@ -88,7 +100,10 @@ This flag provides a UI for setting the file output mapping. With this UI you ca
 - *is public* - the file is accessible to anyone knowing its URL
 - *is permanent* - the file won't be deleted after 180 days
 
+{: .image-popup}
 ![File output screenshot](/extend/registration/file-output-1.png)
+
+{: .image-popup}
 ![File output detail screenshot](/extend/registration/file-output-2.png)
 
 ### Hide your Extension from the KBC App Store
