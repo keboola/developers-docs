@@ -5,7 +5,7 @@ permalink: /extend/docker/
 
 Docker extensions allow you to extend KBC in a more flexible way than [Custom Science](/extend/custom-science/). At the same 
 time, significant implementation effort on your part is required. In Docker extensions, the data interface is 
-very similar to [transformations](https://help.keboola.com/transformations/) 
+very similar to [Transformations](https://help.keboola.com/transformations/) 
 and [Custom Science](/extend/custom-science/) - data are exchanged as 
 CSV files in [designated directories](/extend/common-interface/).
 
@@ -40,18 +40,18 @@ We provide libraries to help you with implementation in
  We also have an example application in [PHP](https://github.com/keboola/docker-demo-app). When you have your
  application ready, you need to wrap it in a Docker image.  All images which are supposed to be run in KBC
   must have an `ENTRYPOINT`. 
-We also recommned that you base your image on [one of our images](/extend/docker/images/).
+We also recommend that you base your image on [one of our images](/extend/docker/images/).
 
 A Docker extension processes input tables stored in [CSV files](/extend/common-interface/) and generates 
 result tables in CSV files.  An extractor works the same way, however, it does not read input from 
-KBC tables, but instead from its source (usualy some API). Similarly, a Writer does not generate any KBC tables. 
+KBC tables, but instead from its source (usually some API). Similarly, a Writer does not generate any KBC tables. 
 We make sure the CSV files are created in and taken from the right places. 
 
 The execution of your extension happens in its own [isolated environment](/architecture/docker-bundle/).
 
-Before you (or anyone else) can use your *Docker extension*, it must be [registered](/extend/registration/) 
+Before you (or anyone else) can use your *Docker extension*, it must be [registered](/extend/registration/). 
 
-If you are new to docker, there is a [quick introdution](/extend/docker/tutorial/),
+If you are new to docker, there is a [quick introduction](/extend/docker/tutorial/),
 a [guide to setting up docker](/extend/docker/tutorial/setup/) and  
  [guide to building dockerized applications](/extend/docker/tutorial/howto/). 
 To create a simple Docker Extension on your own, go to [Quick start guide](/extend/docker/quick-start/).
