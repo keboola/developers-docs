@@ -31,7 +31,7 @@ The following table provides an overview of the main characteristics of KBC exte
     <tr>
       <th rowspan="2">KBC EXTENSIONS</th>
       <th colspan="3" style="text-align: center;">Implementation</th>
-      <th colspan="4" style="text-align: center;">User Features</th>
+      <th colspan="5" style="text-align: center;">User Features</th>
       <th style="text-align: center;">Other</th>
     </tr>
     <tr>
