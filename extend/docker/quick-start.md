@@ -165,7 +165,7 @@ see [Setting up Docker](/extend/docker/tutorial/setup/#sharing-files). In our ex
 
     docker run --volume=/c/Users/ondre/data/:/data/ test
 
-Where the contents of the sample data folder are put in the user’s' home directory. If you have set everythingeveryting correctly,
+Where the contents of the sample data folder are put in the users' home directory. If you have set everything correctly,
 you should see **All done** and a `destination.csv` file will appear in the `data/out/tables/` directory.
 
 ### Step 5.1 Debugging
