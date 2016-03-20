@@ -65,7 +65,7 @@ The KBC interfaces for Custom Science Application and Transformations are highly
 ### Usage Differences:
 
 - The code in Transformations is visible to everyone in the KBC project. 
-The Custom Science Application code (similarly to the [Docker extension]) can be hidden by using a private repository.
+The Custom Science Application code (similarly to the [Docker extension](/extend/docker/)) can be hidden by using a private repository.
 
 - The Transformation code is tied to a specific project. To share the code across different projects, 
 use Custom Science Application (or the Docker extension).

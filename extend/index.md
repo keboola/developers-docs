@@ -12,7 +12,7 @@ there are two types of extensions available:
 
 ## Custom Extensions
 
-Custom Extensions can be used as Extractors, Writers and Applications. An application processes input tables stored in CSV files and generates result tables in CSV files. An extractor works the same way, however, it does not read input from KBC tables, but instead from its source (usually some API). Similarly, a Writer does not generate any KBC tables. We make sure the CSV files are created in and taken from the right places.
+Custom Extensions can be used as Extractors, Writers and Applications. An application processes input tables stored in CSV files and generates result tables in CSV files. An extractor works the same way. However, instead of reading its input from KBC tables, it gets it from its source (usually an API). Similarly, a Writer does not generate any KBC tables. We make sure the CSV files are created in and taken from the right places.
 
 Extensions run inside a [Docker component](/architecture/docker-bundle) which takes care of: 
 
@@ -48,7 +48,7 @@ The following table provides an overview of the main characteristics of KBC exte
       <th>Brandable</th>
       <th>Offered to All Users</th>
       <th>Customizable User Interface</th>
-      <th>OAuth2 support</th>
+      <th>OAuth2 Support</th>
       <th>Keboola Approval/Registration Required</th>
     </tr>
   </thead>
