@@ -4,7 +4,7 @@ permalink: /extend/docker/quick-start/
 ---
 
 This tutorial guides you through the process of creating a simple Docker Application in PHP. 
-The application logic is trivial: it takes a table with numbers as an input, and creates another table with an extra column containing those numbers multiplied by two. A test in KBC is included. 
+As in the [Custom Science Quick Start](/extend/custom-science/quick-start/), the application logic is trivial: it takes a table with numbers as an input, and creates another table with an extra column containing those numbers multiplied by two. A test in KBC is included. 
 
 ## Before You Start
 
@@ -20,7 +20,7 @@ of [sample requests](https://www.getpostman.com/collections/87da6ac847f5edcac776
 
 Create a public git repository ([Github](https://github.com/) or [Bitbucket](https://bitbucket.org/) is recommended, although any other host should work as well).
 
-## Step 2 - Write the Application Code.
+## Step 2 -- Write the Application Code.
 
 In the root of your repository, create a PHP script named 
 [`main.php`](https://github.com/keboola/docs-docker-example-basic/blob/master/main.php) with the following contents:
@@ -65,11 +65,10 @@ number | someText | double_number
 30 | ij | 60
 
 
-## Step 3 - Wrap the Application in a Docker Image
-You need to create a Docker Image which will contain your application and when the image is run, it will run 
-your application. 
+## Step 3 -- Wrap the Application in a Docker Image
+You need to create a Docker Image containing and run your application. 
 
-### Step 3.1 - Wrap the Application in an Image
+### Step 3.1 -- Wrap the Application in an Image
 To create your own image, create a file named 
 [`Dockerfile`](https://github.com/keboola/docs-docker-example-basic/blob/master/Dockerfile) in the root of the repository.
 
@@ -87,7 +86,7 @@ The Dockerfile and the application can be in two separate repositories or in a
 single [git repository](https://github.com/keboola/docs-docker-example-basic). Using a single repository makes 
 things generally easier, but it is not required.
 
-### Step 3.2 - Build the Image
+### Step 3.2 -- Build the Image
 On command line, navigate to the directory with your repository and run the following command (including the dot at the end):
     
     docker build --tag=test .
@@ -101,16 +100,16 @@ Out of that output, the most important thing is the *Successfully built ded5321d
 hash of the new image: `ded5321d5ba5`, which can be abbreviated to the first three characters, so we can
 later refer to it as `ded` or as `test` (the tag of the image). 
 
-## Step 4 - Obtaining sample data and configuration
+## Step 4 -- Obtaining sample data and configuration
 Data between KBC and your Docker image are exchanged using [CSV files](/extend/common-interface/) which will be 
 injected into the image when we run it. To simulate this, you can download an archive containing the data files 
 and [configuration](/extend/common-interface/config-file/) in the exact same format as you will obtain it
 in production environment.
 
 To obtain the configuration, send a [Sandbox API Request](/extend/common-interface/sandbox/). You will receive an 
-archive which contains a [/data/ folder](/extend/common-interface/) with tables and files from the input mapping and a??
-configuration depending on the request body. In the request, you need to enter a configuration format which 
-you choose to be either `Yaml` or `JSON`. A sample request to `https://syrup.keboola.com/docker/sandbox?format=json`:
+archive which contains a [/data/ folder](/extend/common-interface/) with tables and files from the input mapping, and a
+configuration depending on the request body. In the request, enter a configuration format: 
+either `Yaml` or `JSON`. A sample request to `https://syrup.keboola.com/docker/sandbox?format=json`:
 
 {% highlight json %}
 {
@@ -146,12 +145,12 @@ available only when your extension is complete and [registered](/extend/registra
 {: .image-popup}
 ![Configuration Screenshot](/extend/docker/configuration-sample.png) 
 
-Alternatively - to quickly get the picture, you can download a [random sample data folder](/extend/docker/data.zip),
+Alternatively -- to quickly get the picture, you can download a [random sample data folder](/extend/docker/data.zip),
  which can be used together with the above [sample application](https://github.com/keboola/docs-docker-example-basic).
 
-## Step 5 - Running the application with sample data 
+## Step 5 -- Running the application with sample data 
 Once you have prepared the data folder with sample data and configuration, you can inject it into the Docker image. 
-Apart from the options shown in the example, there are plenty of [other options](/extend/common-interface/config-file/)
+In addition to the options shown in the example, there are many [other options](/extend/common-interface/config-file/)
 
 When you run an image, a *container* is created in which the application is running isolated. 
 Use the following command to run the image:
@@ -165,14 +164,14 @@ see [Setting up Docker](/extend/docker/tutorial/setup/#sharing-files). In our ex
 
     docker run --volume=/c/Users/ondre/data/:/data/ test
 
-Where the contents of the sample data folder are put in the users' home directory. If you have set everything correctly,
+Where the contents of the sample data folder are put in the user's home directory. If you have set everything correctly,
 you should see **All done** and a `destination.csv` file will appear in the `data/out/tables/` directory.
 
 ### Step 5.1 Debugging
 
 Chances are, that you received some ugly error or warning. In that case, you might want to check out the 
 contents of the image and specifically if all the files are where you expect 
-them to be - see [debugging](/extend/docker/running/).
+them to be -- see [debugging](/extend/docker/running/).
 
 To work with the application container interactively, use the following command:
 
@@ -185,11 +184,10 @@ e.g.
 You can then inspect the container contents: 'ls /data/'. For more details on see [Howto](/extend/docker/running/)
 
 
-### Step 6 - Deployment
+### Step 6 -- Deployment
 
-It is best to use a docker registry ([Dockerhub](https://hub.docker.com/) or [Quay](https://quay.io/)) for 
-Deployment and to set up an [automated build](/extend/docker/tutorial/automated-build/). To 
-be usable in KBC, the image must be available in one of the supported registries (Dockerhub, Quay).
+It is best to use a Docker registry and set up [automated builds](/extend/docker/tutorial/automated-build/) for deployment. To 
+be usable in KBC, the image must be available in one of the supported registries ([Dockerhub](https://hub.docker.com/) or [Quay](https://quay.io/)).
 We support both public and private images. 
 
 To deploy the application to production, it must first be [registered](/extend/registration/). Once the
