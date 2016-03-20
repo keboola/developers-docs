@@ -64,7 +64,7 @@ you should see an output like this:
 
 The `b818507de866` is a volatile image hash which is used to refer to the image and can be abbreviated to first three 
 characters (`b81` in this case).
-Additionally, you can name the image by passsing the `--tag` option, e.g. 
+Additionally, you can name the image by passing the `--tag` option, e.g. 
 
     docker build --tag=my-image .
 
