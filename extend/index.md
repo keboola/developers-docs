@@ -8,18 +8,20 @@ together (e.g. Storage, Transformations and Readers). You can also create KBC ex
 there are two types of extensions available:
 
 * [Generic Extractor](todo) - a specific component designated for implementing extractors for services with REST API
-* Custom Extension - a component extending KBC with arbitrary code
+* Custom Extension - a component extending KBC with an arbitrary code
 
 ## Custom Extensions
 
-Custom Extensions can be used as Extractors, Writers and Applications. An application processes input tables stored in CSV files and generates result tables in CSV files. An extractor works the same way. However, instead of reading its input from KBC tables, it gets it from its source (usually an API). Similarly, a Writer does not generate any KBC tables. We make sure the CSV files are created in and taken from the right places.
+Custom Extensions can be used as Applications, Extractors and Writers. 
 
-Extensions run inside a [Docker component](/architecture/docker-bundle) which takes care of: 
+Applications process input tables stored in CSV files and generate result tables in CSV files. Extractors work the same way. However, instead of reading their input from KBC tables, they get it from an external source (usually an API). Similarly, Writers do not generate any KBC tables.
 
-* authentication
-* starting and stopping the extension
-* reading and writing data to KBC Storage
-* application isolation
+All extensions run inside a [Docker component](/architecture/docker-bundle) which takes care of: 
+
+* Authentication
+* Starting and stopping the extension
+* Reading and writing data to KBC Storage
+* Application isolation
 
 They must adhere to a [common interface](/extend/common-interface). 
 
