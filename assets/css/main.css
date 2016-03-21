@@ -6,10 +6,10 @@
 }
 
 .docs-search input.form-control {
-  background: #2f402f;
+  background: #271758;
   color: #FFF;
-  border-color: #253325;
-  box-shadow: inset 0 8px 8px -8px #253325;
+  border-color: #14073A;
+  box-shadow: inset 0 8px 8px -8px #14073A;
   font-weight: 300;
   padding: 0 0 0 40px;
 }
@@ -18,7 +18,7 @@
   position: absolute;
   top: 18px;
   left: 20px;
-  color: #a3b5a3;
+  color: #625192;
   font-size: 22px;
 }
 
@@ -38,11 +38,11 @@ strong {
   padding-left: 20px !important;
 }
 
-table { 
-  border: 1px solid black; 
-} 
+table {
+  border: 1px solid black;
+}
 
-td, th { 
+td, th {
   border: 1px solid black; padding: 4px;
 }
 
@@ -80,31 +80,31 @@ ul.kbc-nav-sidebar li.active > ul {
 */
 
 .kbc-logo {
-    background: #2f402f;
+    background: #14073A;
     color: #f5f5f7;
-    border-bottom: solid 2px #1e291e;
+    border-bottom: solid 2px #14073A;
 }
 
 .kbc-sidebar {
-    background: #273627;
+    background: #413075;
 }
 
 a {
-    color: #11a811;
+    color: #625192;
 }
 
 .kbc-nav-sidebar>li>a {
     padding: 8px 12px;
-    border-left: solid 2px #273627;
+    border-left: solid 2px #413075;
 }
 
 a:hover, a:focus {
-    color: #11a811;
+    color: #625192;
     text-decoration: underline;
 }
 
 .kbc-nav-sidebar>li.active>a, .kbc-nav-sidebar>li>a:hover, .kbc-nav-sidebar>li>a:focus {
-    border-left: solid 2px #11a811;
-    color: #11a811;
+    border-left: solid 2px #625192;
+    color: #625192;
     background: 0 0;
 }
