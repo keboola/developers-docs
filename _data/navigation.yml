@@ -1,0 +1,96 @@
+items:
+
+  - url: /overview/
+    title: KBC Overview
+    items:
+
+      - url: /overview/api/
+        title: Calling API
+
+      - url: /overview/encryption/
+        title: Encryption
+
+      - url: /overview/docker-bundle/
+        title: Docker Bundle
+
+      - url: /overview/devel-project/
+        title: Development Project
+
+  - url: /extend/
+    title: Extending KBC
+    items:
+
+      - url: /extend/custom-science/
+        title: Custom Science
+        items:
+
+          - url: /extend/custom-science/quick-start/
+            title: Quick Start
+
+          - url: /extend/custom-science/development/
+            title: Development Guide
+
+          - url: /extend/custom-science/r/
+            title: Custom Science R
+
+          - url: /extend/custom-science/python/
+            title: Custom Science Python
+
+      - url: /extend/docker/
+        title: Docker Extensions
+        items:
+
+          - url: /extend/docker/quick-start/
+            title: Docker Extensions Quick start
+
+          - url: /extend/docker/tutorial/
+            title: About docker
+            items:
+
+              - url: /extend/docker/tutorial/setup/
+                title: Installation and Running
+
+              - url: /extend/docker/tutorial/howto/
+                title: Howto create a dockerized application
+
+              - url: /extend/docker/tutorial/automated-build/
+                title: Automated build
+
+          - url: /extend/docker/running/
+            title: Running Images
+
+          - url: /extend/docker/images/
+            title: Keboola Images
+
+      - url: /extend/common-interface/
+        title: Common interface
+        items:
+
+          - url: /extend/common-interface/folders/
+            title: Data Folders
+
+          - url: /extend/common-interface/config-file/
+            title: Configuration file
+
+          - url: /extend/common-interface/environment/
+            title: Environment
+
+          - url: /extend/common-interface/manifest-files/
+            title: Manifest files
+
+          - url: /extend/common-interface/sandbox/
+            title: Creating Sandbox
+
+      - url: /extend/registration/
+        title: Component Registration
+        items:
+
+          - url: /extend/registration/checklist/
+            title: Submission Checklist
+
+  - url: /integrate/
+    title: Integrate
+
+  - url: /automate/
+    title: Automate/Common tasks
+
