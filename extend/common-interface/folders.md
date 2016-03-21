@@ -1,5 +1,5 @@
 ---
-title: Data Folders
+title: Data Folders Specification
 permalink: /extend/common-interface/folders
 ---
 

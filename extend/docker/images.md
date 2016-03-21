@@ -1,5 +1,5 @@
 ---
-title: Keboola Base Images
+title: Keboola Images
 permalink: /extend/docker/images/
 ---
 
