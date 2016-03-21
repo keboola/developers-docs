@@ -108,8 +108,7 @@ Sample configuration file might look like this:
                     "delete_where_values": [],
                     "delete_where_operator": "eq",
                     "delimiter": ",",
-                    "enclosure": "\"",
-                    "escaped_by": ""
+                    "enclosure": "\""
                 },
                 {
                     "source": "destination1.csv",
