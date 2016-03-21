@@ -1,6 +1,6 @@
 ---
 title: Data Folders Specification
-permalink: /extend/common-interface/folders
+permalink: /extend/common-interface/folders/
 ---
 
 Data folders are one of the [possible channels](/extend/common-interface/) to exchange data between your application and Keboola Connection. 
