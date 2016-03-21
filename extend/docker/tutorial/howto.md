@@ -194,7 +194,7 @@ is run. When you `docker build` and `docker run` the image, you will receive:
 
 - Make absolutely sure that the *Dockerfile* script requires no interaction.
 - Each Dockerfile instruction runs in its own shell and there is no state maintained between them. 
-This means that e.g. having `RUN export foo=bar` makes no sense. Use `ENV` instruction
+This means that e.g. having `RUN export foo=bar` makes no sense. Use `ENV foo=bar` instruction
 to create environment variables.
 - When you look at the [existing dockerfiles](https://github.com/keboola/docker-base-php70/blob/master/Dockerfile), 
 you will realize that commands are squashed together 
