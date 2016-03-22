@@ -45,15 +45,15 @@ The execution of your extension happens in its own [isolated environment](/archi
 To use your *Custom Science extension*, the end user should be instructed to specify its configuration. 
 Make sure your instructions are publicly available. Draw inspiration from the
 [instructions](https://github.com/keboola/python-custom-application-text-splitter/blob/master/README.md)
-for our [sample application](https://github.com/keboola/python-custom-application-text-splitter). 
+for our sample applications:
 
+- [Python Text Splitter](https://github.com/keboola/python-custom-application-text-splitter).
+- [R Tree Level Computation](https://github.com/keboola/r-custom-application-tree).
+- [R Transpose Table](https://github.com/keboola/r-custom-application-transpose)
 
 To create a simple Custom Science Application on your own, go to [Quick Start Guide](/extend/custom-science/quick-start/).
 
 To learn more, go to [Development Guide](/extend/custom-science/development/) .
-
-
-
 
 
 ## Custom Science Applications vs. Transformations
