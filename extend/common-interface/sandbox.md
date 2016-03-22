@@ -136,7 +136,9 @@ The request body is:
 {% endhighlight %}
 
 Where you need to replace `sample-configuration-27` with your own configuration ID. The request URL is:
-https://syrup.keboola.com/docker/keboola.docs-docker-example-parameters/input/
+
+    https://syrup.keboola.com/docker/keboola.docs-docker-example-parameters/input/
+
 Where `keboola.docs-docker-example-parameters` is the component ID (you can replace that with your own component if you like).
 Again, don't forget to enter your Storage API token into *Headers* - *X-StorageAPI-Token*.
 

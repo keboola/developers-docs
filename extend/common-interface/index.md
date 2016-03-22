@@ -9,5 +9,5 @@ To exchange data between your extension and Keboola Connection, use
 * a [configuration file](/extend/common-interface/config-file/), and 
 * [environment](/extend/common-interface/environment/) variables, return values and standard output/error. 
 
-Additionally, the [Docker Component](/overview/docker-bundle/) provides tools for 
+Additionally, [Docker Bundle](/overview/docker-bundle/) provides tools for 
 [encryption](/overview/encryption) and [Oauth2 authorization](/common-interface/oauth/). 
