@@ -14,7 +14,7 @@ with our [environment](/extend/common-interface/). Please note:
 
 If you are starting with Custom Science, consider going through the
 [Quickstart](/extend/custom-science/quick-start/).
-You can also have a look at an [example repository](https://github.com/keboola/python-custom-application-text-splitter).
+You can also have a look at our [example repository](https://github.com/keboola/python-custom-application-text-splitter).
 
 
 ## Packages
@@ -89,7 +89,7 @@ The KBC [Python extension package](https://github.com/keboola/python-docker-appl
 - Work with manifests containing table and file metadata - `getTableManifest()`, `getFileManifest()`, `writeTableManifest()`, `writeFileManifest()` methods.
 - List expected outputs - `getExpectedOutputFiles()` and `getExpectedOutputTables()` methods.
 
-Additionally, it also defines a KBC [CSV dialect](https://docs.python.org/3/library/csv.html#csv-fmt-params)
+Additionally, it also defines the KBC [CSV dialect](https://docs.python.org/3/library/csv.html#csv-fmt-params)
 to shorten up the CSV manipulation code.
 The library is a standard Python package that is available by default in the production environment.
 It is [available on Github](https://github.com/keboola/python-docker-application), so it can be installed
@@ -99,7 +99,7 @@ is available for the package, actual working example can be found in our
 [sample application](https://github.com/keboola/python-custom-application-text-splitter/blob/master/main.py).
 Also note that the library does no special magic, it is just a mean to simplify things a bit for you.
 
-To use the library to read the user-supplied configuration parameter 'myParameter':
+To read the user-supplied configuration parameter 'myParameter', use the following code:
 
 {% highlight python %}
 from keboola import docker
@@ -146,7 +146,7 @@ with open('in/tables/source.csv', mode='rt', encoding='utf-8') as in_file, open(
         writer.writerow({'number': row['number'], 'someText': row['someText'], 'double_number': int(row['number']) * multiplier})
 {% endhighlight %}
 
-Note that we also simplified reading and writing of the CSV files using `dialect='kbc'` option. The dialect is
+Note that we have also simplified reading and writing of the CSV files using `dialect='kbc'` option. The dialect is
 registered automatically when the `Config` class is initialized.
 You can test the code with the following runtime configuration:
 
@@ -169,12 +169,12 @@ And with the following parameters:
 ### Dynamic Input/Output Mapping
 In the [Quick start tutorial](/extend/custom-science/quick-start/) and the above examples, we have shown
 applications which have names of their input/output tables hard-coded.
-This example shows how to read an input and output mapping specified by the end-user,
+The following example shows how to read an input and output mapping specified by the end-user,
 which is accessible in the [configuration file](/extend/common-interface/config-file/). It demonstrates
 how to read and write tables and table manifests. File manifests are handled the same way. For a full authoritative list
 of items returned in table list and manifest contents, see [the specification](/extend/common-interface/config-file/)
 
-Note that the `destination` label in the script refers to the destination from the the mappers perspective.
+Note that the `destination` label in the script refers to the destination from the mappers perspective.
 The input mapper takes `source` tables from user's storage, and produces `destination` tables that become
 the input of your extension. The output tables of your extension are consumed by the output mapper
 whose `destination` are the resulting tables in Storage.

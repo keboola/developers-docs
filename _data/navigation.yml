@@ -41,20 +41,20 @@ items:
         items:
 
           - url: /extend/docker/quick-start/
-            title: Docker Extensions Quick start
+            title: Quick Start
 
           - url: /extend/docker/tutorial/
-            title: About docker
+            title: About Docker
             items:
 
               - url: /extend/docker/tutorial/setup/
                 title: Installation and Running
 
               - url: /extend/docker/tutorial/howto/
-                title: Howto create a dockerized application
+                title: Creating Dockerized App
 
               - url: /extend/docker/tutorial/automated-build/
-                title: Automated build
+                title: Automated Build
 
           - url: /extend/docker/running/
             title: Running Images
@@ -63,20 +63,20 @@ items:
             title: Keboola Images
 
       - url: /extend/common-interface/
-        title: Common interface
+        title: Common Interface
         items:
 
           - url: /extend/common-interface/folders/
             title: Data Folders
 
           - url: /extend/common-interface/config-file/
-            title: Configuration file
+            title: Configuration File
 
           - url: /extend/common-interface/environment/
             title: Environment
 
           - url: /extend/common-interface/manifest-files/
-            title: Manifest files
+            title: Manifest Files
 
           - url: /extend/common-interface/sandbox/
             title: Creating Sandbox
@@ -92,5 +92,5 @@ items:
     title: Integrate
 
   - url: /automate/
-    title: Automate/Common tasks
+    title: Automate/Common Tasks
 
