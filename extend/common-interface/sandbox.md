@@ -141,7 +141,7 @@ Where `keboola.docs-docker-example-parameters` is the component ID (you can repl
 Again, don't forget to enter your Storage API token into *Headers* - *X-StorageAPI-Token*.
 
 As with the [sandbox call](#sandbox), running the API call will create a job, which will execute and produce a 
-`data.zip` file in *Storage* - *File Uploads*. The contents of the 
+`data.zip` file in *Storage* - *File Uploads*. 
 
 Note: If you actually want to *run* the above *sample-configuration-27* configuration, you also need
 to set the output mapping from `destination.csv` to some table.
@@ -156,7 +156,7 @@ to set the output mapping from `destination.csv` to some table.
 existing configuration (`config` node)
   - the source data are exported unlimited -- this can lead to large data folders! 
   - the format of the configuration in the data folder was defined when the component was registered
-- both of the Sandbox and Input call create a job (which gets executed automatically) which produces a `data.zip` file 
+- both the Sandbox and Input call create a job (which gets executed automatically) which produces a `data.zip` file 
 in your *Storage* -- *File Uploads*
   - you can extract the `data.zip` folder and map that folder to your dockerized application 
   - the `data.zip` contains the input tables and files, their manifests and configuration file
