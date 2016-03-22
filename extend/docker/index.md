@@ -3,7 +3,7 @@ title: Docker Extensions
 permalink: /extend/docker/
 ---
 
-Docker extensions allow you to extend KBC in a more flexible way than [Custom Science](/extend/custom-science/). At the same 
+Docker [extensions](/extend/) allow you to extend KBC in a more flexible way than [Custom Science](/extend/custom-science/). At the same 
 time, significant implementation effort on your part is required. In Docker extensions, the data interface is 
 very similar to [Transformations](https://help.keboola.com/transformations/) 
 and [Custom Science](/extend/custom-science/) - data are exchanged as 
@@ -42,9 +42,9 @@ We provide libraries to help you with implementation in
   must have an `ENTRYPOINT`. 
 We also recommend that you base your image on [one of our images](/extend/docker/images/).
 
-A Docker extension processes input tables stored in [CSV files](/extend/common-interface/) and generates 
-result tables in CSV files.  An extractor works the same way, however, it does not read input from 
-KBC tables, but instead from its source (usually some API). Similarly, a Writer does not generate any KBC tables. 
+Applications process input tables stored in [CSV files](/extend/common-interface/folders/) and generate result tables in CSV files. 
+Extractors work the same way. However, instead of reading their input from KBC tables, they get it from an external source (usually an API). 
+Similarly, Writers do not generate any KBC tables.
 We make sure the CSV files are created in and taken from the right places. 
 
 The execution of your extension happens in its own [isolated environment](/architecture/docker-bundle/).
