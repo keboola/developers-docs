@@ -1,82 +1,78 @@
 ---
-title: Configuration file Specification
+title: Configuration File Specification
 permalink: /extend/common-interface/config-file/
 ---
 
-Any dockerized application and Keboola Connection, uses 
-predefined set of [structured folders](/extend/common-interface/), 
-files and [configuration file](/extend/common-interface/config-file/) which is specifid below.
-Additionaly, there are also [environment specification](/extend/common-interface/environment) in which 
-the application is executed.
+Configuration files are one of the [possible channels](/extend/common-interface/) for exchanging data between extensions (and other dockerized applications) and Keboola Connection. 
 
-To create a sample configuration file (toghether with the data directory), you can 
+To create a sample configuration file (together with the data directory), 
 use [create sandbox](/extend/common-interface/) via the
 [Docker bundle API](http://docs.kebooladocker.apiary.io/#reference/sandbox). 
-You'll get all the resources in a ZIP archive you need to access in your app. 
+You will get a zip archive containing all the resources you need in your extension.
 
-## Configuration file format
-For [docker extensions](/extend/docker/), the configuration file format is specified, during
+## Configuration File Format
+For [Docker extensions](/extend/docker/), the configuration file format is specified during
 [registration](/extend/registration/) as either JSON or Yaml. For Docker extensions which are not
-yet registred, you can choose freely. For [Custom Science](/extend/custom-science/) and 
+yet registered, you can choose freely. For [Custom Science](/extend/custom-science/) and 
 for [Transformations](https://help.keboola.com/???), the format is always JSON. There are no differences
-in the contents of the file, the choice of format is purely formal. Note however that the configuration file 
-extension changes (`.json` for JSON and `.yml` for Yaml)
+in the contents of the file; the choice of the format is purely formal. However, the configuration file 
+extension changes (`.json` for JSON and `.yml` for Yaml).
 
-## Configuration file structure
-The configuration files has the following root nodes:
+## Configuration File Structure
+The configuration file has the following root nodes:
 
-- `storage` - Contains both input and output mapping for both files and tables. This section is important if your
-application uses dynamic input/output mapping. Simple applications can be created with static input/output mapping
-which do not use this configuration section at all (see [Custom Science Quick Start](/extend/custom-science/quick-start/)).  
-- `parameters` - Contains arbitrary parameters passed from UI to the application. This section can be used in any
+- `storage`: Contains both the input and output mapping for both files and tables. This section is important if your
+application uses a dynamic input/output mapping. Simple applications can be created with a static input/output mapping. 
+They do not use this configuration section at all (see [Custom Science Quick Start](/extend/custom-science/quick-start/)).  
+- `parameters`: Contains arbitrary parameters passed from the UI to the application. This section can be used in any
 way you wish. Your application should validate the contents of this section. For passing sensitive 
-data, you should use [encryption](/overview/encryption/). This section is not available in Transformations.
-- `image_parameters` - Available only for [registered docker extensions](/extend/registration/). Contains arbitrary
-paramters passed to the application, which cannot be modified by the end user. The typical use for this section are 
-global application parameters (such as token, URL, version of your API) 
-- `authorization` - Available only for [registered docker extensions](/extend/registration/). Contains Oauth2 
-[autorization contents](/extend/common-interface/oauth/). 
+data, use [encryption](/overview/encryption/). This section is not available in Transformations.
+- `image_parameters`: Available only for [registered Docker extensions](/extend/registration/). Contains arbitrary
+parameters passed to the application. They cannot be modified by the end-user. The typical use for this section are 
+global application parameters (such as token, URL, version of your API). 
+- `authorization`: Available only for [registered Docker extensions](/extend/registration/). Contains Oauth2 
+[authorization contents](/extend/common-interface/oauth/). 
 
  
-## State file
+## State File
 
-State file is used to store component state for the next run. It provides a two-way communication between 
-Keboola Connection configuration state storage and the application. State file only works if the API call 
+The state file is used to store the component state for the next run. It provides a two-way communication between 
+Keboola Connection configuration state storage and the application. The state file only works if the API call 
 references a stored configuration (`config` is used, not `configData`).
 
-The location of state file is: 
+The location of the state file is: 
 
-- `/data/in/state.yml` or `/data/in/state.json` loaded from configuration state storage
-- `/data/out/state.yml` or `/data/out/state.json` saved to configuration state storage
+- `/data/in/state.yml` or `/data/in/state.json` loaded from a configuration state storage
+- `/data/out/state.yml` or `/data/out/state.json` saved to a configuration state storage
 
-The application can read the input state file and write any content to the output state 
-file (valid JSON or YAML) and that 
-will be available to the next API call. Missing or empty file will remove the state value. 
-State object is is saved to configuration storage only when actually running the app 
-(not in [sandbox API calls](/extend/common-interface/sadnbox/). State must be a valid JSON or Yaml.
+The application reads the input state file and writes any content to the output state 
+file (valid JSON or YAML) that 
+will be available to the next API call. A missing or an empty file will remove the state value. 
+A state object is saved to configuration storage only when actually running the app 
+(not in [sandbox API calls](/extend/common-interface/sadnbox/). The state must be a valid JSON or Yaml.
 
-### State file properties
-Because state is stored as part of 
+### State File Properties
+Because the state is stored as part of 
 [Component configuration](http://docs.keboola.apiary.io/#reference/component-configurations),
 the value of the state object is somewhat limited (should not generally exceed 1MB). It should not
-be used to store large amounts of data. Also the end-user cannot easily access the data through UI.
-The data can be however modified outside of the dockerized application itself using the
+be used to store large amounts of data. Also, the end-user cannot easily access the data through the UI.
+The data can be, however, modified outside of the dockerized application itself using the
 [Component configuration](http://docs.keboola.apiary.io/#reference/component-configurations) API calls.
 
-Also note that the statefile is not thread-safe in that if multiple instances of the *same configuration*
-in a *same project* are run simulatnously, the one, who writes data later wins. Use the state file more
-like a HTTP Cookie then like a Database. Typical use for the state file would be saving last record 
+Note that the state file is not thread-safe. If multiple instances of the *same configuration*
+in the *same project* are run simultaneously, the one writing data later wins. Use the state file more
+like a HTTP Cookie than like a Database. Typical use for the state file would be saving the last record 
 loaded from some API to enable incremental loads.  
 
      
 ## Examples
 To create an example configuration, use the [sandbox API calls](/extend/common-interface/sandbox/). You will get a 
 `data.zip` archive in your *Storage* - *File uploads* which will contain the config.json or config.yml file.
-You can also use these structures to create API request for [creating sandbox](/extend/common-interface/sandbox/)
-and also for actually [running dockerizied applications](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job).
-If you want to manually pass configuration options in the API request, be sure to wrap it around in `configData` node. 
+You can also use these structures to create an API request for [creating sandbox](/extend/common-interface/sandbox/),
+as well as for actually [running dockerized applications](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job).
+If you want to manually pass configuration options in the API request, be sure to wrap it around in the `configData` node. 
 
-Sample configuration file might look like this:
+A sample configuration file might look like this:
 
 {% highlight json %}
 {
@@ -126,10 +122,10 @@ Sample configuration file might look like this:
 {% endhighlight %}
 
 ### Tables
-Tables from input mapping are mounted to `/data/in/tables`. 
+Tables from the input mapping are mounted to `/data/in/tables`. 
 Input mapping parameters are similar to [Storage API export table options ](http://docs.keboola.apiary.io/#tables). 
 If `destination` is not set, the CSV file will have the same name as the table (without adding `.csv` suffix).
-The tables element in configuration of **input mapping** is an array and supports these attributes:
+The tables element in a configuration of the **input mapping** is an array and supports the following attributes:
 
 - `source`
 - `destination`
@@ -140,11 +136,11 @@ The tables element in configuration of **input mapping** is an array and support
 - `where_values`
 - `limit`
 
-Output mapping parameters are similar 
+The output mapping parameters are similar 
 to [Transformation API output mapping ](http://wiki.keboola.com/home/keboola-connection/devel-space/integrating-with-kbc/transformations/intro#TOC-Output-mapping). 
 `destination` is the only required parameter. If `source` is not set, the CSV file is expected to have the same name 
 as the `destination` table. 
-The tables element in configuration of **output mapping** is an array and supports these attributes:
+The tables element in a configuration of the **output mapping** is an array and supports the following attributes:
 
   - `source`
   - `destination`
@@ -156,9 +152,9 @@ The tables element in configuration of **output mapping** is an array and suppor
   - `delimiter`
   - `enclosure`
 
-#### Input mapping - Basic
+#### Input Mapping - Basic
 Download tables `in.c-ex-salesforce.Leads` and `in.c-ex-salesforce.Accounts` to `/data/tables/in/leads.csv` 
-and `/data/tables/in/accounts.csv`
+and `/data/tables/in/accounts.csv`.
 
 {% highlight json %}
 {
@@ -203,8 +199,8 @@ In an API request this would be passed as:
 {% endhighlight %}
 
 
-#### Input mapping - Incremental load
-Download 2 days of data from table `in.c-storage.StoredData` to `/data/tables/in/in.c-storage.StoredData`
+#### Input Mapping - Incremental Load
+Download 2 days of data from the `in.c-storage.StoredData` table to `/data/tables/in/in.c-storage.StoredData`.
 
 {% highlight json %}
 {
@@ -221,7 +217,7 @@ Download 2 days of data from table `in.c-storage.StoredData` to `/data/tables/in
 }
 {% endhighlight %}
 
-#### Input mapping - Select columns
+#### Input Mapping - Select Columns
 
 {% highlight json %}
 {
@@ -238,7 +234,7 @@ Download 2 days of data from table `in.c-storage.StoredData` to `/data/tables/in
 }
 {% endhighlight %}
 
-#### Input mapping - Filtered table
+#### Input Mapping - Filtered Table
 
 {% highlight json %}
 {
@@ -258,7 +254,7 @@ Download 2 days of data from table `in.c-storage.StoredData` to `/data/tables/in
 }
 {% endhighlight %}
 
-### Output mapping - Basic
+### Output Mapping - Basic
 Upload `/data/out/tables/out.c-main.data.csv` to `out.c-main.data`
 
 {% highlight json %}
@@ -276,7 +272,7 @@ Upload `/data/out/tables/out.c-main.data.csv` to `out.c-main.data`
 }
 {% endhighlight %}
 
-### Output mapping - Set additional properties
+### Output Mapping - Set Additional Properties
 Upload `/data/out/tables/data.csv` to `out.c-main.data`.
 with a primary key and incrementally.
 
@@ -297,7 +293,7 @@ with a primary key and incrementally.
 }
 {% endhighlight %}
     
-### Output mapping - Delete rows
+### Output Mapping - Delete Rows
 Delete data from `destination` table before uploading the CSV 
 file (only makes sense with `incremental: true`).
 
@@ -321,16 +317,16 @@ file (only makes sense with `incremental: true`).
 {% endhighlight %}
 
 ### Files
-You can also download files from file uploads using an 
+Another way of downloading files from file uploads is to use an 
 [Elasticsearch query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax) 
-or filtering using tags. Note that the results of a file mapping are limited to 10 files (to prevent accidental downloads). 
-If you need more files you can use multiple file mappings.  
+or filtering with tags. Note that the results of a file mapping are limited to 10 files (to prevent accidental downloads). 
+If you need more files, use multiple file mappings.  
 
-All files that will match the search will be downloaded to the `/data/in/files` folder. 
-The name of each file has the format `fileId_fileName`. Each file will also contain a 
+All files matching the search will be downloaded to the `/data/in/files` folder. 
+The name of each file has the `fileId_fileName` format. Each file will also contain a 
 [manifest](/extend/common-interface/manifest-files/) with all information about the file.
 
-#### Input mapping - Query
+#### Input Mapping - Query
 
 {% highlight json %}
 {
@@ -347,7 +343,7 @@ The name of each file has the format `fileId_fileName`. Each file will also cont
 }
 {% endhighlight %}
 
-Will download with files with matching `.zip` **and** having tag `docker-demo`, depdending on the contents of your 
+This will download with files with matching `.zip` **and** having the `docker-demo` tag. Depending on the contents of your 
 *File uploads* in *Storage*, this may produce something like:
 
     /data/in/files/75807542_fooBar.zip
@@ -355,11 +351,11 @@ Will download with files with matching `.zip` **and** having tag `docker-demo`, 
     /data/in/files/75807657_fooBarBaz.zip
     /data/in/files/75807657_fooBarBaz.zip.manifest        
  
-#### Input mapping - Run Id
-You can also use `filter_by_run_id` option to select only files which are related to the job 
-currently beeing executed. If `filter_by_run_id` is specified, we will download only files which 
+#### Input Mapping - Run Id
+Use the `filter_by_run_id` option to select only files which are related to the job 
+currently being executed. If `filter_by_run_id` is specified, we will download only files which 
 satisfy the filter (either `tags` or `query`) *and* were uploaded by a parent job (a job with same 
-or parent runId). This allows you to further limit downloaded files only to thoose related to a 
+or parent runId). This allows you to further limit downloaded files only to those related to a 
 current chain of jobs.
 
 {% highlight json %}
@@ -377,12 +373,12 @@ current chain of jobs.
 }
 {% endhighlight %}
 
-This will download only file which have the tag `fooBar` and were produced by a parent job to
-the currently running docker.
+This will download only files with the `fooBar` tag that were produced by a parent job to
+the currently running Docker.
 
-#### Output mapping - Basic
-You can define additional properties for uploaded files in the output mapping configuration. If 
-that file is not present in the `/data/out/files` folder, an error will be throws. 
+#### Output Mapping - Basic
+Define additional properties for uploaded files in the output mapping configuration. 
+If that file is not present in the `/data/out/files` folder, an error will be thrown. 
 
 {% highlight json %}
 {
@@ -408,10 +404,10 @@ that file is not present in the `/data/out/files` folder, an error will be throw
 ### Incremental Processing
 Docker containers may be used to process unknown files incrementally. This means that when a container is run, 
 it will download any files not yet downloaded, and process them. To achieve this behavior, it is necessary 
-to select only the files which have not been processed yet and tag processed files. 
-The former can be achieved by using proper
-[ElasticSearch query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax)  
-and the latter is achieved using the `processed_tags` setting. `processed_tags` setting is an array of tags
+to select only the files which have not been processed yet and tag the processed files. 
+To achieve the former, use a proper
+[ElasticSearch query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax).  
+The latter is achieved using the `processed_tags` setting. The `processed_tags` setting is an array of tags
 which will be added to the *input* files once they are downloaded. A sample contents of `configData`:
 
 {% highlight json %}   
@@ -421,7 +417,7 @@ which will be added to the *input* files once they are downloaded. A sample cont
             "files": [
                 {
                     "query": "tags: toprocess AND NOT tags: downloaded",
-                    "processed_tags": ["downloaded", "my-image"]
+                    "processed_tags": ["downloaded"]
                 }
             ]
         }
@@ -429,10 +425,8 @@ which will be added to the *input* files once they are downloaded. A sample cont
 }
 {% endhighlight %}
 
-The above request will download every file with tag `toprocess` except for files which have 
-tag `downloaded`. It will mark each such file with tags `my-image` and `downloaded` and tag 
-to all processed files and the query will exclude them on the next run. 
-This allows you to set up incremental file processing pipeline. 
+The above request will download every file with the `toprocess` tag **except** for the files having the `downloaded` tag. It will mark each such file with the `downloaded` tag; therefore the query will exclude them on the next run. 
+This allows you to set up an incremental file processing pipeline. 
 
  
 
