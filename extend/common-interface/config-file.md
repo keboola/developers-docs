@@ -133,7 +133,7 @@ The tables element in configuration of **input mapping** is an array and support
 
 - `source`
 - `destination`
-- `changed_since`
+- `days` (internally converted to `changed_since`)
 - `columns`
 - `where_column`
 - `where_operator`
@@ -213,7 +213,7 @@ Download 2 days of data from table `in.c-storage.StoredData` to `/data/tables/in
             "tables": [
                 {
                     "source": "in.c-storage.StoredData",
-                    "changed_since": "-2 days"
+                    "days": "1"
                 }
             ]
         }
