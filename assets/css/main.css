@@ -104,7 +104,7 @@ a:hover, a:focus {
 }
 
 .kbc-nav-sidebar>li.active>a, .kbc-nav-sidebar>li>a:hover, .kbc-nav-sidebar>li>a:focus {
-    border-left: solid 2px #625192;
-    color: #625192;
+    border-left: solid 2px #8978c0;
+    color: #8978c0;
     background: 0 0;
 }
