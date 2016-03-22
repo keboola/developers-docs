@@ -35,11 +35,9 @@ The extension must adhere to our [Common Interface](/extend/common-interface/).
 We provide libraries to help you with that. 
 Few additional language specific requirements may apply (e.g. an R extension must have a `main.R` file) - see the [detailed guide](/extend/custom-science/development/). 
 
-A Custom Science Application processes input tables stored in [CSV files](/extend/common-interface/) 
-and generates result tables in CSV files. 
-A Custom Science Extractor works the same way. 
-However, it does not read its input from KBC tables, but instead from its source. 
-Similarly, a Custom Science Writer does not generate any KBC tables. 
+Applications process input tables stored in [CSV files](/extend/common-interface/folders/) and generate result tables in CSV files. 
+Extractors work the same way. However, instead of reading their input from KBC tables, they get it from an external source (usually an API). 
+Similarly, Writers do not generate any KBC tables.
 We make sure the CSV files are created in and taken from the right places. 
 
 The execution of your extension happens in its own [isolated environment](/architecture/docker-bundle/).
