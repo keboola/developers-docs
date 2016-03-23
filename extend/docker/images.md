@@ -14,10 +14,9 @@ In that case, you should use the one in the same registry as your image.
 
 ## Base images
 
-Keboola Base Images are Docker images which serve as a base for applications written in a specific programming language. 
+We highly encourage you to use Keboola Base Images as the base for your docker images, unless you have some special requirements.
 They have no entrypoint and they do not contain any application logic. 
 Both of these things are up to you to implement.
-We highly encourage you to use these images as the base for your docker images, unless you have some special requirements.
 
 
 - base 
@@ -68,6 +67,10 @@ Base image for all Ruby images,
 uses `master`, `latest` tags.
  
 ## Application images
+
+For inspiration, these are our docker images used in transformations and custom applications. 
+Docker extensions use the same [common interface](/extend/common-interface/).
+
 Transformations:
 
 - python-transformation:
@@ -83,17 +86,17 @@ uses `X.Y.Z` tags.
 
 Custom applications:
 
-- docker-custom-r
+- docker-custom-r:
 [Quay](https://quay.io/repository/keboola/docker-custom-r),
 [Dockerfile](https://github.com/keboola/docker-custom-r) -- 
 Image for Custom Science R, 
 uses `X.Y.Z` tags.
-- docker-custom-python 
+- docker-custom-python: 
 [Quay](https://quay.io/repository/keboola/docker-custom-python),
 [Dockerfile](https://github.com/keboola/docker-custom-python) -- 
 Image for Custom Science Python 3.x, 
 uses `X.Y.Z` tags.
-- docker-custom-python2
+- docker-custom-python2:
 [Quay](https://quay.io/repository/keboola/docker-custom-python2),
 [Dockerfile](https://github.com/keboola/docker-custom-python2) -- 
 Image for Custom Science Python 2.x, 
