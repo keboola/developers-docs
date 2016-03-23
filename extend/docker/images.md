@@ -6,15 +6,15 @@ permalink: /extend/docker/images/
 In Keboola, we use both 
 [Docker Hub](https://hub.docker.com/r/keboola/) and 
 [Quay](https://quay.io/organization/keboola) registry to store docker images. 
-In both registries, our account is called *Keboola*.
-Some images are present in both registries.  
+In both registries, our account is called *Keboola*. 
+Some images are present in both registries. 
 As long as the same tag is used, they refer to the exact same build and are freely interchangeable. 
 In that case, you should use the one in the same registry as your image. 
 
 
 ## Base images
 
-We highly encourage you to use Keboola Base Images as the base for your docker images, unless you have some special requirements.
+Unless you have some special requirements, we highly encourage you to use Keboola Base Images as the base for your docker images.
 They have no entrypoint and they do not contain any application logic. 
 Both of these things are up to you to implement.
 
