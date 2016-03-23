@@ -11,7 +11,7 @@ As in the [Custom Science Quick Start](/extend/custom-science/quick-start/), the
 - Have a [KBC project](/overview/devel-project/) where you can test your code.
 - Get yourself acquainted with [Docker](/extend/docker/tutorial/). You must be 
 able to [run `docker`](/extend/docker/tutorial/setup/) commands.
-- You should be able to send API requests. Although you can use an [Apiary](https://apiary.io/) client console, we 
+- You should be able to send API requests. Although you can use the [Apiary](https://apiary.io/) client console, we 
 recommend using [Postman](https://www.getpostman.com/) as it is
 more convenient. If you do use Postman, you can [import a list](/overview/api/)
 of [sample requests](https://www.getpostman.com/collections/87da6ac847f5edcac776).
@@ -46,12 +46,12 @@ echo "All done";
 {% endhighlight %}
     
 As mentioned above, this script reads a CSV file, takes a column named
-_number_, multiplies its value by 2 and adds the new values as a new column. 
+_number_, multiplies its values by 2 and adds the new values as a new column. 
 We take care to properly find the column index (`$numberIndex`), as it is not safe to rely on the order of columns.
 Finally, the result is written to another CSV file. Note that we open both the input and output files simultaneously; as soon as a row is processed,
 it is immediately written to _destination.csv_. This approach keeps only a single row of data in the memory and is
-generally very efficient. It is not required to implement the processing in this way, but keep in mind that data files
-incoming from KBC can by quite large (i.e. Gigabytes).
+generally very efficient. There is no requirement to implement the processing in this way, but keep in mind that data files
+coming from KBC can by quite large (i.e. Gigabytes).
 
 You can test the code with a [sample table](/extend/source.csv):
 
@@ -66,11 +66,11 @@ number | someText | double_number
 
 
 ## Step 3 -- Wrap the Application in a Docker Image
-You need to create a Docker Image containing and run your application. 
+You need to create a Docker Image containing and running your application. 
 
 ### Step 3.1 -- Wrap the Application in an Image
-To create your own image, create a file named 
-[`Dockerfile`](https://github.com/keboola/docs-docker-example-basic/blob/master/Dockerfile) in the root of the repository.
+Create a file named 
+[`Dockerfile`](https://github.com/keboola/docs-docker-example-basic/blob/master/Dockerfile) in the root of the repository:
 
     FROM quay.io/keboola/docker-base-php56:0.0.2
     COPY . /home/
@@ -78,7 +78,7 @@ To create your own image, create a file named
 
 The image inherits from our [Keboola PHP56 base image](https://quay.io/repository/keboola/docker-base-php56),
 which is defined by its own [Dockerfile](https://github.com/keboola/docker-base-php56/blob/master/Dockerfile).
-The instruction `COPY . /home/` copies the application code (only `main.php` in this simple application) 
+The instruction `COPY . /home/` copies the application code (only the `main.php` file in this simple application) 
 from the *build context* (the same directory in which the Dockerfile resides) into the image. 
 The `ENTRYPOINT` line specifies that when the image is run, the PHP application script is executed. 
 
@@ -87,7 +87,7 @@ single [git repository](https://github.com/keboola/docs-docker-example-basic). U
 things generally easier, but it is not required.
 
 ### Step 3.2 -- Build the Image
-On command line, navigate to the directory with your repository and run the following command (including the dot at the end):
+On the command line, navigate to the directory with your repository and run the following command (including the dot at the end):
     
     docker build --tag=test .
 
@@ -97,8 +97,8 @@ It should produce output similar to the one below:
 ![Docker build output](/extend/docker/build-output.png)
 
 Out of that output, the most important thing is the *Successfully built ded5321d5ba5* message which gives us a 
-hash of the new image: `ded5321d5ba5`, which can be abbreviated to the first three characters, so we can
-later refer to it as `ded` or as `test` (the tag of the image). 
+hash of the new image: `ded5321d5ba5`. It can be abbreviated to the first three characters, so we can
+later refer to it as `ded`. We can also use the tag of the image: `test`.
 
 ## Step 4 -- Obtaining sample data and configuration
 Data between KBC and your Docker image are exchanged using [CSV files](/extend/common-interface/) which will be 
