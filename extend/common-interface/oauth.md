@@ -3,10 +3,10 @@ title: Oauth2 Interface Specification
 permalink: /extend/common-interface/oauth
 ---
 
-[OAuth API V2](https://github.com/keboola/oauth-v2-bundle) integration provides a safe way to retrieve stored autorizations. 
+[OAuth API V2](https://github.com/keboola/oauth-v2-bundle) integration provides a safe way to retrieve stored authorizations. 
 
-When you're building an application that communicates with a 3rd party API and that API authorizes using OAuth, 
-Keboola Connection stores the users' credentials/access tokens in OAuth API V2 and they are revealed and 
+When you are building an application that communicates with a 3rd party API and that API authorizes using OAuth, 
+Keboola Connection stores the users' credentials/access tokens in OAuth API V2; they are revealed and 
 decrypted only for a target component and project. End-users can be assured that their authorized access will not leak.
 
 This feature is available only for [registered extensions](/extend/registration/).
@@ -61,6 +61,6 @@ The `authorization.oauth_api.credentials.#data` configuration node stores the re
 the authorized API as a raw string. You need to parse the string accordingly as OAuth API V2 has intentionally  
 no knowledge about the authorized APIs.
 
-Note: None of the [sandbox API calls](/extend/common-interface/sandbox) do 
+Note: None of the [sandbox API calls](/extend/common-interface/sandbox)
 decrypt `authorization.oauth_api.credentials.#data` and `authorization.oauth_api.credentials.#appSecret` keys. 
 

@@ -82,7 +82,7 @@ items:
             title: Creating Sandbox
 
       - url: /extend/registration/
-        title: Component Registration
+        title: Registration
         items:
 
           - url: /extend/registration/checklist/

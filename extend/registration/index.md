@@ -14,7 +14,7 @@ That being said, any KBC user can use any registered component, unless:
 - the component itself limits where it can run (in what projects and for which users)
 
 ## Using a Private Repository
-If your image cannot be public, you can use a private docker repository on both DockerHub and Quay.io.
+If your image cannot be public, you can use a private Docker repository on both DockerHub and Quay.io.
 
 ### DockerHub
 
@@ -49,13 +49,13 @@ JSON validation and syntax highlighting.
 ![Generic configuration screenshot](/extend/registration/configuration.png)
 
 #### tableInput
-This flag provides a UI for setting the table input mapping. With this UI you can set:
+This flag provides a UI for setting the table input mapping. With this UI, you can set:
 
-- *source* - the name of the table in Storage
-- *destination* - the name of the .csv file passed to the application
-- *columns* - select only some columns of the source table
-- *days* - load only rows modified in the specified number of days; useful for incremental loads
-- *data filter* - a simple filter for selecting specified rows only
+- *source* -- the name of the table in Storage
+- *destination* -- the name of the .csv file passed to the application
+- *columns* -- select only some columns of the source table
+- *days* -- load only rows modified in the specified number of days; useful for incremental loads
+- *data filter* -- a simple filter for selecting specified rows only
 
 {: .image-popup}
 ![Table input screenshot](/extend/registration/table-input-1.png)
@@ -64,7 +64,7 @@ This flag provides a UI for setting the table input mapping. With this UI you ca
 ![Table input detail screenshot](/extend/registration/table-input-2.png)
 
 #### tableOutput
-This flag provides a UI for setting the table output mapping. With this UI you can set:
+This flag provides a UI for setting the table output mapping. With this UI, you can set:
 
 - *source* - the name of the .csv file retrieved from the application
 - *destination* - the name of the table in Storage, the destination bucket should exist already
@@ -79,12 +79,12 @@ This flag provides a UI for setting the table output mapping. With this UI you c
 ![Table output detail screenshot](/extend/registration/table-output-2.png)
 
 #### fileInput
-This flag provides a UI for setting the file input mapping. With this UI you can set:
+This flag provides a UI for setting the file input mapping. With this UI, you can set:
 
-- *file tags* - select files by the file tags listed in *File Uploads*
-- *query* - [ElasticSearch query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax)
+- *file tags* -- select files by the file tags listed in *File Uploads*
+- *query* -- [ElasticSearch query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax)
 to select files from *File Uploads*
-- *processed tags* - used for [incremental processing](/extend/common-interface/#incremental-processing)
+- *processed tags* -- used for [incremental processing](/extend/common-interface/#incremental-processing)
 
 {: .image-popup}
 ![File input screenshot](/extend/registration/file-input-1.png)
@@ -93,12 +93,12 @@ to select files from *File Uploads*
 ![File input detail screenshot](/extend/registration/file-input-2.png)
 
 #### fileOutput
-This flag provides a UI for setting the file output mapping. With this UI you can set:
+This flag provides a UI for setting the file output mapping. With this UI, you can set:
 
-- *source* - the name of the file produced by the application
-- *file tags* - the file tags assigned to the produced file
-- *is public* - the file is accessible to anyone knowing its URL
-- *is permanent* - the file won't be deleted after 180 days
+- *source* -- the name of the file produced by the application
+- *file tags* -- the file tags assigned to the produced file
+- *is public* -- the file is accessible to anyone knowing its URL
+- *is permanent* -- the file won't be deleted after 180 days
 
 {: .image-popup}
 ![File output screenshot](/extend/registration/file-output-1.png)

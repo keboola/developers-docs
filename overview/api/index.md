@@ -4,21 +4,20 @@ permalink: /overview/api/
 ---
 
 All our [KBC components](/overview/) have a public API on [apiary](https://apiary.io/). If you need to send requests to our 
-API, we recommend you use either use the Apiary Console or Postman Client. Most of our APIs take and produce data in JSON format. 
-Many of our APIs require *Storage API token* which is entered in `X-StorageApi-Token` header.
+API, we recommend you use either the Apiary Console or Postman Client. Most of our APIs take and produce data in JSON format. 
+Many of our APIs require a *Storage API token* which is entered in `X-StorageApi-Token` header.
 
-## The Apiary console
-You can send requests to our API directly from the Apiary console by clicking on **Switch to console** or **Try**. Then you need to fill request headers and parameters
-and **Call Resource**.
+## The Apiary Console
+You can send requests to our API directly from the Apiary console by clicking on **Switch to console** or **Try**. Then you need to fill the request headers and parameters and **Call Resource**.
 
 {: .image-popup}
 ![Apiary console](/overview/api/apiary-console.png)
 
-The Apiary console is fine when you send API requests only ocassionally, it requires no application installation but has no history and other useful features.
+The Apiary console is fine when you send API requests only occasionally. It requires no application installation; however, it has no history and no other useful features.
  
-## Postman client
-[Postman](https://www.getpostman.com/) is a generic HTTP API client. We recommend you use this client if you work with KBC API on a more regular basis. We also have 
-a collection of usefull API calls, which you can import by clicking the button
+## Postman Client
+[Postman](https://www.getpostman.com/) is a generic HTTP API client. We recommend you use this client if you work with KBC API on a more regular basis. We also provide
+a collection of useful API calls; they can be imported either by clicking the following button:
 
 [![Run in Postman](https://run.pstmn.io/button.png)](https://www.getpostman.com/run-collection/7dc2e4b41225738f5411)
 

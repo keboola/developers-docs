@@ -13,7 +13,7 @@ A Custom Science extension can be created either for a particular end-user, or i
 
 Advantages:
 
-* Zero developer configuration; only a git repository is needed
+* Zero developer configuration; only a git repository is needed.
 * No interaction with Keboola developers is needed. No acceptance process.
 * No knowledge of Docker is required.
 
@@ -49,7 +49,7 @@ for our sample applications:
 
 - [Python Text Splitter](https://github.com/keboola/python-custom-application-text-splitter).
 - [R Tree Level Computation](https://github.com/keboola/r-custom-application-tree).
-- [R Transpose Table](https://github.com/keboola/r-custom-application-transpose)
+- [R Transpose Table](https://github.com/keboola/r-custom-application-transpose).
 
 To create a simple Custom Science Application on your own, go to [Quick Start Guide](/extend/custom-science/quick-start/).
 

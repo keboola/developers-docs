@@ -3,17 +3,17 @@ title: Installation and Running
 permalink: /extend/docker/tutorial/setup/
 ---
 
-To work with Docker you need a running [Docker machine server](https://docs.docker.com/machine/)
+To work with Docker, you need a running [Docker machine server](https://docs.docker.com/machine/)
 and a [Docker engine client](https://docs.docker.com/engine/quickstart/). If you have no server
 with Docker machine at hand, run everything locally. To install a Docker machine on Win/Mac, 
 use [Docker Toolbox](https://www.docker.com/products/docker-toolbox) (this will also install a Docker client). For 
-other systems, see the [documentation](https://docs.docker.com/machine/install-machine/). 
+other systems, see our [documentation](https://docs.docker.com/machine/install-machine/). 
 
-Docker Toolbox is actually Oracle VM VirtualBox image containing a Tinycore distribution Linux, 
+Docker Toolbox is actually an Oracle VM VirtualBox image containing a Tinycore distribution Linux, 
 which is a tiny OS containing only the Docker machine server. Do not get confused about 
 the VirtualBox as it really has nothing to do with Docker. It is there just to run the 
 Docker-machine server. Apart from [some issues with sharing files](#sharing-files),  
-you don't need to worry about the VM being there.
+do not worry about the VM being there.
 
 ## Getting Started
 If you have a Docker machine (local or remote) and Docker client ready, it is time to play with Docker. 
@@ -61,7 +61,7 @@ Sharing files between the host OS and the container is done using the `--volume`
 
     docker run --volume=/hostPath/:/containerPath/ imageName
 
-Do not use any spaces around `:`. The details of file sharing are dependent on the host OS you're using. 
+Do not use any spaces around `:`. The details of file sharing are dependent on the host OS you are using. 
 There is a very 
 useful [guide for Rocker image](https://github.com/rocker-org/rocker/wiki/Sharing-files-with-host-machine) which
 describes all the sharing options in great detail. 
@@ -78,7 +78,7 @@ The basic limitation is that your host path should be in the `/Users/` directory
 
 ### Windows
 With Docker Toolbox, take an approach similar to Mac OS, but beware of different path conventions. Because the
-docker-machine itself runs in a TinyCore Linux VM, use that VM path as the host OS path. As
+Docker-machine itself runs in a TinyCore Linux VM, use that VM path as the host OS path. As
 with Mac OS, the shared folder is `C:/Users`.
 
 Let's assume you have a folder called `C:/Users/JohnDoe/MyData`, and you want to share it with Docker Container. 
@@ -89,7 +89,7 @@ VM Virtualbox, and starting/showing the `default` virtual machine; check the fol
 {: .image-popup}
 ![Oracle VM Virtualbox screenshot](/extend/docker/tutorial/virtualbox.png)
 
-If you want to map the `C:/Users/JohnDoe/MyData` into a `/home/mydata` folder of the container, write
+If you want to map the `C:/Users/JohnDoe/MyData` into a `/home/mydata` folder of the container, write:
 
     docker run --volume=/c/Users/JohnDoe/MyData/:/home/mydata/ imageName 
 

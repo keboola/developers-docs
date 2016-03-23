@@ -9,14 +9,14 @@ Their description follows. For full technical description of Docker, consult the
 [official documentation](https://docs.docker.com/).
 
 ## What Is Docker
-At first sight, Docker is similar to other virtualization technologies (such as VMware or VirutalBox). 
+At first sight, Docker is similar to other virtualization technologies (such as VMware or VirtualBox). 
 However, there are some [fundamental differences](https://docs.docker.com/engine/understanding-docker/). 
 The main difference is that Docker runs only virtualized applications, not the entire OS.
 
 Docker has *Docker Images* and *Docker Containers*. To create a Docker Image, create *Dockerfile*. Dockerfile
 contains instructions on how the Docker Image should be built, and this represents the environment (OS + modifications) in 
 which an application runs. 
-A Docker Image contains everything that is required to run an application. An image usually has *entrypoint* which is 
+A Docker Image contains everything that is required to run an application. An image usually has an *entrypoint* which is 
 a single command that is executed when the image is run.
 
 When you run an image (start an application in it), *Docker Container* is created. The container
@@ -28,15 +28,15 @@ Container. Docker Image is therefore stateless and acts like a template. The sta
 ## Docker Images
 *Docker Images* are created by executing instructions written in *Dockerfile*. Dockerfile is a simple text
 file consisting mostly of shell commands which must be executed to prepare the application for running.
- Docker Images can be based on other Images. So if
+Docker Images can be based on other Images. So if
 you need minor modification to a system, you do not have to build the whole thing from scratch. If you want Images to be
 reused, *push* your Dockerfile to Docker *Registry*. The Registry ([Dockerhub](https://hub.docker.com/), 
-[Quay](https://quay.io/)) will build the Image; anyone interested in using it can download it. 
+[Quay](https://quay.io/)) will build the image; anyone interested in using it can download it. 
 
-Docker images are named with the scheme: `registry-name/account-name/image-name:tag` Where _registry-name_ 
-and _acoount-name_ can sometimes be omitted. For example, you can refer to docker _hello-world_ image as: `hello-world`
+Docker Images names are based on the following scheme: `registry-name/account-name/image-name:tag` Where _registry-name_ 
+and _acoount-name_ can sometimes be omitted. For example, you can refer to a Docker _hello-world_ image as: `hello-world`
 or as `docker.io/library/hello-world:latest`.
-Where the `docker.io` refers to [Docker Hub](https://hub.docker.com/) registry, 
+Where the `docker.io` refers to the [Docker Hub](https://hub.docker.com/) registry, 
 the `library` refers to _account_ (common library is default), `hello-world` refers to the _image name_, 
 and `latest` refers to the _tag_. 
 
@@ -47,12 +47,12 @@ and *master* tags both point to the same (latest) build and are movable. Please 
 
 ## Running Docker Images in KBC
 We have wrapped Docker in our [Docker Bundle component](/overview/docker-bundle/). The component 
-runs [registered](/extend/registration/) Docker images. The Docker Bundle component 
-has [API](https://app.apiary.io/kebooladocker/editor) 
-which allows to run the Docker images and encrypt arbitrary values. The 
-[Docker Bundle component](/overview/docker-bundle/) takes 
+runs [registered](/extend/registration/) Docker Images. Docker Bundle
+has an [API](https://app.apiary.io/kebooladocker/editor) 
+which allows to run Docker Images and encrypt arbitrary values.
+[Docker Bundle](/overview/docker-bundle/) takes 
 care of injecting the right data, creating, running, and terminating the container, and uploading 
-the result data to KBC Storage. All images which are supposed to be run in KBC must have an `ENTRYPOINT`. 
+the result data to KBC Storage. All images to be run in KBC must have an `ENTRYPOINT`. 
 We also recommend that you base your image on [one of our images](/extend/docker/images/).
 
 Before you run Docker applications in KBC, make sure to 
@@ -60,14 +60,14 @@ Before you run Docker applications in KBC, make sure to
 Before you develop a dockerized application for KBC, you should be able to 
 [create and run dockerized applications](/extend/docker/tutorial/howto/) in your own environment.
 
-If you are already familiar with Docker, you can jump straight into our sample application 
+If you are already familiar with Docker, jump straight into our sample application 
 code [in PHP](https://github.com/keboola/docker-demo-app).
-The demo application itself is started by a single script 
-[`/src/run.php`](https://github.com/keboola/docker-demo-app/blob/master/src/run.php). 
-The application can exist independently (without Docker), contains unit and functional tests.
-The repository includes also the Docker image definition in 
+The demo application itself starts with a single  
+[`/src/run.php`](https://github.com/keboola/docker-demo-app/blob/master/src/run.php) script. 
+The application can exist independently (without Docker), and contains unit and functional tests.
+The repository includes also the Docker Image definition in 
 [**Dockerfile**](https://github.com/keboola/docker-demo-app/blob/master/Dockerfile). The Docker environment including the application
-is prepared by the Docker image definition. A hook from Dockerhub builds the Docker image automatically on every commit.  
+is prepared by the Docker Image definition. A hook from Dockerhub builds Docker Image automatically on every commit.  
 A similar application is also available [in Python](https://github.com/keboola/python-custom-application-text-splitter).
 
 

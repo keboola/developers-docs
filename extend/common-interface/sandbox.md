@@ -140,7 +140,7 @@ Where you need to replace `sample-configuration-27` with your own configuration 
     https://syrup.keboola.com/docker/keboola.docs-docker-example-parameters/input/
 
 Where `keboola.docs-docker-example-parameters` is the component ID (you can replace that with your own component if you like).
-Again, don't forget to enter your Storage API token into *Headers* - *X-StorageAPI-Token*.
+Again, do not forget to enter your Storage API token into *Headers* - *X-StorageAPI-Token*.
 
 As with the [sandbox call](#sandbox), running the API call will create a job, which will execute and produce a 
 `data.zip` file in *Storage* - *File Uploads*. 

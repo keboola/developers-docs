@@ -11,9 +11,9 @@ Before you start, make sure you have [Docker installed](/extend/docker/tutorial/
 ## Creating Your Own Image
 To create your own image, create a [Dockerfile](https://docs.docker.com/engine/reference/builder/). 
 Dockerfile is a set of shell instructions leading to configured OS environment. You can think of it as a 
-bash shell script with some specifics. Each Dockerfile should be placed in its own folder, because the folder 
-becomes *Build context* of the Docker image. Build context contains files which can be injected into the 
-Image. There is no other way to inject arbitrary files into the image other than through build 
+bash shell script with some specifics. Each Dockerfile should be placed in its own folder because the folder 
+becomes *Build Context* of the Docker image. Build context contains files which can be injected into the 
+Image. There is no other way to inject arbitrary files into the image other than through the build 
 context or download them from the Internet.
 
 Useful Dockerfile instructions:
@@ -27,7 +27,7 @@ When the command finishes, the container finishes too.
 - [`WORKDIR`](https://docs.docker.com/engine/reference/builder/#workdir): Set the current working folder.
 - [`COPY`](https://docs.docker.com/engine/reference/builder/#copy): Copy files from Build context into the image.
 
-Note that in dockerfile, each instruction is executed in its own shell. Therefore, the
+Note that in Dockerfile, each instruction is executed in its own shell. Therefore, the
 `ENV` and `WORKDIR` instructions *MUST* be used to set environment variables and the current folder.
 
 ### Sample Image
@@ -85,7 +85,7 @@ The switch _-i_ is important for receiving an interactive output. You should see
 
 ### Inspecting the Image
 When building your own image, the ability to run arbitrary commands in the image is very useful. Override the entrypoint using the `--entrypoint` 
-option (which means that your application won't execute, you'll have to run it manually). The `-t`
+option (which means that your application will not execute, and you will have to run it manually). The `-t`
 option opens **i**nteractive **t**erminal: 
 
     `docker run -i -t --entrypoint=/bin/bash my-image`.
@@ -118,12 +118,12 @@ This will show you a list of running containers - something like:
     CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS               NAMES
     dafd708d0d7e        my-image            "/bin/sh -c 'ping exa"   58 seconds ago      Up 57 seconds                           jolly_rosalind
 
-The important part is *container ID*. You can then run an arbitrary command in the running container with
+The important part is the *container ID*. You can then run an arbitrary command in the running container with
 the following command:
 
     docker exec *container_id* *command*
 
-E.g.
+For example:
 
     docker exec -i -t daf /bin/bash
 
@@ -150,7 +150,7 @@ RUN yum -y install php-cli
 ENTRYPOINT php -r "echo 'Hello world from PHP';"
 {% endhighlight %}
 
-The `RUN` command will install the specified package `php-cli`. Build the image with:
+The `RUN` command will install the specified `php-cli` package. Build the image with:
 
     docker build --tag=my-image . 
     
@@ -165,8 +165,8 @@ Which will give you:
 
 ### Loading Files into Image 
 When you need to add files into your image, use the *build context* (which is simply
-the folder in which *Dockerfile* is and in which you are building the image). Create a `test.php`
-file in the same folder as *Dockerfile* with the following contents: 
+the folder in which the *Dockerfile* is and in which you are building the image). Create a `test.php`
+file in the same folder as the *Dockerfile* with the following contents: 
 
 {% highlight php %}
 <?php
@@ -190,17 +190,17 @@ is run. When you `docker build` and `docker run` the image, you will receive:
     Hello world from PHP file
 
 
-## Dockerfile gotchas
+## Dockerfile Gotchas
 
 - Make absolutely sure that the *Dockerfile* script requires no interaction.
 - Each Dockerfile instruction runs in its own shell and there is no state maintained between them. 
-This means that e.g. having `RUN export foo=bar` makes no sense. Use `ENV foo=bar` instruction
+This means that, for instance, having `RUN export foo=bar` makes no sense. Use `ENV foo=bar` instruction
 to create environment variables.
-- When you look at the [existing dockerfiles](https://github.com/keboola/docker-base-php70/blob/master/Dockerfile), 
+- When you look at the [existing Dockerfiles](https://github.com/keboola/docker-base-php70/blob/master/Dockerfile), 
 you will realize that commands are squashed together 
 to a [single instruction](https://github.com/keboola/docker-base-php70/blob/master/Dockerfile#L9). This is 
 because each instruction creates a *layer* and there is a limited number of layers (layers are counted for the base 
-images too). However, this approach makes debugging more complicated. So, you better start with having:
+images too). However, this approach makes debugging more complicated. So, you better start with having
 
     RUN instruction1
     RUN instruction2
@@ -219,8 +219,8 @@ the image unless you delete them.
 - Be sure to delete temporary files, as they bloat the image. That's why we add `yum clean all` everywhere.
 - Consult 
 the [Dockerfile Best Practices](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/) 
-for more detailed information 
+for more detailed information. 
 
 The above code is available in a [sample repository](https://github.com/keboola/docs-docker-example-image).
 Now that you are able to create dockerized applications, get yourself familiar with the
-[docker registry](/extend/docker/tutorial/automated-build). 
+[Docker registry](/extend/docker/tutorial/automated-build). 
