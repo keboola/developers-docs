@@ -34,7 +34,7 @@ or [Quay](https://quay.io/organization/keboola).
 
 This means that there are virtually endless possibilities of what can be done with KBC programmatically. For instance, you can:
 
-
+{% comment %} Sem prubezne doplnovat odkazy {% endcomment %}
 - [Extend KBC with code R and Python snipets](/extend/custom-science/) stored in a git repository
 - [Extend KBC with arbitrary Docker images](/extend/docker/)
 - Use it just to exchange data (using the Storage API)
