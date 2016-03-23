@@ -24,19 +24,19 @@ Both of these things are up to you to implement.
 [DockeHub](https://hub.docker.com/r/keboola/base/), 
 [Dockerfile](https://github.com/keboola/docker-base) -- 
 Base image for all other images, contains CentOS7, 
-uses `master`, `latest` tags.
+uses `master`, `latest` tags, see [below](#tags).
 - R Language
   - docker-base-r: 
 [Quay](https://quay.io/repository/keboola/docker-base-r),
 [DockerHub](https://hub.docker.com/r/keboola/docker-base-r/), 
-[Dockerfile](https://github.com/keboola/docker-base-r) -
+[Dockerfile](https://github.com/keboola/docker-base-r) -- 
 Base image for all R images, 
 uses `X.Y.Z-a` tags, see [below](#tags).
   - docker-base-r-packages: 
 [Quay](https://quay.io/repository/keboola/docker-base-r-packages), 
-[Dockerfile](https://github.com/keboola/docker-base-r-packages) - 
+[Dockerfile](https://github.com/keboola/docker-base-r-packages) -- 
 Base image with installed common R packages installed, 
-uses `X.Y.Z-A` tags, see [below](#tags). 
+uses `X.Y.Z-a` tags. 
 - Python Language
   - base-python: 
 [Quay](https://quay.io/repository/keboola/base-python), 
