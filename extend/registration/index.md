@@ -66,11 +66,11 @@ This flag provides a UI for setting the table input mapping. With this UI, you c
 #### tableOutput
 This flag provides a UI for setting the table output mapping. With this UI, you can set:
 
-- *source* - the name of the .csv file retrieved from the application
-- *destination* - the name of the table in Storage, the destination bucket should exist already
-- *incremental* - if checked, the loaded data will be appended to the contents of the destination table
-- *primary key* - set the primary key for your destination table - multiple columns are allowed
-- *delete rows* - delete some rows from the destination table using a simple filter
+- *source* -- the name of the .csv file retrieved from the application
+- *destination* -- the name of the table in Storage, the destination bucket should exist already
+- *incremental* -- if checked, the loaded data will be appended to the contents of the destination table
+- *primary key* -- set the primary key for your destination table - multiple columns are allowed
+- *delete rows* -- delete some rows from the destination table using a simple filter
 
 {: .image-popup}
 ![Table output screenshot](/extend/registration/table-output-1.png)

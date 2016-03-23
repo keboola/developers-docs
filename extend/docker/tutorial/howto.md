@@ -91,8 +91,7 @@ option opens **i**nteractive **t**erminal:
     `docker run -i -t --entrypoint=/bin/bash my-image`.
 
 The option `--entrypoint` overrides the `ENTRYPOINT` specified in the `Dockerfile`. This ensures that a
-bash shell is run instead of your application. You then have to run the command previously defined
-entrypoint manually. 
+bash shell is run instead of your application. You then have to run the `ping` command, previously defined in the entrypoint, manually. 
 
 It is also possible to inspect a running container. Assume you have the following `Dockerfile`:
 
