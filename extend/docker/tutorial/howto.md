@@ -8,9 +8,11 @@ The official [Windows](https://docs.docker.com/windows/step_one/),
 [Mac OS X](https://docs.docker.com/mac/), and other [Tutorials](TODO: REPLACE https://docs.docker.com/mac/) are not being replaced here.
 Before you start, make sure you have [Docker installed](/extend/docker/tutorial/setup/). 
 
+The code discussed below is available in our [sample repository](https://github.com/keboola/docs-docker-example-image).
+
 ## Creating Your Own Image
 To create your own image, create a [Dockerfile](https://docs.docker.com/engine/reference/builder/). 
-Dockerfile is a set of shell instructions leading to configured OS environment. You can think of it as a 
+Dockerfile is a set of shell instructions leading to a configured OS environment. You can think of it as a 
 bash shell script with some specifics. Each Dockerfile should be placed in its own folder because the folder 
 becomes *Build Context* of the Docker image. Build context contains files which can be injected into the 
 Image. There is no other way to inject arbitrary files into the image other than through the build 
@@ -39,7 +41,7 @@ ENTRYPOINT ping -c 2 example.com
 {% endhighlight %}
 
 The `FROM` instruction means we start with our [base image](https://quay.io/repository/keboola/base)
-which, in turn, is based on [CentOS](https://hub.docker.com/_/centos/) image. 
+which, in turn, is based on the [CentOS](https://hub.docker.com/_/centos/) image. 
 The second instruction means that when you run the image, it will ping _example.com_ twice and exit. 
 When you run
  
@@ -126,12 +128,12 @@ For example:
 
     docker exec -i -t daf /bin/bash
 
-Will execute **i**nteractive **t**erminal with the bash shell in the container *daf* (container ID can 
+will execute **i**nteractive **t**erminal with the bash shell in the container *daf* (container ID can 
 be shortened to first 3 letters). Verify that `ping` is still running by: 
 
     ps -A
     
-Which will give you something like:
+which will give you something like:
     
     PID     TTY     TIME        CMD
     1 ?             00:00:01    ping
@@ -153,11 +155,11 @@ The `RUN` command will install the specified `php-cli` package. Build the image 
 
     docker build --tag=my-image . 
     
-And then run the image (and create a new container):
+and then run the image (and create a new container):
 
     docker run -i my-image
 
-Which will give you:
+You should see the following output:
     
     Hello world from PHP
 
@@ -220,6 +222,5 @@ the image unless you delete them.
 the [Dockerfile Best Practices](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/) 
 for more detailed information. 
 
-The above code is available in a [sample repository](https://github.com/keboola/docs-docker-example-image).
 Now that you are able to create dockerized applications, get yourself familiar with the
 [Docker registry](/extend/docker/tutorial/automated-build). 

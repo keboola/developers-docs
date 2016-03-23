@@ -16,7 +16,7 @@ command does that automatically for you, so when you do:
 
     docker run -i quay.io/keboola/base-php70
     
-You will see something like:
+you will see something like:
 
     Unable to find image 'quay.io/keboola/base-php70:latest' locally
     latest: Pulling from keboola/base-php70 
@@ -47,9 +47,8 @@ In the repository configuration, select *Link to a Github Repository Push*:
 {: .image-popup}
 ![Repository configuration](/extend/docker/tutorial/quay-new-repository.png)
 
-Then link the image repository to the Github repository
-(you can also use our sample repository 
-[https://github.com/keboola/docs-docker-example-basic](https://github.com/keboola/docs-docker-example-basic)):
+Then link the image repository to a Github repository
+(you can use our [sample repository](https://github.com/keboola/docs-docker-example-basic)):
 
 {: .image-popup} 
 ![Link repositories](/extend/docker/tutorial/quay-link-repository.png)
@@ -61,8 +60,8 @@ will trigger an image rebuild on every commit to the repository. You can also se
 ![Configure build trigger for branch](/extend/docker/tutorial/quay-build-trigger-master.png)
 
 An alternative option is to configure the trigger to a specific tag. For Semantic versioning, 
-use the following regular expression: `^tags/[0-9]+\.[0-9]+\.[0-9]+$`.
-In this case an image will be rebuilt only when you create a new tag.
+the following regular expression: `^tags/[0-9]+\.[0-9]+\.[0-9]+$`
+ensures the image is rebuilt only when you create a new tag.
  
 {: .image-popup}
 ![Configure build trigger for tag](/extend/docker/tutorial/quay-build-trigger-tag.png)
