@@ -32,9 +32,8 @@ When the application execution is finished, Docker Bundle automatically collects
 The application is responsible for:
 
 - Reading the configuration and source tables in CSV format and files (if specified).
-- Writing the results to the predefined directories and files.
+- Writing the results to the predefined folders and files.
 - Proper handling of success/error results by setting an appropriate exit code.
-
 
 Docker Bundle is responsible for:
 

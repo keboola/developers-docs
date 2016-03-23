@@ -20,7 +20,7 @@ of [sample requests](https://www.getpostman.com/collections/87da6ac847f5edcac776
 
 Create a public git repository ([Github](https://github.com/) or [Bitbucket](https://bitbucket.org/) is recommended, although any other host should work as well).
 
-## Step 2 -- Write the Application Code.
+## Step 2 -- Write the Application Code
 
 In the root of your repository, create a PHP script named 
 [`main.php`](https://github.com/keboola/docs-docker-example-basic/blob/master/main.php) with the following contents:
@@ -53,7 +53,7 @@ it is immediately written to _destination.csv_. This approach keeps only a singl
 generally very efficient. There is no requirement to implement the processing in this way, but keep in mind that data files
 coming from KBC can by quite large (i.e. Gigabytes).
 
-You can test the code with a [sample table](/extend/source.csv):
+You can test the code with our [sample table](/extend/source.csv):
 
 {:.table}
 number | someText | double_number
@@ -79,7 +79,7 @@ Create a file named
 The image inherits from our [Keboola PHP56 base image](https://quay.io/repository/keboola/docker-base-php56),
 which is defined by its own [Dockerfile](https://github.com/keboola/docker-base-php56/blob/master/Dockerfile).
 The instruction `COPY . /home/` copies the application code (only the `main.php` file in this simple application) 
-from the *build context* (the same directory in which the Dockerfile resides) into the image. 
+from the *build context* (the same folder in which the Dockerfile resides) into the image. 
 The `ENTRYPOINT` line specifies that when the image is run, the PHP application script is executed. 
 
 The Dockerfile and the application can be in two separate repositories or in a 
@@ -87,7 +87,7 @@ single [git repository](https://github.com/keboola/docs-docker-example-basic). U
 things generally easier, but it is not required.
 
 ### Step 3.2 -- Build the Image
-On the command line, navigate to the directory with your repository and run the following command (including the dot at the end):
+On the command line, navigate to the folder with your repository and run the following command (including the dot at the end):
     
     docker build --tag=test .
 
@@ -100,14 +100,14 @@ Out of that output, the most important thing is the *Successfully built ded5321d
 hash of the new image: `ded5321d5ba5`. It can be abbreviated to the first three characters, so we can
 later refer to it as `ded`. We can also use the tag of the image: `test`.
 
-## Step 4 -- Obtaining sample data and configuration
-Data between KBC and your Docker image are exchanged using [CSV files](/extend/common-interface/) which will be 
-injected into the image when we run it. To simulate this, you can download an archive containing the data files 
+## Step 4 -- Obtaining Sample Data and Configuration
+Data between KBC and your Docker image are exchanged using [CSV files](/extend/common-interface/); they will be 
+injected into the image when we run it. To simulate this, download an archive containing the data files 
 and [configuration](/extend/common-interface/config-file/) in the exact same format as you will obtain it
-in production environment.
+in the production environment.
 
 To obtain the configuration, send a [Sandbox API Request](/extend/common-interface/sandbox/). You will receive an 
-archive which contains a [/data/ folder](/extend/common-interface/) with tables and files from the input mapping, and a
+archive containing a [/data/ folder](/extend/common-interface/) with tables and files from the input mapping, and a
 configuration depending on the request body. In the request, enter a configuration format: 
 either `Yaml` or `JSON`. A sample request to `https://syrup.keboola.com/docker/sandbox?format=json`:
 
@@ -140,24 +140,24 @@ either `Yaml` or `JSON`. A sample request to `https://syrup.keboola.com/docker/s
 {% endhighlight %}
  
 The sample request corresponds to the following setting in the UI (though the UI for your component will become 
-available only when your extension is complete and [registered](/extend/registration/)).
+available only after your extension has been completed and [registered](/extend/registration/)).
 
 {: .image-popup}
 ![Configuration Screenshot](/extend/docker/configuration-sample.png) 
 
-Alternatively -- to quickly get the picture, you can download a [random sample data folder](/extend/docker/data.zip),
+Alternatively -- to quickly get the picture, download a [random sample data folder](/extend/docker/data.zip),
  which can be used together with the above [sample application](https://github.com/keboola/docs-docker-example-basic).
 
-## Step 5 -- Running the application with sample data 
-Once you have prepared the data folder with sample data and configuration, you can inject it into the Docker image. 
-In addition to the options shown in the example, there are many [other options](/extend/common-interface/config-file/)
+## Step 5 -- Running the Application with Sample Data 
+Once you have prepared the data folder with sample data and configuration, inject it into the Docker Image. 
+In addition to the options shown in the example, there are many [other options](/extend/common-interface/config-file/) available.
 
 When you run an image, a *container* is created in which the application is running isolated. 
 Use the following command to run the image:
 
     docker run --volume=physicalhostpath:/data/ imageTag
 
-Image tag can be either the tag you supplied in the `--tag` parameter for `docker build` or the image hash you received
+An Image tag can be either the tag you supplied in the `--tag` parameter for `docker build` or the image hash you received
 when the image was build (`ded` in the above example). 
 The physical host path depends on the system you are running. If in doubt, 
 see [Setting up Docker](/extend/docker/tutorial/setup/#sharing-files). In our example image with default Windows installation of Docker, this would be:
@@ -165,23 +165,23 @@ see [Setting up Docker](/extend/docker/tutorial/setup/#sharing-files). In our ex
     docker run --volume=/c/Users/ondre/data/:/data/ test
 
 Where the contents of the sample data folder are put in the user's home directory. If you have set everything correctly,
-you should see **All done** and a `destination.csv` file will appear in the `data/out/tables/` directory.
+you should see **All done**; and a `destination.csv` file will appear in the `data/out/tables/` folder.
 
 ### Step 5.1 Debugging
 
-Chances are, that you received some ugly error or warning. In that case, you might want to check out the 
-contents of the image and specifically if all the files are where you expect 
+Chances are, that you received an ugly error or warning. In that case, you might want to check out the 
+contents of the image; specifically, if all the files are where you expect 
 them to be -- see [debugging](/extend/docker/running/).
 
 To work with the application container interactively, use the following command:
 
     docker run --volume=physicalhostpath:/data/ -i -t --entrypoint=/bin/bash imageTag
 
-e.g.
+For instance:
 
     docker run --volume=/c/Users/JohnDoe/data:/data/ -i -t --entrypoint=/bin/bash test
 
-You can then inspect the container contents: 'ls /data/'. For more details on see [Howto](/extend/docker/running/)
+You can then inspect the container contents: 'ls /data/'. For more details, see [Howto](/extend/docker/running/).
 
 
 ### Step 6 -- Deployment
@@ -194,15 +194,15 @@ To deploy the application to production, it must first be [registered](/extend/r
 application is registered with us, we will automatically pull the image and make it available in production.
 There are two modes for deployment:
 
-- automatic: use the *latest* or *master* tags on the docker image. If you commit a new code to your application 
-repository and [(automatically) rebuild] the image, the next time time your application is run, 
-it will be updated to the latest version
-- manual: use [Semantic versioning](http://semver.org/) versioning tags on your docker images. 
+- automatic: use the *latest* or *master* tags on the Docker Image. If you commit a new code to your application 
+repository and [(automatically) rebuild] the image, the next time your application is run, 
+it will be updated to the latest version.
+- manual: use [Semantic versioning](http://semver.org/) versioning tags on your Docker Images. 
 Let us know when you want to change the image tag to a new version. 
 
-There is no need to specify the deployment mode, it is fully determined from  by the type of tags you use.
+There is no need to specify the deployment mode; it is fully determined by the type of tags you use.
 At the beginning, it is probably more straightforward to work in the automatic mode because your deployment is 
-fully automated and requires no interaction from us. Once the application gets more mature, you should probably 
+fully automated and requires no interaction with us. Once the application gets more mature, you should probably 
 switch to manual versioning and perhaps notify your users about any modifications.
 
 

@@ -26,4 +26,4 @@ Under the following conditions:
 If you wish to apply for a KBC project, send us an email (use the following template if you are lazy):
 
 Hello,
-I'am XZ (from XY) and I'd like to develop component XY for KBC. TODO :)
+I'am XZ (from XY) and I'd like to develop a XY component for KBC. TODO :)
