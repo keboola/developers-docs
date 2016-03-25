@@ -80,6 +80,10 @@ ul.kbc-nav-sidebar li.active > ul {
     override kbc.css defaults
 */
 
+hr {
+    border-top: 1px solid #ededf0;
+}
+
 .kbc-logo {
     background: #14073A;
     color: #f5f5f7;
