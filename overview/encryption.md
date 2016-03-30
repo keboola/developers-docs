@@ -3,6 +3,9 @@ title: Encryption
 permalink: /overview/encryption/
 ---
 
+* TOC
+{:toc}
+
 Many of [KBC components](/overview/) provide Encryption API; it encrypts sensitive values 
 which are supposed to be securely stored and decrypted inside the component itself. This means that the encryption 
 keys are stored inside the components and are not accessible to API users. Also, there is no decryption

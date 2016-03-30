@@ -3,6 +3,9 @@ title: Manifest Files Specification
 permalink: /extend/common-interface/manifest-files/
 ---
 
+* TOC
+{:toc}
+
 A manifest file contains additional information about tables and files injected to the 
 [`/data/in` folders](/extend/common-interface/). 
 It also provides a way to specify options for tables and files transferred back to Storage from `/data/out`
@@ -97,7 +100,7 @@ table is imported, see [Example](/extend/common-interface/config-file/#output-ma
 
 ### Files
 
-#### `/data/in/files` manifests
+#### `/data/in/files` Manifests
 
 An input file manifest stores metadata about a downloaded file.
 

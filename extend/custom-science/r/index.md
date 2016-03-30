@@ -3,6 +3,9 @@ title: Custom Science R
 permalink: /extend/custom-science/r/
 ---
 
+* TOC
+{:toc}
+
 Your R Custom Science Application can be created in multiple ways (as described below). There are no known limitations to the architecture of your R code. We recommend that you use our [library](https://github.com/keboola/r-docker-application). It provides useful functions for working with our [environment](/extend/common-interface/). Please note: 
 
 - The repository of your R application must always contain the `main.R` script. 

@@ -3,6 +3,9 @@ title: Creating Sandbox
 permalink: /extend/common-interface/sandbox/
 ---
 
+* TOC
+{:toc}
+
 In order to run and debug KBC dockerized applications (including
 [Custom Science](/extend/custom-science/) and [R] and [Python] Transformations)
 on your own computer, you need to
@@ -148,7 +151,7 @@ As with the [sandbox call](#sandbox), running the API call will create a job, wh
 Note: If you actually want to *run* the above *sample-configuration-27* configuration, you also need
 to set the output mapping from `destination.csv` to some table.
 
-# Summary
+## Summary
 - for unregistered components, use the Sandbox call:
   - the whole configuration must be passed as the body (`configData` node) of the API call in JSON format
   - the source data are limited to 50 rows

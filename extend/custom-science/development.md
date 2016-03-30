@@ -3,6 +3,9 @@ title: Development Guide
 permalink: /extend/custom-science/development/
 ---
 
+* TOC
+{:toc}
+
 When developing the code for your Custom Science extension, there is no interaction with Keboola required (no code configuration/approval, etc.). 
 However, make sure you meet the following guidelines:
 
@@ -84,7 +87,7 @@ If you do not wish the end-user to have an access to the git repository password
  In the API call, the `componentId` parameter is `dca-custom-science-r` for R applications, `dca-custom-science-python` for Python 3.x, and `dca-custom-science-python2` for Python 2.x. This is probably the best choice to start with in a Custom Science extension.  
 - [Image Configuration Encryption](/architecture/encryption/#image-configuration-encryption); Encrypted values will be readable in all instances of the specific Custom Science extension in *a single project*.
  In the API call, the `componentId` parameter is `dca-custom-science-r` for R applications, `dca-custom-science-python` for Python 3.x, and `dca-custom-science-python2` for Python 2.x. This is the most secure way, 
- but you need to encrypt a password for each project in which your Custom Science extension will be used.
+ but you need to encrypt a password for each project in which your Custom Science extension will be used. This also prevents anyone from using your application in their project unless you give them the correct encrypted string (i.e. the application configuration cannot be copied between projects).
 
 ## Git Repository Contents
 As for the contents of your git repository, we only have a single requirement. Either `main.R` (for R Custom Science) or `main.py` (for Python Custom Science) must be present in the root of the repository. 

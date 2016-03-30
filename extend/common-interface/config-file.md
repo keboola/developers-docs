@@ -3,6 +3,9 @@ title: Configuration File Specification
 permalink: /extend/common-interface/config-file/
 ---
 
+* TOC
+{:toc}
+
 Configuration files are one of the [possible channels](/extend/common-interface/) for exchanging data between extensions (and other dockerized applications) and Keboola Connection. 
 
 To create a sample configuration file (together with the data directory), 

@@ -3,7 +3,12 @@ title: Data Folders Specification
 permalink: /extend/common-interface/folders/
 ---
 
+* TOC
+{:toc}
+
 Data folders are one of the [possible channels](/extend/common-interface/) to exchange data between your application and Keboola Connection. 
+
+## /data/ Root folder 
 
 The `/data/` folder is the root folder for exchanging data.  
 Your application reads its input from the `/data/in` folder and writes its results to the `/data/out` folder. 
@@ -29,7 +34,7 @@ This folder structure is always available to your application. The current direc
 Do not put arbitrary files in the `/data/` folder as they will be uploaded into the user project 
 (or cause errors in the output mapping). For working or temporary files, use either the `/home/` or `/tmp/` folder.
 
-### `/data/in/tables`
+### `/data/in/tables/` Folder
 
 The folder contains tables defined in the input mapping; they are serialized in the CSV format:
  
@@ -40,7 +45,7 @@ The folder contains tables defined in the input mapping; they are serialized in 
 File names are specified in the input mapping, defaulting to `{tableId}.csv` (a file name can be changed in the UI).
 The table metadata is stored in a [manifest file](/extend/common-interface/manifest-files/).
 
-### `/data/out/tables`
+### `/data/out/tables/` Folder
 
 All output tables from your application must be placed in this folder. The destination table in 
 [Storage](https://help.keboola.com/???) is defined by the following rules (listed in order):
@@ -88,13 +93,13 @@ Note: The `default_bucket` flag always requires the `config` parameter when crea
 API even if the `config` configuration does not exist in Storage. This feature
 is available only for [Docker extensions](/extend/docker/).  
 
-### `/data/in/files`  
+### `/data/in/files/` Folder
 
 Files defined in the input mapping are stored in their raw form, file names are numeric and 
 equal to `{fileId}_{filename}` in Storage. All other information about the files is available 
 in the [manifest file](/extend/common-interface/manifest-files/).
 
-### `/data/out/files`
+### `/data/out/files/` Folder
 
 All files in this folder are uploaded to Storage. File names are preserved and tags and other upload options 
 can be specified in the [manifest file](/extend/common-interface/manifest-files/).

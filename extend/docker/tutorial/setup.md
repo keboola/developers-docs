@@ -3,6 +3,9 @@ title: Installation and Running
 permalink: /extend/docker/tutorial/setup/
 ---
 
+* TOC
+{:toc}
+
 To work with Docker, you need a running [Docker machine server](https://docs.docker.com/machine/)
 and a [Docker engine client](https://docs.docker.com/engine/quickstart/). If you have no server
 with Docker machine at hand, run everything locally. To install a Docker machine on Win/Mac, 

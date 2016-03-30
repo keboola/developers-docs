@@ -3,6 +3,9 @@ title: Running Images
 permalink: /extend/docker/running/
 ---
 
+* TOC
+{:toc}
+
 One of the great advantages of dockerized applications is that the applications always run in the
 same environment defined by the docker image. When running in KBC, there are, however, some outside
 environment bindings for you to take care of. Before you start, make sure, you have

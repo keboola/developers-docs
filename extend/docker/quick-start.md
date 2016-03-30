@@ -3,6 +3,9 @@ title: Docker Extension Quick Start
 permalink: /extend/docker/quick-start/
 ---
 
+* TOC
+{:toc}
+
 This tutorial guides you through the process of creating a simple Docker Application in PHP. 
 As in the [Custom Science Quick Start](/extend/custom-science/quick-start/), the application logic is trivial: it takes a table with numbers as an input, and creates another table with an extra column containing those numbers multiplied by two. A test in KBC is included. 
 

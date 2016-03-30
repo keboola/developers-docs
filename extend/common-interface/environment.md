@@ -3,6 +3,9 @@ title: Environment Specification
 permalink: /extend/common-interface/environment/
 ---
 
+* TOC
+{:toc}
+
 Extensions (and other dockerized applications) use several [channels](/extend/common-interface/) to exchange information with Keboola Connection,
 primarily [structured folders](/extend/common-interface/) and [configuration files](/extend/common-interface/config-file/).
 

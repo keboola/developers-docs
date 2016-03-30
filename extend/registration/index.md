@@ -3,6 +3,9 @@ title: Component Registration
 permalink: /extend/registration/
 ---
 
+* TOC
+{:toc}
+
 ## Introduction
 As described in the [architecture overview](/architecture/), KBC consists of many different components. Only those components that are registered in our **Component List** are generally available in KBC. The list is provided by our [Storage Component API](http://docs.keboola.apiary.io/#) in the dedicated [Components section](http://docs.keboola.apiary.io/#reference/components). 
 
