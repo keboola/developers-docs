@@ -90,16 +90,6 @@ items:
 
   - url: /integrate/
     title: Integrate
-    items:
-
-      - url: /integrate/extractors/
-        title: Extractors
-        items:
-
-          - url: /integrate/extractors/pigeon/
-            title: Pigeon Importer
-
-
 
   - url: /automate/
     title: Automate/Common Tasks
