@@ -3,7 +3,7 @@ title: Integrate
 permalink: /integrate/
 ---
 
-  - Using API
+{% comment %}
   - Storage
     - API
     - Curl
@@ -17,5 +17,4 @@ permalink: /integrate/
     - App Annie
     - ...
   - Writers
-
-
+{% endcomment %}
