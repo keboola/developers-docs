@@ -8,12 +8,12 @@ API, we recommend you use either the Apiary Console or Postman Client. Most of o
 Many of our APIs require a *Storage API token* which is entered in `X-StorageApi-Token` header.
 
 ## The Apiary Console
-You can send requests to our API directly from the Apiary console by clicking on **Switch to console** or **Try**. Then you need to fill the request headers and parameters and **Call Resource**.
+Send requests to our API directly from the Apiary console by clicking on **Switch to console** or **Try**. Then fill the request headers and parameters and **Call Resource**.
 
 {: .image-popup}
 ![Apiary console](/overview/api/apiary-console.png)
 
-The Apiary console is fine when you send API requests only occasionally. It requires no application installation; however, it has no history and no other useful features.
+The Apiary console is fine if you send API requests only occasionally. It requires no application installation; however, it has no history and no other useful features.
  
 ## Postman Client
 [Postman](https://www.getpostman.com/) is a generic HTTP API client. We recommend you use this client if you work with KBC API on a more regular basis. We also provide
