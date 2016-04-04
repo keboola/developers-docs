@@ -5,7 +5,7 @@ permalink: /extend/docker/
 
 Docker [extensions](/extend/) allow you to extend KBC in a more flexible way than [Custom Science](/extend/custom-science/). At the same 
 time, significant implementation effort on your part is required. In Docker extensions, the data interface is 
-very similar to [Transformations](https://help.keboola.com/transformations/) 
+very similar to [Transformations](http://help.keboola.com/manipulation/transformations/) 
 and [Custom Science](/extend/custom-science/) - data are exchanged as 
 CSV files in [designated directories](/extend/common-interface/).
 

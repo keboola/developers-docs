@@ -140,7 +140,7 @@ The tables element in a configuration of the **input mapping** is an array and s
 - `limit`
 
 The output mapping parameters are similar 
-to [Transformation API output mapping ](http://wiki.keboola.com/home/keboola-connection/devel-space/integrating-with-kbc/transformations/intro#TOC-Output-mapping). 
+to [Transformation API output mapping ](http://help.keboola.com/manipulation/transformations/). 
 `destination` is the only required parameter. If `source` is not set, the CSV file is expected to have the same name 
 as the `destination` table. 
 The tables element in a configuration of the **output mapping** is an array and supports the following attributes:
