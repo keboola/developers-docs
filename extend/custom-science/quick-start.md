@@ -53,9 +53,9 @@ Create a [source table](/extend/source.csv) in *Storage*, e.g.:
 
 Name of the table in *Storage* is not important. Let's name it **in.c-main.custom-science-example**.
 
-For instructions on how to create a table, go to [TODO]().
+For instructions on how to create a table, go to [KBC Tutorial](http://help.keboola.com/overview/tutorial/load/).
 
-The bucket to write the output of the application to has to exist.  
+The bucket to write the output of the application to has to exist. 
 We will use the **out.c-main** bucket. 
 The output table will be created automatically.
 
@@ -63,7 +63,9 @@ The output table will be created automatically.
 Go to *Applications* - *New Application* - *Custom Science R*, and press *Add configuration* in which you will set the input and output mapping and repository as explained below. 
 
 #### Step 4.3 - Input Mapping
-To test the application, use the **in.c-main.custom-science-example** sample table as input. Make sure to set the input mapping name to **source.csv** - that is what we expect in the [sample script](https://github.com/keboola/docs-custom-science-example-/blob/master/main.R#L2).
+To test the application, use the **in.c-main.custom-science-example** sample table as input. Make sure to set 
+the input mapping name to **source.csv** - that is what we expect in 
+the [sample script](https://github.com/keboola/docs-custom-science-example-r-basic/blob/master/main.R#L2).
 
 {: .image-popup}
 ![Input mapping configuration](/extend/custom-science/input-mapping.png)

@@ -10,7 +10,7 @@ with Storage API will be handled by Docker Bundle. You can encapsulate any appli
 following a set of rules that will allow you to integrate the application into Keboola Connection.
 
 There is a [predefined interface](/extend/common-interface/) with Docker Bundle consisting of a
-[folder structure](/extend/common-interface/) and a [serialized configuration file](/extend/config-file/). 
+[folder structure](/extend/common-interface/) and a [serialized configuration file](/extend/common-interface/config-file/). 
 [Custom Science](/extend/custom-science/), [Docker Extensions](/extend/docker/) and also 
 R and Python Transformations are all dockerized applications and are run using Docker Bundle. 
 

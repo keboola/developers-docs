@@ -12,7 +12,7 @@ on your own computer, you need to
 manually supply the application with a [data folder and configuration file](/extend/common-interface/). 
 
 To create a sample data folder, use 
-a [Docker Bundle](/overview/api/docker-bundle/) API. There are three calls available:
+a [Docker Bundle](/overview/docker-bundle/) API. There are three calls available:
 
 - [create sandbox](http://docs.kebooladocker.apiary.io/#reference/sandbox/sandbox) -- use with components with/without [registration](/extend/registration/) 
 - [input data](http://docs.kebooladocker.apiary.io/#reference/sandbox/input-data/create-an-input-job) -- use with already registered components

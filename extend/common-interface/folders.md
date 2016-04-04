@@ -48,7 +48,7 @@ The table metadata is stored in a [manifest file](/extend/common-interface/manif
 ### `/data/out/tables/` Folder
 
 All output tables from your application must be placed in this folder. The destination table in 
-[Storage](http://help.keboola.com/overview/storage/) is defined by the following rules (listed in order):
+[Storage](http://help.keboola.com/storage/) is defined by the following rules (listed in order):
 
 - If `defaultBucket` (see [below])(#default-bucket) is specified, it applies only 
 to the [Docker extension](/extend/docker/). The table will be uploaded to a

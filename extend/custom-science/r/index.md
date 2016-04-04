@@ -189,7 +189,7 @@ You can test the sample code with this *runtime* setting:
 #### Tests 
 Tests are organized in the [/tests/](https://github.com/keboola/docs-custom-science-example-r-package/tree/master/tests) directory which contains:
 
-- Subdirectory `data/` which contains pregenerated sample data from [sandbox](/common-interface/sandbox/).
+- Subdirectory `data/` which contains pregenerated sample data from [sandbox](/extend/common-interface/sandbox/).
 - Optional `config.R` file which can be used to set environment for running the tests; it can be created 
 by copying [config_template.R](https://github.com/keboola/docs-custom-science-example-r-package/blob/master/tests/config_template.R)
 - Subdirectory `test_that/` which contains the actual [testthat tests](http://r-pkgs.had.co.nz/tests.html)

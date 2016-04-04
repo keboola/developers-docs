@@ -4,7 +4,7 @@ permalink: /
 ---
 
 This site is aimed for developers who are working with Keboola Connection programmatically. For end-users, there
-is a separate documentation at [help.keboola.com](https://help.keboola.com).  
+is a separate documentation at [help.keboola.com](http://help.keboola.com/).  
 
 ## Building for Keboola Connection
 Keboola Connection (KBC) is an open system and we welcome developers to [build their own extensions](/extend/), whether for 

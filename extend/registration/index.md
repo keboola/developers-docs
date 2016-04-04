@@ -87,7 +87,7 @@ This flag provides a UI for setting the file input mapping. With this UI, you ca
 - *file tags* -- select files by the file tags listed in *File Uploads*
 - *query* -- [ElasticSearch query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax)
 to select files from *File Uploads*
-- *processed tags* -- used for [incremental processing](/extend/common-interface/#incremental-processing)
+- *processed tags* -- used for [incremental processing](/extend/common-interface/config-file/#incremental-processing)
 
 {: .image-popup}
 ![File input screenshot](/extend/registration/file-input-1.png)

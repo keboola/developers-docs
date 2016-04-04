@@ -1,6 +1,6 @@
 ---
 title: Oauth2 Interface Specification
-permalink: /extend/common-interface/oauth
+permalink: /extend/common-interface/oauth/
 ---
 
 [OAuth API V2](https://github.com/keboola/oauth-v2-bundle) integration provides a safe way to retrieve stored authorizations. 
