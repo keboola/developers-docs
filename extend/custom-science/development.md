@@ -55,7 +55,7 @@ The basic *Runtime* settings for a public repository are entered in JSON format:
 
 ### Private Repository
 The *Runtime* settings for a private repository must include git credentials: an unencrypted username in the
-`username` field, and an [encrypted](/architecture/encryption/) password in `#password`. 
+`username` field, and an [encrypted](/overview/encryption/) password in `#password`. 
 
 {% highlight json %}
 {
@@ -80,12 +80,12 @@ the end-user must know the password to the git repository (though only when crea
   
 #### Encryption Beforehand
 If you do not wish the end-user to have an access to the git repository password, the password must be encrypted in advance; use our 
-[Encryption API](/architecture/encryption/). There are three more options here:
+[Encryption API](/overview/encryption/). There are three more options here:
 
-- [Base Encryption](/architecture/encryption/#base-encryption); Encrypted values will be readable in all dockerized applications.
-- [Image Encryption](/architecture/encryption/#image-encryption); Encrypted values will be readable in all instances of the specific Custom Science extension.
+- [Base Encryption](/overview/encryption/#base-encryption); Encrypted values will be readable in all dockerized applications.
+- [Image Encryption](/overview/encryption/#image-encryption); Encrypted values will be readable in all instances of the specific Custom Science extension.
  In the API call, the `componentId` parameter is `dca-custom-science-r` for R applications, `dca-custom-science-python` for Python 3.x, and `dca-custom-science-python2` for Python 2.x. This is probably the best choice to start with in a Custom Science extension.  
-- [Image Configuration Encryption](/architecture/encryption/#image-configuration-encryption); Encrypted values will be readable in all instances of the specific Custom Science extension in *a single project*.
+- [Image Configuration Encryption](/overview/encryption/#image-configuration-encryption); Encrypted values will be readable in all instances of the specific Custom Science extension in *a single project*.
  In the API call, the `componentId` parameter is `dca-custom-science-r` for R applications, `dca-custom-science-python` for Python 3.x, and `dca-custom-science-python2` for Python 2.x. This is the most secure way, 
  but you need to encrypt a password for each project in which your Custom Science extension will be used. This also prevents anyone from using your application in their project unless you give them the correct encrypted string (i.e. the application configuration cannot be copied between projects).
 
@@ -93,5 +93,5 @@ If you do not wish the end-user to have an access to the git repository password
 As for the contents of your git repository, we only have a single requirement. Either `main.R` (for R Custom Science) or `main.py` (for Python Custom Science) must be present in the root of the repository. 
 This is the actual code executed by KBC when running the extension. 
 Otherwise the repository contents are arbitrary.
-However, you might want to take a look at the specific notes on implementation details for [Python](/extend/custom-science/python/) or [R](/extend/custom-science/r).
+However, you might want to take a look at the specific notes on implementation details for [Python](/extend/custom-science/python/) or [R](/extend/custom-science/r/).
 

@@ -19,7 +19,7 @@ The Apiary console is fine if you send API requests only occasionally. It requir
 [Postman](https://www.getpostman.com/) is a generic HTTP API client. We recommend you use this client if you work with KBC API on a more regular basis. We also provide
 a collection of useful API calls; they can be imported either by clicking the following button:
 
-[![Run in Postman](https://run.pstmn.io/button.png)](https://www.getpostman.com/run-collection/7dc2e4b41225738f5411)
+[![Run in Postman](https://run.pstmn.io/button.png)](https://app.getpostman.com/run-collection/7dc2e4b41225738f5411)
 
 Or with the following procedure: 
 

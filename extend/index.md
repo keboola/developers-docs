@@ -3,11 +3,11 @@ title: Extending KBC
 permalink: /extend/
 ---
 
-The KBC environment consists of many built-in [*components*](/architecture) which interoperate 
+The KBC environment consists of many built-in [*components*](/overview/) which interoperate 
 together (e.g. Storage, Transformations and Readers). You can also create KBC extensions. Currently, 
 there are two types of extensions available:
 
-* [Generic Extractor](todo) - a specific component designated for implementing extractors for services with REST API
+* [Generic Extractor](/extend/generic-extractor/) - a specific component designated for implementing extractors for services with REST API
 * Custom Extension - a component extending KBC with an arbitrary code
 
 ## Custom Extensions
@@ -16,14 +16,14 @@ Custom Extensions can be used as Applications, Extractors and Writers.
 
 Applications process input tables stored in CSV files and generate result tables in CSV files. Extractors work the same way. However, instead of reading their input from KBC tables, they get it from an external source (usually an API). Similarly, Writers do not generate any KBC tables.
 
-All extensions run inside a [Docker component](/architecture/docker-bundle) which takes care of: 
+All extensions run inside a [Docker component](/overview/docker-bundle) which takes care of: 
 
 * Authentication
 * Starting and stopping the extension
 * Reading and writing data to KBC Storage
 * Application isolation
 
-They must adhere to a [common interface](/extend/common-interface). 
+They must adhere to a [common interface](/extend/common-interface/). 
 
 There are two types of Custom extensions differing in the level of integration and implementation flexibility:
 

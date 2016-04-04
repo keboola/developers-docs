@@ -7,13 +7,13 @@ permalink: /extend/registration/
 {:toc}
 
 ## Introduction
-As described in the [architecture overview](/architecture/), KBC consists of many different components. Only those components that are registered in our **Component List** are generally available in KBC. The list is provided by our [Storage Component API](http://docs.keboola.apiary.io/#) in the dedicated [Components section](http://docs.keboola.apiary.io/#reference/components). 
+As described in the [architecture overview](/overview/), KBC consists of many different components. Only those components that are registered in our **Component List** are generally available in KBC. The list is provided by our [Storage Component API](http://docs.keboola.apiary.io/#) in the dedicated [Components section](http://docs.keboola.apiary.io/#reference/components). 
 
 While a [Custom Science extension](/extend/custom-science/) requires registration only when offered to all KBC users, registering a [Docker extension](/extend/docker/) is mandatory at all times.
 
 That being said, any KBC user can use any registered component, unless:
 
-- the KBC user (or their token) has a [limited access to the component](/token-permissions/)
+- the KBC user (or their token) has a [limited access to the component](http://help.keboola.com/storage/tokens/)
 - the component itself limits where it can run (in what projects and for which users)
 
 ## Using a Private Repository

@@ -33,12 +33,13 @@ The following environment variables are injected in the container:
 
 ## Return Values
 
-The script defined in Dockerfile [`ENTRYPOINT`](/extend/docker/howto/) should provide an exit status. The
+The script defined in Dockerfile [`ENTRYPOINT`](/extend/docker/tutorial/howto/) should provide an exit status. The
 following rules apply:
 
 - `exit code = 0`  The execution is considered successful (when `streaming_logs` is turned off, the contents 
 of [STDOUT](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_.28stdout.29) will be sent to 
-[Storage API Events](http://docs.keboola.apiary.io/#events) and displayed in [Job detail](https://help.keboola.com/???))
+[Storage API Events](http://docs.keboola.apiary.io/#events) and displayed in 
+[Job detail](http://help.keboola.com/management/jobs/))
 - `exit code = 1`  The execution fails with a *User Exception*;
 the contents of both STDOUT and [STDERR](https://en.wikipedia.org/wiki/Standard_streams#Standard_error_.28stderr.29) 
 will be sent to a Storage API Events.
@@ -66,7 +67,7 @@ and [STDERR](https://en.wikipedia.org/wiki/Standard_streams#Standard_error_.28st
 of the application and forwards any content live to [Storage API Events](http://docs.keboola.apiary.io/#events) 
 (log levels `info` and `error`). You can turn off live forwarding by setting `streaming_logs` to `false` in the 
 [component registration](/extend/registration/). The events are displayed in 
-[Job detail](https://help.keboola.com/???).
+[Job detail](http://help.keboola.com/management/jobs).
 
 Make sure your application does not use any output buffering otherwise all 
 events will be cached after the application finishes. In R applications, the outputs printed in rapid succession

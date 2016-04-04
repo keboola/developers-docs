@@ -120,7 +120,7 @@ To test the code, set an arbitrary number of input/output mapping tables. Keep i
 ## KBC Package Integration Options
 
 ### Simple Example
-In the simplest case, you can use the code from an [R transformation](/???/) to create a simple R script. It must be named `main.R`.
+In the simplest case, you can use the code from an [R transformation](http://localhost:4000/manipulation/transformations/r/) to create a simple R script. It must be named `main.R`.
  To see a sample R script, go to [our repository](https://github.com/keboola/docs-custom-science-example-r-parameters). 
  Despite the fact that this approach is the simplest and quickest to do, it offers limited options for testing and is generally good only for 
  one-liners (i.e. you have an existing library which does all the work, all you need to do is execute it).

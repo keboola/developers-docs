@@ -18,7 +18,7 @@ than an input and output mapping.
 ## Format
 
 The format of the manifest file is always *JSON* for [Custom Science](/extend/custom-science/)
-and [Transformations](https://help.keboola.com/??) 
+and [Transformations](http://help.keboola.com/manipulation/transformations/) 
 and *JSON* or *Yaml* for [Docker extensions](/extend/docker/); depending on what you have 
 chosen in [Component registration](/extend/registration/).
 There are no differences in the contents of the file; the choice of format is purely formal. The manifest
@@ -61,7 +61,7 @@ contents (provided that the chosen format is JSON):
 The `name` node refers to the name of the component configuration.
 Note that `data_size_bytes` and `rows_count` values are estimated by the database server and they may be 
 significantly off (especially right after the table is created). The `attributes` node contains
-additional [table attributes](https://help.keboola.com/????). If used, it has the following structure:
+additional [table attributes](http://help.keboola.com/storage/). If used, it has the following structure:
 
 {% highlight json %}
 atrributes: [
@@ -96,7 +96,7 @@ Additionally, the following options can be specified:
 {% endhighlight %}
     
 Which will cause to be the specified rows deleted from the source table before the new 
-table is imported, see [Example](/extend/common-interface/config-file/#output-mapping-delete-rows).
+table is imported, see [Example](/extend/common-interface/config-file/#output-mapping---delete-rows).
 
 ### Files
 

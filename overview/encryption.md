@@ -95,7 +95,7 @@ ask a Keboola Developer to enable encryption for your [Docker extension](/extend
 [Custom Science](/).
 
 You can use sample Postman requests from collection 
-[![Run in Postman](https://run.pstmn.io/button.png)](https://www.getpostman.com/run-collection/7dc2e4b41225738f5411)
+[![Run in Postman](https://run.pstmn.io/button.png)](https://app.getpostman.com/run-collection/7dc2e4b41225738f5411)
 
 {: .image-popup}
 ![Postman screenshot](/overview/encryption-postman.png)
@@ -112,7 +112,7 @@ There are three options available:
 ### Base Encryption
 [Base Encryption](http://docs.kebooladocker.apiary.io/#reference/encrypt/base-encryption/encrypt-data)
  encrypts data, so that they are globally usable for all dockerized components. Data encrypted using this method can be decrypted in all projects 
-and in all [Docker Bundles](/overview/docker-bundle) (including Custom Science Applications). Note that under all
+and in all [Docker Bundles](/overview/docker-bundle/) (including Custom Science Applications). Note that under all
 circumstances the data are decrypted only inside the component application code; decrypted data are never available to the end-user. The API
 call requires an arbitrary valid Storage API token. The encrypted value is identified by the `KBC::Encrypted` string.
 

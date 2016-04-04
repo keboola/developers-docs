@@ -30,7 +30,7 @@ Before you start, you need a [KBC project](/overview/devel-project/). We recomme
 ## Create Sandbox API Call
 
 ### Prepare
-[Create a table](https://help.keboola.com/??) in KBC Storage which contains a column named `number`. 
+[Create a table](http://help.keboola.com/overview/tutorial/load/) in KBC Storage which contains a column named `number`. 
 You can use the [sample table](/extend/source.csv). In the following example, the 
 table is stored in the `in.c-main` bucket and the table name is `test`. The table ID is therefore
 `in.c-main.test`.
@@ -44,7 +44,7 @@ You also need your Storage API token which can be found by clicking the icon at 
 ### Create the API Request
 
 Get a [collection of sample](/overview/api/) requests in Postman 
-here: [![Run in Postman](https://run.pstmn.io/button.png)](https://www.getpostman.com/run-collection/7dc2e4b41225738f5411)
+here: [![Run in Postman](https://run.pstmn.io/button.png)](https://app.getpostman.com/run-collection/7dc2e4b41225738f5411)
 There is a *Sandbox introduction* request, with the following JSON contents in its body:  
 
 {% highlight json %}
@@ -107,8 +107,8 @@ KBC. There you will find a `data.zip` file with a sample data folder. You can no
 
 ## Input Data API Call
 The input API call differs in that it *must* be used with an existing component. It requires *componentId* obtained
-from [component registration](/extend/register/). This also means that this call can be used both with 
-with existing configurations as well as ad-hoc configurations (as in the above [sandbox](#sandbox) request.
+from [component registration](/extend/registration/). This also means that this call can be used both with 
+with existing configurations as well as ad-hoc configurations (as in the above [sandbox](#create-sandbox-api-call) request.
 
 ### Prepare
 We assume you have the same source table `in.c-main.test` as in the [previous request](#prepare).
@@ -118,7 +118,7 @@ visiting the URL:
     https://connection.keboola.com/admin/projects/{projectId}/applications/keboola.docs-docker-example-parameters 
 
 Where you replace `{projectId}` with the Id of the project in KBC (you can find that in the URL). Then
-create the configuration. The equivalent to what we have used in the [Sandbox above](#sandbox) call would be: 
+create the configuration. The equivalent to what we have used in the [Sandbox above](#create-sandbox-api-call) call would be: 
 
 {: .image-popup}
 ![Configuration screnshot](/extend/common-interface/input-configuration.png)
@@ -128,7 +128,7 @@ When you created the configuration, it was assigned a configuration Id - `sample
 Use this Id, instead of manually crafting the request body. 
 
 You can see an *Input data Introduction* sample request in [our collection of requests](/overview/api/) in Postman 
-: [![Run in Postman](https://run.pstmn.io/button.png)](https://www.getpostman.com/run-collection/7dc2e4b41225738f5411)
+: [![Run in Postman](https://run.pstmn.io/button.png)](https://app.getpostman.com/run-collection/7dc2e4b41225738f5411)
 
 The request body is:
 
@@ -145,7 +145,7 @@ Where you need to replace `sample-configuration-27` with your own configuration 
 Where `keboola.docs-docker-example-parameters` is the component ID (you can replace that with your own component if you like).
 Again, do not forget to enter your Storage API token into *Headers* - *X-StorageAPI-Token*.
 
-As with the [sandbox call](#sandbox), running the API call will create a job, which will execute and produce a 
+As with the [sandbox call](#create-sandbox-api-call), running the API call will create a job, which will execute and produce a 
 `data.zip` file in *Storage* - *File Uploads*. 
 
 Note: If you actually want to *run* the above *sample-configuration-27* configuration, you also need

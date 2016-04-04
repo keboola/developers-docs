@@ -40,7 +40,7 @@ Extractors work the same way. However, instead of reading their input from KBC t
 Similarly, Writers do not generate any KBC tables.
 We make sure the CSV files are created in and taken from the right places. 
 
-The execution of your extension happens in its own [isolated environment](/architecture/docker-bundle/).
+The execution of your extension happens in its own [isolated environment](/overvier/docker-bundle/).
 
 To use your *Custom Science extension*, the end user should be instructed to specify its configuration. 
 Make sure your instructions are publicly available. Draw inspiration from the

@@ -56,7 +56,7 @@ the result data to KBC Storage. All images to be run in KBC must have an `ENTRYP
 We also recommend that you base your image on [one of our images](/extend/docker/images/).
 
 Before you run Docker applications in KBC, make sure to 
-[set up your Docker environment](/extend/docker/tutorial/setup).
+[set up your Docker environment](/extend/docker/tutorial/setup/).
 Before you develop a dockerized application for KBC, you should be able to 
 [create and run dockerized applications](/extend/docker/tutorial/howto/) in your own environment.
 

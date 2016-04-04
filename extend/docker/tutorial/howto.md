@@ -8,7 +8,7 @@ permalink: /extend/docker/tutorial/howto/
 
 The following are the basic steps for developing KBC Docker Images. There is no need to know everything about the Docker stack since this is a very limited set of Docker features.
 The official [Windows](https://docs.docker.com/windows/step_one/), 
-[Mac OS X](https://docs.docker.com/mac/), and other [Tutorials](TODO: REPLACE https://docs.docker.com/mac/) are not being replaced here.
+[Mac OS X](https://docs.docker.com/mac/), and other [Tutorials](https://docs.docker.com/linux/) are not being replaced here.
 Before you start, make sure you have [Docker installed](/extend/docker/tutorial/setup/). 
 
 The code discussed below is available in our [sample repository](https://github.com/keboola/docs-docker-example-image).
@@ -226,4 +226,4 @@ the [Dockerfile Best Practices](https://docs.docker.com/engine/userguide/eng-ima
 for more detailed information. 
 
 Now that you are able to create dockerized applications, get yourself familiar with the
-[Docker registry](/extend/docker/tutorial/automated-build). 
+[Docker registry](/extend/docker/tutorial/automated-build/). 

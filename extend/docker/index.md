@@ -47,7 +47,7 @@ Extractors work the same way. However, instead of reading their input from KBC t
 Similarly, Writers do not generate any KBC tables.
 We make sure the CSV files are created in and taken from the right places. 
 
-The execution of your extension happens in its own [isolated environment](/architecture/docker-bundle/).
+The execution of your extension happens in its own [isolated environment](/overview/docker-bundle/).
 
 Before you (or anyone else) can use your *Docker extension*, it must be [registered](/extend/registration/). 
 

@@ -10,7 +10,7 @@ One of the great advantages of dockerized applications is that the applications 
 same environment defined by the docker image. When running in KBC, there are, however, some outside
 environment bindings for you to take care of. Before you start, make sure, you have
 [docker set up correctly](/extend/docker/tutorial/setup/), particularly that you know
-your *host path* for [sharing files](/extend/docker/tutorial/setup/sharing-files/). In this guide,
+your *host path* for [sharing files](/extend/docker/tutorial/setup#sharing-files). In this guide,
 we will use /Users/JohnDoe/data/ as the *host path* containing the 
 [sandbox data folder](/extend/common-interface/sandbox/).
 
@@ -19,7 +19,7 @@ variable to point to the data folder. With this approach, you loose the advantag
 environment, but in some cases it may be a nice shortcut. 
 
 For more details on how to develop your own 
-[Docker extension](/extend/docker/) or [Custom Science](/extend/custom-science), go to [Howto Guide](/extend/docker/tutorial/howto/). Regardless of   
+[Docker extension](/extend/docker/) or [Custom Science](/extend/custom-science/), go to [Howto Guide](/extend/docker/tutorial/howto/). Regardless of   
 the chosen approach, the image -- when being run -- should consume tables and files from `in` subfolders and
 produce result tables and files in the respective `out` subfolders.
 
@@ -78,12 +78,12 @@ some common situations, though there are only minor differences.
 ## Running an Unregistered Docker Extension
 Unregistered Docker extensions do not have their component Id yet. This is somewhat limiting because you 
 get only a sample of the data the component will receive by using 
-the [Sandbox call](/extend/common-interface/sandbox/#sandbox). In the 
+the [Sandbox call](/extend/common-interface/sandbox/#create-sandbox-api-call). In the 
 [API call](http://docs.kebooladocker.apiary.io/#reference/sandbox/sandbox/create-a-sandbox-job), manually 
 specify the input/output mapping and parameters. The configuration format (JSON or Yaml) is specified by the 
 `format` parameter in the URL.
 
-[![Run in Postman](https://run.pstmn.io/button.png)](https://www.getpostman.com/run-collection/7dc2e4b41225738f5411)
+[![Run in Postman](https://run.pstmn.io/button.png)](https://app.getpostman.com/run-collection/7dc2e4b41225738f5411)
 
 You can use *Sandbox introduction* request for a simple start or the more advanced *Sandbox Example* which provides
 more configuration options. The request URL is e.g. `https://syrup.keboola.com/docker/sandbox?format=json`.
@@ -100,14 +100,14 @@ obtained in the above Sandbox API call (`data.zip` file stored in the *Storage* 
 
 
 ## Running a Registered Docker Extension
-Already [registered](/extend/register/) Docker extensions have been assigned their *component ID* 
+Already [registered](/extend/registration/) Docker extensions have been assigned their *component ID* 
 (in the form of *vendor.componentName*, e.g. *keboola.docs-docker-example-parameters*). To obtain the sample data for 
-a registered component, use the [Input data](/extend/common-interface/sandbox/#input-data) call. 
+a registered component, use the [Input data](/extend/common-interface/sandbox/#input-data-api-call) call. 
 In the [API call](http://docs.kebooladocker.apiary.io/#reference/sandbox/input-data/create-an-input-job), either specify the full configuration (using the `configData` node) or refer to an existing configuration
 of the component (using the `config` node). The configuration format is now fixed to what has been specified in the component
 registration.
 
-[![Run in Postman](https://run.pstmn.io/button.png)](https://www.getpostman.com/run-collection/7dc2e4b41225738f5411)
+[![Run in Postman](https://run.pstmn.io/button.png)](https://app.getpostman.com/run-collection/7dc2e4b41225738f5411)
 
 You can use an *Input Data introduction* request for a sample request referring to an existing configuration, or
 *Input Data full example* for a request specifying the whole configuration. The request URL is 
@@ -126,17 +126,17 @@ Note: If your extension uses encryption, the Input Data API call will be disable
 
     This API call is not supported for components that use the 'encrypt' flag.
 
-In that case, revert to the [Sandbox call](/extend/common-interface/sandbox/#sandbox).
+In that case, revert to the [Sandbox call](/extend/common-interface/sandbox/#create-sandbox-api-call).
 
 
 ## Running Custom Science Extensions
 Running Custom Science extensions is slightly more complicated, because their Docker images are build dynamically
 on execution. Also, because the Custom Science component uses encryption, 
-the [Sandbox call](/extend/common-interface/sandbox/#sandbox) must be used. In the 
+the [Sandbox call](/extend/common-interface/sandbox/#create-sandbox-api-call) must be used. In the 
 [API call](http://docs.kebooladocker.apiary.io/#reference/sandbox/sandbox/create-a-sandbox-job), manually 
 specify the input/output mapping and parameters. The configuration format must be *JSON*.
 
-[![Run in Postman](https://run.pstmn.io/button.png)](https://www.getpostman.com/run-collection/7dc2e4b41225738f5411)
+[![Run in Postman](https://run.pstmn.io/button.png)](https://app.getpostman.com/run-collection/7dc2e4b41225738f5411)
 
 Use either *Sandbox introduction* request for a simple start, or the more advanced *Sandbox Example* in case you wish to have 
 more configuration options available. The request URL is e.g. `https://syrup.keboola.com/docker/sandbox?format=json`
@@ -190,10 +190,10 @@ and then run the application with:
 
 ## Running Transformations 
 Both R and Python Transformations are implemented as Docker components. They can be run 
-locally as well. Use the [Input data](/extend/common-interface/sandbox/#input-data) call. 
+locally as well. Use the [Input data](/extend/common-interface/sandbox/#input-data-api-call) call. 
 In the [API call](http://docs.kebooladocker.apiary.io/#reference/sandbox/input-data/create-an-input-job), specify full configuration (using `configData` node). The configuration format is 
 
-[![Run in Postman](https://run.pstmn.io/button.png)](https://www.getpostman.com/run-collection/7dc2e4b41225738f5411)
+[![Run in Postman](https://run.pstmn.io/button.png)](https://app.getpostman.com/run-collection/7dc2e4b41225738f5411)
 
 Use *R Transformations* request for a sample request. The only special thing about the request is that
 the body of the transformation is passed in `parameters.script` node either as a string or as an
@@ -210,7 +210,7 @@ To run Python transformations, use:
     `docker run --volume=/Users/JohnDoe/data/:/data --memory=8192m --cpu-shares=1024 --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-78 [quay.io/keboola/python-transformation](https://quay.io/repository/keboola/python-transformation):0.0.14
  
 The transformation will run automatically and produce results. If you want to get interactively into
-the container, use the [`--entrypoint`](/docker/tutorial/howto/) parameter. 
+the container, use the [`--entrypoint`](/extend/docker/tutorial/howto/) parameter. 
 
 
 ### Debugging

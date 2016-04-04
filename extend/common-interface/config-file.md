@@ -17,7 +17,7 @@ You will get a zip archive containing all the resources you need in your extensi
 For [Docker extensions](/extend/docker/), the configuration file format is specified during
 [registration](/extend/registration/) as either JSON or Yaml. For Docker extensions which are not
 yet registered, you can choose freely. For [Custom Science](/extend/custom-science/) and 
-for [Transformations](https://help.keboola.com/???), the format is always JSON. There are no differences
+for [Transformations](http://help.keboola.com/manipulation/transformations/), the format is always JSON. There are no differences
 in the contents of the file; the choice of the format is purely formal. However, the configuration file 
 extension changes (`.json` for JSON and `.yml` for Yaml).
 
