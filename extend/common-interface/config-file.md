@@ -212,7 +212,7 @@ Download 2 days of data from the `in.c-storage.StoredData` table to `/data/table
             "tables": [
                 {
                     "source": "in.c-storage.StoredData",
-                    "days": "1"
+                    "days": "2"
                 }
             ]
         }
