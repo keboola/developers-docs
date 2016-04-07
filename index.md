@@ -15,7 +15,7 @@ extensions one can build are:
 - *Writers* to push data into new systems and consumption methods
 - *Applications* that further enrich the data or add value in new ways
 
-![Overview of KBC Components](/kbc-structure.png)
+![Overview of KBC Components](/kbc-structure.png){: .img-responsive}
 
 By building extensions for KBC, you get an easy access to data from many sources, and a simple path to 
 deliver the data back to your customers. Your application or algorithm suddenly becomes available to all 
