@@ -189,7 +189,13 @@ pre {
 }
 
 // image popup
-.image-popup img {
-  max-width: 500px;
-  max-height: 500px;
+.image-popup {
+  img {
+    max-width: 500px;
+    max-height: 500px;
+    cursor: pointer;
+    padding: 1em;
+    border: thin solid $gray-lighter;
+    border-radius: 3px;
+  }
 }
