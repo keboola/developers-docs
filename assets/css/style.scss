@@ -171,21 +171,25 @@ pre {
 // TOC
 #markdown-toc {
   border: thin solid $gray-lighter;
-  display: inline-block;
   list-style: none;
   padding: 1em 1.5em;
   ul {
     list-style: none;
     padding: 0 0 0 1.5em;
   }
-  float: right;
-  margin: 0 0 1em 1.5em;
+  margin-bottom: 1em;
   &:before {
     content: 'Table of contents';
     font-weight: bold;
     margin-bottom: .5em;
   }
   border-radius: 3px;
+  @media (min-width: $screen-sm-min) {
+    float: right;
+    display: inline-block;
+    margin-left: 1.5em;
+    max-width: 40%;
+  }
 }
 
 // image popup
