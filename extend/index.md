@@ -34,64 +34,72 @@ There are two types of Custom extensions differing in the level of integration a
 
 The following table provides an overview of the main characteristics of KBC extensions:
 
-<table>
-  <thead>
-    <tr>
-      <th rowspan="2">KBC EXTENSIONS</th>
-      <th colspan="3" style="text-align: center;">Implementation</th>
-      <th colspan="5" style="text-align: center;">User Features</th>
-      <th style="text-align: center;">Other</th>
-    </tr>
-    <tr>
-      <th>Implementation Complexity</th>
-      <th>Application Environment</th>
-      <th>Knowledge of Docker Required</th>
-      <th>Setup User Experience</th>
-      <th>Brandable</th>
-      <th>Offered to All Users</th>
-      <th>Customizable User Interface</th>
-      <th>OAuth2 Support</th>
-      <th>Keboola Approval/Registration Required</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Generic Extractor</th>
-      <td>very easy</td>
-      <td>configuration only</td>
-      <td>no</td>
-      <td>poor</td>
-      <td>no<br>(coming soon)</td>
-      <td>no<br>(coming soon)</td>
-      <td>no</td>
-      <td>yes</td>
-      <td>no</td>
-    </tr>
-    <tr>
-      <th>Custom Science</th>
-      <td>easy</td>
-      <td>R or Python</td>
-      <td>no</td>
-      <td>poor</td>
-      <td>no</td>
-      <td>no</td>
-      <td>no</td>
-      <td>no</td>
-      <td>no</td>
-    </tr>
-    <tr>
-      <th>Docker</th>
-      <td>medium</td>
-      <td>any</td>
-      <td>yes</td>
-      <td>fully customizable</td>
-      <td>yes</td>
-      <td>yes</td>
-      <td>yes</td>
-      <td>yes</td>
-      <td>yes</td>
-    </tr>
-  </tbody>
+<table class="table">
+  <tr>
+    <th colspan="2"></th>
+    <th>Docker</th>
+    <th>Custom Science</th>
+    <th>Generic Extractor</th>
+  </tr>
+  <tr>
+    <th rowspan="3">Implementation</th>
+    <th>Implementation Complexity</th>
+    <td>medium</td>
+    <td>easy</td>
+    <td>very easy</td>
+  </tr>
+  <tr>
+    <th>Application Environment</th>
+    <td>any</td>
+    <td>R or Python</td>
+    <td>configuration only</td>
+  </tr>
+  <tr>
+    <th>Knowledge of Docker Required</th>
+    <td>yes</td>
+    <td>no</td>
+    <td>no</td>
+  </tr>
+  <tr>
+    <th rowspan="5">User Features</th>
+    <th>Setup User Experience</th>
+    <td>fully customizable</td>
+    <td>poor</td>
+    <td>poor</td>
+  </tr>
+  <tr>
+    <th>Brandable</th>
+    <td>yes</td>
+    <td>no</td>
+    <td>no
+      (coming soon)</td>
+  </tr>
+  <tr>
+    <th>Offered to All Users</th>
+    <td>yes</td>
+    <td>no</td>
+    <td>no
+      (coming soon)</td>
+  </tr>
+  <tr>
+    <th>Customizable User Interface</th>
+    <td>yes</td>
+    <td>no</td>
+    <td>no</td>
+  </tr>
+  <tr>
+    <th>OAuth2 Support</th>
+    <td>yes</td>
+    <td>no</td>
+    <td>yes</td>
+  </tr>
+  <tr>
+    <th>Other</th>
+    <th>Keboola Approval/Registration Required</th>
+    <td>yes</td>
+    <td>no</td>
+    <td>no</td>
+  </tr>
 </table>
 
 *Note: With the exception of Generic Extractor, all KBC Extensions can be used for creating Extractors, 
