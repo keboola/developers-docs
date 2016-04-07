@@ -119,7 +119,7 @@ pre {
 
 .sidebar {
   .navigation {
-    padding: 1.4em 0;
+    padding: 1.2em 0;
     ul.nav {
       li {
         > ul {
@@ -150,13 +150,25 @@ pre {
         }
       }
     }
+    &.affix {
+      @media (max-width: $screen-sm-max) {
+        position: relative;
+      }
+      @media (min-width: $screen-md-min) {
+        top: 0;
+        width: 212.5px;
+      }
+      @media (min-width: $screen-lg-min) {
+        width: 262.5px;
+      }
+    }
   }
 }
 
 .content {
   background-color: #fff;
   .page {
-    padding: 2em 2.5em;
+    padding: 1.8em 2.5em 2em;
     min-height: 100em;
     .breadcrumb {
       margin: 0 0 1em 0;
