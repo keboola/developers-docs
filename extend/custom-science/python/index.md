@@ -33,7 +33,7 @@ Here is our current
 You can use those with `import`. If you know of another useful standard package to pre-install, we would like
 to hear about it.
 
-## Reading and Writing files
+## Reading and Writing Files
 Tables from Storage are imported to the Python script from CSV files. The CSV files can be read by standard python
 functions from the [csv packages](https://docs.python.org/3/library/csv.html). You can read the CSV files either
 to vectors (numbered columns) or to dictionaries (named columns). The directory structure follows our general

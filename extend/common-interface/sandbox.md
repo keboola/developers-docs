@@ -152,16 +152,16 @@ Note: If you actually want to *run* the above *sample-configuration-27* configur
 to set the output mapping from `destination.csv` to some table.
 
 ## Summary
-- for unregistered components, use the Sandbox call:
+- For unregistered components, use the Sandbox call:
   - the whole configuration must be passed as the body (`configData` node) of the API call in JSON format
   - the source data are limited to 50 rows
   - the format of the configuration in the data folder is specified in the `format` parameter
-- for registered components, use the Input data call:
+- For registered components, use the Input data call:
   - the configuration can be either passed as the body (`configData` node) or refer to 
 existing configuration (`config` node)
   - the source data are exported unlimited -- this can lead to large data folders! 
   - the format of the configuration in the data folder was defined when the component was registered
-- both the Sandbox and Input call create a job (which gets executed automatically) which produces a `data.zip` file 
+- Both the Sandbox and Input call create a job (which gets executed automatically) which produces a `data.zip` file 
 in your *Storage* -- *File Uploads*
   - you can extract the `data.zip` folder and map that folder to your dockerized application 
   - the `data.zip` contains the input tables and files, their manifests and configuration file

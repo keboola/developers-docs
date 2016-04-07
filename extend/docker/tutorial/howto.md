@@ -93,7 +93,7 @@ When building your own image, the ability to run arbitrary commands in the image
 option (which means that your application will not execute, and you will have to run it manually). The `-t`
 option opens **i**nteractive **t**erminal: 
 
-    `docker run -i -t --entrypoint=/bin/bash my-image`.
+    docker run -i -t --entrypoint=/bin/bash my-image 
 
 The option `--entrypoint` overrides the `ENTRYPOINT` specified in the `Dockerfile`. This ensures that a
 bash shell is run instead of your application. You then have to run the `ping` command, previously defined in the entrypoint, manually. 
@@ -206,8 +206,10 @@ to a [single instruction](https://github.com/keboola/docker-base-php70/blob/mast
 because each instruction creates a *layer* and there is a limited number of layers (layers are counted for the base 
 images too). However, this approach makes debugging more complicated. So, you better start with having
 
+{% highlight dockerfile %}
     RUN instruction1
     RUN instruction2
+{% endhighlight %}        
 
 and only once you are sure the image builds correctly and you are happy with the result, change this to:
 

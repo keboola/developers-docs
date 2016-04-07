@@ -21,7 +21,7 @@ items:
     items:
 
       - url: /extend/custom-science/
-        title: Custom Science
+        title: Custom Science Extensions
         items:
 
           - url: /extend/custom-science/quick-start/
@@ -78,11 +78,11 @@ items:
           - url: /extend/common-interface/manifest-files/
             title: Manifest Files
 
-          - url: /extend/common-interface/oauth/
-            title: OAuth2
-
           - url: /extend/common-interface/sandbox/
             title: Creating Sandbox
+
+          - url: /extend/common-interface/oauth/
+            title: OAuth2
 
       - url: /extend/registration/
         title: Registration

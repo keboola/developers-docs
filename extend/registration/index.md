@@ -11,10 +11,10 @@ As described in the [architecture overview](/overview/), KBC consists of many di
 
 While a [Custom Science extension](/extend/custom-science/) requires registration only when offered to all KBC users, registering a [Docker extension](/extend/docker/) is mandatory at all times.
 
-That being said, any KBC user can use any registered component, unless:
+That being said, any KBC user can use any registered component, unless
 
-- the KBC user (or their token) has a [limited access to the component](http://help.keboola.com/storage/tokens/)
-- the component itself limits where it can run (in what projects and for which users)
+- the KBC user (or their token) has a [limited access to the component](http://help.keboola.com/storage/tokens/),
+- the component itself limits where it can run (in what projects and for which users).
 
 ## Using a Private Repository
 If your image cannot be public, you can use a private Docker repository on both DockerHub and Quay.io.
@@ -54,11 +54,11 @@ JSON validation and syntax highlighting.
 #### tableInput
 This flag provides a UI for setting the table input mapping. With this UI, you can set:
 
-- *source* -- the name of the table in Storage
-- *destination* -- the name of the .csv file passed to the application
-- *columns* -- select only some columns of the source table
-- *days* -- load only rows modified in the specified number of days; useful for incremental loads
-- *data filter* -- a simple filter for selecting specified rows only
+- *Source* -- the name of the table in Storage
+- *Destination* -- the name of the .csv file passed to the application
+- *Columns* -- select only some columns of the source table
+- *Days* -- load only rows modified in the specified number of days; useful for incremental loads
+- *Data filter* -- a simple filter for selecting specified rows only
 
 {: .image-popup}
 ![Table input screenshot](/extend/registration/table-input-1.png)
@@ -69,11 +69,11 @@ This flag provides a UI for setting the table input mapping. With this UI, you c
 #### tableOutput
 This flag provides a UI for setting the table output mapping. With this UI, you can set:
 
-- *source* -- the name of the .csv file retrieved from the application
-- *destination* -- the name of the table in Storage, the destination bucket should exist already
-- *incremental* -- if checked, the loaded data will be appended to the contents of the destination table
-- *primary key* -- set the primary key for your destination table - multiple columns are allowed
-- *delete rows* -- delete some rows from the destination table using a simple filter
+- *Source* -- the name of the .csv file retrieved from the application
+- *Destination* -- the name of the table in Storage, the destination bucket should exist already
+- *Incremental* -- if checked, the loaded data will be appended to the contents of the destination table
+- *Primary key* -- set the primary key for your destination table - multiple columns are allowed
+- *Delete rows* -- delete some rows from the destination table using a simple filter
 
 {: .image-popup}
 ![Table output screenshot](/extend/registration/table-output-1.png)
@@ -84,10 +84,10 @@ This flag provides a UI for setting the table output mapping. With this UI, you 
 #### fileInput
 This flag provides a UI for setting the file input mapping. With this UI, you can set:
 
-- *file tags* -- select files by the file tags listed in *File Uploads*
-- *query* -- [ElasticSearch query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax)
+- *File tags* -- select files by the file tags listed in *File Uploads*
+- *Query* -- [ElasticSearch query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax)
 to select files from *File Uploads*
-- *processed tags* -- used for [incremental processing](/extend/common-interface/config-file/#incremental-processing)
+- *Processed tags* -- used for [incremental processing](/extend/common-interface/config-file/#incremental-processing)
 
 {: .image-popup}
 ![File input screenshot](/extend/registration/file-input-1.png)
@@ -98,10 +98,10 @@ to select files from *File Uploads*
 #### fileOutput
 This flag provides a UI for setting the file output mapping. With this UI, you can set:
 
-- *source* -- the name of the file produced by the application
-- *file tags* -- the file tags assigned to the produced file
-- *is public* -- the file is accessible to anyone knowing its URL
-- *is permanent* -- the file won't be deleted after 180 days
+- *Source* -- the name of the file produced by the application
+- *File tags* -- the file tags assigned to the produced file
+- *Is public* -- the file is accessible to anyone knowing its URL
+- *Is permanent* -- the file won't be deleted after 180 days
 
 {: .image-popup}
 ![File output screenshot](/extend/registration/file-output-1.png)

@@ -12,7 +12,7 @@ As long as the same tag is used, they refer to the exact same build and are free
 In that case, you should use the one in the same registry as your image. 
 
 
-## Base images
+## Base Images
 
 Unless you have some special requirements, we highly encourage you to use Keboola Base Images as the base for your docker images.
 They have no entrypoint and they do not contain any application logic. 
@@ -66,9 +66,9 @@ uses `master` and `latest` tags.
 Base image for all Ruby images, 
 uses `master`, `latest` tags.
  
-## Application images
+## Application Images
 
-For inspiration, these are our docker images used in transformations and custom applications. 
+For inspiration, these are our docker images used in transformations and Custom Science extensions. 
 Docker extensions use the same [common interface](/extend/common-interface/).
 
 Transformations:
@@ -84,7 +84,7 @@ uses `X.Y.Z` tags.
 Image for R transformations, 
 uses `X.Y.Z` tags. 
 
-Custom applications:
+Custom Science Extensions:
 
 - docker-custom-r:
 [Quay](https://quay.io/repository/keboola/docker-custom-r),
@@ -105,10 +105,10 @@ uses `X.Y.Z` tags.
 ## Tags
 We use three types of tags:
 
-- `master`, `latest`: The tag is movable and always points to the latest image build 
-- `X.Y.Z`: The tags follow [Semantic versioning](http://semver.org/) and are fixed to a specific image build 
+- `master`, `latest`: The tag is movable and always points to the latest image build. 
+- `X.Y.Z`: The tags follow [Semantic versioning](http://semver.org/) and are fixed to a specific image build.
 - `X.Y.Z-a`: The `X.Y.Z` tag section refers to a specific environment version and the `a` part refers to our revision. 
 For example, the *docker-base-r* image with `3.2.1-k` tag contains R version *3.2.1*. *k* is our revision. Similarly, all other images
-with `3.2.1-?` tag contain R version *3.2.1*, though there are minor differences in what and how is installed. Generally
+with `3.2.1-?` tag contain R version *3.2.1*, though there are minor differences in what and how is installed. Generally,
 the latest minor revision should be used. 
 
