@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="Keboola">
+
+	<title>{{ page.title }} | Keboola Connection Developers Knowledge Base</title>
+
+	<link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="{{ '/assets/css/style.css' | prepend: site.baseurl }}">
+</head>
+<body>
+
+	<div class="root">
+		<div class="container header">
+			<div class="inside">
+				<a href="{{ '/' | prepend: site.baseurl }}" class="logo"><img src="{{ '/assets/img/logo.png' | prepend: site.baseurl }}"></a>
+				<span class="label">DEVELOPERS DOCS</span>
+
+				<form class="pull-right" role="search">
+					<input size="30" type="text" class="st-default-search-input form-control" placeholder="Search developers documentation">
+				</form>
+			</div>
+		</div>
+
+		<div class="container main">
+			<div class="inside">
+				<div class="row">
+
+					<div class="col-sm-3 sidebar">
+						<div class="navigation">
+						{% include navigation.html context="/" %}
+						</div>
+					</div>
+					<div class="col-sm-9 content">
+
+						<div class="page">
+							<ol class="breadcrumb">
+								{% assign crumbs = page.url | remove:'/index.html' | split: '/' %}
+								<li><a href="/">Home</a></li>
+								{% for crumb in crumbs offset: 1 %}
+								{% if forloop.last %}
+								<li>{{ crumb | replace:'-',' ' | remove:'.html' | capitalize }}</li>
+								{% else %}
+								<li><a href="{% assign crumb_limit = forloop.index | plus: 1 %}{% for crumb in crumbs limit: crumb_limit %}{{ crumb | append: '/' }}{% endfor %}">{{ crumb | replace:'-',' ' | remove:'.html' | capitalize }}</a></li>
+								{% endif %}
+								{% endfor %}
+							</ol>
+
+							<h1>{{ page.title }}</h1>
+
+						 	{{ content }}
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="container footer">
+			<div class="inside">
+				<div class="row">
+					<div class="col-sm-12">
+						<!--Footer-->
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="{{ '/assets/js/magnific-popup.js' | prepend: site.baseurl }}"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+	  $('.image-popup').magnificPopup({type:'image', delegate:'img',
+		callbacks: {
+		  elementParse: function(item) { item.src = item.el.attr('src'); }
+		}});
+	});
+	</script>
+</body>
+</html>
