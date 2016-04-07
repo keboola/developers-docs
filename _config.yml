@@ -3,7 +3,7 @@ defaults:
     scope:
       path: "" # an empty string here means all files in the project
     values:
-      layout: "default"
+      layout: "main"
 
 exclude:
   - docker-compose.yml
@@ -12,3 +12,6 @@ exclude:
   - Gemfile.lock
   - README.md
   - CNAME
+
+sass:
+  style: compressed
