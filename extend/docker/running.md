@@ -203,11 +203,11 @@ e.g. `https://syrup.keboola.com/docker/keboola.r-transformation/input` for R tra
 
 To run R Transformations, use: 
 
-    `docker run --volume=/Users/JohnDoe/data/:/data --memory=8192m --cpu-shares=1024 --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-78 [quay.io/keboola/r-transformation](https://quay.io/repository/keboola/r-transformation):0.0.8
+    docker run --volume=/Users/JohnDoe/data/:/data --memory=8192m --cpu-shares=1024 --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-78 [quay.io/keboola/r-transformation](https://quay.io/repository/keboola/r-transformation):0.0.8
 
 To run Python transformations, use: 
 
-    `docker run --volume=/Users/JohnDoe/data/:/data --memory=8192m --cpu-shares=1024 --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-78 [quay.io/keboola/python-transformation](https://quay.io/repository/keboola/python-transformation):0.0.14
+    docker run --volume=/Users/JohnDoe/data/:/data --memory=8192m --cpu-shares=1024 --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-78 [quay.io/keboola/python-transformation](https://quay.io/repository/keboola/python-transformation):0.0.14
  
 The transformation will run automatically and produce results. If you want to get interactively into
 the container, use the [`--entrypoint`](/extend/docker/tutorial/howto/) parameter. 

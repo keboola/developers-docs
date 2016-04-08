@@ -1,9 +1,7 @@
 ---
-title: Custom Science
+title: Custom Science Extensions
 permalink: /extend/custom-science/
 ---
-## Custom Science Extension
-
 A Custom Science extension can be used to create Extractors, Applications and Writers. 
 As a special component wrapping an application logic in a public or private git repository, it is the simplest, quickest, and at the same time somewhat limited, extension of KBC. 
 

@@ -19,7 +19,7 @@ recommend using [Postman](https://www.getpostman.com/) as it is
 more convenient. If you do use Postman, you can [import a list](/overview/api/)
 of [sample requests](https://www.getpostman.com/collections/87da6ac847f5edcac776).
 
-## Step 1
+## Step 1 -- Preliminaries
 
 Create a public git repository ([Github](https://github.com/) or [Bitbucket](https://bitbucket.org/) is recommended, although any other host should work as well).
 
@@ -170,7 +170,7 @@ see [Setting up Docker](/extend/docker/tutorial/setup/#sharing-files). In our ex
 Where the contents of the sample data folder are put in the user's home directory. If you have set everything correctly,
 you should see **All done**; and a `destination.csv` file will appear in the `data/out/tables/` folder.
 
-### Step 5.1 Debugging
+### Step 5.1 -- Debugging
 
 Chances are, that you received an ugly error or warning. In that case, you might want to check out the 
 contents of the image; specifically, if all the files are where you expect 

@@ -15,10 +15,10 @@ necessary for [Python](/extend/custom-science/python/) are minimal.
 
 You should have a [KBC project](/overview/devel-project/), where you can test your code.
 
-### Step 1
+### Step 1 -- Preliminaries
 Create a public git repository ([Github](https://github.com/) or [Bitbucket](https://bitbucket.org/) is recommended, although any other host should work as well).
 
-### Step 2
+### Step 2 -- Application Code
 In the root of your repository, create the main application file [`main.R`](https://github.com/keboola/docs-custom-science-example-r-basic/blob/master/main.R). (In Python Custom Science App, the analogous file would be called `main.py`):
 
     # read input
@@ -30,16 +30,16 @@ In the root of your repository, create the main application file [`main.R`](http
     # write output
     write.csv(data, file = "/data/out/tables/result.csv", row.names = FALSE)
 
-### Step 3
+### Step 3 -- Commit and Tag
 Commit to the repository and tag it with a [git tag](https://git-scm.com/book/en/v2/Git-Basics-Tagging) (Github release), such as `0.0.1`. 
 Tagging each version is essential; we recommend using [Semantic versioning](http://semver.org/).
 
 {: .image-popup}
 ![Github tag screenshot](/extend/custom-science/repository-tag.png)
 
-### Step 4 - Test the Application in KBC
+### Step 4 -- Test the Application in KBC
 
-#### Step 4.1 - Prepare Storage 
+#### Step 4.1 -- Prepare Storage 
 Create a [source table](/extend/source.csv) in *Storage*, e.g.:
 
 {:.table}
@@ -59,24 +59,24 @@ The bucket to write the output of the application to has to exist.
 We will use the **out.c-main** bucket. 
 The output table will be created automatically.
 
-#### Step 4.2 - Create the Application
-Go to *Applications* - *New Application* - *Custom Science R*, and press *Add configuration* in which you will set the input and output mapping and repository as explained below. 
+#### Step 4.2 -- Create the Application
+Go to *Applications* -- *New Application* -- *Custom Science R*, and press *Add configuration* in which you will set the input and output mapping and repository as explained below. 
 
-#### Step 4.3 - Input Mapping
+#### Step 4.3 -- Input Mapping
 To test the application, use the **in.c-main.custom-science-example** sample table as input. Make sure to set 
-the input mapping name to **source.csv** - that is what we expect in 
+the input mapping name to **source.csv** -- that is what we expect in 
 the [sample script](https://github.com/keboola/docs-custom-science-example-r-basic/blob/master/main.R#L2).
 
 {: .image-popup}
 ![Input mapping configuration](/extend/custom-science/input-mapping.png)
 
-#### Step 4.4 - Output Mapping
+#### Step 4.4 -- Output Mapping
 The same goes for output mapping: make sure to map from **result.csv** (the result of your [sample script](https://github.com/keboola/docs-custom-science-example-r-basic/blob/master/main.R#L8)) to whatever output table you want to, let's say **out.c-main.custom-science-example**.
 
 Leave *File input mapping* empty.
 
 
-#### Step 4.5 - Configuration 
+#### Step 4.5 -- Configuration 
 Leave *parameters* empty for now. In *Runtime parameters* enter the the configuration of the repository. 
 This must be entered as a [JSON formatted](http://www.w3schools.com/json/json_syntax.asp) string.
 
@@ -88,7 +88,7 @@ This must be entered as a [JSON formatted](http://www.w3schools.com/json/json_sy
 {: .image-popup}
 ![Application configuration example](/extend/custom-science/configuration.png)
 
-#### Step 4.6 - Run the Application
+#### Step 4.6 -- Run the Application
 By running the above configuration, you should obtain a table **out.c-main.custom-science-example** with the following data:
 
 {:.table}
@@ -106,7 +106,7 @@ number | someText | double_number
 You can pass the application an arbitrary set of parameters. 
 As an example, we will extend the application from the previous tutorial by allowing the user to specify the multiplier. 
 
-### Step 1
+### Step 1 -- Code
     
     # initialize application
     library('keboola.r.docker.application')
@@ -124,7 +124,7 @@ As an example, we will extend the application from the previous tutorial by allo
 
 In the above example, we take advantage of our [KBC Docker R library](/extend/custom-science/r/) to work easily with the [configuration format](/extend/common-interface/config-file/). There is also a variant for [Python](/extend/custom-science/python/) available.
 
-### Step 2
+### Step 2 -- Commit and Tag
 
 Commit the code and don't forget to create a new tag in the repository.
 
