@@ -55,7 +55,7 @@ JSON validation and syntax highlighting.
 This flag provides a UI for setting the table input mapping. With this UI, you can set:
 
 - *Source* -- the name of the table in Storage
-- *Destination* -- the name of the .csv file passed to the application
+- Destination *file name* -- the name of the .csv file passed to the application
 - *Columns* -- select only some columns of the source table
 - *Days* -- load only rows modified in the specified number of days; useful for incremental loads
 - *Data filter* -- a simple filter for selecting specified rows only
