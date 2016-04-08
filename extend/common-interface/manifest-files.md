@@ -64,13 +64,16 @@ significantly off (especially right after the table is created). The `attributes
 additional [table attributes](http://help.keboola.com/storage/). If used, it has the following structure:
 
 {% highlight json %}
-atrributes: [
-    {
-        "name": "attributeName",
-        "value": "attributeValue",
-        "protected": false
-    }
-]
+{
+    ...
+    "atrributes": [
+        {
+            "name": "attributeName",
+            "value": "attributeValue",
+            "protected": false
+        }
+    ]
+}
 {% endhighlight %}
 
 #### `/data/out/tables` Manifests
@@ -90,9 +93,12 @@ An output table manifest sets options for transferring a table to Storage.
 Additionally, the following options can be specified:
 
 {% highlight json %}
-"delete_where_column": "column name",
-"delete_where_values": ["value1", "value2"],
-"delete_where_operator": "eq"
+{
+    ...
+    "delete_where_column": "column name",
+    "delete_where_values": ["value1", "value2"],
+    "delete_where_operator": "eq"
+}
 {% endhighlight %}
     
 Which will cause to be the specified rows deleted from the source table before the new 
