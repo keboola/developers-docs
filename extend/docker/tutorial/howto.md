@@ -207,8 +207,8 @@ because each instruction creates a *layer* and there is a limited number of laye
 images too). However, this approach makes debugging more complicated. So, you better start with having
 
 {% highlight dockerfile %}
-    RUN instruction1
-    RUN instruction2
+RUN instruction1
+RUN instruction2
 {% endhighlight %}        
 
 and only once you are sure the image builds correctly and you are happy with the result, change this to:

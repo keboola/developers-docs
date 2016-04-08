@@ -34,8 +34,8 @@ configuration file in the `authorization.oauth_api.credentials` attribute.
 
 {% highlight json %}
 {
-    "storage": { ... }
-    "parameters": { ... }
+    "storage": { ... },
+    "parameters": { ... },
     "authorization": {
         "oauth_api": {
             "id": "{OAUTH_API_ID}",

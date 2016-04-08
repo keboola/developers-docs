@@ -264,12 +264,12 @@ Upload `/data/out/tables/out.c-main.data.csv` to `out.c-main.data`
 {
     "storage": {
         "output": {
-            "tables": {
-                [
+            "tables": [
+                {
                     "source": "out.c-main.data.csv",
                     "destination": "out.c-main.data"
-                ]
-            }
+                }
+            ]
         }
     }
 }

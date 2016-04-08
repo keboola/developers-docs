@@ -47,9 +47,9 @@ The library contains a single [RC class](http://adv-r.had.co.nz/OO-essentials.ht
 Call `readConfig()` to actually read and parse the configuration file. The above would read the `myParameter` parameter from the user-supplied configuration:
 
 {% highlight json %}
-    {
-        "myParameter": "myValue"
-    }
+{
+    "myParameter": "myValue"
+}
 {% endhighlight %}
 
 You can obtain inline help and the list of library functions by running the `?DockerApplication` command.
@@ -238,8 +238,8 @@ data['double_number'] <- data['number'] * getParameters()$multiplier
 You can test the sample code with this *runtime* setting:
 
 {% highlight json %}
-    {
-        "repository": "https://github.com/keboola/docs-custom-science-example-r-subclass.git",
-        "version": "0.0.4"
-    }
+{
+    "repository": "https://github.com/keboola/docs-custom-science-example-r-subclass.git",
+    "version": "0.0.4"
+}
 {% endhighlight %}    

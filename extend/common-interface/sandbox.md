@@ -58,8 +58,8 @@ There is a *Sandbox introduction* request, with the following JSON contents in i
                         "destination": "source.csv"
                     }
                 ]
-            },
-        }
+            }
+        },
         "parameters": {
             "multiplier": 4
         }

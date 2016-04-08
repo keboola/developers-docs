@@ -30,7 +30,7 @@ or on the command line:
 
 or
 
-    docker.io/library/hello-world:latest
+    docker run docker.io/library/hello-world:latest
 
 If this works, use any image published in any Docker 
 registry, e.g. [Docker Hub](https://hub.docker.com/) or [Quay](https://quay.io/).
