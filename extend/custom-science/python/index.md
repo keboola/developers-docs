@@ -199,10 +199,10 @@ for table in tables:
     # read input table metadata
     manifest = cfg.get_table_manifest(inName)
 
-    # get csv file name with full path from output mcfging
+    # get csv file name with full path from output mapping
     outName = cfg.get_expected_output_tables()[j]['full_path']
 
-    # get file name from output mcfging
+    # get file name from output mapping
     outDestination = cfg.get_expected_output_tables()[j]['destination']
 
     # get csv full path and read table data
