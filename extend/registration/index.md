@@ -17,7 +17,8 @@ That being said, any KBC user can use any registered component, unless
 - the component itself limits where it can run (in what projects and for which users).
 
 ## Using a Private Repository
-If your image cannot be public, you can use a private Docker repository on both DockerHub and Quay.io.
+If your image cannot be public, you can use a private Docker repository on both DockerHub and Quay.io. If you are 
+registering a [Custom Science](/extend/custom-science/) extension and you want to use private git repository, you need to provide us with [encrypted credentials to the git repository](/extend/custom-science/development/#encryption-beforehand).
 
 ### DockerHub
 
