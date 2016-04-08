@@ -87,10 +87,10 @@ following *runtime* configuration:
 ## Using the KBC Package
 The KBC [Python extension package](https://github.com/keboola/python-docker-application) provides functions to:
 
-- Read and parse the configuration file and parameters - `configData` property and `getParameters()` method.
-- List input files and tables - `getInputFiles()`, `getInputTables()` methods.
-- Work with manifests containing table and file metadata - `getTableManifest()`, `getFileManifest()`, `writeTableManifest()`, `writeFileManifest()` methods.
-- List expected outputs - `getExpectedOutputFiles()` and `getExpectedOutputTables()` methods.
+- Read and parse the configuration file and parameters - `config_data` property and `get_parameters()` method.
+- List input files and tables - `get_input_files()`, `get_input_tables()` methods.
+- Work with manifests containing table and file metadata - `get_table_manifest()`, `get_file_manifest()`, `write_table_manifest()`, `write_file_manifest()` methods.
+- List expected outputs - `get_expected_output_files()` and `get_expected_output_tables()` methods.
 
 Additionally, it also defines the KBC [CSV dialect](https://docs.python.org/3/library/csv.html#csv-fmt-params)
 to shorten up the CSV manipulation code.
@@ -109,10 +109,10 @@ from keboola import docker
 
 # initialize application
 cfg = docker.Config('/data/')
-params = cfg.getParameters()
+params = cfg.get_parameters()
 
 # access the supplied value of 'myParameter'
-app$getParameters()$myParameter
+multiplier = cfg.get_parameters()['myParameter']
 {% endhighlight %}
 
 The library contains a single class `Config`; a parameter of the constructor is the path to the data directory.
