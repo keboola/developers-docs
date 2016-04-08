@@ -199,10 +199,10 @@ for table in tables:
     # read input table metadata
     manifest = cfg.get_table_manifest(inName)
 
-    # get csv file name with full path from output mapping
+    # get csv file name with full path from output mcfging
     outName = cfg.get_expected_output_tables()[j]['full_path']
 
-    # get file name from output mapping
+    # get file name from output mcfging
     outDestination = cfg.get_expected_output_tables()[j]['destination']
 
     # get csv full path and read table data
@@ -234,7 +234,7 @@ for table in tables:
         pk = manifest['primary_key']
 
     # write table metadata - set new primary key
-    cfg.writeTableManifest(outName, destination=outDestination, primary_key=pk)
+    cfg.write_table_manifest(outName, destination=outDestination, primary_key=pk)
     j = j + 1
 {% endhighlight %}
 
@@ -266,7 +266,7 @@ the actual application is a reusable class and the `main.py` runner is handling 
 
 {% highlight python %}
 try:
-    app = textSplitter.App()
+    app = text_splitter.App()
     app.run()
 except ValueError as err:
     print(err, file=sys.stderr)
