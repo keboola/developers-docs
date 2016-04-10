@@ -86,7 +86,7 @@ the `default_bucket` flag during your [extension registration](/extend/registrat
 
 All tables in `/data/out/tables` will then be uploaded to a bucket identified by your
 component id (created upon the extension registration) and 
-configuration id (created when an end-user adds new extension configuration). 
+configuration id (created when an end-user adds new extension configuration) and stage (`in` or `out`). 
 The file name (without the `.csv` suffix) will be used as the table name. The `destination` attributes 
 in the output mapping and file manifests will be overridden.
  
