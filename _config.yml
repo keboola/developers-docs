@@ -15,3 +15,6 @@ exclude:
 
 sass:
   style: compressed
+
+gems:
+  - jekyll-sitemap
