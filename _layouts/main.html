@@ -20,7 +20,7 @@
 				<span class="label">DEVELOPERS DOCS</span>
 
 				<form class="pull-right" role="search">
-					<input size="30" type="text" class="st-default-search-input form-control" placeholder="Search developers documentation">
+					<input size="20" type="text" class="st-default-search-input form-control" placeholder="Search">
 				</form>
 			</div>
 		</div>
@@ -37,7 +37,9 @@
 					<div class="col-md-9 content">
 
 						<div class="page">
+							{% if page.showBreadcrumbs != false %}
 							{% include breadcrumbs.html %}
+							{% endif %}
 
 							<h1>{{ page.title }}</h1>
 
@@ -60,6 +62,13 @@
 		</div>
 
 	</div>
+	<script type="text/javascript">
+		(function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+					(w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+			e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+		})(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+		_st('install','tM-dZKs7DADT5bRod7bF','2.0.0');
+	</script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 	<script src="{{ '/assets/js/magnific-popup.js' | prepend: site.baseurl }}"></script>
