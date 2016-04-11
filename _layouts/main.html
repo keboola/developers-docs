@@ -37,7 +37,9 @@
 					<div class="col-md-9 content">
 
 						<div class="page">
+							{% if page.showBreadcrumbs != false %}
 							{% include breadcrumbs.html %}
+							{% endif %}
 
 							<h1>{{ page.title }}</h1>
 
