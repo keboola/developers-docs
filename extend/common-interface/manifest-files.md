@@ -78,7 +78,8 @@ additional [table attributes](http://help.keboola.com/storage/). If used, it has
 
 #### `/data/out/tables` Manifests
 
-An output table manifest sets options for transferring a table to Storage.
+An output table manifest sets options for transferring a table to Storage. The following example lists available
+manifest fields, all of them are optional.
 
 {% highlight json %}
 {
@@ -133,7 +134,8 @@ An input file manifest stores metadata about a downloaded file.
 
 #### `/data/out/files` Manifests
 
-An output file manifest sets options for transferring a file to Storage.
+An output file manifest sets options for transferring a file to Storage. The following example lists available
+manifest fields, all of them are optional.
 
 {% highlight json %}
 {
@@ -150,5 +152,5 @@ An output file manifest sets options for transferring a file to Storage.
 
 These parameters can be used (taken from [Storage API File Import](http://docs.keboola.apiary.io/#files)):
 If `is_permnanent` is false, then the file will be automatically deleted after 180 days. When `notify` is
-true, the members of the project will be notified that a file has been uploaded to the project.
+true, the members of the project will be notified that a file has been uploaded to the project. 
 
