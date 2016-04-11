@@ -404,7 +404,7 @@ If that file is not present in the `/data/out/files` folder, an error will be th
 }
 {% endhighlight %}
 
-### Incremental Processing
+#### Incremental Processing
 Docker containers may be used to process unknown files incrementally. This means that when a container is run, 
 it will download any files not yet downloaded, and process them. To achieve this behavior, it is necessary 
 to select only the files which have not been processed yet and tag the processed files. 
