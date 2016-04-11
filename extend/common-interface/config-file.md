@@ -257,7 +257,7 @@ Download 2 days of data from the `in.c-storage.StoredData` table to `/data/table
 }
 {% endhighlight %}
 
-### Output Mapping - Basic
+#### Output Mapping - Basic
 Upload `/data/out/tables/out.c-main.data.csv` to `out.c-main.data`
 
 {% highlight json %}
@@ -275,7 +275,7 @@ Upload `/data/out/tables/out.c-main.data.csv` to `out.c-main.data`
 }
 {% endhighlight %}
 
-### Output Mapping - Set Additional Properties
+#### Output Mapping - Set Additional Properties
 Upload `/data/out/tables/data.csv` to `out.c-main.data`.
 with a primary key and incrementally.
 
@@ -296,7 +296,7 @@ with a primary key and incrementally.
 }
 {% endhighlight %}
     
-### Output Mapping - Delete Rows
+#### Output Mapping - Delete Rows
 Delete data from `destination` table before uploading the CSV 
 file (only makes sense with `incremental: true`).
 
