@@ -78,7 +78,7 @@ additional [table attributes](http://help.keboola.com/storage/). If used, it has
 
 #### `/data/out/tables` Manifests
 
-An output table manifest sets options for transferring a table to Storage. The following example lists available
+An output table manifest sets options for transferring a table to Storage. The following examples list available
 manifest fields, all of them are optional.
 
 {% highlight json %}
