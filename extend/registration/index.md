@@ -7,22 +7,22 @@ permalink: /extend/registration/
 {:toc}
 
 ## Introduction
-As described in the [architecture overview](/overview/), KBC consists of many different components. Only those components that are registered in our **Component List** are generally available in KBC. The list is provided by our [Storage Component API](http://docs.keboola.apiary.io/#) in the dedicated [Components section](http://docs.keboola.apiary.io/#reference/components). 
+As described in the [architecture overview](/overview/), KBC consists of many different components. Only those components that are registered in our **Component List** are generally available in KBC. The list is provided by our [Storage Component API](http://docs.keboola.apiary.io/#) in the dedicated [Components section](http://docs.keboola.apiary.io/#reference/components).
 
 While a [Custom Science extension](/extend/custom-science/) requires registration only when offered to all KBC users, registering a [Docker extension](/extend/docker/) is mandatory at all times.
 
 That being said, any KBC user can use any registered component, unless
 
-- the KBC user (or their token) has a [limited access to the component](http://help.keboola.com/storage/tokens/),
+- the KBC user (or their token) has a [limited access to the component](https://help.keboola.com/storage/tokens/),
 - the component itself limits where it can run (in what projects and for which users).
 
 ## Using a Private Repository
-If your image cannot be public, you can use a private Docker repository on both DockerHub and Quay.io. If you are 
+If your image cannot be public, you can use a private Docker repository on both DockerHub and Quay.io. If you are
 registering a [Custom Science](/extend/custom-science/) extension and you want to use private git repository, you need to provide us with [encrypted credentials to the git repository](/extend/custom-science/development/#encryption-beforehand).
 
 ### DockerHub
 
-An account has to be created in order to access your private DockerHub repositories. Please provide us with your `email`, `username`, `password` and `server` properties from the login credentials. Better yet - create a new user that has an access to the desired repository and surrender it to us. 
+An account has to be created in order to access your private DockerHub repositories. Please provide us with your `email`, `username`, `password` and `server` properties from the login credentials. Better yet - create a new user that has an access to the desired repository and surrender it to us.
 
 DockerHub offers 1 free private repository per account.
 
@@ -32,21 +32,21 @@ Quay.io offers convenient robot accounts. Provide us with a robot `username` and
 
 {: .image-popup}
 ![Quay.io screenshot](/extend/registration/quayioprivate.png)
- 
+
 Private Quay.io repositories are paid.
- 
+
 ## Registration
-The registration process is simple, but it must be done by Keboola. To register your extension, 
+The registration process is simple, but it must be done by Keboola. To register your extension,
 please fill in the [checklist](/extend/registration/checklist) and contact us.
 
 ### UI Options
-Each extension will receive a **Generic UI**. The generic UI will always show a text field for entering the 
-component configuration in JSON format. Additionally, you can request other parts of the generic UI by 
-adding any of `tableInput`, `tableOutput`, `fileInput`, `fileOutput`, `genericDockerUI` flags in the checklist. Each of 
+Each extension will receive a **Generic UI**. The generic UI will always show a text field for entering the
+component configuration in JSON format. Additionally, you can request other parts of the generic UI by
+adding any of `tableInput`, `tableOutput`, `fileInput`, `fileOutput`, `genericDockerUI` flags in the checklist. Each of
 the options is shown below:
 
 #### genericDockerUI
-This provides a basic textarea for setting extension parameters as a JSON, the textarea has 
+This provides a basic textarea for setting extension parameters as a JSON, the textarea has
 JSON validation and syntax highlighting.
 
 {: .image-popup}
@@ -111,11 +111,11 @@ This flag provides a UI for setting the file output mapping. With this UI, you c
 ![File output detail screenshot](/extend/registration/file-output-2.png)
 
 ### Hide your Extension from the KBC App Store
-If you want to test your extension before making it available to all users, it can be 
-hidden from the list of all components (UI flag `excludeFromNewList`). 
+If you want to test your extension before making it available to all users, it can be
+hidden from the list of all components (UI flag `excludeFromNewList`).
 However, this does not really prevent anyone from using it.
-To use a non-published extension, create the configuration with 
-the [component API](http://docs.keboola.apiary.io/#reference/components/create-config/create-config). 
+To use a non-published extension, create the configuration with
+the [component API](http://docs.keboola.apiary.io/#reference/components/create-config/create-config).
 Or visit directly the following URL: https://connection.keboola.com/admin/projects/{projectId}/applications/{componentId}.
 The *projectid* is your KBC project ID. The *componentId* (e.g. _myCompany.acmeApplication_) is provided upon your extension registration.
 

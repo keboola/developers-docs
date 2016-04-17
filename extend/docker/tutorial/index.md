@@ -19,8 +19,8 @@ which an application runs.
 A Docker Image contains everything that is required to run an application. An image usually has an *entrypoint* which is 
 a single command that is executed when the image is run.
 
-When you run an image (start an application in it), *Docker Container* is created. The container
-is isolated from the image itself and cannot make permanent changes to it; this is very important (and maybe somewhat
+When you run an image (start an application in it), *Docker Container* is created. The container is a sandbox
+isolated from the image itself and cannot make permanent changes to it; this is very important (and maybe somewhat
 surprising). When you run the Image again (and create a new Container), it won't be affected in any way by the previous 
 Container. Docker Image is therefore stateless and acts like a template. The state is stored only in the container.
 
