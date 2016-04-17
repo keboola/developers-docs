@@ -58,7 +58,6 @@ coming from KBC can by quite large (i.e. Gigabytes).
 
 You can test the code with our [sample table](/extend/source.csv):
 
-{:.table}
 number | someText | double_number
 --- | --- | ---
 10 | ab | 20

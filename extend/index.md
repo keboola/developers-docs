@@ -34,7 +34,7 @@ There are two types of Custom extensions differing in the level of integration a
 
 The following table provides an overview of the main characteristics of KBC extensions:
 
-<table class="table">
+<table>
   <tr>
     <th colspan="2"></th>
     <th>Docker</th>

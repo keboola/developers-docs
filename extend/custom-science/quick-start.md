@@ -42,7 +42,6 @@ Tagging each version is essential; we recommend using [Semantic versioning](http
 #### Step 4.1 -- Prepare Storage
 Create a [source table](/extend/source.csv) in *Storage*, e.g.:
 
-{:.table}
 | number | someText |
 | -------- | --- |
 | 10 | ab |
@@ -91,7 +90,6 @@ This must be entered as a [JSON formatted](http://www.w3schools.com/json/json_sy
 #### Step 4.6 -- Run the Application
 By running the above configuration, you should obtain a table **out.c-main.custom-science-example** with the following data:
 
-{:.table}
 number | someText | double_number
 --- | --- | ---
 10 | ab | 20
