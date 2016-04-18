@@ -5,13 +5,14 @@ defaults:
     values:
       layout: "main"
 
+url: "https://developers.keboola.com"
+
 exclude:
   - docker-compose.yml
   - Dockerfile
   - Gemfile
   - Gemfile.lock
   - README.md
-  - CNAME
 
 sass:
   style: compressed
