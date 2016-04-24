@@ -93,6 +93,14 @@ items:
 
   - url: /integrate/
     title: Integrate
+    items:
+
+      - url: /integrate/transformations/
+        title: Transformations
+
+      - url: /integrate/docker/
+        title: Docker Components
+
 
   - url: /automate/
     title: Automate/Common Tasks

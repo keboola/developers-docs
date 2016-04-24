@@ -3,6 +3,9 @@ title: Docker Bundle
 permalink: /overview/docker-bundle/
 ---
 
+* TOC
+{:toc}
+
 Docker Bundle is a [KBC component](/overview/) which provides an interface for 
 running [Docker images](/extend/docker/tutorial) in Keboola Connection. 
 By developing functionality in [Docker](https://www.docker.com/) you will focus only on the application logic; all communication 
