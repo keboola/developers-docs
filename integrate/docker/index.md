@@ -1,5 +1,5 @@
 ---
-title: Docker Components
+title: Docker Extensions
 permalink: /integrate/docker/
 ---
 
@@ -8,13 +8,13 @@ permalink: /integrate/docker/
 
 ## API
 
-The Docker Components API is described on [Apiary.io](http://docs.kebooladocker.apiary.io/). 
+The Docker Extensions API is described on [Apiary.io](http://docs.kebooladocker.apiary.io/). 
 
 ## Configuration
 
 Transformations configurations are stored in [Storage API Components Configurations](http://docs.keboola.apiary.io/#reference/component-configurations). 
  
-When you're creating the configuration programmatically, you can use [this JSON schema](https://github.com/keboola/docker-bundle/blob/master/Resources/schemas/configuration.json) to validate the configuration before storing it.
+When you're creating the configuration, you can use [this JSON schema](https://github.com/keboola/docker-bundle/blob/master/Resources/schemas/configuration.json) to validate the configuration before storing it.
  
 
 ## Source code

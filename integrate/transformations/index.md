@@ -6,6 +6,10 @@ permalink: /integrate/transformations/
 * TOC
 {:toc}
 
+## Documentation
+
+Full Transformations documentation is on [help.keboola.com/manipulation/transformations](https://help.keboola.com/manipulation/transformations/). 
+
 ## API
 
 The Transformations API is described on [Apiary.io](http://docs.keboolatransformationapi.apiary.io/). 

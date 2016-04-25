@@ -99,7 +99,7 @@ items:
         title: Transformations
 
       - url: /integrate/docker/
-        title: Docker Components
+        title: Docker Extensions
 
 
   - url: /automate/
