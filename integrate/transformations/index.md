@@ -25,7 +25,6 @@ API calls to work with [configuration buckets](http://docs.keboolatransformation
 Transformations configurations are stored in [Storage API Components Configurations](http://docs.keboola.apiary.io/#reference/component-configurations). A Storage API Configuration refers to a Transformation Bucket, Storage API Configuration Row is a single transformation.
  
 When you're creating the configuration programmatically, you can use [these JSON schemas](https://github.com/keboola/transformation-bundle/tree/master/Resources/schemas) to validate the configuration before storing it.
- 
 
 ## Source code
 

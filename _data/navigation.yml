@@ -98,10 +98,6 @@ items:
       - url: /integrate/transformations/
         title: Transformations
 
-      - url: /integrate/docker/
-        title: Docker Extensions
-
-
   - url: /automate/
     title: Automate/Common Tasks
 

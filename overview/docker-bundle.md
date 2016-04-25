@@ -55,3 +55,14 @@ to have no network access.
 
 For [Custom Science](/extend/custom-science/), Docker Bundle also creates the Docker image from the 
 specified git repository on the fly.
+
+## API
+
+The Docker Bundle API is described on [Apiary.io](http://docs.kebooladocker.apiary.io/). 
+
+## Configuration
+
+Extensions executed by Docker Bundle store their configurations in [Storage API Components Configurations](http://docs.keboola.apiary.io/#reference/component-configurations). 
+ 
+When you're creating the configuration, you can use [this JSON schema](https://github.com/keboola/docker-bundle/blob/master/Resources/schemas/configuration.json) to validate the configuration before storing it.
+
