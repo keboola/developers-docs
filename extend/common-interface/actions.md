@@ -40,8 +40,10 @@ These actions are available through the [API](http://docs.kebooladocker.apiary.i
 do not load the configuration from Storage, you need to fully specify the whole configuration. If any of your parameters 
 are encrypted, they will be decrypted before passing to your application. 
 
-*Note: Do not specify the `action` attribute in the request body. It's already in the URI. Use any of `parameters`, 
-`storage` or `runtime` as you would when storing the configuration to Storage.*
+Do not specify the `action` attribute in the request body. It's already in the URI. Use any of `parameters`, 
+`storage` or `runtime` as you would when storing the configuration to Storage.
+
+*Note: use https://syrup-docker.keboola.com/ for running calling this part of the API.*
 
 ### Exit Codes
 
