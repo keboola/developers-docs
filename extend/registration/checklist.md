@@ -30,4 +30,5 @@ permalink: /extend/registration/checklist/
 | 22 | **Test configuration** | JSON configuration to test the application | &#9744; |  |
 | 23 | **Configuration schema** | [JSON schema](http://json-schema.org/) or [MSON](https://github.com/apiaryio/mson) describing the configuration | &#9744; |  |
 | 24 | **Networking** | If the app downloads or uploads the client data to the Internet, any of `dataIn` (eg. for extractors), `dataOut` (eg. for writers) | &#9744; | `dataIn` |
-| 25 | **Fees** | Using the component in KBC implies additional fees; `true` or `false` | &#9744; | `false` |
+| 25 | **Actions** | List of supported actions, default `run` | &#9744; | `run` |
+| 26 | **Fees** | Using the component in KBC implies additional fees; `true` or `false` | &#9744; | `false` |

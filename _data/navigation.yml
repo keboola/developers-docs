@@ -84,6 +84,9 @@ items:
           - url: /extend/common-interface/sandbox/
             title: Creating Sandbox
 
+          - url: /extend/common-interface/actions/
+            title: Actions
+
       - url: /extend/registration/
         title: Registration
         items:

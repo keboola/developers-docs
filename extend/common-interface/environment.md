@@ -42,7 +42,7 @@ of [STDOUT](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_.28st
 [Job detail](https://help.keboola.com/management/jobs/))
 - `exit code = 1`  The execution fails with a *User Exception*;
 the contents of both STDOUT and [STDERR](https://en.wikipedia.org/wiki/Standard_streams#Standard_error_.28stderr.29)
-will be sent to a Storage API Events.
+will be sent to Storage API Events.
 - `exit code > 1`  The execution fails with an *Application Exception*
 and the contents of both STDOUT and STDERR will be sent to internal logs.
 

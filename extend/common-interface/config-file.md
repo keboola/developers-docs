@@ -35,6 +35,9 @@ parameters passed to the application. They cannot be modified by the end-user. T
 global application parameters (such as token, URL, version of your API).
 - `authorization`: Available only for [registered Docker extensions](/extend/registration/). Contains Oauth2
 [authorization contents](/extend/common-interface/oauth/).
+- `action`: Name of the action to execute, default `run`. Other actions available upon [registration](/extend/registration/) 
+and all other actions except `run` have a strict execution time limit of 30 second. See [actions](/extend/common-interface/actions/) 
+for more details.
 
 
 ## State File
@@ -120,7 +123,8 @@ A sample configuration file might look like this:
     "parameters": {
         "multiplier": 2
     },
-    "image_parameters": []
+    "image_parameters": [],
+    "action": "run"
 }
 {% endhighlight %}
 
