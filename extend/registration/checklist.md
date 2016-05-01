@@ -3,17 +3,17 @@ title: Submission Checklist
 permalink: /extend/registration/checklist/
 ---
 
-| # | Name | Note | &#9745; | Example | 
-| --- | ----- | ---- | ---- | ---- |  
-| 0 | **Vendor ID** | Prefixes application id.  | &#9744; | `keboola` | 
-| 1 | **Application name** | Do not use the word *extractor* or *writer* in your app.  | &#9744; | `iTunes` | 
+| # | Name | Note | &#9745; | Example |
+| --- | ----- | ---- | ---- | ---- |
+| 0 | **Vendor ID** | Prefixes application id.  | &#9744; | `keboola` |
+| 1 | **Application name** | Do not use the word *extractor* or *writer* in your app.  | &#9744; | `iTunes` |
 | 2 | **Application type** | One of `extractor`, `writer`, `application` | &#9744; | `extractor` |
 | 3 | **Short description** | One sentence describing your app or the app you are integrating | &#9744; | Tailor-made predictive models (recommendation engines, propensity models and many more) in R |
 | 4 | **Full description** | Markdown or a link to a markdown document describing what the component does (shown on the application intro page)| &#9744; |  |
-| 5 | **Application icon URL** | PNG, 32x32px and 64x64px sizes on a public *HTTPS* URL | &#9744; | `https://d3iz2gfan5zufq.cloudfront.net/images/cloud-services/docker-demo-32-1.png`{: .td-break-code} | 
-| 6 | **Vendor full name** | Will be visible to end-users | &#9744; | Company LTD | 
-| 7 | **Vendor address** |  Will be visible to end-users  | &#9744; | 1 Connected Way, BigTown, CS | 
-| 8 | **Email address** | Will be visible to end-users and we will send error notifications to this address | &#9744; | `info@company.com` | 
+| 5 | **Application icon URL** | PNG, 32x32px and 64x64px sizes on a public *HTTPS* URL | &#9744; | `https://d3iz2gfan5zufq.cloudfront.net/images/cloud-services/docker-demo-32-1.png`{: .td-break-code} |
+| 6 | **Vendor full name** | Will be visible to end-users | &#9744; | Company LTD |
+| 7 | **Vendor address** |  Will be visible to end-users  | &#9744; | 1 Connected Way, BigTown, CS |
+| 8 | **Email address** | Will be visible to end-users and we will send error notifications to this address | &#9744; | `info@company.com` |
 | 9 | **License agreement URL** | Can be included in your public source repository | &#9744; | `https://github.com/org/reponame/master/blob/LICENSE.md`{: .td-break-code} |
 | 10 | **Docker image URL** | Currently supported are DockerHub (public and private) and Quay (public, [private](/extend/registration/#using-a-private-repository)) | &#9744; | `https://hub.docker.com/r/keboola/docker-demo` |
 | 11 | **Docker image tag** | Tag of the image in the Docker repository; typically `latest` or `master` or `1.0.0` | &#9744; | `latest` |
@@ -30,5 +30,5 @@ permalink: /extend/registration/checklist/
 | 22 | **Test configuration** | JSON configuration to test the application | &#9744; |  |
 | 23 | **Configuration schema** | [JSON schema](http://json-schema.org/) or [MSON](https://github.com/apiaryio/mson) describing the configuration | &#9744; |  |
 | 24 | **Networking** | If the app downloads or uploads the client data to the Internet, any of `dataIn` (eg. for extractors), `dataOut` (eg. for writers) | &#9744; | `dataIn` |
-| 25 | **Actions** | List of supported actions, default `run` | &#9744; | `run` |
+| 25 | **Actions** | List of supported [actions](/extend/common-interface/actions/), default `run` | &#9744; | `run` |
 | 26 | **Fees** | Using the component in KBC implies additional fees; `true` or `false` | &#9744; | `false` |

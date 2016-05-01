@@ -81,11 +81,11 @@ items:
           - url: /extend/common-interface/oauth/
             title: OAuth2
 
-          - url: /extend/common-interface/sandbox/
-            title: Creating Sandbox
-
           - url: /extend/common-interface/actions/
             title: Actions
+
+          - url: /extend/common-interface/sandbox/
+            title: Creating Sandbox
 
       - url: /extend/registration/
         title: Registration

@@ -35,8 +35,8 @@ parameters passed to the application. They cannot be modified by the end-user. T
 global application parameters (such as token, URL, version of your API).
 - `authorization`: Available only for [registered Docker extensions](/extend/registration/). Contains Oauth2
 [authorization contents](/extend/common-interface/oauth/).
-- `action`: Name of the action to execute, default `run`. Other actions available upon [registration](/extend/registration/) 
-and all other actions except `run` have a strict execution time limit of 30 second. See [actions](/extend/common-interface/actions/) 
+- `action`: Name of the [action](/extend/common-interface/actions/) to execute, default `run`. Other actions available upon [registration](/extend/registration/)
+and all other actions except `run` have a strict execution time limit of 30 seconds. See [actions](/extend/common-interface/actions/)
 for more details.
 
 
@@ -434,9 +434,3 @@ which will be added to the *input* files once they are downloaded. A sample cont
 
 The above request will download every file with the `toprocess` tag **except** for the files having the `downloaded` tag. It will mark each such file with the `downloaded` tag; therefore the query will exclude them on the next run.
 This allows you to set up an incremental file processing pipeline.
-
-
-
-
-
-
