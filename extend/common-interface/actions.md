@@ -33,8 +33,20 @@ Actions are available through the [API](http://docs.kebooladocker.apiary.io/#ref
 do not load the configuration from Storage so you need to fully specify the whole configuration in the request body. If any of your parameters
 are encrypted, they will be decrypted before they are passed to your application.
 
-Do not specify the `action` attribute in the request body. It's already in the URI. Use any of `parameters`,
-`storage` or `runtime` as you would when storing the configuration to Storage.
+Do not specify the `action` attribute in the request body, it's already in the URI. Use any of `parameters`,
+`storage` or `runtime` inside `configData` root element as you would when creating an asynchronous jobs, eg:
+
+{% highlight json %}
+
+{
+    "configData": {
+        "parameters": {
+            "key": "val"
+        }
+    }
+}
+
+{% endhighlight %}
 
 *Note: use https://syrup-docker.keboola.com/ for running calling this part of the API.*
 
