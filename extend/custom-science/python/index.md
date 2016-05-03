@@ -239,7 +239,7 @@ for table in tables:
 {% endhighlight %}
 
 
-The above code is located in a [sample repository](https://github.com/keboola/docs-custom-science-example-python-dynamic.git),
+The above code is located in a [sample repository](https://github.com/keboola/docs-custom-science-example-python-dynamic),
 so you can use it with the *runtime settings*. Supply any number of input tables.
 
 {% highlight json %}

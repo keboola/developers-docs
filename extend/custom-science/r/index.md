@@ -103,7 +103,7 @@ for (i in 1:nrow(tables)) {
 }
 {% endhighlight %}
 
-The above code is located in a [sample repository](https://github.com/keboola/docs-custom-science-example-dynamic.git), so you can use it
+The above code is located in a [sample repository](https://github.com/keboola/docs-custom-science-example-r-dynamic), so you can use it
 with the *runtime settings*. Supply any number of input tables.
 
     {
@@ -145,12 +145,12 @@ write.csv(data, file = "/data/out/tables/result.csv", row.names = FALSE)
 {% endhighlight %}
 
 ### Package Example
-This example shows how an R package can be made in order to interact with our environment, the code is available in a [git repository](https://github.com/keboola/docs-custom-science-example-package.git).
+This example shows how an R package can be made in order to interact with our environment, the code is available in a [git repository](https://github.com/keboola/docs-custom-science-example-r-package).
 We strongly recommend this approach over the previous [simple example](#simple-example).
 
 Wrapping the application logic into an R package makes testing and portability much easier, specifically:
 
-- [Writing tests](http://r-pkgs.had.co.nz/tests.html) - [Example](https://github.com/keboola/docs-custom-science-example-package/blob/master/tests/testthat/test_main.R)
+- [Writing tests](http://r-pkgs.had.co.nz/tests.html) - [Example](https://github.com/keboola/docs-custom-science-example-r-package/blob/master/tests/testthat/test_main.R)
 - Running tests and applications in multiple environments (see below)
 - Dependencies are [checked](http://r-pkgs.had.co.nz/namespace.html) and automatically installed
 - Package code is [checked for errors](http://r-pkgs.had.co.nz/check.html)
