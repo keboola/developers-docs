@@ -52,6 +52,8 @@ JSON validation and syntax highlighting.
 {: .image-popup}
 ![Generic configuration screenshot](/extend/registration/configuration.png)
 
+Defining a [configuration schema](/extend/registration/configuration-schema/) will replace the JSON textarea with a form.
+
 #### tableInput
 This flag provides a UI for setting the table input mapping. With this UI, you can set:
 
@@ -118,4 +120,3 @@ To use a non-published extension, create the configuration with
 the [component API](http://docs.keboola.apiary.io/#reference/components/create-config/create-config).
 Or visit directly the following URL: https://connection.keboola.com/admin/projects/{projectId}/applications/{componentId}.
 The *projectid* is your KBC project ID. The *componentId* (e.g. _myCompany.acmeApplication_) is provided upon your extension registration.
-

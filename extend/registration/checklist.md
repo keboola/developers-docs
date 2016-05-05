@@ -28,7 +28,7 @@ permalink: /extend/registration/checklist/
 | 20 | **Component documentation** | Instructions to help end-user configure the application (linked from application configuration page) and payment information (if any) | &#9744; | `https://github.com/org/reponame/master/blob/CONFIGURATION.md`{: .td-break-code} |
 | 21 | **UI options** | Which UI helpers to use; any combination of `tableInput`, `tableOutput`, `fileInput`, `fileOutput`. [More info](/extend/registration/#ui-options) | &#9744; | `tableInput, tableOutput` |
 | 22 | **Test configuration** | JSON configuration to test the application | &#9744; |  |
-| 23 | **Configuration schema** | [JSON schema](http://json-schema.org/) or [MSON](https://github.com/apiaryio/mson) describing the configuration | &#9744; |  |
+| 23 | **Configuration schema** | [JSON schema](http://json-schema.org/) describing the configuration, more details [here](/extend/registration/configuration-schema) | &#9744; |  |
 | 24 | **Networking** | If the app downloads or uploads the client data to the Internet, any of `dataIn` (eg. for extractors), `dataOut` (eg. for writers) | &#9744; | `dataIn` |
 | 25 | **Actions** | List of supported [actions](/extend/common-interface/actions/), default `run` | &#9744; | `run` |
 | 26 | **Fees** | Using the component in KBC implies additional fees; `true` or `false` | &#9744; | `false` |

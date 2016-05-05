@@ -94,6 +94,9 @@ items:
           - url: /extend/registration/checklist/
             title: Submission Checklist
 
+          - url: /extend/registration/configuration-schema/
+            title: Configuration Schema
+
   - url: /integrate/
     title: Integrate
     items:
