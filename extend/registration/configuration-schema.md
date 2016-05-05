@@ -24,7 +24,27 @@ Using the configuration schema also allows us to validate the user input (both f
 JSON schema is well documented on [json-schema.org](http://json-schema.org/) website and JSON Editor is available 
 [online](http://jeremydorn.com/json-editor/) to develop and test JSON schemas.
 
-The form above is created using this JSON Schema.
+### Example
+
+Let's assume your application accepts this configuration.
+
+{% highlight json %}
+
+{
+    "username": "foo",
+    "#password": "baz",
+    "dateFrom": "yesterday",
+    "dateTo": "today"
+}
+
+{% endhighlight %}
+
+This looks like an appropriate form.
+
+{: .image-popup}
+![Configuration form](/extend/registration/form.png)
+
+The form above can be created using this JSON Schema.
 
 {% highlight json %}
 
@@ -34,50 +54,32 @@ The form above is created using this JSON Schema.
   "required": [
     "dateFrom",
     "dateTo",
-    "api"
+    "username",
+    "#password"
   ],
   "properties": {
-    "api": {
-      "title": "Authorization",
-      "required": [
-        "username",
-        "user_id",
-        "#password"
-      ],
-      "type": "object",
-      "properties": {
-        "username": {
-          "title": "Username",
-          "type": "string",
-          "minLength": 1,
-          "default": ""
-        },
-        "#password": {
-          "title": "Password",
-          "type": "string",
-          "format": "password",
-          "minLength": 1,
-          "default": ""
-        },
-        "user_id": {
-          "title": "User ID",
-          "type": "string",
-          "minLength": 1,
-          "default": ""
-        }
-      }
+    "username": {
+      "title": "Username",
+      "type": "string",
+      "minLength": 1,
+      "default": ""
+    },
+    "#password": {
+      "title": "Password",
+      "type": "string",
+      "format": "password",
+      "minLength": 1,
+      "default": ""
     },
     "dateFrom": {
       "title": "Date from",
       "type": "string",
-      "description": "Any format supported by https://secure.php.net/manual/en/datetime.construct.php",
       "minLength": 1,
       "default": ""
     },
     "dateTo": {
       "title": "Date to",
       "type": "string",
-      "description": "Any format supported by https://secure.php.net/manual/en/datetime.construct.php",
       "minLength": 1,
       "default": ""
     }
