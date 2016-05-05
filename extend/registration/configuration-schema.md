@@ -88,6 +88,3 @@ The form above can be created using this JSON Schema.
 
 {% endhighlight %}
 
-## Update Component
-
-To update your component's configuration schema, contact us at [support@keboola.com](mailto:support@keboola.com). 
