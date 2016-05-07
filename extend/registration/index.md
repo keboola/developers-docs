@@ -37,7 +37,9 @@ Private Quay.io repositories are paid.
 
 ## Registration
 The registration process is simple, but it must be done by Keboola. To register your extension,
-please fill in the [checklist](/extend/registration/checklist) and contact us. When your component is registered, you will receive it's **Component ID**.
+please fill in the [checklist](/extend/registration/checklist) and [contact us](mailto:support@keboola.com). When your component is registered, 
+you will receive its **Component ID**. If you need to make any changes to your application (e.g. changes in the [JSON schema](/extend/registration/configuration-schema/)), 
+[contact us](mailto:support@keboola.com) with a modified checklist.
 
 ### UI Options
 Each extension will receive a **Generic UI**. The generic UI will always show a text field for entering the
