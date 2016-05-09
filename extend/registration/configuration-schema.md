@@ -22,7 +22,9 @@ Using the configuration schema also allows us to validate the user input (both f
 ## Creating Schema
 
 JSON schema is well documented on [json-schema.org](http://json-schema.org/) website and JSON Editor is available 
-[online](http://jeremydorn.com/json-editor/) to develop and test JSON schemas.
+[online](http://jeremydorn.com/json-editor/) to develop and test JSON schemas. Make sure to list all configuration 
+properties as `required`. This is to make sure that the actual configuration will always contain all properties. If
+you want a property to be optional, set a default value for it.
 
 ### Example
 
