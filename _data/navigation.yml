@@ -7,6 +7,9 @@ items:
       - url: /overview/api/
         title: Calling API
 
+      - url: /overview/jobs/
+        title: Background Jobs
+
       - url: /overview/encryption/
         title: Encryption
 

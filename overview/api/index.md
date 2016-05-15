@@ -29,3 +29,18 @@ Or with the following procedure:
 
 {: .image-popup}
 ![Apiary console](/overview/api/postman-import.png)
+
+## cURL
+[cURL](https://curl.haxx.se/) is a common library used by many systems. There is also a [command-line interface (CLI)](https://curl.haxx.se/docs/manpage.html) 
+available. You can use the cURL CLI to create simple scripts working with KBC API. E.g. to 
+[Run a Job](/overview/jobs/) you would use:
+
+{% highlight shell %}
+curl --data "{\"config\": \"sampledatabase\"}" --header "X-StorageAPI-Token: YourStorageToken" https://syrup.keboola.com/ex-db/run 
+{% endhighlight %}
+
+To call the [encryption API](/overview/encryption/) for [R Custom Science](/extend/custom-science/), you would use:
+
+{% highlight shell %}
+curl --data "sometext" --header "X-StorageAPI-Token: YourStorageToken" --header "Content-Type: text/plain" https://syrup.keboola.com/docker/dca-custom-science-r/encrypt
+{% endhighlight %}

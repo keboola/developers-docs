@@ -92,7 +92,7 @@ If you happen to receive the following error,
     This API call is only supported for components that use the 'encrypt' flag.
     
 ask a Keboola Developer to enable encryption for your [Docker extension](/extend/docker/), or your 
-[Custom Science](/).
+[Custom Science](/extend/custom-science/).
 
 You can use sample Postman requests from collection 
 [![Run in Postman](https://run.pstmn.io/button.png)](https://app.getpostman.com/run-collection/7dc2e4b41225738f5411)
