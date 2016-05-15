@@ -3,6 +3,9 @@ title: Calling API
 permalink: /overview/api/
 ---
 
+* TOC
+{:toc}
+
 All our [KBC components](/overview/) have a public API on [apiary](https://apiary.io/). If you need to send requests to our 
 API, we recommend you use either the Apiary Console or Postman Client. Most of our APIs take and produce data in JSON format. 
 Many of our APIs require a *Storage API token* which is entered in `X-StorageApi-Token` header.
