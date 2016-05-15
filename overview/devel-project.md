@@ -23,7 +23,9 @@ Under the following conditions:
 - Write an email to devel@keboola.com
 - Remain active in the development
 
-If you wish to apply for a KBC project, send us an email (use the following template if you are lazy):
+If you wish to apply for a KBC project, [send us an email](mailto:support@keboola.com) 
+(use the following template if you are lazy):
 
 Hello,
-I'am XZ (from XY) and I'd like to develop a XY component for KBC. TODO :)
+I'am *XY* (from company *YZ*) and I'd like to develop an *extractor|writer|application* for KBC.
+My component will do *some really awesome things*.
