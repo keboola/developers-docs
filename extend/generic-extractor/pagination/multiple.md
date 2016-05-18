@@ -4,25 +4,48 @@ permalink: /extend/generic-extractor/pagination/multiple/
 ---
 
 ## Multiple scrollers
-Allows setting scrollers per request.
+Allows setting scrollers for each endpoint.
 
-### Example configuration:
+## Configuration:
+- **method**: `multiple`
+- **scrollers**:
+    - An object where each key represents an identifier of a scroller, which can then be used in job's `scroller` parameter to choose which scroller should it use
+    - Each value in the object **must** be a configuration of another scroller (eg `response.param` scroller with all of its parameters)
+- **default**: A default scroller identifier for jobs where no `scroller` is set. If not set, jobs with no scroller will not use any pagination.
 
-```
-pagination:
-    method: multiple
-    #default: param_timeline # NoScroller if not defined
-    scrollers:
-        param_next_cursor: # Uses response.param next_cursor for Twitter https://dev.twitter.com/rest/reference/get/followers/list
-            method: response.param
-            # settings of response.param scroller for listing followers etc
-        param_next_results: # Uses response.param
-            method: response.param
-            # settings of such scroller
-        cursor_timeline: # Uses cursor scroller for timelines
-            method: cursor
-            idKey: id
-            param: max_id
-            reverse: true
-            increment: -1
-```
+## Example
+
+    {
+        "api": {
+            "pagination": {
+                "method": "multiple",
+                "scrollers": {
+                    "param_next_results": {
+                        "method": "response.param"
+                    },
+                    "cursor_timeline": {
+                        "method": "cursor",
+                        "idKey": "id",
+                        "param": "max_id",
+                        "reverse": true,
+                        "increment": -1
+                    }
+                }
+            }
+        },
+        "config": {
+            "jobs": [
+                {
+                    "endpoint": "statuses/user_timeline",
+                    "scroller": "cursor_timeline"
+                },
+                {
+                    "endpoint": "search",
+                    "scroller": "param_next_results",
+                    "params": {
+                        "q": "..."
+                    }
+                }
+            ]
+        }
+    }
