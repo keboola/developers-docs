@@ -7,30 +7,30 @@ permalink: /overview/jobs/
 {:toc}
 
 Most operations (such as extracting data, running an application) are executed in KBC as
-background (asynchronous) jobs. This means that when you trigger the operation (i.e. run an extractor) a
-*job* is created and pushed into a *queue*. A job waits in a queue until it is picked up by a worker 
+background (asynchronous) jobs. This means that when you trigger the operation (i.e. run an extractor), a
+*job* is created and pushed into a *queue*. The job waits in the queue until it is picked up by a worker 
 server, which actually executes it. The job queuing and
-execution is fully automatic. So if you are working with asynchornous parts of your API, you need to 
+execution is fully automatic. So if you are working with asynchronous parts of your API, you need to 
 
 - *create* a job
 - and *wait* for it to finish. 
 
-Different [components](/overview/) have different upper limits on how long can a job run, so a job 
-can generally run from couple of seconds to several hours. 
+Different [components](/overview/) have different upper limits on how long can a job run,
+from couple of seconds to several hours. 
 
 ## Job Ids
-When a job is created a *JobId* is assigned to it. When a job is put into a queue a *RunId* is assigned to it. 
-When a job is executing, it can spawn *child jobs* (sub-jobs).
-When a job spawns some child jobs, it becomes their *parent-job*. Usually a parent job will wait until all its 
-child jobs have finished. 
+When a job is created, *JobId* is assigned to it. When the job is put into a queue, it gets *RunId* assigned. 
+An executing job can spawn *child jobs* (sub-jobs) and become their *parent-job*. 
+Usually, a parent job waits until all its child jobs have finished. 
 
-A JobId refers to the job definition (what should be done). A RunId refers to actual execution of the job, so 
-one JobId may have multiple RunIds, though in practice, this situation is rare.
-A RunId may be *hierarchical* in case the job is a child to some other job. I.e. when a job with ID `123` is executed, it
-will be assigned RunId `789`, When it spawns a child job, that child job will have jobId e.g. `231` and a runId `789.876`. 
-Where is the *RunId* of the parent job. Jobs may be unilmitedly nested, but in practice they don't go beyond three levels.
+A JobId refers to the job definition, to what should be done. RunId refers to the actual job execution, so 
+one JobId may, though very rarely, have multiple RunIds. Jobs can be *hierarchically* organized. 
+In such case, a child job's RunId contains parent's RunId as a prefix. 
+For example, assume that a job with ID 123 is executed and assigned RunId 789. 
+When it spawns a child job, that child job will have its JobId, for instance, `234`, and its RunId will have `789.` as a prefix, 
+for example `789.876`. Jobs may be nested without limits, but in practice they don't go beyond three levels.
 
-## Job status
+## Job Status
 A job can have different statuses:
 
 - created (right after it is created, but before it is put in a queue) 
@@ -40,15 +40,15 @@ A job can have different statuses:
 - error (job finished)
 - warning (job finished, but some child job failed)
 - terminating (user has requested to abort a job)
-- cancelled (job was created, but it was aborted before execution actually begun)
+- cancelled (job was created, but it was aborted before its execution actually begun)
 - terminated (job was created and it was aborted in the middle of execution)
 
-## Creating and running a job
-Usually you need to know the *component URI* and *configurationId* to create a job, There are however 
-more more possibilities how a job can be created. To obtain a list of all components available
+## Creating and Running a Job
+Usually, you need to know the *component URI* and *configurationId* to create a job. There are, however, 
+more possibilities how a job can be created. To obtain a list of all components available
 in the project, and their configuration, you can use the 
 [corresponding API call](http://docs.keboola.apiary.io/#reference/component-configurations/list-components/get-components).
-Sample of the response is below:
+A sample of the response is below:
 
 {% highlight json %}
 [
@@ -86,15 +86,15 @@ Sample of the response is below:
   ...
 {% endhighlight %}
 
-From there, the important part is the `uri` field and `configurations.id` field. E.g. in the 
+From there, the important part is the `uri` field and `configurations.id` field. For instance, in the 
 above, there is a database extractor with `uri` `https://syrup.keboola.com/ex-db` and a 
 configuration with id `sampledatabase`.
 
 To [create a job](http://docs.keboolaconnector.apiary.io/#reference/sample-coponent) 
-running that configuration, you would call `POST` to URL `https://syrup.keboola.com/ex-db/run` 
-with `X-StorageApi-Token` header containing your Storage token. 
+running that configuration, call `POST` to URL `https://syrup.keboola.com/ex-db/run` 
+with the `X-StorageApi-Token` header containing your Storage token. 
 
-When a job is created, you will obtain a response simirlar to this:
+When a job is created, you will obtain a response similar to this:
 
 {% highlight json %}
 {
@@ -129,12 +129,12 @@ When a job is created, you will obtain a response simirlar to this:
 } 
 {% endhighlight %}
 
-This means that the job was created (and `waiting` in queue) and will automatically start executing.
-From the above response, the most important parts is `url` which gives you URL of the resource for
+This means that the job was created (and `waiting` in the queue) and will automatically start executing.
+From the above response, the most important part is `url` which gives you URL of the resource for
 [Job status polling](https://en.wikipedia.org/wiki/Polling_(computer_science)).  
 
 ## Job Polling
-If you want to get the actual job result, you need to poll the [Job API](http://docs.syrupqueue.apiary.io/#reference/jobs/job/view-job-detail) 
+If you want to get the actual job result, poll the [Job API](http://docs.syrupqueue.apiary.io/#reference/jobs/job/view-job-detail) 
 for the current state of the job. For example, to poll for the above job, you need to send a `GET` request to
 `https://syrup.keboola.com/queue/job/186985832` with `X-StorageApi-Token` header containing your Storage token. 
 You will receive a response similar to this:
@@ -182,9 +182,9 @@ You will receive a response similar to this:
 }
 {% endhighlight %}
 
-From the above respone, the most important part is the `status` field (`processing` in this case)
-at this time). To obtain Job result, you need to send the above API call until job status changes
-to one of the finished states (or you can use the `isFinished` field).  
+From the above response, the most important part is the `status` field (`processing`, in this case)
+at this time. To obtain the Job result, send the above API call once the job status changes
+to one of the finished states (or use the `isFinished` field).  
  
 ## Working with Jobs
 To work with Job API, you need two things:
@@ -192,20 +192,19 @@ To work with Job API, you need two things:
 - [the API to create a Job](http://docs.keboolaconnector.apiary.io/#reference/sample-coponent)
 - [the API to poll Job status](http://docs.syrupqueue.apiary.io/#reference/jobs/job/view-job-detail)
 
-The first API is specific for each component, so to obtain the actuall URLs and parameters, you should
-use the [Component API](http://docs.keboola.apiary.io/#reference/component-configurations/list-components/get-components)
-The second API is generic for all components. To work with the API you can use our 
-[Syrup PHP Client](https://github.com/keboola/syrup-php-client). In case, you want to implement things
-yourself, you should copy the part of 
-[Job Polling](https://github.com/keboola/syrup-php-client/blob/master/src/Keboola/Syrup/Client.php#L328). 
+The first API is specific for each component, so to obtain the actual URLs and parameters,
+use the [Component API](http://docs.keboola.apiary.io/#reference/component-configurations/list-components/get-components).
+The second API is generic for all components. To work with the API, use our 
+[Syrup PHP Client](https://github.com/keboola/syrup-php-client). In case you want to implement things
+yourself, copy the part of [Job Polling](https://github.com/keboola/syrup-php-client/blob/master/src/Keboola/Syrup/Client.php#L328). 
 
-Also note, that there are some other special cases of asynchronous operations, which are 
-in principle same, but may differ in little details. The most common are:
+Note that there are some other special cases of asynchronous operations, which are 
+in principle the same, but may differ in little details. The most common ones are:
 
 - [Storage Jobs](http://docs.keboola.apiary.io/#reference/jobs/manage-jobs/job-detail), triggered e.g. by
 [asynchronous imports](http://docs.keboola.apiary.io/#reference/tables/create-table-asynchronously/create-new-table-from-csv-file-asynchronously)
 or [exports](http://docs.keboola.apiary.io/#reference/tables/table-export-asynchronously/asynchronous-export).
 - [GoodData Writer Jobs](http://docs.keboolagooddatawriterv2.apiary.io/#introduction/synchronous-vs.-asynchronous-tasks) 
 
-Also note, that apart from running predefined configurations with a `run` action, each component may
-provide additional options to create an asynchronous background job or it may also support snychronous actions. 
+Apart from running predefined configurations with a `run` action, each component may
+provide additional options to create an asynchronous background job or it may also support synchronous actions. 
