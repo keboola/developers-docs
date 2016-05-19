@@ -14,14 +14,7 @@ Parameters used by all scroller methods
 
 Looks within responses to find a boolean field determining whether to continue scrolling or not.
 
-Usage:
-```
-pagination:
-   nextPageFlag:
-     field: hasMore #name of the bool field
-     stopOn: false #whether to stop once the value is true or false
-     ifNotSet: false #optional, what value to assume if the field is not present
-```
+## Usage:
 
 ### Configuration
 
