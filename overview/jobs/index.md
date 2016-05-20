@@ -6,42 +6,44 @@ permalink: /overview/jobs/
 * TOC
 {:toc}
 
-Most operations (such as extracting data, running an application) are executed in KBC as
-background (asynchronous) jobs. This means that when you trigger the operation (i.e. run an extractor), a
+Most operations, such as extracting data, or running an application are executed in KBC as
+background, asynchronous, jobs. When an operation is triggered, for example, you run an extractor, a
 *job* is created and pushed into a *queue*. The job waits in the queue until it is picked up by a worker 
-server, which actually executes it. The job queuing and
-execution is fully automatic. So if you are working with asynchronous parts of your API, you need to 
+server, which actually executes it. The job queuing and execution are fully automatic. 
+So, if you are working with asynchronous parts of your API, you need to 
 
-- *create* a job
-- and *wait* for it to finish. 
+- *create* a job, and
+- *wait* for it to finish. 
 
-Different [components](/overview/) have different upper limits on how long can a job run,
-from couple of seconds to several hours. 
+[Components](/overview/) differ in their upper limits on how long can a job run,
+from a couple of seconds to several hours. 
 
 ## Job Ids
-When a job is created, *JobId* is assigned to it. When the job is put into a queue, it gets *RunId* assigned. 
+When a job is created, *JobId* is assigned to it. When the job is put into a queue, it gets its own *RunId*. 
 An executing job can spawn *child jobs* (sub-jobs) and become their *parent-job*. 
 Usually, a parent job waits until all its child jobs have finished. 
 
-A JobId refers to the job definition, to what should be done. RunId refers to the actual job execution, so 
-one JobId may, though very rarely, have multiple RunIds. Jobs can be *hierarchically* organized. 
-In such case, a child job's RunId contains parent's RunId as a prefix. 
+A JobId refers to the job definition, to what should be done. RunId refers to the actual job execution. That is why
+one JobId may, though very rarely, have multiple RunIds. 
+
+Jobs can be *hierarchically* organized. 
+In such case, a child job's RunId contains its parent's RunId as a prefix. 
 For example, assume that a job with ID 123 is executed and assigned RunId 789. 
 When it spawns a child job, that child job will have its JobId, for instance, `234`, and its RunId will have `789.` as a prefix, 
-for example `789.876`. Jobs may be nested without limits, but in practice they don't go beyond three levels.
+for example `789.876`. Jobs may be nested without limits, but in practice they do not go beyond three levels.
 
 ## Job Status
 A job can have different statuses:
 
-- created (right after it is created, but before it is put in a queue) 
+- created (right after a job is created, but before it is put in a queue) 
 - waiting (a job is in a queue, waiting to be picked up by a worker server)
 - processing (job stuff is being done)
-- success (job finished)
-- error (job finished)
-- warning (job finished, but some child job failed)
-- terminating (user has requested to abort a job)
-- cancelled (job was created, but it was aborted before its execution actually begun)
-- terminated (job was created and it was aborted in the middle of execution)
+- success (a job is finished)
+- error (a job is finished)
+- warning (a job is finished, but some child job failed)
+- terminating (a user has requested to abort a job)
+- cancelled (a job was created, but it was aborted before its execution actually began)
+- terminated (a job was created and it was aborted in the middle of its execution)
 
 ## Creating and Running a Job
 Usually, you need to know the *component URI* and *configurationId* to create a job. There are, however, 
@@ -135,7 +137,7 @@ From the above response, the most important part is `url` which gives you URL of
 
 ## Job Polling
 If you want to get the actual job result, poll the [Job API](http://docs.syrupqueue.apiary.io/#reference/jobs/job/view-job-detail) 
-for the current state of the job. For example, to poll for the above job, you need to send a `GET` request to
+for the current state of the job. For example, to poll for the above job, send a `GET` request to
 `https://syrup.keboola.com/queue/job/186985832` with `X-StorageApi-Token` header containing your Storage token. 
 You will receive a response similar to this:
 
@@ -189,8 +191,8 @@ to one of the finished states (or use the `isFinished` field).
 ## Working with Jobs
 To work with Job API, you need two things:
 
-- [the API to create a Job](http://docs.keboolaconnector.apiary.io/#reference/sample-coponent)
-- [the API to poll Job status](http://docs.syrupqueue.apiary.io/#reference/jobs/job/view-job-detail)
+- [API to create a Job](http://docs.keboolaconnector.apiary.io/#reference/sample-coponent)
+- [API to poll Job status](http://docs.syrupqueue.apiary.io/#reference/jobs/job/view-job-detail)
 
 The first API is specific for each component, so to obtain the actual URLs and parameters,
 use the [Component API](http://docs.keboola.apiary.io/#reference/component-configurations/list-components/get-components).
@@ -198,13 +200,13 @@ The second API is generic for all components. To work with the API, use our
 [Syrup PHP Client](https://github.com/keboola/syrup-php-client). In case you want to implement things
 yourself, copy the part of [Job Polling](https://github.com/keboola/syrup-php-client/blob/master/src/Keboola/Syrup/Client.php#L328). 
 
-Note that there are some other special cases of asynchronous operations, which are 
+Note that there are some other special cases of asynchronous operations which are 
 in principle the same, but may differ in little details. The most common ones are:
 
-- [Storage Jobs](http://docs.keboola.apiary.io/#reference/jobs/manage-jobs/job-detail), triggered e.g. by
+- [Storage Jobs](http://docs.keboola.apiary.io/#reference/jobs/manage-jobs/job-detail), triggered, for instance, by
 [asynchronous imports](http://docs.keboola.apiary.io/#reference/tables/create-table-asynchronously/create-new-table-from-csv-file-asynchronously)
-or [exports](http://docs.keboola.apiary.io/#reference/tables/table-export-asynchronously/asynchronous-export).
+or [exports](http://docs.keboola.apiary.io/#reference/tables/table-export-asynchronously/asynchronous-export)
 - [GoodData Writer Jobs](http://docs.keboolagooddatawriterv2.apiary.io/#introduction/synchronous-vs.-asynchronous-tasks) 
 
 Apart from running predefined configurations with a `run` action, each component may
-provide additional options to create an asynchronous background job or it may also support synchronous actions. 
+provide additional options to create an asynchronous background job, or it may also support synchronous actions. 
