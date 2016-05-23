@@ -3,4 +3,19 @@ defaults:
     scope:
       path: "" # an empty string here means all files in the project
     values:
-      layout: "default"
+      layout: "main"
+
+url: "https://developers.keboola.com"
+
+exclude:
+  - docker-compose.yml
+  - Dockerfile
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+
+sass:
+  style: compressed
+
+gems:
+  - jekyll-sitemap

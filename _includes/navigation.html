@@ -1,3 +1,5 @@
+{% comment %}
+
 {% capture html %}
 <ul class="kbc-nav-sidebar nav nav-sidebar">
     {% if include.context == "/" %}
@@ -22,3 +24,6 @@
     {% endfor %}
 </ul>
 {% endcapture %}{{ html | strip_newlines | replace:'    ','' | replace:'    ','' | replace:'  ',' ' }}
+{% endcomment %}
+
+{% include nav-items.html items=site.data.navigation.items %}

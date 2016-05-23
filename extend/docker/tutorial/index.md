@@ -1,26 +1,73 @@
 ---
-title: Tutorial
+title: About Docker
 permalink: /extend/docker/tutorial/
 ---
 
-## Docker
-Docker is a technology stack for running things in virutalized environments. In KBC we use a limited set of docker features, which are described here. For full technical description of docker, you should consult the [official documentation](https://docs.docker.com/).
 
-### What is docker
-At first sight it might seem that docker is similar to other virutualization technologies (such as VMware or VirutalBox) but there are some fundamental differences. The difference is that docker has *Docker images* and *Docker containers*. To create a Docker Image, you must create a *Dockerfile*. Dockerfile contains instructions on how the docker Image should be build and this is the environment (OS + modifications) in which an application runs. When you run an image (start an application in it), a docker Container is created. The Container is isolated from the image itself and cannot make permanent changes to it - this is one of those fundamental differences. When a Container is terminated (usually because it has nothing more to do), its state is deleted. When you run the Image again (and create a new Container), it won't be anyhow affected by the previous Container. Docker is therefore somewhat stateless.
+Docker is a technology stack for running things in virtualized environments. In KBC, we use a limited set of Docker features.
+Their description follows. For full technical description of Docker, consult the
+[official documentation](https://docs.docker.com/).
 
-### Docker Images
-Docker Images are created by executing instruction writen in Dockerfile. Docker Images can be based on other Images. So if you need minor modification to some system, there is no need to build the whole thing from scratch. If you want Images to be reused, you can push your Dockerfile to docker *Registry*. The Registry ([Dockerhub](https://hub.docker.com/), [Quay](https://quay.io/)) will build the Image, and anyone who wish to use it, can download it. 
+## What Is Docker
+At first sight, Docker is similar to other virtualization technologies (such as VMware or VirtualBox).
+However, there are some [fundamental differences](https://docs.docker.com/engine/understanding-docker/).
+The main difference is that Docker runs only virtualized applications, not the entire OS.
 
-Docker images are named with the scheme: `registry-name/account-name/image-name:tag` Where _registry-name_ and _acoount-name_ can sometimes be omitted. The for example you can refer to docker _hello-world_ image as: `hello-world`
-or as `docker.io/library/hello-world:latest`
-Where the `docker.io` refers to [Docker Hub](https://hub.docker.com/) registry (which is default), the second docker refers to common library (which is default), the third part refers to the image `hello-world` and the fourth part refers to the tag `latest`. Image tags work the same as git tag as they refer to a specific build of the image. However docker tags can be moved easily so they do not need to always refer to the same build. The general convention is that tags *latest* and *master* both point to the same (latest) build. Please note that many of our Keboola images do NOT follow this convention. In keboola, we use [Docker Hub](https://hub.docker.com/) and [Quay](https://quay.io/) registry, in both registries we have the account *Keboola*. So our images are either: `keboola/base` or `keboola/base` Some images are present on both registries and as long as the same tag is used, they refer to exact same build and are freely interchangeable.
+Docker has *Docker Images* and *Docker Containers*. To create a Docker Image, create *Dockerfile*. Dockerfile
+contains instructions on how the Docker Image should be built, and this represents the environment (OS + modifications) in
+which an application runs.
+A Docker Image contains everything that is required to run an application. An image usually has an *entrypoint* which is
+a single command that is executed when the image is run.
 
-## Running docker Images in KBC
-We have wrapped docker in our [Docker bundle component](https://github.com/keboola/docker-bundle). The component runs [registred](/extend/registration) docker images. The Docker Bundle component has [API](https://app.apiary.io/kebooladocker/editor) which basically allows to run the docker images. The Docker bundle component takes care of injecting the right data, creating and runing the container, terminating the container and uploading the result data to KBC Storage. 
+When you run an image (start an application in it), *Docker Container* is created. The container is a sandbox
+isolated from the image itself and cannot make permanent changes to it; this is very important (and maybe somewhat
+surprising). When you run the Image again (and create a new Container), it won't be affected in any way by the previous
+Container. Docker Image is therefore stateless and acts like a template. The state is stored only in the container.
 
 
+## Docker Images
+*Docker Images* are created by executing instructions written in *Dockerfile*. Dockerfile is a simple text
+file consisting mostly of shell commands which must be executed to prepare the application for running.
+Docker Images can be based on other Images. So if
+you need minor modification to a system, you do not have to build the whole thing from scratch. If you want Images to be
+reused, *push* your Dockerfile to Docker *Registry*. The Registry ([Dockerhub](https://hub.docker.com/),
+[Quay](https://quay.io/)) will build the image; anyone interested in using it can download it.
 
+Docker Images names are based on the following scheme: `registry-name/account-name/image-name:tag` Where _registry-name_
+and _acoount-name_ can sometimes be omitted. For example, you can refer to a Docker _hello-world_ image as: `hello-world`
+or as `docker.io/library/hello-world:latest`.
+Where the `docker.io` refers to the [Docker Hub](https://hub.docker.com/) registry,
+the `library` refers to _account_ (common library is default), `hello-world` refers to the _image name_,
+and `latest` refers to the _tag_.
 
+Image tags work similarly to Git tags as they refer to a specific build of the image. However, Docker tags can be moved
+easily, so they do not need to always refer to the same build. The general convention is that the *latest*
+and *master* tags both point to the same (latest) build and are movable. Please note, that some of our
+[Keboola images](/extend/docker/images/) do not follow this convention.
+
+## Running Docker Images in KBC
+We have wrapped Docker in our [Docker Bundle component](/overview/docker-bundle/). The component
+runs [registered](/extend/registration/) Docker Images. Docker Bundle
+has an [API](http://docs.kebooladocker.apiary.io/#)
+which allows to run Docker Images and encrypt arbitrary values.
+[Docker Bundle](/overview/docker-bundle/) takes
+care of injecting the right data, creating, running, and terminating the container, and uploading
+the result data to KBC Storage. All images to be run in KBC must have an `ENTRYPOINT`.
+We also recommend that you base your image on [one of our images](/extend/docker/images/).
+
+Before you run Docker applications in KBC, make sure to
+[set up your Docker environment](/extend/docker/tutorial/setup/).
+Before you develop a dockerized application for KBC, you should be able to
+[create and run dockerized applications](/extend/docker/tutorial/howto/) in your own environment.
+
+If you are already familiar with Docker, jump straight into our sample application
+code [in PHP](https://github.com/keboola/docker-demo-app).
+The demo application itself starts with a single
+[`/src/run.php`](https://github.com/keboola/docker-demo-app/blob/master/src/run.php) script.
+The application can exist independently (without Docker), and contains unit and functional tests.
+The repository includes also the Docker Image definition in
+[**Dockerfile**](https://github.com/keboola/docker-demo-app/blob/master/Dockerfile). The Docker environment including the application
+is prepared by the Docker Image definition. A hook from Dockerhub builds Docker Image automatically on every commit.
+A similar application is also available [in Python](https://github.com/keboola/python-custom-application-text-splitter).
 
 
