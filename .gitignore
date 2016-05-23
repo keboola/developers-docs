@@ -1,2 +1,4 @@
 _site
 .idea
+.kdev4
+*.kdev4
