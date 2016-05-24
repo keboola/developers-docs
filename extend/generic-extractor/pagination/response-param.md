@@ -1,6 +1,6 @@
 ---
 title: Response parameter scroller
-permalink: /extend/generic-extractor/pagination/response.param/
+permalink: /extend/generic-extractor/pagination/response-param/
 ---
 
 ## Response parameter scroller

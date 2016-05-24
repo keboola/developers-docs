@@ -1,6 +1,6 @@
 ---
 title: Response URL scroller
-permalink: /extend/generic-extractor/pagination/response.url/
+permalink: /extend/generic-extractor/pagination/response-url/
 ---
 
 ## Response URL scroller
