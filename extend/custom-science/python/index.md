@@ -279,9 +279,9 @@ Every other error will lead to a generic message and only developers will see th
 course, modify this logic to your liking.
 
 ## Using Classes
-Since the organization of your code is completely up to you, notyhing prenevts you from wrapping the entire application in a classs.
-Actually, we do recommend this approach, since it makes the code more contained and allows for greater testabilty. To wrap the code in a class
-you can create a [file `sample_application.py`](https://github.com/keboola/docs-custom-science-example-python-class/blob/master/sample_application.py):
+Since the organization of your code is completely up to you, nothing prevents you from wrapping the entire application in a class.
+Actually, we do recommend this approach since it makes the code more contained and allows for greater testability. 
+To wrap the code in a class, create a [file `sample_application.py`](https://github.com/keboola/docs-custom-science-example-python-class/blob/master/sample_application.py):
 
 {% highlight python %}
 import csv
@@ -312,22 +312,21 @@ except Exception as err:
     sys.exit(2)
 {% endhighlight %}
 
-Where `sample_application` is the name of the file in which the application class is defined and and `SampleApplication` is the
-name of the actual class. This also takes care of [handling errors](#error-handling) and keeps the `main.py` runner clean.
+Where `sample_application` is the name of the file in which the application class is defined and `SampleApplication` 
+is the name of the actual class. This also takes care of [handling errors](#error-handling) and keeps the `main.py` runner clean.
 You can look at the [sample application](https://github.com/keboola/docs-custom-science-example-python-class) or
-at a more complicated [TextSpliiter application](https://github.com/keboola/python-custom-application-text-splitter/blob/master/main.py).
+at a more complicated [TextSpliter application](https://github.com/keboola/python-custom-application-text-splitter/blob/master/main.py).
 
 ## Continuous Integration and Testing
-Once you have your script contained, you can use standard testing methods of Python such as
-[py.test](http://pytest.org/latest/). It is important to run tests automatically, so you should set up tests to run everytime
-you push a commit into your repository.
+Once you have your script contained, use standard testing methods of Python such as [py.test](http://pytest.org/latest/). 
+It is important to run tests automatically. Set them up to run every time you push a commit into your repository.
 
 ### Integration with Travis
-[Travis](https://travis-ci.org/) offers an easy way to setup continuous integration with Github repositories. To setup the integration, you need to create
-a `.travis.yml` file in the root of your repository and
+[Travis](https://travis-ci.org/) offers an easy way to setup a continuous integration with Github repositories. To setup the integration, 
+create a `.travis.yml` file in the root of your repository and
 then [link the repository to Travis](https://docs.travis-ci.com/user/getting-started/#To-get-started-with-Travis-CI%3A).
-Travis offers [Python support](https://docs.travis-ci.com/user/languages/python), you only need to add the KBC Package (if you use it) and set the data directory using
-the `KBC_DATADIR` environment variable (that will be automatically picked up by KBC package):
+Travis offers [Python support](https://docs.travis-ci.com/user/languages/python), only add the KBC Package (if you use it) and set the data directory using
+the `KBC_DATADIR` environment variable (that will be automatically picked up by the KBC package):
 
 {% highlight yml %}
 language: python
@@ -346,15 +345,16 @@ script:
   - py.test ./../../
 {% endhighlight %}
 
-### Integration using Docker Compose
-The above option is easy to set up, but it has two disadvantages: it is specific to Travis CI (Continous Integration) service and it does not run your application in the
-*exact same* environment as the production code. To fix both, you can take advantage of the fact that we will run your application code in a
-[Docker container](/extend/docker/tutorial/). By using [Docker Compose](https://docs.docker.com/compose/) you can set the testing environment
-exactly the same as the production environment. You can have a look at a [sample repository](https://github.com/keboola/docs-custom-science-example-python-ci-testing) which
-is described below.
+### Integration Using Docker Compose
+The above option is easy to set up, but it has two disadvantages: it is specific to Travis CI (Continuous Integration) service and 
+it does not run your application in the *exact same* environment as the production code. To fix both, 
+take advantage of the fact that we will run your application code in a [Docker container](/extend/docker/tutorial/). 
+By using [Docker Compose](https://docs.docker.com/compose/) you can set the testing environment
+exactly the same as the production environment. Have a look at the [sample repository](https://github.com/keboola/docs-custom-science-example-python-ci-testing) 
+described below.
 
 #### Configuration
-To run your tests in our Docker Container, you need to create a
+To run your tests in our Docker Container, create a
 [`docker-compose.yml` file](https://github.com/keboola/docs-custom-science-example-python-ci-testing/blob/master/docker-compose.yml) in the root of your repository:
 
 {% highlight yml %}
@@ -370,14 +370,14 @@ services:
       - ./:/src/
 {% endhighlight %}
 
-The `image` option defines what Docker Image is used to run the tests - `quay.io/keboola/docker-custom-python:1.1.2` refers to
-[our image](https://quay.io/repository/keboola/docker-custom-r?tab=tags) which we use to run Custom Science extensions on
-our production servers. Note that the part `1.1.2` refers to an image tag, which changes from time to time (and you should
-generally use the highest version). The `volumes` option defines that the current directory will be mapped to `/src/` directory
-inside the image. The `command` option defines the command that will be used to run the tests `/bin/sh /src/tests.sh`. Note
-that this command will be run **inside** the docker image, so you don't need to have shell available on your machine. This leads
-us to the [`tests.sh` file](https://github.com/keboola/docs-custom-science-example-python-ci-testing/blob/master/tests.sh), which you
-should also create in the root of your repository:
+The `image` option defines what Docker Image is used to run the tests -- `quay.io/keboola/docker-custom-python:1.1.2` refers to
+[our image](https://quay.io/repository/keboola/docker-custom-r?tab=tags) we use to run Custom Science extensions on
+our production servers. The `1.1.2` part refers to an image tag, which changes from time to time. You should generally use its highest version. 
+The `volumes` option defines that the current directory will be mapped to the `/src/` directory inside the image. 
+The `command` option defines the command for running the `/bin/sh /src/tests.sh` tests. It will be run **inside** the docker image, 
+so you do not need to have shell available on your machine. This leads us to the 
+[`tests.sh` file](https://github.com/keboola/docs-custom-science-example-python-ci-testing/blob/master/tests.sh), 
+which you should also create in the root of your repository:
 
 {% highlight bash %}
 #!/bin/sh
@@ -389,24 +389,24 @@ py.test --cov=text_splitter --cov-report term-missing /src/
 The above simple [Shell script](http://www.freeos.com/guides/lsst/) will first try to check your package using the
 [flake8 checker](https://pypi.python.org/pypi/flake8) and then run the tests with
 [pytest](http://pytest.org/latest/). Don't forget that the `/src/` directory maps to the root directory of your
-repository (we have defined this in `docker-compose.yml`.
+repository (we have defined this in `docker-compose.yml`).
 
 #### Running
-To run the tests in the Docker container, you need a machine with [installed Docker](/extend/docker/tutorial/setup/) and execute the
-following command line (in the root of your repository):
+To run the tests in the Docker container, [install Docker](/extend/docker/tutorial/setup/) on your machine,
+and execute the following command line (in the root of your repository):
 
     docker-compose run --rm -e KBC_DATADIR=/src/tests/data/ tests
 
 Docker-compose will process the `docker-compose.yml` and execute the `tests` service as defined on
 its [4th line](https://github.com/keboola/docs-custom-science-example-python-ci-testing/blob/master/docker-compose.yml#L4). This service will take our
-docker `docker-custom-python` image and map the current directory into a `/src/` directory inside the image. Then it will execute the shell script `/src/tests.sh`
+docker `docker-custom-python` image and map the current directory into a `/src/` directory inside the image. Then it will execute the `/src/tests.sh` shell script
 inside that image. Where `/src/tests.sh` refers to the `tests.sh` script in the root of your repository. This will check your Python class.
-The option `-e KBC_DATADIR=/src/tests/data/` sets environment variable `KBC_DATADIR` to the data directory so that it refers to the `tests/data/` directory
+The `-e KBC_DATADIR=/src/tests/data/` option sets the `KBC_DATADIR` environment variable to the data directory so that it refers to the `tests/data/` directory
 in the root of your repository.
 
 #### Running on Travis
-To run the tests in docker container automatically, you should again automate them to run on every push to your git repository. Now, you are not limited to
-CI services with Python support, but you can use any CI service with Docker support. You can also use Travis, as we will demonstrate in the following
+To run the tests in a docker container automatically, automate them, again, to run on every push to your git repository. Now, you are not limited to
+CI services with Python support, but you can use any CI service with Docker support. You can also use Travis, as we will show in the following
 [`.travis.yml` configuration](https://github.com/keboola/docs-custom-science-example-python-ci-testing/blob/master/.travis.yml):
 
 {% highlight yml %}
@@ -438,8 +438,8 @@ script
 {% endhighlight %}
 
 Most of the configuration is related to setting up docker, the only important part is two last lines. `docker-compose build tests` will build the
-docker image (which will be skipped in case you are not using your own [Dockerfile](/extend/docker/tutorial/howto/)). The
-command `docker-compose run --rm -e KBC_DATADIR=/src/tests/data/ tests` is the most important as it actually runs docker-compose and subsequently
+docker image, which will be skipped in case you are not using your own [Dockerfile](/extend/docker/tutorial/howto/). 
+The `docker-compose run --rm -e KBC_DATADIR=/src/tests/data/ tests` command is the most important as it actually runs docker-compose and subsequently
 all the tests (it is the same command you can use [locally](/extend/custom-science/python/#running)).
 
 All the above configuration is available in the [sample repository](https://github.com/keboola/docs-custom-science-example-python-ci-testing).
