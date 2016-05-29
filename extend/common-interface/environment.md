@@ -31,6 +31,11 @@ The following environment variables are injected in the container:
  - `KBC_TOKENDESC`: Description (user name or token name) of the token running the container.
  - `KBC_TOKEN`: The actual token running the container.
 
+The following variables are available when GELF logger is enabled in the [component registration](/extend/registration/):
+
+- `KBC_LOGGER_ADDR`: IP Address of GELF server.
+- `KBC_LOGGER_PORT`: Port of the GELF server.
+
 ## Return Values
 
 The script defined in Dockerfile [`ENTRYPOINT`](/extend/docker/tutorial/howto/) should provide an exit status. The
@@ -62,6 +67,7 @@ automatically forwarded to you.
 
 ## Standard Output and Standard Error
 
+Unless you have turned on
 Docker Bundle listens to [STDOUT](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_.28stdout.29)
 and [STDERR](https://en.wikipedia.org/wiki/Standard_streams#Standard_error_.28stderr.29)
 of the application and forwards any content live to [Storage API Events](http://docs.keboola.apiary.io/#events)
@@ -76,3 +82,5 @@ are sometimes joined into a single event; this is a known behavior of R and it h
 The events serve to pass only informational, status and warning/error messages. Absolutely no data should be
 passed through events. The amount of data in each event is limited (about 64KB). If live events are turned off, the amount
 of complete application output is also limited (about 1MB). If the limit is exceeded, the message will be trimmed.
+
+

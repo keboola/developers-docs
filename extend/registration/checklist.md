@@ -33,3 +33,4 @@ permalink: /extend/registration/checklist/
 | 25 | **Networking** | If the app downloads or uploads the client data to the Internet, any of `dataIn` (eg. for extractors), `dataOut` (eg. for writers) | &#9744; | `dataIn` |
 | 26 | **Actions** | List of supported [actions](/extend/common-interface/actions/), default `run` | &#9744; | `run` |
 | 27 | **Fees** | Using the component in KBC implies additional fees; `true` or `false` | &#9744; | `false` |
+| 28 | **Logger** | Specify a way to [log events](/extend/common-interface/logging/#gelf-logger) from your application; 'standard' or 'gelf' | &#9744; | `standard` |
