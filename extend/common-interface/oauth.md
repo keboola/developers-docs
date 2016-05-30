@@ -1,5 +1,5 @@
 ---
-title: Oauth2 Interface Specification
+title: OAuth2 Interface Specification
 permalink: /extend/common-interface/oauth/
 ---
 
@@ -12,7 +12,7 @@ decrypted only for a target component and project. End-users can be assured that
 This feature is available only for [registered extensions](/extend/registration/).
 
 ## Initialize 
-You must create a configuration for the given component and project in OAuth API V2. 
+Create a configuration for the given component and project in OAuth API V2. 
 The `OAUTH_API_ID` is the id provided when storing authorization via OAuth API V2.
 
 {% highlight json %}
@@ -62,5 +62,5 @@ the authorized API as a raw string. You need to parse the string accordingly as 
 no knowledge about the authorized APIs.
 
 Note: None of the [sandbox API calls](/extend/common-interface/sandbox)
-decrypt `authorization.oauth_api.credentials.#data` and `authorization.oauth_api.credentials.#appSecret` keys. 
+decrypt the `authorization.oauth_api.credentials.#data` and `authorization.oauth_api.credentials.#appSecret` keys. 
 

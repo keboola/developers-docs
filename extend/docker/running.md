@@ -7,9 +7,9 @@ permalink: /extend/docker/running/
 {:toc}
 
 One of the great advantages of dockerized applications is that the applications always run in the
-same environment defined by the docker image. When running in KBC, there are, however, some outside
+same environment defined by the Docker image. When running in KBC, there are, however, some outside
 environment bindings for you to take care of. Before you start, make sure, you have
-[docker set up correctly](/extend/docker/tutorial/setup/), particularly that you know
+[Docker set up correctly](/extend/docker/tutorial/setup/), particularly that you know
 your *host path* for [sharing files](/extend/docker/tutorial/setup#sharing-files). In this guide,
 we will use /Users/JohnDoe/data/ as the *host path* containing the
 [sandbox data folder](/extend/common-interface/sandbox/).
@@ -132,7 +132,7 @@ In that case, revert to the [Sandbox call](/extend/common-interface/sandbox/#cre
 
 
 ## Running Custom Science Extensions
-Running Custom Science extensions is slightly more complicated, because their Docker images are build dynamically
+Running Custom Science extensions is slightly more complicated, because their Docker images are built dynamically
 on execution. Also, because the Custom Science component uses encryption,
 the [Sandbox call](/extend/common-interface/sandbox/#create-sandbox-api-call) must be used. In the
 [API call](http://docs.kebooladocker.apiary.io/#reference/sandbox/sandbox/create-a-sandbox-job), manually
@@ -145,19 +145,19 @@ more configuration options available. The request URL is e.g. `https://syrup.keb
 
 ### Custom Science R
 
-You can run the image with:
+You can run the image with
 
     docker run --volume=/Users/JohnDoe/data/:/data --memory=8192m --cpu-shares=1024 --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-78 -i -t --entrypoint=/bin/bash/ [quay.io/keboola/docker-custom-r](https://quay.io/repository/keboola/docker-custom-r):1.0.2
 
-Then:
+then
 
     cd /data/
 
-And then execute:
+and then execute,
 
     git clone -b your_version --depth 1 your_repository /home/
 
-for example:
+for example,
 
     git clone -b 0.0.2 --depth 1 https://github.com/keboola/docs-custom-science-example-r-parameters /home/
 
@@ -169,21 +169,21 @@ You can also use docker-compose as described in [Integration using Docker Compos
 
 ### Custom Science Python
 
-You can run the image with:
+You can run the image with
 
     docker run --volume=/Users/JohnDoe/data/:/data --memory=8192m --cpu-shares=1024 --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-78 -i -t --entrypoint=/bin/bash/ [quay.io/keboola/docker-custom-python](https://quay.io/repository/keboola/docker-custom-python):0.0.4
 
-Then:
+then
 
     cd /data/
 
 (Note: for running Python 2.x applications, use the `quay.io/keboola/docker-custom-python2:0.0.2` image)
 
-Then execute:
+Then execute
 
     git clone -b your_version --depth 1 your_repository /home/
 
-for example:
+for example,
 
     git clone -b 1.0.0 --depth 1 https://github.com/keboola/docs-custom-science-example-python-parameters.git /home/
 
@@ -201,9 +201,9 @@ In the [API call](http://docs.kebooladocker.apiary.io/#reference/sandbox/input-d
 
 Use *R Transformations* request for a sample request. The only special thing about the request is that
 the body of the transformation is passed in `parameters.script` node either as a string or as an
-array of lines. The request URL is
-e.g. `https://syrup.keboola.com/docker/keboola.r-transformation/input` for R transformations
- or `https://syrup.keboola.com/docker/keboola.python-transformation/input` for Python transformations.
+array of lines. The request URL is, for instance,
+`https://syrup.keboola.com/docker/keboola.r-transformation/input` for R transformations,
+or `https://syrup.keboola.com/docker/keboola.python-transformation/input` for Python transformations.
 
 To run R Transformations, use:
 
@@ -213,8 +213,8 @@ To run Python transformations, use:
 
     docker run --volume=/Users/JohnDoe/data/:/data --memory=8192m --cpu-shares=1024 --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-78 [quay.io/keboola/python-transformation](https://quay.io/repository/keboola/python-transformation):0.0.14
 
-The transformation will run automatically and produce results. If you want to get interactively into
-the container, use the [`--entrypoint`](/extend/docker/tutorial/howto/) parameter.
+The transformation will run automatically and produce results. If you want to get into
+the container interactively, use the [`--entrypoint`](/extend/docker/tutorial/howto/) parameter.
 
 
 ### Debugging
@@ -234,7 +234,7 @@ The [Input](http://docs.kebooladocker.apiary.io/#reference/input) API call is us
 environment configuration for a registered Docker extension (without encryption) or Transformations.
 
 The [Dry run](http://docs.kebooladocker.apiary.io/#reference/dry-run) API call is the last step.
-It will do everything except output mapping and is therefore useful for debugging an existing application
+It will do everything except the output mapping and is therefore useful for debugging an existing application
 in production without modifying files and tables in a KBC project.
 
 

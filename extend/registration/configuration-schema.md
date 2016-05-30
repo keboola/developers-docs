@@ -3,21 +3,18 @@ title: Configuration Schema
 permalink: /extend/registration/configuration-schema/
 ---
 
-* TOC
-{:toc}
-
-The default input for component configuration is a JSON textarea.
+The default input for a component configuration is a JSON textarea.
 
 {: .image-popup}
 ![Generic configuration screenshot](/extend/registration/configuration.png)
 
-If you define a JSON schema, we're able to display a nice form and 
+If you define a JSON schema, we are able to display a nice form, and 
 let the user to fill the JSON using a set of defined inputs.
 
 {: .image-popup}
 ![Configuration schema](/extend/registration/configuration-schema.png)
 
-Using the configuration schema also allows us to validate the user input (both frontend and backend).
+Using the configuration schema also allows us to validate the user input, both frontend and backend.
  
 ## Creating Schema
 
@@ -28,7 +25,7 @@ you want a property to be optional, set a default value for it.
 
 ### Example
 
-Let's assume your application accepts this configuration.
+Let's assume your application accepts the following configuration.
 
 {% highlight json %}
 
