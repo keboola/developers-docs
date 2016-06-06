@@ -71,9 +71,6 @@ Unless you have turned on [GELF logging](/extend/commaon-interface/logging/#gelf
 [component registration](/extend/registration/). Docker Runner listens
 to [STDOUT](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_.28stdout.29)
 and [STDERR](https://en.wikipedia.org/wiki/Standard_streams#Standard_error_.28stderr.29)
-of the application and forwards any content live to [Storage API Events](http://docs.keboola.apiary.io/#events)
-(log levels `info` and `error`). You can turn off live forwarding by setting `streaming_logs` to `false` in the
-[component registration](/extend/registration/). The events are displayed in
-[Job detail](https://help.keboola.com/management/jobs/).
+of the application and forwards any content live to [Storage API Events](http://docs.keboola.apiary.io/#events).
 
 
