@@ -92,6 +92,9 @@ items:
 
           - url: /extend/common-interface/logging/
             title: Logging
+            items:
+              - url: /extend/common-interface/logging/development/
+                title: Local Development
 
       - url: /extend/registration/
         title: Registration
