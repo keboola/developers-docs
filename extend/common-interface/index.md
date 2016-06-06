@@ -13,5 +13,5 @@ To exchange data between your extension and Keboola Connection, use
 * optional [OAuth](/extend/common-interface/oauth/) part of configuration file, and
 * optional [actions](/extend/common-interface/actions/) for quick synchronous tasks.
 
-Additionally, [Docker Bundle](/overview/docker-bundle/) provides tools for
+Additionally, [Docker Runner](/overview/docker-bundle/) provides tools for
 [encryption](/overview/encryption) and [OAuth2 authorization](/extend/common-interface/oauth/).

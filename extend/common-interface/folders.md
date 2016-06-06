@@ -19,7 +19,7 @@ For each datafile, a [manifest file](/extend/common-interface/manifest-files/) i
 It contains metadata information (creation time, keys for tables, etc.).
 
 To create a data folder sample, use [create sandbox](/extend/common-interface/) via the
-[Docker Bundle API](http://docs.kebooladocker.apiary.io/#reference/sandbox).
+[Docker Runner API](http://docs.kebooladocker.apiary.io/#reference/sandbox).
 All the resources you need in your application will be provided in a ZIP archive.
 
 The predefined data exchange folder structure is as follows:
@@ -33,7 +33,7 @@ This folder structure is always available to your application. For Custom Scienc
 will always be set to `/data/`, so the above folders can be accessed both with absolute and relative paths (e.g. `in/tables`)
 (for Docker Extensions, the current directory is up to you).
 Do not put arbitrary files in the `/data/` folder as they will be uploaded into the user project
-(or cause errors in the output mapping). For working or temporary files, use either the `/home/` or `/tmp/` folder. 
+(or cause errors in the output mapping). For working or temporary files, use either the `/home/` or `/tmp/` folder.
 The working directories have 10GB of free space.
 
 ### `/data/in/tables/` Folder
