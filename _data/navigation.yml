@@ -14,7 +14,7 @@ items:
         title: Encryption
 
       - url: /overview/docker-bundle/
-        title: Docker Bundle
+        title: Docker Runner
 
       - url: /overview/devel-project/
         title: Development Project

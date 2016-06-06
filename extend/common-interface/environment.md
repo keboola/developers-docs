@@ -62,7 +62,7 @@ automatically forwarded to you.
 
 ## Standard Output and Standard Error
 
-Docker Bundle listens to [STDOUT](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_.28stdout.29)
+Docker Runner listens to [STDOUT](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_.28stdout.29)
 and [STDERR](https://en.wikipedia.org/wiki/Standard_streams#Standard_error_.28stderr.29)
 of the application and forwards any content live to [Storage API Events](http://docs.keboola.apiary.io/#events)
 (log levels `info` and `error`). You can turn off live forwarding by setting `streaming_logs` to `false` in the
