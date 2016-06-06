@@ -7,7 +7,7 @@ The KBC environment consists of many built-in [*components*](/overview/) which i
 together (e.g. Storage, Transformations and Readers). You can also create KBC extensions. Currently, 
 there are two types of extensions available:
 
-* [Generic Extractor](/extend/generic-extractor/) - a specific component designated for implementing extractors for services with REST API
+* [Generic Extractor](https://github.com/keboola/generic-extractor/) - a specific component designated for implementing extractors for services with REST API
 * Custom Extension - a component extending KBC with an arbitrary code
 
 ## Custom Extensions
@@ -70,7 +70,7 @@ The following table provides an overview of the main characteristics of KBC exte
   <tr>
     <th>Brandable</th>
     <td>yes</td>
-    <td>no</td>
+    <td>yes</td>
     <td>no
       (coming soon)</td>
   </tr>

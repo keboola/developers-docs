@@ -37,7 +37,7 @@ to hear about it.
 Tables from Storage are imported to the Python script from CSV files. The CSV files can be read by standard python
 functions from the [csv packages](https://docs.python.org/3/library/csv.html). You can read the CSV files either
 to vectors (numbered columns) or to dictionaries (named columns). The directory structure follows our general
-[docker interface](/extend/common-interface/) - so
+[Docker interface](/extend/common-interface/) - so
 input tables are stored as CSV files in `in/tables/`, output tables are stored in `out/tables/`.
 It is recommended to explicitly specify the CSV formatting options.
 Below is the code for basic reading and writing files, it is also available in our
@@ -318,15 +318,15 @@ You can look at the [sample application](https://github.com/keboola/docs-custom-
 at a more complicated [TextSpliter application](https://github.com/keboola/python-custom-application-text-splitter/blob/master/main.py).
 
 ## Continuous Integration and Testing
-Once you have your script contained, use standard testing methods of Python such as [py.test](http://pytest.org/latest/). 
+Once you have your script contained, use standard Python testing methods such as [py.test](http://pytest.org/latest/). 
 It is important to run tests automatically. Set them up to run every time you push a commit into your repository.
 
 ### Integration with Travis
 [Travis](https://travis-ci.org/) offers an easy way to setup a continuous integration with Github repositories. To setup the integration, 
 create a `.travis.yml` file in the root of your repository and
 then [link the repository to Travis](https://docs.travis-ci.com/user/getting-started/#To-get-started-with-Travis-CI%3A).
-Travis offers [Python support](https://docs.travis-ci.com/user/languages/python), only add the KBC Package (if you use it) and set the data directory using
-the `KBC_DATADIR` environment variable (that will be automatically picked up by the KBC package):
+Travis offers [Python support](https://docs.travis-ci.com/user/languages/python), only add the KBC Package, if using it, and set the data directory using
+the `KBC_DATADIR` environment variable, which will be automatically picked up by the KBC package:
 
 {% highlight yml %}
 language: python
@@ -346,12 +346,14 @@ script:
 {% endhighlight %}
 
 ### Integration Using Docker Compose
-The above option is easy to set up, but it has two disadvantages: it is specific to Travis CI (Continuous Integration) service and 
-it does not run your application in the *exact same* environment as the production code. To fix both, 
-take advantage of the fact that we will run your application code in a [Docker container](/extend/docker/tutorial/). 
-By using [Docker Compose](https://docs.docker.com/compose/) you can set the testing environment
-exactly the same as the production environment. Have a look at the [sample repository](https://github.com/keboola/docs-custom-science-example-python-ci-testing) 
-described below.
+The above option is easy to set up, but it has two disadvantages: 
+
+- it is specific to Travis CI (Continuous Integration) service, and
+- it does not run your application in the *exact same* environment as the production code. 
+
+To fix both, take an advantage of the fact that we will run your application code in a [Docker container](/extend/docker/tutorial/). 
+By using [Docker Compose](https://docs.docker.com/compose/) you can set the testing environment in the exact same manner as the production environment. 
+Have a look at the [sample repository](https://github.com/keboola/docs-custom-science-example-python-ci-testing) described below.
 
 #### Configuration
 To run your tests in our Docker Container, create a
@@ -370,14 +372,14 @@ services:
       - ./:/src/
 {% endhighlight %}
 
-The `image` option defines what Docker Image is used to run the tests -- `quay.io/keboola/docker-custom-python:1.1.2` refers to
+The `image` option defines what Docker Image is used for running the tests -- `quay.io/keboola/docker-custom-python:1.1.2` refers to
 [our image](https://quay.io/repository/keboola/docker-custom-r?tab=tags) we use to run Custom Science extensions on
 our production servers. The `1.1.2` part refers to an image tag, which changes from time to time. You should generally use its highest version. 
 The `volumes` option defines that the current directory will be mapped to the `/src/` directory inside the image. 
-The `command` option defines the command for running the `/bin/sh /src/tests.sh` tests. It will be run **inside** the docker image, 
+The `command` option defines the command for running the `/bin/sh /src/tests.sh` tests. It will be run **inside** the Docker image, 
 so you do not need to have shell available on your machine. This leads us to the 
 [`tests.sh` file](https://github.com/keboola/docs-custom-science-example-python-ci-testing/blob/master/tests.sh), 
-which you should also create in the root of your repository:
+which should be also created in the root of your repository:
 
 {% highlight bash %}
 #!/bin/sh
@@ -399,13 +401,13 @@ and execute the following command line (in the root of your repository):
 
 Docker-compose will process the `docker-compose.yml` and execute the `tests` service as defined on
 its [4th line](https://github.com/keboola/docs-custom-science-example-python-ci-testing/blob/master/docker-compose.yml#L4). This service will take our
-docker `docker-custom-python` image and map the current directory into a `/src/` directory inside the image. Then it will execute the `/src/tests.sh` shell script
+Docker `docker-custom-python` image and map the current directory into a `/src/` directory inside the image. Then it will execute the `/src/tests.sh` shell script
 inside that image. Where `/src/tests.sh` refers to the `tests.sh` script in the root of your repository. This will check your Python class.
 The `-e KBC_DATADIR=/src/tests/data/` option sets the `KBC_DATADIR` environment variable to the data directory so that it refers to the `tests/data/` directory
 in the root of your repository.
 
 #### Running on Travis
-To run the tests in a docker container automatically, automate them, again, to run on every push to your git repository. Now, you are not limited to
+To run the tests in a Docker container automatically, automate them, again, to run on every push to your git repository. Now, you are not limited to
 CI services with Python support, but you can use any CI service with Docker support. You can also use Travis, as we will show in the following
 [`.travis.yml` configuration](https://github.com/keboola/docs-custom-science-example-python-ci-testing/blob/master/.travis.yml):
 
@@ -413,7 +415,7 @@ CI services with Python support, but you can use any CI service with Docker supp
 sudo: required
 
 services:
-  - docker
+  - Docker
 
 env:
   DOCKER_COMPOSE_VERSION: 1.6.2
@@ -437,9 +439,9 @@ script
   - docker-compose run --rm -e KBC_DATADIR=/src/tests/data/ tests
 {% endhighlight %}
 
-Most of the configuration is related to setting up docker, the only important part is two last lines. `docker-compose build tests` will build the
-docker image, which will be skipped in case you are not using your own [Dockerfile](/extend/docker/tutorial/howto/). 
-The `docker-compose run --rm -e KBC_DATADIR=/src/tests/data/ tests` command is the most important as it actually runs docker-compose and subsequently
+Most of the configuration is related to setting up Docker, the only important part is two last lines. `docker-compose build tests` will build the
+Docker image, which will be skipped in case you are not using your own [Dockerfile](/extend/docker/tutorial/howto/). 
+The `docker-compose run --rm -e KBC_DATADIR=/src/tests/data/ tests` command is the most important as it actually runs docker-compose, and subsequently
 all the tests (it is the same command you can use [locally](/extend/custom-science/python/#running)).
 
 All the above configuration is available in the [sample repository](https://github.com/keboola/docs-custom-science-example-python-ci-testing).

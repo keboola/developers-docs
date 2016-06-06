@@ -5,7 +5,7 @@ permalink: /extend/docker/images/
 
 In Keboola, we use both 
 [Docker Hub](https://hub.docker.com/r/keboola/) and 
-[Quay](https://quay.io/organization/keboola) registry to store docker images. 
+[Quay](https://quay.io/organization/keboola) registry to store Docker images. 
 In both registries, our account is called *Keboola*. 
 Some images are present in both registries. 
 As long as the same tag is used, they refer to the exact same build and are freely interchangeable. 
@@ -14,7 +14,7 @@ In that case, you should use the one in the same registry as your image.
 
 ## Base Images
 
-Unless you have some special requirements, we highly encourage you to use Keboola Base Images as the base for your docker images.
+Unless you have some special requirements, we highly encourage you to use Keboola Base Images as the base for your Docker images.
 They have no entrypoint and they do not contain any application logic. 
 Both of these things are up to you to implement.
 
@@ -68,7 +68,7 @@ uses `master`, `latest` tags.
  
 ## Application Images
 
-For inspiration, these are our docker images used in transformations and Custom Science extensions. 
+For inspiration, these are our Docker images used in transformations and Custom Science extensions. 
 Docker extensions use the same [common interface](/extend/common-interface/).
 
 Transformations:
@@ -109,6 +109,6 @@ We use three types of tags:
 - `X.Y.Z`: The tags follow [Semantic versioning](http://semver.org/) and are fixed to a specific image build.
 - `X.Y.Z-a`: The `X.Y.Z` tag section refers to a specific environment version and the `a` part refers to our revision. 
 For example, the *docker-base-r* image with `3.2.1-k` tag contains R version *3.2.1*. *k* is our revision. Similarly, all other images
-with `3.2.1-?` tag contain R version *3.2.1*, though there are minor differences in what and how is installed. Generally,
+with `3.2.1-?` tag contain R version *3.2.1*, though there are minor differences in what is installed and how. Generally,
 the latest minor revision should be used. 
 

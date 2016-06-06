@@ -61,7 +61,7 @@ which is accessible in the [configuration file](/extend/common-interface/config-
 how to read and write tables and table manifests. File manifests are handled the same way. For a full authoritative list
 of items returned in table list and manifest contents, see [the specification](/extend/common-interface/config-file/)
 
-Note that the `destination` label in the script refers to the destination from the the mappers perspective. The input mapper takes `source` tables from user's storage, and produces `destination` tables that become the input of the extension. The output tables of the extension are consumed by the output mapper whose `destination` are the resulting tables in Storage.
+Note that the `destination` label in the script refers to the destination from the mappers perspective. The input mapper takes `source` tables from user's storage, and produces `destination` tables that become the input of the extension. The output tables of the extension are consumed by the output mapper whose `destination` are the resulting tables in Storage.
 
 {% highlight r %}
 # initialize application
@@ -177,7 +177,7 @@ actual code is contained in the `doSomething()` function in
 the [`R/myPackage.R`](https://github.com/keboola/docs-custom-science-example-r-package/blob/master/R/myPackage.R) file. The code
 itself is identical to the [previous example](#simple-example).
 
-You can test the sample code with this *runtime* setting:
+Test the sample code with this *runtime* setting:
 
 {% highlight json %}
 {
@@ -194,21 +194,22 @@ Tests are organized in the [/tests/](https://github.com/keboola/docs-custom-scie
 by copying [config_template.R](https://github.com/keboola/docs-custom-science-example-r-package/blob/master/tests/config_template.R)
 - Subdirectory `test_that/` which contains the actual [testthat tests](http://r-pkgs.had.co.nz/tests.html)
 
-You can run the tests locally from RStudio:
+You can run the tests locally from RStudio,
 
 {: .image-popup}
 ![RStudio tests](/extend/custom-science/r/rstudio-tests.png)
 
-Or you can set them to run automatically using [Travis](https://travis-ci.org/) continuous integration server every time you push into your git repository.
-For that you can use the provided [travis.yml](https://github.com/keboola/docs-custom-science-example-r-package/blob/master/.travis.yml) file.
-[See below](#continuous-integration-and-testing) for more information about continous integration.
+or you can set them to run automatically using the [Travis](https://travis-ci.org/) continuous integration server every time 
+you push into your git repository.
+For that use the provided [travis.yml](https://github.com/keboola/docs-custom-science-example-r-package/blob/master/.travis.yml) file.
+[See below](#continuous-integration-and-testing) for more information about continuous integration.
 
 For a more thorough tutorial on developing R packages, see the [R packages book](http://r-pkgs.had.co.nz/).
 
 ### Subclass Example
-This example defines a subclass of the `DockerApplication` RC class from the [KBC R package's](https://github.com/keboola/r-docker-application).
+This example defines a subclass of the `DockerApplication` RC class from the [KBC R package](https://github.com/keboola/r-docker-application).
 [RC classes](http://adv-r.had.co.nz/OO-essentials.html#rc) are a type of classes in R. This approach is fully comparable with the
-previous [package example](#package-example). There are no major differences or (dis)advantages. The repository again has
+previous [package example](#package-example). There are no major differences or (dis)advantages. The repository, again, has
 to have the file `main.R` in its root. The difference is that we create the RS class `CustomApplicationExample` and call
 its `run()` method.
 
@@ -221,7 +222,7 @@ app$run()
 
 The name of the class `CustomApplicationExample` is completely arbitrary and is defined in
 [`R/myApp.R'](https://github.com/keboola/docs-custom-science-example-r-subclass/blob/master/R/myApp.R#L6). The application
-code itself is formally different as all the methods are in the class, so instead of:
+code itself is formally different as all the methods are in the class. So, instead of
 
 {% highlight r %}
 app <- DockerApplication$new(datadir)
@@ -229,14 +230,16 @@ app$readConfig()
 data['double_number'] <- data['number'] * app$getParameters()$multiplier
 {% endhighlight %}
 
-You use only within the body of `CustomApplicationExample`'s `run` method:
+use 
 
 {% highlight r %}
 readConfig()
 data['double_number'] <- data['number'] * getParameters()$multiplier
 {% endhighlight %}
 
-You can test the sample code with this *runtime* setting:
+within the body of `CustomApplicationExample`'s `run` method.
+
+Test the sample code with this *runtime* setting:
 
 {% highlight json %}
 {
@@ -246,16 +249,16 @@ You can test the sample code with this *runtime* setting:
 {% endhighlight %}
 
 ## Continuous Integration and Testing
-When using the [Package](#package-example) or [Subclass](#subclass-example) approach, you can use standard testing methods of R (we like using
-the [`testthat` package](http://r-pkgs.had.co.nz/tests.html)). It is important to run tests automatically, so you should set up tests to run everytime
-you push a commit into your repository.
+When using the [Package](#package-example) or [Subclass](#subclass-example) approach, you can use standard R testing methods.
+We like the [`testthat` package](http://r-pkgs.had.co.nz/tests.html). Since it is important to run tests automatically,
+set them up to run every time you push a commit into your repository.
 
 ### Integration with Travis
-[Travis](https://travis-ci.org/) offers an easy way to setup continuous integration with Github repositories. To setup the integration, you need to create
-a `.travis.yml` file in the root of your repository and
+[Travis](https://travis-ci.org/) offers an easy way of setting up a continuous integration with Github repositories. To setup the integration,
+create a `.travis.yml` file in the root of your repository, and
 then [link the repository to Travis](https://docs.travis-ci.com/user/getting-started/#To-get-started-with-Travis-CI%3A).
-Travis offers [R support](https://docs.travis-ci.com/user/languages/r), you only need to add the KBC Package (if you use it) and set the data directory using
-the `KBC_DATADIR` environment variable (that will be automatically picked up by KBC package):
+Travis offers [R support](https://docs.travis-ci.com/user/languages/r). Only add the KBC Package, if using it, and set the data directory using
+the `KBC_DATADIR` environment variable, which will be automatically picked up by the KBC package:
 
 {% highlight yml %}
 language: r
@@ -275,12 +278,15 @@ before_install:
  - export KBC_DATADIR=$TRAVIS_BUILD_DIR/tests/data/
 {% endhighlight %}
 
-### Integration using Docker Compose
-The above option is easy to set up, but it has two disadvantages: it is specific to Travis CI (Continous Integration) service and it does not run your application in the
-*exact same* environment as the production code. To fix both, you can take advantage of the fact that we will run your application code in a
-[Docker container](/extend/docker/tutorial/). By using [Docker Compose](https://docs.docker.com/compose/) you can set the testing environment
-exactly the same as the production environment. You can have a look at a [sample repository](https://github.com/keboola/docs-custom-science-example-r-ci-testing) which
-is described below.
+### Integration Using Docker Compose
+The above option is easy to set up, but it has two disadvantages: 
+
+- it is specific to Travis CI (Continuous Integration) service, and 
+- it does not run your application in the *exact same* environment as the production code. 
+
+To fix both, take an advantage of the fact that we will run your application code in a [Docker container](/extend/docker/tutorial/). 
+By using [Docker Compose](https://docs.docker.com/compose/), you can set the testing environment in the exact same way as the production environment. 
+Take a look at the [sample repository](https://github.com/keboola/docs-custom-science-example-r-ci-testing) described below.
 
 #### Configuration
 To run your tests in our Docker Container, you need to create a
@@ -299,14 +305,14 @@ services:
     command: /bin/sh /src/tests.sh
 {% endhighlight %}
 
-The `image` option defines what Docker Image is used to run the tests - `quay.io/keboola/docker-custom-r:1.0.4` refers to
-[our image](https://quay.io/repository/keboola/docker-custom-r?tab=tags) which we use to run Custom Science extensions on
-our production servers. Note that the part `1.0.4` refers to an image tag, which changes from time to time (and you should
-generally use the highest version). The `volumes` option defines that the current directory will be mapped to `/src/` directory
-inside the image. The `command` option defines the command that will be used to run the tests `/bin/sh /src/tests.sh`. Note
-that this command will be run **inside** the docker image, so you don't need to have shell available on your machine. This leads
-us to the [`tests.sh` file](https://github.com/keboola/docs-custom-science-example-r-ci-testing/blob/master/tests.sh), which you
-should also create in the root of your repository:
+The `image` option defines what Docker Image is used for running the tests -- `quay.io/keboola/docker-custom-r:1.0.4` refers to
+[our image](https://quay.io/repository/keboola/docker-custom-r?tab=tags) we use to run Custom Science extensions on our production servers. 
+The `1.0.4` part refers to an image tag, which changes from time to time. You should generally use the highest version. 
+The `volumes` option defines that the current directory will be mapped to `/src/` directory inside the image. 
+The `command` option defines the command for running the tests `/bin/sh /src/tests.sh`. 
+It will be run **inside** the Docker image, so you don't need to have shell available on your machine. 
+This leads us to the [`tests.sh` file](https://github.com/keboola/docs-custom-science-example-r-ci-testing/blob/master/tests.sh), which
+should be also created in the root of your repository:
 
 {% highlight bash %}
 #!/bin/sh
@@ -317,28 +323,28 @@ R CMD check --as-cran /src/
 
 The above simple [Shell script](http://www.freeos.com/guides/lsst/) will first try to build your package using
 [`R CMD build`](https://stat.ethz.ch/R-manual/R-devel/library/utils/html/PkgUtils.html) and then check
-it (i.e. run the tests) with
-[`R CMD check`](http://r-pkgs.had.co.nz/check.html). This assumes that you are using the
-[package approach](#package-example), if you are using other approaches you should modify these commands to run your tests.
+it, meaning running the tests, with [`R CMD check`](http://r-pkgs.had.co.nz/check.html). This assumes you are using the
+[package approach](#package-example). If using other approaches, modify these commands to run your tests.
 Don't forget that the `/src/` directory maps to the root directory of your repository (we have defined this in
-`docker-compose.yml`.
+`docker-compose.yml`).
 
 #### Running
-To run the tests in the Docker container, you need a machine with [installed Docker](/extend/docker/tutorial/setup/) and execute the
+To run the tests in the Docker container, have [Docker installed](/extend/docker/tutorial/setup/) on your machine, and execute the
 following command line (in the root of your repository):
 
     docker-compose run --rm -e KBC_DATADIR=/src/tests/data/ tests
 
 Docker-compose will process the `docker-compose.yml` and execute the `tests` service as defined on
-its [4th line](https://github.com/keboola/docs-custom-science-example-r-ci-testing/blob/master/docker-compose.yml#L4). This service will take our
-docker `docker-custom-r` image and map the current directory into a `/src/` directory inside the image. Then it will execute the shell script `/src/tests.sh`
-inside that image. Where `/src/tests.sh` refers to the `tests.sh` script in the root of your repository. This will buiild and check the R package.
-The option `-e KBC_DATADIR=/src/tests/data/` sets environment variable `KBC_DATADIR` to the data directory so that it refers to the `tests/data/` directory
-in the root of your repository.
+its [4th line](https://github.com/keboola/docs-custom-science-example-r-ci-testing/blob/master/docker-compose.yml#L4). 
+This service will take our Docker `docker-custom-r` image and map the current directory into a `/src/` directory inside the image. 
+Then it will execute the shell script `/src/tests.sh` inside that image. Where `/src/tests.sh` refers to the `tests.sh` script in the root of your repository. 
+This will build and check the R package. The option `-e KBC_DATADIR=/src/tests/data/` sets environment variable `KBC_DATADIR` to the data directory, 
+so that it refers to the `tests/data/` directory in the root of your repository.
 
 #### Running on Travis
-To run the tests in docker container automatically, you should again automate them to run on every push to your git repository. Now, you are not limited to
-CI services with R support, but you can use any CI service with Docker support. You can also use Travis, as we will demonstrate in the following
+To run the tests in a Docker container automatically, automate them, again, to run on every push to your git repository. 
+Now, you are not limited to the CI services with R support, but you can use any CI service with Docker support. 
+You can also use Travis, as we will show you in the following
 [`.travis.yml` configuration](https://github.com/keboola/docs-custom-science-example-r-ci-testing/blob/master/.travis.yml):
 
 {% highlight yml %}
@@ -369,12 +375,12 @@ script
   - docker-compose run --rm -e KBC_DATADIR=/src/tests/data/ tests
 {% endhighlight %}
 
-Most of the configuration is related to setting up docker, the only important part is two last lines. `docker-compose build tests` will build the
-docker image (which will be skipped in case you are not using your own [Dockerfile](/extend/docker/tutorial/howto/)). The
-command `docker-compose run --rm -e KBC_DATADIR=/src/tests/data/ tests` is the most important as it actually runs docker-compose and subsequently
-all the tests (it is the same command you can use [locally](/extend/custom-science/r/#running)).
+Most of the configuration is related to setting up Docker, the only important part is two last lines. `docker-compose build tests` will build 
+the Docker image, which will be skipped in case you are not using your own [Dockerfile](/extend/docker/tutorial/howto/). 
+The `docker-compose run --rm -e KBC_DATADIR=/src/tests/data/ tests` command is the most important as it actually runs docker-compose and, 
+subsequently, all the tests. It is the same command you can use [locally](/extend/custom-science/r/#running).
 
-You should also create an [`.Rbuildignore` file](https://github.com/keboola/docs-custom-science-example-r-ci-testing/blob/master/.Rbuildignore) to avoid receiving
+Also, create an [`.Rbuildignore` file](https://github.com/keboola/docs-custom-science-example-r-ci-testing/blob/master/.Rbuildignore) to avoid receiving
 warnings for unrecognized files in the root of your package repository:
 
     ^.*\.Rproj$
