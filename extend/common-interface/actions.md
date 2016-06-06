@@ -8,7 +8,9 @@ permalink: /extend/common-interface/actions/
 
 Actions provide a way to execute very quick tasks in a single Docker extension, using a single code base.
 The default component's action (`run`) executes as a background, asynchronous, job. It is queued, has plenty of
-execution time, and there are cases when you might not want to wait for it. Using actions is fully optional.
+execution time, and there are cases when you might not want to wait for it. Apart from the default `run`, there
+can be synchronous actions, which have limited execution time and you must wait for them. When we refer to
+**actions** we mean *synchronous actions*. Using actions is fully optional.
 
 ## Use Case
 For example in our database extractor the main task (`run` action) is the data extraction itself. But we also want to be
@@ -29,8 +31,8 @@ contains the `action` property, which contains the name of the currently execute
 All actions must be explicitly specified when you [register](/extend/registration/) your component.
 
 ## Running Actions
-Actions are available through the [API](http://docs.kebooladocker.apiary.io/#reference/actions/run-custom-docker-extension-action). 
-Actions do not load the configuration from Storage, so you need to fully specify the whole configuration in the request body. 
+Actions are available through the [API](http://docs.kebooladocker.apiary.io/#reference/actions/run-custom-docker-extension-action).
+Actions do not load the configuration from Storage, so you need to fully specify the whole configuration in the request body.
 If any of your parameters are encrypted, they will be decrypted before they are passed to your application.
 
 Do not specify the `action` attribute in the request body, it is already in the URI. Use any of `parameters`,
