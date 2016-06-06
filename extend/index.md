@@ -70,7 +70,7 @@ The following table provides an overview of the main characteristics of KBC exte
   <tr>
     <th>Brandable</th>
     <td>yes</td>
-    <td>no</td>
+    <td>yes</td>
     <td>no
       (coming soon)</td>
   </tr>

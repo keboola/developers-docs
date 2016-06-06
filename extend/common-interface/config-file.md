@@ -280,8 +280,8 @@ Upload `/data/out/tables/out.c-main.data.csv` to `out.c-main.data`
 {% endhighlight %}
 
 #### Output Mapping - Set Additional Properties
-Upload `/data/out/tables/data.csv` to `out.c-main.data`.
-with a primary key and incrementally.
+Incrementally upload `/data/out/tables/data.csv` to `out.c-main.data`.
+with a compound primary key set on columns `column1` and `column2`.
 
 {% highlight json %}
 {
@@ -292,7 +292,7 @@ with a primary key and incrementally.
                     "source": "data.csv",
                     "destination": "out.c-main.data",
                     "incremental": true,
-                    "primary_key": ["id"]
+                    "primary_key": ["column1", "column2"]
                 }
             ]
         }
