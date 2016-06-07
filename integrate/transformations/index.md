@@ -3,9 +3,6 @@ title: Transformations
 permalink: /integrate/transformations/
 ---
 
-* TOC
-{:toc}
-
 ## Documentation
 
 Full Transformations documentation is on [help.keboola.com/manipulation/transformations](https://help.keboola.com/manipulation/transformations/). 
