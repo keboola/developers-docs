@@ -69,6 +69,9 @@ items:
         title: Common Interface
         items:
 
+          - url: /extend/common-interface/sandbox/
+            title: Creating Sandbox
+
           - url: /extend/common-interface/folders/
             title: Data Folders
 
@@ -87,8 +90,11 @@ items:
           - url: /extend/common-interface/actions/
             title: Actions
 
-          - url: /extend/common-interface/sandbox/
-            title: Creating Sandbox
+          - url: /extend/common-interface/logging/
+            title: Logging
+            items:
+              - url: /extend/common-interface/logging/development/
+                title: Local Development
 
       - url: /extend/registration/
         title: Registration
