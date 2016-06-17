@@ -40,8 +40,8 @@ if (Sys.getenv("KBC_PROJECTID") != '123')  {
 
 Information about the repository with the extension code is entered into the *Runtime* configuration field when 
 creating the extension configuration. It is not available to the extension itself. Both repositories, private 
-and public, are supported. KBC Custom Science configuration needs to refer to a particular tag of your repository; 
-we recommend [Semantic versioning](http://semver.org/). 
+and public, are supported. **KBC Custom Science configuration needs to refer to a particular tag of your repository; 
+we recommend [Semantic versioning](http://semver.org/)**. 
 
 ### Public Repository
 The basic *Runtime* settings for a public repository are entered in JSON format: 
