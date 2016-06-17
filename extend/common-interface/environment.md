@@ -31,6 +31,11 @@ The following environment variables are injected in the container:
  - `KBC_TOKENDESC`: Description (user name or token name) of the token running the container.
  - `KBC_TOKEN`: The actual token running the container.
 
+The following variables are available when GELF logger is enabled in the [component registration](/extend/registration/):
+
+- `KBC_LOGGER_ADDR`: IP Address of GELF server.
+- `KBC_LOGGER_PORT`: Port of the GELF server.
+
 ## Return Values
 
 The script defined in Dockerfile [`ENTRYPOINT`](/extend/docker/tutorial/howto/) should provide an exit status. The
@@ -62,17 +67,10 @@ automatically forwarded to you.
 
 ## Standard Output and Standard Error
 
-Docker Runner listens to [STDOUT](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_.28stdout.29)
+Unless you have turned on [GELF logging](/extend/commaon-interface/logging/#gelf-logger) in
+[component registration](/extend/registration/). Docker Runner listens
+to [STDOUT](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_.28stdout.29)
 and [STDERR](https://en.wikipedia.org/wiki/Standard_streams#Standard_error_.28stderr.29)
-of the application and forwards any content live to [Storage API Events](http://docs.keboola.apiary.io/#events)
-(log levels `info` and `error`). You can turn off live forwarding by setting `streaming_logs` to `false` in the
-[component registration](/extend/registration/). The events are displayed in
-[Job detail](https://help.keboola.com/management/jobs/).
+of the application and forwards any content live to [Storage API Events](http://docs.keboola.apiary.io/#events).
 
-Make sure your application does not use any output buffering otherwise all
-events will be cached after the application finishes. In R applications, the outputs printed in rapid succession
-are sometimes joined into a single event; this is a known behavior of R and it has no workaround.
 
-The events serve to pass only informational, status and warning/error messages. Absolutely no data should be
-passed through events. The amount of data in each event is limited (about 64KB). If live events are turned off, the amount
-of complete application output is also limited (about 1MB). If the limit is exceeded, the message will be trimmed.
