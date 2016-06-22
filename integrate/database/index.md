@@ -1,6 +1,6 @@
 ---
-title: SSH Tunneling
-permalink: /extractors/database/ssh/
+title: SSH Database connection
+permalink: /integrate/database/
 ---
 
 * TOC
@@ -15,7 +15,7 @@ You may set up this tunnel to connect to your database server, which is located 
 The SSH connection is encrypted and uses public - private key pair for user authorization.
 
 {: .image-popup}
-![ssh tunnel](/extractors/database/ssh/ssh-tunnel.jpg)
+![Schema - SSH tunnel](/integrate/database/ssh-tunnel.jpg)
 
 ## Usage
 To use SSH tunnel with one of our database extractors, you have to setup a *SSH proxy server*.
@@ -26,7 +26,8 @@ Follow these steps, to setup a SSH tunnel to your database server:
 
 ### 1. Setup SSH proxy server
 Here is a very basic example [Dockerfile](https://docs.docker.com/engine/reference/builder/).
-All it does is run an sshd daemon and exposes port 22.
+All it does is run an sshd daemon and exposes port 22. You can of course set this up in your system in
+a similar way without using docker.
 
 {% highlight dockerfile %}
 FROM ubuntu:14.04
@@ -85,4 +86,4 @@ Various DB extractors could have different fields, but the principle remains.
 
 ## Local Tunnel
 It is also possible to use your database server as *SSH proxy server* and setup your database to only accept connections from localhost.
-In this case, set the *Host Name* to 127.0.0.1. DO NOT use the word `localhost`! Our extractors have problem with that ;)
+In this case, set the *Host Name* to `127.0.0.1`. **Do not use the word `localhost`!** Our extractors have problem with that.

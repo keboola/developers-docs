@@ -125,7 +125,7 @@ items:
             title: Windows CLI client
 
           - url: /integrate/storage/api
-            title: Using the bare API
+            title: Using the API
             items:
               - url: /integrate/storage/api/importer/
                 title: Storage API Importer

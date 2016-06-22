@@ -1,4 +1,7 @@
-
+---
+title: Manually importing and exporting data
+permalink: /integrate/storage/api/import-export/
+---
 
 ## Working with data
 KBC Table Storage (Tables) and KBC File Storage (File Uploads) are heavily connected together.
@@ -15,7 +18,7 @@ from the uploaded file (use it as `dataFileId` parameter) into destination table
 is asynchronous, so the request only creates a job and you need to poll for it's results.
 The imported files must conform to the [supported CSV format](http://docs.keboola.apiary.io/#reference/csv-files-formats).
 
-![Schema of file upload process](/integrate/storage/async-import-handling.png)
+![Schema of file upload process](/integrate/storage/api/async-import-handling.png)
 
 Exporting a table from storage is analogous to the import. First, data is [asynchronously
 exported](http://docs.keboola.apiary.io/#reference/tables/unload-data-asynchronously/asynchronous-export) from
@@ -107,7 +110,8 @@ You then have to [poll for the job results](/overview/jobs/#polling), or review 
 
 ### Table Importer Service
 The process of importing data into Storage tables can be simplified a bit by using the
-[*Table Importer*](https://github.com/keboola/sapi-table-importer). The Table importer
+[*Table Importer*](https://github.com/keboola/sapi-table-importer)
+(not to be confused with [Storage API importer](/integrate/storage/api/importer/). The Table importer
 is a KBC component, which takes files from KBC File Storage (*File Uploads*) and imports them in Storage tables.
 The advantage of Table Importer is that can be configured as part of KBC orchestration.
 To use the importer service, you need to create a configuration table for it. The table must be placed in
@@ -115,7 +119,7 @@ the bucket `sys.c-table-importer` and its name may be arbitrary. Configuration o
 [sample table](/integrate/storage/sys.c-table-importer.test-config.csv) is shown below:
 
 {: .image-popup}
-![Screenshot - Table importer configuration](/integrate/storage/api-table-exporter-setting.png)
+![Screenshot - Table importer configuration](/integrate/storage/api/api-table-exporter-setting.png)
 
 Any table in `sys.c-table-importer` bucket can contain any number of rows, each row corresponds to a single destination table and has to have the following columns:
 - `table` - Full name of the destination table in storage in format `bucketName`.`tableName`.
@@ -131,7 +135,7 @@ You can test the above configuration by uploading a [CSV file](integrate/storage
 can do so programatically via the API or via the UI.
 
 {: .image-popup}
-![Screenshot - File upload Tag](/integrate/storage/api-upload-file.png)
+![Screenshot - File upload Tag](/integrate/storage/api/api-upload-file.png)
 
 You can then run the configuration by executing the [`run` API call](http://docs.sapitableimporter.apiary.io/#reference/api/importer-run/run-import):
 
@@ -154,7 +158,7 @@ the specified table (`in.c-main.new-table`). The Table Importer records the last
  that each file is processed only once. Last processed file is recroded in table attributes:
 
 {: .image-popup}
-![Screenshot - Table attributes](table-importer-last-processed.png)
+![Screenshot - Table attributes](/integrate/storage/api/table-importer-last-processed.png)
 
 ### Working with sliced files
 Depending on the backend and table size, the data file may be sliced into chunks.

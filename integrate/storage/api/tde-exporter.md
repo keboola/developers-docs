@@ -45,7 +45,7 @@ to [general configuration format](/extend/common-interface/config-file/). The sp
 is only `parameters` section. A sample request to export table
 `in.c-main.old-table` would look like this:
 
-{% hihglight json %}
+{% highlight json %}
 {
 	"configData": {
 		"storage": {
