@@ -117,6 +117,12 @@ with the `X-StorageApi-Token` header containing your Storage token and with requ
 }
 {% endhighlight %}
 
+With [cURL](/overview/api/index/#curl), you do it by:
+
+{% highlight bash %}
+curl --request POST --header "X-StorageAPI-Token: storage-token" --data "{\"config\": \"odinuv-test-90\"}" "https://syrup.keboola.com/docker/keboola.ex-db-mysql/run"
+{% endhighlight %}
+
 When a job is created, you will obtain a response similar to this:
 
 {% highlight json %}
@@ -134,7 +140,12 @@ From the above response, the most important part is `url` which gives you URL of
 ## Job Polling
 If you want to get the actual job result, poll the [Job API](http://docs.syrupqueue.apiary.io/#reference/jobs/job/view-job-detail)
 for the current state of the job. For example, to poll for the above job, send a `GET` request to
-`https://syrup.keboola.com/queue/job/189164612` with `X-StorageApi-Token` header containing your Storage token.
+`https://syrup.keboola.com/queue/job/189164612` with `X-StorageApi-Token` header containing your Storage token:
+
+{% highlight bash %}
+curl --header "X-StorageAPI-Token: storage-token" https://syrup.keboola.com/queue/job/189164612
+{% endhighlight %}
+
 You will receive a response similar to this:
 
 {% highlight json %}

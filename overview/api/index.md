@@ -38,7 +38,8 @@ or with the following procedure:
 ## cURL
 [cURL](https://curl.haxx.se/) is a common library used by many systems. There is also 
 a [command-line interface (CLI)](https://curl.haxx.se/docs/manpage.html) available. 
-You can use the cURL CLI to create simple scripts working with KBC API. For example, to [Run a Job](/overview/jobs/), use:
+You can use the cURL CLI to create simple scripts working with KBC API. For example, to [Run a Job](/overview/jobs/), 
+use:
 
 {% highlight shell %}
 curl --data "{\"config\": \"sampledatabase\"}" --header "X-StorageAPI-Token: YourStorageToken" https://syrup.keboola.com/ex-db/run 

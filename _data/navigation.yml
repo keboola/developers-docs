@@ -109,9 +109,41 @@ items:
   - url: /integrate/
     title: Integrate
     items:
+      - url: /integrate/storage/
+        title: Storage
+        items:
+          - url: /integrate/storage/php-client
+            title: PHP client library
+
+          - url: /integrate/storage/r-client
+            title: R client library
+
+          - url: /integrate/storage/php-cli-client
+            title: PHP CLI client
+
+          - url: /integrate/storage/win-cli-client
+            title: Windows CLI client
+
+          - url: /integrate/storage/api
+            title: Using the bare API
+            items:
+              - url: /integrate/storage/api/importer/
+                title: Storage API Importer
+
+              - url: /integrate/storage/api/import-export/
+                title: Manually importing and exporting data
+
+              - url: /integrate/storage/api/configurations/
+                title: Working with configurations
+
+              - url: /integrate/storage/api/tde-exporter/
+                title: TDE Exporter
 
       - url: /integrate/transformations/
         title: Transformations
+
+      - url: /integrate/database/
+        title: SSH Tunnel for Database Extractors
 
   - url: /automate/
     title: Automate/Common Tasks

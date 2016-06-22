@@ -58,11 +58,20 @@ specified git repository on the fly.
 
 ## API
 
-The Docker Bundle API is described on [Apiary.io](http://docs.kebooladocker.apiary.io/). 
+The Docker Runner API is described on [Apiary.io](http://docs.kebooladocker.apiary.io/). Docker Runner
+has API calls to:
+
+- run a [docker extension](/extend/docker/)
+- [encrypt values](/overview/encryption/)
+- [creating sandbox](/overview/common-interface/sandbox/)
+- run [component actions](/extend/common-interface/actions/)
 
 ## Configuration
 
-Extensions executed by Docker Bundle store their configurations in [Storage API Components Configurations](http://docs.keboola.apiary.io/#reference/component-configurations). 
+Extensions executed by Docker Runner store their configurations in 
+[Storage API Components Configurations](http://docs.keboola.apiary.io/#reference/component-configurations). 
  
-When you're creating the configuration, you can use [this JSON schema](https://github.com/keboola/docker-bundle/blob/master/Resources/schemas/configuration.json) to validate the configuration before storing it.
+When you're creating the configuration, you can use 
+[this JSON schema](https://github.com/keboola/docker-bundle/blob/master/Resources/schemas/configuration.json) 
+to validate the configuration before storing it.
 
