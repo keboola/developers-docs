@@ -30,7 +30,7 @@ access to an S3 server for actual file download.
 To upload a file to KBC file Storage, you have to follow the instructions outlined in the
 [API documentation](http://docs.keboola.apiary.io/#reference/files/upload-file/upload-arbitrary-file-to-keboola).
 This means that you first need to create a file resource - to create a new file with name
-[`new-file.csv`](/intergrate/storage/new-table.csv) and size `52` bytes,
+[`new-file.csv`](/integrate/storage/new-table.csv) and size `52` bytes,
 you have to call:
 
 {% highlight bash %}
@@ -131,7 +131,7 @@ Any table in `sys.c-table-importer` bucket can contain any number of rows, each 
 - `delimiter` - CSV delimiter (by default `,`).
 - `escapedBy` - CSV escape character for enclosure, leave empty to default to escaping by double enclosure.
 
-You can test the above configuration by uploading a [CSV file](integrate/storage/new-table.csv) into *File Uploads* and assigning a tag `new-data` to it. You
+You can test the above configuration by uploading a [CSV file](/integrate/storage/new-table.csv) into *File Uploads* and assigning a tag `new-data` to it. You
 can do so programatically via the API or via the UI.
 
 {: .image-popup}

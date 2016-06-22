@@ -7,23 +7,23 @@ permalink: /integrate/storage/win-cli-client/
 {:toc}
 
 Storage API Command line interface (CLI) client for Microsoft Windows is a simple implementation
-of [Storage API](http://docs.keboola.apiary.io/). The current implementation supports only 
-very limited set of the API features - loading of data into Storage. 
-In case you need more data manipulation features, you might want to check out 
-[PHP CLI client](/intergrate/storage/php-cli-client/).
+of [Storage API](http://docs.keboola.apiary.io/). The current implementation supports only
+very limited set of the API features - loading of data into Storage.
+In case you need more data manipulation features, you might want to check out
+[PHP CLI client](/integrate/storage/php-cli-client/).
 The client source code is available in our [Github repository](https://github.com/keboola/storage-api-dotnet-client).
 
 ## Installation
-This application requires .NET Framework 4.0 (or higher) which is natively included since Windows 7 
+This application requires .NET Framework 4.0 (or higher) which is natively included since Windows 7
 and Windows Server 2008 R2. A [download is available](https://www.microsoft.com/en-us/download/details.aspx?id=17718)
-for older versions of Windows. 
+for older versions of Windows.
 
 ## Manual Installation
-If you don't want to install Chocolatey, you can simply download all the application files in a 
+If you don't want to install Chocolatey, you can simply download all the application files in a
 [ZIP package](https://keboola-sapi-dotnet-client.s3.amazonaws.com/builds/sapi-client.zip)
 
 ## Installation via Chocolatey
-[Chocolatey](https://chocolatey.org/) is a package manager for Windows. You can install 
+[Chocolatey](https://chocolatey.org/) is a package manager for Windows. You can install
 [Storage API client package](https://chocolatey.org/packages/SapiClient/) using Chocolatey.
 
 If you don't have chocolatey installed, you can install it with the following (administrator) command line:
@@ -32,9 +32,9 @@ If you don't have chocolatey installed, you can install it with the following (a
 @powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%systemdrive%\chocolatey\bin
 {% endhighlight %}
 
-By default, Chocolatey will be installed into `C:\ProgramData\chocolatey` In case you've just installed 
-Chocolatey make sure you have opened a new instanace of command line 
-window. 
+By default, Chocolatey will be installed into `C:\ProgramData\chocolatey` In case you've just installed
+Chocolatey make sure you have opened a new instanace of command line
+window.
 
 To install SAPI client just run the following command into the windows command line:
 
@@ -62,7 +62,7 @@ sapi-client
 {% endhighlight %}
 
 ### Example - Create a table
-To create a new table in Storage, use the `create-table` command. You need to provide a name of an 
+To create a new table in Storage, use the `create-table` command. You need to provide a name of an
 existing bucket, a name of the new table and a CSV file with the contents of the table.
 
 To create a table `new-table` in bucket `in.c-main` you would use:
@@ -76,7 +76,7 @@ also mark the column `id` as a primary key.
 
 ### Example - Importing data
 If you want only to import new data into the table, use the `write-table` command. You need to provide
-an ID (*bucketName.tableName*) of an existing table.  
+an ID (*bucketName.tableName*) of an existing table.
 
 To import data into the table `new-table` in bucket `in.c-main`, you would use:
 
@@ -84,7 +84,7 @@ To import data into the table `new-table` in bucket `in.c-main`, you would use:
 sapi-client write-table in.c-main.new-table D:\new-data.csv --token=storage_token --incremental
 {% endhighlight %}
 
-The above command will import the contents of the `new-data.csv` file into the existing table. If the 
+The above command will import the contents of the `new-data.csv` file into the existing table. If the
 `--incremental` parameter is supplied, the table contents will be appended. If the parameter is not
 supplied, the table contents will be overwritten.
 

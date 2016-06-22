@@ -117,7 +117,7 @@ with the `X-StorageApi-Token` header containing your Storage token and with requ
 }
 {% endhighlight %}
 
-With [cURL](/overview/api/index/#curl), you do it by:
+With [cURL](/overview/api/#curl), you do it by:
 
 {% highlight bash %}
 curl --request POST --header "X-StorageAPI-Token: storage-token" --data "{\"config\": \"odinuv-test-90\"}" "https://syrup.keboola.com/docker/keboola.ex-db-mysql/run"

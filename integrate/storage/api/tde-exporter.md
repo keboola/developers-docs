@@ -13,7 +13,7 @@ but it can also be used as a standalone component.
 
 User can [run TDE exporter job](/overview/jobs/) as any other KBC component or register it
 as an orchestration task. After the Exporter finishes, the resulting TDE files will be avaliable in
-*Storage* - *File uploads* section where you can download them via UI or [API](/integrate/storage/import-export/#export).
+*Storage* - *File uploads* section where you can download them via UI or [API](/integrate/storage/api/import-export/).
 
 ##  Running the component
 TDE-exporter is Keboola [Docker component](/extend/docker/) that supports both

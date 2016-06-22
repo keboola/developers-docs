@@ -67,10 +67,8 @@ automatically forwarded to you.
 
 ## Standard Output and Standard Error
 
-Unless you have turned on [GELF logging](/extend/commaon-interface/logging/#gelf-logger) in
+Unless you have turned on [GELF logging](/extend/common-interface/logging/#gelf-logger) in
 [component registration](/extend/registration/). Docker Runner listens
 to [STDOUT](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_.28stdout.29)
 and [STDERR](https://en.wikipedia.org/wiki/Standard_streams#Standard_error_.28stderr.29)
 of the application and forwards any content live to [Storage API Events](http://docs.keboola.apiary.io/#events).
-
-

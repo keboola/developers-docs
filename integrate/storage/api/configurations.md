@@ -153,7 +153,7 @@ The field `version` represent the `version_id` in the following API examples.
 
 ### Creating a configuration copy
 When you have chosen a particular version, you can create a new independent
-[configuration copy](https://connection.keboola.com/v2/storage/components/component_id/configs/config_id/versions/version_id/create)
+[configuration copy](http://docs.keboola.apiary.io/#reference/component-configurations/copy-configs/create-config-copy)
 out of it. For example to create a new configuration with name
 `test-copy` from version `2` of the configuration `sample-database-82` for component
 `keboola.ex-db-mysql`, you would use:
