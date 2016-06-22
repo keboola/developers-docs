@@ -18,7 +18,7 @@ Virtually all API calls require a [Storage API token](https://help.keboola.com/s
 be passed as `X-StorageApi-Token` header. Note that the Storage API calls require request to be sent
 as `form-data` (unlike the rest of KBC API, which is sent as `application/json`). If you need to
 export/import tables from/to Storage, we highly recommend that you use on of the
-[available clients](/intergate/storage/) or the [Storage API Importer service](/integrate/storage/api/importer/).
+[available clients](/integrate/storage/) or the [Storage API Importer service](/integrate/storage/api/importer/).
 
 To get started you can continue to:
 - [storage importer service for easiest upload of data via API](/integrate/storage/api/importer/)
