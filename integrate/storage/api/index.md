@@ -21,6 +21,7 @@ export/import tables from/to Storage, we highly recommend that you use on of the
 [available clients](/integrate/storage/) or the [Storage API Importer service](/integrate/storage/api/importer/).
 
 To get started you can continue to:
+
 - [storage importer service for easiest upload of data via API](/integrate/storage/api/importer/)
 - [getting started with component configurations](/integrate/storage/api/configurations/)
 - [importing and exporting data](/integrate/storage/api/import-export/)
