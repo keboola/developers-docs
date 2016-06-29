@@ -34,6 +34,7 @@ or
 
 If this works, use any image published in any Docker 
 registry, e.g. [Docker Hub](https://hub.docker.com/) or [Quay](https://quay.io/).
+Note that in some configurations you may need to use `sudo` to run `docker`. 
 If the above fails, make sure your client is set up properly. If you are using Docker Toolbox, the following might help:
 
 - Start *Docker Quickstart Terminal*; watch for any errors, particularly certificates and network.
