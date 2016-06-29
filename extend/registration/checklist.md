@@ -15,8 +15,8 @@ permalink: /extend/registration/checklist/
 | 7 | **Vendor address** |  Will be visible to end-users  | &#9744; | 1 Connected Way, BigTown, CS |
 | 8 | **Email address** | Will be visible to end-users and we will send error notifications to this address | &#9744; | `info@company.com` |
 | 9 | **License agreement URL** | Can be included in your public source repository | &#9744; | `https://github.com/org/reponame/master/blob/LICENSE.md`{: .td-break-code} |
-| 10 | **Docker image URL** | Currently supported are DockerHub (public and private) and Quay (public, [private](/extend/registration/#using-a-private-repository)) | &#9744; | `https://hub.docker.com/r/keboola/docker-demo` |
-| 11 | **Docker image tag** | Tag of the image in the Docker repository; typically `latest` or `master` or `1.0.0` | &#9744; | `latest` |
+| 10 | **Docker image URL** [More info](/extend/docker/tutorial/#docker-images) | Currently supported are DockerHub (public and private) and Quay (public, [private](/extend/registration/#using-a-private-repository)) | &#9744; | `https://hub.docker.com/r/keboola/docker-demo` |
+| 11 | **Docker image tag** [More info](/extend/docker/tutorial/#docker-images) | Tag of the image in the Docker repository; typically `latest` or `master` or `1.0.0` | &#9744; | `latest` |
 | 12 | **Required memory**  | Maximum memory your image will use | &#9744; | `512M` |
 | 13 | **Processing timeout**  | Maximum processing time in seconds | &#9744; | `3600` |
 | 14 | **Configuration format**  | Format to store configuration file, state file and all manifests; `yaml` or `json` | &#9744; | `yaml` |
@@ -26,7 +26,7 @@ permalink: /extend/registration/checklist/
 | 18 | **Default bucket stage** | `in` or `out`. [More info](/extend/common-interface/folders/#default-bucket) | &#9744; | `in` |
 | 19 | **Token forwarding** | Application needs Storage API token and its details; `true` or `false` | &#9744; | `false` |
 | 20 | **Component documentation** | Instructions to help end-user configure the application (linked from application configuration page) and payment information (if any) | &#9744; | `https://github.com/org/reponame/master/blob/CONFIGURATION.md`{: .td-break-code} |
-| 21 | **UI options** | Which UI helpers to use; any combination of `tableInput`, `tableOutput`, `fileInput`, `fileOutput`. [More info](/extend/registration/#ui-options) | &#9744; | `tableInput, tableOutput` |
+| 21 | **UI options** | Which UI helpers to use; any combination of `tableInput`, `tableOutput`, `fileInput`, `fileOutput`, `excludeFromNewList`. [More info](/extend/registration/#ui-options) | &#9744; | `tableInput, tableOutput` |
 | 22 | **Test configuration** | JSON configuration to test the application | &#9744; |  |
 | 23 | **Configuration schema** | [JSON schema](http://json-schema.org/) describing the configuration. [More info](/extend/registration/configuration-schema/) | &#9744; |  |
 | 24 | **Configuration description** | Markdown explaining the configuration. Use headlines level 3 or higher (h3, h4, ...) | &#9744; |  |
