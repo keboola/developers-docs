@@ -7,8 +7,10 @@ permalink: /extend/docker/tutorial/setup/
 {:toc}
 
 To work with Docker, you need a running [Docker machine server](https://docs.docker.com/machine/)
-and a [Docker engine client](https://docs.docker.com/engine/quickstart/). If you have no server
-with Docker machine at hand, run everything locally. To install a Docker machine on Win/Mac, 
+and a [Docker engine client](https://docs.docker.com/engine/quickstart/). 
+If you have no server with Docker machine at hand, you can obtain a 
+cheap [hosted server](https://www.digitalocean.com/features/one-click-apps/docker/) or 
+run everything locally. To install a Docker machine on Win/Mac, 
 use [Docker Toolbox](https://www.docker.com/products/docker-toolbox) (this will also install a Docker client). For 
 other systems, see our [documentation](https://docs.docker.com/machine/install-machine/). 
 
