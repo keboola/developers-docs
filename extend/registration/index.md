@@ -22,7 +22,9 @@ registering a [Custom Science](/extend/custom-science/) extension and you want t
 
 ### DockerHub
 
-An account has to be created in order to access your private DockerHub repositories. Please provide us with your `email`, `username`, `password` and `server` properties from the login credentials. Better yet - create a new user that has an access to the desired repository and surrender it to us.
+An account has to be created in order to access your private DockerHub repositories. Please provide us with your `username`, 
+`password` and `server` properties from the login credentials. Better yet - create a new user that has an access to the 
+desired repository and surrender it to us.
 
 DockerHub offers 1 free private repository per account.
 
