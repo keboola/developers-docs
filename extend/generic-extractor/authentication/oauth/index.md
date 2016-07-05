@@ -17,4 +17,4 @@ The component **must** have the **encryption** enabled
 ### 2) Add the component to OAuth API
 [link](http://docs.oauthv2.apiary.io/#reference/manage/addlist-supported-api/add-new-component)
 
-### 3) Configure the component API part according to one of 1.0 or 2.0 OAuth configurations
+### 3) Configure the component API part according to one of [1.0](/extend/generic-extractor/authentication/oauth/10/) or [2.0](/extend/generic-extractor/authentication/oauth/20/) OAuth configurations

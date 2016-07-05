@@ -3,7 +3,7 @@ title: Basic Authentication
 permalink: /extend/generic-extractor/authentication/basic/
 ---
 
-Use simple combination of `username` and `password`.
+Use simple combination of `username` and `password` in config.
 
 ## Configuration
 
