@@ -16,37 +16,52 @@ This authentication method is nearly identical to the [login](/extend/generic-ex
 
 {% highlight json %}
 {
-    "api": {
-        "authentication": {
-            "type":"oauth20.login",
-            "loginRequest": {
-                "endpoint":"https://www.googleapis.com/oauth2/v4/token",
-                "params": {
-                    "refresh_token": {
-                        "user":"refresh_token"
+
+    "authorization": {
+        "oauth_api": {
+            "credentials": {
+                "#data": "{\"status\": \"ok\",\"access_token\": \"asdf1234\", \"refresh_token\": \"fdsa4321\"}",
+                "appKey": "clId",
+                "#appSecret": "clScrt"
+            }
+        }
+    },
+    "parameters": {
+        "api": {
+            "authentication": {
+                "type":"oauth20.login",
+                "loginRequest": {
+                    "endpoint":"https://www.googleapis.com/oauth2/v4/token",
+                    "params": {
+                        "refresh_token": {
+                            "user":"refresh_token"
+                        },
+                        "client_id": {
+                            "consumer":"client_id"
+                        },
+                        "client_secret": {
+                            "consumer":"client_secret"
+                        },
+                        "grant_type":"refresh_token"
                     },
-                    "client_id": {
-                        "consumer":"client_id"
-                    },
-                    "client_secret": {
-                        "consumer":"client_secret"
-                    },
-                    "grant_type":"refresh_token"
+                    "method":"FORM",
+                    "headers": {
+                        "Content-Type":"application/x-www-form-urlencoded"
+                    }
                 },
-                "method":"FORM",
-                "headers": {
-                    "Content-Type":"application/x-www-form-urlencoded"
-                }
-            },
-            "apiRequest": {
-                "query": {
-                    "access_token":"access_token"
+                "apiRequest": {
+                    "query": {
+                        "access_token":"access_token"
+                    }
                 }
             }
         }
     }
 }
 {% endhighlight %}
+
+- **consumer.client_id** contains the value of `appKey`
+- **consumer.client_secret** contains decrypted value of `appSecret` from the OAuth API.
 
 This Google API example requires the JSON, that is stored in [OAuth API](docs.oauthv2.apiary.io) to contain a `refresh_token` property, such as:
 
