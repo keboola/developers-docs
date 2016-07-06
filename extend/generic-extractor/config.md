@@ -13,7 +13,9 @@ This section defines the actual run of the extractor
 ### `debug`
 - Output all requests to events log
 
-### `jobs` (TODO link to def)
+### `jobs`
+- Define resources to be exported from the API
+- [link](/extend/generic-extractor/jobs/)
 
 ### `mappings` (TODO link)
 
