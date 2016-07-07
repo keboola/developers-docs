@@ -7,5 +7,5 @@ permalink: /extend/generic-extractor/authentication/
 Authenticate using one of supported methods
 
 ## OAuth
-See the OAuth section for information on setting up OAuth APIs using the generic extractor
+See the [OAuth](/extend/generic-extractor/authentication/oauth/) section for information on setting up OAuth APIs using the generic extractor
 
