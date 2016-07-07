@@ -17,7 +17,9 @@ This section defines the actual run of the extractor
 - Define resources to be exported from the API
 - [link](/extend/generic-extractor/jobs/)
 
-### `mappings` (TODO link)
+### `mappings`
+- Allows to override the default JSON parser and manually map data to CSV files
+- [link](/extend/generic-extractor/mappings/)
 
 ### `outputBucket`
 - Used **only** if the application doesn't use the default_bucket flag in KBC
