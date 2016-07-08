@@ -19,7 +19,7 @@ permalink: /extend/registration/checklist/
 | 11 | **Docker image tag** [More info](/extend/docker/tutorial/#docker-images) | Tag of the image in the Docker repository; typically `latest` or `master` or `1.0.0` | &#9744; | `latest` |
 | 12 | **Required memory**  | Maximum memory your image will use | &#9744; | `512M` |
 | 13 | **Processing timeout**  | Maximum processing time in seconds | &#9744; | `3600` |
-| 14 | **Configuration format**  | Format to store configuration file, state file and all manifests; `yaml` or `json` | &#9744; | `yaml` |
+| <del>14</del> | DEPRECATED <del>Configuration format</del> | Configuration will be provided only in `json` format <del>Format to store configuration file, state file and all manifests; `yaml` or `json`~</del> | | `json` |
 | 15 | **Streaming logs**  | STDOUT will immediately forward to Storage API events; `true` or `false`. [More info](/extend/common-interface/environment/#standard-output-and-standard-error) | &#9744; | `false` |
 | 16 | **Encryption** | All parameter attributes with keys prefixed by `#` will be encrypted. If you pass sensitive data in configuration (credentials, tokens), it is encouraged to turn the encryption on; `true` or `false`. [More info](/overview/encryption/#encrypting-data-with-api) | &#9744; | `true` |
 | 17 | **Default bucket** | All tables should be uploaded to a pregenerated bucket;`true` or `false`. [More info](/extend/common-interface/folders/#default-bucket) | &#9744; | `false` |

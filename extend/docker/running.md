@@ -82,13 +82,12 @@ Unregistered Docker extensions do not have their component Id yet. This is somew
 get only a sample of the data the component will receive by using
 the [Sandbox call](/extend/common-interface/sandbox/#create-sandbox-api-call). In the
 [API call](http://docs.kebooladocker.apiary.io/#reference/sandbox/sandbox/create-a-sandbox-job), manually
-specify the input/output mapping and parameters. The configuration format (JSON or Yaml) is specified by the
-`format` parameter in the URL.
+specify the input/output mapping and parameters.
 
 [![Run in Postman](https://run.pstmn.io/button.png)](https://app.getpostman.com/run-collection/7dc2e4b41225738f5411)
 
 You can use *Sandbox introduction* request for a simple start or the more advanced *Sandbox Example* which provides
-more configuration options. The request URL is e.g. `https://syrup.keboola.com/docker/sandbox?format=json`.
+more configuration options. The request URL is e.g. `https://syrup.keboola.com/docker/sandbox`.
 
 To run the component, use the command line. For example:
 
@@ -106,8 +105,7 @@ Already [registered](/extend/registration/) Docker extensions have been assigned
 (in the form of *vendor.componentName*, e.g. *keboola.docs-docker-example-parameters*). To obtain the sample data for
 a registered component, use the [Input data](/extend/common-interface/sandbox/#input-data-api-call) call.
 In the [API call](http://docs.kebooladocker.apiary.io/#reference/sandbox/input-data/create-an-input-job), either specify the full configuration (using the `configData` node) or refer to an existing configuration
-of the component (using the `config` node). The configuration format is now fixed to what has been specified in the component
-registration.
+of the component (using the `config` node). 
 
 [![Run in Postman](https://run.pstmn.io/button.png)](https://app.getpostman.com/run-collection/7dc2e4b41225738f5411)
 
@@ -141,7 +139,7 @@ specify the input/output mapping and parameters. The configuration format must b
 [![Run in Postman](https://run.pstmn.io/button.png)](https://app.getpostman.com/run-collection/7dc2e4b41225738f5411)
 
 Use either *Sandbox introduction* request for a simple start, or the more advanced *Sandbox Example* in case you wish to have
-more configuration options available. The request URL is e.g. `https://syrup.keboola.com/docker/sandbox?format=json`
+more configuration options available. The request URL is e.g. `https://syrup.keboola.com/docker/sandbox`
 
 ### Custom Science R
 
