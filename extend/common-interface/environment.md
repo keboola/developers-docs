@@ -41,10 +41,7 @@ The following variables are available when GELF logger is enabled in the [compon
 The script defined in Dockerfile [`ENTRYPOINT`](/extend/docker/tutorial/howto/) should provide an exit status. The
 following rules apply:
 
-- `exit code = 0`  The execution is considered successful (when `streaming_logs` is turned off, the contents
-of [STDOUT](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_.28stdout.29) will be sent to
-[Storage API Events](http://docs.keboola.apiary.io/#events) and displayed in
-[Job detail](https://help.keboola.com/management/jobs/))
+- `exit code = 0`  The execution is considered successful.
 - `exit code = 1`  The execution fails with a *User Exception*;
 the contents of both STDOUT and [STDERR](https://en.wikipedia.org/wiki/Standard_streams#Standard_error_.28stderr.29)
 will be sent to Storage API Events.
