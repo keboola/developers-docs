@@ -23,9 +23,7 @@ as error, informational, warning, debug) and these messages can contain addition
 By default the Docker Bundle listens to [STDOUT](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_.28stdout.29)
 and [STDERR](https://en.wikipedia.org/wiki/Standard_streams#Standard_error_.28stderr.29)
 of the application and forwards any content live to [Storage API Events](http://docs.keboola.apiary.io/#events)
-(log levels `info` and `error`). You can turn off live forwarding by setting `streaming_logs` to `false` in the
-[component registration](/extend/registration/). The events are displayed in
-[Job detail](https://help.keboola.com/management/jobs/).
+(log levels `info` and `error`). The events are displayed in [Job detail](https://help.keboola.com/management/jobs/).
 
 Make sure your application does not use any output buffering otherwise all
 events will be cached after the application finishes. In R applications, the outputs printed in rapid succession

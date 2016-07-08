@@ -20,7 +20,7 @@ permalink: /extend/registration/checklist/
 | 12 | **Required memory**  | Maximum memory your image will use | &#9744; | `512M` |
 | 13 | **Processing timeout**  | Maximum processing time in seconds | &#9744; | `3600` |
 | 14 | **Configuration format**  | Format to store configuration file, state file and all manifests; `yaml` or `json` | &#9744; | `yaml` |
-| 15 | **Streaming logs**  | STDOUT will immediately forward to Storage API events; `true` or `false`. [More info](/extend/common-interface/environment/#standard-output-and-standard-error) | &#9744; | `false` |
+| 15 | *Removed* |  |  |  |
 | 16 | **Encryption** | All parameter attributes with keys prefixed by `#` will be encrypted. If you pass sensitive data in configuration (credentials, tokens), it is encouraged to turn the encryption on; `true` or `false`. [More info](/overview/encryption/#encrypting-data-with-api) | &#9744; | `true` |
 | 17 | **Default bucket** | All tables should be uploaded to a pregenerated bucket;`true` or `false`. [More info](/extend/common-interface/folders/#default-bucket) | &#9744; | `false` |
 | 18 | **Default bucket stage** | `in` or `out`. [More info](/extend/common-interface/folders/#default-bucket) | &#9744; | `in` |
