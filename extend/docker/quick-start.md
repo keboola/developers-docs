@@ -110,8 +110,7 @@ in the production environment.
 
 To obtain the configuration, send a [Sandbox API Request](/extend/common-interface/sandbox/). You will receive an 
 archive containing a [/data/ folder](/extend/common-interface/) with tables and files from the input mapping, and a
-configuration depending on the request body. In the request, enter a configuration format: 
-either `Yaml` or `JSON`. A sample request to `https://syrup.keboola.com/docker/sandbox?format=json`:
+configuration depending on the request body. A sample request to `https://syrup.keboola.com/docker/sandbox?format=json`:
 
 {% highlight json %}
 {

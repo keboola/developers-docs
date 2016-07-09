@@ -17,12 +17,8 @@ than an input and output mapping.
 
 ## Format
 
-The format of the manifest file is always *JSON* for [Custom Science](/extend/custom-science/)
-and [Transformations](https://help.keboola.com/manipulation/transformations/)
-and *JSON* or *Yaml* for [Docker extensions](/extend/docker/); depending on what you have
-chosen in [Component registration](/extend/registration/).
-There are no differences in the contents of the file; the choice of format is purely formal. The manifest
-file always has the `.manifest` extension regardless of what format is used.
+The format of the manifest file is always *JSON*. The manifest
+file always has the `.manifest` extension.
 
 ## Examples
 
@@ -34,7 +30,7 @@ with ID `in.c-docker-demo.data` will be downloaded into
 `/in/tables/in.c-docker-demo.data.csv' (unless stated otherwise in the
 [input mapping](/extend/common-interface/config-file/)] and a manifest file
 '/in/tables/in.c-docker-demo.data.csv.manifest' will be created with the following
-contents (provided that the chosen format is JSON):
+contents:
 
 {% highlight json %}
 {

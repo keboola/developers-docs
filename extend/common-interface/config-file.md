@@ -14,12 +14,7 @@ use [create sandbox](/extend/common-interface/) via the
 You will get a zip archive containing all the resources you need in your extension.
 
 ## Configuration File Format
-For [Docker extensions](/extend/docker/), the configuration file format is specified during
-[registration](/extend/registration/) as either JSON or Yaml. For Docker extensions which are not
-yet registered, you can choose freely. For [Custom Science](/extend/custom-science/) and
-for [Transformations](https://help.keboola.com/manipulation/transformations/), the format is always JSON. There are no differences
-in the contents of the file; the choice of the format is purely formal. However, the configuration file
-extension changes (`.json` for JSON and `.yml` for Yaml).
+The configuration files is always stored in `JSON` format. 
 
 ## Configuration File Structure
 The configuration file has the following root nodes:
@@ -48,14 +43,14 @@ references a stored configuration (`config` is used, not `configData`).
 
 The location of the state file is:
 
-- `/data/in/state.yml` or `/data/in/state.json` loaded from a configuration state storage
-- `/data/out/state.yml` or `/data/out/state.json` saved to a configuration state storage
+- `/data/in/state.json` loaded from a configuration state storage
+- `/data/out/state.json` saved to a configuration state storage
 
 The application reads the input state file and writes any content to the output state
-file (valid JSON or YAML) that
+file (valid JSON) that
 will be available to the next API call. A missing or an empty file will remove the state value.
 A state object is saved to configuration storage only when actually running the app
-(not in [sandbox API calls](/extend/common-interface/sandbox/). The state must be a valid JSON or Yaml.
+(not in [sandbox API calls](/extend/common-interface/sandbox/). The state must be a valid JSON file.
 
 ### State File Properties
 Because the state is stored as part of
@@ -73,7 +68,7 @@ loaded from some API to enable incremental loads.
 
 ## Examples
 To create an example configuration, use the [sandbox API calls](/extend/common-interface/sandbox/). You will get a
-`data.zip` archive in your *Storage* - *File uploads* which will contain the config.json or config.yml file.
+`data.zip` archive in your *Storage* - *File uploads* which will contain the `config.json` file.
 You can also use these structures to create an API request for [creating sandbox](/extend/common-interface/sandbox/),
 as well as for actually [running dockerized applications](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job).
 If you want to manually pass configuration options in the API request, be sure to wrap it around in the `configData` node.
