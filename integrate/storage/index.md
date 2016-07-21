@@ -9,7 +9,8 @@ permalink: /integrate/storage/
 As the central KBC component, Storage 
 
 - Keeps all data in [**buckets** and **tables**](https://help.keboola.com/storage/); 
-- Controls access to the data using **tokens**. All data manipulations are audited using **events**;
+- Controls access to the data using **tokens**. 
+- Logs all data manipulations as **events**;
 - Maintains the index of all other KBC **components** and stores their **configurations**.
 
 All this (and a few other things) is available through [Storage API (SAPI)](http://docs.keboola.apiary.io/#). 
@@ -19,16 +20,16 @@ It is required regardless of whether you use the bare API or any of the clients.
 
 ## Storage API Clients
 Although you can work directly with the API, we recommend using one of our Storage API clients, as they simplify some tasks. 
-There are four Storage clients available with different feature sets:
+There are four Storage clients with different feature sets available:
 
-- [SAPI PHP client](https://github.com/keboola/storage-api-php-client) - a PHP library supporting most of the Storage API features; 
+1. [SAPI PHP client](https://github.com/keboola/storage-api-php-client) - a PHP library supporting most of the Storage API features; 
 use it programatically in PHP.
-- [SAPI R client](/integrate/storage/r-client/) - an R library supporting most data manipulation features of the Storage API; 
+2. [SAPI R client](/integrate/storage/r-client/) - an R library supporting most data manipulation features of the Storage API; 
 use it programatically in R.
-- [SAPI PHP CLI client](https://github.com/keboola/storage-api-cli) - a CLI (command line interface) application supporting 
+3. [SAPI PHP CLI client](https://github.com/keboola/storage-api-cli) - a CLI (command line interface) application supporting 
 basic data manipulation features of the Storage API; use it from the command line provided that you have PHP interpreter
 available.
-- [SAPI Windows CLI client](/integrate/storage/win-cli-client/) - a CLI application supporting basic data manipulation features;
+4. [SAPI Windows CLI client](/integrate/storage/win-cli-client/) - a CLI application supporting basic data manipulation features;
 use it from the Windows command line.
 
 Additional tools:
@@ -42,9 +43,9 @@ The client choice is purely up to you, but it is best to use the most straightfo
 ## Table Imports and Exports
 Tables are imported to and exported from Storage via asynchronous (background) jobs.
 
-- Technically, when importing a table, the actual data is first transported to an Amazon S3 storage,
-and then bulk is loaded into the internal database in Storage. 
-- Similarly, when exporting a table, the data is first offloaded to an Amazon S3 storage and downloaded from there. 
+- When importing a table, the actual data is first transported to an Amazon S3 storage,
+and then bulk is loaded into the internal database in Storage. Similarly,
+- When exporting a table, the data is first offloaded to an Amazon S3 storage and downloaded from there. 
 
 While this process is much more complicated than a simple file upload or download, 
 it offers better **manageability** and **traceability** features. 
