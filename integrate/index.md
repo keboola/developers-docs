@@ -27,7 +27,6 @@ Each component has a `/run` API call, that accepts either a reference to compone
 For more details, see
 [full API description](http://docs.keboolaconnector.apiary.io/#reference/sample-coponent's-api-calls-required-for-orchestration).
 What each component does is defined purely by that component, so is the contents of the configuration.
-The common property is that each component has `/run` which accepts configuration in some form.
 Each component has a `/run` API call that accepts its configuration in JSON body and queues the job. For more details, see the [full API description](http://docs.keboolaconnector.apiary.io/#reference/sample-coponent's-api-calls-required-for-orchestration).
 
 ### Components Configuration

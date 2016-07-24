@@ -6,9 +6,13 @@ permalink: /integrate/storage/r-client/
 * TOC
 {:toc}
 
-R client library is a [Storage API client](http://docs.keboola.apiary.io/) which you can use from
-withing an R code. The current implementation supports all basic data manipulations -
-importing data and exporting data, and creating and deleting buckets and tables.
+The R client library is a [Storage API client](http://docs.keboola.apiary.io/) which you can use in your R code. 
+The current implementation supports all basic data manipulations:
+
+- Importing data
+- Exporting data 
+- Creating and deleting buckets and tables
+
 The client source code is available in our [Github repository](https://github.com/keboola/sapi-r-client).
 
 ## Installation
@@ -30,17 +34,16 @@ library(keboola.sapi.r.client)
 {% endhighlight %}
 
 ## Usage
-To list available commands, you can run:
+To list available commands, run
 {% highlight r %}
 ?keboola.sapi.r.client::SapiClient
 {% endhighlight %}
 
-Note that if you are running the code in R Studio, it might require a restart so that its help index is updated
+**Important**: If you are running the code in R Studio, it might require a restart so that its help index is updated
 and the above command works.
 
-The client is implemented as na [RC class](http://adv-r.had.co.nz/R5.html). To work with it, you
-need to create an instance of the client.
-The only required argument to create a client is a valid Storage API token.
+The client is implemented as an [RC class](http://adv-r.had.co.nz/R5.html). To work with it, create an instance of the client.
+The only required argument to create it is a valid Storage API token.
 
 {% highlight r %}
 client <- SapiClient$new(
@@ -49,10 +52,10 @@ client <- SapiClient$new(
 {% endhighlight %}
 
 ### Example - Create a table and import data
-To create a new table in Storage, use the `saveTable` function. You need to provide a name of an
-existing bucket, a name of the new table and a CSV file with the contents of the table.
+To create a new table in Storage, use the `saveTable` function. Provide the name of an existing bucket, 
+the name of the new table and a CSV file with the table's contents.
 
-To create a table `new-table` in bucket `in.c-main` you would use:
+To create the `new-table` table in the `in.c-main` bucket, use
 
 {% highlight r %}
 myDataFrame <- data.frame(id = c(1,2,3,4), secondCol = c('a', 'b', 'c', 'd'))
@@ -68,14 +71,14 @@ table <- client$saveTable(
 )
 {% endhighlight %}
 
-The above command will import the contents of the `myDataFrame` variable into the newly created table, it will
-also mark the column `id` as a primary key.
+The above command will import the contents of the `myDataFrame` variable into the newly created table. It will
+also mark the `id` column as the primary key.
 
 ### Example - Exporting data
-If you want to export a table from Storage and import them into R, use the `importTable` function. You need to provide
-an ID (*bucketName.tableName*) of an existing table.
+If you want to export a table from Storage and import it into R, use the `importTable` function. Provide
+the ID (*bucketName.tableName*) of an existing table.
 
-To export data from the table `old-table` in bucket `in.c-main`, you would use:
+To export data from the `old-table` table in the `in.c-main` bucket, use
 
 {% highlight PowerShell %}
 client <- SapiClient$new(
@@ -85,9 +88,8 @@ client <- SapiClient$new(
 data <- client$importTable('in.c-main.old-table')
 {% endhighlight %}
 
-The above command will export the table from storage and save it in `data` variable. The output is
-a [data.table](https://cran.r-project.org/web/packages/data.table/index.html) object which is
-compatible with a `data.frame`.
+The above command will export the table from Storage and save it in the `data` variable. The output is
+a [data.table](https://cran.r-project.org/web/packages/data.table/index.html) object compatible with a `data.frame`.
 
 ### Other Examples
 
@@ -112,10 +114,10 @@ tables <- client$listTables()
 # list all tables in a bucket
 tables <- client$listTables(bucket = bucket$id)
 
-# delete table
+# delete a table
 client$deleteTable(table$id)
 
-# delete bucket
+# delete a bucket
 client$deleteBucket(bucket$id)
 
 {% endhighlight %}

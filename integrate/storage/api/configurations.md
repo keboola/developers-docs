@@ -1,20 +1,21 @@
 ---
-title: Component configurations Tutorial
+title: Component Configurations Tutorial
 permalink: /integrate/storage/api/configurations/
 ---
 
 * TOC
 {:toc}
 
-When working with [component configurations API](http://docs.keboola.apiary.io/#reference/component-configurations), you usually need to know a `componentId`. You can get
-a list of all available components with the [API index call](http://docs.keboola.apiary.io/#reference/miscellaneous/api-index/get).
-This API call is one of the few that does not require Storage API token:
+When working with the [component configurations API](http://docs.keboola.apiary.io/#reference/component-configurations), 
+you usually need to know a `componentId`. 
+You can get a list of all available components with the [API index call](http://docs.keboola.apiary.io/#reference/miscellaneous/api-index/get).
+This API call is one of the few that do not require a Storage API token
 
 {% highlight bash %}
 curl https://connection.keboola.com/v2/storage
 {% endhighlight %}
 
-Which will give you something like:
+Which will give you something like
 
 {% highlight json %}
 {
@@ -47,11 +48,16 @@ will use `keboola.ex-db-mysql` - the MySQL Database Extractor.
 
 ### Inspecting configuration
 To obtain configuration details, use the [List Configs call](http://docs.keboola.apiary.io/#reference/component-configurations/component-configs/list-configs)
-which will return all the configuration details. This means the configuration itself
-`configuration` section below; configuration rows (`rows`) section, which contains additional data
-of the configuration and configuration state (`state` node), which contains
-[componennt state](/extend/common-interface/environment/#state). Please note that the contents
-of the `configuration`, `rows` and `state` section dependes purely on the component iteslf. For example
+which will return all the configuration details. This means 
+
+- the configuration itself (`configuration` section below); 
+- configuration rows (`rows`) section, which contains additional data
+of the configuration; and 
+- configuration state (`state`), which contains
+[component state](/extend/common-interface/environment/#state). 
+
+Please note that the contents
+of the `configuration`, `rows` and `state` section depends purely on the component itself. For example
 retrieving the configurations for MySQL database extractor, you would call:
 
 {% highlight bash %}

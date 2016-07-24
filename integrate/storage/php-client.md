@@ -1,31 +1,30 @@
 ---
-title: Storage PHP client library
+title: Storage PHP Client Library
 permalink: /integrate/storage/php-client/
 ---
 
 * TOC
 {:toc}
 
-Storage API PHP client library is portable command line client which provides 
-the most complete implementation of [Storage API](http://docs.keboola.apiary.io/). The client 
-runs on any platform which has PHP installed. 
-Currently the client implements almost all functions of Storage API including of cousre exporting and importing
- tables.  
+Storage API PHP client library is a portable command line client providing 
+the most complete [Storage API](http://docs.keboola.apiary.io/) implementation. 
+It runs on any platform which has PHP installed. 
+Currently this client implements almost all Storage API functions including, of course, exporting and importing tables. 
+
 The client source is available in our [Github repository](https://github.com/keboola/storage-api-cli).
 
 ## Installation
 
-The Library is available as [composer package](https://getcomposer.org/). 
-If you don't have composer installed on your system, you need to 
-to [install composer](https://getcomposer.org/download/). On *nix system
-you can do so by running: 
+The Library is available as a [Composer package](https://getcomposer.org/). 
+Unless you already have it, [install Composer](https://getcomposer.org/download/) on your system. 
+On *nix system, do so by running
 
 {% highlight bash %}
 curl -s http://getcomposer.org/installer | php
 mv ./composer.phar ~/bin/composer # or /usr/local/bin/composer
 {% endhighlight %}
 
-On Windows, use the [installer](https://getcomposer.org/Composer-Setup.exe)
+On Windows, use the [installer](https://getcomposer.org/Composer-Setup.exe).
 
 ### Library installation
 To install the library, run
@@ -34,7 +33,7 @@ To install the library, run
 composer require keboola/storage-api-client
 {% endhighlight %}
 
-in the root of your project. You should get an output similar to:
+in the root of your project. You should get an output similar to this one:
 
     Using version ^4.11 for keboola/storage-api-client
     ./composer.json has been created
@@ -55,11 +54,11 @@ require 'vendor/autoload.php';
 {% endhighlight %}
 
 You can read more in [Composer documentation](http://getcomposer.org/doc/01-basic-usage.md). Packages
-installable by composer can be browsed at [Packagist package repository](https://packagist.org/).
+installable by Composer can be browsed at [Packagist package repository](https://packagist.org/).
 
 ## Usage
-The Storage API client is implemented as a single class, you need to provide Storage API token to the 
-consturctor to create an instance of the class:
+The Storage API client is implemented as a single class. To create an instance of the class, provide Storage API token to the 
+constructor.
 
 {% highlight php %}
 <?php
@@ -95,7 +94,7 @@ $client->createTableAsync('in.c-main', 'new-table', $csvFile);
 {% endhighlight %}
 
 ### Example - Import data 
-To import data to an existing table and import CSV data in it, you can use the following PHP script:
+To import data to an existing table and import CSV data in it, use the following PHP script:
 
 {% highlight php %}
 <?php
@@ -113,7 +112,7 @@ $client->writeTableAsync('in.c-main.new-table', $csvFile);
 
 ### Example - Export data 
 To export data from a Storage table to a CSV file, use the 
-`TableExporter` class which is part of the client library. You can use the following script:
+`TableExporter` class. It is part of the client library. You can use the following script:
 
 {% highlight php %}
 <?php
