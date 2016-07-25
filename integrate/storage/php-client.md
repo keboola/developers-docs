@@ -94,7 +94,7 @@ $client->createTableAsync('in.c-main', 'new-table', $csvFile);
 {% endhighlight %}
 
 ### Example - Import data 
-To import data to an existing table and import CSV data in it, use the following PHP script:
+To import CSV data into an existing table, use the following PHP script:
 
 {% highlight php %}
 <?php
