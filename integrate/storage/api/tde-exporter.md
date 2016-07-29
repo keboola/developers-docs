@@ -6,26 +6,26 @@ permalink: /integrate/storage/api/tde-exporter/
 * TOC
 {:toc}
 
-[TDE Exporter](https://github.com/keboola/tde-exporter) exports tables from KBC Storage into
+[TDE Exporter](https://github.com/keboola/tde-exporter) exports tables from KBC Storage into the
 [TDE file format (Tableau Data Extract)](http://www.tableau.com/about/blog/2014/7/understanding-tableau-data-extracts-part1).
-This component is normally part of [Tableu Writer](https://help.keboola.com/overview/tutorial/write/),
+This component is normally a part of the [Tableau Writer](https://help.keboola.com/overview/tutorial/write/),
 but it can also be used as a standalone component.
 
-User can [run TDE exporter job](/overview/jobs/) as any other KBC component or register it
-as an orchestration task. After the Exporter finishes, the resulting TDE files will be avaliable in
+Users can [run TDE exporter job](/overview/jobs/) as any other KBC component or register it
+as an orchestration task. After the exporter finishes, the resulting TDE files will be available in the
 *Storage* - *File uploads* section where you can download them via UI or [API](/integrate/storage/api/import-export/).
 
-##  Running the component
-TDE-exporter is Keboola [Docker component](/extend/docker/) that supports both
-[stored configurations](/integrate/storage/api/configurations/) and
-custom configuration supplied in directly in the `run` request.
+##  Running the Component
+The TDE Exporter is a Keboola [Docker component](/extend/docker/) supporting both
+[stored](/integrate/storage/api/configurations/) and
+custom configurations supplied directly in the `run` request.
 
-### Stored configuration
-To run the TDE exporter with a stored configuration, you first need to
+### Stored Configuration
+To run the TDE exporter with a stored configuration, first 
 [create the configuration](http://docs.keboola.apiary.io/#reference/component-configurations/component-configs/create-config).
 See [below](#custom-configuration) for the required configuration contents.
-This call will give you ID of the newly created configuration (e.g. `new-configuration-id`),
-then do a HTTP POST request to `https://syrup.keboola.com/docker/tde-exporter/run`, with request body:
+This call will give you the ID of the newly created configuration (for instance, `new-configuration-id`).
+Then make an HTTP POST request to `https://syrup.keboola.com/docker/tde-exporter/run` with the following request body:
 
 {% highlight json %}
 {
@@ -33,17 +33,16 @@ then do a HTTP POST request to `https://syrup.keboola.com/docker/tde-exporter/ru
 }
 {% endhighlight %}
 
-Using [cURL](/overview/api/#curl), you would do:
+Using [cURL](/overview/api/#curl), do this:
 
 {% highlight bash %}
 curl --request POST --header "X-StorageAPI-Token: storage-token" --data "{\"config\": \"odinuv-test-90\"}" https://syrup.keboola.com/docker/tde-exporter/run
 {% endhighlight %}
 
-### Custom configuration
-You can specify the entire configuration in the API call. The configuration JSON conforms
-to [general configuration format](/extend/common-interface/config-file/). The spefic part
-is only `parameters` section. A sample request to export table
-`in.c-main.old-table` would look like this:
+### Custom Configuration
+You can specify the entire configuration in the API call. The JSON configuration conforms
+to the [general configuration format](/extend/common-interface/config-file/). The specific part
+is only the `parameters` section. A sample request to the `in.c-main.old-table` export table would look like this:
 
 {% highlight json %}
 {
@@ -75,18 +74,17 @@ is only `parameters` section. A sample request to export table
 The `parameters` section contains:
 
 - `tags`: array of tags that will be assigned to the resulting file in Storage File uploads.
-- `typedefs`: definitions of data types mapping of source tables columns to destination TDE columns.
+- `typedefs`: definitions of data types mapping source tables columns to destination TDE columns.
 
-Type definitions are entered as object whose name must match the name of table in
+Type definitions are entered as an object whose name must match the name of the table in the
 `storage.input.tables.source` node (`in.c-main.old-table` in the above example). Object properties
-are names of colums of the table, where each must have a property `type` which is one of the
+are names of the table columns; each must have the `type` property which is one of the
 [supported column types](https://onlinehelp.tableau.com/current/pro/online/mac/en-us/datafields_typesandroles_datatypes.html):
-`boolean`, `number`, `decimal`, `date`, `datetime`, `string`.
+`boolean`, `number`, `decimal`, `date`, `datetime` and `string`.
 
 ## Date and DateTime
-Data for these datatypes can be specified in format used by
-in [strptime function](http://pubs.opengroup.org/onlinepubs/009695399/functions/strptime.html) Format is specified in
-the type definiftions column definition e.g.
+Data for these data types can be specified in the format used
+in the [strptime function](http://pubs.opengroup.org/onlinepubs/009695399/functions/strptime.html). The format is specified as part of the column's type definition. For example:
 
 {% highlight json %}
 {
@@ -97,6 +95,7 @@ the type definiftions column definition e.g.
 }
 {% endhighlight %}
 
-If no format is specified then default formats is used:
-- default format for `date` is `%Y-%m-%d`
-- default format for `datetime` is `%Y-%m-%d %H:%M:%S or %Y-%m-%d %H:%M:%S.%f`
+If no format is specified, the following default formats are used:
+
+- For `date`: `%Y-%m-%d`
+- For `datetime`: `%Y-%m-%d %H:%M:%S or %Y-%m-%d %H:%M:%S.%f`
