@@ -9,7 +9,7 @@ permalink: /integrate/storage/
 As the central KBC component, Storage 
 
 - Keeps all data in [**buckets** and **tables**](https://help.keboola.com/storage/); 
-- Controls access to the data using **tokens**. 
+- Controls access to the data using **tokens**; 
 - Logs all data manipulations as **events**;
 - Maintains the index of all other KBC **components** and stores their **configurations**.
 

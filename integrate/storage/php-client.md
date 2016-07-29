@@ -26,8 +26,7 @@ mv ./composer.phar ~/bin/composer # or /usr/local/bin/composer
 
 On Windows, use the [installer](https://getcomposer.org/Composer-Setup.exe).
 
-### Library installation
-To install the library, run
+**To install the library, run**
 
 {% highlight bash %}
 composer require keboola/storage-api-client
@@ -72,7 +71,7 @@ $client = new Client([
 ]);
 {% endhighlight %}
 
-### Example - Create a table 
+### Example - Create a Table 
 To create a new table in Storage, it is recommended to use an additional 
 [php-csv](https://github.com/keboola/php-csv) library to work 
 with CSV files. The library will get installed
@@ -110,7 +109,7 @@ $csvFile = new CsvFile('./new-table.csv');
 $client->writeTableAsync('in.c-main.new-table', $csvFile);
 {% endhighlight %}
 
-### Example - Export data 
+### Example - Export Data 
 To export data from a Storage table to a CSV file, use the 
 `TableExporter` class. It is part of the client library. You can use the following script:
 

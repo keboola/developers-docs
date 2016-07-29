@@ -46,7 +46,7 @@ Which will give you something like
 From here, you can select a particular component - in the following examples, we
 will use `keboola.ex-db-mysql` - the MySQL Database Extractor.
 
-### Inspecting configuration
+### Inspecting Configuration
 To obtain configuration details, use the [List Configs call](http://docs.keboola.apiary.io/#reference/component-configurations/component-configs/list-configs)
 which will return all the configuration details. This means 
 
@@ -113,7 +113,7 @@ and obtain a result similar to this:
 The important part is configuration id `sample-database-82`, which is required in the
 following examples.
 
-### Configuration versions
+### Configuration Versions
 When you [update a configuration](http://docs.keboola.apiary.io/#reference/component-configurations/manage-configs/update-config),
 actually a new configuration version is created. In the above calls, only the last (active/published) configuration
 is returned. To obtain a list of all recorded versions, use the
@@ -157,7 +157,7 @@ Which would give you an output like this:
 
 The field `version` represent the `version_id` in the following API examples.
 
-### Creating a configuration copy
+### Creating a Configuration Copy
 When you have chosen a particular version, you can create a new independent
 [configuration copy](http://docs.keboola.apiary.io/#reference/component-configurations/copy-configs/create-config-copy)
 out of it. For example to create a new configuration with name

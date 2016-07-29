@@ -22,7 +22,7 @@ for older versions of Windows.
 If you do not want to install Chocolatey, simply download all the application files in a
 [ZIP package](https://keboola-sapi-dotnet-client.s3.amazonaws.com/builds/sapi-client.zip).
 
-## Installation via Chocolatey
+## Installation Via Chocolatey
 [Chocolatey](https://chocolatey.org/) is a package manager for Windows. You can install
 [Storage API client package](https://chocolatey.org/packages/SapiClient/) using Chocolatey.
 
@@ -60,7 +60,7 @@ the client's available commands by running
 sapi-client
 {% endhighlight %}
 
-### Example - Create a table
+### Example - Create a Table
 To create a new table in Storage, use the `create-table` command. Provide the name of an
 existing bucket, the name of the new table and a CSV file with the table's contents.
 
@@ -73,7 +73,7 @@ sapi-client create-table in.c-main new-table D:\new-table.csv --token=storage_to
 The above command will import the contents of `new-table.csv` into the newly created table. It will
 also mark the `id` column as the primary key.
 
-### Example - Importing data
+### Example - Importing Data
 If you want only to import new data into the table, use the `write-table` command. Provide
 the ID (*bucketName.tableName*) of an existing table.
 
@@ -87,7 +87,7 @@ The above command will import the contents of the `new-data.csv` file into the e
 `--incremental` parameter is supplied, the table contents will be appended. If the parameter is not
 supplied, the table contents will be overwritten.
 
-### Example - Exporting data
+### Example - Exporting Data
 If you want to export a table from Storage, use the `export-table` command. Provide
 the ID (*bucketName.tableName*) of an existing table.
 

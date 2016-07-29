@@ -51,7 +51,7 @@ client <- SapiClient$new(
 )
 {% endhighlight %}
 
-### Example - Create a table and import data
+### Example - Create a Table and Import Data
 To create a new table in Storage, use the `saveTable` function. Provide the name of an existing bucket, 
 the name of the new table and a CSV file with the table's contents.
 
@@ -74,7 +74,7 @@ table <- client$saveTable(
 The above command will import the contents of the `myDataFrame` variable into the newly created table. It will
 also mark the `id` column as the primary key.
 
-### Example - Exporting data
+### Example - Export Data
 If you want to export a table from Storage and import it into R, use the `importTable` function. Provide
 the ID (*bucketName.tableName*) of an existing table.
 

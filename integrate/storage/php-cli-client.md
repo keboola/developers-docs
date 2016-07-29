@@ -60,7 +60,7 @@ created table. You should see an output similar to this one:
     Table create end
     Table id: in.c-main.new-table
 
-### Example - Importing data
+### Example - Importing Data
 If you want only to import new data into the table, use the `write-table` command and provide
 the ID (*bucketName.tableName*) of an existing table.
 
@@ -89,7 +89,7 @@ supplied, the table contents will be overwritten. You should see an output simil
     totalDataSizeBytes: 4096
 
 
-### Example - Exporting data
+### Example - Exporting Data
 If you want to export a table from Storage, use the `export-table` command. Provide
 the ID (*bucketName.tableName*) of an existing table.
 
