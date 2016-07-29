@@ -1,37 +1,39 @@
 ---
-title: Manually importing and exporting data
+title: Manually Importing and Exporting Data
 permalink: /integrate/storage/api/import-export/
 ---
 
-## Working with data
+* TOC
+{:toc}
+
+## Working with Data
 KBC Table Storage (Tables) and KBC File Storage (File Uploads) are heavily connected together.
-The KBC File Storage is a technically a layer on top of Amazon S3 service and KBC Table
+KBC File Storage is technically a layer on top of Amazon S3 service and KBC Table
 Storage is a layer on top of a [database backend](https://help.keboola.com/storage/#backends).
 
-Uploading a table therefore means that you need to request a
-[file upload](http://docs.keboola.apiary.io/#reference/files/upload-file/upload-arbitrary-file-to-keboola) from
-KBC File Storage. Which will give you destination for the uploaded file on an S3 server.
-Then you need to upload the file there. When the upload is finished, the data file
-will be available in *File Uploads* section. Then you need to initiate
-an [asynchronous table import](http://docs.keboola.apiary.io/#reference/tables/load-data-asynchronously/imports-data)
-from the uploaded file (use it as `dataFileId` parameter) into destination table. The import
-is asynchronous, so the request only creates a job and you need to poll for it's results.
+To upload a table, take the following steps:
+
+- Request a [file upload](http://docs.keboola.apiary.io/#reference/files/upload-file/upload-arbitrary-file-to-keboola) from
+KBC File Storage. You will be given a destination for the uploaded file on an S3 server.
+- Upload the file there. When the upload is finished, the data file will be available in *File Uploads* section. 
+- Initiate an [asynchronous table import](http://docs.keboola.apiary.io/#reference/tables/load-data-asynchronously/imports-data)
+from the uploaded file (use it as `dataFileId` parameter) into the destination table. 
+The import is asynchronous, so the request only creates a job and you need to poll for its results.
 The imported files must conform to the [supported CSV format](http://docs.keboola.apiary.io/#reference/csv-files-formats).
 
 ![Schema of file upload process](/integrate/storage/api/async-import-handling.png)
 
-Exporting a table from storage is analogous to the import. First, data is [asynchronously
+Exporting a table from Storage is analogous to importing. First, data is [asynchronously
 exported](http://docs.keboola.apiary.io/#reference/tables/unload-data-asynchronously/asynchronous-export) from
 Storage table into File uploads, then you can request [downloading of
 the file](http://docs.keboola.apiary.io/#reference/files/manage-files/file-detail), which will give you
-access to an S3 server for actual file download.
+access to an S3 server for the actual file download.
 
-### Manually uploading a file
-To upload a file to KBC file Storage, you have to follow the instructions outlined in the
+### Manually Uploading a File
+To upload a file to KBC file Storage, follow the instructions outlined in the
 [API documentation](http://docs.keboola.apiary.io/#reference/files/upload-file/upload-arbitrary-file-to-keboola).
-This means that you first need to create a file resource - to create a new file with name
-[`new-file.csv`](/integrate/storage/new-table.csv) and size `52` bytes,
-you have to call:
+First create a file resource - to create a new file with name
+[`new-file.csv`](/integrate/storage/new-table.csv) and size `52` bytes, call:
 
 {% highlight bash %}
 curl --request POST --header "X-StorageApi-Token:storage-token" --form "name=new-file.csv" --form "sizeBytes=52"  https://connection.keboola.com/v2/storage/files/prepare?federationToken=1
@@ -76,7 +78,7 @@ The important part is `id` of the file, which will be needed later, `uploadParam
 the `key` and `bucket` nodes, which define the target S3 destination as *s3://`bucket`/`key`*.
 To upload the files to S3, you need an S3 client, there are a wide number of clients of available - you can use for example
 [S3 AWS command line client](http://docs.aws.amazon.com/cli/latest/userguide/installing.html). Before
-you use it, you need to [pass the credentials](http://docs.aws.amazon.com/cli/latest/topic/config-vars.html#credentials), e.g by executing:
+using it, [pass the credentials](http://docs.aws.amazon.com/cli/latest/topic/config-vars.html#credentials), e.g by executing:
 
 on *nix systems:
 {% highlight bash %}
@@ -92,52 +94,55 @@ SET AWS_SECRET_ACCESS_KEY=QbO...7qu
 SET AWS_SESSION_TOKEN=Ago...bsF
 {% endhighlight %}
 
-Then you can actually upload the file `new-table.csv` by executing the AWS S3 CLI [cp command](http://docs.aws.amazon.com/cli/latest/reference/s3/cp.html):
+Then you can actually upload the `new-table.csv` file by executing the AWS S3 CLI [cp command](http://docs.aws.amazon.com/cli/latest/reference/s3/cp.html):
 {% highlight bash %}
 aws s3 cp new-table.csv s3://kbc-sapi-files/exp-180/1134/files/2016/06/22/192726697.new_file2.csv
 {% endhighlight %}
 
-Then you can import the file into Table Storage, by calling either
+After that, import the file into Table Storage, by calling either
 [Create Table API call](http://docs.keboola.apiary.io/#reference/tables/create-table-asynchronously/create-new-table-from-csv-file-asynchronously
-(for new table) or
+(for a new table) or
 [Load Data API call]http://docs.keboola.apiary.io/#reference/tables/load-data-asynchronously/create-new-table-from-csv-file-asynchronously
-(for existing table).
+(for an existing table).
 
 curl --request POST --header "X-StorageApi-Token:storage-token" --form "name=new-table" --form "dataFileId=192726698" https://connection.keboola.com/v2/storage/buckets/in.c-main/tables-async
 
-This will create an asynchronous job which will import data from the file `192726698` into a destination table `new-table` in bucket `in.c-main`.
-You then have to [poll for the job results](/overview/jobs/#polling), or review its status in the UI.
+This will create an asynchronous job importing data from the `192726698` file into the `new-table` destination table in the `in.c-main` bucket.
+Then [poll for the job results](/overview/jobs/#polling), or review its status in the UI.
 
 ### Table Importer Service
 The process of importing data into Storage tables can be simplified a bit by using the
 [*Table Importer*](https://github.com/keboola/sapi-table-importer)
 (not to be confused with [Storage API importer](/integrate/storage/api/importer/). The Table importer
-is a KBC component, which takes files from KBC File Storage (*File Uploads*) and imports them in Storage tables.
-The advantage of Table Importer is that can be configured as part of KBC orchestration.
-To use the importer service, you need to create a configuration table for it. The table must be placed in
-the bucket `sys.c-table-importer` and its name may be arbitrary. Configuration of a
+is a KBC component which takes files from KBC File Storage (*File Uploads*) and imports them into KBC Table Storage (*Tables*).
+The advantage of Table Importer is that it can be configured as part of the KBC orchestration.
+
+To use the importer service, create a configuration table for it. The table must be placed in
+the `sys.c-table-importer` bucket. Its name may be arbitrary. The configuration of a 
 [sample table](/integrate/storage/sys.c-table-importer.test-config.csv) is shown below:
 
 {: .image-popup}
 ![Screenshot - Table importer configuration](/integrate/storage/api/api-table-exporter-setting.png)
 
-Any table in `sys.c-table-importer` bucket can contain any number of rows, each row corresponds to a single destination table and has to have the following columns:
-- `table` - Full name of the destination table in storage in format `bucketName`.`tableName`.
-- `tag` - Tag of uploaded file which will be converted into the destination table.
+Any table in the `sys.c-table-importer` bucket can contain any number of rows; each row corresponds to a single destination table and has to have the following columns:
+
+- `table` - Full name of the destination table in Storage in the following format: `bucketName`.`tableName`.
+- `tag` - Tag of an uploaded file which will be converted into the destination table.
 - `rowId` - Unique (sequential) identifier of the row.
-- `primaryKey` - Optional name of column marked as primary column in the table.
-- `incremental` - 0 or 1 for incremental load of the destination table (append data to table).
+- `primaryKey` - Optional name of the column marked as the primary column in the table.
+- `incremental` - 0 or 1 for an incremental load of the destination table (append data to a table).
 - `enclosure` - CSV enclosure for strings (by default `"`).
 - `delimiter` - CSV delimiter (by default `,`).
-- `escapedBy` - CSV escape character for enclosure, leave empty to default to escaping by double enclosure.
+- `escapedBy` - CSV escape character for enclosure; leave empty to escape by double enclosure.
 
-You can test the above configuration by uploading a [CSV file](/integrate/storage/new-table.csv) into *File Uploads* and assigning a tag `new-data` to it. You
-can do so programatically via the API or via the UI.
+
+You can test the above configuration by uploading a [CSV file](/integrate/storage/new-table.csv) into *File Uploads* and assigning a tag `new-data` to it. 
+You can do so programatically via the API or via the UI.
 
 {: .image-popup}
 ![Screenshot - File upload Tag](/integrate/storage/api/api-upload-file.png)
 
-You can then run the configuration by executing the [`run` API call](http://docs.sapitableimporter.apiary.io/#reference/api/importer-run/run-import):
+Then run the configuration by executing the [`run` API call](http://docs.sapitableimporter.apiary.io/#reference/api/importer-run/run-import):
 
 {% highlight bash %}
 curl --request POST --header "X-StorageApi-Token:storage-token" https://syrup.keboola.com/table-importer/run
@@ -152,33 +157,35 @@ Which will run the import job and return:
 }
 {% endhighlight %}
 
-Then you can [poll for the job status](/overview/jobs/) or review the job progress in UI.
+Then [poll for the job status](/overview/jobs/) or review the job progress in UI.
 The table importer will take all files with the specified tags (`new-data`) and import them into
 the specified table (`in.c-main.new-table`). The Table Importer records the last processed files, so
- that each file is processed only once. Last processed file is recroded in table attributes:
+that each file is processed only once. The last processed file is recorded in table attributes:
 
 {: .image-popup}
 ![Screenshot - Table attributes](/integrate/storage/api/table-importer-last-processed.png)
 
-### Working with sliced files
+### Working with Sliced Files
 Depending on the backend and table size, the data file may be sliced into chunks.
 Requirements for uploading sliced files are described in the respective part of the
 [API documentation](http://docs.keboola.apiary.io/#reference/files/upload-file/upload-arbitrary-file-to-keboola).
-When you attempt too download sliced file, you will instead obtain its manifest which
-lists the indivudal parts. You need to download the parts individually and join them
+
+When you attempt to download a sliced file, you will instead obtain its manifest 
+listing the individual parts. You need to download the parts individually and join them
 together. For a reference implementation of this process, see
 our [TableExporter class](https://github.com/keboola/storage-api-php-client/blob/master/src/Keboola/StorageApi/TableExporter.php).
-Also note, that when you export a table throught the *Table* - *Export* UI, the file will
-be already merged and not listed in *File Uploads* section.
 
-When you want to download a sliced file, you then need to [obtain credentials](http://docs.keboola.apiary.io/#reference/files/manage-files/file-detail)
-to download the file from AWS S3. Assuming, that the file ID is e.g 192611596, you would call:
+**Important:** When exporting a table through the *Table* - *Export* UI, the file will
+be already merged and not listed in the *File Uploads* section.
+
+If you want to download a sliced file, [get credentials](http://docs.keboola.apiary.io/#reference/files/manage-files/file-detail)
+to download the file from AWS S3. Assuming that the file ID is 192611596, for example, call
 
 {% highlight bash %}
 curl --header "X-StorageAPI-Token: storage-token" https://connection.keboola.com/v2/storage/files/192611596?federationToken=1
 {% endhighlight %}
 
-which will return a response similar to:
+which will return a response similar to this:
 
 {% highlight json %}
 {
@@ -205,8 +212,8 @@ which will return a response similar to:
 }
 {% endhighlight %}
 
-The field `url` contains the URL to the file manifest. When you download it, you will obtain a JSON file with contents
-similar to:
+The field `url` contains the URL to the file manifest. Upon downloading it, you will get a JSON file with contents
+similar to this:
 
 {% highlight json %}
 {
@@ -217,11 +224,11 @@ similar to:
 }
 {% endhighlight %}
 
-Now, you can download the actual data file slices, URLs are are provided in the manifest file, and credentials to them
-are returned as part of the previous file info call. To download the files from S3, you need an S3 client, there
+Now you can download the actual data file slices. URLs are provided in the manifest file, and credentials to them
+are returned as part of the previous file info call. To download the files from S3, you need an S3 client. There
 are a wide number of clients of available - you can use for example
 [S3 AWS command line client](http://docs.aws.amazon.com/cli/latest/userguide/installing.html). Before
-you use it, you need to [pass the credentials](http://docs.aws.amazon.com/cli/latest/topic/config-vars.html#credentials), e.g by executing:
+using it, [pass the credentials](http://docs.aws.amazon.com/cli/latest/topic/config-vars.html#credentials), for instance by executing:
 
 on *nix systems:
 {% highlight bash %}
@@ -237,13 +244,13 @@ SET AWS_SECRET_ACCESS_KEY=LHU...HAp
 SET AWS_SESSION_TOKEN=Ago...wU=
 {% endhighlight %}
 
-Then you can actuall download the files by executing the AWS S3 CLI [cp command](http://docs.aws.amazon.com/cli/latest/reference/s3/cp.html):
+Then you can actually download the files by executing the AWS S3 CLI [cp command](http://docs.aws.amazon.com/cli/latest/reference/s3/cp.html):
 {% highlight bash %}
 aws s3 cp s3://kbc-sapi-files/exp-30/578/table-exports/in/c-redshift/blog-data/192611594.csv0000_part_00 192611594.csv0000_part_00
 aws s3 cp s3://kbc-sapi-files/exp-30/578/table-exports/in/c-redshift/blog-data/192611594.csv0001_part_00 192611594.csv0001_part_00
 {% endhighlight %}
 
-Then you need to merge the files together by executing:
+After that merge the files together by executing:
 
 on *nix systems:
 {% highlight bash %}
