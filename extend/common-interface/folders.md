@@ -8,7 +8,7 @@ permalink: /extend/common-interface/folders/
 
 Data folders are one of the [possible channels](/extend/common-interface/) to exchange data between your application and Keboola Connection.
 
-## /data/ Root folder
+## /data/ Root Folder
 
 The `/data/` folder is the root folder for exchanging data.
 Your application reads its input from the `/data/in` folder and writes its results to the `/data/out` folder.
@@ -18,7 +18,7 @@ The data folders contain actual data files (tables and files) and metadata.
 For each datafile, a [manifest file](/extend/common-interface/manifest-files/) is created.
 It contains metadata information (creation time, keys for tables, etc.).
 
-To create a data folder sample, use [create sandbox](/extend/common-interface/) via the
+To create a data folder sample, use the [create sandbox](/extend/common-interface/sandbox/) call via the
 [Docker Runner API](http://docs.kebooladocker.apiary.io/#reference/sandbox).
 All the resources you need in your application will be provided in a ZIP archive.
 
@@ -30,8 +30,8 @@ The predefined data exchange folder structure is as follows:
     /data/out/files
 
 This folder structure is always available to your application. For Custom Science the current directory
-will always be set to `/data/`, so the above folders can be accessed both with absolute and relative paths (e.g. `in/tables`)
-(for Docker Extensions, the current directory is up to you).
+will always be set to `/data/`, so the above folders can be accessed both with absolute and relative paths (e.g. `in/tables`).
+For Docker Extensions, the current directory is up to you.
 Do not put arbitrary files in the `/data/` folder as they will be uploaded into the user project
 (or cause errors in the output mapping). For working or temporary files, use either the `/home/` or `/tmp/` folder.
 The working directories have 10GB of free space.
@@ -55,13 +55,13 @@ All output tables from your application must be placed in this folder. The desti
 - If `defaultBucket` (see [below])(#default-bucket) is specified, it applies only
 to the [Docker extension](/extend/docker/). The table will be uploaded to a
 bucket whose name is created from the extension and configuration names.
-- If the output mapping is specified (through the UI, usually), and its *source* matches the physical file name in the
+- If the output mapping is specified (through the UI, usually) and its *source* matches the physical file name in the
 `/data/out/tables` folder, the *destination* is the name of the table in Storage. An output mapping which cannot be
 matched to a physical file produces an error (i.e. fulfilling the output mapping is mandatory).
 - If a [manifest file](/extend/common-interface/manifest-files/) exists, it can specify the *destination* of
 the table in Storage if no output mapping is present.
 - If none of the above options are used, the destination is defined by the name of the file
-(e.g. `out.c-data.my-table.csv` will create a *my-table* table in the *out-c-data* bucket). The filename must have
+(for example, `out.c-data.my-table.csv` will create a *my-table* table in the *out-c-data* bucket). The filename must have
 at least two dots.
 - If neither rule can be applied, an error is thrown.
 
@@ -69,7 +69,8 @@ Basically, manifests allow you to process files in the `/data/out` folder withou
 output mapping. That allows for a flexible and dynamic output mapping where the structure is unknown at the beginning.
 Using filenames (e.g. `out.c-data.my-table.csv`) for an output mapping is great for saving implementation time in simple or
 POC applications.
-Note that all files in the `/data/out/tables` folder will be uploaded, not only those specified in the output mapping or
+
+**Important**: All files in the `/data/out/tables` folder will be uploaded, not only those specified in the output mapping or
 manifests.
 
 The expected CSV format:
@@ -87,17 +88,17 @@ the `default_bucket` flag during your [extension registration](/extend/registrat
 
 All tables in `/data/out/tables` will then be uploaded to a bucket identified by your
 component id (created upon the extension registration) and
-configuration id (created when an end-user adds new extension configuration) and stage (`in` or `out`).
+configuration id (created when an end-user adds a new extension configuration) and stage (`in` or `out`).
 The file name (without the `.csv` suffix) will be used as the table name. The `destination` attributes
 in the output mapping and file manifests will be overridden.
 
-Note: The `default_bucket` flag always requires the `config` parameter when creating a job manually using
+**Important**: The `default_bucket` flag always requires the `config` parameter when creating a job manually using
 API even if the `config` configuration does not exist in Storage. This feature
 is available only for [Docker extensions](/extend/docker/).
 
 ### `/data/in/files/` Folder
 
-Files defined in the input mapping are stored in their raw form, file names are numeric and
+Files defined in the input mapping are stored in their raw form. File names are numeric and
 equal to `{fileId}_{filename}` in Storage. All other information about the files is available
 in the [manifest file](/extend/common-interface/manifest-files/).
 

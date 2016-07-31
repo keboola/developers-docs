@@ -8,7 +8,7 @@ The default input for a component configuration is a JSON textarea.
 {: .image-popup}
 ![Generic configuration screenshot](/extend/registration/configuration.png)
 
-If you define a JSON schema, we are able to display a nice form, and 
+If you define a JSON schema, we are able to display a nice form and 
 let the user to fill the JSON using a set of defined inputs.
 
 {: .image-popup}
@@ -18,15 +18,16 @@ Using the configuration schema also allows us to validate the user input, both f
  
 ## Creating Schema
 
-JSON schema is well documented on [json-schema.org](http://json-schema.org/) website and JSON Editor is available 
-[online](http://jeremydorn.com/json-editor/) to develop and test JSON schemas. Make sure to list all configuration 
-properties as `required`. This is to make sure that the actual configuration will always contain all properties. If
-you want a property to be optional, set a default value for it. The supported formatting options for 
-the editor are available in the [offical editor documentation](https://github.com/jdorn/json-editor#format).
+JSON schemas are well documented on the [json-schema.org](http://json-schema.org/) website. For their developing and testing, 
+use, for example, JSON Editor available [on-line](http://jeremydorn.com/json-editor/). 
+Make sure to list all configuration properties as `required`. 
+This is to make sure that the actual configuration will always contain all properties. 
+If you want a property to be optional, set a default value for it. The supported formatting options for 
+the editor are available in the [official editor documentation](https://github.com/jdorn/json-editor#format).
 
 ### Example
 
-Let's assume your application accepts the following configuration.
+Let's assume your application accepts the following configuration:
 
 {% highlight json %}
 

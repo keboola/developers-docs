@@ -9,7 +9,7 @@ permalink: /integrate/storage/api/importer/
 The [whole process of importing](/integrate/storage/api/) a table into Storage can be simplified with the
 Storage API Importer Service 
 {% comment %}[Storage API Importer Service](https://bitbucket.org/keboola/sapi-importer-bundle){% endcomment %}. 
-The SAPI Importer allows you to make an HTTP POST request and import a file into Storage Table.
+The SAPI Importer allows you to make an HTTP POST request and import a file directly into a Storage table.
 
 The HTTP request must contain the `tableId` and `data` form fields. Therefore to
 upload the `new-table.csv` CSV file (and replace the contents) into the `new-table` table in the `in.c-main` bucket,

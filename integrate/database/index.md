@@ -49,9 +49,9 @@ CMD    ["/usr/sbin/sshd", "-D"]
 This server should be in the same private network where your database server resides. It should be accessible publicly from the internet via SSH.
 The default port for SSH is 22, but you can choose a different port.
 
-For more information about setting up SSH on your server, go to:
+See the following pages for more information about setting up SSH on your server:
 
-- [OpenSSH configuration](https://help.ubuntu.com/community/SSH/OpenSSH/Configuring).
+- [OpenSSH configuration](https://help.ubuntu.com/community/SSH/OpenSSH/Configuring)
 - [Dockerized SSH service](https://docs.docker.com/engine/examples/running_ssh_service/)
 
 

@@ -9,15 +9,15 @@ permalink: /extend/common-interface/environment/
 Extensions (and other dockerized applications) use several [channels](/extend/common-interface/) to exchange information with Keboola Connection,
 primarily [structured folders](/extend/common-interface/) and [configuration files](/extend/common-interface/config-file/).
 
-Additional parts of the environment in which your application is executed are specified below:
+Additional parts of the environment in which your application is executed are specified below.
 
 ## Environment Variables
 
 The following environment variables are injected in the container:
 
- - `KBC_DATADIR`: This is always `/data/` in KBC; you can use this environment variable during application
+ - `KBC_DATADIR`: This is always `/data/` in KBC; use this environment variable during application
  development to create development and testing environments.
- - `KBC_RUNID`: RunId from Storage; couples all events within an API call (use this for logging)
+ - `KBC_RUNID`: RunId from Storage; it couples all events within an API call (use this for logging)
  - `KBC_PROJECTID`: Id of the project in KBC.
  - `KBC_CONFIGID`: Id of the configuration or hash of configuration data if the configuration
  is not named (`configData` was used in
@@ -31,10 +31,10 @@ The following environment variables are injected in the container:
  - `KBC_TOKENDESC`: Description (user name or token name) of the token running the container.
  - `KBC_TOKEN`: The actual token running the container.
 
-The following variables are available when GELF logger is enabled in the [component registration](/extend/registration/):
+The following variables are available when [GELF Logger](/extend/common-interface/logging/#gelf-logger) is enabled in the [component registration](/extend/registration/):
 
-- `KBC_LOGGER_ADDR`: IP Address of GELF server.
-- `KBC_LOGGER_PORT`: Port of the GELF server.
+- `KBC_LOGGER_ADDR`: IP address of GELF server
+- `KBC_LOGGER_PORT`: Port of the GELF server
 
 ## Return Values
 
@@ -49,23 +49,23 @@ will be sent to Storage API Events.
 and the contents of both STDOUT and STDERR will be sent to internal logs.
 
 It is fairly important to distinguish between a *User Exception* and *Application Exception*. In case of
-User Exception, the end-user will see a full error message. Therefore:
+User Exception, the end-user will see a full error message. Therefore,
 
-- Avoid messages which make no sense at all; for example 'Banana Error: Exceeding trifling witling' or only numeric errors.
+- Avoid messages which make no sense at all. For example, 'Banana Error: Exceeding trifling witling' or only numeric errors.
 - Avoid leaking sensitive information (such as credentials, tokens).
-- Avoid errors which the user cannot solve -- for example 'Outdated OpenSSL library, update to OpenSSL 1.0.2'.
-- Provide guidance on what the user should do (e.g. 'Input table is missing, make sure the output mapping produces table 'items.csv')
+- Avoid errors which the user cannot solve. For example, 'An outdated OpenSSL library, update to OpenSSL 1.0.2'.
+- Provide guidance on what the user should do. For example, 'The input table is missing; make sure the output mapping produces the 'items.csv' table.
 
-In case of an *Application Exception*, the end-user will see only a canned response ('An application error occurred'), with
-the option to contact support. The actual output of the application will be sent to our internal logs only. In case of
-[Docker extensions](/extend/docker/) these can be forwarded to a place you specify in your
-[component registration](/extend/registration/). In case of [Custom Science](/extend/custom-science/) these cannot be
-automatically forwarded to you.
+In case of an *Application Exception*, the end-user will see only a canned response ('An application error occurred') with
+the option to contact support. The actual output of the application will be sent to our internal logs only. 
+
+In case of [Docker extensions](/extend/docker/) the output can be forwarded to a place specify by you in your
+[component registration](/extend/registration/), while in case of [Custom Science](/extend/custom-science/), it cannot.
 
 ## Standard Output and Standard Error
 
-Unless you have turned on [GELF logging](/extend/common-interface/logging/#gelf-logger) in
-[component registration](/extend/registration/). Docker Runner listens
+Unless you have turned on [GELF logging](/extend/common-interface/logging/#gelf-logger) in the
+[component registration](/extend/registration/), Docker Runner listens
 to [STDOUT](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_.28stdout.29)
 and [STDERR](https://en.wikipedia.org/wiki/Standard_streams#Standard_error_.28stderr.29)
 of the application and forwards any content live to [Storage API Events](http://docs.keboola.apiary.io/#events).
