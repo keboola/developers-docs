@@ -50,7 +50,7 @@ Do not specify the `action` attribute in the request body, it is already in the 
 
 {% endhighlight %}
 
-*Note: use https://syrup-docker.keboola.com/ for running calling this part of the API.*
+*Note: use **https://syrup-docker.keboola.com/** for running calling this part of the API.*
 
 ### Exit Codes
 
