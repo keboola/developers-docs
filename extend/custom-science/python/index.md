@@ -76,12 +76,8 @@ It is also important to use `encoding='utf-8'` when reading and writing files.
 To test the above code, you can use a sample [source table](/extend/source.csv) in *Storage* and the
 following *runtime* configuration:
 
-{% highlight json %}
-{
-    "repository": "https://github.com/keboola/docs-custom-science-example-python-basic",
-    "version": "1.0.6"
-}
-{% endhighlight %}
+- Repository: https://github.com/keboola/docs-custom-science-example-python-basic
+- Version: 1.0.6
 
 
 ## Using the KBC Package
@@ -153,12 +149,8 @@ Note that we have also simplified reading and writing of the CSV files using `di
 registered automatically when the `Config` class is initialized.
 You can test the code with the following runtime configuration:
 
-{% highlight json %}
-{
-    "repository": "https://github.com/keboola/docs-custom-science-example-python-parameters",
-    "version": "1.0.1"
-}
-{% endhighlight %}
+- Repository: https://github.com/keboola/docs-custom-science-example-python-parameters
+- Version: 1.0.1
 
 And with the following parameters:
 
@@ -242,12 +234,8 @@ for table in tables:
 The above code is located in a [sample repository](https://github.com/keboola/docs-custom-science-example-python-dynamic),
 so you can use it with the *runtime settings*. Supply any number of input tables.
 
-{% highlight json %}
-{
-    "repository": "https://github.com/keboola/docs-custom-science-example-python-dynamic.git",
-    "version": "1.0.5"
-}
-{% endhighlight %}
+- Repository: https://github.com/keboola/docs-custom-science-example-python-dynamic.git
+- Version: 1.0.5
 
 To test the code, set an arbitrary number of input/output mapping tables. Keep in mind to set the same number of
 inputs and outputs. The names of the CSV files are arbitrary.

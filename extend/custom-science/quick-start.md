@@ -21,14 +21,16 @@ Create a public git repository ([Github](https://github.com/) or [Bitbucket](htt
 ### Step 2 -- Application Code
 In the root of your repository, create the main application file [`main.R`](https://github.com/keboola/docs-custom-science-example-r-basic/blob/master/main.R). (In Python Custom Science App, the analogous file would be called `main.py`):
 
-    # read input
-    data <- read.csv("/data/in/tables/source.csv");
+{% highlight r %}
+# read input
+data <- read.csv("/data/in/tables/source.csv");
 
-    # do something
-    data['double_number'] <- data['number'] * 2
+# do something
+data['double_number'] <- data['number'] * 2
 
-    # write output
-    write.csv(data, file = "/data/out/tables/result.csv", row.names = FALSE)
+# write output
+write.csv(data, file = "/data/out/tables/result.csv", row.names = FALSE)
+{% endhighlight %}
 
 ### Step 3 -- Commit and Tag
 Commit to the repository and tag it with a [git tag](https://git-scm.com/book/en/v2/Git-Basics-Tagging) (Github release), such as `0.0.1`.
@@ -76,13 +78,10 @@ Leave *File input mapping* empty.
 
 
 #### Step 4.5 -- Configuration
-Leave *parameters* empty for now. In *Runtime parameters* enter the the configuration of the repository.
-This must be entered as a [JSON formatted](http://www.w3schools.com/json/json_syntax.asp) string.
+Leave *parameters* empty for now. In *Runtime* section enter the the configuration of the repository:
 
-    {
-        "repository": "https://github.com/keboola/docs-custom-science-example-r-basic",
-        "version": "0.0.2"
-    }
+- Repository: https://github.com/keboola/docs-custom-science-example-r-basic
+- Version: 0.0.2
 
 {: .image-popup}
 ![Application configuration example](/extend/custom-science/configuration.png)
@@ -130,16 +129,16 @@ Commit the code and don't forget to create a new tag in the repository.
 
 Enter the configuration in the parameters field:
 
-    {
-        "multiplier": 10
-    }
+{% highlight json %}
+{
+    "multiplier": 10
+}
+{% endhighlight %}
 
-Enter the repository in the runtime field:
+Enter the repository in the runtime section:
 
-    {
-        "repository": "https://github.com/keboola/docs-custom-science-example-r-parameters",
-        "version": "0.0.2"
-    }
+- Repository: https://github.com/keboola/docs-custom-science-example-r-parameters
+- Vversion: 0.0.2
 
 
 Note that the configuration format is arbitrary and there is no validation.

@@ -52,25 +52,18 @@ version is inefficient and makes it hard to trace what code has been executed.
 ### Public Repository
 The basic *Runtime* settings for a public repository are entered in JSON format:
 
-{% highlight json %}
-{
-    "repository": "https://github.com/keboola/docs-custom-science-example-basic",
-    "version": "0.0.1"
-}
-{% endhighlight %}
+- Repository: https://github.com/keboola/docs-custom-science-example-basic
+- Version: 0.0.1
 
 ### Private Repository
 The *Runtime* settings for a private repository must include git credentials: an unencrypted username in the
 `username` field, and an [encrypted](/overview/encryption/) password in `#password`.
 
-{% highlight json %}
-{
-    "repository": "https://github.com/keboola/docs-custom-science-example-basic",
-    "version": "0.0.1",
-    "username": "JohnDoe",
-    "#password": "MySecretPassword"
-}
-{% endhighlight %}
+- Repository: https://github.com/keboola/docs-custom-science-example-basic
+- Version: 0.0.1
+- Username: JohnDoe
+- Password: MySecretPassword
+
 
 There are two main encryption options available:
 
