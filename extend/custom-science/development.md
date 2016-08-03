@@ -38,7 +38,7 @@ if (Sys.getenv("KBC_PROJECTID") != '123')  {
 
 ## Git Repository Configuration
 
-Information about the repository with the extension code is entered into the *Runtime* configuration field when
+Information about the repository with the extension code is entered into the *Runtime* configuration section when
 creating the extension configuration. It is not available to the extension itself. Both types of repositories, private
 and public, are supported. **KBC Custom Science configuration needs to refer to a particular tag/branch of your repository;
 we recommend [Semantic versioning](http://semver.org/)**.
@@ -50,19 +50,19 @@ when quickly iterating over the application code and when running the configurat
 version is inefficient and makes it hard to trace what code has been executed.
 
 ### Public Repository
-The basic *Runtime* settings for a public repository are entered in JSON format:
+For public repository, the *Runtime* settings contain only the repository and version specificition, e.g.:
 
-- Repository: https://github.com/keboola/docs-custom-science-example-basic
-- Version: 0.0.1
+- Repository: `https://github.com/keboola/docs-custom-science-example-basic`
+- Version: `0.0.1`
 
 ### Private Repository
 The *Runtime* settings for a private repository must include git credentials: an unencrypted username in the
-`username` field, and an [encrypted](/overview/encryption/) password in `#password`.
+Username field, and an [encrypted](/overview/encryption/) Password, e.g:
 
-- Repository: https://github.com/keboola/docs-custom-science-example-basic
-- Version: 0.0.1
-- Username: JohnDoe
-- Password: MySecretPassword
+- Repository: `https://github.com/keboola/docs-custom-science-example-basic`
+- Version: `0.0.1`
+- Username: `JohnDoe`
+- Password: `MySecretPassword`
 
 
 There are two main encryption options available:

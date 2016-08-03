@@ -106,8 +106,8 @@ for (i in 1:nrow(tables)) {
 The above code is located in a [sample repository](https://github.com/keboola/docs-custom-science-example-r-dynamic), so you can use it
 with the *runtime settings*. Supply any number of input tables.
 
-- Repository: https://github.com/keboola/docs-custom-science-example-dynamic.git
-- Version: 0.0.1
+- Repository: `https://github.com/keboola/docs-custom-science-example-dynamic.git`
+- Version: `0.0.1`
 
 To test the code, set an arbitrary number of input/output mapping tables. Keep in mind to set the same number of inputs and outputs. The names of the CSV files are arbitrary.
 
@@ -177,8 +177,8 @@ itself is identical to the [previous example](#simple-example).
 
 Test the sample code with this *runtime* setting:
 
-- Repository: https://github.com/keboola/docs-custom-science-example-r-package.git
-- Version: 0.0.5
+- Repository: `https://github.com/keboola/docs-custom-science-example-r-package.git`
+- Version: `0.0.5`
 
 #### Tests
 Tests are organized in the [/tests/](https://github.com/keboola/docs-custom-science-example-r-package/tree/master/tests) directory which contains:
@@ -235,8 +235,8 @@ within the body of `CustomApplicationExample`'s `run` method.
 
 Test the sample code with this *runtime* setting:
 
-- Repository: https://github.com/keboola/docs-custom-science-example-r-subclass.git
-- Version: 0.0.4
+- Repository: `https://github.com/keboola/docs-custom-science-example-r-subclass.git`
+- Version: `0.0.4`
 
 ## Continuous Integration and Testing
 When using the [Package](#package-example) or [Subclass](#subclass-example) approach, you can use standard R testing methods.

@@ -80,8 +80,8 @@ Leave *File input mapping* empty.
 #### Step 4.5 -- Configuration
 Leave *parameters* empty for now. In *Runtime* section enter the the configuration of the repository:
 
-- Repository: https://github.com/keboola/docs-custom-science-example-r-basic
-- Version: 0.0.2
+- Repository: `https://github.com/keboola/docs-custom-science-example-r-basic`
+- Version: `0.0.2`
 
 {: .image-popup}
 ![Application configuration example](/extend/custom-science/configuration.png)
@@ -137,8 +137,8 @@ Enter the configuration in the parameters field:
 
 Enter the repository in the runtime section:
 
-- Repository: https://github.com/keboola/docs-custom-science-example-r-parameters
-- Vversion: 0.0.2
+- Repository: `https://github.com/keboola/docs-custom-science-example-r-parameters`
+- Vversion: `0.0.2`
 
 
 Note that the configuration format is arbitrary and there is no validation.
