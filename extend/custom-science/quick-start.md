@@ -53,12 +53,8 @@ Create a [source table](/extend/source.csv) in *Storage*, e.g.:
 | 30 | ij |
 
 Name of the table in *Storage* is not important. Let's name it **in.c-main.custom-science-example**.
-
 For instructions on how to create a table, go to [KBC Tutorial](https://help.keboola.com/overview/tutorial/load/).
-
-The bucket to write the output of the application to has to exist.
-We will use the **out.c-main** bucket.
-The output table will be created automatically.
+The output bucket and table will be created automatically.
 
 #### Step 4.2 -- Create the Application
 Go to *Applications* -- *New Application* -- *Custom Science R*, and press *Add configuration* in which you will set the input and output mapping and repository as explained below.
