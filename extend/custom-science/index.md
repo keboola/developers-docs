@@ -21,7 +21,7 @@ Advantages:
 
 Disadvantages:
 
-* Predefined environments only (currently R and Python)
+* Predefined environments only (currently R, Python and PHP)
 * Poor end-user experience when configuring
 * Extensions cannot be branded
 * The UI cannot be modified by the developer
@@ -32,7 +32,7 @@ to provide the application logic without having to maintain the Docker images.
 
 ### How to Create a Custom Science Extension
 
-As a developer, you need to implement the application logic in Python or R and store it in a git repository.
+As a developer, you need to implement the application logic in R, Python and PHP and store it in a git repository.
 The extension must adhere to our [Common Interface](/extend/common-interface/).
 We provide libraries to help you with that.
 Few additional language specific requirements may apply (e.g. an R extension must have a `main.R` file) - see the [detailed guide](/extend/custom-science/development/).

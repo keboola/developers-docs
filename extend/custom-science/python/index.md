@@ -12,8 +12,7 @@ our [library](https://github.com/keboola/python-docker-application). It provides
 with our [environment](/extend/common-interface/). Please note:
 
 - The repository of your Python application must always contain the `main.py` script.
-- The output mapping in your application is always required. Your application will always produce the tables and
- files listed in the output mapping (even if the files were empty).
+- If set, your application must always produce the tables and files listed in the output mapping (even if the files were empty).
 
 If you are starting with Custom Science, consider going through the
 [Quickstart](/extend/custom-science/quick-start/).

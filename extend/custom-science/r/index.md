@@ -10,7 +10,7 @@ Your R Custom Science Application can be created in multiple ways (as described 
 
 - The repository of your R application must always contain the `main.R` script.
 - All result .csv files **must be** written with the `row.names = FALSE` option (otherwise KBC cannot read the file because it contains unnamed column).
-- The output mapping in your application is always required. Your application will always produce the tables and files listed in the output mapping (even if the files were empty).
+- If set, your application must always produce the tables and files listed in the output mapping (even if the files were empty).
 
 ## Packages
 To install a package, use `install.packages('packageName')`. It is not necessary to specify the repository. If you wish to install a package from source, use `devtools::install_github()` (and friends).
