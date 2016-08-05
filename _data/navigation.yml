@@ -39,6 +39,9 @@ items:
           - url: /extend/custom-science/python/
             title: Custom Science Python
 
+          - url: /extend/custom-science/php/
+            title: Custom Science PHP
+
       - url: /extend/docker/
         title: Docker Extensions
         items:
