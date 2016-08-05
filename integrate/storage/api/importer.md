@@ -7,8 +7,8 @@ permalink: /integrate/storage/api/importer/
 {:toc}
 
 The [whole process of importing](/integrate/storage/api/) a table into Storage can be simplified with the
-Storage API Importer Service 
-{% comment %}[Storage API Importer Service](https://bitbucket.org/keboola/sapi-importer-bundle){% endcomment %}. 
+Storage API Importer Service
+{% comment %}[Storage API Importer Service](https://bitbucket.org/keboola/sapi-importer-bundle){% endcomment %}.
 The SAPI Importer allows you to make an HTTP POST request and import a file directly into a Storage table.
 
 The HTTP request must contain the `tableId` and `data` form fields. Therefore to
@@ -33,8 +33,7 @@ files [directly to S3](#manually-uploading-a-file).
 - `delimiter` (optional) Field delimiter used in a CSV file. The default value is ' , '. Use '\t' or type the tab char for tabulator.
 - `enclosure` (optional) Field enclosure used in a CSV file. The default value is '"'.
 - `escapedBy` (optional) CSV escape character; empty by default.
-- `incremental` (optional) If incremental is set to 0 (its default), the target table is truncated before each import. 
-- `partial` (optional) If partial is set to 1, only some of the table columns can be imported. It is useful for column updates in combination with incremental.
+- `incremental` (optional) If incremental is set to 0 (its default), the target table is truncated before each import.
 
 ## Examples
 To load data incrementally (append new data to existing contents):
@@ -48,4 +47,3 @@ To load data with a non-default delimiter (tabulator) and enclosure (empty):
 {% highlight bash %}
 curl --request POST --header "X-StorageApi-Token:storage-token" --form "delimiter=\t" --form "enclosure=" --form "tableId=in.c-main.new-table" --form "data=@new-table.csv" "https://syrup.keboola.com/sapi-importer/run"
 {% endhighlight %}
-
