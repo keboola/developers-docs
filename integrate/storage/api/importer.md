@@ -21,7 +21,7 @@ curl --request POST --header "X-StorageApi-Token:storage-token" --form "tableId=
 
 Using the SAPI Importer is the easiest way to upload data into KBC Table Storage (except for
 using one of the [API clients](/integrate/storage/#clients)). However, the disadvantage is that the whole data file
-has to be posted in a single HTTP request. **The maximum limit for a file transfer is 45 minutes**.
+has to be posted in a single HTTP request. **The maximum limit for a file size is 2GB and transfer time is 45 minutes**.
 This means that for substantially large files (usually more than hundreds of MB)
 you may experience timeouts. If that happens, use the above outlined approach and upload the
 files [directly to S3](#manually-uploading-a-file).
