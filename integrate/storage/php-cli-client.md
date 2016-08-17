@@ -7,12 +7,12 @@ permalink: /integrate/storage/php-cli-client/
 {:toc}
 
 The Storage API PHP command line interface (CLI) client is a portable command line client which provides
-a simple implementation of [Storage API](http://docs.keboola.apiary.io/). 
+a simple implementation of [Storage API](http://docs.keboola.apiary.io/).
 It runs on any platform which has PHP CLI installed.
 
-Currently, the client implements 
+Currently, the client implements
 
-- functions for exporting and importing tables; 
+- functions for exporting and importing tables;
 - functions for creating and deleting buckets; and additionally,
 - the [project backup feature](https://help.keboola.com/management/project-export/).
 
@@ -106,3 +106,13 @@ the current directory. You should see an output similar to this one:
     Table found ok
     Export done in 17 secs.
 
+## Troubleshooting
+If the client does not seem to respond (hangs, prints no error or information message), make sure that your PHP installation can
+communicate properly and securely. You can verify this by running e.g. the following command:
+
+{% highlight bash %}
+curl --request GET --header "X-StorageApi-Token:yourtoken" "https://connection.keboola.com/v2/storage/buckets"
+{% endhighlight %}
+
+This should print a JSON with list of buckets in project. If the command returns an error, you need to resolve that error first before
+running Storage API client.

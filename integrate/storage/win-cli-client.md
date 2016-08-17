@@ -86,15 +86,3 @@ sapi-client write-table in.c-main.new-table D:\new-data.csv --token=storage_toke
 The above command will import the contents of the `new-data.csv` file into the existing table. If the
 `--incremental` parameter is supplied, the table contents will be appended. If the parameter is not
 supplied, the table contents will be overwritten.
-
-### Example - Exporting Data
-If you want to export a table from Storage, use the `export-table` command. Provide
-the ID (*bucketName.tableName*) of an existing table.
-
-To export data from the `old-table` table in the `in.c-main` bucket, use
-
-{% highlight Batchfile %}
-sapi-client export-table in.c-main.old-table D:\old-data.csv --token=storage_token
-{% endhighlight %}
-
-The above command will export the table from Storage and save it as `old-data.csv` on the D drive.
