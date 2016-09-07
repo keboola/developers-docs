@@ -50,7 +50,40 @@ pass `#username` because the application does not expect such a key to exist (al
 normally). Internally, the [Encrypt and Store configuration API call](http://docs.kebooladocker.apiary.io/#reference/encrypt/encrypt-and-store-configuration/save-configuration)
 is used.
 
+### Automated configuration adjustment
+
+*Note: Automated adjustment applies only to UI -- for components which have encryption enabled.*
+
+There are few automatic configuration adjustments UI does for you.
+
+They are applied in following order:
+
+1. Prefer encrypted values to plain values -- if you provide both `password` and `#password`, only the latter will be saved.
+2. Replace empty encrypted values by values of plain values -- if you provide both `password` and `#password`, but `#password` is null/empty, its value will be taken from the plain value.
+3. Remove all encrypted keys, which has null/empty values.
+
+Applying conditions above, the following configuration:
+
+{% highlight json %}
+{
+    "username": "JohnDoe",
+    "#password": "",
+    "password": "secret",
+    "#token": ""
+}
+{% endhighlight %}
+
+Will become:
+
+{% highlight json %}
+{
+    "username": "JohnDoe",
+    "#password": "secret"
+}
+{% endhighlight %}
+
 ## Encrypting Data with API
+
 The encryption API can encrypt either strings or arbitrary JSON data. For strings, the whole string is
 encrypted. For JSON data,
 only keys which start with `#` character and are scalar are encrypted. For example, encrypting
