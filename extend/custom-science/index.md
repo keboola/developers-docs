@@ -9,7 +9,7 @@ permalink: /extend/custom-science/
 A Custom Science extension can be used to create Extractors, Applications and Writers.
 As a special component wrapping an application logic in a public or private git repository, it is the simplest, quickest, and at the same time somewhat limited, extension of KBC.
 
-The end-user has to provide a link to your git repository, our system will wrap the code and run it.
+The end-user has to provide a link to your git repository. Our system will wrap the code and run it.
 
 A Custom Science extension can be created either for a particular end-user, or it may be offered to all KBC customers, in which case it has to be [registered](/extend/registration/) in KBC App Store.
 
@@ -32,10 +32,11 @@ to provide the application logic without having to maintain the Docker images.
 
 ### How to Create a Custom Science Extension
 
-As a developer, you need to implement the application logic in R, Python and PHP and store it in a git repository.
+As a developer, you need to implement the application logic in R, Python and PHP, and store it in a git repository.
 The extension must adhere to our [Common Interface](/extend/common-interface/).
 We provide libraries to help you with that.
-Few additional language specific requirements may apply (e.g. an R extension must have a `main.R` file) - see the [detailed guide](/extend/custom-science/development/).
+
+Few additional language specific requirements may apply (for example, an R extension must have a `main.R` file) - see our [detailed guide](/extend/custom-science/development/).
 
 Applications process input tables stored in [CSV files](/extend/common-interface/folders/) and generate result tables in CSV files.
 Extractors work the same way. However, instead of reading their input from KBC tables, they get it from an external source (usually an API).
