@@ -3,8 +3,8 @@ title: Extending KBC
 permalink: /extend/
 ---
 
-The KBC environment consists of many built-in [*components*](/overview/) which interoperate 
-together (e.g. Storage, Transformations and Readers). You can also create KBC extensions. Currently, 
+The KBC environment consists of many built-in [*components*](/overview/) which interoperate
+together (e.g. Storage, Transformations and Readers). You can also create KBC extensions. Currently,
 there are two types of extensions available:
 
 * [Generic Extractor](https://github.com/keboola/generic-extractor/) - a specific component designated for implementing extractors for services with REST API
@@ -12,18 +12,20 @@ there are two types of extensions available:
 
 ## Custom Extensions
 
-Custom Extensions can be used as Applications, Extractors and Writers. 
+Custom Extensions can be used as Applications, Extractors and Writers.
 
-Applications process input tables stored in CSV files and generate result tables in CSV files. Extractors work the same way. However, instead of reading their input from KBC tables, they get it from an external source (usually an API). Similarly, Writers do not generate any KBC tables.
+Applications process input tables stored in CSV files and generate result tables in CSV files.
+Extractors work the same way. However, instead of reading their input from KBC tables, they get it from an external
+source (usually an API). Similarly, Writers do not generate any KBC tables.
 
-All extensions run inside a [Docker component](/overview/docker-bundle) which takes care of: 
+All extensions run inside a [Docker component](/overview/docker-bundle) which takes care of:
 
 * Authentication
 * Starting and stopping the extension
 * Reading and writing data to KBC Storage
 * Application isolation
 
-They must adhere to a [common interface](/extend/common-interface/). 
+They must adhere to a [common interface](/extend/common-interface/).
 
 There are two types of Custom extensions differing in the level of integration and implementation flexibility:
 
@@ -42,7 +44,19 @@ The following table provides an overview of the main characteristics of KBC exte
     <th>Generic Extractor</th>
   </tr>
   <tr>
-    <th rowspan="3">Implementation</th>
+    <th rowspan="5">Implementation</th>
+    <th>Keboola Approval / Registration Required</th>
+    <td>yes</td>
+    <td>no</td>
+    <td>no</td>
+  </tr>
+  <tr>
+    <th>KBC Components</th>
+    <td>extractor, writer, application</td>
+    <td>extractor, writer, application</td>
+    <td>extractor</td>
+  </tr>
+  <tr>
     <th>Implementation Complexity</th>
     <td>medium</td>
     <td>easy</td>
@@ -51,7 +65,7 @@ The following table provides an overview of the main characteristics of KBC exte
   <tr>
     <th>Application Environment</th>
     <td>any</td>
-    <td>R or Python</td>
+    <td>R, Python, PHP</td>
     <td>configuration only</td>
   </tr>
   <tr>
@@ -70,22 +84,20 @@ The following table provides an overview of the main characteristics of KBC exte
   <tr>
     <th>Brandable</th>
     <td>yes</td>
-    <td>yes</td>
-    <td>no
-      (coming soon)</td>
+    <td>yes <sup>*</sup></td>
+    <td>yes <sup>*</sup></td>
   </tr>
   <tr>
     <th>Offered to All Users</th>
     <td>yes</td>
-    <td>no</td>
-    <td>no
-      (coming soon)</td>
+    <td>yes <sup>*</sup></td>
+    <td>yes <sup>*</sup></td>
   </tr>
   <tr>
     <th>Customizable User Interface</th>
     <td>yes</td>
-    <td>no</td>
-    <td>no</td>
+    <td>yes <sup>*</sup></td>
+    <td>yes <sup>*</sup></td>
   </tr>
   <tr>
     <th>OAuth2 Support</th>
@@ -93,14 +105,6 @@ The following table provides an overview of the main characteristics of KBC exte
     <td>no</td>
     <td>yes</td>
   </tr>
-  <tr>
-    <th>Other</th>
-    <th>Keboola Approval/Registration Required</th>
-    <td>yes</td>
-    <td>no</td>
-    <td>no</td>
-  </tr>
 </table>
 
-*Note: With the exception of Generic Extractor, all KBC Extensions can be used for creating Extractors, 
-Applications and Writers.*
+<sup>\*</sup> *Available only when [registered](/extend/registration/).*
