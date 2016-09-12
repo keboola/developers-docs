@@ -82,7 +82,7 @@ The expected CSV format:
 A [manifest file](/extend/common-interface/manifest-files/) can specify a different enclosure and delimiter.
 
 
-#### Default Bucket
+#### Default bucket
 If you cannot define a bucket or want to get it automatically, request setting
 the `default_bucket` flag during your [extension registration](/extend/registration/).
 

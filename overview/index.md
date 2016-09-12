@@ -18,7 +18,7 @@ various backends, R, Python)
 - [Orchestrator](/integrate/orchestrator/) component which takes care of grouping different tasks together and
 running them regularly at scheduled times
 
-All components share the same properties such as [running jobs](/overview/jobs/) or [component API](/integrate/#component-api). 
+All components share the same properties such as [running jobs](/overview/jobs/) or [component API](/integrate/#components-api). 
 This means that once worked your way through one component, you have seen them all. 
 Most of our components are open source, so if you are interested in code, have a look [at our repositories](/overview/repositories/).
 

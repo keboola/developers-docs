@@ -14,7 +14,7 @@ project, but also provides additional functions such as managing other component
 and their configurations. When you are integrating your systems with KBC,
 **chances are that you want to start with [Storage](/integrate/storage/)**.
 
-## Common
+## Component Common Features
 
 All components share some common behaviour. Each component has *Component API* which allows it
 to be run in [Orchestrations](https://help.keboola.com/automate/) and *Component Configuration*.

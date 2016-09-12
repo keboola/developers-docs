@@ -50,19 +50,17 @@ pass `#username` because the application does not expect such a key to exist (al
 normally). Internally, the [Encrypt and Store configuration API call](http://docs.kebooladocker.apiary.io/#reference/encrypt/encrypt-and-store-configuration/save-configuration)
 is used.
 
-### Automated configuration adjustment
+### Automated Configuration Adjustment
 
 *Note: Automated adjustment applies only to UI -- for components which have encryption enabled.*
 
-There are few automatic configuration adjustments UI does for you.
-
-They are applied in following order:
+There are few automatic configuration adjustments UI does for you:
 
 1. Prefer encrypted values to plain values -- if you provide both `password` and `#password`, only the latter will be saved.
-2. Replace empty encrypted values by values of plain values -- if you provide both `password` and `#password`, but `#password` is null/empty, its value will be taken from the plain value.
-3. Remove all encrypted keys, which has null/empty values.
+2. Use plain values instead of empty encrypted values -- if you provide both `password` and `#password`, but `#password` is null/empty, its value will be taken from the plain value.
+3. Remove all encrypted keys with null/empty values.
 
-Applying conditions above, the following configuration:
+Applying the above conditions, the following configuration
 
 {% highlight json %}
 {
@@ -73,7 +71,7 @@ Applying conditions above, the following configuration:
 }
 {% endhighlight %}
 
-Will become:
+will become
 
 {% highlight json %}
 {
@@ -120,7 +118,7 @@ yields
     KBC::Encrypted==ENCODEDSTRING==
 
 
-If you happen to receive the following error,
+If you happen to receive the following error
 
     This API call is only supported for components that use the 'encrypt' flag.
 
@@ -143,23 +141,28 @@ There are three options available:
 - [Image Configuration Encryption](http://docs.kebooladocker.apiary.io/#reference/encrypt/image-configuration-encryption/encrypt-data) (`/docker/*{componentId}*/**configs**/encrypt`); use when the encrypted value does not have to be transferable between projects.
 
 ### Base Encryption
-[Base Encryption](http://docs.kebooladocker.apiary.io/#reference/encrypt/base-encryption/encrypt-data)
- encrypts data, so that they are globally usable for all dockerized components. Data encrypted using this method can be decrypted in all projects
-and in all components run by [Docker Runner](/overview/docker-bundle/) (including Custom Science Applications). Note that under all
-circumstances the data are decrypted only inside the component application code; decrypted data are never available to the end-user. The encrypted
-value is identified by the `KBC::Encrypted` string.
+[Base Encryption](http://docs.kebooladocker.apiary.io/#reference/encrypt/base-encryption/encrypt-data) encrypts data, 
+so that they are globally usable for all dockerized components. Data encrypted using this method can be decrypted in all projects
+and in all components run by [Docker Runner](/overview/docker-bundle/) (including Custom Science Applications). 
+
+**Important:** Under all circumstances the data is decrypted only inside the component application code; 
+decrypted data is never available to the end-user. The encrypted value is identified by the `KBC::Encrypted` string.
 
 ### Image Encryption
 [Image Encryption](http://docs.kebooladocker.apiary.io/#reference/encrypt/image-encryption/encrypt-data)
- encrypts data so that they are usable within a single KBC component. Data encrypted using this method can be
-decrypted in all projects but always only in the component for which they were encrypted. The API
-call requires an `image` parameter which is the name of the component ID obtained during its
-[registration](/extend/registration/). The encrypted value is identified by string `KBC::ComponentEncrypted`
+encrypts data making it usable within a single KBC component. Data encrypted using this method can be
+decrypted in all projects but always only in the component for which it was encrypted. 
+The API call requires an `image` parameter which is the name of the component ID obtained during its [registration](/extend/registration/). 
+The encrypted value is identified by the `KBC::ComponentEncrypted` string.
 
 ### Image Configuration Encryption
 [Image Configuration Encryption](http://docs.kebooladocker.apiary.io/#reference/encrypt/image-configuration-encryption/encrypt-data)
-encrypts data so that they are usable only in a single KBC component and project. Data encrypted
-using this method can be decrypted in all configurations; however, this can be done only in the project and component for which the data was encrypted.
-The API call requires a valid Storage API token for the respective project and `image` parameter which is the component ID obtained upon its [registration](/extend/registration/). Selected project is derived from the Storage API token. The data can be decrypted only in the project associated with that token.
+encrypts data so that they are **usable only in a single KBC component and project**. 
+Data encrypted using this method can be decrypted in all configurations; 
+however, this can be done only in the project and component for which the data was encrypted.
+
+The API call requires a valid Storage API token for the respective project and `image` parameter 
+which is the component ID obtained upon its [registration](/extend/registration/). 
+The selected project is derived from the Storage API token. The data can be decrypted only in the project associated with that token.
 The encrypted value is identified by the `KBC::ComponentProjectEncrypted` string.
 
