@@ -3,3 +3,4 @@ _site
 .kdev4
 *.kdev4
 .sass-cache
+/.vscode
