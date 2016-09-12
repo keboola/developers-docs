@@ -75,7 +75,8 @@ additional [table attributes](https://help.keboola.com/storage/). If used, it ha
 #### `/data/out/tables` Manifests
 
 An output table manifest sets options for transferring a table to Storage. The following examples list available
-manifest fields, all of them are optional.
+manifest fields, **all of them are optional**. `destination` field overrides table name generated
+from file name, it can (and commonly is) overridden by end-user configuration.
 
 {% highlight json %}
 {

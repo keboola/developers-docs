@@ -47,7 +47,9 @@ the application explicitly supports it. For example, if the application states t
 
 It means the password will always be encrypted and the username will not be encrypted. You generally cannot
 pass `#username` because the application does not expect such a key to exist (although its value will be decrypted
-normally). Internally, the [Encrypt and Store configuration API call](http://docs.kebooladocker.apiary.io/#reference/encrypt/encrypt-and-store-configuration/save-configuration)
+normally). Also the application itself must expect the items `username` nad `#password` -- i.e. there
+**will be `password` element in the configuration.
+Internally, the [Encrypt and Store configuration API call](http://docs.kebooladocker.apiary.io/#reference/encrypt/encrypt-and-store-configuration/save-configuration)
 is used.
 
 ### Automated Configuration Adjustment
@@ -141,28 +143,28 @@ There are three options available:
 - [Image Configuration Encryption](http://docs.kebooladocker.apiary.io/#reference/encrypt/image-configuration-encryption/encrypt-data) (`/docker/*{componentId}*/**configs**/encrypt`); use when the encrypted value does not have to be transferable between projects.
 
 ### Base Encryption
-[Base Encryption](http://docs.kebooladocker.apiary.io/#reference/encrypt/base-encryption/encrypt-data) encrypts data, 
+[Base Encryption](http://docs.kebooladocker.apiary.io/#reference/encrypt/base-encryption/encrypt-data) encrypts data,
 so that they are globally usable for all dockerized components. Data encrypted using this method can be decrypted in all projects
-and in all components run by [Docker Runner](/overview/docker-bundle/) (including Custom Science Applications). 
+and in all components run by [Docker Runner](/overview/docker-bundle/) (including Custom Science Applications).
 
-**Important:** Under all circumstances the data is decrypted only inside the component application code; 
+**Important:** Under all circumstances the data is decrypted only inside the component application code;
 decrypted data is never available to the end-user. The encrypted value is identified by the `KBC::Encrypted` string.
 
 ### Image Encryption
 [Image Encryption](http://docs.kebooladocker.apiary.io/#reference/encrypt/image-encryption/encrypt-data)
 encrypts data making it usable within a single KBC component. Data encrypted using this method can be
-decrypted in all projects but always only in the component for which it was encrypted. 
-The API call requires an `image` parameter which is the name of the component ID obtained during its [registration](/extend/registration/). 
+decrypted in all projects but always only in the component for which it was encrypted.
+The API call requires an `image` parameter which is the name of the component ID obtained during its [registration](/extend/registration/).
 The encrypted value is identified by the `KBC::ComponentEncrypted` string.
 
 ### Image Configuration Encryption
 [Image Configuration Encryption](http://docs.kebooladocker.apiary.io/#reference/encrypt/image-configuration-encryption/encrypt-data)
-encrypts data so that they are **usable only in a single KBC component and project**. 
-Data encrypted using this method can be decrypted in all configurations; 
+encrypts data so that they are **usable only in a single KBC component and project**.
+Data encrypted using this method can be decrypted in all configurations;
 however, this can be done only in the project and component for which the data was encrypted.
 
-The API call requires a valid Storage API token for the respective project and `image` parameter 
-which is the component ID obtained upon its [registration](/extend/registration/). 
+The API call requires a valid Storage API token for the respective project and `image` parameter
+which is the component ID obtained upon its [registration](/extend/registration/).
 The selected project is derived from the Storage API token. The data can be decrypted only in the project associated with that token.
 The encrypted value is identified by the `KBC::ComponentProjectEncrypted` string.
 
