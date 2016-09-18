@@ -1,6 +1,7 @@
 ---
 title: Keboola Connection Developers Documentation
 permalink: /
+showLinkToGithubPage: false
 ---
 
 This site is aimed for developers who are working with Keboola Connection programmatically. For end-users, there
