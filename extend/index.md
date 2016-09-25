@@ -1,40 +1,58 @@
 ---
-title: Extending KBC
+title: Extending Keboola Connection
 permalink: /extend/
 ---
 
-The KBC environment consists of many built-in [*components*](/overview/) which interoperate
-together (e.g. Storage, Transformations and Readers). You can also create KBC extensions. Currently,
-there are two types of extensions available:
+As an open system consisting of many built-in, interoperating components, 
+such as Storage or Extractors, Keboola Connection (KBC) can be extended. 
+We encourage you to **build your own extensions**, whether for your own use or to be offered to other KBC users and customers. 
 
-* [Generic Extractor](https://github.com/keboola/generic-extractor/) -- a specific component designated for implementing extractors for services with REST API
-* Custom Extension -- a component extending KBC with an arbitrary code
+* TOC
+{:toc}
 
-## Custom Extensions
+## Benefits of Extending KBC
 
-Custom Extensions can be used as Applications, Extractors and Writers.
+Building extensions for KBC offers many advantages: 
 
-Applications process input tables stored in CSV files and generate result tables in CSV files.
-Extractors work the same way. However, instead of reading their input from KBC tables, they get it from an external
-source (usually an API). Similarly, Writers do not generate any KBC tables.
+- easy access to data from many different sources
+- simple path to delivering the data back to your customers
+- availability of your application or algorithm to all existing KBC subscribers and implementation partners
+- opportunity for you to focus only on areas of your product where you are adding value 
+- Keboola in charge of the billing 
 
-All extensions run inside a [Docker component](/overview/docker-bundle) which takes care of:
+To become a Keboola Development Partner, [get in touch](https://www.keboola.com/contact/). We want to hear
+what you would like to build!
 
-* Authentication
-* Starting and stopping the extension
-* Reading and writing data to KBC Storage
-* Application isolation
+## Types of Extensions
+Currently, there are two types of extensions available:
 
+1. [**Generic Extractor**](https://github.com/keboola/generic-extractor/) -- specific component for implementing extractors 
+for services with REST API
+2. **Custom Extension** -- component extending KBC with arbitrary code
+
+### Generic Extractor
+Generic Extractor is a KBC component acting like a customizable HTTP REST client. 
+It can be configured to extract data from virtually any API and offers a vast amount of configuration options. 
+With Generic Extractor you can build an entirely new extractor for KBC in less than an hour. 
+
+### Custom Extensions
+Custom Extensions can be used as 
+
+- **Extractors** - allowing customers to get data from new sources. They only process input tables from external sources (usually API).
+- **Applications** - further enriching the data or add value in new ways. They process input tables stored in CSV files and generate result tables in CSV files. 
+- **Writers** - pushing data into new systems and consumption methods. They do not generate any KBC tables. 
+
+All extensions run inside a [Docker component](/integrate/docker-bundle) which takes care of their
+*authentication, starting, stopping, isolation, and reading data from and writing it to KBC Storage*.
 They must adhere to a [common interface](/extend/common-interface/).
 
 There are two types of Custom extensions differing in the level of integration and implementation flexibility:
 
-* [Custom Science extension](/extend/custom-science/) - easier to implement, less features available
-* [Docker extension](/extend/docker/) - maximum implementation flexibility
+1. [**Custom Science extension**](/extend/custom-science/) - easier to implement, less features available
+2. [**Docker extension**](/extend/docker/) - maximum implementation flexibility
 
 ## Comparison of Extensions
-
-The following table provides an overview of the main characteristics of KBC extensions:
+The following table provides an overview of the **main characteristics** of KBC extensions:
 
 <table>
   <tr>

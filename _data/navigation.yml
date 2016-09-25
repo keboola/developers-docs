@@ -13,12 +13,6 @@ items:
       - url: /overview/encryption/
         title: Encryption
 
-      - url: /overview/docker-bundle/
-        title: Docker Runner
-
-      - url: /overview/devel-project/
-        title: Development Project
-
   - url: /extend/
     title: Extending KBC
     items:
@@ -110,7 +104,7 @@ items:
             title: Configuration Schema
 
   - url: /integrate/
-    title: Integrate
+    title: Integration
     items:
       - url: /integrate/storage/
         title: Storage
@@ -128,7 +122,7 @@ items:
             title: Windows CLI client
 
           - url: /integrate/storage/api
-            title: Using the API
+            title: Using API
             items:
               - url: /integrate/storage/api/importer/
                 title: Storage API Importer
@@ -142,6 +136,9 @@ items:
               - url: /integrate/storage/api/tde-exporter/
                 title: TDE Exporter
 
+      - url: /integrate/docker-bundle/
+        title: Docker Runner
+
       - url: /integrate/transformations/
         title: Transformations
 
@@ -149,5 +146,5 @@ items:
         title: SSH Tunnel for Database Extractors
 
   - url: /automate/
-    title: Automate/Common Tasks
+    title: Automation/Common Tasks
 

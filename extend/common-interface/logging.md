@@ -20,7 +20,7 @@ Using a [GELF](http://docs.graylog.org/en/2.0/pages/gelf.html) compatible logger
 such a logger in your application. However, it offers much **greater flexibility**: you can send different kinds of messages (such as error, informational, warning, debug) and the messages can contain additional structured information (not only a plain text string)..
 
 ## Standard Output and Standard Error
-By default, the Docker Bundle listens to [STDOUT](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_.28stdout.29)
+By default, the Docker Runner listens to [STDOUT](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_.28stdout.29)
 and [STDERR](https://en.wikipedia.org/wiki/Standard_streams#Standard_error_.28stderr.29)
 of the application and forwards any content live to [Storage API Events](http://docs.keboola.apiary.io/#events)
 (log levels `info` and `error`). The events are displayed in a [Job detail](https://help.keboola.com/management/jobs/).

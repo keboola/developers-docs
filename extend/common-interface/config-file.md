@@ -10,7 +10,7 @@ Configuration files are one of the [possible channels](/extend/common-interface/
 
 To create a sample configuration file (together with the data directory),
 use [create sandbox](/extend/common-interface/) via the
-[Docker bundle API](http://docs.kebooladocker.apiary.io/#reference/sandbox).
+[Docker Runner API](http://docs.kebooladocker.apiary.io/#reference/sandbox).
 You will get a zip archive containing all the resources you need in your extension.
 
 ## Configuration File Format

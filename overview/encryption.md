@@ -7,13 +7,16 @@ permalink: /overview/encryption/
 {:toc}
 
 Many of [KBC components](/overview/) provide Encryption API; it encrypts sensitive values
-which are supposed to be securely stored and decrypted inside the component itself. This means that the encryption
-keys are stored inside the components and are not accessible to API users. Also, there is no decryption
-API and there is no way the end-user can decrypt the encrypted values. Furthermore, the encrypted values are not
-transferable between components (this may be a bit confusing when it comes to components encapsulating other
-components, such as [Docker Runner](/overview/docker-bundle/). The encryption keys are
-different in production and development, so values encrypted on the development server will not be readable
-on production (and vice versa).
+which are supposed to be securely stored and decrypted inside the component itself. 
+
+This means that the encryption keys are stored inside the components and are not accessible to API users. 
+Also, there is no decryption API and there is no way the end-user can decrypt the encrypted values. 
+
+Furthermore, the encrypted values are not transferable between components (this may be a bit confusing 
+when it comes to components encapsulating other components, such as [Docker Runner](/overview/docker-bundle/). 
+
+The encryption keys are different in production and development, so values encrypted on the development server 
+will not be readable on production (and vice versa).
 
 Decryption is only executed when serializing configuration to the configuration file for the Docker container.
 The decrypted data will be stored on the Docker host drive and will be deleted after the container finishes.
