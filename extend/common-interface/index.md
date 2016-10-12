@@ -21,7 +21,7 @@ Additionally, [Docker Runner](/overview/docker-bundle/) provides tools for
 Even when you can define limits for your extension, all extensions are subject to these service limits:
 
 * both memory and swap sizes are set to equal value
-* Docker devicemapper size is set to 10 GB
+* Docker [devicemapper](https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/) size is set to 10 GB
 
 Size allocated for devicemapper is consumed by memory swapping, /tmp and all other operations in the extension (eg. ad hoc module installations); only input and output folders are excluded. As the swap size cannot be larger than the allocated disk space, we cannot safely increase the memory limit over 8 GB. 
 
