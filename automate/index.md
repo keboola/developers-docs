@@ -8,7 +8,7 @@ configure their automatic execution (specified intervals, specified times of the
 
 ## Documentation
 
-You can learn about how to set up our Orchestrator on [help.keboola.com/overview/tutorial/automate/](https://help.keboola.com/overview/tutorial/automate/).
+You can learn about how to set up our Orchestrator on [help.keboola.com/tutorial/automate/](https://help.keboola.com/tutorial/automate/).
 
 {% comment %} 
   - Load data from your system
