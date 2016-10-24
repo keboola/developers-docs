@@ -23,7 +23,7 @@ You can also have a look at our [example repository](https://github.com/keboola/
 To install a custom package, use:
 
 {% highlight python %}
-pip.main(['install', '--disable-pip-version-check', '--no-cache-dir', '--cert=/tmp/cacert.pem', 'packageName'])
+pip.main(['install', '--disable-pip-version-check', '--no-cache-dir', 'packageName'])
 {% endhighlight %}
 
 
