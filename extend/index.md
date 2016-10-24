@@ -14,10 +14,10 @@ We encourage you to **build your own extensions**, whether for your own use or t
 
 Building extensions for KBC offers many advantages: 
 
-- easy access to data from many different sources
-- simple path to delivering the data back to your customers
-- availability of your application or algorithm to all existing KBC subscribers and implementation partners
-- opportunity for you to focus only on areas of your product where you are adding value 
+- Easy access to data from many different sources
+- Simple path to delivering the data back to your customers
+- Availability of your application or algorithm to all existing KBC subscribers and implementation partners
+- Opportunity for you to focus only on areas of your product where you are adding value 
 - Keboola in charge of the billing 
 
 To become a Keboola Development Partner, [get in touch](https://www.keboola.com/contact/). We want to hear
