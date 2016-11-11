@@ -30,6 +30,7 @@ The following environment variables are injected in the container:
  - `KBC_TOKENID`: Id of the token running the container.
  - `KBC_TOKENDESC`: Description (user name or token name) of the token running the container.
  - `KBC_TOKEN`: The actual token running the container.
+ - `KBC_URL`: The Storage API URL.
 
 The following variables are available when [GELF Logger](/extend/common-interface/logging/#gelf-logger) is enabled in the [component registration](/extend/registration/):
 
@@ -57,7 +58,7 @@ User Exception, the end-user will see a full error message. Therefore,
 - Provide guidance on what the user should do. For example, 'The input table is missing; make sure the output mapping produces the 'items.csv' table.
 
 In case of an *Application Exception*, the end-user will see only a canned response ('An application error occurred') with
-the option to contact support. The actual output of the application will be sent to our internal logs only. 
+the option to contact support. The actual output of the application will be sent to our internal logs only.
 
 In case of [Docker extensions](/extend/docker/) the output can be forwarded to a place specify by you in your
 [component registration](/extend/registration/), while in case of [Custom Science](/extend/custom-science/), it cannot.

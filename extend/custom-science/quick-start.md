@@ -53,7 +53,7 @@ Create a [source table](/extend/source.csv) in *Storage*, e.g.:
 | 30 | ij |
 
 Name of the table in *Storage* is not important. Let's name it **in.c-main.custom-science-example**.
-For instructions on how to create a table, go to [KBC Tutorial](https://help.keboola.com/overview/tutorial/load/).
+For instructions on how to create a table, go to [KBC Tutorial](https://help.keboola.com/tutorial/load/).
 The output bucket and table will be created automatically.
 
 #### Step 4.2 -- Create the Application
