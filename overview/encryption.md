@@ -7,15 +7,15 @@ permalink: /overview/encryption/
 {:toc}
 
 Many of [KBC components](/overview/) provide Encryption API; it encrypts sensitive values
-which are supposed to be securely stored and decrypted inside the component itself. 
+which are supposed to be securely stored and decrypted inside the component itself.
 
-This means that the encryption keys are stored inside the components and are not accessible to API users. 
-Also, there is no decryption API and there is no way the end-user can decrypt the encrypted values. 
+This means that the encryption keys are stored inside the components and are not accessible to API users.
+Also, there is no decryption API and there is no way the end-user can decrypt the encrypted values.
 
-Furthermore, the encrypted values are not transferable between components (this may be a bit confusing 
-when it comes to components encapsulating other components, such as [Docker Runner](/overview/docker-bundle/). 
+Furthermore, the encrypted values are not transferable between components (this may be a bit confusing
+when it comes to components encapsulating other components, such as [Docker Runner](/integrate/docker-bundle/).
 
-The encryption keys are different in production and development, so values encrypted on the development server 
+The encryption keys are different in production and development, so values encrypted on the development server
 will not be readable on production (and vice versa).
 
 Decryption is only executed when serializing configuration to the configuration file for the Docker container.
@@ -138,7 +138,7 @@ You can use sample Postman requests from collection
 
 
 ## Encryption Options
-Our [Docker component](/overview/docker-bundle/) provides [Encryption API](http://docs.kebooladocker.apiary.io/#reference/encrypt).
+Our [Docker component](/integrate/docker-bundle/) provides [Encryption API](http://docs.kebooladocker.apiary.io/#reference/encrypt).
 There are three options available:
 
 - [Base Encryption](http://docs.kebooladocker.apiary.io/#reference/encrypt/base-encryption/encrypt-data); use only with multiple components and a very good reason for transferable ciphers.
@@ -148,7 +148,7 @@ There are three options available:
 ### Base Encryption
 [Base Encryption](http://docs.kebooladocker.apiary.io/#reference/encrypt/base-encryption/encrypt-data) encrypts data,
 so that they are globally usable for all dockerized components. Data encrypted using this method can be decrypted in all projects
-and in all components run by [Docker Runner](/overview/docker-bundle/) (including Custom Science Applications).
+and in all components run by [Docker Runner](/integrate/docker-bundle/) (including Custom Science Applications).
 
 **Important:** Under all circumstances the data is decrypted only inside the component application code;
 decrypted data is never available to the end-user. The encrypted value is identified by the `KBC::Encrypted` string.

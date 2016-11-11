@@ -13,7 +13,7 @@ necessary for [Python](/extend/custom-science/python/) are minimal.
 
 ### Before you start
 
-You should have a [KBC project](/overview/devel-project/), where you can test your code.
+You should have a [KBC project](/#development-project), where you can test your code.
 
 ### Step 1 -- Preliminaries
 Create a public git repository ([Github](https://github.com/) or [Bitbucket](https://bitbucket.org/) is recommended, although any other host should work as well).

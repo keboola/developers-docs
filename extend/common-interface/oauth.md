@@ -29,7 +29,7 @@ The `OAUTH_API_ID` is the id provided when storing authorization via OAuth API V
 {% endhighlight %}
 
 ## Authorize
-[Docker Runner](/overview/docker-bundle/) then retrieves, decrypts and injects the credentials to the
+[Docker Runner](/integrate/docker-bundle/) then retrieves, decrypts and injects the credentials to the
 configuration file in the `authorization.oauth_api.credentials` attribute.
 
 {% highlight json %}

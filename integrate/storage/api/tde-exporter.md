@@ -8,7 +8,7 @@ permalink: /integrate/storage/api/tde-exporter/
 
 [TDE Exporter](https://github.com/keboola/tde-exporter) exports tables from KBC Storage into the
 [TDE file format (Tableau Data Extract)](http://www.tableau.com/about/blog/2014/7/understanding-tableau-data-extracts-part1).
-This component is normally a part of the [Tableau Writer](https://help.keboola.com/overview/tutorial/write/),
+This component is normally a part of the [Tableau Writer](https://help.keboola.com/tutorial/write/),
 but it can also be used as a standalone component.
 
 Users can [run TDE exporter job](/overview/jobs/) as any other KBC component or register it
@@ -21,7 +21,7 @@ The TDE Exporter is a Keboola [Docker component](/extend/docker/) supporting bot
 custom configurations supplied directly in the `run` request.
 
 ### Stored Configuration
-To run the TDE exporter with a stored configuration, first 
+To run the TDE exporter with a stored configuration, first
 [create the configuration](http://docs.keboola.apiary.io/#reference/component-configurations/component-configs/create-config).
 See [below](#custom-configuration) for the required configuration contents.
 This call will give you the ID of the newly created configuration (for instance, `new-configuration-id`).

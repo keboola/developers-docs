@@ -16,7 +16,7 @@ Optionally, you can use
 * the [OAuth](/extend/common-interface/oauth/) part of the configuration file, and
 * [actions](/extend/common-interface/actions/) for quick synchronous tasks.
 
-In addition to that, [Docker Runner](/overview/docker-bundle/) provides tools for
+In addition to that, [Docker Runner](/integrate/docker-bundle/) provides tools for
 [encryption](/overview/encryption) and [OAuth2 authorization](/extend/common-interface/oauth/).
 
 ### Extension Limits

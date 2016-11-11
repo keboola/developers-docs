@@ -12,7 +12,7 @@ on your own computer, you need to
 manually supply the application with a [data folder and configuration file](/extend/common-interface/).
 
 To create a sample data folder, use
-a [Docker Runner](/overview/docker-bundle/) API. There are three calls available:
+a [Docker Runner](/integrate/docker-bundle/) API. There are three calls available:
 
 - [create sandbox](http://docs.kebooladocker.apiary.io/#reference/sandbox/sandbox) -- use with components with/without [registration](/extend/registration/)
 - [input data](http://docs.kebooladocker.apiary.io/#reference/sandbox/input-data/create-an-input-job) -- use with already registered components
@@ -24,13 +24,13 @@ None of these API calls will write any tables or files other than the archive,
 so they are very safe to run.
 
 The body structure of the first two API calls is the same.
-Before you start, you need a [KBC project](/overview/devel-project/). We recommend that you use [Apiary or Postman](/overview/api/) to call the API.
+Before you start, you need a [KBC project](/#development-project). We recommend that you use [Apiary or Postman](/overview/api/) to call the API.
 
 
 ## Create Sandbox API Call
 
 ### Prepare
-[Create a table](https://help.keboola.com/overview/tutorial/load/) in KBC Storage which contains a column named `number`.
+[Create a table](https://help.keboola.com/tutorial/load/) in KBC Storage which contains a column named `number`.
 You can use the [sample table](/extend/source.csv). In the following example, the
 table is stored in the `in.c-main` bucket and the table name is `test`. The table ID is therefore
 `in.c-main.test`.
@@ -104,7 +104,7 @@ KBC. There you will find a `data.zip` file with a sample data folder. You can no
 
 ## Input Data API Call
 The input API call differs in that it *must* be used with an existing component. It requires *componentId* obtained
-from the [component registration](/extend/registration/). This also means that this call can be used both 
+from the [component registration](/extend/registration/). This also means that this call can be used both
 with existing configurations as well as ad-hoc configurations (as in the above [sandbox](#create-sandbox-api-call) request.
 
 ### Prepare

@@ -24,7 +24,7 @@ If you do not want to install Chocolatey, simply download all the application fi
 
 ## Installation Via Chocolatey
 [Chocolatey](https://chocolatey.org/) is a package manager for Windows. You can install
-[Storage API client package](https://chocolatey.org/packages/SapiClient/) using Chocolatey.
+[Storage API client package](https://chocolatey.org/packages/SapiClient) using Chocolatey.
 
 If you do not have Chocolatey installed, do so using the following (administrator) command line:
 

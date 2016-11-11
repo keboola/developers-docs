@@ -48,11 +48,11 @@ and *master* tags both point to the same (latest) build and are movable. Please 
 [Keboola images](/extend/docker/images/) do not follow this convention.
 
 ## Running Docker Images in KBC
-We have wrapped Docker in our [Docker Runner component](/overview/docker-bundle/). The component
+We have wrapped Docker in our [Docker Runner component](/integrate/docker-bundle/). The component
 runs [registered](/extend/registration/) Docker Images. Docker Runner
 has an [API](http://docs.kebooladocker.apiary.io/#)
 which allows to run Docker Images and encrypt arbitrary values.
-[Docker Runner](/overview/docker-bundle/) takes
+[Docker Runner](/integrate/docker-bundle/) takes
 care of injecting the right data, creating, running, and terminating the container, and uploading
 the result data to KBC Storage. All images to be run in KBC must have an `ENTRYPOINT`.
 We also recommend that you base your image on [one of our images](/extend/docker/images/).
