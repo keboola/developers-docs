@@ -22,21 +22,21 @@ It is required regardless of whether you use the bare API or any of the clients.
 Although you can work directly with the API, we recommend using one of our Storage API clients, as they simplify some tasks. 
 There are four Storage clients with different feature sets available:
 
-1. [SAPI PHP client](https://github.com/keboola/storage-api-php-client) - a PHP library supporting most of the Storage API features; 
+1. [SAPI PHP client](https://github.com/keboola/storage-api-php-client) --- a PHP library supporting most of the Storage API features; 
 use it programatically in PHP.
-2. [SAPI R client](/integrate/storage/r-client/) - an R library supporting most data manipulation features of the Storage API; 
+2. [SAPI R client](/integrate/storage/r-client/) --- an R library supporting most data manipulation features of the Storage API; 
 use it programatically in R.
-3. [SAPI PHP CLI client](https://github.com/keboola/storage-api-cli) - a CLI (command line interface) application supporting 
+3. [SAPI PHP CLI client](https://github.com/keboola/storage-api-cli) --- a CLI (command line interface) application supporting 
 basic data manipulation features of the Storage API; use it from the command line provided that you have PHP interpreter
 available.
-4. [SAPI Windows CLI client](/integrate/storage/win-cli-client/) - a CLI application supporting basic data manipulation features;
+4. [SAPI Windows CLI client](/integrate/storage/win-cli-client/) --- a CLI application supporting basic data manipulation features;
 use it from the Windows command line.
 
 Additional tools:
 
-- [Storage API Console](https://storage-api-console.keboola.com/) - a UI to work with KBC Storage;
+- [Storage API Console](https://storage-api-console.keboola.com/) --- a UI to work with KBC Storage;
 this is accessible to anyone with a Storage Token (not necessarily a KBC project administrator)
-- [Table Importer Service](/integrate/storage/api/importer/) - a service designed for simplified table loads
+- [Table Importer Service](/integrate/storage/api/importer/) --- a service designed for simplified table loads
 
 The client choice is purely up to you, but it is best to use the most straightforward solution.
 

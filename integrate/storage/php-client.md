@@ -6,7 +6,7 @@ permalink: /integrate/storage/php-client/
 * TOC
 {:toc}
 
-Storage API PHP client library is a portable command line client providing
+The Storage API PHP client library is a portable command line client providing
 the most complete [Storage API](http://docs.keboola.apiary.io/) implementation.
 It runs on any platform which has PHP installed.
 Currently this client implements almost all Storage API functions including, of course, exporting and importing tables.
@@ -72,11 +72,11 @@ $client = new Client([
 {% endhighlight %}
 
 
-### Example - Create a Table
+### Example --- Create a Table
 To create a new table in Storage, it is recommended to use an additional
 [php-csv](https://github.com/keboola/php-csv) library to work
 with CSV files. The library will get installed
-automatically with Storage API client, so you can use it out of the box.
+automatically with the Storage API client, so you can use it out of the box.
 To create a new table and import CSV data in it, use the following PHP script:
 
 {% highlight php %}
@@ -93,7 +93,7 @@ $csvFile = new CsvFile('./new-table.csv');
 $client->createTableAsync('in.c-main', 'new-table', $csvFile);
 {% endhighlight %}
 
-### Example - Import Data
+### Example --- Import Data
 To import CSV data into an existing table and overwrite its contents, use the following PHP script:
 
 {% highlight php %}
@@ -110,7 +110,7 @@ $csvFile = new CsvFile('./new-table.csv');
 $client->writeTableAsync('in.c-main.new-table', $csvFile);
 {% endhighlight %}
 
-### Example - Import Data Incrementally
+### Example --- Import Data Incrementally
 To import CSV data into an existing table and append the new data to the existing table contents, use the following PHP script:
 
 {% highlight php %}
@@ -129,7 +129,7 @@ $client->writeTableAsync('in.c-main.new-table', $csvFile, ['incremental' => true
 
 All available upload options are listed in the [API documentation](http://docs.keboola.apiary.io/#reference/tables/load-data).
 
-### Example - Export Data
+### Example --- Export Data
 To export data from a Storage table to a CSV file, use the
 `TableExporter` class. It is part of the client library. You can use the following script:
 

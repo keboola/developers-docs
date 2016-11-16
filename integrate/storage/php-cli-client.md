@@ -41,7 +41,7 @@ php sapi-client.phar
 {% endhighlight %}
 
 
-### Example - Create a table
+### Example --- Create a table
 To create a new table in Storage, use the `create-table` command. Provide the name of an
 existing bucket, the name of the new table and a CSV file with the table's contents.
 
@@ -60,7 +60,7 @@ created table. You should see an output similar to this one:
     Table create end
     Table id: in.c-main.new-table
 
-### Example - Importing Data
+### Example --- Importing Data
 If you want only to import new data into the table, use the `write-table` command and provide
 the ID (*bucketName.tableName*) of an existing table.
 
@@ -89,7 +89,7 @@ supplied, the table contents will be overwritten. You should see an output simil
     totalDataSizeBytes: 4096
 
 
-### Example - Exporting Data
+### Example --- Exporting Data
 If you want to export a table from Storage, use the `export-table` command. Provide
 the ID (*bucketName.tableName*) of an existing table.
 
@@ -114,5 +114,5 @@ communicate properly and securely. You can verify this by running e.g. the follo
 curl --request GET --header "X-StorageApi-Token:yourtoken" "https://connection.keboola.com/v2/storage/buckets"
 {% endhighlight %}
 
-This should print a JSON with list of buckets in project. If the command returns an error, you need to resolve that error first before
-running Storage API client.
+This should print a JSON with a list of buckets in the project. If the command returns an error, you need to 
+resolve that error first before running Storage API client.

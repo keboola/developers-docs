@@ -9,7 +9,7 @@ permalink: /integrate/storage/api/
 If you are new to KBC, you should make yourself familiar with
 the [Storage component](https://help.keboola.com/storage/) before you start using it.
 For a general introduction to working with KBC APIs, see the [API Introduction](/overview/api/).
-The [Storage API](http://docs.keboola.apiary.io/) provides a number of functions. These are the most important ones:
+[Storage API](http://docs.keboola.apiary.io/) provides a number of functions. These are the most important ones:
 
 - [Component configurations](http://docs.keboola.apiary.io/#reference/component-configurations/)
 - [Storage tables](http://docs.keboola.apiary.io/#reference/tables)
