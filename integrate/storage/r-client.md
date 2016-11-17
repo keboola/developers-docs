@@ -17,10 +17,10 @@ The client source code is available in our [Github repository](https://github.co
 
 ## Installation
 This library is available on [Github](https://github.com/keboola/sapi-r-client), so we
-recommend that you use `devtools` package to install it.
+recommend that you use the `devtools` package to install it.
 
 {% highlight r %}
-# first need to install the devtools package if it isn't already installed
+# first install the devtools package if it isn't already installed
 install.packages("devtools")
 
 # install dependencies (another github package for aws request signature generation)
@@ -51,7 +51,7 @@ client <- SapiClient$new(
 )
 {% endhighlight %}
 
-### Example - Create a Table and Import Data
+### Example --- Create a Table and Import Data
 To create a new table in Storage, use the `saveTable` function. Provide the name of an existing bucket, 
 the name of the new table and a CSV file with the table's contents.
 
@@ -74,7 +74,7 @@ table <- client$saveTable(
 The above command will import the contents of the `myDataFrame` variable into the newly created table. It will
 also mark the `id` column as the primary key.
 
-### Example - Export Data
+### Example --- Export Data
 If you want to export a table from Storage and import it into R, use the `importTable` function. Provide
 the ID (*bucketName.tableName*) of an existing table.
 
@@ -94,7 +94,7 @@ a [data.table](https://cran.r-project.org/web/packages/data.table/index.html) ob
 ### Other Examples
 
 {% highlight r %}
-# create client
+# create a client
 client <- SapiClient$new(
     token = 'your-token'
 )

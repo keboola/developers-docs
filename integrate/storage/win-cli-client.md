@@ -7,7 +7,7 @@ permalink: /integrate/storage/win-cli-client/
 {:toc}
 
 The Storage API Command line interface (CLI) client for Microsoft Windows is a simple implementation
-of [Storage API](http://docs.keboola.apiary.io/) currently supporting only a
+of [Storage API](http://docs.keboola.apiary.io/), currently supporting only a
 very **limited** set of the API features: loading data into Storage.
 In case you need more data manipulation features, check out the [PHP CLI client](/integrate/storage/php-cli-client/).
 
@@ -18,13 +18,13 @@ This application requires .NET Framework 4.0 (or higher) which is natively inclu
 and Windows Server 2008 R2. A [download is available](https://www.microsoft.com/en-us/download/details.aspx?id=17718)
 for older versions of Windows.
 
-## Manual Installation
+### Manual Installation
 If you do not want to install Chocolatey, simply download all the application files in a
 [ZIP package](https://keboola-sapi-dotnet-client.s3.amazonaws.com/builds/sapi-client.zip).
 
-## Installation Via Chocolatey
-[Chocolatey](https://chocolatey.org/) is a package manager for Windows. You can install
-[Storage API client package](https://chocolatey.org/packages/SapiClient) using Chocolatey.
+### Installation via Chocolatey
+[Chocolatey](https://chocolatey.org/) is a package manager for Windows and can be used for installing the
+[Storage API client package](https://chocolatey.org/packages/SapiClient).
 
 If you do not have Chocolatey installed, do so using the following (administrator) command line:
 
@@ -32,8 +32,8 @@ If you do not have Chocolatey installed, do so using the following (administrato
 @powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%systemdrive%\chocolatey\bin
 {% endhighlight %}
 
-Chocolatey will be installed, by default, into `C:\ProgramData\chocolatey`. In case you have just installed
-Chocolatey, make sure to open a new instance of the command line window.
+Chocolatey will be installed, by default, into `C:\ProgramData\chocolatey`. 
+Once done, make sure to open a new instance of the command line window.
 
 To install the SAPI client, just run the following command in the windows command line:
 
@@ -41,10 +41,10 @@ To install the SAPI client, just run the following command in the windows comman
 cinst SapiClient
 {% endhighlight %}
 
-This command will install all SAPI client application binaries into **C:\ProgramData\chocolatey\bin\**.
+This command will install all SAPI client application binaries into `C:\ProgramData\chocolatey\bin\`.
 
 ## Uninstalling the Client
-You can uninstall the SAPI client from Chocolatey typing the following command:
+You can uninstall the SAPI client from Chocolatey by typing the following command:
 
 {% highlight Batchfile %}
 cuninst SapiClient
@@ -53,14 +53,15 @@ cuninst SapiClient
 All the Storage API Client application binaries and folders will be deleted (Chocolatey itself remains installed).
 
 ## Running the Client
-Now run the `sapi-client` command globally from any folder in the windows command line. You can see
-the client's available commands by running
+Now run the `sapi-client` command globally from any folder in the windows command line. By running 
 
 {% highlight Batchfile %}
 sapi-client
 {% endhighlight %}
 
-### Example - Create a Table
+you can see all available commands of the client.
+
+### Example --- Creating a Table
 To create a new table in Storage, use the `create-table` command. Provide the name of an
 existing bucket, the name of the new table and a CSV file with the table's contents.
 
@@ -73,7 +74,7 @@ sapi-client create-table in.c-main new-table D:\new-table.csv --token=storage_to
 The above command will import the contents of `new-table.csv` into the newly created table. It will
 also mark the `id` column as the primary key.
 
-### Example - Importing Data
+### Example --- Importing Data
 If you want only to import new data into the table, use the `write-table` command. Provide
 the ID (*bucketName.tableName*) of an existing table.
 

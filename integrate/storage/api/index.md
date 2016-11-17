@@ -23,10 +23,10 @@ as `form-data` (unlike the rest of KBC API, which is sent as `application/json`)
 
 For exporting tables from and importing tables to Storage, we highly recommend that you use one of the
 [available clients](/integrate/storage/) or the [Storage API Importer service](/integrate/storage/api/importer/).
-All imports and exports are done using CSV files, see
+All imports and exports are done using CSV files. See
 the [API documentation](http://docs.keboola.apiary.io/#reference/csv-files-formats) for the format
-and encoding specification or
-[User documentation](https://help.keboola.com/storage/tables/csv-files/) for help how to create such files.
+and encoding specification, and
+[User documentation](https://help.keboola.com/storage/tables/csv-files/) for help on how to create such files.
 
 Continue reading the following sections for guidance on how to get started:
 
