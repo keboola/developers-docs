@@ -55,7 +55,7 @@ User Exception, the end-user will see a full error message. Therefore,
 - Avoid messages which make no sense at all. For example, 'Banana Error: Exceeding trifling witling' or only numeric errors.
 - Avoid leaking sensitive information (such as credentials, tokens).
 - Avoid errors which the user cannot solve. For example, 'An outdated OpenSSL library, update to OpenSSL 1.0.2'.
-- Provide guidance on what the user should do. For example, 'The input table is missing; make sure the output mapping produces the 'items.csv' table.
+- Provide guidance on what the user should do. For example, 'The input table is missing; make sure the output mapping produces the 'items.csv' table'.
 
 In case of an *Application Exception*, the end-user will see only a canned response ('An application error occurred') with
 the option to contact support. The actual output of the application will be sent to our internal logs only.

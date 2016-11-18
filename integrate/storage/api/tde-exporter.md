@@ -11,9 +11,9 @@ permalink: /integrate/storage/api/tde-exporter/
 This component is normally a part of the [Tableau Writer](https://help.keboola.com/tutorial/write/),
 but it can also be used as a standalone component.
 
-Users can [run TDE exporter job](/overview/jobs/) as any other KBC component or register it
+Users can [run a TDE exporter job](/overview/jobs/) as any other KBC component or register it
 as an orchestration task. After the exporter finishes, the resulting TDE files will be available in the
-*Storage* - *File uploads* section where you can download them via UI or [API](/integrate/storage/api/import-export/).
+*Storage* --- *File uploads* section where you can download them via UI or [API](/integrate/storage/api/import-export/).
 
 ##  Running the Component
 The TDE Exporter is a Keboola [Docker component](/extend/docker/) supporting both
@@ -73,10 +73,10 @@ is only the `parameters` section. A sample request to the `in.c-main.old-table` 
 
 The `parameters` section contains:
 
-- `tags`: array of tags that will be assigned to the resulting file in Storage File uploads.
+- `tags`: array of tags that will be assigned to the resulting file in Storage File Uploads.
 - `typedefs`: definitions of data types mapping source tables columns to destination TDE columns.
 
-Type definitions are entered as an object whose name must match the name of the table in the
+The type definitions are entered as an object whose name must match the name of the table in the
 `storage.input.tables.source` node (`in.c-main.old-table` in the above example). Object properties
 are names of the table columns; each must have the `type` property which is one of the
 [supported column types](https://onlinehelp.tableau.com/current/pro/online/mac/en-us/datafields_typesandroles_datatypes.html):

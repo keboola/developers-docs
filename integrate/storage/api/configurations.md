@@ -7,15 +7,15 @@ permalink: /integrate/storage/api/configurations/
 {:toc}
 
 When working with the [component configurations API](http://docs.keboola.apiary.io/#reference/component-configurations), 
-you usually need to know a `componentId`. 
+you usually need to know the `componentId`. 
 You can get a list of all available components with the [API index call](http://docs.keboola.apiary.io/#reference/miscellaneous/api-index/get).
-This API call is one of the few that do not require a Storage API token
+It is one of the few API calls that do not require a Storage API token:
 
 {% highlight bash %}
 curl https://connection.keboola.com/v2/storage
 {% endhighlight %}
 
-Which will give you something like
+It will give you something like this:
 
 {% highlight json %}
 {
@@ -43,21 +43,19 @@ Which will give you something like
 }
 {% endhighlight %}
 
-From here, you can select a particular component - in the following examples, we
-will use `keboola.ex-db-mysql` - the MySQL Database Extractor.
+From here, you can select a particular component. In the following examples, we
+will use `keboola.ex-db-mysql` --- the MySQL Database Extractor.
 
 ### Inspecting Configuration
-To obtain configuration details, use the [List Configs call](http://docs.keboola.apiary.io/#reference/component-configurations/component-configs/list-configs)
+To obtain configuration details, use the [List Configs call](http://docs.keboola.apiary.io/#reference/component-configurations/component-configs/list-configs),
 which will return all the configuration details. This means 
 
-- the configuration itself (`configuration` section below); 
-- configuration rows (`rows`) section, which contains additional data
-of the configuration; and 
-- configuration state (`state`), which contains
-[component state](/extend/common-interface/environment/#state). 
+- the configuration itself (`configuration`) --- section on configuration follows; 
+- configuration rows (`rows`) --- additional data of the configuration; and 
+- configuration state (`state`) --- [component state](/extend/common-interface/environment/#state). 
 
 Please note that the contents
-of the `configuration`, `rows` and `state` section depends purely on the component itself. For example
+of the `configuration`, `rows` and `state` section depend purely on the component itself. For example,
 retrieving the configurations for MySQL database extractor, you would call:
 
 {% highlight bash %}
@@ -110,7 +108,7 @@ and obtain a result similar to this:
 ]
 {% endhighlight %}
 
-The important part is configuration id `sample-database-82`, which is required in the
+The important part is the configuration id `sample-database-82`, which is required in the
 following examples.
 
 ### Configuration Versions
@@ -119,14 +117,14 @@ actually a new configuration version is created. In the above calls, only the la
 is returned. To obtain a list of all recorded versions, use the
 [list versions call](http://docs.keboola.apiary.io/#reference/component-configurations/list-configs-versions/versions-list).
 
-For example to return a list of versions of configuration `sample-database-82` for component
-`keboola.ex-db-mysql`, you would use:
+For example, to return a list of versions of the `sample-database-82` configuration for the
+`keboola.ex-db-mysql` component, you would use
 
 {% highlight bash %}
 curl --header "X-StorageAPI-Token: storage-token" https://connection.keboola.com/v2/storage/components/keboola.ex-db-mysql/configs/sample-database-82/versions
 {% endhighlight %}
 
-Which would give you an output like this:
+which would give you the following output:
 
 {% highlight json %}
 [
@@ -155,20 +153,19 @@ Which would give you an output like this:
 ]
 {% endhighlight %}
 
-The field `version` represent the `version_id` in the following API examples.
+The field `version` represents the `version_id` in the following API examples.
 
 ### Creating a Configuration Copy
 When you have chosen a particular version, you can create a new independent
 [configuration copy](http://docs.keboola.apiary.io/#reference/component-configurations/copy-configs/create-config-copy)
-out of it. For example to create a new configuration with name
-`test-copy` from version `2` of the configuration `sample-database-82` for component
-`keboola.ex-db-mysql`, you would use:
+out of it. For example, to create a new configuration called `test-copy` from version `2` of the `sample-database-82` configuration 
+for the `keboola.ex-db-mysql` component, you would use:
 
 {% highlight bash %}
 curl --request POST --header "X-StorageAPI-Token: storage-token" --form "name=test-copy" https://connection.keboola.com/v2/storage/components/keboola.ex-db-mysql/configs/sample-database-82/versions/2/create
 {% endhighlight %}
 
-Which will return the ID of the newly created configuration:
+It will return the ID of the newly created configuration:
 {% highlight json %}
 {
   "id": 1
