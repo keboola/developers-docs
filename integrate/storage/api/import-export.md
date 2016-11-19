@@ -15,24 +15,25 @@ To upload a table, take the following steps:
 
 - Request a [file upload](http://docs.keboola.apiary.io/#reference/files/upload-file/upload-arbitrary-file-to-keboola) from
 KBC File Storage. You will be given a destination for the uploaded file on an S3 server.
-- Upload the file there. When the upload is finished, the data file will be available in the *File Uploads* section. 
+- Upload the file there. When the upload is finished, the data file will be available in the *File Uploads* section.
 - Initiate an [asynchronous table import](http://docs.keboola.apiary.io/#reference/tables/load-data-asynchronously/imports-data)
-from the uploaded file (use it as the `dataFileId` parameter) into the destination table. 
+from the uploaded file (use it as the `dataFileId` parameter) into the destination table.
 The import is asynchronous, so the request only creates a job and you need to poll for its results.
 The imported files must conform to the [supported CSV format](http://docs.keboola.apiary.io/#reference/csv-files-formats).
 
-![Schema of file upload process](/integrate/storage/api/async-import-handling.png)
+{: .image-popup}
+![Schema of file upload process](/integrate/storage/api/async-import-handling.svg)
 
 Exporting a table from Storage is analogous to its importing. First, data is [asynchronously
 exported](http://docs.keboola.apiary.io/#reference/tables/unload-data-asynchronously/asynchronous-export) from
-Table Storage into File Uploads. Then you can request to [download 
+Table Storage into File Uploads. Then you can request to [download
 the file](http://docs.keboola.apiary.io/#reference/files/manage-files/file-detail), which will give you
 access to an S3 server for the actual file download.
 
 ### Manually Uploading a File
 To upload a file to KBC File Storage, follow the instructions outlined in the
 [API documentation](http://docs.keboola.apiary.io/#reference/files/upload-file/upload-arbitrary-file-to-keboola).
-First create a file resource; to create a new file called 
+First create a file resource; to create a new file called
 [`new-file.csv`](/integrate/storage/new-table.csv) with `52` bytes, call:
 
 {% highlight bash %}
@@ -77,9 +78,9 @@ Which will return a response similar to this:
 The important parts are: `id` of the file, which will be needed later, the `uploadParams.credentials` node,
 which gives you credentials to AWS S3 to upload your file, and
 the `key` and `bucket` nodes, which define the target S3 destination as *s3://`bucket`/`key`*.
-To upload the files to S3, you need an S3 client. There are a large number of clients available: 
+To upload the files to S3, you need an S3 client. There are a large number of clients available:
 for example, use the
-[S3 AWS command line client](http://docs.aws.amazon.com/cli/latest/userguide/installing.html). 
+[S3 AWS command line client](http://docs.aws.amazon.com/cli/latest/userguide/installing.html).
 Before using it, [pass the credentials](http://docs.aws.amazon.com/cli/latest/topic/config-vars.html#credentials)
 by executing, for instance, the following commands
 
@@ -123,7 +124,7 @@ is a KBC component which takes files from KBC File Storage (*File Uploads*) and 
 The advantage of Table Importer is that it can be configured as part of the KBC orchestration.
 
 To use the importer service, create a configuration table for it. The table must be placed in
-the `sys.c-table-importer` bucket. Its name may be arbitrary. The configuration of a 
+the `sys.c-table-importer` bucket. Its name may be arbitrary. The configuration of a
 [sample table](/integrate/storage/sys.c-table-importer.test-config.csv) is shown below:
 
 {: .image-popup}
@@ -140,8 +141,8 @@ Any table in the `sys.c-table-importer` bucket can contain any number of rows; e
 - `delimiter` --- CSV delimiter (by default `,`);
 - `escapedBy` --- CSV escape character for enclosure; leave empty to escape by double enclosure.
 
-Test the above configuration by uploading a [CSV file](/integrate/storage/new-table.csv) into *File Uploads* 
-and assigning a tag `new-data` to it. 
+Test the above configuration by uploading a [CSV file](/integrate/storage/new-table.csv) into *File Uploads*
+and assigning a tag `new-data` to it.
 You can do so programatically via the API or via the UI.
 
 {: .image-popup}
@@ -175,7 +176,7 @@ Depending on the backend and table size, the data file may be sliced into chunks
 Requirements for uploading sliced files are described in the respective part of the
 [API documentation](http://docs.keboola.apiary.io/#reference/files/upload-file/upload-arbitrary-file-to-keboola).
 
-When you attempt to download a sliced file, you will instead obtain its manifest 
+When you attempt to download a sliced file, you will instead obtain its manifest
 listing the individual parts. Download the parts individually and join them
 together. For a reference implementation of this process, see
 our [TableExporter class](https://github.com/keboola/storage-api-php-client/blob/master/src/Keboola/StorageApi/TableExporter.php).
