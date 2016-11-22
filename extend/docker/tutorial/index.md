@@ -33,7 +33,8 @@ file consisting mostly of shell commands which must be executed to prepare the a
 Docker Images can be based on other Images. So if
 you need minor modification to a system, you do not have to build the whole thing from scratch. If you want Images to be
 reused, *push* your Dockerfile to Docker *Registry*. The Registry ([Dockerhub](https://hub.docker.com/),
-[Quay](https://quay.io/)) will build the image; anyone interested in using it can download it.
+[Quay](https://quay.io/)) will build the image; anyone interested in using it can download it. 
+[AWS ECR](https://aws.amazon.com/ecr/) is a private repository and has no build triggers, you need to push the images manually or using a deploy script in your CI pipeline.
 
 Docker Images names are based on the following scheme: `registry-name/account-name/image-name:tag` Where _registry-name_
 and _acoount-name_ can sometimes be omitted. For example, you can refer to a Docker _hello-world_ image as: `hello-world`

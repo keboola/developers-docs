@@ -19,8 +19,7 @@ The following chart shows how KBC is structured. All KBC parts are briefly descr
 Everything you can do in the KBC UI can be done programatically using the API of the corresponding component.
 All of our components have API documentation on [Apiary](http://docs.keboola.apiary.io/) and
 most of them have a public [Github repository](https://github.com/keboola/).
-Our Docker components are built either on [DockerHub](https://github.com/keboola/)
-or [Quay](https://quay.io/organization/keboola).
+Our Docker components are built either on [DockerHub](https://github.com/keboola/), [Quay](https://quay.io/organization/keboola) or privately on [AWS ECR](https://aws.amazon.com/ecr/).
 
 This means that there are virtually **endless possibilities of what can be done with KBC programmatically**.
 

@@ -35,7 +35,7 @@ or
     docker run docker.io/library/hello-world:latest
 
 If this works, use any image published in any Docker
-registry, e.g. [Docker Hub](https://hub.docker.com/) or [Quay](https://quay.io/).
+registry, e.g. [Docker Hub](https://hub.docker.com/), [Quay](https://quay.io/) or [AWS ECR](https://aws.amazon.com/ecr/).
 Note that in some configurations you may need to use `sudo` to run `docker`.
 If the above fails, make sure your client is set up properly. If you are using Docker Toolbox, the following might help:
 

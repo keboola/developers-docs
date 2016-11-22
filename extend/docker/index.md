@@ -23,7 +23,7 @@ Disadvantages:
 
 * [Registration checklist](/extend/registration/checklist/) must be completed
 * Extension [registration](/extend/registration/) by Keboola is required
-* Maintaining your own Docker image is necessary (on Dockerhub or Quay)
+* Maintaining your own Docker image is necessary (on Dockerhub, Quay or AWS ECR)
 
 See the [overview](/extend/) for comparison with other customization options.
 
