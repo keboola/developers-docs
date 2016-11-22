@@ -3,11 +3,11 @@ title: Keboola Images
 permalink: /extend/docker/images/
 ---
 
-In Keboola, we use both 
-[Docker Hub](https://hub.docker.com/r/keboola/) and 
-[Quay](https://quay.io/organization/keboola) registry to store Docker images. 
-In both registries, our account is called *Keboola*. 
-Some images are present in both registries. 
+In Keboola, we use 
+[Docker Hub](https://hub.docker.com/r/keboola/), 
+[Quay](https://quay.io/organization/keboola) and [AWS ECR](https://aws.amazon.com/ecr/) registries to store Docker images. 
+In Docker Hub and Quay registries, our account is called *Keboola*. 
+Some images are present in all registries. 
 As long as the same tag is used, they refer to the exact same build and are freely interchangeable. 
 In that case, you should use the one in the same registry as your image. 
 

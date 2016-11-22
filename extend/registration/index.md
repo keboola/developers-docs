@@ -17,7 +17,7 @@ That being said, any KBC user can use any registered component, unless
 - the component itself limits where it can run (in what projects and for which users).
 
 ## Using a Private Repository
-If your image cannot be public, you can use a private Docker repository on both DockerHub and Quay.io. If you are
+If your image cannot be public, you can use a private Docker repository on both DockerHub, Quay.io and AWS ECR. If you are
 registering a [Custom Science](/extend/custom-science/) extension and you want to use private git repository, you need to provide us with [encrypted credentials to the git repository](/extend/custom-science/development/#encryption-beforehand).
 
 ### DockerHub
@@ -36,6 +36,14 @@ Quay.io offers convenient robot accounts. Provide us with a robot `username` and
 ![Quay.io screenshot](/extend/registration/quayioprivate.png)
 
 Private Quay.io repositories are paid.
+
+### AWS ECR
+
+We offer free hosting of your images in AWS ECR under our account. 
+Repositories in AWS ECR are private and our application has read-only access. 
+When registering your component you will receive push credentials to the repository and you can either push the images manually or integrate the push in your CI pipeline. 
+
+The main benefit of AWS ECR is reliability, as Quay.io and Dockerhub are prone to more outages than AWS ECR.
 
 ## Registration
 The registration process is simple, but it must be done by Keboola. To register your extension,

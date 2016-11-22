@@ -3,12 +3,15 @@ title: Automated Build
 permalink: /extend/docker/tutorial/automated-build/
 ---
 
+* TOC
+{:toc}
+
 An important part of the Docker ecosystem is a *Docker registry*. A Docker registry acts as a folder of images; 
 it takes care of storing and building images as well. 
 [Docker Hub](https://hub.docker.com/) is the official Docker registry. There are also alternative registries, such as 
-[Quay](https://quay.io/), or completely private registries.
+[Quay](https://quay.io/), or completely private registries such as [AWS ECR](https://aws.amazon.com/ecr/) where we are keen to host your images for you.
 
-We support public and private images on both Docker Hub and Quay registries. Other registries are not yet supported. 
+We support public and private images on both Docker Hub and Quay registries and private images on AWS ECR. Other registries are not yet supported. 
 
 ## Working with a Registry
 In order to run an image, *pull* (`docker pull`) that image to your machine. The `docker run` 
@@ -76,3 +79,32 @@ trigger a new build of the Docker Image. Also note that the image will automatic
 or branch name. So, when you push a commit to the `master` branch, you will get an image with a tag master (which will
 move away from any older image builds). When creating a `1.0.0` tag, you will get an image with a `1.0.0` tag.
 
+## Setting up a Repository on AWS ECR
+
+Contact us at [support@keboola.com](mailto:support@keboola.com) to create a new AWS ECR registry and AWS push credentials.
+
+Once you received your AWS ECR registry URI and AWS credentials from us, the manual push process is as follows.
+ 
+Retrieve the docker login command that you can use to authenticate your Docker client to your registry:
+    
+    $ aws ecr get-login --region us-east-1
+    docker login -u AWS -p *** -e none https://147946154733.dkr.ecr.us-east-1.amazonaws.com    
+
+Run the docker login command that was returned in the previous step.
+
+    $ docker login -u AWS -p *** -e none https://147946154733.dkr.ecr.us-east-1.amazonaws.com
+    Login Succeeded    
+
+Build your Docker image.
+    
+    $ docker build -t {registryId} .
+
+After the build completes, tag your image so you can push the image to this repository.
+
+    $ docker tag {registryId}:latest 147946154733.dkr.ecr.us-east-1.amazonaws.com/{registryId}:latest
+
+Run the following command to push this image to your newly created AWS repository.
+
+    $ docker push 147946154733.dkr.ecr.us-east-1.amazonaws.com/{registryId}:latest
+    
+You can follow similar steps to push a tagged image or to integrate this push in your CI pipeline.

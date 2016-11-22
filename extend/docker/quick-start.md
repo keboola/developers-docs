@@ -188,8 +188,10 @@ You can then inspect the container contents: 'ls /data/'. For more details, see 
 ### Step 6 -- Deployment
 
 It is best to use a Docker registry and set up [automated builds](/extend/docker/tutorial/automated-build/) for deployment. To
-be usable in KBC, the image must be available in one of the supported registries ([Dockerhub](https://hub.docker.com/) or [Quay](https://quay.io/)).
+be usable in KBC, the image must be available in one of the supported registries ([Dockerhub](https://hub.docker.com/), [Quay](https://quay.io/)) or [AWS ECR](https://aws.amazon.com/ecr/).
 We support both public and private images.
+AWS ECR supports only private images and we will host your image and prodvide you with push credentials. 
+Contact us at [support@keboola.com](mailto:support@keboola.com) to obtain AWS ECR credentials for your image.
 
 To deploy the application to production, it must first be [registered](/extend/registration/). Once the
 application is registered with us, we will automatically pull the image and make it available in production.
