@@ -81,7 +81,6 @@ The expected CSV format:
 
 A [manifest file](/extend/common-interface/manifest-files/) can specify a different enclosure and delimiter.
 
-
 #### Default bucket
 If you cannot define a bucket or want to get it automatically, request setting
 the `default_bucket` flag during your [extension registration](/extend/registration/).
@@ -95,6 +94,29 @@ in the output mapping and file manifests will be overridden.
 **Important**: The `default_bucket` flag always requires the `config` parameter when creating a job manually using
 API even if the `config` configuration does not exist in Storage. This feature
 is available only for [Docker extensions](/extend/docker/).
+
+#### Sliced tables
+
+Sometimes your app will download the CSV file in chunks (slices). You do not need to manually merge them, simply put them 
+in a subfolder with the same name as you would use for a single file. All files found in the subfolder are considered 
+slices of the table.     
+
+    /data/out/tables/myfile.csv/part01
+    /data/out/tables/myfile.csv/part02
+    /data/out/tables/myfile.csv.manifest
+    
+Sliced files must not contain headers and must have columns specified in [manifest file](/extend/common-interface/manifest-files/) 
+or in output mapping configuration. 
+Example of specifying columns in the manifest file `/data/out/tables/myfile.csv.manifest`
+
+    {
+        "source": "myfile.csv",
+        "destination": "in.c-mybucket.table",
+        "columns": ["col1", "col2", "col3"]
+    }
+    
+All files from the enclosing folder are uploaded to Storage in parallel and they are imported to Storage 
+in an undefined order.
 
 ### `/data/in/files/` Folder
 
