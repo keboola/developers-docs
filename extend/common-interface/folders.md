@@ -97,9 +97,9 @@ is available only for [Docker extensions](/extend/docker/).
 
 #### Sliced tables
 
-Sometimes your app will download the CSV file in chunks (slices). You do not need to manually merge them, simply put them 
+Sometimes your application will download the CSV file in slices (chunks). You do not need to manually merge them, simply put them 
 in a subfolder with the same name as you would use for a single file. All files found in the subfolder are considered 
-slices of the table.     
+slices of the table. 
 
     /data/out/tables/myfile.csv/part01
     /data/out/tables/myfile.csv/part02
@@ -115,8 +115,9 @@ Example of specifying columns in the manifest file `/data/out/tables/myfile.csv.
         "columns": ["col1", "col2", "col3"]
     }
     
-All files from the enclosing folder are uploaded to Storage in parallel and they are imported to Storage 
-in an undefined order.
+All files from the folder are uploaded irrespective of their name or extension. The files are uploaded 
+to Storage in parallel and they are imported to Storage in an undefined order. You need to use sliced 
+tables in case you want to upload tables [larger then 5GB](https://help.keboola.com/storage/file-uploads/#limits).  
 
 ### `/data/in/files/` Folder
 
