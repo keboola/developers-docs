@@ -119,6 +119,10 @@ All files from the folder are uploaded irrespective of their name or extension. 
 to Storage in parallel and they are imported to Storage in an undefined order. You need to use sliced 
 tables in case you want to upload tables [larger then 5GB](https://help.keboola.com/storage/file-uploads/#limits).  
 
+**Important**: Please be reasonable with total volume and number of slices. 
+A rule of thumb is that slices are best around 100 MB in size and the total number of slices should not exceed 1000 files. 
+Total size of all slices combined should not exceed 50 GB.   
+
 ### `/data/in/files/` Folder
 
 Files defined in the input mapping are stored in their raw form. File names are numeric and
