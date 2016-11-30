@@ -81,6 +81,7 @@ from file name, it can (and commonly is) overridden by end-user configuration.
 {% highlight json %}
 {
     "destination": "out.c-main.Leads",
+    "columns": ["column1", "column2", "column3"],
     "incremental": true,
     "primary_key": ["column1", "column2"],
     "delimiter": "\t",

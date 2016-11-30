@@ -101,6 +101,7 @@ A sample configuration file might look like this:
                     "source": "destination.csv",
                     "destination": "out.c-main.test",
                     "incremental": false,
+                    "colummns": [],
                     "primary_key": [],
                     "delete_where_values": [],
                     "delete_where_operator": "eq",
@@ -147,6 +148,7 @@ The tables element in a configuration of the **output mapping** is an array and 
   - `source`
   - `destination`
   - `incremental`
+  - `columns`
   - `primary_key`
   - `delete_where_column`
   - `delete_where_operator`
@@ -267,6 +269,25 @@ Upload `/data/out/tables/out.c-main.data.csv` to `out.c-main.data`
                 {
                     "source": "out.c-main.data.csv",
                     "destination": "out.c-main.data"
+                }
+            ]
+        }
+    }
+}
+{% endhighlight %}
+
+#### Output Mapping - Headless CSV
+Upload CSV file `/data/out/tables/data.csv` that does not have headers on the fist line to `out.c-main.data`.
+
+{% highlight json %}
+{
+    "storage": {
+        "output": {
+            "tables": [
+                {
+                    "source": "data.csv",
+                    "destination": "out.c-main.data",
+                    "columns": ["column1", "column2"]
                 }
             ]
         }
