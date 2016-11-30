@@ -276,8 +276,8 @@ Upload `/data/out/tables/out.c-main.data.csv` to `out.c-main.data`
 }
 {% endhighlight %}
 
-#### Output Mapping - Headless CSV
-Upload CSV file `/data/out/tables/data.csv` that does not have headers on the fist line to `out.c-main.data`.
+#### Output Mapping -- Headless CSV
+Upload CSV file `/data/out/tables/data.csv` that does not have headers on the first line to table `out.c-main.data`.
 
 {% highlight json %}
 {
