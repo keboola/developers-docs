@@ -14,9 +14,9 @@ manually supply the application with a [data folder and configuration file](/ext
 To create a sample data folder, use
 a [Docker Runner](/integrate/docker-bundle/) API. There are three calls available:
 
-- [create sandbox](http://docs.kebooladocker.apiary.io/#reference/sandbox/sandbox) -- use with components with/without [registration](/extend/registration/)
-- [input data](http://docs.kebooladocker.apiary.io/#reference/sandbox/input-data/create-an-input-job) -- use with already registered components
-- [dry run](http://docs.kebooladocker.apiary.io/#reference/dry-run) -- only for [debugging](/extend/docker/#debugging) registered extensions
+- [create sandbox](http://docs.kebooladocker.apiary.io/#reference/sandbox/sandbox) --- use with components with/without [registration](/extend/registration/)
+- [input data](http://docs.kebooladocker.apiary.io/#reference/sandbox/input-data/create-an-input-job) --- use with already registered components
+- [dry run](http://docs.kebooladocker.apiary.io/#reference/dry-run) --- only for [debugging](/extend/docker/#debugging) registered extensions
 
 The API calls will resolve and validate the input mapping and create a configuration file.
 Then they will archive the whole `/data/` folder and upload it to your KBC project.
@@ -121,7 +121,7 @@ create the configuration. The equivalent to what we have used in the [Sandbox ab
 ![Configuration screnshot](/extend/common-interface/input-configuration.png)
 
 ### Run the API Request
-When you created the configuration, it was assigned a configuration Id - `sample-configuration-27` in our example.
+When you created the configuration, it was assigned a configuration Id --- `sample-configuration-27` --- in our example.
 Use this Id instead of manually crafting the request body.
 
 You can see an *Input data Introduction* sample request in [our collection of requests](/overview/api/) in Postman
@@ -155,9 +155,9 @@ to set the output mapping from `destination.csv` to some table.
 - For registered components, use the Input data call:
   - the configuration can be either passed as the body (`configData` node), or it can refer to an
 existing configuration (`config` node)
-  - the source data is exported unlimited -- this can lead to large data folders!
+  - the source data is exported unlimited --- this can lead to large data folders!
 - Both the Sandbox and Input calls create a job (automatically executed) which produces a `data.zip` file
-in your *Storage* -- *File Uploads*
+in your *Storage* - *File Uploads*
   - the `data.zip` folder can be extracted and mapped to your dockerized application
   - the `data.zip` contains the input tables and files, their manifests and configuration file
   - the `data.zip` does not contain any data in the `out` folder, your application has to produce it

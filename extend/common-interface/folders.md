@@ -33,12 +33,14 @@ This folder structure is always available to your application. For Custom Scienc
 will always be set to `/data/`, so the above folders can be accessed both with absolute and relative paths (e.g. `in/tables`).
 For Docker Extensions, the current directory is up to you.
 Do not put arbitrary files in the `/data/` folder as they will be uploaded into the user project
-(or cause errors in the output mapping). For working or temporary files, use either the `/home/` or `/tmp/` folder.
+(or cause errors in the output [mapping](https://help.keboola.com/manipulation/transformations/mappings/)). 
+For working or temporary files, use either the `/home/` or `/tmp/` folder.
 The working directories have 10GB of free space.
 
 ### `/data/in/tables/` Folder
 
-The folder contains tables defined in the input mapping; they are serialized in the CSV format:
+The folder contains tables defined in the input [mapping](https://help.keboola.com/manipulation/transformations/mappings/); 
+they are serialized in the CSV format:
 
   - string enclosure `"`
   - delimiter `,`
@@ -81,12 +83,12 @@ The expected CSV format:
 
 A [manifest file](/extend/common-interface/manifest-files/) can specify a different enclosure and delimiter.
 
-#### Default bucket
+#### Default Bucket
 If you cannot define a bucket or want to get it automatically, request setting
 the `default_bucket` flag during your [extension registration](/extend/registration/).
 
 All tables in `/data/out/tables` will then be uploaded to a bucket identified by your
-component id (created upon the extension registration) and
+component id (created upon the extension registration), 
 configuration id (created when an end-user adds a new extension configuration) and stage (`in` or `out`).
 The file name (without the `.csv` suffix) will be used as the table name. The `destination` attributes
 in the output mapping and file manifests will be overridden.
@@ -95,7 +97,7 @@ in the output mapping and file manifests will be overridden.
 API even if the `config` configuration does not exist in Storage. This feature
 is available only for [Docker extensions](/extend/docker/).
 
-#### Sliced tables
+#### Sliced Tables
 
 Sometimes your application will download the CSV file in slices (chunks). You do not need to manually merge them, simply put them 
 in a subfolder with the same name as you would use for a single file. All files found in the subfolder are considered 
@@ -105,9 +107,10 @@ slices of the table.
     /data/out/tables/myfile.csv/part02
     /data/out/tables/myfile.csv.manifest
     
-Sliced files must not contain headers and must have columns specified in [manifest file](/extend/common-interface/manifest-files/) 
-or in output mapping configuration. 
-Example of specifying columns in the manifest file `/data/out/tables/myfile.csv.manifest`
+No sliced files can contain headers. They must have their columns specified in the [manifest file](/extend/common-interface/manifest-files/)
+or in the output mapping configuration. 
+
+The following is an example of specifying columns in the manifest file `/data/out/tables/myfile.csv.manifest`:
 
     {
         "source": "myfile.csv",
@@ -115,13 +118,12 @@ Example of specifying columns in the manifest file `/data/out/tables/myfile.csv.
         "columns": ["col1", "col2", "col3"]
     }
     
-All files from the folder are uploaded irrespective of their name or extension. The files are uploaded 
-to Storage in parallel and they are imported to Storage in an undefined order. You need to use sliced 
-tables in case you want to upload tables [larger then 5GB](https://help.keboola.com/storage/file-uploads/#limits).  
+All files from the folder are uploaded irrespective of their name or extension. They are uploaded 
+to Storage in parallel and in an undefined order. Use sliced tables in case you want to upload tables [larger then 5GB](https://help.keboola.com/storage/file-uploads/#limits).  
 
-**Important**: Please be reasonable with total volume and number of slices. 
+**Important**: Please be reasonable with the total volume and number of slices. 
 A rule of thumb is that slices are best around 100 MB in size and the total number of slices should not exceed 1000 files. 
-Total size of all slices combined should not exceed 50 GB.   
+The total size of all slices combined should not exceed 50 GB.   
 
 ### `/data/in/files/` Folder
 
@@ -131,7 +133,7 @@ in the [manifest file](/extend/common-interface/manifest-files/).
 
 ### `/data/out/files/` Folder
 
-All files in this folder are uploaded to Storage. File names are preserved and tags and other upload options
+All files in this folder are uploaded to Storage. File names are preserved, and tags and other upload options
 can be specified in the [manifest file](/extend/common-interface/manifest-files/).
 Note that all files in the `/data/out/files` folder will be uploaded, not only those specified in the output mapping.
 

@@ -41,7 +41,7 @@ php sapi-client.phar
 {% endhighlight %}
 
 
-### Example --- Create a table
+### Example --- Create a Table
 To create a new table in Storage, use the `create-table` command. Provide the name of an
 existing bucket, the name of the new table and a CSV file with the table's contents.
 
@@ -115,8 +115,8 @@ curl --request GET --header "X-StorageApi-Token:yourtoken" "https://connection.k
 {% endhighlight %}
 
 This should print a JSON with a list of buckets in the project. If the command returns an error, you need to 
-resolve that error first before running Storage API client. This usually means [installing the cURL library](https://curl.haxx.se/download.html).
-If the above command works and the CLI client still does not work, then your PHP installation is probably not configured correctly. This
-usually means that the [`curl.cainfo`](http://php.net/manual/en/curl.configuration.php) PHP configuration variable does not point to valid
-a [CA (certification authority) certificates bundle](https://curl.haxx.se/docs/caextract.html). For more details, see 
+resolve that error first before running the Storage API client. This usually means [installing the cURL library](https://curl.haxx.se/download.html).
+If the above command works and the CLI client still does not, then your PHP installation is probably not configured correctly. This
+usually means that the [`curl.cainfo`](http://php.net/manual/en/curl.configuration.php) PHP configuration variable does not point to a valid
+[CA (certification authority) certificates bundle](https://curl.haxx.se/docs/caextract.html). For more details, see 
 e.g. (Stackoverflow discussion](http://stackoverflow.com/questions/6400300/https-and-ssl3-get-server-certificatecertificate-verify-failed-ca-is-ok?rq=1).

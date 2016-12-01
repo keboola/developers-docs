@@ -6,21 +6,23 @@ permalink: /extend/common-interface/config-file/
 * TOC
 {:toc}
 
-Configuration files are one of the [possible channels](/extend/common-interface/) for exchanging data between extensions (and other dockerized applications) and Keboola Connection.
+Configuration files are one of the [possible channels](/extend/common-interface/) for exchanging data 
+between extensions (and other dockerized applications) and Keboola Connection (KBC).
 
 To create a sample configuration file (together with the data directory),
-use [create sandbox](/extend/common-interface/) via the
+use the [create sandbox](/extend/common-interface/sandbox/#create-sandbox-api-call) call via the
 [Docker Runner API](http://docs.kebooladocker.apiary.io/#reference/sandbox).
 You will get a zip archive containing all the resources you need in your extension.
 
 ## Configuration File Format
-The configuration files is always stored in `JSON` format. 
+All configuration files are always stored in `JSON` format. 
 
 ## Configuration File Structure
-The configuration file has the following root nodes:
+Each configuration file has the following root nodes:
 
-- `storage`: Contains both the input and output mapping for both files and tables. This section is important if your
-application uses a dynamic input/output mapping. Simple applications can be created with a static input/output mapping.
+- `storage`: Contains both the input and output [mapping](https://help.keboola.com/manipulation/transformations/mappings/) for both files and tables. 
+This section is important if your application uses a dynamic input/output mapping. 
+Simple applications can be created with a static input/output mapping.
 They do not use this configuration section at all (see [Custom Science Quick Start](/extend/custom-science/quick-start/)).
 - `parameters`: Contains arbitrary parameters passed from the UI to the application. This section can be used in any
 way you wish. Your application should validate the contents of this section. For passing sensitive
@@ -30,15 +32,15 @@ parameters passed to the application. They cannot be modified by the end-user. T
 global application parameters (such as token, URL, version of your API).
 - `authorization`: Available only for [registered Docker extensions](/extend/registration/). Contains Oauth2
 [authorization contents](/extend/common-interface/oauth/).
-- `action`: Name of the [action](/extend/common-interface/actions/) to execute, default `run`. Other actions available upon [registration](/extend/registration/)
-and all other actions except `run` have a strict execution time limit of 30 seconds. See [actions](/extend/common-interface/actions/)
-for more details.
+- `action`: Name of the [action](/extend/common-interface/actions/) to execute; defaults to `run`. Other actions available upon [registration](/extend/registration/)
+and all other actions except `run` have a strict execution time limit of 30 seconds. 
+See [actions](/extend/common-interface/actions/) for more details.
 
 
 ## State File
 
 The state file is used to store the component state for the next run. It provides a two-way communication between
-Keboola Connection configuration state storage and the application. The state file only works if the API call
+KBC configuration state storage and the application. The state file only works if the API call
 references a stored configuration (`config` is used, not `configData`).
 
 The location of the state file is:
@@ -53,23 +55,25 @@ A state object is saved to configuration storage only when actually running the 
 (not in [sandbox API calls](/extend/common-interface/sandbox/). The state must be a valid JSON file.
 
 ### State File Properties
-Because the state is stored as part of
+Because the state is stored as part of a
 [Component configuration](http://docs.keboola.apiary.io/#reference/component-configurations),
 the value of the state object is somewhat limited (should not generally exceed 1MB). It should not
-be used to store large amounts of data. Also, the end-user cannot easily access the data through the UI.
+be used to store large amounts of data. 
+
+Also, the end-user cannot easily access the data through the UI.
 The data can be, however, modified outside of the dockerized application itself using the
 [Component configuration](http://docs.keboola.apiary.io/#reference/component-configurations) API calls.
 
-Note that the state file is not thread-safe. If multiple instances of the *same configuration*
-in the *same project* are run simultaneously, the one writing data later wins. Use the state file more
-like a HTTP Cookie than like a Database. Typical use for the state file would be saving the last record
+**Important:** The state file is not thread-safe. If multiple instances of the *same configuration*
+are run simultaneously in the *same project*, the one writing data later wins. Use the state file more
+as an HTTP Cookie than as a Database. A typical use for the state file would be saving the last record
 loaded from some API to enable incremental loads.
 
 
 ## Examples
 To create an example configuration, use the [sandbox API calls](/extend/common-interface/sandbox/). You will get a
-`data.zip` archive in your *Storage* - *File uploads* which will contain the `config.json` file.
-You can also use these structures to create an API request for [creating sandbox](/extend/common-interface/sandbox/),
+`data.zip` archive in your *Storage* --- *File uploads*, which will contain the `config.json` file.
+You can also use these structures to create an API request for [creating a sandbox](/extend/common-interface/sandbox/),
 as well as for actually [running dockerized applications](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job).
 If you want to manually pass configuration options in the API request, be sure to wrap it around in the `configData` node.
 
@@ -126,7 +130,7 @@ A sample configuration file might look like this:
 
 ### Tables
 Tables from the input mapping are mounted to `/data/in/tables`.
-Input mapping parameters are similar to [Storage API export table options ](http://docs.keboola.apiary.io/#tables).
+Input mapping parameters are similar to the [Storage API export table options ](http://docs.keboola.apiary.io/#tables).
 If `destination` is not set, the CSV file will have the same name as the table (without adding `.csv` suffix).
 The tables element in a configuration of the **input mapping** is an array and supports the following attributes:
 
@@ -140,7 +144,7 @@ The tables element in a configuration of the **input mapping** is an array and s
 - `limit`
 
 The output mapping parameters are similar
-to [Transformation API output mapping ](https://help.keboola.com/manipulation/transformations/).
+to the [Transformation API output mapping ](https://help.keboola.com/manipulation/transformations/).
 `destination` is the only required parameter. If `source` is not set, the CSV file is expected to have the same name
 as the `destination` table.
 The tables element in a configuration of the **output mapping** is an array and supports the following attributes:
@@ -156,7 +160,7 @@ The tables element in a configuration of the **output mapping** is an array and 
   - `delimiter`
   - `enclosure`
 
-#### Input Mapping - Basic
+#### Input Mapping --- Basic
 Download tables `in.c-ex-salesforce.Leads` and `in.c-ex-salesforce.Accounts` to `/data/tables/in/leads.csv`
 and `/data/tables/in/accounts.csv`.
 
@@ -179,7 +183,7 @@ and `/data/tables/in/accounts.csv`.
 }
 {% endhighlight %}
 
-In an API request this would be passed as:
+In an API request, this would be passed as:
 
 {% highlight json %}
 {
@@ -203,7 +207,7 @@ In an API request this would be passed as:
 {% endhighlight %}
 
 
-#### Input Mapping - Incremental Load
+#### Input Mapping --- Incremental Load
 Download 2 days of data from the `in.c-storage.StoredData` table to `/data/tables/in/in.c-storage.StoredData`.
 
 {% highlight json %}
@@ -221,7 +225,7 @@ Download 2 days of data from the `in.c-storage.StoredData` table to `/data/table
 }
 {% endhighlight %}
 
-#### Input Mapping - Select Columns
+#### Input Mapping --- Select Columns
 
 {% highlight json %}
 {
@@ -238,7 +242,7 @@ Download 2 days of data from the `in.c-storage.StoredData` table to `/data/table
 }
 {% endhighlight %}
 
-#### Input Mapping - Filtered Table
+#### Input Mapping --- Filtered Table
 
 {% highlight json %}
 {
@@ -258,8 +262,8 @@ Download 2 days of data from the `in.c-storage.StoredData` table to `/data/table
 }
 {% endhighlight %}
 
-#### Output Mapping - Basic
-Upload `/data/out/tables/out.c-main.data.csv` to `out.c-main.data`
+#### Output Mapping --- Basic
+Upload `/data/out/tables/out.c-main.data.csv` to `out.c-main.data`.
 
 {% highlight json %}
 {
@@ -276,7 +280,7 @@ Upload `/data/out/tables/out.c-main.data.csv` to `out.c-main.data`
 }
 {% endhighlight %}
 
-#### Output Mapping -- Headless CSV
+#### Output Mapping --- Headless CSV
 Upload CSV file `/data/out/tables/data.csv` that does not have headers on the first line to table `out.c-main.data`.
 
 {% highlight json %}
@@ -295,7 +299,7 @@ Upload CSV file `/data/out/tables/data.csv` that does not have headers on the fi
 }
 {% endhighlight %}
 
-#### Output Mapping - Set Additional Properties
+#### Output Mapping --- Set Additional Properties
 Incrementally upload `/data/out/tables/data.csv` to `out.c-main.data`.
 with a compound primary key set on columns `column1` and `column2`.
 
@@ -316,8 +320,8 @@ with a compound primary key set on columns `column1` and `column2`.
 }
 {% endhighlight %}
 
-#### Output Mapping - Delete Rows
-Delete data from `destination` table before uploading the CSV
+#### Output Mapping --- Delete Rows
+Delete data from the `destination` table before uploading the CSV
 file (only makes sense with `incremental: true`).
 
 {% highlight json %}
