@@ -353,7 +353,7 @@ All files matching the search will be downloaded to the `/data/in/files` folder.
 The name of each file has the `fileId_fileName` format. Each file will also contain a
 [manifest](/extend/common-interface/manifest-files/) with all information about the file.
 
-#### Input Mapping - Query
+#### Input Mapping --- Query
 
 {% highlight json %}
 {
@@ -378,7 +378,7 @@ This will download with files with matching `.zip` **and** having the `docker-de
     /data/in/files/75807657_fooBarBaz.zip
     /data/in/files/75807657_fooBarBaz.zip.manifest
 
-#### Input Mapping - Run Id
+#### Input Mapping --- Run Id
 Use the `filter_by_run_id` option to select only files which are related to the job
 currently being executed. If `filter_by_run_id` is specified, we will download only files which
 satisfy the filter (either `tags` or `query`) *and* were uploaded by a parent job (a job with same
@@ -403,7 +403,7 @@ current chain of jobs.
 This will download only files with the `fooBar` tag that were produced by a parent job to
 the currently running Docker.
 
-#### Output Mapping - Basic
+#### Output Mapping --- Basic
 Define additional properties for uploaded files in the output mapping configuration.
 If that file is not present in the `/data/out/files` folder, an error will be thrown.
 
