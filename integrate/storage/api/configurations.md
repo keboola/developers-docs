@@ -52,7 +52,7 @@ which will return all the configuration details. This means
 
 - the configuration itself (`configuration`) --- section on configuration follows; 
 - configuration rows (`rows`) --- additional data of the configuration; and 
-- configuration state (`state`) --- [component state](/extend/common-interface/environment/#state). 
+- configuration state (`state`) --- [component state](/extend/common-interface/config-file/#state-file). 
 
 Please note that the contents
 of the `configuration`, `rows` and `state` section depend purely on the component itself. For example,
