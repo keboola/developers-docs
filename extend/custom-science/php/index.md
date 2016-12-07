@@ -30,6 +30,16 @@ The code is executed in a docker image derived from our [PHP image](https://gith
 The `composer.json` (and `composer.lock` if present) files will be automatically processed with `composer install` before your application is
 run. The composer command will run only if the `composer.json` is present, so it is not required.
 
+## PHP Modules
+The following PHP modules (extensions) are available in the PHP installation:
+Core, ctype, curl, date, dom, fileinfo, filter, ftp, hash, iconv, json, libxml, mbstring, mysqlnd, openssl, pcre, 
+PDO, pdo_sqlite, Phar, posix, readline, Reflection, session, SimpleXML, SPL, sqlite3, standard, tokenizer, 
+xml, xmlreader, xmlwriter, zlib.
+
+If you need to enable another built-in PHP extension, please contact us on [support](mailto:support@keboola.com). 
+If you need to install [PECL extensions](https://pecl.php.net/), please create your own
+[Docker extension](https://developers.keboola.com/extend/docker/) instead of using Custom Science.  
+
 ## Reading and Writing Files
 Tables from Storage are imported to the PHP script from CSV files. The CSV files can be read by
 [our CSV library](https://github.com/keboola/php-csv). We recommend using this library over standard
