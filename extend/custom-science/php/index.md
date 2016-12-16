@@ -6,10 +6,11 @@ permalink: /extend/custom-science/php/
 * TOC
 {:toc}
 
-So far there are no known limitations to the architecture of your PHP code. Please note:
+So far, there are no known limitations to the architecture of your PHP code. Please note:
 
 - The repository of your PHP application must always contain the `main.php` script.
-- If set, your application must always produce the tables and files listed in the output mapping (even if the files were empty).
+- If set, your application must always produce the tables and files listed in the [output mapping](https://help.keboola.com/manipulation/transformations/mappings/) 
+(even if the files were empty).
 
 If you are starting with Custom Science, consider going through the
 [Quickstart](/extend/custom-science/quick-start/).
@@ -27,8 +28,9 @@ To install a package, create a [`composer.json`](https://getcomposer.org/doc/00-
 {% endhighlight %}
 
 The code is executed in a docker image derived from our [PHP image](https://github.com/keboola/docker-custom-php/blob/master/Dockerfile).
-The `composer.json` (and `composer.lock` if present) files will be automatically processed with `composer install` before your application is
-run. The composer command will run only if the `composer.json` is present, so it is not required.
+The `composer.json` (and `composer.lock` if present) files will be automatically processed with `composer install` 
+before your application is run. The composer command will run only if the `composer.json` is present, 
+so it is not required.
 
 ## PHP Modules
 The following PHP modules (extensions) are available in the PHP installation:
@@ -36,15 +38,16 @@ Core, ctype, curl, date, dom, fileinfo, filter, ftp, hash, iconv, json, libxml, 
 PDO, pdo_sqlite, Phar, posix, readline, Reflection, session, SimpleXML, SPL, sqlite3, standard, tokenizer, 
 xml, xmlreader, xmlwriter, zlib.
 
-If you need to enable another built-in PHP extension, please contact us on [support](mailto:support@keboola.com). 
+If you need to enable another built-in PHP extension, please contact us at [support](mailto:support@keboola.com). 
+
 If you need to install [PECL extensions](https://pecl.php.net/), please create your own
 [Docker extension](https://developers.keboola.com/extend/docker/) instead of using Custom Science.  
 
 ## Reading and Writing Files
 Tables from Storage are imported to the PHP script from CSV files. The CSV files can be read by
 [our CSV library](https://github.com/keboola/php-csv). We recommend using this library over standard
-`fgetcsv` functions. Below is the code for basic reading and writing of files, it is also available in our
-[git repository](https://github.com/keboola/docker-custom-php)
+`fgetcsv` functions. Below is the code for basic reading and writing of files. It is also available in our
+[git repository](https://github.com/keboola/docker-custom-php).
 
 {% highlight php %}
 <?php
@@ -79,20 +82,20 @@ foreach ($inFile as $rowNum => $row) {
 }
 {% endhighlight %}
 
-The above example shows how to write file line-by-line; this is the most memory-efficient way which
+The above example shows how to write a file line-by-line; this is the most memory-efficient way which
 allows you to process data files of any size.
 
-To test the above code, set an ouput mapping to `result.csv` and the following *runtime* configuration:
+To test the above code, set the output mapping to `result.csv` and use the following *runtime* configuration:
 
 - Repository: `https://github.com/keboola/docker-custom-php.git`
 - Version: `0.0.2`
 
 ## Error Handling
-An important part of the application is handling errors. By
-[the specification](/extend/common-interface/environment/), we assume that command return
+An important part of the application is handling errors. Following
+[the specification](/extend/common-interface/environment/#return-values), the command should return
 code: 0 = no error, 1 = user error (shown to the end-user in KBC), > 1 = application error
 (the end-user will receive only a generic message). To implement this, you should wrap your
-entire script in `try-catch` statement.
+entire script in a `try-catch` statement.
 
 {% highlight php %}
 try {
