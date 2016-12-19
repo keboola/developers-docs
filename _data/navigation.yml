@@ -1,4 +1,6 @@
 items:
+  - url: /
+    title: Home
 
   - url: /overview/
     title: KBC Overview
