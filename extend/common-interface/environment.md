@@ -60,8 +60,10 @@ User Exception, the end-user will see a full error message. Therefore,
 In case of an *Application Exception*, the end-user will see only a canned response ('An application error occurred') with
 the option to contact support. The actual output of the application will be sent to our internal logs only.
 
-In case of [Docker extensions](/extend/docker/) the output can be forwarded to a place specify by you in your
+In case of [Docker extensions](/extend/docker/) the output can be forwarded to a place specified by you in your
 [component registration](/extend/registration/), while in case of [Custom Science](/extend/custom-science/), it cannot.
+It is possible to modify the above behavior so that regardless of the exit code, all errors are User Exceptions. This is done
+by setting `no_application_errors` during component registration.
 
 ## Standard Output and Standard Error
 
