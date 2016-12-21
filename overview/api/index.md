@@ -1,5 +1,5 @@
 ---
-title: Calling API 
+title: Our APIs
 permalink: /overview/api/
 ---
 
@@ -10,7 +10,30 @@ All our [KBC components](/overview/) have a public API on [apiary](https://apiar
 API, we recommend either the Apiary Console or Postman Client. Most of our APIs take and produce data in JSON format. 
 Many of them require a *Storage API token*, which is entered in the `X-StorageApi-Token` header.
 
-## Apiary Console
+## List of Keboola APIs
+
+All parts of the Keboola Connection platform can be controlled via an API.
+The main APIs for our components are:
+
+- [KBC Storage API](http://docs.keboola.apiary.io/#) --- [Storage](/integrate/storage/) is the main KBC component storing all data.
+- [KBC Management API](http://docs.keboolamanagementapi.apiary.io/#) --- API managing KBC projects and users (and notifications and features).
+- [Docker Runner API](http://docs.kebooladocker.apiary.io/#) ([APIB](https://github.com/keboola/docker-bundle/blob/master/apiary.apib)) --- [Docker Runner](/integrate/docker-bundle/) is the component running other KBC components.
+- [JSON Parser API](http://docs.jsonparserapi.apiary.io/#) ([APIB](https://github.com/keboola/jsonparser-api/blob/master/apiary.apib)) --- JSON Parser is a service [converting JSON files to CSV](https://json-parser.keboola.com/).
+- [Transformation API](http://docs.keboolatransformationapi.apiary.io/) --- [Transformations](/integrate/transformations/) is the component running [SQL/R/Python transformations](https://help.keboola.com/manipulation/transformations/).
+- [Provisioning API](http://docs.provisioningapi.apiary.io/) ([APIB](https://github.com/keboola/provisioning-bundle/blob/master/apiary.apib)) --- Provisioning is a service creating accounts for [sandboxes](https://help.keboola.com/manipulation/transformations/sandbox/), [transformations](https://help.keboola.com/manipulation/transformations/) and database writers.
+- [Syrup Queue API](http://docs.syrupqueue.apiary.io/#) ([APIB](
+https://github.com/keboola/syrup-queue/blob/master/apiary.apib)) --- Syrup Queue is a component managing
+[Jobs](/overview/jobs/).
+- [OAuth Manager API](http://docs.oauthv2.apiary.io/) ([APIB](https://github.com/keboola/oauth-v2-bundle/blob/master/apiary.apib)) --- OAuth2 is a component managing [OAuth authorizations](/extend/common-interface/oauth/#authorize) of other components.
+- [GoodData Writer API](http://docs.keboolagooddatawriterv2.apiary.io/#) ([APIB](https://github.com/keboola/gooddata-writer/blob/master/apiary.apib)) --- GoodData Writer is a component [loading data into GoodData](https://help.keboola.com/tutorial/write/gooddata/).
+- [Orchestrator API](http://docs.keboolaorchestratorv2api.apiary.io/#) ([APIB](https://github.com/keboola/orchestrator-bundle/blob/master/apiary.apib)) --- Orchestrator is a component [automating and scheduling tasks](https://help.keboola.com/tutorial/automate/) in your project.
+- [Developer Portal API](http://docs.kebooladeveloperportal.apiary.io/#) ([APIB](https://github.com/keboola/developer-portal/blob/master/apiary.apib)) --- Developer Portal is an application separated from KBC for [registering components](/extend/registration/).
+
+## Calling API
+
+There are several ways of sending requests to our APIs.
+
+### Apiary Console
 Send requests to our API directly from the Apiary console by clicking on **Switch to console** or **Try**. 
 Then fill the request headers and parameters and **Call Resource**.
 
@@ -20,7 +43,7 @@ Then fill the request headers and parameters and **Call Resource**.
 The Apiary console is fine if you send API requests only occasionally. It requires no application installation; 
 however, it has no history and no other useful features.
  
-## Postman Client
+### Postman Client
 [Postman](https://www.getpostman.com/) is a generic HTTP API client. Use it if you work with KBC API on a more regular basis. 
 We also provide a collection of useful API calls. They can be imported either by clicking the following button,
 
@@ -35,7 +58,7 @@ or with the following procedure:
 {: .image-popup}
 ![Apiary console](/overview/api/postman-import.png)
 
-## cURL
+### cURL
 [cURL](https://curl.haxx.se/) is a common library used by many systems. There is also 
 a [command-line interface (CLI)](https://curl.haxx.se/docs/manpage.html) available. 
 You can use the cURL CLI to create simple scripts working with KBC API. For example, to [Run a Job](/overview/jobs/), 
@@ -50,23 +73,4 @@ To call the [encryption API](/overview/encryption/) for [R Custom Science](/exte
 {% highlight shell %}
 curl --data "sometext" --header "X-StorageAPI-Token: YourStorageToken" --header "Content-Type: text/plain" https://syrup.keboola.com/docker/dca-custom-science-r/encrypt
 {% endhighlight %}
-
-## Our APIs
-All parts of the Keboola Connection platform can be controlled via an API. The main APIs for 
-our components are:
-
-- [KBC Storage API](http://docs.keboola.apiary.io/#) --- [Storage](/integrate/storage/) is the main KBC component storing all data.
-- [KBC Management API](http://docs.keboolamanagementapi.apiary.io/#) --- API managing KBC projects and users (and notifications and features).
-- [Docker Runner API](http://docs.kebooladocker.apiary.io/#) ([APIB](https://github.com/keboola/docker-bundle/blob/master/apiary.apib)) --- [Docker Runner](/integrate/docker-bundle/) is the component running other KBC components.
-- [JSON Parser API](http://docs.jsonparserapi.apiary.io/#) ([APIB](https://github.com/keboola/jsonparser-api/blob/master/apiary.apib)) --- JSON Parser is a service [converting JSON files to CSV](https://json-parser.keboola.com/).
-- [Transformation API](http://docs.keboolatransformationapi.apiary.io/) --- [Transformations](/integrate/transformations/) is the component running [SQL/R/Python transformations](https://help.keboola.com/manipulation/transformations/). 
-- [Provisioning API](http://docs.provisioningapi.apiary.io/) ([APIB](https://github.com/keboola/provisioning-bundle/blob/master/apiary.apib)) --- Provisioning is a service creating accounts for [sandboxes](https://help.keboola.com/manipulation/transformations/sandbox/), [transformations](https://help.keboola.com/manipulation/transformations/) and database writers.
-- [Syrup Queue API](http://docs.syrupqueue.apiary.io/#) ([APIB](
-https://github.com/keboola/syrup-queue/blob/master/apiary.apib)) --- Syrup Queue is a component managing 
-[Jobs](/overview/jobs/).
-- [OAuth Manager API](http://docs.oauthv2.apiary.io/) ([APIB](https://github.com/keboola/oauth-v2-bundle/blob/master/apiary.apib)) --- OAuth2 is a component managing [OAuth authorizations](/extend/common-interface/oauth/#authorize) of other components.
-- [GoodData Writer API](http://docs.keboolagooddatawriterv2.apiary.io/#) ([APIB](https://github.com/keboola/gooddata-writer/blob/master/apiary.apib)) --- GoodData Writer is a component [loading data into GoodData](https://help.keboola.com/tutorial/write/gooddata/).
-- [Orchestrator API](http://docs.keboolaorchestratorv2api.apiary.io/#) ([APIB](https://github.com/keboola/orchestrator-bundle/blob/master/apiary.apib)) --- Orchestrator is a component [automating and scheduling tasks](https://help.keboola.com/tutorial/automate/) in your project.
-- [Developer Portal API](http://docs.kebooladeveloperportal.apiary.io/#) ([APIB](https://github.com/keboola/developer-portal/blob/master/apiary.apib)) --- Developer Portal is an application separated from KBC for [registering components](/extend/registration/).
-
 
