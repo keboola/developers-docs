@@ -13,7 +13,8 @@ Your R Custom Science Application can be created in multiple ways (as described 
 - If set, your application must always produce the tables and files listed in the output mapping (even if the files were empty).
 
 ## Packages
-To install a package, use `install.packages('packageName')`. It is not necessary to specify the repository. If you wish to install a package from source, use `devtools::install_github()` (and friends).
+To install a package, use `install.packages('packageName')`. It is not necessary to specify the repository. If you wish to install a package from source,
+use `devtools::install_github()` (and friends). The R version is the same as for [R transformations](https://help.keboola.com/manipulation/transformations/r/#environment).
 
 Here is our current
 [list of pre-installed packages](https://github.com/keboola/docker-base-r-packages/blob/master/init.R#L14).
@@ -342,19 +343,6 @@ sudo: required
 
 services:
   - docker
-
-env:
-  DOCKER_COMPOSE_VERSION: 1.6.2
-
-before_install:
-  - sudo apt-get update
-  - sudo apt-get -o Dpkg::Options::="--force-confnew" -y install docker-engine
-
-install:
-  - sudo rm /usr/local/bin/docker-compose
-  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
 
 before_script:
   - docker -v
