@@ -4,7 +4,7 @@ import json
 import boto3
 from time import sleep
 
-storageToken = '578-27978-a469a49c14195a3e0176e3d35c65033ce6dce4fa'
+storageToken = 'yourToken'
 # Source filename (including path)
 fileName = 'simple.csv'
 # Target Storage Bucket (assumed to exist)
