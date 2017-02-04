@@ -67,3 +67,25 @@ no knowledge about the authorized APIs.
 **Important:** None of the [sandbox API calls](/extend/common-interface/sandbox)
 decrypt the `authorization.oauth_api.credentials.#data` and `authorization.oauth_api.credentials.#appSecret` keys.
 
+## Credentials Injection
+
+If you want to bypass OAuth API V2 integration, you can paste all required credential parameters in the configuration directly. 
+Fields requiring encryption will be encrypted and decrypted as usual. That means, that you can save the following configuration.
+
+{% highlight json %}
+{
+    "storage": { ... },
+    "parameters": { ... },
+    "authorization": {
+        "oauth_api": {
+            "credentials": {
+                "#data": "{\"oauth_token\":\"xx\",\"oauth_token_secret\":\"xxx\",\"x_auth_expires\":\"0\"}",
+                "appKey": "...",
+                "#appSecret": "..."
+            }
+        }
+    }
+}
+{% endhighlight %}
+
+This comes in very handy for quick Generic extractor iterations.
