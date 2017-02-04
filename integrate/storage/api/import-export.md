@@ -116,6 +116,21 @@ curl --request POST --header "X-StorageApi-Token:storage-token" --form "name=new
 This will create an asynchronous job, importing data from the `192726698` file into the `new-table` destination table in the `in.c-main` bucket.
 Then [poll for the job results](/overview/jobs/#job-polling), or review its status in the UI.
 
+#### Python Example
+The above process is implemented in the following example script in Python. This script uses the
+[Requests](http://docs.python-requests.org/en/master/) library for sending HTTP requests and
+the [Boto 3](https://github.com/boto/boto3) library for working with Amazon S3. Both libraries can be
+installed using pip:
+
+{% highlight bash %}
+pip install boto3
+pip install requests
+{% endhighlight %}
+
+{% highlight python %}
+{% include async-create.py %}
+{% endhighlight %}
+
 ### Table Importer Service
 The process of importing data into Storage Tables can be simplified a bit by using the
 [*Table Importer*](https://github.com/keboola/sapi-table-importer)
