@@ -11,11 +11,13 @@ look somewhat abstract and hard to understand at first sight, but once you confi
 your first extractor, you'll see that is a great tool. With generic extractor you can
 build an entirely new extractor for KBC in less than an hour. 
 To get started quickly, you can follow the [tutorial](/extend/generic-extractor/tutorial).
-
-pojmy
+{% comment %}
+TODO
+terms
 - endpoint
 - api
 - rest
+{% endcomment %}
 
 ## Generic Extractor requirements
 Using generic extractor you can extract data from some [REST API](todo) into KBC only by
@@ -30,7 +32,9 @@ send any PUT/POST/DELETE requests - which means that the API must not:
 
 Also the API response must be either a CSV data or JSON data.
 
-TODO priklad api
+{% comment %}
+TODO api example 
+{% endcomment %}
 
 ## Registering Generic Extractor
 A configuration of Generic Extractor can be [registered](/extend/registration/) as 
@@ -61,6 +65,7 @@ TUTORIAL
 {% comment %}
 TODO
 {% endcomment %}
+
 ## Introduction
 Generic extractor allows exporting data from REST APIs not implemented in Keboola Connection or creating custom configurations to export any data from any REST API.
 
