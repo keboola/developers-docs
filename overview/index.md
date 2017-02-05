@@ -32,7 +32,7 @@ file uploads, configurations and logs)
 [dockerized components](/extend/docker/); therefore many extractors, writers and applications share its features
 - [Transformations](/integrate/transformations/) component which encapsulates all types of transformations (SQL with
 various backends, R, Python)
-- [Orchestrator](/integrate/orchestrator/) component which takes care of grouping different tasks together and
+- [Orchestrator](/automate/) component which takes care of grouping different tasks together and
 running them regularly at scheduled times
 
 ## Component Common Features
