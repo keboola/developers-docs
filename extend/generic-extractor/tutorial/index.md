@@ -1,5 +1,5 @@
 ---
-title: Generic Extractor Tutorial
+title: Generic Extractor Tutorial (under construction)
 permalink: /extend/generic-extractor/tutorial/
 ---
 

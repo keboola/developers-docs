@@ -1,5 +1,5 @@
 ---
-title: Page number scroller
+title: Page number scroller (under construction)
 permalink: /extend/generic-extractor/pagination/pagenum/
 ---
 

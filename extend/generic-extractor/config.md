@@ -1,5 +1,5 @@
 ---
-title: Generic Extractor Config
+title: Generic Extractor Config (under construction)
 permalink: /extend/generic-extractor/config/
 ---
 

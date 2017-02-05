@@ -1,5 +1,5 @@
 ---
-title: Offset scroller
+title: Offset scroller (under construction)
 permalink: /extend/generic-extractor/pagination/offset/
 ---
 

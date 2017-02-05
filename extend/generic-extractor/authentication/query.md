@@ -1,5 +1,5 @@
 ---
-title: Query Authentication
+title: Query Authentication (under construction)
 permalink: /extend/generic-extractor/authentication/query/
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Cursor scroller
+title: Cursor scroller (under construction)
 permalink: /extend/generic-extractor/pagination/cursor/
 ---
 

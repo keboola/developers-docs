@@ -26,12 +26,12 @@ what you would like to build!
 ## Types of Extensions
 Currently, there are two types of extensions available:
 
-1. [**Generic Extractor**](https://github.com/keboola/generic-extractor/) -- specific component for implementing extractors 
+1. **Generic Extractor** -- specific component for implementing extractors 
 for services with REST API
 2. **Custom Extension** -- component extending KBC with arbitrary code
 
 ### Generic Extractor
-Generic Extractor is a KBC component acting like a customizable HTTP REST client. 
+[Generic Extractor](/extend/generic-extractor/) is a KBC component acting like a customizable HTTP REST client. 
 It can be configured to extract data from virtually any API and offers a vast amount of configuration options. 
 With Generic Extractor you can build an entirely new extractor for KBC in less than an hour. 
 
