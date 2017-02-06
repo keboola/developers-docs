@@ -75,7 +75,7 @@ POC applications.
 **Important**: All files in the `/data/out/tables` folder will be uploaded, not only those specified in the output mapping or
 manifests.
 
-The expected CSV format:
+The expected CSV format ([RFC 4180](https://tools.ietf.org/html/rfc4180)):
 
   - string enclosure `"`
   - delimiter `,`
