@@ -69,6 +69,32 @@ are run simultaneously in the *same project*, the one writing data later wins. U
 as an HTTP Cookie than as a Database. A typical use for the state file would be saving the last record
 loaded from some API to enable incremental loads.
 
+## Usage File
+
+The usage file is used to store resources application consumed. Comparing to state file, **usage file is
+one way only** and has pre-defined structure. The usage file is used to exchange information between
+application and Keboola, so in most cases is used only internally.
+
+Location of the usage file is `/data/out/usage.json`. The file should contain array of objects
+keeping information about consumed resources. Objects have to contain only two keys, `metric`
+and `value`, as in the example bellow:
+
+{% highlight json %}
+[
+    {
+        "metric": "API calls",
+        "value": 150
+    }
+]
+{% endhighlight %}
+
+These data are processed and stored within job, so we can analyze and process them later.
+
+To keep tracking of consumed resources and accurate as possible, **it is recommended to write to usage file
+more often** -- not only at the end.
+
+*Note: As structure of the state is pre-defined, content of usage file is strictly validated
+and wrong format will cause application failure.*
 
 ## Examples
 To create an example configuration, use the [sandbox API calls](/extend/common-interface/sandbox/). You will get a
