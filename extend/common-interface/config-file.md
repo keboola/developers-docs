@@ -71,9 +71,9 @@ loaded from some API to enable incremental loads.
 
 ## Usage File
 
-The usage file is used to store resources application consumed. Comparing to state file, **usage file is
-one way only** and has pre-defined structure. The usage file is used to exchange information between
-application and Keboola, so in most cases is used only internally.
+Unlike state file, **usage file is
+one way only** and has pre-defined structure. The usage file is used to pass information from the
+application to Keboola Connection. Metrics stored are used to determine how much resources the job consumed and translate the usage to KBC credits, which is very useful when you need customers to pay for the use of your application or service.
 
 Location of the usage file is `/data/out/usage.json`. The file should contain array of objects
 keeping information about consumed resources. Objects have to contain only two keys, `metric`
@@ -88,10 +88,10 @@ and `value`, as in the example bellow:
 ]
 {% endhighlight %}
 
-These data are processed and stored within job, so we can analyze and process them later.
+This structure is processed and stored within job, so it can be analyzed, processed and aggregated later.
 
-To keep tracking of consumed resources and accurate as possible, **it is recommended to write to usage file
-more often** -- not only at the end.
+To keep track of consumed resources in case of application failure, **it is recommended to write the usage file
+regularly** during the application run, not only at the end.
 
 *Note: As structure of the state is pre-defined, content of usage file is strictly validated
 and wrong format will cause application failure.*
