@@ -71,12 +71,13 @@ loaded from some API to enable incremental loads.
 
 ## Usage File
 
-Unlike state file, **usage file is
-one way only** and has pre-defined structure. The usage file is used to pass information from the
-application to Keboola Connection. Metrics stored are used to determine how much resources the job consumed and translate the usage to KBC credits, which is very useful when you need customers to pay for the use of your application or service.
+Unlike the state file, the **usage file is one way only** and has a pre-defined structure. 
+The usage file is used to pass information from the application to Keboola Connection. 
+Metrics stored are used to determine how much resources the job consumed and translate the usage to KBC 
+credits; this is very useful when you need your customers to pay using your application or service.
 
-Location of the usage file is `/data/out/usage.json`. The file should contain array of objects
-keeping information about consumed resources. Objects have to contain only two keys, `metric`
+The usage file is located at `/data/out/usage.json`. It should contain an array of objects
+keeping information about the consumed resources. The objects have to contain only two keys, `metric`
 and `value`, as in the example bellow:
 
 {% highlight json %}
@@ -88,13 +89,13 @@ and `value`, as in the example bellow:
 ]
 {% endhighlight %}
 
-This structure is processed and stored within job, so it can be analyzed, processed and aggregated later.
+This structure is processed and stored within a job, so it can be analyzed, processed and aggregated later.
 
-To keep track of consumed resources in case of application failure, **it is recommended to write the usage file
-regularly** during the application run, not only at the end.
+To keep track of the consumed resources in the case of an application failure, **it is recommended to 
+write the usage file regularly** during the application run, not only at the end.
 
-*Note: As structure of the state is pre-defined, content of usage file is strictly validated
-and wrong format will cause application failure.*
+*Note: As the structure of the state file is pre-defined, the content of the usage file is strictly 
+validated and a wrong format will cause an application failure.*
 
 ## Examples
 To create an example configuration, use the [sandbox API calls](/extend/common-interface/sandbox/). You will get a
