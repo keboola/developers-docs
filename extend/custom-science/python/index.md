@@ -20,10 +20,14 @@ You can also have a look at our [example repository](https://github.com/keboola/
 
 
 ## Packages
-To install a custom package, use:
+To install a custom package, use e.g:
 
 {% highlight python %}
-pip.main(['install', '--disable-pip-version-check', '--no-cache-dir', 'packageName'])
+import pip
+pip.main(['install', '--disable-pip-version-check', '--no-cache-dir', 'transliterate'])
+
+import transliterate
+// use package ...
 {% endhighlight %}
 
 
