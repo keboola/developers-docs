@@ -131,6 +131,61 @@ pip install requests
 {% include async-create.py %}
 {% endhighlight %}
 
+#### Upload Files Using HTTP
+In case you need to avoid using an S3 client, it is also possible to upload the files by
+a simple HTTP request. To do so, create a new file, but set the `federationToken` to false:
+
+{% highlight bash %}
+curl --request POST --header "X-StorageApi-Token:storage-token" --form "name=new-file.csv" https://connection.keboola.com/v2/storage/files/prepare?federationToken=0
+{% endhighlight %}
+
+The above will return a response similar to this:
+
+{% highlight json %}
+{
+  "id": 237360075,
+  "created": "2017-02-16T01:21:18+0100",
+  "isPublic": false,
+  "isSliced": false,
+  "isEncrypted": false,
+  "name": "new_file.csv",
+  "url": "https://s3.amazonaws.com/kbc-sapi-files/exp-180/578/files/2017/02/16/237360074.new_file.csv?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJ2N244XSWYVVYVLQ%2F20170216%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20170216T002118Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=6e959a81efc3047b2333ab8d471e0855fc3e5f98183fb7fe84af6359b071553b",
+  "region": "us-east-1",
+  "sizeBytes": null,
+  "tags": [],
+  "maxAgeDays": 180,
+  "runId": null,
+  "runIds": [],
+  "creatorToken": {
+    "id": 27978,
+    "description": "ondrej.popelka@keboola.com"
+  },
+  "uploadParams": {
+    "url": "https://kbc-sapi-files.s3.amazonaws.com",
+    "acl": "private",
+    "key": "exp-180/578/files/2017/02/16/237360074.new_file.csv",
+    "AWSAccessKeyId": "AKI...VLQ",
+    "policy": "eyJ...Q==",
+    "signature": "TRQ4soSMdt7AzyL1nVp/lzFFxIU="
+  }
+}
+{% endhighlight %}
+
+Now use the information in the response to upload the file to s3. All necessary information is stored 
+in the `uploadParams` response property. You can upload the file by doing a HTTP POST to the url you obtain 
+in the response:
+
+{% highlight bash %}
+curl --form "key=exp-180/578/files/2017/02/16/237360074.new_file.csv" --form "acl=private" --form "policy=eyJ...IU=" --form "AWSAccessKeyId=AKI...VLQ" --form "file=@auto.csv" https://kbc-sapi-files.s3.amazonaws.com
+{% endhighlight %}
+
+The last `--form` parameter must be the actual file you want to upload, the value must be 
+prefixes by at `@` character. Note this method of upload sends the entire file in a single 
+HTTP request. This upload method may therefor suffer from timeouts, especially for large files. 
+Also this type of file upload is not supported for `eu-central-1` and `ap-northeast-2` regions.
+We generally recommend using the approach with [federationToken token](#manually-uploading-a-file) as
+it is more reliable and universal.
+
 ### Table Importer Service
 The process of importing data into Storage Tables can be simplified a bit by using the
 [*Table Importer*](https://github.com/keboola/sapi-table-importer)
