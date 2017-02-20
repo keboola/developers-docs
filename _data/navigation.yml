@@ -70,6 +70,27 @@ items:
 
           - url: /extend/generic-extractor/tutorial/
             title: Generic Extractor Tutorial
+            items:
+              - url: /extend/generic-extractor/tutorial/rest/
+                title: REST HTTP API Introduction
+
+              - url: /extend/generic-extractor/tutorial/json/
+                title: JSON Introduction
+
+              - url: /extend/generic-extractor/tutorial/basic/
+                title: Basic Configuration
+
+              - url: /extend/generic-extractor/tutorial/basic/
+                title: Basic Configuration
+
+              - url: /extend/generic-extractor/tutorial/pagination/
+                title: Pagination Tutorial
+
+              - url: /extend/generic-extractor/tutorial/jobs/
+                title: Jobs Tutorial
+
+              - url: /extend/generic-extractor/tutorial/mapping/
+                title: Mapping Tutorial
 
           - url: /extend/generic-extractor/recursion/
             title: Recursive Jobs

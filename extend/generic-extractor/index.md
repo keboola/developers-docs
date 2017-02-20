@@ -1,5 +1,5 @@
 ---
-title: Generic Extractor (under construction)
+title: Generic Extractor
 permalink: /extend/generic-extractor/
 ---
 
@@ -31,24 +31,19 @@ configuration](todo) when necessary. Also note that templates can be used only w
 configurations of generic extractor.
 
 ## Generic Extractor Source 
-As with any other KBC components, Generic Extractor source is available on [github](todo). Apart from the 
-main repository, it uses some vital librariries (which partially define its capabilities):
+As with any other KBC components, Generic Extractor source is available on 
+[GitHub](https://github.com/keboola/generic-extractor/). Apart from the 
+main repository, it uses some vital libraries (which partially define its capabilities):
 
-- [juicer](todo) - a component reponsible for processing HTTP JSON responses
-- [csvmap](todo) - a library which converts JSON data into CSV tables
-- [phpfilter](todo) - a library which allows to match values together
-- [jsonparser](todo) - a JSON parser which produces CSV tables while maintaining relations
+- [Juicer](https://github.com/keboola/juicer) - a component responsible for processing HTTP JSON responses
+- [CSV Map](https://github.com/keboola/php-csvmap) - a library which converts JSON data into CSV tables
+- [Filter](https://github.com/keboola/php-filter) - a library which allows to match values together
+- [JSON Parser](https://github.com/keboola/php-jsonparser) - a JSON parser which produces CSV tables while maintaining relations
 
-Generic extractor also allows to use some customized modules [todo](todo). However these must
-be activated in the extractor code and cannot activated only by configuration.
-
-TUTORIAL
 {% comment %}
-TODO
-{% endcomment %}
-
 ## Introduction
-Generic extractor allows exporting data from REST APIs not implemented in Keboola Connection or creating custom configurations to export any data from any REST API.
+Generic extractor allows exporting data from REST APIs not implemented in Keboola Connection or 
+creating custom configurations to export any data from any REST API.
 
 ## Configuration
 The configuration consists of 2 main parts:
@@ -60,3 +55,4 @@ The configuration consists of 2 main parts:
     - This part defines the configuration itself - resources from the API, authentication credentials, ...
     - Each resource is a "job" within the extractor, and can contain children for recursive API calls (eg tickets > comments for each ticket)
     - [Documentation](/extend/generic-extractor/config/)
+{% endcomment %}

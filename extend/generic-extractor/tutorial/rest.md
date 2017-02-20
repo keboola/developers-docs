@@ -3,6 +3,9 @@ title: REST HTTP API Introduction
 permalink: /extend/generic-extractor/tutorial/rest/
 ---
 
+* TOC
+{:toc}
+
 An [API (Application Programing Interface)](todo) is an [interface](todo) to some application or **service**
 designed for machine access. API can be seen as the UI (User Interface) of some application designed
 for machines (another applications). So that another application can be programmed to consume the 
@@ -36,8 +39,8 @@ is composed of the following components:
 - `www.example.com` -- **host** -- network address of the HTTP server,
 - `8080` -- **port** -- an optional network identifier within the target server; default value is `80`
 - `/customers/acme/order/` -- an optional **path** to a **resource** we wish to obtain; default value is `\`
-- `show=deleted&fields=all` -- optional **request parameters**, separated by the character `&` (ampersand); the 
-actual parameters are:
+- `show=deleted&fields=all` -- optional **request parameters** (also called **query string** or **query string parameters**), 
+separated by the character `&` (ampersand); the actual parameters are:
     - `show` with value `deleted`, and`
     - `fields` with value `all`.
 
