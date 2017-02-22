@@ -192,7 +192,7 @@ The extraction produced two tables. The `in.c-ge-tutorial.campaigns` table conta
 fields of a campaign and as many rows as you have campaigns. 
 
 {: .image-popup}
-![Screenshot - Camapigns Table](/extend/generic-extractor/tutorial/table-campaigns-sample.png)
+![Screenshot - Campaigns Table](/extend/generic-extractor/tutorial/table-campaigns-sample.png)
 
 The table `in.c-ge-tutorial.campaigns__links`
 contains the contents of the `_links` property. Because the `_links` property is a nested array 

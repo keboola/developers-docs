@@ -1,7 +1,19 @@
 ---
-title: Mappings (under construction)
+title: Mapping
 permalink: /extend/generic-extractor/mappings/
 ---
+
+
+The `dataType` is the input to *Mapping*. 
+
+
+ze se to automaticky rozpona struktura a merguje
+
+- **dataType**: Sets name for the data result, used by the parser - 
+both automatic [JSON parser](https://github.com/keboola/php-jsonparser#parse-characteristics) 
+and [manual mapping](#TODO). This value is also used to name the output table.
+
+
 
 Manually map the JSON data to CSV files for some or all `dataType`s.
 Ideally, the built in JSON parser would analyze and parse the result into a table with no configuration. However, that also assumes the data is not known before received from the API, and doesn't allow setting a primary key. In some cases with very complicated JSONs, it could also result into a hardly useful yet large amount of tables on the output, in which case it is often better to create the mapping and define what columns/tables will be created.
@@ -14,6 +26,8 @@ Each property in the `mappings` object must follow the mapper settings, where th
 - If there's no mapping for a `dataType`, the standard JSON parser processes the result.
 
 - In a [recursive job](/extend/generic-extractor/recursion/), the placeholer prepended by `parent_` is available as `type: user` to link the child to a parent. See example below:
+
+
 
     Jobs:
 

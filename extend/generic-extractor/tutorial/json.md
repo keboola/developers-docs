@@ -68,7 +68,9 @@ A value of each property always has some data type. Available data types are:
 - array -- a collection of values
 - object -- a collection of named values
 
-For example:
+The types `string`, `number`, `integer`, `boolean` represent **scalar values**. The
+types `array` and `object` represent **structured values** (they are composed of 
+other values). For example:
 
 {% highlight json %}
 {
@@ -131,7 +133,7 @@ Doe's family.
 To refer to the Joe's city, we would write `address.city`. To refer to little Jimmy`s shoe size, we
 would write `members[2].shoeSize`. Array items indexes are *zero-based* so the third item has 
 index `2`. Also note that the order of items in an object is not important. It is also worth noting
-that `[]` represnts an empty array and `{}` represents an empty object.
+that `[]` represents an empty array and `{}` represents an empty object.
 
 ## Summary
 This page contains a little introduction to JSON documents. We intentionally avoided many details, 

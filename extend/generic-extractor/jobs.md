@@ -1,47 +1,489 @@
 ---
-title: Generic Extractor Jobs (under construction)
+title: Jobs
 permalink: /extend/generic-extractor/jobs/
 ---
 
-Jobs is an **array** containing descriptions of resources that will be exported from the API.
+The jobs section of the configuration contains descriptions of API resources that will be 
+extracted. The `jobs` configuration property is an array of processed API endpoints. A 
+single *job represents a single [API resource](/extend/generic-extractor/tutorial/rest)*.
 
-## Configuration
+A sample job configuration can look like this:
 
-- **endpoint**: A path in the API
-    - Required
-- **params**: Parameters of the API call, to be sent in either GET query, POST Json or Form data, depending on the **method** setting
-    - Optional. If no parameters are needed for the resource, this can be omitted.
-    - Each parameter in the JSON encoded object may either contain a string, eg: `{""start_date"": ""2014-12-26""}`
-    - OR contain an [user function](/extend/generic-extractor/user-functions/) as described below, for example to load value from parameters:
-    - Example
-
+{% highlight json %}
+"jobs": [
+    {
+        "endpoint": "campaigns",
+        "dataField": "campaigns",
+        "children": [
             {
-                "start_date": {
-                    "function":"date",
-                    "args": [
-                        "Y-m-d+H:i",
-                        {
-                            "time":"previousStart"
-                        }
-                    ]
+                "endpoint": "campaigns/{campaign_id}/send-checklist",
+                "dataField": "items",
+                "placeholders": {
+                    "campaign_id": "id"
                 }
             }
+        ]
+    }
+]
+{% endhighlight %}
 
-- **method**: One of `GET`, `POST` and `FORM`, where `POST` sends the parameters as a **JSON** in a POST request, while `FORM` uses **form data** in POST
-    - `GET` is default
-    - Optional
-- **dataType**: Sets name for the data result, used by the parser - both automatic [JSON parser](https://github.com/keboola/php-jsonparser#parse-characteristics) and [manual mapping](#TODO). This value is also used to name the output table.
-    - Optional. If not set, the type is generated from `endpoint`
-    - Multiple resources can share the same **dataType**, but their structure should be identical or very similar.
-- **dataField**: Allows to override which field of the response will be exported.
-    - If there's multiple arrays in the response "root" the extractor may not know which array to export and fail
-    - If the response is an array, the whole response is used by default
-    - If there's no array within the root, the path to response data **must** be specified in *dataField*
-    - Can contain a path to nested value, dot separater (eg `result.results.products`)
-    - `dataField` can also be an object containing `path`
+Generic Extractor reads and processes the responses from API endpoints in a pretty complex 
+way. In principle processing the response is composed of the following steps:
+
+- receive the JSON in response,
+- find an objects in array in the response or find object identified by [`dataField`](#dataField),
+- flatten the object structure into one or more tables,
+- create the tables in Storage and load data into them.
+
+The first two steps are the responsibility of [Jobs](/extend/generic-extractor/jobs/). The result of
+these steps is an array of objects. Generic Extractor then tries to find a common super-set of 
+properties of all objects. For example with the following response:
+
+{% highlight json %}
+[
+    {
+        "id": 123,
+        "name": "foo",
+        "color": "green"
+    },
+    {
+        "id": 321,
+        "name": "bar",
+        "size": "large"
+    }
+]
+{% endhighlight %}
+
+The super-set of object properties will be `id`, `name`, `color` and `size`. In Generic Extractor configuration 
+this is referred to as [`dataType`](#dataType). If the `dataType` configuration is not set, a name is 
+automatically generated. This merging of object structure requires that the objects are in principle compatible,
+e.g. this would not be allowed:
+
+{% highlight json %}
+[
+    {
+        "id": 123,
+        "name": "foo",
+        "color": "green"
+    },
+    {
+        "id": 321,
+        "name": "bar",
+        "color": ["red", "blue"]
+    }
+]
+{% endhighlight %}
+
+TODO: Na tohle by se dal pouzit ten parse filter
+
+## Endpoint
+The endpoint property is **required** and represents the URL of the resource. It can be either:
+- URL fragment relative to the [`baseURL` property](/extend/generic-extractor/api/#baseurl) of the API definition,
+- absolute URL from the domain specified in the [`baseURL` property](/extend/generic-extractor/api/#baseurl) of the API definition,
+- full absolute URL.
+
+Assume the following [API definition](/extend/generic-extractor/api/).
+
+{% highlight json %}
+"api": {
+    "baseURL": "https://example.com/3.0/"
+}
+{% endhighlight %}
+
+### Relative URL fragment
+The relative endpoint **must not start** with a slash so with 
+`endpoint` set to  `campaign`, the final resource URL would be 
+`https://example.com/3.0/campaign`.
+
+### Absolute Domain URL 
+The absolute endpoint **must start** with a slash. So with `/endpoint`
+set to `campaign`, the final resource URL would be
+`https://example.com/campaign`
+I.e. the path part specified in the `baseURL` is ignored and is fully replaced
+by the value specified in `endpoint`.
+
+### Absolute Full URL
+The full absolute URL must start with protocol. So with endpoint set to
+`https://eu.example.com/campaign` this would be the final resource URL
+and the path specified in the `baseURL` is completely ignored.
+
+### Specifying Endpoint
+The following table summarizes some possible outcomes:
+
+|`baseURL`|`endpoint`|actual URL|
+|---------|----------|----------|
+|`https://example.com/3.0/`|`campaign`|`https://example.com/3.0/campaign`|
+|`https://example.com/3.0/`|`campaign/`|`https://example.com/3.0/campaign/`|
+|`https://example.com/3.0/`|`/1.0/campaign`|`https://example.com/1.0/campaign`|
+|`https://example.com/3.0/`|`https://eu.example.com/3.0/`|`https://eu.example.com/3.0/campaign`|
+|`https://example.com/`|`campaign`|`https://example.com/campaign`|
+|`https://example.com`|`campaign`|`https://example.comcampaign`|
+
+It is highly recommended to use the relative URL fragments. This means that the 
+`baseURL` property of the `api` section **must** end with slash. Use the other two options
+for handling exceptions in the API extraction (e.g. falling back to an older API version). 
+Also note that using a different domain (or even base path) may interfere with authentication -- 
+this depends on the specification of the target API. 
+
+Also note that you should closely follow the target API specification regarding trailing slashes. I.e. 
+for some APIs both `https://example.com/3.0/campaign` and `https://example.com/3.0/campaign/` URLs may
+be accepted and valid. For some APIs only one version may be supported so please read and follow the
+API specification carefully.
+
+### Placeholders 
+TODO
+
+## Request Parameters
+The `params` section defines [request parameters](/extend/generic-extractor/tutorial/rest). Request
+parameters may be optional or required depending on the target API specification. The `params` 
+section is object with arbitrary properties (or more precisely parameters understood by the target
+API). It is also allowed to use [function calls](todo).
+
+Assume that the `api.baseUrl` is set to `https://example.com/3.0/` and `jobs[].endpoint` 
+is set to `mock-api` and following `param` parameters are set:
+
+{% highlight json %}
+"params": {
+    "startDate": "2016-01-20",
+    "types": ["new", "active", "finished"],
+    "filter": {
+        "query": "q=user:johnDoe",
+        "tags": {
+            "first": true,
+            "second": false
+        }
+    }
+}
+{% endhighlight %}
+
+## Method
+The `method` parameter defines [HTTP request method](/extend/generic-extractor/tutorial/rest/). Allowed values
+are:
+
+- `GET` (default)
+- `POST`
+- `FORM`
+
+### GET
+The HTTP method encodes the parameters in the URL. Therefore the above `params` definition will be transformed
+in the following URL:
+
+    https://example.com/3.0/mock-api?startDate=2016-01-20&types%5B0%5D=new&types%5B1%5D=active&types%5B2%5D=finished&filter%5Bquery%5D=q%3Duser%3AjohnDoe&filter%5Btags%5D%5Bfirst%5D=1&filter%5Btags%5D%5Bsecond%5D=0
+
+In a more readable [URLDecoded](https://urldecode.org/) form:
+
+    https://example.com/3.0/mock-api?/mock-server/web/users/12/orders/2/tickets/000/comments?startDate=2016-01-20&types[0]=new&types[1]=active&types[2]=finished&filter[query]=q=user:johnDoe&filter[tags][first]=1&filter[tags][second]=0
+
+### POST
+The HTTP POST method sends the parameters in the request body. Method type `POST` in Generic extractor means
+that the parameters are sent as JSON object in the same form as entered in the configuration. 
+For the above defined `params` property, the request body would be:
+
+{% highlight json %}
+{
+    "startDate": "2016-01-20",
+    "types": ["new", "active", "finished"],
+    "filter": {
+        "query": "q=user:johnDoe",
+        "tags": {
+            "first": true,
+            "second": false
+        }
+    }
+}
+{% endhighlight %}
+
+Also the `Content-Type: application/json` HTTP header will be added to the request.
+
+### FORM
+Method type `FORM` sends the request also as HTTP POST method. However the parameters from 
+the `param` object are encoded as form data -- this mimics that the request was sent by 
+web form. This method **does not** support nested objects in the `param` object.
+E.g. the following `params` field:
+
+{% highlight json %}
+"params": {
+    "startDate": "2016-01-20",
+    "types": ["new", "active", "finished"]
+}
+{% endhighlight %}
+
+Will be sent as the following POST request body:
+
+    startDate=2016-01-20&types%5B0%5D=new&types%5B1%5D=active&types%5B2%5D=finished
+
+In a more readable [URLDecoded](https://urldecode.org/) form:
+
+   startDate=2016-01-20&types[0]=new&types[1]=active&types[2]=finished
+
+Also the `Content-Type: application/x-www-form-urlencoded` HTTP header will be added to the request.
+
+## Data Type
+The `dataType` parameter assigns a name to the object(s) obtained from the endpoint.
+Setting `dataType` is optional, if not set, a name will be generated automatically from the `endpoint` value
+and parent jobs. The `dataType` is also used as the name of the output table within the 
+specified [output bucket](/extend/generic-extractor/api#outputBucket). 
+Note that you can use the same `dataType` for multiple resources provided that the result objects may 
+be [merged into a single one](/extend/generic-extractor/mappings/). This can be used 
+for example in situation where two API endpoints return the same resource:
+
+{% highlight json %}
+"jobs": [
+    {
+        "endpoint": "solved-tickets/",
+        "dataType": "tickets"
+    },
+    {
+        "endpoint": "unsolved-tickets/",
+        "dataType": "tickets"
+    }
+]
+{% endhighlight %}
+
+In the above case, only a single `tickets` table will be produced in the output bucket. It 
+will contain records from both API endpoints.
+
+## Data Field
+The `dataField` parameter is used to determine what part of the API **response** will be
+extracted. The following rules are applied by default:
+
+- If the response is a single *array*, use the whole response (TODO: overit)
+- If the response is an [object](/extend/generic-extractor-tutorial/json/) and there is a single *array* property,
+use that property.
+- If the response is an object with none or multiple array properties, require that `dataField` is configured.
+
+Apart from cases where required, the `dataField` configuration may also be set to override the 
+above default behavior. The `dataField` parameter contains a 
+[dot separated path](/extend/generic-extractor/tutorial/json/) to the response property you want to 
+extract. The `dataField` parameter may be written in two ways -- either as a simple string or 
+as and object with `path` property. E.g. these two configurations are equivalent:
+
+{% highlight json %}
+"jobs": [
+    {
+        "endpoint": "solved-tickets/",
+        "dataField": "tickets"
+    }
+]
+{% endhighlight %}
+
+{% highlight json %}
+"jobs": [
+    {
+        "endpoint": "solved-tickets/",
+        "dataField": {
+            "path": "tickets"
+        }
+    }
+]
+{% endhighlight %}
+
+### Examples
+
+#### Simple array
+To extract data from the following API response:
+
+{% highlight json %}
+[
+    {
+        "id": 123,
+        "name": "John Doe"
+    },
+    {
+        "id": 234,
+        "name": "Jane Doe"
+    }
+]
+{% endhighlight %}
+
+You would not set the `dataField` parameter or set it to empty string (`"dataField": ""`). The following table 
+will be extracted:
+
+|id|name|
+|--|----|
+|123|John Doe|
+|234|Jane Doe|
+
+#### An array within an object
+To extract data from the following API response:
+
+{% highlight json %}
+{
+    "users": [
+        {
+            "id": 123,
+            "name": "John Doe"
+        },
+        {
+            "id": 234,
+            "name": "Jane Doe"
+        }
+    ]
+}
+{% endhighlight %}
+
+You would not set the `dataField` parameter or set it to empty string or you may set it to value `users`. 
+(`"dataField": ""` or `"dataField": "users"`)
+The following table will be extracted:
+
+|id|name|
+|--|----|
+|123|John Doe|
+|234|Jane Doe|
+
+#### Multiple arrays within an object
+To extract data from the following API response:
+
+{% highlight json %}
+{
+    "users": [
+        {
+            "id": 123,
+            "name": "John Doe"
+        },
+        {
+            "id": 234,
+            "name": "Jane Doe"
+        }
+    ],
+    "userTypes": [
+        "member",
+        "guest"
+    ]
+}
+{% endhighlight %}
+
+You have to ser the `dataField` parameter to value `users` (`"dataField": "users"`). Not setting the 
+`dataField` parameter would result in an error
+(`More than one array found in response! Use 'dataField' parameter to specify a key to the data array`).
+The following table will be extracted:
+
+|id|name|
+|--|----|
+|123|John Doe|
+|234|Jane Doe|
+
+#### Array within a nested object
+To extract data from the following API response:
+
+{% highlight json %}
+{
+    "members": {
+        "active": [
+            {
+                "id": 123,
+                "name": "John Doe"
+            },
+            {
+                "id": 234,
+                "name": "Jane Doe"
+            }
+        ],
+        "inactive": [
+            {
+                "id": 345,
+                "name": "Jimmy Doe"
+            }
+        ]
+    }
+}
+{% endhighlight %}
+
+You have to set the `dataField` parameter to value `members.active` (`"dataField": "members.active"`). Not setting the 
+`dataField` parameter would result in an error (`No data array found in response!`).
+The following table will be extracted:
+
+|id|name|
+|--|----|
+|123|John Doe|
+|234|Jane Doe|
+
+Note: to extract both `active` and `inactive` arrays, you would need to use two jobs.
+
+#### A simple object
+To extract data from the following API response:
+
+{% highlight json %}
+{
+    "id": 123,
+    "name": "John Doe"
+}
+{% endhighlight %}
+
+You have to set the `dataField` parameter to value `.` (`"dataField": "."`). Not setting the 
+`dataField` parameter would result in an error (`No data array found in response!`).
+The following table will be extracted:
+
+|id|name|
+|--|----|
+|123|John Doe|
+
+#### A nested object
+To extract data from the following API response:
+
+{% highlight json %}
+{
+    "user": {
+        "id": 123,
+        "name": "John Doe"
+    }
+}
+{% endhighlight %}
+
+You have to set the `dataField` parameter to value `user` (`"dataField": "user"`). Not setting the 
+`dataField` parameter would result in an error (`No data array found in response!`).
+The following table will be extracted:
+
+|id|name|
+|--|----|
+|123|John Doe|
+
+#### A single object from an array
+TODO: overit!
+To extract data from the following API response:
+
+{% highlight json %}
+{
+    "member": {
+        "history": [
+            {
+                "id": 123,
+                "name": "John Doe",
+                "version": 2
+            },
+            {
+                "id": 123,
+                "name": "Jonh Doe",
+                "version": 1
+            }
+        ]
+    }
+}
+{% endhighlight %}
+
+To extract a single value, you can set the `dataField` parameter to value `members.active[0]` 
+(`"dataField": "members.active[0]"`). The following table will be extracted:
+
+|id|name|
+|--|----|
+|123|John Doe|
+
+
+## Response Filter
+The `responseFilter` option allows you to skip parts of the API response from processing. This can
+be useful in case you don't want to flatten the JSON structure using the default 
+[JSON Parser](todo) or if the API response is inconsistent and the objects cannot be 
+[merged together](todo).
+
+The value of `responseFilter` property is either a path to a property in the response or
+an array of such paths. The path is dot-separated unless set otherwise in the `responseFilterDelimiter` configuration.
+
+
+
 - **responseFilter**: Allows filtering data from API response to leave them unparsed and store as a JSON.
     - Filtered data will be imported as a JSON encoded string.
-    - Value of this parameter can be either a string containing path to data to be filtered within response data, or an array of such values.
+    - Value of this parameter can be either a string containing path to data to be filtered 
+    within response data, or an array of such values.
     - Example:
 
             {
@@ -119,3 +561,21 @@ This config would create a request such as the following:
 `GET users?type=customer&last_seen_after=1467845525`
 
 ..where the timestamp would be the time of last execution of the extractor configuration.
+
+
+parameters :
+    - OR contain an [user function](/extend/generic-extractor/user-functions/) as described below, for example to load value from parameters:
+    - Example
+
+            {
+                "start_date": {
+                    "function":"date",
+                    "args": [
+                        "Y-m-d+H:i",
+                        {
+                            "time":"previousStart"
+                        }
+                    ]
+                }
+            }
+
