@@ -80,7 +80,7 @@ request and response. The response body is in in [JSON](/extend/generic-extracto
 Now you have pretty much everything to actually start extracting the data and 
 continue with Generic Extractor configuration:
 
-- [Basic ocnfiguration](/extend/generic-extractor/tutorial/pagination/)
+- [Basic configuration](/extend/generic-extractor/tutorial/basic/)
 - [Pagination](/extend/generic-extractor/tutorial/pagination/)
 - [Jobs](/extend/generic-extractor/tutorial/jobs/)
 - [Mapping](/extend/generic-extractor/tutorial/mapping/)

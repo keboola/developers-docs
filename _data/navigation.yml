@@ -80,9 +80,6 @@ items:
               - url: /extend/generic-extractor/tutorial/basic/
                 title: Basic Configuration
 
-              - url: /extend/generic-extractor/tutorial/basic/
-                title: Basic Configuration
-
               - url: /extend/generic-extractor/tutorial/pagination/
                 title: Pagination Tutorial
 
