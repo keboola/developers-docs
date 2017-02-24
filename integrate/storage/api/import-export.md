@@ -182,7 +182,7 @@ curl --form "key=exp-180/578/files/2017/02/16/237360074.new_file.csv" --form "ac
 The last `--form` parameter must be the actual file you want to upload; the value must be 
 prefixed by the `@` character. Note that this upload method sends the entire file in a single 
 HTTP request and may therefore suffer from timeouts, especially for large files. 
-Also, this type of file upload is not supported for `eu-central-1` and `ap-northeast-2` regions.
+Also, this type of file upload is not supported for the `eu-central-1` and `ap-northeast-2` regions.
 We generally recommend using the approach with the [federationToken token](#manually-uploading-a-file) as
 it is more reliable and universal.
 
