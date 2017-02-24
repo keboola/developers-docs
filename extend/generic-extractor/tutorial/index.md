@@ -6,66 +6,60 @@ permalink: /extend/generic-extractor/tutorial/
 * TOC
 {:toc}
 
-This tutorial will guide you through configuration of generic extractor on a new API.
-We will use [Mailchimp](https://mailchimp.com/) API as it is fairly easy to understand 
-and has excellent documentation. Mailchimp is a service for email marketing.
-Note that there is already a Mailchimp extractor available in KBC, so you do not need to 
-configure Generic Extractor to be able to extract data from the Mailchimp API.
-The Mailchimp extractor available in KBC is in fact a 
-[registered configuration](/extend/generic-extractor/registering-generic-extractor) of generic extractor.
+This tutorial will guide you through configuring Generic Extractor on a new API.
 
-## Preparing
-Before you start, you should have a basic understanding of HTTP request and 
-REST API. If you are not familiar with these concepts, please read our 
-[quick introduction to REST](/extend/generic-extractor/tutorial/rest/). Also 
-you should be capable of writing JSON configurations. If not go through our
-[quick introduction to JSON](/extend/generic-extractor/tutorial/json/).
+We will use the API of [MailChimp](https://mailchimp.com/) --- an email marketing service, as it is fairly 
+easy to understand and has excellent documentation. 
 
-Before you start working with the Mailchimp API, you need an account and API Key and
-some data in that account. If you do not have an account, you can 
-[create it](https://login.mailchimp.com/signup/) free of charge. If you created a fresh account,
-you also need to fill it with some data.
+Note that there already is a MailChimp extractor available in KBC, so you do not need to 
+configure Generic Extractor to extract data from the MailChimp API.
+The MailChimp extractor available in KBC is in fact a 
+[registered configuration](/extend/generic-extractor/registering-generic-extractor)(TODO) of Generic Extractor.
 
-- **Create a New Campaign** (choose **Regular Type**). 
-- Follow the instructions to **Create a new List** and add some addresses to it (preferably yours).
-- Go back to Campaigns, click your campaign and hit "Next" at the bottom right corner.
-- Design a test email and if you follow the wizard, you should be ready to send the email.
-- Check that you received the email and read it.
+## Prepare
+There are a few things you need to do and know to get started. For a basic understanding of **HTTP
+requests** and **REST API**, read our [quick introduction to REST](/extend/generic-extractor/tutorial/rest/). 
+Also, learn how to write **JSON configurations** in our [quick introduction to JSON](/extend/generic-extractor/tutorial/json/).
 
-The Mailchimp wizards should guide you in the above process. If you get lost, check out
-[their help](https://us13.admin.mailchimp.com/campaigns/). To obtain Mailchimp API
-go to your **Account** detail and under **Extras** you can find the option to
-generate an API Key. You can check out the 
-[Mailchimp guide](http://kb.mailchimp.com/integrations/api-integrations/about-api-keys#Find-or-Generate-Your-API-Key)
-in case of trouble. The API key looks like this `c40xxxxxxxxxxxxxxxxxxxxxxxxxxxxx-us13`.
+Next, you need a **MailChimp account, API key and data**. [Create your account](https://login.mailchimp.com/signup/), 
+free of charge, if you do not have one already. Then, follow the 
+MailChimp wizard or [help](https://us13.admin.mailchimp.com/campaigns/) and fill the account with data:
 
-## Getting Started
-Now it's time to review the [Mailchimp API](http://developer.mailchimp.com/documentation/mailchimp/). 
-There are plenty of documentation guides available. For example, you can use the 
-[Playground](https://us1.api.mailchimp.com/playground/) to explore the API and review what
-information is contained in each resource.
+- Create a new Campaign (choose the *regular type*). 
+- Create a new List and add some addresses to it (preferably yours).
+- Go back to Campaigns, click your campaign and hit "Next" in the bottom right corner.
+- Design a test email and send it.
+- Check that you have received the email and read it.
 
-You also need to review basic properties of the API outlined in the 
+To gain access to the MailChimp API, go to your Account detail and under Extras find the option to 
+[generate your API Key](http://kb.mailchimp.com/integrations/api-integrations/about-api-keys#Find-or-Generate-Your-API-Key). 
+It will look like this: `c40xxxxxxxxxxxxxxxxxxxxxxxxxxxxx-us13`. 
+
+## Get Started
+Now it is time to review the [MailChimp API](http://developer.mailchimp.com/documentation/mailchimp/). 
+There are plenty of documentation guides available. To explore the API and review what information is in 
+each resource, use, for example, the [Playground](https://us1.api.mailchimp.com/playground/).
+
+Then review basic properties of the API outlined in the 
 [Getting Started Guide](http://developer.mailchimp.com/documentation/mailchimp/guides/get-started-with-mailchimp-api-3/#resources).
-The crucial parts for our use-case are:
+The following are the crucial parts for our use-case:
 
 - The root API URL is `https://<dc>.api.mailchimp.com/3.0`, where `<dc>` refers to a data center for your
-account. Data center is the last part of the API key, so in case the API key is 
-`c40xxxxxxxxxxxxxxxxxxxxxxxxxxxxx-us13`, then the root URL is `https://us13.api.mailchimp.com/3.0`.
-- API Authentication can be done using *HTTP Basic Authentication* where you use **any string** for username and
-the API key for password.
+account. The data center is the last part of the API key; if the API key is 
+`c40xxxxxxxxxxxxxxxxxxxxxxxxxxxxx-us13`, the root URL is `https://us13.api.mailchimp.com/3.0`.
+- API Authentication can be done using *HTTP Basic Authentication* where you use **any string** for 
+username and the API key for password.
 
-No you can go straight to the documentation of the 
+Now go straight to the documentation of the 
 [**Campaign** resource](http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/).
-
-Because you intend to extract data from Mailchimp, the only part you are interested in is the **Read Method**.
+Because you intend to extract data from MailChimp, the only part you are interested in is the **Read Method**.
 
 {: .image-popup}
 ![Screenshot - Read Campaign Documentation](/extend/generic-extractor/tutorial/mailchimp-api-docs-1.png)
 
-The documentation list the URL (`/campaigns`) of the **Campaign Resource**, the query string 
-parameters (these go into the URL) -- such as `fields`, `count`, etc. Then it lists example 
-request and response. The response body is in in [JSON](/extend/generic-extractor/tutorial/json) format and starts like this:
+The documentation lists the URL (`/campaigns`) of the **Campaign Resource**, the query string 
+parameters (these go into the URL) -- such as `fields`, `count`, etc. It also lists example 
+requests and responses. The response body is in [JSON](/extend/generic-extractor/tutorial/json) format and starts like this:
 
 {% highlight json %}
 {
@@ -77,6 +71,7 @@ request and response. The response body is in in [JSON](/extend/generic-extracto
       ...
 {% endhighlight %}
 
+## Next Steps
 Now you have pretty much everything to actually start extracting the data and 
 continue with Generic Extractor configuration:
 

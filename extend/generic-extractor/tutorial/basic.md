@@ -11,7 +11,7 @@ of [REST API](/extend/generic-extractor/tutorial/rest/),
 [JSON format](/extend/generic-extractor/tutorial/json/). This tutorial uses the 
 [Mailchimp API](http://developer.mailchimp.com/documentation/mailchimp/reference/overview/) so
 you should have that documentation at hand. You also need to have the 
-[Mailchimp API key](/extend/generic-extractor/tutorial/#getting-started).
+[Mailchimp API key](/extend/generic-extractor/tutorial/#get-started).
 
 ## Configuration
 Generic extractor configuration is written in [JSON format](/extend/generic-extractor/tutorial/json/) 
@@ -51,7 +51,7 @@ start with this configuration section:
 {% highlight json %}
 "config": {
     "username": "dummy",
-    "#password": "c40xxxxxxxxxxxxxxxxxxxxxxxxxxxxx-us13"
+    "#password": "c40xxxxxxxxxxxxxxxxxxxxxxxxxxxxx-us13",
     "outputBucket": "ge-tutorial",
     "jobs": []    
 }
@@ -112,6 +112,7 @@ This means that the extractor got the response, but cannot automatically process
 sample [response in the documentation](http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/#)
 You'll see that it is an object with three items `campaigns`, `total_items` and `_links`:
 
+{% highlight json %}
 {
   "campaigns": [
     {
@@ -142,6 +143,7 @@ You'll see that it is an object with three items `campaigns`, `total_items` and 
     }
   ]
 }
+{% endhighlight %}
 
 Generic Extractor expects the response to be an array of items. If it receives an object, it
 searches through its properties to find an array. If it finds multiple array it becomes confused
