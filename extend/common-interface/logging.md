@@ -26,8 +26,8 @@ of the application and forwards any content live to [Storage API Events](http://
 (log levels `info` and `error`). The events are displayed in a [Job detail](https://help.keboola.com/management/jobs/).
 
 Make sure your application does not use any output buffering, otherwise all events will be cached after the application finishes.
-In R applications, the outputs printed in rapid succession are sometimes joined into a single event;
-this is a known behavior of R and it has no workaround.
+In **R applications**, the outputs printed in rapid succession are sometimes joined into a single event;
+this is a known behavior of R and it has no workaround. In **Python applications**, the output is buffered, but the output buffering may be [switched off](http://stackoverflow.com/questions/107705/disable-output-buffering). The easiest solution is to run your script with the `-u` option -- you would use `CMD python -u ./main.py` in your `Dockerfile`.
 
 The events serve to pass only informational and error messages; **no data** can be passed through.
 The event message size is limited (about 64KB). If live events are turned off,
