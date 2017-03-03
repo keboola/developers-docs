@@ -18,7 +18,14 @@ than an input and output mapping.
 ## Format
 
 The format of the manifest file is always *JSON*. The manifest
-file always has the `.manifest` extension.
+file always has the `.manifest` extension. This applies to files with multiple extensions as well so the following
+filenames are expected:
+
+| Data File Name | Manifest File Name       |
+|----------------|--------------------------|
+| myfile         | myfile.manifest          |
+| myfile.csv     | myfile.csv.manifest      |
+| myfile.csv.gz  | myfile.csv.gz.manifest   |
 
 ## Examples
 
