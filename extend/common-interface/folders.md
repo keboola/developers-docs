@@ -138,3 +138,12 @@ All files in this folder are uploaded to Storage. File names are preserved, and 
 can be specified in the [manifest file](/extend/common-interface/manifest-files/).
 Note that all files in the `/data/out/files` folder will be uploaded, not only those specified in the output mapping.
 
+## Exchanging Data via S3
+The application may also exchange data with Storage [using Amazon S3](https://aws.amazon.com/documentation/s3/). 
+In this case, the data folders contain only [manifest files](/extend/common-interface/manifest-files/) and 
+not the actual data. This mode of operation can be enabled by setting `staging_storage` option to `S3` during 
+[application registration](/extend/registration/). If this option is enabled, all the data folders 
+will contain only manifest files, extended with additional 
+[`s3` section](/extend/common-interface/manifest-files/#s3-section).
+
+Note: Exchanging data via S3 is currently only available for input mapping.

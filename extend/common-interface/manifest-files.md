@@ -156,6 +156,33 @@ manifest fields, all of them are optional.
 {% endhighlight %}
 
 These parameters can be used (taken from [Storage API File Import](http://docs.keboola.apiary.io/#files)):
-If `is_permnanent` is false, then the file will be automatically deleted after 180 days. When `notify` is
+If `is_permanent` is false, then the file will be automatically deleted after 180 days. When `notify` is
 true, the members of the project will be notified that a file has been uploaded to the project.
 
+### S3 Section
+When using [Amazon S3 for data exchange](/extend/common-interface/folders/#exchanging-data-via-s3), 
+the manifest files will contain additional `s3` section with 
+credentials for downloading the actual file data.
+
+{% highlight json %}
+{
+    "id": "in.c-docker-demo.data",
+    ...
+    "s3": {
+        "isSliced": true,
+        "region": "us-east-1",
+        "bucket": "kbc-sapi-files",
+        "key": "exp-30/1581/table-exports/in/c-docker-test/test/243100072.csv.gzmanifest",
+        "credentials": {
+            "access_key_id": "ASI...CDQ",
+            "secret_access_key": "tCE..I+T",
+            "session_token": "Ago...POP"
+        }
+    }
+}
+{% endhighlight %}
+
+If the file is sliced, and you need to merge it into a single file, read through the guide to 
+[working with sliced files](https://developers.keboola.com/integrate/storage/api/import-export/#working-with-sliced-files).
+
+Note: Exchanging data via S3 is currently available only for input mapping.
