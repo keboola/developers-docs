@@ -6,7 +6,7 @@ permalink: /extend/common-interface/folders/
 * TOC
 {:toc}
 
-Data folders are one of the [possible channels](/extend/common-interface/) to exchange data between your application and Keboola Connection.
+Data folders are one of the [possible channels](/extend/common-interface/) to exchange data between your application and Keboola Connection (KBC).
 
 ## /data/ Root Folder
 
@@ -29,7 +29,7 @@ The predefined data exchange folder structure is as follows:
     /data/out/tables
     /data/out/files
 
-This folder structure is always available to your application. For Custom Science the current directory
+This folder structure is always available to your application. For Custom Science, the current directory
 will always be set to `/data/`, so the above folders can be accessed both with absolute and relative paths (e.g. `in/tables`).
 For Docker Extensions, the current directory is up to you.
 Do not put arbitrary files in the `/data/` folder as they will be uploaded into the user project
@@ -128,7 +128,7 @@ The total size of all slices combined should not exceed 50 GB.
 
 ### `/data/in/files/` Folder
 
-Files defined in the input mapping are stored in their raw form. File names are numeric and
+All files defined in the input mapping are stored in their raw form. File names are numeric and
 equal to `{fileId}_{filename}` in Storage. All other information about the files is available
 in the [manifest file](/extend/common-interface/manifest-files/).
 
@@ -141,9 +141,9 @@ Note that all files in the `/data/out/files` folder will be uploaded, not only t
 ## Exchanging Data via S3
 The application may also exchange data with Storage [using Amazon S3](https://aws.amazon.com/documentation/s3/). 
 In this case, the data folders contain only [manifest files](/extend/common-interface/manifest-files/) and 
-not the actual data. This mode of operation can be enabled by setting `staging_storage` option to `S3` during 
+not the actual data. This mode of operation can be enabled by setting the `staging_storage` option to `S3` during 
 [application registration](/extend/registration/). If this option is enabled, all the data folders 
-will contain only manifest files, extended with additional 
+will contain only manifest files, extended with an additional 
 [`s3` section](/extend/common-interface/manifest-files/#s3-section).
 
 Note: Exchanging data via S3 is currently only available for input mapping.
