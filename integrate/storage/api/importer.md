@@ -24,7 +24,7 @@ using one of the [API clients](/integrate/storage/#clients)). However, the disad
 has to be posted in a single HTTP request. **The maximum limit for a file size is 2GB and the transfer time is 45 minutes**.
 This means that for substantially large files (usually more than hundreds of MB)
 you may experience timeouts. If that happens, use the above outlined approach and upload the
-files [directly to S3](#manually-uploading-a-file).
+files [directly to S3](/integrate/storage/api/import-export/#manually-uploading-a-file).
 
 ## Parameters
 

@@ -80,7 +80,7 @@ With this UI, you can set:
 - *Source* --- the name of the table in Storage
 - Destination *file name* --- the name of the .csv file passed to the application
 - *Columns* --- select only some columns of the source table
-- *Days* --- load only rows modified in the specified number of days; useful for incremental loads
+- *Days* --- load only rows modified in the specified number of days; useful for incremental loads; set to 0 to load all data
 - *Data filter* --- a simple filter for selecting specified rows only
 
 {: .image-popup}

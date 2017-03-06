@@ -59,7 +59,7 @@ if (parsed['status'] == 'error'):
     exit(2)
 
 status = parsed['status']
-while status == 'waiting':
+while (status == 'waiting') or (status == 'processing'):
     print('\nWaiting for import to finish')
     # See http://docs.keboola.apiary.io/#reference/jobs/manage-jobs/job-detail
     response = requests.get(parsed['url'], headers={'X-StorageApi-Token': storageToken})

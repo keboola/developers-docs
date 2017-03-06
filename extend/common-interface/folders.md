@@ -6,7 +6,7 @@ permalink: /extend/common-interface/folders/
 * TOC
 {:toc}
 
-Data folders are one of the [possible channels](/extend/common-interface/) to exchange data between your application and Keboola Connection.
+Data folders are one of the [possible channels](/extend/common-interface/) to exchange data between your application and Keboola Connection (KBC).
 
 ## /data/ Root Folder
 
@@ -29,17 +29,17 @@ The predefined data exchange folder structure is as follows:
     /data/out/tables
     /data/out/files
 
-This folder structure is always available to your application. For Custom Science the current directory
+This folder structure is always available to your application. For Custom Science, the current directory
 will always be set to `/data/`, so the above folders can be accessed both with absolute and relative paths (e.g. `in/tables`).
 For Docker Extensions, the current directory is up to you.
 Do not put arbitrary files in the `/data/` folder as they will be uploaded into the user project
-(or cause errors in the output [mapping](https://help.keboola.com/manipulation/transformations/mappings/)). 
+(or cause errors in the output [mapping](https://help.keboola.com/manipulation/transformations/mappings/)).
 For working or temporary files, use either the `/home/` or `/tmp/` folder.
 The working directories have 10GB of free space.
 
 ### `/data/in/tables/` Folder
 
-The folder contains tables defined in the input [mapping](https://help.keboola.com/manipulation/transformations/mappings/); 
+The folder contains tables defined in the input [mapping](https://help.keboola.com/manipulation/transformations/mappings/);
 they are serialized in the CSV format:
 
   - string enclosure `"`
@@ -81,14 +81,15 @@ The expected CSV format ([RFC 4180](https://tools.ietf.org/html/rfc4180)):
   - delimiter `,`
   - no escape character
 
-A [manifest file](/extend/common-interface/manifest-files/) can specify a different enclosure and delimiter.
+A [manifest file](/extend/common-interface/manifest-files/) can specify a different enclosure and delimiter. The
+CSV file may also be [gzipped](http://www.gzip.org/).
 
 #### Default Bucket
 If you cannot define a bucket or want to get it automatically, request setting
 the `default_bucket` flag during your [extension registration](/extend/registration/).
 
 All tables in `/data/out/tables` will then be uploaded to a bucket identified by your
-component id (created upon the extension registration), 
+component id (created upon the extension registration),
 configuration id (created when an end-user adds a new extension configuration) and stage (`in` or `out`).
 The file name (without the `.csv` suffix) will be used as the table name. The `destination` attributes
 in the output mapping and file manifests will be overridden.
@@ -99,16 +100,16 @@ is available only for [Docker extensions](/extend/docker/).
 
 #### Sliced Tables
 
-Sometimes your application will download the CSV file in slices (chunks). You do not need to manually merge them, simply put them 
-in a subfolder with the same name as you would use for a single file. All files found in the subfolder are considered 
-slices of the table. 
+Sometimes your application will download the CSV file in slices (chunks). You do not need to manually merge them, simply put them
+in a subfolder with the same name as you would use for a single file. All files found in the subfolder are considered
+slices of the table.
 
     /data/out/tables/myfile.csv/part01
     /data/out/tables/myfile.csv/part02
     /data/out/tables/myfile.csv.manifest
-    
+
 No sliced files can contain headers. They must have their columns specified in the [manifest file](/extend/common-interface/manifest-files/)
-or in the output mapping configuration. 
+or in the output mapping configuration.
 
 The following is an example of specifying columns in the manifest file `/data/out/tables/myfile.csv.manifest`:
 
@@ -117,17 +118,17 @@ The following is an example of specifying columns in the manifest file `/data/ou
         "destination": "in.c-mybucket.table",
         "columns": ["col1", "col2", "col3"]
     }
-    
-All files from the folder are uploaded irrespective of their name or extension. They are uploaded 
-to Storage in parallel and in an undefined order. Use sliced tables in case you want to upload tables [larger then 5GB](https://help.keboola.com/storage/file-uploads/#limits).  
 
-**Important**: Please be reasonable with the total volume and number of slices. 
-A rule of thumb is that slices are best around 100 MB in size and the total number of slices should not exceed 1000 files. 
-The total size of all slices combined should not exceed 50 GB.   
+All files from the folder are uploaded irrespective of their name or extension. They are uploaded
+to Storage in parallel and in an undefined order. Use sliced tables in case you want to upload tables [larger then 5GB](https://help.keboola.com/storage/file-uploads/#limits).
+
+**Important**: Please be reasonable with the total volume and number of slices.
+A rule of thumb is that slices are best around 100 MB in size and the total number of slices should not exceed 1000 files.
+The total size of all slices combined should not exceed 50 GB.
 
 ### `/data/in/files/` Folder
 
-Files defined in the input mapping are stored in their raw form. File names are numeric and
+All files defined in the input mapping are stored in their raw form. File names are numeric and
 equal to `{fileId}_{filename}` in Storage. All other information about the files is available
 in the [manifest file](/extend/common-interface/manifest-files/).
 
@@ -137,3 +138,12 @@ All files in this folder are uploaded to Storage. File names are preserved, and 
 can be specified in the [manifest file](/extend/common-interface/manifest-files/).
 Note that all files in the `/data/out/files` folder will be uploaded, not only those specified in the output mapping.
 
+## Exchanging Data via S3
+The application may also exchange data with Storage [using Amazon S3](https://aws.amazon.com/documentation/s3/). 
+In this case, the data folders contain only [manifest files](/extend/common-interface/manifest-files/) and 
+not the actual data. This mode of operation can be enabled by setting the `staging_storage` option to `S3` during 
+[application registration](/extend/registration/). If this option is enabled, all the data folders 
+will contain only manifest files, extended with an additional 
+[`s3` section](/extend/common-interface/manifest-files/#s3-section).
+
+Note: Exchanging data via S3 is currently only available for input mapping.
