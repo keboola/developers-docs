@@ -6,25 +6,24 @@ permalink: /extend/generic-extractor/tutorial/basic/
 * TOC
 {:toc}
 
-Before you start with configuration of Generic Extractor, you should have basic understanding
-of [REST API](/extend/generic-extractor/tutorial/rest/), 
+Before you start configuring Generic Extractor, you should have a basic understanding
+of [REST API](/extend/generic-extractor/tutorial/rest/) and the 
 [JSON format](/extend/generic-extractor/tutorial/json/). This tutorial uses the 
-[Mailchimp API](http://developer.mailchimp.com/documentation/mailchimp/reference/overview/) so
-you should have that documentation at hand. You also need to have the 
+[Mailchimp API](http://developer.mailchimp.com/documentation/mailchimp/reference/overview/), so
+have that documentation at hand. You also need to have the 
 [Mailchimp API key](/extend/generic-extractor/tutorial/#get-started).
 
 ## Configuration
-Generic extractor configuration is written in [JSON format](/extend/generic-extractor/tutorial/json/) 
-and is composed of several sections. The main parts and their nesting is displayed on the below schema:
+Generic Extractor configuration is written in [JSON format](/extend/generic-extractor/tutorial/json/) 
+and is composed of several sections. The main parts and their nesting are shown in the below schema:
 
 {: .image-popup}
 ![Schema - Generic Extractor configuration](todo)
 
 ### API Section
-The first configuration part is the `api` section. Here, you need to set the 
-basic properties of the API. In the most simple case, this is 
-`baseUrl` property and `authentication`. The below JSON snippet shows the 
-exact configuration (note that `config` is outside `authentication`):
+The first configuration part is the `api` section where you set the basic properties of the API. 
+In the most simple case, this is the `baseUrl` property and `authentication`. The below JSON snippet shows 
+the exact configuration (note that `config` is outside `authentication`):
 
 {% highlight json %}
 {
@@ -37,13 +36,13 @@ exact configuration (note that `config` is outside `authentication`):
 }
 {% endhighlight %}
 
-**important:** Make sue that the `baseUrl` URL ends with a slash!
+**Important:** Make sure that the `baseUrl` URL ends with a slash!
 
 ### Configuration Section
-The `config` section describes the actual extraction, the most important parts of it are 
-the `outputBucket` property and the `jobs` property. `outputBucket` must be set to an id 
-of an [Storage Bucket](https://help.keboola.com/storage/buckets/) where the data will be stored.
-If the bucket does exist, it will be created. 
+The `config` section describes the actual extraction. Its most important parts are the `outputBucket` 
+property and the `jobs` property. `outputBucket` must be set to an id of a 
+[Storage Bucket](https://help.keboola.com/storage/buckets/) where the data will be stored.
+If no bucket exists, it will be created. 
 
 It also contains the authentication parameters `username` and `password`. So you will
 start with this configuration section:
@@ -57,8 +56,8 @@ start with this configuration section:
 }
 {% endhighlight %}
 
-The `password` property is prefixed with hash mark `#` which means that the 
-value will [encrypted](https://developers.keboola.com/overview/encryption/) once 
+The `password` property is prefixed with the hash mark `#`, which means that the 
+value will be [encrypted](https://developers.keboola.com/overview/encryption/) once 
 you save the configuration. 
 
 #### Jobs Section
@@ -73,7 +72,7 @@ of the `jobs` configuration is the `endpoint`:
 ]
 {% endhighlight %}
 
-**Important:** Make sure **not to** start the the URL with a slash. If you would do so, the URL 
+**Important:** Make sure **not to** start the URL with a slash. If you would do so, the URL 
 will be absolute from the domain. Therefore in this case the URL would become
 `https://us13.api.mailchimp.com/campaigns` which is not valid (it is missing the `3.0` part).
 An alternative would be to put `/3.0/campaigns` in the `endpoint` property.
@@ -204,10 +203,9 @@ e.g. `campaigns_75d5b14d79d034cd07a9d95d5f0ca5bd` and automatically creates a ne
 which has column `JSON_parentId` with that value so that you can join the tables together.
 
 ## Summary
-The above tutorial demonstrates a very basic configuration of generic extractor. Generic 
-extractor is capable of doing much more, see other parts of this tutorial for 
-explanation of:
+The above tutorial demonstrates a very basic configuration of Generic Extractor. The extractor is capable 
+of doing much more; see other parts of this tutorial for explanation of
 
-- [Pagination](/extend/generic-extractor/tutorial/pagination/)
-- [Jobs](/extend/generic-extractor/tutorial/jobs/)
-- [Mapping](/extend/generic-extractor/tutorial/mapping/)
+- [Pagination](/extend/generic-extractor/tutorial/pagination/),
+- [Jobs](/extend/generic-extractor/tutorial/jobs/), and
+- [Mapping](/extend/generic-extractor/tutorial/mapping/).
