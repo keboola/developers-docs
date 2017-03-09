@@ -6,23 +6,23 @@ permalink: /extend/generic-extractor/tutorial/jobs/
 * TOC
 {:toc}
 
-In this tutorial so far you went through [basic configuration](/extend/generic-extractor/tutorial/basic/)
-of Generic Extractor and also through [configuration of pagination](/extend/generic-extractor/tutorial/pagination/).
-In this part of the tutorial you will learn how to use sub-jobs of Generic Extractor.
+Having already gone through Generic Extractor [basic configuration](/extend/generic-extractor/tutorial/basic/)
+and [configuration of pagination](/extend/generic-extractor/tutorial/pagination/), you will learn now how 
+to use Generic Extractor's sub-jobs.
 
-Let's more closely examine the `campaigns` resource of the Mailchimp API. Apart from 
-retrieving multiple campaigns `/campaign` endpoint. It can also retrieve detailed information
-about a single campaign `/campaign/{campaign_id}`. And it also has **sub-resources**.
+Let's start this section of our tutorial with a closer examination of the `campaigns` resource of the 
+MailChimp API. Apart from retrieving multiple campaigns using the `/campaigns` endpoint, it can also 
+retrieve detailed information about a single campaign using `/campaign/{campaign_id}`. And it also has 
+**sub-resources**.
 
 {: .image-popup}
 ![Screenshot - Mailchimp documentation](/extend/generic-extractor/tutorial/mailchimp-api-docs-1.png)
 
 The sub-resources are `/campaigns/{campaign_id}/content`, `/campaigns/{campaign_id}/feedback` 
-and `/campaigns/{campaign_id}/send-checklist`. The `{campaign_id}` expression 
-represents a placeholder which should be replaced by a specific campaign Id.
-To retrieve the sub-resource, you have to use child jobs. In 
-the [previous part](/extend/generic-extractor/tutorial/) you ended up
-with this job property in Generic Extractor configuration:
+and `/campaigns/{campaign_id}/send-checklist`. The `{campaign_id}` expression represents a placeholder 
+which should be replaced by a specific campaign Id. To retrieve the sub-resource, you have to use child 
+jobs. In the [previous part](/extend/generic-extractor/tutorial/) you created this job property in 
+the Generic Extractor configuration:
 
 {% highlight json %}
 "jobs": [
@@ -34,8 +34,8 @@ with this job property in Generic Extractor configuration:
 {% endhighlight %}
 
 ## Child Jobs
-Sub-resources are retrieved through configuration of the `children` property. The structure
-of the `children` property is the same as the structure of `jobs` property, but it must additionally
+Sub-resources are retrieved through configuration of the `children` property. The structure of the 
+`children` property is the same as the structure of the `jobs` property, but it must additionally
 define `placeholders`.
 
 {% highlight json %}
