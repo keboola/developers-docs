@@ -6,25 +6,24 @@ permalink: /extend/generic-extractor/tutorial/basic/
 * TOC
 {:toc}
 
-Before you start with configuration of Generic Extractor, you should have basic understanding
-of [REST API](/extend/generic-extractor/tutorial/rest/), 
+Before you start configuring Generic Extractor, you should have a basic understanding
+of [REST API](/extend/generic-extractor/tutorial/rest/) and the 
 [JSON format](/extend/generic-extractor/tutorial/json/). This tutorial uses the 
-[Mailchimp API](http://developer.mailchimp.com/documentation/mailchimp/reference/overview/) so
-you should have that documentation at hand. You also need to have the 
-[Mailchimp API key](/extend/generic-extractor/tutorial/#get-started).
+[MailChimp API](http://developer.mailchimp.com/documentation/mailchimp/reference/overview/), so
+have that documentation at hand. You also need to have the 
+[MailChimp API key](/extend/generic-extractor/tutorial/#get-started).
 
 ## Configuration
-Generic extractor configuration is written in [JSON format](/extend/generic-extractor/tutorial/json/) 
-and is composed of several sections. The main parts and their nesting is displayed on the below schema:
+Generic Extractor configuration is written in [JSON format](/extend/generic-extractor/tutorial/json/) 
+and is composed of several sections. The main parts and their nesting are shown in the below schema:
 
 {: .image-popup}
 ![Schema - Generic Extractor configuration](todo)
 
 ### API Section
-The first configuration part is the `api` section. Here, you need to set the 
-basic properties of the API. In the most simple case, this is 
-`baseUrl` property and `authentication`. The below JSON snippet shows the 
-exact configuration (note that `config` is outside `authentication`):
+The first configuration part is the `api` section where you set the basic properties of the API. 
+In the most simple case, this is the `baseUrl` property and `authentication`. The below JSON snippet shows 
+the exact configuration (note that `config` is outside `authentication`):
 
 {% highlight json %}
 {
@@ -37,16 +36,15 @@ exact configuration (note that `config` is outside `authentication`):
 }
 {% endhighlight %}
 
-**important:** Make sue that the `baseUrl` URL ends with a slash!
+**Important:** Make sure that the `baseUrl` URL ends with a slash!
 
 ### Configuration Section
-The `config` section describes the actual extraction, the most important parts of it are 
-the `outputBucket` property and the `jobs` property. `outputBucket` must be set to an id 
-of an [Storage Bucket](https://help.keboola.com/storage/buckets/) where the data will be stored.
-If the bucket does exist, it will be created. 
+The `config` section describes the actual extraction. Its most important parts are the `outputBucket` and 
+`jobs` properties. `outputBucket` must be set to an id of a [Storage Bucket](https://help.keboola.com/storage/buckets/) 
+where the data will be stored. If no bucket exists, it will be created. 
 
-It also contains the authentication parameters `username` and `password`. So you will
-start with this configuration section:
+It also contains the authentication parameters `username` and `password`. So you will start with this 
+configuration section:
 
 {% highlight json %}
 "config": {
@@ -57,8 +55,8 @@ start with this configuration section:
 }
 {% endhighlight %}
 
-The `password` property is prefixed with hash mark `#` which means that the 
-value will [encrypted](https://developers.keboola.com/overview/encryption/) once 
+The `password` property is prefixed with the hash mark `#`, which means that the 
+value will be [encrypted](https://developers.keboola.com/overview/encryption/) once 
 you save the configuration. 
 
 #### Jobs Section
@@ -73,12 +71,11 @@ of the `jobs` configuration is the `endpoint`:
 ]
 {% endhighlight %}
 
-**Important:** Make sure **not to** start the the URL with a slash. If you would do so, the URL 
-will be absolute from the domain. Therefore in this case the URL would become
-`https://us13.api.mailchimp.com/campaigns` which is not valid (it is missing the `3.0` part).
-An alternative would be to put `/3.0/campaigns` in the `endpoint` property.
+**Important:** Make sure **not to** start the URL with a slash. If you do so, the URL 
+will be absolute from the domain: `https://us13.api.mailchimp.com/campaigns`, which is not valid (it is 
+missing the `3.0` part). An alternative would be to put `/3.0/campaigns` in the `endpoint` property.
 
-Now you are getting close to runnable configuration:
+Now you are getting close to a runnable configuration:
 
 {% highlight json %}
 {
@@ -105,12 +102,12 @@ Now you are getting close to runnable configuration:
 
 If you try to run this configuration, you will obtain an error similar to this:
 
-    More than one array found in response! Use 'dataField' parameter to specify a key to the data array. 
-    (endpoint: campaigns, arrays in response root: campaigns, _links) 
+    More than one array found in the response! Use the 'dataField' parameter to specify a key to the data array. 
+    (endpoint: campaigns, arrays in the response root: campaigns, _links) 
 
 This means that the extractor got the response, but cannot automatically process it. If you examine the 
-sample [response in the documentation](http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/#)
-You'll see that it is an object with three items `campaigns`, `total_items` and `_links`:
+sample [response in the documentation](http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/#),
+you will see that it is an object with three items `campaigns`, `total_items` and `_links`:
 
 {% highlight json %}
 {
@@ -146,8 +143,8 @@ You'll see that it is an object with three items `campaigns`, `total_items` and 
 {% endhighlight %}
 
 Generic Extractor expects the response to be an array of items. If it receives an object, it
-searches through its properties to find an array. If it finds multiple array it becomes confused
-because it is unclear which array you want. To fix this, you need to add `dataField` parameter
+searches through its properties to find an array. If it finds multiple arrays, it becomes confused
+because it is unclear which array you want. To fix this, you need to add the `dataField` parameter
 as the error message suggests:
 
 {% highlight json %}
@@ -174,8 +171,8 @@ as the error message suggests:
 }
 {% endhighlight %}
 
-**Important:** It may seem confusing that both `endpoint` and `dataField` properties are set to `campaigns`. 
-This is just a coincidence, the `endpoint` property refers to the `campaigns` in the resource URL. 
+**Important:** It may seem confusing that both the `endpoint` and `dataField` properties are set to `campaigns`. 
+This is just a coincidence; the `endpoint` property refers to the `campaigns` in the resource URL. 
 The `dataField` refers to the `campaigns` property in the JSON retrieved as the API response.
 
 You can now run the above configuration by simply pasting it into the Generic Extractor configuration field:
@@ -196,18 +193,16 @@ fields of a campaign and as many rows as you have campaigns.
 {: .image-popup}
 ![Screenshot - Campaigns Table](/extend/generic-extractor/tutorial/table-campaigns-sample.png)
 
-The table `in.c-ge-tutorial.campaigns__links`
-contains the contents of the `_links` property. Because the `_links` property is a nested array 
-within a single campaign object, it cannot be easily represented in a single column of the
-`campaigns` table. Generic extractor therefore replaces the column value with a generated key`
-e.g. `campaigns_75d5b14d79d034cd07a9d95d5f0ca5bd` and automatically creates a new table
-which has column `JSON_parentId` with that value so that you can join the tables together.
+The table `in.c-ge-tutorial.campaigns__links` contains the contents of the `_links` property. 
+Because the `_links` property is a nested array within a single campaign object, it cannot be easily 
+represented in a single column of the `campaigns` table. Generic Extractor therefore replaces the column 
+value with a generated key, for example, `campaigns_75d5b14d79d034cd07a9d95d5f0ca5bd` and automatically 
+creates a new table which has the column `JSON_parentId` with that value so that you can join the tables together.
 
 ## Summary
-The above tutorial demonstrates a very basic configuration of generic extractor. Generic 
-extractor is capable of doing much more, see other parts of this tutorial for 
-explanation of:
+The above tutorial demonstrates a very basic configuration of Generic Extractor. The extractor is capable 
+of doing much more; see other parts of this tutorial for explanation of
 
-- [Pagination](/extend/generic-extractor/tutorial/pagination/)
-- [Jobs](/extend/generic-extractor/tutorial/jobs/)
-- [Mapping](/extend/generic-extractor/tutorial/mapping/)
+- [Pagination](/extend/generic-extractor/tutorial/pagination/),
+- [Jobs](/extend/generic-extractor/tutorial/jobs/), and
+- [Mapping](/extend/generic-extractor/tutorial/mapping/).

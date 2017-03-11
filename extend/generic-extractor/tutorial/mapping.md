@@ -7,8 +7,7 @@ permalink: /extend/generic-extractor/tutorial/mapping/
 {:toc}
 
 In the [previous part](/extend/generic-extractor/tutorial/jobs/) of the tutorial
-you extracted the content of a Mailchimp campaign. In this part of the tutorial
-you will clean up the response a little bit.
+you extracted the content of a MailChimp campaign. In this part you will clean up the response a little bit.
 
 The initial configuration is this one:
 
@@ -59,7 +58,7 @@ The initial configuration is this one:
 }
 {% endhighlight %}
 
-This extracts Mailchimp campaigns, together with the `send-checklist` items and
+This extracts MailChimp campaigns, together with the `send-checklist` items and
 together with the campaign `content`. There are some parts of the content resource you are probably not 
 interested in and also the table contains duplicates.
 
@@ -111,7 +110,7 @@ resource property `plain_text` will be stored in table column `text`. No other
 properties of the content resource will be imported. I.e. the mapping defines
 all columns of the output table.
 
-I.e if you are interested in having the `plain_text` and `html` version of the 
+I.e. if you are interested in having the `plain_text` and `html` version of the 
 campaign content, you can use a mapping like this:
 
 {% highlight json %}
@@ -131,7 +130,7 @@ campaign content, you can use a mapping like this:
 }
 {% endhighlight %}
 
-Note that the `destination` value is arbitrary, but it must be a valid column nam.
+Note that the `destination` value is arbitrary, but it must be a valid column name.
 The data type name (`content`) must match the value of the `dataType` property 
 se defined in some of the jobs.
 
@@ -235,17 +234,17 @@ then look like this:
 {% endhighlight %}
 
 ## Review
-Because the above configuration proably looks quite complex, let's review what parts are connected
-and how. Note that the values colored blue have been choosen arbitrarily when the configuration 
+Because the above configuration probably looks quite complex, let's review what parts are connected
+and how. Note that the values colored blue have been chosen arbitrarily when the configuration 
 was created:
 
 {: .image-popup}
 ![Configuration Schema](/extend/generic-extractor/tutorial/configuration-schema.svg)
 
 ## Summary
-Mapping lets you define preciesely what the output of the extraction will look like and 
+Mapping lets you define precisely what the output of the extraction will look like and 
 also define primary keys. If you are doing a one time ad-hoc extraction, you may skip 
 setting up mapping and clean the extracted data later in 
 [transformations](https://help.keboola.com/manipulation/transformations/). If you
-intend to use your configuration regulary or make it into its own component, it is recommennded to
+intend to use your configuration regularly or make it into its own component, it is recommended to
 set up mapping.

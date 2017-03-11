@@ -6,23 +6,30 @@ permalink: /extend/generic-extractor/tutorial/jobs/
 * TOC
 {:toc}
 
-In this tutorial so far you went through [basic configuration](/extend/generic-extractor/tutorial/basic/)
-of Generic Extractor and also through [configuration of pagination](/extend/generic-extractor/tutorial/pagination/).
-In this part of the tutorial you will learn how to use sub-jobs of Generic Extractor.
+On your way through the Generic Extractor tutorial, you have learned about
 
-Let's more closely examine the `campaigns` resource of the Mailchimp API. Apart from 
-retrieving multiple campaigns `/campaign` endpoint. It can also retrieve detailed information
-about a single campaign `/campaign/{campaign_id}`. And it also has **sub-resources**.
+- [Basic configuration](/extend/generic-extractor/tutorial/basic/) and 
+- [Configuration of pagination](/extend/generic-extractor/tutorial/pagination/).
+
+Now we will show you how to use Generic Extractor's **sub-jobs**.
+
+Let's start this section with a closer examination of the `campaigns` resource of the MailChimp API. 
+Apart from retrieving multiple campaigns using the `/campaigns` endpoint, it can also retrieve detailed 
+information about a single campaign using `/campaigns/{campaign_id}`. 
 
 {: .image-popup}
 ![Screenshot - Mailchimp documentation](/extend/generic-extractor/tutorial/mailchimp-api-docs-1.png)
 
-The sub-resources are `/campaigns/{campaign_id}/content`, `/campaigns/{campaign_id}/feedback` 
-and `/campaigns/{campaign_id}/send-checklist`. The `{campaign_id}` expression 
-represents a placeholder which should be replaced by a specific campaign Id.
-To retrieve the sub-resource, you have to use child jobs. In 
-the [previous part](/extend/generic-extractor/tutorial/) you ended up
-with this job property in Generic Extractor configuration:
+Moreover, each campaign has three **sub-resources**: 
+`/campaigns/{campaign_id}/content`, `/campaigns/{campaign_id}/feedback` 
+and `/campaigns/{campaign_id}/send-checklist`. The `{campaign_id}` expression represents a placeholder 
+that should be replaced by a specific campaign Id. To retrieve the sub-resource, use child jobs. 
+
+## Child Jobs
+
+In the 
+[previous part](/extend/generic-extractor/tutorial/pagination/#running) of the tutorial you created this job 
+property in the Generic Extractor configuration:
 
 {% highlight json %}
 "jobs": [
@@ -33,10 +40,12 @@ with this job property in Generic Extractor configuration:
 ]
 {% endhighlight %}
 
-## Child Jobs
-Sub-resources are retrieved through configuration of the `children` property. The structure
-of the `children` property is the same as the structure of `jobs` property, but it must additionally
-define `placeholders`.
+All sub-resources are retrieved by configuring the `children` property; its structure is the same as the 
+structure of the `jobs` property, but it must additionally define `placeholders`.
+The `dataField` property must refer to an array, i.e. `items` or `_links` in our case 
+(see the [documentation](http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/send-checklist/)). 
+Let's set it to `items`. See [below](#Multiple_Jobs) how to refer to the whole sub-resource with a dot.
+[CHECK zkontrolovat predchozi 3 vety, ze jsou spravne]
 
 {% highlight json %}
 "jobs": [
@@ -56,20 +65,16 @@ define `placeholders`.
 ]
 {% endhighlight %}
 
-You also need to set the `dataField` property to `items`. This is because the response 
-contains two array properties `items` and `_links`, as you can see
-in the [Documentation](http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/send-checklist/).
-
-The `children` are essential executed for each item retrieved from the parent 
-endpoint. The `placeholders` setting connects together the placeholders used in the `endpoint` property
-and data in the actual response. That means tha `campaign_id` refers to the placeholder 
-in endpoint `campaigns/{campaign_id}/send-checklist` and `id` refers to property of the JSON object in response.
-To find that, you need to examine the [sample response](http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/):
+The `children` are essentially executed for each item [CHECK to asi neni item z dataField:items z predchozi vety, ale jednotlive campaign-e] retrieved from the parent endpoint. 
+The `placeholders` setting connects the placeholders used in the `endpoint` property with 
+the data in the actual response [CHECK tim je asi mineno parent response?]. 
+That means that the `campaign_id` placeholder in the `campaigns/{campaign_id}/send-checklist` endpoint 
+will be replaced by the `id` property of the JSON [response](http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/): 
 
 {: .image-popup}
 ![Screenshot - Mailchimp docs](/extend/generic-extractor/tutorial/mailchimp-api-docs-2.png)
 
-Also notice, that the placeholder name is completely arbitrary (i.e. it is just a coincidence that
+Also note that the placeholder name is completely arbitrary (i.e. it is just a coincidence that
 it is also named `campaign_id` in the Mailchimp documentation). Therefore, the following configuration is 
 also valid:
 
@@ -113,27 +118,24 @@ also valid:
 }
 {% endhighlight %}
 
-If you run the above configuration, you'll obtain a new table named 
-e.g. `in.c-ge-tutorial.campaigns__campaign_id__send-checklist`. The table
-contains messages that occurred during checking your campaign.
-You'll see something like this:
+Running the above configuration gives you a new table named, for example, 
+`in.c-ge-tutorial.campaigns__campaign_id__send-checklist`. The table
+contains messages from campaign checking. You will see something like this:
 
 {: .image-popup}
 ![Screenshot - Job Table](/extend/generic-extractor/tutorial/job-table-1.png)
 
-Note that apart from the API response properties `type`, `heading` and
-`details` an additional field `parent_id` was added. This contains the value of the 
-placeholder (`campaign_id`) for the particular request. I.e. to join the 
-the two tables together in SQL, you would use the join condition: 
+Note that apart from the API response properties `type`, `heading` and `details`, an additional field 
+`parent_id` was added. This contains the value of the placeholder (`campaign_id`) for the particular 
+request. So to join the two tables together in SQL, you would use the join condition: 
 
     campaigns.id=campaigns__campaign_id__send-checklist.parent_id
 
-You have to remember to what table the `parent_id` column refers to though.
+You have to remember to what table the `parent_id` column refers though.
 
 ## Multiple Jobs
-You probably noticed that the `jobs` property is an array. This of course means 
-that you can retrieve multiple endpoints in a single configuration. Let's pick
-the campaign `content` sub-resource too:
+You have probably noticed that the `jobs` property is an array [CHECK v prikladu se ale pridava do `children` a ne do `jobs`. Oboji je array, mozna jde mit multiple jobs v obojim?]. It means that you can retrieve multiple 
+endpoints in a single configuration. Let's pick the campaign `content` sub-resource too:
 
 {% highlight json %}
 "jobs": [
@@ -159,8 +161,8 @@ the campaign `content` sub-resource too:
 ]
 {% endhighlight %}
 
-The question is what to put in the `dataField`. If you examine the [sample response](http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/content/)
-It looks like this:
+The question is what to put in the `dataField`. If you examine the sample [response](http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/content/),
+it looks like this:
 
 {% highlight json %}
 
@@ -180,17 +182,16 @@ It looks like this:
 
 {% endhighlight %}
 
-If you use no `dataField` like in the above configuration and run it, you'll obtain a table like this:
+If you use no `dataField` like in the above configuration and run it, you will obtain a table like this:
 
 {: .image-popup}
-![Screenshot - Job Table](/extend/generic-extractor/tutorial/job-table-1.png)
+![Screenshot - Job Table](/extend/generic-extractor/tutorial/job-table-2.png)
 
 This is definitely not what you expected. Instead of obtaining the campaign content, you 
 got the `_links` property from the response. This is because Generic Extractor automatically 
-picks an array in the response. To tell Generic extractor that you want to the entire
-response as a *single table record*, you need to set `dataField` to the [path](todo) in the object.
-Because you want to use the *entire* response, you'll set `dataField` to `.` to start 
-in the root.
+picks an array in the response. To get the entire response as a *single table record*, set `dataField` 
+to the [path](todo) in the object. Because you want to use the *entire* response, you will set 
+`dataField` to `.` to start in the root.
 
 {% highlight json %}
 {
@@ -239,11 +240,11 @@ in the root.
 }
 {% endhighlight %}
 
-If you run the above configuration, you will get a table `in.c-ge-tutorial.campaigns__campaign_id__content`
-with columns `plain_text`, `html` and some others. 
+Running the above configuration will get you the table `in.c-ge-tutorial.campaigns__campaign_id__content`
+with columns like `plain_text`, `html` and others. 
 
-You will also get a table `in.c-ge-tutorial.campaigns__campaign_id__content__links`. This table 
-represents the `links` property of `content` resource. The links table contains the 
+You will also get the table `in.c-ge-tutorial.campaigns__campaign_id__content__links`. It 
+represents the `links` property of the `content` resource. The links table contains the 
 `JSON_parentId` column which contains a generated hash such as 
 `campaigns/{campaign_id}/content_1c3b951ece2a05c1239b06e99cf804c2` whose value is inserted into
 the `links` column of the campaign content table. This is done automatically because once
@@ -251,11 +252,10 @@ you said that the entire response was supposed to be a single table row, the arr
 property will not fit into a single value of a table.
 
 ## Summary
-In this part of the tutorial you have shown how to extract sub-resources using child jobs and
-how to extract resources composed directly of properties (not having an array of items).
-Now you probably think that the dreaded `_links` property which is all over the Mailchimp API 
-gave us too much trouble already and you should somehow ignore it. The answer to 
-it is **mapping**, which is described in the
-[next part](/extend/generic-extractor/tutorial/mapping/) of the tutorial. Also you might have 
-noticed that there are some duplicate records in the `in.c-ge-tutorial.campaigns__campaign_id__content` 
-table. You'll see into this as well.
+Now that you know how to extract sub-resources using child jobs, as well as resources composed directly of 
+properties (without an array of items), you probably think that the `_links` property, found all over the 
+MailChimp API and giving us a lot of trouble, is best to be ignored. The answer to this is 
+**mapping** described in the [next part](/extend/generic-extractor/tutorial/mapping/) of the tutorial. 
+
+You might have also noticed some duplicate records in the table `in.c-ge-tutorial.campaigns__campaign_id__content` 
+along the way. You'll see into this as well.

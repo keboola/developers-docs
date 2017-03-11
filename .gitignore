@@ -4,3 +4,4 @@ _site
 *.kdev4
 .sass-cache
 /.vscode
+.jekyll-metadata
