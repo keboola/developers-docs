@@ -10,21 +10,24 @@ single *job represents a single [API resource](/extend/generic-extractor/tutoria
 A sample job configuration can look like this:
 
 {% highlight json %}
-"jobs": [
-    {
-        "endpoint": "campaigns",
-        "dataField": "campaigns",
-        "children": [
-            {
-                "endpoint": "campaigns/{campaign_id}/send-checklist",
-                "dataField": "items",
-                "placeholders": {
-                    "campaign_id": "id"
+{
+    ...
+    "jobs": [
+        {
+            "endpoint": "campaigns",
+            "dataField": "campaigns",
+            "children": [
+                {
+                    "endpoint": "campaigns/{campaign_id}/send-checklist",
+                    "dataField": "items",
+                    "placeholders": {
+                        "campaign_id": "id"
+                    }
                 }
-            }
-        ]
-    }
-]
+            ]
+        }
+    ]
+}
 {% endhighlight %}
 
 Generic Extractor reads and processes the responses from API endpoints in a pretty complex
@@ -85,8 +88,11 @@ The endpoint property is **required** and represents the URL of the resource. It
 Assume the following [API definition](/extend/generic-extractor/api/).
 
 {% highlight json %}
-"api": {
-    "baseURL": "https://example.com/3.0/"
+{
+    ...
+    "api": {
+        "baseURL": "https://example.com/3.0/"
+    }
 }
 {% endhighlight %}
 
@@ -302,11 +308,13 @@ To extract data from the following API response:
 [
     {
         "id": 123,
-        "name": "John Doe"
+        "name": "John Doe",
+        "married": true
     },
     {
         "id": 234,
-        "name": "Jane Doe"
+        "name": "Jane Doe",
+        "married": false
     }
 ]
 {% endhighlight %}
@@ -314,10 +322,12 @@ To extract data from the following API response:
 You would not set the `dataField` parameter or set it to empty string (`"dataField": ""`). The following table
 will be extracted:
 
-|id|name|
-|--|----|
-|123|John Doe|
-|234|Jane Doe|
+|id|name|married|
+|--|---|---|
+|123|John Doe|1|
+|234|Jane Doe||
+
+Notice that the [boolean value](todo) `married` is converted to `1` when true and left empty otherwise (`false` and `null`).
 
 See a [full example](todo:1-simple-job)
 
@@ -465,7 +475,7 @@ will look like this:
         }                
     ]
 }
-{% endhighlight}
+{% endhighlight %}
 
 
 The following table will be extracted:
@@ -479,7 +489,7 @@ The following table will be extracted:
 See the [full example](todo:5-two-arrays-in-nested-object)
 
 #### A simple object
-To extract data from the following API response:
+You may encounter and API response like this:
 
 {% highlight json %}
 {
@@ -499,7 +509,7 @@ The following table will be extracted:
 See the [full example](todo:6-simple-object)
 
 #### A nested object
-To extract data from the following API response:
+You may encounter and API response like this:
 
 {% highlight json %}
 {
@@ -521,7 +531,7 @@ The following table will be extracted:
 See the [full example](todo:7-nested-object)
 
 #### A single object in an array
-To extract data from the following API response:
+You may encounter and API response like this:
 
 {% highlight json %}
 {
@@ -551,7 +561,7 @@ To extract the first item from `history` array, you can set the `dataField` para
 See the [full example](todo:8-single-object-in-array)
 
 #### A nested array
-To extract data from the following API response:
+You may encounter an API response like this:
 
 {% highlight json %}
 {
@@ -597,7 +607,7 @@ extractor can also extract objects with non-scalar properties. The default
 [JSON to CSV mapping](todo) flattens nested objects and produces secondary tables from nested arrays.
 
 #### An object with nested array
-To extract data from the following API response:
+You may encounter and API response like this:
 
 {% highlight json %}
 {
@@ -616,10 +626,10 @@ To extract data from the following API response:
 }
 {% endhighlight %}
 
-To extract the `members` array, you set the `dataField` parameter to value `members`. The following 
+To extract the `members` array, you set the `dataField` parameter to value `members` or empty value. The following 
 tables will be extracted:
 
-Members:
+Users:
 
 |id|name|tags|
 |---|---|----|
@@ -642,22 +652,286 @@ way, the 1:N relationship between Members and Tags is represented.
 
 See the [full example](todo:10-object-wth-nested-array)
 
+#### An object with nested object
+You may encounter an API response like this:
 
+{% highlight json %}
+{
+    "members": [
+        {
+            "id": 123,
+            "name": "John Doe",
+            "address": {
+                "street": "Elm Street",
+                "city": "New York"
+            }
+        },
+        {
+            "id": 234,
+            "name": "Jane Doe",
+            "address": {
+                "street": "Bates Street",
+                "city": "Chicago",
+                "state": "USA"
+            }
+        }
+    ]
+}
+{% endhighlight %}
 
+To extract the `members` array, you set the `dataField` parameter to value `members` or empty value. The following 
+table will be extracted:
 
+|id|name|address\_street|address\_city|address_state|
+|---|---|---|---|---|
+|123|John Doe|Elm Street|New York||
+|234|Jane Doe|Bates Street|Chicago|USA|
+
+The properties of nested `address` objects are automatically flattened into the parent object, therefore the
+`address.city` property is flattened into `address_city` column.
+
+See the [full example](todo:11-object-with-nested-object)
+
+#### An object with a deeply nested object
+The above two examples show basic principles of JSON-CSV mapping used by generic extractor. 
+These principles are applied to all child properties, so when you encounter an API response like this:
+
+{% highlight json %}
+{
+    "members": [
+        {
+            "id": 123,
+            "name": "John Doe",
+            "contacts": [
+                {
+                    "type": "address",
+                    "properties": {
+                        "street": "Elm Street",
+                        "city": "New York"
+                    }
+                },
+                {
+                    "type": "email",
+                    "primary": true,
+                    "properties": {
+                        "address": "john.doe@example.com"
+                    }
+                }
+            ]
+        },
+        {
+            "id": 234,
+            "name": "Jane Doe",
+            "contacts": [
+                {
+                    "type": "address",
+                    "primary": false,
+                    "properties": {
+                        "street": "Bates Street",
+                        "city": "Chicago",
+                        "state": "USA"
+                    }
+                },
+                {
+                    "type": "phone",
+                    "primary": true,
+                    "properties": {
+                        "number": "123 456 789"
+                    }
+                }
+            ]
+        }
+    ]
+}
+{% endhighlight %}
+
+The following two tables will be extracted:
+
+Users:
+
+|id|name|contacts|
+|123|John Doe|users-12_8505d6585e28c00d461ba64f085d1055|
+|234|Jane Doe|users-12_ec8c48efecb10334072f03a860113ea2|
+
+Contacts:
+
+|type|properties\_street|properties\_city|properties\_address|properties\_state|properties\_number|primary|JSON_parentId|
+|---|---|---|---|---|---|---|---|
+|address|Elm Street|New York|||||users-12_8505d6585e28c00d461ba64f085d1055|
+|email||||john.doe@example.com|||1|users-12_8505d6585e28c00d461ba64f085d1055|
+|address|Bates Street|Chicago||USA|||users-12_ec8c48efecb10334072f03a860113ea2|
+|phone|||||123 456 789|1|users-12_ec8c48efecb10334072f03a860113ea2|
+
+As you can see, you will obtain a rather sparse table because the properties of the nested 
+`contacts` objects do not match exactly. For example the `properties_number` column was created
+as a result of flattening `properties.number` object which is contained only once in the response, therefore 
+the column has a single value. The rows in the *Contacts* table are again linked through an
+autogenerated key to the to the parent *Users* table. Also notice that the [boolean value](todo)
+`primary` is converted to `1` when true and left empty otherwise.
+
+See the [full example](todo:12-deeply-nested-object)
 
 ## Response Filter
 The `responseFilter` option allows you to skip parts of the API response from processing. This can
 be useful in case you don't want to flatten the JSON structure using the default
-[JSON Parser](todo) or if the API response is inconsistent and the objects cannot be
-[merged together](todo).
+[JSON Parser](todo) (as seen in the above examples) or if the API response is inconsistent and the 
+objects cannot be flattened.
 
 The value of `responseFilter` property is either a path to a property in the response or
 an array of such paths. The path is dot-separated unless set otherwise in the `responseFilterDelimiter` configuration.
 
 ### Examples
 
-#### Inconsistent Object
+#### Skip Flattening
+If you have an API response like this:
+
+{% highlight json %}
+{
+    "members": [
+        {
+            "id": 123,
+            "name": "John Doe",
+            "tags": ["active", "admin"]
+        },
+        {
+            "id": 234,
+            "name": "Jane Doe",
+            "tags": ["active"]
+        }
+    ]
+}
+{% endhighlight %}
+
+and you extract the `members` array with the [default settings](todo:ex10), two tables will be 
+produced. If you set `"responseFilter": "tags"`, then the `tags` property of the `members` items
+will not be processed and will be stored as a [serialized](todo) JSON string. The following 
+table will be extracted:
+
+|id|name|tags|
+|---|---|---|
+|123|John Doe|["active","admin"]|
+|234|Jane Doe|["active"]|
+
+The `tags` column contains serialized JSON fragments, which can be processed by 
+JSON capable database (todo:snowflake).
+
+See the [full example](todo:13-skip-flatten)
+
+#### Skip Flattening in Nested objects
+If you have an API response like this:
+
+{% highlight json %}
+{
+    "members": [
+        {
+            "id": 123,
+            "name": "John Doe",
+            "contacts": [
+                {
+                    "type": "address",
+                    "properties": {
+                        "street": "Elm Street",
+                        "city": "New York"
+                    }
+                },
+                {
+                    "type": "email",
+                    "primary": true,
+                    "properties": {
+                        "address": "john.doe@example.com"
+                    }
+                }
+            ]
+        },
+        {
+            "id": 234,
+            "name": "Jane Doe",
+            "contacts": [
+                {
+                    "type": "address",
+                    "primary": false,
+                    "properties": {
+                        "street": "Bates Street",
+                        "city": "Chicago",
+                        "state": "USA"
+                    }
+                },
+                {
+                    "type": "phone",
+                    "primary": true,
+                    "properties": {
+                        "number": "123 456 789"
+                    }
+                }
+            ]
+        }
+    ]
+}
+{% endhighlight %}
+
+and you extract the `members` array with the [default settings](todo:ex12), two tables will be 
+produced and the `properties` object will be flattened into a sparse table. To avoid that, you 
+can set the response filter to `"responseFilter": "contacts[].properties"`. This will 
+leave the `properties` child off `contacts` array of `members` array unprocessed. The following
+two tables will be produced:
+
+Users:
+
+|id|name|contacts|
+|---|---|---|
+|123|John Doe|users-12_0b9650e0f68b0c6738843d5b4ff0a961|
+|234|Jane Doe|users-12_cf76fb6794380244946d2bc4fa3aa04a|
+
+Contacts:
+
+|type|properties|primary|JSON_parentId|
+|address|{""street"":""Elm Street"",""city"":""New York""}||users-12_0b9650e0f68b0c6738843d5b4ff0a961|
+|email|{""address"":""john.doe@example.com""}|1|users-12_0b9650e0f68b0c6738843d5b4ff0a961|
+|address|{""street"":""Bates Street"",""city"":""Chicago"",""state"":""USA""}||users-12_cf76fb6794380244946d2bc4fa3aa04a|
+|phone|{""number"":""123 456 789""}|1|users-12_cf76fb6794380244946d2bc4fa3aa04a|
+
+The `properties` column contains JSON serialized objects. Note that when setting the `responseFilter` parameter,
+you have to use the correct path to the properties you wish to skip from processing. I.e. setting
+`responseFilter` to:
+
+- `contacts` -- would skip the entire `contacts` property and will not crate the *Contacts:* table at all.
+- `properties` -- would do nothing because there is not `properties` property under the `members` array items.
+- `contacts.properties` -- would do nothing, because there is no `properties` property under the `contacts` array.
+
+The last two options might seem inconsistent. This is because the `responseFilter` path is set **relative to** the
+objects of the processed array (not to the array itself, not to the JSON root). Thus the only correct 
+setting is `contacts[].properties`.
+
+See the [full example](todo:14-skip-flatten-nested)
+
+#### Skip Boolean conversion
+If you have an API response like this:
+
+{% highlight json %}
+{% endhighlight %}
+
+and you extract the `members` array with the [default settings](todo:ex12), two tables will be 
+produced and the `properties` object will be flattened into a sparse table. To avoid that, you 
+can set the response filter to `"responseFilter": "contacts[].properties"`. This will 
+leave the `properties` child off `contacts` array of `members` array unprocessed. The following
+two tables will be produced:
+
+Users:
+
+|id|name|contacts|
+|---|---|---|
+|123|John Doe|users-12_0b9650e0f68b0c6738843d5b4ff0a961|
+|234|Jane Doe|users-12_cf76fb6794380244946d2bc4fa3aa04a|
+
+Contacts:
+
+|type|properties|primary|JSON_parentId|
+|address|{""street"":""Elm Street"",""city"":""New York""}||users-12_0b9650e0f68b0c6738843d5b4ff0a961|
+|email|{""address"":""john.doe@example.com""}|1|users-12_0b9650e0f68b0c6738843d5b4ff0a961|
+|address|{""street"":""Bates Street"",""city"":""Chicago"",""state"":""USA""}||users-12_cf76fb6794380244946d2bc4fa3aa04a|
+|phone|{""number"":""123 456 789""}|1|users-12_cf76fb6794380244946d2bc4fa3aa04a|
+
+See the [full example](todo:15-skip-boolean)
 
 
 - **responseFilter**: Allows filtering data from API response to leave them unparsed and store as a JSON.
