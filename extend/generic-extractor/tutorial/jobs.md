@@ -45,7 +45,6 @@ structure of the `jobs` property, but it must additionally define `placeholders`
 The `dataField` property must refer to an array, i.e. `items` or `_links` in our case 
 (see the [documentation](http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/send-checklist/)). 
 Let's set it to `items`. See [below](#Multiple_Jobs) how to refer to the whole sub-resource with a dot.
-[CHECK zkontrolovat predchozi 3 vety, ze jsou spravne]
 
 {% highlight json %}
 "jobs": [
@@ -65,9 +64,9 @@ Let's set it to `items`. See [below](#Multiple_Jobs) how to refer to the whole s
 ]
 {% endhighlight %}
 
-The `children` are essentially executed for each item [CHECK to asi neni item z dataField:items z predchozi vety, ale jednotlive campaign-e] retrieved from the parent endpoint. 
+The `children` are executed for each element retrieved from the parent endpoint, i.e. for each campaign.
 The `placeholders` setting connects the placeholders used in the `endpoint` property with 
-the data in the actual response [CHECK tim je asi mineno parent response?]. 
+the data in the actual parent response. 
 That means that the `campaign_id` placeholder in the `campaigns/{campaign_id}/send-checklist` endpoint 
 will be replaced by the `id` property of the JSON [response](http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/): 
 
@@ -134,7 +133,7 @@ request. So to join the two tables together in SQL, you would use the join condi
 You have to remember to what table the `parent_id` column refers though.
 
 ## Multiple Jobs
-You have probably noticed that the `jobs` property is an array [CHECK v prikladu se ale pridava do `children` a ne do `jobs`. Oboji je array, mozna jde mit multiple jobs v obojim?]. It means that you can retrieve multiple 
+You have probably noticed that the `jobs` and `children` properties are arrays. It means that you can retrieve multiple 
 endpoints in a single configuration. Let's pick the campaign `content` sub-resource too:
 
 {% highlight json %}
