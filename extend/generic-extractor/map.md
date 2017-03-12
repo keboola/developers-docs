@@ -3,15 +3,11 @@ title: Generic Extractor Parameter Map
 permalink: /extend/generic-extractor/map/
 ---
 
-<script>
-$("span.nt:contains('\"parameters\"')").wrap("<a href='https://google.com'></a>");
-</script>
-
 {% highlight json %}
 {
     "parameters": {
         "api": {
-            "baseUrl": "https://us13.api.mailchimp.com/3.0/",
+            "baseUrl": "https://example.com/3.0/",
             "authentication": {
                 "type": "basic"
             },
@@ -25,12 +21,14 @@ $("span.nt:contains('\"parameters\"')").wrap("<a href='https://google.com'></a>"
         "config": {
             "debug": true,
             "username": "dummy",
-            "#password": "c40xxxxxxxxxxxxxxxxxxxxxxxxxxxxx-us13",
+            "#password": "secret",
             "outputBucket": "ge-tutorial",
             "jobs": [
                 {
                     "endpoint": "campaigns",
                     "dataField": "campaigns",
+                    "responseFilter": "campaigns.tasks/tags",
+                    "responseFilterDelimiter": "/",
                     "children": [
                         {
                             "endpoint": "campaigns/{campaign_id}/send-checklist",
@@ -68,5 +66,16 @@ $("span.nt:contains('\"parameters\"')").wrap("<a href='https://google.com'></a>"
 }
 {% endhighlight %}
 
-
-
+<script src='/assets/js/jquery-3.1.1.min'></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    $("span.nt:contains('\"endpoint\"')").wrap("<a href='/extend/generic-extractor/jobs/#endpoint'></a>");
+    $("span.nt:contains('\"params\"')").wrap("<a href='/extend/generic-extractor/jobs/#request-parameters'></a>");
+    $("span.nt:contains('\"method\"')").wrap("<a href='/extend/generic-extractor/jobs/#method'></a>");
+    $("span.nt:contains('\"dataField\"')").wrap("<a href='/extend/generic-extractor/jobs/#data-field'></a>");
+    $("span.nt:contains('\"dataType\"')").wrap("<a href='/extend/generic-extractor/jobs/#data-type'></a>");
+    $("span.nt:contains('\"responseFilter\"')").wrap("<a href='/extend/generic-extractor/jobs/#response-filter'></a>");
+    $("span.nt:contains('\"responseFilterDelimiter\"')").wrap("<a href='/extend/generic-extractor/jobs/#response-filter'></a>");
+    $("span.nt:contains('\"children\"')").wrap("<a href='/extend/generic-extractor/jobs/#children'></a>");
+}, false);
+</script>

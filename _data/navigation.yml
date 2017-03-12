@@ -89,14 +89,14 @@ items:
               - url: /extend/generic-extractor/tutorial/mapping/
                 title: Mapping Tutorial
 
-          - url: /extend/generic-extractor/recursion/
-            title: Recursive Jobs
+          - url: /extend/generic-extractor/jobs/
+            title: Jobs
+            items:
+              - url: /extend/generic-extractor/jobs/children/
+                title: Child Jobs
 
           - url: /extend/generic-extractor/mappings/
             title: Mappings
-
-          - url: /extend/generic-extractor/jobs/
-            title: Jobs
 
           - url: /extend/generic-extractor/config/
             title: Configuration
@@ -151,6 +151,9 @@ items:
 
               - url: /extend/generic-extractor/pagination/multiple/
                 title: Multiple scrollers
+
+          - url: /extend/generic-extractor/map/
+            title: Configuration Map
 
       - url: /extend/common-interface/
         title: Common Interface
