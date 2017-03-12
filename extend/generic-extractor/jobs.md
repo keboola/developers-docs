@@ -3,6 +3,9 @@ title: Jobs
 permalink: /extend/generic-extractor/jobs/
 ---
 
+* TOC
+{:toc}
+
 The jobs section of the configuration contains descriptions of API resources that will be
 extracted. The `jobs` configuration property is an array of processed API endpoints. A
 single *job represents a single [API resource](/extend/generic-extractor/tutorial/rest)*.
@@ -38,6 +41,7 @@ way. In principle processing the response is composed of the following steps:
 - flatten the object structure into one or more tables,
 - create the tables in Storage and load data into them.
 
+## Merging Responses
 The first two steps are the responsibility of [Jobs](/extend/generic-extractor/jobs/). The result of
 these steps is an array of objects. Generic Extractor then tries to find a common super-set of
 properties of all objects. For example with the following response:
@@ -59,8 +63,15 @@ properties of all objects. For example with the following response:
 
 The super-set of object properties will be `id`, `name`, `color` and `size`. In Generic Extractor configuration
 this is referred to as [`dataType`](#dataType). If the `dataType` configuration is not set, a name is
-automatically generated. This merging of object structure requires that the objects are in principle compatible,
-e.g. this would not be allowed:
+automatically generated. This merging of object structure requires that the objects are in principle compatible.
+The responses are merged into type-less tables. This means that values `42` and `apples` are perfectly compatible
+because they will get converted to string. Also a scalar value and and array value are compatible, because the 
+scalar is [upgraded to array](#upgrading-to-array). Therefore the incompatible combinations are:
+
+- scalar value and object value
+- object value and array value
+
+E.g. this would not be allowed:
 
 {% highlight json %}
 [
@@ -72,12 +83,14 @@ e.g. this would not be allowed:
     {
         "id": 321,
         "name": "bar",
-        "color": ["red", "blue"]
+        "color": {
+            "items": ["red", "blue"]
+        }
     }
 ]
 {% endhighlight %}
 
-TODO: Na tohle by se dal pouzit ten parse filter
+If you want to process the above response, you need to use the [`responseFilter` setting](todo).
 
 ## Endpoint
 The endpoint property is **required** and represents the URL of the resource. It can be either:
@@ -652,6 +665,49 @@ way, the 1:N relationship between Members and Tags is represented.
 
 See the [full example](todo:10-object-wth-nested-array)
 
+#### Upgrading to array
+You may encounter and API response like this:
+
+{% highlight json %}
+{
+    "members": [
+        {
+            "id": 123,
+            "name": "John Doe",
+            "tags": "active"
+        },
+        {
+            "id": 234,
+            "name": "Jane Doe",
+            "tags": ["active", "admin"]
+        }
+    ]
+}
+{% endhighlight %}
+
+When you extract the `members` array (set the `dataField` parameter to value `members` or empty value). The following 
+tables will be extracted:
+
+Users:
+
+|id|name|tags|
+|---|---|----|
+|123|John Doe|users-17_c6f3e32262682b6efd6c85ad97d2d503|
+|234|Jane Doe|users-17_92df9d5b9af8821316172285b196318e|
+
+Tags:
+
+|data|JSON_parentId|
+|----|-------------|
+|active|users-17_c6f3e32262682b6efd6c85ad97d2d503|
+|active|users-17_92df9d5b9af8821316172285b196318e|
+|admin|users-17_92df9d5b9af8821316172285b196318e|
+
+As you can see the, the scalar value `tags` in the first member object was automatically upgraded to 
+single-element array, because the `tags` property is an array elsewhere (second member) in the response.
+
+See the [full example](todo:17-upgrading-array)
+
 #### An object with nested object
 You may encounter an API response like this:
 
@@ -779,6 +835,8 @@ objects cannot be flattened.
 
 The value of `responseFilter` property is either a path to a property in the response or
 an array of such paths. The path is dot-separated unless set otherwise in the `responseFilterDelimiter` configuration.
+If you want to refer to items of array, use `[]` -- see 
+[example below](skip-flattening-in-nested-objects).
 
 ### Examples
 
@@ -900,61 +958,277 @@ you have to use the correct path to the properties you wish to skip from process
 
 The last two options might seem inconsistent. This is because the `responseFilter` path is set **relative to** the
 objects of the processed array (not to the array itself, not to the JSON root). Thus the only correct 
-setting is `contacts[].properties`.
+setting in this case is `contacts[].properties`.
 
 See the [full example](todo:14-skip-flatten-nested)
 
 #### Skip Boolean conversion
+TODO: tohle tak nefunguje, bud vyhodit, nebo updatnout GE!
 If you have an API response like this:
 
 {% highlight json %}
+[
+    {
+        "id": 123,
+        "name": "John Doe",
+        "married": true        
+    },
+    {
+        "id": 234,
+        "name": "Jane Doe",
+        "married": false
+    }
+]
 {% endhighlight %}
 
-and you extract the `members` array with the [default settings](todo:ex12), two tables will be 
-produced and the `properties` object will be flattened into a sparse table. To avoid that, you 
-can set the response filter to `"responseFilter": "contacts[].properties"`. This will 
-leave the `properties` child off `contacts` array of `members` array unprocessed. The following
-two tables will be produced:
+and you want to avoid the [default boolean conversion], you can add the `married` property to 
+the response filter. Setting `"responseFilter": "married"` will cause Generic Extractor to
+return the following table:
+
+|id|name|married|
+|---|---|---|
+|123|John Doe|true|
+|234|Jane Doe|false|
+
+See the [full example](todo:15-skip-boolean)
+
+#### Inconsistent Object
+If you have an API response like this:
+
+{% highlight json %}
+[
+    {
+        "id": 123,
+        "name": "foo",
+        "color": "green"
+    },
+    {
+        "id": 321,
+        "name": "bar",
+        "color": {
+            "items": ["red", "blue"]
+        }
+    }
+]
+{% endhighlight %}
+
+You will receive an error similar to `Error parsing response JSON: Unhandled type change from "scalar" to "object" in 'users-16.color'`. This means that the objects returned in the response are incompatible and cannot
+be [merged into a table](#merging-responses) by Generic Extractor. To avoid the error and still retrieve the data,
+you can use the `responseFilter` to skip the `color` property. When you set `"responseFilter": "color"`, you 
+will obtain the following table:
+
+|id|name|color|
+|---|---|---|
+|123|foo|"green"|
+|321|bar|{"items":["red","blue"]}|
+
+See the [full example](todo:16-inconsistent-object)
+
+#### Multiple Filters
+If you have a complex API response like this:
+
+{% highlight json %}
+{
+    "members": [
+        {
+            "id": 123,
+            "name": "John Doe",
+            "tags": {
+                "items": ["active", "admin"]
+            },
+            "contacts": [
+                {
+                    "type": "address",
+                    "properties": {
+                        "street": "Elm Street",
+                        "city": "New York"
+                    }
+                },
+                {
+                    "type": "email",
+                    "primary": true,
+                    "properties": "john.doe@example.com"                    
+                }
+            ]
+        },
+        {
+            "id": 234,
+            "name": "Jane Doe",
+            "tags": "none",
+            "contacts": [
+                {
+                    "type": "address",
+                    "primary": false,
+                    "properties": {
+                        "street": "Bates Street",
+                        "city": "Chicago",
+                        "state": "USA"
+                    }
+                },
+                {
+                    "type": "phone",
+                    "primary": true,
+                    "properties": "123 456 789"                    
+                }
+            ]
+        }
+    ]
+}
+{% endhighlight %}
+
+Because both `tags` and `contacts.properties` properties are inconsistent (sometimes using an object, sometimes using
+ a scalar value), you have to define multiple response filters. This can be done by using an array of 
+ paths: 
+
+{% highlight json %}
+"responseFilter": [
+    "contacts[].properties",
+    "tags"
+]
+{% endhighlight %}
+
+Then you will obtain the following tables:
 
 Users:
 
-|id|name|contacts|
-|---|---|---|
-|123|John Doe|users-12_0b9650e0f68b0c6738843d5b4ff0a961|
-|234|Jane Doe|users-12_cf76fb6794380244946d2bc4fa3aa04a|
+|id|name|tags|contacts|
+|---|---|---|---|
+|123|John Doe|{"items":["active","admin"]}|users-18_19318ac6aa76a92c8d90e603f69e02f6|
+|234|Jane Doe|"none"|users-18_3fdf6b12b11f85cb4eb9c34ce0322ecd|
 
 Contacts:
 
 |type|properties|primary|JSON_parentId|
-|address|{""street"":""Elm Street"",""city"":""New York""}||users-12_0b9650e0f68b0c6738843d5b4ff0a961|
-|email|{""address"":""john.doe@example.com""}|1|users-12_0b9650e0f68b0c6738843d5b4ff0a961|
-|address|{""street"":""Bates Street"",""city"":""Chicago"",""state"":""USA""}||users-12_cf76fb6794380244946d2bc4fa3aa04a|
-|phone|{""number"":""123 456 789""}|1|users-12_cf76fb6794380244946d2bc4fa3aa04a|
+|---|---|---|---|
+|address|{"street":"Elm Street","city":"New York"}||users-18_19318ac6aa76a92c8d90e603f69e02f6|
+|email|"john.doe@example.com"|1|users-18_19318ac6aa76a92c8d90e603f69e02f6|
+|address|{"street":"Bates Street","city":"Chicago","state":"USA"}||users-18_3fdf6b12b11f85cb4eb9c34ce0322ecd|
+|phone|"123 456 789"|1|users-18_3fdf6b12b11f85cb4eb9c34ce0322ecd|
 
-See the [full example](todo:15-skip-boolean)
+See the [full example](todo:18-multiple-filters)
 
+#### Setting Delimiter
+The default delimiter used for referencing nested properties is dot `.`. If the names of 
+properties in the API response contain dots, it might be necessary to change the default delimiter.
+If the API response looks like this:
 
-- **responseFilter**: Allows filtering data from API response to leave them unparsed and store as a JSON.
-    - Filtered data will be imported as a JSON encoded string.
-    - Value of this parameter can be either a string containing path to data to be filtered
-    within response data, or an array of such values.
-    - Example:
-
-            {
-                "results": [
-                    {
-                        "id": 1,
-                        "data": "scalar"
-                    },
-                    {
-                        "id": 2
-                        "data": { "object": "can\"t really parse this into the same column!" }
-                    }
-                ]
+{% highlight json %}
+{
+    "members": [
+        {
+            "id": 123,
+            "name": "John Doe",
+            "primary.address": {
+                "street": "Elm Street",
+                "city": "New York"
+            },
+            "secondary.address": {
+                "street": "Cemetery Ridge",
+                "city": "New York"
+            }            
+        },
+        {
+            "id": 234,
+            "name": "Jane Doe",
+            "primary.address": {
+                "street": " Blossom Avenue",
+                "state": "U.K."
+            },
+            "secondary.address": {
+                "street": "1313 Webfoot Walk",
+                "city": "Duckburg",
+                "state": "Calisota"
             }
+        }
+    ]
+}
+{% endhighlight %}
 
-    - To be able to work with such response, set `"responseFilter": "data"` - it should be a path within each object of the response array, **not** including the key of the response array
-    - To filter values within nested arrays, use `"responseFilter": "data.array[].key"`
+If you want to filter `secondary.address` field, you cannot set the `responseFilter` setting to 
+`secondary.address` because it would be interpreted as an `address` property of the `secondary` property.
+If you set `"responseFilter": "secondary.address` the extraction will work as if you did not set the
+filter at all (because it will be filtering non-existent `address` property). 
+
+For the filter to work correctly, you need to set the `responseFilterDelimiter` to an arbitrary character not
+used in the response property names. I.e. this would be a valid configuration:
+
+{% highlight json %}
+{
+    ...
+    "responseFilter": "secondary.address",
+    "responseFilterDelimiter": "#"
+}
+{% endhighlight %}
+
+Notice that it might by tempting to change the response filter to `secondary#address`. However, this would be 
+incorrect as it would again mean that we're referring to an `address` property nested in `secondary` 
+object. With the above settings you will obtain a table like this:
+
+|id|name|primary\_address\_street|primary\_address\_city|primary\_address\_state|secondary\_address|
+|---|---|---|---|---|---|
+|123|John Doe|Elm Street|New York||{"street":"Cemetery Ridge","city":"New York"}|
+|234|Jane Doe|Blossom Avenue||U.K.|{"street":"1313 Webfoot Walk","city":"Duckburg","state":"Calisota"}|
+
+See the [full example](todo:19-different-delimiter)
+
+#### Setting Delimiter More Complex
+To the custom set delimiter in response filter, you need to have a complex API response, e.g:
+
+{% highlight json %}
+{
+    "members": [
+        {
+            "id": 123,
+            "name": "John Doe",
+            "primary.address": {
+                "street": "Elm Street",
+                "city": "New York",
+                "tags": []
+            },
+            "secondary.address": {
+                "street": "Cemetery Ridge",
+                "city": "New York",
+                "tags": ["work", "usaddress"]
+            }            
+        },
+        {
+            "id": 234,
+            "name": "Jane Doe",
+            "primary.address": {
+                "street": " Blossom Avenue",
+                "state": "U.K.",
+                "tags": ["home"]
+            },
+            "secondary.address": {
+                "street": "1313 Webfoot Walk",
+                "city": "Duckburg",
+                "state": "Calisota"
+            }
+        }
+    ]
+}
+{% endhighlight %}
+
+To filter out all the `tags` properties, you need to set:
+
+{% highlight json %}
+{
+    "responseFilter": [
+        "secondary.address#tags",
+        "primary.address#tags"
+    ],
+    "responseFilterDelimiter": "#"
+}
+{% endhighlight %}
+
+With the above settings, you will obtain a table like the below one:
+
+|id|name|primary\_address\_street|primary\_address\_city|primary\_address\_tags|primary\_address\_state|secondary\_address\_street|secondary\_address\_city|secondary\_address\_tags|secondary\_address\_state|
+|123|John Doe|Elm Street|New York|||Cemetery Ridge|New York|["work","usaddress"]||
+|234|Jane Doe|Blossom Avenue||["home"]|U.K.|1313 Webfoot Walk|Duckburg||Calisota|
+
+See the [full example](todo:20-setting-delimiter-complex)
+
     - Example:
 
             {
