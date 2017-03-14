@@ -52,15 +52,57 @@ Do not specify the `action` attribute in the request body, it is already in the 
 
 *Note: use **https://docker-runner.keboola.com/** for running calling this part of the API.*
 
-### Exit Codes
+### Return Values
+
+As the application output is passed back through the API, all output from an action **MUST** be JSON (except for errors).
+
+If your application outputs an invalid JSON on its STDOUT, an application error will be raised.
+
+## Handling User and Application errors
 
 Actions use the same [exit codes](https://developers.keboola.com/extend/common-interface/environment/#return-values) as the default `run` action.
 
-### Return Values
+If an user or application error is detected, STDERR/STDOUT is handled as the message string and is returned to the user. The message is wrapped into a standardized structure.
 
-As the application output is passed back through the API, all output from actions **MUST** be JSON (except for application errors, exit code 2).
+For example
 
-If your application outputs an invalid JSON on its STDOUT, an application error will be raised.
+{% highlight python %}
+print('user error message')
+sys.exit(1)
+{% endhighlight %}
+
+yields this message on the API (HTTP status code 400)
+
+{% highlight json %}
+{
+  "status": "error",
+  "error": "User error",
+  "code": 400,
+  "message": "user error message",
+  "exceptionId": "docker-7ed4c3b599776e8a2a84a7f185f5f7f2",
+  "runId": 0
+}
+{% endhighlight %}
+
+and 
+
+{% highlight python %}
+print('application error message')
+sys.exit(2)
+{% endhighlight %}
+
+yields this message on the API (HTTP status code 500)
+
+{% highlight json %}
+{
+  "status": "error",
+  "error": "Application error",
+  "code": 500,
+  "message": "Contact support@keboola.com and attach this exception id.",
+  "exceptionId": "docker-2a51922e0753cf78297ad6d384200206",
+  "runId": 0
+}
+{% endhighlight %}
 
 ## Limits
 

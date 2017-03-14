@@ -58,7 +58,7 @@ User Exception, the end-user will see a full error message. Therefore,
 - Provide guidance on what the user should do. For example, 'The input table is missing; make sure the output mapping produces the 'items.csv' table'.
 
 In case of an *Application Exception*, the end-user will see only a canned response ('An application error occurred') with
-the option to contact support. The actual output of the application will be sent to our internal logs only.
+the option to contact support. The actual output of the application will be sent to our internal logs only. You can request us to retrieve the internal logs. 
 
 In case of [Docker extensions](/extend/docker/) the output can be forwarded to a place specified by you in your
 [component registration](/extend/registration/), while in case of [Custom Science](/extend/custom-science/), it cannot.
