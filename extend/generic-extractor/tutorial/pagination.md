@@ -9,9 +9,9 @@ permalink: /extend/generic-extractor/tutorial/pagination/
 Pagination breaks a result with a large number of items into separate pages and is used very commonly in 
 many API calls. 
 
-In the [previous part](/extend/generic-extractor/tutorial/) of the tutorial, you fetched campaigns from 
-the MailChimp API. If you created a new account, chances are that you probably have only one campaign. 
-You should now create some more campaigns (you do not have to configure them anyhow).
+In the previous part of the tutorial, you [fetched campaigns from 
+the MailChimp API](/extend/generic-extractor/tutorial/). If you created a new account, chances are that you probably have 
+only one campaign. You should now create some more campaigns (you do not have to configure them anyhow).
 
 If the API has consistent pagination for all resources (which the
 [MailChimp API has](http://developer.mailchimp.com/documentation/mailchimp/guides/get-started-with-mailchimp-api-3/#pagination)),
