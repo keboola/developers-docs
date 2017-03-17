@@ -23,3 +23,23 @@ parameters :
                 }
             }
 
+
+
+        - You can also use an [user function](/extend/generic-extractor/user-functions/) on the value from a parent using an object as the placeholder value
+        - That object MUST contain a `path` key that would be the value of the placeholer, and a `function`. To access the value in the function arguments, use `{"placeholder": "value"}`
+            - Example:
+
+                    {
+                        "placeholders": {
+                            "1:id": {
+                                "path": "id",
+                                "function": "urlencode",
+                                "args": [
+                                    {
+                                        "placeholder": "value"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                    

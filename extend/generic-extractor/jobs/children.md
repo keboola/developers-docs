@@ -396,69 +396,383 @@ And you use the following job configuration:
         }
     ]
 }
-{% endhighlight}
+{% endhighlight %}
 
 The output for the child job will contain column `parent_id` and at the same time, Generic Extractor will attempt
 to create a column `parent_id` with the placeholder value. The outcome is that Generic Extractor 
 overwrites the original column and that column is lost.
 
+See [full example](todo:025-naming-conflict)
 
+### Nesting Level
+By default, the placeholder value is taken from the object retrieved in the parent job. As long as the child
+jobs are nested only one level deep, there is no other option anyway. Let's see what happens with a deeper nesting.
+Let's say that you have an API with two endpoints:
 
+- `/users/` -- returns a list of users,
+- `/user/?` -- returns user details with given user ID,
+- `/user/?/orders` -- returns a list of user orders,
+- `/user/?/orders/?` -- returns order detail with given user and order ID.
 
-Jobs also allow you to set their children and filters to go through its result and for each one of the results create a "child" job using some attributes from the result.
+The `users` API returns a response like this:
 
-## Job configuration
+{% highlight json %}
+[
+    {
+        "userId": 123,
+        "name": "John Doe"
+    },
+    {
+        "userId": 234,
+        "name": "Jane Doe"
+    }
+]
+{% endhighlight %}
 
-This extends the basic functionality of a [job](/extend/generic-extractor/jobs/)
+The `user/123` response returns a response like this:
 
-- **children**: Array of child jobs that use the jobs' results to iterate
-    - The endpoint must use a placeholder enclosed in `{}`
-    - The placeholder can be prefixed by a number, that refers to higher level of nesting. By default, data from direct parent are used. The direct parent can be referred as `{id}` or `{1:id}`. A "grandparent" result would then be `{2:id}` etc.
-    - Results in the child table will contain column(s) containing parent data used in the placeholder(s), prefixed by **parent_**. For example, if your placeholder is `{ticket_id}`, a column **parent_ticket_id** containing the value of current iteration will be appended to each row.
+{% highlight json %}
+{
+    "userId": 123,
+    "name": "John Doe",
+    "description": "Good ol' father John"
+}
+{% endhighlight %}
 
-    - **placeholders** array must define each placeholder. It must be a set of `key: value` pairs, where **key** is the placeholder (eg `"1:id"`) and the value is a path within the response object - if nested, use `.` as a separator.
-        - Example job config:
+The `user/123/orders` response returns a response like this:
 
+{% highlight json %}
+[
+    {
+        "orderId": "1234",
+        "price": "$12"
+    },
+    {
+        "orderId": "1345",
+        "price": "$1212"
+    }
+]
+{% endhighlight %}
+
+The `user/123/order/1234` response returns a response like this:
+
+{% highlight json %}
+{
+    "orderId": 1234,
+    "price": "$12",
+    "timestamp": "2017-05-06 8:21:45",
+    "state": "cancelled"
+}
+{% endhighlight %}
+
+Then you can create a job configuration with three nested children to retrieve all the API resources:
+
+{% highlight json %}
+{
+    ...,
+    "jobs": [
+        {
+            "endpoint": "users",
+            "children": [
                 {
-                    "endpoint": "tickets.json",
+                    "endpoint": "user/{1:user-id}",
+                    "dataField": ".",
+                    "dataType": "user-detail",
+                    "placeholders": {
+                        "1:user-id": "userId"
+                    },
                     "children": [
                         {
-                            "endpoint": "tickets/{id}/comments.json",
+                            "endpoint": "user/{2:user-id}/orders",
+                            "dataType": "orders",
                             "placeholders": {
-                                "id": "id"
+                                "2:user-id": "userId"
                             },
                             "children": [
                                 {
-                                    "endpoint": "tickets/{2:ticket_id}/comments/{comment_id}/details.json",
+                                    "endpoint": "user/{3:user-id}/order/{1:order-id}",
+                                    "dataType": "order-detail",
+                                    "dataField": ".",
                                     "placeholders": {
-                                        "comment_id": "id",
-                                        "2:ticket_id": "id"
+                                        "3:user-id": "userId",
+                                        "1:order-id": "orderId"
+                                    }                                            
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+{% endhighlight %}
+
+The `jobs` configuration retrieves all users from the `users` API endpoint. The first child retrieves
+details for each user (from `user/?` endpoint) and stores them in the `user-detail` table. The second 
+child retrieves each user orders (from `user/?/orders` endpoint) and stores them in the `orders` table.
+Finally the deepest nested child returns details of each order (for each user) from the 
+`user/?/order/?` endpoint and stores them in the `order-detail` table. Therefore the following four tables
+will be produced:
+
+users:
+|userId|name|
+|---|---|
+|123|John Doe|
+|234|Jane Doe|
+
+user-detail:
+|userId|name|description|parent\_userId|
+|---|---|---|---|
+|123|John Doe|Good ol' father John|123|
+|234|Jane Doe|Good young mommy Jenny|234|
+
+orders:
+|orderId|price|parent\_userId|
+|---|---|---|
+|1234|$12|123|
+|1345|$1212|123|
+|2345|$42|234|
+
+order-detail:
+|orderId|price|timestamp|state|parent\_userId|parent\_orderId|
+|---|---|---|---|---|---|
+|1234|$12|2017-05-06 8:21:45|cancelled|123|1234|
+|1345|$1212|2017-12-24 12:30:53|delivered|123|1345|
+|2345|$42|2017-01-12 2:12:43|cancelled|234|2345|
+
+Notice that each table contains additional columns with the placeholder property path prefixed with `parent_`.
+
+See [full example](todo:026-basic-deeper-nesting)
+
+### Nesting Level Alternative
+
+Because the required user and order IDs are present in multiple requests (in the list and in the detail), there
+are multiple ways how the jobs may be configured. For example the following configuration produces the 
+exact same result as the above configuration:
+
+{% highlight json %}
+{
+    ...,
+    "jobs": [
+        {
+            "endpoint": "users",
+            "children": [
+                {
+                    "endpoint": "user/{user-id}",
+                    "dataField": ".",
+                    "dataType": "user-detail",
+                    "placeholders": {
+                        "user-id": "userId"
+                    },
+                    "children": [
+                        {
+                            "endpoint": "user/{user-id}/orders",
+                            "dataType": "orders",
+                            "children": [
+                                {
+                                    "endpoint": "user/{user-id}/order/{order-id}",
+                                    "dataType": "order-detail",
+                                    "dataField": ".",
+                                    "placeholders": {
+                                        "order-id": "orderId"
                                     }
                                 }
                             ]
                         }
                     ]
                 }
+            ]
+        }
+    ]
+}
+{% endhighlight %}
 
-        - You can also use an [user function](/extend/generic-extractor/user-functions/) on the value from a parent using an object as the placeholder value
-        - That object MUST contain a `path` key that would be the value of the placeholer, and a `function`. To access the value in the function arguments, use `{"placeholder": "value"}`
-            - Example:
+The above configuration is less explicit and not really recommended, but still acceptable. 
+Placeholders are defined globally, which means that
+the second nested child job to `user/{user-id}/orders` does not define any, because it relies on those 
+defined by its parent job (which happen to be correct). Also the deepest child defines only `order-id` placeholder,
+because again the `user-id` placeholder was defined in some of its parents. Even though the
+placeholders are defined globally, the placeholders defined in child jobs override the placeholders in the
+parent jobs. E.g. in this (probably **very incorrect** configuration) the `1:user-id` placeholder in the 
+deepest child will really contain `orderId` value.
 
-                    {
-                        "placeholders": {
-                            "1:id": {
-                                "path": "id",
-                                "function": "urlencode",
-                                "args": [
-                                    {
-                                        "placeholder": "value"
+{% highlight json %}
+{
+    ...,
+    "jobs": [
+        {
+            "endpoint": "users",
+            "children": [
+                {
+                    "endpoint": "user/{1:user-id}",
+                    "dataField": ".",
+                    "dataType": "user-detail",
+                    "placeholders": {
+                        "1:user-id": "userId"
+                    },
+                    "children": [
+                        {
+                            "endpoint": "user/{2:user-id}/orders",
+                            "dataType": "orders",
+                            "placeholders": {
+                                "2:user-id": "userId"
+                            },
+                            "children": [
+                                {
+                                    "endpoint": "user/{1:user-id}/order/{2:order-id}",
+                                    "dataType": "order-detail",
+                                    "dataField": ".",
+                                    "placeholders": {
+                                        "1:user-id": "orderId",
+                                        "2:order-id": "userId"
                                     }
-                                ]
-                            }
+                                }
+                            ]
                         }
-                    }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+{% endhighlight %}
 
-    - **recursionFilter**:
+See [full example](todo:027-basic-deeper-nesting-alternative)
+
+### Deep Job Nesting
+Let's see how you can retrieve more nested API resource:
+
+{% highlight json %}
+{
+    "jobs": [
+        {
+            "endpoint": "users",
+            "children": [
+                {
+                    "endpoint": "user/{1:user-id}",
+                    "dataField": ".",
+                    "dataType": "user-detail",
+                    "placeholders": {
+                        "1:user-id": "id"
+                    },
+                    "children": [
+                        {
+                            "endpoint": "user/{2:user-id}/orders",
+                            "dataType": "orders",
+                            "placeholders": {
+                                "2-user-id": "id"
+                            },
+                            "children": [
+                                {
+                                    "endpoint": "user/{3:user-id}/order/{1:order-id}",
+                                    "dataType": "order-detail",
+                                    "dataField": ".",
+                                    "placeholders": {
+                                        "3:user-id": "id",
+                                        "1:order-id": "id"
+                                    },
+                                    "children": [
+                                        {
+                                            "endpoint": "user/{4:user-id}/order/{2:order-id}/items",
+                                            "dataType": "order-items",
+                                            "placeholders": {
+                                                "4:user-id": "id",
+                                                "2:order-id": "id"
+                                            },
+                                            "children": [
+                                                {
+                                                    "endpoint": "user/{5:user-id}/order/{3:order-id}/item/{1:item-id}",
+                                                    "dataType": "item-detail",
+                                                    "dataField": ".",
+                                                    "placeholders": {
+                                                        "5:user-id": "id",
+                                                        "3:order-id": "id",
+                                                        "1:item-id": "id"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+{% endhighlight %}
+
+The above configuration assumes that all API resources simply have an `id` property (unlike in
+previous example where users had `userId` and orders had `orderId`). This makes the configuration look 
+rather cryptic. You have to read the deepest child placeholder configuration:
+
+    "5:user-id": "id",
+    "3:order-id": "id",
+    "1:item-id": "id"
+
+as:
+
+- go five levels up, pick the `id` property from the response and put it in place of the `user-id` in the endpoint URL
+- go three levels up, pick the `id` property from the response and put it in place of the `order-id` in the endpoint URL
+- go one level up, pick the `id` property from the response and put it in place of the `item-id` in the endpoint URL
+
+Important: Once you run into using placeholders with same property path, their order becomes important. 
+This is because the property path is used as a name of an additional column in the extracted table. Because 
+the property path is `id` in all cases, it will lead to column `parent_id` in all cases and therefore it 
+will get overwritten. With the above configuration, the following `item-detail` table will be produced.
+
+|id|code|name|parent_id|
+|---|---|---|---|
+|345|PA10|Pick Axe|345|
+|456|TB20|Tooth Brush|456|
+
+Where the `parent_id` column refers to the `1:item-id` placeholder. If you would use a placeholder configuration
+
+{% highlight json %}
+{
+    ...,
+    "placeholders": {
+        "1:item-id": "id",
+        "3:order-id": "id",
+        "5:user-id": "id"
+    }
+}
+{% endhighlight %}
+
+You would obtain an `item-detail` table:
+
+|id|code|name|parent_id|
+|---|---|---|---|
+|345|PA10|Pick Axe|123|
+|456|TB20|Tooth Brush|123|
+
+Where the `parent_id` column refers the `5:user-id` placeholder.
+
+See [full example](todo:028-advanced-deep-nesting)
+
+## Filter
+The configuration option `recursionFilter` allows you to skip some child jobs from processing. This can be
+useful in cases when:
+- some resources are not accessible to you and querying them would cause an error in the extraction,
+- some resources return inconsistent or incomplete responses,
+- you are not interested in some resources and you want to speed up the extraction.
+
+The `responseFilter` configuration contains a string expression with filter condition composed of:
+
+- a name of a property from parent response, 
+- a comparison operator -- `<`, `>`, `<=`, `>=`, `==` (equal), `!=` (not equal), `~~` (like), `!~` (unlike)
+- a value to compare
+- optionally logical operators `|` (or), `&` (and) may be used to join multiple conditions
+
+An example response filter may be `type!=employee` or `product.value>150`. *Important:* The expression is 
+whitespace sensitive, therefore `type != employee` will filter properties `type ` to not contain 
+a value ` employee` (which is probably not what you intended to do).
+
+
+
         - Can contain a value consisting of a name of a field from the parent's response, logical operator and a value to compare against. Supported operators are "**==**", "**<**", "**>**", "**<=**", "**>=**", "**!=**"
         - Example: `type!=employee` or `product.value>150`
         - The filter is whitespace sensitive, therefore `value == 100` will look into `value␣` for a `␣100` value, instead of `value` and `100` as likely desired.
