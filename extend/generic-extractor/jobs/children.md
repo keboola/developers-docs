@@ -769,12 +769,213 @@ The `responseFilter` configuration contains a string expression with filter cond
 
 An example response filter may be `type!=employee` or `product.value>150`. *Important:* The expression is 
 whitespace sensitive, therefore `type != employee` will filter properties `type ` to not contain 
-a value ` employee` (which is probably not what you intended to do).
+a value ` employee` (which is probably not what you intended to do). String comparisons are always **case sensitive**.
 
+### Examples
+#### Simple Filter
+Let's assume that you have an API which has two resources: 
 
+- `users` -- returning a list of users
+- `users/?` -- returning a user detail
 
-        - Can contain a value consisting of a name of a field from the parent's response, logical operator and a value to compare against. Supported operators are "**==**", "**<**", "**>**", "**<=**", "**>=**", "**!=**"
-        - Example: `type!=employee` or `product.value>150`
-        - The filter is whitespace sensitive, therefore `value == 100` will look into `value␣` for a `␣100` value, instead of `value` and `100` as likely desired.
-        - Further documentation can be found at [keboola/php-filter](https://github.com/keboola/php-filter)
+The `users` API returns a response like this:
 
+{% highlight json %}
+[
+    {
+        "id": 123,
+        "name": "John Doe",
+        "role": "parent",
+        "type": "admin"
+    },
+    {
+        "id": 234,
+        "name": "Jane Doe",
+        "role": "parent",
+        "type": "administrator"
+    },
+    {
+    	"id": 345,
+    	"name": "Jimmy Doe",
+    	"role": "child",
+    	"type": "user"
+    },
+    {
+    	"id": 456,
+    	"name": "Janet Doe",
+    	"role": "child",
+    	"type": "user"
+    }
+]
+{% endhighlight %}
+
+The `user/123` API endpoint returns a response like this:
+
+{% highlight json %}
+{
+    "id": 123,
+    "name": "John Doe",
+    "userRole": "parent",
+    "userType": "admin",
+    "description": "Father John"
+}
+{% endhighlight %}
+
+A simple child filter can be then set up using the following `jobs` configuration:
+
+{% highlight json %}
+{
+    ...,
+    "jobs": [
+        {
+            "endpoint": "users",
+            "children": [
+                {
+                    "endpoint": "user/{user-id}",
+                    "dataField": ".",
+                    "dataType": "user-deail",
+                    "placeholders": {
+                        "user-id": "id"
+                    },
+                    "recursionFilter": "role==parent"
+                }
+            ]
+        }
+    ]
+}
+{% endhighlight %}
+
+The `recursionFilter` setting will cause Generic Extractor to query only the sub-resources for which the 
+filter evaluates to true. The filter property name `type` refers to the parent response, but it 
+does filter only the children. I.e the following tables will be returned:
+
+users:
+|id|name|role|type|
+|---|---|---|---|
+|123|John Doe|parent|admin|
+|234|Jane Doe|parent|administrator|
+|345|Jimmy Doe|child|user|
+|456|Janet Doe|child|user|
+
+user-detail:
+|id|name|userRole|userType|description|parent\_id|
+|---|---|---|---|---|---|
+|123|John Doe|parent|admin|Father John|123|
+|234|Jane Doe|parent|administrator|Mother Jane|234|
+
+You can see from the above tables that the filter is applied to the child results only so that
+the details for only the wanted users are retrieved.
+
+### Not Like Filter
+Apart from the standard comparison operators, the recursive filter allows to use 
+a **like** comparison operator `~`. It expects that the value contains a placeholder `%` 
+which matches any number of characters. The following configuration:
+
+{% highlight json %}
+{
+    ...,
+    "jobs": [
+        {
+            "endpoint": "users",
+            "children": [
+                {
+                    "endpoint": "user/{user-id}",
+                    "dataField": ".",
+                    "recursionFilter": "type!~%min%",
+                    "dataType": "user-detail",
+                    "placeholders": {
+                        "user-id": "id"
+                    }
+                }
+            ]
+        }
+    ]
+}
+{% endhighlight %}
+
+filters out all child resources not containing the string `min` in their parent type property.
+The expression `%min%` matches any string which contains any number of characters (including none)
+before and after the string `min`. The operator `!~` is negative like, therefore the 
+following `user-detail` table will be extracted:
+
+|id|name|userRole|userType|description|parent\_id|
+|---|---|---|---|---|---|
+|345|Jimmy Doe|child|user|Sonny Jimmy|345|
+|456|Janet Doe|child|user|Missy Jennie|456|
+
+### Combining Filters
+Multiple filters can be combined using the 
+[logical](https://en.wikipedia.org/wiki/Boolean_algebra#Basic_operations) `&` (and) and `|` (or) operators.
+For example the following configuration retrieves details for user which have 
+both `id < 400` and `role = child`. 
+
+{% highlight %}
+{
+    ...,
+    "jobs": [
+        {
+            "endpoint": "users",
+            "children": [
+                {
+                    "endpoint": "user/{user-id}",
+                    "dataField": ".",
+                    "dataType": "user-detail",
+                    "recursionFilter": "id<400&role==child",
+                    "placeholders": {
+                        "user-id": "id"
+                    }
+                }
+            ]
+        }
+    ]
+}
+{% endhighlight %}
+
+The following `user-detail` will be produced:
+
+|id|name|userRole|userType|description|parent\_id|
+|---|---|---|---|---|---|
+|345|Jimmy Doe|child|user|Sonny Jimmy|345|
+
+### Multiple Filter Combinations
+Although you can join multiple filter expression with logical operators as in the 
+above example, there is no support for parentheses. The following configuration
+combines multiple filters:
+
+{% highlight json %}
+{
+    ...,
+    "jobs": [
+        {
+            "endpoint": "users",
+            "recursionFilter": "role=parent|id>300&id<400",
+            "children": [
+                {
+                    "endpoint": "user/{user-id}",
+                    "dataField": ".",
+                    "placeholders": {
+                        "user-id": "id"
+                    }
+                }
+            ]
+        }
+    ]
+}
+{% endhighlight %}
+
+The precedence of logical operators is defined so that the first operator occurring in the 
+expression takes precedence over the second. I.e. the condition `role=parent|id>300&id<400` 
+is interpreted as `role=parent|(id>300&id<400)` because the operator `|` takes precedence 
+over the `&` operator. The condition `id>300&id<400|role==parent` is interpreted as
+`id>300&(id<400|role==parent)` because the `&` operator takes precedence over the `|` operator.
+
+With the above configuration, the following `user-detail` table will be produced:
+
+|id|name|userRole|userType|description|parent\_id|
+|---|---|---|---|---|---|
+|123|John Doe|parent|admin|Father John|123|
+|234|Jane Doe|parent|administrator|Mother Jane|234|
+|345|Jimmy Doe|child|user|Sonny Jimmy|345|
+
+Because the described system of operator precedence may lead to rather unusual behavior, 
+we recommend that you keep the recursive filter simple.

@@ -42,4 +42,7 @@ parameters :
                             }
                         }
                     }
-                    
+
+        - Further documentation can be found at [keboola/php-filter](https://github.com/keboola/php-filter)
+
+
