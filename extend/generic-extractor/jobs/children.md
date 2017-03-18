@@ -909,7 +909,7 @@ Multiple filters can be combined using the
 For example the following configuration retrieves details for user which have 
 both `id < 400` and `role = child`. 
 
-{% highlight %}
+{% highlight json %}
 {
     ...,
     "jobs": [
