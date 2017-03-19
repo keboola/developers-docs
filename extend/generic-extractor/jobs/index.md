@@ -6,10 +6,10 @@ permalink: /extend/generic-extractor/jobs/
 * TOC
 {:toc}
 
-The jobs section of the configuration contains descriptions of API resources that will be
+The jobs section of the configuration contains descriptions of the API resources to be
 extracted. The `jobs` configuration property is an array of processed API endpoints. A
 single *job represents a single [API resource](/extend/generic-extractor/tutorial/rest)*.
-If you are new to Generic Extractor, you should go through the [corresponding part of the tutorial](/extend/generic-extractor/tutorial/jobs/).
+If new to Generic Extractor, learn about [jobs in our tutorial](/extend/generic-extractor/tutorial/jobs/) first.
 
 A sample job configuration can look like this:
 
@@ -34,7 +34,7 @@ A sample job configuration can look like this:
 }
 {% endhighlight %}
 
-Generic Extractor reads and processes the responses from API endpoints in a pretty complex
+Generic Extractor reads and processes the responses from the API endpoints in a pretty complex
 way. In principle processing the response is composed of the following steps:
 
 - receive the JSON in response,
@@ -280,7 +280,7 @@ use that property.
 - If the response is an object with none or multiple array properties, require that `dataField` is configured.
 
 Apart from cases where required, the `dataField` configuration may also be set to override the
-above default behavior. The `dataField` parameter contains a
+above default behaviour. The `dataField` parameter contains a
 [dot separated path](/extend/generic-extractor/tutorial/json/) to the response property you want to
 extract. The `dataField` parameter may be written in two ways -- either as a simple string or
 as and object with `path` property. E.g. these two configurations are equivalent:
@@ -395,7 +395,7 @@ To extract data from the following API response:
 }
 {% endhighlight %}
 
-You have to ser the `dataField` parameter to value `users` (`"dataField": "users"`). Not setting the
+You have to set the `dataField` parameter to value `users` (`"dataField": "users"`). Not setting the
 `dataField` parameter would result in an error
 (`More than one array found in response! Use 'dataField' parameter to specify a key to the data array`).
 The following table will be extracted:
@@ -434,7 +434,7 @@ To extract data from the following API response:
 {% endhighlight %}
 
 You have to set the `dataField` parameter to value `members.active` (`"dataField": "members.active"`). Not setting the
-`dataField` parameter would result in a warning (`No data array found in response!`).
+`dataField` parameter would result in a warning (`No data array found in the response!`).
 The following table will be extracted:
 
 |id|name|
@@ -1164,8 +1164,8 @@ used in the response property names. I.e. this would be a valid configuration:
 }
 {% endhighlight %}
 
-Notice that it might by tempting to change the response filter to `secondary#address`. However, this would be 
-incorrect as it would again mean that we're referring to an `address` property nested in `secondary` 
+It might by tempting to change the response filter to `secondary#address`. However, this would be 
+incorrect as it would again mean that we're referring to an `address` property nested in the `secondary` 
 object. With the above settings you will obtain a table like this:
 
 |id|name|primary\_address\_street|primary\_address\_city|primary\_address\_state|secondary\_address|
