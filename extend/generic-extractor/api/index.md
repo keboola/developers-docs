@@ -1,33 +1,23 @@
 ---
-title: Generic Extractor API Config (under construction)
+title: API Configuration
 permalink: /extend/generic-extractor/api/
 ---
 
-This section defines characteristics of the API
+* TOC
+{:toc}
+
+The API section of configuration describes global characteristics of the API. These include
+HTTP headers, authentication and pagination methods. 
+
+### Base URL
+The `baseUrl` configuration defines the URL to which the API requests should be sent to. We
+recommend that the URL ends with slash so that the `jobs.endpoint` can be set easily.
+See the [`endpoint` configuration](/extend/generic-extractor/jobs/#endpoint) for detailed description
+how `api.baseUrl` and `jobs.endpoint` work together.
+
 
 ## Config items
 
-### `baseUrl`
-- Either a string with base URL of the API (eg `https://connection.keboola.com/v2/`)
-- OR an [user function](/extend/generic-extractor/user-functions/), if there's a configurable part of the base URL, such as a subdomain, or an account ID..
-- Example using a function:
-
-        {
-            "api": {
-                "function": "concat",
-                "args": [
-                    "https://",
-                    { "attr": "domain" },
-                    ".zendesk.com/api/v2/"
-                ]
-            },
-            "config": {
-                "domain": "yourDomain"
-            }
-        }
-
-    - for *https://__yourDomain__.zendesk.com/api/v2/*
-    - uses `config` part, where attribute **domain** would contain `yourDomain`
 
 ### `pagination`
 - Configure scrolling through pages of results

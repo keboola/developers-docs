@@ -46,3 +46,25 @@ parameters :
         - Further documentation can be found at [keboola/php-filter](https://github.com/keboola/php-filter)
 
 
+### `baseUrl`
+- Either a string with base URL of the API (eg `https://connection.keboola.com/v2/`)
+- OR an [user function](/extend/generic-extractor/user-functions/), if there's a configurable part of the base URL, such as a subdomain, or an account ID..
+- Example using a function:
+
+        {
+            "api": {
+                "function": "concat",
+                "args": [
+                    "https://",
+                    { "attr": "domain" },
+                    ".zendesk.com/api/v2/"
+                ]
+            },
+            "config": {
+                "domain": "yourDomain"
+            }
+        }
+
+    - for *https://__yourDomain__.zendesk.com/api/v2/*
+    - uses `config` part, where attribute **domain** would contain `yourDomain`
+
