@@ -232,11 +232,11 @@ For example, the following `params` field
 }
 {% endhighlight %}
 
-will be sent as the following POST request body:
+will be sent as the following POST request body
 
     startDate=2016-01-20&types%5B0%5D=new&types%5B1%5D=active&types%5B2%5D=finished
 
-In a more readable [URLDecoded](https://urldecode.org/) form:
+in a more readable [URLDecoded](https://urldecode.org/) form:
 
    startDate=2016-01-20&types[0]=new&types[1]=active&types[2]=finished
 
@@ -827,6 +827,7 @@ the following two tables will be extracted:
 Users:
 
 |id|name|contacts|
+|---|---|---|
 |123|John Doe|users-12_8505d6585e28c00d461ba64f085d1055|
 |234|Jane Doe|users-12_ec8c48efecb10334072f03a860113ea2|
 
@@ -835,7 +836,7 @@ Contacts:
 |type|properties\_street|properties\_city|properties\_address|properties\_state|properties\_number|primary|JSON_parentId|
 |---|---|---|---|---|---|---|---|
 |address|Elm Street|New York|||||users-12_8505d6585e28c00d461ba64f085d1055|
-|email||||john.doe@example.com|||1|users-12_8505d6585e28c00d461ba64f085d1055|
+|email|||john.doe@example.com|||1|users-12_8505d6585e28c00d461ba64f085d1055|
 |address|Bates Street|Chicago||USA|||users-12_ec8c48efecb10334072f03a860113ea2|
 |phone|||||123 456 789|1|users-12_ec8c48efecb10334072f03a860113ea2|
 
@@ -958,6 +959,7 @@ Users:
 Contacts:
 
 |type|properties|primary|JSON_parentId|
+|---|---|---|---|
 |address|{""street"":""Elm Street"",""city"":""New York""}||users-12_0b9650e0f68b0c6738843d5b4ff0a961|
 |email|{""address"":""john.doe@example.com""}|1|users-12_0b9650e0f68b0c6738843d5b4ff0a961|
 |address|{""street"":""Bates Street"",""city"":""Chicago"",""state"":""USA""}||users-12_cf76fb6794380244946d2bc4fa3aa04a|
