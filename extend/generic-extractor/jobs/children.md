@@ -3,6 +3,9 @@ title: Child Jobs
 permalink: /extend/generic-extractor/jobs/children/
 ---
 
+* TOC
+{:toc}
+
 Child jobs allows you to iterate/traverse over sub-resources of an API resource. For example if you download a
 list of users, you can download details of each user or a list of orders for each users. You can see basic example
 of using child jobs in the [corresponding part of the tutorial](/extend/generic-extractor/tutorial/jobs/#child-jobs).
@@ -58,9 +61,27 @@ is counted from the child 'upwards'. Therefore a placeholder `2:user-id` means t
 the property path will be searched in parent of the child parent ('two levels up`).
 See the [corresponding examples](todo).
 
-### Examples
+## Filter
+The configuration option `recursionFilter` allows you to skip some child jobs from processing. This can be
+useful in cases when:
+- some resources are not accessible to you and querying them would cause an error in the extraction,
+- some resources return inconsistent or incomplete responses,
+- you are not interested in some resources and you want to speed up the extraction.
 
-#### Basic Example
+The `responseFilter` configuration contains a string expression with filter condition composed of:
+
+- a name of a property from parent response, 
+- a comparison operator -- `<`, `>`, `<=`, `>=`, `==` (equal), `!=` (not equal), `~~` (like), `!~` (unlike)
+- a value to compare
+- optionally logical operators `|` (or), `&` (and) may be used to join multiple conditions
+
+An example response filter may be `type!=employee` or `product.value>150`. *Important:* The expression is 
+whitespace sensitive, therefore `type != employee` will filter properties `type ` to not contain 
+a value ` employee` (which is probably not what you intended to do). String comparisons are always **case sensitive**.
+
+## Examples
+
+### Basic Example
 Let's say that you have an API with two endpoints:
 
 - `/users/` -- returns a list of users,
@@ -753,26 +774,7 @@ Where the `parent_id` column refers the `5:user-id` placeholder.
 
 See [full example](todo:028-advanced-deep-nesting)
 
-## Filter
-The configuration option `recursionFilter` allows you to skip some child jobs from processing. This can be
-useful in cases when:
-- some resources are not accessible to you and querying them would cause an error in the extraction,
-- some resources return inconsistent or incomplete responses,
-- you are not interested in some resources and you want to speed up the extraction.
-
-The `responseFilter` configuration contains a string expression with filter condition composed of:
-
-- a name of a property from parent response, 
-- a comparison operator -- `<`, `>`, `<=`, `>=`, `==` (equal), `!=` (not equal), `~~` (like), `!~` (unlike)
-- a value to compare
-- optionally logical operators `|` (or), `&` (and) may be used to join multiple conditions
-
-An example response filter may be `type!=employee` or `product.value>150`. *Important:* The expression is 
-whitespace sensitive, therefore `type != employee` will filter properties `type ` to not contain 
-a value ` employee` (which is probably not what you intended to do). String comparisons are always **case sensitive**.
-
-### Examples
-#### Simple Filter
+### Simple Filter
 Let's assume that you have an API which has two resources: 
 
 - `users` -- returning a list of users

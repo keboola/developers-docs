@@ -312,9 +312,28 @@ as an object with the `path` property. For instance, these two configurations ar
 }
 {% endhighlight %}
 
-### Examples
+## Response Filter
+The `responseFilter` option allows you to skip parts of the API response from processing. This can
+be useful if 
 
-#### Simple array
+- you do not want to flatten the JSON structure using the default
+[JSON Parser](/extend/generic-extractor/jobs/#merging-responses) (as in the above examples). 
+- the API response is inconsistent and the objects cannot be flattened.
+
+The value of the `responseFilter` property is either a path to a property in the response, or
+an array of such paths. The path is dot-separated unless set otherwise in the `responseFilterDelimiter` configuration.
+If you want to refer to the items of an array, use `[]` --- see 
+an [example below](skip-flattening-in-nested-objects).
+
+### Children
+The `children` configuration allows you to retrieve sub-resources of the processes API resource.
+These **child jobs** (**nested jobs**) are executed for each object retrieved from the 
+parent response. The definition of child jobs is the same as the definition of parent jobs, 
+except for **placeholders**. The children configuration is described in a [separate article](/jobs/children/).
+
+## Examples
+
+### Simple array
 To extract data from the following API response,
 
 {% highlight json %}
@@ -345,7 +364,7 @@ to `1` when true and left empty otherwise (`false` and `null`).
 
 See the [full example](todo:1-simple-job).
 
-#### Array within an object
+### Array within an object
 To extract data from the following API response,
 
 {% highlight json %}
@@ -374,7 +393,7 @@ The following table will be extracted:
 
 See the [full example](todo:2-array-in-object).
 
-#### Multiple arrays within an object
+### Multiple arrays within an object
 To extract data from the following API response,
 
 {% highlight json %}
@@ -408,7 +427,7 @@ The following table will be extracted:
 
 See the [full example](todo:3-multiple-arrays-in-object).
 
-#### Array within a nested object
+### Array within a nested object
 To extract data from the following API response,
 
 {% highlight json %}
@@ -445,7 +464,7 @@ The following table will be extracted:
 
 See the [full example](todo:4-array-in-nested-object).
 
-#### Two arrays within a nested object
+### Two arrays within a nested object
 To extract both `active` and `inactive` arrays from the above API response, you need to use two jobs:
 
 {% highlight json %}
@@ -501,7 +520,7 @@ The following table will be extracted:
 
 See the [full example](todo:5-two-arrays-in-nested-object).
 
-#### Simple object
+### Simple object
 You may encounter and API response like this:
 
 {% highlight json %}
@@ -521,7 +540,7 @@ The following table will be extracted:
 
 See the [full example](todo:6-simple-object).
 
-#### Nested object
+### Nested object
 You may encounter and API response like this:
 
 {% highlight json %}
@@ -543,7 +562,7 @@ The following table will be extracted:
 
 See the [full example](todo:7-nested-object).
 
-#### Single object in an array
+### Single object in an array
 You may encounter an API response like this:
 
 {% highlight json %}
@@ -574,7 +593,7 @@ The following table will be extracted:
 
 See the [full example](todo:8-single-object-in-array).
 
-#### Nested array
+### Nested array
 You may encounter an API response like this:
 
 {% highlight json %}
@@ -616,12 +635,12 @@ The following table will be extracted:
 
 See the [full example](todo:9-nested-array).
 
-### Examples with Complicated Objects
+## Examples with Complicated Objects
 The above examples show how simple objects are extracted from different objects. Generic
 extractor can also extract objects with non-scalar properties. The default
 [JSON to CSV mapping](todo) flattens nested objects and produces secondary tables from nested arrays.
 
-#### Object with nested array
+### Object with nested array
 You may encounter an API response like this:
 
 {% highlight json %}
@@ -667,7 +686,7 @@ way, the 1:N relationship between Members and Tags is represented.
 
 See the [full example](todo:10-object-wth-nested-array).
 
-#### Upgrading to array
+### Upgrading to array
 You may encounter the following API response
 
 {% highlight json %}
@@ -710,7 +729,7 @@ a single-element array because the `tags` property is an array elsewhere (second
 
 See the [full example](todo:17-upgrading-array).
 
-#### Object with nested object
+### Object with nested object
 You may encounter an API response like this:
 
 {% highlight json %}
@@ -750,7 +769,7 @@ the `address.city` property is flattened into the `address_city` column.
 
 See the [full example](todo:11-object-with-nested-object).
 
-#### Object with a deeply nested object
+### Object with a deeply nested object
 The above two examples show the basic principles of the JSON-CSV mapping used by Generic Extractor. 
 They are applied to all child properties. So, when you encounter the following API response,
 
@@ -832,22 +851,9 @@ autogenerated key to the parent *Users* table. Also notice that the
 
 See the [full example](todo:12-deeply-nested-object).
 
-## Response Filter
-The `responseFilter` option allows you to skip parts of the API response from processing. This can
-be useful if 
+## Response Filter Examples
 
-- you do not want to flatten the JSON structure using the default
-[JSON Parser](/extend/generic-extractor/jobs/#merging-responses) (as in the above examples). 
-- the API response is inconsistent and the objects cannot be flattened.
-
-The value of the `responseFilter` property is either a path to a property in the response, or
-an array of such paths. The path is dot-separated unless set otherwise in the `responseFilterDelimiter` configuration.
-If you want to refer to the items of an array, use `[]` --- see 
-an [example below](skip-flattening-in-nested-objects).
-
-### Examples
-
-#### Skip flattening
+### Skip flattening
 If you have an API response like this
 
 {% highlight json %}
@@ -883,7 +889,7 @@ the JSON capable database (e.g., [Snowflake](https://docs.snowflake.net/manuals/
 
 See the [full example](todo:13-skip-flatten).
 
-#### Skip flattening in nested objects
+### Skip flattening in nested objects
 If you have the following API response 
 
 {% highlight json %}
@@ -971,7 +977,7 @@ setting in this case is `contacts[].properties`.
 
 See the [full example](todo:14-skip-flatten-nested).
 
-#### Skip Boolean conversion
+### Skip Boolean conversion
 TODO: tohle tak nefunguje! Bud se to musi vyhodit, nebo updatnout GE! TODO
 
 If you have an API response like this
@@ -1002,7 +1008,7 @@ return the following table:
 
 See the [full example](todo:15-skip-boolean).
 
-#### Inconsistent object
+### Inconsistent object
 If you have an API response like this,
 
 {% highlight json %}
@@ -1034,7 +1040,7 @@ will obtain the following table:
 
 See the [full example](todo:16-inconsistent-object).
 
-#### Multiple filters
+### Multiple filters
 You might have a complex API response like this:
 
 {% highlight json %}
@@ -1117,7 +1123,7 @@ Contacts:
 
 See the [full example](todo:18-multiple-filters).
 
-#### Setting delimiter
+### Setting delimiter
 The default delimiter used for referencing nested properties is a dot `.`. If the names of 
 properties in the API response contain dots, it might be necessary to change the default delimiter.
 The API response might look like this:
@@ -1181,7 +1187,7 @@ object. With the above settings you will obtain a table like this:
 
 See the [full example](todo:19-different-delimiter).
 
-#### Setting delimiter --- more complex
+### Setting delimiter --- more complex
 For the custom set delimiter in the response filter, you need to have a complex API response. For example:
 
 {% highlight json %}
@@ -1239,8 +1245,3 @@ You will obtain a table similar to the one below:
 
 See the [full example](todo:20-setting-delimiter-complex).
 
-### Children
-The `children` configuration allows you to retrieve sub-resources of the processes API resource.
-These **child jobs** (**nested jobs**) are executed for each object retrieved from the 
-parent response. The definition of child jobs is the same as the definition of parent jobs, 
-except for **placeholders**. The children configuration is described in a [separate article](/jobs/children/).
