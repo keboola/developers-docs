@@ -13,6 +13,39 @@ Child jobs may contain other child jobs, so you may query for sub-sub-resources 
 The configuration of a child job is the same a configuration of [any job](/extend/generic-extractor/jobs) with two 
 additional fields `placeholders` and `recursionFilter`.
 
+A sample job configuration can look like this:
+
+{% highlight json %}
+{
+    ...,
+    "config": {
+        "jobs": [
+            {
+                "endpoint": "users",
+                "method": "get",
+                "dataField": "items",
+                "dataType": "users",
+                "params": {
+                    "type": "active"
+                },
+                "responseFilter": "additional.address/details",
+                "responseFilterDelimiter": "/",
+                "children": [
+                    {
+                        "endpoint": "users/{user_id}/orders",
+                        "dataField": "items",
+                        "recursionFilter": "id>20",
+                        "placeholders": {
+                            "user_id": "id"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}
+{% endhighlight %}
+
 ## Placeholders
 In a child job, the `endpoint` configuration must contain a **placeholder**. The placeholder is 
 enclosed in curly braces `{}`. For example an endpoint:

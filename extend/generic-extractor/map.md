@@ -25,16 +25,22 @@ permalink: /extend/generic-extractor/map/
             "outputBucket": "ge-tutorial",
             "jobs": [
                 {
-                    "endpoint": "campaigns",
-                    "dataField": "campaigns",
-                    "responseFilter": "campaigns.tasks/tags",
+                    "endpoint": "users",
+                    "method": "get",
+                    "dataField": "items",
+                    "dataType": "users",
+                    "params": {
+                        "type": "active"
+                    },
+                    "responseFilter": "additional.address/details",
                     "responseFilterDelimiter": "/",
                     "children": [
                         {
-                            "endpoint": "campaigns/{campaign_id}/send-checklist",
-                            "dataField": "items",
+                            "endpoint": "users/{user_id}/orders",
+                            "dataField": "items",                        
+                            "recursionFilter": "id>20",
                             "placeholders": {
-                                "campaign_id": "id"
+                                "user_id": "id"
                             }
                         }
                     ]
@@ -66,16 +72,18 @@ permalink: /extend/generic-extractor/map/
 }
 {% endhighlight %}
 
-<script src='/assets/js/jquery-3.1.1.min'></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     $("span.nt:contains('\"endpoint\"')").wrap("<a href='/extend/generic-extractor/jobs/#endpoint'></a>");
-    $("span.nt:contains('\"params\"')").wrap("<a href='/extend/generic-extractor/jobs/#request-parameters'></a>");
-    $("span.nt:contains('\"method\"')").wrap("<a href='/extend/generic-extractor/jobs/#method'></a>");
+    $("span.nt:contains('\"params\"')").last().wrap("<a href='/extend/generic-extractor/jobs/#request-parameters'></a>");    
+    $("span.nt:contains('\"method\"')").last().wrap("<a href='/extend/generic-extractor/jobs/#method'></a>");
     $("span.nt:contains('\"dataField\"')").wrap("<a href='/extend/generic-extractor/jobs/#data-field'></a>");
     $("span.nt:contains('\"dataType\"')").wrap("<a href='/extend/generic-extractor/jobs/#data-type'></a>");
     $("span.nt:contains('\"responseFilter\"')").wrap("<a href='/extend/generic-extractor/jobs/#response-filter'></a>");
     $("span.nt:contains('\"responseFilterDelimiter\"')").wrap("<a href='/extend/generic-extractor/jobs/#response-filter'></a>");
+    $("span.nt:contains('\"jobs\"')").wrap("<a href='/extend/generic-extractor/jobs/'></a>");
     $("span.nt:contains('\"children\"')").wrap("<a href='/extend/generic-extractor/jobs/#children'></a>");
+    $("span.nt:contains('\"recursionFilter\"')").wrap("<a href='/extend/generic-extractor/jobs/children/#filter'></a>");
+    $("span.nt:contains('\"placeholders\"')").wrap("<a href='/extend/generic-extractor/jobs/children/#placeholders'></a>");
 }, false);
 </script>
