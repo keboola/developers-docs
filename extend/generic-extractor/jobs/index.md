@@ -15,22 +15,32 @@ A sample job configuration can look like this:
 
 {% highlight json %}
 {
-    ...
+    ...,
+    "config": {
     "jobs": [
         {
-            "endpoint": "campaigns",
-            "dataField": "campaigns",
+                "endpoint": "users",
+                "method": "get",
+                "dataField": "items",
+                "dataType": "users",
+                "params": {
+                    "type": "active"
+                },
+                "responseFilter": "additional.address/details",
+                "responseFilterDelimiter": "/",
             "children": [
                 {
-                    "endpoint": "campaigns/{campaign_id}/send-checklist",
+                        "endpoint": "users/{user_id}/orders",
                     "dataField": "items",
+                        "recursionFilter": "id>20",
                     "placeholders": {
-                        "campaign_id": "id"
+                            "user_id": "id"
                     }
                 }
             ]
         }
     ]
+}
 }
 {% endhighlight %}
 
@@ -106,7 +116,7 @@ Assume the following [API definition](/extend/generic-extractor/api/):
 
 {% highlight json %}
 {
-    ...
+    ...,
     "api": {
         "baseURL": "https://example.com/3.0/"
     }
@@ -162,8 +172,6 @@ Assume that `api.baseUrl` is set to `https://example.com/3.0/`, `jobs[].endpoint
 is set to `mock-api` and that the `param` parameters are set as follows:
 
 {% highlight json %}
-{
-    ...
     "params": {
         "startDate": "2016-01-20",
         "types": ["new", "active", "finished"],
@@ -175,7 +183,6 @@ is set to `mock-api` and that the `param` parameters are set as follows:
             }
         }
     }
-}
 {% endhighlight %}
 
 ## Method
@@ -223,13 +230,10 @@ a web form. This method **does not** support nested objects in the `param` objec
 For example, the following `params` field
 
 {% highlight json %}
-{
-    ...
     "params": {
         "startDate": "2016-01-20",
         "types": ["new", "active", "finished"]
     }
-}
 {% endhighlight %}
 
 will be sent as the following POST request body
@@ -253,8 +257,6 @@ be [merged into a single one](/extend/generic-extractor/mappings/). This can be 
 for example, in a situation where two API endpoints return the same resource:
 
 {% highlight json %}
-{
-    ...
     "jobs": [
         {
             "endpoint": "solved-tickets/",
@@ -265,7 +267,6 @@ for example, in a situation where two API endpoints return the same resource:
             "dataType": "tickets"
         }
     ]
-}
 {% endhighlight %}
 
 In the above case, only a single `tickets` table will be produced in the output bucket. It
@@ -287,20 +288,15 @@ extract. The `dataField` parameter may be written in two ways --- either as a si
 as an object with the `path` property. For instance, these two configurations are equivalent:
 
 {% highlight json %}
-{
-    ...
     "jobs": [
         {
             "endpoint": "solved-tickets/",
             "dataField": "tickets"
         }
     ]
-}
 {% endhighlight %}
 
 {% highlight json %}
-{
-    ...
     "jobs": [
         {
             "endpoint": "solved-tickets/",
@@ -309,7 +305,6 @@ as an object with the `path` property. For instance, these two configurations ar
             }
         }
     ]
-}
 {% endhighlight %}
 
 ## Response Filter
@@ -494,8 +489,6 @@ In the first job, set the `dataField` parameter to the value `members.active`. I
 the `dataField` parameter to the value `members.inactive`. The entire `jobs` section will look like this:
 
 {% highlight json %}
-{
-    ...
     "jobs": [
         {
             "endpoint": "users-5",
@@ -506,7 +499,6 @@ the `dataField` parameter to the value `members.inactive`. The entire `jobs` sec
             "dataField": "members.inactive"
         }                
     ]
-}
 {% endhighlight %}
 
 
@@ -959,11 +951,10 @@ Users:
 Contacts:
 
 |type|properties|primary|JSON_parentId|
-|---|---|---|---|
-|address|{""street"":""Elm Street"",""city"":""New York""}||users-12_0b9650e0f68b0c6738843d5b4ff0a961|
-|email|{""address"":""john.doe@example.com""}|1|users-12_0b9650e0f68b0c6738843d5b4ff0a961|
-|address|{""street"":""Bates Street"",""city"":""Chicago"",""state"":""USA""}||users-12_cf76fb6794380244946d2bc4fa3aa04a|
-|phone|{""number"":""123 456 789""}|1|users-12_cf76fb6794380244946d2bc4fa3aa04a|
+|address|{"street":"Elm Street","city":"New York"}||users-12_0b9650e0f68b0c6738843d5b4ff0a961|
+|email|{"address":"john.doe@example.com"}|1|users-12_0b9650e0f68b0c6738843d5b4ff0a961|
+|address|{"street":"Bates Street","city":"Chicago","state":"USA"}||users-12_cf76fb6794380244946d2bc4fa3aa04a|
+|phone|{"number":"123 456 789"}|1|users-12_cf76fb6794380244946d2bc4fa3aa04a|
 
 The `properties` column contains JSON serialized objects. When setting the `responseFilter` parameter,
 remember to use the correct path to the properties you wish to skip from processing. That is to say that
@@ -1247,3 +1238,228 @@ You will obtain a table similar to the one below:
 
 See the [full example](todo:20-setting-delimiter-complex).
 
+## Examples with HTTP Methods and Parameters
+
+### Request Parameters
+Assume that you have an API with and endpoint `users` which requires a 
+[GET parameter](/extend/generic-extractor/tutorial/rest/#url) `type` to specify which
+users will be retrieved. E.g a request to `/users?type=active` would return a response 
+with active users:
+
+{% highlight json %}
+[
+    {
+        "id": 123,
+        "name": "John Doe",
+        "married": true
+    },
+    {
+        "id": 234,
+        "name": "Jane Doe",
+        "married": false
+    }
+]
+{% endhighlight %}
+
+To retrieve inactive users, you have to send a request to `/users?type=inactive`. This
+can be solved using the following jobs configuration:
+
+{% highlight json %}
+"jobs": [
+    {
+        "endpoint": "users",
+        "params": {
+            "type": "active"
+        }
+    },
+    {
+        "endpoint": "users",
+        "params": {
+            "type": "inactive"
+        }
+    }
+]
+{% endhighlight %}
+
+The [`params` configuration](/extend/generic-extractor/jobs/#request-parameters) option specifies the 
+parameters to be sent to the API, therefore
+the `type` property is the name defined by the API itself.
+The above configuration will produced the following table:
+
+|id|name|married|
+|---|---|---|
+|123|John Doe|1|
+|234|Jane Doe||
+|345|Jimmy Doe||
+
+See the [full example](todo:033-job-parameters).
+
+### POST Request
+You may encounter an API which is not exactly [RESTful](/extend/generic-extractor/tutorial/rest/)
+and requires that you query the API using [HTTP POST method](/extend/generic-extractor/tutorial/rest/#method).
+Assume that you have an API with endpoint `getUsers` expecting empty HTTP POST request. The endpoint
+then returns the following response:
+
+{% highlight json %}
+[
+    {
+        "id": 123,
+        "name": "John Doe",
+        "married": true
+    },
+    {
+        "id": 234,
+        "name": "Jane Doe",
+        "married": false
+    }
+]
+{% endhighlight %}
+
+Generic extractor can handle this too using the [`method` configuration](/extend/generic-extractor/jobs/#method):
+
+{% highlight json %}
+"jobs": [
+    {
+        "endpoint": "getUsers",
+        "method": "POST"
+    }
+]
+{% endhighlight %}
+
+The above configuration will produce the following table:
+
+|id|name|married|
+|---|---|---|
+|123|John Doe|1|
+|234|Jane Doe||
+
+See the [full example](todo:034-post-request).
+
+### Complex POST Request
+With the above situation of an API which is not exactly [RESTful](/extend/generic-extractor/tutorial/rest/),
+chances are that the API requires some JSON parameters in the request. Let's say you have the 
+`getUsers` endpoint which requires a HTTP POST request with the following body:
+
+{% highlight json %}
+{
+    "filter": {
+        "type": "active"
+    },
+    "return": {
+        "fields": ["id", "name"]
+    }
+}
+{% endhighlight %}
+
+Then it returns the following JSON:
+
+{% highlight json %}
+[
+    {
+        "id": 123,
+        "name": "John Doe"
+    },
+    {
+        "id": 234,
+        "name": "Jane Doe"
+    }
+]
+{% endhighlight %}
+
+The above situation can be handled by passing the entire request JSON to the 
+[`params` configuration](/extend/generic-extractor/jobs/#request-parameters).
+
+{% highlight json %}
+"jobs": [
+    {
+        "endpoint": "getUsers",
+        "method": "POST",
+        "params": {
+            "filter": {
+                "type": "active"
+            },
+            "return": {
+                "fields": ["id", "name"]
+            }
+        }
+    }
+]
+{% endhighlight %}
+
+The above configuration will produce the following table:
+
+|id|name|
+|---|---|
+|123|John Doe|
+|234|Jane Doe|
+
+See the [full example](todo:035-complex-post).
+
+### Complex GET Request
+Sometimes even the HTTP GET requests also require complex parameters. Suppose the API
+endpoint `/users` requires a `filter` and `return` definition. The API may describe
+the configuration in many different ways, e.g.:
+
+|filter|name|example value|
+|---|---|---|
+|Name of property for filtering|field|type|
+|Filtering operator|operator|equal|
+|Value to use in filter|value|active|
+
+|return|name|example value|
+|---|---|---|
+|Names of properties to return in response|fields|id,name|
+
+In HTTP protocol this would be encoded in the following [query string](/extend/generic-extractor/tutorial/rest/#url):
+
+    filter[field]=type&filter[operator]=equal&filter[value]=active&return[fields][0]=id&return[fields][1]=name
+
+Or in [URL Encoded](https://www.w3schools.com/tags/ref_urlencode.asp) form:
+
+    filter%5Bfield%5D%3Dtype%26filter%5Boperator%5D%3Dequal%26filter%5Bvalue%5D%3Dactive%26return%5Bfields%5D%5B0%5D%3Did%26return%5Bfields%5D%5B1%5D%3Dname
+
+Then it returns the following JSON:
+
+{% highlight json %}
+[
+    {
+        "id": 123,
+        "name": "John Doe"
+    },
+    {
+        "id": 234,
+        "name": "Jane Doe"
+    }
+]
+{% endhighlight %}
+
+The above situation can be handled by encoding the parameters in a JSON into the
+[`params` configuration](/extend/generic-extractor/jobs/#request-parameters).
+
+{% highlight json %}
+"jobs": [
+    {
+        "endpoint": "getUsers",
+        "method": "POST",
+        "params": {
+            "filter": {
+                "field": "type",
+                "operator": "equal",
+                "value": "active"
+            },
+            "return": {
+                "fields": ["id", "name"]
+            }
+        }
+    }
+]
+{% endhighlight %}
+
+The above configuration will produce the following table:
+
+|id|name|
+|---|---|
+|123|John Doe|
+|234|Jane Doe|
+
+See the [full example](todo:036-complex-get).
