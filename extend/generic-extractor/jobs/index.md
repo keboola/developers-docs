@@ -72,12 +72,12 @@ properties of all objects, for example, with the following response:
 ]
 {% endhighlight %}
 
-The super-set of object properties will be `id`, `name`, `color` and `size`. In the Generic Extractor configuration,
-this is referred to as [`dataType`](#dataType). If the `dataType` configuration is not set, a name is
+The super-set of object properties consists of `id`, `name`, `color` and `size`. In the Generic Extractor 
+configuration, this is referred to as [`dataType`](#dataType). If the `dataType` configuration is not set, a name is
 automatically generated. This merging of the object structure requires that the objects are compatible.
 
 The responses are merged into type-less tables. This means that values `42` and `apples` are perfectly compatible
-because they will get converted to a string. Also, the scalar and array values are compatible because the 
+because they get converted to a string. Also, the scalar and array values are compatible because the 
 scalar is [upgraded to an array](#upgrading-to-array). The following are the incompatible combinations:
 
 - Scalar and object values
@@ -154,7 +154,7 @@ The following table summarizes some possible outcomes:
 It is highly recommended to use the relative URL fragments. This means that the
 `baseURL` property of the `api` section **must end** with a slash. 
 
-Use the other two options for handling exceptions in the API extraction (e.g. falling back 
+Use the other two options for handling exceptions in the API extraction (for instance, falling back 
 to an older API version). Note that using a different domain (or even a base path) may 
 interfere with the authentication --- depending on the specification of the target API.
 
@@ -165,7 +165,7 @@ be accepted and valid. For other APIs, however, only one version may be supporte
 ## Request Parameters
 The `params` section defines [request parameters](/extend/generic-extractor/tutorial/rest). They 
 may be optional or required, depending on the target API specification. The `params` section is 
-an object with arbitrary properties (or more precisely parameters understood by the target
+an object with arbitrary properties (or, more precisely, parameters understood by the target
 API). It is also allowed to use [function calls](todo).
 
 Assume that `api.baseUrl` is set to `https://example.com/3.0/`, `jobs[].endpoint`
@@ -194,7 +194,7 @@ The following are the allowed values:
 - `FORM`
 
 ### GET
-The HTTP method encodes the parameters in the URL. Therefore the above `params` definition will be transformed
+The HTTP method encodes the parameters in the URL. Therefore the above `params` definition gets transformed
 in the following URL:
 
     https://example.com/3.0/mock-api?startDate=2016-01-20&types%5B0%5D=new&types%5B1%5D=active&types%5B2%5D=finished&filter%5Bquery%5D=q%3Duser%3AjohnDoe&filter%5Btags%5D%5Bfirst%5D=1&filter%5Btags%5D%5Bsecond%5D=0
@@ -204,8 +204,8 @@ In a more readable [URLDecoded](https://urldecode.org/) form:
     https://example.com/3.0/mock-api?/mock-server/web/users/12/orders/2/tickets/000/comments?startDate=2016-01-20&types[0]=new&types[1]=active&types[2]=finished&filter[query]=q=user:johnDoe&filter[tags][first]=1&filter[tags][second]=0
 
 ### POST
-The HTTP POST method sends the parameters in the request body. The parameters are sent as a JSON object 
-in the same form as entered in the configuration. For the above defined `params` property, the request body would be:
+The HTTP POST method sends the parameters in the request body. They are sent as a JSON object in the same form 
+as entered in the configuration. For the above defined `params` property, the request body would be:
 
 {% highlight json %}
 {
@@ -221,11 +221,11 @@ in the same form as entered in the configuration. For the above defined `params`
 }
 {% endhighlight %}
 
-Also, the `Content-Type: application/json` HTTP header will be added to the request.
+Also, the `Content-Type: application/json` HTTP header is added to the request.
 
 ### FORM
 The `FORM` method type sends the request the same way the HTTP POST method does. However, 
-the parameters from the `param` object are encoded as form data --- this mimics the request being sent by
+the parameters from the `param` object are encoded as form data, mimicking the request being sent by
 a web form. This method **does not** support nested objects in the `param` object.
 For example, the following `params` field
 
@@ -236,11 +236,11 @@ For example, the following `params` field
     }
 {% endhighlight %}
 
-will be sent as the following POST request body
+will be sent as the following POST request body:
 
     startDate=2016-01-20&types%5B0%5D=new&types%5B1%5D=active&types%5B2%5D=finished
 
-in a more readable [URLDecoded](https://urldecode.org/) form:
+In a more readable [URLDecoded](https://urldecode.org/) form:
 
    startDate=2016-01-20&types[0]=new&types[1]=active&types[2]=finished
 
@@ -951,6 +951,7 @@ Users:
 Contacts:
 
 |type|properties|primary|JSON_parentId|
+|---|---|---|---|
 |address|{"street":"Elm Street","city":"New York"}||users-12_0b9650e0f68b0c6738843d5b4ff0a961|
 |email|{"address":"john.doe@example.com"}|1|users-12_0b9650e0f68b0c6738843d5b4ff0a961|
 |address|{"street":"Bates Street","city":"Chicago","state":"USA"}||users-12_cf76fb6794380244946d2bc4fa3aa04a|
@@ -1241,9 +1242,9 @@ See the [full example](todo:20-setting-delimiter-complex).
 ## Examples with HTTP Methods and Parameters
 
 ### Request Parameters
-Assume that you have an API with and endpoint `users` which requires a 
+Assume that you have an API with the endpoint `users` which requires the 
 [GET parameter](/extend/generic-extractor/tutorial/rest/#url) `type` to specify which
-users will be retrieved. E.g a request to `/users?type=active` would return a response 
+users are to be retrieved. For example, a request to `/users?type=active` returns a response 
 with active users:
 
 {% highlight json %}
@@ -1261,7 +1262,7 @@ with active users:
 ]
 {% endhighlight %}
 
-To retrieve inactive users, you have to send a request to `/users?type=inactive`. This
+To retrieve inactive users, send a request to `/users?type=inactive`. This
 can be solved using the following jobs configuration:
 
 {% highlight json %}
@@ -1282,9 +1283,8 @@ can be solved using the following jobs configuration:
 {% endhighlight %}
 
 The [`params` configuration](/extend/generic-extractor/jobs/#request-parameters) option specifies the 
-parameters to be sent to the API, therefore
-the `type` property is the name defined by the API itself.
-The above configuration will produced the following table:
+parameters to be sent to the API. Therefore the `type` property is the name defined by the API itself.
+The above configuration produces the following table:
 
 |id|name|married|
 |---|---|---|
@@ -1296,8 +1296,8 @@ See the [full example](todo:033-job-parameters).
 
 ### POST Request
 You may encounter an API which is not exactly [RESTful](/extend/generic-extractor/tutorial/rest/)
-and requires that you query the API using [HTTP POST method](/extend/generic-extractor/tutorial/rest/#method).
-Assume that you have an API with endpoint `getUsers` expecting empty HTTP POST request. The endpoint
+and has to be queried using the [HTTP POST method](/extend/generic-extractor/tutorial/rest/#method).
+Assume that you have an API with the endpoint `getUsers` that expects an empty HTTP POST request. The endpoint
 then returns the following response:
 
 {% highlight json %}
@@ -1315,7 +1315,7 @@ then returns the following response:
 ]
 {% endhighlight %}
 
-Generic extractor can handle this too using the [`method` configuration](/extend/generic-extractor/jobs/#method):
+Generic Extractor can handle this too, using the [`method` configuration](/extend/generic-extractor/jobs/#method):
 
 {% highlight json %}
 "jobs": [
@@ -1326,7 +1326,7 @@ Generic extractor can handle this too using the [`method` configuration](/extend
 ]
 {% endhighlight %}
 
-The above configuration will produce the following table:
+The above configuration produces the following table:
 
 |id|name|married|
 |---|---|---|
@@ -1336,9 +1336,9 @@ The above configuration will produce the following table:
 See the [full example](todo:034-post-request).
 
 ### Complex POST Request
-With the above situation of an API which is not exactly [RESTful](/extend/generic-extractor/tutorial/rest/),
-chances are that the API requires some JSON parameters in the request. Let's say you have the 
-`getUsers` endpoint which requires a HTTP POST request with the following body:
+A not-exactly-[RESTful](/extend/generic-extractor/tutorial/rest/) API (see above) may require some JSON 
+parameters in the request. Let's say you have the `getUsers` endpoint which requires an HTTP POST request with 
+the following body:
 
 {% highlight json %}
 {
@@ -1351,7 +1351,7 @@ chances are that the API requires some JSON parameters in the request. Let's say
 }
 {% endhighlight %}
 
-Then it returns the following JSON:
+The request returns the following JSON:
 
 {% highlight json %}
 [
@@ -1386,7 +1386,7 @@ The above situation can be handled by passing the entire request JSON to the
 ]
 {% endhighlight %}
 
-The above configuration will produce the following table:
+The above configuration produces the following table:
 
 |id|name|
 |---|---|
@@ -1396,8 +1396,8 @@ The above configuration will produce the following table:
 See the [full example](todo:035-complex-post).
 
 ### Complex GET Request
-Sometimes even the HTTP GET requests also require complex parameters. Suppose the API
-endpoint `/users` requires a `filter` and `return` definition. The API may describe
+Sometimes even the HTTP GET requests require complex parameters. Suppose the API
+endpoint `/users` requires the `filter` and `return` definitions. The API may describe
 the configuration in many different ways, e.g.:
 
 |filter|name|example value|
@@ -1410,15 +1410,15 @@ the configuration in many different ways, e.g.:
 |---|---|---|
 |Names of properties to return in response|fields|id,name|
 
-In HTTP protocol this would be encoded in the following [query string](/extend/generic-extractor/tutorial/rest/#url):
+In the HTTP protocol, this would be encoded in the following [query string](/extend/generic-extractor/tutorial/rest/#url)
 
     filter[field]=type&filter[operator]=equal&filter[value]=active&return[fields][0]=id&return[fields][1]=name
 
-Or in [URL Encoded](https://www.w3schools.com/tags/ref_urlencode.asp) form:
+or, in the [URL Encoded](https://www.w3schools.com/tags/ref_urlencode.asp) form:
 
     filter%5Bfield%5D%3Dtype%26filter%5Boperator%5D%3Dequal%26filter%5Bvalue%5D%3Dactive%26return%5Bfields%5D%5B0%5D%3Did%26return%5Bfields%5D%5B1%5D%3Dname
 
-Then it returns the following JSON:
+The following JSON is returned:
 
 {% highlight json %}
 [
@@ -1455,7 +1455,7 @@ The above situation can be handled by encoding the parameters in a JSON into the
 ]
 {% endhighlight %}
 
-The above configuration will produce the following table:
+The above configuration produces the following table:
 
 |id|name|
 |---|---|

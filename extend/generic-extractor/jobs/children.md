@@ -6,12 +6,14 @@ permalink: /extend/generic-extractor/jobs/children/
 * TOC
 {:toc}
 
-Child jobs allow you to iterate/traverse over sub-resources of an API resource. For example, if you download a
-list of users, you can download details of each user or a list of orders for each users. See the corresponding 
-part of the tutorial for a basic [example of using child jobs](/extend/generic-extractor/tutorial/jobs/#child-jobs).
+Child jobs allow you to iterate/traverse over sub-resources of an API resource. Because child jobs may contain 
+other child jobs, you may query for sub-sub-resources in a virtually unlimited depth. 
 
-Because child jobs may contain other child jobs, you may query for sub-sub-resources in a virtually unlimited depth.
-With two additional fields `placeholders` and `recursionFilter`, configuring a child job is no different than 
+For instance, when downloading a list of users, you can download details of each user or a list of orders for each 
+user. See the Generic Extractor tutorial for a basic [example of using child 
+jobs](/extend/generic-extractor/tutorial/jobs/#child-jobs).
+
+Apart from two additional fields, `placeholders` and `recursionFilter`, configuring a child job is no different than 
 configuring [any other job](/extend/generic-extractor/jobs).
 
 A sample job configuration can look like this:
@@ -48,8 +50,8 @@ A sample job configuration can look like this:
 {% endhighlight %}
 
 ## Placeholders
-In a child job, the `endpoint` configuration must contain a **placeholder** (enclosed in curly braces `{}`). 
-For example, the endpoint
+In a child job, the `endpoint` configuration must contain a **placeholder** enclosed in curly braces `{}`. 
+For example, the following endpoint defines the placeholder **user-id**: 
 
 {% highlight json %}
 {
@@ -58,14 +60,12 @@ For example, the endpoint
 }
 {% endhighlight %}
 
-defines a placeholder **user-id**. The **placeholder name** is rather arbitrary (it should not contain any 
-special characters though). To assign it a value, use the `placeholders` configuration. It is an object whose 
-properties are placeholder names. The value of each `placeholders` object property is a **property path** in the 
-parent job response. The placeholder in the child `endpoint` will be replaced by the **value** of that
-parent property. The property path is configured relative to the extracted 
-object ([see an example](#accessing-deeply-nested-id)). The child `endpoint` is 
-configured relative to the [`api.baseUrl` configuration](todo),
-not relative to the parent endpoint.
+The **placeholder name** is rather arbitrary (it should not contain any special characters though). To assign it 
+a value, use the `placeholders` configuration. It is an object whose properties are placeholder names. The value 
+of each `placeholders` object property is a **property path** in the parent job response. 
+The placeholder in the child `endpoint` will be replaced by the **value** of that parent property. The property 
+path is configured relative to the extracted object ([see an example](#accessing-deeply-nested-id)). The child 
+`endpoint` is configured relative to the [`api.baseUrl` configuration](todo), not relative to the parent endpoint.
 
 The following configuration
 
@@ -84,34 +84,34 @@ are result objects in the parent API response. The `XXX` will be replaced by the
 of each individual response.
 
 ### Placeholder Level
-Optionally, the placeholder name may be prefixed by nesting **level**. Nesting allows you to 
-refer to properties in other objects than the direct parent. Level is written as the
-placeholder name prefix, delimited by a colon `:` --- i.e `2:user-id`. 
+Optionally, the placeholder name may be prefixed by a nesting **level**. Nesting allows you to 
+refer to properties in other objects than the direct parent. The level is written as the
+placeholder name prefix, delimited by a colon `:`. For example, `2:user-id`. 
 
-The default level is 1 --- i.e. the placeholder `user-id` is equivalent to `1:user-id` and 
-means that the property path will be searched in the direct parent of the child job. Level
+The default level is 1, meaning that the placeholder `user-id` is equivalent to `1:user-id` and 
+that the property path will be searched in the direct parent of the child job. The level
 is counted from the child 'upwards'. Therefore a placeholder `2:user-id` means that 
-the property path will be searched in the parent of the child parent ('two levels up`).
+the property path will be searched in the parent of the child parent (two levels up).
 See the [corresponding examples](todo).
 
 ## Filter
-The configuration option `recursionFilter` allows you to skip some child jobs from processing. This can be
+The configuration option `recursionFilter` allows you to skip some child jobs. This can be
 useful in these cases:
 
 - Some resources are not accessible to you and querying them would cause an error in the extraction.
 - Some resources return inconsistent or incomplete responses.
-- You are not interested in some resources and want to speed up the extraction.
+- You are not interested in some of the resources and want to speed up the extraction.
 
 The `responseFilter` configuration contains a string expression with a filter condition composed of the following:
 
 - Name of a property from the parent response
 - Comparison operator -- `<`, `>`, `<=`, `>=`, `==` (equal), `!=` (not equal), `~~` (like), `!~` (unlike)
 - Value to compare
-- Optionally logical operators `|` (or), `&` (and) may be used to join multiple conditions.
+- Logical operators `|` (or), `&` (and); optionally, they may be used to join multiple conditions.
 
 An example response filter may be `type!=employee` or `product.value>150`. 
 
-**Important:** The expression is whitespace sensitive, therefore `type != employee` filters properties `type ` 
+**Important:** The expression is whitespace sensitive. Therefore `type != employee` filters the `type ` properties
 to not contain the value `employee` (which is probably not what you intended to do). String comparisons are always 
 **case sensitive**.
 
@@ -120,8 +120,8 @@ to not contain the value `employee` (which is probably not what you intended to 
 ### Basic Example
 Let's say that you have an API with two endpoints:
 
-- `/users/` -- returns a list of users,
-- `/user/?` -- returns user details with a given user ID.
+- `/users/` --- returns a list of users.
+- `/user/?` --- returns user details with a given user ID.
 
 The `users` API returns a response like this:
 
@@ -153,7 +153,7 @@ The `user/123` response returns a response like this:
 {% endhighlight %}
 
 Now use the following configuration, retrieving the user list and user 
-details for each user.
+details for each user:
 
 {% highlight json %}
 {
@@ -209,15 +209,14 @@ user__user-id:
 |234|Jane Doe|St Mary Mead|UK|High Street|234|
 
 Notice that the table representing child resources contains all the responses 
-merged into a single table. The [usual merging rules](/extend/generic-extractor/jobs/TODO) apply.
-Also notice that a new column `parent_id` was added which contains the **placeholder value** used 
+merged into a single table; the [usual merging rules](/extend/generic-extractor/jobs/TODO) apply.
+
+Also notice that a new column, `parent_id`, was added, containing the **placeholder value** used 
 to retrieve the resource. The `parent_id` column is not always named `parent_id`.
 Its name is created by joining the `parent_` prefix to the **placeholder path**.
 
-Also notice that the table name is rather
-ugly because it was generated automatically. It is therefore advisable to 
-use the [dataType](/extend/generic-extractor/jobs/TODO) property to define a friendly name for the 
-table (see the next example).
+To create a friendly name for the table, it is good to use the [dataType](/extend/generic-extractor/jobs/TODO) 
+property (see the next example). The auto-generated name is rather ugly.
 
 See the [full example](todo:021-basic-child-job).
 
@@ -698,7 +697,7 @@ deepest child will really contain `orderId` value.
 See [full example](todo:027-basic-deeper-nesting-alternative)
 
 ### Deep Job Nesting
-Let's see how you can retrieve more nested API resource:
+Let's see how you can retrieve more nested API resources:
 
 {% highlight json %}
 {
