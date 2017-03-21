@@ -28,19 +28,19 @@ A sample job configuration can look like this:
                 },
                 "responseFilter": "additional.address/details",
                 "responseFilterDelimiter": "/",
-            "children": [
-                {
+                "children": [
+                    {
                         "endpoint": "users/{user_id}/orders",
-                    "dataField": "items",
+                        "dataField": "items",
                         "recursionFilter": "id>20",
-                    "placeholders": {
+                        "placeholders": {
                             "user_id": "id"
+                        }
                     }
-                }
-            ]
-        }
-    ]
-}
+                ]
+            }
+        ]
+    }
 }
 {% endhighlight %}
 
@@ -185,6 +185,8 @@ is set to `mock-api` and that the `param` parameters are set as follows:
     }
 {% endhighlight %}
 
+See [examples](/extend/generic-extractor/jobs/#exaples-with-http-methods-and-parameters)
+
 ## Method
 The `method` parameter defines the [HTTP request method](/extend/generic-extractor/tutorial/rest/). 
 The following are the allowed values:
@@ -222,6 +224,7 @@ in the same form as entered in the configuration. For the above defined `params`
 {% endhighlight %}
 
 Also, the `Content-Type: application/json` HTTP header will be added to the request.
+See [examples](/extend/generic-extractor/jobs/#exaples-with-http-methods-and-parameters)
 
 ### FORM
 The `FORM` method type sends the request the same way the HTTP POST method does. However, 
