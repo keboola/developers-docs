@@ -81,7 +81,11 @@ The following configuration
 
 means that Generic Extractor sends as many requests to the `/user/XXX` endpoint as there
 are result objects in the parent API response. The `XXX` will be replaced by the `userId` value
-of each individual response.
+of each individual response. Placeholders must be used in child jobs so that each child job sends a different API request. 
+
+Note: It is technically possible to define a child job without using `placeholders` configuration 
+or without having a placeholder in the `endpoint`. But then all the child requests would be the same and 
+that is usually not what you intend to do.
 
 ### Placeholder Level
 Optionally, the placeholder name may be prefixed by a nesting **level**. Nesting allows you to 
@@ -404,13 +408,6 @@ Notice that the placeholder path remains set to `user-info.id` because it is rel
 the parent object, which itself is located at the path `active-users.items`. This 
 may be confusing because the endpoint property in that child job is set relative to the
 `api.baseUrl` and not to the parent URL.
-
-Placeholders must be used in child jobs so that each child job sends a different API request. 
-The placeholder `placeholders`
-
-Note: It is technically possible to define a child job without using `placeholders` configuration 
-or without having a placeholder in the `endpoint`. But then all the child requests would be the same and 
-that is usually not what you intend to do.
 
 See the [full example](todo:024-child-job-deeply-nested-id).
 
