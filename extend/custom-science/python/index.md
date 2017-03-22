@@ -355,7 +355,7 @@ version: "2"
 
 services:
   tests:
-    image: quay.io/keboola/docker-custom-python:1.1.2
+    image: quay.io/keboola/docker-custom-python:latest
     tty: true
     stdin_open: true
     command: /bin/sh /src/tests.sh
@@ -363,9 +363,9 @@ services:
       - ./:/src/
 {% endhighlight %}
 
-The `image` option defines what Docker Image is used for running the tests -- `quay.io/keboola/docker-custom-python:1.1.2` refers to
+The `image` option defines what Docker Image is used for running the tests -- `quay.io/keboola/docker-custom-python:latest` refers to
 [our image](https://quay.io/repository/keboola/docker-custom-r?tab=tags) we use to run Custom Science extensions on
-our production servers. The `1.1.2` part refers to an image tag, which changes from time to time. You should generally use its highest version.
+our production servers. The `latest` part refers to an image tag, which points to the highest stable version.
 The `volumes` option defines that the current directory will be mapped to the `/src/` directory inside the image.
 The `command` option defines the command for running the `/bin/sh /src/tests.sh` tests. It will be run **inside** the Docker image,
 so you do not need to have shell available on your machine. This leads us to the
