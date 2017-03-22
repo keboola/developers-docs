@@ -7,15 +7,28 @@ permalink: /extend/generic-extractor/map/
 {
     "parameters": {
         "api": {
-            "baseUrl": "https://example.com/3.0/",
-            "authentication": {
-                "type": "basic"
-            },
+            "baseUrl": "https://example.com/v3.0/",
             "pagination": {
                 "method": "offset",
                 "offsetParam": "offset",
-                "limitParam": "count",
-                "limit": 10
+                "limitParam": "count"
+            },
+            "authentication": {
+                "type": "basic"
+            },
+            "retryConfig": {
+                "maxRetries": 3
+            },
+            "http": {
+                "headers": {
+                    "Accept": "application/json"
+                },                
+                "defaultOptions": {
+                    "params": {
+                        "company": 123
+                    }
+                },
+                "requiredHeaders": ["X-AppKey"]
             }
         },
         "config": {
@@ -23,6 +36,11 @@ permalink: /extend/generic-extractor/map/
             "username": "dummy",
             "#password": "secret",
             "outputBucket": "ge-tutorial",
+            "http": {
+                "headers": {
+                    "X-AppKey": "ThisIsSecret"
+                }
+            },            
             "jobs": [
                 {
                     "endpoint": "users",
@@ -74,6 +92,15 @@ permalink: /extend/generic-extractor/map/
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Api
+    $("span.nt:contains('\"baseUrl\"')").wrap("<a href='/extend/generic-extractor/api/#base-url'></a>");
+    $("span.nt:contains('\"retryConfig\"')").wrap("<a href='/extend/generic-extractor/api/#retry-configuration'></a>");
+    $("span.nt:contains('\"http\"')").first().wrap("<a href='/extend/generic-extractor/api/#default-http-options'></a>");
+    $("span.nt:contains('\"headers\"')").first().wrap("<a href='/extend/generic-extractor/api/#headers'></a>");
+    $("span.nt:contains('\"params\"')").first().wrap("<a href='/extend/generic-extractor/api/#default-request-parameters'></a>");
+    $("span.nt:contains('\"defaultOptions\"')").wrap("<a href='/extend/generic-extractor/api/#default-request-parameters'></a>");
+    $("span.nt:contains('\"requiredHeaders\"')").wrap("<a href='/extend/generic-extractor/api/#required-headers'></a>");
+    // Jobs
     $("span.nt:contains('\"endpoint\"')").wrap("<a href='/extend/generic-extractor/jobs/#endpoint'></a>");
     $("span.nt:contains('\"params\"')").last().wrap("<a href='/extend/generic-extractor/jobs/#request-parameters'></a>");    
     $("span.nt:contains('\"method\"')").last().wrap("<a href='/extend/generic-extractor/jobs/#method'></a>");
@@ -82,6 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
     $("span.nt:contains('\"responseFilter\"')").wrap("<a href='/extend/generic-extractor/jobs/#response-filter'></a>");
     $("span.nt:contains('\"responseFilterDelimiter\"')").wrap("<a href='/extend/generic-extractor/jobs/#response-filter'></a>");
     $("span.nt:contains('\"jobs\"')").wrap("<a href='/extend/generic-extractor/jobs/'></a>");
+    // Child jobs
     $("span.nt:contains('\"children\"')").wrap("<a href='/extend/generic-extractor/jobs/#children'></a>");
     $("span.nt:contains('\"recursionFilter\"')").wrap("<a href='/extend/generic-extractor/jobs/children/#filter'></a>");
     $("span.nt:contains('\"placeholders\"')").wrap("<a href='/extend/generic-extractor/jobs/children/#placeholders'></a>");

@@ -24,12 +24,18 @@ methods. A sample API configuration can look like this:
             "type": "basic"
         },
         "retryConfig": {
-            "maxRetries": 3
+            "account": 3
         },
         "http": {
-            "params": {
-                "company": 123
-            }
+            "headers": {
+                "Accept": "application/json"
+            },
+            "defaultOptions": {
+                "params": {
+                    "company": 123
+                }
+            },
+            "requiredHeaders": ["X-AppKey"]            
         }
     }
 }
@@ -252,9 +258,10 @@ The following configuration sends the parameter with every API request:
 "api": {
     "baseUrl": "http://example.com/",
     "http": {
-        "headers": {
-            "Accept": "application/json",
-            "Accept-Encoding": "gzip"
+        "defaultOptions": {
+            "params": {
+                "account": 123
+            }
         }
     }
 }
