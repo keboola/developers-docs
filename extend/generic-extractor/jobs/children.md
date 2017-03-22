@@ -313,9 +313,9 @@ Setting the placeholder to `"user-id": "user-info.id"` means that the `user-id` 
 will be replaced by the value of the `id` property inside the `user-info` object in the parent response.
 If you fail to set a correct path for the placeholder, you will receive an error:
 
-    No value found for user-id in the parent result. (level: 1)
+    `No value found for user-id in the parent result. (level: 1)`
 
-When you set the correct path, you will receive the following tables:
+When you set the correct path, you will get the following tables:
 
 users:
 
@@ -331,7 +331,7 @@ user detail:
 |123|John Doe|London|UK|Whitehaven Mansions|123|
 |234|Jane Doe|St Mary Mead|UK|High Street|234|
 
-Notice that the parent reference column name is concatenation of `parent` prefix and 
+Notice that the parent reference column name is the concatenation of the `parent` prefix and 
 `user-info_id` placeholder path (with special characters replaced by the underscore `_`).
 
 See the [full example](todo:023-child-job-nested-id).
@@ -376,7 +376,7 @@ parent endpoint returns a complicated response like this:
 }
 {% endhighlight %}
 
-The following job definition extracts `active-users` array together with details for each user.
+The following job definition extracts the `active-users` array together with the details for each user.
 
 {% highlight json %}
 {
@@ -400,24 +400,23 @@ The following job definition extracts `active-users` array together with details
 }
 {% endhighlight %}
 
-Notice that the placeholder path remains set `user-info.id` to because it is relative to 
-the parent object which itself is located at path `active-users.items`. This 
+Notice that the placeholder path remains set to `user-info.id` because it is relative to 
+the parent object, which itself is located at the path `active-users.items`. This 
 may be confusing because the endpoint property in that child job is set relative to the
 `api.baseUrl` and not to the parent URL.
 
 Placeholders must be used in child jobs so that each child job sends a different API request. 
-The placeholder
-`placeholders`
+The placeholder `placeholders`
 
-Note: it is technically possible to define a child job without using `placeholders` configuration 
-or without having a placeholder in the `endpoint`. But then all the child requests are same which is 
-usually not what you intend to do.
+Note: It is technically possible to define a child job without using `placeholders` configuration 
+or without having a placeholder in the `endpoint`. But then all the child requests would be the same and 
+that is usually not what you intend to do.
 
-See [full example](todo:024-child-job-deeply-nested-id)
+See the [full example](todo:024-child-job-deeply-nested-id).
 
 ### Naming Conflict
 Because a new column is added to the table representing child properties, it is possible that you 
-run into a naming conflict. I.e. if the child response with user details looks like this:
+run into a naming conflict. That is, if the child response with user details looks like this
 
 {% highlight json %}
 {
@@ -432,7 +431,7 @@ run into a naming conflict. I.e. if the child response with user details looks l
 }
 {% endhighlight %}
 
-And you use the following job configuration:
+and you use the following job configuration,
 
 {% highlight json %}
 {
@@ -454,21 +453,20 @@ And you use the following job configuration:
 }
 {% endhighlight %}
 
-The output for the child job will contain column `parent_id` and at the same time, Generic Extractor will attempt
-to create a column `parent_id` with the placeholder value. The outcome is that Generic Extractor 
-overwrites the original column and that column is lost.
+the output for the child job will contain the column `parent_id`. At the same time, Generic Extractor will attempt
+to create the column `parent_id` with the placeholder value, overwriting the original column. That column will be lost.
 
-See [full example](todo:025-naming-conflict)
+See the [full example](todo:025-naming-conflict).
 
 ### Nesting Level
 By default, the placeholder value is taken from the object retrieved in the parent job. As long as the child
 jobs are nested only one level deep, there is no other option anyway. Let's see what happens with a deeper nesting.
 Let's say that you have an API with two endpoints:
 
-- `/users/` -- returns a list of users,
-- `/user/?` -- returns user details with given user ID,
-- `/user/?/orders` -- returns a list of user orders,
-- `/user/?/orders/?` -- returns order detail with given user and order ID.
+- `/users/` --- Returns a list of users.
+- `/user/?` --- Returns user details with given user ID.
+- `/user/?/orders` --- Returns a list of user orders.
+- `/user/?/orders/?` --- Returns order detail with given user and order ID.
 
 The `users` API returns a response like this:
 
@@ -567,7 +565,7 @@ Then you can create a job configuration with three nested children to retrieve a
 The `jobs` configuration retrieves all users from the `users` API endpoint. The first child retrieves
 details for each user (from `user/?` endpoint) and stores them in the `user-detail` table. The second 
 child retrieves each user orders (from `user/?/orders` endpoint) and stores them in the `orders` table.
-Finally the deepest nested child returns details of each order (for each user) from the 
+Finally, the deepest nested child returns details of each order (for each user) from the 
 `user/?/order/?` endpoint and stores them in the `order-detail` table. Therefore the following four tables
 will be produced:
 
@@ -599,12 +597,12 @@ order-detail:
 
 Notice that each table contains additional columns with the placeholder property path prefixed with `parent_`.
 
-See [full example](todo:026-basic-deeper-nesting)
+See the [full example](todo:026-basic-deeper-nesting).
 
 ### Nesting Level Alternative
 
 Because the required user and order IDs are present in multiple requests (in the list and in the detail), there
-are multiple ways how the jobs may be configured. For example the following configuration produces the 
+are multiple ways how the jobs may be configured. For example, the following configuration produces the 
 exact same result as the above configuration:
 
 {% highlight json %}
@@ -644,14 +642,13 @@ exact same result as the above configuration:
 }
 {% endhighlight %}
 
-The above configuration is less explicit and not really recommended, but still acceptable. 
-Placeholders are defined globally, which means that
-the second nested child job to `user/{user-id}/orders` does not define any, because it relies on those 
-defined by its parent job (which happen to be correct). Also the deepest child defines only `order-id` placeholder,
-because again the `user-id` placeholder was defined in some of its parents. Even though the
-placeholders are defined globally, the placeholders defined in child jobs override the placeholders in the
-parent jobs. E.g. in this (probably **very incorrect** configuration) the `1:user-id` placeholder in the 
-deepest child will really contain `orderId` value.
+Even though the above configuration is less explicit and not really recommended, it is still acceptable. 
+Placeholders are defined globally, which means that the second nested child job to `user/{user-id}/orders` does 
+not define any because it relies on those defined by its parent job (which happen to be correct). Also the 
+deepest child defines only the `order-id` placeholder because, again, the `user-id` placeholder was defined in 
+some of its parents. Even though the placeholders are defined globally, the ones defined in child jobs 
+override the ones in the parent jobs. For example, in the following (probably **very incorrect**) configuration the 
+`1:user-id` placeholder in the deepest child will really contain the `orderId` value.
 
 {% highlight json %}
 {
@@ -694,7 +691,7 @@ deepest child will really contain `orderId` value.
 }
 {% endhighlight %}
 
-See [full example](todo:027-basic-deeper-nesting-alternative)
+See the [full example](todo:027-basic-deeper-nesting-alternative).
 
 ### Deep Job Nesting
 Let's see how you can retrieve more nested API resources:
@@ -761,31 +758,31 @@ Let's see how you can retrieve more nested API resources:
 }
 {% endhighlight %}
 
-The above configuration assumes that all API resources simply have an `id` property (unlike in
-previous example where users had `userId` and orders had `orderId`). This makes the configuration look 
-rather cryptic. You have to read the deepest child placeholder configuration:
+The above configuration assumes that all API resources simply have an `id` property (unlike in the
+previous example where the users had `userId` and the orders had `orderId`). This makes the configuration look 
+rather cryptic. Read the deepest child placeholder configuration
 
     "5:user-id": "id",
     "3:order-id": "id",
     "1:item-id": "id"
 
-as:
+as
 
-- go five levels up, pick the `id` property from the response and put it in place of the `user-id` in the endpoint URL
-- go three levels up, pick the `id` property from the response and put it in place of the `order-id` in the endpoint URL
-- go one level up, pick the `id` property from the response and put it in place of the `item-id` in the endpoint URL
+- Go five levels up, pick the `id` property from the response and put it in place of the `user-id` in the endpoint URL.
+- Go three levels up, pick the `id` property from the response and put it in place of the `order-id` in the endpoint URL.
+- Go one level up, pick the `id` property from the response and put it in place of the `item-id` in the endpoint URL.
 
-Important: Once you run into using placeholders with same property path, their order becomes important. 
-This is because the property path is used as a name of an additional column in the extracted table. Because 
-the property path is `id` in all cases, it will lead to column `parent_id` in all cases and therefore it 
-will get overwritten. With the above configuration, the following `item-detail` table will be produced.
+**Important:** Once you run into using placeholders with the same property path, their order becomes important. 
+This is because the property path is used as the name of an additional column in the extracted table. Because 
+the property path is `id` in all cases, it will lead to the column `parent_id` in all cases and therefore it 
+will get overwritten. With the above configuration, the following `item-detail` table will be produced
 
 |id|code|name|parent_id|
 |---|---|---|---|
 |345|PA10|Pick Axe|345|
 |456|TB20|Tooth Brush|456|
 
-Where the `parent_id` column refers to the `1:item-id` placeholder. If you would use a placeholder configuration
+where the `parent_id` column refers to the `1:item-id` placeholder. If you would use this placeholder configuration,
 
 {% highlight json %}
 {
@@ -798,7 +795,7 @@ Where the `parent_id` column refers to the `1:item-id` placeholder. If you would
 }
 {% endhighlight %}
 
-You would obtain an `item-detail` table:
+you would obtain an `item-detail` table:
 
 |id|code|name|parent_id|
 |---|---|---|---|
@@ -807,7 +804,7 @@ You would obtain an `item-detail` table:
 
 Where the `parent_id` column refers the `5:user-id` placeholder.
 
-See [full example](todo:028-advanced-deep-nesting)
+See the [full example](todo:028-advanced-deep-nesting).
 
 ### Simple Filter
 Let's assume that you have an API which has two resources: 
