@@ -67,7 +67,7 @@ The placeholder in the child `endpoint` will be replaced by the **value** of tha
 path is configured relative to the extracted object ([see an example](#accessing-deeply-nested-id)). The child 
 `endpoint` is configured relative to the [`api.baseUrl` configuration](todo), not relative to the parent endpoint.
 
-The following configuration
+The following configuration:
 
 {% highlight json %}
 {
@@ -124,10 +124,10 @@ to not contain the value `employee` (which is probably not what you intended to 
 ### Basic Example
 Let's say that you have an API with two endpoints:
 
-- `/users/` --- returns a list of users.
-- `/user/?` --- returns user details with a given user ID.
+- `/users/` --- Returns a list of users.
+- `/user/?` --- Returns user details with a given user ID.
 
-The `users` API returns a response like this:
+The `users` endpoint returns a response like this:
 
 {% highlight json %}
 [
@@ -142,7 +142,7 @@ The `users` API returns a response like this:
 ]
 {% endhighlight %}
 
-The `user/123` response returns a response like this:
+The `user/123` endpoint returns a response like this:
 
 {% highlight json %}
 {
@@ -228,6 +228,7 @@ See the [full example](todo:021-basic-child-job).
 To avoid automatic table names, it is advisable to always use the `dataType` property for
 child jobs:
 
+{% highlight json %}
 {
     ...,
     "jobs": [
@@ -246,7 +247,7 @@ child jobs:
         }
     ]
 }
-
+{% endhighlight %}
 In the above configuration, `dataType` is set to `user-detail`, hence you will obtain the 
 following tables:
 
@@ -268,8 +269,8 @@ See the [full example](todo:022-basic-child-job-datatype).
 
 ### Accessing Nested ID
 If the placeholder value is nested within the response object, you can use
-dot notation to access child properties of the response object. E.g., if the 
-parent response with a list of users returns a response similar to this,
+dot notation to access child properties of the response object. For instance, if the 
+parent response with a list of users returns a response similar to this:
 
 {% highlight json %}
 [
@@ -380,7 +381,7 @@ parent endpoint returns a complicated response like this:
 }
 {% endhighlight %}
 
-The following job definition extracts the `active-users` array together with the details for each user.
+The following job definition extracts the `active-users` array together with the details for each user:
 
 {% highlight json %}
 {
@@ -413,7 +414,7 @@ See the [full example](todo:024-child-job-deeply-nested-id).
 
 ### Naming Conflict
 Because a new column is added to the table representing child properties, it is possible that you 
-run into a naming conflict. That is, if the child response with user details looks like this
+run into a naming conflict. That is, if the child response with user details looks like this:
 
 {% highlight json %}
 {
@@ -428,7 +429,7 @@ run into a naming conflict. That is, if the child response with user details loo
 }
 {% endhighlight %}
 
-and you use the following job configuration,
+and you use the following job configuration:
 
 {% highlight json %}
 {
@@ -458,14 +459,14 @@ See the [full example](todo:025-naming-conflict).
 ### Nesting Level
 By default, the placeholder value is taken from the object retrieved in the parent job. As long as the child
 jobs are nested only one level deep, there is no other option anyway. Let's see what happens with a deeper nesting.
-Let's say that you have an API with two endpoints:
+Let's say that you have an API with the following endpoints:
 
 - `/users/` --- Returns a list of users.
 - `/user/?` --- Returns user details with given user ID.
 - `/user/?/orders` --- Returns a list of user orders.
 - `/user/?/orders/?` --- Returns order detail with given user and order ID.
 
-The `users` API returns a response like this:
+The `users` endpoint returns a response like this:
 
 {% highlight json %}
 [
@@ -480,7 +481,7 @@ The `users` API returns a response like this:
 ]
 {% endhighlight %}
 
-The `user/123` response returns a response like this:
+The `user/123` endpoint returns a response like this:
 
 {% highlight json %}
 {
@@ -490,7 +491,7 @@ The `user/123` response returns a response like this:
 }
 {% endhighlight %}
 
-The `user/123/orders` response returns a response like this:
+The `user/123/orders` endpoint returns a response like this:
 
 {% highlight json %}
 [
@@ -505,7 +506,7 @@ The `user/123/orders` response returns a response like this:
 ]
 {% endhighlight %}
 
-The `user/123/order/1234` response returns a response like this:
+The `user/123/order/1234` endpoint returns a response like this:
 
 {% highlight json %}
 {
@@ -756,14 +757,14 @@ Let's see how you can retrieve more nested API resources:
 {% endhighlight %}
 
 The above configuration assumes that all API resources simply have an `id` property (unlike in the
-previous example where the users had `userId` and the orders had `orderId`). This makes the configuration look 
+previous example, where the users had `userId` and the orders had `orderId`). This makes the configuration look 
 rather cryptic. Read the deepest child placeholder configuration
 
     "5:user-id": "id",
     "3:order-id": "id",
     "1:item-id": "id"
 
-as
+as:
 
 - Go five levels up, pick the `id` property from the response and put it in place of the `user-id` in the endpoint URL.
 - Go three levels up, pick the `id` property from the response and put it in place of the `order-id` in the endpoint URL.
@@ -771,15 +772,15 @@ as
 
 **Important:** Once you run into using placeholders with the same property path, their order becomes important. 
 This is because the property path is used as the name of an additional column in the extracted table. Because 
-the property path is `id` in all cases, it will lead to the column `parent_id` in all cases and therefore it 
-will get overwritten. With the above configuration, the following `item-detail` table will be produced
+the property path is `id` in all cases, it will lead to the column `parent_id` in all cases, and therefore it 
+will get overwritten. With the above configuration, the following `item-detail` table will be produced:
 
 |id|code|name|parent_id|
 |---|---|---|---|
 |345|PA10|Pick Axe|345|
 |456|TB20|Tooth Brush|456|
 
-where the `parent_id` column refers to the `1:item-id` placeholder. If you would use this placeholder configuration,
+where the `parent_id` column refers to the `1:item-id` placeholder. If you used this placeholder configuration:
 
 {% highlight json %}
 {
@@ -792,24 +793,24 @@ where the `parent_id` column refers to the `1:item-id` placeholder. If you would
 }
 {% endhighlight %}
 
-you would obtain an `item-detail` table:
+you would obtain the following `item-detail` table:
 
 |id|code|name|parent_id|
 |---|---|---|---|
 |345|PA10|Pick Axe|123|
 |456|TB20|Tooth Brush|123|
 
-Where the `parent_id` column refers the `5:user-id` placeholder.
+where the `parent_id` column refers the `5:user-id` placeholder.
 
 See the [full example](todo:028-advanced-deep-nesting).
 
 ### Simple Filter
-Let's assume that you have an API which has two resources: 
+Let's assume that you have an API which has two endpoints: 
 
-- `users` -- returning a list of users
-- `users/?` -- returning a user detail
+- `users` --- Returns a list of users.
+- `users/?` --- Returns a user detail.
 
-The `users` API returns a response like this:
+The `users` endpoint returns a response like this:
 
 {% highlight json %}
 [
@@ -840,7 +841,7 @@ The `users` API returns a response like this:
 ]
 {% endhighlight %}
 
-The `user/123` API endpoint returns a response like this:
+The `user/123` endpoint returns a response like this:
 
 {% highlight json %}
 {
@@ -878,7 +879,7 @@ A simple child filter can be then set up using the following `jobs` configuratio
 
 The `recursionFilter` setting will cause Generic Extractor to query only the sub-resources for which the 
 filter evaluates to true. The filter property name `type` refers to the parent response, but it 
-does filter only the children. I.e the following tables will be returned:
+filters only the children. So, the following tables will be returned:
 
 users:
 |id|name|role|type|
@@ -938,7 +939,7 @@ following `user-detail` table will be extracted:
 Multiple filters can be combined using the 
 [logical](https://en.wikipedia.org/wiki/Boolean_algebra#Basic_operations) `&` (and) and `|` (or) operators.
 For example the following configuration retrieves details for user which have 
-both `id < 400` and `role = child`. 
+both `id < 400` and `role = child`: 
 
 {% highlight json %}
 {
@@ -1008,5 +1009,5 @@ With the above configuration, the following `user-detail` table will be produced
 |234|Jane Doe|parent|administrator|Mother Jane|234|
 |345|Jimmy Doe|child|user|Sonny Jimmy|345|
 
-Because the described system of operator precedence may lead to rather unusual behavior, 
+Because the described system of operator precedence may lead to rather unusual behaviour, 
 we recommend that you keep the recursive filter simple.
