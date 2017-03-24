@@ -49,6 +49,7 @@ Generic extractor supports the following paging strategies:
 There are three situations when generic extractor will stop scrolling:
 
 - the `nextPageFlag` configuration,
+- the `forceStop` configuration,
 - the same result is obtained twice,
 - the result contains less items than requested (*underflow*)
 
@@ -120,7 +121,94 @@ The boolean conversion has the following rules:
 - `false`, `0`, `null`, string `"0"`, empty array `[]` is `false`,
 - everything else is `true`.
 
-## Examples
+Example `nextPageFlag` setting:
+
+{% highlight json %}
+"pagination": {
+    "nextPageFlag": {
+        "field": "moreItems",
+        "stopOn": false,
+        "ifNotSet": true
+    },
+    ...
+}
+{% endhighlight %}
+
+See [Next Page Flag Examples](#next-page-flag-examples)
+
+### Force Stop
+Force stop configuration allows you to stop scrolling when some extraction limits are hit.
+The supported options are:
+ 
+- `pages` -- maximum number of pages to extract
+- `time` -- maximum number of seconds the extraction should run
+- `volume` -- maximum number of bytes which can be extracted
+
+Example `forceStop` setting:
+
+{% highlight json %}
+"pagination": {
+    "forceStop": {
+        "pages": 20,
+        "time": 3600
+    },
+    ...
+}
+{% endhighlight %}
+
+The volume of response is measured as number of bytes in compressed JSON. Therefore the response 
+
+{% highlight json %}
+{
+    "items": [
+        {
+            "id": 123,
+            "name": "John Doe"
+        },
+        {
+            "id": 234,
+            "name": "Jane Doe"
+        }
+    ]
+}
+{% endhighlight %}
+
+is compressed (minified) to:
+
+{% highlight json %}
+    {"items":[{"id":123,"name":"John Doe"},{"id":234,"name":"Jane Doe"}]}
+{% endhighlight %}
+
+which makes it 69 bytes long.
+
+### Combining Multiple Stopping Strategies
+All stopping strategies are evaluated simultaneously and for the scrolling to continue, none of
+the stopping conditions must be met. Or in other words, the scrolling continues until any of the
+stopping conditions is true. For example with the following configuration:
+
+{% highlight json %}
+"pagination": {
+    "nextPageFlag": {
+        "field": "isLast",
+        "stopOn": true
+    },
+    "forceStop": {
+        "pages": 20
+    },    
+    "method": "offset",
+    "limit": "10"
+}
+{% endhighlight %}
+
+The scrolling will stop if:
+
+- an empty page is encountered,
+- a page contains less then 10 items,
+- a page contains the same items as the previous page,
+- 20 pages were extracted,
+- if a field `isLast` is present in the response and is true.
+
+## Next Page Flag Examples
 
 ### Has-More Type Scrolling
 Assume that the API returns a response which contains a `hasMore` field. The field is present in 
@@ -189,39 +277,21 @@ is required.
 
 (see [Full Example](todo:047-next-page-flag-is-last).
 
-## Common scrolling parameters
-Parameters used by all scroller methods
+## Examples
 
-### nextPageFlag
+### Force Stop
+The following configuration will stop scrolling after extracting two pages of results or
+after extracting 69 bytes of minifed JSON data (whichever comes first).
 
-Looks within responses to find a boolean field determining whether to continue scrolling or not.
+{% highlight json %}
+"pagination": {
+    "forceStop": {
+        "pages": 2,
+        "volume": 69
+    },
+    "method": "offset",
+    "limit": "2"
+}
+{% endhighlight %}
 
-## Usage:
-
-### Configuration
-
-- **field**: Path in the response to a boolean property that indicates whether to continue or not
-- **stopOn**: Whether the pagination should be stopped on `true` or `false`
-- **ifNotSet**:(optional) Whether to assume `true` or `false` if the `field` doesn't exist in the response. If not set, the scrolling stops when the value is not present
-
-### Example
-
-Configuration:
-
-    {
-        "pagination": {
-            "nextPageFlag": {
-                "field": "hasMore",
-                "stopOn": false,
-                "ifNotSet": false
-            },
-            "type": "..."
-        }
-    }
-
-Response:
-
-    {
-        "results": [...],
-        "hasMore": true
-    }
+(see [Full Example](todo:048-force-stop).

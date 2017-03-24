@@ -68,3 +68,4 @@ parameters :
     - for *https://__yourDomain__.zendesk.com/api/v2/*
     - uses `config` part, where attribute **domain** would contain `yourDomain`
 
+todo, muze se pouzit user funkce v ## Force Stop scrolleru  ?
