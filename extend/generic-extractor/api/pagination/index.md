@@ -73,27 +73,30 @@ Querying `users?offset=0&limit=2` returns the first two users. Querying `users?o
 the second two users. Then generic extractor will query `users?offset=4&limit=2`. 
 
 If the response is empty (the API returns an empty page) -- i.e. `[]` the *underflow* check kicks in 
-and the extraction is stopped. 
+and the extraction is stopped. See [Full Example](todo:043-paging-stop-underflow)
 
-    TODO - je na to nejakej message? 
-
-(see [Full Example](todo:043-paging-stop-underflow)
 Note that the *emptiness* is evaluated on the extracted array as [autodected](todo) or 
 specified by the [`dataField`](todo) configuration. That means that the entire response
 may be non-empty (see [Full Example](todo:044-paging-stop-underflow-struct).
+Also, you'll see a warning in the logs
+
+    WARNING: dataField `results.users.items` contains no data!
+
+Which is expected.
 
 If the API returns the last page, it is the same as the previous page and the second check kicks in
 and the extraction is stopped too. 
 You will see
 this in Generic extractor logs as a message
 
-    Same result obtained twice TODO
+    Job '1234567890' finished when last response matched the previous!
 
-(see [Full Example](todo:042-paging-stop-same-2)
+(see [Full Example](todo:041-paging-stop-same)
 
 If the API returns the first page (uncommon), it is not same as the previous page and therefore another
 request is sent to `users?offset=6&limit=2`. Then the result is as the previous page and the
-second check kicks in and the extraction is stopped too.
+second check kicks in and the extraction is stopped too. However the results from the first page
+will be duplicated.
 (see [Full Example](todo:042-paging-stop-same-2)
 
 TODO: co z toho plati univerzalne a co jen pro offset?
@@ -107,16 +110,27 @@ value (or presence) of that flag.
 
 Next page flag is configured using three options:
 
-- `field` -- path to a field containing [boolean](todo) value,
-- `stopOn` -- stop scrolling on `true` or `false`
-- `ifNotSet` -- if the field does not exist in the response, consider its value either `true` or `false`.
+- `field` (required) -- Name of field containing some value. The field must be in root of the response. 
+    The field will be converted to [boolean](/extend/generic-extractor/tutorial/json/#data-values).
+- `stopOn` (required) -- Value to which the field will be compared to. When the values are equal, the scrolling stops.
+- `ifNotSet` -- Assumed value of the `field` in case it is not present in response. Defaults to the `stopOn` value.
 
-For example:
+The boolean conversion has the following rules:
+
+- `false`, `0`, `null`, string `"0"`, empty array `[]` is `false`,
+- everything else is `true`.
+
+## Examples
+
+### Has-More Type Scrolling
+Assume that the API returns a response which contains a `hasMore` field. The field is present in 
+every response and has always the value `true` except for the last response where it is `false`.
+The following pagination configuration can be used to configure the stopping strategy:
 
 {% highlight json %}
 "pagination": {
     "nextPageFlag": {
-        "field": "results.hasMore",
+        "field": "hasMore",
         "stopOn": false,
         "ifNotSet": false
     },
@@ -124,31 +138,22 @@ For example:
 }
 {% endhighlight %}
 
-means that the scrolling will **continue** till the field `results.hasMore` is present in the response and true.
-(see [Full Example](todo:045-next-page-flag-has-more).
+means that the scrolling will **continue** till the field `hasMore` is present in the response and true.
+In this case setting `ifNotSet` is not necessary.
+
+See [Full Example](todo:045-next-page-flag-has-more)
+
+### Non-Boolean Has-More Type Scrolling
+Assume that the API returns a response which contains a `hasMore` field. The field is present only in the
+last response and has the value `"no"` there.
+The following pagination configuration can be used to configure the stopping strategy:
 
 The configuration:
 
 {% highlight json %}
 "pagination": {
     "nextPageFlag": {
-        "field": "results.hasMore",
-        "stopOn": false,
-        "ifNotSet": true
-    },
-    ...
-}
-{% endhighlight %}
-
-means that the scrolling will **continue** until the field `results.hasMore` is false.
-(see [Full Example](todo:046-next-page-flag-has-more-2)
-
-On the other hand, the configuration:
-
-{% highlight json %}
-"pagination": {
-    "nextPageFlag": {
-        "field": "results.isLast",
+        "field": "hasMore",
         "stopOn": true,
         "ifNotSet": false
     },
@@ -156,12 +161,34 @@ On the other hand, the configuration:
 }
 {% endhighlight %}
 
-will **stop** scrolling when the field `result.isLast` is present in the response and true.
+means that the scrolling will **continue** until the field `hasMore` is present. This takes advantage of the
+boolean conversion which converts the value `"no"` to true. If the field `hasMore` is not present, it defaults
+to false. In this case setting `ifNotSet` is mandatory.
 
-- stejnej vysledek
-- nextPageFlag (je to v json schema? - co jsem tim kurva myslel)
-- min vysledku nez pozadovano (applies to offset)
- 
+See [Full Example](todo:046-next-page-flag-has-more-2).
+
+### Is-Last type of Scrolling
+Assume that the API returns a response which contains a `isLast` field. The field is present only in the
+last response and has the value `true` there.
+The following pagination configuration can be used to configure the stopping strategy:
+
+{% highlight json %}
+"pagination": {
+    "nextPageFlag": {
+        "field": "isLast",
+        "stopOn": true,
+        "ifNotSet": false
+    },
+    ...
+}
+{% endhighlight %}
+
+The above configuration will **stop** scrolling when the field `isLast` is present in the 
+response and true. Because the field `isLast` is not present at all times, the `ifNotSet` configuration
+is required.
+
+(see [Full Example](todo:047-next-page-flag-is-last).
+
 ## Common scrolling parameters
 Parameters used by all scroller methods
 
