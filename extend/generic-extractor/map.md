@@ -100,6 +100,8 @@ document.addEventListener('DOMContentLoaded', function() {
     $("span.nt:contains('\"params\"')").first().wrap("<a href='/extend/generic-extractor/api/#default-request-parameters'></a>");
     $("span.nt:contains('\"defaultOptions\"')").wrap("<a href='/extend/generic-extractor/api/#default-request-parameters'></a>");
     $("span.nt:contains('\"requiredHeaders\"')").wrap("<a href='/extend/generic-extractor/api/#required-headers'></a>");
+    $("span.nt:contains('\"pagination\"')").wrap("<a href='/extend/generic-extractor/api/pagination/'></a>");
+    $("span.nt:contains('\"method\"')").first().wrap("<a href='/extend/generic-extractor/api/pagination/#paging-strategy'></a>");
     // Jobs
     $("span.nt:contains('\"endpoint\"')").wrap("<a href='/extend/generic-extractor/jobs/#endpoint'></a>");
     $("span.nt:contains('\"params\"')").last().wrap("<a href='/extend/generic-extractor/jobs/#request-parameters'></a>");    

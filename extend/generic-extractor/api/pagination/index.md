@@ -35,12 +35,11 @@ An example pagination configuration looks like this:
 {% endhighlight %}
 
 ## Paging Strategy
-Generic extractor supports the following paging strategies:
+Generic extractor supports the following paging strategies (scrollers):
 
-- [`offset`](todo) -- uses limit and offset to create pages (like in SQL)
-- cursor
-- offset 
-- pagenum
+- [`offset`](/extend/generic-extractor/api/pagination/offset/) -- uses page size (limit) and items offset (like in SQL)
+- [`pagenum`](/extend/generic-extractor/api/pagination/pagenum/) -- uses page size (limit) and page number
+- [`cursor`]
 - response-param
 - response-url
 - multiple
