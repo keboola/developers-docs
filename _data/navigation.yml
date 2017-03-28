@@ -103,6 +103,27 @@ items:
 
           - url: /extend/generic-extractor/api/
             title: API Configuration
+            items:
+              - url: /extend/generic-extractor/pagination/
+                title: Pagination
+                items:
+                  - url: /extend/generic-extractor/pagination/response-url/
+                    title: Response URL Scroller
+
+                  - url: /extend/generic-extractor/pagination/response-param/
+                    title: Response Parameter Scroller
+
+                  - url: /extend/generic-extractor/pagination/offset/
+                    title: Offset Scroller
+                
+                  - url: /extend/generic-extractor/pagination/pagenum/
+                    title: Page Number Scroller
+
+                  - url: /extend/generic-extractor/pagination/cursor/
+                    title: Cursor Scroller
+
+                  - url: /extend/generic-extractor/pagination/multiple/
+                    title: Multiple Scrollers
 
           - url: /extend/generic-extractor/user-functions/
             title: User Functions

@@ -35,14 +35,22 @@ An example pagination configuration looks like this:
 {% endhighlight %}
 
 ## Paging Strategy
-Generic extractor supports the following paging strategies (scrollers):
+Generic extractor supports the following paging strategies (scrollers), these are configured
+using the `method` option:
 
-- [`offset`](/extend/generic-extractor/api/pagination/offset/) -- uses page size (limit) and items offset (like in SQL)
-- [`pagenum`](/extend/generic-extractor/api/pagination/pagenum/) -- uses page size (limit) and page number
+- [`response.url`](/extend/generic-extractor/api/pagination/response-url/) -- uses URL provided in the response
+- [`offset`](/extend/generic-extractor/api/pagination/offset/) -- uses page size (limit) and **item offset** (like in SQL)
+- [`pagenum`](/extend/generic-extractor/api/pagination/pagenum/) -- uses page size (limit) and **page number**
+- [`response.param`](/extend/generic-extractor/api/pagination/response-param/) -- 
 - [`cursor`]
-- response-param
 - response-url
 - multiple
+
+Choosing pagination strategy
+- kdyz je url pouzij url
+- kdyz je neco v response, pouzij response
+- fallbak je offset a pagenum ktery jsou lowlevel
+-
 
 ## Stopping Strategy
 There are three situations when generic extractor will stop scrolling:
@@ -50,6 +58,9 @@ There are three situations when generic extractor will stop scrolling:
 - the `nextPageFlag` configuration,
 - the `forceStop` configuration,
 - the same result is obtained twice,
+
+TODO: tohle preunout k pagenum a offset
+apart from those, each pagination method may have additionall conditions
 - the result contains less items than requested (*underflow*)
 
 This last two options can be demonstrated on a basic `offset` pagination type. Let's say that you

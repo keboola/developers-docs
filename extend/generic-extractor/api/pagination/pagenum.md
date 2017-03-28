@@ -22,7 +22,7 @@ If you need to use the *item offset*, use the [Offset Scroller](/extend/generic-
 {% endhighlight %}
 
 ## Configuration Parameters
-The following configuration parameters are supported for the `pagenum` type of pagination:
+The following configuration parameters are supported for the `pagenum` method of pagination:
 
 - `limit` (optional, integer) -- page size
 - `limitParam`(optional, string) -- name of the parameter in which the API expects page size, default value is `limit`;

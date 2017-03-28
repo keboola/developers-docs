@@ -25,7 +25,7 @@ Example of configuration:
 {% endhighlight %}
 
 ## Configuration Parameters
-The following configuration parameters are supported for the `offset` type of pagination:
+The following configuration parameters are supported for the `offset` method of pagination:
 - `limit` (required, integer) -- page siz;
 - `limitParam` (optional, string) -- name of the parameter in which the API expects page size, default value is `limit`;
 - `offsetParam` (optional, string) -- name of the parameter in which the API expects the item offset, default value is `offset`;
@@ -113,6 +113,7 @@ API endpoints.
         }
     }
 }
+{% endhighlight %}
 
 In the above configuration, the first API request to the `users` endpoint will be
 `GET /users?count=2&skip=2`. This is because the values `count=2` and `skip=2` are taken from the 
