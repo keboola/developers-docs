@@ -1,6 +1,6 @@
 ---
 title: Response Parameter Scroller
-permalink: /extend/generic-extractor/pagination/response-param/
+permalink: /extend/generic-extractor/api/pagination/response-param/
 ---
 
 The Response Parameter Scroller can be used with an API which provides some kind

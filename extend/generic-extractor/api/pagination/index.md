@@ -50,7 +50,7 @@ Choosing pagination strategy
 - kdyz je url pouzij url
 - kdyz je neco v response, pouzij response
 - fallbak je offset a pagenum ktery jsou lowlevel
--
+- kdyz je offset hodnota (treba ID), tak pouzit cursor, kdyz je to index, tak pouzit offset
 
 ## Stopping Strategy
 There are three situations when generic extractor will stop scrolling:
