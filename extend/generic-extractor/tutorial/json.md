@@ -6,12 +6,12 @@ permalink: /extend/generic-extractor/tutorial/json/
 * TOC
 {:toc}
 
-[JSON (JavaScript Object Notation)](http://www.json.org/) is a format for describing structured 
-kind of data. For working with JSON you should be familiar with basic programming jargon. 
+[JSON (JavaScript Object Notation)](http://www.json.org/) is a format for describing structured data. 
+Before you start working with JSON, familiarize yourself with basic programming jargon:
 
 ## Object Representation
-JSON is used to described **objects** and their **properties**. For example you can describe a 
-a person "John Doe" using the following JSON:
+JSON is used to describe **objects** and their **properties**. For example, "John Doe" (a person) can be described 
+using the following JSON:
 
 {% highlight json %}
 {
@@ -20,15 +20,11 @@ a person "John Doe" using the following JSON:
 }
 {% endhighlight %}
 
-The terminology varies a lot, so the **object** is also commonly called **record**, **structure**, 
-**dictionary**, **hash table**, **keyed list**, **key-value**, **associative array**. A **property** is
-also commonly called a **field**, **key**, **index**. Objects may be further organized into other
-objects or into **arrays**. An **array** is a simple list of (usually the same) things, 
-it is also commonly called a **collection**, **list**, **vector** or **sequence**. Both **array** and
-**object** are collection of things. The core difference is that items in array are identified
-by their numeric position and the array maintains order of the items. Items in object are 
-identified by their name (property name) and the order of items is not maintainted. Arrays are
-numericaly indexed (also called *ordinal arrays*) and objects are indexed by name (also called *associative arrays*).
+okomentovat 
+object having two properties 
+Each property has a value.
+
+Except objects, there are also arrays. Values in arrays do not have a property name, but are referred to by their position.
 
 To describe the John Doe family, you might use the following JSON:
 
@@ -57,6 +53,23 @@ three **objects** (marked by the curly brackets `{}`). Each object has **propert
 (in double quotes `"` before the colon `:`, e.g. `firstName`). Each property has a **value** (in double 
 quotes after the colon, e.g. `John`). Properties and objects are separated using commas `,`. Notice that 
 the last item has no comma.
+
+Both **array** and **object** are collection of things. The core difference is that items in array are identified 
+by their numeric position and the array maintains order of the items. Items in object are identified by their name 
+(property name) and the order of items is not maintained. Arrays are numerically indexed (also called *ordinal 
+arrays*) and objects are indexed by name (also called *associative arrays*).
+
+
+The terminology varies a lot: 
+
+- **Object** is also commonly called a **record**, **structure**, **dictionary**, **hash table**, **keyed 
+list**, **key-value** and **associative array**. 
+- **Property** is also commonly called a **field**, **key** and **index**. Objects may be further organized into 
+other objects or into **arrays**. 
+- **Array** is a simple list of (usually the same) things. It is also commonly called a **collection**, **list**, 
+**vector** or a **sequence**. 
+
+
 
 ## Data Values
 A value of each property always has some data type. Available data types are:
@@ -130,7 +143,7 @@ Doe's family.
 }
 {% endhighlight %}
 
-To refer to the Joe's city, we would write `address.city`. To refer to little Jimmy`s shoe size, we
+To refer to Joe's city, we would write `address.city`. To refer to little Jimmy`s shoe size, we
 would write `members[2].shoeSize`. Array items indexes are *zero-based* so the third item has 
 index `2`. Also note that the order of items in an object is not important. It is also worth noting
 that `[]` represents an empty array and `{}` represents an empty object.
