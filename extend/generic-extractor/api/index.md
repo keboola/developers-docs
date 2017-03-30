@@ -146,7 +146,7 @@ See [example](/extend/generic-extractor/api/#retry-configuration)
 
 ## Default HTTP Options
 The `http` configuration option allows you to set default headers and parameters 
-sent with each API call (defined later in the [`jobs` section](todo)).
+sent with each API call (defined later in the [`jobs` section](/extend/generic-extractor/jobs/#request-parameters)).
 
 ### Headers
 The `http.headers` configuration allows you to set default headers sent with

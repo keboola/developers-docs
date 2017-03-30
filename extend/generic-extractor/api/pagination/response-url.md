@@ -3,6 +3,9 @@ title: Response URL Scroller
 permalink: /extend/generic-extractor/api/pagination/response-url/
 ---
 
+* TOC
+{:toc}
+
 The Response URL Scroller can be used with an API which provides the URL of the 
 next page in the response. This scroller is suitable for APIs supporting the 
 [JSON API specification](http://jsonapi.org/format/#fetching-pagination).

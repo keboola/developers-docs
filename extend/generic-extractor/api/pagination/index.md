@@ -3,10 +3,12 @@ title: Pagination
 permalink: /extend/generic-extractor/api/pagination/
 ---
 
-Pagination (or paging) describes how an API splits a large list of items into [separate pages](todowiki). 
-Pagination may also be 
+* TOC
+{:toc}
+
+[Pagination](https://en.wikipedia.org/wiki/Pagination) (or paging) describes how an API splits a large list of items into separate pages. Pagination may also be 
 called *scrolling* or *traversing* (scrolling through a large result set), sometimes it is also referred to as
-*setting a cursor* (pointing to a current result). Almost every API has some form of pagination because 
+*setting a [cursor](https://en.wikipedia.org/wiki/Cursor_(databases))* (pointing to a current result). Almost every API has some form of pagination because 
 returning lists of results is impractical for many reasons (memory overflows, transfer takes too long, processing takes too long, ...). This makes pagination setting important if you want to retrieve large results. If you
 are doing only an ad-hoc query to an API and you want to retrieve thousands of items at most, you may
 get away without setting pagination at all.
@@ -41,10 +43,9 @@ using the `method` option:
 - [`response.url`](/extend/generic-extractor/api/pagination/response-url/) -- uses URL provided in the response
 - [`offset`](/extend/generic-extractor/api/pagination/offset/) -- uses page size (limit) and **item offset** (like in SQL)
 - [`pagenum`](/extend/generic-extractor/api/pagination/pagenum/) -- uses page size (limit) and **page number**
-- [`response.param`](/extend/generic-extractor/api/pagination/response-param/) -- 
-- [`cursor`]
-- response-url
-- multiple
+- [`response.param`](/extend/generic-extractor/api/pagination/response-param/) -- uses some value (token) provided in the response.
+- [`cursor`](/extend/generic-extractor/api/pagination/cursor/) -- uses an identifier of the item in response to maintain a scrolling cursor.
+- [`multiple`](/extend/generic-extractor/api/pagination/multiple/) -- allows to set different scrollers for different API endpoints.
 
 Choosing pagination strategy
 - kdyz je url pouzij url
@@ -53,64 +54,41 @@ Choosing pagination strategy
 - kdyz je offset hodnota (treba ID), tak pouzit cursor, kdyz je to index, tak pouzit offset
 
 ## Stopping Strategy
-There are three situations when generic extractor will stop scrolling:
+There are three situations when generic extractor will stop scrolling if:
 
 - the `nextPageFlag` configuration,
 - the `forceStop` configuration,
-- the same result is obtained twice,
+- the *same result* is obtained twice.
 
-TODO: tohle preunout k pagenum a offset
-apart from those, each pagination method may have additionall conditions
-- the result contains less items than requested (*underflow*)
+Apart from those, each pagination method may have their own 
+[stopping strategies](#combining-multiple-stopping-strategies).
 
-This last two options can be demonstrated on a basic `offset` pagination type. Let's say that you
-have an API endpoint `users` which takes parameters `limit` and `offset`. There are four users in
-total. The response looks as this:
+The *same result* condition deals with the situation when there is no clear limit to 
+stop the scrolling. Generic extractor will keep requesting higher and higher pages from the API.
+Let's say that there are 150 pages of results in total. When Generic Extractor asks for page 151, different 
+situations can arise:
 
-{% highlight json %}
-[
-    {
-        "id": 345,
-        "name": "Jimmy Doe"
-    },
-    {
-        "id": 456,
-        "name": "Jenny Doe"
-    }
-]
-{% endhighlight %}
+- most common -- the API returns empty page (scrolling with 
+[`pagenum`](/extend/generic-extractor/api/pagination/pagenum/) and 
+[`offset`](/extend/generic-extractor/api/pagination/pagenum/) methods will stop, other methods will probably stop 
+too (depends on how empty the response is)),
+- less common -- the API keeps returning the last page, the extraction is stopped when a page is obtained twice -- see below.
+- even less common -- the API keeps returning the first page, the extraction is stopped when a page is obtained twice -- see below.
+- less common -- the API returns an error -- in this case a different stopping condition has to be used
+([`nextFlag`](#next-page-flag) or [`forceStop`](#force-stop)).
 
-Querying `users?offset=0&limit=2` returns the first two users. Querying `users?offset=2limit`
-the second two users. Then generic extractor will query `users?offset=4&limit=2`. 
-
-If the response is empty (the API returns an empty page) -- i.e. `[]` the *underflow* check kicks in 
-and the extraction is stopped. See [Full Example](todo:043-paging-stop-underflow)
-
-Note that the *emptiness* is evaluated on the extracted array as [autodected](todo) or 
-specified by the [`dataField`](todo) configuration. That means that the entire response
-may be non-empty (see [Full Example](todo:044-paging-stop-underflow-struct).
-Also, you'll see a warning in the logs
-
-    WARNING: dataField `results.users.items` contains no data!
-
-Which is expected.
-
-If the API returns the last page, it is the same as the previous page and the second check kicks in
-and the extraction is stopped too. 
-You will see
-this in Generic extractor logs as a message
+If the API returns the last page and it is the same as the 
+previous page, the extraction is stopped. You will see this in Generic extractor logs as a message:
 
     Job '1234567890' finished when last response matched the previous!
 
 (see [Full Example](todo:041-paging-stop-same)
 
-If the API returns the first page (uncommon), it is not same as the previous page and therefore another
+If the API returns the first page, it is not same as the previous page and therefore another
 request is sent to `users?offset=6&limit=2`. Then the result is as the previous page and the
-second check kicks in and the extraction is stopped too. However the results from the first page
+same check kicks in and the extraction is stopped too. However the results from the first page
 will be duplicated.
 (see [Full Example](todo:042-paging-stop-same-2)
-
-TODO: co z toho plati univerzalne a co jen pro offset?
 
 ### Next Page Flag
 The above describes automatic behavior of Generic Extractor regarding scrolling stopping. 
@@ -193,8 +171,9 @@ which makes it 69 bytes long.
 
 ### Combining Multiple Stopping Strategies
 All stopping strategies are evaluated simultaneously and for the scrolling to continue, none of
-the stopping conditions must be met. Or in other words, the scrolling continues until any of the
-stopping conditions is true. For example with the following configuration:
+the stopping conditions must be met. In other words, the scrolling continues until any of the
+stopping conditions is true. To this you need to account specific stopping strategies for 
+each scroller. For example with the following configuration:
 
 {% highlight json %}
 "pagination": {
@@ -210,13 +189,13 @@ stopping conditions is true. For example with the following configuration:
 }
 {% endhighlight %}
 
-The scrolling will stop if:
+The scrolling will stop if **any** of the following is true:
 
-- an empty page is encountered,
-- a page contains less then 10 items,
+- an empty page is encountered (`offset` scroller specific),
+- a page contains less then 10 items (`offset` scroller specific),
 - a page contains the same items as the previous page,
-- 20 pages were extracted,
-- if a field `isLast` is present in the response and is true.
+- 20 pages were extracted (`forceStop`),
+- if a field `isLast` is present in the response and is true (`nextPageFlag`).
 
 ## Next Page Flag Examples
 

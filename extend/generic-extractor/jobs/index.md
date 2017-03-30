@@ -329,6 +329,13 @@ These **child jobs** (**nested jobs**) are executed for each object retrieved fr
 parent response. The definition of child jobs is the same as the definition of parent jobs, 
 except for **placeholders**. The children configuration is described in a [separate article](/jobs/children/).
 
+### Scroller
+The `scroller` parameter can be used to assign a predefined scroller in case 
+[`multiple` pagination](/extend/generic-extractor/api/pagination/multiple/) is used. If the
+`multiple` pagination method is not used, the `scroller` parameter has no use. If `scroller` is not
+set, the pagination method specified in the [`api` configuration](/extend/generic-extractor/api/pagination/)
+is used. If no pagination method is specified in the `api` section, then the job uses no pagination.
+
 ## Examples
 
 ### Simple array

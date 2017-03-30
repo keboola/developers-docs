@@ -9,9 +9,14 @@ permalink: /extend/generic-extractor/map/
         "api": {
             "baseUrl": "https://example.com/v3.0/",
             "pagination": {
-                "method": "offset",
-                "offsetParam": "offset",
-                "limitParam": "count"
+                "method": "multiple",
+                "scrollers": {
+                    "offset_scroll": {
+                        "method": "offset",
+                        "offsetParam": "offset",
+                        "limitParam": "count"
+                    }
+                }
             },
             "authentication": {
                 "type": "basic"
@@ -52,6 +57,7 @@ permalink: /extend/generic-extractor/map/
                     },
                     "responseFilter": "additional.address/details",
                     "responseFilterDelimiter": "/",
+                    "scroller": "offset_scroll",
                     "children": [
                         {
                             "endpoint": "users/{user_id}/orders",
@@ -101,6 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
     $("span.nt:contains('\"defaultOptions\"')").wrap("<a href='/extend/generic-extractor/api/#default-request-parameters'></a>");
     $("span.nt:contains('\"requiredHeaders\"')").wrap("<a href='/extend/generic-extractor/api/#required-headers'></a>");
     $("span.nt:contains('\"pagination\"')").wrap("<a href='/extend/generic-extractor/api/pagination/'></a>");
+    $("span.nt:contains('\"scrollers\"')").wrap("<a href='/extend/generic-extractor/api/pagination/multiple/'></a>");
     $("span.nt:contains('\"method\"')").first().wrap("<a href='/extend/generic-extractor/api/pagination/#paging-strategy'></a>");
     // Jobs
     $("span.nt:contains('\"endpoint\"')").wrap("<a href='/extend/generic-extractor/jobs/#endpoint'></a>");
@@ -110,10 +117,14 @@ document.addEventListener('DOMContentLoaded', function() {
     $("span.nt:contains('\"dataType\"')").wrap("<a href='/extend/generic-extractor/jobs/#data-type'></a>");
     $("span.nt:contains('\"responseFilter\"')").wrap("<a href='/extend/generic-extractor/jobs/#response-filter'></a>");
     $("span.nt:contains('\"responseFilterDelimiter\"')").wrap("<a href='/extend/generic-extractor/jobs/#response-filter'></a>");
+    $("span.nt:contains('\"scroller\"')").last().wrap("<a href='/extend/generic-extractor/jobs/#scroller'></a>");
     $("span.nt:contains('\"jobs\"')").wrap("<a href='/extend/generic-extractor/jobs/'></a>");
     // Child jobs
     $("span.nt:contains('\"children\"')").wrap("<a href='/extend/generic-extractor/jobs/#children'></a>");
     $("span.nt:contains('\"recursionFilter\"')").wrap("<a href='/extend/generic-extractor/jobs/children/#filter'></a>");
     $("span.nt:contains('\"placeholders\"')").wrap("<a href='/extend/generic-extractor/jobs/children/#placeholders'></a>");
+
+    // Config root
+    $("span.nt:contains('\"debug\"')").wrap("<a href='/extend/generic-extractor/running/#debug-mode'></a>");
 }, false);
 </script>

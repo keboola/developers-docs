@@ -3,6 +3,9 @@ title: Cursor Scroller
 permalink: /extend/generic-extractor/api/pagination/cursor/
 ---
 
+* TOC
+{:toc}
+
 The Cursors Scroller can be used with an API which expects the client to maintain a cursor (pointer)
 to the last obtained item. For example on first request it returns items with ID 1-100, for the second
 request, you must tell the API to start with ID 101. 

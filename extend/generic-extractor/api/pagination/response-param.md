@@ -3,6 +3,9 @@ title: Response Parameter Scroller
 permalink: /extend/generic-extractor/api/pagination/response-param/
 ---
 
+* TOC
+{:toc}
+
 The Response Parameter Scroller can be used with an API which provides some kind
 of value in the response which must be used in the next request.
 
@@ -14,7 +17,8 @@ of value in the response which must be used in the next request.
             "urlKey": "links.next"
         },
         ...
-    }
+    },
+    ...
 }
 {% endhighlight %}
 

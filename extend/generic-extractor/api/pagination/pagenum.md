@@ -3,6 +3,9 @@ title: Page Number Scroller
 permalink: /extend/generic-extractor/api/pagination/pagenum/
 ---
 
+* TOC
+{:toc}
+
 The Offset scroller handles pagination strategy in which the API splits the results into pages
 of the same size (limit parameter) and navigates through them using the **item offset** parameter. 
 If you need to use the *item offset*, use the [Offset Scroller](/extend/generic-extractor/pagination/offset/).
@@ -30,8 +33,12 @@ The following configuration parameters are supported for the `pagenum` method of
 - `firstPageParams` (optional, boolean) -- when false, the first page will be retrieved without the page parameters, default value is `true`;
 - `firstPage` (optional, integer) -- index of the first page, default value is `1`.
 
-The `limit` parameter has no default value. This means that if you omit it, it is not possible to 
-use the [*underflow* stopping condition](/extend/generic-extractor/api/pagination/#stopping-strategy).
+### Stopping Condition
+The `pagenum` scroller uses similar stopping condition as the 
+[`offset` scroller](/extend/generic-extractor/api/pagination/offset/#stopping-condition). That is --
+the extraction is stopped in case of underflow -- when the API returns less items then requested 
+(including zero). However in the `pagenum` scroller, the `limit` parameter is not required and has no 
+default value. This means -- if you omit it, the scrolling will stop only if an empty page is encountered.
 
 ## Examples
 

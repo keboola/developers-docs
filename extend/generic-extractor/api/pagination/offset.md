@@ -3,6 +3,9 @@ title: Offset scroller
 permalink: /extend/generic-extractor/api/pagination/offset/
 ---
 
+* TOC
+{:toc}
+
 The Offset scroller handles pagination strategy in which the API splits the results into pages
 of the same size (limit parameter) and navigates through them using the **item offset** parameter. This 
 is similar to paging in SQL language. If you need to use *page offset*, use the 
@@ -40,6 +43,44 @@ it may be overridden in the job parameters if `offsetFromJob` is set to true.
 limit to e.g. 1000 if the API returns 100 items at most would cause the extraction to stop after
 the first page. This is because the [underflow condition](/extend/generic-extractor/api/pagination/#stopping-strategy)
 would be triggered.
+
+### Stopping Condition
+Scrolling is stopped when the result contains less items than requested -- specified in the
+`limit` configuration (*underflow*). This also includes when no items are returned or the 
+response is empty.
+
+Let's say that you have an API endpoint `users` which takes parameters `limit` and `offset`. 
+There are four users in total. The response looks as this:
+
+{% highlight json %}
+[
+    {
+        "id": 345,
+        "name": "Jimmy Doe"
+    },
+    {
+        "id": 456,
+        "name": "Jenny Doe"
+    }
+]
+{% endhighlight %}
+
+Querying `users?offset=0&limit=2` returns the first two users. Querying `users?offset=2limit`
+the second two users. Then generic extractor will then query `users?offset=4&limit=2`. 
+
+If the response is empty (the API returns an empty page) -- i.e. `[]` the *underflow* check kicks in 
+and the extraction is stopped. See [Full Example](todo:043-paging-stop-underflow)
+
+Note that the *emptiness* is evaluated on the extracted array as [autodected](todo) or 
+specified by the [`dataField`](todo) configuration. That means that the entire response
+may be non-empty (see [Full Example](todo:044-paging-stop-underflow-struct).
+Also, you'll see a warning in the logs
+
+    WARNING: dataField `results.users.items` contains no data!
+
+Which is expected.
+
+[Common stopping conditions](/extend/generic-extractor/api/pagination/#stopping-strategy) also apply.
 
 ## Examples
 
