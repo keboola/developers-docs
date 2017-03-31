@@ -302,6 +302,8 @@ column `parent_id` does not really exist in the response as it is generated dyna
 
 See the [full example](todo:065-mapping-child-jobs).
 
+## Table Mapping Examples
+
 ### Basic Table Mapping
 Because all output columns must be listed in mapping, the above settings skip the `interests` property of 
 the response:
@@ -373,8 +375,518 @@ itself is an array, its value has no name therefore the key is empty string `""`
 value is standard [column mapping](todo). The above configuration produces the 
 same result as the automatic mapping of columns.
 
-### Complex Table Mapping
+See the [full example](todo:066-mapping-tables-basic).
 
+### Nested Properties
+Let's say that you have an API which returns a response like this:
+
+{% highlight json %}
+[
+    {
+        "id": 123,
+        "name": "John Doe",
+        "contacts": {
+            "email": "john.doe@example.com",
+            "phone": "987345765",
+            "addresses": [
+                {
+                    "street": "Blossom Avenue",
+                    "country": "United Kingdom"
+                },
+                {
+                    "street": "Whiteheaven Mansions",
+                    "city": "London",
+                    "country": "United Kingdom"
+                }
+            ]
+        }
+    },
+    {
+        "id": 234,
+        "name": "Jane Doe",
+        "contacts": {
+            "email": "jane.doe@example.com",
+            "skype": "jane.doe",
+            "addresses": [
+                {
+                    "street": "Whiteheaven Mansions",
+                    "city": "London",
+                    "country": "United Kingdom"
+                }
+            ]
+        }
+    }
+]
+{% endhighlight %}
+
+With the automatic mapping (without any `mappings` configuration), the following tables will be extracted:
+
+users:
+
+|id|name|contacts\_email|contacts\_phone|contacts\_addresses|contacts\_skype|
+|123|John Doe|john.doe@example.com|987345765|users.contacts_912c86dec7acdb9d8a17c97eb464aec6||
+|234|Jane Doe|jane.doe@example.com||users.contacts_4cf9e859113127acb138872cc630e75f|jane.doe|
+
+users.contacts:
+
+|street|country|city|JSON_parentId|
+|Blossom Avenue|United Kingdom||users.contacts_912c86dec7acdb9d8a17c97eb464aec6|
+|Whiteheaven Mansions|United Kingdom|London|users.contacts_912c86dec7acdb9d8a17c97eb464aec6|
+|Whiteheaven Mansions|United Kingdom|London|users.contacts_4cf9e859113127acb138872cc630e75f|
+
+This might not be exactly what you want. Perhaps you would like the contacts to be separate from users and 
+addresses. This can be done using the following mapping configuration: 
+
+{% highlight json %}
+"mappings": {
+    "users": {
+        "id": {
+            "type": "column",
+            "mapping": {
+                "destination": "id"
+            }
+        },
+        "name": {
+            "type": "column",
+            "mapping": {
+                "destination": "name"
+            }
+        },
+        "contacts": {
+            "type": "table",
+            "destination": "user-contact",
+            "tableMapping": {
+                "email": {
+                    "type": "column",
+                    "mapping": {
+                        "destination": "email"
+                    }
+                },
+                "phone": {
+                    "type": "column",
+                    "mapping": {
+                        "destination": "tel"
+                    }
+                },
+                "addresses": {
+                    "type": "table",
+                    "destination": "user-address",
+                    "tableMapping": {
+                        "street": {
+                            "type": "column",
+                            "mapping": {
+                                "destination": "street"
+                            }
+                        },
+                        "country": {
+                            "type": "column",
+                            "mapping": {
+                                "destination": "country"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+{% endhighlight %}
+
+The above configuration defines that `contacts` field will be mapped into a separate table
+with columns `email` and `tel` (value of `mapping.destination`). The `address` field will be 
+mapped into yet another separate table with columns `street` and `country`. 
+
+With the above configuration, the following tables will be created:
+
+users:
+
+|id|name|user-contact|
+|123|John Doe|b5d72095c441b3a3d6f23ad8142c3f8b|
+|234|Jane Doe|5f7f2ab65a680f1a9387a8fafe6b9050|
+
+user-contact:
+
+|email|tel|user-address|users_pk|
+|john.doe@example.com|987345765|1c439a9a39548290f7b7a4513a9224e7|b5d72095c441b3a3d6f23ad8142c3f8b|
+|jane.doe@example.com||605e865710f95dba665f6d0e8bc19f1a|5f7f2ab65a680f1a9387a8fafe6b9050|
+
+user-address:
+
+|street|country|user-contact_pk|
+|Blossom Avenue|United Kingdom|1c439a9a39548290f7b7a4513a9224e7|
+|Whiteheaven Mansions|United Kingdom|1c439a9a39548290f7b7a4513a9224e7|
+|Whiteheaven Mansions|United Kingdom|605e865710f95dba665f6d0e8bc19f1a|
+
+See the [full example](todo:067-mapping-tables-nested).
+
+### Array Items
+With the same API response as above: 
+
+{% highlight json %}
+[
+    {
+        "id": 123,
+        "name": "John Doe",
+        "contacts": {
+            "email": "john.doe@example.com",
+            "phone": "987345765",
+            "addresses": [
+                {
+                    "street": "Blossom Avenue",
+                    "country": "United Kingdom"
+                },
+                {
+                    "street": "Whiteheaven Mansions",
+                    "city": "London",
+                    "country": "United Kingdom"
+                }
+            ]
+        }
+    },
+    {
+        "id": 234,
+        "name": "Jane Doe",
+        "contacts": {
+            "email": "jane.doe@example.com",
+            "skype": "jane.doe",
+            "addresses": [
+                {
+                    "street": "Whiteheaven Mansions",
+                    "city": "London",
+                    "country": "United Kingdom"
+                }
+            ]
+        }
+    }
+]
+{% endhighlight %}
+
+let's say that you know that the `addresses` array contains only two items at most and therefore
+you want to mark them as primary and secondary address.
+
+{% highlight json %}
+"mappings": {
+    "users": {
+        "id": {
+            "type": "column",
+            "mapping": {
+                "destination": "id"
+            }
+        },
+        "name": {
+            "type": "column",
+            "mapping": {
+                "destination": "name"
+            }
+        },
+        "contacts": {
+            "type": "table",
+            "destination": "user-contact",
+            "tableMapping": {
+                "email": {
+                    "type": "column",
+                    "mapping": {
+                        "destination": "email"
+                    }
+                },
+                "phone": {
+                    "type": "column",
+                    "mapping": {
+                        "destination": "tel"
+                    }
+                },
+                "addresses.0": {
+                    "type": "table",
+                    "destination": "primary-address",
+                    "tableMapping": {
+                        "street": {
+                            "type": "column",
+                            "mapping": {
+                                "destination": "street"
+                            }
+                        },
+                        "country": {
+                            "type": "column",
+                            "mapping": {
+                                "destination": "country"
+                            }
+                        }
+                    }
+                },
+                "addresses.1": {
+                    "type": "table",
+                    "destination": "secondary-address",
+                    "tableMapping": {
+                        "street": {
+                            "type": "column",
+                            "mapping": {
+                                "destination": "street"
+                            }
+                        },
+                        "country": {
+                            "type": "column",
+                            "mapping": {
+                                "destination": "country"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+{% endhighlight %}
+
+The above is pretty long configuration, but the important part is:
+
+{% highlight json %}
+"addresses.0": {
+    "type": "table",
+    "destination": "primary-address",
+    "tableMapping": {
+        "street": {
+            "type": "column",
+            "mapping": {
+                "destination": "street"
+            }
+        },
+        "country": {
+            "type": "column",
+            "mapping": {
+                "destination": "country"
+            }
+        }
+    }
+}
+{% endhighlight %}
+
+This picks the first item (rember that arrays indexes are [zero-based](todo)) and places it in the
+`primary-address` table. Analogously, the `addresses.1` mapping picks the second item from the `addressess` 
+array and stores it in the `seconday-address` table.
+
+See the [full example](todo:068-mapping-tables-nested-array).
+
+### Directly Mapping Array
+With the same API response as above:
+
+{% highlight json %}
+[
+    {
+        "id": 123,
+        "name": "John Doe",
+        "contacts": {
+            "email": "john.doe@example.com",
+            "phone": "987345765",
+            "addresses": [
+                {
+                    "street": "Blossom Avenue",
+                    "country": "United Kingdom"
+                },
+                {
+                    "street": "Whiteheaven Mansions",
+                    "city": "London",
+                    "country": "United Kingdom"
+                }
+            ]
+        }
+    },
+    {
+        "id": 234,
+        "name": "Jane Doe",
+        "contacts": {
+            "email": "jane.doe@example.com",
+            "skype": "jane.doe",
+            "addresses": [
+                {
+                    "street": "Whiteheaven Mansions",
+                    "city": "London",
+                    "country": "United Kingdom"
+                }
+            ]
+        }
+    }
+]
+{% endhighlight %}
+
+If you map the table as in the [previous example](todo), you will receive a `primary-address` table:
+
+|street|country|user-contact_pk|
+|Blossom Avenue|United Kingdom|1c439a9a39548290f7b7a4513a9224e7|
+|Whiteheaven Mansions|United Kingdom|605e865710f95dba665f6d0e8bc19f1a|
+
+Notice that the records link to the `user-contact` table. This may produce unnecesarilly complicated
+links between tables, because from the response it is obvious that each address is assigned to 
+a specific user. To avoid this, you can directly map a nested property:
+
+{% highlight json %}
+"mappings": {
+    "users": {
+        "id": {
+            "type": "column",
+            "mapping": {
+                "destination": "id"
+            }
+        },
+        "name": {
+            "type": "column",
+            "mapping": {
+                "destination": "name"
+            }
+        },
+        "contacts": {
+            "type": "table",
+            "destination": "user-contact",
+            "tableMapping": {
+                "email": {
+                    "type": "column",
+                    "mapping": {
+                        "destination": "email"
+                    }
+                },
+                "phone": {
+                    "type": "column",
+                    "mapping": {
+                        "destination": "tel"
+                    }
+                }
+            }
+        },
+        "contacts.addresses.0": {
+            "type": "table",
+            "destination": "primary-address",
+            "tableMapping": {
+                "street": {
+                    "type": "column",
+                    "mapping": {
+                        "destination": "street"
+                    }
+                },
+                "country": {
+                    "type": "column",
+                    "mapping": {
+                        "destination": "country"
+                    }
+                }
+            }
+        }
+    }
+}
+{% endhighlight %}
+
+The mapping for `primary-address` table is now **not nested** inside the mapping for the
+`contacts` table. Therefore it links directly to the `users` table. The content is the same because
+the mapping still refers to the same property -- the first item of the `adddresses` property of `contacts` 
+(`contacts.addresses.0`). The following table is produced:
+
+|street|country|users_pk|
+|Blossom Avenue|United Kingdom|b5d72095c441b3a3d6f23ad8142c3f8b|
+|Whiteheaven Mansions|United Kingdom|5f7f2ab65a680f1a9387a8fafe6b9050|
+
+The user table now contains additonal column `primary-address`:
+
+|id|name|user-contact|primary-address|
+|123|John Doe|b5d72095c441b3a3d6f23ad8142c3f8b|b5d72095c441b3a3d6f23ad8142c3f8b|
+|234|Jane Doe|5f7f2ab65a680f1a9387a8fafe6b9050|5f7f2ab65a680f1a9387a8fafe6b9050|
+
+See the [full example](todo:069-mapping-tables-nested-direct).
+
+### Using Primary Keys
+In the above example, you can see that the `primary-address` table contains 
+an autogenerated key to link back to users. This is unnecessary, because you can safely link to
+the user ID. To do this, you need only to specify a primary key for a table:
+
+{% highlight json %}
+"mappings": {
+    "users": {
+        "id": {
+            "type": "column",
+            "mapping": {
+                "destination": "id",
+                "primaryKey": true
+            }
+        },
+        "name": {
+            "type": "column",
+            "mapping": {
+                "destination": "name"
+            }
+        },
+        "contacts": {
+            "type": "table",
+            "destination": "user-contact",
+            "tableMapping": {
+                "parentKey": {
+                    "primaryKey": true,
+                    "destination": "userId"
+                },
+                "email": {
+                    "type": "column",
+                    "mapping": {
+                        "destination": "email"
+                    }
+                },
+                "phone": {
+                    "type": "column",
+                    "mapping": {
+                        "destination": "phone"
+                    }
+                }
+            }
+        },
+        "contacts.addresses.0": {
+            "type": "table",
+            "destination": "primary-address",
+            "tableMapping": {
+                "street": {
+                    "type": "column",
+                    "mapping": {
+                        "destination": "street"
+                    }
+                },
+                "country": {
+                    "type": "column",
+                    "mapping": {
+                        "destination": "country"
+                    }
+                }
+            }
+        }
+    }
+}
+{% endhighlight %}
+
+The most important part in the above configuration is the `"primaryKey": true` setting for 
+the `id` column in the `users` table. Thanks to this, Generic Extractor is able to automatically link
+all related records to this ID. In the `user-contact` and `primary-address` tables, a column
+`users_pk` will be created which will contain the user ID. The name is auto-generated as the
+name of the parent table with suffix `_pk`. 
+
+To override this auto-generated name, the following configuration is used in the `user-contact` 
+table to rename the `users_pk` column to `userId`.
+
+{% highlight json %}
+"parentKey": {
+    "primaryKey": true,
+    "destination": "userId"
+},
+
+It also marks the `userId` column in the `user-contact` table as primary key. The following tables
+are produced by the above mapping configuration:
+
+users:
+|id|name|
+|123|John Doe|
+|234|Jane Doe|
+
+user-contact:
+|email|phone|userId|
+|john.doe@example.com|987345765|123|
+|jane.doe@example.com||234|
+
+primary-address:
+|street|country|users_pk|
+|Blossom Avenue|United Kingdom|123|
+|Whiteheaven Mansions|United Kingdom|234|
 
 
 
