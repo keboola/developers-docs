@@ -43,8 +43,8 @@ methods. A sample API configuration can look like this:
 
 ## Base URL
 The `baseUrl` configuration defines the URL to which the API requests should be sent to. We
-recommend that the URL ends with slash so that the `jobs.endpoint` can be set easily.
-See the [`endpoint` configuration](/extend/generic-extractor/jobs/#endpoint) for detailed description
+recommend that the URL ends with a slash so that the `jobs.endpoint` can be set easily.
+See the [`endpoint` configuration](/extend/generic-extractor/jobs/#endpoint) for a detailed description of
 how `api.baseUrl` and `jobs.endpoint` work together.
 
 ## Pagination
@@ -53,66 +53,67 @@ there are many different pagination strategies, the configuration is described o
 [separate page](/extend/generic-extractor/api/pagination/)
 
 ## Authentication
-Authentication (authorization) needs to be configured for any API which is not public. There are many
-authorization methods used by different APIs, therefore the configuration has many options
-which are described on a [dedicated page](/extend/generic-extractor/api/authentication/).
+Authentication (authorization) needs to be configured for any API which is not public. 
+Because there are many authorization methods used by different APIs, there are also many 
+[configuration options](/extend/generic-extractor/api/authentication/).
 
 ## Retry Configuration
-Generic extractor automatically retries failed HTTP requests. This is one of big advantages over 
-writing your own extractor from scratch. By default Generic Extractor is configured in a very benevolent
-way which means that it will retry a lot and retry on most errors. You can tweak the retry setting
-to optimize the speed of extraction or avoid unwanted flooding of the API.
+Generic Extractor automatically retries failed HTTP requests. This is one of the big advantages over 
+writing your own extractor from scratch. By default, Generic Extractor is configured in a very benevolent
+way: it will retry a lot and retry on most errors. You can tweak the retry setting to optimize the speed of an 
+extraction or to avoid unwanted flooding of the API.
 
-Every HTTP response contains a [Status code](/extend/generic-extractor/tutorial/rest/#http-status) and
-optionally a Header describing the situation or further actions. Status codes 2xx (beginning with 2) (e.g. 200 OK) 
-represent success and no action is needed for them. Status codes 3xx (e.g. 301 Moved Permanently) represent 
+Every HTTP response contains a [Status code](/extend/generic-extractor/tutorial/rest/#http-status) and,
+optionally, a Header describing the situation or further actions. Status codes 2xx (beginning with 2) (e.g., 200 
+OK) represent success and no action is needed for them. Status codes 3xx (e.g., 301 Moved Permanently) represent 
 redirection and are automatically handled by Generic Extractor (the redirection is followed).
 
-This leaves us with status codes 4xx (e.g. 404 Not Found) and 5xx (e.g. 500 Internal Server Error). The 4xx codes
-represent codes whose error is on client side and 5xx represent errors on the server side. When
-retrying this distinction is really irrelevant because we need to use codes which represent transient/temporary 
-errors. Unfortunately there is no definitive official list of those. When it comes to communicating with
-real word API, the typical examples of transient errors are:
+This leaves us with status codes 4xx (e.g., 404 Not Found) and 5xx (e.g., 500 Internal Server Error). The 4xx codes
+represent the codes whose error is on the client side. 5xx represent errors on the server side. When
+retrying this distinction is really irrelevant because we need to use the codes which represent transient/temporary 
+errors. Unfortunately, there is no definitive official list of those. When it comes to communicating with
+a real word API, the typical examples of transient errors are:
 
 - network outage/malfunction
 - target server maintenance/outage
 - API throttling/rate limiting
 
-Rate limiting behavior is not universally agreed upon. A nice API should return a 
+The rate limiting behaviour is not universally agreed upon. A nice API should return a 
 `503 Service Unavailable` status together with a `Retry-After` HTTP header specifying number of 
-seconds to wait before the next request. This is however not supported by many APIs. 
+seconds to wait before the next request. This is, however, not supported by many APIs. 
 **Adjusting to the API rate limiting is the main reason for changing Retry Configuration**.
 
 The next aspect to consider is "when to retry". Even if the error is transient, retrying 
-immediately (within few milliseconds) usually makes no sense because the error is still not gone
-probably. There are two retry strategies:
+immediately (within few milliseconds) usually makes no sense because the error is probably still not gone. 
+There are two retry strategies:
 
-- either the API sends a `Retry-After` header (or its equivalent),
-- or Generic Extractor uses [exponential backoff](todo).
+- Either the API sends a `Retry-After` header (or its equivalent), or
+- Generic Extractor uses [exponential backoff](todo).
 
 ### API Retry Strategy
-Per the HTTP specification, the API may send [`Retry-After`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After) 
-header which should contain number of seconds to pause/sleep before the next request. The generic extractor supports
-some extensions to this. First the *Retry Header* name may be customized. Second the header
+Per the HTTP specification, the API may send the [`Retry-After`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After) 
+header which should contain number of seconds to pause/sleep before the next request. Generic Extractor 
+supports some extensions to this. First, the *Retry Header* name may be customized. Second, the header
 value may be:
 
-- either number of seconds before the next request,
-- or [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time) of the time of the next request,
-- or string date in [RFC 1123 format](http://php.net/manual/en/class.datetime.php#datetime.constants.rfc1123) of the time of the next request.
+- either number of seconds before the next request, or
+- [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time) of the time of the next request, or
+- string date in [RFC 1123 format](http://php.net/manual/en/class.datetime.php#datetime.constants.rfc1123) of the 
+time of the next request.
 
-The second two options are often called *Rate Limit Reset* as they describe when next successful request 
-can be made (i.e the limit is reset).
+The second and third options are often called *Rate Limit Reset* as they describe when the next successful request 
+can be made (i.e., the limit is reset).
 
-### Backoff strategy
-The exponential backoff in generic extractor is defined as `truncate(2^(retry\_number - 1)) * 1000` seconds. This means that
-the first retry (zero based index) will be after 0 seconds `(2^(0-1)) = 0.5` truncated to 0. The retry 
-delays are the following:
+### Backoff Strategy
+The exponential backoff in Generic Extractor is defined as `truncate(2^(retry\_number - 1)) * 1000` seconds. 
+This means that the first retry (zero based index) will be after 0 seconds `(2^(0-1)) = 0.5` truncated to 0. 
+The retry delays are the following:
 
 |retry|1|2|3|4|5|6|7|8|9|10|11|12|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 |delay|0s|1s|2s|4s|8s|16s|32s|64s|128s (~2min)|256s (~4min)|512s (~8.5min)|1024s (~17min)|
 
-Default number of retries is **10** which means that the retries stop after
+The default number of retries is **10** which means that the retries stop after
 511 seconds (~8.5 minutes).
 
 ### Configuration
@@ -131,18 +132,18 @@ The default Retry configuration `retryConfig` is:
 }
 {% endhighlight %}
 
-The above defined `curl.codes` cover common network errors. You can find full list of 
+The above defined `curl.codes` cover the common network errors. You can find a full list of 
 supported codes in the [cURL documentation](https://curl.haxx.se/libcurl/c/libcurl-errors.html).
 There is no way to set the actual backoff strategy as it is derived automatically from the 
-content of the HTTP header specified in `retryHeader`. Generic extractor will fallback to the 
-exponential backoff strategy in case the header contents is invalid (that includes e.g. that you
-made a typo in the header name). Make sure to check that the backoff is correct -- you can verify 
-the times in [debug](todo) messages:
+content of the HTTP header specified in `retryHeader`. Generic Extractor will fallback to the 
+exponential backoff strategy in case the header contents is invalid (that includes, e.g., that you
+made a typo in the header name). Make sure to check that the backoff is correct --- you can verify 
+the times in the [debug](todo) messages:
 
     Http request failed, retrying in 1s
 
-If the exponential backoff is used, you'll see its sequence of times.
-See [example](/extend/generic-extractor/api/#retry-configuration)
+If the exponential backoff is used, you will see its sequence of times.
+See an [example](/extend/generic-extractor/api/#retry-configuration).
 
 ## Default HTTP Options
 The `http` configuration option allows you to set default headers and parameters 
@@ -151,7 +152,7 @@ sent with each API call (defined later in the [`jobs` section](/extend/generic-e
 ### Headers
 The `http.headers` configuration allows you to set default headers sent with
 each API call. The configuration is an object where names are the names of
-the headers and values are their values -- e.g.:
+the headers and values are their values -- for instance:
 
 {% highlight json %}
 "http": {
@@ -162,19 +163,19 @@ the headers and values are their values -- e.g.:
 }
 {% endhighlight %}
 
-See [example](/extend/generic-extractor/api/#default-headers)
+See the full [example](/extend/generic-extractor/api/#default-headers).
 
 ### Default Request Parameters 
 The `http.defaultOptions.params` configuration allows you to set 
 [request parameters](/extend/generic-extractor/tutorial/rest/url) to be
-sent with each API request. The same rules applies as to the
+sent with each API request. The same rules apply as to the
 [`jobs.params`](/extend/generic-extractor/jobs/#request-parameters).
 
-See [example](/extend/generic-extractor/api/#default-headers)
+See an [example](/extend/generic-extractor/api/#default-headers).
 
 ### Required Headers
-Similar to `http.headers` option the `http.requiredHeaders` option allows you to set 
-HTTP header for every API request. The difference is that `requiredHeaders` configuration
+Similar to the `http.headers` option, the `http.requiredHeaders` option allows you to set the
+HTTP header for every API request. The difference is that the `requiredHeaders` configuration
 specifies only the header names. The actual values must be provided in the 
 [`config`](todo) configuration section. This is useful in case the header values change
 dynamically or they are provided as part of [template configuration](todo). The `api` configuration 
@@ -200,12 +201,12 @@ Failing to provide the header values in the `config` section will cause an error
 
     Missing required header Accept in config.http.headers!
 
-See [example](/extend/generic-extractor/api/#required-headers)
+See the full [example](/extend/generic-extractor/api/#required-headers).
 
 ## Examples
 
 ### Retry Configuration
-Assume that you have an API which does have API throttling implements so that it in case of 
+Assume that you have an API which has API throttling implements so that it in case of 
 exceeded number of requests it returns an empty response with status code `202` and 
 timestamp of the time when a new requests should be made in a `X-RetryAfter` HTTP header.
 Then you can create the following API configuration to make Generic Extractor handle the
