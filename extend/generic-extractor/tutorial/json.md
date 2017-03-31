@@ -6,12 +6,17 @@ permalink: /extend/generic-extractor/tutorial/json/
 * TOC
 {:toc}
 
-[JSON (JavaScript Object Notation)](http://www.json.org/) is a format for describing structured data. 
-Before you start working with JSON, familiarize yourself with basic programming jargon:
+[JSON (JavaScript Object Notation)](http://www.json.org/) is an easy-to-work-with format for describing structured 
+data. Before you start working with JSON, familiarize yourself with basic programming jargon.
 
 ## Object Representation
-JSON is used to describe **objects** and their **properties**. For example, "John Doe" (a person) can be described 
-using the following JSON:
+To describe structured data, JSON uses **objects** and **arrays**. 
+
+Objects consist of **properties** and their **values**. Because items in an object are identified by their name 
+(property name), their order is not maintained. 
+
+The following object, marked by `{}`, describes *John Doe* using two properties : `firstName` and 
+`lastName`.
 
 {% highlight json %}
 {
@@ -20,13 +25,17 @@ using the following JSON:
 }
 {% endhighlight %}
 
-okomentovat 
-object having two properties 
-Each property has a value.
+Notice that properties and values are both in double quotes, separated by a colon; properties are separated from 
+each other using commas.
 
-Except objects, there are also arrays. Values in arrays do not have a property name, but are referred to by their position.
+An object can contain another object, an array, ...
 
-To describe the John Doe family, you might use the following JSON:
+As objects collect named values, an **array** is a collection/simple list of values that do not have a property 
+name. They are identified by their numeric position. Arrays maintain the order of their items.  
+
+An array can contain objects, other arrays, numbers, ...
+
+Let's go on to describing John Doe's family using an **array** (marked by `[]`) of three **objects**:
 
 {% highlight json %}
 [
@@ -48,42 +57,26 @@ To describe the John Doe family, you might use the following JSON:
 ]
 {% endhighlight %}
 
-The above structure is an **array** (marked by the square brackets `[]`) of 
-three **objects** (marked by the curly brackets `{}`). Each object has **properties** 
-(in double quotes `"` before the colon `:`, e.g. `firstName`). Each property has a **value** (in double 
-quotes after the colon, e.g. `John`). Properties and objects are separated using commas `,`. Notice that 
-the last item has no comma.
+Objects are also separated by commas. Notice that the last item (property or object) has no comma.
 
-Both **array** and **object** are collection of things. The core difference is that items in array are identified 
-by their numeric position and the array maintains order of the items. Items in object are identified by their name 
-(property name) and the order of items is not maintained. Arrays are numerically indexed (also called *ordinal 
-arrays*) and objects are indexed by name (also called *associative arrays*).
+The terminology varies a lot and other expressions are also commonly used: 
 
-
-The terminology varies a lot: 
-
-- **Object** is also commonly called a **record**, **structure**, **dictionary**, **hash table**, **keyed 
-list**, **key-value** and **associative array**. 
-- **Property** is also commonly called a **field**, **key** and **index**. Objects may be further organized into 
-other objects or into **arrays**. 
-- **Array** is a simple list of (usually the same) things. It is also commonly called a **collection**, **list**, 
-**vector** or a **sequence**. 
-
-
+- Object --- also a record / structure / dictionary / hash table / keyed list / key-value / associative array
+- Property --- also a field / key / index
+- Array --- also a collection / list / vector / ordinal array / sequence
 
 ## Data Values
-A value of each property always has some data type. Available data types are:
+Each property value always has one of the following data types:
 
-- string -- text
-- number -- a number
-- integer -- a whole number (without decimal part)
-- boolean -- a value which is either `true` or `false`
-- array -- a collection of values
-- object -- a collection of named values
+- String --- text
+- Number --- number
+- Integer --- whole number (without decimal part)
+- Boolean --- value which is either `true` or `false`
+- Array --- collection of values
+- Object --- collection of named values
 
-The types `string`, `number`, `integer`, `boolean` represent **scalar values**. The
-types `array` and `object` represent **structured values** (they are composed of 
-other values). For example:
+The types `string`, `number`, `integer` and `boolean` represent **scalar values**. The types `array` and `object` 
+represent **structured values** (they are composed of other values). For example:
 
 {% highlight json %}
 {
@@ -99,14 +92,14 @@ other values). For example:
 }
 {% endhighlight %}
 
-Notice that the boolean value is `false` without quotes. It would be invalid writing it in the quotes,
+Notice that the boolean value is `false` without quotes. It would be invalid writing it in the quotes
 because it would be considered a string then. `false` (and `true`) are **keywords** which must be written
-without quotes. Another keyword is `null` which represents no value (or unknown value).
+without quotes. Another keyword is `null` which represents no value (or an unknown value).
 
 ## References
-There are multiple ways to refer to particular properties in a JSON document (e.g. [JSONPath](http://jsonpath.com/). 
-For the purpose of this documentation we will use simple *dot notation*. Let's consider this JSON describing the
-Doe's family.
+There are multiple ways to refer to particular properties in a JSON document (for instance, [JSONPath](http://jsonpath.com/). 
+For the purpose of this documentation, we will use simple *dot notation*. Let's consider this JSON describing the
+Doe's family:
 
 {% highlight json %}
 {
@@ -143,10 +136,12 @@ Doe's family.
 }
 {% endhighlight %}
 
-To refer to Joe's city, we would write `address.city`. To refer to little Jimmy`s shoe size, we
-would write `members[2].shoeSize`. Array items indexes are *zero-based* so the third item has 
-index `2`. Also note that the order of items in an object is not important. It is also worth noting
-that `[]` represents an empty array and `{}` represents an empty object.
+To refer to John's city, we would write `address.city`. To refer to little Jimmy's shoe size, we
+would write `members[2].shoeSize`. Array items indexes are *zero-based*, so the third item has 
+index `2`. 
+
+The order of items in an object is not important. It is also worth noting that `[]` represents an empty array and 
+`{}` represents an empty object.
 
 ## Summary
 This page contains a little introduction to JSON documents. We intentionally avoided many details, 
