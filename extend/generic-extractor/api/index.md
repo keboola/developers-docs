@@ -96,9 +96,9 @@ header which should contain number of seconds to pause/sleep before the next req
 supports some extensions to this. First, the *Retry Header* name may be customized. Second, the header
 value may be:
 
-- either number of seconds before the next request, or
+- Number of seconds before the next request, 
 - [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time) of the time of the next request, or
-- string date in [RFC 1123 format](http://php.net/manual/en/class.datetime.php#datetime.constants.rfc1123) of the 
+- String date in [RFC 1123 format](http://php.net/manual/en/class.datetime.php#datetime.constants.rfc1123) of the 
 time of the next request.
 
 The second and third options are often called *Rate Limit Reset* as they describe when the next successful request 
@@ -106,7 +106,7 @@ can be made (i.e., the limit is reset).
 
 ### Backoff Strategy
 The exponential backoff in Generic Extractor is defined as `truncate(2^(retry\_number - 1)) * 1000` seconds. 
-This means that the first retry (zero based index) will be after 0 seconds `(2^(0-1)) = 0.5` truncated to 0. 
+This means that the first retry (zero-based index) will be after 0 seconds (`(2^(0-1)) = 0.5`, truncated to 0). 
 The retry delays are the following:
 
 |retry|1|2|3|4|5|6|7|8|9|10|11|12|
@@ -206,9 +206,9 @@ See the full [example](/extend/generic-extractor/api/#required-headers).
 ## Examples
 
 ### Retry Configuration
-Assume that you have an API which has API throttling implements so that it in case of 
-exceeded number of requests it returns an empty response with status code `202` and 
-timestamp of the time when a new requests should be made in a `X-RetryAfter` HTTP header.
+Assume that you have an API which has API throttling implements so that, in case of 
+exceeded number of requests, it returns an empty response with the status code `202` and 
+timestamp of the time when a new requests should be made in an `X-RetryAfter` HTTP header.
 Then you can create the following API configuration to make Generic Extractor handle the
 situation:
 
@@ -225,14 +225,14 @@ situation:
 }
 {% endhighlight %}
 
-Notice that you have to add the response code `202` to the existing codes. I.e. setting
+Notice that you have to add the response code `202` to the existing codes. I.e., setting
 `"codes": [202]` is likely very wrong. 
 
 See the [full example](todo:037-retry-header).
 
 ### Default Headers
-Assume that you have an API which returns a JSON response only if the client sends 
-`Accept: application/json` header. Additionally, if the client sends a 
+Assume that you have an API which returns a JSON response only if the client sends an
+`Accept: application/json` header. Additionally, if the client sends an 
 `Accept-Encoding: gzip` header, the HTTP transmission will be compressed (and thus faster).
 The following configuration sends both headers with every API request:
 
@@ -252,7 +252,7 @@ See the [full example](todo:038-default-headers).
 
 ### Default Parameters
 Assume that you have an API which requires that all requests contain a filter
-for the account to which they belong. This is done passing the `account=XXX` parameter.
+for the account to which they belong. This is done by passing the `account=XXX` parameter.
 The following configuration sends the parameter with every API request:
 
 {% highlight json %}
@@ -271,7 +271,7 @@ The following configuration sends the parameter with every API request:
 See the [full example](todo:039-default-parameters).
 
 ### Required Headers
-Assume that an API requires that a parameter `X-AppKey` is sent with each
+Assume that an API requires a parameter `X-AppKey` to be sent with each
 API request. The following API configuration can be used:
 
 {% highlight json %}

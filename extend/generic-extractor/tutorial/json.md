@@ -13,7 +13,8 @@ data. Before you start working with JSON, familiarize yourself with basic progra
 To describe structured data, JSON uses **objects** and **arrays**. 
 
 ### Objects
-Objects consist of **properties** and their **values**. Because the values in an object are identified by names (property names), they are not kept in a particular order. 
+Objects consist of **properties** and their **values**. Because the values in an object are identified by names 
+(property names), they are not kept in a particular order. 
 
 The following object describes *John Doe* using two properties : `firstName` and `lastName`.
 
@@ -28,8 +29,8 @@ The following object describes *John Doe* using two properties : `firstName` and
 by a colon. The individual properties are separated from each other using commas.*
 
 ### Arrays
-As objects collect named values, **arrays** are collections/simple lists of values that do not have a property 
-name. They are identified by their numeric position that cannot change. The order of array items stays the same.   
+As objects collect named values, **arrays** are ordered lists of values that do not have a property 
+name but are identified by their numeric position.   
 
 Let's go on to describing John Doe's family using an **array** (marked by `[]`) of three **objects**:
 
@@ -70,11 +71,11 @@ Each property value always has one of the following data types:
 - Number --- number
 - Integer --- whole number (without decimal part)
 - Boolean --- value which is either `true` or `false`
-- Array --- collection of values
+- Array --- ordered list of values
 - Object --- collection of named values
 
-The types `string`, `number`, `integer` and `boolean` represent **scalar values**. The types `array` and `object` 
-represent **structured values** (they are composed of other values). For example:
+The types `string`, `number`, `integer` and `boolean` represent **scalar values** (simple). The types `array` and 
+`object` represent **structured values** (they are composed of other values). For example:
 
 {% highlight json %}
 {
@@ -90,8 +91,8 @@ represent **structured values** (they are composed of other values). For example
 }
 {% endhighlight %}
 
-*Notice that the boolean value is `false` without quotes. `false`, `true` and `null` (no or an 
-unknown value) are **keywords** which must be written without quotes. Otherwise, they would become strings.*
+*Notice that only strings and property names are enclosed in double quotes. The boolean value  is `false` without 
+double quotes because `false`, `true` and `null` (no or an unknown value) are **keywords**, not strings.*
 
 ## References
 There are multiple ways to refer to particular properties in a JSON document (for instance, [JSONPath](http://jsonpath.com/). 
@@ -116,7 +117,7 @@ Doe's family:
         {
             "firstName": "Jenny",
             "adult": true,
-            "shoeSize": "24.5",
+            "shoeSize": 24.5,
             "lastName": "Doe",
             "age": 42,
             "interests": ["cars", "boys", "painting"]
