@@ -1,6 +1,6 @@
 ---
 title: Child Jobs
-permalink: /extend/generic-extractor/jobs/children/
+permalink: /extend/generic-extractor/config/jobs/children/
 ---
 
 * TOC

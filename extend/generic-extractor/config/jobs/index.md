@@ -1,6 +1,6 @@
 ---
 title: Jobs
-permalink: /extend/generic-extractor/jobs/
+permalink: /extend/generic-extractor/config/jobs/
 ---
 
 * TOC

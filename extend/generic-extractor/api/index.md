@@ -8,7 +8,9 @@ permalink: /extend/generic-extractor/api/
 
 The API section of configuration describes global characteristics of the API. These include
 [HTTP headers](/extend/generic-extractor/tutorial/rest/#headers), authentication and pagination 
-methods. A sample API configuration can look like this:
+methods. This is the first of the two main parts (the second part is 
+[`config`](/extend/generic-extractor/config/)) of the Generic Extractor configuration.
+A sample API configuration can look like this:
 
 {% highlight json %}
 {
@@ -35,7 +37,7 @@ methods. A sample API configuration can look like this:
                     "company": 123
                 }
             },
-            "requiredHeaders": ["X-AppKey"]            
+            "requiredHeaders": ["X-AppKey"]
         }
     }
 }
