@@ -1,6 +1,6 @@
 ---
 title: Mapping
-permalink: /extend/generic-extractor/mappings/
+permalink: /extend/generic-extractor/config/mappings/
 ---
 
 * TOC

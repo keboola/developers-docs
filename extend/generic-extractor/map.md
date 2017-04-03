@@ -121,33 +121,33 @@ document.addEventListener('DOMContentLoaded', function() {
     $("span.nt:contains('\"method\"')").first().wrap("<a href='/extend/generic-extractor/api/pagination/#paging-strategy'></a>");
 
     // Jobs
-    $("span.nt:contains('\"endpoint\"')").wrap("<a href='/extend/generic-extractor/jobs/#endpoint'></a>");
-    $("span.nt:contains('\"params\"')").last().wrap("<a href='/extend/generic-extractor/jobs/#request-parameters'></a>");    
-    $("span.nt:contains('\"method\"')").last().wrap("<a href='/extend/generic-extractor/jobs/#method'></a>");
-    $("span.nt:contains('\"dataField\"')").wrap("<a href='/extend/generic-extractor/jobs/#data-field'></a>");
-    $("span.nt:contains('\"dataType\"')").wrap("<a href='/extend/generic-extractor/jobs/#data-type'></a>");
-    $("span.nt:contains('\"responseFilter\"')").wrap("<a href='/extend/generic-extractor/jobs/#response-filter'></a>");
-    $("span.nt:contains('\"responseFilterDelimiter\"')").wrap("<a href='/extend/generic-extractor/jobs/#response-filter'></a>");
-    $("span.nt:contains('\"scroller\"')").last().wrap("<a href='/extend/generic-extractor/jobs/#scroller'></a>");
+    $("span.nt:contains('\"endpoint\"')").wrap("<a href='/extend/generic-extractor/config/jobs/#endpoint'></a>");
+    $("span.nt:contains('\"params\"')").last().wrap("<a href='/extend/generic-extractor/config/jobs/#request-parameters'></a>");    
+    $("span.nt:contains('\"method\"')").last().wrap("<a href='/extend/generic-extractor/config/jobs/#method'></a>");
+    $("span.nt:contains('\"dataField\"')").wrap("<a href='/extend/generic-extractor/config/jobs/#data-field'></a>");
+    $("span.nt:contains('\"dataType\"')").wrap("<a href='/extend/generic-extractor/config/jobs/#data-type'></a>");
+    $("span.nt:contains('\"responseFilter\"')").wrap("<a href='/extend/generic-extractor/config/jobs/#response-filter'></a>");
+    $("span.nt:contains('\"responseFilterDelimiter\"')").wrap("<a href='/extend/generic-extractor/config/jobs/#response-filter'></a>");
+    $("span.nt:contains('\"scroller\"')").last().wrap("<a href='/extend/generic-extractor/config/jobs/#scroller'></a>");
 
     // Child jobs
-    $("span.nt:contains('\"children\"')").wrap("<a href='/extend/generic-extractor/jobs/#children'></a>");
-    $("span.nt:contains('\"recursionFilter\"')").wrap("<a href='/extend/generic-extractor/jobs/children/#filter'></a>");
-    $("span.nt:contains('\"placeholders\"')").wrap("<a href='/extend/generic-extractor/jobs/children/#placeholders'></a>");
+    $("span.nt:contains('\"children\"')").wrap("<a href='/extend/generic-extractor/config/jobs/#children'></a>");
+    $("span.nt:contains('\"recursionFilter\"')").wrap("<a href='/extend/generic-extractor/config/jobs/children/#filter'></a>");
+    $("span.nt:contains('\"placeholders\"')").wrap("<a href='/extend/generic-extractor/config/jobs/children/#placeholders'></a>");
 
     // Config root
     $("span.nt:contains('\"debug\"')").wrap("<a href='/extend/generic-extractor/running/#debug-mode'></a>");
-    $("span.nt:contains('\"jobs\"')").wrap("<a href='/extend/generic-extractor/jobs/'></a>");
-    $("span.nt:contains('\"mappings\"')").wrap("<a href='/extend/generic-extractor/mappings/'></a>");
+    $("span.nt:contains('\"jobs\"')").wrap("<a href='/extend/generic-extractor/config/jobs/'></a>");
+    $("span.nt:contains('\"mappings\"')").wrap("<a href='/extend/generic-extractor/config/mappings/'></a>");
     $("span.nt:contains('\"api\"')").wrap("<a href='/extend/generic-extractor/api/'></a>");
 
     // Mappings
-    $("span.nt:contains('\"type\"')").last().wrap("<a href='/extend/generic-extractor/mappings/#configuration'></a>");
-    $("span.s2:contains('\"column\"')").wrap("<a href='/extend/generic-extractor/mappings/#column-mapping'></a>");
-    $("span.s2:contains('\"user\"')").wrap("<a href='/extend/generic-extractor/mappings/#user-mapping'></a>");
-    $("span.s2:contains('\"table\"')").wrap("<a href='/extend/generic-extractor/mappings/#table-mapping'></a>");
-    $("span.nt:contains('\"mapping\"')").wrap("<a href='/extend/generic-extractor/mappings/#column-mapping'></a>");
-    $("span.nt:contains('\"tableMapping\"')").wrap("<a href='/extend/generic-extractor/mappings/#table-mapping'></a>");
+    $("span.nt:contains('\"type\"')").last().wrap("<a href='/extend/generic-extractor/config/mappings/#configuration'></a>");
+    $("span.s2:contains('\"column\"')").wrap("<a href='/extend/generic-extractor/config/mappings/#column-mapping'></a>");
+    $("span.s2:contains('\"user\"')").wrap("<a href='/extend/generic-extractor/config/mappings/#user-mapping'></a>");
+    $("span.s2:contains('\"table\"')").wrap("<a href='/extend/generic-extractor/config/mappings/#table-mapping'></a>");
+    $("span.nt:contains('\"mapping\"')").wrap("<a href='/extend/generic-extractor/config/mappings/#column-mapping'></a>");
+    $("span.nt:contains('\"tableMapping\"')").wrap("<a href='/extend/generic-extractor/config/mappings/#table-mapping'></a>");
     
 }, false);
 </script>

@@ -91,15 +91,15 @@ items:
 
           - url: /extend/generic-extractor/config/
             title: Configuration
-
-          - url: /extend/generic-extractor/jobs/
-            title: Jobs
             items:
-              - url: /extend/generic-extractor/jobs/children/
-                title: Child Jobs
+              - url: /extend/generic-extractor/config/jobs/
+                title: Jobs
+                items:
+                  - url: /extend/generic-extractor/config/jobs/children/
+                    title: Child Jobs
 
-          - url: /extend/generic-extractor/mappings/
-            title: Mappings
+              - url: /extend/generic-extractor/config/mappings/
+                title: Mappings
 
           - url: /extend/generic-extractor/api/
             title: API Configuration
