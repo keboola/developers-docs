@@ -50,7 +50,7 @@ how `api.baseUrl` and `jobs.endpoint` work together.
 ## Pagination
 Pagination (or scrolling) describes how the API pages through a large set of results. Because 
 there are many different pagination strategies, the configuration is described on a
-[separate page](/extend/generic-extractor/api/pagination/)
+[separate page](/extend/generic-extractor/api/pagination/).
 
 ## Authentication
 Authentication (authorization) needs to be configured for any API which is not public. 
