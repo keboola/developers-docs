@@ -157,11 +157,14 @@ is converted to the following CSV files (and subsequently Storage tables)
 users:
 
 |id|name|address\_street|address\_country|address\_city|interests|
+|---|---|---|---|---|---|
 |123|John Doe|Blossom Avenue|United Kingdom||users_dab021748b7f93c10476ebe151de4459|
 |234|Jane Doe|Whiteheaven Mansions|United Kingdom|London|users_aeb1d126471eef24c0769437f4e7adaa|
 
 users_interests:
+
 |data|JSON_parentId|
+|---|---|
 |girls|users_dab021748b7f93c10476ebe151de4459|
 |cars|users_dab021748b7f93c10476ebe151de4459|
 |flowers|users_dab021748b7f93c10476ebe151de4459|
@@ -240,6 +243,7 @@ an empty column in the result (it will refer to a non-existent property of the r
 correct settings, the following table will be produced:
 
 |country|name|id|
+|---|---|---|
 |United Kingdom|John Doe|123|
 |United Kingdom|Jane Doe|234|
 
@@ -303,6 +307,7 @@ To handle this situation in Generic Extractor, you need to use a [child job](/ex
 The produced user-detail table will look like this:
 
 |id|name|address\_city|address\_country|address\_street|interests|parent_id|
+|---|---|---|---|---|---|---|
 |123|John Doe|London|UK|Whitehaven Mansions|user-detail_3484bd6e10690a3a2e77079f69ceaa42|123|
 |234|Jane Doe|St Mary Mead|UK|High Street|user-detail_a7655e39a0399dc842b44365778cd295|234|
 
@@ -330,6 +335,7 @@ Now you can use the following mapping to shape the table:
 The above mapping will cause Generic Extractor to return the following user-detail table:
 
 |country|user_id|
+|---|---|
 |UK|123|
 |UK|234|
 
@@ -550,12 +556,14 @@ With the automatic mapping (without any `mappings` configuration), the following
 users:
 
 |id|name|contacts\_email|contacts\_phone|contacts\_addresses|contacts\_skype|
+|---|---|---|---|---|---|---|
 |123|John Doe|john.doe@example.com|987345765|users.contacts_912c86dec7acdb9d8a17c97eb464aec6||
 |234|Jane Doe|jane.doe@example.com||users.contacts_4cf9e859113127acb138872cc630e75f|jane.doe|
 
 users.contacts:
 
 |street|country|city|JSON_parentId|
+|---|---|---|---|
 |Blossom Avenue|United Kingdom||users.contacts_912c86dec7acdb9d8a17c97eb464aec6|
 |Whiteheaven Mansions|United Kingdom|London|users.contacts_912c86dec7acdb9d8a17c97eb464aec6|
 |Whiteheaven Mansions|United Kingdom|London|users.contacts_4cf9e859113127acb138872cc630e75f|
@@ -627,18 +635,21 @@ With the above configuration, the following tables will be created:
 users:
 
 |id|name|user-contact|
+|---|---|---|
 |123|John Doe|b5d72095c441b3a3d6f23ad8142c3f8b|
 |234|Jane Doe|5f7f2ab65a680f1a9387a8fafe6b9050|
 
 user-contact:
 
 |email|tel|user-address|users_pk|
+|---|---|---|---|
 |john.doe@example.com|987345765|1c439a9a39548290f7b7a4513a9224e7|b5d72095c441b3a3d6f23ad8142c3f8b|
 |jane.doe@example.com||605e865710f95dba665f6d0e8bc19f1a|5f7f2ab65a680f1a9387a8fafe6b9050|
 
 user-address:
 
 |street|country|user-contact_pk|
+|---|---|---|
 |Blossom Avenue|United Kingdom|1c439a9a39548290f7b7a4513a9224e7|
 |Whiteheaven Mansions|United Kingdom|1c439a9a39548290f7b7a4513a9224e7|
 |Whiteheaven Mansions|United Kingdom|605e865710f95dba665f6d0e8bc19f1a|
@@ -838,6 +849,7 @@ With the same API response as above:
 If you map the table as in the [previous example](#array-items), you will receive a `primary-address` table:
 
 |street|country|user-contact_pk|
+|---|---|---|
 |Blossom Avenue|United Kingdom|1c439a9a39548290f7b7a4513a9224e7|
 |Whiteheaven Mansions|United Kingdom|605e865710f95dba665f6d0e8bc19f1a|
 
@@ -906,12 +918,14 @@ the mapping still refers to the same property -- the first item of the `adddress
 (`contacts.addresses.0`). The following table is produced:
 
 |street|country|users_pk|
+|---|---|---|
 |Blossom Avenue|United Kingdom|b5d72095c441b3a3d6f23ad8142c3f8b|
 |Whiteheaven Mansions|United Kingdom|5f7f2ab65a680f1a9387a8fafe6b9050|
 
 The user table now contains additonal column `primary-address`:
 
 |id|name|user-contact|primary-address|
+|---|---|---|---|
 |123|John Doe|b5d72095c441b3a3d6f23ad8142c3f8b|b5d72095c441b3a3d6f23ad8142c3f8b|
 |234|Jane Doe|5f7f2ab65a680f1a9387a8fafe6b9050|5f7f2ab65a680f1a9387a8fafe6b9050|
 
@@ -1002,17 +1016,23 @@ It also marks the `userId` column in the `user-contact` table as primary key. Th
 are produced by the above mapping configuration:
 
 users:
+
 |id|name|
+|---|---|
 |123|John Doe|
 |234|Jane Doe|
 
 user-contact:
+
 |email|phone|userId|
+|---|---|---|
 |john.doe@example.com|987345765|123|
 |jane.doe@example.com||234|
 
 primary-address:
+
 |street|country|users_pk|
+|---|---|---|
 |Blossom Avenue|United Kingdom|123|
 |Whiteheaven Mansions|United Kingdom|234|
 
@@ -1076,13 +1096,17 @@ following configuration:
 
 The following tables will be extracted:
 
-users
+users:
+
 |first\_name|last\_name|
+|---|---|
 |John|Doe|
 |Jane|Doe|
 
-interests
+interests:
+
 |interest|users\_pk|
+|---|---|
 |girls|John,Doe|
 |cars|John,Doe|
 |flowers|John,Doe|
