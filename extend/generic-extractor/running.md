@@ -27,6 +27,7 @@ Debug mode can be turned on by setting `debug: true` in the `config` section of 
         ...
     }
 }
+{% endhighlight %}
 
 In debug mode, the extractor displays all API requests it sends. This may help you understanding what is
 really happening, why something is skipped, etc

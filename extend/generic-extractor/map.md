@@ -79,14 +79,22 @@ permalink: /extend/generic-extractor/map/
                             "primaryKey": true
                         }
                     },
-                    "plain_text": {
+                    "name": {
+                        "type": "column",
                         "mapping": {
                             "destination": "text"
                         }
                     },
-                    "html": {
-                        "mapping": {
-                            "destination": "html"
+                    "address": {
+                        "type": "table",
+                        "destination": "addresses",
+                        "tableMapping": {
+                            "street": {
+                                "type": "column",
+                                "mapping": {
+                                    "destination": "streetName"
+                                }
+                            }
                         }
                     }
                 }
@@ -126,5 +134,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Config root
     $("span.nt:contains('\"debug\"')").wrap("<a href='/extend/generic-extractor/running/#debug-mode'></a>");
+
+    // Mappings
+    $("span.nt:contains('\"mappings\"')").wrap("<a href='/extend/generic-extractor/mappings'></a>");
+    $("span.nt:contains('\"type\"')").last().wrap("<a href='/extend/generic-extractor/mappings/#configuration'></a>");
+    $("span.nt:contains('\"column\"')").wrap("<a href='/extend/generic-extractor/mappings/#column-mapping'></a>");
+    $("span.nt:contains('\"user\"')").wrap("<a href='/extend/generic-extractor/mappings/#user-mapping'></a>");
+    $("span.nt:contains('\"table\"')").wrap("<a href='/extend/generic-extractor/mappings/#table-mapping'></a>");
+    
 }, false);
 </script>

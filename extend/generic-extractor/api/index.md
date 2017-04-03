@@ -138,7 +138,7 @@ There is no way to set the actual backoff strategy as it is derived automaticall
 content of the HTTP header specified in `retryHeader`. Generic Extractor will fallback to the 
 exponential backoff strategy in case the header contents is invalid (that includes, e.g., that you
 made a typo in the header name). Make sure to check that the backoff is correct --- you can verify 
-the times in the [debug](todo) messages:
+the times in the [debug](/extend/generic-extractor/running/#debug-mode) messages:
 
     Http request failed, retrying in 1s
 
@@ -271,7 +271,7 @@ The following configuration sends the parameter with every API request:
 See the [full example](todo:039-default-parameters).
 
 ### Required Headers
-Assume that an API requires a parameter `X-AppKey` to be sent with each
+Assume that an API requires a header `X-AppKey` to be sent with each
 API request. The following API configuration can be used:
 
 {% highlight json %}

@@ -320,16 +320,17 @@ be useful if
 
 The value of the `responseFilter` property is either a path to a property in the response, or
 an array of such paths. The path is dot-separated unless set otherwise in the `responseFilterDelimiter` configuration.
-If you want to refer to the items of an array, use `[]` --- see 
-an [example below](skip-flattening-in-nested-objects).
+If you want to refer to the items of an array, use `[]` --- see an [example below](#skip-flattening-in-nested-objects).
+The same result can be achieved using `forceType` parameter in 
+[column mapping](/extend/generic-extrator/mapping/#column-mapping).
 
-### Children
+## Children
 The `children` configuration allows you to retrieve sub-resources of the processes API resource.
 These **child jobs** (**nested jobs**) are executed for each object retrieved from the 
 parent response. The definition of child jobs is the same as the definition of parent jobs, 
 except for **placeholders**. The children configuration is described in a [separate article](/jobs/children/).
 
-### Scroller
+## Scroller
 The `scroller` parameter can be used to assign a predefined scroller in case 
 [`multiple` pagination](/extend/generic-extractor/api/pagination/multiple/) is used. If the
 `multiple` pagination method is not used, the `scroller` parameter has no use. If `scroller` is not
