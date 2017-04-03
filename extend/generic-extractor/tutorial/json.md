@@ -12,11 +12,11 @@ data. Before you start working with JSON, familiarize yourself with basic progra
 ## Object Representation
 To describe structured data, JSON uses **objects** and **arrays**. 
 
-Objects consist of **properties** and their **values**. Because items in an object are identified by their name 
-(property name), their order is not maintained. 
+### Objects
+Objects consist of **properties** and their **values**. Because the values in an object are identified by names 
+(property names), they are not kept in a particular order. 
 
-The following object, marked by `{}`, describes *John Doe* using two properties : `firstName` and 
-`lastName`.
+The following object describes *John Doe* using two properties : `firstName` and `lastName`.
 
 {% highlight json %}
 {
@@ -25,15 +25,12 @@ The following object, marked by `{}`, describes *John Doe* using two properties 
 }
 {% endhighlight %}
 
-Notice that properties and values are both in double quotes, separated by a colon; properties are separated from 
-each other using commas.
+*Notice that the object is enclosed in `{}`. The properties and values are both in double quotes and are separated 
+by a colon. The individual properties are separated from each other using commas.*
 
-An object can contain another object, an array, ...
-
-As objects collect named values, an **array** is a collection/simple list of values that do not have a property 
-name. They are identified by their numeric position. Arrays maintain the order of their items.  
-
-An array can contain objects, other arrays, numbers, ...
+### Arrays
+As objects collect named values, **arrays** are ordered lists of values that do not have a property 
+name but are identified by their numeric position.   
 
 Let's go on to describing John Doe's family using an **array** (marked by `[]`) of three **objects**:
 
@@ -57,11 +54,13 @@ Let's go on to describing John Doe's family using an **array** (marked by `[]`) 
 ]
 {% endhighlight %}
 
-Objects are also separated by commas. Notice that the last item (property or object) has no comma.
+*Objects are also separated from each other by commas. Notice that the last item (property or object) is not 
+followed by a comma.*
 
+### Terminology
 The terminology varies a lot and other expressions are also commonly used: 
 
-- Object --- also a record / structure / dictionary / hash table / keyed list / key-value / associative array
+- Object --- also a record / structure / dictionary / hash table / keyed list / key value / associative array
 - Property --- also a field / key / index
 - Array --- also a collection / list / vector / ordinal array / sequence
 
@@ -72,11 +71,11 @@ Each property value always has one of the following data types:
 - Number --- number
 - Integer --- whole number (without decimal part)
 - Boolean --- value which is either `true` or `false`
-- Array --- collection of values
+- Array --- ordered list of values
 - Object --- collection of named values
 
-The types `string`, `number`, `integer` and `boolean` represent **scalar values**. The types `array` and `object` 
-represent **structured values** (they are composed of other values). For example:
+The types `string`, `number`, `integer` and `boolean` represent **scalar values** (simple). The types `array` and 
+`object` represent **structured values** (they are composed of other values). For example:
 
 {% highlight json %}
 {
@@ -92,9 +91,8 @@ represent **structured values** (they are composed of other values). For example
 }
 {% endhighlight %}
 
-Notice that the boolean value is `false` without quotes. It would be invalid writing it in the quotes
-because it would be considered a string then. `false` (and `true`) are **keywords** which must be written
-without quotes. Another keyword is `null` which represents no value (or an unknown value).
+*Notice that only strings and property names are enclosed in double quotes. The boolean value  is `false` without 
+double quotes because `false`, `true` and `null` (no or an unknown value) are **keywords**, not strings.*
 
 ## References
 There are multiple ways to refer to particular properties in a JSON document (for instance, [JSONPath](http://jsonpath.com/). 
@@ -119,7 +117,7 @@ Doe's family:
         {
             "firstName": "Jenny",
             "adult": true,
-            "shoeSize": "24.5",
+            "shoeSize": 24.5,
             "lastName": "Doe",
             "age": 42,
             "interests": ["cars", "boys", "painting"]

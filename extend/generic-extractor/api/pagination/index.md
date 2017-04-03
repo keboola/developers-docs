@@ -47,7 +47,8 @@ using the `method` option:
 - [`cursor`](/extend/generic-extractor/api/pagination/cursor/) -- uses an identifier of the item in response to maintain a scrolling cursor.
 - [`multiple`](/extend/generic-extractor/api/pagination/multiple/) -- allows to set different scrollers for different API endpoints.
 
-Choosing pagination strategy
+Choosing pagination strategy:
+
 - kdyz je url pouzij url
 - kdyz je neco v response, pouzij response
 - fallbak je offset a pagenum ktery jsou lowlevel
