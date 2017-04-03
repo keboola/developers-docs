@@ -3,6 +3,8 @@ title: Generic Extractor Parameter Map
 permalink: /extend/generic-extractor/map/
 ---
 
+Use the following sample configuration to navigate among various configuration options:
+
 {% highlight json %}
 {
     "parameters": {
@@ -117,6 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
     $("span.nt:contains('\"pagination\"')").wrap("<a href='/extend/generic-extractor/api/pagination/'></a>");
     $("span.nt:contains('\"scrollers\"')").wrap("<a href='/extend/generic-extractor/api/pagination/multiple/'></a>");
     $("span.nt:contains('\"method\"')").first().wrap("<a href='/extend/generic-extractor/api/pagination/#paging-strategy'></a>");
+
     // Jobs
     $("span.nt:contains('\"endpoint\"')").wrap("<a href='/extend/generic-extractor/jobs/#endpoint'></a>");
     $("span.nt:contains('\"params\"')").last().wrap("<a href='/extend/generic-extractor/jobs/#request-parameters'></a>");    
@@ -126,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
     $("span.nt:contains('\"responseFilter\"')").wrap("<a href='/extend/generic-extractor/jobs/#response-filter'></a>");
     $("span.nt:contains('\"responseFilterDelimiter\"')").wrap("<a href='/extend/generic-extractor/jobs/#response-filter'></a>");
     $("span.nt:contains('\"scroller\"')").last().wrap("<a href='/extend/generic-extractor/jobs/#scroller'></a>");
-    $("span.nt:contains('\"jobs\"')").wrap("<a href='/extend/generic-extractor/jobs/'></a>");
+
     // Child jobs
     $("span.nt:contains('\"children\"')").wrap("<a href='/extend/generic-extractor/jobs/#children'></a>");
     $("span.nt:contains('\"recursionFilter\"')").wrap("<a href='/extend/generic-extractor/jobs/children/#filter'></a>");
@@ -134,13 +137,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Config root
     $("span.nt:contains('\"debug\"')").wrap("<a href='/extend/generic-extractor/running/#debug-mode'></a>");
+    $("span.nt:contains('\"jobs\"')").wrap("<a href='/extend/generic-extractor/jobs/'></a>");
+    $("span.nt:contains('\"mappings\"')").wrap("<a href='/extend/generic-extractor/mappings/'></a>");
+    $("span.nt:contains('\"api\"')").wrap("<a href='/extend/generic-extractor/api/'></a>");
 
     // Mappings
-    $("span.nt:contains('\"mappings\"')").wrap("<a href='/extend/generic-extractor/mappings'></a>");
     $("span.nt:contains('\"type\"')").last().wrap("<a href='/extend/generic-extractor/mappings/#configuration'></a>");
-    $("span.nt:contains('\"column\"')").wrap("<a href='/extend/generic-extractor/mappings/#column-mapping'></a>");
-    $("span.nt:contains('\"user\"')").wrap("<a href='/extend/generic-extractor/mappings/#user-mapping'></a>");
-    $("span.nt:contains('\"table\"')").wrap("<a href='/extend/generic-extractor/mappings/#table-mapping'></a>");
+    $("span.s2:contains('\"column\"')").wrap("<a href='/extend/generic-extractor/mappings/#column-mapping'></a>");
+    $("span.s2:contains('\"user\"')").wrap("<a href='/extend/generic-extractor/mappings/#user-mapping'></a>");
+    $("span.s2:contains('\"table\"')").wrap("<a href='/extend/generic-extractor/mappings/#table-mapping'></a>");
+    $("span.nt:contains('\"mapping\"')").wrap("<a href='/extend/generic-extractor/mappings/#column-mapping'></a>");
+    $("span.nt:contains('\"tableMapping\"')").wrap("<a href='/extend/generic-extractor/mappings/#table-mapping'></a>");
     
 }, false);
 </script>
+<style>
+pre a {
+    border-bottom: 1px dashed navy;
+}
+</style>

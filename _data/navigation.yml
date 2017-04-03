@@ -155,6 +155,9 @@ items:
           - url: /extend/generic-extractor/map/
             title: Configuration Map
 
+          - url: /extend/generic-extractor/running/
+            title: Running Generic Extractor
+
       - url: /extend/common-interface/
         title: Common Interface
         items:

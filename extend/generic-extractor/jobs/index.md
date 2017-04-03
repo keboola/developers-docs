@@ -328,7 +328,8 @@ The same result can be achieved using `forceType` parameter in
 The `children` configuration allows you to retrieve sub-resources of the processes API resource.
 These **child jobs** (**nested jobs**) are executed for each object retrieved from the 
 parent response. The definition of child jobs is the same as the definition of parent jobs, 
-except for **placeholders**. The children configuration is described in a [separate article](/jobs/children/).
+except for **placeholders**. The children configuration is described in a 
+[separate article](/extend/generic-extractor/jobs/children/).
 
 ## Scroller
 The `scroller` parameter can be used to assign a predefined scroller in case 
