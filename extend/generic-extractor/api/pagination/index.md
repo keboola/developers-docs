@@ -82,7 +82,7 @@ too (depends on how empty the response is)),
 If the API returns the last page and it is the same as the previous page, the extraction is stopped. 
 You will see this in the Generic Extractor logs as a message:
 
-    Job '1234567890' finished when the last response matched the previous one!
+    Job '1234567890' finished when last response matched the previous!
 
 See the [full example](todo:041-paging-stop-same).
 
