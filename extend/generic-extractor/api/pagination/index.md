@@ -6,23 +6,25 @@ permalink: /extend/generic-extractor/api/pagination/
 * TOC
 {:toc}
 
-[Pagination](https://en.wikipedia.org/wiki/Pagination) (or paging) describes how an API splits a large list of items into separate pages. Pagination may also be 
-called *scrolling* or *traversing* (scrolling through a large result set), sometimes it is also referred to as
-*setting a [cursor](https://en.wikipedia.org/wiki/Cursor_(databases))* (pointing to a current result). Almost every API has some form of pagination because 
-returning lists of results is impractical for many reasons (memory overflows, transfer takes too long, processing takes too long, ...). This makes pagination setting important if you want to retrieve large results. If you
-are doing only an ad-hoc query to an API and you want to retrieve thousands of items at most, you may
-get away without setting pagination at all.
+[Pagination](https://en.wikipedia.org/wiki/Pagination) (or paging) describes how an API splits a large list of items into 
+separate pages. Pagination may also be called *scrolling* or *traversing* (scrolling through a large result set), sometimes 
+it is also referred to as *setting a [cursor](https://en.wikipedia.org/wiki/Cursor_(databases))* (pointing to a current 
+result). 
 
-When configuring Generic Extractor there is a slight distinction between *pagination* and *scrolling*:
+Almost every API has some form of pagination because returning extensive lists of large results is impractical for many 
+reasons (memory overflow issues, long transfer and processing times, etc). So, unless you only want to do an ad-hoc query to 
+extract thousands of items at most, setting pagination is important.
 
-- **pagination** -- describes paging of the entire API,
-- **scrolling** (scroller) -- describes paging of a single resource.
+When configuring Generic Extractor, there is a slight distinction between *pagination* and *scrolling*:
 
-As long as the API uses the same pagination method for all resources, there is no need to distinct between the 
+- **Pagination** describes paging of the entire API.
+- **Scrolling** (scroller) describes paging of a single resource.
+
+As long as the API uses the same pagination method for all resources, there is no need to distinguish between the 
 two. Setting up pagination for Generic Extractor boils down to two crucial questions:
 
 - How to obtain the next set of items? (*paging strategy*)
-- How to determine that all items were obtained? (When stop scrolling) (*stopping strategy*)
+- How to determine that all items were obtained and scrolling can stop? (*stopping strategy*)
 
 An example pagination configuration looks like this:
 
@@ -37,15 +39,15 @@ An example pagination configuration looks like this:
 {% endhighlight %}
 
 ## Paging Strategy
-Generic extractor supports the following paging strategies (scrollers), these are configured
+Generic Extractor supports the following paging strategies (scrollers); they are configured
 using the `method` option:
 
-- [`response.url`](/extend/generic-extractor/api/pagination/response-url/) -- uses URL provided in the response
-- [`offset`](/extend/generic-extractor/api/pagination/offset/) -- uses page size (limit) and **item offset** (like in SQL)
-- [`pagenum`](/extend/generic-extractor/api/pagination/pagenum/) -- uses page size (limit) and **page number**
-- [`response.param`](/extend/generic-extractor/api/pagination/response-param/) -- uses some value (token) provided in the response.
-- [`cursor`](/extend/generic-extractor/api/pagination/cursor/) -- uses an identifier of the item in response to maintain a scrolling cursor.
-- [`multiple`](/extend/generic-extractor/api/pagination/multiple/) -- allows to set different scrollers for different API endpoints.
+- [`response.url`](/extend/generic-extractor/api/pagination/response-url/) --- uses URL provided in the response
+- [`offset`](/extend/generic-extractor/api/pagination/offset/) --- uses page size (limit) and **item offset** (like in SQL)
+- [`pagenum`](/extend/generic-extractor/api/pagination/pagenum/) --- uses page size (limit) and **page number**
+- [`response.param`](/extend/generic-extractor/api/pagination/response-param/) --- uses some value (token) provided in the response.
+- [`cursor`](/extend/generic-extractor/api/pagination/cursor/) --- uses an identifier of the item in response to maintain a scrolling cursor.
+- [`multiple`](/extend/generic-extractor/api/pagination/multiple/) --- allows to set different scrollers for different API endpoints.
 
 Choosing pagination strategy:
 
@@ -55,41 +57,41 @@ Choosing pagination strategy:
 - kdyz je offset hodnota (treba ID), tak pouzit cursor, kdyz je to index, tak pouzit offset
 
 ## Stopping Strategy
-There are three situations when generic extractor will stop scrolling if:
+Generic Extractor stops scrolling
 
-- the `nextPageFlag` configuration,
-- the `forceStop` configuration,
-- the *same result* is obtained twice.
+- based on the `nextPageFlag` condition configuration.
+- based on the `forceStop` condition configuration.
+- when the *same result* is obtained twice.
 
-Apart from those, each pagination method may have their own 
-[stopping strategies](#combining-multiple-stopping-strategies).
+Apart from those, each pagination method may have its own 
+[stopping strategy](#combining-multiple-stopping-strategies).
 
 The *same result* condition deals with the situation when there is no clear limit to 
-stop the scrolling. Generic extractor will keep requesting higher and higher pages from the API.
+stop the scrolling. Generic Extractor keeps requesting higher and higher pages from the API.
 Let's say that there are 150 pages of results in total. When Generic Extractor asks for page 151, different 
 situations can arise:
 
-- most common -- the API returns empty page (scrolling with 
+- most common --- the API returns an empty page (scrolling with 
 [`pagenum`](/extend/generic-extractor/api/pagination/pagenum/) and 
 [`offset`](/extend/generic-extractor/api/pagination/pagenum/) methods will stop, other methods will probably stop 
 too (depends on how empty the response is)),
-- less common -- the API keeps returning the last page, the extraction is stopped when a page is obtained twice -- see below.
-- even less common -- the API keeps returning the first page, the extraction is stopped when a page is obtained twice -- see below.
-- less common -- the API returns an error -- in this case a different stopping condition has to be used
-([`nextFlag`](#next-page-flag) or [`forceStop`](#force-stop)).
+- less common --- the API keeps returning the last page, the extraction is stopped when a page is obtained twice --- see below.
+- even less common --- the API keeps returning the first page, the extraction is stopped when a page is obtained twice --- see below.
+- less common --- the API returns an error --- in this case a different stopping condition such as ([`nextFlag`](#next-page-flag) or [`forceStop`](#force-stop)) has to be used.
 
-If the API returns the last page and it is the same as the 
-previous page, the extraction is stopped. You will see this in Generic extractor logs as a message:
+If the API returns the last page and it is the same as the previous page, the extraction is stopped. 
+You will see this in the Generic Extractor logs as a message:
 
-    Job '1234567890' finished when last response matched the previous!
+    Job '1234567890' finished when the last response matched the previous one!
 
-(see [Full Example](todo:041-paging-stop-same)
+See the [full example](todo:041-paging-stop-same).
 
 If the API returns the first page, it is not same as the previous page and therefore another
 request is sent to `users?offset=6&limit=2`. Then the result is as the previous page and the
-same check kicks in and the extraction is stopped too. However the results from the first page
+same check kicks in and the extraction is stopped too. However, the results from the first page
 will be duplicated.
-(see [Full Example](todo:042-paging-stop-same-2)
+
+See the [full example](todo:042-paging-stop-same-2).
 
 ### Next Page Flag
 The above describes automatic behavior of Generic Extractor regarding scrolling stopping. 
@@ -98,12 +100,12 @@ Using *Next Page Flag* allows you to do a manual setup of the stopping strategy.
 particular field (the flag) and decides whether to continue scrolling based on the 
 value (or presence) of that flag.
 
-Next page flag is configured using three options:
+*Next Page Flag* is configured using three options:
 
-- `field` (required) -- Name of field containing some value. The field must be in root of the response. 
+- `field` (required) --- Name of field containing some value. The field must be in the root of the response. 
     The field will be converted to [boolean](/extend/generic-extractor/tutorial/json/#data-values).
-- `stopOn` (required) -- Value to which the field will be compared to. When the values are equal, the scrolling stops.
-- `ifNotSet` -- Assumed value of the `field` in case it is not present in response. Defaults to the `stopOn` value.
+- `stopOn` (required) --- Value to which the field will be compared to. When the values are equal, the scrolling stops.
+- `ifNotSet` --- Assumed value of the `field` in case it is not present in response. Defaults to the `stopOn` value.
 
 The boolean conversion has the following rules:
 
@@ -123,17 +125,17 @@ Example `nextPageFlag` setting:
 }
 {% endhighlight %}
 
-See [Next Page Flag Examples](#next-page-flag-examples)
+See our [Next Page Flag Examples](#next-page-flag-examples).
 
 ### Force Stop
 Force stop configuration allows you to stop scrolling when some extraction limits are hit.
 The supported options are:
  
-- `pages` -- maximum number of pages to extract
-- `time` -- maximum number of seconds the extraction should run
-- `volume` -- maximum number of bytes which can be extracted
+- `pages` --- maximum number of pages to extract
+- `time` --- maximum number of seconds the extraction should run
+- `volume` --- maximum number of bytes which can be extracted
 
-Example `forceStop` setting:
+This is an example or the `forceStop` setting:
 
 {% highlight json %}
 "pagination": {
@@ -145,7 +147,7 @@ Example `forceStop` setting:
 }
 {% endhighlight %}
 
-The volume of response is measured as number of bytes in compressed JSON. Therefore the response 
+The volume of the response is measured as number of bytes in compressed JSON. Therefore the response 
 
 {% highlight json %}
 {
@@ -174,7 +176,7 @@ which makes it 69 bytes long.
 All stopping strategies are evaluated simultaneously and for the scrolling to continue, none of
 the stopping conditions must be met. In other words, the scrolling continues until any of the
 stopping conditions is true. To this you need to account specific stopping strategies for 
-each scroller. For example with the following configuration:
+each scroller. For example, the scrolling of this configuration:
 
 {% highlight json %}
 "pagination": {
@@ -190,13 +192,13 @@ each scroller. For example with the following configuration:
 }
 {% endhighlight %}
 
-The scrolling will stop if **any** of the following is true:
+will stop if **any** of the following is true:
 
-- an empty page is encountered (`offset` scroller specific),
-- a page contains less then 10 items (`offset` scroller specific),
-- a page contains the same items as the previous page,
-- 20 pages were extracted (`forceStop`),
-- if a field `isLast` is present in the response and is true (`nextPageFlag`).
+- An empty page is encountered (`offset` scroller specific).
+- A page contains less then 10 items (`offset` scroller specific).
+- A page contains the same items as the previous page.
+- 20 pages were extracted (`forceStop`).
+- The `isLast` field is present in the response and is true (`nextPageFlag`).
 
 ## Next Page Flag Examples
 
@@ -216,10 +218,10 @@ The following pagination configuration can be used to configure the stopping str
 }
 {% endhighlight %}
 
-means that the scrolling will **continue** till the field `hasMore` is present in the response and true.
-In this case setting `ifNotSet` is not necessary.
+It means that the scrolling will **continue** till the field `hasMore` is present in the response and true.
+In this case, setting `ifNotSet` is not necessary.
 
-See [Full Example](todo:045-next-page-flag-has-more)
+See the [full example](todo:045-next-page-flag-has-more).
 
 ### Non-Boolean Has-More Type Scrolling
 Assume that the API returns a response which contains a `hasMore` field. The field is present only in the
@@ -243,7 +245,7 @@ means that the scrolling will **continue** until the field `hasMore` is present.
 boolean conversion which converts the value `"no"` to true. If the field `hasMore` is not present, it defaults
 to false. In this case setting `ifNotSet` is mandatory.
 
-See [Full Example](todo:046-next-page-flag-has-more-2).
+See the [full example](todo:046-next-page-flag-has-more-2).
 
 ### Is-Last type of Scrolling
 Assume that the API returns a response which contains a `isLast` field. The field is present only in the
@@ -261,16 +263,15 @@ The following pagination configuration can be used to configure the stopping str
 }
 {% endhighlight %}
 
-The above configuration will **stop** scrolling when the field `isLast` is present in the 
-response and true. Because the field `isLast` is not present at all times, the `ifNotSet` configuration
-is required.
+The scrolling will **stop** when the field `isLast` is present in the response and true. 
+Because the field `isLast` is not present at all times, the `ifNotSet` configuration is required.
 
-(see [Full Example](todo:047-next-page-flag-is-last).
+See the [full example](todo:047-next-page-flag-is-last).
 
 ## Examples
 
 ### Force Stop
-The following configuration will stop scrolling after extracting two pages of results or
+The following configuration will stop scrolling after extracting two pages of results, or
 after extracting 69 bytes of minifed JSON data (whichever comes first).
 
 {% highlight json %}
@@ -284,4 +285,4 @@ after extracting 69 bytes of minifed JSON data (whichever comes first).
 }
 {% endhighlight %}
 
-(see [Full Example](todo:048-force-stop).
+See the [full example](todo:048-force-stop).
