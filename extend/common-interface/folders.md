@@ -46,7 +46,7 @@ they are serialized in the CSV format:
   - delimiter `,`
   - no escape character
 
-File names are specified in the input mapping, defaulting to `{tableId}.csv` (a file name can be changed in the UI).
+File names are specified in the input mapping, defaulting to `{tableId}` (a file name can be changed in the UI).
 The table metadata is stored in a [manifest file](/extend/common-interface/manifest-files/).
 
 ### `/data/out/tables/` Folder
