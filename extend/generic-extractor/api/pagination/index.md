@@ -49,12 +49,50 @@ using the `method` option:
 - [`cursor`](/extend/generic-extractor/api/pagination/cursor/) --- uses an identifier of the item in response to maintain a scrolling cursor.
 - [`multiple`](/extend/generic-extractor/api/pagination/multiple/) --- allows to set different scrollers for different API endpoints.
 
-Choosing pagination strategy:
+### Choosing Paging Strategy
+If the API responses contain direct links to next set of results, use the 
+[`response.url`](/extend/generic-extractor/api/pagination/response-url/) method.
+This applies to APIs following the [JSON API specification](http://jsonapi.org). The response usually 
+contains a `links` section:
 
-- kdyz je url pouzij url
-- kdyz je neco v response, pouzij response
-- fallbak je offset a pagenum ktery jsou lowlevel
-- kdyz je offset hodnota (treba ID), tak pouzit cursor, kdyz je to index, tak pouzit offset
+{% highlight json %}
+{
+    "results": [
+        ...
+    ],
+    "links": {
+        "next": "http://example.com/posts?page=2"
+    }
+}
+{% endhighlight %}
+
+If the API response contains a parameter used to obtain the next page, use the 
+`response.param`](/extend/generic-extractor/api/pagination/response-param/) method. 
+It is preferred to use an
+authoritative value provided by the API than any of the following methods.
+This can be some kind of scrolling token or even a page number of the next page.  E.g.
+
+{% highlight json %}
+{
+    "results": [
+        ...
+    ],
+    "scrolling": {
+        "next_page": 2
+    }
+}
+{% endhighlight %}
+
+If the API does not provide and scrolling hint within the response, you have to use one of the 
+`offset`, `pagenum` or `cursor` methods: 
+
+- Use the [`pagenum`]((/extend/generic-extractor/api/pagination/pagenum/) method if the API expects **page** number/index (i.e. `/users?page=2` to retrieve 2nd page regardless of how many items the page contains).
+- Use the [`offset`](/extend/generic-extractor/api/pagination/offset/) method if the API expects **item** number/index (i.e. `/useers?startWith=20` to retrieve 20th item and following items).
+- Use the [`cursor`](/extend/generic-extractor/api/pagination/cursor/) method if the API expects item **identifier** (i.e. `/users?startWith=20` to retrieve item with ID 20 and the following items).
+
+If the API uses different paging methods for different endpoints, you have to use the 
+[`multiple`](/extend/generic-extractor/api/pagination/multiple/) method together with
+any of the above methods.
 
 ## Stopping Strategy
 Generic Extractor stops scrolling

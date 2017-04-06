@@ -94,6 +94,7 @@ See [Full Example](todo:057-pagination-response-param-basic)
 ### Overriding Parameters
 The following configuration passes the parameter `orderBy` to every request:
 
+{% highlight json %}
 {
     "parameters": {
         "api": {
@@ -121,6 +122,7 @@ The following configuration passes the parameter `orderBy` to every request:
         }
     }
 }
+{% endhighlight %}
 
 The `includeParams` configuration set to true causes the parameters from the `job.params` settings to 
 be sent with every request. If you set `includeParams` to false, then they will be sent only with
