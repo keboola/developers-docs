@@ -7,26 +7,29 @@ permalink: /extend/generic-extractor/config/mappings/
 {:toc}
 
 Generic Extractor receives JSON responses, 
-[merges them together](/extend/generic-extractor/jobs/#merging-responses) and converts them to CSV files
+[merges them together](/extend/generic-extractor/config/jobs/#merging-responses) and converts them to CSV files
 which are then imported to KBC. **Mapping** allows you to modify the behavior of this conversion process.
-To see mapping in action, you should have a look at the corresponding part of 
-[the tutorial](/extend/generic-extractor/jobs/mapping).
-The reasons to manually define mapping include:
+Go to our tutorial to see [mapping in action](/extend/generic-extractor/tutorial/mapping).
+Manually define mapping if you wish to do the following:
 
-- set up primary key to simplify relations between result tables and speed up extraction,
-- avoid extraction of unnecessary properties which make result tables cluttered,
-- split a single response to multiple result tables,
-- override the automatic conversion for any other reason.
+- Set up a primary key to simplify relations between result tables, and speed up the extraction,
+- Avoid extraction of unnecessary properties which make result tables cluttered,
+- Split a single response into multiple result tables,
+- Override the automatic conversion for any other reason.
 
-The automatic conversion between JSON and CSV (Storage Tables) is defined by the following rules (see 
-[example](#automatic-mapping) below:
+The automatic conversion between JSON and CSV (Storage Tables) is defined by the following rules (see an
+[example](#automatic-mapping)):
 
-- If the value of a JSON field is a [scalar](/extend/generic-extractor/tutorial/json/#data-values), it is saved as the value of a column with the name of the field.
-- If the value of a JSON field is an object, each of the object property values will be added as a value of a column with auto-generated name.
-- If the value of a JSON field is an [array](/extend/generic-extractor/tutorial/json/#data-values), a new table will be created and linked by a `JSON_parentId` column.
+- If the value of a JSON field is a [scalar](/extend/generic-extractor/tutorial/json/#data-values), it is saved as \
+the value of the column with the name of the field.
+- If the value of a JSON field is an [object](/extend/generic-extractor/tutorial/json/#data-values), each of the 
+object property values will be added as a value of a column with an auto-generated name.
+- If the value of a JSON field is an [array](/extend/generic-extractor/tutorial/json/#data-values), a new table 
+will be created and linked by the `JSON_parentId` column.
 
 Mapping configuration allows you to manually modify or override this behavior for a 
-[`dataType`](/extend/generic-extractor/jobs/#data-type) defined in a job. Example mapping configuration can look like this:
+[`dataType`](/extend/generic-extractor/config/jobs/#data-type) 
+defined in a job. The following is a mapping configuration example:
 
 {% highlight json %}
 "mappings": {
@@ -43,12 +46,12 @@ Mapping configuration allows you to manually modify or override this behavior fo
 
 ## Configuration
 The `mappings` configuration is a deeply nested object. The first level of keys are `dataType` 
-values used in the [job configurations](/extend/generic-extractor/jobs/#data-type). The 
-second level of keys are names of properties found (or expected) in the response. 
+values used in the [job configurations](/extend/generic-extractor/config/jobs/#data-type). The 
+second level of keys are the names of the properties found (or expected) in the response. 
 Then the value is an object with the following properties:
 
-- `type` (optional, string) -- Mapping type, either `column`, `table` or `user`. Default value is `column`.
-- `mapping` (required, object) -- Mapping configuration, depends on the mapping type.
+- `type` (optional, string) --- Mapping type, either `column`, `table` or `user`. The default value is `column`.
+- `mapping` (required, object) --- Mapping configuration, depends on the mapping type.
 
 The following configuration shows a sample mapping configuration for dataType `users` and column `id`:
 
@@ -67,36 +70,40 @@ The following configuration shows a sample mapping configuration for dataType `u
 
 ### Column Mapping
 Column mapping represents a basic mapping type which allows you to select extracted 
-columns, rename them and optionally set primary key on them. The mapping 
+columns, rename them and optionally set a primary key on them. The mapping 
 configuration requires:
 
-- `type` (optional, string) -- can be omitted or must be set to `column`,
-- `mapping` (required, object) -- object with properties:
-  - `destination` (required, string) -- name of the column in the output table,
-  - `primaryKey` (optional, boolean) -- if `true`, then a primary key will be set on the column. Default value is `false`.
-- `forceType` (optional, boolean) -- if set to true, the property will not be processed and will be stored
-as an encoded JSON (see [example](#mapping-without-processing)).
+- `type` (optional, string) --- Can be omitted or must be `column`.
+- `mapping` (required, object) --- Object with two properties:
+  - `destination` (required, string) --- Name of the column in the output table
+  - `primaryKey` (optional, boolean) --- If `true`, then a primary key will be set on the column. The default value is `false`.
+- `forceType` (optional, boolean) --- If set to `true`, the property will not be processed and will be stored as an encoded 
+JSON (see an [example](#mapping-without-processing)).
 
 ### User Mapping
 User mapping has the same configuration as the [column mapping](#column-mapping). The only difference is
 that it applies to *virtual properties*. This is useful mainly for working with auto-generated properties/columns
-in child jobs (see [example](#mapping-child-jobs)).
+in child jobs (see an [example](#mapping-child-jobs)).
 
 ### Table Mapping
 Table mapping allows you to create a new table from a particular property of the response object. Table
-mapping is by default used for arrays. The mapping configuration requires:
+mapping is, by default, used for arrays. The mapping configuration requires:
 
-- `type` (required, string) -- Must be set to `table`.
-- `destination` (required, string) -- Name of the output table.
-- `tableMapping` (required, object) -- Object with another mapping configuration (required unless `parentKey.disable` is set to true -- see below).
-- `parentKey` (optional, object) -- configuration of parent-child relationship between tables
-    - `destination` (optional, string) -- name of the column which links to the parent table. Default value is name of the parent table with suffix `_pkey`. See [example](#using-primary-keys)
-    - `primaryKey` (optional, boolean) -- set to true to mark the link column as primary key for the child table too. Default value is `false`. See [example](#using-primary-keys)
-    - `disable` (optional, boolean) -- completely disble parent-child relationship, disables configured `tableMapping`. See [example](#disabled-parent-key).
+- `type` (required, string) --- Must be set to `table`.
+- `destination` (required, string) --- Name of the output table.
+- `tableMapping` (required, object) --- Object with another mapping configuration (required unless `parentKey.disable` is 
+set to `true` --- see below).
+- `parentKey` (optional, object) --- Configuration of the parent-child relationship between tables:
+    - `destination` (optional, string) --- Name of the column which links to the parent table. The default value is the name 
+	of the parent table with suffix `_pkey`. See an [example](#using-primary-keys).
+    - `primaryKey` (optional, boolean) --- Set to `true` to mark the link column as a primary key for the child table too. 
+	The default value is `false`. See an [example](#using-primary-keys).
+    - `disable` (optional, boolean) --- Completely disables the parent-child relationship, disables configured 
+	`tableMapping`. See an [example](#disabled-parent-key).
 
-The following configuration will take the `contacts` property from the response and make a new table
-(`user-contact`) from it so that the `contacts.email` is mapped to column `email` and property
-`contacts.phone` is mapped to column `tel`. See more in the [examples](#table-mapping-examples).
+The following configuration takes the `contacts` property from the response and makes a new table
+(`user-contact`) from it; the `contacts.email` is mapped to the `email` column and the property
+`contacts.phone` is mapped to the column `tel`. See more in the [examples](#table-mapping-examples).
 
 {% highlight json %}
 "contacts": {
@@ -152,7 +159,7 @@ Without any configuration the following JSON response:
 ]
 {% endhighlight %}
 
-is converted to the following CSV files (and subsequently Storage tables)
+is converted to the following CSV files (and subsequently Storage tables):
 
 users:
 
@@ -175,14 +182,13 @@ users_interests:
 The nested properties `address.street`, `address.county` and `address_city` were automatically 
 flattened into columns named as concatenation of the parent and child property name. The 
 array property `interests` was turned into a separate table and linked through using 
-`JSON_parentId` column and autogenerated keys.
+`JSON_parentId` column and auto-generated keys.
 
 See the [full example](todo:063-mapping-automatic).
 
 ### Basic Manual Mapping
-Maybe you are not interested in the user `interests` and you want to simplify the users table
-to four columns `country`, `name` and `id`. The following mapping configuration does
-the trick:
+Maybe you are not interested in the user `interests` and want to simplify the users table
+to three columns: `country`, `name` and `id`. The following mapping configuration does the trick:
 
 {% highlight json %}
 {
@@ -226,20 +232,19 @@ the trick:
 }
 {% endhighlight %}
 
-The `mappings` settings has the key `users` which is the value of `job.dataType` property. The keys in
-the `users` objects are names of properties in the JSON response, the values are mapping configurations for
-each of the property. The mapping is always exhaustive, which means that only the mentioned properties will
-get processed and all others will be completely ignored. The above configuration will also set a primary
-key on the `id` column.
+The `mappings` settings has the key `users` which is the value of the `job.dataType` property. The keys in
+the `users` objects are the names of the properties in the JSON response. The values are the mapping configurations for
+each property. The mapping is always exhaustive; only the mentioned properties get processed while the others are 
+completely ignored. The above configuration also sets the primary key on the `id` column.
 
 All three mapped properties are mapped to columns (the `id` property relies on the default value for `type`). 
-Notice that in for the nested properties, you need to enter the name/path in the JSON response (`address.country`).
-You can't use the auto-generated name produced without any mapping (`address_country`), because the automatic 
+Notice that in the nested properties, you need to enter the name/path in the JSON response (`address.country`).
+You cannot use the auto-generated name produced without any mapping (`address_country`), because the automatic 
 processing is turned off by the mapping.
 
-Take great care to use correct keys in the mapping! If you misspell the first-level key, the entire configuration 
-will be ignored (it will refer to a non-existent data type). If you misspell the second-level key, you'll get 
-an empty column in the result (it will refer to a non-existent property of the response). With the 
+Take great care to **use the correct keys** in the mapping! If you misspell the first-level key, the entire configuration 
+will be ignored (it will refer to a non-existent data type). If you misspell the second-level key, you will get 
+an empty column in the result (referring to a non-existent property of the response). With the 
 correct settings, the following table will be produced:
 
 |country|name|id|
@@ -265,7 +270,7 @@ Let's say that you have an API endpoint `/users` which returns a response simila
 ]
 {% endhighlight %}
 
-More details about the user, can be retrieved through another endpoint `/user/{id}`, where `{id}` is 
+More details about the user can be retrieved through another endpoint --- `/user/{id}`, where `{id}` is 
 the user ID:
 
 {% highlight json %}
@@ -283,7 +288,7 @@ the user ID:
 }
 {% endhighlight %}
 
-To handle this situation in Generic Extractor, you need to use a [child job](/extend/generic-extractor/jobs/#children). 
+To handle this situation in Generic Extractor, use a [child job](/extend/generic-extractor/config/jobs/#children): 
 
 {% highlight json %}
 "jobs": [
@@ -332,7 +337,7 @@ Now you can use the following mapping to shape the table:
 }
 {% endhighlight %}
 
-The above mapping will cause Generic Extractor to return the following user-detail table:
+and get the following user-detail table:
 
 |country|user_id|
 |---|---|
@@ -377,7 +382,7 @@ With the following API response:
 ]
 {% endhighlight %}
 
-And the folllowing mapping configuration:
+and the following mapping configuration:
 
 {% highlight json %}
 "mappings": {
@@ -405,14 +410,14 @@ And the folllowing mapping configuration:
 }
 {% endhighlight %}
 
-The result table `users` will contain the `interests` field unprocessed and left as JSON fragments:
+the result table `users` contains the `interests` field unprocessed and left as JSON fragments:
 
 |name|id|interests|
 |---|---|---|
 |John Doe|123|["girls","cars","flowers"]|
 |Jane Doe|234|["boys","cars","flowers"]|
 
-The same result can be achieved by using the [`responseFilter` job property](/extend/generic-extractor/jobs/#response-filter):
+The same result can be achieved by using the [`responseFilter` job property](/extend/generic-extractor/config/jobs/#response-filter):
 
 {% highlight json %}
 {
@@ -436,7 +441,7 @@ The same result can be achieved by using the [`responseFilter` job property](/ex
 ## Table Mapping Examples
 
 ### Basic Table Mapping
-Because all output columns must be listed in mapping, using only column mapping settings skips 
+Because all output columns must be listed in a mapping, using only column mapping settings skips 
 the `interests` property of the response:
 
 {% highlight json %}
@@ -467,7 +472,7 @@ the `interests` property of the response:
 ]
 {% endhighlight %}
 
-The `interests` property cannot be saved as a column, therefore a mapping of type `table` must be used.
+The `interests` property cannot be saved as a column, therefore a mapping of the `table` type must be used:
 
 {% highlight json %}
 "mappings": {
@@ -500,12 +505,11 @@ The `interests` property cannot be saved as a column, therefore a mapping of typ
 }
 {% endhighlight %}
 
-The table mapping follows the same structure as normal mapping. Each item is another mapping 
+The table mapping follows the same structure as a normal mapping. Each item is another mapping 
 definition identified by the property name in the JSON file. Because the `interests` property
-itself is an array, its value has no name therefore the key is empty string `""`. The mapping
-value is standard [column mapping](/extend/generic-extractor/mappings/#column-mapping). 
-The above configuration produces the 
-same result as the automatic mapping of columns.
+itself is an array, its value has no name and therefore the key is an empty string `""`. The mapping
+value is a standard [column mapping](/extend/generic-extractor/config/mappings/#column-mapping). 
+The above configuration produces the same result as the automatic mapping of columns.
 
 See the [full example](todo:066-mapping-tables-basic).
 
@@ -568,7 +572,7 @@ users.contacts:
 |Whiteheaven Mansions|United Kingdom|London|users.contacts_912c86dec7acdb9d8a17c97eb464aec6|
 |Whiteheaven Mansions|United Kingdom|London|users.contacts_4cf9e859113127acb138872cc630e75f|
 
-This might not be exactly what you want. Perhaps you would like the contacts to be separate from users and 
+This might not be exactly what you want. Perhaps you would like the contacts to be separate from the users and 
 addresses. This can be done using the following mapping configuration: 
 
 {% highlight json %}
@@ -626,9 +630,9 @@ addresses. This can be done using the following mapping configuration:
 }
 {% endhighlight %}
 
-The above configuration defines that `contacts` field will be mapped into a separate table
-with columns `email` and `tel` (value of `mapping.destination`). The `address` field will be 
-mapped into yet another separate table with columns `street` and `country`. 
+The above configuration defines that the `contacts` field will be mapped into a separate table
+with the columns `email` and `tel` (value of `mapping.destination`). The `address` field will be 
+mapped into yet another separate table with the columns `street` and `country`. 
 
 With the above configuration, the following tables will be created:
 
@@ -699,7 +703,7 @@ With the same API response as above:
 {% endhighlight %}
 
 let's say that you know that the `addresses` array contains only two items at most and therefore
-you want to mark them as primary and secondary address.
+you want to mark them as a primary and secondary address.
 
 {% highlight json %}
 "mappings": {
@@ -774,7 +778,7 @@ you want to mark them as primary and secondary address.
 }
 {% endhighlight %}
 
-The above is pretty long configuration, but the important part is:
+The above is a pretty long configuration, but the important part is:
 
 {% highlight json %}
 "addresses.0": {
@@ -799,7 +803,7 @@ The above is pretty long configuration, but the important part is:
 
 This picks the first item (remember that arrays indexes are 
 [zero-based](/extend/generic-extractor/tutorial/json/#references)) and places it in the
-`primary-address` table. Analogously, the `addresses.1` mapping picks the second item from the `addressess` 
+`primary-address` table. Analogously, the `addresses.1` mapping picks the second item from the `addresses` 
 array and stores it in the `secondary-address` table.
 
 See the [full example](todo:068-mapping-tables-nested-array).
@@ -853,7 +857,7 @@ If you map the table as in the [previous example](#array-items), you will receiv
 |Blossom Avenue|United Kingdom|1c439a9a39548290f7b7a4513a9224e7|
 |Whiteheaven Mansions|United Kingdom|605e865710f95dba665f6d0e8bc19f1a|
 
-Notice that the records link to the `user-contact` table. This may produce unnecesarilly complicated
+Notice that the records link to the `user-contact` table. This may produce unnecessarily complicated
 links between tables, because from the response it is obvious that each address is assigned to 
 a specific user. To avoid this, you can directly map a nested property:
 
@@ -912,9 +916,9 @@ a specific user. To avoid this, you can directly map a nested property:
 }
 {% endhighlight %}
 
-The mapping for `primary-address` table is now **not nested** inside the mapping for the
+The mapping for the `primary-address` table is now **not nested** inside the mapping for the
 `contacts` table. Therefore it links directly to the `users` table. The content is the same because
-the mapping still refers to the same property -- the first item of the `adddresses` property of `contacts` 
+the mapping still refers to the same property --- the first item of the `addresses` property of `contacts` 
 (`contacts.addresses.0`). The following table is produced:
 
 |street|country|users_pk|
@@ -922,7 +926,7 @@ the mapping still refers to the same property -- the first item of the `adddress
 |Blossom Avenue|United Kingdom|b5d72095c441b3a3d6f23ad8142c3f8b|
 |Whiteheaven Mansions|United Kingdom|5f7f2ab65a680f1a9387a8fafe6b9050|
 
-The user table now contains additonal column `primary-address`:
+The user table now contains an additional column --- `primary-address`:
 
 |id|name|user-contact|primary-address|
 |---|---|---|---|
@@ -933,8 +937,8 @@ See the [full example](todo:069-mapping-tables-nested-direct).
 
 ### Using Primary Keys
 In the above example, you can see that the `primary-address` table contains 
-an autogenerated key to link back to users. This is unnecessary, because you can safely link to
-the user ID. To do this, you need only to specify a primary key for a table:
+an auto-generated key to link back to users. This is unnecessary, because you can safely link to
+the user ID. To do this, you only need to specify a primary key for a table:
 
 {% highlight json %}
 "mappings": {
@@ -998,12 +1002,12 @@ the user ID. To do this, you need only to specify a primary key for a table:
 
 The most important part in the above configuration is the `"primaryKey": true` setting for 
 the `id` column in the `users` table. Thanks to this, Generic Extractor is able to automatically link
-all related records to this ID. In the `user-contact` and `primary-address` tables, a column
+all related records to this ID. In the `user-contact` and `primary-address` tables, the column
 `users_pk` will be created which will contain the user ID. The name is auto-generated as the
 name of the parent table with suffix `_pk`. 
 
 To override this auto-generated name, the following configuration is used in the `user-contact` 
-table to rename the `users_pk` column to `userId`.
+table, renaming the `users_pk` column to `userId`.
 
 {% highlight json %}
 "parentKey": {
@@ -1012,7 +1016,7 @@ table to rename the `users_pk` column to `userId`.
 },
 {% endhighlight %}
 
-It also marks the `userId` column in the `user-contact` table as primary key. The following tables
+It also marks the `userId` column in the `user-contact` table as the primary key. The following tables
 are produced by the above mapping configuration:
 
 users:
@@ -1037,7 +1041,7 @@ primary-address:
 |Whiteheaven Mansions|United Kingdom|234|
 
 ### Multiple Primary Key Columns
-Generic extractor allows you to set only a single (primary) key for a table. This means that 
+Generic Extractor allows you to set only a single (primary) key for a table. This means that 
 if you set `primaryKey` on multiple columns you will create a compound primary key. Let's say
 that you have an API with the following response:
 
@@ -1060,7 +1064,7 @@ that you have an API with the following response:
 ]
 {% endhighlight %}
 
-Notice, that the response does not contain a single unique property (id). You can create the 
+Notice that the response does not contain a single unique property (id). You can create the 
 following configuration:
 
 {% highlight json %}
@@ -1094,7 +1098,7 @@ following configuration:
 }
 {% endhighlight %}
 
-The following tables will be extracted:
+to extract the following tables:
 
 users:
 
@@ -1114,12 +1118,12 @@ interests:
 |cars|Jane,Doe|
 |flowers|Jane,Doe|
 
-**Important:** if you set column (or combination of columns) as primary key which have duplicate
-values, they won't be imported!
+**Important:** If you set a column (or combination of columns) as a primary key which has duplicate
+values, the rows will not be imported!
 
-### Disbled Parent Key
-It is also possible to entirely disable the relationships between parts of response objects. 
-Consider for example this API response:
+### Disabled Parent Key
+It is also possible to entirely disable the relationships between parts of the response objects. 
+Consider, for example, this API response:
 
 {% highlight json %}
 [
@@ -1189,9 +1193,11 @@ disabling the relationship:
 }
 {% endhighlight %}
 
-The important part is `parentKey.disable` set to true in the `children` mapping. Then an already 
-existing mapping can be referenced -- `"destination": "users"` defines that the children are to be mapped using 
-the same configuration as their parents. Notice that `children` mapping contains no `tableMapping` configuration.
-This is because the mapping of `users` data type is used both for users and their children. Setting
-`tableMapping` for `children` would have no effect. This also means that the `favoriteColors` column
-configuration *must be* defined in for the `users` mapping (even though it is not used by the users in the API response).
+The important part is `parentKey.disable` set to `true` in the `children` mapping. Then an already 
+existing mapping can be referenced --- `"destination": "users"` defines that the children are to be mapped using 
+the same configuration as their parents. 
+
+Notice that the `children` mapping contains no `tableMapping` configuration. This is because the mapping of 
+the `users` data type is used both for users and their children. Setting `tableMapping` for `children` would have 
+no effect. This also means that the `favoriteColors` column configuration **must be** defined in the `users` 
+mapping (even though it is not used by the users in the API response). 
