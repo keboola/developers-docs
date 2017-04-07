@@ -1,25 +1,71 @@
 ---
-title: Generic Extractor Config (under construction)
+title: Generic Extractor Configuration
 permalink: /extend/generic-extractor/config/
 ---
 
-This section defines the actual run of the extractor
+* TOC
+{:toc}
 
-## Config items
+The `config` section describes the configuration of the extraction. This incudes mainly 
+API endpoints, properties of HTTP requests and mapping between source JSON and target CSV.
+The `config` section is one of the two main parts 
+(the second part is [`api`](/extend/generic-extractor/api/) of the Generic Extractor configuration.
+
+A sample API configuration can look like this:
+
+{% highlight json %}
+{
+    ...,
+    "config": {
+        "debug": false,
+        "outputBucket": "ge-tutorial",
+        "incrementalOutput": false,
+        "jobs": [
+            ...
+        ],
+        "mappings": {
+            ...
+        },
+        "http": {
+            ...
+        },
+        "userData": {
+            ...
+        }
+    }
+}
+{% endhighlight %}
+
+## Jobs
+Jobs configuration describes API endpoints (resources) which will be extracted. This
+includes configuration of HTTP method and parameters. The `jobs` configuration is 
+described in a [separate article](/extend/generic-extractor/config/jobs/).
+
+## Mappings
+Mappings configuration describes how the JSON response is converted into 
+CSV files that will be imported into Storage. The `mappings` configuration 
+is described in a [separate article](/extend/generic-extractor/config/mappings/).
+
+## Debug
+The `debug` option allows you to turn on more verbose logging which shows 
+all HTTP requests sent by the Generic Extractor. Default value is `false`.
+You can read more about running Generic Extractor in a 
+[separate article](/extend/generic-extractor/running/).
+
+## Output Bucket
+
+## HTTP
+
+## Incremental Output
+
+## User Data
+
+
+
+## Config Items
 
 ### `incrementalOutput`
 - Sets the incremental flag for Docker bundle
-
-### `debug`
-- Output all requests to events log
-
-### `jobs`
-- Define resources to be exported from the API
-- [link](/extend/generic-extractor/jobs/)
-
-### `mappings`
-- Allows to override the default JSON parser and manually map data to CSV files
-- [link](/extend/generic-extractor/mappings/)
 
 ### `outputBucket`
 - Used **only** if the application doesn't use the default_bucket flag in KBC
@@ -53,38 +99,3 @@ This section defines the actual run of the extractor
             "1","Joe","tag","identifier"
             "2","Garry","tag","identifier"
 
-- [User functions](/extend/generic-extractor/user-functions/) can be used as a value, for intance to fill in a current date:
-
-    - Config:
-
-            {
-                "config": {
-                    "userData": {
-                        "export_date": {
-                            "function": "date",
-                            "args": [
-                                "Y-m-d"
-                            ]
-                        }
-                    }
-                }
-            }
-
-    - Result:
-
-            "id","username","export_date"
-            "1","Joe","2016-06-30"
-            "2","Garry","2016-06-30"
-
-## Example
-
-    {
-        "config": {
-            "incrementalOutput": true,
-            "jobs": [
-                {
-                    "endpoint": "events"
-                }
-            ]
-        }
-    }

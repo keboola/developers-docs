@@ -69,3 +69,40 @@ parameters :
     - uses `config` part, where attribute **domain** would contain `yourDomain`
 
 todo, muze se pouzit user funkce v ## Force Stop scrolleru  ?
+
+- [User functions](/extend/generic-extractor/user-functions/) can be used as a value, for intance to fill in a current date:
+
+    - Config:
+
+            {
+                "config": {
+                    "userData": {
+                        "export_date": {
+                            "function": "date",
+                            "args": [
+                                "Y-m-d"
+                            ]
+                        }
+                    }
+                }
+            }
+
+    - Result:
+
+            "id","username","export_date"
+            "1","Joe","2016-06-30"
+            "2","Garry","2016-06-30"
+
+## Example
+
+    {
+        "config": {
+            "incrementalOutput": true,
+            "jobs": [
+                {
+                    "endpoint": "events"
+                }
+            ]
+        }
+    }
+
