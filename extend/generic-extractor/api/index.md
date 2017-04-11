@@ -270,6 +270,8 @@ The following configuration sends the parameter with every API request:
 }
 {% endhighlight %}
 
+For this use case, the [query authentication](/extend/generic-extractor/api/authentication/query/) may also be used.
+
 See the [full example](todo:039-default-parameters).
 
 ### Required Headers
