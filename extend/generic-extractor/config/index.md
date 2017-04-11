@@ -39,63 +39,121 @@ A sample API configuration can look like this:
 ## Jobs
 Jobs configuration describes API endpoints (resources) which will be extracted. This
 includes configuration of HTTP method and parameters. The `jobs` configuration is 
-described in a [separate article](/extend/generic-extractor/config/jobs/).
+**required** and described in a [separate article](/extend/generic-extractor/config/jobs/).
+
+## Output Bucket
+The `outputBucket` option defines the name of the [Storage Bucket](https://help.keboola.com/storage/buckets/) 
+in which the extracted tables will be stored. The configuration is **required** unless
+the extractor is [registered](todo) as standalone component with the 
+[Default Bucket](/extend/common-interface/folders/#default-bucket) option.
+
+The following configuration will make Generic Extractor place all extracted tables 
+(the names of the tables are defined by the [`dataType`](/extend/generic-extractor/jobs/#dataType) setting) 
+in the `ge-tutorial` bucket:
+
+{% highlight json %}
+{
+    ...,
+    "config": {
+        "outputBucket": "ge-tutorial",
+        ...
+    }
+}
+{% endhighlight %}
+
+If you omit the `outputBucket` configuration, you will receive an error similar to this:
+
+    CSV file 'campaigns' file name is not a valid table identifier, either set output mapping for 'campaigns' or make sure that the file name is a valid Storage table identifier.
 
 ## Mappings
 Mappings configuration describes how the JSON response is converted into 
-CSV files that will be imported into Storage. The `mappings` configuration 
+CSV files that will be imported into Storage. The `mappings` configuration is optional and 
 is described in a [separate article](/extend/generic-extractor/config/mappings/).
 
 ## Debug
-The `debug` option allows you to turn on more verbose logging which shows 
+The `debug` boolean option allows you to turn on more verbose logging which shows 
 all HTTP requests sent by the Generic Extractor. Default value is `false`.
 You can read more about running Generic Extractor in a 
 [separate article](/extend/generic-extractor/running/).
 
-## Output Bucket
-
 ## HTTP
+The `http` option allows you to set HTTP headers sent with every request. This
+serves primarily the purpose of providing values for 
+[`api.http.requiredHeaders` option](/extend/generic-extractor/api/#required-headers).
+It is also possible to use `http` option without the `api.http.requiredHeaders` in 
+which case, it is essentially equal to [`api.http.headers`](/extend/generic-extractor/api/#default-headers).
+
+{% highlight json %}
+{
+    ...,
+    "config": {
+        "http": {
+            "headers": {
+                "X-AppKey": "ThisIsSecret"
+            }
+        },
+        ...        
+    }
+}
+{% endhighlight %}
+
+See the [full example](todo:074-http-headers).
 
 ## Incremental Output
+The `incrementalOutput` boolean option allows you to turn on incremental loading for loading 
+the extracted data into [Storage](http://help.keboola.com/storage/). This flag in no way affects
+the extraction of data. When `incrementalOutput` is set to `true`, the contents of the target 
+table in Storage will not be cleared. Default value is `false`. How to configure
+Generic Extractor to extract data in increments from an API, is described in a 
+[dedicated article](/extend/generic-extractor/incremental/).
+
+See the [full example](todo:075-incremental-output).
 
 ## User Data
+The `userData` option allows you to add arbitrary data to extracted records. 
+The `userData` is an object with arbitrary property names. The property names will be added as columns to all 
+extracted records from parent jobs, the property values will be the columns values. It is also possible to 
+use [user functions](/extend/generic-extractor/user-functions/) as `userData` property values.
 
+The following configuration:
 
-
-## Config Items
-
-### `incrementalOutput`
-- Sets the incremental flag for Docker bundle
-
-### `outputBucket`
-- Used **only** if the application doesn't use the default_bucket flag in KBC
-
-### `http`
-- Values for required headers defined in [api](/extend/generic-extractor/api/)'s `requiredHeaders`
-- See example in the [API config documentation](/extend/generic-extractor/api/)
-
-### `userData`
-- A set of `key:value` pairs that will be added to the `root` of all endpoints' results
-- Example:
-
-        {
-            "config": {
-                "userData": {
-                    "some": "tag",
-                    "another": "identifier"
-                }
-            }
+{% highlight json %}
+{
+    "config": {
+        "userData": {
+            "tag": "fullExtract",
+            "mode": "development"
         }
+    }
+}
+{% endhighlight %}
 
-    - With this config, if the usual result CSV would look like this:
+And the following response:
 
-            "id","username"
-            "1","Joe",
-            "2","Garry"
+{% highlight json %}
+[
+    {
+        "id": 123,
+        "name": "John Doe"
+    },
+    {
+        "id": 234,
+        "name": "Jane Doe"
+    }
+]
+{% endhighlight %}
 
-    - ...the result will instead look like this:
+Will produce the following `users` table:
 
-            "id","username","some","another"
-            "1","Joe","tag","identifier"
-            "2","Garry","tag","identifier"
+{% highlight json %}
+|id|name|tag|mode|
+|123|John Doe|fullExtract|development|
+|234|Jane Doe|fullExtract|development|
+{% endhighlight %}
 
+The `userData` values are added to parent jobs only, they will not affect 
+[child jobs](/extend/generic-extractor/jobs/children) anyhow. If the result table contains
+columns with the same names as `userData` properties, the original column will be overwritten 
+by the values of `userData`.
+
+See the [full example](todo:076-user-data).
