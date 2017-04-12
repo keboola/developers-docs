@@ -44,6 +44,19 @@ string parameters**), separated by the character `&` (ampersand); the actual par
     - `show` with the value `deleted`, and
     - `fields` with the value `all`.
 
+Because the URL contains a number of special characters (`?`, `&`, `/` and many others), when these parameters
+need to be part of the URL, they must be encoded (URL encoded, urlencoded, escaped). Therefore a URL:
+
+    http://example.com/this address & special
+
+will be actually sent to the server as:
+
+    http%3A%2F%2Fexample.com%2Fthis+address+%26+special
+
+The web browser (and Generic Extractor too) will normally do this conversion for you. However, you might run into
+the encoded format in Generic Extractor events. There are plenty of [online tools to decode](https://urldecode.org/) 
+this encoded format.
+
 Sometimes you may also encounter the term [URI (Uniform Resource Identifier)](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier). 
 It is used in case 
 a single **Resource** may be accessed through multiple URLs. For example, the web page `http://example.com` may
