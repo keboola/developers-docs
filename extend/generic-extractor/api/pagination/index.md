@@ -42,17 +42,17 @@ An example pagination configuration looks like this:
 Generic Extractor supports the following paging strategies (scrollers); they are configured
 using the `method` option:
 
-- [`response.url`](/extend/generic-extractor/api/pagination/response-url/) --- uses URL provided in the response
-- [`offset`](/extend/generic-extractor/api/pagination/offset/) --- uses page size (limit) and **item offset** (like in SQL)
-- [`pagenum`](/extend/generic-extractor/api/pagination/pagenum/) --- uses page size (limit) and **page number**
-- [`response.param`](/extend/generic-extractor/api/pagination/response-param/) --- uses some value (token) provided in the response.
-- [`cursor`](/extend/generic-extractor/api/pagination/cursor/) --- uses an identifier of the item in response to maintain a scrolling cursor.
+- [`response.url`](/extend/generic-extractor/api/pagination/response-url/) --- uses a URL provided in the response
+- [`offset`](/extend/generic-extractor/api/pagination/offset/) --- uses the page size (limit) and **item offset** (like in SQL)
+- [`pagenum`](/extend/generic-extractor/api/pagination/pagenum/) --- uses the page size (limit) and **page number**
+- [`response.param`](/extend/generic-extractor/api/pagination/response-param/) --- uses a specific value (token) provided in the response.
+- [`cursor`](/extend/generic-extractor/api/pagination/cursor/) --- uses the identifier of the item in response to maintain a scrolling cursor.
 - [`multiple`](/extend/generic-extractor/api/pagination/multiple/) --- allows to set different scrollers for different API endpoints.
 
 ### Choosing Paging Strategy
 If the API responses contain direct links to the next set of results, use the 
 [`response.url`](/extend/generic-extractor/api/pagination/response-url/) method.
-This applies to APIs following the [JSON API specification](http://jsonapi.org). The response usually 
+This applies to the APIs following the [JSON API specification](http://jsonapi.org). The response usually 
 contains a `links` section:
 
 {% highlight json %}
@@ -237,6 +237,7 @@ will stop if **any** of the following is true:
 - A page contains the same items as the previous page.
 - 20 pages were extracted (`forceStop`).
 - The `isLast` field is present in the response and is true (`nextPageFlag`).
+- The `isLast` field is not present in the response.
 
 ## Next Page Flag Examples
 
