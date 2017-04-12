@@ -350,7 +350,7 @@ column `parent_id` does not really exist in the response as it is generated dyna
 
 See the [full example](todo:065-mapping-child-jobs).
 
-## Mapping without Processing
+### Mapping without Processing
 The `forceType` configuration property allows you to skip a part of the API response from processing.
 With the following API response:
 
@@ -438,9 +438,9 @@ The same result can be achieved by using the [`responseFilter` job property](/ex
 }
 {% endhighlight %}
 
-## Table Mapping Examples
+### Table Mapping Examples
 
-### Basic Table Mapping
+#### Basic Table Mapping
 Because all output columns must be listed in a mapping, using only column mapping settings skips 
 the `interests` property of the response:
 
@@ -513,8 +513,8 @@ The above configuration produces the same result as the automatic mapping of col
 
 See the [full example](todo:066-mapping-tables-basic).
 
-### Nested Properties
-Let's say that you have an API which returns a response like this:
+#### Nested Properties
+Let's say that you have an API which returns a response like this (it will be used in the following two examples as well):
 
 {% highlight json %}
 [
@@ -660,9 +660,12 @@ user-address:
 
 See the [full example](todo:067-mapping-tables-nested).
 
-### Array Items
-With the same API response as above: 
 
+#### Array Items
+Consider the same API response as above:
+<details>
+  <summary>Click to expand the response.</summary>
+ 
 {% highlight json %}
 [
     {
@@ -701,9 +704,10 @@ With the same API response as above:
     }
 ]
 {% endhighlight %}
-
-let's say that you know that the `addresses` array contains only two items at most and therefore
-you want to mark them as a primary and secondary address.
+</details>
+<br>
+Let's say that you know that the `addresses` array contains only two items at most and therefore
+you want to mark them as the primary and secondary address:
 
 {% highlight json %}
 "mappings": {
@@ -778,7 +782,8 @@ you want to mark them as a primary and secondary address.
 }
 {% endhighlight %}
 
-The above is a pretty long configuration, but the important part is:
+
+The important part of the pretty long configuration is:
 
 {% highlight json %}
 "addresses.0": {
@@ -808,9 +813,12 @@ array and stores it in the `secondary-address` table.
 
 See the [full example](todo:068-mapping-tables-nested-array).
 
-### Directly Mapping Array
-With the same API response as above:
 
+#### Directly Mapping Array
+Consider the same API response as above:
+<details> 
+ <summary>Click to expand the response.</summary> 
+  
 {% highlight json %}
 [
     {
@@ -849,7 +857,8 @@ With the same API response as above:
     }
 ]
 {% endhighlight %}
-
+</details>
+<br>
 If you map the table as in the [previous example](#array-items), you will receive a `primary-address` table:
 
 |street|country|user-contact_pk|
@@ -858,7 +867,7 @@ If you map the table as in the [previous example](#array-items), you will receiv
 |Whiteheaven Mansions|United Kingdom|605e865710f95dba665f6d0e8bc19f1a|
 
 Notice that the records link to the `user-contact` table. This may produce unnecessarily complicated
-links between tables, because from the response it is obvious that each address is assigned to 
+links between the tables, because from the response it is obvious that each address is assigned to 
 a specific user. To avoid this, you can directly map a nested property:
 
 {% highlight json %}
@@ -935,10 +944,10 @@ The user table now contains an additional column --- `primary-address`:
 
 See the [full example](todo:069-mapping-tables-nested-direct).
 
-### Using Primary Keys
+#### Using Primary Keys
 In the above example, you can see that the `primary-address` table contains 
 an auto-generated key to link back to users. This is unnecessary, because you can safely link to
-the user ID. To do this, you only need to specify a primary key for a table:
+the user ID. To do this, you only need to specify the primary key for the table:
 
 {% highlight json %}
 "mappings": {
@@ -1040,7 +1049,7 @@ primary-address:
 |Blossom Avenue|United Kingdom|123|
 |Whiteheaven Mansions|United Kingdom|234|
 
-### Multiple Primary Key Columns
+#### Multiple Primary Key Columns
 Generic Extractor allows you to set only a single (primary) key for a table. This means that 
 if you set `primaryKey` on multiple columns you will create a compound primary key. Let's say
 that you have an API with the following response:
@@ -1121,7 +1130,7 @@ interests:
 **Important:** If you set a column (or combination of columns) as a primary key which has duplicate
 values, the rows will not be imported!
 
-### Disabled Parent Key
+#### Disabled Parent Key
 It is also possible to entirely disable the relationships between parts of the response objects. 
 Consider, for example, this API response:
 
@@ -1201,3 +1210,4 @@ Notice that the `children` mapping contains no `tableMapping` configuration. Thi
 the `users` data type is used both for users and their children. Setting `tableMapping` for `children` would have 
 no effect. This also means that the `favoriteColors` column configuration **must be** defined in the `users` 
 mapping (even though it is not used by the users in the API response). 
+

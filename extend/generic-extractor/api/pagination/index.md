@@ -50,7 +50,7 @@ using the `method` option:
 - [`multiple`](/extend/generic-extractor/api/pagination/multiple/) --- allows to set different scrollers for different API endpoints.
 
 ### Choosing Paging Strategy
-If the API responses contain direct links to next set of results, use the 
+If the API responses contain direct links to the next set of results, use the 
 [`response.url`](/extend/generic-extractor/api/pagination/response-url/) method.
 This applies to APIs following the [JSON API specification](http://jsonapi.org). The response usually 
 contains a `links` section:
@@ -70,7 +70,7 @@ If the API response contains a parameter used to obtain the next page, use the
 `response.param`](/extend/generic-extractor/api/pagination/response-param/) method. 
 It is preferred to use an
 authoritative value provided by the API than any of the following methods.
-This can be some kind of scrolling token or even a page number of the next page.  E.g.
+This can be some kind of scrolling token or even a page number of the next page, for example:
 
 {% highlight json %}
 {
