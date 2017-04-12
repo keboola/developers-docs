@@ -128,14 +128,14 @@ items:
               - url: /extend/generic-extractor/api/authentication/
                 title: Authentication
                 items:
+                  - url: /extend/generic-extractor/api/authentication/query/
+                    title: Query
+
                   - url: /extend/generic-extractor/api/authentication/basic/
                     title: Basic
 
                   - url: /extend/generic-extractor/api/authentication/login/
                     title: Login
-
-                  - url: /extend/generic-extractor/api/authentication/query/
-                    title: Query
 
                   - url: /extend/generic-extractor/api/authentication/oauth/
                     title: OAuth

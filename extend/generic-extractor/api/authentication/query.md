@@ -1,6 +1,6 @@
 ---
 title: Query Authentication
-permalink: /extend/generic-extractor/authentication/api/query/
+permalink: /extend/generic-extractor/api/authentication/query/
 ---
 
 Query Authentication provides the simplest authentication method in which
@@ -12,13 +12,13 @@ signatures. Dynamic values of query parameters can be generated using
 {% highlight json %}
 {
     "api": {
+        ...,
         "authentication": {
             "type": "query",
             "query": {
                 "apikey": "2267709"
             }
-        },
-        ...
+        }
     }
 }
 {% endhighlight %}

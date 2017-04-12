@@ -1,6 +1,6 @@
 ---
-title: Login (under construction)
-permalink: /extend/generic-extractor/authentication/login/
+title: Login
+permalink: /extend/generic-extractor/api/authentication/login/
 ---
 
 Sign in to the service to obtain fresh credentials for accessing the API.
