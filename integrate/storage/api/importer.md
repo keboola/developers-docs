@@ -29,7 +29,7 @@ files [directly to S3](/integrate/storage/api/import-export/#manually-uploading-
 ## Parameters
 
 - `tableId` (required) Storage Table ID, example: in.c-main.users
-- `data` (required) Uploaded CSV file. Raw file or compressed by [gzip](http://www.gzip.org/) or [ZIP](https://en.wikipedia.org/wiki/Zip_(file_format))
+- `data` (required) Uploaded CSV file. Raw file or compressed by [gzip](http://www.gzip.org/)
 - `delimiter` (optional) Field delimiter used in a CSV file. The default value is ' , '. Use '\t' or type the tab char for tabulator.
 - `enclosure` (optional) Field enclosure used in a CSV file. The default value is '"'.
 - `escapedBy` (optional) CSV escape character; empty by default.
