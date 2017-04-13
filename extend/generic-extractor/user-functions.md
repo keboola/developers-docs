@@ -174,3 +174,76 @@ todo, muze se pouzit user funkce v ## Force Stop scrolleru  ?
             - `resource`
 
 - For an example that includes request data in a function, please refer to the [OAuth 20 HMAC example part](/extend/generic-extractor/authentication/oauth/20/#example-for-mac-authentication).
+
+## Example:
+
+### Configuration:
+
+{% highlight json %}
+{
+    "api": {
+        "authentication": {
+            "type": "login",
+            "loginRequest": {
+                "endpoint": "Security/Login",
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "method": "POST",
+                "params": {
+                    "UserName": {
+                        "attr": "username"
+                    },
+                    "PassWord": {
+                        "attr": "password"
+                    }
+                }
+            },
+            "apiRequest": {
+                "headers": {
+                    "X-Api-Token": "Ticket"
+                }
+            }
+        }
+    },
+    "config": {
+        "username": "whoever",
+        "password": "soSecret",
+        "jobs": [
+            {
+                "endpoint": "reports"
+            }
+        ]
+    }
+}
+{% endhighlight %}
+
+This example will first send the following request:
+
+```
+POST Security/Login
+Host: ...(baseUrl)...
+Content-Type: application/json
+
+{
+    "UserName": "whoever",
+    "PassWord": "soSecret"
+}
+```
+
+And expect a reply such as:
+
+```
+{
+    "Ticket": "12345abcde"
+}
+```
+
+Then the value from `Ticket` in the JSON will be used as a `X-Api-Token` header in actual API requests:
+
+```
+GET reports
+Host: ...(baseUrl)...
+X-Api-Token: 12345abcde
+```
+
