@@ -11,7 +11,8 @@ extracted. The `jobs` configuration property is an array of processed API endpoi
 **single job represents a single [API resource](/extend/generic-extractor/tutorial/rest)**.
 If new to Generic Extractor, learn about [jobs in our tutorial](/extend/generic-extractor/tutorial/jobs/) first.
 
-A sample job configuration can look like this:
+<details>
+  <summary>Click to see a sample job configuration.</summary>
 
 {% highlight json %}
 {
@@ -43,7 +44,8 @@ A sample job configuration can look like this:
     }
 }
 {% endhighlight %}
-
+</details>
+<br>
 Generic Extractor reads and processes the responses from the API endpoints in a pretty complex
 way. Each response is processed in the following steps:
 
@@ -775,7 +777,7 @@ See the [full example](todo:11-object-with-nested-object).
 
 ### Object with a deeply nested object
 The above two examples show the basic principles of the JSON-CSV mapping used by Generic Extractor. 
-They are applied to all child properties. So, when you encounter the following API response:
+They are applied to all child properties. So, when you encounter an API response like this:
 
 {% highlight json %}
 {
@@ -1129,7 +1131,7 @@ Contacts:
 
 See the [full example](todo:18-multiple-filters).
 
-### Setting Delimiter
+### Setting delimiter
 The default delimiter used for referencing nested properties is a dot `.`. If the names of 
 properties in the API response contain dots, it might be necessary to change the default delimiter.
 The API response might look like this:
@@ -1253,7 +1255,7 @@ See the [full example](todo:20-setting-delimiter-complex).
 
 ## Examples with HTTP Methods and Parameters
 
-### Request Parameters
+### Request parameters
 Assume that you have an API with the endpoint `users` which requires the 
 [GET parameter](/extend/generic-extractor/tutorial/rest/#url) `type` to specify which
 users are to be retrieved. For example, a request to `/users?type=active` returns a response 
@@ -1306,7 +1308,7 @@ The above configuration produces the following table:
 
 See the [full example](todo:033-job-parameters).
 
-### POST Request
+### POST request
 You may encounter an API which is not exactly [RESTful](/extend/generic-extractor/tutorial/rest/)
 and has to be queried using the [HTTP POST method](/extend/generic-extractor/tutorial/rest/#method).
 Assume that you have an API with the endpoint `getUsers` that expects an empty HTTP POST request. The endpoint
@@ -1347,7 +1349,7 @@ The above configuration produces the following table:
 
 See the [full example](todo:034-post-request).
 
-### Complex POST Request
+### Complex POST request
 A not-exactly-[RESTful](/extend/generic-extractor/tutorial/rest/) API (see above) may require some JSON 
 parameters in the request. Let's say you have the `getUsers` endpoint which requires an HTTP POST request with 
 the following body:
@@ -1407,7 +1409,7 @@ The above configuration produces the following table:
 
 See the [full example](todo:035-complex-post).
 
-### Complex GET Request
+### Complex GET request
 Sometimes even the HTTP GET requests require complex parameters. Suppose the API
 endpoint `/users` requires the `filter` and `return` definitions. The API may describe
 the configuration in many different ways, e.g.:

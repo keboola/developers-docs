@@ -9,7 +9,7 @@ permalink: /extend/generic-extractor/api/pagination/multiple/
 Setting pagination method to `multiple` allows you to use multiple scrollers on a single API.
 This type of pagination contains definition of all scrollers used in the entire configuration.
 Each [job](/extend/generic-extractor/jobs/) is then assigned a 
-[`scroller`]((/extend/generic-extractor/jobs/#scroller) in it's configuration.
+[`scroller`]((/extend/generic-extractor/config/jobs/#scroller) in it's configuration.
 This is useful mainly if the API has inconsistent pagination methods among various API calls. 
 It may be also useful in case you need to vary parameters -- e.g. set different page sizes for
 different endpoints.

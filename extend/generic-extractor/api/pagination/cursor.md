@@ -38,7 +38,7 @@ API in a parameter whose name is in the `param` value. If the cursor is set to r
 the **minimum** value of the `idKey` is taken. The `increment` is added to that value, so it should be probably
 set to negative when using `reverse=true`.
 The request parameter specified in the `param` configuration overwrites a parameter of the same name defined in
-[job parameters](/extend/generic-extractor/jobs/#request-parameters). Other job parameters are carried over without modification (see [example](#reverse-configuration).
+[job parameters](/extend/generic-extractor/config/jobs/#request-parameters). Other job parameters are carried over without modification (see [example](#reverse-configuration).
 
 ### Stopping Condition
 The pagination ends when the `dataField` of the response contains no items. Because of this, each 

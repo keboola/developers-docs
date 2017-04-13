@@ -6,9 +6,9 @@ permalink: /extend/generic-extractor/api/pagination/pagenum/
 * TOC
 {:toc}
 
-The Offset scroller handles pagination strategy in which the API splits the results into pages
+The Offset scroller handles a pagination strategy in which the API splits the results into pages
 of the same size (limit parameter) and navigates through them using the **item offset** parameter. 
-If you need to use the *item offset*, use the [Offset Scroller](/extend/generic-extractor/pagination/offset/).
+If you need to use the *item offset*, use the [Offset Scroller](/extend/generic-extractor/api/pagination/offset/).
 
 {% highlight json %}
 {
@@ -27,18 +27,17 @@ If you need to use the *item offset*, use the [Offset Scroller](/extend/generic-
 ## Configuration Parameters
 The following configuration parameters are supported for the `pagenum` method of pagination:
 
-- `limit` (optional, integer) -- page size
-- `limitParam`(optional, string) -- name of the parameter in which the API expects page size, default value is `limit`;
-- `pageParam` (optional, string) -- name of the parameter in which the API expects the page number, default value is `page`;
-- `firstPageParams` (optional, boolean) -- when false, the first page will be retrieved without the page parameters, default value is `true`;
-- `firstPage` (optional, integer) -- index of the first page, default value is `1`.
+- `limit` (optional, integer) --- Page size
+- `limitParam`(optional, string) --- Name of the parameter in which the API expects the page size. The default value is `limit`.
+- `pageParam` (optional, string) --- Name of the parameter in which the API expects the page number. The default value is `page`.
+- `firstPageParams` (optional, boolean) --- When false, the first page will be retrieved without the page parameters. The default value is `true`.
+- `firstPage` (optional, integer) --- Index of the first page. The default value is `1`.
 
 ### Stopping Condition
-The `pagenum` scroller uses similar stopping condition as the 
-[`offset` scroller](/extend/generic-extractor/api/pagination/offset/#stopping-condition). That is --
-the extraction is stopped in case of underflow -- when the API returns less items then requested 
-(including zero). However in the `pagenum` scroller, the `limit` parameter is not required and has no 
-default value. This means -- if you omit it, the scrolling will stop only if an empty page is encountered.
+The `pagenum` scroller uses similar stopping condition as the [`offset` scroller](/extend/generic-extractor/api/pagination/offset/#stopping-condition). 
+That is to say that the extraction is stopped in case of underflow --- when the API returns less items then requested 
+(including zero). However, in the `pagenum` scroller, the `limit` parameter is not required and has no 
+default value. This means that if you omit it, the scrolling will stop only if an empty page is encountered.
 
 ## Examples
 
@@ -51,9 +50,9 @@ The most simple scrolling setup is the following:
 }
 {% endhighlight %}
 
-The first request is sent with parameter `page=1` e.g. `/users?page=1`.
-The next request will have `page=2` e.g. `/users?page=2`.
-See [Full Example](todo:051-pagination-pagenum-basic)
+The first request is sent with the parameter `page=1`, for example `/users?page=1`.
+The next request will have `page=2`, for example `/users?page=2`.
+See the [full example](todo:051-pagination-pagenum-basic).
 
 ### Renaming Parameters
 The `limitParam` and `pageParam` configuration options allow you to rename the limit and 
@@ -68,15 +67,15 @@ offset for the needs of a specific API:
 }
 {% endhighlight %}
 
-In the above example the API expects parameters `count` and `set`. With the above configuration,
-the first request will be sent with parameters `count=20` and `page=1` -- e.g. `/users?set=1&count=2`.
-See [Full Example](todo:052-pagination-pagenum-rename). **Important:** without setting a value for the `limit`
-option, the `limitParam` will not be sent at all (no matter how you name it).
+Here the API expects the parameters `count` and `set`. The first request will be sent with the parameters `count=20` 
+and `page=1`; for example, `/users?set=1&count=2`. See the [full example](todo:052-pagination-pagenum-rename). 
+
+**Important:** Without setting a value for the `limit` option, the `limitParam` will not be sent at all 
+(no matter how you name it).
 
 ### Overriding Parameters
-It is possible to override the limit parameter in parameters of a 
-specific API job. This is useful in case you want to use different limits for different
-API endpoints.
+It is possible to override the limit parameter of a specific API job. 
+This is useful when you want to use different limits for different API endpoints.
 
 {% highlight json %}
 {
@@ -107,11 +106,11 @@ API endpoints.
 }
 {% endhighlight %}
 
-In the above configuration, the first request will be sent to `/users?count=2`. This is because the 
-`limit` parameter was renamed to `count`. Then the default value of count was overridden for the 
+In the above configuration, the first request is sent to `/users?count=2` because the 
+`limit` parameter was renamed to `count`. Then the default value of `count` was overridden for the 
 `users` API endpoint in `jobs.params.count`. The `firstPageParams` is set to false, which means that
 the page parameter (named `count`) is **not** sent in the first request. The second API 
-request will be sent to `/users?count=2&set=1`. Because the `firstPage` option was set to `0`, the 
+request is sent to `/users?count=2&set=1`. Because the `firstPage` option is set to `0`, the 
 second page has index `1`.
 
-See [Full Example](todo:053-pagination-pagenum-override)
+See the [full example](todo:053-pagination-pagenum-override).

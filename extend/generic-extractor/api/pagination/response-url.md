@@ -6,7 +6,7 @@ permalink: /extend/generic-extractor/api/pagination/response-url/
 * TOC
 {:toc}
 
-The Response URL Scroller can be used with an API which provides the URL of the 
+The Response URL Scroller can be used with APIs that provide the URL of the 
 next page in the response. This scroller is suitable for APIs supporting the 
 [JSON API specification](http://jsonapi.org/format/#fetching-pagination).
 
@@ -25,27 +25,30 @@ next page in the response. This scroller is suitable for APIs supporting the
 ## Configuration Parameters
 The following configuration parameters are supported for the `response.url` method of pagination:
 
-- `urlKey` (optional, string) -- path in the response to the field which contains URL of the next request. Default value is `next_page`.
-- `paramIsQuery` (optional, boolean) -- when true, the URL is assumed to be only 
-[query string](/extend/generic-extractor/tutorial/rest/#url) parameters. When false a URL with path is assumed. Default value is `false`.
-- `includeParams` (optional, boolean) -- when true, the [job parameters](/extend/generic-extractor/jobs/#request-parameters) are added to the provided URL. Default value is `false`.
+- `urlKey` (optional, string) --- Path in the response to the field which contains the URL of the next request. 
+The default value is `next_page`.
+- `paramIsQuery` (optional, boolean) 
+	- When true, the URL is assumed to be only [query string](/extend/generic-extractor/tutorial/rest/#url) parameters. 
+	- When false, a URL with a path is assumed. `false` is also the default value.
+- `includeParams` (optional, boolean) --- When true, the [job parameters](/extend/generic-extractor/config/jobs/#request-parameters) 
+are added to the provided URL. The default value is `false`.
 
-If `includeParams` is true, then the [job parameters](/extend/generic-extractor/jobs/#request-parameters) are merged into
-the parameters of the URL in the response. If `paramIsQuery` is false, then the parameters in the response **are overridden**
-by the parameters in the job. If `paramIsQuery` is true, then the parameters in the response
-**override** the parameters in the job. See [examples below](todo).
+If `includeParams` is true, the [job parameters](/extend/generic-extractor/config/jobs/#request-parameters) are merged into
+the parameters of the URL in the response. If `paramIsQuery` is false, the parameters in the response **are overridden**
+by the parameters in the job. If `paramIsQuery` is true, then the parameters in the response **override** the parameters in 
+the job. See the [examples below](todo).
 
 ### Stopping Condition
-The pagination ends when the value of `urlKey` parameters is empty -- the key is not present at all, is null,
-is an empty string or is `false`. Take care when configuring the `urlKey` parameter. If you e.g. misspell the
-name of the key, the extraction will not go beyond the first page.
+The pagination ends when the value of the `urlKey` parameter is empty --- the key is not present at all, is null,
+is an empty string or is `false`. Take care when configuring the `urlKey` parameter. If you, for example, misspell the
+key's name, the extraction will not go beyond the first page.
 [Common stopping conditions](/extend/generic-extractor/api/pagination/#stopping-strategy) also apply.
 
 ## Examples
 
 ### Basic Configuration
-To configure pagination for an API which supports the [JSON API specification](http://jsonapi.org/format/#fetching-pagination),
-all you need to do is the configuration below:
+To configure pagination for an API that supports the [JSON API specification](http://jsonapi.org/format/#fetching-pagination),
+use the configuration below:
 
 {% highlight json %}
 "pagination": {
@@ -54,7 +57,7 @@ all you need to do is the configuration below:
 }
 {% endhighlight %}
 
-The configuration expects that a response contains a `links.next` field with the URL of the next page, e.g.:
+The configuration expects a response to contain a `links.next` field with the URL of the next page, e.g.:
 
 {% highlight json %}
 {
@@ -74,13 +77,13 @@ The configuration expects that a response contains a `links.next` field with the
 }
 {% endhighlight %}
 
-The URL maybe either *absolute link* (`http://example.com/users?page=2`) or *absolute path* (`/users?page=2`). 
-If the the URL is *relative* (`users?page=2`) it is appended to the endpoint URL.
+The URL may be either an *absolute link* (`http://example.com/users?page=2`) or an *absolute path* (`/users?page=2`). 
+If the URL is *relative* (`users?page=2`), it is appended to the endpoint URL.
 
-See [Full Example](todo:054-pagination-response-url-basic)
+See the [full example](todo:054-pagination-response-url-basic).
 
 ### Merging Parameters
-If you need to pass additional parameters to each of the page URLs, you need to use the `includeParams` parameter.
+If you need to pass additional parameters to each of the page URLs, use the `includeParams` parameter:
 
 {% highlight json %}
 {
@@ -110,7 +113,7 @@ If you need to pass additional parameters to each of the page URLs, you need to 
 }
 {% endhighlight %}
 
-Sample response:
+A sample response:
 
 {% highlight json %}
 {
@@ -130,12 +133,12 @@ Sample response:
 }
 {% endhighlight %}
 
-In the above configuration, the `account` parameter is sent with every API request. If it weren't for the
+In the above configuration, the `account` parameter is sent with every API request. If it were not for the
 `includeParams` option, it would be sent **only with the first request**. Note that adding 
 a `jobs.params.page` parameter would overwrite the `page` parameter in the response URL and thus 
 would probably break the paging.
 
-See [Full Example](todo:055-pagination-response-url-params)
+See the [full example](todo:055-pagination-response-url-params).
 
 ### Overriding Parameters
 Sometimes the API does not pass the entire URL, but only the [query string](/extend/generic-extractor/tutorial/rest/#url)
@@ -159,8 +162,8 @@ parameters which should be used for querying the next page.
  }
 {% endhighlight %}
 
-You must then use the `paramsIsQuery` configuration, so that the Generic Extractor can produce a 
-valid URL.
+You must then use the `paramsIsQuery` configuration, so that your Generic Extractor can produce a 
+valid URL:
 
 {% highlight json %}
 {
@@ -194,5 +197,5 @@ valid URL.
 
 Also notice that with the above 
 configuration the `page` parameter specified in the job is used only for the first page, because it 
-is overridden by the `page` parameter given in the response. That is -- the first request is sent to
-`/users?account=123&page=start` the second request is sent to `/users?account=123&page=2`.
+is overridden by the `page` parameter given in the response. That is to say that the first request is sent to
+`/users?account=123&page=start` and the second request is sent to `/users?account=123&page=2`.
