@@ -93,6 +93,36 @@ You should see:
 along with the output tables created in `/out/tables` sub-directory of the current directory.
 It is recommended to remove the contents of the `out/tables` directory before running the extractor again.
 
+**Important:** Generic Extractor itself is not able to decrypt encrypted values. That means that when you 
+supply the configuration directly in the `config.json` file, you must always provide decrypted values --- e.g.:
+
+{% highlight json %}
+{
+    ...,
+    "config": {
+        "#username": "JohnDoe",
+        "#password": "TopSecret",
+        ...
+    }
+}
+{% endhighlight %}
+
+When you store such configuration in KBC UI, it will automatically be encrypted:
+
+{% highlight json %}
+{
+    ...,
+    "config": {
+        "#username": "JohnDoe",
+        "#password": "KBC::ComponentProjectEncrypted==r13Khq0lR4ycDNTujirz5/GMqNEVZ4tZ2OTmRcsNYqlP/a/STMelWtz9R8yEtr3ck6KiYA7XrL8pqIQv9S7Ro28KNZgmqtSNzKhFcEsItPnTDCQqvnU99q2a0ES+oN/v",
+        ...
+    }
+}
+{% endhighlight %}
+
+The above configuration then **cannot** be run locally. 
+Read more about [encryption](/overview/encryption/).
+
 ### Building and Running the Image
 To build the container from source:
 
