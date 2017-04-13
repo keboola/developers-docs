@@ -5,7 +5,7 @@ permalink: /extend/generic-extractor/api/authentication/basic/
 
 Basic Authentication provides [HTTP Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication)
 method. It requires entering a username and password in configuration and sends the encoded values in `Authorization` 
-header.
+header. A sample Basic authentication looks like thiS:
 
 {% highlight json %}
 {

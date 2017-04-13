@@ -7,7 +7,7 @@ Query Authentication provides the simplest authentication method in which
 the credentials are sent in the [request URL](/extend/generic-extractor/tutorial/rest#url).
 This is most often used with APIs which are authenticated using API tokens and
 signatures. Dynamic values of query parameters can be generated using 
-[user functions](/extend/generic-extractor/user-functions/).
+[user functions](/extend/generic-extractor/user-functions/). A sample Query authentication configuration looks like this:
 
 {% highlight json %}
 {
@@ -24,7 +24,7 @@ signatures. Dynamic values of query parameters can be generated using
 {% endhighlight %}
 
 ## Configuration Parameters
-The following configuration parameters are supported for the `query` type of pagination:
+The following configuration parameters are supported for the `query` type of authentication:
 
 - `query` (required, object) --- An object whose properties represent key-value pairs of the URL query.
 
