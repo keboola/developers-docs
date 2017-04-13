@@ -286,7 +286,7 @@ to false. In this case setting `ifNotSet` is mandatory.
 
 See the [full example](todo:046-next-page-flag-has-more-2).
 
-### Is-Last type of Scrolling
+### Is-Last Type of Scrolling
 Assume that the API returns a response which contains a `isLast` field. The field is present only in the
 last response and has the value `true` there.
 The following pagination configuration can be used to configure the stopping strategy:
