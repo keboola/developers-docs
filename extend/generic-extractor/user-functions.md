@@ -1,7 +1,63 @@
 ---
-title: User Functions (under construction)
+title: User Functions
 permalink: /extend/generic-extractor/user-functions/
 ---
+
+User functions can be used in several places of Generic Extractor configuration to introduce dynamically generated values instead of
+statically provided ones. User functions are simple pre-defined functions which allow you to add extra flexibility when needed. User functions
+also allow referencing an already existing value in the configuration instead of copying it. Using user functions is also advantageous (and sometimes necessary)
+when you [register your configuration as a new component](/extend/generic-extractor/registration/).
+
+## Configuration
+A user function is used instead of a simple value in specific parts (see [below](todo) of Generic Extractor configuration. The function can be either
+a function call:
+
+{% highlight json %}
+{
+    "function": "concat",
+    "args": [
+        "John",
+        "Doe"
+    ]
+}
+{% endhighlight %}
+
+or a reference to another value in the configuration:
+
+{% highlight json %}
+{
+    "attr": "username"
+}
+{% endhighlight %}
+
+or a reference to a parameter in the function **context**:
+
+{% highlight json %}
+todo
+{% endhighlight %}
+
+or a simple value:
+
+{% highlight json %}
+{
+    "a scalar value"
+}
+{% endhighlight %}
+
+All these forms may be combined freely and they may be nested in a virtually unlimited way, e.g.:
+
+{
+    "function": "concat",
+    "args": [
+        {
+            "attr": "username"
+        },
+        "-spacer-",
+        {
+            "function": "time"
+        }
+    ]
+}
 
 ## User functions
 
