@@ -6,12 +6,12 @@ permalink: /extend/generic-extractor/api/pagination/multiple/
 * TOC
 {:toc}
 
-Setting pagination method to `multiple` allows you to use multiple scrollers on a single API.
-This type of pagination contains definition of all scrollers used in the entire configuration.
-Each [job](/extend/generic-extractor/jobs/) is then assigned a 
-[`scroller`]((/extend/generic-extractor/config/jobs/#scroller) in it's configuration.
+Setting the pagination method to `multiple` allows you to use multiple scrollers on a single API.
+This type of pagination contains the definition of all scrollers used in the entire configuration.
+Each [job](/extend/generic-extractor/config/jobs/) is then assigned a 
+[`scroller`]((/extend/generic-extractor/config/jobs/#scroller) in its configuration.
 This is useful mainly if the API has inconsistent pagination methods among various API calls. 
-It may be also useful in case you need to vary parameters -- e.g. set different page sizes for
+It may be also useful in case you need to vary parameters --- e.g., set different page sizes for
 different endpoints.
 
 {% highlight json %}
@@ -38,28 +38,28 @@ different endpoints.
 ## Configuration
 The following configuration parameters are supported for the `multiple` method of pagination:
 
-- `scrollers` (required, object) -- An object with configuration of the scrollers (see below).
-- `default` (optional, string) -- Name of a scroller used for jobs without a specified scroller. If not 
-specified, then jobs with no scroller will not use any type of pagination.
+- `scrollers` (required, object) --- Object with configuration of the scrollers (see below).
+- `default` (optional, string) --- Name of a scroller used for all jobs without a specified scroller. If not 
+specified, then the jobs with no assigned scroller will not use any type of pagination.
 
 The `scrollers` configuration is an object whose keys are arbitrary scroller names. The values of the 
 keys are standard scroller configurations. Any of the supported 
 [paging strategies](/extend/generic-extractor/api/pagination/#paging-strategy) can be used and 
-multiple paging strategies can be mixed. The configurations are the same is if there was a single scroller.
+multiple paging strategies can be mixed. The configurations are the same as if there was a single scroller.
 The name of the scroller must be used in a specific [job `scroller` parameter](/extend/generic-extractor/jobs/#scroller).
 A `default` scroller can be set (must be one of the names defined in `scrollers`). In that case, all jobs
 without an assigned scroller will use the default one.
 
 ### Stopping Condition
-There are no specific stopping conditions for `multiple` pagination. Each scroller acts upon its 
+There are no specific stopping conditions for the `multiple` pagination. Each scroller acts upon its 
 normal stopping conditions.
 
 ## Examples
-Assume you have an API which has several endpoints (`/users`, `/orders`, `/search`, ...). Most endpoints
-use offset pagination strategy (i.e. results are split into pages of same size, next page is obtained by 
-setting offset to multiple of the page size). The `/search` endpoint uses page number pagination strategy
-because the retrieved pages are not of equal size. The following configuration extracts from two endpoint
-with different paging strategies.
+Assume you have an API which has several endpoints (`/users`, `/orders`, `/search`, etc.). Most endpoints
+use the offset pagination strategy (meaning that the results are split into pages of the same size, and 
+the next page is obtained by setting offset to a multiple of the page size). The `/search` endpoint uses the 
+page number pagination strategy because the retrieved pages are not of equal size. The following 
+configuration extracts from two endpoints with different paging strategies.
 
 {% highlight json %}
 {
@@ -111,7 +111,7 @@ The `api.pagination.scrollers` defines both pagination methods:
 }
 {% endhighlight %}
 
-It is then important to actually use the scroller in the `job.scroller` configuration for endpoint `/search`. 
+It is then important to actually use the scroller in the `job.scroller` configuration for the endpoint `/search`. 
 The endpoint `/users` has no assigned scroller, therefore it uses the default one, which is `list_scroller`.
 
-See [Full Example](todo:062-pagination-multiple-scrollers)
+See the [full example](todo:062-pagination-multiple-scrollers).
