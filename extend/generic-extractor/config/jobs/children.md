@@ -6,14 +6,14 @@ permalink: /extend/generic-extractor/config/jobs/children/
 * TOC
 {:toc}
 
-Child jobs allow you to iterate/traverse over sub-resources of an API resource. Because child jobs may contain 
-other child jobs, you may query for sub-sub-resources in a virtually unlimited depth. 
+Child jobs allow you to iterate/traverse over sub-resources of an API resource. Because child jobs may contain
+other child jobs, you may query for sub-sub-resources in a virtually unlimited depth.
 
-For instance, when downloading a list of users, you can download details of each user or a list of orders for each 
-user. See the Generic Extractor tutorial for a basic [example of using child 
+For instance, when downloading a list of users, you can download details of each user or a list of orders for each
+user. See the Generic Extractor tutorial for a basic [example of using child
 jobs](/extend/generic-extractor/tutorial/jobs/#child-jobs).
 
-Apart from two additional fields, `placeholders` and `recursionFilter`, configuring a child job is no different than 
+Apart from two additional fields, `placeholders` and `recursionFilter`, configuring a child job is no different than
 configuring [any other job](/extend/generic-extractor/jobs).
 
 A sample job configuration can look like this:
@@ -50,8 +50,8 @@ A sample job configuration can look like this:
 {% endhighlight %}
 
 ## Placeholders
-In a child job, the `endpoint` configuration must contain a **placeholder** enclosed in curly braces `{}`. 
-For example, the following endpoint defines the placeholder **user-id**: 
+In a child job, the `endpoint` configuration must contain a **placeholder** enclosed in curly braces `{}`.
+For example, the following endpoint defines the placeholder **user-id**:
 
 {% highlight json %}
 {
@@ -60,11 +60,11 @@ For example, the following endpoint defines the placeholder **user-id**:
 }
 {% endhighlight %}
 
-The **placeholder name** is rather arbitrary (it should not contain any special characters though). To assign it 
-a value, use the `placeholders` configuration. It is an object whose properties are placeholder names. The value 
-of each `placeholders` object property is a **property path** in the parent job response. 
-The placeholder in the child `endpoint` will be replaced by the **value** of that parent property. The property 
-path is configured relative to the extracted object ([see an example](#accessing-deeply-nested-id)). The child 
+The **placeholder name** is rather arbitrary (it should not contain any special characters though). To assign it
+a value, use the `placeholders` configuration. It is an object whose properties are placeholder names. The value
+of each `placeholders` object property is a **property path** in the parent job response.
+The placeholder in the child `endpoint` will be replaced by the **value** of that parent property. The property
+path is configured relative to the extracted object ([see an example](#accessing-deeply-nested-id)). The child
 `endpoint` is configured relative to the [`api.baseUrl` configuration](todo), not relative to the parent endpoint.
 
 The following configuration:
@@ -81,20 +81,42 @@ The following configuration:
 
 means that Generic Extractor sends as many requests to the `/user/XXX` endpoint as there
 are result objects in the parent API response. The `XXX` will be replaced by the `userId` value
-of each individual response. Placeholders must be used in child jobs so that each child job sends a different API request. 
+of each individual response. Placeholders must be used in child jobs so that each child job sends a different API request.
 
-Note: It is technically possible to define a child job without using `placeholders` configuration 
-or without having a placeholder in the `endpoint`. But then all the child requests would be the same and 
+{% comment %}
+TODO: Un-comment this when this https://github.com/keboola/generic-extractor/issues/49 is fixed.
+
+The `placeholders` object can be specified as an object whose values are strings with the paths. It is
+also possible to use a more complicated structure where the value is another object with `path` property.
+The following configuration is equivalent to the above one:
+
+{% highlight json %}
+{
+    ...,
+    "endpoint": "user/{user-id}",
+    "placeholders": {
+        "user-id": {
+            "path": "userId"
+        }
+    }
+}
+{% endhighlight %}
+
+This is useful when using [User Defined functions](/extend/generic-extractor/user-functions/)
+{% endcomment %}
+
+Note: It is technically possible to define a child job without using `placeholders` configuration
+or without having a placeholder in the `endpoint`. But then all the child requests would be the same and
 that is usually not what you intend to do.
 
 ### Placeholder Level
-Optionally, the placeholder name may be prefixed by a nesting **level**. Nesting allows you to 
+Optionally, the placeholder name may be prefixed by a nesting **level**. Nesting allows you to
 refer to properties in other objects than the direct parent. The level is written as the
-placeholder name prefix, delimited by a colon `:`. For example, `2:user-id`. 
+placeholder name prefix, delimited by a colon `:`. For example, `2:user-id`.
 
-The default level is 1, meaning that the placeholder `user-id` is equivalent to `1:user-id` and 
+The default level is 1, meaning that the placeholder `user-id` is equivalent to `1:user-id` and
 that the property path will be searched in the direct parent of the child job. The level
-is counted from the child 'upwards'. Therefore a placeholder `2:user-id` means that 
+is counted from the child 'upwards'. Therefore a placeholder `2:user-id` means that
 the property path will be searched in the parent of the child parent (two levels up).
 See the [corresponding examples](todo).
 
@@ -113,10 +135,10 @@ The `responseFilter` configuration contains a string expression with a filter co
 - Value to compare
 - Logical operators `|` (or), `&` (and); optionally, they may be used to join multiple conditions.
 
-An example response filter may be `type!=employee` or `product.value>150`. 
+An example response filter may be `type!=employee` or `product.value>150`.
 
 **Important:** The expression is whitespace sensitive. Therefore `type != employee` filters the `type ` properties
-to not contain the value `employee` (which is probably not what you intended to do). String comparisons are always 
+to not contain the value `employee` (which is probably not what you intended to do). String comparisons are always
 **case sensitive**.
 
 ## Examples
@@ -156,7 +178,7 @@ The `user/123` endpoint returns a response like this:
 }
 {% endhighlight %}
 
-Now use the following configuration, retrieving the user list and user 
+Now use the following configuration, retrieving the user list and user
 details for each user:
 
 {% highlight json %}
@@ -186,16 +208,16 @@ details for each user:
 }
 {% endhighlight %}
 
-The `jobs` section defines a single job for the `users` resource. This job has child jobs for 
+The `jobs` section defines a single job for the `users` resource. This job has child jobs for
 the `users/{user-id}` resource. The `user-id` placeholder in the endpoint URL is
-replaced by the value of the `id` property of each user in the parent job response. This means that 
+replaced by the value of the `id` property of each user in the parent job response. This means that
 Generic Extractor makes three API calls:
 
 - `users`
 - `users/123`
 - `users/234`
 
-The [`dataField`](/extend/generic-extractor/jobs/TODO) is set to a dot to retrieve the 
+The [`dataField`](/extend/generic-extractor/jobs/TODO) is set to a dot to retrieve the
 entire response as a single object. Running Generic Extractor produces the following tables:
 
 users:
@@ -212,14 +234,14 @@ user__user-id:
 |123|John Doe|London|UK|Whitehaven Mansions|123|
 |234|Jane Doe|St Mary Mead|UK|High Street|234|
 
-Notice that the table representing child resources contains all the responses 
+Notice that the table representing child resources contains all the responses
 merged into a single table; the [usual merging rules](/extend/generic-extractor/jobs/TODO) apply.
 
-Also notice that a new column, `parent_id`, was added, containing the **placeholder value** used 
+Also notice that a new column, `parent_id`, was added, containing the **placeholder value** used
 to retrieve the resource. The `parent_id` column is not always named `parent_id`.
 Its name is created by joining the `parent_` prefix to the **placeholder path**.
 
-To create a friendly name for the table, it is good to use the [dataType](/extend/generic-extractor/jobs/TODO) 
+To create a friendly name for the table, it is good to use the [dataType](/extend/generic-extractor/jobs/TODO)
 property (see the next example). The auto-generated name is rather ugly.
 
 See the [full example](todo:021-basic-child-job).
@@ -248,7 +270,7 @@ child jobs:
     ]
 }
 {% endhighlight %}
-In the above configuration, `dataType` is set to `user-detail`, hence you will obtain the 
+In the above configuration, `dataType` is set to `user-detail`, hence you will obtain the
 following tables:
 
 users:
@@ -269,7 +291,7 @@ See the [full example](todo:022-basic-child-job-datatype).
 
 ### Accessing Nested ID
 If the placeholder value is nested within the response object, you can use
-dot notation to access child properties of the response object. For instance, if the 
+dot notation to access child properties of the response object. For instance, if the
 parent response with a list of users returns a response similar to this:
 
 {% highlight json %}
@@ -314,7 +336,7 @@ you have to modify the `placeholders` definition:
 }
 {% endhighlight %}
 
-Setting the placeholder to `"user-id": "user-info.id"` means that the `user-id` placeholder 
+Setting the placeholder to `"user-id": "user-info.id"` means that the `user-id` placeholder
 will be replaced by the value of the `id` property inside the `user-info` object in the parent response.
 If you fail to set a correct path for the placeholder, you will receive an error:
 
@@ -336,17 +358,17 @@ user detail:
 |123|John Doe|London|UK|Whitehaven Mansions|123|
 |234|Jane Doe|St Mary Mead|UK|High Street|234|
 
-Notice that the parent reference column name is the concatenation of the `parent` prefix and 
+Notice that the parent reference column name is the concatenation of the `parent` prefix and
 `user-info_id` placeholder path (with special characters replaced by the underscore `_`).
 
 See the [full example](todo:023-child-job-nested-id).
 
 ### Accessing Deeply Nested Id
-The placeholder path is configured **relative to** the extracted object. Assume that the 
+The placeholder path is configured **relative to** the extracted object. Assume that the
 parent endpoint returns a complicated response like this:
 
 {% highlight json %}
-{    
+{
     "active-users": {
         "items": [
             {
@@ -405,15 +427,15 @@ The following job definition extracts the `active-users` array together with the
 }
 {% endhighlight %}
 
-Notice that the placeholder path remains set to `user-info.id` because it is relative to 
-the parent object, which itself is located at the path `active-users.items`. This 
+Notice that the placeholder path remains set to `user-info.id` because it is relative to
+the parent object, which itself is located at the path `active-users.items`. This
 may be confusing because the endpoint property in that child job is set relative to the
 `api.baseUrl` and not to the parent URL.
 
 See the [full example](todo:024-child-job-deeply-nested-id).
 
 ### Naming Conflict
-Because a new column is added to the table representing child properties, it is possible that you 
+Because a new column is added to the table representing child properties, it is possible that you
 run into a naming conflict. That is, if the child response with user details looks like this:
 
 {% highlight json %}
@@ -548,7 +570,7 @@ Then you can create a job configuration with three nested children to retrieve a
                                     "placeholders": {
                                         "3:user-id": "userId",
                                         "1:order-id": "orderId"
-                                    }                                            
+                                    }
                                 }
                             ]
                         }
@@ -561,9 +583,9 @@ Then you can create a job configuration with three nested children to retrieve a
 {% endhighlight %}
 
 The `jobs` configuration retrieves all users from the `users` API endpoint. The first child retrieves
-details for each user (from `user/?` endpoint) and stores them in the `user-detail` table. The second 
+details for each user (from `user/?` endpoint) and stores them in the `user-detail` table. The second
 child retrieves each user orders (from `user/?/orders` endpoint) and stores them in the `orders` table.
-Finally, the deepest nested child returns details of each order (for each user) from the 
+Finally, the deepest nested child returns details of each order (for each user) from the
 `user/?/order/?` endpoint and stores them in the `order-detail` table. Therefore the following four tables
 will be produced:
 
@@ -600,7 +622,7 @@ See the [full example](todo:026-basic-deeper-nesting).
 ### Nesting Level Alternative
 
 Because the required user and order IDs are present in multiple requests (in the list and in the detail), there
-are multiple ways how the jobs may be configured. For example, the following configuration produces the 
+are multiple ways how the jobs may be configured. For example, the following configuration produces the
 exact same result as the above configuration:
 
 {% highlight json %}
@@ -640,12 +662,12 @@ exact same result as the above configuration:
 }
 {% endhighlight %}
 
-Even though the above configuration is less explicit and not really recommended, it is still acceptable. 
-Placeholders are defined globally, which means that the second nested child job to `user/{user-id}/orders` does 
-not define any because it relies on those defined by its parent job (which happen to be correct). Also the 
-deepest child defines only the `order-id` placeholder because, again, the `user-id` placeholder was defined in 
-some of its parents. Even though the placeholders are defined globally, the ones defined in child jobs 
-override the ones in the parent jobs. For example, in the following (probably **very incorrect**) configuration the 
+Even though the above configuration is less explicit and not really recommended, it is still acceptable.
+Placeholders are defined globally, which means that the second nested child job to `user/{user-id}/orders` does
+not define any because it relies on those defined by its parent job (which happen to be correct). Also the
+deepest child defines only the `order-id` placeholder because, again, the `user-id` placeholder was defined in
+some of its parents. Even though the placeholders are defined globally, the ones defined in child jobs
+override the ones in the parent jobs. For example, in the following (probably **very incorrect**) configuration the
 `1:user-id` placeholder in the deepest child will really contain the `orderId` value.
 
 {% highlight json %}
@@ -757,7 +779,7 @@ Let's see how you can retrieve more nested API resources:
 {% endhighlight %}
 
 The above configuration assumes that all API resources simply have an `id` property (unlike in the
-previous example, where the users had `userId` and the orders had `orderId`). This makes the configuration look 
+previous example, where the users had `userId` and the orders had `orderId`). This makes the configuration look
 rather cryptic. Read the deepest child placeholder configuration
 
     "5:user-id": "id",
@@ -770,9 +792,9 @@ as:
 - Go three levels up, pick the `id` property from the response and put it in place of the `order-id` in the endpoint URL.
 - Go one level up, pick the `id` property from the response and put it in place of the `item-id` in the endpoint URL.
 
-**Important:** Once you run into using placeholders with the same property path, their order becomes important. 
-This is because the property path is used as the name of an additional column in the extracted table. Because 
-the property path is `id` in all cases, it will lead to the column `parent_id` in all cases, and therefore it 
+**Important:** Once you run into using placeholders with the same property path, their order becomes important.
+This is because the property path is used as the name of an additional column in the extracted table. Because
+the property path is `id` in all cases, it will lead to the column `parent_id` in all cases, and therefore it
 will get overwritten. With the above configuration, the following `item-detail` table will be produced:
 
 |id|code|name|parent_id|
@@ -805,7 +827,7 @@ where the `parent_id` column refers the `5:user-id` placeholder.
 See the [full example](todo:028-advanced-deep-nesting).
 
 ### Simple Filter
-Let's assume that you have an API which has two endpoints: 
+Let's assume that you have an API which has two endpoints:
 
 - `users` --- Returns a list of users.
 - `users/?` --- Returns a user detail.
@@ -877,8 +899,8 @@ A simple child filter can be then set up using the following `jobs` configuratio
 }
 {% endhighlight %}
 
-The `recursionFilter` setting will cause Generic Extractor to query only the sub-resources for which the 
-filter evaluates to true. The filter property name `type` refers to the parent response, but it 
+The `recursionFilter` setting will cause Generic Extractor to query only the sub-resources for which the
+filter evaluates to true. The filter property name `type` refers to the parent response, but it
 filters only the children. So, the following tables will be returned:
 
 users:
@@ -898,9 +920,11 @@ user-detail:
 You can see from the above tables that the filter is applied to the child results only so that
 the details for only the wanted users are retrieved.
 
+See the [full example](todo:029-simple-filter).
+
 ### Not Like Filter
-Apart from the standard comparison operators, the recursive filter allows to use 
-a **like** comparison operator `~`. It expects that the value contains a placeholder `%` 
+Apart from the standard comparison operators, the recursive filter allows to use
+a **like** comparison operator `~`. It expects that the value contains a placeholder `%`
 which matches any number of characters. The following configuration:
 
 {% highlight json %}
@@ -927,7 +951,7 @@ which matches any number of characters. The following configuration:
 
 filters out all child resources not containing the string `min` in their parent type property.
 The expression `%min%` matches any string which contains any number of characters (including none)
-before and after the string `min`. The operator `!~` is negative like, therefore the 
+before and after the string `min`. The operator `!~` is negative like, therefore the
 following `user-detail` table will be extracted:
 
 |id|name|userRole|userType|description|parent\_id|
@@ -935,11 +959,13 @@ following `user-detail` table will be extracted:
 |345|Jimmy Doe|child|user|Sonny Jimmy|345|
 |456|Janet Doe|child|user|Missy Jennie|456|
 
+See the [full example](todo:030-not-like-filter).
+
 ### Combining Filters
-Multiple filters can be combined using the 
+Multiple filters can be combined using the
 [logical](https://en.wikipedia.org/wiki/Boolean_algebra#Basic_operations) `&` (and) and `|` (or) operators.
-For example the following configuration retrieves details for user which have 
-both `id < 400` and `role = child`: 
+For example the following configuration retrieves details for user which have
+both `id < 400` and `role = child`:
 
 {% highlight json %}
 {
@@ -969,8 +995,10 @@ The following `user-detail` will be produced:
 |---|---|---|---|---|---|
 |345|Jimmy Doe|child|user|Sonny Jimmy|345|
 
+See the [full example](todo:031-combined-filter).
+
 ### Multiple Filter Combinations
-Although you can join multiple filter expression with logical operators as in the 
+Although you can join multiple filter expression with logical operators as in the
 above example, there is no support for parentheses. The following configuration
 combines multiple filters:
 
@@ -995,9 +1023,9 @@ combines multiple filters:
 }
 {% endhighlight %}
 
-The precedence of logical operators is defined so that the first operator occurring in the 
-expression takes precedence over the second. I.e. the condition `role=parent|id>300&id<400` 
-is interpreted as `role=parent|(id>300&id<400)` because the operator `|` takes precedence 
+The precedence of logical operators is defined so that the first operator occurring in the
+expression takes precedence over the second. I.e. the condition `role=parent|id>300&id<400`
+is interpreted as `role=parent|(id>300&id<400)` because the operator `|` takes precedence
 over the `&` operator. The condition `id>300&id<400|role==parent` is interpreted as
 `id>300&(id<400|role==parent)` because the `&` operator takes precedence over the `|` operator.
 
@@ -1009,5 +1037,7 @@ With the above configuration, the following `user-detail` table will be produced
 |234|Jane Doe|parent|administrator|Mother Jane|234|
 |345|Jimmy Doe|child|user|Sonny Jimmy|345|
 
-Because the described system of operator precedence may lead to rather unusual behaviour, 
+Because the described system of operator precedence may lead to rather unusual behaviour,
 we recommend that you keep the recursive filter simple.
+
+See the [full example](todo:032-multiple-combined-filter).

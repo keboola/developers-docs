@@ -3,14 +3,16 @@ title: User Functions
 permalink: /extend/generic-extractor/user-functions/
 ---
 
+TODO: prejmenovat na "function calls" ??
+
 User functions can be used in several places of Generic Extractor configuration to introduce dynamically generated values instead of
 statically provided ones. User functions are simple pre-defined functions which allow you to add extra flexibility when needed. User functions
 also allow referencing an already existing value in the configuration instead of copying it. Using user functions is also advantageous (and sometimes necessary)
 when you [register your configuration as a new component](/extend/generic-extractor/registration/).
 
 ## Configuration
-A user function is used instead of a simple value in specific parts (see [below](todo) of Generic Extractor configuration. The function can be either
-a function call:
+A user function is used instead of a simple value in specific parts (see [below](todo) of Generic Extractor configuration. The function
+configuration is an object with properties `function` (one of [available function names](todo) and `args` (function arguments), e.g.:
 
 {% highlight json %}
 {
@@ -21,6 +23,27 @@ a function call:
     ]
 }
 {% endhighlight %}
+
+The argument of a function can be any of:
+
+- [scalar](todo) value (as in the above example),
+- a reference to function context (see below),
+- another function object.
+
+### Allowed functions
+
+- md5
+- sha1
+- time
+- date
+- strtotime
+- base64_encode
+- hash_hmac
+- sprintf
+- concat
+- ifempty
+- implode
+- urlencode (available only in `api.baseUrl` context)
 
 or a reference to another value in the configuration:
 
@@ -58,6 +81,89 @@ All these forms may be combined freely and they may be nested in a virtually unl
         }
     ]
 }
+
+## Supported Functions
+
+## Function Contexts
+Apart from
+
+### Placeholder Context
+
+The placeholder function context contains the following structure:
+
+{% highlight json %}
+{
+    "placeholder": {
+        "value": "???"
+    }
+}
+{% endhighlight %}
+
+Where `???` is the value provided in the `path` property of the respective placeholder.
+
+
+
+
+## Examples
+
+### Job Placeholders
+Let's say you have an API which has and endpoint `/users` which returns a list of user and
+endpoint `/user/{userId}` which returns details of a specific user with given ID. The list response
+looks like this:
+
+{% highlight json %}
+[
+    {
+        "id": 3,
+        "name": "John Doe"
+    },
+    {
+        "id": 234,
+        "name": "Jane Doe"
+    }
+]
+{% endhighlight %}
+
+To obtain the details of the first user, the user-id has to be padded to five digits. The details API call for the
+first user must be sent to `/user/00003`, and for the second user to `/user/00234`. To achieve this you can use the
+`sprintf` function which allows [number padding](http://php.net/manual/en/function.sprintf.php#example-5484). The
+following `placeholders` configuration in the child job calls the function with first argument set to
+`%'.05d` (which is a sprintf [format](http://php.net/manual/en/function.sprintf.php) to pad with zeros to 5 digits)
+and second argument set to the value of the `id` property found in the parent response. The placeholder path must
+be specified in the `path` property, that means that the configuration:
+
+{% highlight json %}
+"placeholders": {
+    "user-id": "id"
+}
+{% endhighlight %}
+
+has to be converted to:
+
+{% highlight json %}
+"placeholders": {
+    "user-id": {
+        "path": "id",
+        "function": "sprintf",
+        "args": [
+            "%'.05d",
+            {
+                "placeholder": "value"
+            }
+        ]
+    }
+}
+{% endhighlight %}
+
+The following `user-detail` table will be extracted:
+
+|id|name|address\_city|address\_country|address\_street|parent\_id|
+|123|John Doe|London|UK|Whitehaven Mansions|00003|
+|234|Jane Doe|St Mary Mead|UK|High Street|00234|
+
+Notice that the `parent_id` column contains the processed value and not the original one.
+
+See the [full example](todo:085-function-job-placeholders).
 
 ## User functions
 
