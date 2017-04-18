@@ -46,7 +46,7 @@ The `scrollers` configuration is an object whose keys are arbitrary scroller nam
 keys are standard scroller configurations. Any of the supported 
 [paging strategies](/extend/generic-extractor/api/pagination/#paging-strategy) can be used and 
 multiple paging strategies can be mixed. The configurations are the same as if there was a single scroller.
-The name of the scroller must be used in a specific [job `scroller` parameter](/extend/generic-extractor/jobs/#scroller).
+The name of the scroller must be used in a specific [job `scroller` parameter](/extend/generic-extractor/config/jobs/#scroller).
 A `default` scroller can be set (must be one of the names defined in `scrollers`). In that case, all jobs
 without an assigned scroller will use the default one.
 

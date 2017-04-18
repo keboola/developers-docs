@@ -152,7 +152,7 @@ Will produce the following `users` table:
 {% endhighlight %}
 
 The `userData` values are added to parent jobs only, they will not affect 
-[child jobs](/extend/generic-extractor/jobs/children) anyhow. If the result table contains
+[child jobs](/extend/generic-extractor/config/jobs/children) anyhow. If the result table contains
 columns with the same names as `userData` properties, the original column will be overwritten 
 by the values of `userData`.
 
