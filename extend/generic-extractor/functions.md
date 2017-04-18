@@ -1,18 +1,16 @@
 ---
-title: User Functions
-permalink: /extend/generic-extractor/user-functions/
+title: Functions
+permalink: /extend/generic-extractor/functions/
 ---
 
-TODO: prejmenovat na "function calls" ??
-
-User functions can be used in several places of Generic Extractor configuration to introduce dynamically generated values instead of
-statically provided ones. User functions are simple pre-defined functions which allow you to add extra flexibility when needed. User functions
-also allow referencing an already existing value in the configuration instead of copying it. Using user functions is also advantageous (and sometimes necessary)
+Functions can be used in several places of Generic Extractor configuration to introduce dynamically generated values instead of
+statically provided ones. Functions are simple pre-defined functions which allow you to add extra flexibility when needed. Functions
+also allow referencing already existing values in the configuration instead of copying them. Using functions is also advantageous (and sometimes necessary)
 when you [register your configuration as a new component](/extend/generic-extractor/registration/).
 
 ## Configuration
-A user function is used instead of a simple value in specific parts (see [below](todo) of Generic Extractor configuration. The function
-configuration is an object with properties `function` (one of [available function names](todo) and `args` (function arguments), e.g.:
+A function is used instead of a simple value in specific parts (see [below](#function-contexts) of Generic Extractor configuration. The function
+configuration is an object with properties `function` (one of [available function names](#supported-functions) and `args` (function arguments), e.g.:
 
 {% highlight json %}
 {
@@ -27,10 +25,64 @@ configuration is an object with properties `function` (one of [available functio
 The argument of a function can be any of:
 
 - [scalar](todo) value (as in the above example),
-- a reference to function context (see below),
+- a reference to a value from [function context (see below)](#function-contexts),
 - another function object.
 
-### Allowed functions
+Additionally, the function may be replaced by a plain reference to the function context. This mean that you can write (where permitted)
+a configuration value in three possible ways:
+
+**Simple value:**
+
+{% highlight json %}
+{
+    ...,
+    "baseUrl": "http://example.com/
+}
+{% endhighlight %}
+
+**A function call:**
+
+{% highlight json %}
+{
+    ...,
+    "baseUrl": {
+        "function": "concat",
+        "args": {
+            "http://",
+            "example.com"
+        }
+    }
+}
+{% endhighlight %}
+
+**A reference to a value from function context:**
+{% highlight json %}
+{
+    ...,
+    "baseUrl": {
+        "attr": "someUrl"
+    }
+}
+{% endhighlight %}
+
+All these forms may be combined freely and they may be nested in a virtually unlimited way, e.g.:
+
+{% highlight json %}
+{
+    ...,
+    "baseUrl": {
+        "function": "concat",
+        "args": [
+            "https://",
+            {
+                "attr": "domain"
+            }
+        ]
+    }
+}
+{% endhighlight %}
+
+### Supported functions
 
 - md5
 - sha1
@@ -45,49 +97,95 @@ The argument of a function can be any of:
 - implode
 - urlencode (available only in `api.baseUrl` context)
 
-or a reference to another value in the configuration:
+### Function Contexts
+Every place in the Generic Extractor configuration in which a function may be used may allow different parameters to the function.
+This is referred to as a **function context**. Many contexts share access to *configuration attributes*.
+
+#### Configuration Attributes
+The *configuration attributes* are accessible in some function contexts and they represent the entire [`config`](http://localhost:4000/extend/generic-extractor/config/)
+section of Generic Extractor configuration. There is some processing involved which means that:
+
+- the [`jobs`](http://localhost:4000/extend/generic-extractor/config/jobs/) section is removed entirely,
+- all other values are flattened (keys are concatenated using dot `.`) into a one-level deep object,
+- the result object is available in a property named `attr`.
+
+For example the following configuration:
 
 {% highlight json %}
 {
-    "attr": "username"
-}
-{% endhighlight %}
-
-or a reference to a parameter in the function **context**:
-
-{% highlight json %}
-todo
-{% endhighlight %}
-
-or a simple value:
-
-{% highlight json %}
-{
-    "a scalar value"
-}
-{% endhighlight %}
-
-All these forms may be combined freely and they may be nested in a virtually unlimited way, e.g.:
-
-{
-    "function": "concat",
-    "args": [
-        {
-            "attr": "username"
+    "parameters": {
+        "api": {
+            "baseUrl": "http://example.com"
         },
-        "-spacer-",
-        {
-            "function": "time"
+        "config": {
+            "debug": true,
+            "outputBucket": "get-tutorial",
+            "server": "localhost:8888",
+            "incrementalOutput": false,
+            "jobs": [
+                {
+                    "endpoint": "users",
+                    "dataType": "users"
+                }
+            ],
+            "http": {
+                "headers": {
+                    "X-AppKey": "ThisIsSecret"
+                }
+            },
+            "userData": {
+                "tag": "fullExtract",
+                "mode": "development"
+            },
+            "mappings": {
+                "content": {
+                    "whatever": "foobar"
+                }
+            }
         }
-    ]
+    }
 }
+{% endhighlight %}
 
-## Supported Functions
+Will be converted to the following function context:
 
-## Function Contexts
-Apart from
+{% highlight json %}
+{
+	"attr": {
+		"debug": true,
+		"outputBucket": "mock-server",
+		"server": "localhost:8888",
+		"incrementalOutput": false,
+		"http.headers.X-AppKey": "ThisIsSecret",
+		"userData.tag": "fullExtract",
+		"userData.mode": "development",
+		"mappings.content.whatever": "foobar"
+	}
+}
+{% endhighlight %}
+
+
 
 ### Placeholder Context
+The Placeholder function context refers to configuration of [placeholders in child jobs](/extend/generic-extractor/config/jobs/children/#placeholders).
+When using function to process placeholder value, the placeholder must be specified as an object with `path` property. Therefore instead of writing:
+
+{% highlight json %}
+"placeholders": {
+    "user-id": "userId"
+}
+{% endhighlight %}
+
+You have to write:
+
+{% highlight json %}
+"placeholders": {
+    "user-id": {
+        "path": "userId",
+        "function": ...
+    }
+}
+{% endhighlight %}
 
 The placeholder function context contains the following structure:
 
@@ -99,9 +197,15 @@ The placeholder function context contains the following structure:
 }
 {% endhighlight %}
 
-Where `???` is the value provided in the `path` property of the respective placeholder.
+Where `???` is the value obtained from the response JSON from the path provided in the `path` property
+of the placeholder. See [example](#job-placeholders).
+
+### Base URL Context
+The Base URL function context is used when setting the [`baseURL` for API](/extend/generic-extractor/api/#base-url). The
+base URL function context contains [*configuration attributes*](/#function-contexts).
 
 
+### Parameters Context
 
 
 ## Examples
@@ -163,7 +267,7 @@ The following `user-detail` table will be extracted:
 
 Notice that the `parent_id` column contains the processed value and not the original one.
 
-See the [full example](todo:085-function-job-placeholders).
+See the [full example](todo:085-function-job-placeholders) (or a not-so-useful example of [using reference](todo:086-function-job-placeholders-reference)).
 
 ## User functions
 
