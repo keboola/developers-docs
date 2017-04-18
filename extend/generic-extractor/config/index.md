@@ -39,7 +39,7 @@ A sample API configuration can look like this:
 ## Jobs
 Jobs configuration describes API endpoints (resources) which will be extracted. This
 includes configuration of HTTP method and parameters. The `jobs` configuration is 
-**required** and described in a [separate article](/extend/generic-extractor/config/jobs/).
+**required** and is described in a [separate article](/extend/generic-extractor/config/jobs/).
 
 ## Output Bucket
 The `outputBucket` option defines the name of the [Storage Bucket](https://help.keboola.com/storage/buckets/) 

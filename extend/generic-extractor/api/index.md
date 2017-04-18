@@ -46,7 +46,7 @@ A sample API configuration can look like this:
 ## Base URL
 The `baseUrl` configuration defines the URL to which the API requests should be sent to. We
 recommend that the URL ends with a slash so that the `jobs.endpoint` can be set easily.
-See the [`endpoint` configuration](/extend/generic-extractor/jobs/#endpoint) for a detailed description of
+See the [`endpoint` configuration](/extend/generic-extractor/config/jobs/#endpoint) for a detailed description of
 how `api.baseUrl` and `jobs.endpoint` work together.
 
 ## Pagination
@@ -149,12 +149,12 @@ See an [example](/extend/generic-extractor/api/#retry-configuration).
 
 ## Default HTTP Options
 The `http` configuration option allows you to set default headers and parameters 
-sent with each API call (defined later in the [`jobs` section](/extend/generic-extractor/jobs/#request-parameters)).
+sent with each API call (defined later in the [`jobs` section](/extend/generic-extractor/config/jobs/#request-parameters)).
 
 ### Headers
 The `http.headers` configuration allows you to set default headers sent with
 each API call. The configuration is an object where names are the names of
-the headers and values are their values -- for instance:
+the headers and values are their values --- for instance:
 
 {% highlight json %}
 "http": {
@@ -171,7 +171,7 @@ See the full [example](/extend/generic-extractor/api/#default-headers).
 The `http.defaultOptions.params` configuration allows you to set 
 [request parameters](/extend/generic-extractor/tutorial/rest/url) to be
 sent with each API request. The same rules apply as to the
-[`jobs.params`](/extend/generic-extractor/jobs/#request-parameters).
+[`jobs.params`](/extend/generic-extractor/config/jobs/#request-parameters).
 
 See an [example](/extend/generic-extractor/api/#default-headers).
 
