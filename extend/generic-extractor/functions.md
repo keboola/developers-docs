@@ -91,14 +91,76 @@ All these forms may be combined freely and they may be nested in a virtually unl
 - strtotime
 - base64_encode
 - hash_hmac
-- sprintf
-- concat
+
+#### Sprintf
+The `sprintf` function formats values and inserts them into a string. The `sprintf` function maps directly to
+the [original PHP function](http://php.net/manual/en/function.sprintf.php) which is very versatile and has many
+uses. The function accepts two or more arguments. The first argument is a string with
+[formatting directives](http://php.net/manual/en/function.sprintf.php) (marked with percent character `%`),
+other arguments are values inserted into the string:
+
+{% highlight json %}
+{
+    "function": "sprintf",
+    "args": [
+        "Three %s are %.2f %s.",
+        "apples",
+        0.5,
+        "plums"
+    ]
+}
+{% endhighlight %}
+
+The above will produce `Three apples are 0.50 plums.`
+(see [simple insert example](#api-base-url) or [formatting example](#job-placeholders))
+
+#### Concat
+The `concat` function concatenates an arbitrary number of strings into one. For example:
+
+{% highlight json %}
+{
+    "function": "concat",
+    "args": [
+        "Hen",
+        "Or",
+        "Egg"
+    ]
+}
+{% endhighlight %}
+
+The above will produce `HenOrEgg` (see [example](#api-base-url). See also the
+[implode function](#implode).
+
 - ifempty
-- implode
+
+#### Implode
+The implode function concatenates an arbitrary number of strings into one using a delimiter. The function takes
+two arguments, first is the delimiter string which is used for the concatenation, second is an array of values to
+be concatenated. For example:
+
+{% highlight json %}
+{
+    "function": "implode",
+    "args": [
+        ",",
+        [
+            "apples",
+            "oranges",
+            "plums"
+        ]
+    ]
+}
+{% endhighlight %}
+
+The above will produce `apples,oranges,plums`. todo example
+
+See also the [concat function](#concat).
+
+
 - urlencode (available only in `api.baseUrl` context)
 
 ### Function Contexts
-Every place in the Generic Extractor configuration in which a function may be used may allow different parameters to the function.
+Every place in the Generic Extractor configuration in which a function may be used may allow different arguments of the function.
 This is referred to as a **function context**. Many contexts share access to *configuration attributes*.
 
 #### Configuration Attributes
@@ -163,8 +225,6 @@ Will be converted to the following function context:
 	}
 }
 {% endhighlight %}
-
-
 
 ### Placeholder Context
 The Placeholder function context refers to configuration of [placeholders in child jobs](/extend/generic-extractor/config/jobs/children/#placeholders).
@@ -269,6 +329,64 @@ Notice that the `parent_id` column contains the processed value and not the orig
 
 See the [full example](todo:085-function-job-placeholders) (or a not-so-useful example of [using reference](todo:086-function-job-placeholders-reference)).
 
+### Job Parameters
+
+
+### API Base URL
+When you use [register your Generic Extractor configuration](/extend/generic-extractor/registration/), chances are that you want the end-user to
+provide part of the API configuration. Due to the limitations of [how templates work](todo), the parameter obtained from the end-user configuration
+will be only available in the `config` section. Let's say that the end-user enters `www.example.com` as the API server and that values becomes
+available as the `server` property of the `config` section, e.g:
+
+{% highlight json %}
+"config": {
+    "outputBucket": "ge-tutorial",
+    "server": "www.example.com",
+    "jobs": [
+        {
+            "endpoint": "users",
+            "dataType": "users"
+        }
+    ]
+}
+{% endhighlight %}
+
+This means that the [*configuration attributes*](#configuration-attributes) will be available as:
+
+{% highlight json %}
+{
+    "attr": {
+        "outputBucket": "ge-tutorial",
+        "server": "www.example.com"
+    }
+}
+{% endhighlight %}
+
+You can then use the [`concat` function](todo) to access that value and merge it with other parts to create the
+final API URL (`http://example.com/api/1.0/`):
+
+{% highlight json %}
+{
+    "parameters": {
+        "api": {
+            "baseUrl": {
+                "function": "concat",
+                "args": [
+                    "http://",
+                    {
+                        "attr": "server"
+                    },
+                    "/api/1.0/"
+                ]
+            }
+        },
+    }
+}
+{% endhighlight %}
+
+See the [full example with concat](todo:087-function-baseurl) or an alternative [example with sprintf](088-function-baseurl-sprintf).
+
+
 ## User functions
 
 Use [php-codebuilder](https://github.com/keboola/php-codebuilder) library for advanced functionality, such as dynamically transforming strings or date values in API call parameters.
@@ -288,51 +406,6 @@ parameters :
                     ]
                 }
             }
-
-
-
-        - You can also use an [user function](/extend/generic-extractor/user-functions/) on the value from a parent using an object as the placeholder value
-        - That object MUST contain a `path` key that would be the value of the placeholer, and a `function`. To access the value in the function arguments, use `{"placeholder": "value"}`
-            - Example:
-
-                    {
-                        "placeholders": {
-                            "1:id": {
-                                "path": "id",
-                                "function": "urlencode",
-                                "args": [
-                                    {
-                                        "placeholder": "value"
-                                    }
-                                ]
-                            }
-                        }
-                    }
-
-        - Further documentation can be found at [keboola/php-filter](https://github.com/keboola/php-filter)
-
-
-### `baseUrl`
-- Either a string with base URL of the API (eg `https://connection.keboola.com/v2/`)
-- OR an [user function](/extend/generic-extractor/user-functions/), if there's a configurable part of the base URL, such as a subdomain, or an account ID..
-- Example using a function:
-
-        {
-            "api": {
-                "function": "concat",
-                "args": [
-                    "https://",
-                    { "attr": "domain" },
-                    ".zendesk.com/api/v2/"
-                ]
-            },
-            "config": {
-                "domain": "yourDomain"
-            }
-        }
-
-    - for *https://__yourDomain__.zendesk.com/api/v2/*
-    - uses `config` part, where attribute **domain** would contain `yourDomain`
 
 todo, muze se pouzit user funkce v ## Force Stop scrolleru  ?
 
