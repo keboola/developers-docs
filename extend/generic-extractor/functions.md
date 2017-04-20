@@ -114,6 +114,15 @@ is the string to hash.
 
 The above will produce `64d5d2977cc2573afbd187ff5e71d1529fd7f6d8`. See [example](#job-parameters).
 
+- hash_hmac
+
+- ifempty
+- urlencode (available only in `api.baseUrl` context)
+
+- strtotime
+- base64_encode
+
+
 #### Time
 The [`time` function](http://php.net/manual/en/function.time.php) returns the current time as a 
 [Unix timestamp](https://en.wikipedia.org/wiki/Unix_timehttps://en.wikipedia.org/wiki/Unix_time). 
@@ -157,13 +166,7 @@ The above will produce something like `2017-04-20`.
 }
 {% endhighlight %}
 
-The above will produce `2017-03-20 8:53:20`. 
-
-(See [example](#TODO doplnit neco na datum - jineho nez incremental load ? napsat ze je to useful hlavne pro inc load).
-
-- strtotime
-- base64_encode
-- hash_hmac
+The above will produce `2017-03-20 8:53:20`. See [example](#user-data).
 
 #### Sprintf
 The `sprintf` function formats values and inserts them into a string. The `sprintf` function maps directly to
@@ -201,10 +204,8 @@ The `concat` function concatenates an arbitrary number of strings into one. For 
 }
 {% endhighlight %}
 
-The above will produce `HenOrEgg` (see [example](#api-base-url). See also the
+The above will produce `HenOrEgg` (see [example 1](#api-base-url), [example 2](#headers)). See also the
 [implode function](#implode).
-
-- ifempty
 
 #### Implode
 The [`implode` function](http://php.net/manual/en/function.implode.php) concatenates an arbitrary number 
@@ -226,12 +227,27 @@ be concatenated. For example:
 }
 {% endhighlight %}
 
-The above will produce `apples,oranges,plums`. todo example
+The above will produce `apples,oranges,plums`. 
+(see [example](#headers))
 
-See also the [concat function](#concat).
+todo example (nejakej filtr - priklada na parametry v getu).
+The delimiter can be empty in which case it is equivalent to the [`concat` function](#concat):
 
+TODO: tohle overit!
 
-- urlencode (available only in `api.baseUrl` context)
+{% highlight json %}
+{
+    "function": "implode",
+    "args": [
+        "",
+        [
+            "Hen",
+            "Or",
+            "Egg"
+        ]
+    ]
+}
+{% endhighlight %}
 
 ### Function Contexts
 Every place in the Generic Extractor configuration in which a function may be used may allow different arguments of the function.
@@ -300,7 +316,7 @@ Will be converted to the following function context:
 }
 {% endhighlight %}
 
-### Placeholder Context
+#### Placeholder Context
 The Placeholder function context refers to configuration of [placeholders in child jobs](/extend/generic-extractor/config/jobs/children/#placeholders).
 When using function to process placeholder value, the placeholder must be specified as an object with `path` property. Therefore instead of writing:
 
@@ -334,11 +350,18 @@ The placeholder function context contains the following structure:
 Where `???` is the value obtained from the response JSON from the path provided in the `path` property
 of the placeholder. See [example](#job-placeholders).
 
-### Base URL Context
+#### Base URL Context
 The Base URL function context is used when setting the [`baseURL` for API](/extend/generic-extractor/api/#base-url). The
 base URL function context contains [*configuration attributes*](/#function-contexts). See [example](#api-base-url).
 
-### Parameters Context
+#### Headers Context
+The Headers function context is used when setting the [`http.headers` for API](/extend/generic-extractor/api/#headers)
+or the [`http.headers` in config](/extend/generic-extractor/config/#http). The Headers function context contains [*configuration attributes*](/#function-contexts). See [example](#headers).
+
+TODO: overit, ze to funguje na obou mistech
+
+
+#### Parameters Context
 The Parameters function context is used when setting job [request parameters -- `params`](/extend/generic-extractor/config/jobs/#request-parameters). The parameters context contains 
 [*configuration attributes*](/#function-contexts) plus the times of the current (`currentStart`) and 
 previous (`previousStart`) run of Generic Extractor. The times are [Unix timestamps](https://en.wikipedia.org/wiki/Unix_time).
@@ -383,7 +406,20 @@ The parameters function context will contain:
 See [example of using parameters context](#job-parameters). The `time` values are used in
 [incremental processing](todo).
 
+#### User Data Context
+The User Data function context is used when setting the [`userData`](/extend/generic-extractor/config/#user-data). The
+The parameters context contains [*configuration attributes*](/#function-contexts) plus the times of the current (`currentStart`) and previous (`previousStart`) run of Generic Extractor. The User Data Context is therefore 
+same as the [Parameters Context](#parameters-context). See [example](#user-data).
+
+
+
 ## Examples
+TODO: poskladat examply stejne jako contexty a to  asi ?
+- api url
+- api headers (+ config headers)
+- job parameters
+- job placeholders
+- user data ?
 
 ### Job Placeholders
 Let's say you have an API which has and endpoint `/users` which returns a list of user and
@@ -446,7 +482,7 @@ See the [full example](todo:085-function-job-placeholders) (or a not-so-useful e
 
 ### Job Parameters
 Let's say that you have an API, which requires that you send a hash of some value with every request. Specifically,
-each request must be done with [HTTP POST method](todo ) with content:
+each request must be done with [HTTP POST method](/extend/generic-extractor/tutorial/rest/#method) with content:
 
 {% highlight json %}
 {
@@ -489,7 +525,8 @@ The following configuration does exactly that:
 {% endhighlight %}
 
 In the above configuration, the value of the token is taken from the configuration root (using the `attr` reference).
-This is useful in case of the configuration is used as part of a [template](todo). 
+This is useful in case of the configuration is used as part of a [template](todo). The actual hash will be generated
+of the `NotSoSecret` value.
 See the [full example](todo:089-function-job-parameters-md5) or an alternative [with SHA1 hash](090-function-job-parameters-sha1).
 
 ### API Base URL
@@ -546,51 +583,172 @@ final API URL (`http://example.com/api/1.0/`):
 
 See the [full example with concat](todo:087-function-baseurl) or an alternative [example with sprintf](088-function-baseurl-sprintf).
 
+### User Data
+Assume that you have an API which returns a response that does not contain any time information in 
+the response, e.g.:
 
-## User functions
+{% highlight json %}
+[
+    {
+        "id": 3,
+        "name": "John Doe"
+    },
+    {
+        "id": 234,
+        "name": "Jane Doe"
+    }
+]
+{% endhighlight %}
 
-Use [php-codebuilder](https://github.com/keboola/php-codebuilder) library for advanced functionality, such as dynamically transforming strings or date values in API call parameters.
+You may want to add the extraction time to each record so that you at least know when 
+each record was obtained (when the creation time is unknown). You can add additional data to
+each record using the [`userData` configuration](/extend/generic-extractor/config/#user-data):
 
-parameters :
-    - OR contain an [user function](/extend/generic-extractor/user-functions/) as described below, for example to load value from parameters:
-    - Example
-
+{% highlight json %}
+"userData": {
+    "extractionDate": {
+        "function": "date",
+        "args": [
+            "Y-m-d H:i:s",
             {
-                "start_date": {
-                    "function":"date",
-                    "args": [
-                        "Y-m-d+H:i",
+                "time": "currentStart"
+            }
+        ]
+    }
+}
+{% endhighlight %}
+
+The following table will be extracted:
+
+|id|name|extractionDate|
+|3|John Doe|2017-04-20 10:17:20|
+|234|Jane Doe|2017-04-20 10:17:20|
+
+You may also be tempted to use an alternative configuration:
+
+{% highlight json %}
+"userData": {
+    "extractionDate": {
+        "function": "date",
+        "args": [
+            "Y-m-d H:i:s"
+        ]
+    }
+}
+{% endhighlight %}
+
+The alternative configuration also puts current date, but whereas the first one puts a single same
+date to each record, the alternative configuration will return different times for different records 
+as they are extracted. 
+
+### Headers
+Suppose you have an API which requires you to send a custom `X-Api-Auth` header with every request.
+The header must contain user name and password separated by a colon -- e.g. `JohnDoe:TopSecret`. 
+
+This can be done using the following `api` configuration:
+
+{% highlight json %}
+"api": {
+    "baseUrl": "http://example.com/",
+    "http": {
+        "headers": {
+            "X-Api-Auth": {
+                "function": "concat",
+                "args": [
+                    {
+                        "attr": "credentials.#username"
+                    },
+                    ":",
+                    {
+                        "attr": "credentials.#password"
+                    }
+                ]
+            }
+        }
+    }
+}
+{% endhighlight %}
+
+Alternatively, you can achieve the same result using the `implode` function:
+
+{% highlight json %}
+"api": {
+    "baseUrl": "http://mock-server:80/093-function-api-http-headers/",
+    "http": {
+        "headers": {
+            "X-Api-Auth": {
+                "function": "implode",
+                "args": [
+                    ":",
+                    [
                         {
-                            "time":"previousStart"
+                            "attr": "credentials.#username"
+                        },
+                        {
+                            "attr": "credentials.#password"
                         }
                     ]
-                }
+                ]
             }
+        }
+    }
+}
+{% endhighlight %}
+
+Both configurations rely of having the username and password parameters 
+in the [`config` section](todo). In this case also nested in the `credentials` property:
+
+{% highlight json %}
+"config": {
+    "credentials": {
+        "#username": "JohnDoe",
+        "#password": "TopSecret"
+    },
+    "jobs": ...
+}
+{% endhighlight %}
+
+See the [example](todo:093-function-api-http-headers) or an 
+[alternative example](todo:094-function-config-headers).
+
+### Nested Functions
+If the API in the [above example](#headers) would try to mimmick [HTTP authorization](todo),
+the header has to be sent as [base64 encoded](todo) value. That is instead of sending
+`JohnDoe:TopSecret`, you have to send `TODO`. To do this you have to wrap the function which
+generates the header value in another function.
+
+{% highlight json %}
+"api": {
+    "baseUrl": "http://example.com/",
+    "http": {
+        "headers": {
+            "X-Api-Auth": {
+                "function": "base64_encode",
+                "args": [
+                    {
+                        "function": "concat",
+                        "args": [
+                            {
+                                "attr": "#username"
+                            },
+                            ":",
+                            {
+                                "attr": "#password"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}
+{% endhighlight %}
+
+
 
 todo, muze se pouzit user funkce v ## Force Stop scrolleru  ?
 
-- [User functions](/extend/generic-extractor/user-functions/) can be used as a value, for intance to fill in a current date:
 
-    - Config:
-
-            {
-                "config": {
-                    "userData": {
-                        "export_date": {
-                            "function": "date",
-                            "args": [
-                                "Y-m-d"
-                            ]
-                        }
-                    }
-                }
-            }
-
-    - Result:
-
-            "id","username","export_date"
-            "1","Joe","2016-06-30"
-            "2","Garry","2016-06-30"
 
 ## Example
 
