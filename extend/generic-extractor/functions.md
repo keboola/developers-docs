@@ -84,10 +84,83 @@ All these forms may be combined freely and they may be nested in a virtually unl
 
 ### Supported functions
 
-- md5
-- sha1
-- time
-- date
+#### MD5
+The [`md5` function](http://php.net/manual/en/function.md5.php) calculates the [MD5 hash](https://en.wikipedia.org/wiki/MD5) of a string. The function takes one argument, which 
+is the string to hash.
+
+{% highlight json %}
+{
+    "function": "md5",
+    "args": [
+        "NotSoSecret"
+    ]
+}
+{% endhighlight %}
+
+The above will produce `1228d3ff5089f27721f1e0403ad86e73`. See [example](#job-parameters).
+
+#### SHA1
+The [`sha1` function](http://php.net/manual/en/function.sha1.php) calculates the [SHA-1 hash](https://en.wikipedia.org/wiki/SHA-1) of a string. THe function takes one argument, which 
+is the string to hash.
+
+{% highlight json %}
+{
+    "function": "sha1",
+    "args": [
+        "NotSoSecret"
+    ]
+}
+{% endhighlight %}
+
+The above will produce `64d5d2977cc2573afbd187ff5e71d1529fd7f6d8`. See [example](#job-parameters).
+
+#### Time
+The [`time` function](http://php.net/manual/en/function.time.php) returns the current time as a 
+[Unix timestamp](https://en.wikipedia.org/wiki/Unix_timehttps://en.wikipedia.org/wiki/Unix_time). 
+To obtain the current time in a more readable format, you probably want to use the
+the [`date` function](#date). The function takes no arguments.
+
+{% highlight json %}
+{
+    "function": "time"
+}
+{% endhighlight %}
+
+The above will produce something like `1492674974`. TODO example ?
+
+#### Date
+The [`date` function](http://php.net/manual/en/function.date.php) formats the provided or the current 
+timestamp into a human readable format. The function takes either one or two arguments. The first argument
+is a [formatting string](http://php.net/manual/en/function.date.php#refsect1-function.date-parameters). 
+The second argument is optional 
+[Unix timestamp](https://en.wikipedia.org/wiki/Unix_timehttps://en.wikipedia.org/wiki/Unix_time), if not
+provided, the current time is used.
+
+{% highlight json %}
+{
+    "function": "date",
+    "args": [
+        "Y-m-d"
+    ]
+}
+{% endhighlight %}
+
+The above will produce something like `2017-04-20`. 
+
+{% highlight json %}
+{
+    "function": "date",
+    "args": [
+        "Y-m-d H:i:s",
+        1490000000
+    ]
+}
+{% endhighlight %}
+
+The above will produce `2017-03-20 8:53:20`. 
+
+(See [example](#TODO doplnit neco na datum - jineho nez incremental load ? napsat ze je to useful hlavne pro inc load).
+
 - strtotime
 - base64_encode
 - hash_hmac
@@ -134,7 +207,8 @@ The above will produce `HenOrEgg` (see [example](#api-base-url). See also the
 - ifempty
 
 #### Implode
-The implode function concatenates an arbitrary number of strings into one using a delimiter. The function takes
+The [`implode` function](http://php.net/manual/en/function.implode.php) concatenates an arbitrary number 
+of strings into one using a delimiter. The function takes
 two arguments, first is the delimiter string which is used for the concatenation, second is an array of values to
 be concatenated. For example:
 
@@ -262,11 +336,52 @@ of the placeholder. See [example](#job-placeholders).
 
 ### Base URL Context
 The Base URL function context is used when setting the [`baseURL` for API](/extend/generic-extractor/api/#base-url). The
-base URL function context contains [*configuration attributes*](/#function-contexts).
-
+base URL function context contains [*configuration attributes*](/#function-contexts). See [example](#api-base-url).
 
 ### Parameters Context
+The Parameters function context is used when setting job [request parameters -- `params`](/extend/generic-extractor/config/jobs/#request-parameters). The parameters context contains 
+[*configuration attributes*](/#function-contexts) plus the times of the current (`currentStart`) and 
+previous (`previousStart`) run of Generic Extractor. The times are [Unix timestamps](https://en.wikipedia.org/wiki/Unix_time).
+If the extraction is run for the first time, the `previousStart` is 0.
 
+With the following configuration:
+
+{% highlight json %}
+{
+    "parameters": {
+        "api": {
+            "baseUrl": "http://example.com"
+        },
+        "config": {
+            "debug": true,
+            "outputBucket": "get-tutorial",
+            "server": "localhost:8888",
+            "jobs": [
+                ...
+            ]
+        }
+    }
+}
+{% endhighlight %}
+
+The parameters function context will contain:
+
+{% highlight json %}
+{
+	"attr": {
+		"debug": true,
+		"outputBucket": "mock-server",
+		"server": "localhost:8888",
+    },
+    "time": {
+        "previousStart": 0,
+        "currentStart": 1492678268
+    }
+}
+{% endhighlight %}
+
+See [example of using parameters context](#job-parameters). The `time` values are used in
+[incremental processing](todo).
 
 ## Examples
 
@@ -330,7 +445,52 @@ Notice that the `parent_id` column contains the processed value and not the orig
 See the [full example](todo:085-function-job-placeholders) (or a not-so-useful example of [using reference](todo:086-function-job-placeholders-reference)).
 
 ### Job Parameters
+Let's say that you have an API, which requires that you send a hash of some value with every request. Specifically,
+each request must be done with [HTTP POST method](todo ) with content:
 
+{% highlight json %}
+{
+    "token": "someValue"
+}
+{% endhighlight %}
+
+The following configuration does exactly that:
+
+{% highlight json %}
+{
+    "parameters": {
+        "api": {
+            "baseUrl": "http://example.com/"
+        },
+        "config": {
+            "debug": true,
+            "outputBucket": "mock-server",
+            "tokenValue": "NotSoSecret",
+            "jobs": [
+                {
+                    "endpoint": "users",
+                    "dataType": "users",
+                    "method": "POST",
+                    "params": {
+                        "token": {
+                            "function": "md5",
+                            "args": [
+                                {
+                                    "attr": "tokenValue"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
+{% endhighlight %}
+
+In the above configuration, the value of the token is taken from the configuration root (using the `attr` reference).
+This is useful in case of the configuration is used as part of a [template](todo). 
+See the [full example](todo:089-function-job-parameters-md5) or an alternative [with SHA1 hash](090-function-job-parameters-sha1).
 
 ### API Base URL
 When you use [register your Generic Extractor configuration](/extend/generic-extractor/registration/), chances are that you want the end-user to
