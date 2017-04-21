@@ -42,9 +42,9 @@ An example pagination configuration looks like this:
 Generic Extractor supports the following paging strategies (scrollers); they are configured
 using the `method` option:
 
-- [`response.url`](/extend/generic-extractor/api/pagination/response-url/) --- uses a URL provided in the response
-- [`offset`](/extend/generic-extractor/api/pagination/offset/) --- uses the page size (limit) and **item offset** (like in SQL)
-- [`pagenum`](/extend/generic-extractor/api/pagination/pagenum/) --- uses the page size (limit) and **page number**
+- [`response.url`](/extend/generic-extractor/api/pagination/response-url/) --- uses a URL provided in the response.
+- [`offset`](/extend/generic-extractor/api/pagination/offset/) --- uses the page size (limit) and **item offset** (like in SQL).
+- [`pagenum`](/extend/generic-extractor/api/pagination/pagenum/) --- uses the page size (limit) and **page number**.
 - [`response.param`](/extend/generic-extractor/api/pagination/response-param/) --- uses a specific value (token) provided in the response.
 - [`cursor`](/extend/generic-extractor/api/pagination/cursor/) --- uses the identifier of the item in response to maintain a scrolling cursor.
 - [`multiple`](/extend/generic-extractor/api/pagination/multiple/) --- allows to set different scrollers for different API endpoints.
