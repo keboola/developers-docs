@@ -26,6 +26,18 @@ This config would create a request such as the following:
 
 a jeste pres PK
 
+
+    {
+        "config": {
+            "incrementalOutput": true,
+            "jobs": [
+                {
+                    "endpoint": "events"
+                }
+            ]
+        }
+    }
+    
 parameters :
     - OR contain an [user function](/extend/generic-extractor/user-functions/) as described below, for example to load value from parameters:
     - Example

@@ -36,6 +36,10 @@ A sample API configuration can look like this:
 }
 {% endhighlight %}
 
+Apart from the properties listed below, the `config` section can contain any number of
+other properties which are not used by Generic Extractor itself, but may be referenced
+from within [functions](/extend/generic-extractor/functions/).
+
 ## Jobs
 Jobs configuration describes API endpoints (resources) which will be extracted. This
 includes configuration of HTTP method and parameters. The `jobs` configuration is 

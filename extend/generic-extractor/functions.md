@@ -84,7 +84,7 @@ All these forms may be combined freely and they may be nested in a virtually unl
 
 ### Supported functions
 
-#### MD5
+#### md5
 The [`md5` function](http://php.net/manual/en/function.md5.php) calculates the [MD5 hash](https://en.wikipedia.org/wiki/MD5) of a string. The function takes one argument, which 
 is the string to hash.
 
@@ -99,8 +99,8 @@ is the string to hash.
 
 The above will produce `1228d3ff5089f27721f1e0403ad86e73`. See [example](#job-parameters).
 
-#### SHA1
-The [`sha1` function](http://php.net/manual/en/function.sha1.php) calculates the [SHA-1 hash](https://en.wikipedia.org/wiki/SHA-1) of a string. THe function takes one argument, which 
+#### sha1
+The [`sha1` function](http://php.net/manual/en/function.sha1.php) calculates the [SHA-1 hash](https://en.wikipedia.org/wiki/SHA-1) of a string. The function takes one argument, which 
 is the string to hash.
 
 {% highlight json %}
@@ -114,16 +114,33 @@ is the string to hash.
 
 The above will produce `64d5d2977cc2573afbd187ff5e71d1529fd7f6d8`. See [example](#job-parameters).
 
+#### base64_encode
+The [`base64_encode` function](http://php.net/manual/en/function.base64-encode.php) converts a
+string to the [MIME Base64 encoding](https://en.wikipedia.org/wiki/Base64#MIME). The function
+takes one argument, which is the string to encode.
+
+{% highlight json %}
+{
+    "function": "base64_encode",
+    "args": [
+        "TeaPot"
+    ]
+}
+{% endhighlight %}
+
+The above will produce `VGVhUG90`. See [example](#nested-functions)
+
+
+TODO
 - hash_hmac
 
 - ifempty
 - urlencode (available only in `api.baseUrl` context)
 
 - strtotime
-- base64_encode
 
 
-#### Time
+#### time
 The [`time` function](http://php.net/manual/en/function.time.php) returns the current time as a 
 [Unix timestamp](https://en.wikipedia.org/wiki/Unix_timehttps://en.wikipedia.org/wiki/Unix_time). 
 To obtain the current time in a more readable format, you probably want to use the
@@ -137,7 +154,7 @@ the [`date` function](#date). The function takes no arguments.
 
 The above will produce something like `1492674974`. TODO example ?
 
-#### Date
+#### date
 The [`date` function](http://php.net/manual/en/function.date.php) formats the provided or the current 
 timestamp into a human readable format. The function takes either one or two arguments. The first argument
 is a [formatting string](http://php.net/manual/en/function.date.php#refsect1-function.date-parameters). 
@@ -168,7 +185,10 @@ The above will produce something like `2017-04-20`.
 
 The above will produce `2017-03-20 8:53:20`. See [example](#user-data).
 
-#### Sprintf
+#### strtotime
+
+
+#### sprintf
 The `sprintf` function formats values and inserts them into a string. The `sprintf` function maps directly to
 the [original PHP function](http://php.net/manual/en/function.sprintf.php) which is very versatile and has many
 uses. The function accepts two or more arguments. The first argument is a string with
@@ -190,7 +210,7 @@ other arguments are values inserted into the string:
 The above will produce `Three apples are 0.50 plums.`
 (see [simple insert example](#api-base-url) or [formatting example](#job-placeholders))
 
-#### Concat
+#### concat
 The `concat` function concatenates an arbitrary number of strings into one. For example:
 
 {% highlight json %}
@@ -205,9 +225,9 @@ The `concat` function concatenates an arbitrary number of strings into one. For 
 {% endhighlight %}
 
 The above will produce `HenOrEgg` (see [example 1](#api-base-url), [example 2](#headers)). See also the
-[implode function](#implode).
+[`implode` function](#implode).
 
-#### Implode
+#### implode
 The [`implode` function](http://php.net/manual/en/function.implode.php) concatenates an arbitrary number 
 of strings into one using a delimiter. The function takes
 two arguments, first is the delimiter string which is used for the concatenation, second is an array of values to
@@ -227,8 +247,7 @@ be concatenated. For example:
 }
 {% endhighlight %}
 
-The above will produce `apples,oranges,plums`. 
-(see [example](#headers))
+The above will produce `apples,oranges,plums`. (see [example](#headers))
 
 todo example (nejakej filtr - priklada na parametry v getu).
 The delimiter can be empty in which case it is equivalent to the [`concat` function](#concat):
@@ -282,7 +301,14 @@ For example the following configuration:
             ],
             "http": {
                 "headers": {
-                    "X-AppKey": "ThisIsSecret"
+                    "X-AppKey": "ThisIsSecret",
+                    "X-Auth": {
+                        "function": "concat",
+                        "args": [
+                            "Tea",
+                            "Pot"
+                        ]
+                    }
                 }
             },
             "userData": {
@@ -309,6 +335,9 @@ Will be converted to the following function context:
 		"server": "localhost:8888",
 		"incrementalOutput": false,
 		"http.headers.X-AppKey": "ThisIsSecret",
+        "http.headers.X-Auth.function": "concat",
+        "http.headers.X-Auth.args.0": "Tea",
+        "http.headers.X-Auth.args.1": "Pot",
 		"userData.tag": "fullExtract",
 		"userData.mode": "development",
 		"mappings.content.whatever": "foobar"
@@ -357,9 +386,6 @@ base URL function context contains [*configuration attributes*](/#function-conte
 #### Headers Context
 The Headers function context is used when setting the [`http.headers` for API](/extend/generic-extractor/api/#headers)
 or the [`http.headers` in config](/extend/generic-extractor/config/#http). The Headers function context contains [*configuration attributes*](/#function-contexts). See [example](#headers).
-
-TODO: overit, ze to funguje na obou mistech
-
 
 #### Parameters Context
 The Parameters function context is used when setting job [request parameters -- `params`](/extend/generic-extractor/config/jobs/#request-parameters). The parameters context contains 
@@ -640,6 +666,7 @@ You may also be tempted to use an alternative configuration:
 The alternative configuration also puts current date, but whereas the first one puts a single same
 date to each record, the alternative configuration will return different times for different records 
 as they are extracted. 
+See the [full example](todo:091-function-user-data) or an alternative [example with set date](092-function-user-date-set-date).
 
 ### Headers
 Suppose you have an API which requires you to send a custom `X-Api-Auth` header with every request.
@@ -696,7 +723,7 @@ Alternatively, you can achieve the same result using the `implode` function:
 {% endhighlight %}
 
 Both configurations rely of having the username and password parameters 
-in the [`config` section](todo). In this case also nested in the `credentials` property:
+in the [`config` section](/extend/generic-extractor/config/). In this case also nested in a `credentials` property:
 
 {% highlight json %}
 "config": {
@@ -709,13 +736,14 @@ in the [`config` section](todo). In this case also nested in the `credentials` p
 {% endhighlight %}
 
 See the [example](todo:093-function-api-http-headers) or an 
-[alternative example](todo:094-function-config-headers).
+[alternative example setting headers in the `config` section](todo:094-function-config-headers).
 
 ### Nested Functions
-If the API in the [above example](#headers) would try to mimmick [HTTP authorization](todo),
+If the API in the [above example](#headers) would try to mimic 
+[HTTP authentication](/extend/generic-extractor/api/authentication/basic/),
 the header has to be sent as [base64 encoded](todo) value. That is instead of sending
-`JohnDoe:TopSecret`, you have to send `TODO`. To do this you have to wrap the function which
-generates the header value in another function.
+`JohnDoe:TopSecret`, you have to send `Sm9obkRvZTpUb3BTZWNyZXQ=`. To do this you have to wrap the `concat` 
+function which generates the header value in another function (`base64_encode`).
 
 {% highlight json %}
 "api": {
@@ -744,24 +772,11 @@ generates the header value in another function.
 }
 {% endhighlight %}
 
+See the [example](todo:095-function-nested). 
 
 
 todo, muze se pouzit user funkce v ## Force Stop scrolleru  ?
 
-
-
-## Example
-
-    {
-        "config": {
-            "incrementalOutput": true,
-            "jobs": [
-                {
-                    "endpoint": "events"
-                }
-            ]
-        }
-    }
 
 ###  Query auth
 
