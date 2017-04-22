@@ -1,6 +1,6 @@
 ---
 title: OAuth 1.0 Authentication (under construction)
-permalink: /extend/generic-extractor/authentication/oauth/10/
+permalink: /extend/generic-extractor/api/authentication/oauth/10/
 ---
 
 - Use OAuth 1.0 tokens

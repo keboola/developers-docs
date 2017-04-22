@@ -14,7 +14,7 @@ user. See the Generic Extractor tutorial for a basic [example of using child
 jobs](/extend/generic-extractor/tutorial/jobs/#child-jobs).
 
 Apart from two additional fields, `placeholders` and `recursionFilter`, configuring a child job is no different than
-configuring [any other job](/extend/generic-extractor/jobs).
+configuring [any other job](/extend/generic-extractor/config/jobs).
 
 A sample job configuration can look like this:
 
@@ -217,7 +217,7 @@ Generic Extractor makes three API calls:
 - `users/123`
 - `users/234`
 
-The [`dataField`](/extend/generic-extractor/jobs/TODO) is set to a dot to retrieve the
+The [`dataField`](/extend/generic-extractor/config/jobs/TODO) is set to a dot to retrieve the 
 entire response as a single object. Running Generic Extractor produces the following tables:
 
 users:
@@ -235,13 +235,13 @@ user__user-id:
 |234|Jane Doe|St Mary Mead|UK|High Street|234|
 
 Notice that the table representing child resources contains all the responses
-merged into a single table; the [usual merging rules](/extend/generic-extractor/jobs/TODO) apply.
+merged into a single table; the [usual merging rules](/extend/generic-extractor/config/jobs/TODO) apply.
 
 Also notice that a new column, `parent_id`, was added, containing the **placeholder value** used
 to retrieve the resource. The `parent_id` column is not always named `parent_id`.
 Its name is created by joining the `parent_` prefix to the **placeholder path**.
 
-To create a friendly name for the table, it is good to use the [dataType](/extend/generic-extractor/jobs/TODO)
+To create a friendly name for the table, it is good to use the [dataType](/extend/generic-extractor/config/jobs/TODO) 
 property (see the next example). The auto-generated name is rather ugly.
 
 See the [full example](todo:021-basic-child-job).

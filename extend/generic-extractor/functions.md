@@ -24,7 +24,7 @@ configuration is an object with properties `function` (one of [available functio
 
 The argument of a function can be any of:
 
-- [scalar](todo) value (as in the above example),
+- [scalar](/extend/generic-extractor/tutorial/json/#data-values) value (as in the above example),
 - a reference to a value from [function context (see below)](#function-contexts),
 - another function object.
 
@@ -130,12 +130,27 @@ takes one argument, which is the string to encode.
 
 The above will produce `VGVhUG90`. See [example](#nested-functions)
 
+#### hash_hmac
+The [`hash_hmac` function](http://php.net/manual/en/function.hash-hmac.php) creates 
+a [HMAC (Hash-based message authentication code)](https://en.wikipedia.org/wiki/Hash-based_message_authentication_code)
+from a string. The function takes
+three arguments. The first argument is the name of a hashing algorithm (see the 
+[list of supported algorithms](http://php.net/manual/en/function.hash-algos.php#refsect1-function.hash-algos-examples)).
+The second argument is the value to hash and the third argument is a secret key.
 
-TODO
-- hash_hmac
+{% highlight json %}
+{
+    "function": "hash_hmac",
+    "args": [
+        "sha256",
+        "12345abcd5678efgh90ijk",
+        "TeaPot"
+    ]
+}
+{% endhighlight %}
 
-- urlencode (available only in `api.baseUrl` context)
-
+The above will return `d868d581b2f2edd09e8e7ce12c00723b3fcffb6a5d74c40eae9d94181a0bf731`. 
+See [example](#api-default-parameters).
 
 #### time
 The [`time` function](http://php.net/manual/en/function.time.php) returns the current time as a 
@@ -471,12 +486,101 @@ The parameters function context will contain:
 {% endhighlight %}
 
 See [example of using parameters context](#job-parameters). The `time` values are used in
-[incremental processing](todo).
+[incremental processing](/extend/generic-extractor/incremental/).
 
 #### User Data Context
 The User Data function context is used when setting the [`userData`](/extend/generic-extractor/config/#user-data). The
 The parameters context contains [*configuration attributes*](/#function-contexts) plus the times of the current (`currentStart`) and previous (`previousStart`) run of Generic Extractor. The User Data Context is therefore 
 same as the [Parameters Context](#parameters-context). See [example](#user-data).
+
+#### Login Authentication Context
+The Login Authentication function context is used in the 
+[login authentication](/extend/generic-extractor/api/authentication/login/) method. 
+The Headers function context contains [*configuration attributes*](/#function-contexts). The login
+authentication context is same for both `params` and `headers` 
+[login authentication configuration options](http://localhost:4000/extend/generic-extractor/api/authentication/login/#configuration-parameters).
+See [example](#login-authentication).
+
+#### Query Authentication Context
+The Query Authentication function context is used in the
+[query authentication](/extend/generic-extractor/api/authentication/query/) method. 
+The Query Authentication Context contains [*configuration attributes*](/#function-contexts) plus
+a representation of the complete HTTP request to be sent (`request`) plus a key
+value list of query parameters of the HTTP request (`query`).
+
+The following configuration:
+
+{% highlight json %}
+{
+    "parameters": {
+        "api": {
+            "baseUrl": "http://example.com/",
+            "http": {
+                "defaultOptions": {
+                    "params": {
+                        "account": "admin"
+                    }
+                }
+            },
+            "authentication": {
+                "type": "query",
+                "query": {
+                    "signature": {
+                        "function": "sha1",
+                        "args": [
+                            "time",
+                            {
+                                "attr": "#api-key"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "config": {
+            "#api-key": "12345abcd5678efgh90ijk",
+            "outputBucket": "mock-server",
+            "jobs": [
+                {
+                    "endpoint": "users",
+                    "params": {
+                        "showColumns": "all"
+                    }
+                }
+            ]
+        }
+    }
+}
+{% endhighlight %}
+
+Leads to the following function context:
+
+{% highlight %}
+{
+	"query": {
+		"account": "admin",
+		"showColumns": "all"
+	},
+	"request": {
+		"url": "http:\/\/example.com\/users?account=admin&showColumns=all",
+		"path": "\/users",
+		"queryString": "account=admin&showColumns=all",
+		"method": "GET",
+		"hostname": "example.com",
+		"port": 80,
+		"resource": "\/users?account=admin&showColumns=all"
+	},
+	"attr": {
+		"#api-key": "12345abcd5678efgh90ijk",
+		"outputBucket": "mock-server"
+	}
+}
+
+See [basic example](#api-default-parameter) and [more complicated example](#api-query-authentication).
+
+TODO
+oauth20 - vubec nevim kde? - nejaky definitions coz je bud query nebo headers podle subscriber
+Oauth20Login - params i heeaders
 
 
 
@@ -596,7 +700,7 @@ This is useful in case of the configuration is used as part of a [template](todo
 of the `NotSoSecret` value.
 See the [full example](todo:089-function-job-parameters-md5) or an alternative [with SHA1 hash](090-function-job-parameters-sha1).
 
-### Optiona Job Parameters 
+### Optional Job Parameters 
 Let's say you have an API which allows you to send the list of columns to be contained in the API response.
 For example to list users and include their `id`, `name` and `login` properties, you have to call
 `/users?showColumns=id,name,login`. Also you want to enter these values an array in the `config` section, because
@@ -668,7 +772,7 @@ This means that the [*configuration attributes*](#configuration-attributes) will
 }
 {% endhighlight %}
 
-You can then use the [`concat` function](todo) to access that value and merge it with other parts to create the
+You can then use the [`concat` function](#concat) to access that value and merge it with other parts to create the
 final API URL (`http://example.com/api/1.0/`):
 
 {% highlight json %}
@@ -750,6 +854,172 @@ The alternative configuration also puts current date, but whereas the first one 
 date to each record, the alternative configuration will return different times for different records 
 as they are extracted. 
 See the [full example](todo:091-function-user-data) or an alternative [example with set date](092-function-user-date-set-date).
+
+### API Default Parameters
+Suppose you have an API which expects a `tokenHash` parameter sent with every request. The 
+token hash is supposed to be generated by SHA-256 hashing algorithm from a token and secret
+you obtain. Because the 
+[`api.http.defaultOptions.params`](/extend/generic-extractor/api/#headers) option does not 
+support functions, you either have to supply the parameters in the 
+[`jobs.params`](/extend/generic-extractor/config/jobs/#request-parameters) configuration or use 
+[API Query Authentication](/extend/generic-extractor/api/authentication/query/). Using (or abusing) the
+API Query Authentication is possible if the default parameters represent authentication or, you
+the API does not use any authentication method (two authentication methods are not possible):
+
+{% highlight json %}
+{
+    "parameters": {
+        "api": {
+            "baseUrl": "http://example.com/",
+            "authentication": {
+                "type": "query",
+                "query": {
+                    "tokenHash": {
+                        "function": "hash_hmac",
+                        "args": [
+                            "sha256",
+                            {
+                                "attr": "#api-key"
+                            },
+                            {
+                                "attr": "#secret-key"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "config": {
+            "#api-key": "12345abcd5678efgh90ijk",
+            "#secret-key": "TeaPot",
+            "debug": true,
+            "outputBucket": "mock-server",
+            "jobs": [
+                {
+                    "endpoint": "users",
+                    "dataType": "users"
+                }
+            ]
+        }
+    }
+}
+{% endhighlight %}
+
+The above configuration reads the `#api-key` and `#secret-key` parameters from the `config` section,
+computes SHA-256 hash and sends it as a `tokenHash` parameter with every request. See the
+[full example](todo:099-function-query-parameters). The solution with using the `jobs.params` 
+configuration can look like this:
+
+{% highlight json %}
+{
+    "parameters": {
+        "api": {
+            "baseUrl": "http://example.com/"
+        },
+        "config": {
+            "#api-key": "12345abcd5678efgh90ijk",
+            "#secret-key": "TeaPot",
+            "debug": true,
+            "outputBucket": "mock-server",
+            "jobs": [
+                {
+                    "endpoint": "users",
+                    "dataType": "users",
+                    "params": {
+                        "tokenHash": {
+                            "function": "hash_hmac",
+                            "args": [
+                                "sha256",
+                                {
+                                    "attr": "#api-key"
+                                },
+                                {
+                                    "attr": "#secret-key"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
+{% endhighlight %}
+
+The only practical difference is that the `tokenHash` parameter is going to be sent only with
+the single `users` job. See [full example](098-function-hmac).
+
+### API Query Authentication
+Suppose you have an API which has only a single endpoint `/items` to which you have to 
+pass a `type` parameter to list resources of a given type. On top of that the API requires 
+to be sent with every request an `apiToken` parameter and a `signature` parameter which is 
+a hash of the token and type. The following configuration handles the situation:
+
+{% highlight json %}
+{
+    "parameters": {
+        "api": {
+            "baseUrl": "http://mock-server:80/101-function-query-auth/",
+            "authentication": {
+                "type": "query",
+                "query": {
+                    "apiToken": {
+                        "attr": "#token"
+                    },
+                    "signature": {
+                        "function": "sha1",
+                        "args": [
+                            {
+                                "function": "concat",
+                                "args": [
+                                    {
+                                        "attr": "#token"
+                                    },
+                                    {
+                                        "query": "type"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "apiRequest": {
+                    "headers": {
+                        "X-Api-Token": "token"
+                    }
+                }
+            }
+        },
+        "config": {            
+            "#token": "1234abcd567efg890hij",
+            "debug": true,
+            "outputBucket": "mock-server",
+            "jobs": [
+                {
+                    "endpoint": "items",
+                    "dataType": "users",
+                    "params": {
+                        "type": "users"
+                    }
+                },
+                {
+                    "endpoint": "items",
+                    "dataType": "orders",
+                    "params": {
+                        "type": "orders"
+                    }
+                }
+            ]
+        }
+    }
+}
+{% endhighlight %}
+
+There are two jobs, both to same endpoint (`items`), but with different `type` parameter and `dataType`.
+The authentication method `query` adds two more parameters to each request -- `apiToken` (contain the value 
+of `config.#token`) and `signature`. The `signature` parameters is created as a SHA-1 hash of the 
+token and resource type (`"query": "type"` is taken from the `jobs.params.type` value). See
+[full example](101-function-query-auth).
 
 ### Headers
 Suppose you have an API which requires you to send a custom `X-Api-Auth` header with every request.
@@ -950,77 +1220,69 @@ timestamp value (`???` below). Then there is another outer part:
 The converts the timestamp back to a string format (`Y-m-d` format) which yields `2017-10-11`. This
 value is assigned to the `to` parameter of the API call.
 
-
-
-todo, muze se pouzit user funkce v ## Force Stop scrolleru  ?
-
-
-###  Query auth
-
-- **authentication.type**: `query`
-- **authentication.query**: An object that describes each query parameter, where each key in the object is the actual query parameter, and its value is either its value, pointer to a config value or an [user function](/extend/generic-extractor/user-functions/)
-
-## Example:
-
-### Configuration:
+### Login Authentication
+Suppose you have an API which requires you to send username and password separated by colon and
+base64 encoded -- e.g. `JohnDoe:TopSecret` (base64 encoded to `Sm9obkRvZTpUb3BTZWNyZXQ=`) in
+`X-Authorization` header to a `/auth` endpoint. The login endpoint then returns a token
+which can be used with other API calls. The following configuration reads both the login and
+password parameters from the `config` section and uses the `login` authorization method to send them
+to a special `/auth` endpoint.
 
 {% highlight json %}
 {
-    "api": {
-        "authentication": {
-            "type": "url.query",
-            "query": {
-                "apiKey": {
-                    "attr": "apiKey"
-                },
-                "sig": {
-                    "function": "md5",
-                    "args": [
-                        {
-                            "function": "concat",
+    "parameters": {
+        "api": {
+            "baseUrl": "http://example.com/",
+            "authentication": {
+                "type": "login",
+                "loginRequest": {
+                    "endpoint": "auth",
+                    "headers": {
+                        "X-Authorization": {
+                            "function": "base64_encode",
                             "args": [
                                 {
-                                    "attr": "apiKey"
-                                },
-                                {
-                                    "attr": "#secret"
-                                },
-                                {
-                                    "function": "time"
+                                    "function": "concat",
+                                    "args": [
+                                        {
+                                            "attr": "#login"
+                                        },
+                                        ":",
+                                        {
+                                            "attr": "#password"
+                                        }
+                                    ]
                                 }
                             ]
                         }
-                    ]
+                    }
+                },
+                "apiRequest": {
+                    "headers": {
+                        "X-Api-Token": "token"
+                    }
                 }
             }
+        },
+        "config": {
+            "#login": "JohnDoe",
+            "#password": "TopSecret",
+            "debug": true,
+            "outputBucket": "mock-server",
+            "jobs": [
+                {
+                    "endpoint": "users",
+                    "dataType": "users"
+                }
+            ]
         }
-    },
-    "config": {
-        "apiKey": "asdf1234",
-        "#secret": "KBC::ComponentEncrypted==gvrevgrew\grewvgr\ev6\u45bu\65^|VH|^vh==",
-        "jobs": []
     }
 }
 {% endhighlight %}
 
-- The first item will look for the *apiKey* query parameter value in the config attribute named *apiKey*
-- The second item will generate a *sig* parameter value from MD5 of merged configuration table attributes *apiKey* and *secret*, followed by current *time()* at the time of the request (time() being the PHP function)
-- Allowed functions are listed below in the *User functions* section
-- If you're using any config parameter by using `"attr": "parameterName"`, it has to be identical string to the one in the actual config, including eventual `#` if KBC Docker's encryption is used.
+See [full example](todo:100-function-login-headers)s
 
-- Data available in query functions:
-    - **attr**: An attribute from `config` (first level only)
-    - **query**: A value from a query parameter
-        - Ex.: `{ "query": "par1" }` will return `val1` if the request query contains `?par1=val1`
-    - **request**: Information about the request
-        - Available information:
-            - `url`
-            - `path`
-            - `queryString`
-            - `method`
-            - `hostname`
-            - `port`
-            - `resource`
+
 
 - For an example that includes request data in a function, please refer to the [OAuth 20 HMAC example part](/extend/generic-extractor/authentication/oauth/20/#example-for-mac-authentication).
 

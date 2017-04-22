@@ -68,7 +68,7 @@ offset for the needs of a specific API:
 {% endhighlight %}
 
 Here the API expects the parameters `count` and `set`. The first request will be sent with the parameters `count=20` 
-and `page=1`; for example, `/users?set=1&count=2`. See the [full example](todo:052-pagination-pagenum-rename). 
+and `set=1`; for example, `/users?set=1&count=20`. See the [full example](todo:052-pagination-pagenum-rename). 
 
 **Important:** Without setting a value for the `limit` option, the `limitParam` will not be sent at all 
 (no matter how you name it).

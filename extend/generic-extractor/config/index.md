@@ -43,7 +43,7 @@ from within [functions](/extend/generic-extractor/functions/).
 ## Jobs
 Jobs configuration describes API endpoints (resources) which will be extracted. This
 includes configuration of HTTP method and parameters. The `jobs` configuration is 
-**required** and described in a [separate article](/extend/generic-extractor/config/jobs/).
+**required** and is described in a [separate article](/extend/generic-extractor/config/jobs/).
 
 ## Output Bucket
 The `outputBucket` option defines the name of the [Storage Bucket](https://help.keboola.com/storage/buckets/) 
@@ -156,7 +156,7 @@ Will produce the following `users` table:
 {% endhighlight %}
 
 The `userData` values are added to parent jobs only, they will not affect 
-[child jobs](/extend/generic-extractor/jobs/children) anyhow. If the result table contains
+[child jobs](/extend/generic-extractor/config/jobs/children) anyhow. If the result table contains
 columns with the same names as `userData` properties, the original column will be overwritten 
 by the values of `userData`.
 
