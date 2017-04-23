@@ -3,6 +3,9 @@ title: Functions
 permalink: /extend/generic-extractor/functions/
 ---
 
+* TOC
+{:toc}
+
 Functions can be used in several places of Generic Extractor configuration to introduce dynamically generated values instead of
 statically provided ones. Functions are simple pre-defined functions which allow you to add extra flexibility when needed. Functions
 also allow referencing already existing values in the configuration instead of copying them. Using functions is also advantageous (and sometimes necessary)
@@ -555,7 +558,7 @@ The following configuration:
 
 Leads to the following function context:
 
-{% highlight %}
+{% highlight json %}
 {
 	"query": {
 		"account": "admin",
@@ -575,6 +578,7 @@ Leads to the following function context:
 		"outputBucket": "mock-server"
 	}
 }
+{% endhighlight %}
 
 See [basic example](#api-default-parameter) and [more complicated example](#api-query-authentication).
 

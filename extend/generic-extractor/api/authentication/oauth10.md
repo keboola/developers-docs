@@ -1,7 +1,11 @@
 ---
-title: OAuth 1.0 Authentication (under construction)
-permalink: /extend/generic-extractor/api/authentication/oauth/10/
+title: OAuth 1.0 Authentication
+permalink: /extend/generic-extractor/api/authentication/oauth10/
 ---
+
+* TOC
+{:toc}
+
 
 - Use OAuth 1.0 tokens
 - Using OAuth in ex-generic-v2 in KBC currently requires the application to be registered under the API's component ID and cannot be configured in Generic extractor itself
