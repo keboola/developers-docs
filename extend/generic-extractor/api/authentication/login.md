@@ -362,7 +362,7 @@ This assumes that the response of the *login request* looks like this:
 
 See the [full example](todo:083-login-auth-expires-date).
 
-### Expiration from Response
+### Relative Expiration from Response
 In case the API returns credentials validity in the *login request* and that validity is expressed in seconds, 
 use the `expires` option together with setting `relative` to `true`. 
 The result is the behavior of the [first example](#configuration-with-headers) but the value is taken 

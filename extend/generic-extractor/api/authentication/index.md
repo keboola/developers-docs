@@ -15,7 +15,7 @@ and then sends them in the URL or headers of each API request
 - [OAuth 2.0 Login](/extend/generic-extractor/api/authentication/oauth20/) authentication --- crossover between [OAuth 2.0](/extend/generic-extractor/api/authentication/oauth20/) and [Login](/extend/generic-extractor/api/authentication/login/) authentication.
 
 Use the authentication method supported by the target API. If the API supports multiple 
-authorization methods, the [URL Query](/extend/generic-extractor/api/authentication/query/) and
+authentication methods, the [URL Query](/extend/generic-extractor/api/authentication/query/) and
 [Basic HTTP](/extend/generic-extractor/api/authentication/basic/) methods are the easiest to set up; but they
 are also the least secure.
 
