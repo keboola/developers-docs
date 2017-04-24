@@ -1,6 +1,6 @@
 ---
 title: OAuth Authentication (under construction)
-permalink: /extend/generic-extractor/authentication/oauth/
+permalink: /extend/generic-extractor/api/authentication/oauth/
 ---
 
 ## OAuth Authentication
