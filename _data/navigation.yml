@@ -137,26 +137,29 @@ items:
                   - url: /extend/generic-extractor/api/authentication/login/
                     title: Login
 
-                  - url: /extend/generic-extractor/api/authentication/oauth/
-                    title: OAuth
-                    items:
-                      - url: /extend/generic-extractor/api/authentication/oauth/20-login/
-                        title: Login using OAuth 2.0
+                  - url: /extend/generic-extractor/api/authentication/oauth10/
+                    title: OAuth 1.0
 
-                      - url: /extend/generic-extractor/api/authentication/oauth/10/
-                        title: OAuth 1.0
+                  - url: /extend/generic-extractor/api/authentication/oauth20/
+                    title: OAuth 2.0
 
-                      - url: /extend/generic-extractor/api/authentication/oauth/20/
-                        title: OAuth 2.0
+                  - url: /extend/generic-extractor/api/authentication/oauth20-login/
+                    title: Login using OAuth 2.0
 
-          - url: /extend/generic-extractor/user-functions/
-            title: User Functions
+          - url: /extend/generic-extractor/functions/
+            title: Functions
+
+          - url: /extend/generic-extractor/incremental/
+            title: Incremental Extraction
 
           - url: /extend/generic-extractor/map/
             title: Configuration Map
 
           - url: /extend/generic-extractor/running/
             title: Running Generic Extractor
+
+          - url: /extend/generic-extractor/registration/
+            title: Component Registration
 
       - url: /extend/common-interface/
         title: Common Interface
