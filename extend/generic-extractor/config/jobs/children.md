@@ -251,24 +251,21 @@ To avoid automatic table names, it is advisable to always use the `dataType` pro
 child jobs:
 
 {% highlight json %}
-{
-    ...,
-    "jobs": [
-        {
-            "endpoint": "users",
-            "children": [
-                {
-                    "endpoint": "user/{user-id}",
-                    "dataField": ".",
-                    "dataType": "user-detail",
-                    "placeholders": {
-                        "user-id": "id"
-                    }
+"jobs": [
+    {
+        "endpoint": "users",
+        "children": [
+            {
+                "endpoint": "user/{user-id}",
+                "dataField": ".",
+                "dataType": "user-detail",
+                "placeholders": {
+                    "user-id": "id"
                 }
-            ]
-        }
-    ]
-}
+            }
+        ]
+    }
+]
 {% endhighlight %}
 In the above configuration, `dataType` is set to `user-detail`, hence you will obtain the
 following tables:
@@ -316,24 +313,21 @@ parent response with a list of users returns a response similar to this:
 you have to modify the `placeholders` definition:
 
 {% highlight json %}
-{
-    ...,
-    "jobs": [
-        {
-            "endpoint": "users",
-            "children": [
-                {
-                    "endpoint": "user/{user-id}",
-                    "dataField": ".",
-                    "dataType": "user-detail",
-                    "placeholders": {
-                        "user-id": "user-info.id"
-                    }
+"jobs": [
+    {
+        "endpoint": "users",
+        "children": [
+            {
+                "endpoint": "user/{user-id}",
+                "dataField": ".",
+                "dataType": "user-detail",
+                "placeholders": {
+                    "user-id": "user-info.id"
                 }
-            ]
-        }
-    ]
-}
+            }
+        ]
+    }
+]
 {% endhighlight %}
 
 Setting the placeholder to `"user-id": "user-info.id"` means that the `user-id` placeholder
@@ -406,25 +400,22 @@ parent endpoint returns a complicated response like this:
 The following job definition extracts the `active-users` array together with the details for each user:
 
 {% highlight json %}
-{
-    ...,
-    "jobs": [
-        {
-            "endpoint": "users",
-            "dataField": "active-users.items",
-            "children": [
-                {
-                    "endpoint": "user/{user-id}",
-                    "dataField": ".",
-                    "dataType": "user-detail",
-                    "placeholders": {
-                        "user-id": "user-info.id"
-                    }
+"jobs": [
+    {
+        "endpoint": "users",
+        "dataField": "active-users.items",
+        "children": [
+            {
+                "endpoint": "user/{user-id}",
+                "dataField": ".",
+                "dataType": "user-detail",
+                "placeholders": {
+                    "user-id": "user-info.id"
                 }
-            ]
-        }
-    ]
-}
+            }
+        ]
+    }
+]
 {% endhighlight %}
 
 Notice that the placeholder path remains set to `user-info.id` because it is relative to
@@ -454,23 +445,20 @@ run into a naming conflict. That is, if the child response with user details loo
 and you use the following job configuration:
 
 {% highlight json %}
-{
-    ...,
-    "jobs": [
-        {
-            "endpoint": "users",
-            "children": [
-                {
-                    "endpoint": "user/{user-id}",
-                    "dataField": ".",
-                    "placeholders": {
-                        "user-id": "id"
-                    }
+"jobs": [
+    {
+        "endpoint": "users",
+        "children": [
+            {
+                "endpoint": "user/{user-id}",
+                "dataField": ".",
+                "placeholders": {
+                    "user-id": "id"
                 }
-            ]
-        }
-    ]
-}
+            }
+        ]
+    }
+]
 {% endhighlight %}
 
 the output for the child job will contain the column `parent_id`. At the same time, Generic Extractor will attempt
@@ -542,44 +530,41 @@ The `user/123/order/1234` endpoint returns a response like this:
 Then you can create a job configuration with three nested children to retrieve all the API resources:
 
 {% highlight json %}
-{
-    ...,
-    "jobs": [
-        {
-            "endpoint": "users",
-            "children": [
-                {
-                    "endpoint": "user/{1:user-id}",
-                    "dataField": ".",
-                    "dataType": "user-detail",
-                    "placeholders": {
-                        "1:user-id": "userId"
-                    },
-                    "children": [
-                        {
-                            "endpoint": "user/{2:user-id}/orders",
-                            "dataType": "orders",
-                            "placeholders": {
-                                "2:user-id": "userId"
-                            },
-                            "children": [
-                                {
-                                    "endpoint": "user/{3:user-id}/order/{1:order-id}",
-                                    "dataType": "order-detail",
-                                    "dataField": ".",
-                                    "placeholders": {
-                                        "3:user-id": "userId",
-                                        "1:order-id": "orderId"
-                                    }
+"jobs": [
+    {
+        "endpoint": "users",
+        "children": [
+            {
+                "endpoint": "user/{1:user-id}",
+                "dataField": ".",
+                "dataType": "user-detail",
+                "placeholders": {
+                    "1:user-id": "userId"
+                },
+                "children": [
+                    {
+                        "endpoint": "user/{2:user-id}/orders",
+                        "dataType": "orders",
+                        "placeholders": {
+                            "2:user-id": "userId"
+                        },
+                        "children": [
+                            {
+                                "endpoint": "user/{3:user-id}/order/{1:order-id}",
+                                "dataType": "order-detail",
+                                "dataField": ".",
+                                "placeholders": {
+                                    "3:user-id": "userId",
+                                    "1:order-id": "orderId"
                                 }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        }
-    ]
-}
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
 {% endhighlight %}
 
 The `jobs` configuration retrieves all users from the `users` API endpoint. The first child retrieves
@@ -625,40 +610,37 @@ are multiple ways how the jobs may be configured. For example, the following con
 exact same result as the above configuration:
 
 {% highlight json %}
-{
-    ...,
-    "jobs": [
-        {
-            "endpoint": "users",
-            "children": [
-                {
-                    "endpoint": "user/{user-id}",
-                    "dataField": ".",
-                    "dataType": "user-detail",
-                    "placeholders": {
-                        "user-id": "userId"
-                    },
-                    "children": [
-                        {
-                            "endpoint": "user/{user-id}/orders",
-                            "dataType": "orders",
-                            "children": [
-                                {
-                                    "endpoint": "user/{user-id}/order/{order-id}",
-                                    "dataType": "order-detail",
-                                    "dataField": ".",
-                                    "placeholders": {
-                                        "order-id": "orderId"
-                                    }
+"jobs": [
+    {
+        "endpoint": "users",
+        "children": [
+            {
+                "endpoint": "user/{user-id}",
+                "dataField": ".",
+                "dataType": "user-detail",
+                "placeholders": {
+                    "user-id": "userId"
+                },
+                "children": [
+                    {
+                        "endpoint": "user/{user-id}/orders",
+                        "dataType": "orders",
+                        "children": [
+                            {
+                                "endpoint": "user/{user-id}/order/{order-id}",
+                                "dataType": "order-detail",
+                                "dataField": ".",
+                                "placeholders": {
+                                    "order-id": "orderId"
                                 }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        }
-    ]
-}
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
 {% endhighlight %}
 
 Even though the above configuration is less explicit and not really recommended, it is still acceptable.
@@ -670,44 +652,41 @@ override the ones in the parent jobs. For example, in the following (probably **
 `1:user-id` placeholder in the deepest child will really contain the `orderId` value.
 
 {% highlight json %}
-{
-    ...,
-    "jobs": [
-        {
-            "endpoint": "users",
-            "children": [
-                {
-                    "endpoint": "user/{1:user-id}",
-                    "dataField": ".",
-                    "dataType": "user-detail",
-                    "placeholders": {
-                        "1:user-id": "userId"
-                    },
-                    "children": [
-                        {
-                            "endpoint": "user/{2:user-id}/orders",
-                            "dataType": "orders",
-                            "placeholders": {
-                                "2:user-id": "userId"
-                            },
-                            "children": [
-                                {
-                                    "endpoint": "user/{1:user-id}/order/{2:order-id}",
-                                    "dataType": "order-detail",
-                                    "dataField": ".",
-                                    "placeholders": {
-                                        "1:user-id": "orderId",
-                                        "2:order-id": "userId"
-                                    }
+"jobs": [
+    {
+        "endpoint": "users",
+        "children": [
+            {
+                "endpoint": "user/{1:user-id}",
+                "dataField": ".",
+                "dataType": "user-detail",
+                "placeholders": {
+                    "1:user-id": "userId"
+                },
+                "children": [
+                    {
+                        "endpoint": "user/{2:user-id}/orders",
+                        "dataType": "orders",
+                        "placeholders": {
+                            "2:user-id": "userId"
+                        },
+                        "children": [
+                            {
+                                "endpoint": "user/{1:user-id}/order/{2:order-id}",
+                                "dataType": "order-detail",
+                                "dataField": ".",
+                                "placeholders": {
+                                    "1:user-id": "orderId",
+                                    "2:order-id": "userId"
                                 }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        }
-    ]
-}
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
 {% endhighlight %}
 
 See the [full example](todo:027-basic-deeper-nesting-alternative).
@@ -716,65 +695,63 @@ See the [full example](todo:027-basic-deeper-nesting-alternative).
 Let's see how you can retrieve more nested API resources:
 
 {% highlight json %}
-{
-    "jobs": [
-        {
-            "endpoint": "users",
-            "children": [
-                {
-                    "endpoint": "user/{1:user-id}",
-                    "dataField": ".",
-                    "dataType": "user-detail",
-                    "placeholders": {
-                        "1:user-id": "id"
-                    },
-                    "children": [
-                        {
-                            "endpoint": "user/{2:user-id}/orders",
-                            "dataType": "orders",
-                            "placeholders": {
-                                "2-user-id": "id"
-                            },
-                            "children": [
-                                {
-                                    "endpoint": "user/{3:user-id}/order/{1:order-id}",
-                                    "dataType": "order-detail",
-                                    "dataField": ".",
-                                    "placeholders": {
-                                        "3:user-id": "id",
-                                        "1:order-id": "id"
-                                    },
-                                    "children": [
-                                        {
-                                            "endpoint": "user/{4:user-id}/order/{2:order-id}/items",
-                                            "dataType": "order-items",
-                                            "placeholders": {
-                                                "4:user-id": "id",
-                                                "2:order-id": "id"
-                                            },
-                                            "children": [
-                                                {
-                                                    "endpoint": "user/{5:user-id}/order/{3:order-id}/item/{1:item-id}",
-                                                    "dataType": "item-detail",
-                                                    "dataField": ".",
-                                                    "placeholders": {
-                                                        "5:user-id": "id",
-                                                        "3:order-id": "id",
-                                                        "1:item-id": "id"
-                                                    }
+"jobs": [
+    {
+        "endpoint": "users",
+        "children": [
+            {
+                "endpoint": "user/{1:user-id}",
+                "dataField": ".",
+                "dataType": "user-detail",
+                "placeholders": {
+                    "1:user-id": "id"
+                },
+                "children": [
+                    {
+                        "endpoint": "user/{2:user-id}/orders",
+                        "dataType": "orders",
+                        "placeholders": {
+                            "2-user-id": "id"
+                        },
+                        "children": [
+                            {
+                                "endpoint": "user/{3:user-id}/order/{1:order-id}",
+                                "dataType": "order-detail",
+                                "dataField": ".",
+                                "placeholders": {
+                                    "3:user-id": "id",
+                                    "1:order-id": "id"
+                                },
+                                "children": [
+                                    {
+                                        "endpoint": "user/{4:user-id}/order/{2:order-id}/items",
+                                        "dataType": "order-items",
+                                        "placeholders": {
+                                            "4:user-id": "id",
+                                            "2:order-id": "id"
+                                        },
+                                        "children": [
+                                            {
+                                                "endpoint": "user/{5:user-id}/order/{3:order-id}/item/{1:item-id}",
+                                                "dataType": "item-detail",
+                                                "dataField": ".",
+                                                "placeholders": {
+                                                    "5:user-id": "id",
+                                                    "3:order-id": "id",
+                                                    "1:item-id": "id"
                                                 }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        }
-    ]
-}
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
 {% endhighlight %}
 
 The above configuration assumes that all API resources simply have an `id` property (unlike in the
@@ -804,13 +781,10 @@ will get overwritten. With the above configuration, the following `item-detail` 
 where the `parent_id` column refers to the `1:item-id` placeholder. If you used this placeholder configuration:
 
 {% highlight json %}
-{
-    ...,
-    "placeholders": {
-        "1:item-id": "id",
-        "3:order-id": "id",
-        "5:user-id": "id"
-    }
+"placeholders": {
+    "1:item-id": "id",
+    "3:order-id": "id",
+    "5:user-id": "id"
 }
 {% endhighlight %}
 
@@ -998,25 +972,22 @@ The `user/123` endpoint returns a response like this:
 A simple child filter can be then set up using the following `jobs` configuration:
 
 {% highlight json %}
-{
-    ...,
-    "jobs": [
-        {
-            "endpoint": "users",
-            "children": [
-                {
-                    "endpoint": "user/{user-id}",
-                    "dataField": ".",
-                    "dataType": "user-deail",
-                    "placeholders": {
-                        "user-id": "id"
-                    },
-                    "recursionFilter": "role==parent"
-                }
-            ]
-        }
-    ]
-}
+"jobs": [
+    {
+        "endpoint": "users",
+        "children": [
+            {
+                "endpoint": "user/{user-id}",
+                "dataField": ".",
+                "dataType": "user-deail",
+                "placeholders": {
+                    "user-id": "id"
+                },
+                "recursionFilter": "role==parent"
+            }
+        ]
+    }
+]
 {% endhighlight %}
 
 The `recursionFilter` setting will cause Generic Extractor to query only the sub-resources for which the
@@ -1048,25 +1019,22 @@ a **like** comparison operator `~`. It expects that the value contains a placeho
 which matches any number of characters. The following configuration:
 
 {% highlight json %}
-{
-    ...,
-    "jobs": [
-        {
-            "endpoint": "users",
-            "children": [
-                {
-                    "endpoint": "user/{user-id}",
-                    "dataField": ".",
-                    "recursionFilter": "type!~%min%",
-                    "dataType": "user-detail",
-                    "placeholders": {
-                        "user-id": "id"
-                    }
+"jobs": [
+    {
+        "endpoint": "users",
+        "children": [
+            {
+                "endpoint": "user/{user-id}",
+                "dataField": ".",
+                "recursionFilter": "type!~%min%",
+                "dataType": "user-detail",
+                "placeholders": {
+                    "user-id": "id"
                 }
-            ]
-        }
-    ]
-}
+            }
+        ]
+    }
+]
 {% endhighlight %}
 
 filters out all child resources not containing the string `min` in their parent type property.
@@ -1088,25 +1056,22 @@ For example the following configuration retrieves details for user which have
 both `id < 400` and `role = child`:
 
 {% highlight json %}
-{
-    ...,
-    "jobs": [
-        {
-            "endpoint": "users",
-            "children": [
-                {
-                    "endpoint": "user/{user-id}",
-                    "dataField": ".",
-                    "dataType": "user-detail",
-                    "recursionFilter": "id<400&role==child",
-                    "placeholders": {
-                        "user-id": "id"
-                    }
+"jobs": [
+    {
+        "endpoint": "users",
+        "children": [
+            {
+                "endpoint": "user/{user-id}",
+                "dataField": ".",
+                "dataType": "user-detail",
+                "recursionFilter": "id<400&role==child",
+                "placeholders": {
+                    "user-id": "id"
                 }
-            ]
-        }
-    ]
-}
+            }
+        ]
+    }
+]
 {% endhighlight %}
 
 The following `user-detail` will be produced:
@@ -1123,24 +1088,21 @@ above example, there is no support for parentheses. The following configuration
 combines multiple filters:
 
 {% highlight json %}
-{
-    ...,
-    "jobs": [
-        {
-            "endpoint": "users",
-            "recursionFilter": "role=parent|id>300&id<400",
-            "children": [
-                {
-                    "endpoint": "user/{user-id}",
-                    "dataField": ".",
-                    "placeholders": {
-                        "user-id": "id"
-                    }
+"jobs": [
+    {
+        "endpoint": "users",
+        "recursionFilter": "role=parent|id>300&id<400",
+        "children": [
+            {
+                "endpoint": "user/{user-id}",
+                "dataField": ".",
+                "placeholders": {
+                    "user-id": "id"
                 }
-            ]
-        }
-    ]
-}
+            }
+        ]
+    }
+]
 {% endhighlight %}
 
 The precedence of logical operators is defined so that the first operator occurring in the
