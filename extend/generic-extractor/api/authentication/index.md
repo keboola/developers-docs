@@ -39,7 +39,7 @@ An example authentication configuration looks like this:
 
 ## OAuth
 Generic Extractor also supports authentication using the [OAuth](https://en.wikipedia.org/wiki/OAuth) standard.
-Due to the nature of OAuth, this is authentication method is supported only for [registered components](todo).
+Due to the principles of OAuth, this is authentication method is supported only for [registered components](todo).
 The OAuth protocol defines a scheme in which credentials are exchanged between a:
 
 - consumer (Generic Extractor)

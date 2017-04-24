@@ -582,11 +582,178 @@ Leads to the following function context:
 
 See [basic example](#api-default-parameter) and [more complicated example](#api-query-authentication).
 
-TODO
-oauth20 - vubec nevim kde? - nejaky definitions coz je bud query nebo headers podle subscriber
-Oauth20Login - params i heeaders
+#### OAuth 2.0 Authentication Context
+The OAuth Authentication Context is used for
+[`oauth20`](/extend/generic-extractor/api/authentication/oauth20/) authentication method
+(it is not applicable to `oauth10`). The OAuth Authentication context contains 
+representation of the complete HTTP request to be sent (`request`) plus a key
+value list of query parameters of the HTTP request (`query`) plus a `authorization` section
+which contains the response from the OAuth service provider. This context is available for 
+both `headers` and `query` section of the `oauth20` authentication methods.
 
+The following configuration:
 
+{% highlight json %}
+{
+    "parameters": {
+        "api": {
+            "baseUrl": "http://example.com/",
+            "authentication": {
+                "type": "oauth20",
+                "headers": {
+                    "Authorization": {
+                        "function": "concat",
+                        "args": [
+                            "Bearer ",
+                            {
+                                "authorization": "#data.access_token"
+                            }
+                        ]
+                    }
+                }                
+            }
+        },
+        "config": {
+            "outputBucket": "mock-server",
+            "jobs": [
+                {
+                    "endpoint": "users",
+                    "dataType": "users"
+                }
+            ]
+        }
+    },
+    "authorization": {
+        "oauth_api": {
+            "credentials": {
+                "#data": "{\"status\": \"ok\",\"access_token\": \"testToken\", \"foo\": {\"bar\": \"baz\"}}",
+                "appKey": "clientId",
+                "#appSecret": "clientSecret"
+            }
+        }
+    }    
+}
+{% endhighlight %}
+
+Leads to the following function context:
+
+{% highlight json %}
+{
+	"query": {
+		"showColumns": "all"
+	},
+	"request": {
+		"url": "http:\/\/example.com\/users?showColumns=all",
+		"path": "\/users",
+		"queryString": "showColumns=all",
+		"method": "GET",
+		"hostname": "example.com",
+		"port": 80,
+		"resource": "\/users?showColumns=all"
+	},
+	"authorization": {
+		"data.status": "ok",
+		"data.access_token": "testToken",
+        "data.foo.bar": "baz"
+		"timestamp": 1492949837,
+		"nonce": "99206d94a6846841",
+		"clientId": "clientId",
+	}
+}
+{% endhighlight %}
+
+The `authorization` section of the configuration contains the 
+[OAuth2 response](/extend/generic-extractor/api/authentication/oauth20/). The function context contains the
+the parsed and flattened response fields under the key `data` provided that the response was sent int JSON format
+and that [`"format": "json"`](/extend/generic-extractor/api/authentication/oauth20/#configuration) was set.
+In the response above, these are the keys `data.status`, `data.access_token`, `data.foo.bar`. This is defined
+entirely by the behavior of the OAuth Service provider. If the response is a plaintext (usual directly a token),
+then the entire response is available in the field `data`. Apart from that, the fields `timestamp` (Unix timestamp 
+of the request), `nonce` (cryptographic [nonce](https://en.wikipedia.org/wiki/Cryptographic_nonce) for 
+signing the request) and `clientId` (the value of `authorization.oauth_api.credentials.appKey`, which is obtained when
+the application is registered) are added to the `authorization` section. For usage, see [OAuth examples](/extend/generic-extractor/api/authentication/oauth20/).
+
+#### OAuth 2.0 Login Authentication Context
+The OAuth Login Authentication Context is used for
+[`oauth20.login`](/extend/generic-extractor/api/authentication/oauth20-login/) authentication method
+(it is not applicable to `oauth20`). The OAuth Login Authentication context contains 
+OAuth information split into properties `consumer` (response obtained from the service provider) and
+`user` (data obtained from the user). This context is available for 
+both `headers` and `params` section of the `oauth20` authentication methods.
+
+The following configuration:
+
+{% highlight json %}
+{
+    "parameters": {
+        "api": {
+            "baseUrl": "http://example.com",
+            "authentication": {
+                "type": "oauth20.login",
+                "loginRequest": {
+                    "endpoint": "login",
+                    "headers": {
+                        "Authorization": {
+                            "function": "concat",
+                            "args": [
+                                "JohnDoe: ",
+                                {
+                                    "attr": "#password"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "config": {
+            "outputBucket": "mock-server",
+            "#password": "TopSecret",
+            "jobs": [
+                {
+                    "endpoint": "users",
+                    "dataType": "users"
+                }
+            ]
+        }
+    },
+    "authorization": {
+        "oauth_api": {
+            "credentials": {
+                "#data": "{\"status\": \"ok\",\"access_token\": \"testToken\", \"mac_secret\": \"iAreSoSecret123\", \"foo\": {\"bar\": \"baz\"}}",
+                "appKey": "clientId",
+                "#appSecret": "clientSecret"
+            }
+        }
+    }
+}
+{% endhighlight %}
+
+Leads to the following function context:
+
+{% highlight json %}
+{
+    "consumer": {
+        "client_id": "clientId",
+        "client_secret": "clientSecret"
+    },
+    "user": {
+        "status: "ok",
+        "access_token": "testToken",
+        "mac_secret": "iAreSoSecret123",
+        "foo.bar": "baz"
+    }
+}
+{% endhighlight %}
+
+The `authorization` section of the configuration contains the 
+[OAuth2 response](/extend/generic-extractor/api/authentication/oauth20/). The function context contains the
+the parsed and flattened response fields in the `user` property. The content of the 
+`user` property is fully dependent on the response of the OAuth service provider. The
+`consumer` property contains the `client_id` and `client_secret` which contain values of 
+`authorization.oauth_api.credetials.appKey` and 
+`authorization.oauth_api.credetials.appSecret` respectively.
+These are obtained by KBC when the application is registered). For usage, see [OAuth Login examples](/extend/generic-extractor/api/authentication/oauth20-login/).
 
 ## Examples
 TODO: poskladat examply stejne jako contexty a to  asi ?

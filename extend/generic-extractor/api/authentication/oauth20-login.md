@@ -1,75 +1,122 @@
 ---
-title: Login using OAuth 2.0 Authentication (under construction)
-permalink: /extend/generic-extractor/authentication/oauth/20-login/
+title: Login using OAuth 2.0 Authentication
+permalink: /extend/generic-extractor/api/authentication/oauth20-login/
 ---
 
-This authentication method is nearly identical to the [login](/extend/generic-extractor/authentication/login/) method, with the exception that instead of using `attr` to access config attributes, it gives you access to user and application tokens using the `consumer` and `user` object, as long as the user data (returned by the OAuth 2.0 API) are a valid JSON.
+* TOC
+{:toc}
 
-## Configuration:
-
-- **authentication.type**: `oauth20.login`
-- See [login](/extend/generic-extractor/authentication/login/) and the example below
-
-## Example:
-
-### Configuration:
+The OAuth Login method is useful when you need to send a one-time **login request** to obtain temporary credentials 
+for authentication of all the other API requests. A sample OAuth Login authentication looks like this:
 
 {% highlight json %}
 {
-
-    "authorization": {
-        "oauth_api": {
-            "credentials": {
-                "#data": "{\"status\": \"ok\",\"access_token\": \"asdf1234\", \"refresh_token\": \"fdsa4321\"}",
-                "appKey": "clId",
-                "#appSecret": "clScrt"
+    "api": {
+        ...,
+        "authentication": {
+            "type": "oauth20.login",
+            "loginRequest": {
+                "endpoint": "login",
+                "method": "GET",
+                "headers": {
+                    "X-Login": "JohnDoe",
+                    "X-Password": "TopSecret"
+                }
+            },
+            "apiRequest": {
+                "headers": {
+                    "X-ApiToken": "authorization.token"
+                }
             }
         }
     },
+    "config": {
+        ...
+    }
+}
+{% endhighlight %}
+
+## Configuration Parameters
+The configuration parameters are identical to the [Login](/extend/generic-extractor/api/authentication/login/) method.
+The difference however is in the [function context](/extend/generic-extractor/functions/oauth-2-0-login-authentication-context).
+The **login request** is assumed to require OAuth2 authorization and its response must be in JSON format (plaintext is not supported).
+
+## Examples
+
+### Basic Configuration
+The following configuration shows how to set up a OAuth *login request*:
+
+{% highlight json %}
+{
     "parameters": {
         "api": {
+            "baseUrl": "http://mock-server:80/105-oauth2-login/",
             "authentication": {
-                "type":"oauth20.login",
+                "type": "oauth20.login",
                 "loginRequest": {
-                    "endpoint":"https://www.googleapis.com/oauth2/v4/token",
-                    "params": {
-                        "refresh_token": {
-                            "user":"refresh_token"
-                        },
-                        "client_id": {
-                            "consumer":"client_id"
-                        },
-                        "client_secret": {
-                            "consumer":"client_secret"
-                        },
-                        "grant_type":"refresh_token"
-                    },
-                    "method":"FORM",
+                    "endpoint": "token",
                     "headers": {
-                        "Content-Type":"application/x-www-form-urlencoded"
+                        "X-Refresh-Token": {
+                            "user": "refresh_token"
+                        },
+                        "X-App-Key": {
+                            "consumer": "client_id"
+                        }
                     }
                 },
                 "apiRequest": {
-                    "query": {
-                        "access_token":"access_token"
+                    "headers": {
+                        "X-Access-Token": "credentials.access_token"
                     }
                 }
+            }
+        },
+        "config": {
+            "outputBucket": "mock-server",
+            "jobs": [
+                {
+                    "endpoint": "users",
+                    "dataType": "users"
+                }
+            ]
+        }
+    },
+    "authorization": {
+        "oauth_api": {
+            "credentials": {
+                "#data": "{\"status\": \"ok\",\"refresh_token\": \"1234abcd5678efgh\"}",
+                "appKey": "someId",
+                "#appSecret": "clientSecret"
             }
         }
     }
 }
 {% endhighlight %}
 
-- **consumer.client_id** contains the value of `appKey`
-- **consumer.client_secret** contains decrypted value of `appSecret` from the OAuth API.
-
-This Google API example requires the JSON, that is stored in [OAuth API](docs.oauthv2.apiary.io) to contain a `refresh_token` property, such as:
+First an OAuth login is negotiated. The result of this authentication is response from the API (inserted into `authorization.oauth_api.credentials.#data` property): 
 
 {% highlight json %}
 {
-    "access_token": "asdf1234",
-    "refresh_token": "fdsa4321"
+    "status": "ok",
+    "refresh_token": "1234abcd5678efgh"
 }
 {% endhighlight %}
 
-..where the `access_token` is disregarded and one returned by the "login" is used instead.
+This is sent to the `/token` endpoint with the following headers:
+
+    X-Refresh-Token: 1234abcd5678efgh
+    X-App-Key: someId
+
+This API call then returns the following response:
+
+{% highlight json %}
+{
+	"credentials": {
+		"validUntil": "2017-10-04 12:45:09",
+		"access_token": "mkoijn098uhbygv"
+	}
+}
+{% endhighlight %}
+
+From that, the value of `credentials.access_token` property is taken and inserted into `X-Access-Token` header
+and sent to other API requests (`/users`).

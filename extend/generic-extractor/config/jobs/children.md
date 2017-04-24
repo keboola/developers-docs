@@ -620,7 +620,6 @@ Notice that each table contains additional columns with the placeholder property
 See the [full example](todo:026-basic-deeper-nesting).
 
 ### Nesting Level Alternative
-
 Because the required user and order IDs are present in multiple requests (in the list and in the detail), there
 are multiple ways how the jobs may be configured. For example, the following configuration produces the
 exact same result as the above configuration:
@@ -825,6 +824,127 @@ you would obtain the following `item-detail` table:
 where the `parent_id` column refers the `5:user-id` placeholder.
 
 See the [full example](todo:028-advanced-deep-nesting).
+
+### Nested Array
+Suppose you have an API which has an endpoint `/users` which returns a response like this:
+
+{% highlight json %}
+{
+    "members": {
+        "description": "Active System Members",
+        "tags": [
+            "active",
+            "crm"
+        ],
+        "count": "2",
+        "items": [
+            {
+                "name": "John Doe",
+                "user-info": {
+                    "id": 123,
+                    "active": true
+                }
+            },
+            {
+                "name": "Jane Doe",
+                "user-info": {
+                    "id": 234,
+                    "active": false
+                }
+            }
+        ]
+    }
+}
+{% endhighlight %}
+
+The API also has and endpoint `/user/{userId}` which returns details about a specific user. If 
+you wan to obtain all the fields from the above response and also the details about each user, 
+you have to create a rather tricky configuration. You may be tempted to start with the following job
+configuration:
+
+{% highlight json %}
+{
+    "endpoint": "users",
+    "dataField": "."
+}
+{% endhighlight %}
+
+This is not possible however, because the root of the response is the `members` field is not 
+an array and therefore it cannot create child jobs. Therefore the job configuration must start with:
+
+{% highlight json %}
+{
+    "endpoint": "users",
+    "dataField": "members.items",
+}
+{% endhighlight %}
+
+The `members.items` is an array which now can be used in as a source for child jobs:
+
+{% highlight json %}
+{
+    "endpoint": "users",
+    "dataField": "members.items",
+    "dataType": "users",
+    "children": [
+        {
+            "endpoint": "user/{user-id}",
+            "dataField": ".",
+            "dataType": "user-detail",
+            "placeholders": {
+                "user-id": "user-info.id"
+            }
+        }
+    ]
+}
+{% endhighlight %}
+
+Notice that the placeholder path (`user-info.id`) is entered relative to the `dataField` setting
+(`members.items`). Now to extract the other fields from the `/users` response (other than `member.items`), you
+have to create another job:
+
+{% highlight json %}
+{
+    "endpoint": "users",
+    "dataField": ".",
+    "dataType": "users-2"
+}
+{% endhighlight %}
+
+Note that the `dataType` must be different then for the first job, because the structure of the response is different.
+You will receive a number of tables:
+
+users (first job):
+
+|name|user-info\_id|user-info\_active|
+|---|---|---|
+|John Doe|123|1|
+|Jane Doe|234||
+
+user-detail (first job children):
+
+|id|name|address\_city|address\_country|address\_street|parent\_user-info\_id|
+|---|---|---|---|---|---|
+|123|John Doe|London|UK|Whitehaven Mansions|123|
+|234|Jane Doe|St Mary Mead|UK|High Street|234|
+
+users-2 (second job):
+
+|members\_description|members\_tags|members\_count|members\_items|
+|---|---|---|---|
+|Active System Members|users-2.members\_c6eb0647a7f2fb2cbe02ba62d56e3312|2|users-2.members\_c6eb0647a7f2fb2cbe02ba62d56e3312|
+
+users-2\_members\_items (second job, generated from array node `items`):
+
+|name|user-info\_id|user-info\_active|JSON\_parentId|
+|---|---|---|---|
+|John Doe|123|1|users-2.members_c6eb0647a7f2fb2cbe02ba62d56e3312|
+|Jane Doe|234||users-2.members_c6eb0647a7f2fb2cbe02ba62d56e3312|
+
+The `users-2\_members\_items` contains the same results as the `users` table, but it also contains the 
+`JSON\_parentId` column which allows you to link the user list to the list description in the `users-2` table.
+This makes the response in the `users` table quite useless, but the job is still required to generate
+the child jobs to obtain the `user-detail` table. See the [full example](106-child-jobs-array).
 
 ### Simple Filter
 Let's assume that you have an API which has two endpoints:
