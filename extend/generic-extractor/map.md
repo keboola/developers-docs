@@ -102,6 +102,15 @@ Use the following sample configuration to navigate among various configuration o
                 }
             }
         }
+    },
+    "authorization": {
+        "oauth_api": {
+            "credentials": {
+                "#data": "{\"status\": \"ok\",\"refresh_token\": \"1234abcd5678efgh\"}",
+                "appKey": "someId",
+                "#appSecret": "clientSecret"
+            }
+        }        
     }
 }
 {% endhighlight %}
@@ -119,6 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
     $("span.nt:contains('\"pagination\"')").wrap("<a href='/extend/generic-extractor/api/pagination/'></a>");
     $("span.nt:contains('\"scrollers\"')").wrap("<a href='/extend/generic-extractor/api/pagination/multiple/'></a>");
     $("span.nt:contains('\"method\"')").first().wrap("<a href='/extend/generic-extractor/api/pagination/#paging-strategy'></a>");
+    $("span.nt:contains('\"authentication\"')").wrap("<a href='/extend/generic-extractor/api/authentication'></a>");
 
     // Jobs
     $("span.nt:contains('\"endpoint\"')").wrap("<a href='/extend/generic-extractor/config/jobs/#endpoint'></a>");
@@ -136,10 +146,13 @@ document.addEventListener('DOMContentLoaded', function() {
     $("span.nt:contains('\"placeholders\"')").wrap("<a href='/extend/generic-extractor/config/jobs/children/#placeholders'></a>");
 
     // Config root
+    $("span.nt:contains('\"config\"')").wrap("<a href='/extend/generic-extractor/config/'></a>");
     $("span.nt:contains('\"debug\"')").wrap("<a href='/extend/generic-extractor/running/#debug-mode'></a>");
     $("span.nt:contains('\"jobs\"')").wrap("<a href='/extend/generic-extractor/config/jobs/'></a>");
     $("span.nt:contains('\"mappings\"')").wrap("<a href='/extend/generic-extractor/config/mappings/'></a>");
     $("span.nt:contains('\"api\"')").wrap("<a href='/extend/generic-extractor/api/'></a>");
+    $("span.nt:contains('\"outputBucket\"')").wrap("<a href='/extend/generic-extractor/config/#output-bucket'></a>");
+    $("span.nt:contains('\"http\"')").last().wrap("<a href='/extend/generic-extractor/config/#http'></a>");
 
     // Mappings
     $("span.nt:contains('\"type\"')").last().wrap("<a href='/extend/generic-extractor/config/mappings/#configuration'></a>");
@@ -149,6 +162,10 @@ document.addEventListener('DOMContentLoaded', function() {
     $("span.nt:contains('\"mapping\"')").wrap("<a href='/extend/generic-extractor/config/mappings/#column-mapping'></a>");
     $("span.nt:contains('\"tableMapping\"')").wrap("<a href='/extend/generic-extractor/config/mappings/#table-mapping'></a>");
     
+    // Authorization
+    $("span.nt:contains('\"authorization\"')").wrap("<a href='/extend/generic-extractor/api/authentication/#oauth'></a>");
+    $("span.nt:contains('\"oauth_api\"')").wrap("<a href='/extend/generic-extractor/api/authentication/#oauth'></a>");
+    $("span.nt:contains('\"credentials\"')").wrap("<a href='/extend/generic-extractor/api/authentication/#oauth'></a>");
 }, false);
 </script>
 <style>

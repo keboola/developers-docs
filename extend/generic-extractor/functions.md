@@ -654,7 +654,7 @@ Leads to the following function context:
 	"authorization": {
 		"data.status": "ok",
 		"data.access_token": "testToken",
-        "data.foo.bar": "baz"
+		"data.foo.bar": "baz"
 		"timestamp": 1492949837,
 		"nonce": "99206d94a6846841",
 		"clientId": "clientId",
@@ -738,7 +738,7 @@ Leads to the following function context:
         "client_secret": "clientSecret"
     },
     "user": {
-        "status: "ok",
+        "status": "ok",
         "access_token": "testToken",
         "mac_secret": "iAreSoSecret123",
         "foo.bar": "baz"
@@ -757,12 +757,6 @@ These are obtained by KBC when the application is registered). For usage, see
 [OAuth Login examples](/extend/generic-extractor/api/authentication/oauth20-login/).
 
 ## Examples
-TODO: poskladat examply stejne jako contexty a to  asi ?
-- api url
-- api headers (+ config headers)
-- job parameters
-- job placeholders
-- user data ?
 
 ### API Base URL
 When you use [register your Generic Extractor configuration](/extend/generic-extractor/registration/), chances are 
