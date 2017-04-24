@@ -3,9 +3,9 @@ title: OAuth 2.0 Authentication
 permalink: /extend/generic-extractor/api/authentication/oauth20/
 ---
 
-OAuth 2.0 Authentication is one of the [two OAuth methods](/extend/generic-extractor/api/authentication/#oauth) and
+OAuth 2.0 Authentication is one of [two OAuth methods](/extend/generic-extractor/api/authentication/#oauth) and
 is supported only for [registered components](todo). The OAuth 2.0 authentication is configured by setting
-type to `oauth20`:
+the `type` key to `oauth20`:
 
 {% highlight json %}
 {

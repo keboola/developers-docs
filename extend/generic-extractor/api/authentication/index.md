@@ -12,7 +12,9 @@ There are many authentication methods available. Generic Extractor supports the 
 and then sends them in the URL or headers of each API request
 - [OAuth 1.0](/extend/generic-extractor/api/authentication/oauth10/) authentication --- authenticates with [OAuth 1.0 scheme](#oauth) 
 - [OAuth 2.0](/extend/generic-extractor/api/authentication/oauth20/) authentication --- authenticates with [OAuth 2.0 scheme](#oauth) 
-- [OAuth 2.0 Login](/extend/generic-extractor/api/authentication/oauth20/) authentication --- crossover between [OAuth 2.0](/extend/generic-extractor/api/authentication/oauth20/) and [Login](/extend/generic-extractor/api/authentication/login/) authentication.
+- [OAuth 2.0 Login](/extend/generic-extractor/api/authentication/oauth20/) authentication --- 
+crossover between the [OAuth 2.0](/extend/generic-extractor/api/authentication/oauth20/) and 
+[Login](/extend/generic-extractor/api/authentication/login/) authentication.
 
 Use the authentication method supported by the target API. If the API supports multiple 
 authentication methods, the [URL Query](/extend/generic-extractor/api/authentication/query/) and
@@ -39,19 +41,19 @@ An example authentication configuration looks like this:
 
 ## OAuth
 Generic Extractor also supports authentication using the [OAuth](https://en.wikipedia.org/wiki/OAuth) standard.
-Due to the principles of OAuth, this is authentication method is supported only for [registered components](todo).
-The OAuth protocol defines a scheme in which credentials are exchanged between a:
+Due to the principles of OAuth, this authentication method is supported only for [registered components](todo).
+The OAuth protocol defines a scheme in which credentials are exchanged between the following:
 
-- consumer (Generic Extractor)
-- service provider (the API itself)
-- end-user (the person authenticating against the API)
+- Consumer (Generic Extractor)
+- Service provider (the API itself)
+- End-user (the person authenticating against the API)
 
 The OAuth specification defines what kind of information is exchanged in which steps. It is not a precise
-specification and leaves quite some freedom to the implementation. Also there are two versions of 
-OAuth -- 1.0 and 2.0. They are completely incompatible (both the authentication steps and the exchanged fields differ).
+specification and leaves quite some freedom to the implementation. Also, there are two versions of 
+OAuth --- 1.0 and 2.0. They are completely incompatible (both the authentication steps and the exchanged fields differ).
 Both [OAuth 1.0](/extend/generic-extractor/api/authentication/oauth10/)
 and  [OAuth 2.0](/extend/generic-extractor/api/authentication/oauth20/)
 are supported by Generic Extractor. If you are developing a new component using Generic Extractor
-[templates](todo) and you want to use and test OAuth authentication, you can 
+[templates](todo) and want to use and test OAuth authentication, 
 [inject the necessary credentials](/extend/common-interface/oauth/#credentials-injection) simply by passing them
-in `authorization` property of the configuration.
+in the `authorization` property of the configuration.
