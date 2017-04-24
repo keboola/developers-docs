@@ -85,9 +85,9 @@ All these forms may be combined freely and they may be nested in a virtually unl
 }
 {% endhighlight %}
 
-### Supported functions
+## Supported functions
 
-#### md5
+### md5
 The [`md5` function](http://php.net/manual/en/function.md5.php) calculates the [MD5 hash](https://en.wikipedia.org/wiki/MD5) of a string. The function takes one argument, which 
 is the string to hash.
 
@@ -102,7 +102,7 @@ is the string to hash.
 
 The above will produce `1228d3ff5089f27721f1e0403ad86e73`. See [example](#job-parameters).
 
-#### sha1
+### sha1
 The [`sha1` function](http://php.net/manual/en/function.sha1.php) calculates the [SHA-1 hash](https://en.wikipedia.org/wiki/SHA-1) of a string. The function takes one argument, which 
 is the string to hash.
 
@@ -117,7 +117,7 @@ is the string to hash.
 
 The above will produce `64d5d2977cc2573afbd187ff5e71d1529fd7f6d8`. See [example](#job-parameters).
 
-#### base64_encode
+### base64_encode
 The [`base64_encode` function](http://php.net/manual/en/function.base64-encode.php) converts a
 string to the [MIME Base64 encoding](https://en.wikipedia.org/wiki/Base64#MIME). The function
 takes one argument, which is the string to encode.
@@ -133,7 +133,7 @@ takes one argument, which is the string to encode.
 
 The above will produce `VGVhUG90`. See [example](#nested-functions)
 
-#### hash_hmac
+### hash_hmac
 The [`hash_hmac` function](http://php.net/manual/en/function.hash-hmac.php) creates 
 a [HMAC (Hash-based message authentication code)](https://en.wikipedia.org/wiki/Hash-based_message_authentication_code)
 from a string. The function takes
@@ -155,7 +155,7 @@ The second argument is the value to hash and the third argument is a secret key.
 The above will return `d868d581b2f2edd09e8e7ce12c00723b3fcffb6a5d74c40eae9d94181a0bf731`. 
 See [example](#api-default-parameters).
 
-#### time
+### time
 The [`time` function](http://php.net/manual/en/function.time.php) returns the current time as a 
 [Unix timestamp](https://en.wikipedia.org/wiki/Unix_timehttps://en.wikipedia.org/wiki/Unix_time). 
 To obtain the current time in a more readable format, you probably want to use the
@@ -167,9 +167,9 @@ the [`date` function](#date). The function takes no arguments.
 }
 {% endhighlight %}
 
-The above will produce something like `1492674974`. TODO example ?
+The above will produce something like `1492674974`.
 
-#### date
+### date
 The [`date` function](http://php.net/manual/en/function.date.php) formats the provided or the current 
 timestamp into a human readable format. The function takes either one or two arguments. The first argument
 is a [formatting string](http://php.net/manual/en/function.date.php#refsect1-function.date-parameters). 
@@ -200,7 +200,7 @@ The above will produce something like `2017-04-20`.
 
 The above will produce `2017-03-20 8:53:20`. See [example](#user-data).
 
-#### strtotime
+### strtotime
 The `strtotime` function converts a string date into a [Unix timestamp](https://en.wikipedia.org/wiki/Unix_timehttps://en.wikipedia.org/wiki/Unix_time). The function takes
 one or two arguments. The first argument is the string date, the second argument is the base for
 relative dates (see below).
@@ -234,7 +234,7 @@ useful for [incremental extraction](/extend/generic-extractor/incremental/). Als
 it is common to combine the `strtottime` and `date` functions to convert between string and timestamp
 representation of a date (see [example](#nested-strtotime).
 
-#### sprintf
+### sprintf
 The `sprintf` function formats values and inserts them into a string. The `sprintf` function maps directly to
 the [original PHP function](http://php.net/manual/en/function.sprintf.php) which is very versatile and has many
 uses. The function accepts two or more arguments. The first argument is a string with
@@ -256,7 +256,7 @@ other arguments are values inserted into the string:
 The above will produce `Three apples are 0.50 plums.`
 (see [simple insert example](#api-base-url) or [formatting example](#job-placeholders))
 
-#### concat
+### concat
 The `concat` function concatenates an arbitrary number of strings into one. For example:
 
 {% highlight json %}
@@ -273,7 +273,7 @@ The `concat` function concatenates an arbitrary number of strings into one. For 
 The above will produce `HenOrEgg` (see [example 1](#api-base-url), [example 2](#headers)). See also the
 [`implode` function](#implode).
 
-#### implode
+### implode
 The [`implode` function](http://php.net/manual/en/function.implode.php) concatenates an arbitrary number 
 of strings into one using a delimiter. The function takes
 two arguments, first is the delimiter string which is used for the concatenation, second is an array of values to
@@ -310,7 +310,7 @@ The delimiter can be empty in which case the `implode` function is equivalent to
 }
 {% endhighlight %}
 
-#### ifempty
+### ifempty
 The `ifempty` function can be useful for handling optional values. The function takes two arguments and 
 returns the first one if it is not empty. If the first argument is empty, it returns the second argument.
 
@@ -327,11 +327,11 @@ returns the first one if it is not empty. If the first argument is empty, it ret
 The above will return `Banzai`. For the `ifempty` function an empty string and the values `0` and `null` are
 considered 'empty' (see an [example](. 
 
-### Function Contexts
+## Function Contexts
 Every place in the Generic Extractor configuration in which a function may be used may allow different arguments of the function.
 This is referred to as a **function context**. Many contexts share access to *configuration attributes*.
 
-#### Configuration Attributes
+### Configuration Attributes
 The *configuration attributes* are accessible in some function contexts and they represent the entire [`config`](http://localhost:4000/extend/generic-extractor/config/)
 section of Generic Extractor configuration. There is some processing involved which means that:
 
@@ -404,49 +404,15 @@ Will be converted to the following function context:
 }
 {% endhighlight %}
 
-#### Placeholder Context
-The Placeholder function context refers to configuration of [placeholders in child jobs](/extend/generic-extractor/config/jobs/children/#placeholders).
-When using function to process placeholder value, the placeholder must be specified as an object with `path` property. Therefore instead of writing:
-
-{% highlight json %}
-"placeholders": {
-    "user-id": "userId"
-}
-{% endhighlight %}
-
-You have to write:
-
-{% highlight json %}
-"placeholders": {
-    "user-id": {
-        "path": "userId",
-        "function": ...
-    }
-}
-{% endhighlight %}
-
-The placeholder function context contains the following structure:
-
-{% highlight json %}
-{
-    "placeholder": {
-        "value": "???"
-    }
-}
-{% endhighlight %}
-
-Where `???` is the value obtained from the response JSON from the path provided in the `path` property
-of the placeholder. See [example](#job-placeholders).
-
-#### Base URL Context
+### Base URL Context
 The Base URL function context is used when setting the [`baseURL` for API](/extend/generic-extractor/api/#base-url). The
 base URL function context contains [*configuration attributes*](/#function-contexts). See [example](#api-base-url).
 
-#### Headers Context
+### Headers Context
 The Headers function context is used when setting the [`http.headers` for API](/extend/generic-extractor/api/#headers)
 or the [`http.headers` in config](/extend/generic-extractor/config/#http). The Headers function context contains [*configuration attributes*](/#function-contexts). See [example](#headers).
 
-#### Parameters Context
+### Parameters Context
 The Parameters function context is used when setting job [request parameters -- `params`](/extend/generic-extractor/config/jobs/#request-parameters). The parameters context contains 
 [*configuration attributes*](/#function-contexts) plus the times of the current (`currentStart`) and 
 previous (`previousStart`) run of Generic Extractor. The times are [Unix timestamps](https://en.wikipedia.org/wiki/Unix_time).
@@ -491,12 +457,46 @@ The parameters function context will contain:
 See [example of using parameters context](#job-parameters). The `time` values are used in
 [incremental processing](/extend/generic-extractor/incremental/).
 
-#### User Data Context
+### Placeholder Context
+The Placeholder function context refers to configuration of [placeholders in child jobs](/extend/generic-extractor/config/jobs/children/#placeholders).
+When using function to process placeholder value, the placeholder must be specified as an object with `path` property. Therefore instead of writing:
+
+{% highlight json %}
+"placeholders": {
+    "user-id": "userId"
+}
+{% endhighlight %}
+
+You have to write:
+
+{% highlight json %}
+"placeholders": {
+    "user-id": {
+        "path": "userId",
+        "function": ...
+    }
+}
+{% endhighlight %}
+
+The placeholder function context contains the following structure:
+
+{% highlight json %}
+{
+    "placeholder": {
+        "value": "???"
+    }
+}
+{% endhighlight %}
+
+Where `???` is the value obtained from the response JSON from the path provided in the `path` property
+of the placeholder. See [example](#job-placeholders).
+
+### User Data Context
 The User Data function context is used when setting the [`userData`](/extend/generic-extractor/config/#user-data). The
 The parameters context contains [*configuration attributes*](/#function-contexts) plus the times of the current (`currentStart`) and previous (`previousStart`) run of Generic Extractor. The User Data Context is therefore 
 same as the [Parameters Context](#parameters-context). See [example](#user-data).
 
-#### Login Authentication Context
+### Login Authentication Context
 The Login Authentication function context is used in the 
 [login authentication](/extend/generic-extractor/api/authentication/login/) method. 
 The Headers function context contains [*configuration attributes*](/#function-contexts). The login
@@ -504,7 +504,7 @@ authentication context is same for both `params` and `headers`
 [login authentication configuration options](http://localhost:4000/extend/generic-extractor/api/authentication/login/#configuration-parameters).
 See [example](#login-authentication).
 
-#### Query Authentication Context
+### Query Authentication Context
 The Query Authentication function context is used in the
 [query authentication](/extend/generic-extractor/api/authentication/query/) method. 
 The Query Authentication Context contains [*configuration attributes*](/#function-contexts) plus
@@ -582,7 +582,7 @@ Leads to the following function context:
 
 See [basic example](#api-default-parameter) and [more complicated example](#api-query-authentication).
 
-#### OAuth 2.0 Authentication Context
+### OAuth 2.0 Authentication Context
 The OAuth Authentication Context is used for
 [`oauth20`](/extend/generic-extractor/api/authentication/oauth20/) authentication method
 (it is not applicable to `oauth10`). The OAuth Authentication context contains 
@@ -673,7 +673,7 @@ of the request), `nonce` (cryptographic [nonce](https://en.wikipedia.org/wiki/Cr
 signing the request) and `clientId` (the value of `authorization.oauth_api.credentials.appKey`, which is obtained when
 the application is registered) are added to the `authorization` section. For usage, see [OAuth examples](/extend/generic-extractor/api/authentication/oauth20/).
 
-#### OAuth 2.0 Login Authentication Context
+### OAuth 2.0 Login Authentication Context
 The OAuth Login Authentication Context is used for
 [`oauth20.login`](/extend/generic-extractor/api/authentication/oauth20-login/) authentication method
 (it is not applicable to `oauth20`). The OAuth Login Authentication context contains 
@@ -753,7 +753,8 @@ the parsed and flattened response fields in the `user` property. The content of 
 `consumer` property contains the `client_id` and `client_secret` which contain values of 
 `authorization.oauth_api.credetials.appKey` and 
 `authorization.oauth_api.credetials.appSecret` respectively.
-These are obtained by KBC when the application is registered). For usage, see [OAuth Login examples](/extend/generic-extractor/api/authentication/oauth20-login/).
+These are obtained by KBC when the application is registered). For usage, see 
+[OAuth Login examples](/extend/generic-extractor/api/authentication/oauth20-login/).
 
 ## Examples
 TODO: poskladat examply stejne jako contexty a to  asi ?
@@ -763,160 +764,12 @@ TODO: poskladat examply stejne jako contexty a to  asi ?
 - job placeholders
 - user data ?
 
-### Job Placeholders
-Let's say you have an API which has and endpoint `/users` which returns a list of user and
-endpoint `/user/{userId}` which returns details of a specific user with given ID. The list response
-looks like this:
-
-{% highlight json %}
-[
-    {
-        "id": 3,
-        "name": "John Doe"
-    },
-    {
-        "id": 234,
-        "name": "Jane Doe"
-    }
-]
-{% endhighlight %}
-
-To obtain the details of the first user, the user-id has to be padded to five digits. The details API call for the
-first user must be sent to `/user/00003`, and for the second user to `/user/00234`. To achieve this you can use the
-`sprintf` function which allows [number padding](http://php.net/manual/en/function.sprintf.php#example-5484). The
-following `placeholders` configuration in the child job calls the function with first argument set to
-`%'.05d` (which is a sprintf [format](http://php.net/manual/en/function.sprintf.php) to pad with zeros to 5 digits)
-and second argument set to the value of the `id` property found in the parent response. The placeholder path must
-be specified in the `path` property, that means that the configuration:
-
-{% highlight json %}
-"placeholders": {
-    "user-id": "id"
-}
-{% endhighlight %}
-
-has to be converted to:
-
-{% highlight json %}
-"placeholders": {
-    "user-id": {
-        "path": "id",
-        "function": "sprintf",
-        "args": [
-            "%'.05d",
-            {
-                "placeholder": "value"
-            }
-        ]
-    }
-}
-{% endhighlight %}
-
-The following `user-detail` table will be extracted:
-
-|id|name|address\_city|address\_country|address\_street|parent\_id|
-|123|John Doe|London|UK|Whitehaven Mansions|00003|
-|234|Jane Doe|St Mary Mead|UK|High Street|00234|
-
-Notice that the `parent_id` column contains the processed value and not the original one.
-
-See the [full example](todo:085-function-job-placeholders) (or a not-so-useful example of [using reference](todo:086-function-job-placeholders-reference)).
-
-### Job Parameters
-Let's say that you have an API, which requires that you send a hash of some value with every request. Specifically,
-each request must be done with [HTTP POST method](/extend/generic-extractor/tutorial/rest/#method) with content:
-
-{% highlight json %}
-{
-    "token": "someValue"
-}
-{% endhighlight %}
-
-The following configuration does exactly that:
-
-{% highlight json %}
-{
-    "parameters": {
-        "api": {
-            "baseUrl": "http://example.com/"
-        },
-        "config": {
-            "debug": true,
-            "outputBucket": "mock-server",
-            "tokenValue": "NotSoSecret",
-            "jobs": [
-                {
-                    "endpoint": "users",
-                    "dataType": "users",
-                    "method": "POST",
-                    "params": {
-                        "token": {
-                            "function": "md5",
-                            "args": [
-                                {
-                                    "attr": "tokenValue"
-                                }
-                            ]
-                        }
-                    }
-                }
-            ]
-        }
-    }
-}
-{% endhighlight %}
-
-In the above configuration, the value of the token is taken from the configuration root (using the `attr` reference).
-This is useful in case of the configuration is used as part of a [template](todo). The actual hash will be generated
-of the `NotSoSecret` value.
-See the [full example](todo:089-function-job-parameters-md5) or an alternative [with SHA1 hash](090-function-job-parameters-sha1).
-
-### Optional Job Parameters 
-Let's say you have an API which allows you to send the list of columns to be contained in the API response.
-For example to list users and include their `id`, `name` and `login` properties, you have to call
-`/users?showColumns=id,name,login`. Also you want to enter these values an array in the `config` section, because
-the config is generated by a [template](todo). If the end-user does not wish to filter the columns, she can
-list all the columns (which would be annoying) or leave the column filter empty. In that case, the API
-call would be `/users?showColumns=all`. The following configuration does exactly that:
-
-{% highlight json %}
-{
-    "parameters": {
-        "api": {
-            "baseUrl": "http://example.com/"
-        },
-        "config": {
-            "columns": "",
-            "outputBucket": "mock-server",
-            "jobs": [
-                {
-                    "endpoint": "users",
-                    "dataType": "users",
-                    "method": "GET",
-                    "params": {
-                        "showColumns": {
-                            "function": "ifempty",
-                            "args": [
-                                {
-                                    "attr": "columns"
-                                },
-                                "all"
-                            ]
-                        }
-                    }
-                }
-            ]
-        }
-    }
-}
-{% endhighlight %}
-
-See the [full example](097-function-ifempty).
-
 ### API Base URL
-When you use [register your Generic Extractor configuration](/extend/generic-extractor/registration/), chances are that you want the end-user to
-provide part of the API configuration. Due to the limitations of [how templates work](todo), the parameter obtained from the end-user configuration
-will be only available in the `config` section. Let's say that the end-user enters `www.example.com` as the API server and that values becomes
+When you use [register your Generic Extractor configuration](/extend/generic-extractor/registration/), chances are 
+that you want the end-user to provide part of the API configuration. Due to the limitations of 
+[how templates work](/extend/generic-extractor/registration/#configuration-considerations), the parameter 
+obtained from the end-user configuration will be only available in the `config` section. Let's say that 
+the end-user enters `www.example.com` as the API server and that values becomes
 available as the `server` property of the `config` section, e.g:
 
 {% highlight json %}
@@ -960,71 +813,12 @@ final API URL (`http://example.com/api/1.0/`):
                     "/api/1.0/"
                 ]
             }
-        },
+        }
     }
 }
 {% endhighlight %}
 
 See the [full example with concat](todo:087-function-baseurl) or an alternative [example with sprintf](088-function-baseurl-sprintf).
-
-### User Data
-Assume that you have an API which returns a response that does not contain any time information in 
-the response, e.g.:
-
-{% highlight json %}
-[
-    {
-        "id": 3,
-        "name": "John Doe"
-    },
-    {
-        "id": 234,
-        "name": "Jane Doe"
-    }
-]
-{% endhighlight %}
-
-You may want to add the extraction time to each record so that you at least know when 
-each record was obtained (when the creation time is unknown). You can add additional data to
-each record using the [`userData` configuration](/extend/generic-extractor/config/#user-data):
-
-{% highlight json %}
-"userData": {
-    "extractionDate": {
-        "function": "date",
-        "args": [
-            "Y-m-d H:i:s",
-            {
-                "time": "currentStart"
-            }
-        ]
-    }
-}
-{% endhighlight %}
-
-The following table will be extracted:
-
-|id|name|extractionDate|
-|3|John Doe|2017-04-20 10:17:20|
-|234|Jane Doe|2017-04-20 10:17:20|
-
-You may also be tempted to use an alternative configuration:
-
-{% highlight json %}
-"userData": {
-    "extractionDate": {
-        "function": "date",
-        "args": [
-            "Y-m-d H:i:s"
-        ]
-    }
-}
-{% endhighlight %}
-
-The alternative configuration also puts current date, but whereas the first one puts a single same
-date to each record, the alternative configuration will return different times for different records 
-as they are extracted. 
-See the [full example](todo:091-function-user-data) or an alternative [example with set date](092-function-user-date-set-date).
 
 ### API Default Parameters
 Suppose you have an API which expects a `tokenHash` parameter sent with every request. The 
@@ -1192,6 +986,216 @@ of `config.#token`) and `signature`. The `signature` parameters is created as a 
 token and resource type (`"query": "type"` is taken from the `jobs.params.type` value). See
 [full example](101-function-query-auth).
 
+### Job Placeholders
+Let's say you have an API which has and endpoint `/users` which returns a list of user and
+endpoint `/user/{userId}` which returns details of a specific user with given ID. The list response
+looks like this:
+
+{% highlight json %}
+[
+    {
+        "id": 3,
+        "name": "John Doe"
+    },
+    {
+        "id": 234,
+        "name": "Jane Doe"
+    }
+]
+{% endhighlight %}
+
+To obtain the details of the first user, the user-id has to be padded to five digits. The details API call for the
+first user must be sent to `/user/00003`, and for the second user to `/user/00234`. To achieve this you can use the
+`sprintf` function which allows [number padding](http://php.net/manual/en/function.sprintf.php#example-5484). The
+following `placeholders` configuration in the child job calls the function with first argument set to
+`%'.05d` (which is a sprintf [format](http://php.net/manual/en/function.sprintf.php) to pad with zeros to 5 digits)
+and second argument set to the value of the `id` property found in the parent response. The placeholder path must
+be specified in the `path` property, that means that the configuration:
+
+{% highlight json %}
+"placeholders": {
+    "user-id": "id"
+}
+{% endhighlight %}
+
+has to be converted to:
+
+{% highlight json %}
+"placeholders": {
+    "user-id": {
+        "path": "id",
+        "function": "sprintf",
+        "args": [
+            "%'.05d",
+            {
+                "placeholder": "value"
+            }
+        ]
+    }
+}
+{% endhighlight %}
+
+The following `user-detail` table will be extracted:
+
+|id|name|address\_city|address\_country|address\_street|parent\_id|
+|123|John Doe|London|UK|Whitehaven Mansions|00003|
+|234|Jane Doe|St Mary Mead|UK|High Street|00234|
+
+Notice that the `parent_id` column contains the processed value and not the original one.
+
+See the [full example](todo:085-function-job-placeholders) (or a not-so-useful example of [using reference](todo:086-function-job-placeholders-reference)).
+
+### Job Parameters
+Let's say that you have an API, which requires that you send a hash of some value with every request. Specifically,
+each request must be done with [HTTP POST method](/extend/generic-extractor/tutorial/rest/#method) with content:
+
+{% highlight json %}
+{
+    "token": "someValue"
+}
+{% endhighlight %}
+
+The following configuration does exactly that:
+
+{% highlight json %}
+{
+    "parameters": {
+        "api": {
+            "baseUrl": "http://example.com/"
+        },
+        "config": {
+            "debug": true,
+            "outputBucket": "mock-server",
+            "tokenValue": "NotSoSecret",
+            "jobs": [
+                {
+                    "endpoint": "users",
+                    "dataType": "users",
+                    "method": "POST",
+                    "params": {
+                        "token": {
+                            "function": "md5",
+                            "args": [
+                                {
+                                    "attr": "tokenValue"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
+{% endhighlight %}
+
+In the above configuration, the value of the token is taken from the configuration root (using the `attr` reference).
+This is useful in case of the configuration is used as part of a [template](/extend/generic-extractor/registration/). 
+The actual hash will be generated of the `NotSoSecret` value.
+See the [full example](todo:089-function-job-parameters-md5) or an alternative [with SHA1 hash](090-function-job-parameters-sha1).
+
+### Optional Job Parameters 
+Let's say you have an API which allows you to send the list of columns to be contained in the API response.
+For example to list users and include their `id`, `name` and `login` properties, you have to call
+`/users?showColumns=id,name,login`. Also you want to enter these values an array in the `config` section, because
+the config is generated by a [template](/extend/generic-extractor/registration/). If the end-user 
+does not wish to filter the columns, she can
+list all the columns (which would be annoying) or leave the column filter empty. In that case, the API
+call would be `/users?showColumns=all`. The following configuration does exactly that:
+
+{% highlight json %}
+{
+    "parameters": {
+        "api": {
+            "baseUrl": "http://example.com/"
+        },
+        "config": {
+            "columns": "",
+            "outputBucket": "mock-server",
+            "jobs": [
+                {
+                    "endpoint": "users",
+                    "dataType": "users",
+                    "method": "GET",
+                    "params": {
+                        "showColumns": {
+                            "function": "ifempty",
+                            "args": [
+                                {
+                                    "attr": "columns"
+                                },
+                                "all"
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
+{% endhighlight %}
+
+See the [full example](097-function-ifempty).
+
+### User Data
+Assume that you have an API which returns a response that does not contain any time information in 
+the response, e.g.:
+
+{% highlight json %}
+[
+    {
+        "id": 3,
+        "name": "John Doe"
+    },
+    {
+        "id": 234,
+        "name": "Jane Doe"
+    }
+]
+{% endhighlight %}
+
+You may want to add the extraction time to each record so that you at least know when 
+each record was obtained (when the creation time is unknown). You can add additional data to
+each record using the [`userData` configuration](/extend/generic-extractor/config/#user-data):
+
+{% highlight json %}
+"userData": {
+    "extractionDate": {
+        "function": "date",
+        "args": [
+            "Y-m-d H:i:s",
+            {
+                "time": "currentStart"
+            }
+        ]
+    }
+}
+{% endhighlight %}
+
+The following table will be extracted:
+
+|id|name|extractionDate|
+|3|John Doe|2017-04-20 10:17:20|
+|234|Jane Doe|2017-04-20 10:17:20|
+
+You may also be tempted to use an alternative configuration:
+
+{% highlight json %}
+"userData": {
+    "extractionDate": {
+        "function": "date",
+        "args": [
+            "Y-m-d H:i:s"
+        ]
+    }
+}
+{% endhighlight %}
+
+The alternative configuration also puts current date, but whereas the first one puts a single same
+date to each record, the alternative configuration will return different times for different records 
+as they are extracted. 
+See the [full example](todo:091-function-user-data) or an alternative [example with set date](092-function-user-date-set-date).
+
 ### Headers
 Suppose you have an API which requires you to send a custom `X-Api-Auth` header with every request.
 The header must contain user name and password separated by a colon -- e.g. `JohnDoe:TopSecret`. 
@@ -1265,7 +1269,7 @@ See the [example](todo:093-function-api-http-headers) or an
 ### Nested Functions
 If the API in the [above example](#headers) would try to mimic 
 [HTTP authentication](/extend/generic-extractor/api/authentication/basic/),
-the header has to be sent as [base64 encoded](todo) value. That is instead of sending
+the header has to be sent as [base64 encoded](https://en.wikipedia.org/wiki/Base64#MIME) value. That is instead of sending
 `JohnDoe:TopSecret`, you have to send `Sm9obkRvZTpUb3BTZWNyZXQ=`. To do this you have to wrap the `concat` 
 function which generates the header value in another function (`base64_encode`).
 
@@ -1301,7 +1305,8 @@ See the [example](todo:095-function-nested).
 ### Nested StrToTime
 Suppose you have an API which requires you to specify `from` and `to` date parameters to obtain orders created 
 in that time interval. You want to specify only the `from` date and extract a week of data.
-So you want to enter (preferably in a [template](todo)) the value `2017-10-04` and send an API request to
+So you want to enter (preferably in a [template](/extend/generic-extractor/registration/)) the 
+value `2017-10-04` and send an API request to
 `/orders?from=2017-10-04&to=2017-10-11`. The following configuration can be used:
 
 {% highlight json %}
@@ -1451,81 +1456,4 @@ to a special `/auth` endpoint.
 }
 {% endhighlight %}
 
-See [full example](todo:100-function-login-headers)s
-
-
-
-- For an example that includes request data in a function, please refer to the [OAuth 20 HMAC example part](/extend/generic-extractor/authentication/oauth/20/#example-for-mac-authentication).
-
-## Example:
-
-### Configuration:
-
-{% highlight json %}
-{
-    "api": {
-        "authentication": {
-            "type": "login",
-            "loginRequest": {
-                "endpoint": "Security/Login",
-                "headers": {
-                    "Content-Type": "application/json"
-                },
-                "method": "POST",
-                "params": {
-                    "UserName": {
-                        "attr": "username"
-                    },
-                    "PassWord": {
-                        "attr": "password"
-                    }
-                }
-            },
-            "apiRequest": {
-                "headers": {
-                    "X-Api-Token": "Ticket"
-                }
-            }
-        }
-    },
-    "config": {
-        "username": "whoever",
-        "password": "soSecret",
-        "jobs": [
-            {
-                "endpoint": "reports"
-            }
-        ]
-    }
-}
-{% endhighlight %}
-
-This example will first send the following request:
-
-```
-POST Security/Login
-Host: ...(baseUrl)...
-Content-Type: application/json
-
-{
-    "UserName": "whoever",
-    "PassWord": "soSecret"
-}
-```
-
-And expect a reply such as:
-
-```
-{
-    "Ticket": "12345abcde"
-}
-```
-
-Then the value from `Ticket` in the JSON will be used as a `X-Api-Token` header in actual API requests:
-
-```
-GET reports
-Host: ...(baseUrl)...
-X-Api-Token: 12345abcde
-```
-
+See [full example](todo:100-function-login-headers)
