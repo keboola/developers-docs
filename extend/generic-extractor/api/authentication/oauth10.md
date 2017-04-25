@@ -1,6 +1,6 @@
 ---
 title: OAuth 1.0 Authentication
-permalink: /extend/generic-extractor/api/authentication/oauth10/
+permalink: /extend/generic-extractor/api/authentication/oauth/10/
 ---
 
 OAuth 1.0 Authentication is one of the [two OAuth methods](/extend/generic-extractor/api/authentication/#oauth) and

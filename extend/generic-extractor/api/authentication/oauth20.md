@@ -1,6 +1,6 @@
 ---
 title: OAuth 2.0 Authentication
-permalink: /extend/generic-extractor/api/authentication/oauth20/
+permalink: /extend/generic-extractor/api/authentication/oauth/20/
 ---
 
 OAuth 2.0 Authentication is one of [two OAuth methods](/extend/generic-extractor/api/authentication/#oauth) and
