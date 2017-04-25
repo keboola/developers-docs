@@ -1,6 +1,6 @@
 ---
 title: Login Using OAuth 2.0 Authentication
-permalink: /extend/generic-extractor/api/authentication/oauth/20-login/
+permalink: /extend/generic-extractor/api/authentication/oauth20-login/
 ---
 
 * TOC

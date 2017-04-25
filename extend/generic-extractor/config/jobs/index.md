@@ -117,11 +117,8 @@ The endpoint property is **required** and represents the URL of the resource. It
 Assume the following [API definition](/extend/generic-extractor/api/):
 
 {% highlight json %}
-{
-    ...,
-    "api": {
-        "baseURL": "https://example.com/3.0/"
-    }
+"api": {
+    "baseURL": "https://example.com/3.0/"
 }
 {% endhighlight %}
 
