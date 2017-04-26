@@ -45,4 +45,4 @@ For this use case, it is also possible to use [`defaultOptions` setting](/extend
 However, we recommend using the `authentication` setting for credentials so that the Generic Extractor
 configuration does not become a complete mess.
 
-See the [full example](todo:077-query-auth).
+See [example [077]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/077-query-auth).

@@ -41,7 +41,8 @@ not applicable:
 - **Staging Storage** -- not used, provided by Keboola
 
 Because the UI is assumed to be `genericTemplatesUI`, you have to provide 
-[**Configuration schema**](/extend/registration/configuration-schema/).
+[**Configuration schema**](/extend/registration/configuration-schema/) and
+a **template** which will be used in conjunction with the schema.
 An example of the templates UI is shown on the picture below.
 
 {: .image-popup}

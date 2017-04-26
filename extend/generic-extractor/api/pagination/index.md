@@ -122,14 +122,14 @@ You will see this in the Generic Extractor logs as a message:
 
     Job '1234567890' finished when last response matched the previous!
 
-See the [full example](todo:041-paging-stop-same).
+See the [example [041]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/041-paging-stop-same).
 
 If the API returns the first page, it is not same as the previous page and therefore another
 request is sent to `users?offset=6&limit=2`. Then the result is as the previous page and the
 same check kicks in and the extraction is stopped too. However, the results from the first page
 will be duplicated.
 
-See the [full example](todo:042-paging-stop-same-2).
+See [example [042]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/037-retry-header).
 
 ### Next Page Flag
 The above describes automatic behavior of Generic Extractor regarding scrolling stopping. 
@@ -260,7 +260,7 @@ The following pagination configuration can be used to configure the stopping str
 It means that the scrolling will **continue** till the field `hasMore` is present in the response and true.
 In this case, setting `ifNotSet` is not necessary.
 
-See the [full example](todo:045-next-page-flag-has-more).
+See [example [EX045]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/045-next-page-flag-has-more).
 
 ### Non-Boolean Has-More Type Scrolling
 Assume that the API returns a response which contains a `hasMore` field. The field is present only in the
@@ -284,7 +284,7 @@ means that the scrolling will **continue** until the field `hasMore` is present.
 boolean conversion which converts the value `"no"` to true. If the field `hasMore` is not present, it defaults
 to false. In this case setting `ifNotSet` is mandatory.
 
-See the [full example](todo:046-next-page-flag-has-more-2).
+See [example [EX046]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/046-next-page-flag-has-more-2).
 
 ### Is-Last Type of Scrolling
 Assume that the API returns a response which contains a `isLast` field. The field is present only in the
@@ -305,7 +305,7 @@ The following pagination configuration can be used to configure the stopping str
 The scrolling will **stop** when the field `isLast` is present in the response and true. 
 Because the field `isLast` is not present at all times, the `ifNotSet` configuration is required.
 
-See the [full example](todo:047-next-page-flag-is-last).
+See [example [EX047]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/047-next-page-flag-is-last).
 
 ## Examples
 
@@ -324,4 +324,4 @@ after extracting 69 bytes of minifed JSON data (whichever comes first).
 }
 {% endhighlight %}
 
-See the [full example](todo:048-force-stop).
+See [example [EX048]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/048-force-stop).

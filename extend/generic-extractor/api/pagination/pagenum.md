@@ -52,7 +52,7 @@ The most simple scrolling setup is the following:
 
 The first request is sent with the parameter `page=1`, for example `/users?page=1`.
 The next request will have `page=2`, for example `/users?page=2`.
-See the [full example](todo:051-pagination-pagenum-basic).
+See [example [051]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/051-pagination-pagenum-basic).
 
 ### Renaming Parameters
 The `limitParam` and `pageParam` configuration options allow you to rename the limit and 
@@ -68,7 +68,7 @@ offset for the needs of a specific API:
 {% endhighlight %}
 
 Here the API expects the parameters `count` and `set`. The first request will be sent with the parameters `count=20` 
-and `set=1`; for example, `/users?set=1&count=20`. See the [full example](todo:052-pagination-pagenum-rename). 
+and `set=1`; for example, `/users?set=1&count=20`. See [example [052]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/052-pagination-pagenum-rename).
 
 **Important:** Without setting a value for the `limit` option, the `limitParam` will not be sent at all 
 (no matter how you name it).
@@ -113,4 +113,4 @@ the page parameter (named `count`) is **not** sent in the first request. The sec
 request is sent to `/users?count=2&set=1`. Because the `firstPage` option is set to `0`, the 
 second page has index `1`.
 
-See the [full example](todo:053-pagination-pagenum-override).
+See [example [058]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/058-pagination-response-param-override).

@@ -64,3 +64,4 @@ The following HTTP header will be sent:
 
     Authorization: Basic Sm9obkRvZTpzZWNyZXQ=
 
+See [example [EX078]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/078-basic-auth).

@@ -14,7 +14,7 @@ easy to understand and has excellent documentation.
 Note that there already is a MailChimp extractor available in KBC, so you do not need to 
 configure Generic Extractor to extract data from the MailChimp API.
 The MailChimp extractor available in KBC is in fact a 
-[registered configuration](/extend/generic-extractor/registering-generic-extractor)(TODO) of Generic Extractor.
+[registered configuration](/extend/generic-extractor/registering-generic-extractor)(/extend/generic-extractor/registration/) of Generic Extractor.
 
 ## Prepare
 There are a few things you need to do and know to get started. For a basic understanding of **HTTP

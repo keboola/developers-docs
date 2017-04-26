@@ -4,7 +4,8 @@ permalink: /extend/generic-extractor/api/authentication/oauth10/
 ---
 
 OAuth 1.0 Authentication is one of the [two OAuth methods](/extend/generic-extractor/api/authentication/#oauth) and
-is supported only for [registered components](todo). The OAuth 1.0 authentication is configured by setting
+is supported only for [registered components](/extend/generic-extractor/registration/). 
+The OAuth 1.0 authentication is configured by setting
 the `type` key to `oauth10`:
 
 {% highlight json %}
@@ -112,4 +113,4 @@ The full configuration is, e.g.:
 }
 {% endhighlight %}
 
-See the [full example](todo:102-oauth1) or [more information about KBC-OAuth integration](/extend/common-interface/oauth).
+See [example [EX102]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/102-oauth1) or [more information about KBC-OAuth integration](/extend/common-interface/oauth).

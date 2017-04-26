@@ -36,7 +36,7 @@ are added to the provided URL. The default value is `false`.
 If `includeParams` is true, the [job parameters](/extend/generic-extractor/config/jobs/#request-parameters) are merged into
 the parameters of the URL in the response. If `paramIsQuery` is false, the parameters in the response **are overridden**
 by the parameters in the job. If `paramIsQuery` is true, then the parameters in the response **override** the parameters in 
-the job. See the [examples below](todo).
+the job. See the [examples below](#examples).
 
 ### Stopping Condition
 The pagination ends when the value of the `urlKey` parameter is empty --- the key is not present at all, is null,
@@ -80,7 +80,7 @@ The configuration expects a response to contain a `links.next` field with the UR
 The URL may be either an *absolute link* (`http://example.com/users?page=2`) or an *absolute path* (`/users?page=2`). 
 If the URL is *relative* (`users?page=2`), it is appended to the endpoint URL.
 
-See the [full example](todo:054-pagination-response-url-basic).
+See [example [054]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/054-pagination-response-url-basic).
 
 ### Merging Parameters
 If you need to pass additional parameters to each of the page URLs, use the `includeParams` parameter:
@@ -138,7 +138,7 @@ In the above configuration, the `account` parameter is sent with every API reque
 a `jobs.params.page` parameter would overwrite the `page` parameter in the response URL and thus 
 would probably break the paging.
 
-See the [full example](todo:055-pagination-response-url-params).
+See [example [055]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/055-pagination-response-url-params).
 
 ### Overriding Parameters
 Sometimes the API does not pass the entire URL, but only the [query string](/extend/generic-extractor/tutorial/rest/#url)

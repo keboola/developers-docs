@@ -86,7 +86,7 @@ configuration handles the case:
 
 Notice that the `idKey` parameter is relative to the extracted array of items (`fields.id` and not `items[].fields.id`).
 
-See the [full example](todo:060-pagination-cursor-basic).
+See [example [EX060]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/060-pagination-cursor-basic).
 
 ### Reverse Configuration
 Some APIs return items starting with the newest item and therefore need to be queried for offset in 
@@ -145,4 +145,4 @@ property specified in `idKey` (user id). Another important part --- `"increment"
 by 1 between the requests. Also notice that the initial value of the API parameter `startWith` is specified 
 in the `jobs.params` configuration and it is overridden by the scroller in the subsequent requests.
 
-See the [full example](todo:061-pagination-cursor-reverse).
+See [example [061]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/061-pagination-cursor-reverse).

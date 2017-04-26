@@ -110,7 +110,7 @@ Use the following sample configuration to navigate among various configuration o
                 "appKey": "someId",
                 "#appSecret": "clientSecret"
             }
-        }        
+        }
     }
 }
 {% endhighlight %}

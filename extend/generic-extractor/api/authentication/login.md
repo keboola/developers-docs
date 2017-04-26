@@ -106,7 +106,7 @@ will contain the header:
 
     X-ApiToken: a1b2c3d435f6
 
-See the [full example](todo:079-login-auth-headers).
+See [example [EX079]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/079-login-auth-headers).
 
 
 ### Configuration with Query Parameters
@@ -165,7 +165,7 @@ so the second API call will be sent as:
 
     GET /users?secretKey=a1b2c3d435f6&tokenId=123
 
-See the [full example](todo:080-login-auth-query).
+See [example [EX080]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/080-login-auth-query).
 
 ### Parameter Overriding
 The above examples show how to use query parameters and headers separately. However, they can be mixed freely; they can also be
@@ -278,7 +278,7 @@ The request headers contain:
 As you can see, the headers specified elsewhere are **overwritten** by the `api.authentication.apiRequest` while the parameters 
 specified elsewhere are **merged** with the `api.authentication.apiRequest`.
 
-See the [full example](todo:081-login-auth-headers-query-override).
+See [example [EX081]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/081-login-auth-headers-query-override).
 
 ### Expiration Basic
 It is possible that the credentials provided by the *login request* have a time-limited validity. This is handled by the `expires` 
@@ -314,7 +314,7 @@ example](#configuration-with-headers) to this:
 
 This causes Generic Extractor to call the *login request* every hour.
 
-See the [full example](todo:082-login-auth-expires).
+See [example [EX082]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/082-login-auth-expires).
 
 ### Expiration from Response
 In case the credentials provided by the *login request* have a time-limited validity, use the `expires` option. 
@@ -360,7 +360,7 @@ This assumes that the response of the *login request* looks like this:
 }
 {% endhighlight %}
 
-See the [full example](todo:083-login-auth-expires-date).
+See [example [EX083]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/083-login-auth-expires-date).
 
 ### Relative Expiration from Response
 In case the API returns credentials validity in the *login request* and that validity is expressed in seconds, 
@@ -409,4 +409,4 @@ This assumes that the response of the *login request* looks like this:
 }
 {% endhighlight %}
 
-See the [full example](todo:084-login-auth-expires-seconds).
+See [example [EX084]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/084-login-auth-expires-seconds).

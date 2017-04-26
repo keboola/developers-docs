@@ -983,7 +983,7 @@ setting in this case is `contacts[].properties`.
 See [example [EX014]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/014-skip-flatten-nested).
 
 {% comment %}
-Un-comment this when this is fixed: https://github.com/keboola/generic-extractor/issues/59
+TODO: Un-comment this when this is fixed: https://github.com/keboola/generic-extractor/issues/59
 
 ### Skip Boolean conversion
 If you have an API response like this:

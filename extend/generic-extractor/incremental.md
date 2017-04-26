@@ -73,7 +73,7 @@ that if you run the above configuration every 5 minutes,
 it will extract data modified within last 5 minutes. If you run it every hour, it will extract data modified
 within the last hour. If some of the runs fails or is skipped for any reason, there is not problem because the
 extraction will pick up where it ended last time it was successful.
-See [full example](todo:107-incremental-load).
+See [example [EX107]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/107-incremental-load).
 
 The last successful time is stored in [configuration state](/extend/common-interface/config-file/#state-file).
 If for some reason, you need to to reset it, you have to 
@@ -115,7 +115,7 @@ In a more readable [url-decoded](http://meyerweb.com/eric/tools/dencoder/) form:
    GET /users?modified_since=2017-04-19 12:46:46
 
 Otherwise the configuration behaves the same way as the [previous example](#previous-start-example)
-See [full example](todo:108-incremental-load-date).
+See [example [EX108]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/108-incremental-load-date).
 
 ### Incremental Load From To
 Another option is that you have an API which requires `from` and `to` parameters. The following
@@ -159,7 +159,7 @@ The above configuration will send a request similar to:
 
     GET /109-incremental-load-from-to/users?from=2017-04-19&to=2017-04-24
 
-See the [full example](109-incremental-load-from-to)
+See [example [EX109]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/109-incremental-load-from-to)
 
 ### Incremental Relative Load
 Suppose you have an API which supports the `from` and `to` parameters as the 
@@ -210,4 +210,4 @@ The above configuration leads to a request similar to this
 Beware however that this is not a truly reliable incremental load. If you would put such configuration 
 into an orchestration and the configuration would not run for some reason, you may miss some data. 
 However this may be still be a useful approach for obtaining samples of data for POCs.
-See the [full example](110-incremental-relative).
+See [example [110]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/110-incremental-relative).

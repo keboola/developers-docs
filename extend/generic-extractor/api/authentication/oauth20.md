@@ -4,7 +4,8 @@ permalink: /extend/generic-extractor/api/authentication/oauth20/
 ---
 
 OAuth 2.0 Authentication is one of [two OAuth methods](/extend/generic-extractor/api/authentication/#oauth) and
-is supported only for [registered components](todo). The OAuth 2.0 authentication is configured by setting
+is supported only for [registered components](/extend/generic-extractor/registration/). 
+The OAuth 2.0 authentication is configured by setting
 the `type` key to `oauth20`:
 
 {% highlight json %}
@@ -129,7 +130,7 @@ The response obtained from the service provider (the API) is a plaintext string 
 is simply a token you need to use to access other API calls. The `api.authentication.headers` section creates
 the header `Authorization: Bearer SomeToken1234abcd567ef` using the 
 [`concat` function](/extend/generic-extractor/functions/#concat).
-See the [full example](todo:103-oauth2-bearer)
+See [example [EX103]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/103-oauth2-bearer).
 
 ### HMAC Authentication
 If you have na API which requires a [HMAC](https://en.wikipedia.org/wiki/Hash-based_message_authentication_code) 
@@ -251,4 +252,4 @@ The first step is the [`implode` function](/extend/generic-extractor/functions/#
 passed to the [`hash_hmac` function](/extend/generic-extractor/functions/#hash_hmac) along with the
 parameters `sha256` (which specifies the hashing algorithm) and hashing key taken from `authorization` property
 `data.mac_secret`. The last (topmost) step is the [`concat` function](/extend/generic-extractor/function/#concat) which
-concatenates all parts of the `Authorization` header. See [full example](todo:104-oauth2-hmac).
+concatenates all parts of the `Authorization` header. See [example [EX104]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/104-oauth2-hmac).

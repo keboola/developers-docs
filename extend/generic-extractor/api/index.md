@@ -90,7 +90,7 @@ immediately (within few milliseconds) usually makes no sense because the error i
 There are two retry strategies:
 
 - Either the API sends a `Retry-After` header (or its equivalent), or
-- Generic Extractor uses [exponential backoff](todo).
+- Generic Extractor uses [exponential backoff algorithm](https://en.wikipedia.org/wiki/Exponential_backoff).
 
 ### API Retry Strategy
 Per the HTTP specification, the API may send the [`Retry-After`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After) 
@@ -230,7 +230,7 @@ situation:
 Notice that you have to add the response code `202` to the existing codes. I.e., setting
 `"codes": [202]` is likely very wrong. 
 
-See the [full example](todo:037-retry-header).
+See [example [E037]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/037-retry-header).
 
 ### Default Headers
 Assume that you have an API which returns a JSON response only if the client sends an
@@ -250,7 +250,7 @@ The following configuration sends both headers with every API request:
 }
 {% endhighlight %}
 
-See the [full example](todo:038-default-headers).
+See [example [EX038]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/038-default-headers).
 
 ### Default Parameters
 Assume that you have an API which requires that all requests contain a filter
@@ -272,7 +272,7 @@ The following configuration sends the parameter with every API request:
 
 For this use case, the [query authentication](/extend/generic-extractor/api/authentication/query/) may also be used.
 
-See the [full example](todo:039-default-parameters).
+See [example [EX093]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/039-default-parameters).
 
 ### Required Headers
 Assume that an API requires a header `X-AppKey` to be sent with each
@@ -297,5 +297,5 @@ Then the actual header value must be added to the `config` section.
 }
 {% endhighlight %}
 
-For this use case, the [authentication](todo) may also be used.
-See the [full example](todo:040-required-headers).
+For this use case, the [authentication](/extend/generic-extractor/api/authentication/) may also be used.
+See [example [EX040]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/040-required-headers).

@@ -92,7 +92,7 @@ The first request is sent to `/users`. For the second request, the value found i
 in the property `scrolling.next_page` is sent as the `page` parameter. Therefore the request 
 is sent to `/users?page=2`.
 
-See the [full example](todo:057-pagination-response-param-basic).
+See [example [057]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/057-pagination-response-param-basic).
 
 ### Overriding Parameters
 The following configuration passes the parameter `orderBy` to every request:
@@ -135,14 +135,14 @@ Also notice that the `page` parameter from `job.params` is overridden by the `pa
 in the `pagination.queryParam`. Therefore the first request is sent to `/users?page=start&orderBy=id` 
 and the second request to `/users?page=2&orderBy=id`.
 
-See the [full example](todo:058-pagination-response-param-override).
+See [example [EX058]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/058-pagination-response-param-override).
 
 ### Using Scroll Request
 The response param scroller supports sending of an initial scrolling request. This can be used
 in situations where the API requires special initialization of a scrolling endpoint;
 for example, the [Elastic](https://www.elastic.co/guide/en/elasticsearch/reference/5.2/search-request-scroll.html).
 Another example is an API which has something like a search endpoint, which needs an initial request and
-then allows you to scroll through the results (this is not exactly [RESTful](todo) though).
+then allows you to scroll through the results (this is not exactly [RESTful](/extend/generic-extractor/tutorial/rest/) though).
 
 Let's consider an API which --- to list users --- requires that you send a POST request to the
 `/search` endpoint with the configuration:
@@ -236,4 +236,4 @@ configuration with the one provided in the `scrollRequest` configuration. The ne
 a `GET` to `/results?scrollToken=b97d814f1a715d939f3f96bc574445de`. The `queryParam` configuration
 causes the `scrollToken` request parameter. This will repeat until the `scroll.token` field in the response is empty.
 
-See the [full example](todo:059-pagination-response-param-scroll-request).
+See [example [059]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/059-pagination-response-param-scroll-request).

@@ -18,7 +18,7 @@ Generic Extractor configuration is written in [JSON format](/extend/generic-extr
 and is composed of several sections. The main parts and their nesting are shown in the below schema:
 
 {: .image-popup}
-![Schema - Generic Extractor configuration](todo)
+![Schema - Generic Extractor configuration](/extend/generic-extractor/generic-intro.png)
 
 ### API Section
 The first configuration part is the `api` section where you set the basic properties of the API. 

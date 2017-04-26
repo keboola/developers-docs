@@ -41,7 +41,7 @@ An example authentication configuration looks like this:
 
 ## OAuth
 Generic Extractor also supports authentication using the [OAuth](https://en.wikipedia.org/wiki/OAuth) standard.
-Due to the principles of OAuth, this authentication method is supported only for [registered components](todo).
+Due to the principles of OAuth, this authentication method is supported only for [registered components](/extend/generic-extractor/registration/).
 The OAuth protocol defines a scheme in which credentials are exchanged between the following:
 
 - Consumer (Generic Extractor)
@@ -54,6 +54,6 @@ OAuth --- 1.0 and 2.0. They are completely incompatible (both the authentication
 Both [OAuth 1.0](/extend/generic-extractor/api/authentication/oauth10/)
 and  [OAuth 2.0](/extend/generic-extractor/api/authentication/oauth20/)
 are supported by Generic Extractor. If you are developing a new component using Generic Extractor
-[templates](todo) and want to use and test OAuth authentication, 
+[templates](/extend/generic-extractor/registration/#submission) and want to use and test OAuth authentication, 
 [inject the necessary credentials](/extend/common-interface/oauth/#credentials-injection) simply by passing them
 in the `authorization` property of the configuration.

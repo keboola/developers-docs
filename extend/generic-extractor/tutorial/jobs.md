@@ -189,8 +189,7 @@ If you use no `dataField` like in the above configuration and run it, you will o
 This is definitely not what you expected. Instead of obtaining the campaign content, you 
 got the `_links` property from the response. This is because Generic Extractor automatically 
 picks an array in the response. To get the entire response as a *single table record*, set `dataField` 
-to the [path](todo) in the object. Because you want to use the *entire* response, you will set 
-`dataField` to `.` to start in the root.
+to the [path](/extend/generic-extractor/tutorial/json/#references) in the object. Because you want to use the *entire* response, you will set `dataField` to `.` to start in the root.
 
 {% highlight json %}
 {

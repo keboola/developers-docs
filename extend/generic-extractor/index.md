@@ -25,13 +25,13 @@ be [RESTful](/extend/generic-extractor/tutorial/rest/) and more or less follow t
 ## Registering Generic Extractor
 A configuration of Generic Extractor can be [registered](/extend/registration/) as 
 a new standalone component. For the registration, the configuration of 
-generic extractor has to be [converted to template](todo).
+generic extractor has to be [converted to template](/extend/generic-extractor/registration/#submission).
 
 It is *not required* to register your generic extractor configuration, but when registered, 
 it may be used in multiple projects easily. A great advantage of using templates is that they
-are not limiting the configuration at all, since you can always switch to JSON [freeform 
-configuration](todo) when necessary. Also note that templates can be used only with registered
-configurations of generic extractor.
+are not limiting the configuration at all, since you can always switch to JSON 
+[freeform configuration](/extend/generic-extractor/registration/#submission) when necessary. 
+Also note that templates can be used only with registered configurations of generic extractor.
 
 ## Generic Extractor Source 
 As with any other KBC components, Generic Extractor source is available on 

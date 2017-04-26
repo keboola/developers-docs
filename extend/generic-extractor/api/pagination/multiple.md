@@ -114,4 +114,4 @@ The `api.pagination.scrollers` defines both pagination methods:
 It is then important to actually use the scroller in the `job.scroller` configuration for the endpoint `/search`. 
 The endpoint `/users` has no assigned scroller, therefore it uses the default one, which is `list_scroller`.
 
-See the [full example](todo:062-pagination-multiple-scrollers).
+See [example [EX062]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/062-pagination-multiple-scrollers).
