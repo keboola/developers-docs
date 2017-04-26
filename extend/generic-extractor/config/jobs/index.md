@@ -165,7 +165,7 @@ be accepted and valid. For other APIs, however, only one version may be supporte
 The `params` section defines [request parameters](/extend/generic-extractor/tutorial/rest). They
 may be optional or required, depending on the target API specification. The `params` section is
 an object with arbitrary properties (or, more precisely, parameters understood by the target
-API). It is also allowed to use [function calls](todo).
+API). It is also allowed to use [function calls](/extend/generic-extractor/functions/).
 
 Assume that `api.baseUrl` is set to `https://example.com/3.0/`, `jobs[].endpoint`
 is set to `mock-api` and that the `param` parameters are set as follows:
@@ -368,7 +368,7 @@ The following table will be extracted:
 Notice that the [boolean value](/extend/generic-extractor/tutorial/json/#data-values) `married` is converted
 to `1` when true and left empty otherwise (`false` and `null`).
 
-See the [full example](todo:1-simple-job).
+See [example [EX001]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/001-simple-job).
 
 ### Array within an object
 To extract data from the following API response:
@@ -397,7 +397,7 @@ The following table will be extracted:
 |123|John Doe|
 |234|Jane Doe|
 
-See the [full example](todo:2-array-in-object).
+See [example [EX002]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/002-array-in-object).
 
 ### Multiple arrays within an object
 To extract data from the following API response:
@@ -431,7 +431,7 @@ The following table will be extracted:
 |123|John Doe|
 |234|Jane Doe|
 
-See the [full example](todo:3-multiple-arrays-in-object).
+See [example [EX003]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/003-multiple-arrays-in-object).
 
 ### Array within a nested object
 To extract data from the following API response:
@@ -468,7 +468,7 @@ The following table will be extracted:
 |123|John Doe|
 |234|Jane Doe|
 
-See the [full example](todo:4-array-in-nested-object).
+See [example [EX004]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/004-array-in-nested-object).
 
 ### Two arrays within a nested object
 To extract both `active` and `inactive` arrays from the above API response, you need to use two jobs:
@@ -521,7 +521,7 @@ The following table will be extracted:
 |234|Jane Doe|
 |345|Jimmy Doe|
 
-See the [full example](todo:5-two-arrays-in-nested-object).
+See [example [EX005]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/005-two-arrays-in-nested-object).
 
 ### Simple object
 You may encounter and API response like this:
@@ -541,7 +541,7 @@ The following table will be extracted:
 |--|----|
 |123|John Doe|
 
-See the [full example](todo:6-simple-object).
+See [example [EX006]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/006-simple-object).
 
 ### Nested object
 You may encounter and API response like this:
@@ -563,7 +563,7 @@ The following table will be extracted:
 |--|----|
 |123|John Doe|
 
-See the [full example](todo:7-nested-object).
+See [example [EX007]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/007-nested-object).
 
 ### Single object in an array
 You may encounter an API response like this:
@@ -594,7 +594,7 @@ The following table will be extracted:
 |--|----|-------|
 |123|John Doe|2 |
 
-See the [full example](todo:8-single-object-in-array).
+See [example [EX003]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/008-single-object-in-array).
 
 ### Nested array
 You may encounter an API response like this:
@@ -636,12 +636,12 @@ The following table will be extracted:
 |123|John Doe|
 |234|Jane Doe|
 
-See the [full example](todo:9-nested-array).
+See [example [EX009]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/009-nested-array).
 
 ## Examples with Complicated Objects
 The above examples show how simple objects are extracted from different objects. Generic
 Extractor can also extract objects with non-scalar properties. The default
-[JSON to CSV mapping](todo) flattens nested objects and produces secondary tables from nested arrays.
+[JSON to CSV mapping](/extend/generic-extractor/config/mappings/) flattens nested objects and produces secondary tables from nested arrays.
 
 ### Object with nested array
 You may encounter an API response like this:
@@ -687,7 +687,7 @@ database (CSV) column. Therefore the [JSON-CSV mapper] creates another table for
 in the `tags` column and uses it in a new `JSON_parentId` column. This
 way, the 1:N relationship between Members and Tags is represented.
 
-See the [full example](todo:10-object-wth-nested-array).
+See [example [EX010]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/010-object-with-nested-array).
 
 ### Upgrading to array
 You may encounter the following API response:
@@ -730,7 +730,7 @@ Tags:
 As you can see, the scalar value `tags` in the first member object was automatically upgraded to
 a single-element array because the `tags` property is an array elsewhere (second member) in the response.
 
-See the [full example](todo:17-upgrading-array).
+See [example [EX017]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/017-upgrading-array).
 
 ### Object with nested object
 You may encounter an API response like this:
@@ -770,7 +770,7 @@ The following table will be extracted:
 The properties of nested `address` objects are automatically flattened into the parent object. Therefore
 the `address.city` property is flattened into the `address_city` column.
 
-See the [full example](todo:11-object-with-nested-object).
+See [example [EX011]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/011-object-with-nested-object).
 
 ### Object with a deeply nested object
 The above two examples show the basic principles of the JSON-CSV mapping used by Generic Extractor.
@@ -853,7 +853,7 @@ auto-generated key to the parent *Users* table. Also notice that the
 [Boolean value](/extend/generic-extractor/tutorial/json/#data-values)
 `primary` is converted to `1` when true and left empty otherwise.
 
-See the [full example](todo:12-deeply-nested-object).
+See [example [EX012]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/012-deeply-nested-object).
 
 ## Response Filter Examples
 
@@ -891,7 +891,7 @@ JSON string. The following table will be extracted:
 The `tags` column contains serialized JSON fragments, which can be processed by
 the JSON capable database (e.g., [Snowflake](https://docs.snowflake.net/manuals/sql-reference/functions-semistructured.html)).
 
-See the [full example](todo:13-skip-flatten).
+See [example [EX013]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/013-skip-flatten).
 
 ### Skip flattening in nested objects
 If you have the following API response:
@@ -980,11 +980,12 @@ The last two options might seem inconsistent. This is because the `responseFilte
 the objects of the processed array (not to the array itself, not to the JSON root). Thus the only correct
 setting in this case is `contacts[].properties`.
 
-See the [full example](todo:14-skip-flatten-nested).
+See [example [EX014]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/014-skip-flatten-nested).
+
+{% comment %}
+Un-comment this when this is fixed: https://github.com/keboola/generic-extractor/issues/59
 
 ### Skip Boolean conversion
-TODO: tohle tak nefunguje! Bud se to musi vyhodit, nebo updatnout GE! TODO
-
 If you have an API response like this:
 
 {% highlight json %}
@@ -1002,7 +1003,7 @@ If you have an API response like this:
 ]
 {% endhighlight %}
 
-and want to avoid the [default Boolean conversion], add the `married` property to
+and want to avoid the [default Boolean conversion](#simple-array), add the `married` property to
 the response filter. Setting `"responseFilter": "married"` will cause Generic Extractor to
 return the following table:
 
@@ -1011,7 +1012,9 @@ return the following table:
 |123|John Doe|true|
 |234|Jane Doe|false|
 
-See the [full example](todo:15-skip-boolean).
+See [example [EX015]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/015-skip-boolean).
+
+{% endcomment %}
 
 ### Inconsistent object
 If you have an API response like this:
@@ -1043,7 +1046,7 @@ will obtain the following table:
 |123|foo|"green"|
 |321|bar|{"items":["red","blue"]}|
 
-See the [full example](todo:16-inconsistent-object).
+See [example [EX016]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/016-inconsistent-object).
 
 ### Multiple filters
 You might have a complex API response like this:
@@ -1126,7 +1129,7 @@ Contacts:
 |address|{"street":"Bates Street","city":"Chicago","state":"USA"}||users-18_3fdf6b12b11f85cb4eb9c34ce0322ecd|
 |phone|"123 456 789"|1|users-18_3fdf6b12b11f85cb4eb9c34ce0322ecd|
 
-See the [full example](todo:18-multiple-filters).
+See [example [EX018]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/018-multiple-filters).
 
 ### Setting delimiter
 The default delimiter used for referencing nested properties is a dot `.`. If the names of
@@ -1190,7 +1193,7 @@ object. With the above settings you will obtain a table like this:
 |123|John Doe|Elm Street|New York||{"street":"Cemetery Ridge","city":"New York"}|
 |234|Jane Doe|Blossom Avenue||U.K.|{"street":"1313 Webfoot Walk","city":"Duckburg","state":"Calisota"}|
 
-See the [full example](todo:19-different-delimiter).
+See [example [EX019]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/019-different-delimiter).
 
 ### Setting delimiter --- more complex
 For the custom set delimiter in the response filter, you need to have a complex API response. For example:
@@ -1248,7 +1251,7 @@ You will obtain a table similar to the one below:
 |123|John Doe|Elm Street|New York|||Cemetery Ridge|New York|["work","usaddress"]||
 |234|Jane Doe|Blossom Avenue||["home"]|U.K.|1313 Webfoot Walk|Duckburg||Calisota|
 
-See the [full example](todo:20-setting-delimiter-complex).
+See [example [EX020]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/020-setting-delimiter-complex).
 
 ## Examples with HTTP Methods and Parameters
 
@@ -1303,7 +1306,7 @@ The above configuration produces the following table:
 |234|Jane Doe||
 |345|Jimmy Doe||
 
-See the [full example](todo:033-job-parameters).
+See [example [EX033]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/033-job-parameters).
 
 ### POST request
 You may encounter an API which is not exactly [RESTful](/extend/generic-extractor/tutorial/rest/)
@@ -1344,7 +1347,7 @@ The above configuration produces the following table:
 |123|John Doe|1|
 |234|Jane Doe||
 
-See the [full example](todo:034-post-request).
+See [example [EX034]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/034-post-request).
 
 ### Complex POST request
 A not-exactly-[RESTful](/extend/generic-extractor/tutorial/rest/) API (see above) may require some JSON
@@ -1404,7 +1407,7 @@ The above configuration produces the following table:
 |123|John Doe|
 |234|Jane Doe|
 
-See the [full example](todo:035-complex-post).
+See [example [EX035]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/035-complex-post).
 
 ### Complex GET request
 Sometimes even the HTTP GET requests require complex parameters. Suppose the API
@@ -1473,4 +1476,4 @@ The above configuration produces the following table:
 |123|John Doe|
 |234|Jane Doe|
 
-See the [full example](todo:036-complex-get).
+See [example [EX036]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/036-complex-get).

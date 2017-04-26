@@ -65,7 +65,8 @@ a value, use the `placeholders` configuration. It is an object whose properties 
 of each `placeholders` object property is a **property path** in the parent job response.
 The placeholder in the child `endpoint` will be replaced by the **value** of that parent property. The property
 path is configured relative to the extracted object ([see an example](#accessing-deeply-nested-id)). The child
-`endpoint` is configured relative to the [`api.baseUrl` configuration](todo), not relative to the parent endpoint.
+`endpoint` is configured relative to the [`api.baseUrl` configuration](/extend/generic-extractor/api/#base-url), 
+not relative to the parent endpoint.
 
 The following configuration:
 
@@ -118,7 +119,7 @@ The default level is 1, meaning that the placeholder `user-id` is equivalent to 
 that the property path will be searched in the direct parent of the child job. The level
 is counted from the child 'upwards'. Therefore a placeholder `2:user-id` means that
 the property path will be searched in the parent of the child parent (two levels up).
-See the [corresponding examples](todo).
+See the [corresponding examples](#nesting-level).
 
 ## Filter
 The configuration option `recursionFilter` allows you to skip some child jobs. This can be
@@ -217,7 +218,7 @@ Generic Extractor makes three API calls:
 - `users/123`
 - `users/234`
 
-The [`dataField`](/extend/generic-extractor/config/jobs/TODO) is set to a dot to retrieve the 
+The [`dataField`](/extend/generic-extractor/config/jobs/#data-field) is set to a dot to retrieve the 
 entire response as a single object. Running Generic Extractor produces the following tables:
 
 users:
@@ -235,16 +236,16 @@ user__user-id:
 |234|Jane Doe|St Mary Mead|UK|High Street|234|
 
 Notice that the table representing child resources contains all the responses
-merged into a single table; the [usual merging rules](/extend/generic-extractor/config/jobs/TODO) apply.
+merged into a single table; the [usual merging rules](/extend/generic-extractor/config/jobs/#merging-response) apply.
 
 Also notice that a new column, `parent_id`, was added, containing the **placeholder value** used
 to retrieve the resource. The `parent_id` column is not always named `parent_id`.
 Its name is created by joining the `parent_` prefix to the **placeholder path**.
 
-To create a friendly name for the table, it is good to use the [dataType](/extend/generic-extractor/config/jobs/TODO) 
+To create a friendly name for the table, it is good to use the [dataType](/extend/generic-extractor/config/jobs/#data-type) 
 property (see the next example). The auto-generated name is rather ugly.
 
-See the [full example](todo:021-basic-child-job).
+See [example [EX021]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/021-basic-child-job).
 
 ### Basic Job With Data Type
 To avoid automatic table names, it is advisable to always use the `dataType` property for
@@ -284,7 +285,7 @@ user-detail:
 |123|John Doe|London|UK|Whitehaven Mansions|123|
 |234|Jane Doe|St Mary Mead|UK|High Street|234|
 
-See the [full example](todo:022-basic-child-job-datatype).
+See [example [EX022]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/022-basic-child-job-datatype).
 
 ### Accessing Nested ID
 If the placeholder value is nested within the response object, you can use
@@ -355,7 +356,7 @@ user detail:
 Notice that the parent reference column name is the concatenation of the `parent` prefix and
 `user-info_id` placeholder path (with special characters replaced by the underscore `_`).
 
-See the [full example](todo:023-child-job-nested-id).
+See [example [EX023]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/023-child-job-nested-id).
 
 ### Accessing Deeply Nested Id
 The placeholder path is configured **relative to** the extracted object. Assume that the
@@ -423,7 +424,7 @@ the parent object, which itself is located at the path `active-users.items`. Thi
 may be confusing because the endpoint property in that child job is set relative to the
 `api.baseUrl` and not to the parent URL.
 
-See the [full example](todo:024-child-job-deeply-nested-id).
+See [example [EX024]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/024-child-job-deeply-nested-id).
 
 ### Naming Conflict
 Because a new column is added to the table representing child properties, it is possible that you
@@ -464,7 +465,7 @@ and you use the following job configuration:
 the output for the child job will contain the column `parent_id`. At the same time, Generic Extractor will attempt
 to create the column `parent_id` with the placeholder value, overwriting the original column. That column will be lost.
 
-See the [full example](todo:025-naming-conflict).
+See [example [EX025]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/025-naming-conflict).
 
 ### Nesting Level
 By default, the placeholder value is taken from the object retrieved in the parent job. As long as the child
@@ -602,7 +603,7 @@ order-detail:
 
 Notice that each table contains additional columns with the placeholder property path prefixed with `parent_`.
 
-See the [full example](todo:026-basic-deeper-nesting).
+See [example [EX026]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/026-basic-deeper-nesting).
 
 ### Nesting Level Alternative
 Because the required user and order IDs are present in multiple requests (in the list and in the detail), there
@@ -689,7 +690,7 @@ override the ones in the parent jobs. For example, in the following (probably **
 ]
 {% endhighlight %}
 
-See the [full example](todo:027-basic-deeper-nesting-alternative).
+See [example [EX027]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/027-basic-deeper-nesting-alternative).
 
 ### Deep Job Nesting
 Let's see how you can retrieve more nested API resources:
@@ -797,7 +798,7 @@ you would obtain the following `item-detail` table:
 
 where the `parent_id` column refers the `5:user-id` placeholder.
 
-See the [full example](todo:028-advanced-deep-nesting).
+See [example [EX028]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/028-advanced-deep-nesting).
 
 ### Nested Array
 Suppose you have an API which has an endpoint `/users` which returns a response like this:
@@ -1011,7 +1012,7 @@ user-detail:
 You can see from the above tables that the filter is applied to the child results only so that
 the details for only the wanted users are retrieved.
 
-See the [full example](todo:029-simple-filter).
+See [example [EX029]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/029-simple-filter).
 
 ### Not Like Filter
 Apart from the standard comparison operators, the recursive filter allows to use
@@ -1047,7 +1048,7 @@ following `user-detail` table will be extracted:
 |345|Jimmy Doe|child|user|Sonny Jimmy|345|
 |456|Janet Doe|child|user|Missy Jennie|456|
 
-See the [full example](todo:030-not-like-filter).
+See [example [EX030]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/030-not-like-filter).
 
 ### Combining Filters
 Multiple filters can be combined using the
@@ -1080,7 +1081,7 @@ The following `user-detail` will be produced:
 |---|---|---|---|---|---|
 |345|Jimmy Doe|child|user|Sonny Jimmy|345|
 
-See the [full example](todo:031-combined-filter).
+See [example [EX031]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/031-combined-filter).
 
 ### Multiple Filter Combinations
 Although you can join multiple filter expression with logical operators as in the
@@ -1122,4 +1123,4 @@ With the above configuration, the following `user-detail` table will be produced
 Because the described system of operator precedence may lead to rather unusual behaviour,
 we recommend that you keep the recursive filter simple.
 
-See the [full example](todo:032-multiple-combined-filter).
+See [example [EX032]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/032-multiple-combined-filter).

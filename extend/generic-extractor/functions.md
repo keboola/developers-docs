@@ -812,7 +812,8 @@ final API URL (`http://example.com/api/1.0/`):
 }
 {% endhighlight %}
 
-See the [full example with concat](todo:087-function-baseurl) or an alternative [example with sprintf](088-function-baseurl-sprintf).
+See [example [EX087] with concat](https://github.com/keboola/generic-extractor/tree/master/doc/examples/087-function-baseurl)
+or an alternative [example [EX088] with sprintf](https://github.com/keboola/generic-extractor/tree/master/doc/examples/088-function-baseurl-sprintf).
 
 ### API Default Parameters
 Suppose you have an API which expects a `tokenHash` parameter sent with every request. The 
@@ -865,8 +866,9 @@ the API does not use any authentication method (two authentication methods are n
 {% endhighlight %}
 
 The above configuration reads the `#api-key` and `#secret-key` parameters from the `config` section,
-computes SHA-256 hash and sends it as a `tokenHash` parameter with every request. See the
-[full example](todo:099-function-query-parameters). The solution with using the `jobs.params` 
+computes SHA-256 hash and sends it as a `tokenHash` parameter with every request. See 
+[example [EX099]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/099-function-query-parameters). 
+The solution with using the `jobs.params` 
 configuration can look like this:
 
 {% highlight json %}
@@ -1037,7 +1039,9 @@ The following `user-detail` table will be extracted:
 
 Notice that the `parent_id` column contains the processed value and not the original one.
 
-See the [full example](todo:085-function-job-placeholders) (or a not-so-useful example of [using reference](todo:086-function-job-placeholders-reference)).
+See [example [EX085]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/085-function-job-placeholders)
+(or a not-so-useful [example [EX086](https://github.com/keboola/generic-extractor/tree/master/doc/examples/086-function-job-placeholders-reference)]
+(using reference).
 
 ### Job Parameters
 Let's say that you have an API, which requires that you send a hash of some value with every request. Specifically,
@@ -1086,7 +1090,8 @@ The following configuration does exactly that:
 In the above configuration, the value of the token is taken from the configuration root (using the `attr` reference).
 This is useful in case of the configuration is used as part of a [template](/extend/generic-extractor/registration/). 
 The actual hash will be generated of the `NotSoSecret` value.
-See the [full example](todo:089-function-job-parameters-md5) or an alternative [with SHA1 hash](090-function-job-parameters-sha1).
+See [example [EX089]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/089-function-job-parameters-md5) or an 
+alternative [example [EX090] with SHA1 hash](https://github.com/keboola/generic-extractor/tree/master/doc/examples/090-function-job-parameters-sha1).
 
 ### Optional Job Parameters 
 Let's say you have an API which allows you to send the list of columns to be contained in the API response.
@@ -1188,7 +1193,8 @@ You may also be tempted to use an alternative configuration:
 The alternative configuration also puts current date, but whereas the first one puts a single same
 date to each record, the alternative configuration will return different times for different records 
 as they are extracted. 
-See the [full example](todo:091-function-user-data) or an alternative [example with set date](092-function-user-date-set-date).
+See [example [EX091]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/091-function-user-data) or 
+an alternative [example [EX092] with set date](https://github.com/keboola/generic-extractor/tree/master/doc/examples/092-function-user-date-set-date).
 
 ### Headers
 Suppose you have an API which requires you to send a custom `X-Api-Auth` header with every request.
@@ -1257,8 +1263,8 @@ in the [`config` section](/extend/generic-extractor/config/). In this case also 
 }
 {% endhighlight %}
 
-See the [example](todo:093-function-api-http-headers) or an 
-[alternative example setting headers in the `config` section](todo:094-function-config-headers).
+See [example [EX093]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/093-function-api-http-headers) or an 
+[alternative example [EX094] setting headers in the `config` section](https://github.com/keboola/generic-extractor/tree/master/doc/examples/094-function-config-headers).
 
 ### Nested Functions
 If the API in the [above example](#headers) would try to mimic 
@@ -1294,7 +1300,7 @@ function which generates the header value in another function (`base64_encode`).
 }
 {% endhighlight %}
 
-See the [example](todo:095-function-nested). 
+See [example [EX095]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/095-function-nested).
 
 ### Nested StrToTime
 Suppose you have an API which requires you to specify `from` and `to` date parameters to obtain orders created 
@@ -1450,4 +1456,4 @@ to a special `/auth` endpoint.
 }
 {% endhighlight %}
 
-See [full example](todo:100-function-login-headers)
+See [example [EX100]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/100-function-login-headers).

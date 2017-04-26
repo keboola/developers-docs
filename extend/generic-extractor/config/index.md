@@ -53,7 +53,7 @@ includes configuration of HTTP method and parameters. The `jobs` configuration i
 ## Output Bucket
 The `outputBucket` option defines the name of the [Storage Bucket](https://help.keboola.com/storage/buckets/) 
 in which the extracted tables will be stored. The configuration is **required** unless
-the extractor is [registered](todo) as standalone component with the 
+the extractor is [registered](/extend/generic-extractor/registration/) as standalone component with the 
 [Default Bucket](/extend/common-interface/folders/#default-bucket) option.
 
 The following configuration will make Generic Extractor place all extracted tables 
@@ -106,7 +106,7 @@ which case, it is essentially equal to [`api.http.headers`](/extend/generic-extr
 }
 {% endhighlight %}
 
-See the [full example](todo:074-http-headers).
+See [example [EX003]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/074-http-headers).
 
 ## Incremental Output
 The `incrementalOutput` boolean option allows you to turn on incremental loading for loading 
@@ -116,7 +116,7 @@ table in Storage will not be cleared. Default value is `false`. How to configure
 Generic Extractor to extract data in increments from an API, is described in a 
 [dedicated article](/extend/generic-extractor/incremental/).
 
-See the [full example](todo:075-incremental-output).
+See [example [EX075]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/075-incremental-output).
 
 ## User Data
 The `userData` option allows you to add arbitrary data to extracted records. 
@@ -165,4 +165,4 @@ The `userData` values are added to parent jobs only, they will not affect
 columns with the same names as `userData` properties, the original column will be overwritten 
 by the values of `userData`.
 
-See the [full example](todo:076-user-data).
+See [example [EX076]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/076-user-data).

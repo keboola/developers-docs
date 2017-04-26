@@ -179,8 +179,8 @@ See an [example](/extend/generic-extractor/api/#default-headers).
 Similar to the `http.headers` option, the `http.requiredHeaders` option allows you to set the
 HTTP header for every API request. The difference is that the `requiredHeaders` configuration
 specifies only the header names. The actual values must be provided in the 
-[`config`](todo) configuration section. This is useful in case the header values change
-dynamically or they are provided as part of [template configuration](todo). The `api` configuration 
+[`config`](/extend/generic-extractor/config/) configuration section. This is useful in case the header values change
+dynamically or they are provided as part of [template configuration](/extend/generic-extractor/registration/). The `api` configuration 
 section:
 
 {% highlight json %}

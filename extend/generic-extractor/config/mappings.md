@@ -184,7 +184,7 @@ flattened into columns named as concatenation of the parent and child property n
 array property `interests` was turned into a separate table and linked through using 
 `JSON_parentId` column and auto-generated keys.
 
-See the [full example](todo:063-mapping-automatic).
+See [example [EX063]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/063-mapping-automatic).
 
 ### Basic Manual Mapping
 Maybe you are not interested in the user `interests` and want to simplify the users table
@@ -252,7 +252,7 @@ correct settings, the following table will be produced:
 |United Kingdom|John Doe|123|
 |United Kingdom|Jane Doe|234|
 
-See the [full example](todo:064-mapping-basic).
+See [example [EX064]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/064-mapping-basic).
 
 ### Mapping Child Jobs
 Let's say that you have an API endpoint `/users` which returns a response similar to:
@@ -348,7 +348,7 @@ The important part in the mapping configuration is that you **must** use `"type"
 for the mapping type of the `parent_id` (`user_id`) column. This is because the 
 column `parent_id` does not really exist in the response as it is generated dynamically for the child job.
 
-See the [full example](todo:065-mapping-child-jobs).
+See [example [EX065]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/065-mapping-child-jobs).
 
 ### Mapping without Processing
 The `forceType` configuration property allows you to skip a part of the API response from processing.
@@ -511,7 +511,7 @@ itself is an array, its value has no name and therefore the key is an empty stri
 value is a standard [column mapping](/extend/generic-extractor/config/mappings/#column-mapping). 
 The above configuration produces the same result as the automatic mapping of columns.
 
-See the [full example](todo:066-mapping-tables-basic).
+See [example [EX066]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/066-mapping-tables-basic).
 
 #### Nested Properties
 Let's say that you have an API which returns a response like this (it will be used in the following two examples as well):
@@ -658,8 +658,7 @@ user-address:
 |Whiteheaven Mansions|United Kingdom|1c439a9a39548290f7b7a4513a9224e7|
 |Whiteheaven Mansions|United Kingdom|605e865710f95dba665f6d0e8bc19f1a|
 
-See the [full example](todo:067-mapping-tables-nested).
-
+See [example [EX067]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/067-mapping-tables-nested).
 
 #### Array Items
 Consider the same API response as above:
@@ -811,8 +810,7 @@ This picks the first item (remember that arrays indexes are
 `primary-address` table. Analogously, the `addresses.1` mapping picks the second item from the `addresses` 
 array and stores it in the `secondary-address` table.
 
-See the [full example](todo:068-mapping-tables-nested-array).
-
+See [example [EX068]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/068-mapping-tables-nested-array).
 
 #### Directly Mapping Array
 Consider the same API response as above:
@@ -942,7 +940,7 @@ The user table now contains an additional column --- `primary-address`:
 |123|John Doe|b5d72095c441b3a3d6f23ad8142c3f8b|b5d72095c441b3a3d6f23ad8142c3f8b|
 |234|Jane Doe|5f7f2ab65a680f1a9387a8fafe6b9050|5f7f2ab65a680f1a9387a8fafe6b9050|
 
-See the [full example](todo:069-mapping-tables-nested-direct).
+See [example [EX069]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/069-mapping-tables-nested-direct).
 
 #### Using Primary Keys
 In the above example, you can see that the `primary-address` table contains 
