@@ -57,7 +57,7 @@ the extractor is [registered](/extend/generic-extractor/registration/) as standa
 [Default Bucket](/extend/common-interface/folders/#default-bucket) option.
 
 The following configuration will make Generic Extractor place all extracted tables 
-(the names of the tables are defined by the [`dataType`](/extend/generic-extractor/jobs/#dataType) setting) 
+(the names of the tables are defined by the [`dataType`](/extend/generic-extractor/config/jobs/#dataType) setting) 
 in the `ge-tutorial` bucket:
 
 {% highlight json %}
@@ -122,7 +122,7 @@ See [example [EX075]](https://github.com/keboola/generic-extractor/tree/master/d
 The `userData` option allows you to add arbitrary data to extracted records. 
 The `userData` is an object with arbitrary property names. The property names will be added as columns to all 
 extracted records from parent jobs, the property values will be the columns values. It is also possible to 
-use [user functions](/extend/generic-extractor/user-functions/) as `userData` property values.
+use [functions](/extend/generic-extractor/functions/) as `userData` property values.
 
 The following configuration:
 

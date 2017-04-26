@@ -6,7 +6,7 @@ permalink: /extend/generic-extractor/tutorial/rest/
 * TOC
 {:toc}
 
-An [API (Application Programming Interface)](https://en.wikipedia.org/wiki/Application_programming_interface) is an [interface](https://en.wikipedia.org/wiki/Interface_(computing)) to some application or **service**
+An [API (Application Programming Interface)](https://en.wikipedia.org/wiki/Application_programming_interface) is an [interface](https://en.wikipedia.org/wiki/Interface_(computing)) to an application or **service**
 designed for machine access. An API can be seen as the UI (User Interface) of an application designed
 for machines (other applications). 
 

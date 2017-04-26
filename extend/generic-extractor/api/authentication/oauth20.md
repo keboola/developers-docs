@@ -85,7 +85,7 @@ value -- `json`. Otherwise do not specify format at all (plaintext is assumed).
 At least one of the `headers` or `query` options should always be specified; otherwise no authentication
 will be sent with the API requests. Both fields also allow and practically require using 
 [functions](/extend/generic-extractor/functions/) to generate an OAuth signature. Specific authentication values
-are available in the [OAuth function context](/extend/generic-extractor/functions/oauth-2-0-authentication-context).
+are available in the [OAuth function context](/extend/generic-extractor/functions/#oauth-20-authentication-context).
 
 ## Examples
 
@@ -252,5 +252,5 @@ The first step is the [`implode` function](/extend/generic-extractor/functions/#
 [Normalized request string](https://tools.ietf.org/html/draft-ietf-oauth-v2-http-mac-01#section-3.2.1). This is then
 passed to the [`hash_hmac` function](/extend/generic-extractor/functions/#hash_hmac) along with the
 parameters `sha256` (specifying the hashing algorithm) and the hashing key taken from the `authorization` property
-`data.mac_secret`. The last (topmost) step is the [`concat` function](/extend/generic-extractor/function/#concat); it
+`data.mac_secret`. The last (topmost) step is the [`concat` function](/extend/generic-extractor/functions/#concat); it
 concatenates all parts of the `Authorization` header. See [example [EX104]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/104-oauth2-hmac).

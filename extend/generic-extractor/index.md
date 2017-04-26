@@ -6,9 +6,9 @@ permalink: /extend/generic-extractor/
 * TOC
 {:toc}
 
-Generic Extractor is a [KBC component](/overview/) which acts like a **customizable 
-[HTTP REST](/generic-extractor/tutorial/rest/) client**. It can be configured to extract data from
-virtually any *sane* web API. 
+Generic Extractor is a [KBC component](/overview/) which acts like a customizable 
+[HTTP REST](/generic-extractor/tutorial/rest/) client. It can be configured to extract data 
+from virtually any sane web API. 
 
 Due to the versatility of different APIs running in the wild, Generic Extractor offers a **vast amount 
 of configuration options**. Even though it may seem somewhat abstract and hard to understand at first, 
@@ -32,10 +32,10 @@ Each configuration of Generic Extractor can be [registered](/extend/registration
 a new standalone component. For the registration, configurations have to be 
 [converted to a template](/extend/generic-extractor/registration/#submission).
 
-It is *not required* to register your Generic Extractor configuration. However, when registered, 
+It is **not required** to register your Generic Extractor configuration. However, when registered, 
 it can be easily used in multiple projects. A great advantage of using templates is that they
 are not limiting the configuration at all. You can always switch to JSON 
-[freeform configuration](/extend/generic-extractor/registration/#submission) when necessary. 
+[free-form configuration](/extend/generic-extractor/registration/#submission) when necessary. 
 
 Also note that templates can be used only with registered configurations of Generic Extractor.
 
