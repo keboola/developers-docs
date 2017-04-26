@@ -38,7 +38,7 @@ for authentication of all the other API requests. A sample OAuth Login authentic
 
 ## Configuration Parameters
 The configuration parameters are identical to the [Login](/extend/generic-extractor/api/authentication/login/) method.
-The difference, however, is in the [function context](/extend/generic-extractor/functions/oauth-2-0-login-authentication-context).
+The difference, however, is in the [function context](/extend/generic-extractor/functions/#oauth-20-login-authentication-context).
 The **login request** is assumed to require OAuth2 authorization and its response must be in JSON format (plaintext is not supported).
 
 ## Examples

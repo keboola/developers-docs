@@ -178,7 +178,7 @@ The `dataField` refers to the `campaigns` property in the JSON retrieved as the 
 You can now run the above configuration by simply pasting it into the Generic Extractor configuration field:
 
 {: .image-popup}
-![Screenshot - Generic Extractor configuration](/extend/generate-extractor/tutorial/config-1.png)
+![Screenshot - Generic Extractor configuration](/extend/generic-extractor/tutorial/config-1.png)
 
 Notice that when you save the configuration, the `#password` property gets 
 [encrypted](https://developers.keboola.com/overview/encryption/).

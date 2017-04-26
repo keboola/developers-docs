@@ -279,7 +279,7 @@ The `dataField` parameter is used to determine what part of the API **response**
 extracted. The following rules are applied by default:
 
 - If the response is a single *array*, use the whole response.
-- If the response is an [object](/extend/generic-extractor-tutorial/json/) and there is a single *array* property,
+- If the response is an [object](/extend/generic-extractor/tutorial/json/) and there is a single *array* property,
 use that property.
 - If the response is an object with none or multiple array properties, require that `dataField` is configured.
 
@@ -321,7 +321,7 @@ The value of the `responseFilter` property is either a path to a property in the
 an array of such paths. The path is dot-separated unless set otherwise in the `responseFilterDelimiter` configuration.
 If you want to refer to the items of an array, use `[]` --- see an [example below](#skip-flattening-in-nested-objects).
 The same result can be achieved using `forceType` parameter in
-[column mapping](/extend/generic-extrator/config/mapping/#column-mapping).
+[column mapping](/extend/generic-extrator/config/mappings/#column-mapping).
 
 ## Children
 The `children` configuration allows you to retrieve sub-resources of the processes API resource.

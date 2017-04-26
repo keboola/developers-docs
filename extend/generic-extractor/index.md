@@ -7,7 +7,7 @@ permalink: /extend/generic-extractor/
 {:toc}
 
 Generic Extractor is a [KBC component](/overview/) which acts like a customizable 
-[HTTP REST](/generic-extractor/tutorial/rest/) client. This means that it can be configured to extract data from
+[HTTP REST](/extend/generic-extractor/tutorial/rest/) client. This means that it can be configured to extract data from
 virtually any *sane* web API. Due to versatility of different APIs running in the wild, 
 Generic Extractor offers a vast amount of configuration options. This may make it 
 look somewhat abstract and hard to understand at first sight, but once you configure

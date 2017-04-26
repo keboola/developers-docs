@@ -157,7 +157,7 @@ See [example](#api-default-parameters).
 
 ### time
 The [`time` function](http://php.net/manual/en/function.time.php) returns the current time as a 
-[Unix timestamp](https://en.wikipedia.org/wiki/Unix_timehttps://en.wikipedia.org/wiki/Unix_time). 
+[Unix timestamp](https://en.wikipedia.org/wiki/Unix_time). 
 To obtain the current time in a more readable format, you probably want to use the
 the [`date` function](#date). The function takes no arguments.
 
@@ -908,7 +908,7 @@ configuration can look like this:
 {% endhighlight %}
 
 The only practical difference is that the `tokenHash` parameter is going to be sent only with
-the single `users` job. See [full example](098-function-hmac).
+the single `users` job. See [example [EX098]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/098-function-hmac).
 
 ### API Query Authentication
 Suppose you have an API which has only a single endpoint `/items` to which you have to 
@@ -980,7 +980,7 @@ There are two jobs, both to same endpoint (`items`), but with different `type` p
 The authentication method `query` adds two more parameters to each request -- `apiToken` (contain the value 
 of `config.#token`) and `signature`. The `signature` parameters is created as a SHA-1 hash of the 
 token and resource type (`"query": "type"` is taken from the `jobs.params.type` value). See
-[full example](101-function-query-auth).
+[example [EX101]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/101-function-query-auth).
 
 ### Job Placeholders
 Let's say you have an API which has and endpoint `/users` which returns a list of user and
@@ -1134,7 +1134,7 @@ call would be `/users?showColumns=all`. The following configuration does exactly
 }
 {% endhighlight %}
 
-See the [full example](097-function-ifempty).
+See [example [EX097]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/097-function-ifempty).
 
 ### User Data
 Assume that you have an API which returns a response that does not contain any time information in 
