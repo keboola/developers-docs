@@ -576,18 +576,21 @@ Finally, the deepest nested child returns details of each order (for each user) 
 will be produced:
 
 users:
+
 |userId|name|
 |---|---|
 |123|John Doe|
 |234|Jane Doe|
 
 user-detail:
+
 |userId|name|description|parent\_userId|
 |---|---|---|---|
 |123|John Doe|Good ol' father John|123|
 |234|Jane Doe|Good young mommy Jenny|234|
 
 orders:
+
 |orderId|price|parent\_userId|
 |---|---|---|
 |1234|$12|123|
@@ -595,6 +598,7 @@ orders:
 |2345|$42|234|
 
 order-detail:
+
 |orderId|price|timestamp|state|parent\_userId|parent\_orderId|
 |---|---|---|---|---|---|
 |1234|$12|2017-05-06 8:21:45|cancelled|123|1234|
@@ -801,7 +805,8 @@ where the `parent_id` column refers the `5:user-id` placeholder.
 See [example [EX028]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/028-advanced-deep-nesting).
 
 ### Nested Array
-Suppose you have an API which has an endpoint `/users` which returns a response like this:
+
+Suppose now that the endpoint `/users` returns a more complicated response like this:
 
 {% highlight json %}
 {
@@ -832,10 +837,10 @@ Suppose you have an API which has an endpoint `/users` which returns a response 
 }
 {% endhighlight %}
 
-The API also has and endpoint `/user/{userId}` which returns details about a specific user. If 
-you wan to obtain all the fields from the above response and also the details about each user, 
-you have to create a rather tricky configuration. You may be tempted to start with the following job
-configuration:
+The API also has an endpoint `/user/{userId}` which returns details about a specific user. If 
+you want to obtain all the fields from the above response and also the details about each user, 
+you have to create a rather tricky configuration. Even though you may be tempted to start with 
+the following job configuration:
 
 {% highlight json %}
 {
@@ -844,8 +849,8 @@ configuration:
 }
 {% endhighlight %}
 
-This is not possible however, because the root of the response is the `members` field is not 
-an array and therefore it cannot create child jobs. Therefore the job configuration must start with:
+this is not possible because the root of the response in the `members` field is not 
+an array and therefore it cannot create child jobs. For that reason the job configuration must start with:
 
 {% highlight json %}
 {
@@ -854,7 +859,7 @@ an array and therefore it cannot create child jobs. Therefore the job configurat
 }
 {% endhighlight %}
 
-The `members.items` is an array which now can be used in as a source for child jobs:
+The `members.items` is an array which now can be used as a source for child jobs:
 
 {% highlight json %}
 {
@@ -875,8 +880,8 @@ The `members.items` is an array which now can be used in as a source for child j
 {% endhighlight %}
 
 Notice that the placeholder path (`user-info.id`) is entered relative to the `dataField` setting
-(`members.items`). Now to extract the other fields from the `/users` response (other than `member.items`), you
-have to create another job:
+(`members.items`). Now, to extract the other fields from the `/users` response (other than `member.items`), 
+create another job:
 
 {% highlight json %}
 {
@@ -886,7 +891,7 @@ have to create another job:
 }
 {% endhighlight %}
 
-Note that the `dataType` must be different then for the first job, because the structure of the response is different.
+Note that the `dataType` must be different than in the first job because the structure of the response is different.
 You will receive a number of tables:
 
 users (first job):
@@ -996,6 +1001,7 @@ filter evaluates to true. The filter property name `type` refers to the parent r
 filters only the children. So, the following tables will be returned:
 
 users:
+
 |id|name|role|type|
 |---|---|---|---|
 |123|John Doe|parent|admin|
@@ -1004,19 +1010,20 @@ users:
 |456|Janet Doe|child|user|
 
 user-detail:
+
 |id|name|userRole|userType|description|parent\_id|
 |---|---|---|---|---|---|
 |123|John Doe|parent|admin|Father John|123|
 |234|Jane Doe|parent|administrator|Mother Jane|234|
 
 You can see from the above tables that the filter is applied to the child results only so that
-the details for only the wanted users are retrieved.
+the details are retrieved only for the desired users.
 
 See [example [EX029]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/029-simple-filter).
 
 ### Not Like Filter
 Apart from the standard comparison operators, the recursive filter allows to use
-a **like** comparison operator `~`. It expects that the value contains a placeholder `%`
+a **like** comparison operator `~`. It expects that the value contains a placeholder `%`,
 which matches any number of characters. The following configuration:
 
 {% highlight json %}
@@ -1053,7 +1060,7 @@ See [example [EX030]](https://github.com/keboola/generic-extractor/tree/master/d
 ### Combining Filters
 Multiple filters can be combined using the
 [logical](https://en.wikipedia.org/wiki/Boolean_algebra#Basic_operations) `&` (and) and `|` (or) operators.
-For example the following configuration retrieves details for user which have
+For example, the following configuration retrieves details for users which have
 both `id < 400` and `role = child`:
 
 {% highlight json %}
@@ -1084,7 +1091,7 @@ The following `user-detail` will be produced:
 See [example [EX031]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/031-combined-filter).
 
 ### Multiple Filter Combinations
-Although you can join multiple filter expression with logical operators as in the
+Although you can join a multiple filter expression with logical operators as in the
 above example, there is no support for parentheses. The following configuration
 combines multiple filters:
 
@@ -1107,7 +1114,7 @@ combines multiple filters:
 {% endhighlight %}
 
 The precedence of logical operators is defined so that the first operator occurring in the
-expression takes precedence over the second. I.e. the condition `role=parent|id>300&id<400`
+expression takes precedence over the second. That is to say that the condition `role=parent|id>300&id<400`
 is interpreted as `role=parent|(id>300&id<400)` because the operator `|` takes precedence
 over the `&` operator. The condition `id>300&id<400|role==parent` is interpreted as
 `id>300&(id<400|role==parent)` because the `&` operator takes precedence over the `|` operator.
