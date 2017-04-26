@@ -38,13 +38,13 @@ for authentication of all the other API requests. A sample OAuth Login authentic
 
 ## Configuration Parameters
 The configuration parameters are identical to the [Login](/extend/generic-extractor/api/authentication/login/) method.
-The difference however is in the [function context](/extend/generic-extractor/functions/oauth-2-0-login-authentication-context).
+The difference, however, is in the [function context](/extend/generic-extractor/functions/oauth-2-0-login-authentication-context).
 The **login request** is assumed to require OAuth2 authorization and its response must be in JSON format (plaintext is not supported).
 
 ## Examples
 
 ### Basic Configuration
-The following configuration shows how to set up a OAuth *login request*:
+The following configuration shows how to set up an OAuth *login request*:
 
 {% highlight json %}
 {
@@ -93,7 +93,8 @@ The following configuration shows how to set up a OAuth *login request*:
 }
 {% endhighlight %}
 
-First an OAuth login is negotiated. The result of this authentication is response from the API (inserted into `authorization.oauth_api.credentials.#data` property): 
+First, an OAuth login is negotiated. The result of this authentication is a response from the API (inserted into 
+the `authorization.oauth_api.credentials.#data` property): 
 
 {% highlight json %}
 {
@@ -118,5 +119,5 @@ This API call then returns the following response:
 }
 {% endhighlight %}
 
-From that, the value of `credentials.access_token` property is taken and inserted into `X-Access-Token` header
+From that, the value of the `credentials.access_token` property is taken, inserted into the `X-Access-Token` header
 and sent to other API requests (`/users`).
