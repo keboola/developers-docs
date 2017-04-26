@@ -251,4 +251,4 @@ The first step is the [`implode` function](/extend/generic-extractor/functions/#
 passed to the [`hash_hmac` function](/extend/generic-extractor/functions/#hash_hmac) along with the
 parameters `sha256` (which specifies the hashing algorithm) and hashing key taken from `authorization` property
 `data.mac_secret`. The last (topmost) step is the [`concat` function](/extend/generic-extractor/function/#concat) which
-concatenates all parts of the `Authorization` header. See [full example](todo:104-oauth2-hmac).
+concatenates all parts of the `Authorization` header. See the [full example](todo:104-oauth2-hmac).
