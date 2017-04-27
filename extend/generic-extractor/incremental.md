@@ -6,24 +6,24 @@ permalink: /extend/generic-extractor/incremental/
 * TOC
 {:toc}
 
-Extracting data incrementally is universally beneficial --- it lowers the load on the API, speeds up the extraction and
-lowers the load on [KBC Storage](https://help.keboola.com/storage/) (therefore it saves 
+Extracting data incrementally is universally beneficial --- it speeds up the extraction and lowers the load on both the API and
+[KBC Storage](https://help.keboola.com/storage/) (therefore it saves 
 [credits](https://help.keboola.com/management/limits/#project-power)).
 
 ## Options
 After you have incrementally extracted data from an API, the data must be [incrementally loaded](https://help.keboola.com/storage/tables/#incremental-loading)
-into Storage. Simply set `"incrementalOutput": true` in the `config` section. 
+into Storage. To do that, simply set `"incrementalOutput": true` in the `config` section. 
 
 There are, however, a number of implications in the incremental loads. It essentially boils downs to the following use cases, 
 depending on what kind of data you are importing (extracting from an API):
 
-- The imported data contain only added entries. When `incrementalOutput` is turned on, the data will be simply appended to the 
+- The imported data contain only **added entries**. When `incrementalOutput` is turned on, the data will be simply appended to the 
 target table in Storage. Turning `incrementalOutput` to false probably makes no sense because the table will contain only the new entries.
-- The imported data contain added and modified entries. When `incrementalOutput` is turned on, set a primary key on the table 
+- The imported data contain **added and modified entries**. When `incrementalOutput` is turned on, set a primary key on the table 
 so that new rows are added and existing [rows are updated](https://help.keboola.com/storage/tables/#primary-key-deduplication). 
 If the primary key is not set, the modified entries will be duplicated in the target table. Turning `incrementalOutput` to false 
 probably makes no sense because the table will contain only the new entries.
-- The imported data contain all rows. In this case, set a primary key for the table or turn `incrementalOutput` to false. Turning 
+- The imported data contain **all rows**. In this case, set a primary key for the table or turn `incrementalOutput` to false. Turning 
 `incrementalOutput` to true probably makes no sense because the table will contain duplicate entries. If you set the primary key, new 
 rows will be added and modified rows will be updated. Note that in this case more 
 [credits](https://help.keboola.com/management/limits/#project-power) are consumed.
@@ -36,7 +36,7 @@ loads by using [`previousStart`](/extend/generic-extractor/functions/#parameters
 [`time` function](/extend/generic-extractor/functions/#time). Setting the primary key is done using
 [mappings](/extend/generic-extractor/config/mappings/).
 
-## Example
+## Examples
 
 ### Previous Start Example
 Assume you have an API supporting a parameter `modified_since` which expects a 
@@ -121,7 +121,7 @@ Otherwise the configuration behaves the same way as the [previous example](#prev
 See [example [EX108]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/108-incremental-load-date).
 
 ### Incremental Load From To
-Another option is that you have an API which requires the `from` and `to` parameters. The following
+Another option is an API which requires the `from` and `to` parameters. The following
 configuration generates the `from` date as the date of the last extraction (using the [`time.previousStart` 
 value](/extend/generic-extractor/functions/#parameters-context)). It also generates the `to` date as the date 
 of the current extraction (using the [`time.currentStart` value](/extend/generic-extractor/functions/#parameters-context)):

@@ -7,59 +7,63 @@ permalink: /extend/generic-extractor/registration/
 {:toc}
 
 It is possible to register a Generic Extractor configuration and create a 
-completely new extractor based on it. This allows you to share the API extractor between various
-projects and simplify its further configuration. The 
-[registration process](https://developers.keboola.com/extend/registration/)
-is common to all components, thought there are some specifics for Generic Extractor.
+completely new extractor based on it. This enables sharing the API extractor between various
+projects and simplifies its further configuration. 
+
+Even though the [registration process](https://developers.keboola.com/extend/registration/)
+is common to all components, there are some specifics for Generic Extractor.
 
 ## Configuration Considerations
-Before converting your configuration to a universally available component, you need to consider
+Before converting your configuration to a universally available component, consider
 what values in the configuration should be provided by the end-user (typically authentication values).
 Then design a [configuration schema](/extend/registration/configuration-schema/) for setting 
-those values. You can [test the schema online](http://jeremydorn.com/json-editor/). The values obtained from
-the end-user will be stored in the [`config` property](/extend/generic-extractor/config/).
-Then you have to modify your configuration so that it reads those values from the `config` properties.
-Do not forget that if you prefix a value with hash `#`, it will be 
-[encrypted](/overview/encryption/) when the configuration is saved.
-You should also try to make the extractor [work incrementally](/extend/generic-extractor/incremental/) 
+those values. You can [test the schema online](http://jeremydorn.com/json-editor/). 
+The values obtained from the end-user will be stored in the [`config` property](/extend/generic-extractor/config/).
+Modify your configuration to read those values from the `config` properties.
+
+Do not forget that if you prefix a value with a hash `#`, it will be 
+[encrypted](/overview/encryption/) once the configuration is saved.
+Also, try to make the extractor [work incrementally](/extend/generic-extractor/incremental/) 
 if possible.
 
 ## Submission
 The following fields from the [checklist](/extend/registration/checklist/) are 
 not applicable:
 
-- **Application Type** -- always `extractor`,
-- **Docker image URL** -- not used, provided by Keboola,
-- **Docker image tag** -- not used, provided by Keboola,
-- **Required memory** -- not used, provided by Keboola,
-- **Encryption** -- always `true`,
-- **Token forwarding** -- always `false`,
-- **UI options** -- always `genericTemplatesUI`,
-- **Networking** -- always `dataIn`,
-- **Actions** -- always `run`,
-- **Logger** -- not used, provided by Keboola,
-- **Staging Storage** -- not used, provided by Keboola
+- **Application Type** --- always `extractor`
+- **Docker image URL** --- not used, provided by Keboola
+- **Docker image tag** -- not used, provided by Keboola
+- **Required memory** --- not used, provided by Keboola
+- **Encryption** --- always `true`
+- **Token forwarding** --- always `false`
+- **UI options** --- always `genericTemplatesUI`
+- **Networking** --- always `dataIn`
+- **Actions** --- always `run`
+- **Logger** --- not used, provided by Keboola
+- **Staging Storage** --- not used, provided by Keboola
 
-Because the UI is assumed to be `genericTemplatesUI`, you have to provide 
-[**Configuration schema**](/extend/registration/configuration-schema/) and
-a **template** which will be used in conjunction with the schema.
-An example of the templates UI is shown on the picture below.
+Because the UI is assumed to be `genericTemplatesUI`, provide a
+[**configuration schema**](/extend/registration/configuration-schema/) and
+a **template** to be used in conjunction with the schema.
+An example of the templates UI is shown in the picture below.
 
 {: .image-popup}
 ![Screenshot - Generic templates UI](/extend/generic-extractor/template-1.png)
 
-The `Config` section of the templates UI is defined by the Configuration Schema you provide. 
-The `Template` section contains at least one template. Template is simply one configuration of 
-Generic Extractor. For example you might want to provide one configuration for incremental loading
+The `Config` section of the templates UI is defined by the configuration schema you provide. 
+The `Template` section contains at least one template. A template is simply a configuration of 
+Generic Extractor. 
+
+For example, you might want to provide one configuration for incremental loading
 and a different configuration for full loading. The template UI also has the option to
 `Switch to JSON editor` which displays the configuration JSON and allows the end-user to modify it.
 Notice that the JSON editor allows modification only to the [`config`](/extend/generic-extractor/config)
 section. Other sections, such as [`api`](/extend/generic-extractor/api/) or 
-[`authorization`](/extend/generic-extractor/api/authentication#oauth20) may not be modified by the end-user.
-Optionally, the templates UI may contain interface to negotiate 
+[`authorization`](/extend/generic-extractor/api/authentication/oauth20) may not be modified by the end-user.
+Optionally, the templates UI may contain interface to negotiate. 
 
 ## Example
-Let's say that you have the following working API configuration
+Let's say you have the following working API configuration
 (see [example [EX111]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/111-templates-example)):
 
 {% highlight json %}
@@ -114,15 +118,15 @@ Let's say that you have the following working API configuration
 }
 {% endhighlight %}
 
-You identify, that four values of that configuration can be set by the end-user:
+You identify that four values of that configuration can be set by the end-user:
 
 - `JohnDoe` --- you can create a string parameter `login`,
 - `TopSecret` --- you can create a string parameter `#password` (it will be encrypted),
 - `123` --- you can create a numeric parameter `accountId`,
 - `active` --- you can create a enumeration parameter `userType` (with values `active`, `inactive`, `all`).
 
-The parameters names are completely arbitrary, only they mustn't conflict with existing
-configuration properties of [Generic Extractor](/extend/generic-extractor/config/) (e.g. `jobs`, `mappings`)
+The parameters names are completely arbitrary, only they must not conflict with existing
+configuration properties of [Generic Extractor](/extend/generic-extractor/config/) (e.g., `jobs`, `mappings`)
 Now you can create a [configuration schema](/extend/registration/configuration-schema/) for the four parameters.
 
 {% highlight json %}
@@ -257,7 +261,7 @@ you have to modify the configuration so that it reads them from there using
 The argument to the `base64_encode` function is now the 
 [`concat` function](/extend/generic-extractor/functions/#concat) which joins together the 
 values of the `username` and `#password` fields. The `accountId` parameter needs to be moved to the 
-`jobs` section, because the `http.defaultOptions.params` section does not support function calls (yet!).
+`jobs` section because the `http.defaultOptions.params` section does not support function calls (yet!).
 The `type` parameter was changed to a reference to the `userType` field
 (see [example [EX111]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/111-templates-example)). 
 
@@ -301,7 +305,7 @@ the `api` section to individual `api.json` file:
 {% endhighlight %}
 
 Then remove the user provided values (`username`, `#password`, `accountId`, `userType`) from
-the `config` section add `name` and `description` to it. Save the file into a 
+the `config` section and add `name` and `description` to it. Save the file into a 
 separate `template.json` file.
 
 {% highlight json %}
@@ -335,6 +339,5 @@ separate `template.json` file.
 }
 {% endhighlight %}
 
-You can create as many `template.json` files as you wish. All of them need to share the same `api.json` 
-configuration however. When you want to register your component, attach the `api.json` and all 
-`template.json` files. 
+You can create as many `template.json` files as you wish. However, all of them need to share the same `api.json` 
+configuration. When you want to register your component, attach the `api.json` and all `template.json` files. 
