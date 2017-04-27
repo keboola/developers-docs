@@ -27,6 +27,20 @@ You just need to do two easy things before you start:
 - Have the documentation of your chosen API at hand. The API should be [RESTful](/extend/generic-extractor/tutorial/rest/) 
 and, more or less, follow the HTTP specification. 
 
+## Configuration & Development
+If you are new to Generic Extractor, we strongly suggest you go through the 
+[Tutorial](/extend/generic-extractor/tutorial/) which shows the principles and most important features.
+If you intend to develop more complicated configuration, check out how to
+[run Generic Extractor locally](/extend/generic-extractor/running/).
+There is also a [number of examples](todo) accompanying the documentation, which
+[can also be run locally](/extend/generic-extractor/running/#running-examples).
+
+We also have some working configuration snippets, which didn't make it to complete extractors yet:
+
+- [Collabim](http://www.collabim.cz/) --- [Configuration Gist](https://gist.github.com/odinuv/e2cf13ae100c146dbccfc650d93aef18)
+- 
+
+
 ## Registering Generic Extractor
 Each configuration of Generic Extractor can be [registered](/extend/registration/) as 
 a new standalone component. For the registration, configurations have to be 
@@ -48,20 +62,3 @@ main repository, it uses some vital libraries (which partially define its capabi
 - [CSV Map](https://github.com/keboola/php-csvmap) --- library which converts JSON data into CSV tables
 - [Filter](https://github.com/keboola/php-filter) --- library which allows to match values together
 - [JSON Parser](https://github.com/keboola/php-jsonparser) --- JSON parser which produces CSV tables while maintaining relations
-
-{% comment %}
-## Introduction
-Generic Extractor allows exporting data from REST APIs not implemented in Keboola Connection or 
-creating custom configurations to export any data from any REST API.
-
-## Configuration
-The configuration consists of 2 main parts:
-
-- `api`
-    - Defines the basic API characteristics, such as pagination, authentication, base URL etc
-    - [Documentation](/extend/generic-extractor/api/)
-- `config`
-    - This part defines the configuration itself - resources from the API, authentication credentials, ...
-    - Each resource is a "job" within the extractor, and can contain children for recursive API calls (eg tickets > comments for each ticket)
-    - [Documentation](/extend/generic-extractor/config/)
-{% endcomment %}

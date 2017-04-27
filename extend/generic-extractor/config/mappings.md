@@ -438,6 +438,8 @@ The same result can be achieved by using the [`responseFilter` job property](/ex
 }
 {% endhighlight %}
 
+See [example [EX073]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/073-mapping-forceType).
+
 ### Table Mapping Examples
 
 #### Basic Table Mapping
@@ -857,6 +859,7 @@ Consider the same API response as above:
 {% endhighlight %}
 </details>
 <br>
+
 If you map the table as in the [previous example](#array-items), you will receive a `primary-address` table:
 
 |street|country|user-contact_pk|
@@ -1047,6 +1050,8 @@ primary-address:
 |Blossom Avenue|United Kingdom|123|
 |Whiteheaven Mansions|United Kingdom|234|
 
+See [example [EX070]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/070-mapping-tables-nested-direct-pk).
+
 #### Multiple Primary Key Columns
 Generic Extractor allows you to set only a single (primary) key for a table. This means that 
 if you set `primaryKey` on multiple columns you will create a compound primary key. Let's say
@@ -1127,6 +1132,8 @@ interests:
 
 **Important:** If you set a column (or combination of columns) as a primary key which has duplicate
 values, the rows will not be imported!
+
+See [example [EX071]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/071-mapping-multiple-pk).
 
 #### Disabled Parent Key
 It is also possible to entirely disable the relationships between parts of the response objects. 
@@ -1209,3 +1216,4 @@ the `users` data type is used both for users and their children. Setting `tableM
 no effect. This also means that the `favoriteColors` column configuration **must be** defined in the `users` 
 mapping (even though it is not used by the users in the API response). 
 
+See [example [EX072]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/072-mapping-pk-disable).

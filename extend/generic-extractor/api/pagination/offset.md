@@ -98,7 +98,8 @@ This is the simplest scrolling setup:
 
 The first request is sent with the parameters `limit=20` and `offset=0`, for example, `/users?limit=20&offset=0`.
 The next request has `limit=20` and `offset=20`, for example, `/users?limit=20&offset=20`.
-See [example [043]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/043-paging-stop-underflow).
+See [example [EX043]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/043-paging-stop-underflow) and
+[example [EX044] with a more structured response](https://github.com/keboola/generic-extractor/tree/master/doc/examples/044-paging-stop-underflow-struct).
 
 ### Renaming Parameters
 The `limitParam` and `offsetParam` configuration options allow you to rename the limit and 
@@ -114,7 +115,7 @@ offset for the needs of a specific API:
 {% endhighlight %}
 
 Here the API expects the parameters `count` and `skip`. The first request will be sent with the parameters `count=100` 
-and `skip=0`; for example `/users?count=2&skip=0`. See [example [049]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/049-pagination-offset-rename).
+and `skip=0`; for example `/users?count=2&skip=0`. See [example [EX049]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/049-pagination-offset-rename).
 
 ### Overriding Limit and Offset
 It is possible to override both the limit and offset parameters of a specific API job. 
@@ -168,4 +169,4 @@ For the `orders` endpoint the `skip` (offset) parameter is not overridden, and t
 The `count` (limit) parameter is set to 10. Therefore the first request to that endpoint will be
 `GET /orders?count=10&skip=0`. 
 
-See [example [050]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/050-pagination-offset-override).
+See [example [EX050]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/050-pagination-offset-override).

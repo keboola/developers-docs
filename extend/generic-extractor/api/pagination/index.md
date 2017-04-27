@@ -113,8 +113,8 @@ situations can arise:
 [`pagenum`](/extend/generic-extractor/api/pagination/pagenum/) and 
 [`offset`](/extend/generic-extractor/api/pagination/pagenum/) methods will stop, other methods will probably stop 
 too (depends on how empty the response is)),
-- less common --- the API keeps returning the last page, the extraction is stopped when a page is obtained twice --- see below.
-- even less common --- the API keeps returning the first page, the extraction is stopped when a page is obtained twice --- see below.
+- less common --- the API keeps returning the last page, the extraction is stopped when a page is obtained twice (see [example [EX041]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/041-paging-stop-same)) --- see below.
+- even less common --- the API keeps returning the first page, the extraction is stopped when a page is obtained twice (see [example [EX042]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/042-paging-stop-same-2))--- see below.
 - less common --- the API returns an error --- in this case a different stopping condition such as ([`nextFlag`](#next-page-flag) or [`forceStop`](#force-stop)) has to be used.
 
 If the API returns the last page and it is the same as the previous page, the extraction is stopped. 

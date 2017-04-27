@@ -230,7 +230,7 @@ situation:
 Notice that you have to add the response code `202` to the existing codes. I.e., setting
 `"codes": [202]` is likely very wrong. 
 
-See [example [E037]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/037-retry-header).
+See [example [EX037]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/037-retry-header).
 
 ### Default Headers
 Assume that you have an API which returns a JSON response only if the client sends an
@@ -272,7 +272,7 @@ The following configuration sends the parameter with every API request:
 
 For this use case, the [query authentication](/extend/generic-extractor/api/authentication/query/) may also be used.
 
-See [example [EX093]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/039-default-parameters).
+See [example [EX039]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/039-default-parameters).
 
 ### Required Headers
 Assume that an API requires a header `X-AppKey` to be sent with each

@@ -594,7 +594,7 @@ The following table will be extracted:
 |--|----|-------|
 |123|John Doe|2 |
 
-See [example [EX003]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/008-single-object-in-array).
+See [example [EX008]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/008-single-object-in-array).
 
 ### Nested array
 You may encounter an API response like this:

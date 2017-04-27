@@ -80,7 +80,7 @@ The configuration expects a response to contain a `links.next` field with the UR
 The URL may be either an *absolute link* (`http://example.com/users?page=2`) or an *absolute path* (`/users?page=2`). 
 If the URL is *relative* (`users?page=2`), it is appended to the endpoint URL.
 
-See [example [054]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/054-pagination-response-url-basic).
+See [example [EX054]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/054-pagination-response-url-basic).
 
 ### Merging Parameters
 If you need to pass additional parameters to each of the page URLs, use the `includeParams` parameter:
@@ -138,7 +138,7 @@ In the above configuration, the `account` parameter is sent with every API reque
 a `jobs.params.page` parameter would overwrite the `page` parameter in the response URL and thus 
 would probably break the paging.
 
-See [example [055]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/055-pagination-response-url-params).
+See [example [EX055]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/055-pagination-response-url-params).
 
 ### Overriding Parameters
 Sometimes the API does not pass the entire URL, but only the [query string](/extend/generic-extractor/tutorial/rest/#url)
@@ -199,3 +199,5 @@ Also notice that with the above
 configuration the `page` parameter specified in the job is used only for the first page, because it 
 is overridden by the `page` parameter given in the response. That is to say that the first request is sent to
 `/users?account=123&page=start` and the second request is sent to `/users?account=123&page=2`.
+
+See [example [EX056]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/056-pagination-response-url-params-override).

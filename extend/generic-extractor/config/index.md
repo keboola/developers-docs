@@ -106,7 +106,7 @@ which case, it is essentially equal to [`api.http.headers`](/extend/generic-extr
 }
 {% endhighlight %}
 
-See [example [EX003]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/074-http-headers).
+See [example [EX074]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/074-http-headers).
 
 ## Incremental Output
 The `incrementalOutput` boolean option allows you to turn on incremental loading for loading 

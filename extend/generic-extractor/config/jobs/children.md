@@ -186,7 +186,7 @@ details for each user:
 {
     "parameters": {
         "api": {
-            "baseUrl": "http://mock-server:80/021-basic-child-job/"
+            "baseUrl": "http://example.com/"
         },
         "config": {
             "outputBucket": "mock-server",
@@ -924,7 +924,7 @@ users-2\_members\_items (second job, generated from array node `items`):
 The `users-2\_members\_items` contains the same results as the `users` table, but it also contains the 
 `JSON\_parentId` column which allows you to link the user list to the list description in the `users-2` table.
 This makes the response in the `users` table quite useless, but the job is still required to generate
-the child jobs to obtain the `user-detail` table. See the [full example](106-child-jobs-array).
+the child jobs to obtain the `user-detail` table. See [example [EX106]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/106-child-jobs-array).
 
 ### Simple Filter
 Let's assume that you have an API which has two endpoints:
