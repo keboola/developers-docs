@@ -1,0 +1,201 @@
+---
+title: Response URL Scroller
+permalink: /extend/generic-extractor/api/pagination/response-url/
+---
+
+* TOC
+{:toc}
+
+The Response URL Scroller can be used with APIs that provide the URL of the 
+next page in the response. This scroller is suitable for APIs supporting the 
+[JSON API specification](http://jsonapi.org/format/#fetching-pagination).
+
+{% highlight json %}
+{
+    "api": {
+        "pagination": {
+            "method": "response.url",
+            "urlKey": "links.next"
+        },
+        ...
+    }
+}
+{% endhighlight %}
+
+## Configuration Parameters
+The following configuration parameters are supported for the `response.url` method of pagination:
+
+- `urlKey` (optional, string) --- Path in the response to the field which contains the URL of the next request. 
+The default value is `next_page`.
+- `paramIsQuery` (optional, boolean) 
+	- When true, the URL is assumed to be only [query string](/extend/generic-extractor/tutorial/rest/#url) parameters. 
+	- When false, a URL with a path is assumed. `false` is also the default value.
+- `includeParams` (optional, boolean) --- When true, the [job parameters](/extend/generic-extractor/config/jobs/#request-parameters) 
+are added to the provided URL. The default value is `false`.
+
+If `includeParams` is true, the [job parameters](/extend/generic-extractor/config/jobs/#request-parameters) are merged into
+the parameters of the URL in the response. If `paramIsQuery` is false, the parameters in the response **are overridden**
+by the parameters in the job. If `paramIsQuery` is true, then the parameters in the response **override** the parameters in 
+the job. See the [examples below](#examples).
+
+### Stopping Condition
+The pagination ends when the value of the `urlKey` parameter is empty --- the key is not present at all, is null,
+is an empty string or is `false`. Take care when configuring the `urlKey` parameter. If you, for example, misspell the
+key's name, the extraction will not go beyond the first page.
+[Common stopping conditions](/extend/generic-extractor/api/pagination/#stopping-strategy) also apply.
+
+## Examples
+
+### Basic Configuration
+To configure pagination for an API that supports the [JSON API specification](http://jsonapi.org/format/#fetching-pagination),
+use the configuration below:
+
+{% highlight json %}
+"pagination": {
+    "method": "response.url",
+    "urlKey": "links.next"
+}
+{% endhighlight %}
+
+The configuration expects a response to contain a `links.next` field with the URL of the next page, e.g.:
+
+{% highlight json %}
+{
+    "items": [
+        {
+            "id": 123,
+            "name": "John Doe"
+        },
+        {
+            "id": 234,
+            "name": "Jane Doe"
+        }
+    ],
+    "links": {
+        "next": "/users?page=2"
+    }
+}
+{% endhighlight %}
+
+The URL may be either an *absolute link* (`http://example.com/users?page=2`) or an *absolute path* (`/users?page=2`). 
+If the URL is *relative* (`users?page=2`), it is appended to the endpoint URL.
+
+See [example [054]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/054-pagination-response-url-basic).
+
+### Merging Parameters
+If you need to pass additional parameters to each of the page URLs, use the `includeParams` parameter:
+
+{% highlight json %}
+{
+    "parameters": {
+        "api": {
+            "baseUrl": "http://example.com/",
+            "pagination": {
+                "method": "response.url",
+                "urlKey": "links.next",
+                "includeParams": true
+            }
+        },
+        "config": {
+            "debug": true,
+            "outputBucket": "mock-server",
+            "jobs": [
+                {
+                    "endpoint": "users",
+                    "dataField": "items",
+                    "params": {
+                        "account": 123
+                    }
+                }
+            ]
+        }
+    }
+}
+{% endhighlight %}
+
+A sample response:
+
+{% highlight json %}
+{
+    "items": [
+        {
+            "id": 123,
+            "name": "John Doe"
+        },
+        {
+            "id": 234,
+            "name": "Jane Doe"
+        }
+    ],
+    "links": {
+        "next": "/users?page=2"
+    }
+}
+{% endhighlight %}
+
+In the above configuration, the `account` parameter is sent with every API request. If it were not for the
+`includeParams` option, it would be sent **only with the first request**. Note that adding 
+a `jobs.params.page` parameter would overwrite the `page` parameter in the response URL and thus 
+would probably break the paging.
+
+See [example [055]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/055-pagination-response-url-params).
+
+### Overriding Parameters
+Sometimes the API does not pass the entire URL, but only the [query string](/extend/generic-extractor/tutorial/rest/#url)
+parameters which should be used for querying the next page.
+
+{% highlight json %}
+{
+    "items": [
+        {
+            "id": 123,
+            "name": "John Doe"
+        },
+        {
+            "id": 234,
+            "name": "Jane Doe"
+        }
+    ],
+    "links": {
+        "next": "?page=2"
+    }
+ }
+{% endhighlight %}
+
+You must then use the `paramsIsQuery` configuration, so that your Generic Extractor can produce a 
+valid URL:
+
+{% highlight json %}
+{
+    "parameters": {
+        "api": {
+            "baseUrl": "http://mock-server:80/056-pagination-response-url-params-override/",
+            "pagination": {
+                "method": "response.url",
+                "urlKey": "links.next",
+                "paramIsQuery": true,
+                "includeParams": true
+            }
+        },
+        "config": {
+            "debug": true,
+            "outputBucket": "mock-server",
+            "jobs": [
+                {
+                    "endpoint": "users",
+                    "dataField": "items",
+                    "params": {
+                        "account": 123,
+                        "page": "start"
+                    }
+                }
+            ]
+        }
+    }
+}
+{% endhighlight %}
+
+Also notice that with the above 
+configuration the `page` parameter specified in the job is used only for the first page, because it 
+is overridden by the `page` parameter given in the response. That is to say that the first request is sent to
+`/users?account=123&page=start` and the second request is sent to `/users?account=123&page=2`.
