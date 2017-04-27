@@ -1396,6 +1396,8 @@ timestamp value (`???` below). Then there is another outer part:
 The converts the timestamp back to a string format (`Y-m-d` format) which yields `2017-10-11`. This
 value is assigned to the `to` parameter of the API call.
 
+See [example [EX096]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/096-function-nested-from-to).
+
 ### Login Authentication
 Suppose you have an API which requires you to send username and password separated by colon and
 base64 encoded -- e.g. `JohnDoe:TopSecret` (base64 encoded to `Sm9obkRvZTpUb3BTZWNyZXQ=`) in

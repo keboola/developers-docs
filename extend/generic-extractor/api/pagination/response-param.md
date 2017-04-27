@@ -92,7 +92,7 @@ The first request is sent to `/users`. For the second request, the value found i
 in the property `scrolling.next_page` is sent as the `page` parameter. Therefore the request 
 is sent to `/users?page=2`.
 
-See [example [057]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/057-pagination-response-param-basic).
+See [example [EX057]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/057-pagination-response-param-basic).
 
 ### Overriding Parameters
 The following configuration passes the parameter `orderBy` to every request:
@@ -236,4 +236,4 @@ configuration with the one provided in the `scrollRequest` configuration. The ne
 a `GET` to `/results?scrollToken=b97d814f1a715d939f3f96bc574445de`. The `queryParam` configuration
 causes the `scrollToken` request parameter. This will repeat until the `scroll.token` field in the response is empty.
 
-See [example [059]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/059-pagination-response-param-scroll-request).
+See [example [EX059]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/059-pagination-response-param-scroll-request).

@@ -145,4 +145,4 @@ property specified in `idKey` (user id). Another important part --- `"increment"
 by 1 between the requests. Also notice that the initial value of the API parameter `startWith` is specified 
 in the `jobs.params` configuration and it is overridden by the scroller in the subsequent requests.
 
-See [example [061]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/061-pagination-cursor-reverse).
+See [example [EX061]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/061-pagination-cursor-reverse).

@@ -14,6 +14,7 @@ How to write documentation [http://sites.google.com/a/keboola.com/devel/kbc/doku
 * `gem install jekyll`
 * `bundle install`
 
+
 ### Run
 
 * `bundle exec jekyll serve`

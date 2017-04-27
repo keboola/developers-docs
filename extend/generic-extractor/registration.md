@@ -59,7 +59,8 @@ section. Other sections, such as [`api`](/extend/generic-extractor/api/) or
 Optionally, the templates UI may contain interface to negotiate 
 
 ## Example
-Let's say that you have the following working API configuration:
+Let's say that you have the following working API configuration
+(see [example [EX111]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/111-templates-example)):
 
 {% highlight json %}
 {
@@ -257,7 +258,8 @@ The argument to the `base64_encode` function is now the
 [`concat` function](/extend/generic-extractor/functions/#concat) which joins together the 
 values of the `username` and `#password` fields. The `accountId` parameter needs to be moved to the 
 `jobs` section, because the `http.defaultOptions.params` section does not support function calls (yet!).
-The `type` parameter was changed to a reference to the `userType` field. 
+The `type` parameter was changed to a reference to the `userType` field
+(see [example [EX111]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/111-templates-example)). 
 
 When you handled the configuration parameters, you can turn the configuration into a template. Separate
 the `api` section to individual `api.json` file:

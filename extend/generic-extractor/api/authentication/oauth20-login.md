@@ -121,3 +121,5 @@ This API call then returns the following response:
 
 From that, the value of the `credentials.access_token` property is taken, inserted into the `X-Access-Token` header
 and sent to other API requests (`/users`).
+
+See [example [EX105]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/105-oauth2-login).
