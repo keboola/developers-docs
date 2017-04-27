@@ -147,7 +147,7 @@ See [example [EX112]](https://github.com/keboola/generic-extractor/tree/master/d
 
 ### Iterating Headers
 Suppose you have an API from which you want to extract data from two accounts (`JohnDoe` and `DoeJohn`). The 
-API uses [HTTP Basic Authentication](/extend/generic-extractor/authentication/basic/) method. Plus each user
+API uses [HTTP Basic Authentication](/extend/generic-extractor/api/authentication/basic/) method. Plus each user
 has his own API token which must be provided in the `X-Api-Token` header. 
 
 Even if the above parameters relate to the [`api` configuration](/extend/generic-extractor/api/) which cannot 
