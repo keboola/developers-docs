@@ -6,7 +6,7 @@ permalink: /extend/generic-extractor/tutorial/
 * TOC
 {:toc}
 
-This tutorial will guide you through configuring Generic Extractor on a new API.
+This tutorial will guide you through configuring Generic Extractor for a new API.
 
 We will use the API of [MailChimp](https://mailchimp.com/) --- an email marketing service, as it is fairly 
 easy to understand and has excellent documentation. 

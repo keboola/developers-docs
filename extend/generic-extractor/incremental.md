@@ -7,7 +7,7 @@ permalink: /extend/generic-extractor/incremental/
 {:toc}
 
 Extracting data incrementally is universally beneficial --- it speeds up the extraction and lowers the load on both the API and
-[KBC Storage](https://help.keboola.com/storage/) (therefore it saves 
+[KBC Storage](https://help.keboola.com/storage/) (thus saving 
 [credits](https://help.keboola.com/management/limits/#project-power)).
 
 ## Options

@@ -19,7 +19,7 @@ what values in the configuration should be provided by the end-user (typically a
 Then design a [configuration schema](/extend/registration/configuration-schema/) for setting 
 those values. You can [test the schema online](http://jeremydorn.com/json-editor/). 
 The values obtained from the end-user will be stored in the [`config` property](/extend/generic-extractor/config/).
-Modify your configuration to read those values from the `config` properties.
+Modify your configuration to read those values from there.
 
 Do not forget that if you prefix a value with a hash `#`, it will be 
 [encrypted](/overview/encryption/) once the configuration is saved.
@@ -56,7 +56,7 @@ Generic Extractor.
 
 For example, you might want to provide one configuration for incremental loading
 and a different configuration for full loading. The template UI also has the option to
-`Switch to JSON editor` which displays the configuration JSON and allows the end-user to modify it.
+`Switch to JSON editor`, which displays the configuration JSON and allows the end-user to modify it.
 Notice that the JSON editor allows modification only to the [`config`](/extend/generic-extractor/config)
 section. Other sections, such as [`api`](/extend/generic-extractor/api/) or 
 [`authorization`](/extend/generic-extractor/api/authentication/oauth20) may not be modified by the end-user.
@@ -118,16 +118,19 @@ Let's say you have the following working API configuration
 }
 {% endhighlight %}
 
-You identify that four values of that configuration can be set by the end-user:
+and you identify that four values of that configuration need to be specified by the end-user:
+`JohnDoe`, `TopSecret`, `123`, and `active`.
 
-- `JohnDoe` --- you can create a string parameter `login`,
-- `TopSecret` --- you can create a string parameter `#password` (it will be encrypted),
-- `123` --- you can create a numeric parameter `accountId`,
-- `active` --- you can create a enumeration parameter `userType` (with values `active`, `inactive`, `all`).
+For each of them, create a parameter of the appropriate type:
 
-The parameters names are completely arbitrary, only they must not conflict with existing
-configuration properties of [Generic Extractor](/extend/generic-extractor/config/) (e.g., `jobs`, `mappings`)
-Now you can create a [configuration schema](/extend/registration/configuration-schema/) for the four parameters.
+- `JohnDoe` --- a string parameter `login`
+- `TopSecret` --- a string parameter `#password` (it will be encrypted)
+- `123` --- a numeric parameter `accountId`
+- `active` --- a enumeration parameter `userType` with values `active`, `inactive`, `all`
+
+The parameters names are completely arbitrary. However, they must not conflict with existing
+configuration properties of [Generic Extractor](/extend/generic-extractor/config/) (e.g., `jobs`, `mappings`).
+Now create a [configuration schema](/extend/registration/configuration-schema/) for the four parameters.
 
 {% highlight json %}
 {
@@ -169,8 +172,8 @@ Now you can create a [configuration schema](/extend/registration/configuration-s
 }
 {% endhighlight %}
 
-When you test the [schema online](http://jeremydorn.com/json-editor/), you will obtain the
-configuration JSON it produces:
+When you test the [schema online](http://jeremydorn.com/json-editor/), it will produce a
+configuration JSON:
 
 {: .image-popup}
 ![Screenshot - Schema Test](/extend/generic-extractor/schema-test.png)
@@ -185,8 +188,7 @@ configuration JSON it produces:
 {% endhighlight %}
 
 The above properties will be merged into the [`config` section](/extend/generic-extractor/config/). Now
-you have to modify the configuration so that it reads them from there using 
-[functions and references](/extend/generic-extractor/functions/).
+modify the configuration so that it reads them from there using [functions and references](/extend/generic-extractor/functions/).
 
 {% highlight json %}
 {
@@ -265,8 +267,8 @@ values of the `username` and `#password` fields. The `accountId` parameter needs
 The `type` parameter was changed to a reference to the `userType` field
 (see [example [EX111]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/111-templates-example)). 
 
-When you handled the configuration parameters, you can turn the configuration into a template. Separate
-the `api` section to individual `api.json` file:
+When you handled the configuration parameters, turn the configuration into a template. Place 
+the `api` section to a separate, individual `api.json` file:
 
 {% highlight json %}
 {
@@ -339,5 +341,5 @@ separate `template.json` file.
 }
 {% endhighlight %}
 
-You can create as many `template.json` files as you wish. However, all of them need to share the same `api.json` 
+Create as many `template.json` files as you wish. However, all of them need to share the same `api.json` 
 configuration. When you want to register your component, attach the `api.json` and all `template.json` files. 
