@@ -55,7 +55,7 @@ way. Each response is processed in the following steps:
 - Create the tables in Storage and load data into them.
 
 ## Merging Responses
-The first two steps are the responsibility of [Jobs](/extend/generic-extractor/config/jobs/) resulting in 
+The first two steps are the responsibility of [Jobs](/extend/generic-extractor/config/jobs/) resulting in
 an array of objects. Generic Extractor then tries to find a common super-set of
 properties of all objects, for example, with the following response:
 
@@ -314,14 +314,14 @@ The `responseFilter` option allows you to skip parts of the API response from pr
 be useful if
 
 - you do not want to flatten the JSON structure using the default
-[JSON Parser](/extend/generic-extractor/config/jobs/#merging-responses) (as in the above examples). 
+[JSON Parser](/extend/generic-extractor/config/jobs/#merging-responses) (as in the above examples).
 - the API response is inconsistent and the objects cannot be flattened.
 
 The value of the `responseFilter` property is either a path to a property in the response, or
 an array of such paths. The path is dot-separated unless set otherwise in the `responseFilterDelimiter` configuration.
 If you want to refer to the items of an array, use `[]` --- see an [example below](#skip-flattening-in-nested-objects).
 The same result can be achieved using `forceType` parameter in
-[column mapping](/extend/generic-extrator/config/mappings/#column-mapping).
+[column mapping](/extend/generic-extractor/config/mappings/#column-mapping).
 
 ## Children
 The `children` configuration allows you to retrieve sub-resources of the processes API resource.
@@ -878,7 +878,7 @@ If you have an API response like this:
 {% endhighlight %}
 
 and extract the `members` array with the
-[default settings](/extend/generic-extractor/config/jobs/#an-object-with-nested-object), two tables will be 
+[default settings](/extend/generic-extractor/config/jobs/#an-object-with-nested-object), two tables will be
 produced. If you set the response filter to `"responseFilter": "tags"`, then the `tags` property of the `members`
 items will not be processed and will be stored as a [serialized](https://en.wikipedia.org/wiki/Serialization)
 JSON string. The following table will be extracted:
@@ -946,7 +946,7 @@ If you have the following API response:
 {% endhighlight %}
 
 and extract the `members` array with the
-[default settings](/extend/generic-extractor/config/jobs/#an-object-with-a-deeply-nested-object), 
+[default settings](/extend/generic-extractor/config/jobs/#an-object-with-a-deeply-nested-object),
 two tables will be produced and the `properties` object will be flattened into a sparse table.
 To avoid that, set the response filter to `"responseFilter": "contacts[].properties"`. This will
 leave the `properties` child of the `contacts` array of the `members` array unprocessed.
@@ -1296,7 +1296,7 @@ can be solved using the following jobs configuration:
 ]
 {% endhighlight %}
 
-The [`params` configuration](/extend/generic-extractor/config/jobs/#request-parameters) option specifies the 
+The [`params` configuration](/extend/generic-extractor/config/jobs/#request-parameters) option specifies the
 parameters to be sent to the API. Therefore the `type` property is the name defined by the API itself.
 The above configuration produces the following table:
 

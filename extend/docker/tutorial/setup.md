@@ -23,7 +23,7 @@ do not worry about the VM being there.
 ## Getting Started
 If you have a Docker machine (local or remote) and Docker client ready, it is time to play with Docker.
 To test that everything is running correctly, start with an example
-from our [documentation](https://docs.docker.com/engine/userguide/containers/dockerizing/).
+from their [documentation](https://docs.docker.com/get-started/).
 If you use DockerToolbox, run the following commands in
 [Docker Quickstart Terminal](https://docs.docker.com/engine/installation/windows/#using-the-docker-quickstart-terminal)
 or on the command line:

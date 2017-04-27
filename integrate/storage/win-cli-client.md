@@ -32,7 +32,7 @@ If you do not have Chocolatey installed, do so using the following (administrato
 @powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%systemdrive%\chocolatey\bin
 {% endhighlight %}
 
-Chocolatey will be installed, by default, into `C:\ProgramData\chocolatey`. 
+Chocolatey will be installed, by default, into `C:\ProgramData\chocolatey`.
 Once done, make sure to open a new instance of the command line window.
 
 To install the SAPI client, just run the following command in the windows command line:
@@ -53,7 +53,7 @@ cuninst SapiClient
 All the Storage API Client application binaries and folders will be deleted (Chocolatey itself remains installed).
 
 ## Running the Client
-Now run the `sapi-client` command globally from any folder in the windows command line. By running 
+Now run the `sapi-client` command globally from any folder in the windows command line. By running
 
 {% highlight Batchfile %}
 sapi-client
