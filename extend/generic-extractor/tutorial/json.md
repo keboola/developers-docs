@@ -7,7 +7,8 @@ permalink: /extend/generic-extractor/tutorial/json/
 {:toc}
 
 [JSON (JavaScript Object Notation)](http://www.json.org/) is an easy-to-work-with format for describing structured 
-data. Before you start working with JSON, familiarize yourself with basic programming jargon.
+data. Before you start working with JSON, familiarize yourself with basic programming jargon. It is also recommended 
+to have a text editor with JSON support (you can also use an [online editor](http://www.jsoneditoronline.org/)).
 
 ## Object Representation
 To describe structured data, JSON uses **objects** and **arrays**. 

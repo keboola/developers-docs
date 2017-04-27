@@ -35,11 +35,8 @@ If you intend to develop more complicated configuration, check out how to
 There is also a [number of examples](todo) accompanying the documentation, which
 [can also be run locally](/extend/generic-extractor/running/#running-examples).
 
-We also have some working configuration snippets, which didn't make it to complete extractors yet:
-
-- [Collabim](http://www.collabim.cz/) --- [Configuration Gist](https://gist.github.com/odinuv/e2cf13ae100c146dbccfc650d93aef18)
-- 
-
+There is also a number of working configuration snippets, which didn't make it to complete extractors yet,
+you can find them in the [Wiki](https://sites.google.com/a/keboola.com/wiki/home/keboola-connection/generic-extractor-configurations)
 
 ## Registering Generic Extractor
 Each configuration of Generic Extractor can be [registered](/extend/registration/) as 

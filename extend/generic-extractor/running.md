@@ -145,6 +145,8 @@ running `docker-compose run --rm extractor rm -rf data/out`.
 All examples referenced in this documentation are actually runnable against the proper API. Because
 it is difficult to find the specific API for the case (and gain access to it), you can test 
 these configurations against a [mock server](https://github.com/keboola/ex-generic-mock-server). 
+Each example contains a set of requests (`*.request` file) and responses (`*.response`) and 
+optionally their headers (`*.requestHeaders` and `*.responseHeaders`). 
 
 To run the examples:
 
