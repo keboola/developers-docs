@@ -128,7 +128,7 @@ For each of them, create a parameter of the appropriate type:
 - `123` --- a numeric parameter `accountId`
 - `active` --- a enumeration parameter `userType` with values `active`, `inactive`, `all`
 
-The parameters names are completely arbitrary, only they must not conflict with existing
+The parameters names are completely arbitrary. However, they must not conflict with existing
 configuration properties of [Generic Extractor](/extend/generic-extractor/config/) (e.g., `jobs`, `mappings`).
 Now create a [configuration schema](/extend/registration/configuration-schema/) for the four parameters.
 
@@ -188,8 +188,7 @@ configuration JSON:
 {% endhighlight %}
 
 The above properties will be merged into the [`config` section](/extend/generic-extractor/config/). Now
-you have to modify the configuration so that it reads them from there using 
-[functions and references](/extend/generic-extractor/functions/).
+modify the configuration so that it reads them from there using [functions and references](/extend/generic-extractor/functions/).
 
 {% highlight json %}
 {
@@ -268,8 +267,8 @@ values of the `username` and `#password` fields. The `accountId` parameter needs
 The `type` parameter was changed to a reference to the `userType` field
 (see [example [EX111]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/111-templates-example)). 
 
-When you handled the configuration parameters, you can turn the configuration into a template. Separate
-the `api` section to individual `api.json` file:
+When you handled the configuration parameters, turn the configuration into a template. Place 
+the `api` section to a separate, individual `api.json` file:
 
 {% highlight json %}
 {
@@ -342,5 +341,5 @@ separate `template.json` file.
 }
 {% endhighlight %}
 
-You can create as many `template.json` files as you wish. However, all of them need to share the same `api.json` 
+Create as many `template.json` files as you wish. However, all of them need to share the same `api.json` 
 configuration. When you want to register your component, attach the `api.json` and all `template.json` files. 

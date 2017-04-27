@@ -3,6 +3,9 @@ title: OAuth 2.0 Authentication
 permalink: /extend/generic-extractor/api/authentication/oauth20/
 ---
 
+* TOC
+{:toc}
+
 OAuth 2.0 Authentication is one of [two OAuth methods](/extend/generic-extractor/api/authentication/#oauth) and
 is supported only for [registered components](/extend/generic-extractor/registration/). 
 OAuth 2.0 authentication is configured by setting
