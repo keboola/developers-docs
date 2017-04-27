@@ -5,7 +5,7 @@ permalink: /extend/generic-extractor/api/authentication/oauth10/
 
 OAuth 1.0 Authentication is one of the [two OAuth methods](/extend/generic-extractor/api/authentication/#oauth) and
 is supported only for [registered components](/extend/generic-extractor/registration/). 
-The OAuth 1.0 authentication is configured by setting
+OAuth 1.0 authentication is configured by setting
 the `type` key to `oauth10`:
 
 {% highlight json %}
@@ -22,7 +22,7 @@ the `type` key to `oauth10`:
 }
 {% endhighlight %}
 
-No other configuration parameters are necessary (nor available). The OAuth authentication is 
+No other configuration parameters are necessary (nor available). OAuth authentication is 
 described by the [following process](https://oauth.net/core/1.0/#anchor9):
 
 ![OAuth 1.0 Diagram](/extend/generic-extractor/api/authentication/oauth10-diagram.png)
