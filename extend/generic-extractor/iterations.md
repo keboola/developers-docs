@@ -1,6 +1,6 @@
 ---
 title: Iterations
-permalink: /extend/generic-extractor/map/
+permalink: /extend/generic-extractor/iterations/
 ---
 
 The `iterations` section allows you to execute the configuration multiple times while using different
