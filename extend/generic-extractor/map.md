@@ -55,7 +55,9 @@ Use the following sample configuration to navigate among various configuration o
                     "dataField": "items",
                     "dataType": "users",
                     "params": {
-                        "type": "active"
+                        "type": {
+                            "attr": "userType"
+                        }
                     },
                     "responseFilter": "additional.address/details",
                     "responseFilterDelimiter": "/",
@@ -103,6 +105,14 @@ Use the following sample configuration to navigate among various configuration o
             }
         }
     },
+    "iterations": [
+        {
+            "userType": "active"
+        },
+        {
+            "userType": "inactive"
+        }
+    ],
     "authorization": {
         "oauth_api": {
             "credentials": {
@@ -166,6 +176,8 @@ document.addEventListener('DOMContentLoaded', function() {
     $("span.nt:contains('\"authorization\"')").wrap("<a href='/extend/generic-extractor/api/authentication/#oauth'></a>");
     $("span.nt:contains('\"oauth_api\"')").wrap("<a href='/extend/generic-extractor/api/authentication/#oauth'></a>");
     $("span.nt:contains('\"credentials\"')").wrap("<a href='/extend/generic-extractor/api/authentication/#oauth'></a>");
+
+    $("span.nt:contains('\"iterations\"')").wrap("<a href='/extend/generic-extractor/iterations/'></a>");    
 }, false);
 </script>
 <style>

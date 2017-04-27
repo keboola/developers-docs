@@ -152,6 +152,9 @@ items:
           - url: /extend/generic-extractor/incremental/
             title: Incremental Extraction
 
+          - url: /extend/generic-extractor/iterations/
+            title: Iterations
+
           - url: /extend/generic-extractor/map/
             title: Configuration Map
 
