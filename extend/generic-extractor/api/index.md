@@ -167,7 +167,7 @@ the headers and values are their values --- for instance:
 
 See the full [example](/extend/generic-extractor/api/#default-headers).
 
-### Default Request Parameters 
+### Request Parameters 
 The `http.defaultOptions.params` configuration allows you to set 
 [request parameters](/extend/generic-extractor/tutorial/rest/#url) to be
 sent with each API request. The same rules apply as to the

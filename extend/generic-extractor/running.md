@@ -142,7 +142,7 @@ Before running the extractor again, it is recommended to clear the `out` directo
 running `docker-compose run --rm extractor rm -rf data/out`.
 
 ## Running Examples
-All examples referenced in this documentation are actually runnable against the proper API. Because
+[All examples](https://github.com/keboola/generic-extractor/tree/master/doc) referenced in this documentation are actually runnable against the proper API. Because
 it is difficult to find the specific API for the case (and gain access to it), you can test 
 these configurations against a [mock server](https://github.com/keboola/ex-generic-mock-server). 
 Each example contains a set of requests (`*.request` file) and responses (`*.response`) and 
@@ -150,7 +150,7 @@ optionally their headers (`*.requestHeaders` and `*.responseHeaders`).
 
 To run the examples:
 
-- Clone this repository: `git clone https://github.com/keboola/generic-extractor.git`
+- Clone Generic Extractor repository: `git clone https://github.com/keboola/generic-extractor.git`
 - Navigate to the documentation directory: `cd generic-extractor/doc`
 - Run a single example of your choice, e.g.: `docker-compose run -e "KBC_EXAMPLE_NAME=001-simple-job" extractor`
 - The output will be available in `examples/001-simple-job/out/tables`.
