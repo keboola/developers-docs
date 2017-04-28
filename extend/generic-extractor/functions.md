@@ -599,11 +599,27 @@ The following configuration:
             "baseUrl": "http://example.com/",
             "authentication": {
                 "type": "oauth20",
-                ...                
+                "headers": {
+                    "Authorization": {
+                        "function": "concat",
+                        "args": [
+                            "Bearer ",
+                            {
+                                "authorization": "#data.access_token"
+                            }
+                        ]
+                    }
+                }
             }
         },
         "config": {
-            ...
+            "outputBucket": "mock-server",
+            "jobs": [
+                {
+                    "endpoint": "users",
+                    "dataType": "users"
+                }
+            ]
         }
     },
     "authorization": {
@@ -673,31 +689,11 @@ The following configuration:
             "baseUrl": "http://example.com",
             "authentication": {
                 "type": "oauth20.login",
-                "loginRequest": {
-                    "endpoint": "login",
-                    "headers": {
-                        "Authorization": {
-                            "function": "concat",
-                            "args": [
-                                "JohnDoe: ",
-                                {
-                                    "attr": "#password"
-                                }
-                            ]
-                        }
-                    }
-                }
+                ...
             }
         },
         "config": {
-            "outputBucket": "mock-server",
-            "#password": "TopSecret",
-            "jobs": [
-                {
-                    "endpoint": "users",
-                    "dataType": "users"
-                }
-            ]
+            ...
         }
     },
     "authorization": {
