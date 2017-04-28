@@ -325,7 +325,7 @@ returns the first one if it is not empty. If the first argument is empty, it ret
 {% endhighlight %}
 
 The above will return `Banzai`. For the `ifempty` function an empty string and the values `0` and `null` are
-considered 'empty' (see an [example]).
+considered 'empty' (see an [example](#optional-job-parameters)).
 
 ## Function Contexts
 Every place in the Generic Extractor configuration in which a function may be used may allow different arguments of the function.
