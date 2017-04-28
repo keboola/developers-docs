@@ -59,7 +59,7 @@ and a different configuration for full loading. The template UI also has the opt
 `Switch to JSON editor`, which displays the configuration JSON and allows the end-user to modify it.
 Notice that the JSON editor allows modification only to the [`config`](/extend/generic-extractor/config)
 section. Other sections, such as [`api`](/extend/generic-extractor/api/) or 
-[`authorization`](/extend/generic-extractor/api/authentication/oauth20) may not be modified by the end-user.
+[`authorization`](/extend/generic-extractor/api/authentication/#oauth) may not be modified by the end-user.
 Optionally, the templates UI may contain interface to negotiate. 
 
 ## Example
@@ -306,7 +306,8 @@ the `api` section to a separate, individual `api.json` file:
 }
 {% endhighlight %}
 
-Then remove the user provided values (`username`, `#password`, `accountId`, `userType`) from
+Once you make sure that the extractor works as it did before, 
+remove the user provided values (`username`, `#password`, `accountId`, `userType`) from
 the `config` section and add `name` and `description` to it. Save the file into a 
 separate `template.json` file.
 
