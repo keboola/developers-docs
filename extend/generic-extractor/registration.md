@@ -45,6 +45,7 @@ not applicable:
 Because the UI is assumed to be `genericTemplatesUI`, provide a
 [**configuration schema**](/extend/registration/configuration-schema/) and
 a **template** to be used in conjunction with the schema.
+Optionally, the templates UI may contain interface to negotiate [OAuth authentication](/extend/generic-extractor/api/authentication/#oauth). 
 An example of the templates UI is shown in the picture below.
 
 {: .image-popup}
@@ -59,8 +60,7 @@ and a different configuration for full loading. The template UI also has the opt
 `Switch to JSON editor`, which displays the configuration JSON and allows the end-user to modify it.
 Notice that the JSON editor allows modification only to the [`config`](/extend/generic-extractor/config)
 section. Other sections, such as [`api`](/extend/generic-extractor/api/) or 
-[`authorization`](/extend/generic-extractor/api/authentication/#oauth) may not be modified by the end-user.
-Optionally, the templates UI may contain interface to negotiate. 
+[`authorization.oauth_api`](/extend/generic-extractor/api/authentication/#oauth) may not be modified by the end-user.
 
 ## Example
 Let's say you have the following working API configuration
