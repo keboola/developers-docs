@@ -3,9 +3,18 @@ title: Iterations
 permalink: /extend/generic-extractor/iterations/
 ---
 
-The `iterations` section allows you to execute the configuration multiple times while using different
-values each time. `iterations` is configured as an array of objects, where each object contains the
-same properties as the [`config`](/extend/generic-extractor/config/) section. All properties of the object are optional. 
+* TOC
+{:toc}
+
+The `iterations` section allows you to execute a configuration **multiple times**, each time with **different
+values**. The most typical use for `iterations` is extraction of the same data from multiple accounts. 
+This also means that the `iterations` configuration can always be replaced by creating multiple complete 
+configurations of Generic Extractor.
+
+Iterations are specified as an array of objects, where each object contains the same properties 
+as the [`config`](/extend/generic-extractor/config/) section. All properties of the object are optional. 
+
+Consider the following example:
 
 {% highlight json %}
 {
@@ -39,29 +48,33 @@ same properties as the [`config`](/extend/generic-extractor/config/) section. Al
 {% endhighlight %}
 
 The above `iterations` configuration defines that the entire Generic Configuration will be executed
-twice. First with username `JohnDoe` (and the respective password) and second time with
-username `DoeJohn` (and the respective password). The most typical use for `iterations` is extraction of 
-the same data from multiple accounts. This also means that `iterations` configuration can always be
-replaced by creating multiple complete configurations of Generic extractor.
+twice. The first time with the username `JohnDoe`, and the second time with
+the username `DoeJohn`. 
 
-Keep in mind that `iterations` applies only to things specified in the `config` section. 
-You cannot specify anything from the `api` section (you have to use [functions](/extend/generic-extractor/functions/)).
-Also, it is not possible to iterate over values returned in response. The number of iterations and their
-values must be defined in the configuration.
+Since all `iterations` properties override the `config` properties, they are accessible 
+as [configuration attributes](/extend/generic-extractor/functions/#configuration-attributes)
+via the `attr` property. 
+
+Keep in mind that `iterations` can refer directly only to the things specified in the `config` section. 
+For the `api` section, you must use [functions](/extend/generic-extractor/functions/). 
+Also, it is not possible to iterate over values returned in the response. 
+The number of iterations and their values must be defined in the configuration.
 
 ## Configuration
-The values defined in `iterations` override those in the
-the `config` section therefore you can use anything allowed in the `config` section (including arbitrary user
-attributes used in [functions](/extend/generic-extractor/functions/)). Although anything is allowed, it does not
-make much sens to use `jobs` and `mappings` in iterations. Also if you use `userData` in iterations, they
-must result in same columns (otherwise the resulting table cannot be imported into Storage). If
-you use `incrementalOutput` then only the last value of `incrementalOutput` is honored.
+Because the values defined in `iterations` override those in the `config` section, 
+everything that can be in the `config` section is allowed as well 
+(including arbitrary user attributes used in [functions](/extend/generic-extractor/functions/)). 
+Using `jobs` and `mappings` in iterations does not make much sense though. 
+
+Also, if you use `userData` in iterations, they must result in the same columns; otherwise the resulting 
+table cannot be imported into Storage. If you use `incrementalOutput`, only the last value of `incrementalOutput` 
+is honoured.
 
 ## Examples
 
 ### Iterating Parameters
-Suppose, you have an API which takes an URL parameter `account_id` which filters the returned data to a
-certain account. The following configuration executed entire configuration for two accounts `345` and `456`:
+Suppose, you have an API which takes a URL parameter `account_id`, which restricts the returned data to a
+certain account. The following configuration executes the entire configuration for two accounts --- `345` and `456`:
 
 {% highlight json %}
 {
@@ -100,8 +113,8 @@ certain account. The following configuration executed entire configuration for t
 }
 {% endhighlight %}
 
-Notice that the `iterations` override values in the `config` section, which means that the 
-below configuration would yield exactly the same result as the above one:
+Since the `iterations` section overrides the values in the `config` section, the below configuration 
+yields the exact same results as the configuration above:
 
 {% highlight json %}
 {
@@ -141,17 +154,17 @@ below configuration would yield exactly the same result as the above one:
 }
 {% endhighlight %}
 
-Even though it might look as if the first execution would be with `account_id=123` it is not true actually.
-The configuration will be executed only twice, the first time with `account_id=345` and `account_id=456`. 
+It looks as if the first execution is with `account_id=123`, but it is not the case. The configuration 
+will be executed only twice: the first time with `account_id=345` and the second time with `account_id=456`. 
 See [example [EX112]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/112-iterations-params).
 
 ### Iterating Headers
 Suppose you have an API from which you want to extract data from two accounts (`JohnDoe` and `DoeJohn`). The 
-API uses [HTTP Basic Authentication](/extend/generic-extractor/api/authentication/basic/) method. Plus each user
-has his own API token which must be provided in the `X-Api-Token` header. 
+API uses the [HTTP Basic Authentication](/extend/generic-extractor/api/authentication/basic/) method, and in addition, 
+each user has their own API token, which must be provided in the `X-Api-Token` header. 
 
-Even if the above parameters relate to the [`api` configuration](/extend/generic-extractor/api/) which cannot 
-be directly included in `iterations` it is still possible to use them.
+Even if the above parameters relate to the [`api` configuration](/extend/generic-extractor/api/), which cannot 
+be directly included in `iterations`, it is still possible to use them.
 
 {% highlight json %}
 {
@@ -195,9 +208,9 @@ be directly included in `iterations` it is still possible to use them.
 }
 {% endhighlight %}
 
-The above configuration overrides `username` and `#password` from the config section and overrides also 
-the `http.headers.X-Api-Token` setting. It is also possible to simplify this configuration 
-using [functions and references](/extend/generic-extractor/functions/):
+Next to `username` and `#password` from the `config` section, the above configuration overrides also 
+the `http.headers.X-Api-Token` setting. The configuration can be simplified by using 
+[functions and references](/extend/generic-extractor/functions/):
 
 {% highlight json %}
 {
@@ -239,5 +252,11 @@ using [functions and references](/extend/generic-extractor/functions/):
     }
 }
 {% endhighlight %}
+
+Here, the `config` section specifies the part of the token authentication which is common to both iterations. 
+Each iteration then specifies only the token. By writing `"attr": "apiToken"` under `X-Api-Token` we say that 
+`X-Api-Token` will have the value of the `apiToken` property from the `config` section. That property is in 
+turn specified in the iteration objects. 
+
 
 See [example [EX113]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/113-iterations-headers).
