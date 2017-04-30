@@ -12,8 +12,9 @@ also allow referencing already existing values in the configuration instead of c
 when you [register your configuration as a new component](/extend/generic-extractor/registration/).
 
 ## Configuration
-A function is used instead of a simple value in specific parts (see [below](#function-contexts) of the Generic Extractor configuration. The function
-configuration is an object with properties `function` (one of [available function names](#supported-functions) and `args` (function arguments), e.g.:
+A function is used instead of a simple value in specific parts (see [below](#function-contexts)) of the Generic Extractor configuration. 
+The function configuration is an object with properties `function` (one of [available function names](#supported-functions) and `args` 
+(function arguments), e.g.:
 
 {% highlight json %}
 {
@@ -394,9 +395,9 @@ Will be converted to the following function context:
 		"server": "localhost:8888",
 		"incrementalOutput": false,
 		"http.headers.X-AppKey": "ThisIsSecret",
-        "http.headers.X-Auth.function": "concat",
-        "http.headers.X-Auth.args.0": "Tea",
-        "http.headers.X-Auth.args.1": "Pot",
+		"http.headers.X-Auth.function": "concat",
+		"http.headers.X-Auth.args.0": "Tea",
+		"http.headers.X-Auth.args.1": "Pot",
 		"userData.tag": "fullExtract",
 		"userData.mode": "development",
 		"mappings.content.whatever": "foobar"
