@@ -11,20 +11,10 @@ Some images are present in all registries.
 As long as the same tag is used, they refer to the exact same build and are freely interchangeable. 
 In that case, you should use the one in the same registry as your image. 
 
-
 ## Base Images
+Unless you have some special requirements, we highly encourage you to use 
+[Official Images](https://hub.docker.com/explore/) or Keboola Images as the base for your Docker images.
 
-Unless you have some special requirements, we highly encourage you to use Keboola Base Images as the base for your Docker images.
-They have no entrypoint and they do not contain any application logic. 
-Both of these things are up to you to implement.
-
-
-- base 
-[Quay](https://quay.io/repository/keboola/base), 
-[DockeHub](https://hub.docker.com/r/keboola/base/), 
-[Dockerfile](https://github.com/keboola/docker-base) -- 
-Base image for all other images, contains CentOS7, 
-uses `master`, `latest` tags, see [below](#tags).
 - R Language
   - docker-base-r: 
 [Quay](https://quay.io/repository/keboola/docker-base-r),
@@ -37,12 +27,7 @@ uses `X.Y.Z-a` tags, see [below](#tags).
 [Dockerfile](https://github.com/keboola/docker-base-r-packages) -- 
 Base image with installed common R packages installed, 
 uses `X.Y.Z-a` tags. 
-- Python Language
-  - base-python: 
-[Quay](https://quay.io/repository/keboola/base-python), 
-[Dockerfile](https://github.com/keboola/docker-base-python) --
-Base image for all Python images, 
-uses `X.Y.Z-a` tags, see [below](#tags).
+- [Python Language](#application-images)
 - PHP Language
   - docker-base-php55:
 [DockerHub](https://hub.docker.com/r/keboola/base-php55/), 
