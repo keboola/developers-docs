@@ -8,8 +8,7 @@ permalink: /extend/generic-extractor/iterations/
 
 The `iterations` section allows you to execute a configuration **multiple times**, each time with **different
 values**. The most typical use for `iterations` is extraction of the same data from multiple accounts. 
-This also means that the `iterations` configuration can always be replaced by creating multiple complete 
-configurations of Generic Extractor.
+Iterations can always be replaced by creating multiple complete configurations of Generic Extractor.
 
 Iterations are specified as an array of objects, where each object contains the same properties 
 as the [`config`](/extend/generic-extractor/config/) section. All properties of the object are optional. 
@@ -164,7 +163,7 @@ API uses the [HTTP Basic Authentication](/extend/generic-extractor/api/authentic
 each user has their own API token, which must be provided in the `X-Api-Token` header. 
 
 Even if the above parameters relate to the [`api` configuration](/extend/generic-extractor/api/), which cannot 
-be directly included in `iterations`, it is still possible to use them.
+be directly included in `iterations`, we can specify them as `http.headers` and therefore it is still possible to use them.
 
 {% highlight json %}
 {
