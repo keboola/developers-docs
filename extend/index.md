@@ -4,7 +4,7 @@ permalink: /extend/
 ---
 
 As an open system consisting of many built-in, interoperating components, 
-such as Storage or Extractors, Keboola Connection (KBC) can be extended. 
+such as Storage or Extractors, [Keboola Connection (KBC)](/overview/) can be extended. 
 We encourage you to **build your own extensions**, whether for your own use or to be offered to other KBC users and customers. 
 
 * TOC
@@ -36,7 +36,7 @@ It can be configured to extract data from virtually any API and offers a vast am
 With Generic Extractor you can build an entirely new extractor for KBC in less than an hour. 
 
 ### Custom Extensions
-Custom Extensions can be used as 
+Custom Extensions can be used as:
 
 - **Extractors** - allowing customers to get data from new sources. They only process input tables from external sources (usually API).
 - **Applications** - further enriching the data or add value in new ways. They process input tables stored in CSV files and generate result tables in CSV files. 
@@ -57,69 +57,75 @@ The following table provides an overview of the **main characteristics** of KBC 
 <table>
   <tr>
     <th colspan="2"></th>
-    <th>Docker</th>
-    <th>Custom Science</th>
     <th>Generic Extractor</th>
+    <th>Custom Science Extension</th>
+    <th>Docker Extension</th>
   </tr>
   <tr>
-    <th rowspan="5">Implementation</th>
+    <th rowspan="6">Implementation</th>
     <th>Keboola Approval / Registration Required</th>
+    <td>no</td>
+    <td>no</td>
     <td>yes</td>
-    <td>no</td>
-    <td>no</td>
   </tr>
   <tr>
     <th>KBC Components</th>
-    <td>extractor, writer, application</td>
-    <td>extractor, writer, application</td>
     <td>extractor</td>
+    <td>extractor, writer, application</td>
+    <td>extractor, writer, application</td>
   </tr>
   <tr>
     <th>Implementation Complexity</th>
-    <td>medium</td>
-    <td>easy</td>
     <td>very easy</td>
+    <td>easy</td>
+    <td>medium</td>
   </tr>
   <tr>
     <th>Application Environment</th>
-    <td>any</td>
+    <td>JSON configuration only</td>
     <td>R, Python, PHP</td>
-    <td>configuration only</td>
+    <td>any</td>
   </tr>
   <tr>
     <th>Knowledge of Docker Required</th>
+    <td>no</td>
+    <td>no</td>
     <td>yes</td>
+  </tr>
+  <tr>
+    <th>Uses External Code Repository</th>
     <td>no</td>
-    <td>no</td>
+    <td>yes</td>
+    <td>yes</td>
   </tr>
   <tr>
     <th rowspan="5">User Features</th>
     <th>Setup User Experience</th>
+    <td>poor, customizable <sup>*</sup></td>
+    <td>poor, customizable <sup>*</sup></td>
     <td>fully customizable</td>
-    <td>poor</td>
-    <td>poor</td>
   </tr>
   <tr>
     <th>Brandable</th>
+    <td>yes <sup>*</sup></td>
+    <td>yes <sup>*</sup></td>
     <td>yes</td>
-    <td>yes <sup>*</sup></td>
-    <td>yes <sup>*</sup></td>
   </tr>
   <tr>
     <th>Offered to All Users</th>
+    <td>yes <sup>*</sup></td>
+    <td>yes <sup>*</sup></td>
     <td>yes</td>
-    <td>yes <sup>*</sup></td>
-    <td>yes <sup>*</sup></td>
   </tr>
   <tr>
     <th>Customizable User Interface</th>
+    <td>yes <sup>*</sup></td>
+    <td>yes <sup>*</sup></td>
     <td>yes</td>
-    <td>yes <sup>*</sup></td>
-    <td>yes <sup>*</sup></td>
   </tr>
   <tr>
     <th>OAuth2 Support</th>
-    <td>yes</td>
+    <td>yes <sup>*</sup></td>
     <td>no</td>
     <td>yes</td>
   </tr>
