@@ -12,43 +12,42 @@ from virtually any sane web API.
 
 Due to the versatility of different APIs running in the wild, Generic Extractor offers a **vast amount
 of configuration options**. Even though it may seem somewhat abstract and hard to understand at first,
-once you configure your first extractor, you will see that it is a great tool. With it you can build
+once you configure your first extractor, you will see that it is a great tool. With it, you can build
 an entirely new extractor for KBC in **less than an hour**.
 
-To get started quickly, follow the [tutorial](/extend/generic-extractor/tutorial).
+To get started quickly, follow our [Generic Extractor tutorial](/extend/generic-extractor/tutorial).
 
 ## Generic Extractor Requirements
 Generic Extractor allows you to extract data from an API into KBC only by configuring it.
-No programming skills or other tools are required.
-
-You just need to do two easy things before you start:
+No programming skills or additional tools are required. You just need to do two easy things before you start:
 
 - Learn how to [write JSON](/extend/generic-extractor/tutorial/json/).
 - Have the documentation of your chosen API at hand. The API should be [RESTful](/extend/generic-extractor/tutorial/rest/)
 and, more or less, follow the HTTP specification.
 
 ## Configuration & Development
-If you are new to Generic Extractor, we strongly suggest you go through the
-[Tutorial](/extend/generic-extractor/tutorial/) which shows the principles and most important features.
-If you intend to develop more complicated configuration, check out how to
-[run Generic Extractor locally](/extend/generic-extractor/running/).
-There is also a [number of examples](https://github.com/keboola/generic-extractor/tree/master/doc) accompanying the documentation, which
-[can also be run locally](/extend/generic-extractor/running/#running-examples).
+Again, if you are new to Generic Extractor, we strongly suggest you go through the 
+[Generic Extractor tutorial](/extend/generic-extractor/tutorial/). It shows the basic principles, as well as 
+the most important features.
 
-There is also a number of working configuration snippets, which didn't make it to complete extractors yet,
-you can find them in the [Wiki](https://sites.google.com/a/keboola.com/wiki/home/generic-extractor-configurations)
+If you intend to develop a more complicated configuration, check out how to
+[run Generic Extractor locally](/extend/generic-extractor/running/). 
+There are a [number of examples](https://github.com/keboola/generic-extractor/tree/master/doc) accompanying the 
+documentation which [can be run locally](/extend/generic-extractor/running/#running-examples) too.
+In addition, several working configuration snippets, which have not made it to complete extractors yet, are 
+available in our [Wiki](https://sites.google.com/a/keboola.com/wiki/home/generic-extractor-configurations).
 
 ## Registering Generic Extractor
 Each configuration of Generic Extractor can be [registered](/extend/registration/) as
 a new standalone component. For the registration, configurations have to be
 [converted to a template](/extend/generic-extractor/registration/#submission).
 
-It is **not required** to register your Generic Extractor configuration. However, when registered,
+Registering your Generic Extractor configuration is **not required**. However, when registered,
 it can be easily used in multiple projects. A great advantage of using templates is that they
-are not limiting the configuration at all. You can always switch to JSON
+do not limit the configuration at all. You can always switch to JSON
 [free-form configuration](/extend/generic-extractor/registration/#submission) when necessary.
 
-Also note that templates can be used only with registered configurations of Generic Extractor.
+Also note that templates can be used only with registered Generic Extractor configurations.
 
 ## Generic Extractor Source
 As with any other KBC components, the Generic Extractor source is available on
