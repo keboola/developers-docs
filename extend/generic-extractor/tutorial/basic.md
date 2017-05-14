@@ -21,9 +21,8 @@ and is composed of several sections. The main parts and their nesting are shown 
 ![Schema - Generic Extractor configuration](/extend/generic-extractor/generic-intro.png)
 
 ### API Section
-The first configuration part is the `api` section where you set the basic properties of the API. 
-In the most simple case, this is the `baseUrl` property and `authentication`. The below JSON snippet shows 
-the exact configuration (note that `config` is outside `authentication`):
+The first configuration part is the `api` section where you set the **basic properties** of the API. 
+In the most simple case, this is the `baseUrl` property and `authentication`, as shown in the below JSON snippet:
 
 {% highlight json %}
 {
@@ -39,7 +38,7 @@ the exact configuration (note that `config` is outside `authentication`):
 **Important:** Make sure that the `baseUrl` URL ends with a slash!
 
 ### Configuration Section
-The `config` section describes the actual extraction. Its most important parts are the `outputBucket` and 
+The `config` section describes the **actual extraction**. Its most important parts are the `outputBucket` and 
 `jobs` properties. `outputBucket` must be set to an id of a [Storage Bucket](https://help.keboola.com/storage/buckets/) 
 where the data will be stored. If no bucket exists, it will be created. 
 
@@ -60,7 +59,7 @@ value will be [encrypted](https://developers.keboola.com/overview/encryption/) o
 you save the configuration. 
 
 #### Jobs Section
-The `jobs` section is the most complex part of the configuration. The first part
+The `jobs` section is the most complex part of the whole configuration. The first part
 of the `jobs` configuration is the `endpoint`:
 
 {% highlight json %}
