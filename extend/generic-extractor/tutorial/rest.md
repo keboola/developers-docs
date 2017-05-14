@@ -39,7 +39,7 @@ is composed of:
 - `www.example.com` --- **Host** --- network address of the HTTP server,
 - `8080` --- **port** --- Optional network identifier within the target server; its default value is `80`.
 - `/customers/acme/order/` --- Optional **path** to a **resource** we wish to obtain; its default value is `\`.
-- `show=deleted&fields=all` --- Optional **request parameters** (also called **query string** or **query s
+- `show=deleted&fields=all` --- Optional **request parameters** (also called **query string** or **query
 string parameters**), separated by the character `&` (ampersand); the actual parameters are:
     - `show` with the value `deleted`, and
     - `fields` with the value `all`.
@@ -114,18 +114,18 @@ is associated with a successful response. There are many HTTP Statuses, but the 
 [REST (Representational state transfer)](http://www.restapitutorial.com/lessons/whatisrest.html) (or RESTful) 
 is an API which follows a set of [loosely defined](http://restcookbook.com/Miscellaneous/rest-and-http/) principles:
 
-- The API URLs (or URIs) represent individual **resources**. This emphasizes that each API endpoint 
-represents a resource of a *single type*. That is, it represents a list of users, for example, and not a list of 
-users and their invoices.
-- Each resource is **represented** in a structured format ([JSON](http://www.json.org/) or [XML](https://en.wikipedia.org/wiki/XML)). 
-This is to emphasize that the data is not transferred, for instance, as ordinary text or a web page.
+- The API URLs (or URIs) represent individual **resources**. Each API endpoint should represent a resource of 
+a *single type*. For example, it represents a list of users, and not a list of users and their invoices.
+- Each resource is **represented** in a structured format ([JSON](http://www.json.org/) or 
+[XML](https://en.wikipedia.org/wiki/XML)). The data is not transferred, for instance, as ordinary text or a web 
+page.
 - **Messages** (request and response) are transferred using various HTTP methods (`GET`, `POST`, etc.). 
-This emphasizes that for obtaining data, only the `GET` method should be used. Also the `GET` method
-must not cause any modifications of data.
+For example, for obtaining data, the `GET` method should be used. Also the `GET` method
+should not cause any modifications of data.
 - The entire communication is **stateless**. This means that multiple requests can be called in an
-arbitrary order and they must yield the same results. This is to emphasize that it is not correct for
-an API to have endpoints such as `setFilter`, `getFilteredResult` because they imply that some 
-state (a filter) is retained between those API endpoints.
+arbitrary order and must yield the same results. It is not correct for an API to have endpoints such as 
+`setFilter` and`getFilteredResult` because they imply that any state (a filter) is retained between those API 
+endpoints.
 
 See also [some examples](https://spring.io/understanding/REST).
 
@@ -133,6 +133,6 @@ See also [some examples](https://spring.io/understanding/REST).
 The above describes the basic concepts of an API, HTTP protocol and HTTP REST API. When you 
 understand these concepts (and the associated jargon), you can use Generic Extractor 
 to get responses from virtually any HTTP REST API. Since the REST rules are not rigidly specified, it 
-is not possible to ensure that Generic Extractor will be capable of reading 100% of APIs 
-or 100% of end-points API declared as RESTful by someone.
+is not possible to ensure that Generic Extractor will be capable of reading 100% of APIs, 
+even when declared as RESTful by someone.
 
