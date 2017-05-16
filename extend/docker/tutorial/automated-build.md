@@ -14,7 +14,7 @@ such as [AWS ECR](https://aws.amazon.com/ecr/) where we are keen to host your im
 
 We support public and private images on both Docker Hub and Quay registries, and private images on AWS ECR. Other registries are not yet supported. 
 
-We strongly recommend to use **AWS ECR** provisioned by **Keboola Developer Portal**.
+Fore reliability reasons, we strongly recommend to use the [**AWS ECR**](#setting-up-a-repository-on-aws-ecr) provisioned by the **Keboola Developer Portal**.
 
 ## Working with a Registry
 In order to run an image, *pull* (`docker pull`) that image to your machine. The `docker run` 
@@ -87,16 +87,16 @@ If you do not have a Keboola Developer Portal account yet, head to the [API docu
  and create a new account and register your vendor.
  
 The [Get credentials to ECR repository API call](http://docs.kebooladeveloperportal.apiary.io/#reference/0/apps/get-credentials-to-ecr-repository)
-will create a repository and temporary credentials to log into AWS ECR registry and to upload your image. 
+will create a repository and temporary credentials to log into AWS ECR registry and to upload your Docker image. 
 
-If you want to integrate this process in a CI tool like Travis or CircleCI, you certainly do not want to use your Keboola Developer Portal 
- credentials to log in. For this case the [Generate credentials for service account](http://docs.kebooladeveloperportal.apiary.io/#reference/0/vendors/generate-credentials-for-service-account)
- API call will create a service user which credentials are safe to share with Travis or the CI tool of your choice.
+If you want to integrate this process in a CI tool like Travis or CircleCI, you should not use your Keboola Developer Portal 
+ credentials to log in. For this case the [Generate credentials for a service account API call](http://docs.kebooladeveloperportal.apiary.io/#reference/0/vendors/generate-credentials-for-service-account)
+ will create a service user whose credentials are safe to share with Travis or the CI tool of your choice.
  
 ### Sample integration with Travis CI
  
-Generate the username and password using [Generate credentials for service account API call](http://docs.kebooladeveloperportal.apiary.io/#reference/0/vendors/generate-credentials-for-service-account) 
-and save these environment variables
+Generate the service username and password using [Generate credentials for service account API call](http://docs.kebooladeveloperportal.apiary.io/#reference/0/vendors/generate-credentials-for-service-account) 
+and save these to environment variables
 
  - `KBC_DEVELOPERPORTAL_USERNAME` with the login
  - `KBC_DEVELOPERPORTAL_PASSWORD` with the password
@@ -107,22 +107,25 @@ and save these environment variables
 
 Then simply paste this code in your deploy script:
 
-    docker pull quay.io/keboola/developer-portal-cli-v2:latest
-    export REPOSITORY=`docker run --rm  -e KBC_DEVELOPERPORTAL_USERNAME=$KBC_DEVELOPERPORTAL_USERNAME -e KBC_DEVELOPERPORTAL_PASSWORD=$KBC_DEVELOPERPORTAL_PASSWORD -e KBC_DEVELOPERPORTAL_URL=$KBC_DEVELOPERPORTAL_URL quay.io/keboola/developer-portal-cli-v2:latest ecr:get-repository keboola docker-demo`
-    docker tag keboola/docker-demo-app:latest $REPOSITORY:$TRAVIS_TAG
-    docker tag keboola/docker-demo-app:latest $REPOSITORY:latest
-    eval $(docker run --rm -e KBC_DEVELOPERPORTAL_USERNAME=$KBC_DEVELOPERPORTAL_USERNAME -e KBC_DEVELOPERPORTAL_PASSWORD=$KBC_DEVELOPERPORTAL_PASSWORD -e KBC_DEVELOPERPORTAL_URL=$KBC_DEVELOPERPORTAL_URL quay.io/keboola/developer-portal-cli-v2:latest ecr:get-login keboola docker-demo)
-    docker push $REPOSITORY:$TRAVIS_TAG
-    docker push $REPOSITORY:latest
+{% highlight bash %}
+docker pull quay.io/keboola/developer-portal-cli-v2:latest
+export REPOSITORY=`docker run --rm -e KBC_DEVELOPERPORTAL_USERNAME=$KBC_DEVELOPERPORTAL_USERNAME -e KBC_DEVELOPERPORTAL_PASSWORD=$KBC_DEVELOPERPORTAL_PASSWORD -e KBC_DEVELOPERPORTAL_URL=$KBC_DEVELOPERPORTAL_URL quay.io/keboola/developer-portal-cli-v2:latest ecr:get-repository keboola docker-demo`
+docker tag keboola/docker-demo-app:latest $REPOSITORY:$TRAVIS_TAG
+docker tag keboola/docker-demo-app:latest $REPOSITORY:latest
+eval $(docker run --rm -e KBC_DEVELOPERPORTAL_USERNAME=$KBC_DEVELOPERPORTAL_USERNAME -e KBC_DEVELOPERPORTAL_PASSWORD=$KBC_DEVELOPERPORTAL_PASSWORD -e KBC_DEVELOPERPORTAL_URL=$KBC_DEVELOPERPORTAL_URL quay.io/keboola/developer-portal-cli-v2:latest ecr:get-login keboola docker-demo)
+docker push $REPOSITORY:$TRAVIS_TAG
+docker push $REPOSITORY:latest
+{% endhighlight %}
 
 This code will tag your image with relevant tags (`latest` and the tag of the build) and push them to our registry. 
 
 You can see both [`.travis.yml`](https://github.com/keboola/docker-demo-app/blob/master/.travis.yml) and the deploy script ([`deploy.sh`](https://github.com/keboola/docker-demo-app/blob/master/deploy.sh)) 
 in our [Docker Demo App](https://github.com/keboola/docker-demo-app) GitHub repository.
 
-Please note, that pushing the image to the registry does not update the tag in your application configuration. You have 
-to manually update the application configuration using the [Keboola Developer Portal API](http://docs.kebooladeveloperportal.apiary.io/).
+Please note, that pushing the image to the registry does not update the tag in your KBC application definition. You have 
+to manually update the application definition using the [Keboola Developer Portal API](http://docs.kebooladeveloperportal.apiary.io/).
 
 This sample deployment script uses the [Developer Portal CLI](https://github.com/keboola/developer-portal-cli-v2) tool. 
-The CLI (delivered as a Docker image) provides the deploy script with simple commands to retrieve the repository and credentials to our AWS ECR registry. 
-The script uses these to log in and push your image. 
+The CLI (delivered as a Docker image) provides the deploy script with simple commands to retrieve the repository and credentials to our AWS ECR registry. The `ecr:get-repository` command returns the repository associated with user in
+`KBC_DEVELOPERPORTAL_USERNAME` variable. The `ecr:get-login` command returns a `docker login ...` command to authenticate
+to that repository.
