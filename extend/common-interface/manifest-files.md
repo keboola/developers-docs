@@ -92,7 +92,9 @@ from the file name; it can (and commonly is) overridden by the end-user configur
     "incremental": true,
     "primary_key": ["column1", "column2"],
     "delimiter": "\t",
-    "enclosure": "\""
+    "enclosure": "\"",
+    "metadata": ...,
+    "columnMetadata": ...
 }
 {% endhighlight %}
 
@@ -109,6 +111,36 @@ Additionally, the following options can be specified:
 
 Which will cause the specified rows to be deleted from the source table before the new
 table is imported. See an [Example](/extend/common-interface/config-file/#output-mapping---delete-rows).
+
+The `metadata` and `columnMetadata` fields allow you to set 
+[Metadata](http://docs.keboola.apiary.io/#reference/metadata) for a table and its columns.
+The `metadata` field corresponds to the [Table Metadata API call](http://docs.keboola.apiary.io/#reference/metadata/table-metadata/create-or-update). 
+The `columnMetadata` field corresponds to the [Column Metadata API call](http://docs.keboola.apiary.io/#reference/metadata/column-metadata/create-or-update).
+In both cases, the `key` and `value` are passed directly to the API, the `provider` value is
+filled by the Id of the running component (e.g `keboola.ex-db-snowflake`).
+
+{% highlight json %}
+    "metadata": [
+        {
+            "key": "an.arbitrary.key",
+            "value": "Some value"
+        },
+        {
+            "key": "another.arbitrary.key",
+            "value": "A different value"
+        }
+    ],
+    "columnMetadata": {
+        "column1": {
+            [
+                {
+                    "key": "yet.another.key",
+                    "value": "Some other value"
+                }
+            ]
+        }
+    }
+{% endhighlight %}
 
 ### Files
 
