@@ -88,7 +88,7 @@ For example:
 {% endhighlight %}
 
 The value of the `dataType` property is an arbitrary name. Apart from identifying
-the resource type, it is also used as the *output table name*. If you run
+the resource type, it is also used as the **output table name**. If you run
 the job, the content will be stored in `in.c-ge-tutorial.content`.
 
 Each mapping item is identified by the property name of the resource and must contain 
