@@ -69,7 +69,7 @@ additional [table attributes](https://help.keboola.com/storage/). If used, it ha
 {% highlight json %}
 {
     ...
-    "atrributes": [
+    "attributes": [
         {
             "name": "attributeName",
             "value": "attributeValue",
@@ -120,6 +120,8 @@ In both cases, the `key` and `value` are passed directly to the API, the `provid
 filled by the Id of the running component (e.g `keboola.ex-db-snowflake`).
 
 {% highlight json %}
+{
+    ...,
     "metadata": [
         {
             "key": "an.arbitrary.key",
@@ -140,6 +142,7 @@ filled by the Id of the running component (e.g `keboola.ex-db-snowflake`).
             ]
         }
     }
+}
 {% endhighlight %}
 
 ### Files
