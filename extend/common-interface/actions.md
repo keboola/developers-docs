@@ -22,7 +22,7 @@ separate application would bring an overhead of maintaining both the extractor's
 For each registered Docker Extension or Custom Science App, you can specify other actions (apart from the default `run`). These
 actions will be executed using the same Docker image, but [Docker Runner](/integrate/docker-bundle/) will wait for its execution and use
 the returned value as the API response. So, these additional actions are executed *synchronously* and have a very
-limited execution time (maximum 30 seconds).
+limited execution time (maximum 30 seconds). These actions also cannot access Storage.
 
 ![Docker Actions overview](/extend/common-interface/docker-actions.png)
 
@@ -106,5 +106,6 @@ yields this message on the API (HTTP status code 500)
 
 ## Limits
 
-Actions share the same limits as the default `run` action, only the execution time is limited to 30 seconds.
-This time does not include pulling the Docker image.
+**Sync actions may not read from or write data to the Storage.**
+Otherwise actions share the same limits as the default `run` action, only the execution time is limited to 30 seconds.
+This time does not include pulling the Docker image. 
