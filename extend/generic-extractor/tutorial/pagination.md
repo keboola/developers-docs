@@ -19,15 +19,15 @@ then the pagination is defined in the `api` section of the configuration.
 
 ## Preparation
 The MailChimp API uses the [`offset` pagination method](http://developer.mailchimp.com/documentation/mailchimp/guides/get-started-with-mailchimp-api-3/#pagination);
-it means that each page has a fixed `limit` (by default 10 items) and you need to use the offset to move 
+it means that each page has a fixed `limit` (by default 10 items), and you need to use the offset to move 
 that fixed-size page over the next set of results. For the first page, the `offset` is 0, for the second 
 page, the `offset` is 10. This is the same kind of pagination as in SQL.
 
 The offset pagination method is configured with the following basic properties:
 
-- `method` --- For MailChimp, set this property to `offset`.
-- `offsetParam` --- Name of the API parameter which defines the [page offset](http://developer.mailchimp.com/documentation/mailchimp/guides/get-started-with-mailchimp-api-3/#pagination)
-- `limitParam` -- Name of the API parameters which define the [page size (limit)](http://developer.mailchimp.com/documentation/mailchimp/guides/get-started-with-mailchimp-api-3/#pagination)
+- `method` --- for MailChimp, set this property to `offset`.
+- `offsetParam` --- name of the API parameter which defines the [page offset](http://developer.mailchimp.com/documentation/mailchimp/guides/get-started-with-mailchimp-api-3/#pagination)
+- `limitParam` -- name of the API parameters which define the [page size (limit)](http://developer.mailchimp.com/documentation/mailchimp/guides/get-started-with-mailchimp-api-3/#pagination)
 
 So for MailChimp, configure the pagination this way:
 

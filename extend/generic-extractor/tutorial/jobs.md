@@ -28,7 +28,7 @@ that should be replaced by a specific campaign Id. To retrieve the sub-resource,
 ## Child Jobs
 
 In the 
-[previous part](/extend/generic-extractor/tutorial/pagination/#running) of the tutorial you created this job 
+[previous part](/extend/generic-extractor/tutorial/pagination/#running) of the tutorial, you created this job 
 property in the Generic Extractor configuration:
 
 {% highlight json %}
@@ -188,8 +188,9 @@ If you use no `dataField` like in the above configuration and run it, you will o
 
 This is definitely not what you expected. Instead of obtaining the campaign content, you 
 got the `_links` property from the response. This is because Generic Extractor automatically 
-picks an array in the response. To get the entire response as a *single table record*, set `dataField` 
-to the [path](/extend/generic-extractor/tutorial/json/#references) in the object. Because you want to use the *entire* response, you will set `dataField` to `.` to start in the root.
+picks an array in the response. To get the entire response as a **single table record**, set `dataField` 
+to the [path](/extend/generic-extractor/tutorial/json/#references) in the object. Because you want to use the 
+**entire response**, set `dataField` to `.` to start in the root.
 
 {% highlight json %}
 {
@@ -243,7 +244,7 @@ with columns like `plain_text`, `html` and others.
 
 You will also get the table `in.c-ge-tutorial.campaigns__campaign_id__content__links`. It 
 represents the `links` property of the `content` resource. The links table contains the 
-`JSON_parentId` column which contains a generated hash such as 
+`JSON_parentId` column which contains a generated hash, such as 
 `campaigns/{campaign_id}/content_1c3b951ece2a05c1239b06e99cf804c2` whose value is inserted into
 the `links` column of the campaign content table. This is done automatically because once
 you said that the entire response was supposed to be a single table row, the array `_links` 
