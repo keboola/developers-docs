@@ -6,10 +6,11 @@ permalink: /extend/generic-extractor/configuration/config/jobs/
 * TOC
 {:toc}
 
-The jobs section of the configuration contains descriptions of the API resources to be
+*If new to Generic Extractor, learn about [jobs in our tutorial](/extend/generic-extractor/tutorial/jobs/) first.*
+
+The jobs section of the extraction configuration contains descriptions of the API resources to be
 extracted. The `jobs` configuration property is an array of processed API endpoints. A
 **single job represents a single [API resource](/extend/generic-extractor/tutorial/rest)**.
-If new to Generic Extractor, learn about [jobs in our tutorial](/extend/generic-extractor/tutorial/jobs/) first.
 
 <details>
   <summary>Click to see a sample job configuration.</summary>
@@ -49,14 +50,14 @@ If new to Generic Extractor, learn about [jobs in our tutorial](/extend/generic-
 Generic Extractor reads and processes the responses from the API endpoints in a pretty complex
 way. Each response is processed in the following steps:
 
-- Receive the JSON in the response.
-- Find an object in the response array, or find the object identified by [`dataField`](#data-field).
-- Flatten the object structure into one or more tables.
-- Create the tables in Storage and load data into them.
+1. Receive the response JSON.
+2. Find the relevant object in the response as specified by the [`dataField` property](#data-field) or default rules.
+3. Flatten the object structure into one or more tables.
+4. Create the required tables in Storage and load data into them.
 
 ## Merging Responses
-The first two steps are the responsibility of [Jobs](/extend/generic-extractor/configuration/config/jobs/) resulting in
-an array of objects. Generic Extractor then tries to find a common super-set of
+The first two steps are the responsibility of [Jobs](/extend/generic-extractor/configuration/config/jobs/) 
+resulting in an array of objects. Generic Extractor then tries to find a common super-set of
 properties of all objects, for example, with the following response:
 
 {% highlight json %}
@@ -75,14 +76,14 @@ properties of all objects, for example, with the following response:
 {% endhighlight %}
 
 The super-set of object properties consists of `id`, `name`, `color` and `size`. In the Generic Extractor
-configuration, this is referred to as [`dataType`](#dataType). If the `dataType` configuration is not set, a name is
-automatically generated. This merging of the object structure requires that the objects are compatible.
+configuration, this is [referred to as **`dataType`**](#data-type). If the `dataType` configuration is not set, a 
+name is automatically generated. Merging the object structure requires that the objects are compatible.
 
 The responses are merged into type-less tables. This means that values `42` and `apples` are perfectly compatible
 because they get converted to a string. Also, the scalar and array values are compatible because the
-scalar is [upgraded to an array](#upgrading-to-array). The following are the incompatible combinations:
+scalar is [upgraded to an array](#upgrading-to-array). The following are incompatible combinations:
 
-- Scalar and object values
+- Scalar (simple) and object values
 - Object and array values
 
 For example, this would not be allowed:
@@ -134,12 +135,12 @@ This means that the path part specified in the `baseURL` is ignored and fully
 replaced by the value specified in `endpoint`.
 
 ### Absolute Full URL
-The full absolute URL must start with a protocol. So, with endpoint set to
+The full absolute URL must start with a protocol. So, with the endpoint set to
 `https://eu.example.com/campaign`, this would be the final resource URL
 and the path specified in the `baseURL` is completely ignored.
 
 ### Specifying Endpoint
-The following table summarizes some possible outcomes:
+The following table summarizes possible outcomes:
 
 |`baseURL`|`endpoint`|actual URL|
 |---------|----------|----------|
@@ -228,7 +229,7 @@ See our [examples](/extend/generic-extractor/configuration/config/jobs/#examples
 ### FORM
 The `FORM` method type sends the request the same way the HTTP POST method does. However,
 the parameters from the `param` object are encoded as form data, mimicking the request being sent by
-a web form. This method **does not** support nested objects in the `param` object.
+a web form. This method **does not support nested objects** in the `param` object.
 For example, the following `params` field:
 
 {% highlight json %}

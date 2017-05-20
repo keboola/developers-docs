@@ -55,7 +55,7 @@ in which the extracted tables will be stored. The configuration is **required** 
 the extractor is [registered](/extend/generic-extractor/registration/) as a standalone component with the 
 [Default Bucket](/extend/common-interface/folders/#default-bucket) option.
 
-The following configuration will make Generic Extractor place all extracted tables in the `ge-tutorial` bucket
+The following configuration will make Generic Extractor put all extracted tables in the `ge-tutorial` bucket
 (the names of the tables are defined by the [`dataType`](/extend/generic-extractor/configuration/config/jobs/#dataType) setting):
 
 {% highlight json %}
@@ -104,12 +104,13 @@ which case it is essentially equal to [`api.http.headers`](/extend/generic-extra
 See [example [EX074]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/074-http-headers).
 
 ## Incremental Output
-The `incrementalOutput` boolean option allows you to turn on incremental loading for loading 
-the extracted data into [Storage](http://help.keboola.com/storage/). This flag in no way affects
-the data extraction. When `incrementalOutput` is set to `true`, the contents of the target 
-table in Storage will not be cleared. The default value is `false`. How to configure
-Generic Extractor to extract data in increments from an API is described in a 
-[dedicated article](/extend/generic-extractor/incremental/).
+The `incrementalOutput` boolean option allows you to load the extracted data into 
+[Storage](http://help.keboola.com/storage/) incrementally. This flag in no way affects the data extraction. 
+When `incrementalOutput` is set to `true`, the contents of the target table in Storage will not be cleared. 
+The default value is `false`. 
+
+How to configure Generic Extractor to extract data in increments from an API 
+is described in a [dedicated article](/extend/generic-extractor/incremental/).
 
 See [example [EX075]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/075-incremental-output).
 

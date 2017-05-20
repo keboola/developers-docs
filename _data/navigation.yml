@@ -159,9 +159,6 @@ items:
           - url: /extend/generic-extractor/iterations/
             title: Iterations
 
-          - url: /extend/generic-extractor/map/
-            title: Configuration Map
-
           - url: /extend/generic-extractor/running/
             title: Running Generic Extractor
 
