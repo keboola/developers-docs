@@ -1,6 +1,6 @@
 ---
 title: Multiple Scroller
-permalink: /extend/generic-extractor/api/pagination/multiple/
+permalink: /extend/generic-extractor/configuration/api/pagination/multiple/
 ---
 
 * TOC
@@ -8,8 +8,8 @@ permalink: /extend/generic-extractor/api/pagination/multiple/
 
 Setting the pagination method to `multiple` allows you to use multiple scrollers on a single API.
 This type of pagination contains the definition of all scrollers used in the entire configuration.
-Each [job](/extend/generic-extractor/config/jobs/) is then assigned a 
-[`scroller`]((/extend/generic-extractor/config/jobs/#scroller) in its configuration.
+Each [job](/extend/generic-extractor/configuration/config/jobs/) is then assigned a 
+[`scroller`]((/extend/generic-extractor/configuration/config/jobs/#scroller) in its configuration.
 This is useful mainly if the API has inconsistent pagination methods among various API calls. 
 It may be also useful in case you need to vary parameters --- e.g., set different page sizes for
 different endpoints.
@@ -44,9 +44,9 @@ specified, then the jobs with no assigned scroller will not use any type of pagi
 
 The `scrollers` configuration is an object whose keys are arbitrary scroller names. The values of the 
 keys are standard scroller configurations. Any of the supported 
-[paging strategies](/extend/generic-extractor/api/pagination/#paging-strategy) can be used and 
+[paging strategies](/extend/generic-extractor/configuration/api/pagination/#paging-strategy) can be used and 
 multiple paging strategies can be mixed. The configurations are the same as if there was a single scroller.
-The name of the scroller must be used in a specific [job `scroller` parameter](/extend/generic-extractor/config/jobs/#scroller).
+The name of the scroller must be used in a specific [job `scroller` parameter](/extend/generic-extractor/configuration/config/jobs/#scroller).
 A `default` scroller can be set (must be one of the names defined in `scrollers`). In that case, all jobs
 without an assigned scroller will use the default one.
 

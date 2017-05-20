@@ -1,6 +1,6 @@
 ---
 title: Pagination
-permalink: /extend/generic-extractor/api/pagination/
+permalink: /extend/generic-extractor/configuration/api/pagination/
 ---
 
 * TOC
@@ -42,16 +42,16 @@ An example pagination configuration looks like this:
 Generic Extractor supports the following paging strategies (scrollers); they are configured
 using the `method` option:
 
-- [`response.url`](/extend/generic-extractor/api/pagination/response-url/) --- uses a URL provided in the response.
-- [`offset`](/extend/generic-extractor/api/pagination/offset/) --- uses the page size (limit) and **item offset** (like in SQL).
-- [`pagenum`](/extend/generic-extractor/api/pagination/pagenum/) --- uses the page size (limit) and **page number**.
-- [`response.param`](/extend/generic-extractor/api/pagination/response-param/) --- uses a specific value (token) provided in the response.
-- [`cursor`](/extend/generic-extractor/api/pagination/cursor/) --- uses the identifier of the item in response to maintain a scrolling cursor.
-- [`multiple`](/extend/generic-extractor/api/pagination/multiple/) --- allows to set different scrollers for different API endpoints.
+- [`response.url`](/extend/generic-extractor/configuration/api/pagination/response-url/) --- uses a URL provided in the response.
+- [`offset`](/extend/generic-extractor/configuration/api/pagination/offset/) --- uses the page size (limit) and **item offset** (like in SQL).
+- [`pagenum`](/extend/generic-extractor/configuration/api/pagination/pagenum/) --- uses the page size (limit) and **page number**.
+- [`response.param`](/extend/generic-extractor/configuration/api/pagination/response-param/) --- uses a specific value (token) provided in the response.
+- [`cursor`](/extend/generic-extractor/configuration/api/pagination/cursor/) --- uses the identifier of the item in response to maintain a scrolling cursor.
+- [`multiple`](/extend/generic-extractor/configuration/api/pagination/multiple/) --- allows to set different scrollers for different API endpoints.
 
 ### Choosing Paging Strategy
 If the API responses contain direct links to the next set of results, use the 
-[`response.url`](/extend/generic-extractor/api/pagination/response-url/) method.
+[`response.url`](/extend/generic-extractor/configuration/api/pagination/response-url/) method.
 This applies to the APIs following the [JSON API specification](http://jsonapi.org). The response usually 
 contains a `links` section:
 
@@ -67,7 +67,7 @@ contains a `links` section:
 {% endhighlight %}
 
 If the API response contains a parameter used to obtain the next page, use the 
-`response.param`](/extend/generic-extractor/api/pagination/response-param/) method. 
+`response.param`](/extend/generic-extractor/configuration/api/pagination/response-param/) method. 
 It is preferred to use an
 authoritative value provided by the API than any of the following methods.
 This can be some kind of scrolling token or even a page number of the next page, for example:
@@ -86,12 +86,12 @@ This can be some kind of scrolling token or even a page number of the next page,
 If the API does not provide and scrolling hint within the response, you have to use one of the 
 `offset`, `pagenum` or `cursor` methods: 
 
-- Use the [`pagenum`]((/extend/generic-extractor/api/pagination/pagenum/) method if the API expects **page** number/index (i.e. `/users?page=2` to retrieve 2nd page regardless of how many items the page contains).
-- Use the [`offset`](/extend/generic-extractor/api/pagination/offset/) method if the API expects **item** number/index (i.e. `/useers?startWith=20` to retrieve 20th item and following items).
-- Use the [`cursor`](/extend/generic-extractor/api/pagination/cursor/) method if the API expects item **identifier** (i.e. `/users?startWith=20` to retrieve item with ID 20 and the following items).
+- Use the [`pagenum`](/extend/generic-extractor/configuration/api/pagination/pagenum/) method if the API expects **page** number/index (i.e. `/users?page=2` to retrieve 2nd page regardless of how many items the page contains).
+- Use the [`offset`](/extend/generic-extractor/configuration/api/pagination/offset/) method if the API expects **item** number/index (i.e. `/useers?startWith=20` to retrieve 20th item and following items).
+- Use the [`cursor`](/extend/generic-extractor/configuration/api/pagination/cursor/) method if the API expects item **identifier** (i.e. `/users?startWith=20` to retrieve item with ID 20 and the following items).
 
 If the API uses different paging methods for different endpoints, you have to use the 
-[`multiple`](/extend/generic-extractor/api/pagination/multiple/) method together with
+[`multiple`](/extend/generic-extractor/configuration/api/pagination/multiple/) method together with
 any of the above methods.
 
 ## Stopping Strategy
@@ -110,8 +110,8 @@ Let's say that there are 150 pages of results in total. When Generic Extractor a
 situations can arise:
 
 - most common --- the API returns an empty page (scrolling with 
-[`pagenum`](/extend/generic-extractor/api/pagination/pagenum/) and 
-[`offset`](/extend/generic-extractor/api/pagination/pagenum/) methods will stop, other methods will probably stop 
+[`pagenum`](/extend/generic-extractor/configuration/api/pagination/pagenum/) and 
+[`offset`](/extend/generic-extractor/configuration/api/pagination/pagenum/) methods will stop, other methods will probably stop 
 too (depends on how empty the response is)),
 - less common --- the API keeps returning the last page, the extraction is stopped when a page is obtained twice (see [example [EX041]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/041-paging-stop-same)) --- see below.
 - even less common --- the API keeps returning the first page, the extraction is stopped when a page is obtained twice (see [example [EX042]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/042-paging-stop-same-2))--- see below.

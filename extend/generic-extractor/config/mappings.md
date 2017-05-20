@@ -1,13 +1,13 @@
 ---
 title: Mapping
-permalink: /extend/generic-extractor/config/mappings/
+permalink: /extend/generic-extractor/configuration/config/mappings/
 ---
 
 * TOC
 {:toc}
 
 Generic Extractor receives JSON responses, 
-[merges them together](/extend/generic-extractor/config/jobs/#merging-responses) and converts them to CSV files
+[merges them together](/extend/generic-extractor/configuration/config/jobs/#merging-responses) and converts them to CSV files
 which are then imported to KBC. **Mapping** allows you to modify the behavior of this conversion process.
 Go to our tutorial to see [mapping in action](/extend/generic-extractor/tutorial/mapping).
 Manually define mapping if you wish to do the following:
@@ -28,7 +28,7 @@ object property values will be added as a value of a column with an auto-generat
 will be created and linked by the `JSON_parentId` column.
 
 Mapping configuration allows you to manually modify or override this behavior for a 
-[`dataType`](/extend/generic-extractor/config/jobs/#data-type) 
+[`dataType`](/extend/generic-extractor/configuration/config/jobs/#data-type) 
 defined in a job. The following is a mapping configuration example:
 
 {% highlight json %}
@@ -46,7 +46,7 @@ defined in a job. The following is a mapping configuration example:
 
 ## Configuration
 The `mappings` configuration is a deeply nested object. The first level of keys are `dataType` 
-values used in the [job configurations](/extend/generic-extractor/config/jobs/#data-type). The 
+values used in the [job configurations](/extend/generic-extractor/configuration/config/jobs/#data-type). The 
 second level of keys are the names of the properties found (or expected) in the response. 
 Then the value is an object with the following properties:
 
@@ -288,7 +288,7 @@ the user ID:
 }
 {% endhighlight %}
 
-To handle this situation in Generic Extractor, use a [child job](/extend/generic-extractor/config/jobs/#children): 
+To handle this situation in Generic Extractor, use a [child job](/extend/generic-extractor/configuration/config/jobs/#children): 
 
 {% highlight json %}
 "jobs": [
@@ -417,7 +417,7 @@ the result table `users` contains the `interests` field unprocessed and left as 
 |John Doe|123|["girls","cars","flowers"]|
 |Jane Doe|234|["boys","cars","flowers"]|
 
-The same result can be achieved by using the [`responseFilter` job property](/extend/generic-extractor/config/jobs/#response-filter):
+The same result can be achieved by using the [`responseFilter` job property](/extend/generic-extractor/configuration/config/jobs/#response-filter):
 
 {% highlight json %}
 {
@@ -510,7 +510,7 @@ The `interests` property cannot be saved as a column, therefore a mapping of the
 The table mapping follows the same structure as a normal mapping. Each item is another mapping 
 definition identified by the property name in the JSON file. Because the `interests` property
 itself is an array, its value has no name and therefore the key is an empty string `""`. The mapping
-value is a standard [column mapping](/extend/generic-extractor/config/mappings/#column-mapping). 
+value is a standard [column mapping](/extend/generic-extractor/configuration/config/mappings/#column-mapping). 
 The above configuration produces the same result as the automatic mapping of columns.
 
 See [example [EX066]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/066-mapping-tables-basic).

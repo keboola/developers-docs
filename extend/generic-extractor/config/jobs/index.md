@@ -1,6 +1,6 @@
 ---
 title: Jobs
-permalink: /extend/generic-extractor/config/jobs/
+permalink: /extend/generic-extractor/configuration/config/jobs/
 ---
 
 * TOC
@@ -55,7 +55,7 @@ way. Each response is processed in the following steps:
 - Create the tables in Storage and load data into them.
 
 ## Merging Responses
-The first two steps are the responsibility of [Jobs](/extend/generic-extractor/config/jobs/) resulting in
+The first two steps are the responsibility of [Jobs](/extend/generic-extractor/configuration/config/jobs/) resulting in
 an array of objects. Generic Extractor then tries to find a common super-set of
 properties of all objects, for example, with the following response:
 
@@ -105,16 +105,16 @@ For example, this would not be allowed:
 {% endhighlight %}
 
 If you want to process the above response, use the
-[`responseFilter` setting](/extend/generic-extractor/config/jobs/#response-filter).
+[`responseFilter` setting](/extend/generic-extractor/configuration/config/jobs/#response-filter).
 
 ## Endpoint
 The endpoint property is **required** and represents the URL of the resource. It can be either of the following:
 
-- URL fragment relative to the [`baseURL` property](/extend/generic-extractor/api/#baseurl) of the API definition
-- Absolute URL from the domain specified in the [`baseURL` property](/extend/generic-extractor/api/#baseurl) of the API definition
+- URL fragment relative to the [`baseURL` property](/extend/generic-extractor/configuration/api/#baseurl) of the API definition
+- Absolute URL from the domain specified in the [`baseURL` property](/extend/generic-extractor/configuration/api/#baseurl) of the API definition
 - Full absolute URL
 
-Assume the following [API definition](/extend/generic-extractor/api/):
+Assume the following [API definition](/extend/generic-extractor/configuration/api/):
 
 {% highlight json %}
 "api": {
@@ -184,7 +184,7 @@ is set to `mock-api` and that the `param` parameters are set as follows:
     }
 {% endhighlight %}
 
-See our [examples](/extend/generic-extractor/config/jobs/#examples-with-http-methods-and-parameters).
+See our [examples](/extend/generic-extractor/configuration/config/jobs/#examples-with-http-methods-and-parameters).
 
 ## Method
 The `method` parameter defines the [HTTP request method](/extend/generic-extractor/tutorial/rest/).
@@ -223,7 +223,7 @@ as entered in the configuration. For the above defined `params` property, the re
 {% endhighlight %}
 
 Also, the `Content-Type: application/json` HTTP header is added to the request.
-See our [examples](/extend/generic-extractor/config/jobs/#examples-with-http-methods-and-parameters).
+See our [examples](/extend/generic-extractor/configuration/config/jobs/#examples-with-http-methods-and-parameters).
 
 ### FORM
 The `FORM` method type sends the request the same way the HTTP POST method does. However,
@@ -252,10 +252,10 @@ Also, the `Content-Type: application/x-www-form-urlencoded` HTTP header will be 
 The `dataType` parameter assigns a name to the object(s) obtained from the endpoint.
 Setting it is optional. If not set, a name will be generated automatically from the `endpoint`
 value and parent jobs. The parameter is also used as the name of the output table within the
-specified [output bucket](/extend/generic-extractor/api/#outputBucket).
+specified [output bucket](/extend/generic-extractor/configuration/api/#outputBucket).
 
 Note that you can use the same `dataType` for multiple resources, provided that the result objects may
-be [merged into a single one](/extend/generic-extractor/config/mappings/). This can be used,
+be [merged into a single one](/extend/generic-extractor/configuration/config/mappings/). This can be used,
 for example, in a situation where two API endpoints return the same resource:
 
 {% highlight json %}
@@ -314,27 +314,27 @@ The `responseFilter` option allows you to skip parts of the API response from pr
 be useful if
 
 - you do not want to flatten the JSON structure using the default
-[JSON Parser](/extend/generic-extractor/config/jobs/#merging-responses) (as in the above examples).
+[JSON Parser](/extend/generic-extractor/configuration/config/jobs/#merging-responses) (as in the above examples).
 - the API response is inconsistent and the objects cannot be flattened.
 
 The value of the `responseFilter` property is either a path to a property in the response, or
 an array of such paths. The path is dot-separated unless set otherwise in the `responseFilterDelimiter` configuration.
 If you want to refer to the items of an array, use `[]` --- see an [example below](#skip-flattening-in-nested-objects).
 The same result can be achieved using `forceType` parameter in
-[column mapping](/extend/generic-extractor/config/mappings/#column-mapping).
+[column mapping](/extend/generic-extractor/configuration/config/mappings/#column-mapping).
 
 ## Children
 The `children` configuration allows you to retrieve sub-resources of the processes API resource.
 These **child jobs** (**nested jobs**) are executed for each object retrieved from the
 parent response. The definition of child jobs is the same as the definition of parent jobs,
 except for **placeholders**. The children configuration is described in a
-[separate article](/extend/generic-extractor/config/jobs/children/).
+[separate article](/extend/generic-extractor/configuration/config/jobs/children/).
 
 ## Scroller
 The `scroller` parameter can be used to assign a predefined scroller in case
-[`multiple` pagination](/extend/generic-extractor/api/pagination/multiple/) is used. If the
+[`multiple` pagination](/extend/generic-extractor/configuration/api/pagination/multiple/) is used. If the
 `multiple` pagination method is not used, the `scroller` parameter has no use. If `scroller` is not
-set, the pagination method specified in the [`api` configuration](/extend/generic-extractor/api/pagination/)
+set, the pagination method specified in the [`api` configuration](/extend/generic-extractor/configuration/api/pagination/)
 is used. If no pagination method is specified in the `api` section, then the job uses no pagination.
 
 ## Examples
@@ -641,7 +641,7 @@ See [example [EX009]](https://github.com/keboola/generic-extractor/tree/master/d
 ## Examples with Complicated Objects
 The above examples show how simple objects are extracted from different objects. Generic
 Extractor can also extract objects with non-scalar properties. The default
-[JSON to CSV mapping](/extend/generic-extractor/config/mappings/) flattens nested objects and produces secondary tables from nested arrays.
+[JSON to CSV mapping](/extend/generic-extractor/configuration/config/mappings/) flattens nested objects and produces secondary tables from nested arrays.
 
 ### Object with nested array
 You may encounter an API response like this:
@@ -878,7 +878,7 @@ If you have an API response like this:
 {% endhighlight %}
 
 and extract the `members` array with the
-[default settings](/extend/generic-extractor/config/jobs/#an-object-with-nested-object), two tables will be
+[default settings](/extend/generic-extractor/configuration/config/jobs/#an-object-with-nested-object), two tables will be
 produced. If you set the response filter to `"responseFilter": "tags"`, then the `tags` property of the `members`
 items will not be processed and will be stored as a [serialized](https://en.wikipedia.org/wiki/Serialization)
 JSON string. The following table will be extracted:
@@ -946,7 +946,7 @@ If you have the following API response:
 {% endhighlight %}
 
 and extract the `members` array with the
-[default settings](/extend/generic-extractor/config/jobs/#an-object-with-a-deeply-nested-object),
+[default settings](/extend/generic-extractor/configuration/config/jobs/#an-object-with-a-deeply-nested-object),
 two tables will be produced and the `properties` object will be flattened into a sparse table.
 To avoid that, set the response filter to `"responseFilter": "contacts[].properties"`. This will
 leave the `properties` child of the `contacts` array of the `members` array unprocessed.
@@ -1296,7 +1296,7 @@ can be solved using the following jobs configuration:
 ]
 {% endhighlight %}
 
-The [`params` configuration](/extend/generic-extractor/config/jobs/#request-parameters) option specifies the
+The [`params` configuration](/extend/generic-extractor/configuration/config/jobs/#request-parameters) option specifies the
 parameters to be sent to the API. Therefore the `type` property is the name defined by the API itself.
 The above configuration produces the following table:
 
@@ -1329,7 +1329,7 @@ then returns the following response:
 ]
 {% endhighlight %}
 
-Generic Extractor can handle this too, using the [`method` configuration](/extend/generic-extractor/config/jobs/#method):
+Generic Extractor can handle this too, using the [`method` configuration](/extend/generic-extractor/configuration/config/jobs/#method):
 
 {% highlight json %}
 "jobs": [
@@ -1381,7 +1381,7 @@ The request returns the following JSON:
 {% endhighlight %}
 
 The above situation can be handled by passing the entire request JSON to the
-[`params` configuration](/extend/generic-extractor/config/jobs/#request-parameters).
+[`params` configuration](/extend/generic-extractor/configuration/config/jobs/#request-parameters).
 
 {% highlight json %}
 "jobs": [
@@ -1448,7 +1448,7 @@ The following JSON is returned:
 {% endhighlight %}
 
 The above situation can be handled by encoding the parameters in a JSON into the
-[`params` configuration](/extend/generic-extractor/config/jobs/#request-parameters).
+[`params` configuration](/extend/generic-extractor/configuration/config/jobs/#request-parameters).
 
 {% highlight json %}
 "jobs": [

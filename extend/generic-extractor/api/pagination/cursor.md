@@ -1,6 +1,6 @@
 ---
 title: Cursor Scroller
-permalink: /extend/generic-extractor/api/pagination/cursor/
+permalink: /extend/generic-extractor/configuration/api/pagination/cursor/
 ---
 
 * TOC
@@ -38,7 +38,7 @@ API in a parameter whose name is in the `param` value. If the cursor is set to r
 the **minimum** value of the `idKey` is taken. The `increment` is added to that value, so it should be probably
 set to negative when using `reverse=true`.
 The request parameter specified in the `param` configuration overwrites the parameter of the same name defined in the
-[job parameters](/extend/generic-extractor/config/jobs/#request-parameters). Other job parameters are carried over without modification 
+[job parameters](/extend/generic-extractor/configuration/config/jobs/#request-parameters). Other job parameters are carried over without modification 
 (see an [example](#reverse-configuration)).
 
 ### Stopping Condition
@@ -47,7 +47,7 @@ run with the `cursor` scroller produces a similar warning:
     
     Warning: datafield 'items' contains no data!
 
-This is expected behavior. [Common stopping conditions](/extend/generic-extractor/api/pagination/#stopping-strategy) also apply.
+This is expected behavior. [Common stopping conditions](/extend/generic-extractor/configuration/api/pagination/#stopping-strategy) also apply.
 
 ## Examples
 

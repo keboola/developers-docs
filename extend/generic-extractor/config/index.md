@@ -1,17 +1,15 @@
 ---
-title: Generic Extractor Configuration
-permalink: /extend/generic-extractor/config/
+title: Extraction Configuration
+permalink: /extend/generic-extractor/configuration/config/
 ---
 
 * TOC
 {:toc}
 
-The `config` section describes the configuration of the extraction. This incudes mainly 
-API endpoints, properties of HTTP requests and mapping between source JSON and target CSV.
-The `config` section is one of the two main parts 
-(the second part is [`api`](/extend/generic-extractor/api/) of the Generic Extractor configuration.
-
-A sample API configuration can look like this:
+The **actual extraction** is described in the `config` section of Generic Extractor configuration, 
+including properties of HTTP requests, and mapping between source JSON and target CSV. 
+  
+A sample `config` configuration can look like this:
 
 {% highlight json %}
 {
@@ -38,27 +36,27 @@ A sample API configuration can look like this:
 
 Apart from the properties listed below, the `config` section can contain any number of
 other properties which are not used by Generic Extractor itself, but may be referenced
-from within [functions](/extend/generic-extractor/functions/). The keys prefixed by
-the hash character `#` are [automatically encrypted](/overview/encryption/) when the configuration is
-saved. It is advisable to store sensitive information in such fields. Note however that they 
-are not automatic aliases to un-encrypted fields. That means, when you use a `#password` field, you 
-must always refer to it as `#password` (e.g. in [functions](/extend/generic-extractor/functions)).
+from within [functions](/extend/generic-extractor/functions/). 
+
+The keys prefixed by the hash character `#` are [automatically encrypted](/overview/encryption/) when the 
+configuration is saved. It is advisable to store sensitive information in such fields. Note, however, they 
+are not automatic aliases to un-encrypted fields. That means that when using a `#password` field, you 
+must always refer to it as `#password` (for instance, in [functions](/extend/generic-extractor/functions)).
 Also, you cannot encrypt any Generic Extractor configuration fields (such as `jobs`, `mappings`, ...).
 
 ## Jobs
-Jobs configuration describes API endpoints (resources) which will be extracted. This
-includes configuration of HTTP method and parameters. The `jobs` configuration is 
-**required** and is described in a [separate article](/extend/generic-extractor/config/jobs/).
+The Jobs configuration describes the API endpoints (resources) which will be extracted. This
+includes configuring the HTTP method and parameters. The `jobs` configuration is 
+**required** and is described in a [separate article](/extend/generic-extractor/configuration/config/jobs/).
 
 ## Output Bucket
 The `outputBucket` option defines the name of the [Storage Bucket](https://help.keboola.com/storage/buckets/) 
 in which the extracted tables will be stored. The configuration is **required** unless
-the extractor is [registered](/extend/generic-extractor/registration/) as standalone component with the 
+the extractor is [registered](/extend/generic-extractor/registration/) as a standalone component with the 
 [Default Bucket](/extend/common-interface/folders/#default-bucket) option.
 
-The following configuration will make Generic Extractor place all extracted tables 
-(the names of the tables are defined by the [`dataType`](/extend/generic-extractor/config/jobs/#dataType) setting) 
-in the `ge-tutorial` bucket:
+The following configuration will make Generic Extractor place all extracted tables in the `ge-tutorial` bucket
+(the names of the tables are defined by the [`dataType`](/extend/generic-extractor/configuration/config/jobs/#dataType) setting):
 
 {% highlight json %}
 {
@@ -75,22 +73,19 @@ If you omit the `outputBucket` configuration, you will receive an error similar 
     CSV file 'campaigns' file name is not a valid table identifier, either set output mapping for 'campaigns' or make sure that the file name is a valid Storage table identifier.
 
 ## Mappings
-Mappings configuration describes how the JSON response is converted into 
-CSV files that will be imported into Storage. The `mappings` configuration is optional and 
-is described in a [separate article](/extend/generic-extractor/config/mappings/).
+The Mappings configuration describes how the JSON response is converted into 
+CSV files that will be imported into Storage. The `mappings` configuration is **optional** and 
+is described in a [separate article](/extend/generic-extractor/configuration/config/mappings/).
 
 ## Debug
 The `debug` boolean option allows you to turn on more verbose logging which shows 
-all HTTP requests sent by the Generic Extractor. Default value is `false`.
-You can read more about running Generic Extractor in a 
-[separate article](/extend/generic-extractor/running/).
+all HTTP requests sent by Generic Extractor. The default value is `false`.
+Read more about running Generic Extractor in a [separate article](/extend/generic-extractor/running/).
 
 ## HTTP
-The `http` option allows you to set HTTP headers sent with every request. This
-serves primarily the purpose of providing values for 
-[`api.http.requiredHeaders` option](/extend/generic-extractor/api/#required-headers).
-It is also possible to use `http` option without the `api.http.requiredHeaders` in 
-which case, it is essentially equal to [`api.http.headers`](/extend/generic-extractor/api/#default-headers).
+The `http` option allows you to set the HTTP headers sent with every request. This primarily serves the purpose of providing values for [`api.http.requiredHeaders` option](/extend/generic-extractor/configuration/api/#required-headers).
+It is also possible to use the `http` option without `api.http.requiredHeaders` in 
+which case it is essentially equal to [`api.http.headers`](/extend/generic-extractor/configuration/api/#default-headers).
 
 {% highlight json %}
 {
@@ -111,18 +106,18 @@ See [example [EX074]](https://github.com/keboola/generic-extractor/tree/master/d
 ## Incremental Output
 The `incrementalOutput` boolean option allows you to turn on incremental loading for loading 
 the extracted data into [Storage](http://help.keboola.com/storage/). This flag in no way affects
-the extraction of data. When `incrementalOutput` is set to `true`, the contents of the target 
-table in Storage will not be cleared. Default value is `false`. How to configure
-Generic Extractor to extract data in increments from an API, is described in a 
+the data extraction. When `incrementalOutput` is set to `true`, the contents of the target 
+table in Storage will not be cleared. The default value is `false`. How to configure
+Generic Extractor to extract data in increments from an API is described in a 
 [dedicated article](/extend/generic-extractor/incremental/).
 
 See [example [EX075]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/075-incremental-output).
 
 ## User Data
 The `userData` option allows you to add arbitrary data to extracted records. 
-The `userData` is an object with arbitrary property names. The property names will be added as columns to all 
-extracted records from parent jobs, the property values will be the columns values. It is also possible to 
-use [functions](/extend/generic-extractor/functions/) as `userData` property values.
+It is an object with arbitrary property names which are added as columns to all records extracted 
+from parent jobs. The property values are the columns values. It is also possible to use 
+[functions](/extend/generic-extractor/functions/) as `userData` property values.
 
 The following configuration:
 
@@ -137,7 +132,7 @@ The following configuration:
 }
 {% endhighlight %}
 
-And the following response:
+and the following response:
 
 {% highlight json %}
 [
@@ -152,7 +147,7 @@ And the following response:
 ]
 {% endhighlight %}
 
-Will produce the following `users` table:
+will produce the following `users` table:
 
 {% highlight json %}
 |id|name|tag|mode|
@@ -160,9 +155,9 @@ Will produce the following `users` table:
 |234|Jane Doe|fullExtract|development|
 {% endhighlight %}
 
-The `userData` values are added to parent jobs only, they will not affect 
-[child jobs](/extend/generic-extractor/config/jobs/children) anyhow. If the result table contains
-columns with the same names as `userData` properties, the original column will be overwritten 
+The `userData` values are added to the parent jobs only. They will not affect the
+[child jobs](/extend/generic-extractor/configuration/config/jobs/children). If the result table contains
+columns with the same names as the `userData` properties, the original column will be overwritten 
 by the values of `userData`.
 
 See [example [EX076]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/076-user-data).

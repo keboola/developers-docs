@@ -1,6 +1,6 @@
 ---
 title: OAuth Authentication (under construction)
-permalink: /extend/generic-extractor/api/authentication/oauth/
+permalink: /extend/generic-extractor/configuration/api/authentication/oauth/
 ---
 
 Set up OAuth based APIs.
@@ -14,5 +14,5 @@ to the [OAuth API](http://docs.oauthv2.apiary.io/).
 
 2) [Add the component to OAuth API](http://docs.oauthv2.apiary.io/#reference/manage/addlist-supported-api/add-new-component).
 
-3) Configure the component API part according to either [1.0](/extend/generic-extractor/api/authentication/oauth/10/) or 
-[2.0](/extend/generic-extractor/api/authentication/oauth/20/) OAuth configurations.
+3) Configure the component API part according to either [1.0](/extend/generic-extractor/configuration/api/authentication/oauth/10/) or 
+[2.0](/extend/generic-extractor/confuguration/api/authentication/oauth/20/) OAuth configurations.

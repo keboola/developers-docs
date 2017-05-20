@@ -1,12 +1,12 @@
 ---
 title: OAuth 2.0 Authentication
-permalink: /extend/generic-extractor/api/authentication/oauth20/
+permalink: /extend/generic-extractor/configuration/api/authentication/oauth20/
 ---
 
 * TOC
 {:toc}
 
-OAuth 2.0 Authentication is one of [two OAuth methods](/extend/generic-extractor/api/authentication/#oauth) and
+OAuth 2.0 Authentication is one of [two OAuth methods](/extend/generic-extractor/configuration/api/authentication/#oauth) and
 is supported only for [registered components](/extend/generic-extractor/registration/). 
 OAuth 2.0 authentication is configured by setting
 the `type` key to `oauth20`:
@@ -27,7 +27,7 @@ the `type` key to `oauth20`:
 
 The OAuth 2.0 authentication process is described by the [following diagram](http://docs.spring.io/spring-social/docs/1.0.0.M3/reference/html/serviceprovider.html):
 
-![Diagram - OAuth 2.0 authentication](/extend/generic-extractor/api/authentication/oauth20-diagram.png)
+![Diagram - OAuth 2.0 authentication](/extend/generic-extractor/configuration/api/authentication/oauth20-diagram.png)
 
 On the diagram, step `6` represents the end of authentication and the actual communication with 
 the API (extraction of data) may begin.

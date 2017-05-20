@@ -1,6 +1,6 @@
 ---
 title: Child Jobs
-permalink: /extend/generic-extractor/config/jobs/children/
+permalink: /extend/generic-extractor/configuration/config/jobs/children/
 ---
 
 * TOC
@@ -14,7 +14,7 @@ user. See the Generic Extractor tutorial for a basic [example of using child
 jobs](/extend/generic-extractor/tutorial/jobs/#child-jobs).
 
 Apart from two additional fields, `placeholders` and `recursionFilter`, configuring a child job is no different than
-configuring [any other job](/extend/generic-extractor/config/jobs).
+configuring [any other job](/extend/generic-extractor/configuration/config/jobs).
 
 A sample job configuration can look like this:
 
@@ -65,7 +65,7 @@ a value, use the `placeholders` configuration. It is an object whose properties 
 of each `placeholders` object property is a **property path** in the parent job response.
 The placeholder in the child `endpoint` will be replaced by the **value** of that parent property. The property
 path is configured relative to the extracted object ([see an example](#accessing-deeply-nested-id)). The child
-`endpoint` is configured relative to the [`api.baseUrl` configuration](/extend/generic-extractor/api/#base-url), 
+`endpoint` is configured relative to the [`api.baseUrl` configuration](/extend/generic-extractor/configuration/api/#base-url), 
 not relative to the parent endpoint.
 
 The following configuration:
@@ -218,7 +218,7 @@ Generic Extractor makes three API calls:
 - `users/123`
 - `users/234`
 
-The [`dataField`](/extend/generic-extractor/config/jobs/#data-field) is set to a dot to retrieve the 
+The [`dataField`](/extend/generic-extractor/configuration/config/jobs/#data-field) is set to a dot to retrieve the 
 entire response as a single object. Running Generic Extractor produces the following tables:
 
 users:
@@ -236,13 +236,13 @@ user__user-id:
 |234|Jane Doe|St Mary Mead|UK|High Street|234|
 
 Notice that the table representing child resources contains all the responses
-merged into a single table; the [usual merging rules](/extend/generic-extractor/config/jobs/#merging-response) apply.
+merged into a single table; the [usual merging rules](/extend/generic-extractor/configuration/config/jobs/#merging-response) apply.
 
 Also notice that a new column, `parent_id`, was added, containing the **placeholder value** used
 to retrieve the resource. The `parent_id` column is not always named `parent_id`.
 Its name is created by joining the `parent_` prefix to the **placeholder path**.
 
-To create a friendly name for the table, it is good to use the [dataType](/extend/generic-extractor/config/jobs/#data-type) 
+To create a friendly name for the table, it is good to use the [dataType](/extend/generic-extractor/configuration/config/jobs/#data-type) 
 property (see the next example). The auto-generated name is rather ugly.
 
 See [example [EX021]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/021-basic-child-job).

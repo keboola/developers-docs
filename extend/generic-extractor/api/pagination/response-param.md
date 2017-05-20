@@ -1,6 +1,6 @@
 ---
 title: Response Parameter Scroller
-permalink: /extend/generic-extractor/api/pagination/response-param/
+permalink: /extend/generic-extractor/configuration/api/pagination/response-param/
 ---
 
 * TOC
@@ -28,16 +28,16 @@ The following configuration parameters are supported for the `response.param` me
 - `responseParam` (required, string) --- Path to the key which contains the value used for scrolling
 - `queryParam` (required, string) --- Name of the [query string](/extend/generic-extractor/tutorial/rest/#url) parameter in 
 which the above value should be sent to the API.
-- `includeParams` (optional, boolean) --- When true, the [job parameters](/extend/generic-extractor/config/jobs/#request-parameters) 
+- `includeParams` (optional, boolean) --- When true, the [job parameters](/extend/generic-extractor/configuration/config/jobs/#request-parameters) 
 are added to the provided URL. The `queryParam` overrides the values from the job parameters (see an [example](#overriding-parameters)). The default value is `false`.
-- `scrollRequest` (optional, object) --- [Job-like](/extend/generic-extractor/config/jobs/) object (supported fields are 
+- `scrollRequest` (optional, object) --- [Job-like](/extend/generic-extractor/configuration/config/jobs/) object (supported fields are 
 `endpoint`, `method` and `params`) which allows to sent an initial scrolling request (see an [example](#using-scroll-request)).
 
 ### Stopping Condition
 The pagination ends when the value of `responseParam` parameters is empty --- the key is not present at all, is null, is
 an empty string, or is `false`. Take care when configuring the `responseParam` parameter. If you, for example, misspell the name of 
 the key, the extraction will not go beyond the first page. 
-[Common stopping conditions](/extend/generic-extractor/api/pagination/#stopping-strategy) also apply.
+[Common stopping conditions](/extend/generic-extractor/configuration/api/pagination/#stopping-strategy) also apply.
 
 ## Examples
 

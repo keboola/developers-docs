@@ -1,6 +1,6 @@
 ---
 title: Login
-permalink: /extend/generic-extractor/api/authentication/login/
+permalink: /extend/generic-extractor/configuration/api/authentication/login/
 ---
 
 * TOC
@@ -39,10 +39,10 @@ for authentication of all the other API requests. A sample Login authentication 
 ## Configuration Parameters
 The following configuration parameters are supported for the `login` type of authentication:
 
-- `loginRequest` (required, object) --- a [job-like](/extend/generic-extractor/config/jobs/) object describing the login request; it has the following properties:
-    - `endpoint` (required, string) --- an API endpoint for the login request; the same rules as for the [Job `endpoint`](/extend/generic-extractor/config/jobs/#specifying-endpoint) apply here.
-    - `params` (optional, object) --- an object with key-value properties containing request parameters; object keys are parameters names; values are transformed the [same way as in jobs](/extend/generic-extractor/config/jobs/#request-parameters).
-    - `method` (optional, string) --- an HTTP method to send the request; this defines how the [parameters are sent](/extend/generic-extractor/config/jobs/#request-parameters) to the API. The default value is `GET`.
+- `loginRequest` (required, object) --- a [job-like](/extend/generic-extractor/configuration/config/jobs/) object describing the login request; it has the following properties:
+    - `endpoint` (required, string) --- an API endpoint for the login request; the same rules as for the [Job `endpoint`](/extend/generic-extractor/configuration/config/jobs/#specifying-endpoint) apply here.
+    - `params` (optional, object) --- an object with key-value properties containing request parameters; object keys are parameters names; values are transformed the [same way as in jobs](/extend/generic-extractor/configuration/config/jobs/#request-parameters).
+    - `method` (optional, string) --- an HTTP method to send the request; this defines how the [parameters are sent](/extend/generic-extractor/configuration/config/jobs/#request-parameters) to the API. The default value is `GET`.
     - `headers` (optional, object) --- an object with key-value properties containing HTTP headers. The names will be used as HTTP header names, and the values will be used as the value of the respective header.
 - `apiRequest` (optional, object) --- an object which defines how the result of the *login request* will be used in the actual API request; it contains the following properties:
     - `headers` (optional, object) --- an object with key-value properties containing HTTP headers. The names are header names, the values are paths in the JSON response from which the actual values are extracted.
@@ -102,7 +102,7 @@ The first request will be sent to `/login` with the HTTP headers:
     X-Login: JohnDoe
     X-Password: TopSecret
 
-All consecutive requests will be sent to the endpoints specified in the [`jobs`](/extend/generic-extractor/config/jobs/) section and 
+All consecutive requests will be sent to the endpoints specified in the [`jobs`](/extend/generic-extractor/configuration/config/jobs/) section and 
 will contain the header:
 
     X-ApiToken: a1b2c3d435f6
@@ -159,7 +159,7 @@ The first API request will be sent as:
 
     username=JohnDoe&password=TopSecret
 
-The [FORM method](/extend/generic-extractor/config/jobs/#form) sends the parameters
+The [FORM method](/extend/generic-extractor/configuration/config/jobs/#form) sends the parameters
 as [application/x-www-form-urlencoded](https://en.wikipedia.org/wiki/POST_(HTTP)#Use_for_submitting_web_forms). 
 The `apiRequest.query` settings then map the response values to the parameters of the other API calls, 
 so the second API call will be sent as:
