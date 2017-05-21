@@ -1,6 +1,6 @@
 ---
 title: Generic Extractor Parameter Map
-permalink: /extend/generic-extractor/configuration/map/
+permalink: /extend/generic-extractor/map/
 ---
 
 Use the following sample configuration to navigate among various configuration options:

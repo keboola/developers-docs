@@ -150,6 +150,8 @@ items:
                   - url: /extend/generic-extractor/configuration/config/mappings/
                     title: Mappings
 
+          - url: /extend/generic-extractor/map/
+            
           - url: /extend/generic-extractor/functions/
             title: Functions
 

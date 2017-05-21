@@ -3,7 +3,7 @@ title: Generic Extractor Configuration
 permalink: /extend/generic-extractor/configuration/
 ---
 
-*To configure your first Generic Extractor, go to our [Generic Extractor tutorial](/exten/generic-extractor/tutorial/).*
+*To configure your first Generic Extractor, go to our [Generic Extractor tutorial](/extend/generic-extractor/tutorial/).*
 
 Each Generic Extractor configuration consists of two main sections: 
 
@@ -12,8 +12,8 @@ properties** of the API, such as endpoints, authentication and pagination.
 - [**Extraction Configuration**](/extend/generic-extractor/configuration/config/) (`config` section) --- describes 
 the **actual extraction**, including properties of HTTP requests, and mapping between source JSON and target CSV. 
   
-## Generic Extractor Parameter Map  
-Use the following sample configuration to navigate among various configuration options:
+
+The following sample configuration shows various configuration options and their nesting:
 
 {% highlight json %}
 {
