@@ -151,6 +151,7 @@ items:
                     title: Mappings
 
           - url: /extend/generic-extractor/map/
+            title: Configuration Map
             
           - url: /extend/generic-extractor/functions/
             title: Functions
