@@ -255,7 +255,7 @@ Setting it is optional. If not set, a name will be generated automatically from 
 value and parent jobs. 
 
 Data types are used in [mappings](/extend/generic-extractor/configuration/config/mappings/) and for naming output 
-tables within their [output buckets](/extend/generic-extractor/configuration/api/#outputBucket).
+tables within their [output buckets](/extend/generic-extractor/configuration/config/#outputBucket).
 
 Note that you can use the same `dataType` for multiple resources, provided that the result objects may
 be [merged into a single one](/extend/generic-extractor/configuration/config/mappings/). This can be used,
