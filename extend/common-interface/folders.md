@@ -108,7 +108,7 @@ slices of the table.
     /data/out/tables/myfile.csv/part02
     /data/out/tables/myfile.csv.manifest
 
-No sliced files can contain headers. They must have their columns specified in the [manifest file](/extend/common-interface/manifest-files/)
+Sliced files cannot have header rows. They must have their columns specified in the [manifest file](/extend/common-interface/manifest-files/)
 or in the output mapping configuration.
 
 The following is an example of specifying columns in the manifest file `/data/out/tables/myfile.csv.manifest`:
