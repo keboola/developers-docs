@@ -1,6 +1,6 @@
 ---
 title: Offset Scroller
-permalink: /extend/generic-extractor/api/pagination/offset/
+permalink: /extend/generic-extractor/configuration/api/pagination/offset/
 ---
 
 * TOC
@@ -9,7 +9,7 @@ permalink: /extend/generic-extractor/api/pagination/offset/
 The Offset scroller handles a pagination strategy in which the API splits the results into pages
 of the same size (limit parameter) and navigates through them using the **item offset** parameter. This 
 is similar to paging in SQL language. If you need to use *page offset*, use the 
-[Page Number Scroller](/extend/generic-extractor/api/pagination/pagenum/).
+[Page Number Scroller](/extend/generic-extractor/configuration/api/pagination/pagenum/).
 
 An example configuration:
 
@@ -37,11 +37,11 @@ The following configuration parameters are supported for the `offset` method of 
 - `offsetFromJob` (optional, boolean) --- When true, the offset parameter value is taken from the job parameters. The default value is `false`.
 
 The limit value is configured by the `limit` parameter, but it may be overridden in 
-the [job parameters](/extend/generic-extractor/config/jobs/#request-parameters). The offset value is computed automatically starting from 0, but it may be overridden in the job parameters if `offsetFromJob` is set to true.
+the [job parameters](/extend/generic-extractor/configuration/config/jobs/#request-parameters). The offset value is computed automatically starting from 0, but it may be overridden in the job parameters if `offsetFromJob` is set to true.
 
 **Important:** You must not set the limit parameter above the limit supported by the API. Setting the 
 limit to, e.g., 1000 if the API returns 100 items at most would cause the extraction to stop after
-the first page. This is because the [underflow condition](/extend/generic-extractor/api/pagination/#stopping-strategy)
+the first page. This is because the [underflow condition](/extend/generic-extractor/configuration/api/pagination/#stopping-strategy)
 would be triggered.
 
 ### Stopping Condition
@@ -71,8 +71,8 @@ the second two users. Generic Extractor will then query `users?offset=4&limit=2`
 If the response is empty (the API returns an empty page, `[])`, the *underflow* check kicks in 
 and the extraction is stopped. See [example [043]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/043-paging-stop-underflow).
 
-Note that the *emptiness* is evaluated on the extracted array as [auto-detected](/extend/generic-extractor/config/jobs/#data-field) or 
-specified by the [`dataField`](/extend/generic-extractor/config/jobs/#data-field) configuration. 
+Note that the *emptiness* is evaluated on the extracted array as [auto-detected](/extend/generic-extractor/configuration/config/jobs/#data-field) or 
+specified by the [`dataField`](/extend/generic-extractor/configuration/config/jobs/#data-field) configuration. 
 That means that the entire response
 may be non-empty. See [example [044]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/044-paging-stop-underflow-struct).
 
@@ -82,7 +82,7 @@ You will also see the following warning in the logs:
 
 which is expected.
 
-All [common stopping conditions](/extend/generic-extractor/api/pagination/#stopping-strategy) apply as well.
+All [common stopping conditions](/extend/generic-extractor/configuration/api/pagination/#stopping-strategy) apply as well.
 
 ## Examples
 

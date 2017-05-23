@@ -1,15 +1,13 @@
 ---
 title: API Configuration
-permalink: /extend/generic-extractor/api/
+permalink: /extend/generic-extractor/configuration/api/
 ---
 
 * TOC
 {:toc}
 
-The API section of configuration describes global characteristics of the API. These include
-[HTTP headers](/extend/generic-extractor/tutorial/rest/#headers), authentication and pagination 
-methods. This is the first of the two main parts (the second part is 
-[`config`](/extend/generic-extractor/config/)) of the Generic Extractor configuration.
+The API section of Generic Extractor configuration describes **global characteristics** of the API. These include [HTTP headers](/extend/generic-extractor/tutorial/rest/#headers), authentication and pagination methods. 
+
 A sample API configuration can look like this:
 
 {% highlight json %}
@@ -46,18 +44,18 @@ A sample API configuration can look like this:
 ## Base URL
 The `baseUrl` configuration defines the URL to which the API requests should be sent to. We
 recommend that the URL ends with a slash so that the `jobs.endpoint` can be set easily.
-See the [`endpoint` configuration](/extend/generic-extractor/config/jobs/#endpoint) for a detailed description of
+See the [`endpoint` configuration](/extend/generic-extractor/configuration/config/jobs/#endpoint) for a detailed description of
 how `api.baseUrl` and `jobs.endpoint` work together.
 
 ## Pagination
 Pagination (or scrolling) describes how the API pages through a large set of results. Because 
 there are many different pagination strategies, the configuration is described on a
-[separate page](/extend/generic-extractor/api/pagination/).
+[separate page](/extend/generic-extractor/configuration/api/pagination/).
 
 ## Authentication
 Authentication (authorization) needs to be configured for any API which is not public. 
 Because there are many authorization methods used by different APIs, there are also many 
-[configuration options](/extend/generic-extractor/api/authentication/).
+[configuration options](/extend/generic-extractor/configuration/api/authentication/).
 
 ## Retry Configuration
 Generic Extractor automatically retries failed HTTP requests. This is one of the big advantages over 
@@ -145,11 +143,11 @@ the times in the [debug](/extend/generic-extractor/running/#debug-mode) messages
     Http request failed, retrying in 1s
 
 If the exponential backoff is used, you will see its sequence of times.
-See an [example](/extend/generic-extractor/api/#retry-configuration).
+See an [example](/extend/generic-extractor/configuration/api/#retry-configuration).
 
 ## Default HTTP Options
 The `http` configuration option allows you to set default headers and parameters 
-sent with each API call (defined later in the [`jobs` section](/extend/generic-extractor/config/jobs/#request-parameters)).
+sent with each API call (defined later in the [`jobs` section](/extend/generic-extractor/configuration/config/jobs/#request-parameters)).
 
 ### Headers
 The `http.headers` configuration allows you to set default headers sent with
@@ -165,23 +163,22 @@ the headers and values are their values --- for instance:
 }
 {% endhighlight %}
 
-See the full [example](/extend/generic-extractor/api/#default-headers).
+See the full [example](/extend/generic-extractor/configuration/api/#default-headers).
 
 ### Request Parameters 
 The `http.defaultOptions.params` configuration allows you to set 
 [request parameters](/extend/generic-extractor/tutorial/rest/#url) to be
 sent with each API request. The same rules apply as to the
-[`jobs.params`](/extend/generic-extractor/config/jobs/#request-parameters).
+[`jobs.params`](/extend/generic-extractor/configuration/config/jobs/#request-parameters).
 
-See an [example](/extend/generic-extractor/api/#default-headers).
+See an [example](/extend/generic-extractor/configuration/api/#default-headers).
 
 ### Required Headers
-Similar to the `http.headers` option, the `http.requiredHeaders` option allows you to set the
-HTTP header for every API request. The difference is that the `requiredHeaders` configuration
-specifies only the header names. The actual values must be provided in the 
-[`config`](/extend/generic-extractor/config/) configuration section. This is useful in case the header values change
-dynamically or they are provided as part of [template configuration](/extend/generic-extractor/registration/). The `api` configuration 
-section:
+Similar to the `http.headers` option, the `http.requiredHeaders` option allows you to set the HTTP header 
+for every API request. The difference is that the `requiredHeaders` configuration specifies only the header names. 
+The actual values must be provided in the [`config`](/extend/generic-extractor/configuration/config/) 
+configuration section. This is useful in case the header values change dynamically or they are provided as part 
+of [template configuration](/extend/generic-extractor/registration/). The `api` configuration section:
 
 {% highlight json %}
 "http": {
@@ -203,7 +200,7 @@ Failing to provide the header values in the `config` section will cause an error
 
     Missing required header Accept in config.http.headers!
 
-See the full [example](/extend/generic-extractor/api/#required-headers).
+See the full [example](/extend/generic-extractor/configuration/api/#required-headers).
 
 ## Examples
 
@@ -270,7 +267,8 @@ The following configuration sends the parameter with every API request:
 }
 {% endhighlight %}
 
-For this use case, the [query authentication](/extend/generic-extractor/api/authentication/query/) may also be used.
+For this use case, the [query authentication](/extend/generic-extractor/configuration/api/authentication/query/) 
+may also be used.
 
 See [example [EX039]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/039-default-parameters).
 
@@ -297,5 +295,5 @@ Then the actual header value must be added to the `config` section.
 }
 {% endhighlight %}
 
-For this use case, the [authentication](/extend/generic-extractor/api/authentication/) may also be used.
+For this use case, the [authentication](/extend/generic-extractor/configuration/api/authentication/) may also be used.
 See [example [EX040]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/040-required-headers).

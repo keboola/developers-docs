@@ -1,6 +1,6 @@
 ---
 title: Query Authentication
-permalink: /extend/generic-extractor/api/authentication/query/
+permalink: /extend/generic-extractor/configuration/api/authentication/query/
 ---
 
 Query Authentication provides the simplest authentication method, in which
@@ -41,7 +41,7 @@ each request. The following authentication configuration does exactly that:
 }
 {% endhighlight %}
 
-For this use case, it is also possible to use [`defaultOptions` setting](/extend/generic-extractor/api/#default-parameters).
+For this use case, it is also possible to use [`defaultOptions` setting](/extend/generic-extractor/configuration/api/#default-parameters).
 However, we recommend using the `authentication` setting for credentials so that the Generic Extractor
 configuration does not become a complete mess.
 

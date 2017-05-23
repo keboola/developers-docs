@@ -1,6 +1,6 @@
 ---
 title: Response URL Scroller
-permalink: /extend/generic-extractor/api/pagination/response-url/
+permalink: /extend/generic-extractor/configuration/api/pagination/response-url/
 ---
 
 * TOC
@@ -30,10 +30,10 @@ The default value is `next_page`.
 - `paramIsQuery` (optional, boolean) 
 	- When true, the URL is assumed to be only [query string](/extend/generic-extractor/tutorial/rest/#url) parameters. 
 	- When false, a URL with a path is assumed. `false` is also the default value.
-- `includeParams` (optional, boolean) --- When true, the [job parameters](/extend/generic-extractor/config/jobs/#request-parameters) 
+- `includeParams` (optional, boolean) --- When true, the [job parameters](/extend/generic-extractor/configuration/config/jobs/#request-parameters) 
 are added to the provided URL. The default value is `false`.
 
-If `includeParams` is true, the [job parameters](/extend/generic-extractor/config/jobs/#request-parameters) are merged into
+If `includeParams` is true, the [job parameters](/extend/generic-extractor/configuration/config/jobs/#request-parameters) are merged into
 the parameters of the URL in the response. If `paramIsQuery` is false, the parameters in the response **are overridden**
 by the parameters in the job. If `paramIsQuery` is true, then the parameters in the response **override** the parameters in 
 the job. See the [examples below](#examples).
@@ -42,7 +42,7 @@ the job. See the [examples below](#examples).
 The pagination ends when the value of the `urlKey` parameter is empty --- the key is not present at all, is null,
 is an empty string or is `false`. Take care when configuring the `urlKey` parameter. If you, for example, misspell the
 key's name, the extraction will not go beyond the first page.
-[Common stopping conditions](/extend/generic-extractor/api/pagination/#stopping-strategy) also apply.
+[Common stopping conditions](/extend/generic-extractor/configuration/api/pagination/#stopping-strategy) also apply.
 
 ## Examples
 

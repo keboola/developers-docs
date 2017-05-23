@@ -1,6 +1,6 @@
 ---
 title: Login Using OAuth 2.0 Authentication
-permalink: /extend/generic-extractor/api/authentication/oauth20-login/
+permalink: /extend/generic-extractor/configuration/api/authentication/oauth20-login/
 ---
 
 * TOC
@@ -37,7 +37,7 @@ for authentication of all the other API requests. A sample OAuth Login authentic
 {% endhighlight %}
 
 ## Configuration Parameters
-The configuration parameters are identical to the [Login](/extend/generic-extractor/api/authentication/login/) method.
+The configuration parameters are identical to the [Login](/extend/generic-extractor/configuration/api/authentication/login/) method.
 The difference, however, is in the [function context](/extend/generic-extractor/functions/#oauth-20-login-authentication-context).
 The **login request** is assumed to require OAuth2 authorization and its response must be in JSON format (plaintext is not supported).
 

@@ -1,15 +1,16 @@
 ---
 title: Jobs
-permalink: /extend/generic-extractor/config/jobs/
+permalink: /extend/generic-extractor/configuration/config/jobs/
 ---
 
 * TOC
 {:toc}
 
-The jobs section of the configuration contains descriptions of the API resources to be
+*If new to Generic Extractor, learn about [jobs in our tutorial](/extend/generic-extractor/tutorial/jobs/) first.*
+
+The jobs section of the extraction configuration contains descriptions of the API resources to be
 extracted. The `jobs` configuration property is an array of processed API endpoints. A
 **single job represents a single [API resource](/extend/generic-extractor/tutorial/rest)**.
-If new to Generic Extractor, learn about [jobs in our tutorial](/extend/generic-extractor/tutorial/jobs/) first.
 
 <details>
   <summary>Click to see a sample job configuration.</summary>
@@ -49,14 +50,14 @@ If new to Generic Extractor, learn about [jobs in our tutorial](/extend/generic-
 Generic Extractor reads and processes the responses from the API endpoints in a pretty complex
 way. Each response is processed in the following steps:
 
-- Receive the JSON in the response.
-- Find an object in the response array, or find the object identified by [`dataField`](#data-field).
-- Flatten the object structure into one or more tables.
-- Create the tables in Storage and load data into them.
+1. Receive the response JSON.
+2. Find the relevant object in the response as specified by the [`dataField` property](#data-field) or default rules.
+3. Flatten the object structure into one or more tables.
+4. Create the required tables in Storage and load data into them.
 
 ## Merging Responses
-The first two steps are the responsibility of [Jobs](/extend/generic-extractor/config/jobs/) resulting in
-an array of objects. Generic Extractor then tries to find a common super-set of
+The first two steps are the responsibility of [Jobs](/extend/generic-extractor/configuration/config/jobs/) 
+resulting in an array of objects. Generic Extractor then tries to find a common super-set of
 properties of all objects, for example, with the following response:
 
 {% highlight json %}
@@ -75,14 +76,14 @@ properties of all objects, for example, with the following response:
 {% endhighlight %}
 
 The super-set of object properties consists of `id`, `name`, `color` and `size`. In the Generic Extractor
-configuration, this is referred to as [`dataType`](#dataType). If the `dataType` configuration is not set, a name is
-automatically generated. This merging of the object structure requires that the objects are compatible.
+configuration, this is [referred to as **`dataType`**](#data-type). If the `dataType` configuration is not set, a 
+name is automatically generated. Merging the object structure requires that the objects are compatible.
 
 The responses are merged into type-less tables. This means that values `42` and `apples` are perfectly compatible
 because they get converted to a string. Also, the scalar and array values are compatible because the
-scalar is [upgraded to an array](#upgrading-to-array). The following are the incompatible combinations:
+scalar is [upgraded to an array](#upgrading-to-array). The following are incompatible combinations:
 
-- Scalar and object values
+- Scalar (simple) and object values
 - Object and array values
 
 For example, this would not be allowed:
@@ -105,16 +106,16 @@ For example, this would not be allowed:
 {% endhighlight %}
 
 If you want to process the above response, use the
-[`responseFilter` setting](/extend/generic-extractor/config/jobs/#response-filter).
+[`responseFilter` setting](/extend/generic-extractor/configuration/config/jobs/#response-filter).
 
 ## Endpoint
 The endpoint property is **required** and represents the URL of the resource. It can be either of the following:
 
-- URL fragment relative to the [`baseURL` property](/extend/generic-extractor/api/#baseurl) of the API definition
-- Absolute URL from the domain specified in the [`baseURL` property](/extend/generic-extractor/api/#baseurl) of the API definition
+- URL fragment relative to the [`baseURL` property](/extend/generic-extractor/configuration/api/#baseurl) of the API definition
+- Absolute URL from the domain specified in the [`baseURL` property](/extend/generic-extractor/configuration/api/#baseurl) of the API definition
 - Full absolute URL
 
-Assume the following [API definition](/extend/generic-extractor/api/):
+Assume the following [API definition](/extend/generic-extractor/configuration/api/):
 
 {% highlight json %}
 "api": {
@@ -134,12 +135,12 @@ This means that the path part specified in the `baseURL` is ignored and fully
 replaced by the value specified in `endpoint`.
 
 ### Absolute Full URL
-The full absolute URL must start with a protocol. So, with endpoint set to
+The full absolute URL must start with a protocol. So, with the endpoint set to
 `https://eu.example.com/campaign`, this would be the final resource URL
 and the path specified in the `baseURL` is completely ignored.
 
 ### Specifying Endpoint
-The following table summarizes some possible outcomes:
+The following table summarizes possible outcomes:
 
 |`baseURL`|`endpoint`|actual URL|
 |---------|----------|----------|
@@ -184,7 +185,7 @@ is set to `mock-api` and that the `param` parameters are set as follows:
     }
 {% endhighlight %}
 
-See our [examples](/extend/generic-extractor/config/jobs/#examples-with-http-methods-and-parameters).
+See our [examples](/extend/generic-extractor/configuration/config/jobs/#examples-with-http-methods-and-parameters).
 
 ## Method
 The `method` parameter defines the [HTTP request method](/extend/generic-extractor/tutorial/rest/).
@@ -223,12 +224,12 @@ as entered in the configuration. For the above defined `params` property, the re
 {% endhighlight %}
 
 Also, the `Content-Type: application/json` HTTP header is added to the request.
-See our [examples](/extend/generic-extractor/config/jobs/#examples-with-http-methods-and-parameters).
+See our [examples](/extend/generic-extractor/configuration/config/jobs/#examples-with-http-methods-and-parameters).
 
 ### FORM
 The `FORM` method type sends the request the same way the HTTP POST method does. However,
 the parameters from the `param` object are encoded as form data, mimicking the request being sent by
-a web form. This method **does not** support nested objects in the `param` object.
+a web form. This method **does not support nested objects** in the `param` object.
 For example, the following `params` field:
 
 {% highlight json %}
@@ -251,11 +252,13 @@ Also, the `Content-Type: application/x-www-form-urlencoded` HTTP header will be 
 ## Data Type
 The `dataType` parameter assigns a name to the object(s) obtained from the endpoint.
 Setting it is optional. If not set, a name will be generated automatically from the `endpoint`
-value and parent jobs. The parameter is also used as the name of the output table within the
-specified [output bucket](/extend/generic-extractor/api/#outputBucket).
+value and parent jobs. 
+
+Data types are used in [mappings](/extend/generic-extractor/configuration/config/mappings/) and for naming output 
+tables within their [output buckets](/extend/generic-extractor/configuration/config/#output-bucket).
 
 Note that you can use the same `dataType` for multiple resources, provided that the result objects may
-be [merged into a single one](/extend/generic-extractor/config/mappings/). This can be used,
+be [merged into a single one](/extend/generic-extractor/configuration/config/mappings/). This can be used,
 for example, in a situation where two API endpoints return the same resource:
 
 {% highlight json %}
@@ -276,7 +279,7 @@ will contain records from both API endpoints.
 
 ## Data Field
 The `dataField` parameter is used to determine what part of the API **response** will be
-extracted. The following rules are applied by default:
+extracted. The following rules apply by default:
 
 - If the response is a single *array*, use the whole response.
 - If the response is an [object](/extend/generic-extractor/tutorial/json/) and there is a single *array* property,
@@ -311,31 +314,33 @@ as an object with the `path` property. For instance, these two configurations ar
 
 ## Response Filter
 The `responseFilter` option allows you to skip parts of the API response from processing. This can
-be useful if
+be useful in these cases:
 
-- you do not want to flatten the JSON structure using the default
-[JSON Parser](/extend/generic-extractor/config/jobs/#merging-responses) (as in the above examples).
-- the API response is inconsistent and the objects cannot be flattened.
+- You do not want to flatten the JSON structure using the default
+[JSON Parser](/extend/generic-extractor/configuration/config/jobs/#merging-responses) (as in the above examples).
+- The API response is inconsistent and the objects cannot be flattened.
 
 The value of the `responseFilter` property is either a path to a property in the response, or
 an array of such paths. The path is dot-separated unless set otherwise in the `responseFilterDelimiter` configuration.
 If you want to refer to the items of an array, use `[]` --- see an [example below](#skip-flattening-in-nested-objects).
 The same result can be achieved using `forceType` parameter in
-[column mapping](/extend/generic-extractor/config/mappings/#column-mapping).
+[column mapping](/extend/generic-extractor/configuration/config/mappings/#column-mapping).
 
 ## Children
 The `children` configuration allows you to retrieve sub-resources of the processes API resource.
 These **child jobs** (**nested jobs**) are executed for each object retrieved from the
 parent response. The definition of child jobs is the same as the definition of parent jobs,
 except for **placeholders**. The children configuration is described in a
-[separate article](/extend/generic-extractor/config/jobs/children/).
+[separate article](/extend/generic-extractor/configuration/config/jobs/children/).
 
 ## Scroller
-The `scroller` parameter can be used to assign a predefined scroller in case
-[`multiple` pagination](/extend/generic-extractor/api/pagination/multiple/) is used. If the
-`multiple` pagination method is not used, the `scroller` parameter has no use. If `scroller` is not
-set, the pagination method specified in the [`api` configuration](/extend/generic-extractor/api/pagination/)
-is used. If no pagination method is specified in the `api` section, then the job uses no pagination.
+
+The `scroller` parameter assigns a predefined scroller when
+[`multiple` pagination](/extend/generic-extractor/configuration/api/pagination/multiple/) is used, 
+and is pointless when the `multiple` pagination method is not used. 
+
+If `scroller` is not set, the pagination method specified in the [`api` configuration](/extend/generic-extractor/configuration/api/pagination/)
+is used. If there is no pagination method specified, the job has no pagination.
 
 ## Examples
 
@@ -388,8 +393,8 @@ To extract data from the following API response:
 }
 {% endhighlight %}
 
-do not set the `dataField` parameter at all, or set it to an empty string or to the value `users`.
-(`"dataField": ""` or `"dataField": "users"`)
+do not set the `dataField` parameter at all, or set it to an empty string or to the value `users`
+(`"dataField": ""` or `"dataField": "users"`).
 The following table will be extracted:
 
 |id|name|
@@ -471,7 +476,7 @@ The following table will be extracted:
 See [example [EX004]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/004-array-in-nested-object).
 
 ### Two arrays within a nested object
-To extract both `active` and `inactive` arrays from the above API response, you need to use two jobs:
+To extract both `active` and `inactive` arrays from the above API response, use two jobs:
 
 {% highlight json %}
 {
@@ -524,7 +529,7 @@ The following table will be extracted:
 See [example [EX005]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/005-two-arrays-in-nested-object).
 
 ### Simple object
-You may encounter and API response like this:
+You may encounter an API response like this:
 
 {% highlight json %}
 {
@@ -533,7 +538,7 @@ You may encounter and API response like this:
 }
 {% endhighlight %}
 
-You have to set the `dataField` parameter to value `.` (`"dataField": "."`). Not setting the
+You have to set the `dataField` parameter to the value `.` (`"dataField": "."`). Not setting the
 `dataField` parameter would result in a warning (`No data array found in the response!`) and no data extracted.
 The following table will be extracted:
 
@@ -544,7 +549,7 @@ The following table will be extracted:
 See [example [EX006]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/006-simple-object).
 
 ### Nested object
-You may encounter and API response like this:
+You may encounter an API response like this:
 
 {% highlight json %}
 {
@@ -555,7 +560,7 @@ You may encounter and API response like this:
 }
 {% endhighlight %}
 
-You have to set the `dataField` parameter to the value `user` (`"dataField": "user"`). Not setting the
+Set the `dataField` parameter to the value `user` (`"dataField": "user"`). Not setting the
 `dataField` parameter would result in a warning (`No data array found in the response!`) and no data extracted.
 The following table will be extracted:
 
@@ -641,7 +646,7 @@ See [example [EX009]](https://github.com/keboola/generic-extractor/tree/master/d
 ## Examples with Complicated Objects
 The above examples show how simple objects are extracted from different objects. Generic
 Extractor can also extract objects with non-scalar properties. The default
-[JSON to CSV mapping](/extend/generic-extractor/config/mappings/) flattens nested objects and produces secondary tables from nested arrays.
+[JSON to CSV mapping](/extend/generic-extractor/configuration/config/mappings/) flattens nested objects and produces secondary tables from nested arrays.
 
 ### Object with nested array
 You may encounter an API response like this:
@@ -709,8 +714,8 @@ You may encounter the following API response:
 }
 {% endhighlight %}
 
-when you extract the `members` array (set the `dataField` parameter to the value `members` or to an empty value).
-The following tables will be extracted:
+When you extract the `members` array (set the `dataField` parameter to the value `members` or to an empty value),
+the following tables will be extracted:
 
 Users:
 
@@ -845,8 +850,8 @@ Contacts:
 
 The obtained table is rather sparse because the properties of the nested `contacts`
 objects do not match exactly. For example, the `properties_number` column was created
-as a result of flattening the `properties.number` object that is contained only once
-in the response. Therefore the column has a single value.
+as a result of flattening the `properties.number` object that is contained in the response
+only once. Therefore the column has a single value.
 
 The rows in the *Contacts* table are again linked through an
 auto-generated key to the parent *Users* table. Also notice that the
@@ -878,7 +883,7 @@ If you have an API response like this:
 {% endhighlight %}
 
 and extract the `members` array with the
-[default settings](/extend/generic-extractor/config/jobs/#an-object-with-nested-object), two tables will be
+[default settings](/extend/generic-extractor/configuration/config/jobs/#an-object-with-nested-object), two tables will be
 produced. If you set the response filter to `"responseFilter": "tags"`, then the `tags` property of the `members`
 items will not be processed and will be stored as a [serialized](https://en.wikipedia.org/wiki/Serialization)
 JSON string. The following table will be extracted:
@@ -888,7 +893,7 @@ JSON string. The following table will be extracted:
 |123|John Doe|["active","admin"]|
 |234|Jane Doe|["active"]|
 
-The `tags` column contains serialized JSON fragments, which can be processed by
+The `tags` column contains serialized JSON fragments which can be processed by
 the JSON capable database (e.g., [Snowflake](https://docs.snowflake.net/manuals/sql-reference/functions-semistructured.html)).
 
 See [example [EX013]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/013-skip-flatten).
@@ -946,7 +951,7 @@ If you have the following API response:
 {% endhighlight %}
 
 and extract the `members` array with the
-[default settings](/extend/generic-extractor/config/jobs/#an-object-with-a-deeply-nested-object),
+[default settings](/extend/generic-extractor/configuration/config/jobs/#an-object-with-a-deeply-nested-object),
 two tables will be produced and the `properties` object will be flattened into a sparse table.
 To avoid that, set the response filter to `"responseFilter": "contacts[].properties"`. This will
 leave the `properties` child of the `contacts` array of the `members` array unprocessed.
@@ -1037,7 +1042,9 @@ If you have an API response like this:
 {% endhighlight %}
 
 you will receive an error similar to `Error parsing response JSON: Unhandled type change from "scalar" to "object" in 'users-16.color'`. This means that the objects returned in the response are incompatible and cannot
-be [merged into a table](#merging-responses) by Generic Extractor. To avoid the error and still retrieve the data,
+be [merged into a table](#merging-responses) by Generic Extractor. 
+
+To avoid the error and still retrieve the data,
 use the `responseFilter` to skip the `color` property. When you set `"responseFilter": "color"`, you
 will obtain the following table:
 
@@ -1171,7 +1178,7 @@ The API response might look like this:
 If you want to filter the `secondary.address` field, you cannot set the `responseFilter` setting to
 `secondary.address` because it would be interpreted as an `address` property of the `secondary` property.
 If you set `"responseFilter": "secondary.address`, the extraction will work as if you did not set the
-filter at all (because it will be filtering the non-existent `address` property).
+filter at all; it will be filtering the non-existent `address` property.
 
 For the filter to work correctly, set the `responseFilterDelimiter` to an arbitrary character not
 used in the response property names. The following would be a valid configuration:
@@ -1296,7 +1303,7 @@ can be solved using the following jobs configuration:
 ]
 {% endhighlight %}
 
-The [`params` configuration](/extend/generic-extractor/config/jobs/#request-parameters) option specifies the
+The [`params` configuration](/extend/generic-extractor/configuration/config/jobs/#request-parameters) option specifies the
 parameters to be sent to the API. Therefore the `type` property is the name defined by the API itself.
 The above configuration produces the following table:
 
@@ -1329,7 +1336,7 @@ then returns the following response:
 ]
 {% endhighlight %}
 
-Generic Extractor can handle this too, using the [`method` configuration](/extend/generic-extractor/config/jobs/#method):
+Generic Extractor can handle this too, using the [`method` configuration](/extend/generic-extractor/configuration/config/jobs/#method):
 
 {% highlight json %}
 "jobs": [
@@ -1381,7 +1388,7 @@ The request returns the following JSON:
 {% endhighlight %}
 
 The above situation can be handled by passing the entire request JSON to the
-[`params` configuration](/extend/generic-extractor/config/jobs/#request-parameters).
+[`params` configuration](/extend/generic-extractor/configuration/config/jobs/#request-parameters).
 
 {% highlight json %}
 "jobs": [
@@ -1412,7 +1419,7 @@ See [example [EX035]](https://github.com/keboola/generic-extractor/tree/master/d
 ### Complex GET request
 Sometimes even the HTTP GET requests require complex parameters. Suppose the API
 endpoint `/users` requires the `filter` and `return` definitions. The API may describe
-the configuration in many different ways, e.g.:
+the configuration in many different ways, for instance:
 
 |filter|name|example value|
 |---|---|---|
@@ -1424,7 +1431,7 @@ the configuration in many different ways, e.g.:
 |---|---|---|
 |Names of properties to return in response|fields|id,name|
 
-In the HTTP protocol, this would be encoded in the following [query string](/extend/generic-extractor/tutorial/rest/#url)
+In the HTTP protocol, this would be encoded in the following [query string](/extend/generic-extractor/tutorial/rest/#url):
 
     filter[field]=type&filter[operator]=equal&filter[value]=active&return[fields][0]=id&return[fields][1]=name
 
@@ -1448,7 +1455,7 @@ The following JSON is returned:
 {% endhighlight %}
 
 The above situation can be handled by encoding the parameters in a JSON into the
-[`params` configuration](/extend/generic-extractor/config/jobs/#request-parameters).
+[`params` configuration](/extend/generic-extractor/configuration/config/jobs/#request-parameters).
 
 {% highlight json %}
 "jobs": [

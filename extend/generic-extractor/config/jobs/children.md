@@ -1,6 +1,6 @@
 ---
 title: Child Jobs
-permalink: /extend/generic-extractor/config/jobs/children/
+permalink: /extend/generic-extractor/configuration/config/jobs/children/
 ---
 
 * TOC
@@ -14,9 +14,10 @@ user. See the Generic Extractor tutorial for a basic [example of using child
 jobs](/extend/generic-extractor/tutorial/jobs/#child-jobs).
 
 Apart from two additional fields, `placeholders` and `recursionFilter`, configuring a child job is no different than
-configuring [any other job](/extend/generic-extractor/config/jobs).
+configuring [any other job](/extend/generic-extractor/configuration/config/jobs).
 
-A sample job configuration can look like this:
+<details>
+  <summary>Click to see a sample job configuration.</summary>
 
 {% highlight json %}
 {
@@ -48,6 +49,8 @@ A sample job configuration can look like this:
     }
 }
 {% endhighlight %}
+</details>
+<br>
 
 ## Placeholders
 In a child job, the `endpoint` configuration must contain a **placeholder** enclosed in curly braces `{}`.
@@ -65,7 +68,7 @@ a value, use the `placeholders` configuration. It is an object whose properties 
 of each `placeholders` object property is a **property path** in the parent job response.
 The placeholder in the child `endpoint` will be replaced by the **value** of that parent property. The property
 path is configured relative to the extracted object ([see an example](#accessing-deeply-nested-id)). The child
-`endpoint` is configured relative to the [`api.baseUrl` configuration](/extend/generic-extractor/api/#base-url), 
+`endpoint` is configured relative to the [`api.baseUrl` configuration](/extend/generic-extractor/configuration/api/#base-url), 
 not relative to the parent endpoint.
 
 The following configuration:
@@ -106,7 +109,7 @@ The following configuration is equivalent to the above one:
 This is useful when using [User Defined functions](/extend/generic-extractor/user-functions/)
 {% endcomment %}
 
-Note: It is technically possible to define a child job without using `placeholders` configuration
+**Note:** It is technically possible to define a child job without using `placeholders` configuration
 or without having a placeholder in the `endpoint`. But then all the child requests would be the same and
 that is usually not what you intend to do.
 
@@ -132,9 +135,9 @@ useful in these cases:
 The `responseFilter` configuration contains a string expression with a filter condition composed of the following:
 
 - Name of a property from the parent response
-- Comparison operator -- `<`, `>`, `<=`, `>=`, `==` (equal), `!=` (not equal), `~~` (like), `!~` (unlike)
+- Comparison operator: `<`, `>`, `<=`, `>=`, `==` (equal), `!=` (not equal), `~~` (like), `!~` (unlike)
 - Value to compare
-- Logical operators `|` (or), `&` (and); optionally, they may be used to join multiple conditions.
+- Logical operators: `|` (or), `&` (and); optionally, they may be used to join multiple conditions.
 
 An example response filter may be `type!=employee` or `product.value>150`.
 
@@ -218,7 +221,7 @@ Generic Extractor makes three API calls:
 - `users/123`
 - `users/234`
 
-The [`dataField`](/extend/generic-extractor/config/jobs/#data-field) is set to a dot to retrieve the 
+The [`dataField`](/extend/generic-extractor/configuration/config/jobs/#data-field) is set to a dot to retrieve the 
 entire response as a single object. Running Generic Extractor produces the following tables:
 
 users:
@@ -236,13 +239,13 @@ user__user-id:
 |234|Jane Doe|St Mary Mead|UK|High Street|234|
 
 Notice that the table representing child resources contains all the responses
-merged into a single table; the [usual merging rules](/extend/generic-extractor/config/jobs/#merging-response) apply.
+merged into a single table; the [usual merging rules](/extend/generic-extractor/configuration/config/jobs/#merging-response) apply.
 
-Also notice that a new column, `parent_id`, was added, containing the **placeholder value** used
+Also notice that a new column --- `parent_id` was added, containing the **placeholder value** used
 to retrieve the resource. The `parent_id` column is not always named `parent_id`.
 Its name is created by joining the `parent_` prefix to the **placeholder path**.
 
-To create a friendly name for the table, it is good to use the [dataType](/extend/generic-extractor/config/jobs/#data-type) 
+To create a friendly name for the table, it is good to use the [dataType](/extend/generic-extractor/configuration/config/jobs/#data-type) 
 property (see the next example). The auto-generated name is rather ugly.
 
 See [example [EX021]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/021-basic-child-job).
@@ -470,7 +473,8 @@ See [example [EX025]](https://github.com/keboola/generic-extractor/tree/master/d
 ### Nesting Level
 By default, the placeholder value is taken from the object retrieved in the parent job. As long as the child
 jobs are nested only one level deep, there is no other option anyway. Let's see what happens with a deeper nesting.
-Let's say that you have an API with the following endpoints:
+
+Assume that you have an API with the following endpoints:
 
 - `/users/` --- Returns a list of users.
 - `/user/?` --- Returns user details with given user ID.
@@ -652,9 +656,11 @@ Even though the above configuration is less explicit and not really recommended,
 Placeholders are defined globally, which means that the second nested child job to `user/{user-id}/orders` does
 not define any because it relies on those defined by its parent job (which happen to be correct). Also the
 deepest child defines only the `order-id` placeholder because, again, the `user-id` placeholder was defined in
-some of its parents. Even though the placeholders are defined globally, the ones defined in child jobs
-override the ones in the parent jobs. For example, in the following (probably **very incorrect**) configuration the
-`1:user-id` placeholder in the deepest child will really contain the `orderId` value.
+some of its parents. 
+
+Although the placeholders are defined globally, the ones defined in child jobs override the ones in the parent
+jobs. For example, in the following (probably **very incorrect**) configuration, the `1:user-id` placeholder in 
+the deepest child will really contain the `orderId` value.
 
 {% highlight json %}
 "jobs": [
@@ -697,7 +703,7 @@ override the ones in the parent jobs. For example, in the following (probably **
 See [example [EX027]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/027-basic-deeper-nesting-alternative).
 
 ### Deep Job Nesting
-Let's see how you can retrieve more nested API resources:
+Let's look at how to retrieve more nested API resources:
 
 {% highlight json %}
 "jobs": [
@@ -806,7 +812,7 @@ See [example [EX028]](https://github.com/keboola/generic-extractor/tree/master/d
 
 ### Nested Array
 
-Suppose now that the endpoint `/users` returns a more complicated response like this:
+Suppose now that the endpoint `/users` returns a more complicated response:
 
 {% highlight json %}
 {
@@ -1060,7 +1066,7 @@ See [example [EX030]](https://github.com/keboola/generic-extractor/tree/master/d
 ### Combining Filters
 Multiple filters can be combined using the
 [logical](https://en.wikipedia.org/wiki/Boolean_algebra#Basic_operations) `&` (and) and `|` (or) operators.
-For example, the following configuration retrieves details for users which have
+For example, the following configuration retrieves details for users who have
 both `id < 400` and `role = child`:
 
 {% highlight json %}
