@@ -24,7 +24,7 @@ actions will be executed using the same Docker image, but [Docker Runner](/integ
 the returned value as the API response. So, these additional actions are executed *synchronously* and have a very
 limited execution time (maximum 30 seconds). These actions also cannot access Storage.
 
-![Docker Actions overview](/extend/common-interface/docker-actions.png)
+![Docker Actions overview](/extend/common-interface/docker-sync-actions.svg)
 
 The [configuration file](/extend/common-interface/config-file/#configuration-file-structure)
 contains the `action` property with the name of the currently executed action. Just grab the value and act accordingly.
@@ -35,8 +35,7 @@ Actions are available through the [API](http://docs.kebooladocker.apiary.io/#ref
 They do not load the configuration from Storage, so you need to fully specify the whole configuration in the request body.
 If any of your parameters are encrypted, they will be decrypted before they are passed to your application.
 
-Do not specify the `action` attribute in the request body, it is already in the URI. Use any of `parameters`,
-`storage` or `runtime` inside the `configData` root element as you would when creating an asynchronous jobs. For instance:
+Do not specify the `action` attribute in the request body, it is already in the URI. Use any of `parameters` and `runtime` inside the `configData` root element as you would when creating an asynchronous job. Using `storage` configuration in actions makes no sense, because actions cannot read or write to Storage. For instance:
 
 {% highlight json %}
 
@@ -50,7 +49,7 @@ Do not specify the `action` attribute in the request body, it is already in the 
 
 {% endhighlight %}
 
-*Note: use **https://docker-runner.keboola.com/** for running calling this part of the API.*
+**Important: use https://docker-runner.keboola.com/ for calling this part of the API.**
 
 ### Return Values
 
