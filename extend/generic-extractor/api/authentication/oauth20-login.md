@@ -123,3 +123,38 @@ From that, the value of the `credentials.access_token` property is taken, insert
 and sent to other API requests (`/users`).
 
 See [example [EX105]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/105-oauth2-login).
+
+### Google API Configuration
+The following example shows how to set up an OAuth *login request* for Google APIs.
+
+First, visit [Google API Console](https://console.developers.google.com/apis/credentials) to obtain OAuth 2.0 credentials such as a *Client ID* and *Client secret*.
+
+Add `https://developers.google.com/oauthplayground` to Authorized redirect URIs:
+ 
+![Google API Console](/extend/generic-extractor/api/authentication/oauth20-login-console.png)
+ 
+Then, you need to generate *access* and *refresh* tokens using [Google OAuth 2.0 Playground](https://developers.google.com/oauthplayground/).
+
+Provide your Client ID and Client secret in the settings of OAuth 2.0 Playground:
+  
+![Google OAuth 2.0 Playground 1](/extend/generic-extractor/api/authentication/oauth20-login-playground-1.png)
+
+Make sure the Offline Access option is checked.
+Close the settings dialog.
+
+On the left side, choose which scopes you would like to authorize and click on *Authorize APIs*.
+
+![Google OAuth 2.0 Playground 1](/extend/generic-extractor/api/authentication/oauth20-login-playground-2.png)
+
+Then exchange the authorization code for tokens:
+
+![Google OAuth 2.0 Playground 1](/extend/generic-extractor/api/authentication/oauth20-login-playground-3.png)
+
+
+
+
+
+
+
+
+ 
