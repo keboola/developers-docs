@@ -131,12 +131,14 @@ First, visit [Google API Console](https://console.developers.google.com/apis/cre
 
 Add `https://developers.google.com/oauthplayground` to Authorized redirect URIs:
  
+{: .image-popup}
 ![Google API Console](/extend/generic-extractor/api/authentication/oauth20-login-console.png)
  
 Then, you need to generate *access* and *refresh* tokens using [Google OAuth 2.0 Playground](https://developers.google.com/oauthplayground/).
 
 Provide your Client ID and Client secret in the settings of OAuth 2.0 Playground:
-  
+
+{: .image-popup}
 ![Google OAuth 2.0 Playground 1](/extend/generic-extractor/api/authentication/oauth20-login-playground-1.png)
 
 Make sure the Offline Access option is checked.
@@ -144,10 +146,12 @@ Close the settings dialog.
 
 On the left side, choose which scopes you would like to authorize and click on *Authorize APIs*.
 
+{: .image-popup}
 ![Google OAuth 2.0 Playground 1](/extend/generic-extractor/api/authentication/oauth20-login-playground-2.png)
 
 Then exchange the authorization code for tokens:
 
+{: .image-popup}
 ![Google OAuth 2.0 Playground 1](/extend/generic-extractor/api/authentication/oauth20-login-playground-3.png)
 
 
