@@ -35,4 +35,4 @@ permalink: /extend/registration/checklist/
 | 27 | **Fees** | Using the component in KBC implies additional fees; `true` or `false` | &#9744; | `false` |
 | 28 | **Service limits / Reasonable usage** | Description of service or usage limits. Define what is maximum expected usage of your component. This may vary depending on the memory/time limits, API usage limits and other factors. | &#9744; | `10k tweets, 10k followers` |
 | 29 | **Logger** | Specify a way to [log events](/extend/common-interface/logging/#gelf-logger) from your application; `standard` or `gelf` | &#9744; | `standard` |
-| 30 | **Staging Storage** | Specify storage type used for [exchanging data](/extend/common-interface/folders/#exchanging-data-via-s3); `local` or `s3` | &#9744; | `local` |
+| 30 | **Staging Storage** | Specify storage type used for [exchanging data](/extend/common-interface/folders/#exchanging-data-via-s3); `local`, `s3` or `none` | &#9744; | `local` |
