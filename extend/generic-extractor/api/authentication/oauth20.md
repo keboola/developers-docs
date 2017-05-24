@@ -27,7 +27,7 @@ the `type` key to `oauth20`:
 
 The OAuth 2.0 authentication process is described by the [following diagram](http://docs.spring.io/spring-social/docs/1.0.0.M3/reference/html/serviceprovider.html):
 
-![Diagram - OAuth 2.0 authentication](/extend/generic-extractor/configuration/api/authentication/oauth20-diagram.png)
+![Diagram - OAuth 2.0 authentication](/extend/generic-extractor/api/authentication/oauth20-diagram.png)
 
 On the diagram, step `6` represents the end of authentication and the actual communication with 
 the API (extraction of data) may begin.
