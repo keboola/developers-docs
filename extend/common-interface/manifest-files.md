@@ -112,10 +112,10 @@ Additionally, the following options can be specified:
 Which will cause the specified rows to be deleted from the source table before the new
 table is imported. See an [Example](/extend/common-interface/config-file/#output-mapping---delete-rows).
 
-The `metadata` and `columnMetadata` fields allow you to set 
+The `metadata` and `column_metadata` fields allow you to set 
 [Metadata](http://docs.keboola.apiary.io/#reference/metadata) for a table and its columns.
 The `metadata` field corresponds to the [Table Metadata API call](http://docs.keboola.apiary.io/#reference/metadata/table-metadata/create-or-update). 
-The `columnMetadata` field corresponds to the [Column Metadata API call](http://docs.keboola.apiary.io/#reference/metadata/column-metadata/create-or-update).
+The `column_metadata` field corresponds to the [Column Metadata API call](http://docs.keboola.apiary.io/#reference/metadata/column-metadata/create-or-update).
 In both cases, the `key` and `value` are passed directly to the API, the `provider` value is
 filled by the Id of the running component (e.g `keboola.ex-db-snowflake`).
 
@@ -132,15 +132,13 @@ filled by the Id of the running component (e.g `keboola.ex-db-snowflake`).
             "value": "A different value"
         }
     ],
-    "columnMetadata": {
-        "column1": {
-            [
-                {
-                    "key": "yet.another.key",
-                    "value": "Some other value"
-                }
-            ]
-        }
+    "column_metadata": {
+        "column1": [
+            {
+                "key": "yet.another.key",
+                "value": "Some other value"
+            }
+        ]
     }
 }
 {% endhighlight %}

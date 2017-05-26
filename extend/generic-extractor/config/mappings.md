@@ -495,7 +495,7 @@ The `interests` property cannot be saved as a column, therefore a mapping of the
             "type": "table",
             "destination": "user-interests",
             "tableMapping": {
-                "": {
+                ".": {
                     "type": "column",
                     "mapping": {
                         "destination": "interest"
@@ -509,7 +509,7 @@ The `interests` property cannot be saved as a column, therefore a mapping of the
 
 The table mapping follows the same structure as a normal mapping. Each item is another mapping 
 definition identified by the property name in the JSON file. Because the `interests` property
-itself is an array, its value has no name and therefore the key is an empty string `""`. The mapping
+itself is an array, its value has no name and therefore the key is only a dot `"."`. The mapping
 value is a standard [column mapping](/extend/generic-extractor/configuration/config/mappings/#column-mapping). 
 The above configuration produces the same result as the automatic mapping of columns.
 
