@@ -57,13 +57,30 @@ contents:
         "name",
         "text"
     ],
-    "attributes": []
+    "attributes": [],
+    "metadata": [
+        {
+            "id": "228956",
+            "key": "KBC.createdBy.component.id",
+            "value": "keboola.python-transformation",
+            "provider": "system",
+            "timestamp": "2017-05-26 00:39:07"
+        }
+    ],
+    "column_metadata": {
+        "id": [],
+        "name": [],
+        "text": []
+    }    
 }
 {% endhighlight %}
 
 The `name` node refers to the name of the component configuration.
 Note that the `data_size_bytes` and `rows_count` values are estimated by the database server and they may be
-significantly off (especially right after the table is created). The `attributes` node contains
+significantly off (especially right after the table is created). 
+The `metadata` and `column_metadata` fields contains
+[Metadata](http://docs.keboola.apiary.io/#reference/metadata) for the table and its columns.
+The `attributes` node contains
 additional [table attributes](https://help.keboola.com/storage/). If used, it has the following structure:
 
 {% highlight json %}
@@ -113,7 +130,7 @@ Which will cause the specified rows to be deleted from the source table before t
 table is imported. See an [Example](/extend/common-interface/config-file/#output-mapping---delete-rows).
 
 The `metadata` and `column_metadata` fields allow you to set 
-[Metadata](http://docs.keboola.apiary.io/#reference/metadata) for a table and its columns.
+[Metadata](http://docs.keboola.apiary.io/#reference/metadata) for the table and its columns.
 The `metadata` field corresponds to the [Table Metadata API call](http://docs.keboola.apiary.io/#reference/metadata/table-metadata/create-or-update). 
 The `column_metadata` field corresponds to the [Column Metadata API call](http://docs.keboola.apiary.io/#reference/metadata/column-metadata/create-or-update).
 In both cases, the `key` and `value` are passed directly to the API, the `provider` value is
