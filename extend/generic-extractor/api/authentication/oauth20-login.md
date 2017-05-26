@@ -124,9 +124,11 @@ and sent to other API requests (`/users`).
 
 See [example [EX105]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/105-oauth2-login).
 
+
 ### Google API Configuration
 The following example shows how to set up an OAuth *login request* for Google APIs.
 
+#### Generate access tokens 
 First, visit [Google API Console](https://console.developers.google.com/apis/credentials) to obtain OAuth 2.0 credentials such as a *Client ID* and *Client secret*.
 
 Add `https://developers.google.com/oauthplayground` to Authorized redirect URIs:
@@ -154,10 +156,72 @@ Then exchange the authorization code for tokens:
 {: .image-popup}
 ![Google OAuth 2.0 Playground 1](/extend/generic-extractor/api/authentication/oauth20-login-playground-3.png)
 
+#### Configuration 
 
+Use the generated tokens in the generic extractor configuration. 
+Use the JSON response with access and refresh tokens and paste it as string under `#data` key in `authorization.oauth_api.credentials`.
+You have to escape doublequotes `"` in the JSON response and preferably remove newlines too, so it looks like this:
 
+`{\"access_token\": \"MY_ACCESS_TOKEN\",\"refresh_token\": \"MY_REFRESH_TOKEN\"}`
 
+Here is a complete configuration example for AdSense:
 
+{% highlight json %}
+{
+  "parameters": {
+    "api": {
+      "baseUrl": "https://www.googleapis.com",
+      "authentication": {
+        "type": "oauth20.login",
+        "loginRequest": {
+          "endpoint": "/oauth2/v4/token",
+          "method": "FORM",
+          "headers": {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          "params": {
+            "client_id": {
+              "consumer": "client_id"
+            },
+            "client_secret": {
+              "consumer": "client_secret"
+            },
+            "refresh_token": {
+              "user": "refresh_token"
+            },
+            "grant_type": "refresh_token"
+          }
+        },
+        "apiRequest": {
+          "query": {
+            "access_token": "access_token"
+          }
+        }
+      }
+    },
+    "config": {
+      "debug": true,
+      "outputBucket": "adsense",
+      "jobs": [
+        {
+          "endpoint": "/adsense/v1.4/reports/",
+          "dataField": "rows",
+          "dataType": "rows"
+        }
+      ]
+    }
+  },
+  "authorization": {
+    "oauth_api": {
+      "credentials": {
+        "#data": "{\"access_token\": \"MY_ACCESS_TOKEN\",\"refresh_token\": \"MY_REFRESH_TOKEN\"}",
+        "appKey": "MY_CLIENT_ID",
+        "#appSecret": "MY_CLIENT_SECRET"
+      }
+    }
+  }
+}
+{% endhighlight %}
 
 
 
