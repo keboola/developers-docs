@@ -126,7 +126,7 @@ See [example [EX105]](https://github.com/keboola/generic-extractor/tree/master/d
 
 
 ### Google API Configuration
-The following example shows how to set up an OAuth *login request* for Google APIs.
+The following example shows how to set up OAuth authentication for Google APIs. The access token is refreshed with each API call.
 
 #### Generate access tokens 
 First, visit [Google API Console](https://console.developers.google.com/apis/credentials) to obtain OAuth 2.0 credentials such as a *Client ID* and *Client secret*.
