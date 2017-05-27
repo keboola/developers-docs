@@ -31,7 +31,7 @@ filenames are expected:
 
 ### Tables
 
-#### `/data/in/tables` Manifests
+#### `/data/in/tables` manifests
 An input table manifest stores metadata about a downloaded table. For example, a table
 with the ID `in.c-docker-demo.data` will be downloaded into
 `/in/tables/in.c-docker-demo.data.csv' (unless stated otherwise in the
@@ -96,7 +96,7 @@ additional [table attributes](https://help.keboola.com/storage/). If used, it ha
 }
 {% endhighlight %}
 
-#### `/data/out/tables` Manifests
+#### `/data/out/tables` manifests
 
 An output table manifest sets options for transferring a table to Storage. The following examples list available
 manifest fields; **all of them are optional**. The `destination` field overrides the table name generated
