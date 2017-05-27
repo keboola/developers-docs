@@ -6,6 +6,10 @@ permalink: /extend/generic-extractor/configuration/api/
 * TOC
 {:toc}
 
+*To configure your first Generic Extractor, follow our [tutorial](/extend/generic-extractor/tutorial/basic/).*
+*Use our [Parameter Map](/extend/generic-extractor/map/) to help you navigate among various 
+configuration options.*
+
 The API section of Generic Extractor configuration describes **global characteristics** of the API. These include [HTTP headers](/extend/generic-extractor/tutorial/rest/#headers), authentication and pagination methods. 
 
 A sample API configuration can look like this:

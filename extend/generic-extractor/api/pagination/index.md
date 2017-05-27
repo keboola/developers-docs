@@ -6,6 +6,9 @@ permalink: /extend/generic-extractor/configuration/api/pagination/
 * TOC
 {:toc}
 
+*If new to Generic Extractor, learn about [pagination in our tutorial](/extend/generic-extractor/tutorial/pagination/) first.*
+*Use our [Parameter Map](/extend/generic-extractor/map/) to help you navigate among various configuration options.*
+
 [Pagination](https://en.wikipedia.org/wiki/Pagination) (or paging) describes how an API splits a large list of items into 
 separate pages. Pagination may also be called *scrolling* or *traversing* (scrolling through a large result set), sometimes 
 it is also referred to as *setting a [cursor](https://en.wikipedia.org/wiki/Cursor_(databases))* (pointing to a current 

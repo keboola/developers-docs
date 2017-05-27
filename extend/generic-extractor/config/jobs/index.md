@@ -7,6 +7,8 @@ permalink: /extend/generic-extractor/configuration/config/jobs/
 {:toc}
 
 *If new to Generic Extractor, learn about [jobs in our tutorial](/extend/generic-extractor/tutorial/jobs/) first.*
+*Use our [Parameter Map](/extend/generic-extractor/map/) to help you navigate among various 
+configuration options.*
 
 The jobs section of the extraction configuration contains descriptions of the API resources to be
 extracted. The `jobs` configuration property is an array of processed API endpoints. A
