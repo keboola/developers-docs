@@ -10,7 +10,8 @@ permalink: /extend/generic-extractor/configuration/api/
 *Use our [Parameter Map](/extend/generic-extractor/map/) to help you navigate among various 
 configuration options.*
 
-The API section of Generic Extractor configuration describes **global characteristics** of the API. These include [HTTP headers](/extend/generic-extractor/tutorial/rest/#headers), authentication and pagination methods. 
+The API section of Generic Extractor configuration describes **global characteristics** of the API. These include 
+[HTTP headers](/extend/generic-extractor/tutorial/rest/#headers), authentication and pagination methods. 
 
 A sample API configuration can look like this:
 
@@ -46,7 +47,7 @@ A sample API configuration can look like this:
 {% endhighlight %}
 
 ## Base URL
-The `baseUrl` configuration defines the URL to which the API requests should be sent to. We
+The `baseUrl` configuration defines the URL to which the API requests should be sent. We
 recommend that the URL ends with a slash so that the `jobs.endpoint` can be set easily.
 See the [`endpoint` configuration](/extend/generic-extractor/configuration/config/jobs/#endpoint) for a detailed description of
 how `api.baseUrl` and `jobs.endpoint` work together.
@@ -64,7 +65,7 @@ Because there are many authorization methods used by different APIs, there are a
 ## Retry Configuration
 Generic Extractor automatically retries failed HTTP requests. This is one of the big advantages over 
 writing your own extractor from scratch. By default, Generic Extractor is configured in a very benevolent
-way: it will retry a lot and retry on most errors. You can tweak the retry setting to optimize the speed of an 
+way: it will retry a lot, and on most errors. You can tweak the retry setting to optimize the speed of an 
 extraction or to avoid unwanted flooding of the API.
 
 Every HTTP response contains a [Status code](/extend/generic-extractor/tutorial/rest/#http-status) and,
@@ -74,12 +75,12 @@ redirection and are automatically handled by Generic Extractor (the redirection 
 
 This leaves us with status codes 4xx (e.g., 404 Not Found) and 5xx (e.g., 500 Internal Server Error). The 4xx codes
 represent the codes whose error is on the client side. 5xx represent errors on the server side. When
-retrying this distinction is really irrelevant because we need to use the codes which represent transient/temporary 
+retrying, this distinction is really irrelevant because we need to use the codes that represent transient/temporary 
 errors. Unfortunately, there is no definitive official list of those. When it comes to communicating with
-a real word API, the typical examples of transient errors are:
+a real world API, the typical examples of transient errors are:
 
-- network outage/malfunction
-- target server maintenance/outage
+- Network outage/malfunction
+- Target server maintenance/outage
 - API throttling/rate limiting
 
 The rate limiting behaviour is not universally agreed upon. A nice API should return a 
@@ -92,20 +93,20 @@ immediately (within few milliseconds) usually makes no sense because the error i
 There are two retry strategies:
 
 - Either the API sends a `Retry-After` header (or its equivalent), or
-- Generic Extractor uses [exponential backoff algorithm](https://en.wikipedia.org/wiki/Exponential_backoff).
+- Generic Extractor uses an [exponential backoff algorithm](https://en.wikipedia.org/wiki/Exponential_backoff).
 
 ### API Retry Strategy
 Per the HTTP specification, the API may send the [`Retry-After`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After) 
 header which should contain number of seconds to pause/sleep before the next request. Generic Extractor 
 supports some extensions to this. First, the *Retry Header* name may be customized. Second, the header
-value may be:
+value may be as follows:
 
-- Number of seconds before the next request, 
-- [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time) of the time of the next request, or
+- Number of seconds before the next request
+- [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time) of the time of the next request
 - String date in [RFC 1123 format](http://php.net/manual/en/class.datetime.php#datetime.constants.rfc1123) of the 
-time of the next request.
+time of the next request
 
-The second and third options are often called *Rate Limit Reset* as they describe when the next successful request 
+The second and third options are often called **Rate Limit Reset** as they describe when the next successful request 
 can be made (i.e., the limit is reset).
 
 ### Backoff Strategy
@@ -140,9 +141,9 @@ The above defined `curl.codes` cover the common network errors. You can find a f
 supported codes in the [cURL documentation](https://curl.haxx.se/libcurl/c/libcurl-errors.html).
 There is no way to set the actual backoff strategy as it is derived automatically from the 
 content of the HTTP header specified in `retryHeader`. Generic Extractor will fallback to the 
-exponential backoff strategy in case the header contents is invalid (that includes, e.g., that you
-made a typo in the header name). Make sure to check that the backoff is correct --- you can verify 
-the times in the [debug](/extend/generic-extractor/running/#debug-mode) messages:
+exponential backoff strategy in case the header contents are invalid (that includes, e.g., a typo 
+in the header name). Make sure to check that the backoff is correct --- the times can be verified
+in the [debug](/extend/generic-extractor/running/#debug-mode) messages:
 
     Http request failed, retrying in 1s
 
@@ -150,11 +151,11 @@ If the exponential backoff is used, you will see its sequence of times.
 See an [example](/extend/generic-extractor/configuration/api/#retry-configuration).
 
 ## Default HTTP Options
-The `http` configuration option allows you to set default headers and parameters 
+The `http` configuration option allows you to set the default headers and parameters 
 sent with each API call (defined later in the [`jobs` section](/extend/generic-extractor/configuration/config/jobs/#request-parameters)).
 
 ### Headers
-The `http.headers` configuration allows you to set default headers sent with
+The `http.headers` configuration allows you to set the default headers sent with
 each API call. The configuration is an object where names are the names of
 the headers and values are their values --- for instance:
 
@@ -170,7 +171,7 @@ the headers and values are their values --- for instance:
 See the full [example](/extend/generic-extractor/configuration/api/#default-headers).
 
 ### Request Parameters 
-The `http.defaultOptions.params` configuration allows you to set 
+The `http.defaultOptions.params` configuration allows you to set the
 [request parameters](/extend/generic-extractor/tutorial/rest/#url) to be
 sent with each API request. The same rules apply as to the
 [`jobs.params`](/extend/generic-extractor/configuration/config/jobs/#request-parameters).
@@ -212,7 +213,7 @@ See the full [example](/extend/generic-extractor/configuration/api/#required-hea
 Assume that you have an API which has API throttling implements so that, in case of 
 exceeded number of requests, it returns an empty response with the status code `202` and 
 timestamp of the time when a new requests should be made in an `X-RetryAfter` HTTP header.
-Then you can create the following API configuration to make Generic Extractor handle the
+Then create the following API configuration to make Generic Extractor handle the
 situation:
 
 {% highlight json %}
@@ -228,7 +229,7 @@ situation:
 }
 {% endhighlight %}
 
-Notice that you have to add the response code `202` to the existing codes. I.e., setting
+Notice that it is necessary to add the response code `202` to the existing codes. I.e., setting
 `"codes": [202]` is likely very wrong. 
 
 See [example [EX037]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/037-retry-header).
@@ -254,7 +255,7 @@ The following configuration sends both headers with every API request:
 See [example [EX038]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/038-default-headers).
 
 ### Default Parameters
-Assume that you have an API which requires that all requests contain a filter
+Assume that you have an API requiring all requests to contain a filter
 for the account to which they belong. This is done by passing the `account=XXX` parameter.
 The following configuration sends the parameter with every API request:
 
@@ -277,7 +278,7 @@ may also be used.
 See [example [EX039]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/039-default-parameters).
 
 ### Required Headers
-Assume that an API requires a header `X-AppKey` to be sent with each
+Assume that an API requires the header `X-AppKey` to be sent with each
 API request. The following API configuration can be used:
 
 {% highlight json %}
