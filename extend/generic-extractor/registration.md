@@ -58,7 +58,7 @@ Generic Extractor.
 For example, you might want to provide one configuration for incremental loading
 and a different configuration for full loading. The template UI also has the option to
 `Switch to JSON editor`, which displays the configuration JSON and allows the end-user to modify it.
-Notice that the JSON editor allows modification only to the [`config`](/extend/generic-extractor/config)
+Notice that the JSON editor allows modification only to the [`config`](/extend/generic-extractor/configuration/config/)
 section. Other sections, such as [`api`](/extend/generic-extractor/configuration/api/) or 
 [`authorization.oauth_api`](/extend/generic-extractor/configuration/api/authentication/#oauth) may not be modified by the end-user.
 
