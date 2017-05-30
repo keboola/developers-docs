@@ -111,7 +111,7 @@ from the file name; it can (and commonly is) overridden by the end-user configur
     "delimiter": "\t",
     "enclosure": "\"",
     "metadata": ...,
-    "columnMetadata": ...
+    "column_metadata": ...
 }
 {% endhighlight %}
 
