@@ -69,7 +69,7 @@ way: it will retry a lot, and on most errors. You can tweak the retry setting to
 extraction or to avoid unwanted flooding of the API.
 
 Every HTTP response contains a [Status code](/extend/generic-extractor/tutorial/rest/#http-status) and,
-optionally, a Header describing the situation or further actions. Status codes 2xx (beginning with 2) (e.g., 200 
+optionally, a Header describing the situation or further actions. Status codes 2xx (beginning with 2; e.g., 200 
 OK) represent success and no action is needed for them. Status codes 3xx (e.g., 301 Moved Permanently) represent 
 redirection and are automatically handled by Generic Extractor (the redirection is followed).
 
@@ -183,7 +183,7 @@ Similar to the `http.headers` option, the `http.requiredHeaders` option allows y
 for every API request. The difference is that the `requiredHeaders` configuration specifies only the header names. 
 The actual values must be provided in the [`config`](/extend/generic-extractor/configuration/config/) 
 configuration section. This is useful in case the header values change dynamically or they are provided as part 
-of [template configuration](/extend/generic-extractor/registration/). The `api` configuration section:
+of [template configuration](/extend/generic-extractor/registration/). If the `api` configuration section looks like this:
 
 {% highlight json %}
 "http": {
@@ -191,7 +191,7 @@ of [template configuration](/extend/generic-extractor/registration/). The `api` 
 }
 {% endhighlight %}
 
-Then the header values must be provided in the `config` configuration section:
+then the header values must be provided in the `config` configuration section:
 {% highlight json %}
 "http": {
     "headers": {
@@ -210,9 +210,9 @@ See the full [example](/extend/generic-extractor/configuration/api/#required-hea
 ## Examples
 
 ### Retry Configuration
-Assume that you have an API which has API throttling implements so that, in case of 
-exceeded number of requests, it returns an empty response with the status code `202` and 
-timestamp of the time when a new requests should be made in an `X-RetryAfter` HTTP header.
+Assume that you have an API which implements throttling in the following way: when  
+the number of requests is exceeded, it returns an empty response with the status code `202` and 
+a timestamp when a new requests can be made in the `X-RetryAfter` HTTP header.
 Then create the following API configuration to make Generic Extractor handle the
 situation:
 
@@ -229,7 +229,7 @@ situation:
 }
 {% endhighlight %}
 
-Notice that it is necessary to add the response code `202` to the existing codes. I.e., setting
+Notice that it is necessary to add the response code `202` to the existing default codes. I.e., setting
 `"codes": [202]` is likely very wrong. 
 
 See [example [EX037]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/037-retry-header).
