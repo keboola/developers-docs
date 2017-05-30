@@ -540,7 +540,7 @@ The Login Authentication function context is used in the
 [login authentication](/extend/generic-extractor/configuration/api/authentication/login/) method.
 The Headers function context contains [*configuration attributes*](/#function-contexts). The login
 authentication context is the same for both `params` and `headers`
-[login authentication configuration options](http://localhost:4000/extend/generic-extractor/configuration/api/authentication/login/#configuration-parameters).
+[login authentication configuration options](/extend/generic-extractor/configuration/api/authentication/login/#configuration-parameters).
 
 See an [example](#login-authentication).
 
