@@ -474,12 +474,12 @@ the parameters function context will contain:
 
 {% highlight json %}
 {
-	"attr": {
-		"debug": true,
-		"outputBucket": "mock-server",
-		"server": "localhost:8888",
+    "attr": {
+        "debug": true,
+        "outputBucket": "mock-server",
+        "server": "localhost:8888",
     },
-    "time": {
+        "time": {
         "previousStart": 0,
         "currentStart": 1492678268
     }
