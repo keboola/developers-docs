@@ -7,7 +7,9 @@ Query Authentication provides the simplest authentication method, in which
 the credentials are sent in the [request URL](/extend/generic-extractor/tutorial/rest#url).
 This is most often used with APIs which are authenticated using API tokens and
 signatures. Dynamic values of query parameters can be generated using 
-[user functions](/extend/generic-extractor/functions/). A sample Query authentication configuration looks like this:
+[user functions](/extend/generic-extractor/functions/). 
+
+A sample Query authentication configuration looks like this:
 
 {% highlight json %}
 {
@@ -41,7 +43,7 @@ each request. The following authentication configuration does exactly that:
 }
 {% endhighlight %}
 
-For this use case, it is also possible to use [`defaultOptions` setting](/extend/generic-extractor/configuration/api/#default-parameters).
+For this use case, it is also possible to use the [`defaultOptions` setting](/extend/generic-extractor/configuration/api/#default-parameters).
 However, we recommend using the `authentication` setting for credentials so that the Generic Extractor
 configuration does not become a complete mess.
 
