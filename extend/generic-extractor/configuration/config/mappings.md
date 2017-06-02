@@ -973,11 +973,11 @@ the user ID. To do this, you only need to specify the primary key for the table:
         "contacts": {
             "type": "table",
             "destination": "user-contact",
+            "parentKey": {
+                "primaryKey": true,
+                "destination": "userId"
+            },
             "tableMapping": {
-                "parentKey": {
-                    "primaryKey": true,
-                    "destination": "userId"
-                },
                 "email": {
                     "type": "column",
                     "mapping": {

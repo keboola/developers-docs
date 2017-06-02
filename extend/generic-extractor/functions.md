@@ -477,7 +477,7 @@ the parameters function context will contain:
     "attr": {
         "debug": true,
         "outputBucket": "mock-server",
-        "server": "localhost:8888",
+        "server": "localhost:8888"
     },
         "time": {
         "previousStart": 0,
