@@ -3,13 +3,17 @@ title: Mapping
 permalink: /extend/generic-extractor/configuration/config/mappings/
 ---
 
+*If new to Generic Extractor, learn about [mapping in our tutorial](/extend/generic-extractor/tutorial/mapping/) first.*
+*Use our [Parameter Map](/extend/generic-extractor/map/) to help you navigate among various configuration options.*
+
+
 * TOC
 {:toc}
 
 Generic Extractor receives JSON responses, 
-[merges them together](/extend/generic-extractor/configuration/config/jobs/#merging-responses) and converts them to CSV files
-which are then imported to KBC. **Mapping** allows you to modify the behavior of this conversion process.
-Go to our tutorial to see [mapping in action](/extend/generic-extractor/tutorial/mapping).
+[merges them together](/extend/generic-extractor/configuration/config/jobs/#merging-responses) and 
+converts them to CSV files which are then imported to KBC. **Mapping** allows you to modify the behavior 
+of this conversion process. Go to our tutorial to see [mapping in action](/extend/generic-extractor/tutorial/mapping).
 Manually define mapping if you wish to do the following:
 
 - Set up a primary key to simplify relations between result tables, and speed up the extraction,
@@ -495,7 +499,7 @@ The `interests` property cannot be saved as a column, therefore a mapping of the
             "type": "table",
             "destination": "user-interests",
             "tableMapping": {
-                "": {
+                ".": {
                     "type": "column",
                     "mapping": {
                         "destination": "interest"
@@ -509,7 +513,7 @@ The `interests` property cannot be saved as a column, therefore a mapping of the
 
 The table mapping follows the same structure as a normal mapping. Each item is another mapping 
 definition identified by the property name in the JSON file. Because the `interests` property
-itself is an array, its value has no name and therefore the key is an empty string `""`. The mapping
+itself is an array, its value has no name and therefore the key is only a dot `"."`. The mapping
 value is a standard [column mapping](/extend/generic-extractor/configuration/config/mappings/#column-mapping). 
 The above configuration produces the same result as the automatic mapping of columns.
 
@@ -969,11 +973,11 @@ the user ID. To do this, you only need to specify the primary key for the table:
         "contacts": {
             "type": "table",
             "destination": "user-contact",
+            "parentKey": {
+                "primaryKey": true,
+                "destination": "userId"
+            },
             "tableMapping": {
-                "parentKey": {
-                    "primaryKey": true,
-                    "destination": "userId"
-                },
                 "email": {
                     "type": "column",
                     "mapping": {
@@ -1098,7 +1102,7 @@ following configuration:
             "type": "table",
             "destination": "interests",
             "tableMapping": {
-                "": {
+                ".": {
                     "type": "column",
                     "mapping": {
                         "destination": "interest"

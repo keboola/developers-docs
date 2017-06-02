@@ -13,7 +13,7 @@ you rarely need to work with more than a few components.
 ## KBC Architecture
 The following chart shows how KBC is structured. All KBC parts are briefly described [here](https://help.keboola.com/overview/).
 
-![Overview of KBC Components](/kbc-structure.png){: .img-responsive}
+![Overview of KBC Components](/kbc_structure.png){: .img-responsive}
 
 ## Working with KBC
 Everything you can do in the KBC UI can be done programatically using the API of the corresponding component.

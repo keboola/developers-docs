@@ -34,7 +34,7 @@ to turn `incrementalOutput` to false and do full loads.
 Using incremental loads obviously requires some support from the API. Generic Extractor supports incremental 
 loads by using [`previousStart`](/extend/generic-extractor/functions/#parameters-context) and the
 [`time` function](/extend/generic-extractor/functions/#time). Setting the primary key is done using
-[mappings](/extend/generic-extractor/config/mappings/).
+[mappings](/extend/generic-extractor/configuration/config/mappings/).
 
 ## Examples
 

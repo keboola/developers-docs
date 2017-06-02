@@ -6,18 +6,20 @@ permalink: /extend/docker/tutorial/automated-build/
 * TOC
 {:toc}
 
-An important part of the Docker ecosystem is a *Docker registry*. A Docker registry acts as a folder of images; 
-it takes care of storing and building images as well.
+An important part of the Docker ecosystem is a **Docker registry**. It acts as a folder of images, taking 
+care of their storing and building.
 [Docker Hub](https://hub.docker.com/) is the official Docker registry. 
 There are also alternative registries, such as [Quay](https://quay.io/), or completely private registries 
 such as [AWS ECR](https://aws.amazon.com/ecr/) where we are keen to host your images for you.
 
-We support public and private images on both Docker Hub and Quay registries, and private images on AWS ECR. Other registries are not yet supported. 
+We support public and private images on both Docker Hub and Quay registries, as well as private images on AWS ECR. 
+Other registries are not yet supported. 
 
-Fore reliability reasons, we strongly recommend to use the [**AWS ECR**](#setting-up-a-repository-on-aws-ecr) provisioned by the **Keboola Developer Portal**.
+For reliability reasons, we strongly recommend to use the [**AWS ECR**](#setting-up-a-repository-on-aws-ecr) 
+provisioned by the **Keboola Developer Portal**.
 
 ## Working with a Registry
-In order to run an image, *pull* (`docker pull`) that image to your machine. The `docker run` 
+In order to run an image, **pull** (`docker pull`) that image to your machine. The `docker run` 
 command does that automatically for you. So, when you do:
 
     docker run -i quay.io/keboola/base-php70
@@ -28,8 +30,8 @@ you will see something like this:
     latest: Pulling from keboola/base-php70 
     a3ed95caeb02: Pull complete
 
-When you build an image locally, *push* (`docker push`) it to the Docker registry. Then the
-image can be shared with anyone (if public) or with your organization (if private). 
+When you build an image locally, **push** (`docker push`) it to the Docker registry. Then the
+image can be shared with anyone (if public), or with your organization (if private). 
 
 Because the image is defined only by the Dockerfile instructions (and optionally *build context*), you can take 
 a shortcut and give the registry only the Dockerfile. The registry will then build the image on its own
@@ -40,7 +42,7 @@ containing the Dockerfile (and usually the application code) with the registry.
 This may get slightly confusing because we will create a new *Image Repository* and link
 that to an existing *Github Repository*. Use the 
 [sample repository](https://github.com/keboola/docs-docker-example-basic) 
-created in [tutorial](/extend/docker/tutorial/howto/).
+created in our [tutorial](/extend/docker/tutorial/howto/).
 
 Create an account and organization, and then *Create a New Repository*:
 
@@ -77,26 +79,26 @@ Regardless of your chosen approach, finish setting up the trigger by completing 
 ![Configure build trigger](/extend/docker/tutorial/quay-build-trigger.png)
 
 Pushing a new commit into a git repository or creating a new tag (depending on the trigger setting) will now
-trigger a new build of the Docker Image. Also note that the image will automatically inherit the git repository tag 
+trigger a new build of the Docker Image. Also note that the image automatically inherits the git repository tag 
 or branch name. So, when you push a commit to the `master` branch, you will get an image with a tag master (which will
 move away from any older image builds). When creating a `1.0.0` tag, you will get an image with a `1.0.0` tag.
 
 ## Setting up a Repository on AWS ECR
 
-If you do not have a Keboola Developer Portal account yet, head to the [API documentation](http://docs.kebooladeveloperportal.apiary.io/#)
- and create a new account and register your vendor.
+If you do not have a Keboola Developer Portal account yet, head to the [API documentation](http://docs.kebooladeveloperportal.apiary.io/#),
+create a new account and register your vendor. 
  
 The [Get credentials to ECR repository API call](http://docs.kebooladeveloperportal.apiary.io/#reference/0/apps/get-credentials-to-ecr-repository)
 will create a repository and temporary credentials to log into AWS ECR registry and to upload your Docker image. 
 
-If you want to integrate this process in a CI tool like Travis or CircleCI, you should not use your Keboola Developer Portal 
+If you want to integrate this process in a CI tool like Travis or CircleCI, do not use your Keboola Developer Portal 
  credentials to log in. For this case the [Generate credentials for a service account API call](http://docs.kebooladeveloperportal.apiary.io/#reference/0/vendors/generate-credentials-for-service-account)
  will create a service user whose credentials are safe to share with Travis or the CI tool of your choice.
  
-### Sample integration with Travis CI
+### Sample Integration with Travis CI
  
 Generate the service username and password using [Generate credentials for service account API call](http://docs.kebooladeveloperportal.apiary.io/#reference/0/vendors/generate-credentials-for-service-account) 
-and save these to environment variables
+and save these to environment variables:
 
  - `KBC_DEVELOPERPORTAL_USERNAME` with the login
  - `KBC_DEVELOPERPORTAL_PASSWORD` with the password
@@ -122,10 +124,11 @@ This code will tag your image with relevant tags (`latest` and the tag of the bu
 You can see both [`.travis.yml`](https://github.com/keboola/docker-demo-app/blob/master/.travis.yml) and the deploy script ([`deploy.sh`](https://github.com/keboola/docker-demo-app/blob/master/deploy.sh)) 
 in our [Docker Demo App](https://github.com/keboola/docker-demo-app) GitHub repository.
 
-Please note, that pushing the image to the registry does not update the tag in your KBC application definition. You have 
+Please note that pushing the image to the registry does not update the tag in your KBC application definition. You have 
 to manually update the application definition using the [Keboola Developer Portal API](http://docs.kebooladeveloperportal.apiary.io/).
 
 This sample deployment script uses the [Developer Portal CLI](https://github.com/keboola/developer-portal-cli-v2) tool. 
-The CLI (delivered as a Docker image) provides the deploy script with simple commands to retrieve the repository and credentials to our AWS ECR registry. The `ecr:get-repository` command returns the repository associated with user in
+The CLI (delivered as a Docker image) provides the deploy script with simple commands to retrieve the repository 
+and credentials to our AWS ECR registry. The `ecr:get-repository` command returns the repository associated with user in
 `KBC_DEVELOPERPORTAL_USERNAME` variable. The `ecr:get-login` command returns a `docker login ...` command to authenticate
 to that repository.

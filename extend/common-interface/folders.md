@@ -120,7 +120,7 @@ The following is an example of specifying columns in the manifest file `/data/ou
     }
 
 All files from the folder are uploaded irrespective of their name or extension. They are uploaded
-to Storage in parallel and in an undefined order. Use sliced tables in case you want to upload tables [larger then 5GB](https://help.keboola.com/storage/file-uploads/#limits).
+to Storage in parallel and in an undefined order. Use sliced tables in case you want to upload tables [larger then 5GB](https://help.keboola.com/storage/file-uploads/#limits). The slices may be compressed by gzip.
 
 **Important**: Please be reasonable with the total volume and number of slices.
 A rule of thumb is that slices are best around 100 MB in size and the total number of slices should not exceed 1000 files.

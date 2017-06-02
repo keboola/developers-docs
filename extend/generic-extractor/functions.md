@@ -359,10 +359,10 @@ Every place in the Generic Extractor configuration in which a function may be us
 This is referred to as a **function context**. Many contexts share access to *configuration attributes*.
 
 ### Configuration Attributes
-The *configuration attributes* are accessible in some function contexts and they represent the entire [`config`](http://localhost:4000/extend/generic-extractor/config/)
+The *configuration attributes* are accessible in some function contexts and they represent the entire [`config`](/extend/generic-extractor/configuration/config/)
 section of Generic Extractor configuration. There is some processing involved, which means that:
 
-- the [`jobs`](http://localhost:4000/extend/generic-extractor/config/jobs/) section is removed entirely.
+- the [`jobs`](/extend/generic-extractor/configuration/config/jobs/) section is removed entirely.
 - all other values are flattened (keys are concatenated using dot `.`) into a one-level deep object.
 - the result object is available in a property named `attr`.
 
@@ -432,20 +432,20 @@ will be converted to the following function context:
 {% endhighlight %}
 
 ### Base URL Context
-The Base URL function context is used when setting the [`baseURL` for API](/extend/generic-extractor/api/#base-url), and it 
+The Base URL function context is used when setting the [`baseURL` for API](/extend/generic-extractor/configuration/api/#base-url), and it 
 contains [*configuration attributes*](/#function-contexts). 
 
 See an [example](#api-base-url).
 
 ### Headers Context
-The Headers function context is used when setting the [`http.headers` for API](/extend/generic-extractor/api/#headers)
-or the [`http.headers` in config](/extend/generic-extractor/config/#http), and it contains 
+The Headers function context is used when setting the [`http.headers` for API](/extend/generic-extractor/configuration/api/#headers)
+or the [`http.headers` in config](/extend/generic-extractor/configuration/config/#http), and it contains 
 [*configuration attributes*](/#function-contexts). 
 
 See an [example](#headers).
 
 ### Parameters Context
-The Parameters function context is used when setting job [request parameters --- `params`](/extend/generic-extractor/config/jobs/#request-parameters). It contains
+The Parameters function context is used when setting job [request parameters --- `params`](/extend/generic-extractor/configuration/config/jobs/#request-parameters). It contains
 [*configuration attributes*](/#function-contexts) plus the times of the current (`currentStart`) and
 previous (`previousStart`) run of Generic Extractor. The times are [Unix timestamps](https://en.wikipedia.org/wiki/Unix_time).
 If the extraction is run for the first time, `previousStart` is 0.
@@ -474,12 +474,12 @@ the parameters function context will contain:
 
 {% highlight json %}
 {
-	"attr": {
-		"debug": true,
-		"outputBucket": "mock-server",
-		"server": "localhost:8888",
+    "attr": {
+        "debug": true,
+        "outputBucket": "mock-server",
+        "server": "localhost:8888"
     },
-    "time": {
+        "time": {
         "previousStart": 0,
         "currentStart": 1492678268
     }
@@ -491,7 +491,7 @@ See an [example of using parameters context](#job-parameters).
 The `time` values are used in [incremental processing](/extend/generic-extractor/incremental/).
 
 ### Placeholder Context
-The Placeholder function context refers to configuration of [placeholders in child jobs](/extend/generic-extractor/config/jobs/children/#placeholders).
+The Placeholder function context refers to configuration of [placeholders in child jobs](/extend/generic-extractor/configuration/config/jobs/children/#placeholders).
 When using function to process a placeholder value, the placeholder must be specified as an object with the `path` property. 
 Therefore instead of writing:
 
@@ -528,7 +528,7 @@ of the placeholder.
 See an [example](#job-placeholders).
 
 ### User Data Context
-The User Data function context is used when setting the [`userData`](/extend/generic-extractor/config/#user-data). 
+The User Data function context is used when setting the [`userData`](/extend/generic-extractor/configuration/config/#user-data). 
 The parameters context contains [*configuration attributes*](/#function-contexts) plus the times of the current (`currentStart`) and 
 previous (`previousStart`) run of Generic Extractor. The User Data Context is therefore
 same as the [Parameters Context](#parameters-context). 
@@ -537,16 +537,16 @@ See an [example](#user-data).
 
 ### Login Authentication Context
 The Login Authentication function context is used in the
-[login authentication](/extend/generic-extractor/api/authentication/login/) method.
+[login authentication](/extend/generic-extractor/configuration/api/authentication/login/) method.
 The Headers function context contains [*configuration attributes*](/#function-contexts). The login
 authentication context is the same for both `params` and `headers`
-[login authentication configuration options](http://localhost:4000/extend/generic-extractor/api/authentication/login/#configuration-parameters).
+[login authentication configuration options](/extend/generic-extractor/configuration/api/authentication/login/#configuration-parameters).
 
 See an [example](#login-authentication).
 
 ### Query Authentication Context
 The Query Authentication function context is used in the
-[query authentication](/extend/generic-extractor/api/authentication/query/) method.
+[query authentication](/extend/generic-extractor/configuration/api/authentication/query/) method.
 The Query Authentication Context contains [*configuration attributes*](/#function-contexts) plus
 a representation of the complete HTTP request to be sent (`request`) plus a key
 value list of query parameters of the HTTP request (`query`).
@@ -624,7 +624,7 @@ See the [basic example](#api-default-parameter) and a [more complicated example]
 
 ### OAuth 2.0 Authentication Context
 The OAuth Authentication Context is used for the
-[`oauth20`](/extend/generic-extractor/api/authentication/oauth20/) authentication method
+[`oauth20`](/extend/generic-extractor/configuration/api/authentication/oauth20/) authentication method
 (it is not applicable to `oauth10`) and contains:
 
 - representation of the complete HTTP request to be sent (`request`),
@@ -705,9 +705,9 @@ leads to the following function context:
 {% endhighlight %}
 
 The `authorization` section of the configuration contains the
-[OAuth2 response](/extend/generic-extractor/api/authentication/oauth20/). The function context contains 
+[OAuth2 response](/extend/generic-extractor/configuration/api/authentication/oauth20/). The function context contains 
 the parsed and flattened response fields under the key `data`, provided that the response was sent in JSON format
-and that [`"format": "json"`](/extend/generic-extractor/api/authentication/oauth20/#configuration) was set.
+and that [`"format": "json"`](/extend/generic-extractor/configuration/api/authentication/oauth20/#configuration) was set.
 
 In the response above, these are the keys `data.status`, `data.access_token`, `data.foo.bar`. This is defined
 entirely by the behavior of the OAuth Service provider. If the response is a plaintext (usually directly a token),
@@ -718,11 +718,11 @@ Apart from that, the fields `timestamp` (Unix timestamp of the request),
 signing the request) and `clientId` (the value of `authorization.oauth_api.credentials.appKey`, which is obtained when
 the application is registered) are added to the `authorization` section. 
 
-For usage, see [OAuth examples](/extend/generic-extractor/api/authentication/oauth20/).
+For usage, see [OAuth examples](/extend/generic-extractor/configuration/api/authentication/oauth20/).
 
 ### OAuth 2.0 Login Authentication Context
 The OAuth Login Authentication Context is used for the
-[`oauth20.login`](/extend/generic-extractor/api/authentication/oauth20-login/) authentication method
+[`oauth20.login`](/extend/generic-extractor/configuration/api/authentication/oauth20-login/) authentication method
 (it is not applicable to `oauth20`). The OAuth Login Authentication context contains
 OAuth information split into the properties `consumer` (response obtained from the service provider) and
 `user` (data obtained from the user). This context is available for
@@ -774,7 +774,7 @@ leads to the following function context:
 {% endhighlight %}
 
 The `authorization` section of the configuration contains the
-[OAuth2 response](/extend/generic-extractor/api/authentication/oauth20/). The function context contains the
+[OAuth2 response](/extend/generic-extractor/configuration/api/authentication/oauth20/). The function context contains the
 the parsed and flattened response fields in the `user` property. The content of the
 `user` property is fully dependent on the response of the OAuth service provider. The
 `consumer` property contains the `client_id` and `client_secret` which contain values of
@@ -782,7 +782,7 @@ the parsed and flattened response fields in the `user` property. The content of 
 `authorization.oauth_api.credetials.appSecret` respectively.
 (These are obtained by KBC when the application is registered). 
 
-For usage, see [OAuth Login examples](/extend/generic-extractor/api/authentication/oauth20-login/).
+For usage, see [OAuth Login examples](/extend/generic-extractor/configuration/api/authentication/oauth20-login/).
 
 ## Examples
 
@@ -849,9 +849,9 @@ Suppose you have an API which expects a `tokenHash` parameter to be sent with ev
 token hash is supposed to be generated by the SHA-256 hashing algorithm from a token and secret
 you obtain. 
 
-Because the [`api.http.defaultOptions.params`](/extend/generic-extractor/api/#headers) option does not
-support functions, either supply the parameters in the [`jobs.params`](/extend/generic-extractor/config/jobs/#request-parameters) 
-configuration, or use [API Query Authentication](/extend/generic-extractor/api/authentication/query/). 
+Because the [`api.http.defaultOptions.params`](/extend/generic-extractor/configuration/api/#headers) option does not
+support functions, either supply the parameters in the [`jobs.params`](/extend/generic-extractor/configuration/config/jobs/#request-parameters) 
+configuration, or use [API Query Authentication](/extend/generic-extractor/configuration/api/authentication/query/). 
 Using (or abusing) the API Query Authentication is possible if the default parameters represent authentication, or 
 if the API does not use any authentication method (two authentication methods are not possible):
 
@@ -1189,7 +1189,7 @@ Assume that you have an API returning a response that does not contain any time 
 
 Add the extraction time to each record so that you at least know when each record was obtained
 (when the creation time is unknown). Add additional data to each record using
-the [`userData` configuration](/extend/generic-extractor/config/#user-data):
+the [`userData` configuration](/extend/generic-extractor/configuration/config/#user-data):
 
 {% highlight json %}
 "userData": {
@@ -1286,7 +1286,7 @@ Alternatively, achieve the same result using the `implode` function:
 {% endhighlight %}
 
 Both configurations rely on having the username and password parameters
-in the [`config` section](/extend/generic-extractor/config/), in this case also nested in the `credentials` property:
+in the [`config` section](/extend/generic-extractor/configuration/config/), in this case also nested in the `credentials` property:
 
 {% highlight json %}
 "config": {
@@ -1303,7 +1303,7 @@ See [example [EX093]](https://github.com/keboola/generic-extractor/tree/master/d
 
 ### Nested Functions
 If the API in the [above example](#headers) tries to mimic the
-[HTTP authentication](/extend/generic-extractor/api/authentication/basic/),
+[HTTP authentication](/extend/generic-extractor/configuration/api/authentication/basic/),
 the header has to be sent as a [base64 encoded](https://en.wikipedia.org/wiki/Base64#MIME) value. That is instead of sending a
 `JohnDoe:TopSecret`, you have to send `Sm9obkRvZTpUb3BTZWNyZXQ=`. To do this you have to wrap the `concat`
 function which generates the header value in another function (`base64_encode`).
