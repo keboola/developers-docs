@@ -157,7 +157,6 @@ Then exchange the authorization code for tokens:
 ![Google OAuth 2.0 Playground 1](/extend/generic-extractor/api/authentication/oauth20-login-playground-3.png)
 
 #### Configuration 
-
 Use the generated tokens in the generic extractor configuration. 
 Use the JSON response with access and refresh tokens and paste it as string under `#data` key in `authorization.oauth_api.credentials`.
 You have to escape doublequotes `"` in the JSON response and preferably remove newlines too, so it looks like this:
@@ -223,6 +222,4 @@ Here is a complete configuration example for AdSense:
 }
 {% endhighlight %}
 
-
-
- 
+See [example [EX114]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/114-oauth2-google).
