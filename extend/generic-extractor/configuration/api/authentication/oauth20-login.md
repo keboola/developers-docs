@@ -123,3 +123,103 @@ From that, the value of the `credentials.access_token` property is taken, insert
 and sent to other API requests (`/users`).
 
 See [example [EX105]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/105-oauth2-login).
+
+
+### Google API Configuration
+The following example shows how to set up OAuth authentication for Google APIs. The access token is refreshed with each API call.
+
+#### Generate access tokens 
+First, visit [Google API Console](https://console.developers.google.com/apis/credentials) to obtain OAuth 2.0 credentials such as a *Client ID* and *Client secret*.
+
+Add `https://developers.google.com/oauthplayground` to Authorized redirect URIs:
+ 
+{: .image-popup}
+![Google API Console](/extend/generic-extractor/api/authentication/oauth20-login-console.png)
+ 
+Then, you need to generate *access* and *refresh* tokens using [Google OAuth 2.0 Playground](https://developers.google.com/oauthplayground/).
+
+Provide your Client ID and Client secret in the settings of OAuth 2.0 Playground:
+
+{: .image-popup}
+![Google OAuth 2.0 Playground 1](/extend/generic-extractor/api/authentication/oauth20-login-playground-1.png)
+
+Make sure the Offline Access option is checked.
+Close the settings dialog.
+
+On the left side, choose which scopes you would like to authorize and click on *Authorize APIs*.
+
+{: .image-popup}
+![Google OAuth 2.0 Playground 1](/extend/generic-extractor/api/authentication/oauth20-login-playground-2.png)
+
+Then exchange the authorization code for tokens:
+
+{: .image-popup}
+![Google OAuth 2.0 Playground 1](/extend/generic-extractor/api/authentication/oauth20-login-playground-3.png)
+
+#### Configuration 
+Use the generated tokens in the generic extractor configuration. 
+Use the JSON response with access and refresh tokens and paste it as string under `#data` key in `authorization.oauth_api.credentials`.
+You have to escape doublequotes `"` in the JSON response and preferably remove newlines too, so it looks like this:
+
+`{\"access_token\": \"MY_ACCESS_TOKEN\",\"refresh_token\": \"MY_REFRESH_TOKEN\"}`
+
+Here is a complete configuration example for AdSense:
+
+{% highlight json %}
+{
+  "parameters": {
+    "api": {
+      "baseUrl": "https://www.googleapis.com",
+      "authentication": {
+        "type": "oauth20.login",
+        "loginRequest": {
+          "endpoint": "/oauth2/v4/token",
+          "method": "FORM",
+          "headers": {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          "params": {
+            "client_id": {
+              "consumer": "client_id"
+            },
+            "client_secret": {
+              "consumer": "client_secret"
+            },
+            "refresh_token": {
+              "user": "refresh_token"
+            },
+            "grant_type": "refresh_token"
+          }
+        },
+        "apiRequest": {
+          "query": {
+            "access_token": "access_token"
+          }
+        }
+      }
+    },
+    "config": {
+      "debug": true,
+      "outputBucket": "adsense",
+      "jobs": [
+        {
+          "endpoint": "/adsense/v1.4/reports/",
+          "dataField": "rows",
+          "dataType": "rows"
+        }
+      ]
+    }
+  },
+  "authorization": {
+    "oauth_api": {
+      "credentials": {
+        "#data": "{\"access_token\": \"MY_ACCESS_TOKEN\",\"refresh_token\": \"MY_REFRESH_TOKEN\"}",
+        "appKey": "MY_CLIENT_ID",
+        "#appSecret": "MY_CLIENT_SECRET"
+      }
+    }
+  }
+}
+{% endhighlight %}
+
+See [example [EX114]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/114-oauth2-google).
