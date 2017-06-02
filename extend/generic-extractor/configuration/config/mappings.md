@@ -1102,7 +1102,7 @@ following configuration:
             "type": "table",
             "destination": "interests",
             "tableMapping": {
-                "": {
+                ".": {
                     "type": "column",
                     "mapping": {
                         "destination": "interest"
