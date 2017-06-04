@@ -1139,6 +1139,155 @@ values, the rows will not be imported!
 
 See [example [EX071]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/071-mapping-multiple-pk).
 
+#### Multiple Primary Key From Nested Columns
+The [above example](#multiple-primary-key-columns) shows how to set a compound primary key. 
+It is also possible to create a compound key using a [parent column](#using-primary-keys).
+Let's say that you have an API with the following response:
+
+{% highlight json %}
+[
+    {
+        "id": 123,
+        "name": "John Doe",
+        "addresses": [
+            {
+                "index": 1,
+                "street": "Blossom Avenue",
+                "country": "United Kingdom"
+            },
+            {
+                "index": 2,
+                "street": "Whiteheaven Mansions",
+                "city": "London",
+                "country": "United Kingdom"
+            }
+        ]
+    },
+    {
+        "id": 234,
+        "name": "Jane Doe",
+        "addresses": [
+            {
+                "index": 1,
+                "street": "Whiteheaven Mansions",
+                "city": "London",
+                "country": "United Kingdom"
+            }
+        ]
+    }
+]
+{% endhighlight %}
+
+Notice that the `addresses` response does not contain a single unique property, but there is an `index` 
+property which is unique within a specific user. The primary key for address would therefore be the
+combination of `id` from and `index`. You can create the following configuration:
+
+{% highlight json %}
+"mappings": {
+    "users": {
+        "id": {
+            "mapping": {
+                "destination": "id",
+                "primaryKey": true
+            }
+        },
+        "name": {
+            "mapping": {
+                "destination": "name"
+            }
+        },
+        "addresses": {
+            "type": "table",
+            "parentKey": {
+                "destination": "userId",
+                "primaryKey": true
+            },
+            "destination": "user-address",
+            "tableMapping": {
+                "index": {
+                    "type": "column",
+                    "mapping": {
+                        "destination": "index",
+                        "primaryKey": true
+                    }
+                },
+                "street": {
+                    "type": "column",
+                    "mapping": {
+                        "destination": "street"
+                    }
+                },
+                "country": {
+                    "type": "column",
+                    "mapping": {
+                        "destination": "country"
+                    }
+                }
+            }
+        }
+    }
+}
+{% endhighlight %}
+
+to extract the following tables:
+
+users:
+
+|first\_name|last\_name|
+|---|---|
+|John|Doe|
+|Jane|Doe|
+
+user-address:
+
+|index|street|country|userId|
+|1|Blossom Avenue|United Kingdom|123|
+|2|Whiteheaven Mansions|United Kingdom|123|
+|1|Whiteheaven Mansions|United Kingdom|234|
+
+When imported to Storage, the primary key for the `user-address` table will be set to
+the combination of `index` and `userId`. The configuration has three important parts. First the part
+
+{% highlight json %}
+"id": {
+    "mapping": {
+        "destination": "id",
+        "primaryKey": true
+    }
+}
+{% endhighlight %}
+
+sets the `id` property from user as a primary key for the resulting table. The second part is:
+
+{% highlight json %}
+"parentKey": {
+    "destination": "userId",
+    "primaryKey": true
+}
+{% endhighlight %}
+
+which causes the primary key from users (i.e. the `id` property) to be added to the child 
+table `user-address` as a `userId` column. Also it sets it as the primary key for the `user-address` table.
+The third part is 
+
+{% highlight json %}
+"index": {
+    "type": "column",
+    "mapping": {
+        "destination": "index",
+        "primaryKey": true
+    }
+}
+{% endhighlight %}
+
+which causes the `index` column from the `user-address` table to be added to the list of the primary key 
+columns in that table.
+
+**Important:** If you set a column (or combination of columns) as a primary key which has duplicate
+values, the rows will not be imported!
+
+See [example [EX115]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/115-multiple-pk-parent).
+
 #### Disabled Parent Key
 It is also possible to entirely disable the relationships between parts of the response objects. 
 Consider, for example, this API response:
