@@ -7,7 +7,9 @@ permalink: /extend/generic-extractor/configuration/api/authentication/login/
 {:toc}
 
 Use the Login authentication to send a one-time **login request** to obtain temporary credentials 
-for authentication of all the other API requests. A sample Login authentication looks like this:
+for authentication of all the other API requests. 
+
+A sample Login authentication looks like this:
 
 {% highlight json %}
 {
@@ -56,7 +58,7 @@ The following configuration parameters are supported for the `login` type of aut
 
 Note that the values in `apiRequest.headers` and `apiRequest.query` take precedence over the values specified in the 
 `api.http.defaultOptions.headers` (see an [example](#parameter-overriding)). If `expires` is not set, the login request
-is called only once before all others. If you need to call the login request before every request (e.g. to obtain access token from refresh token), set `"expires": 0`.
+is called only once before all other requests. To call the login request before every request (e.g., to obtain access token from refresh token), set `"expires": 0`.
 
 ## Examples
 

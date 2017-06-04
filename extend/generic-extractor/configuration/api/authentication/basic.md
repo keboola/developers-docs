@@ -24,7 +24,7 @@ method. It requires entering a username and password in the configuration and se
 
 The `username` and `password` fields are part of the [`config` section](/extend/generic-extractor/configuration/config/). 
 They are also prefixed by the hash `#` character, which means they are stored [encrypted](/overview/encryption/). 
-If the API expects something else than a username and a password in the `Authorization` header, or if it requires 
+If the API expects something else than a username and password in the `Authorization` header, or if it requires 
 a custom authorization header, use the [Default Headers option](/extend/generic-extractor/configuration/api/#headers).
 
 ## Configuration Parameters
