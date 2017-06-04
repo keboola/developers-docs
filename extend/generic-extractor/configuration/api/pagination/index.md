@@ -212,7 +212,7 @@ is compressed (minified) to:
 which makes it 69 bytes long.
 
 
-As a force stop example, the following configuration will stop scrolling after extracting two pages of results, or
+The following is a **force stop example** configuration that will stop scrolling after extracting two pages of results, or
 after extracting 69 bytes of minifed JSON data (whichever comes first).
 
 {% highlight json %}
