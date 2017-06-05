@@ -4,7 +4,7 @@ permalink: /extend/generic-extractor/configuration/config/mappings/
 ---
 
 *If new to Generic Extractor, learn about [mapping in our tutorial](/extend/generic-extractor/tutorial/mapping/) first.*
-*Use our [Parameter Map](/extend/generic-extractor/map/) to help you navigate among various configuration options.*
+*Use [Parameter Map](/extend/generic-extractor/map/) to help you navigate among various configuration options.*
 
 
 * TOC
@@ -1058,7 +1058,7 @@ See [example [EX070]](https://github.com/keboola/generic-extractor/tree/master/d
 
 #### Multiple Primary Key Columns
 Generic Extractor allows you to set only a single (primary) key for a table. This means that 
-if you set `primaryKey` on multiple columns you will create a compound primary key. Let's say
+if you set `primaryKey` on multiple columns, you will create a compound primary key. Let's say
 that you have an API with the following response:
 
 {% highlight json %}
@@ -1179,8 +1179,10 @@ Let's say that you have an API with the following response:
 {% endhighlight %}
 
 Notice that the `addresses` response does not contain a single unique property, but there is an `index` 
-property which is unique within a specific user. The primary key for address would therefore be the
-combination of `id` from and `index`. You can create the following configuration:
+property which is unique within a specific user. The primary key for an address would therefore be the
+combination of `id` and `index`. 
+
+Create the following configuration:
 
 {% highlight json %}
 "mappings": {
@@ -1246,7 +1248,9 @@ user-address:
 |1|Whiteheaven Mansions|United Kingdom|234|
 
 When imported to Storage, the primary key for the `user-address` table will be set to
-the combination of `index` and `userId`. The configuration has three important parts. First the part
+the combination of `index` and `userId`. The configuration has three important parts. 
+
+The first part:
 
 {% highlight json %}
 "id": {
@@ -1257,7 +1261,9 @@ the combination of `index` and `userId`. The configuration has three important p
 }
 {% endhighlight %}
 
-sets the `id` property from user as a primary key for the resulting table. The second part is:
+sets the `id` property from a user as the primary key for the resulting table. 
+
+The second part:
 
 {% highlight json %}
 "parentKey": {
@@ -1266,9 +1272,10 @@ sets the `id` property from user as a primary key for the resulting table. The s
 }
 {% endhighlight %}
 
-which causes the primary key from users (i.e. the `id` property) to be added to the child 
-table `user-address` as a `userId` column. Also it sets it as the primary key for the `user-address` table.
-The third part is 
+adds the primary key from users (i.e., the `id` property) to the child table `user-address` as a `userId` column. 
+It also sets it as the primary key for the `user-address` table.
+
+And the third part: 
 
 {% highlight json %}
 "index": {
@@ -1280,10 +1287,9 @@ The third part is
 }
 {% endhighlight %}
 
-which causes the `index` column from the `user-address` table to be added to the list of the primary key 
-columns in that table.
+adds the `index` column from the `user-address` table to the list of the primary key columns in that table.
 
-**Important:** If you set a column (or combination of columns) as a primary key which has duplicate
+**Important:** If you set a column (or a combination of columns) as a primary key which has duplicate
 values, the rows will not be imported!
 
 See [example [EX115]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/115-multiple-pk-parent).
