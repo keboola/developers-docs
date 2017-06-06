@@ -4,7 +4,7 @@ permalink: /extend/generic-extractor/map/
 ---
 *To configure your first Generic Extractor, follow our [tutorial](/extend/generic-extractor/tutorial/).*
 
-Use the following sample configuration to navigate among various configuration options:
+Use the following sample configuration to navigate among various **configuration options**:
 
 {% highlight json %}
 {

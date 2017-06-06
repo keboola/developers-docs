@@ -10,10 +10,10 @@ permalink: /extend/generic-extractor/configuration/config/mappings/
 * TOC
 {:toc}
 
-Generic Extractor receives JSON responses, 
+Mapping allows you to **modify a response conversion process** in which Generic Extractor receives JSON responses, 
 [merges them together](/extend/generic-extractor/configuration/config/jobs/#merging-responses) and 
-converts them to CSV files which are then imported to KBC. **Mapping** allows you to modify the behavior 
-of this conversion process. Go to our tutorial to see [mapping in action](/extend/generic-extractor/tutorial/mapping).
+converts them to CSV files which are then imported to KBC. 
+
 Manually define mapping if you wish to do the following:
 
 - Set up a primary key to simplify relations between result tables, and speed up the extraction,

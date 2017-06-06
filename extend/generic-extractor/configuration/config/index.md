@@ -7,7 +7,7 @@ permalink: /extend/generic-extractor/configuration/config/
 {:toc}
 
 *To configure your first Generic Extractor, follow our [tutorial](/extend/generic-extractor/tutorial/).*
-*Use our [Parameter Map](/extend/generic-extractor/map/) to help you navigate among various 
+*Use [Parameter Map](/extend/generic-extractor/map/) to help you navigate among various 
 configuration options.*
 
 The **actual extraction** is described in the `config` section of Generic Extractor configuration, 

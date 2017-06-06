@@ -4,7 +4,7 @@ permalink: /extend/generic-extractor/configuration/api/authentication/
 ---
 
 *To configure your first Generic Extractor, follow our [tutorial](/extend/generic-extractor/tutorial/).*
-*Use our [Parameter Map](/extend/generic-extractor/map/) to help you navigate among various 
+*Use [Parameter Map](/extend/generic-extractor/map/) to help you navigate among various 
 configuration options.*
 
 Unless the API you want to extract from is completely public, you need an authentication and possibly also an authorization method. 

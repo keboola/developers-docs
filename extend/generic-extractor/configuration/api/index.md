@@ -7,10 +7,10 @@ permalink: /extend/generic-extractor/configuration/api/
 {:toc}
 
 *To configure your first Generic Extractor, follow our [tutorial](/extend/generic-extractor/tutorial/basic/).*
-*Use our [Parameter Map](/extend/generic-extractor/map/) to help you navigate among various 
+*Use [Parameter Map](/extend/generic-extractor/map/) to help you navigate among various 
 configuration options.*
 
-The API section of Generic Extractor configuration describes **global characteristics** of the API. These include 
+The API section of Generic Extractor configuration **describes global characteristics of an API**. These include 
 [HTTP headers](/extend/generic-extractor/tutorial/rest/#headers), authentication and pagination methods. 
 
 A sample API configuration can look like this:
@@ -47,13 +47,13 @@ A sample API configuration can look like this:
 {% endhighlight %}
 
 ## Base URL
-The `baseUrl` configuration defines the URL to which the API requests should be sent. We
+The `baseUrl` configuration **defines the URL to which the API requests should be sent**. We
 recommend that the URL ends with a slash so that the `jobs.endpoint` can be set easily.
 See the [`endpoint` configuration](/extend/generic-extractor/configuration/config/jobs/#endpoint) for a detailed description of
 how `api.baseUrl` and `jobs.endpoint` work together.
 
 ## Pagination
-Pagination (or scrolling) describes how the API pages through a large set of results. Because 
+Pagination (or scrolling) **describes how the API pages through a large set of results**. Because 
 there are many different pagination strategies, the configuration is described on a
 [separate page](/extend/generic-extractor/configuration/api/pagination/).
 
@@ -63,10 +63,9 @@ Because there are many authorization methods used by different APIs, there are a
 [configuration options](/extend/generic-extractor/configuration/api/authentication/).
 
 ## Retry Configuration
-Generic Extractor automatically retries failed HTTP requests. This is one of the big advantages over 
-writing your own extractor from scratch. By default, Generic Extractor is configured in a very benevolent
-way: it will retry a lot, and on most errors. You can tweak the retry setting to optimize the speed of an 
-extraction or to avoid unwanted flooding of the API.
+By default, Generic Extractor **automatically retries failed HTTP requests** --- repeatedly, and on most errors. 
+This is one of the big advantages over writing your own extractor from scratch. Tweak the retry setting to optimize 
+the speed of an extraction or to avoid unwanted flooding of the API.
 
 Every HTTP response contains a [Status code](/extend/generic-extractor/tutorial/rest/#http-status) and,
 optionally, a Header describing the situation or further actions. Status codes 2xx (beginning with 2; e.g., 200 
@@ -151,12 +150,12 @@ If the exponential backoff is used, you will see its sequence of times.
 See an [example](/extend/generic-extractor/configuration/api/#retry-configuration).
 
 ## Default HTTP Options
-The `http` configuration option allows you to set the default headers and parameters 
-sent with each API call (defined later in the [`jobs` section](/extend/generic-extractor/configuration/config/jobs/#request-parameters)).
+The `http` configuration option allows you to set the default headers and parameters sent with each API call 
+(defined later in the [`jobs` section](/extend/generic-extractor/configuration/config/jobs/#request-parameters)).
 
 ### Headers
-The `http.headers` configuration allows you to set the default headers sent with
-each API call. The configuration is an object where names are the names of
+The `http.headers` configuration allows you to **set the default headers sent with
+each API call**. The configuration is an object where names are the names of
 the headers and values are their values --- for instance:
 
 {% highlight json %}
@@ -171,19 +170,21 @@ the headers and values are their values --- for instance:
 See the full [example](/extend/generic-extractor/configuration/api/#default-headers).
 
 ### Request Parameters 
-The `http.defaultOptions.params` configuration allows you to set the
+The `http.defaultOptions.params` configuration allows you to **set the
 [request parameters](/extend/generic-extractor/tutorial/rest/#url) to be
-sent with each API request. The same rules apply as to the
+sent with each API request**. The same rules apply as to the
 [`jobs.params`](/extend/generic-extractor/configuration/config/jobs/#request-parameters).
 
 See an [example](/extend/generic-extractor/configuration/api/#default-headers).
 
 ### Required Headers
-Similar to the `http.headers` option, the `http.requiredHeaders` option allows you to set the HTTP header 
-for every API request. The difference is that the `requiredHeaders` configuration specifies only the header names. 
+Similar to the `http.headers` option, the `http.requiredHeaders` option allows you to **set the HTTP header 
+for every API request**. The difference is that the `requiredHeaders` configuration specifies **only the header names**. 
 The actual values must be provided in the [`config`](/extend/generic-extractor/configuration/config/) 
 configuration section. This is useful in case the header values change dynamically or they are provided as part 
-of [template configuration](/extend/generic-extractor/registration/). If the `api` configuration section looks like this:
+of [template configuration](/extend/generic-extractor/registration/). 
+
+If the `api` configuration section looks like this:
 
 {% highlight json %}
 "http": {
