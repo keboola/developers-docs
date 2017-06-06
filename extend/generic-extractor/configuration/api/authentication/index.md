@@ -16,7 +16,7 @@ There are many authentication methods available. Generic Extractor supports the 
 and then sends them in the URL or headers of each API request.
 - [OAuth 1.0](/extend/generic-extractor/configuration/api/authentication/oauth10/) authentication --- authenticates with [OAuth 1.0 scheme](#oauth). 
 - [OAuth 2.0](/extend/generic-extractor/configuration/api/authentication/oauth20/) authentication --- authenticates with [OAuth 2.0 scheme](#oauth). 
-- [OAuth 2.0 Login](/extend/generic-extractor/configuration/api/authentication/oauth20/) authentication --- 
+- [OAuth 2.0 Login](/extend/generic-extractor/configuration/api/authentication/oauth20-loign/) authentication --- 
 crossover between the [OAuth 2.0](/extend/generic-extractor/configuration/api/authentication/oauth20/) and 
 [Login](/extend/generic-extractor/configuration/api/authentication/login/) authentication.
 
