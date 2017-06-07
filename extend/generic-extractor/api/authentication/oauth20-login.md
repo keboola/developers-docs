@@ -223,6 +223,9 @@ Here is a complete configuration example for AdSense:
 }
 {% endhighlight %}
 
+See [example [EX114]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/114-oauth2-google).
+To run examples locally see [running examples](/extend/generic-extractor/running/#running-examples). 
+
 
 
  
