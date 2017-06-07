@@ -12,11 +12,11 @@ There are many authentication methods available. Generic Extractor supports the 
 
 - [URL Query](/extend/generic-extractor/configuration/api/authentication/query/) authentication --- sends credentials in the URL of each API request.
 - [Basic HTTP](/extend/generic-extractor/configuration/api/authentication/basic/) authentication --- sends credentials in the `Authorization` header of each API request.
-- [Login](/extend/generic-extractor/configuration/api/authentication/login) authentication --- obtains temporary credentials (token) by logging in, 
+- [Login](/extend/generic-extractor/configuration/api/authentication/login/) authentication --- obtains temporary credentials (token) by logging in, 
 and then sends them in the URL or headers of each API request.
 - [OAuth 1.0](/extend/generic-extractor/configuration/api/authentication/oauth10/) authentication --- authenticates with [OAuth 1.0 scheme](#oauth). 
 - [OAuth 2.0](/extend/generic-extractor/configuration/api/authentication/oauth20/) authentication --- authenticates with [OAuth 2.0 scheme](#oauth). 
-- [OAuth 2.0 Login](/extend/generic-extractor/configuration/api/authentication/oauth20-loign/) authentication --- 
+- [OAuth 2.0 Login](/extend/generic-extractor/configuration/api/authentication/oauth20-login/) authentication --- 
 crossover between the [OAuth 2.0](/extend/generic-extractor/configuration/api/authentication/oauth20/) and 
 [Login](/extend/generic-extractor/configuration/api/authentication/login/) authentication.
 
