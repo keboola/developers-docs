@@ -10,8 +10,8 @@ permalink: /extend/generic-extractor/configuration/config/
 *Use [Parameter Map](/extend/generic-extractor/map/) to help you navigate among various 
 configuration options.*
 
-The **actual extraction** is described in the `config` section of Generic Extractor configuration, 
-including properties of HTTP requests, and mapping between source JSON and target CSV. 
+The `config` section of Generic Extractor configuration **describes the actual extraction**, including properties of HTTP requests, 
+and mapping between source JSON and target CSV. 
   
 A sample `config` configuration can look like this:
 

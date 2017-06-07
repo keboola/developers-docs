@@ -25,16 +25,18 @@ of value in the response which must be used in the next request.
 ## Configuration Parameters
 The following configuration parameters are supported for the `response.param` method of pagination:
 
-- `responseParam` (required, string) --- Path to the key which contains the value used for scrolling
-- `queryParam` (required, string) --- Name of the [query string](/extend/generic-extractor/tutorial/rest/#url) parameter in 
-which the above value should be sent to the API.
-- `includeParams` (optional, boolean) --- When true, the [job parameters](/extend/generic-extractor/configuration/config/jobs/#request-parameters) 
-are added to the provided URL. The `queryParam` overrides the values from the job parameters (see an [example](#overriding-parameters)). The default value is `false`.
-- `scrollRequest` (optional, object) --- [Job-like](/extend/generic-extractor/configuration/config/jobs/) object (supported fields are 
+- `responseParam` (required, string) --- path to the key which contains the value used for scrolling
+- `queryParam` (required, string) --- name of the [query string](/extend/generic-extractor/tutorial/rest/#url) parameter in which 
+the above value should be sent to the API; the `queryParam` **overrides** the values from the [job 
+parameters](/extend/generic-extractor/configuration/config/jobs/#request-parameters) 
+(see an [example](#overriding-parameters)).
+- `includeParams` (optional, boolean) --- when `true`, the job parameters 
+**are added** to the provided URL. The default value is `false`.
+- `scrollRequest` (optional, object) --- [job-like](/extend/generic-extractor/configuration/config/jobs/) object (supported fields are 
 `endpoint`, `method` and `params`) which allows to sent an initial scrolling request (see an [example](#using-scroll-request)).
 
 ### Stopping Condition
-The pagination ends when the value of `responseParam` parameters is empty --- the key is not present at all, is null, is
+The pagination ends **when the value of `responseParam` parameters is empty** --- the key is not present at all, is null, is
 an empty string, or is `false`. Take care when configuring the `responseParam` parameter. If you, for example, misspell the name of 
 the key, the extraction will not go beyond the first page. 
 [Common stopping conditions](/extend/generic-extractor/configuration/api/pagination/#stopping-strategy) also apply.
@@ -127,7 +129,7 @@ The following configuration passes the parameter `orderBy` to every request:
 }
 {% endhighlight %}
 
-The `includeParams` configuration set to true causes the parameters from the `job.params` settings to 
+The `includeParams` configuration set to `true` causes the parameters from the `job.params` settings to 
 be sent with every request. If you set `includeParams` to false, they will be sent only with
 the first request. 
 
@@ -140,8 +142,8 @@ See [example [EX058]](https://github.com/keboola/generic-extractor/tree/master/d
 ### Using Scroll Request
 The response param scroller supports sending of an initial scrolling request. This can be used
 in situations where the API requires special initialization of a scrolling endpoint;
-for example, the [Elastic](https://www.elastic.co/guide/en/elasticsearch/reference/5.2/search-request-scroll.html).
-Another example is an API which has something like a search endpoint, which needs an initial request and
+for instance, the [Elastic](https://www.elastic.co/guide/en/elasticsearch/reference/5.2/search-request-scroll.html).
+Another example is an API which has something like a search endpoint which needs an initial request and
 then allows you to scroll through the results (this is not exactly [RESTful](/extend/generic-extractor/tutorial/rest/) though).
 
 Let's consider an API which --- to list users --- requires that you send a POST request to the
@@ -154,7 +156,7 @@ Let's consider an API which --- to list users --- requires that you send a POST 
 }
 {% endhighlight %}
 
-It will then respond with a *search token*, which represents an internal cursor:
+It will then respond with a **search token** representing an internal cursor:
 
 {% highlight json %}
 {
