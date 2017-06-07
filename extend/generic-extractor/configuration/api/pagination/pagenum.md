@@ -6,9 +6,9 @@ permalink: /extend/generic-extractor/configuration/api/pagination/pagenum/
 * TOC
 {:toc}
 
-The Offset scroller handles a pagination strategy in which the API splits the results into pages
-of the same size (limit parameter) and navigates through them using the **item offset** parameter. 
-If you need to use the *item offset*, use the [Offset Scroller](/extend/generic-extractor/configuration/api/pagination/offset/).
+The Page Number Scroller handles a pagination strategy in which the API splits the results into pages
+of the same size (limit parameter) and navigates through them using the **page offset** parameter. 
+If you need to use the item offset, use the [Offset Scroller](/extend/generic-extractor/configuration/api/pagination/offset/).
 
 {% highlight json %}
 {
@@ -27,17 +27,18 @@ If you need to use the *item offset*, use the [Offset Scroller](/extend/generic-
 ## Configuration Parameters
 The following configuration parameters are supported for the `pagenum` method of pagination:
 
-- `limit` (optional, integer) --- Page size
-- `limitParam`(optional, string) --- Name of the parameter in which the API expects the page size. The default value is `limit`.
-- `pageParam` (optional, string) --- Name of the parameter in which the API expects the page number. The default value is `page`.
-- `firstPageParams` (optional, boolean) --- When false, the first page will be retrieved without the page parameters. The default value is `true`.
-- `firstPage` (optional, integer) --- Index of the first page. The default value is `1`.
+- `limit` (optional, integer) --- page size
+- `limitParam`(optional, string) --- name of the parameter in which the API expects the page size; the default value is `limit`.
+- `pageParam` (optional, string) --- name of the parameter in which the API expects the page number; the default value is `page`.
+- `firstPageParams` (optional, boolean) --- when `false`, the first page will be retrieved without the page parameters; the default 
+value is `true`.
+- `firstPage` (optional, integer) --- index of the first page; the default value is `1`.
 
 ### Stopping Condition
 The `pagenum` scroller uses similar stopping condition as the [`offset` scroller](/extend/generic-extractor/configuration/api/pagination/offset/#stopping-condition). 
-That is to say that the extraction is stopped in case of underflow --- when the API returns less items then requested 
-(including zero). However, in the `pagenum` scroller, the `limit` parameter is not required and has no 
-default value. This means that if you omit it, the scrolling will stop only if an empty page is encountered.
+Scrolling is stopped in case of an underflow --- when the result contains **less items than requested** (including zero). However, 
+in the `pagenum` scroller, the **`limit` parameter is not required** and has **no default value**. This means that if you omit it, 
+the scrolling will stop only if an empty page is encountered.
 
 ## Examples
 
@@ -52,6 +53,7 @@ The most simple scrolling setup is the following:
 
 The first request is sent with the parameter `page=1`, for example `/users?page=1`.
 The next request will have `page=2`, for example `/users?page=2`.
+
 See [example [EX051]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/051-pagination-pagenum-basic).
 
 ### Renaming Parameters
@@ -68,14 +70,23 @@ offset for the needs of a specific API:
 {% endhighlight %}
 
 Here the API expects the parameters `count` and `set`. The first request will be sent with the parameters `count=20` 
-and `set=1`; for example, `/users?set=1&count=20`. See [example [EX052]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/052-pagination-pagenum-rename).
+and `set=1`; for example, `/users?set=1&count=20`. 
 
 **Important:** Without setting a value for the `limit` option, the `limitParam` will not be sent at all 
 (no matter how you name it).
 
+See [example [EX052]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/052-pagination-pagenum-rename).
+
 ### Overriding Parameters
 It is possible to override the limit parameter of a specific API job. 
 This is useful when you want to use different limits for different API endpoints.
+
+In the following configuration, the first request is sent to `/users?count=2` because the 
+`limit` parameter was renamed to `count`. Then the default value of `count` was overridden for the 
+`users` API endpoint in `jobs.params.count`. The `firstPageParams` is set to false, which means that
+the page parameter (named `count`) is **not** sent in the first request. The second API 
+request is sent to `/users?count=2&set=1`. Because the `firstPage` option is set to `0`, the 
+second page index is `1`.
 
 {% highlight json %}
 {
@@ -105,12 +116,5 @@ This is useful when you want to use different limits for different API endpoints
     }
 }
 {% endhighlight %}
-
-In the above configuration, the first request is sent to `/users?count=2` because the 
-`limit` parameter was renamed to `count`. Then the default value of `count` was overridden for the 
-`users` API endpoint in `jobs.params.count`. The `firstPageParams` is set to false, which means that
-the page parameter (named `count`) is **not** sent in the first request. The second API 
-request is sent to `/users?count=2&set=1`. Because the `firstPage` option is set to `0`, the 
-second page has index `1`.
 
 See [example [EX053]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/053-pagination-pagenum-override).

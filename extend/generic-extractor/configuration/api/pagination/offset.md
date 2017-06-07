@@ -8,7 +8,7 @@ permalink: /extend/generic-extractor/configuration/api/pagination/offset/
 
 The Offset scroller handles a pagination strategy in which the API splits the results into pages
 of the same size (limit parameter) and navigates through them using the **item offset** parameter. This 
-is similar to paging in SQL language. If you need to use **page offset**, use the 
+is similar to paging in SQL language. If you need to use the page offset, use the 
 [Page Number Scroller](/extend/generic-extractor/configuration/api/pagination/pagenum/).
 
 An example configuration:
