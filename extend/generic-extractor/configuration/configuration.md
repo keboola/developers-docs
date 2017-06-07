@@ -3,7 +3,7 @@ title: Generic Extractor Configuration
 permalink: /extend/generic-extractor/configuration/
 ---
 
-*To configure your first Generic Extractor, go to our [Generic Extractor tutorial](/extend/generic-extractor/tutorial/).*
+*To configure your first Generic Extractor, go to our [tutorial](/extend/generic-extractor/tutorial/).*
 
 Each Generic Extractor configuration consists of two main sections: 
 

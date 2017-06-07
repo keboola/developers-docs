@@ -39,12 +39,12 @@ for authentication of all the other API requests. A sample OAuth Login authentic
 ## Configuration Parameters
 The configuration parameters are identical to the [Login](/extend/generic-extractor/configuration/api/authentication/login/) method.
 The difference, however, is in the [function context](/extend/generic-extractor/functions/#oauth-20-login-authentication-context).
-The **login request** is assumed to require OAuth2 authorization and its response must be in JSON format (plaintext is not supported).
+The **login request** is assumed to require the OAuth2 authorization and its response must be in JSON format (plaintext is not supported).
 
 ## Examples
 
 ### Basic Configuration
-The following configuration shows how to set up an OAuth *login request*:
+The following configuration shows how to set up an OAuth **login request**:
 
 {% highlight json %}
 {
@@ -126,41 +126,42 @@ See [example [EX105]](https://github.com/keboola/generic-extractor/tree/master/d
 
 
 ### Google API Configuration
-The following example shows how to set up OAuth authentication for Google APIs. The access token is refreshed with each API call.
+The following example shows how to set up the OAuth authentication for Google APIs. The access token is refreshed with each API call.
 
 #### Generate access tokens 
-First, visit [Google API Console](https://console.developers.google.com/apis/credentials) to obtain OAuth 2.0 credentials such as a *Client ID* and *Client secret*.
+First, visit [Google API Console](https://console.developers.google.com/apis/credentials) to obtain OAuth 2.0 credentials, such as a 
+**Client ID** and **Client secret**.
 
 Add `https://developers.google.com/oauthplayground` to Authorized redirect URIs:
- 
+
 {: .image-popup}
-![Google API Console](/extend/generic-extractor/api/authentication/oauth20-login-console.png)
+![Google API Console](/extend/generic-extractor/configuration/api/authentication/oauth20-login-console.png)
  
-Then, you need to generate *access* and *refresh* tokens using [Google OAuth 2.0 Playground](https://developers.google.com/oauthplayground/).
+Then, generate **access** and **refresh** tokens using [Google OAuth 2.0 Playground](https://developers.google.com/oauthplayground/).
 
 Provide your Client ID and Client secret in the settings of OAuth 2.0 Playground:
 
 {: .image-popup}
-![Google OAuth 2.0 Playground 1](/extend/generic-extractor/api/authentication/oauth20-login-playground-1.png)
+![Google OAuth 2.0 Playground 1](/extend/generic-extractor/configuration/api/authentication/oauth20-login-playground-1.png)
 
-Make sure the Offline Access option is checked.
-Close the settings dialog.
+Make sure the Offline Access option is checked and close the settings dialog.
 
-On the left side, choose which scopes you would like to authorize and click on *Authorize APIs*.
+On the left side, choose which scopes you would like to authorize and click on **Authorize APIs**.
 
 {: .image-popup}
-![Google OAuth 2.0 Playground 1](/extend/generic-extractor/api/authentication/oauth20-login-playground-2.png)
+![Google OAuth 2.0 Playground 1](/extend/generic-extractor/configuration/api/authentication/oauth20-login-playground-2.png)
 
 Then exchange the authorization code for tokens:
 
 {: .image-popup}
-![Google OAuth 2.0 Playground 1](/extend/generic-extractor/api/authentication/oauth20-login-playground-3.png)
+![Google OAuth 2.0 Playground 1](/extend/generic-extractor/configuration/api/authentication/oauth20-login-playground-3.png)
+
+Use the generated tokens in the Generic Extractor configuration.
 
 #### Configuration 
-
-Use the generated tokens in the generic extractor configuration. 
-Use the JSON response with access and refresh tokens and paste it as string under `#data` key in `authorization.oauth_api.credentials`.
-You have to escape doublequotes `"` in the JSON response and preferably remove newlines too, so it looks like this:
+Paste the JSON response with the generated access and refresh tokens as a string under the `#data` key in 
+`authorization.oauth_api.credentials`.
+Escape double quotes `"` in the JSON response and preferably remove newlines too, so it looks like this:
 
 `{\"access_token\": \"MY_ACCESS_TOKEN\",\"refresh_token\": \"MY_REFRESH_TOKEN\"}`
 
@@ -223,9 +224,4 @@ Here is a complete configuration example for AdSense:
 }
 {% endhighlight %}
 
-See [example [EX114]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/114-oauth2-google).
-To run examples locally see [running examples](/extend/generic-extractor/running/#running-examples). 
-
-
-
- 
+See [example [EX114]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/114-oauth2-google). 

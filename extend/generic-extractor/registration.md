@@ -18,7 +18,7 @@ Before converting your configuration to a universally available component, consi
 what values in the configuration should be provided by the end-user (typically authentication values).
 Then design a [configuration schema](/extend/registration/configuration-schema/) for setting 
 those values. You can [test the schema online](http://jeremydorn.com/json-editor/). 
-The values obtained from the end-user will be stored in the [`config` property](/extend/generic-extractor/config/).
+The values obtained from the end-user will be stored in the [`config` property](/extend/generic-extractor/configuration/config/).
 Modify your configuration to read those values from there.
 
 Do not forget that if you prefix a value with a hash `#`, it will be 
@@ -45,7 +45,7 @@ not applicable:
 Because the UI is assumed to be `genericTemplatesUI`, provide a
 [**configuration schema**](/extend/registration/configuration-schema/) and
 a **template** to be used in conjunction with the schema.
-Optionally, the templates UI may contain interface to negotiate [OAuth authentication](/extend/generic-extractor/api/authentication/#oauth). 
+Optionally, the templates UI may contain interface to negotiate [OAuth authentication](/extend/generic-extractor/configuration/api/authentication/#oauth). 
 An example of the templates UI is shown in the picture below.
 
 {: .image-popup}
@@ -58,9 +58,9 @@ Generic Extractor.
 For example, you might want to provide one configuration for incremental loading
 and a different configuration for full loading. The template UI also has the option to
 `Switch to JSON editor`, which displays the configuration JSON and allows the end-user to modify it.
-Notice that the JSON editor allows modification only to the [`config`](/extend/generic-extractor/config)
-section. Other sections, such as [`api`](/extend/generic-extractor/api/) or 
-[`authorization.oauth_api`](/extend/generic-extractor/api/authentication/#oauth) may not be modified by the end-user.
+Notice that the JSON editor allows modification only to the [`config`](/extend/generic-extractor/configuration/config/)
+section. Other sections, such as [`api`](/extend/generic-extractor/configuration/api/) or 
+[`authorization.oauth_api`](/extend/generic-extractor/configuration/api/authentication/#oauth) may not be modified by the end-user.
 
 ## Example
 Let's say you have the following working API configuration
@@ -129,7 +129,7 @@ For each of them, create a parameter of the appropriate type:
 - `active` --- a enumeration parameter `userType` with values `active`, `inactive`, `all`
 
 The parameters names are completely arbitrary. However, they must not conflict with existing
-configuration properties of [Generic Extractor](/extend/generic-extractor/config/) (e.g., `jobs`, `mappings`).
+configuration properties of [Generic Extractor](/extend/generic-extractor/configuration/config/) (e.g., `jobs`, `mappings`).
 Now create a [configuration schema](/extend/registration/configuration-schema/) for the four parameters.
 
 {% highlight json %}
@@ -187,7 +187,7 @@ configuration JSON:
 }
 {% endhighlight %}
 
-The above properties will be merged into the [`config` section](/extend/generic-extractor/config/). Now
+The above properties will be merged into the [`config` section](/extend/generic-extractor/configuration/config/). Now
 modify the configuration so that it reads them from there using [functions and references](/extend/generic-extractor/functions/).
 
 {% highlight json %}

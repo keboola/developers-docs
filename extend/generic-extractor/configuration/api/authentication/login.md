@@ -7,7 +7,9 @@ permalink: /extend/generic-extractor/configuration/api/authentication/login/
 {:toc}
 
 Use the Login authentication to send a one-time **login request** to obtain temporary credentials 
-for authentication of all the other API requests. A sample Login authentication looks like this:
+for authentication of all the other API requests. 
+
+A sample Login authentication looks like this:
 
 {% highlight json %}
 {
@@ -44,10 +46,10 @@ The following configuration parameters are supported for the `login` type of aut
     - `params` (optional, object) --- an object with key-value properties containing request parameters; object keys are parameters names; values are transformed the [same way as in jobs](/extend/generic-extractor/configuration/config/jobs/#request-parameters).
     - `method` (optional, string) --- an HTTP method to send the request; this defines how the [parameters are sent](/extend/generic-extractor/configuration/config/jobs/#request-parameters) to the API. The default value is `GET`.
     - `headers` (optional, object) --- an object with key-value properties containing HTTP headers. The names will be used as HTTP header names, and the values will be used as the value of the respective header.
-- `apiRequest` (optional, object) --- an object which defines how the result of the *login request* will be used in the actual API request; it contains the following properties:
+- `apiRequest` (optional, object) --- an object which defines how the result of the **login request** will be used in the actual API request; it contains the following properties:
     - `headers` (optional, object) --- an object with key-value properties containing HTTP headers. The names are header names, the values are paths in the JSON response from which the actual values are extracted.
     - `query` (optional, object) --- an object with key-value properties containing URL query parameters. The names are parameter names, and the values are paths in the JSON response from which the actual values are extracted.
-- `expires` (optional, mixed) --- either an integer value specifying a fixed number of seconds after which the *login request* will be sent again (see an [example](#expiration-basic)); or, an object with the following properties:
+- `expires` (optional, mixed) --- either an integer value specifying a fixed number of seconds after which the **login request** will be sent again (see an [example](#expiration-basic)); or, an object with the following properties:
     - `response` (required, string) --- a path in the JSON response which contains the expiration time. It can be either:
         - a string which can be processed by the [`strtotime` function](http://php.net/manual/en/function.strtotime.php) (see an [example](#expiration-from-response)), or
         - a numeric [timestamp](https://en.wikipedia.org/wiki/Unix_time) (with `"relative": false`), or
@@ -56,7 +58,7 @@ The following configuration parameters are supported for the `login` type of aut
 
 Note that the values in `apiRequest.headers` and `apiRequest.query` take precedence over the values specified in the 
 `api.http.defaultOptions.headers` (see an [example](#parameter-overriding)). If `expires` is not set, the login request
-is called only once before all others. If you need to call the login request before every request (e.g. to obtain access token from refresh token), set `"expires": 0`.
+is called only once before all other requests. To call the login request before every request (e.g., to obtain access token from refresh token), set `"expires": 0`.
 
 ## Examples
 
@@ -247,7 +249,7 @@ with this header:
 
     Content-Type: application/json
 
-Notice that in the case of the *login request* both `headers` and `params` from `api.defaultOptions` are ignored. Only the
+Notice that in the case of the **login request** both `headers` and `params` from `api.defaultOptions` are ignored. Only the
 `headers` and `params` from `api.authentication.loginRequest` are used (and encoded as JSON because of `"method": "POST"`).
 
 The second API call is sent as:
@@ -282,7 +284,7 @@ specified elsewhere are **merged** with the `api.authentication.apiRequest`.
 See [example [EX081]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/081-login-auth-headers-query-override).
 
 ### Expiration Basic
-It is possible that the credentials provided by the *login request* have a time-limited validity. This is handled by the `expires` 
+It is possible that the credentials provided by the **login request** have a time-limited validity. This is handled by the `expires` 
 option. If the obtained credentials are always valid for a certain period of time, for example for 1 hour, modify the [first 
 example](#configuration-with-headers) to this:
 
@@ -313,12 +315,12 @@ example](#configuration-with-headers) to this:
 }
 {% endhighlight %}
 
-This causes Generic Extractor to call the *login request* every hour.
+This causes Generic Extractor to call the **login request** every hour.
 
 See [example [EX082]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/082-login-auth-expires).
 
 ### Expiration from Response
-In case the credentials provided by the *login request* have a time-limited validity, use the `expires` option. 
+In case the credentials provided by the **login request** have a time-limited validity, use the `expires` option. 
 If the validity of the credentials is returned in the response, modify the [first example](#configuration-with-headers) to this:
 
 {% highlight json %}
@@ -350,7 +352,7 @@ If the validity of the credentials is returned in the response, modify the [firs
 }
 {% endhighlight %}
 
-This assumes that the response of the *login request* looks like this:
+This assumes that the response of the **login request** looks like this:
 
 {% highlight json %}
 {
@@ -364,7 +366,7 @@ This assumes that the response of the *login request* looks like this:
 See [example [EX083]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/083-login-auth-expires-date).
 
 ### Relative Expiration from Response
-In case the API returns credentials validity in the *login request* and that validity is expressed in seconds, 
+In case the API returns credentials validity in the **login request** and that validity is expressed in seconds, 
 use the `expires` option together with setting `relative` to `true`. 
 The result is the behavior of the [first example](#configuration-with-headers) but the value is taken 
 from the response as in the [second example](#expiration-from-response).
@@ -399,7 +401,7 @@ from the response as in the [second example](#expiration-from-response).
 }
 {% endhighlight %}
 
-This assumes that the response of the *login request* looks like this:
+This assumes that the response of the **login request** looks like this:
 
 {% highlight json %}
 {

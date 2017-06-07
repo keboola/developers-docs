@@ -3,13 +3,17 @@ title: Mapping
 permalink: /extend/generic-extractor/configuration/config/mappings/
 ---
 
+*If new to Generic Extractor, learn about [mapping in our tutorial](/extend/generic-extractor/tutorial/mapping/) first.*
+*Use [Parameter Map](/extend/generic-extractor/map/) to help you navigate among various configuration options.*
+
+
 * TOC
 {:toc}
 
-Generic Extractor receives JSON responses, 
-[merges them together](/extend/generic-extractor/configuration/config/jobs/#merging-responses) and converts them to CSV files
-which are then imported to KBC. **Mapping** allows you to modify the behavior of this conversion process.
-Go to our tutorial to see [mapping in action](/extend/generic-extractor/tutorial/mapping).
+Mapping allows you to **modify a response conversion process** in which Generic Extractor receives JSON responses, 
+[merges them together](/extend/generic-extractor/configuration/config/jobs/#merging-responses) and 
+converts them to CSV files which are then imported to KBC. 
+
 Manually define mapping if you wish to do the following:
 
 - Set up a primary key to simplify relations between result tables, and speed up the extraction,
@@ -495,7 +499,7 @@ The `interests` property cannot be saved as a column, therefore a mapping of the
             "type": "table",
             "destination": "user-interests",
             "tableMapping": {
-                "": {
+                ".": {
                     "type": "column",
                     "mapping": {
                         "destination": "interest"
@@ -509,7 +513,7 @@ The `interests` property cannot be saved as a column, therefore a mapping of the
 
 The table mapping follows the same structure as a normal mapping. Each item is another mapping 
 definition identified by the property name in the JSON file. Because the `interests` property
-itself is an array, its value has no name and therefore the key is an empty string `""`. The mapping
+itself is an array, its value has no name and therefore the key is only a dot `"."`. The mapping
 value is a standard [column mapping](/extend/generic-extractor/configuration/config/mappings/#column-mapping). 
 The above configuration produces the same result as the automatic mapping of columns.
 
@@ -969,11 +973,11 @@ the user ID. To do this, you only need to specify the primary key for the table:
         "contacts": {
             "type": "table",
             "destination": "user-contact",
+            "parentKey": {
+                "primaryKey": true,
+                "destination": "userId"
+            },
             "tableMapping": {
-                "parentKey": {
-                    "primaryKey": true,
-                    "destination": "userId"
-                },
                 "email": {
                     "type": "column",
                     "mapping": {
@@ -1054,7 +1058,7 @@ See [example [EX070]](https://github.com/keboola/generic-extractor/tree/master/d
 
 #### Multiple Primary Key Columns
 Generic Extractor allows you to set only a single (primary) key for a table. This means that 
-if you set `primaryKey` on multiple columns you will create a compound primary key. Let's say
+if you set `primaryKey` on multiple columns, you will create a compound primary key. Let's say
 that you have an API with the following response:
 
 {% highlight json %}
@@ -1098,7 +1102,7 @@ following configuration:
             "type": "table",
             "destination": "interests",
             "tableMapping": {
-                "": {
+                ".": {
                     "type": "column",
                     "mapping": {
                         "destination": "interest"
@@ -1134,6 +1138,161 @@ interests:
 values, the rows will not be imported!
 
 See [example [EX071]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/071-mapping-multiple-pk).
+
+#### Multiple Primary Key From Nested Columns
+The [above example](#multiple-primary-key-columns) shows how to set a compound primary key. 
+It is also possible to create a compound key using a [parent column](#using-primary-keys).
+Let's say that you have an API with the following response:
+
+{% highlight json %}
+[
+    {
+        "id": 123,
+        "name": "John Doe",
+        "addresses": [
+            {
+                "index": 1,
+                "street": "Blossom Avenue",
+                "country": "United Kingdom"
+            },
+            {
+                "index": 2,
+                "street": "Whiteheaven Mansions",
+                "city": "London",
+                "country": "United Kingdom"
+            }
+        ]
+    },
+    {
+        "id": 234,
+        "name": "Jane Doe",
+        "addresses": [
+            {
+                "index": 1,
+                "street": "Whiteheaven Mansions",
+                "city": "London",
+                "country": "United Kingdom"
+            }
+        ]
+    }
+]
+{% endhighlight %}
+
+Notice that the `addresses` response does not contain a single unique property, but there is an `index` 
+property which is unique within a specific user. The primary key for an address would therefore be the
+combination of `id` and `index`. 
+
+Create the following configuration:
+
+{% highlight json %}
+"mappings": {
+    "users": {
+        "id": {
+            "mapping": {
+                "destination": "id",
+                "primaryKey": true
+            }
+        },
+        "name": {
+            "mapping": {
+                "destination": "name"
+            }
+        },
+        "addresses": {
+            "type": "table",
+            "parentKey": {
+                "destination": "userId",
+                "primaryKey": true
+            },
+            "destination": "user-address",
+            "tableMapping": {
+                "index": {
+                    "type": "column",
+                    "mapping": {
+                        "destination": "index",
+                        "primaryKey": true
+                    }
+                },
+                "street": {
+                    "type": "column",
+                    "mapping": {
+                        "destination": "street"
+                    }
+                },
+                "country": {
+                    "type": "column",
+                    "mapping": {
+                        "destination": "country"
+                    }
+                }
+            }
+        }
+    }
+}
+{% endhighlight %}
+
+to extract the following tables:
+
+users:
+
+|first\_name|last\_name|
+|---|---|
+|John|Doe|
+|Jane|Doe|
+
+user-address:
+
+|index|street|country|userId|
+|1|Blossom Avenue|United Kingdom|123|
+|2|Whiteheaven Mansions|United Kingdom|123|
+|1|Whiteheaven Mansions|United Kingdom|234|
+
+When imported to Storage, the primary key for the `user-address` table will be set to
+the combination of `index` and `userId`. The configuration has three important parts. 
+
+The first part:
+
+{% highlight json %}
+"id": {
+    "mapping": {
+        "destination": "id",
+        "primaryKey": true
+    }
+}
+{% endhighlight %}
+
+sets the `id` property from a user as the primary key for the resulting table. 
+
+The second part:
+
+{% highlight json %}
+"parentKey": {
+    "destination": "userId",
+    "primaryKey": true
+}
+{% endhighlight %}
+
+adds the primary key from users (i.e., the `id` property) to the child table `user-address` as a `userId` column. 
+It also sets it as the primary key for the `user-address` table.
+
+And the third part: 
+
+{% highlight json %}
+"index": {
+    "type": "column",
+    "mapping": {
+        "destination": "index",
+        "primaryKey": true
+    }
+}
+{% endhighlight %}
+
+adds the `index` column from the `user-address` table to the list of the primary key columns in that table.
+
+**Important:** If you set a column (or a combination of columns) as a primary key which has duplicate
+values, the rows will not be imported!
+
+See [example [EX115]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/115-multiple-pk-parent).
 
 #### Disabled Parent Key
 It is also possible to entirely disable the relationships between parts of the response objects. 

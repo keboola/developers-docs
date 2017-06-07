@@ -30,22 +30,22 @@ An example configuration:
 ## Configuration Parameters
 The following configuration parameters are supported for the `offset` method of pagination:
 
-- `limit` (required, integer) --- Page size
-- `limitParam` (optional, string) --- Name of the parameter in which the API expects the page size. The default value is `limit`.
-- `offsetParam` (optional, string) --- Name of the parameter in which the API expects the item offset. The default value is `offset`.
-- `firstPageParams` (optional, boolean) --- When false, the first page is retrieved without the page parameters. The default value is `true`.
-- `offsetFromJob` (optional, boolean) --- When true, the offset parameter value is taken from the job parameters. The default value is `false`.
+- `limit` (required, integer) --- page size
+- `limitParam` (optional, string) --- name of the parameter in which the API expects the page size; the default value is `limit`.
+- `offsetParam` (optional, string) --- name of the parameter in which the API expects the item offset; the default value is `offset`.
+- `firstPageParams` (optional, boolean) --- when false, the first page is retrieved without the page parameters; the default value is `true`.
+- `offsetFromJob` (optional, boolean) --- when true, the offset parameter value is taken from the job parameters; the default value is `false`.
 
 The limit value is configured by the `limit` parameter, but it may be overridden in 
 the [job parameters](/extend/generic-extractor/configuration/config/jobs/#request-parameters). The offset value is computed automatically starting from 0, but it may be overridden in the job parameters if `offsetFromJob` is set to true.
 
-**Important:** You must not set the limit parameter above the limit supported by the API. Setting the 
+**Important:** Do not set the limit parameter above the limit supported by the API. Setting the 
 limit to, e.g., 1000 if the API returns 100 items at most would cause the extraction to stop after
 the first page. This is because the [underflow condition](/extend/generic-extractor/configuration/api/pagination/#stopping-strategy)
 would be triggered.
 
 ### Stopping Condition
-Scrolling is stopped when the result contains less items than requested --- specified in the
+Scrolling is stopped **when the result contains less items than requested**	 --- specified in the
 `limit` configuration (*underflow*). This also includes an instance when no items are returned, or the 
 response is empty.
 

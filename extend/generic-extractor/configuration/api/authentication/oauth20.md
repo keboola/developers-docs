@@ -8,8 +8,7 @@ permalink: /extend/generic-extractor/configuration/api/authentication/oauth20/
 
 OAuth 2.0 Authentication is one of [two OAuth methods](/extend/generic-extractor/configuration/api/authentication/#oauth) and
 is supported only for [registered components](/extend/generic-extractor/registration/). 
-OAuth 2.0 authentication is configured by setting
-the `type` key to `oauth20`:
+It is configured by setting the `type` key to `oauth20`:
 
 {% highlight json %}
 {
@@ -27,15 +26,15 @@ the `type` key to `oauth20`:
 
 The OAuth 2.0 authentication process is described by the [following diagram](http://docs.spring.io/spring-social/docs/1.0.0.M3/reference/html/serviceprovider.html):
 
-![Diagram - OAuth 2.0 authentication](/extend/generic-extractor/api/authentication/oauth20-diagram.png)
+![Diagram - OAuth 2.0 authentication](/extend/generic-extractor/configuration/api/authentication/oauth20-diagram.png)
 
-On the diagram, step `6` represents the end of authentication and the actual communication with 
+In the diagram, step `6` represents the end of authentication and the actual communication with 
 the API (extraction of data) may begin.
-The final authorization section for configuring Generic Extractor is generated between
+The final authorization section of the Generic Extractor configuration is generated between
 steps `5` and `6`. When a component is registered, steps `1` --- `6` of the process are handled by 
 KBC (and the end-user). 
 
-When you want to **develop and test** a new component with the OAuth authorization, go through 
+To **develop and test** a new component with the OAuth authorization, go through 
 steps `1` --- `6` manually. At step `5`, you will obtain a response which needs to be put
 in the `authorization.oauth_api.credentials.data` section of the configuration. The response can be 
 either plaintext or a JSON. Let's say you obtain a simple plaintext string:
@@ -134,6 +133,7 @@ The response obtained from the service provider (the API) is a plaintext string 
 is simply a token to be used to access other API calls. The `api.authentication.headers` section creates
 the header `Authorization: Bearer SomeToken1234abcd567ef` using the 
 [`concat` function](/extend/generic-extractor/functions/#concat).
+
 See [example [EX103]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/103-oauth2-bearer).
 
 ### HMAC Authentication
@@ -256,4 +256,6 @@ The first step is the [`implode` function](/extend/generic-extractor/functions/#
 passed to the [`hash_hmac` function](/extend/generic-extractor/functions/#hash_hmac) along with the
 parameters `sha256` (specifying the hashing algorithm) and the hashing key taken from the `authorization` property
 `data.mac_secret`. The last (topmost) step is the [`concat` function](/extend/generic-extractor/functions/#concat); it
-concatenates all parts of the `Authorization` header. See [example [EX104]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/104-oauth2-hmac).
+concatenates all parts of the `Authorization` header. 
+
+See [example [EX104]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/104-oauth2-hmac).

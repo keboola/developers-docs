@@ -23,25 +23,24 @@ next page in the response. This scroller is suitable for APIs supporting the
 {% endhighlight %}
 
 ## Configuration Parameters
-The following configuration parameters are supported for the `response.url` method of pagination:
+The following configuration parameters are supported for the `response.url` pagination method:
 
-- `urlKey` (optional, string) --- Path in the response to the field which contains the URL of the next request. 
-The default value is `next_page`.
+- `urlKey` (optional, string) --- path in the response to the field which contains the URL of the next request; 
+the default value is `next_page`.
 - `paramIsQuery` (optional, boolean) 
-	- When true, the URL is assumed to be only [query string](/extend/generic-extractor/tutorial/rest/#url) parameters. 
-	- When false, a URL with a path is assumed. `false` is also the default value.
-- `includeParams` (optional, boolean) --- When true, the [job parameters](/extend/generic-extractor/configuration/config/jobs/#request-parameters) 
-are added to the provided URL. The default value is `false`.
+	- if `true` --- URL is assumed to be only [query string](/extend/generic-extractor/tutorial/rest/#url) parameters; 
+	the parameters in the response **override** the [parameters in the job](/extend/generic-extractor/configuration/config/jobs/#request-parameters). 
+	- if `false` --- URL with a path is assumed. `false` is the default value; the parameters in the response 
+	**are overridden** by the parameters in the job. 
+- `includeParams` (optional, boolean) 
+	- if `true` --- job parameters **are added** to the parameters of the URL provided in the response; the default value is `false`. 
 
-If `includeParams` is true, the [job parameters](/extend/generic-extractor/configuration/config/jobs/#request-parameters) are merged into
-the parameters of the URL in the response. If `paramIsQuery` is false, the parameters in the response **are overridden**
-by the parameters in the job. If `paramIsQuery` is true, then the parameters in the response **override** the parameters in 
-the job. See the [examples below](#examples).
+See the [examples below](#examples).
 
 ### Stopping Condition
-The pagination ends when the value of the `urlKey` parameter is empty --- the key is not present at all, is null,
-is an empty string or is `false`. Take care when configuring the `urlKey` parameter. If you, for example, misspell the
-key's name, the extraction will not go beyond the first page.
+The pagination ends **when the value of the `urlKey` parameter is empty** --- the key is not present at all, is null,
+is an empty string or is `false`. Be careful when configuring the `urlKey` parameter. If you, for example, misspell the
+key name, the extraction will not go beyond the first page. 
 [Common stopping conditions](/extend/generic-extractor/configuration/api/pagination/#stopping-strategy) also apply.
 
 ## Examples
@@ -83,7 +82,7 @@ If the URL is *relative* (`users?page=2`), it is appended to the endpoint URL.
 See [example [EX054]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/054-pagination-response-url-basic).
 
 ### Merging Parameters
-If you need to pass additional parameters to each of the page URLs, use the `includeParams` parameter:
+To pass additional parameters to each of the page URLs, use the `includeParams` parameter:
 
 {% highlight json %}
 {
@@ -162,7 +161,7 @@ parameters which should be used for querying the next page.
  }
 {% endhighlight %}
 
-You must then use the `paramsIsQuery` configuration, so that your Generic Extractor can produce a 
+Then use the `paramsIsQuery` configuration so that your Generic Extractor can produce a 
 valid URL:
 
 {% highlight json %}
@@ -196,7 +195,7 @@ valid URL:
 {% endhighlight %}
 
 Also notice that with the above 
-configuration the `page` parameter specified in the job is used only for the first page, because it 
+configuration the `page` parameter specified in the job is used only for the first page because it 
 is overridden by the `page` parameter given in the response. That is to say that the first request is sent to
 `/users?account=123&page=start` and the second request is sent to `/users?account=123&page=2`.
 

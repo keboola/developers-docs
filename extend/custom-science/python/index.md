@@ -309,7 +309,7 @@ You can look at the [sample application](https://github.com/keboola/docs-custom-
 at a more complicated [TextSpliter application](https://github.com/keboola/python-custom-application-text-splitter/blob/master/main.py).
 
 ## Continuous Integration and Testing
-Once you have your script contained, use standard Python testing methods such as [py.test](http://pytest.org/latest/).
+Once you have your script contained, use standard Python testing methods such as [unittest](https://docs.python.org/3/library/unittest.html).
 It is important to run tests automatically. Set them up to run every time you push a commit into your repository.
 
 ### Integration with Travis
@@ -358,44 +358,36 @@ services:
     image: quay.io/keboola/docker-custom-python:latest
     tty: true
     stdin_open: true
-    command: /bin/sh /src/tests.sh
+    working_dir: /data/
+    command: python -m unittest discover -s /src/
     volumes:
       - ./:/src/
+      - ./test/data/:/data/
+    environment:
+      - KBC_DATADIR=/src/test/data/
+
 {% endhighlight %}
 
 The `image` option defines what Docker Image is used for running the tests -- `quay.io/keboola/docker-custom-python:latest` refers to
 [our image](https://quay.io/repository/keboola/docker-custom-r?tab=tags) we use to run Custom Science extensions on
 our production servers. The `latest` part refers to an image tag, which points to the highest stable version.
-The `volumes` option defines that the current directory will be mapped to the `/src/` directory inside the image.
-The `command` option defines the command for running the `/bin/sh /src/tests.sh` tests. It will be run **inside** the Docker image,
-so you do not need to have shell available on your machine. This leads us to the
-[`tests.sh` file](https://github.com/keboola/docs-custom-science-example-python-ci-testing/blob/master/tests.sh),
-which should be also created in the root of your repository:
-
-{% highlight bash %}
-#!/bin/sh
-
-flake8 --max-line-length=180 /src/
-py.test --cov=text_splitter --cov-report term-missing /src/
-{% endhighlight %}
-
-The above simple [Shell script](http://www.freeos.com/guides/lsst/) will first try to check your package using the
-[flake8 checker](https://pypi.python.org/pypi/flake8) and then run the tests with
-[pytest](http://pytest.org/latest/). Don't forget that the `/src/` directory maps to the root directory of your
-repository (we have defined this in `docker-compose.yml`).
+The `volumes` option defines that the current directory will be mapped to the `/src/` directory inside the container.
+Also the `test/data/` directory will be mapped to `/data/` directory inside the container (this replicates the production
+environment).
+The `command` option defines the command for running the `python -m unittest discover` tests. It will be run **inside** the Docker container, so you do not need to have python shell available on your machine. The above command will run the tests with [unittest](https://docs.python.org/3/library/unittest.html). Don't forget that the `/src/` directory maps to the root directory of your repository (we have defined this in `docker-compose.yml`).
+The `environment` `KBC_DATADIR=/src/test/data/` option sets the `KBC_DATADIR` environment variable to the data directory so that it refers to the `tests/data/` directory
+in the root of your repository.
 
 #### Running
 To run the tests in the Docker container, [install Docker](/extend/docker/tutorial/setup/) on your machine,
 and execute the following command line (in the root of your repository):
 
-    docker-compose run --rm -e KBC_DATADIR=/src/tests/data/ tests
+    docker-compose run --rm tests
 
 Docker-compose will process the `docker-compose.yml` and execute the `tests` service as defined on
 its [4th line](https://github.com/keboola/docs-custom-science-example-python-ci-testing/blob/master/docker-compose.yml#L4). This service will take our
-Docker `docker-custom-python` image and map the current directory into a `/src/` directory inside the image. Then it will execute the `/src/tests.sh` shell script
-inside that image. Where `/src/tests.sh` refers to the `tests.sh` script in the root of your repository. This will check your Python class.
-The `-e KBC_DATADIR=/src/tests/data/` option sets the `KBC_DATADIR` environment variable to the data directory so that it refers to the `tests/data/` directory
-in the root of your repository.
+Docker `docker-custom-python` image and map the current directory into a `/src/` directory inside the created container. Then it will execute the `python -m unittest discover` script
+inside that container. This will check your Python class.
 
 #### Running on Travis
 To run the tests in a Docker container automatically, automate them, again, to run on every push to your git repository. Now, you are not limited to
@@ -408,18 +400,11 @@ sudo: required
 services:
   - docker
 
-before_script:
-  - docker -v
-  - docker-compose -v
-  - docker-compose build tests
-
-script
-  - docker-compose run --rm -e KBC_DATADIR=/src/tests/data/ tests
+script: 
+  - docker-compose run --rm tests
 {% endhighlight %}
 
-Most of the configuration is related to setting up Docker, the only important part is two last lines. `docker-compose build tests` will build the
-Docker image, which will be skipped in case you are not using your own [Dockerfile](/extend/docker/tutorial/howto/).
-The `docker-compose run --rm -e KBC_DATADIR=/src/tests/data/ tests` command is the most important as it actually runs docker-compose, and subsequently
+The `docker-compose run --rm tests` command is the most important as it actually runs docker-compose, and subsequently
 all the tests (it is the same command you can use [locally](/extend/custom-science/python/#running)).
 
 All the above configuration is available in the [sample repository](https://github.com/keboola/docs-custom-science-example-python-ci-testing).

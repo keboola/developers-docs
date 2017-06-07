@@ -6,7 +6,11 @@ permalink: /extend/generic-extractor/configuration/config/jobs/children/
 * TOC
 {:toc}
 
-Child jobs allow you to iterate/traverse over sub-resources of an API resource. Because child jobs may contain
+*If new to Generic Extractor, learn about [jobs in our tutorial](/extend/generic-extractor/tutorial/jobs/) first.*
+*Use [Parameter Map](/extend/generic-extractor/map/) to help you navigate among various 
+configuration options.*
+
+Child jobs allow you to **iterate/traverse over sub-resources of an API resource**. Because child jobs may contain
 other child jobs, you may query for sub-sub-resources in a virtually unlimited depth.
 
 For instance, when downloading a list of users, you can download details of each user or a list of orders for each
