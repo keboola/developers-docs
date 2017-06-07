@@ -8,7 +8,7 @@ permalink: /extend/generic-extractor/configuration/api/pagination/offset/
 
 The Offset scroller handles a pagination strategy in which the API splits the results into pages
 of the same size (limit parameter) and navigates through them using the **item offset** parameter. This 
-is similar to paging in SQL language. If you need to use *page offset*, use the 
+is similar to paging in SQL language. If you need to use **page offset**, use the 
 [Page Number Scroller](/extend/generic-extractor/configuration/api/pagination/pagenum/).
 
 An example configuration:
@@ -37,16 +37,15 @@ The following configuration parameters are supported for the `offset` method of 
 - `offsetFromJob` (optional, boolean) --- when true, the offset parameter value is taken from the job parameters; the default value is `false`.
 
 The limit value is configured by the `limit` parameter, but it may be overridden in 
-the [job parameters](/extend/generic-extractor/configuration/config/jobs/#request-parameters). The offset value is computed automatically starting from 0, but it may be overridden in the job parameters if `offsetFromJob` is set to true.
+the [job parameters](/extend/generic-extractor/configuration/config/jobs/#request-parameters). The offset value is computed automatically starting from 0, but it may be overridden in the job parameters if `offsetFromJob` is set to `true`.
 
-**Important:** Do not set the limit parameter above the limit supported by the API. Setting the 
-limit to, e.g., 1000 if the API returns 100 items at most would cause the extraction to stop after
-the first page. This is because the [underflow condition](/extend/generic-extractor/configuration/api/pagination/#stopping-strategy)
-would be triggered.
+**Important:** Do not set the limit parameter above the limit supported by the API. To give an example, if the API returned 
+100 items at most and you set the limit 1000, it would cause the extraction to stop after the first page. This is because the 
+[underflow condition](/extend/generic-extractor/configuration/api/pagination/#stopping-strategy) would be triggered.
 
 ### Stopping Condition
 Scrolling is stopped **when the result contains less items than requested**	 --- specified in the
-`limit` configuration (*underflow*). This also includes an instance when no items are returned, or the 
+`limit` configuration (underflow). This also includes an instance when no items are returned, or the 
 response is empty.
 
 Let's say that you have an API endpoint `users` which takes the parameters `limit` and `offset`. 
@@ -68,10 +67,10 @@ There are four users in total. The response looks as follows:
 Querying `users?offset=0&limit=2` returns the first two users. Querying `users?offset=2limit` returns
 the second two users. Generic Extractor will then query `users?offset=4&limit=2`. 
 
-If the response is empty (the API returns an empty page, `[])`, the *underflow* check kicks in 
+If the response is empty (the API returns an empty page, `[])`, the **underflow** check kicks in 
 and the extraction is stopped. See [example [043]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/043-paging-stop-underflow).
 
-Note that the *emptiness* is evaluated on the extracted array as [auto-detected](/extend/generic-extractor/configuration/config/jobs/#data-field) or 
+Note that the **emptiness** is evaluated on the extracted array as [auto-detected](/extend/generic-extractor/configuration/config/jobs/#data-field) or 
 specified by the [`dataField`](/extend/generic-extractor/configuration/config/jobs/#data-field) configuration. 
 That means that the entire response
 may be non-empty. See [example [044]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/044-paging-stop-underflow-struct).
@@ -115,11 +114,22 @@ offset for the needs of a specific API:
 {% endhighlight %}
 
 Here the API expects the parameters `count` and `skip`. The first request will be sent with the parameters `count=100` 
-and `skip=0`; for example `/users?count=2&skip=0`. See [example [EX049]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/049-pagination-offset-rename).
+and `skip=0`, for example, `/users?count=2&skip=0`. 
+
+See [example [EX049]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/049-pagination-offset-rename).
 
 ### Overriding Limit and Offset
 It is possible to override both the limit and offset parameters of a specific API job. 
 This is useful in case you want to use different limits for different API endpoints.
+
+In the configuration below, the first API request to the `users` endpoint will be
+`GET /users?count=2&skip=2`. This is because the values `count=2` and `skip=2` are taken from the 
+job `params`. 
+
+Notice that the job `params` names must correspond to the names of the offset and limit parameters 
+(`skip` and `count` in this case). The limit parameter is always overridden to 5, no setting is necessary. 
+The offset parameter is overridden to 2; this requires setting `offsetFromJob`. 
+Without it being set, the `jobs.params.skip` value would be ignored. 
 
 {% highlight json %}
 {
@@ -157,15 +167,8 @@ This is useful in case you want to use different limits for different API endpoi
 }
 {% endhighlight %}
 
-In the above configuration, the first API request to the `users` endpoint will be
-`GET /users?count=2&skip=2`. This is because the values `count=2` and `skip=2` are taken from the 
-job `params`. Notice that the job `params` names must correspond to the names of the offset and 
-limit parameters (`skip` and `count` in this case). The limit parameter is always overridden to 5, 
-no setting is necessary. The offset parameter is overridden to 2; this requires setting `offsetFromJob`. 
-Without setting `offsetFromJob` the `jobs.params.skip` value would be ignored. 
 The entire endpoint configuration means that the first two items of the `users` endpoint will be skipped.
-
-For the `orders` endpoint the `skip` (offset) parameter is not overridden, and therefore it starts at zero.
+For the `orders` endpoint, the `skip` (offset) parameter is not overridden, and therefore it starts at zero.
 The `count` (limit) parameter is set to 10. Therefore the first request to that endpoint will be
 `GET /orders?count=10&skip=0`. 
 
