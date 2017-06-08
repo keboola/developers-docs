@@ -110,7 +110,7 @@ See an [example](#job-parameters).
 
 ### sha1
 The [`sha1` function](http://php.net/manual/en/function.sha1.php) calculates the [SHA-1 hash](https://en.wikipedia.org/wiki/SHA-1) of a 
-string. The function takes one argument, which is the string to hash.
+string. The function takes one argument which is the string to hash.
 
 {% highlight json %}
 {
@@ -128,7 +128,7 @@ See an [example](#job-parameters).
 ### base64_encode
 The [`base64_encode` function](http://php.net/manual/en/function.base64-encode.php) converts a
 string to the [MIME Base64 encoding](https://en.wikipedia.org/wiki/Base64#MIME). The function
-takes one argument, which is the string to encode.
+takes one argument which is the string to encode.
 
 {% highlight json %}
 {
@@ -245,7 +245,7 @@ write:
 }
 {% endhighlight %}
 
-The above will give `1508015760` which represents the date `2017-10-14 21:16:00`. The second argument
+The above will give `1508015760`, which represents the date `2017-10-14 21:16:00`. The second argument
 specifies the base date (as a Unix timestamp) from which the relative date is computed. This is particularly
 useful for [incremental extraction](/extend/generic-extractor/incremental/). Also note that
 it is common to combine the `strtottime` and `date` functions to convert between string and timestamp
@@ -300,7 +300,7 @@ of strings into one using a delimiter. The function takes
 two arguments: 
 
 1. Delimiter string which is used for the concatenation
-2. Array of values to be concatenated. 
+2. Array of values to be concatenated 
 
 For example:
 
@@ -318,7 +318,7 @@ For example:
 }
 {% endhighlight %}
 
-The above will produce `apples,oranges,plums`. (See an [example](#headers).)
+The above will produce `apples,oranges,plums` (see an [example](#headers)).
 The delimiter can be empty, in which case the `implode` function is equivalent to the [`concat` function](#concat):
 
 {% highlight json %}
@@ -356,15 +356,15 @@ See an [example](#optional-job-parameters).
 
 ## Function Contexts
 Every place in the Generic Extractor configuration in which a function may be used may allow different arguments of the function.
-This is referred to as a **function context**. Many contexts share access to *configuration attributes*.
+This is referred to as a **function context**. Many contexts share access to **configuration attributes**.
 
 ### Configuration Attributes
-The *configuration attributes* are accessible in some function contexts and they represent the entire [`config`](/extend/generic-extractor/configuration/config/)
-section of Generic Extractor configuration. There is some processing involved, which means that:
+The configuration attributes are accessible in specific function contexts and they represent the entire [`config`](/extend/generic-extractor/configuration/config/)
+section of the Generic Extractor configuration. There is some processing involved:
 
-- the [`jobs`](/extend/generic-extractor/configuration/config/jobs/) section is removed entirely.
-- all other values are flattened (keys are concatenated using dot `.`) into a one-level deep object.
-- the result object is available in a property named `attr`.
+- The [`jobs`](/extend/generic-extractor/configuration/config/jobs/) section is removed entirely.
+- All other values are flattened (keys are concatenated using a dot `.`) into a one-level deep object.
+- The result object is available in a property named `attr`.
 
 For example, the following configuration:
 
@@ -433,21 +433,22 @@ will be converted to the following function context:
 
 ### Base URL Context
 The Base URL function context is used when setting the [`baseURL` for API](/extend/generic-extractor/configuration/api/#base-url), and it 
-contains [*configuration attributes*](/#function-contexts). 
+contains [configuration attributes](/#function-contexts). 
 
 See an [example](#api-base-url).
 
 ### Headers Context
 The Headers function context is used when setting the [`http.headers` for API](/extend/generic-extractor/configuration/api/#headers)
 or the [`http.headers` in config](/extend/generic-extractor/configuration/config/#http), and it contains 
-[*configuration attributes*](/#function-contexts). 
+[configuration attributes](/#function-contexts). 
 
 See an [example](#headers).
 
 ### Parameters Context
-The Parameters function context is used when setting job [request parameters --- `params`](/extend/generic-extractor/configuration/config/jobs/#request-parameters). It contains
-[*configuration attributes*](/#function-contexts) plus the times of the current (`currentStart`) and
-previous (`previousStart`) run of Generic Extractor. The times are [Unix timestamps](https://en.wikipedia.org/wiki/Unix_time).
+The Parameters function context is used when setting job [request parameters --- `params`](/extend/generic-extractor/configuration/config/jobs/#request-parameters). 
+It contains [configuration attributes](/#function-contexts) plus the times of the current 
+(`currentStart`) and previous (`previousStart`) run of Generic Extractor. 
+The times are [Unix timestamps](https://en.wikipedia.org/wiki/Unix_time).
 If the extraction is run for the first time, `previousStart` is 0.
 
 With the following configuration:
@@ -529,7 +530,7 @@ See an [example](#job-placeholders).
 
 ### User Data Context
 The User Data function context is used when setting the [`userData`](/extend/generic-extractor/configuration/config/#user-data). 
-The parameters context contains [*configuration attributes*](/#function-contexts) plus the times of the current (`currentStart`) and 
+The parameters context contains [configuration attributes](/#function-contexts) plus the times of the current (`currentStart`) and 
 previous (`previousStart`) run of Generic Extractor. The User Data Context is therefore
 same as the [Parameters Context](#parameters-context). 
 
@@ -538,7 +539,7 @@ See an [example](#user-data).
 ### Login Authentication Context
 The Login Authentication function context is used in the
 [login authentication](/extend/generic-extractor/configuration/api/authentication/login/) method.
-The Headers function context contains [*configuration attributes*](/#function-contexts). The login
+The Headers function context contains [configuration attributes](/#function-contexts). The login
 authentication context is the same for both `params` and `headers`
 [login authentication configuration options](/extend/generic-extractor/configuration/api/authentication/login/#configuration-parameters).
 
@@ -547,7 +548,7 @@ See an [example](#login-authentication).
 ### Query Authentication Context
 The Query Authentication function context is used in the
 [query authentication](/extend/generic-extractor/configuration/api/authentication/query/) method.
-The Query Authentication Context contains [*configuration attributes*](/#function-contexts) plus
+The Query Authentication Context contains [configuration attributes](/#function-contexts) plus
 a representation of the complete HTTP request to be sent (`request`) plus a key
 value list of query parameters of the HTTP request (`query`).
 
@@ -625,11 +626,11 @@ See the [basic example](#api-default-parameter) and a [more complicated example]
 ### OAuth 2.0 Authentication Context
 The OAuth Authentication Context is used for the
 [`oauth20`](/extend/generic-extractor/configuration/api/authentication/oauth20/) authentication method
-(it is not applicable to `oauth10`) and contains:
+(it is not applicable to `oauth10`) and contains the following:
 
-- representation of the complete HTTP request to be sent (`request`),
-- a key value list of query parameters of the HTTP request (`query`), and  
-- an `authorization` section containing the response from the OAuth service provider. 
+- Representation of the complete HTTP request to be sent (`request`)
+- A key value list of query parameters of the HTTP request (`query`)
+- An `authorization` section containing the response from the OAuth service provider
 
 This context is available for both the `headers` and `query` sections of the `oauth20` authentication methods.
 
@@ -774,8 +775,8 @@ leads to the following function context:
 {% endhighlight %}
 
 The `authorization` section of the configuration contains the
-[OAuth2 response](/extend/generic-extractor/configuration/api/authentication/oauth20/). The function context contains the
-the parsed and flattened response fields in the `user` property. The content of the
+[OAuth2 response](/extend/generic-extractor/configuration/api/authentication/oauth20/). The function context 
+contains the parsed and flattened response fields in the `user` property. The content of the
 `user` property is fully dependent on the response of the OAuth service provider. The
 `consumer` property contains the `client_id` and `client_secret` which contain values of
 `authorization.oauth_api.credetials.appKey` and
@@ -808,7 +809,7 @@ available as the `server` property of the `config` section, for instance:
 }
 {% endhighlight %}
 
-This means that the [*configuration attributes*](#configuration-attributes) will be available as:
+This means that the [configuration attributes](#configuration-attributes) will be available as:
 
 {% highlight json %}
 {
@@ -855,6 +856,9 @@ configuration, or use [API Query Authentication](/extend/generic-extractor/confi
 Using (or abusing) the API Query Authentication is possible if the default parameters represent authentication, or 
 if the API does not use any authentication method (two authentication methods are not possible):
 
+The below configuration reads the `#api-key` and `#secret-key` parameters from the `config` section,
+computes SHA-256 hash and sends it as a `tokenHash` parameter with every request. 
+
 {% highlight json %}
 {
     "parameters": {
@@ -893,9 +897,6 @@ if the API does not use any authentication method (two authentication methods ar
     }
 }
 {% endhighlight %}
-
-The above configuration reads the `#api-key` and `#secret-key` parameters from the `config` section,
-computes SHA-256 hash and sends it as a `tokenHash` parameter with every request. 
 
 See [example [EX099]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/099-function-query-parameters).
 
@@ -1073,8 +1074,8 @@ The following `user-detail` table will be extracted:
 
 Notice that the `parent_id` column contains the processed value and not the original one.
 
-See [example [EX085]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/085-function-job-placeholders)
-(or a not-so-useful [example [EX086]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/086-function-job-placeholders-reference)
+See [example [EX085]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/085-function-job-placeholders),
+or a not-so-useful [example [EX086]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/086-function-job-placeholders-reference)
 (using reference).
 
 ### Job Parameters
@@ -1087,7 +1088,10 @@ each request must be done with the [HTTP POST method](/extend/generic-extractor/
 }
 {% endhighlight %}
 
-The following configuration does exactly that:
+The following configuration does exactly that. The value of the token is taken from the configuration 
+root (using the `attr` reference). This is useful in case the configuration is used as part of a 
+[template](/extend/generic-extractor/registration/). The actual hash will be generated of the `NotSoSecret` value.
+
 
 {% highlight json %}
 {
@@ -1121,12 +1125,8 @@ The following configuration does exactly that:
 }
 {% endhighlight %}
 
-In the above configuration, the value of the token is taken from the configuration root (using the `attr` reference).
-This is useful in case the configuration is used as part of a [template](/extend/generic-extractor/registration/).
-The actual hash will be generated of the `NotSoSecret` value.
-
-See [example [EX089]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/089-function-job-parameters-md5) or an
-alternative [example [EX090] with SHA1 hash](https://github.com/keboola/generic-extractor/tree/master/doc/examples/090-function-job-parameters-sha1).
+See [example [EX089]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/089-function-job-parameters-md5) 
+or an alternative [example [EX090] with SHA1 hash](https://github.com/keboola/generic-extractor/tree/master/doc/examples/090-function-job-parameters-sha1).
 
 ### Optional Job Parameters
 Let's say you have an API which allows you to send the list of columns to be contained in the API response.
@@ -1135,7 +1135,9 @@ For example, to list users and include their `id`, `name` and `login` properties
 the config is generated by a [template](/extend/generic-extractor/registration/). If the end-user
 does not wish to filter the columns, they can
 list all the columns (which would be annoying) or leave the column filter empty. In that case, the API
-call would be `/users?showColumns=all`. The following configuration does exactly that:
+call would be `/users?showColumns=all`. 
+
+The following configuration does exactly that:
 
 {% highlight json %}
 {
@@ -1211,7 +1213,7 @@ The following table will be extracted:
 |3|John Doe|2017-04-20 10:17:20|
 |234|Jane Doe|2017-04-20 10:17:20|
 
-If tempted to use an alternative configuration:
+Or, use an alternative configuration that also adds the current date:
 
 {% highlight json %}
 "userData": {
@@ -1224,8 +1226,7 @@ If tempted to use an alternative configuration:
 }
 {% endhighlight %}
 
-The alternative configuration also adds the current date. But whereas the first one puts a single same
-date to each record, the alternative configuration will return different times for different records
+But whereas the first one puts a single same date to each record, the alternative configuration will return different times for different records
 as they are extracted.
 
 See [example [EX091]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/091-function-user-data) or
@@ -1304,9 +1305,9 @@ See [example [EX093]](https://github.com/keboola/generic-extractor/tree/master/d
 ### Nested Functions
 If the API in the [above example](#headers) tries to mimic the
 [HTTP authentication](/extend/generic-extractor/configuration/api/authentication/basic/),
-the header has to be sent as a [base64 encoded](https://en.wikipedia.org/wiki/Base64#MIME) value. That is instead of sending a
-`JohnDoe:TopSecret`, you have to send `Sm9obkRvZTpUb3BTZWNyZXQ=`. To do this you have to wrap the `concat`
-function which generates the header value in another function (`base64_encode`).
+the header has to be sent as a [base64 encoded](https://en.wikipedia.org/wiki/Base64#MIME) value. 
+That is instead of sending a `JohnDoe:TopSecret`, you have to send `Sm9obkRvZTpUb3BTZWNyZXQ=`. To do this 
+you have to wrap the `concat` function which generates the header value in another function (`base64_encode`).
 
 {% highlight json %}
 "api": {
@@ -1432,8 +1433,8 @@ Then there is another outer part:
 }
 {% endhighlight %}
 
-converting the timestamp back to a string format (`Y-m-d` format), which yields `2017-10-11`. This
-value is assigned to the `to` parameter of the API call.
+converting the timestamp back to a string format (`Y-m-d` format) which yields `2017-10-11`. 
+This value is assigned to the `to` parameter of the API call.
 
 See [example [EX096]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/096-function-nested-from-to).
 
@@ -1441,9 +1442,10 @@ See [example [EX096]](https://github.com/keboola/generic-extractor/tree/master/d
 Suppose you have an API which requires you to send a username and password separated by a colon and
 base64 encoded --- for example, `JohnDoe:TopSecret` (base64 encoded to `Sm9obkRvZTpUb3BTZWNyZXQ=`) in the
 `X-Authorization` header to an `/auth` endpoint. The login endpoint then returns a token,
-which can be used with other API calls. The following configuration reads both the login and
-password parameters from the `config` section and uses the `login` authorization method to send them
-to a special `/auth` endpoint.
+which can be used with other API calls. 
+
+The following configuration reads both the login and password parameters from the `config` section and 
+uses the `login` authorization method to send them to a special `/auth` endpoint.
 
 {% highlight json %}
 {
