@@ -6,27 +6,28 @@ permalink: /extend/generic-extractor/incremental/
 * TOC
 {:toc}
 
-Extracting data incrementally is universally beneficial --- it speeds up the extraction and lowers the load on both the API and
+Extracting data incrementally is universally beneficial --- it **speeds up the extraction** and **lowers the load** on both the API and
 [KBC Storage](https://help.keboola.com/storage/) (thus saving 
 [credits](https://help.keboola.com/management/limits/#project-power)).
 
 ## Options
-After you have incrementally extracted data from an API, the data must be [incrementally loaded](https://help.keboola.com/storage/tables/#incremental-loading)
+After you have incrementally extracted data from an API, the data must be 
+[incrementally loaded](https://help.keboola.com/storage/tables/#incremental-loading)
 into Storage. To do that, simply set `"incrementalOutput": true` in the `config` section. 
 
 There are, however, a number of implications in the incremental loads. It essentially boils downs to the following use cases, 
 depending on what kind of data you are importing (extracting from an API):
 
-- The imported data contain only **added entries**. When `incrementalOutput` is turned on, the data will be simply appended to the 
-target table in Storage. Turning `incrementalOutput` to false probably makes no sense because the table will contain only the new entries.
-- The imported data contain **added and modified entries**. When `incrementalOutput` is turned on, set a primary key on the table 
-so that new rows are added and existing [rows are updated](https://help.keboola.com/storage/tables/#primary-key-deduplication). 
-If the primary key is not set, the modified entries will be duplicated in the target table. Turning `incrementalOutput` to false 
-probably makes no sense because the table will contain only the new entries.
-- The imported data contain **all rows**. In this case, set a primary key for the table or turn `incrementalOutput` to false. Turning 
-`incrementalOutput` to true probably makes no sense because the table will contain duplicate entries. If you set the primary key, new 
-rows will be added and modified rows will be updated. Note that in this case more 
-[credits](https://help.keboola.com/management/limits/#project-power) are consumed.
+- The imported data contains only **added entries**. When `incrementalOutput` is turned on, the data will be 
+simply appended to the target table in Storage. Turning `incrementalOutput` to false probably makes no sense 
+because the table will contain only the new entries.
+- The imported data contains **added and modified entries**. When `incrementalOutput` is turned on, set a primary key on the table so that new rows are added and existing [rows are updated](https://help.keboola.com/storage/tables/#primary-key-deduplication). 
+If the primary key is not set, the modified entries will be duplicated in the target table. Turning 
+`incrementalOutput` to false probably makes no sense because the table will contain only the new entries.
+- The imported data contains **all rows**. In this case, set a primary key for the table or turn 
+`incrementalOutput` to false. Turning `incrementalOutput` to true probably makes no sense because the table will 
+contain duplicate entries. If you set the primary key, new rows will be added and modified rows will be updated. 
+Note that in this case more [credits](https://help.keboola.com/management/limits/#project-power) are consumed.
 
 In neither of these situations will the missing rows get deleted. If you want to do so, the only way is 
 to turn `incrementalOutput` to false and do full loads. 
