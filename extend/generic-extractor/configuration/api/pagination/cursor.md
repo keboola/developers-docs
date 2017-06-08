@@ -27,10 +27,10 @@ request, you must tell the API to start with ID 101.
 ## Configuration Parameters
 The following configuration parameters are supported for the `cursor` method of pagination:
 
-- `idKey` (required, string) --- Path to the key which contains the value of the cursor; the path is entered relative to the exported items.
-- `param` (required, string) --- Name of the [query string](/extend/generic-extractor/tutorial/rest/#url) parameter in which the above *cursor value* should be sent to the API.
-- `increment` (optional, integer) --- Value by which the cursor value will be incremented/decremented. The default value is `0`.
-- `reverse` (optional, boolean) --- When true, the cursor is reversed. The default value is `false`.
+- `idKey` (required, string) --- path to the key which contains the value of the cursor; the path is entered relative to the exported items.
+- `param` (required, string) --- name of the [query string](/extend/generic-extractor/tutorial/rest/#url) parameter in which the above **cursor value** should be sent to the API.
+- `increment` (optional, integer) --- value by which the cursor value will be incremented/decremented; the default value is `0`.
+- `reverse` (optional, boolean) --- when `true`, the cursor is reversed; the default value is `false`.
 
 In default mode, Generic Extractor examines the response and finds the **maximum** value in the
 property specified in the `idKey`. Then it adds `increment` to the value and sends it to the 
@@ -42,7 +42,7 @@ The request parameter specified in the `param` configuration overwrites the para
 (see an [example](#reverse-configuration)).
 
 ### Stopping Condition
-The pagination ends when the `dataField` of the response contains no items. Because of this, each 
+The pagination ends **when the `dataField` of the response contains no items**. Because of this, each 
 run with the `cursor` scroller produces a similar warning:
     
     Warning: datafield 'items' contains no data!

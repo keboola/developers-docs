@@ -83,7 +83,9 @@ This is useful when you want to use different limits for different API endpoints
 
 In the following configuration, the first request is sent to `/users?count=2` because the 
 `limit` parameter was renamed to `count`. Then the default value of `count` was overridden for the 
-`users` API endpoint in `jobs.params.count`. The `firstPageParams` is set to false, which means that
+`users` API endpoint in `jobs.params.count`. 
+
+The `firstPageParams` is set to false, which means that
 the page parameter (named `count`) is **not** sent in the first request. The second API 
 request is sent to `/users?count=2&set=1`. Because the `firstPage` option is set to `0`, the 
 second page index is `1`.
