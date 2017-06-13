@@ -102,7 +102,6 @@ this authentication method, the following configuration can be used:
             "baseUrl": "https://example.com/",
             "authentication": {
                 "type": "oauth20",
-                "format": "json",
                 "headers": {
                     "Authorization": {
                         "function": "concat",
@@ -115,6 +114,14 @@ this authentication method, the following configuration can be used:
                     }
                 }
             }
+        },
+        "config": {
+            "jobs": [
+                {
+                    "endpoint": "users",
+                    "dataType": "users"
+                }
+            ]
         }
     },
     "authorization": {
@@ -125,7 +132,7 @@ this authentication method, the following configuration can be used:
                 "#appSecret": "clientSecret"
             }
         }
-    }    
+    }
 }
 {% endhighlight %}
 
