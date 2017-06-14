@@ -198,7 +198,7 @@ The following configuration is able to handle the situation:
             "pagination": {
                 "method": "response.param",
                 "responseParam": "scroll.token",
-                "queryParam": "scrollToken"
+                "queryParam": "scrollToken",
                 "scrollRequest": {
                     "endpoint": "results",
                     "method": "GET"
@@ -236,6 +236,7 @@ is therefore:
 When the response contains a `scroll.token` field, the scroller starts to act and overrides the above 
 configuration with the one provided in the `scrollRequest` configuration. The next request is therefore 
 a `GET` to `/results?scrollToken=b97d814f1a715d939f3f96bc574445de`. The `queryParam` configuration
-causes the `scrollToken` request parameter. This will repeat until the `scroll.token` field in the response is empty.
+causes the `scrollToken` request parameter to be added. This will repeat until the `scroll.token` field in 
+the response is empty.
 
 See [example [EX059]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/059-pagination-response-param-scroll-request).

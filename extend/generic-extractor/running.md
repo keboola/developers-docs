@@ -126,16 +126,16 @@ Read more about [encryption](/overview/encryption/).
 ### Building and Running the Image
 To build the container from source:
 
-- Clone this repository: `git clone https://github.com/keboola/generic-extractor.git`
-- Switch to the created directory: `cd generic-extractor`
-- Build the container: `docker-compose build`
-- Install dependencies locally: `docker-compose run --rm extractor composer install`
-- Create a **data folder** for configuration: `mkdir data`
+- Clone this repository: `git clone https://github.com/keboola/generic-extractor.git`.
+- Switch to the created directory: `cd generic-extractor`.
+- Build the container: `docker-compose build`.
+- Install dependencies locally: `docker-compose run --rm extractor composer install`.
+- Create a **data folder** for configuration: `mkdir data`.
 
 To run the built container:
 
 - Create a configuration file `config.json` in the **data folder**.
-- Run the extraction: `docker-compose run --rm extractor`
+- Run the extraction: `docker-compose run --rm extractor`.
 - You will find the extracted data in the `out/tables` sub-directory of the **data folder**.
 
 Before running the extractor again, it is recommended to clear the `out` directory by
@@ -150,9 +150,9 @@ optionally their headers (`*.requestHeaders` and `*.responseHeaders`).
 
 To run the examples:
 
-- Clone Generic Extractor repository: `git clone https://github.com/keboola/generic-extractor.git`
-- Navigate to the documentation directory: `cd generic-extractor/doc`
-- Run a single example of your choice, e.g.: `docker-compose run -e "KBC_EXAMPLE_NAME=001-simple-job" extractor`
+- Clone Generic Extractor repository: `git clone https://github.com/keboola/generic-extractor.git`.
+- Navigate to the documentation directory: `cd generic-extractor/doc`.
+- Run a single example of your choice, e.g.: `docker-compose run -e "KBC_EXAMPLE_NAME=001-simple-job" extractor`.
 - The output will be available in `examples/001-simple-job/out/tables`.
 - Or run all examples by executing `./run-samples.sh`.
 

@@ -6,14 +6,16 @@ permalink: /extend/generic-extractor/iterations/
 * TOC
 {:toc}
 
-The `iterations` section allows you to execute a configuration **multiple times**, each time with **different
+The `iterations` section allows you to **execute a configuration multiple times, each time with different
 values**. The most typical use for `iterations` is extraction of the same data from multiple accounts. 
 Iterations can always be replaced by creating multiple complete configurations of Generic Extractor.
 
 Iterations are specified as an array of objects, where each object contains the same properties 
 as the [`config`](/extend/generic-extractor/configuration/config/) section. All properties of the object are optional. 
 
-Consider the following example:
+Consider the following example of an `iterations` configuration defining that the entire Generic Configuration 
+will be executed twice: the first time with the username `JohnDoe`, and the second time with the username 
+`DoeJohn`.
 
 {% highlight json %}
 {
@@ -46,11 +48,7 @@ Consider the following example:
 }
 {% endhighlight %}
 
-The above `iterations` configuration defines that the entire Generic Configuration will be executed
-twice. The first time with the username `JohnDoe`, and the second time with
-the username `DoeJohn`. 
-
-Since all `iterations` properties override the `config` properties, they are accessible 
+Since **all `iterations` properties override the `config` properties**, they are accessible 
 as [configuration attributes](/extend/generic-extractor/functions/#configuration-attributes)
 via the `attr` property. 
 
