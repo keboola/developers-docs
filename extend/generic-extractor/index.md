@@ -10,8 +10,8 @@ Generic Extractor is a [KBC component](/overview/) which acts like a customizabl
 [HTTP REST](/extend/generic-extractor/tutorial/rest/) client. It can be configured to extract data
 from virtually any sane web API.
 
-Due to the versatility of different APIs running in the wild, Generic Extractor offers a **vast amount
-of configuration options**. Even though it may seem somewhat abstract and hard to understand at first,
+Due to the versatility of different APIs running in the wild, Generic Extractor offers a vast amount
+of [**configuration options**](/extend/generic-extractor/configuration/). Even though it may seem somewhat abstract and hard to understand at first,
 once you configure your first extractor, you will see that it is a great tool. With it, you can build
 an entirely new extractor for KBC in **less than an hour**.
 

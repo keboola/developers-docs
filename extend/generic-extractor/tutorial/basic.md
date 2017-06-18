@@ -15,7 +15,10 @@ have its documentation at hand. You also need the
 
 ## Configuration
 Generic Extractor configuration is written in [JSON format](/extend/generic-extractor/tutorial/json/) 
-and is composed of several sections. The main parts and their nesting are shown in this schema:
+and is composed of [several sections](/extend/generic-extractor/configuration/#configuration-sections) (a 
+[configuration map](/extend/generic-extractor/map/) for navigation is available). 
+
+The main parts of the configuration and their nesting are shown in the following schema:
 
 {: .image-popup}
 ![Schema - Generic Extractor configuration](/extend/generic-extractor/generic-intro.png)
@@ -200,7 +203,7 @@ creates a new table which has the column `JSON_parentId` with that value so that
 
 ## Summary
 The above tutorial demonstrates a very basic configuration of Generic Extractor. The extractor is capable 
-of doing much more; see other parts of this tutorial for explanation of
+of doing much more; see other parts of this tutorial for an explanation of
 
 - [Pagination](/extend/generic-extractor/tutorial/pagination/),
 - [Jobs](/extend/generic-extractor/tutorial/jobs/), and
