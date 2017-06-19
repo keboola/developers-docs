@@ -93,7 +93,9 @@ which will give you
 
 Then find out the IP address of the running container, for instance by running docker inspect
 
+{% raw %}
     docker inspect --format '{{ .NetworkSettings.IPAddress }}' 6cc
+{% endraw %}
 
 which will give you, for example:
 
