@@ -102,6 +102,6 @@ which will give you, for example:
 (Note: use double quotes in the above command when running on Windows)
 You can now start your client using that address as `KBC_LOGGER_ADDR` environment variable together with (`KBC_LOGGER_PORT` set to 12202), for example:
 
-    docker run -e KBC_LOGGER_ADDR=172.17.0.3 -e KBC_LOGGER_PORT=12202 quay.io/keboola/docs-example-logging-php:master
+    docker run -e KBC_LOGGER_ADDR=172.17.0.2 -e KBC_LOGGER_PORT=12202 quay.io/keboola/docs-example-logging-php:master
 
 You will now see messages printed in the output of your server.
