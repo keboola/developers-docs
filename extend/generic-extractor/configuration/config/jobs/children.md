@@ -143,10 +143,10 @@ The `responseFilter` configuration contains a string expression with a filter co
 - Value to compare
 - Logical operators: `|` (or), `&` (and); optionally, they may be used to join multiple conditions.
 
-An example response filter may be `type!=employee` or `product.value>150`.
+An example response filter may be `type!=employee` or `product.value>150`. To test for an empty value (`null`, `false`, `""`, `0`) do not use any value -- e.g. `type!=` filter matches an empty value.
 
-**Important:** The expression is whitespace sensitive. Therefore `type != employee` filters the `type ` properties
-to not contain the value `employee` (which is probably not what you intended to do). String comparisons are always
+**Important:** The expression is whitespace sensitive. Therefore `type != employee` filters the `"type "` property
+to not contain the value `" employee"` (which is probably not what you intended to do). String comparisons are always
 **case sensitive**.
 
 ## Examples
@@ -995,7 +995,7 @@ A simple child filter can be then set up using the following `jobs` configuratio
             {
                 "endpoint": "user/{user-id}",
                 "dataField": ".",
-                "dataType": "user-deail",
+                "dataType": "user-detail",
                 "placeholders": {
                     "user-id": "id"
                 },
