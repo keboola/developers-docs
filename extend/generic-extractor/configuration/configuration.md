@@ -26,7 +26,7 @@ nesting. The **configuration map** is also available as a [separate article](/ex
 		configured for any API which is not public.
 		- [**retryConfig**](/extend/generic-extractor/configuration/api/#retry-configuration) --- automatically, 
 		and repeatedly, retries failed HTTP requests.
-		- [**http**](/extend/generic-extractor/configuration/api/#default-http-options) --- set the default 
+		- [**http**](/extend/generic-extractor/configuration/api/#default-http-options) --- sets the default 
 		headers and parameters sent with each API call. 
 	- [**config**](/extend/generic-extractor/configuration/config/) --- describes the actual extraction.
 		- [**debug**](/extend/generic-extractor/running/#debug-mode) --- shows all HTTP requests sent by 
@@ -38,7 +38,7 @@ nesting. The **configuration map** is also available as a [separate article](/ex
 		- [**jobs**](/extend/generic-extractor/configuration/config/jobs/) --- describes the API endpoints 
 		(resources) to be extracted.
 		- [**mappings**](/extend/generic-extractor/configuration/config/#mappings) --- describes how the JSON 
-		response is converted into CSV files that will be imported into Storage (optional).
+		response is converted into CSV files that will be imported into Storage.
 		- [**incrementalOutput**](/extend/generic-extractor/incremental/) ---  loads the extracted data into 
 		Storage incrementally.
 		- [**userData**](/extend/generic-extractor/configuration/config/#user-data) --- adds arbitrary data to 
