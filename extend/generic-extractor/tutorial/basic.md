@@ -203,8 +203,11 @@ creates a new table which has the column `JSON_parentId` with that value so that
 
 ## Summary
 The above tutorial demonstrates a very basic configuration of Generic Extractor. The extractor is capable 
-of doing much more; see other parts of this tutorial for an explanation of
+of doing much more; see other parts of this tutorial for an explanation of pagination, jobs and mapping:
 
-- [Pagination](/extend/generic-extractor/tutorial/pagination/),
-- [Jobs](/extend/generic-extractor/tutorial/jobs/), and
-- [Mapping](/extend/generic-extractor/tutorial/mapping/).
+- [Pagination](/extend/generic-extractor/tutorial/pagination/) --- breaks a result with a 
+		large number of items into separate pages.
+- [Jobs](/extend/generic-extractor/tutorial/jobs/) --- describe the API endpoints 
+		(resources) to be extracted.
+- [Mapping](/extend/generic-extractor/tutorial/mapping/) --- describes how the JSON 
+		response is converted into CSV files that will be imported into Storage.

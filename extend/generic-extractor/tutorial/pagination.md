@@ -135,7 +135,9 @@ less than the page size. With the page size set to 1, this means that the last p
 ## Summary
 In this part of the tutorial, you learned how to set up simple pagination. This is very important
 because most APIs use some sort of pagination and without proper setting you would be 
-getting incomplete data. The next two parts of our tutorial deal with setting up
+getting incomplete data. The next two parts of our tutorial deal with setting up jobs and mapping:
 
-- [Jobs](/extend/generic-extractor/tutorial/jobs/) and
-- [Mapping](/extend/generic-extractor/tutorial/mapping/).
+- [Jobs](/extend/generic-extractor/tutorial/jobs/) --- describe the API endpoints 
+		(resources) to be extracted.
+- [Mapping](/extend/generic-extractor/tutorial/mapping/) --- describes how the JSON 
+		response is converted into CSV files that will be imported into Storage.

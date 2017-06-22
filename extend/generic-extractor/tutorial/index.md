@@ -74,7 +74,10 @@ requests and responses. The response body is in [JSON](/extend/generic-extractor
 Now you have everything you need to actually start extracting the data. Continue with your Generic Extractor 
 configuration here:
 
-- [Basic configuration](/extend/generic-extractor/tutorial/basic/)
-- [Pagination](/extend/generic-extractor/tutorial/pagination/)
-- [Jobs](/extend/generic-extractor/tutorial/jobs/)
-- [Mapping](/extend/generic-extractor/tutorial/mapping/)
+- [Basic configuration](/extend/generic-extractor/tutorial/basic/) --- sets the basic properties of the API and describes the actual extraction.
+- [Pagination](/extend/generic-extractor/tutorial/pagination/) --- breaks a result with a 
+		large number of items into separate pages.
+- [Jobs](/extend/generic-extractor/tutorial/jobs/) --- describes the API endpoints 
+		(resources) to be extracted.
+- [Mapping](/extend/generic-extractor/tutorial/mapping/) --- describes how the JSON 
+		response is converted into CSV files that will be imported into Storage.
