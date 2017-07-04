@@ -26,8 +26,11 @@ You may place the downloaded file anywhere that will make it easy for you to acc
 `chmod 755 composer.phar`. You may rename it to `sapi-client` to avoid having to type the .phar
 extension every time.
 
-Storage API CLI requires PHP 5.5 or newer.
+Storage API CLI requires PHP 5.6 or newer.
 
+- For PHP 5.5 use
+<a href=' https://s3.amazonaws.com/keboola-storage-api-cli/builds/sapi-client.0.6.0.phar' download>version
+0.6.0</a>.
 - For PHP 5.4 use
 <a href='https://s3.amazonaws.com/keboola-storage-api-cli/builds/sapi-client.0.2.9.phar' download>version 0.2.9</a>.
 (5.4 version is no longer supported)
@@ -107,6 +110,9 @@ the current directory. You should see an output similar to this one:
     Export done in 17 secs.
 
 ## Troubleshooting
+The newest version of the client verifies that your system is configured properly and will print 
+an error message if cURL or gzip cannot be used. For older versions of the client read on.
+
 If the client does not seem to respond (hangs, prints no error or information message), make sure that your PHP installation can
 communicate properly and securely. You can verify this by running e.g. the following command:
 
