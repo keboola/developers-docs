@@ -8,7 +8,7 @@ permalink: /integrate/storage/php-cli-client/
 
 The Storage API PHP command line interface (CLI) client is a portable command line client which provides
 a simple implementation of [Storage API](http://docs.keboola.apiary.io/).
-It runs on any platform which has PHP CLI installed.
+It runs on any platform which has PHP CLI or Docker installed.
 
 Currently, the client implements
 
@@ -17,8 +17,18 @@ Currently, the client implements
 - the [project backup feature](https://help.keboola.com/management/project-export/).
 
 The client source is available in our [Github repository](https://github.com/keboola/storage-api-cli).
+The client docker image is available in [Quay repository](https://quay.io/repository/keboola/storage-api-cli?tab=tags).
 
-## Installation
+## Running in Docker
+To print available commands:
+
+{% highlight bash %}
+docker run -i -t quay.io/keboola/storage-api-cli
+{% endhighlight %}
+
+The `latest` image tag always corresponds to the latest tagged version.
+
+## Running Phar
 <a href='https://s3.amazonaws.com/keboola-storage-api-cli/builds/sapi-client.phar' download>Download the latest version</a>.
 
 You may place the downloaded file anywhere that will make it easy for you to access
@@ -37,12 +47,10 @@ Storage API CLI requires PHP 5.6 or newer.
 - For PHP 5.3 use
 <a href='https://s3.amazonaws.com/keboola-storage-api-cli/builds/sapi-client.0.1.9.phar' download>version 0.1.9</a>.
 
-## Running the Client
 To print available commands (assuming that the current directory is the directory you installed the client to), run
 {% highlight bash %}
 php sapi-client.phar
 {% endhighlight %}
-
 
 ### Example --- Create a Table
 To create a new table in Storage, use the `create-table` command. Provide the name of an
@@ -52,6 +60,12 @@ To create the`new-table` table in the `in.c-main` bucket, use
 
 {% highlight bash %}
 php sapi-client.phar create-table in.c-main new-table new-table.csv --token=storage_token
+{% endhighlight %}
+
+or 
+
+{% highlight bash %}
+docker run -i -t quay.io/keboola/storage-api-cli create-table in.c-main new-table new-table.csv --token=storage_token
 {% endhighlight %}
 
 The above command will import the contents of `new-table.csv` in the current directory into the newly
@@ -71,6 +85,12 @@ To import data into the `new-table` table in the `in.c-main` bucket, use
 
 {% highlight bash %}
 php sapi-client.phar write-table in.c-main.new-table new-data.csv --token=storage_token --incremental
+{% endhighlight %}
+
+or 
+
+{% highlight bash %}
+docker run -i -t quay.io/keboola/storage-api-cli write-table in.c-main.new-table new-data.csv --token=storage_token --incremental
 {% endhighlight %}
 
 The above command will import the contents of the `new-data.csv` file into the existing table. If the
@@ -99,7 +119,13 @@ the ID (*bucketName.tableName*) of an existing table.
 To export data from the `old-table` table in `in.c-main` bucket, use
 
 {% highlight bash %}
-sapi-client export-table in.c-main.old-table old-data.csv --token=storage_token
+php sapi-client.phar export-table in.c-main.old-table old-data.csv --token=storage_token
+{% endhighlight %}
+
+or 
+
+{% highlight bash %}
+docker run -i -t quay.io/keboola/storage-api-cli export-table in.c-main.old-table old-data.csv --token=storage_token
 {% endhighlight %}
 
 The above command will export the table from Storage and save it as `old-data.csv` in
@@ -125,4 +151,4 @@ resolve that error first before running the Storage API client. This usually mea
 If the above command works and the CLI client still does not, then your PHP installation is probably not configured correctly. This
 usually means that the [`curl.cainfo`](http://php.net/manual/en/curl.configuration.php) PHP configuration variable does not point to a valid
 [CA (certification authority) certificates bundle](https://curl.haxx.se/docs/caextract.html). For more details, see 
-e.g. (Stackoverflow discussion](http://stackoverflow.com/questions/6400300/https-and-ssl3-get-server-certificatecertificate-verify-failed-ca-is-ok?rq=1).
+e.g. [Stackoverflow discussion](http://stackoverflow.com/questions/6400300/https-and-ssl3-get-server-certificatecertificate-verify-failed-ca-is-ok?rq=1).
