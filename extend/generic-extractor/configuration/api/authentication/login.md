@@ -27,7 +27,9 @@ A sample Login authentication looks like this:
             },
             "apiRequest": {
                 "headers": {
-                    "X-ApiToken": "authorization.token"
+                    "X-ApiToken": {
+                        "response": "authorization.token"
+                    }
                 }
             }
         }
@@ -92,7 +94,9 @@ The following API configuration deals with the authentication:
         },
         "apiRequest": {
             "headers": {
-                "X-ApiToken": "authorization.token"
+                "X-ApiToken": {
+                    "response": "authorization.token"
+                }
             }
         }
     }
@@ -148,8 +152,12 @@ The following `authentication` configuration takes care of the situation:
     },
     "apiRequest": {
         "query": {
-            "secretKey": "authentication.0.secret",
-            "tokenId": "authentication.1.token.id"
+            "secretKey": {
+                "response": "authentication.0.secret"
+            },
+            "tokenId": {
+                "response": "authentication.1.token.id"
+            }
         }
     }
 }
@@ -208,13 +216,23 @@ different places are merged together:
                 },
                 "apiRequest": {
                     "query": {
-                        "apiToken": "authorization.token",
-                        "secretKey": "authorization.secretKey",
-                        "customerId": "authorization.accountId"
+                        "apiToken": {
+                            "response": "authorization.token"
+                        },
+                        "secretKey": {
+                            "response": "authorization.secretKey"
+                        },
+                        "customerId": {
+                            "response": "authorization.accountId"
+                        }
                     },
                     "headers": {
-                        "X-SecretKey": "authorization.secretKey",
-                        "X-Account-Id": "authorization.accountId"
+                        "X-SecretKey": {
+                            "response": "authorization.secretKey"
+                        },
+                        "X-Account-Id": {
+                            "response": "authorization.accountId"
+                        }
                     }
                 }
             }
@@ -305,7 +323,9 @@ example](#configuration-with-headers) to this:
                 },
                 "apiRequest": {
                     "headers": {
-                        "X-ApiToken": "authorization.token"
+                        "X-ApiToken": {
+                            "response": "authorization.token"
+                        }
                     }
                 },
                 "expires": "3600"
@@ -340,7 +360,9 @@ If the validity of the credentials is returned in the response, modify the [firs
                 },
                 "apiRequest": {
                     "headers": {
-                        "X-ApiToken": "authorization.token"
+                        "X-ApiToken": {
+                            "response": "authorization.token"
+                        }
                     }
                 },
                 "expires": {
@@ -388,7 +410,9 @@ from the response as in the [second example](#expiration-from-response).
                 },
                 "apiRequest": {
                     "headers": {
-                        "X-ApiToken": "authorization.token"
+                        "X-ApiToken": {
+                            "response": "authorization.token"
+                        }
                     }
                 },
                 "expires": {
@@ -413,3 +437,153 @@ This assumes that the response of the **login request** looks like this:
 {% endhighlight %}
 
 See [example [EX084]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/084-login-auth-expires-seconds).
+
+### Login Authentication with Functions
+Suppose you have an API which requires you to send a username and password separated by a colon and
+base64 encoded --- for example, `JohnDoe:TopSecret` (base64 encoded to `Sm9obkRvZTpUb3BTZWNyZXQ=`) in the
+`X-Authorization` header to an `/auth` endpoint. The login endpoint then returns a token,
+which can be used with other API calls. 
+
+The following configuration reads both the login and password parameters from the 
+[`config` section](/extend/generic-extractor/functions/#configuration-attributes) and 
+uses the `login` authorization method to send them to a special `/auth` endpoint.
+
+{% highlight json %}
+{
+    "parameters": {
+        "api": {
+            "baseUrl": "http://example.com/",
+            "authentication": {
+                "type": "login",
+                "loginRequest": {
+                    "endpoint": "auth",
+                    "headers": {
+                        "X-Authorization": {
+                            "function": "base64_encode",
+                            "args": [
+                                {
+                                    "function": "concat",
+                                    "args": [
+                                        {
+                                            "attr": "#login"
+                                        },
+                                        ":",
+                                        {
+                                            "attr": "#password"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                },
+                "apiRequest": {
+                    "headers": {
+                        "X-Api-Token": "token"
+                    }
+                }
+            }
+        },
+        "config": {
+            "#login": "JohnDoe",
+            "#password": "TopSecret",
+            "debug": true,
+            "outputBucket": "mock-server",
+            "jobs": [
+                {
+                    "endpoint": "users",
+                    "dataType": "users"
+                }
+            ]
+        }
+    }
+}
+{% endhighlight %}
+
+See [example [EX100]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/100-function-login-headers).
+
+### Login Authentication with Login and API Request
+Suppose you have an API similar to the one in the [previous example](#login-authentication-with-functions).
+It requires you to send a username and password separated by a colon and
+base64 encoded --- for example, `JohnDoe:TopSecret` (base64 encoded to `Sm9obkRvZTpUb3BTZWNyZXQ=`) in the
+`X-Authorization` header to an `/auth` endpoint. The difference is that the login endpoint returns a token,
+which must be further processed. The other API requests expects that the received token is concatenated again with the user name --- for example, `JohnDoe:d868d581b2f` and an SHA1 hash is generated (e.g. `09e4e6977b72ecc9fa2120f49a4a74f5c268d277`). This value must be sent in `auth` query parameter. 
+
+The `loginRequest` part of the following configuration is the same as in [previous example](#login-authentication-with-functions) --- it reads both the login and password parameters from the `config` section and 
+uses the `login` authorization method to send them to a special `/auth` endpoint. The `apiRequest`
+part of the configuration uses the [`sha1`](/extend/generic-extractor/functions/#sha1) function on the result of the [`concat`](/extend/generic-extractor/functions/#concat) function. The
+`concat` function takes the login parameter from the 
+[`config` section](/extend/generic-extractor/functions/#configuration-attributes) (via `"attr": "#login"` reference)
+and the token parameter from the 
+[response of the login request](/extend/generic-extractor/functions/#login-authentication-context) (via `"response": "authorization.token"` reference).
+
+{% highlight json %}
+{
+    "parameters": {
+        "api": {
+            "baseUrl": "http://example.com/",
+            "authentication": {
+                "type": "login",
+                "loginRequest": {
+                    "endpoint": "auth",
+                    "headers": {
+                        "X-Authorization": {
+                            "function": "base64_encode",
+                            "args": [
+                                {
+                                    "function": "concat",
+                                    "args": [
+                                        {
+                                            "attr": "#login"
+                                        },
+                                        ":",
+                                        {
+                                            "attr": "#password"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                },
+                "apiRequest": {
+                    "query": {
+                        "auth": {
+                        	"function": "sha1",
+                        	"args": [
+                        		{
+		                            "function": "concat",
+		                            "args": [
+		                                {
+		                                    "attr": "#login"
+		                                },
+		                                ":",
+		                                {
+		                                    "response": "authorization.token"
+		                                }
+		                            ]
+		                        }
+		                    ]
+                        }
+                    }
+                }
+            }
+        },
+        "config": {
+            "#login": "JohnDoe",
+            "#password": "TopSecret",
+            "debug": true,
+            "outputBucket": "mock-server",
+            "jobs": [
+                {
+                    "endpoint": "users",
+                    "dataType": "users"
+                }
+            ]
+        }
+    }
+}
+{% endhighlight %}
+
+See [example [EX117]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/117-function-login-params-response)
+or [example [EX118]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/118-function-login-headers-response) which uses headers.

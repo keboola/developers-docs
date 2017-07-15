@@ -480,7 +480,7 @@ the parameters function context will contain:
         "outputBucket": "mock-server",
         "server": "localhost:8888"
     },
-        "time": {
+    "time": {
         "previousStart": 0,
         "currentStart": 1492678268
     }
@@ -539,11 +539,37 @@ See an [example](#user-data).
 ### Login Authentication Context
 The Login Authentication function context is used in the
 [login authentication](/extend/generic-extractor/configuration/api/authentication/login/) method.
-The Headers function context contains [configuration attributes](/#function-contexts). The login
-authentication context is the same for both `params` and `headers`
-[login authentication configuration options](/extend/generic-extractor/configuration/api/authentication/login/#configuration-parameters).
+The Headers function context contains [configuration attributes](/#function-contexts). 
+Functions are supported in both [`loginRequest`](todo) and [`apiRequest` ](todo) configurations.
+In the `apiRequest` context, the flattened reponse of the login request is available additionally
+to the [configuration attributes](/#function-contexts).
+The login authentication context is the same for both `params` and `headers`
+[login authentication configuration options](/extend/generic-extractor/configuration/api/authentication/login/#configuration-parameters). If the
+login authentication request returns e.g.: 
 
-See an [example](#login-authentication).
+{% highlight json %}
+{
+    "user": "John Doe",
+	"authorization": {
+		"token": "quiteSecret",
+		"validUntil": "2017-20-12 12:20:17"
+	}
+}
+{% endhighlight %}
+
+The following function context will be available in the API request headers and query:
+
+{% highlight json %}
+{
+    "user": "John Doe",
+	"authorization.token": "quiteSecret",
+	"authorization.validUntil": "2017-20-12 12:20:17"
+}
+{% endhighlight %}
+
+See an [example](/extend/generic-extractor/configuration/api/authentication/login/#login-authentication-with-functions) and a more 
+[complicated example](/extend/generic-extractor/configuration/api/authentication/login/#login-authentication-with-login-and-api-request) of using functions in 
+both login request and API request.
 
 ### Query Authentication Context
 The Query Authentication function context is used in the
@@ -1430,6 +1456,7 @@ Then there is another outer part:
     "args": [
         "Y-m-d",
         ???
+    ]
 }
 {% endhighlight %}
 
@@ -1437,66 +1464,3 @@ converting the timestamp back to a string format (`Y-m-d` format) which yields `
 This value is assigned to the `to` parameter of the API call.
 
 See [example [EX096]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/096-function-nested-from-to).
-
-### Login Authentication
-Suppose you have an API which requires you to send a username and password separated by a colon and
-base64 encoded --- for example, `JohnDoe:TopSecret` (base64 encoded to `Sm9obkRvZTpUb3BTZWNyZXQ=`) in the
-`X-Authorization` header to an `/auth` endpoint. The login endpoint then returns a token,
-which can be used with other API calls. 
-
-The following configuration reads both the login and password parameters from the `config` section and 
-uses the `login` authorization method to send them to a special `/auth` endpoint.
-
-{% highlight json %}
-{
-    "parameters": {
-        "api": {
-            "baseUrl": "http://example.com/",
-            "authentication": {
-                "type": "login",
-                "loginRequest": {
-                    "endpoint": "auth",
-                    "headers": {
-                        "X-Authorization": {
-                            "function": "base64_encode",
-                            "args": [
-                                {
-                                    "function": "concat",
-                                    "args": [
-                                        {
-                                            "attr": "#login"
-                                        },
-                                        ":",
-                                        {
-                                            "attr": "#password"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    }
-                },
-                "apiRequest": {
-                    "headers": {
-                        "X-Api-Token": "token"
-                    }
-                }
-            }
-        },
-        "config": {
-            "#login": "JohnDoe",
-            "#password": "TopSecret",
-            "debug": true,
-            "outputBucket": "mock-server",
-            "jobs": [
-                {
-                    "endpoint": "users",
-                    "dataType": "users"
-                }
-            ]
-        }
-    }
-}
-{% endhighlight %}
-
-See [example [EX100]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/100-function-login-headers).
