@@ -431,6 +431,8 @@ will be converted to the following function context:
 }
 {% endhighlight %}
 
+See [example [EX119]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/119-function-nested-config).
+
 ### Base URL Context
 The Base URL function context is used when setting the [`baseURL` for API](/extend/generic-extractor/configuration/api/#base-url), and it 
 contains [configuration attributes](/#function-contexts). 

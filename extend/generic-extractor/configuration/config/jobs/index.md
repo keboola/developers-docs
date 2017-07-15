@@ -7,7 +7,7 @@ permalink: /extend/generic-extractor/configuration/config/jobs/
 {:toc}
 
 *If new to Generic Extractor, learn about [jobs in our tutorial](/extend/generic-extractor/tutorial/jobs/) first.*
-*Use [Parameter Map](/extend/generic-extractor/map/) to help you navigate among various 
+*Use [Parameter Map](/extend/generic-extractor/map/) to help you navigate among various
 configuration options.*
 
 The jobs section of the extraction configuration contains **descriptions of the API resources to be
@@ -58,7 +58,7 @@ way. Each response is processed in the following steps:
 4. Create the required tables in Storage and load data into them.
 
 ## Merging Responses
-The first two steps are the responsibility of [Jobs](/extend/generic-extractor/configuration/config/jobs/) 
+The first two steps are the responsibility of [Jobs](/extend/generic-extractor/configuration/config/jobs/)
 resulting in an array of objects. Generic Extractor then tries to find a common super-set of
 properties of all objects, for example, with the following response:
 
@@ -78,7 +78,7 @@ properties of all objects, for example, with the following response:
 {% endhighlight %}
 
 The super-set of object properties consists of `id`, `name`, `color` and `size`. In the Generic Extractor
-configuration, this is [referred to as **`dataType`**](#data-type). If the `dataType` configuration is not set, a 
+configuration, this is [referred to as **`dataType`**](#data-type). If the `dataType` configuration is not set, a
 name is automatically generated. Merging the object structure requires that the objects are compatible.
 
 The responses are merged into type-less tables. This means that values `42` and `apples` are perfectly compatible
@@ -254,9 +254,9 @@ Also, the `Content-Type: application/x-www-form-urlencoded` HTTP header will be 
 ## Data Type
 The `dataType` parameter assigns a name to the object(s) obtained from the endpoint.
 Setting it is optional. If not set, a name will be generated automatically from the `endpoint`
-value and parent jobs. 
+value and parent jobs.
 
-Data types are used in [mappings](/extend/generic-extractor/configuration/config/mappings/) and for naming output 
+Data types are used in [mappings](/extend/generic-extractor/configuration/config/mappings/) and for naming output
 tables within their [output buckets](/extend/generic-extractor/configuration/config/#output-bucket).
 
 Note that you can use the same `dataType` for multiple resources, provided that the result objects may
@@ -314,6 +314,42 @@ as an object with the `path` property. For instance, these two configurations ar
     ]
 {% endhighlight %}
 
+### Data Field Delimiter
+The path to the response property is by default expected to be dot separated. That is --- a path
+`members.active` refers to property `active` nested inside a property `members`. If you need to refer to a
+property containing a dot, you have to change the data field path delimiter to some other character. This can be
+done using the `delimiter` property:
+
+{% highlight json %}
+    "jobs": [
+        {
+            "endpoint": "solved-tickets/",
+            "dataField": {
+                "path": "members.active",
+                "delimiter": "|"
+            }
+        }
+    ]
+{% endhighlight %}
+
+The above configuration refers to a property named `members.active`. To refer to a property `items` nested
+inside a property `members.active` you have to use:
+
+{% highlight json %}
+    "jobs": [
+        {
+            "endpoint": "solved-tickets/",
+            "dataField": {
+                "path": "members.active|items",
+                "delimiter": "|"
+            }
+        }
+    ]
+{% endhighlight %}
+
+The `delimiter` character is completely arbitrary, but must be something that is not used in the property names in the response.
+See [example [EX120]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/120-datafield-separator).
+
 ## Response Filter
 The `responseFilter` option allows you to skip parts of the API response from processing. This can
 be useful in these cases:
@@ -338,8 +374,8 @@ except for **placeholders**. The children configuration is described in a
 ## Scroller
 
 The `scroller` parameter assigns a predefined scroller when
-[`multiple` pagination](/extend/generic-extractor/configuration/api/pagination/multiple/) is used, 
-and is pointless when the `multiple` pagination method is not used. 
+[`multiple` pagination](/extend/generic-extractor/configuration/api/pagination/multiple/) is used,
+and is pointless when the `multiple` pagination method is not used.
 
 If `scroller` is not set, the pagination method specified in the [`api` configuration](/extend/generic-extractor/configuration/api/pagination/)
 is used. If there is no pagination method specified, the job has no pagination.
@@ -1044,7 +1080,7 @@ If you have an API response like this:
 {% endhighlight %}
 
 you will receive an error similar to `Error parsing response JSON: Unhandled type change from "scalar" to "object" in 'users-16.color'`. This means that the objects returned in the response are incompatible and cannot
-be [merged into a table](#merging-responses) by Generic Extractor. 
+be [merged into a table](#merging-responses) by Generic Extractor.
 
 To avoid the error and still retrieve the data,
 use the `responseFilter` to skip the `color` property. When you set `"responseFilter": "color"`, you
