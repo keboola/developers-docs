@@ -71,9 +71,9 @@ like this:
 
 {% highlight json %}
 {
-	"authorization": {
-		"token": "a1b2c3d435f6"
-	}
+    "authorization": {
+        "token": "a1b2c3d435f6"
+    }
 }
 {% endhighlight %}
 
@@ -123,16 +123,16 @@ On a successful login, it returns the following response:
 
 {% highlight json %}
 {
-	"authentication": [
-		{
-			"secret": "a1b2c3d435f6"
-		},
-		{
-			"token": {
-				"id": 123
-			}
-		}
-	]
+    "authentication": [
+        {
+            "secret": "a1b2c3d435f6"
+        },
+        {
+            "token": {
+                "id": 123
+            }
+        }
+    ]
 }
 {% endhighlight %}
 
@@ -378,10 +378,10 @@ This assumes that the response of the **login request** looks like this:
 
 {% highlight json %}
 {
-	"authorization": {
-		"token": "a1b2c3d435f6",
-		"expires": "2017-02-20 12:34:45"
-	}
+    "authorization": {
+        "token": "a1b2c3d435f6",
+        "expires": "2017-02-20 12:34:45"
+    }
 }
 {% endhighlight %}
 
@@ -429,10 +429,10 @@ This assumes that the response of the **login request** looks like this:
 
 {% highlight json %}
 {
-	"authorization": {
-		"token": "a1b2c3d435f6",
-		"expires": 3600
-	}
+    "authorization": {
+        "token": "a1b2c3d435f6",
+        "expires": 3600
+    }
 }
 {% endhighlight %}
 
@@ -549,21 +549,21 @@ and the token parameter from the
                 "apiRequest": {
                     "query": {
                         "auth": {
-                        	"function": "sha1",
-                        	"args": [
-                        		{
-		                            "function": "concat",
-		                            "args": [
-		                                {
-		                                    "attr": "#login"
-		                                },
-		                                ":",
-		                                {
-		                                    "response": "authorization.token"
-		                                }
-		                            ]
-		                        }
-		                    ]
+                            "function": "sha1",
+                            "args": [
+                                {
+                                    "function": "concat",
+                                    "args": [
+                                        {
+                                            "attr": "#login"
+                                        },
+                                        ":",
+                                        {
+                                            "response": "authorization.token"
+                                        }
+                                    ]
+                                }
+                            ]
                         }
                     }
                 }
