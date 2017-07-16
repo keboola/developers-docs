@@ -6,8 +6,8 @@ permalink: /extend/generic-extractor/configuration/api/authentication/login/
 * TOC
 {:toc}
 
-Use the Login authentication to send a one-time **login request** to obtain temporary credentials 
-for authentication of all the other API requests. 
+Use the Login authentication to send a one-time **login request** to obtain temporary credentials
+for authentication of all the other API requests.
 
 A sample Login authentication looks like this:
 
@@ -58,15 +58,15 @@ The following configuration parameters are supported for the `login` type of aut
         - a number of seconds for which the credentials are valid (with `"relative": true`).
     - `relative` (optional, boolean) --- When true, the expiration time is relative to the current time. The default value is `false`.
 
-Note that the values in `apiRequest.headers` and `apiRequest.query` take precedence over the values specified in the 
+Note that the values in `apiRequest.headers` and `apiRequest.query` take precedence over the values specified in the
 `api.http.defaultOptions.headers` (see an [example](#parameter-overriding)). If `expires` is not set, the login request
 is called only once before all other requests. To call the login request before every request (e.g., to obtain access token from refresh token), set `"expires": 0`.
 
 ## Examples
 
 ### Configuration with Headers
-Let's say you have an API which requires every API call to be authorized with the `X-ApiToken` header. The value of that header (an API 
-token) is obtained by calling the `/login` endpoint with the headers `X-Login` and `X-Password`. The `/login` endpoint response looks 
+Let's say you have an API which requires every API call to be authorized with the `X-ApiToken` header. The value of that header (an API
+token) is obtained by calling the `/login` endpoint with the headers `X-Login` and `X-Password`. The `/login` endpoint response looks
 like this:
 
 {% highlight json %}
@@ -108,7 +108,7 @@ The first request will be sent to `/login` with the HTTP headers:
     X-Login: JohnDoe
     X-Password: TopSecret
 
-All consecutive requests will be sent to the endpoints specified in the [`jobs`](/extend/generic-extractor/configuration/config/jobs/) section and 
+All consecutive requests will be sent to the endpoints specified in the [`jobs`](/extend/generic-extractor/configuration/config/jobs/) section and
 will contain the header:
 
     X-ApiToken: a1b2c3d435f6
@@ -117,7 +117,7 @@ See [example [EX079]](https://github.com/keboola/generic-extractor/tree/master/d
 
 
 ### Configuration with Query Parameters
-Let's say you have an API which requires an [HTTP POST](https://en.wikipedia.org/wiki/POST_(HTTP)) request with `username` and 
+Let's say you have an API which requires an [HTTP POST](https://en.wikipedia.org/wiki/POST_(HTTP)) request with `username` and
 `password` to the endpoint `/login/form`.
 On a successful login, it returns the following response:
 
@@ -136,7 +136,7 @@ On a successful login, it returns the following response:
 }
 {% endhighlight %}
 
-The actual API requests then must contain the `secretKey` and `tokenId` parameters in the URL. 
+The actual API requests then must contain the `secretKey` and `tokenId` parameters in the URL.
 The following `authentication` configuration takes care of the situation:
 
 {% highlight json %}
@@ -170,8 +170,8 @@ The first API request will be sent as:
     username=JohnDoe&password=TopSecret
 
 The [FORM method](/extend/generic-extractor/configuration/config/jobs/#form) sends the parameters
-as [application/x-www-form-urlencoded](https://en.wikipedia.org/wiki/POST_(HTTP)#Use_for_submitting_web_forms). 
-The `apiRequest.query` settings then map the response values to the parameters of the other API calls, 
+as [application/x-www-form-urlencoded](https://en.wikipedia.org/wiki/POST_(HTTP)#Use_for_submitting_web_forms).
+The `apiRequest.query` settings then map the response values to the parameters of the other API calls,
 so the second API call will be sent as:
 
     GET /users?secretKey=a1b2c3d435f6&tokenId=123
@@ -185,7 +185,7 @@ different places are merged together:
 
 <details>
   <summary>Click to expand the example.</summary>
-  
+
 {% highlight json %}
 {
     "parameters": {
@@ -296,14 +296,14 @@ The request headers contain:
 - `X-Account-Id` --- coming from the `api.authentication.apiRequest.headers` option, which overrides the values specified in `api.http.defaultOptions.headers`
 - `X-SecretKey` --- coming from the `api.authentication.apiRequest.headers` option
 
-As you can see, the headers specified elsewhere are **overwritten** by the `api.authentication.apiRequest` while the parameters 
+As you can see, the headers specified elsewhere are **overwritten** by the `api.authentication.apiRequest` while the parameters
 specified elsewhere are **merged** with the `api.authentication.apiRequest`.
 
 See [example [EX081]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/081-login-auth-headers-query-override).
 
 ### Expiration Basic
-It is possible that the credentials provided by the **login request** have a time-limited validity. This is handled by the `expires` 
-option. If the obtained credentials are always valid for a certain period of time, for example for 1 hour, modify the [first 
+It is possible that the credentials provided by the **login request** have a time-limited validity. This is handled by the `expires`
+option. If the obtained credentials are always valid for a certain period of time, for example for 1 hour, modify the [first
 example](#configuration-with-headers) to this:
 
 {% highlight json %}
@@ -340,7 +340,7 @@ This causes Generic Extractor to call the **login request** every hour.
 See [example [EX082]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/082-login-auth-expires).
 
 ### Expiration from Response
-In case the credentials provided by the **login request** have a time-limited validity, use the `expires` option. 
+In case the credentials provided by the **login request** have a time-limited validity, use the `expires` option.
 If the validity of the credentials is returned in the response, modify the [first example](#configuration-with-headers) to this:
 
 {% highlight json %}
@@ -388,9 +388,9 @@ This assumes that the response of the **login request** looks like this:
 See [example [EX083]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/083-login-auth-expires-date).
 
 ### Relative Expiration from Response
-In case the API returns credentials validity in the **login request** and that validity is expressed in seconds, 
-use the `expires` option together with setting `relative` to `true`. 
-The result is the behavior of the [first example](#configuration-with-headers) but the value is taken 
+In case the API returns credentials validity in the **login request** and that validity is expressed in seconds,
+use the `expires` option together with setting `relative` to `true`.
+The result is the behavior of the [first example](#configuration-with-headers) but the value is taken
 from the response as in the [second example](#expiration-from-response).
 
 {% highlight json %}
@@ -442,10 +442,10 @@ See [example [EX084]](https://github.com/keboola/generic-extractor/tree/master/d
 Suppose you have an API which requires you to send a username and password separated by a colon and
 base64 encoded --- for example, `JohnDoe:TopSecret` (base64 encoded to `Sm9obkRvZTpUb3BTZWNyZXQ=`) in the
 `X-Authorization` header to an `/auth` endpoint. The login endpoint then returns a token,
-which can be used with other API calls. 
+which can be used with other API calls.
 
-The following configuration reads both the login and password parameters from the 
-[`config` section](/extend/generic-extractor/functions/#configuration-attributes) and 
+The following configuration reads both the login and password parameters from the
+[`config` section](/extend/generic-extractor/functions/#configuration-attributes) and
 uses the `login` authorization method to send them to a special `/auth` endpoint.
 
 {% highlight json %}
@@ -507,14 +507,14 @@ Suppose you have an API similar to the one in the [previous example](#login-auth
 It requires you to send a username and password separated by a colon and
 base64 encoded --- for example, `JohnDoe:TopSecret` (base64 encoded to `Sm9obkRvZTpUb3BTZWNyZXQ=`) in the
 `X-Authorization` header to an `/auth` endpoint. The difference is that the login endpoint returns a token,
-which must be further processed. The other API requests expects that the received token is concatenated again with the user name --- for example, `JohnDoe:d868d581b2f` and an SHA1 hash is generated (e.g. `09e4e6977b72ecc9fa2120f49a4a74f5c268d277`). This value must be sent in `auth` query parameter. 
+which must be further processed. The other API requests expects that the received token is concatenated again with the user name --- for example, `JohnDoe:d868d581b2f` and an SHA1 hash is generated (e.g. `09e4e6977b72ecc9fa2120f49a4a74f5c268d277`). This value must be sent in `auth` query parameter.
 
-The `loginRequest` part of the following configuration is the same as in [previous example](#login-authentication-with-functions) --- it reads both the login and password parameters from the `config` section and 
+The `loginRequest` part of the following configuration is the same as in [previous example](#login-authentication-with-functions) --- it reads both the login and password parameters from the `config` section and
 uses the `login` authorization method to send them to a special `/auth` endpoint. The `apiRequest`
 part of the configuration uses the [`sha1`](/extend/generic-extractor/functions/#sha1) function on the result of the [`concat`](/extend/generic-extractor/functions/#concat) function. The
-`concat` function takes the login parameter from the 
+`concat` function takes the login parameter from the
 [`config` section](/extend/generic-extractor/functions/#configuration-attributes) (via `"attr": "#login"` reference)
-and the token parameter from the 
+and the token parameter from the
 [response of the login request](/extend/generic-extractor/functions/#login-authentication-context) (via `"response": "authorization.token"` reference).
 
 {% highlight json %}
