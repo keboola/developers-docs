@@ -117,15 +117,17 @@ docker tag keboola/docker-demo-app:latest $REPOSITORY:latest
 eval $(docker run --rm -e KBC_DEVELOPERPORTAL_USERNAME=$KBC_DEVELOPERPORTAL_USERNAME -e KBC_DEVELOPERPORTAL_PASSWORD=$KBC_DEVELOPERPORTAL_PASSWORD -e KBC_DEVELOPERPORTAL_URL=$KBC_DEVELOPERPORTAL_URL quay.io/keboola/developer-portal-cli-v2:latest ecr:get-login keboola docker-demo)
 docker push $REPOSITORY:$TRAVIS_TAG
 docker push $REPOSITORY:latest
+
+# Deploy to KBC -> update tag to current in Keboola Developer Portal
+docker run --rm -e KBC_DEVELOPERPORTAL_USERNAME=$KBC_DEVELOPERPORTAL_USERNAME -e KBC_DEVELOPERPORTAL_PASSWORD=$KBC_DEVELOPERPORTAL_PASSWORD -e KBC_DEVELOPERPORTAL_URL=$KBC_DEVELOPERPORTAL_URL quay.io/keboola/developer-portal-cli-v2:latest update-app-repository keboola docker-demo $TRAVIS_TAG
 {% endhighlight %}
 
 This code will tag your image with relevant tags (`latest` and the tag of the build) and push them to our registry. 
+Finally it updates the tag to current version in Developer Portal, new version of the application is deployed into KBC at the moment.
 
 You can see both [`.travis.yml`](https://github.com/keboola/docker-demo-app/blob/master/.travis.yml) and the deploy script ([`deploy.sh`](https://github.com/keboola/docker-demo-app/blob/master/deploy.sh)) 
 in our [Docker Demo App](https://github.com/keboola/docker-demo-app) GitHub repository.
 
-Please note that pushing the image to the registry does not update the tag in your KBC application definition. You have 
-to manually update the application definition using the [Keboola Developer Portal API](http://docs.kebooladeveloperportal.apiary.io/).
 
 This sample deployment script uses the [Developer Portal CLI](https://github.com/keboola/developer-portal-cli-v2) tool. 
 The CLI (delivered as a Docker image) provides the deploy script with simple commands to retrieve the repository 
