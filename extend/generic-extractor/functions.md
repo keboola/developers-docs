@@ -216,7 +216,7 @@ The above will produce `2017-03-20 8:53:20`.
 See an [example](#user-data).
 
 ### strtotime
-The `strtotime` function converts a string date into a [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time). The function takes
+The [`strtotime` function](http://php.net/manual/en/function.strtotime.php) converts a string date into a [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time). The function takes
 one or two arguments: 
 
 1. String date
@@ -232,7 +232,7 @@ one or two arguments:
 {% endhighlight %}
 
 The above will produce `1508620560`, which represents the date `2017-10-21 21:16:00`. However, the
-`strtotime` function is most useful with relative dates which it also allows. For example, you can
+[`strtotime` function](http://php.net/manual/en/function.strtotime.php) is most useful with relative dates which it also allows. For example, you can
 write:
 
 {% highlight json %}
@@ -248,7 +248,7 @@ write:
 The above will give `1508015760`, which represents the date `2017-10-14 21:16:00`. The second argument
 specifies the base date (as a Unix timestamp) from which the relative date is computed. This is particularly
 useful for [incremental extraction](/extend/generic-extractor/incremental/). Also note that
-it is common to combine the `strtottime` and `date` functions to convert between string and timestamp
+it is common to combine the `strtotime` and `date` functions to convert between string and timestamp
 representation of a date. 
 
 See an [example](#nested-strtotime).
