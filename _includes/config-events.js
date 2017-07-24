@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
     $("span.nt:contains('\"debug\"')").wrap("<a href='/extend/generic-extractor/running/#debug-mode'></a>");
     $("span.nt:contains('\"incrementalOutput\"')").wrap("<a href='/extend/generic-extractor/incremental/'></a>");
     $("span.nt:contains('\"jobs\"')").wrap("<a href='/extend/generic-extractor/configuration/config/jobs/'></a>");
-    $("span.nt:contains('\"mappings\"')").wrap("<a href='/extend/generic-extractor/configuration/configuration/config/mappings/'></a>");
+    $("span.nt:contains('\"mappings\"')").wrap("<a href='/extend/generic-extractor/configuration/config/mappings/'></a>");
     $("span.nt:contains('\"api\"')").wrap("<a href='/extend/generic-extractor/configuration/api/'></a>");
     $("span.nt:contains('\"outputBucket\"')").wrap("<a href='/extend/generic-extractor/configuration/config/#output-bucket'></a>");
     $("span.nt:contains('\"http\"')").last().wrap("<a href='/extend/generic-extractor/configuration/config/#http'></a>");
