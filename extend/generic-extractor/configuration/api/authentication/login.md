@@ -430,7 +430,7 @@ This assumes that the response of the **login request** looks like this:
 {% highlight json %}
 {
     "authorization": {
-        "token": "a1b2c3d435f6",
+        "token": "a1b2c3d435f6",/
         "expires": 3600
     }
 }
@@ -441,12 +441,12 @@ See [example [EX084]](https://github.com/keboola/generic-extractor/tree/master/d
 ### Login Authentication with Functions
 Suppose you have an API which requires you to send a username and password separated by a colon and
 base64 encoded --- for example, `JohnDoe:TopSecret` (base64 encoded to `Sm9obkRvZTpUb3BTZWNyZXQ=`) in the
-`X-Authorization` header to an `/auth` endpoint. The login endpoint then returns a token,
+`X-Authorization` header to an `/auth` endpoint. The login endpoint then returns a token
 which can be used with other API calls.
 
 The following configuration reads both the login and password parameters from the
 [`config` section](/extend/generic-extractor/functions/#configuration-attributes) and
-uses the `login` authorization method to send them to a special `/auth` endpoint.
+uses the `login` authorization method to send them to the special `/auth` endpoint.
 
 {% highlight json %}
 {
@@ -506,16 +506,20 @@ See [example [EX100]](https://github.com/keboola/generic-extractor/tree/master/d
 Suppose you have an API similar to the one in the [previous example](#login-authentication-with-functions).
 It requires you to send a username and password separated by a colon and
 base64 encoded --- for example, `JohnDoe:TopSecret` (base64 encoded to `Sm9obkRvZTpUb3BTZWNyZXQ=`) in the
-`X-Authorization` header to an `/auth` endpoint. The difference is that the login endpoint returns a token,
-which must be further processed. The other API requests expects that the received token is concatenated again with the user name --- for example, `JohnDoe:d868d581b2f` and an SHA1 hash is generated (e.g. `09e4e6977b72ecc9fa2120f49a4a74f5c268d277`). This value must be sent in `auth` query parameter.
+`X-Authorization` header to an `/auth` endpoint. The difference is that the login endpoint returns a token
+which must be further processed. The other API requests expects that the received token is concatenated again 
+with the user name --- for example, `JohnDoe:d868d581b2f` and an SHA1 hash is generated (e.g. 
+`09e4e6977b72ecc9fa2120f49a4a74f5c268d277`). This value must be sent as an `auth` query parameter.
 
-The `loginRequest` part of the following configuration is the same as in [previous example](#login-authentication-with-functions) --- it reads both the login and password parameters from the `config` section and
-uses the `login` authorization method to send them to a special `/auth` endpoint. The `apiRequest`
-part of the configuration uses the [`sha1`](/extend/generic-extractor/functions/#sha1) function on the result of the [`concat`](/extend/generic-extractor/functions/#concat) function. The
-`concat` function takes the login parameter from the
-[`config` section](/extend/generic-extractor/functions/#configuration-attributes) (via `"attr": "#login"` reference)
-and the token parameter from the
-[response of the login request](/extend/generic-extractor/functions/#login-authentication-context) (via `"response": "authorization.token"` reference).
+The `loginRequest` part of the following configuration is the same as in the 
+[previous example](#login-authentication-with-functions) --- it reads both the login and password parameters 
+from the `config` section and uses the `login` authorization method to send them to the special `/auth` endpoint. 
+The `apiRequest` part of the configuration uses the [`sha1`](/extend/generic-extractor/functions/#sha1) function on 
+the result of the [`concat`](/extend/generic-extractor/functions/#concat) function. The `concat` function takes 
+the login parameter from the [`config` section](/extend/generic-extractor/functions/#configuration-attributes) 
+(via `"attr": "#login"` reference) and the token parameter from the
+[response of the login request](/extend/generic-extractor/functions/#login-authentication-context) 
+(via `"response": "authorization.token"` reference).
 
 {% highlight json %}
 {
@@ -586,4 +590,4 @@ and the token parameter from the
 {% endhighlight %}
 
 See [example [EX117]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/117-function-login-params-response)
-or [example [EX118]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/118-function-login-headers-response) which uses headers.
+or [example [EX118]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/118-function-login-headers-response), which uses headers.

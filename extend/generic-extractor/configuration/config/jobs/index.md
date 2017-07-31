@@ -316,7 +316,7 @@ as an object with the `path` property. For instance, these two configurations ar
 
 ### Data Field Delimiter
 The path to the response property is by default expected to be dot separated. That is --- a path
-`members.active` refers to property `active` nested inside a property `members`. If you need to refer to a
+`members.active` refers to the property `active` nested inside the property `members`. If you need to refer to a
 property containing a dot, you have to change the data field path delimiter to some other character. This can be
 done using the `delimiter` property:
 
@@ -332,8 +332,8 @@ done using the `delimiter` property:
     ]
 {% endhighlight %}
 
-The above configuration refers to a property named `members.active`. To refer to a property `items` nested
-inside a property `members.active` you have to use:
+The above configuration refers to the property named `members.active`. To refer to the property `items` nested
+inside the property `members.active` you have to use:
 
 {% highlight json %}
     "jobs": [
@@ -347,7 +347,7 @@ inside a property `members.active` you have to use:
     ]
 {% endhighlight %}
 
-The `delimiter` character is completely arbitrary, but must be something that is not used in the property names in the response.
+The `delimiter` character is completely arbitrary but must be something that is not used in the property names in the response.
 See [example [EX120]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/120-datafield-separator).
 
 ## Response Filter
