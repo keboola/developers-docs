@@ -134,3 +134,28 @@ The CLI (delivered as a Docker image) provides the deploy script with simple com
 and credentials to our AWS ECR registry. The `ecr:get-repository` command returns the repository associated with user in
 `KBC_DEVELOPERPORTAL_USERNAME` variable. The `ecr:get-login` command returns a `docker login ...` command to authenticate
 to that repository.
+
+#### Run test jobs of your new image against live configurations
+
+Before deploying your new image to the developer portal, you may want to try it out on some 'real' configurations in your project.
+You can do this by adding an environment variable to travis with an appropriate storage token (highly recommended to create a dedicated token for this task)
+
+{: .image-popup}
+![Travis Environment Variable](/extend/docker/tutorial/cli_storage_token.png)
+
+Then you can add the following to the deploy script to run the test jobs, ideally before the final command.
+Of course, you'll need to replace `componentId` and `configurationId` with your component and its test configuration. 
+
+{% highlight bash %}
+export SYRUP_CLI=quay.io/keboola/syrup-cli
+docker pull $SYRUP_CLI:latest
+
+docker run --rm -e KBC_STORAGE_TOKEN=$KBC_SYRUP_CLI_TOKEN \
+   $SYRUP_CLI:latest run-job componentId configurationId $TRAVIS_TAG
+
+if [ $? -ne 0 ]; then
+  echo 'Test job run failed'
+  exit 1;
+fi
+{% endhighlight %}
+
