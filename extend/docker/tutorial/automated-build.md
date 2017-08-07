@@ -114,20 +114,30 @@ Then simply paste this code in your deploy script:
 {% highlight bash %}
 # Deploy to repository provided by Keboola Developer Portal
 docker pull quay.io/keboola/developer-portal-cli-v2:latest
-export REPOSITORY=`docker run --rm  \
-    -e KBC_DEVELOPERPORTAL_USERNAME -e KBC_DEVELOPERPORTAL_PASSWORD -e KBC_DEVELOPERPORTAL_URL \
-    quay.io/keboola/developer-portal-cli-v2:latest ecr:get-repository $KBC_DEVELOPERPORTAL_VENDOR $KBC_DEVELOPERPORTAL_APP`
+export REPOSITORY=`docker run --rm \
+  -e KBC_DEVELOPERPORTAL_USERNAME \
+  -e KBC_DEVELOPERPORTAL_PASSWORD \
+  -e KBC_DEVELOPERPORTAL_URL \
+  quay.io/keboola/developer-portal-cli-v2:latest ecr:get-repository \
+  $KBC_DEVELOPERPORTAL_VENDOR $KBC_DEVELOPERPORTAL_APP`
 docker tag $KBC_APP_REPOSITORY:latest $REPOSITORY:$TRAVIS_TAG
 docker tag $KBC_APP_REPOSITORY:latest $REPOSITORY:latest
-eval $(docker run --rm
-    -e KBC_DEVELOPERPORTAL_USERNAME -e KBC_DEVELOPERPORTAL_PASSWORD -e KBC_DEVELOPERPORTAL_URL \
-    quay.io/keboola/developer-portal-cli-v2:latest ecr:get-login $KBC_DEVELOPERPORTAL_VENDOR $KBC_DEVELOPERPORTAL_APP)
+eval $(docker run --rm \
+  -e KBC_DEVELOPERPORTAL_USERNAME \
+  -e KBC_DEVELOPERPORTAL_PASSWORD \
+  -e KBC_DEVELOPERPORTAL_URL \
+  quay.io/keboola/developer-portal-cli-v2:latest ecr:get-login \
+  $KBC_DEVELOPERPORTAL_VENDOR $KBC_DEVELOPERPORTAL_APP)
 docker push $REPOSITORY:$TRAVIS_TAG
 docker push $REPOSITORY:latest
 
 # Deploy the application to KBC
-docker run --rm -e KBC_DEVELOPERPORTAL_USERNAME -e KBC_DEVELOPERPORTAL_PASSWORD -e KBC_DEVELOPERPORTAL_URL \
-    quay.io/keboola/developer-portal-cli-v2:latest update-app-repository $KBC_DEVELOPERPORTAL_VENDOR $KBC_DEVELOPERPORTAL_APP $TRAVIS_TAG
+docker run --rm \
+  -e KBC_DEVELOPERPORTAL_USERNAME \
+  -e KBC_DEVELOPERPORTAL_PASSWORD \
+  -e KBC_DEVELOPERPORTAL_URL \
+  quay.io/keboola/developer-portal-cli-v2:latest update-app-repository \
+  $KBC_DEVELOPERPORTAL_VENDOR $KBC_DEVELOPERPORTAL_APP $TRAVIS_TAG
 
 {% endhighlight %}
 
@@ -155,7 +165,7 @@ Note that if you want to run multiple test jobs, simple repeat the command with 
 
 Then simply add the following steps to your `script` section in `.travis.yml` to run the test jobs. 
 
-```yaml
+{% highlight yaml %}
     # push master image to ECR
     - docker pull quay.io/keboola/developer-portal-cli-v2:0.0.1
     - export REPOSITORY=`docker run --rm -e KBC_DEVELOPERPORTAL_USERNAME -e KBC_DEVELOPERPORTAL_PASSWORD -e KBC_DEVELOPERPORTAL_URL quay.io/keboola/developer-portal-cli-v2:latest ecr:get-repository $KBC_DEVELOPERPORTAL_VENDOR $KBC_DEVELOPERPORTAL_APP`
@@ -166,7 +176,7 @@ Then simply add the following steps to your `script` section in `.travis.yml` to
     # env requires: KBC_STORAGE_TOKEN and KBC_APP_TEST_CONFIG (a token to a test project where the app has a configuration)
     - docker pull quay.io/keboola/syrup-cli:latest
     - docker run --rm -e KBC_STORAGE_TOKEN quay.io/keboola/syrup-cli:latest run-job $KBC_DEVELOPERPORTAL_APP $KBC_APP_TEST_CONFIG master
-```
+{% endhighlight %}
 
 This commands above do as follows:
 * Pull the developer portal cli client [Developer Portal CLI](https://github.com/keboola/developer-portal-cli-v2)
