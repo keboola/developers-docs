@@ -167,7 +167,7 @@ Then simply add the following steps to your `script` section in `.travis.yml` to
 
 {% highlight yaml %}
     # push master image to ECR
-    - docker pull quay.io/keboola/developer-portal-cli-v2:0.0.1
+    - docker pull quay.io/keboola/developer-portal-cli-v2:latest
     - export REPOSITORY=`docker run --rm -e KBC_DEVELOPERPORTAL_USERNAME -e KBC_DEVELOPERPORTAL_PASSWORD -e KBC_DEVELOPERPORTAL_URL quay.io/keboola/developer-portal-cli-v2:latest ecr:get-repository $KBC_DEVELOPERPORTAL_VENDOR $KBC_DEVELOPERPORTAL_APP`
     - docker tag $KBC_APP_REPOSITORY:latest $REPOSITORY:master
     - eval $(docker run --rm -e KBC_DEVELOPERPORTAL_USERNAME -e KBC_DEVELOPERPORTAL_PASSWORD -e KBC_DEVELOPERPORTAL_URL quay.io/keboola/developer-portal-cli-v2:latest ecr:get-login $KBC_DEVELOPERPORTAL_VENDOR $KBC_DEVELOPERPORTAL_APP)
