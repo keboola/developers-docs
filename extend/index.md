@@ -38,9 +38,10 @@ With Generic Extractor you can build an entirely new extractor for KBC in less t
 ### Custom Extensions
 Custom Extensions can be used as:
 
-- **Extractors** - allowing customers to get data from new sources. They only process input tables from external sources (usually API).
-- **Applications** - further enriching the data or add value in new ways. They process input tables stored in CSV files and generate result tables in CSV files. 
-- **Writers** - pushing data into new systems and consumption methods. They do not generate any KBC tables. 
+- **Extractors** -- allowing customers to get data from new sources. They only process input tables from external sources (usually API).
+- **Applications** -- further enriching the data or add value in new ways. They process input tables stored in CSV files and generate result tables in CSV files. 
+- **Writers** -- pushing data into new systems and consumption methods. They do not generate any KBC tables. 
+- **Processors** -- adjusting the inputs or outputs of other components. They have to be run together with any of the above extensions. 
 
 All extensions run inside a [Docker component](/integrate/docker-bundle) which takes care of their
 *authentication, starting, stopping, isolation, and reading data from and writing it to KBC Storage*.

@@ -242,8 +242,11 @@ items:
               - url: /integrate/storage/api/tde-exporter/
                 title: TDE Exporter
 
-      - url: /integrate/docker-bundle/
+      - url: /integrate/docker-runner/
         title: Docker Runner
+        items:
+          - url: /integrate/docker-runner/processors/
+            title: Processors
 
       - url: /integrate/transformations/
         title: Transformations

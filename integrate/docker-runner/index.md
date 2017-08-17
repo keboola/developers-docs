@@ -1,13 +1,15 @@
 ---
 title: Docker Runner
-permalink: /integrate/docker-bundle/
+permalink: /integrate/docker-runner/
+redirect_from:
+    - /integrate/docker-bundle/
 ---
 
 * TOC
 {:toc}
 
 Docker Runner is a [KBC component](/overview/) which provides an interface for
-running [Docker images](/extend/docker/tutorial) in Keboola Connection.
+running other KBC components. Every component in Keboola Connection is represented by a [Docker images](/extend/docker/tutorial/) in Keboola Connection.
 
 By developing functionality in [Docker](https://www.docker.com/) you will focus only on the application logic; all communication
 with Storage API will be handled by Docker Runner. You can encapsulate any application into an Docker image
@@ -66,6 +68,7 @@ has API calls to
 - [encrypt values](/overview/encryption/)
 - [creating sandbox](/extend/common-interface/sandbox/)
 - run [component actions](/extend/common-interface/actions/)
+- run a [docker extension](/extend/docker/) with a [specified docker image tag](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job-with-image/run-job), usable for [testing images](https://developers.keboola.com/extend/docker/tutorial/automated-build/#run-test-jobs-of-your-new-image-against-live-configurations)
 
 ## Configuration
 
@@ -75,4 +78,3 @@ Extensions executed by Docker Runner store their configurations in
 When creating the configuration, use
 [this JSON schema](https://github.com/keboola/docker-bundle/blob/master/Resources/schemas/configuration.json)
 to validate the configuration before storing it.
-
