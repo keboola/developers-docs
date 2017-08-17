@@ -165,26 +165,41 @@ Note that if you want to run multiple test jobs, simple repeat the command with 
 
 Then simply add the following steps to your `script` section in `.travis.yml` to run the test jobs. 
 
-{% highlight yaml %}
-    # push master image to ECR
-    - docker pull quay.io/keboola/developer-portal-cli-v2:0.0.1
-    - export REPOSITORY=`docker run --rm -e KBC_DEVELOPERPORTAL_USERNAME -e KBC_DEVELOPERPORTAL_PASSWORD -e KBC_DEVELOPERPORTAL_URL quay.io/keboola/developer-portal-cli-v2:latest ecr:get-repository $KBC_DEVELOPERPORTAL_VENDOR $KBC_DEVELOPERPORTAL_APP`
-    - docker tag $KBC_APP_REPOSITORY:latest $REPOSITORY:master
-    - eval $(docker run --rm -e KBC_DEVELOPERPORTAL_USERNAME -e KBC_DEVELOPERPORTAL_PASSWORD -e KBC_DEVELOPERPORTAL_URL quay.io/keboola/developer-portal-cli-v2:latest ecr:get-login $KBC_DEVELOPERPORTAL_VENDOR $KBC_DEVELOPERPORTAL_APP)
-    - docker push $REPOSITORY:master
-    # Run live test job on new master image
-    # env requires: KBC_STORAGE_TOKEN and KBC_APP_TEST_CONFIG (a token to a test project where the app has a configuration)
-    - docker pull quay.io/keboola/syrup-cli:latest
-    - docker run --rm -e KBC_STORAGE_TOKEN quay.io/keboola/syrup-cli:latest run-job $KBC_DEVELOPERPORTAL_APP $KBC_APP_TEST_CONFIG master
+{% highlight bash %}
+# Push master image to ECR
+docker pull quay.io/keboola/developer-portal-cli-v2:latest
+export REPOSITORY=`docker run --rm \
+  -e KBC_DEVELOPERPORTAL_USERNAME \
+  -e KBC_DEVELOPERPORTAL_PASSWORD \
+  -e KBC_DEVELOPERPORTAL_URL \
+  quay.io/keboola/developer-portal-cli-v2:latest ecr:get-repository \
+  $KBC_DEVELOPERPORTAL_VENDOR $KBC_DEVELOPERPORTAL_APP`
+docker tag $KBC_APP_REPOSITORY:latest $REPOSITORY:master
+eval $(docker run --rm \
+  -e KBC_DEVELOPERPORTAL_USERNAME \
+  -e KBC_DEVELOPERPORTAL_PASSWORD \
+  -e KBC_DEVELOPERPORTAL_URL \
+  quay.io/keboola/developer-portal-cli-v2:latest ecr:get-login \
+  $KBC_DEVELOPERPORTAL_VENDOR $KBC_DEVELOPERPORTAL_APP)
+docker push $REPOSITORY:master
+
+# Run live test job on new master image
+# env requires: KBC_STORAGE_TOKEN and KBC_APP_TEST_CONFIG (a token to a test project where the app has a configuration)
+docker pull quay.io/keboola/syrup-cli:latest
+docker run --rm \
+  -e KBC_STORAGE_TOKEN \
+  quay.io/keboola/syrup-cli:latest run-job \
+  $KBC_DEVELOPERPORTAL_APP $KBC_APP_TEST_CONFIG master
 {% endhighlight %}
 
 This commands above do as follows:
+
 * Pull the developer portal cli client [Developer Portal CLI](https://github.com/keboola/developer-portal-cli-v2)
 * Gets the application's KBC repository url from the developer portal
 * Tags the image as master
 * Pushes the image to repository
 * Pulls the job runner cli client [Syrup PHP CLI](https://github.com/keboola/syrup-php-cli)
-* Runs the specified test job on KBC using the /{component}/{config}/run/tag/{tag} [Keboola Docker API](api http://docs.kebooladocker.apiary.io/#reference/run/create-a-job-with-image/run-job)
+* Runs the specified test job on KBC using the `/{component}/{config}/run/tag/{tag}` -- [Keboola Docker API](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job-with-image/run-job)
 
 You can see both [`.travis.yml`](https://github.com/keboola/docker-demo-app/blob/master/.travis.yml) and the deploy script ([`deploy.sh`](https://github.com/keboola/docker-demo-app/blob/master/deploy.sh))
 in our [Docker Demo App](https://github.com/keboola/docker-demo-app) GitHub repository.
