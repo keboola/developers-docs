@@ -179,12 +179,13 @@ Then simply add the following steps to your `script` section in `.travis.yml` to
 {% endhighlight %}
 
 This commands above do as follows:
+
 * Pull the developer portal cli client [Developer Portal CLI](https://github.com/keboola/developer-portal-cli-v2)
 * Gets the application's KBC repository url from the developer portal
 * Tags the image as master
 * Pushes the image to repository
 * Pulls the job runner cli client [Syrup PHP CLI](https://github.com/keboola/syrup-php-cli)
-* Runs the specified test job on KBC using the /{component}/{config}/run/tag/{tag} [Keboola Docker API](api http://docs.kebooladocker.apiary.io/#reference/run/create-a-job-with-image/run-job)
+* Runs the specified test job on KBC using the `/{component}/{config}/run/tag/{tag}` -- [Keboola Docker API](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job-with-image/run-job)
 
 You can see both [`.travis.yml`](https://github.com/keboola/docker-demo-app/blob/master/.travis.yml) and the deploy script ([`deploy.sh`](https://github.com/keboola/docker-demo-app/blob/master/deploy.sh))
 in our [Docker Demo App](https://github.com/keboola/docker-demo-app) GitHub repository.
