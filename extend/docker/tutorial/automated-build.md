@@ -60,7 +60,8 @@ Then link the image repository to a Github repository
 {: .image-popup}
 ![Link repositories](/extend/docker/tutorial/quay-link-repository.png)
 
-After that, configure the build trigger. The easiest way to do that is setting the trigger to `All Branches and Tags`.
+After that, configure the build trigger. The easiest way to do that is setting the trigger to 
+`All Branches and Tags`.
 It will trigger an image rebuild on every commit to the repository.
 You can also set the build trigger only to a specific branch, for example, `heads/master`:
 
@@ -68,7 +69,8 @@ You can also set the build trigger only to a specific branch, for example, `head
 ![Configure build trigger for branch](/extend/docker/tutorial/quay-build-trigger-master.png)
 
 An alternative option is to configure the trigger to a specific tag. For Semantic versioning,
-the following regular expression `^tags/[0-9]+\.[0-9]+\.[0-9]+$` ensures the image is rebuilt only when you create a new tag.
+the following regular expression `^tags/[0-9]+\.[0-9]+\.[0-9]+$` ensures the image is rebuilt only 
+when you create a new tag.
 
 {: .image-popup}
 ![Configure build trigger for tag](/extend/docker/tutorial/quay-build-trigger-tag.png)
@@ -80,8 +82,8 @@ Regardless of your chosen approach, finish setting up the trigger by completing 
 
 Pushing a new commit into a git repository or creating a new tag (depending on the trigger setting) will now
 trigger a new build of the Docker Image. Also note that the image automatically inherits the git repository tag
-or branch name. So, when you push a commit to the `master` branch, you will get an image with a tag master (which will
-move away from any older image builds). When creating a `1.0.0` tag, you will get an image with a `1.0.0` tag.
+or branch name. So, when you push a commit to the `master` branch, you will get an image with a tag master (which
+will move away from any older image builds). When creating a `1.0.0` tag, you will get an image with a `1.0.0` tag.
 
 ## Setting up a Repository on AWS ECR
 
@@ -89,14 +91,16 @@ If you do not have a Keboola Developer Portal account yet, head to the [API docu
 create a new account and register your vendor.
 
 The [Get credentials to ECR repository API call](http://docs.kebooladeveloperportal.apiary.io/#reference/0/apps/get-credentials-to-ecr-repository)
-will create a repository and temporary credentials to log into AWS ECR registry and to upload your Docker image.
+will create a repository and temporary credentials for logging into the AWS ECR registry and uploading 
+your Docker image.
 
-If you want to integrate this process in a CI tool like Travis or CircleCI, do not use your Keboola Developer Portal
- credentials to log in. For this case the [Generate credentials for a service account API call](http://docs.kebooladeveloperportal.apiary.io/#reference/0/vendors/generate-credentials-for-service-account)
- will create a service user whose credentials are safe to share with Travis or the CI tool of your choice.
+If you want to integrate this process into a CI tool like Travis or CircleCI, do not use your Keboola Developer 
+Portal credentials to log in. 
+For this case, the [Generate credentials for a service account API call](http://docs.kebooladeveloperportal.apiary.io/#reference/0/vendors/generate-credentials-for-service-account)
+will create a service user whose credentials are safe to share with Travis or the CI tool of your choice.
 
 ### Sample Integration with Travis CI
-Generate the service username and password using [Generate credentials for service account API call](http://docs.kebooladeveloperportal.apiary.io/#reference/0/vendors/generate-credentials-for-service-account)
+Generate the service username and password using the [Generate credentials for service account API call](http://docs.kebooladeveloperportal.apiary.io/#reference/0/vendors/generate-credentials-for-service-account)
 and save these to environment variables:
 
  - `KBC_DEVELOPERPORTAL_USERNAME` with the login
@@ -141,27 +145,30 @@ docker run --rm \
 
 {% endhighlight %}
 
-This code will tag your image with the relevant tags (`latest` and the tag of the build) and push them to our registry.
-Finally it will update the application in Developer Portal to use the current tag. This means that the new version of the application is immediately deployed into KBC.
+This code will tag your image with the relevant tags (`latest` and the tag of the build) and push them to 
+our registry.
+Finally, it will update the application in Developer Portal to use the current tag. This means that the new version 
+of the application is immediately deployed into KBC.
 
-This sample deployment script uses the [Developer Portal CLI](https://github.com/keboola/developer-portal-cli-v2) tool.
-The CLI (delivered as a Docker image) provides the deploy script with simple commands to retrieve the repository
-and credentials to our AWS ECR registry. The `ecr:get-repository` command returns the repository associated with user in
-`KBC_DEVELOPERPORTAL_USERNAME` variable. The `ecr:get-login` command returns a `docker login ...` command to authenticate
-to that repository.
+This sample deployment script uses the [Developer Portal CLI](https://github.com/keboola/developer-portal-cli-v2) 
+tool. The CLI (delivered as a Docker image) provides the deploy script with simple commands to retrieve the 
+repository and credentials to our AWS ECR registry. The `ecr:get-repository` command returns the repository 
+associated with the user in the variable `KBC_DEVELOPERPORTAL_USERNAME`. The `ecr:get-login` command returns a 
+`docker login ...` command to authenticate to that repository.
 
 #### Run test jobs of your new image against live configurations
 
-Before deploying your new image to the developer portal, you may want to try it out on some 'real' configurations in your project. 
-You can do this by adding some environment variables to travis with an appropriate storage token and configurationId  
-(It is highly recommended to create a dedicated token for this task)
+Before deploying your new image to the developer portal, you may want to try it out on some 'real' configurations 
+in your project. You can do this by adding some environment variables to Travis with an appropriate storage token 
+and configurationId. (It is highly recommended to create a dedicated token for this task.)
 
-The commands will need 2 extra environment variables including the ones listed above.
+The commands will need two extra environment variables including the ones listed above:
 
-- `KBC_STORAGE_TOKEN` - the storage token that the test(s) will run under
-- `KBC_APP_TEST_CONFIG` - the configuration to test.
+- `KBC_STORAGE_TOKEN` --- the storage token that the test(s) will run under
+- `KBC_APP_TEST_CONFIG` --- the configuration to test
 
-Note that if you want to run multiple test jobs, simple repeat the command with the different configuration IDs that you'd like to test.
+Note that if you want to run multiple test jobs, simply repeat the command with the different configuration IDs 
+that you would like to test.
 
 Then simply add the following steps to your `script` section in `.travis.yml` to run the test jobs. 
 
@@ -192,15 +199,16 @@ docker run --rm \
   $KBC_DEVELOPERPORTAL_APP $KBC_APP_TEST_CONFIG master
 {% endhighlight %}
 
-This commands above do as follows:
+The commands above do as follows:
 
 * Pull the developer portal cli client [Developer Portal CLI](https://github.com/keboola/developer-portal-cli-v2)
-* Gets the application's KBC repository url from the developer portal
-* Tags the image as master
-* Pushes the image to repository
-* Pulls the job runner cli client [Syrup PHP CLI](https://github.com/keboola/syrup-php-cli)
-* Runs the specified test job on KBC using the `/{component}/{config}/run/tag/{tag}` -- [Keboola Docker API](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job-with-image/run-job)
+* Get the application's KBC repository url from the developer portal
+* Tag the image as master
+* Push the image to the repository
+* Pull the job runner cli client [Syrup PHP CLI](https://github.com/keboola/syrup-php-cli)
+* Run the specified test job on KBC using the `/{component}/{config}/run/tag/{tag}` -- [Keboola Docker API](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job-with-image/run-job)
 
-You can see both [`.travis.yml`](https://github.com/keboola/docker-demo-app/blob/master/.travis.yml) and the deploy script ([`deploy.sh`](https://github.com/keboola/docker-demo-app/blob/master/deploy.sh))
+You can see both [`.travis.yml`](https://github.com/keboola/docker-demo-app/blob/master/.travis.yml) and
+the deploy script ([`deploy.sh`](https://github.com/keboola/docker-demo-app/blob/master/deploy.sh))
 in our [Docker Demo App](https://github.com/keboola/docker-demo-app) GitHub repository.
 
