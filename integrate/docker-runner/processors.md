@@ -10,7 +10,7 @@ Processors are additional components which may be used before or after running a
 (extractor, writer, ...). When [Docker Runner](/integrate/docker-runner/) runs a docker image, a processor 
 may be used to pre-process the inputs (files or tables) supplied to that image, or it may be used to post-process 
 the image outputs. For example, if an extractor extracts CSV data in a non-UTF8 encoding, you can use the 
-[`inconv` processor](https://github.com/keboola/processor-iconv/blob/master/README.md) as a post-processor to 
+[`iconv` processor](https://github.com/keboola/processor-iconv/blob/master/README.md) as a post-processor to 
 convert the CSV to UTF-8 as expected by [Storage](https://help.keboola.com/storage/).
 
 ## Configuration
