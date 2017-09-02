@@ -46,12 +46,11 @@ a project in KBC. It is not strictly necessary to have a KBC project, but it cer
 
 You can apply for a development project with the following features:
 
-- 50GB storage space
-- 50M stored data rows
-- MySQL backend
+- 3.5GB storage space
+- Snowflake backend
 - 10 users
-- 10 orchestrations
-- Possibility to create a demo development project in GoodData with 1GB storage and 30 users (expires in 1 month)
+- 3 orchestrations
+- Possibility to create a demo development project in GoodData with 0.5GB storage and 10 users (expires in 1 month)
  
 Under the following conditions:
 
