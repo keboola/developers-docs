@@ -104,21 +104,23 @@ a [sample repository](https://github.com/keboola/docs-example-logging-php). For 
 see its [official documentation](https://github.com/bzikarsky/gelf-php).
 
 #### Python
-For Python, there are [a number of libraries](https://marketplace.graylog.org/addons?kind=gelf&tag=python) available. For example, the [pygelf library](https://github.com/keeprocking/pygelf). To install it, use
+For Python, there are [a number of libraries](https://marketplace.graylog.org/addons?kind=gelf&tag=python) available. For example, the [logging-gelf library](https://pypi.python.org/pypi/logging-gelf). To install it, use
 
-    pip install pygelf
+    pip3 install logging_gelf
 
 Test the logging with the following simple script:
 
 {% highlight python %}
-from pygelf import GelfTcpHandler
+import logging_gelf.handlers
+import logging_gelf.formatters
 import logging
 import os
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
-fields = {"_some": {"structured": "data"}}
-logger.addHandler(GelfTcpHandler(host=os.getenv('KBC_LOGGER_ADDR'), port=os.getenv('KBC_LOGGER_PORT'), debug=False, **fields))
+logging_gelf_handler = logging_gelf.handlers.GELFTCPSocketHandler(host=os.getenv('KBC_LOGGER_ADDR'), port=int(os.getenv('KBC_LOGGER_PORT')))
+logging_gelf_handler.setFormatter(logging_gelf.formatters.GELFFormatter(null_character=True))
+logger.addHandler(logging_gelf_handler)
 logging.critical('A sample emergency message')
 {% endhighlight %}
 
