@@ -308,37 +308,40 @@ the `api` section to a separate, individual `api.json` file:
 
 Once you make sure that the extractor works as it did before, 
 remove the user provided values (`username`, `#password`, `accountId`, `userType`) from
-the `config` section and add `name` and `description` to it. Save the file into a 
-separate `template.json` file.
+the `config` section, put it in a `data` section and add `name` and `description` to it.
+Save the file into a separate `template.json` file. The template file therefore contains
+`name`, `description` and `data` nodes.
 
 {% highlight json %}
 {
     "name": "Basic",
     "description": "Basic incremental template",
-    "incrementalOutput": true,
-    "jobs": [
-        {
-            "endpoint": "users",
-            "dataType": "users",
-            "params": {
-                "accountId": {
-                    "attr": "accountId"
-                },
-                "type": {
-                    "attr": "userType"
+    "data": {
+        "incrementalOutput": true,
+        "jobs": [
+            {
+                "endpoint": "users",
+                "dataType": "users",
+                "params": {
+                    "accountId": {
+                        "attr": "accountId"
+                    },
+                    "type": {
+                        "attr": "userType"
+                    }
+                }                    
+            },
+            {
+                "endpoint": "orders",
+                "dataType": "orders",
+                "params": {
+                    "accountId": {
+                        "attr": "accountId"
+                    }                        
                 }
-            }                    
-        },
-        {
-            "endpoint": "orders",
-            "dataType": "orders",
-            "params": {
-                "accountId": {
-                    "attr": "accountId"
-                }                        
             }
-        }
-    ]
+        ]
+    }
 }
 {% endhighlight %}
 
