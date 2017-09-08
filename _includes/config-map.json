@@ -36,6 +36,7 @@
             "#password": "secret",
             "outputBucket": "ge-tutorial",
             "incrementalOutput": true,
+            "compatLevel": 2,
             "http": {
                 "headers": {
                     "X-AppKey": "ThisIsSecret"

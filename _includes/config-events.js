@@ -37,7 +37,8 @@ document.addEventListener('DOMContentLoaded', function() {
     $("span.nt:contains('\"outputBucket\"')").wrap("<a href='/extend/generic-extractor/configuration/config/#output-bucket'></a>");
     $("span.nt:contains('\"http\"')").last().wrap("<a href='/extend/generic-extractor/configuration/config/#http'></a>");
     $("span.nt:contains('\"userData\"')").last().wrap("<a href='/extend/generic-extractor/configuration/config/#user-data'></a>");
-
+    $("span.nt:contains('\"compatLevel\"')").wrap("<a href='/extend/generic-extractor/configuration/config/#compatibility-level'></a>");
+    
     // Mappings
     $("span.nt:contains('\"type\"')").last().wrap("<a href='/extend/generic-extractor/configuration/config/mappings/#configuration'></a>");
     $("span.s2:contains('\"column\"')").wrap("<a href='/extend/generic-extractor/configuration/config/mappings/#column-mapping'></a>");
