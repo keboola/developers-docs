@@ -9,13 +9,13 @@ permalink: /extend/generic-extractor/configuration/api/pagination/
 *If new to Generic Extractor, learn about [pagination in our tutorial](/extend/generic-extractor/tutorial/pagination/) first.*
 *Use [Parameter Map](/extend/generic-extractor/map/) to help you navigate among various configuration options.*
 
-[Pagination](https://en.wikipedia.org/wiki/Pagination), or paging, describes **how an API splits a large list of items into 
-separate pages**. Pagination may also be called scrolling or traversing (scrolling through a large result set). Sometimes 
-it is also referred to as setting a [cursor](https://en.wikipedia.org/wiki/Cursor_(databases)) (pointing to a current 
-result). 
+[Pagination](https://en.wikipedia.org/wiki/Pagination), or paging, describes **how an API splits a large list of items into
+separate pages**. Pagination may also be called scrolling or traversing (scrolling through a large result set). Sometimes
+it is also referred to as setting a [cursor](https://en.wikipedia.org/wiki/Cursor_(databases)) (pointing to a current
+result).
 
-Almost every API has some form of pagination because returning extensive lists of large results is impractical for many 
-reasons, such as memory overflow issues and long transfer and processing times. So, unless you only want to do an ad-hoc query to 
+Almost every API has some form of pagination because returning extensive lists of large results is impractical for many
+reasons, such as memory overflow issues and long transfer and processing times. So, unless you only want to do an ad-hoc query to
 extract thousands of items at most, setting pagination is important.
 
 When configuring Generic Extractor, there is a slight distinction between pagination and scrolling:
@@ -23,7 +23,7 @@ When configuring Generic Extractor, there is a slight distinction between pagina
 - **Pagination** describes paging of the entire API.
 - **Scrolling** (scroller) describes paging of a single resource.
 
-As long as the API uses the same pagination method for all resources, there is no need to distinguish between the 
+As long as the API uses the same pagination method for all resources, there is no need to distinguish between the
 two. Setting up pagination for Generic Extractor boils down to two crucial questions:
 
 - **How to obtain the next set of items?** (paging strategy)
@@ -53,9 +53,9 @@ using the `method` option:
 - [`multiple`](/extend/generic-extractor/configuration/api/pagination/multiple/) --- allows to set different scrollers for different API endpoints.
 
 ### Choosing Paging Strategy
-If the API responses contain direct links to the next set of results, use the 
+If the API responses contain direct links to the next set of results, use the
 [`response.url` method](/extend/generic-extractor/configuration/api/pagination/response-url/).
-This applies to the APIs following the [JSON API specification](http://jsonapi.org). The response usually 
+This applies to the APIs following the [JSON API specification](http://jsonapi.org). The response usually
 contains a `links` section:
 
 {% highlight json %}
@@ -69,8 +69,8 @@ contains a `links` section:
 }
 {% endhighlight %}
 
-If the API response contains a parameter used to obtain the next page, use the 
-[`response.param` method](/extend/generic-extractor/configuration/api/pagination/response-param/). 
+If the API response contains a parameter used to obtain the next page, use the
+[`response.param` method](/extend/generic-extractor/configuration/api/pagination/response-param/).
 It is preferred to use an
 authoritative value provided by the API than any of the following methods.
 This can be some kind of scrolling token or even a page number of the next page, for example:
@@ -86,17 +86,17 @@ This can be some kind of scrolling token or even a page number of the next page,
 }
 {% endhighlight %}
 
-If the API does not provide a scrolling hint within the response, use one of the 
-`offset`, `pagenum` or `cursor` methods: 
+If the API does not provide a scrolling hint within the response, use one of the
+`offset`, `pagenum` or `cursor` methods:
 
-- Use the [`pagenum` method](/extend/generic-extractor/configuration/api/pagination/pagenum/) if the API expects the **page** 
+- Use the [`pagenum` method](/extend/generic-extractor/configuration/api/pagination/pagenum/) if the API expects the **page**
 number/index. For example, `/users?page=2` retrieves the 2nd page regardless of how many items the page contains.
-- Use the [`offset` method](/extend/generic-extractor/configuration/api/pagination/offset/) if the API expects the **item** 
+- Use the [`offset` method](/extend/generic-extractor/configuration/api/pagination/offset/) if the API expects the **item**
 number/index. For example, `/users?startWith=20` retrieves the 20th and following items.
-- Use the [`cursor` method](/extend/generic-extractor/configuration/api/pagination/cursor/) if the API expects an item **identifier**. 
+- Use the [`cursor` method](/extend/generic-extractor/configuration/api/pagination/cursor/) if the API expects an item **identifier**.
 For example, `/users?startWith=20` retrieves an item with ID 20 and the following items.
 
-If the API uses different paging methods for different endpoints, use the 
+If the API uses different paging methods for different endpoints, use the
 [`multiple` method](/extend/generic-extractor/configuration/api/pagination/multiple/) together with
 any of the above methods.
 
@@ -105,43 +105,44 @@ Generic Extractor stops scrolling
 
 - based on the `nextPageFlag` condition configuration.
 - based on the `forceStop` condition configuration.
+- based on the `limitStop` condition configuration.
 - when the **same result** is obtained twice.
 
-Apart from those, each pagination method may have its own 
+Apart from those, each pagination method may have its own
 [stopping strategy](#combining-multiple-stopping-strategies).
 
-The **same result** condition deals with the situation when there is no clear limit to 
+The **same result** condition deals with the situation when there is no clear limit to
 stop the scrolling. Generic Extractor keeps requesting higher and higher pages from the API.
-Let's say that there are 150 pages of results in total. When Generic Extractor asks for page 151, various 
+Let's say that there are 150 pages of results in total. When Generic Extractor asks for page 151, various
 situations can arise:
 
-- Most common --- API returns an **empty page**; scrolling with 
-[`pagenum`](/extend/generic-extractor/configuration/api/pagination/pagenum/) and 
-[`offset` methods](/extend/generic-extractor/configuration/api/pagination/pagenum/) will stop, and other methods will probably stop 
+- Most common --- API returns an **empty page**; scrolling with
+[`pagenum`](/extend/generic-extractor/configuration/api/pagination/pagenum/) and
+[`offset` methods](/extend/generic-extractor/configuration/api/pagination/pagenum/) will stop, and other methods will probably stop
 too (depends on how empty the response is).
-- Less common --- API returns an **error** --- in this case a different stopping condition such as [`nextFlag`](#next-page-flag) or 
+- Less common --- API returns an **error** --- in this case a different stopping condition such as [`nextFlag`](#next-page-flag) or
 [`forceStop`](#force-stop) has to be used.
-- Less common --- API keeps returning the **last page**, the extraction is stopped when a page is obtained twice (see 
-[example [041]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/041-paging-stop-same)). If the API returns 
-the last page and it is the same as the previous page, the extraction is stopped. You will see this in the Generic Extractor logs as 
+- Less common --- API keeps returning the **last page**, the extraction is stopped when a page is obtained twice (see
+[example [041]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/041-paging-stop-same)). If the API returns
+the last page and it is the same as the previous page, the extraction is stopped. You will see this in the Generic Extractor logs as
 the following message:
 
 		Job '1234567890' finished when last response matched the previous!
 
-- Even less common --- API keeps returning the **first page**, the extraction is stopped when a page is obtained twice (see 
-[example [EX042]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/042-paging-stop-same-2)). If the API returns 
-the first page, it is not same as the previous page and therefore another request is sent to `users?offset=6&limit=2`. Then the result 
-is the same as the previous page, the same check kicks in and the extraction is stopped too. However, the results from the first 
+- Even less common --- API keeps returning the **first page**, the extraction is stopped when a page is obtained twice (see
+[example [EX042]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/042-paging-stop-same-2)). If the API returns
+the first page, it is not same as the previous page and therefore another request is sent to `users?offset=6&limit=2`. Then the result
+is the same as the previous page, the same check kicks in and the extraction is stopped too. However, the results from the first
 page will be duplicated.
 
 ### Next Page Flag
-The above describes automatic behavior of Generic Extractor regarding scrolling stopping. 
-Using **Next Page Flag** allows you to do a **manual setup of the stopping strategy**: Generic Extractor analyzes the response, 
+The above describes automatic behavior of Generic Extractor regarding scrolling stopping.
+Using **Next Page Flag** allows you to do a **manual setup of the stopping strategy**: Generic Extractor analyzes the response,
 looks for a particular field (the flag) and decides whether to continue scrolling based on the value or presence of that flag.
 
 Next Page Flag is configured using three options:
 
-- **`field`** (required) --- name of a field containing any value. The field must be in the root of the response. 
+- **`field`** (required) --- name of a field containing any value. The field must be in the root of the response.
     It will be converted to [boolean](/extend/generic-extractor/tutorial/json/#data-values).
 - **`stopOn`** (required) --- value to which the field will be compared to. When the values are equal, the scrolling stops.
 - **`ifNotSet`** --- assumed value of the `field` in case it is not present in the response. It defaults to the `stopOn` value.
@@ -169,7 +170,7 @@ See our [Next Page Flag Examples](#next-page-flag-examples).
 ### Force Stop
 Force stop configuration allows you to stop scrolling when some extraction limits are hit.
 The supported options are:
- 
+
 - `pages` --- maximum number of pages to extract
 - `time` --- maximum number of seconds the extraction should run
 - `volume` --- maximum number of bytes which can be extracted
@@ -186,7 +187,7 @@ This is an example or the `forceStop` setting:
 }
 {% endhighlight %}
 
-The volume of the response is measured as number of bytes in compressed JSON. Therefore the response 
+The volume of the response is measured as number of bytes in compressed JSON. Therefore the response
 
 {% highlight json %}
 {
@@ -213,7 +214,7 @@ which makes it 69 bytes long.
 
 
 The following is a **force stop example** configuration that will stop scrolling after extracting two pages of results, or
-after extracting 69 bytes of minifed JSON data (whichever comes first).
+after extracting 69 bytes of minified JSON data (whichever comes first).
 
 {% highlight json %}
 "pagination": {
@@ -228,11 +229,59 @@ after extracting 69 bytes of minifed JSON data (whichever comes first).
 
 See [example [EX048]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/048-force-stop).
 
+### Limit Stop
+Limit stop configuration allows you to stop scrolling when a specified number of items is extracted.
+The supported options are:
+
+- `count` (required, integer) --- total number of items to extract
+- `field` (required, string) --- path to the key which contains the value with total number of items
+
+The two options are **mutually exclusive**, but one of them is required. In both cases, the total number of items may not be
+honored exactly. If the total amount is not divisible by the page size, then the left over from the last page (if any)
+is extracted too (see example [EX127](https://github.com/keboola/generic-extractor/tree/master/doc/examples/127-pagination-stop-field)).
+This is an example or the `limitStop` setting:
+
+{% highlight json %}
+"pagination": {
+    "limitStop": {
+        "field": "items.count"
+    },
+    ...
+}
+{% endhighlight %}
+
+The above configuration will look in the response for a key `count` inside a key `items`. The obtained value is
+expected to be the total number of items to extract. In a sample response below, it will be `4`:
+
+{% highlight json %}
+{
+    "items": [
+        {
+            "id": 123,
+            "name": "John Doe"
+        },
+        {
+            "id": 234,
+            "name": "Jane Doe"
+        }
+    ],
+    "scroller": {
+        "count": 4,
+        "offset": 0
+    }
+}
+{% endhighlight %}
+
+Note that if the field does not exist in the response (e.g you misspell it in the configuration), paging stops after the first page.
+See [example [EX126]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/126-pagination-stop-liimit)
+(a modified version of [EX049](https://github.com/keboola/generic-extractor/tree/master/doc/examples/049-pagination-offset-rename).
+For `count` configuration, see [example [EX127]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/127-pagination-stop-field)
+(a modified version of [EX051](https://github.com/keboola/generic-extractor/tree/master/doc/examples/051-pagination-pagenum-basic).
 
 ### Combining Multiple Stopping Strategies
 All stopping strategies are evaluated simultaneously and for the scrolling to continue, none of
 the stopping conditions must be met. In other words, the scrolling continues until any of the
-stopping conditions is true. To this you need to account specific stopping strategies for 
+stopping conditions is true. To this you need to account specific stopping strategies for
 each scroller. For example, the scrolling of this configuration:
 
 {% highlight json %}
@@ -243,7 +292,7 @@ each scroller. For example, the scrolling of this configuration:
     },
     "forceStop": {
         "pages": 20
-    },    
+    },
     "method": "offset",
     "limit": "10"
 }
@@ -261,7 +310,7 @@ will stop if **any** of the following is true:
 ## Next Page Flag Examples
 
 ### Has-More Type Scrolling
-Assume that the API returns a response which contains a `hasMore` field. The field is present in 
+Assume that the API returns a response which contains a `hasMore` field. The field is present in
 every response and has always the value `true` except for the last response where it is `false`.
 The following pagination configuration can be used to configure the stopping strategy:
 
@@ -321,7 +370,7 @@ The following pagination configuration can be used to configure the stopping str
 }
 {% endhighlight %}
 
-The scrolling will **stop** when the field `isLast` is present in the response and true. 
+The scrolling will **stop** when the field `isLast` is present in the response and true.
 Because the field `isLast` is not present at all times, the `ifNotSet` configuration is required.
 
 See [example [EX047]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/047-next-page-flag-is-last).
