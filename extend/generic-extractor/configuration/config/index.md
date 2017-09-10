@@ -169,19 +169,19 @@ by the values of `userData`.
 See [example [EX076]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/076-user-data).
 
 ## Compatibility Level
-During the development of the Generic Extractor, some new features may lead to minor differences in results.
-When such situation happens a new *compatibility level* is introduced. The `compatLevel` setting allows
-you to force the old compatibility level and **temporarily** maintain the old behavior. Current 
+As we develop the Generic Extractor, some of the new features might lead to minor differences in extraction results.
+When such a situation arises, a new *compatibility level* is introduced. The `compatLevel` setting allows
+you to force the old compatibility level and **temporarily** maintain the old behavior. The current 
 compatibility level is **3**. The `compatLevel` setting is intended only to ease updates and migrations, 
 never use it in new configurations (any version of old behavior is considered unsupported). 
 
-Note: Configurations which were already run, use the legacy ([Level 1](#level-1)) JSON parser. This is
-displayed in events as warning `Using legacy JSON parser, because it is in configuration state.`
+**Note:** Configurations which were already run, use the legacy ([Level 1](#level-1)) JSON parser. This is
+displayed in events as the following warning: `Using legacy JSON parser, because it is in configuration state.`
 
 ### Level 2
-Level 2 has different behavior in [`responseFilter`](/extend/generic-extractor/configuration/config/jobs/#response-filter) handling. In current behavior (level 3 and above), 
-a filtered JSON property consistently produces a valid JSON. Previously (level 2 and below) a scalar
-value was not filtered. Given the data:
+Level 2 has different behavior in [`responseFilter`](/extend/generic-extractor/configuration/config/jobs/#response-filter) handling. 
+In current behavior (level 3 and above), a filtered JSON property consistently produces a valid JSON. 
+Previously (level 2 and below), a scalar value was not filtered. Given the data:
 
 {% highlight json %}
 [
@@ -198,37 +198,43 @@ value was not filtered. Given the data:
 ]
 {% endhighlight %}
 
-With `responseFilter` set to `data`, the level 2 version produces a table:
+With `responseFilter` set to `data`, the level 2 version produces the following table:
 
 |id|data|
 |---|---|
 |1|{"a":"b"}|
 |2|c|
 
-Level 3 and above version produces:
+Level 3 and above produces:
 
 |id|data|
 |---|---|
 |1|{"a":"b"}|
 |2|"c"|
 
-That means, that the `data` column is always a valid JSON string. See
-examples [EX121](https://github.com/keboola/generic-extractor/tree/master/doc/examples/121-inconsistent-object-legacy)
-and [EX122](https://github.com/keboola/generic-extractor/tree/master/doc/examples/122-multiple-filters-legacy). Compare to current results 
-examples [EX016](https://github.com/keboola/generic-extractor/tree/master/doc/examples/016-inconsistent-object)
-and [EX018](https://github.com/keboola/generic-extractor/tree/master/doc/examples/018-multiple-filters).
+That means that the `data` column is always a valid JSON string. 
+Compare the results of examples
+[EX121](https://github.com/keboola/generic-extractor/tree/master/doc/examples/121-inconsistent-object-legacy)
+and 
+[EX122](https://github.com/keboola/generic-extractor/tree/master/doc/examples/122-multiple-filters-legacy). 
+using compatibility level 2 with the result produced by examples 
+[EX016](https://github.com/keboola/generic-extractor/tree/master/doc/examples/016-inconsistent-object)
+and 
+[EX018](https://github.com/keboola/generic-extractor/tree/master/doc/examples/018-multiple-filters)
+which use the current JSON parser.
+
 
 ### Level 1
-Level 1 uses a different JSON parser which cannot handle duplicate columns properly. This applies to a number of situations:
+Level 1 uses a JSON parser which cannot handle duplicate columns properly. This applies to a number of situations:
 
-- the response contains properties which are evaluated to a same name, e.g.: 
+- The response contains properties which are evaluated to the same name, e.g.: 
 {% highlight json %}
 {
     "some.property": "first",
     "some_property": "second"
 }
 {% endhighlight %}
-- the response contains nested properties which are evaluated to a same name, e.g.:
+- The response contains nested properties which are evaluated to the same name, e.g.:
 {% highlight json %}
 {
     "some_property": "first",
@@ -237,24 +243,28 @@ Level 1 uses a different JSON parser which cannot handle duplicate columns prope
     }
 }
 {% endhighlight %}
-- the response contains names which are generated internally by Generic Extractor (`parent_id`, `JSON_parentId`), e.g. -- in a child job:
+- The response contains names which are generated internally by Generic Extractor (`parent_id`, `JSON_parentId`), e.g. -- in a child job:
 {% highlight json %}
 {
     "parent_id": 1,
     "name"" "someName"
 }
 {% endhighlight %}
-- the user data contains a column which is present in the response
+- The user data contains a column which is present in the response.
 
-In either of these situations, the Level 1 extractor generates an empty column with hash and 
-the original (or first encountered) column values were overwritten. In current version 
-(Level 2 and above), both columns are retained. The second encountered column is has a 
-numbered suffix. If you are upgrading from Level 1 extractor, you need to delete the column 
-with hash from target Storage table, otherwise you'll get an error (`Some columns are missing in 
+In either of these situations, the Level 1 extractor generates an empty column with hash, and 
+the original (or first encountered) column values are overwritten. In the current version 
+(Level 2 and above), both columns are retained. The second encountered column has a 
+numbered suffix. If you are upgrading from a Level 1 extractor, delete the column 
+with hash from the target Storage table, otherwise you'll get an error (`Some columns are missing in 
 the csv files`).
 
-See
-examples [EX124](https://github.com/keboola/generic-extractor/tree/master/doc/examples/124-naming-conflict-legacy)
-and [EX125](https://github.com/keboola/generic-extractor/tree/master/doc/examples/125-user-data-legacy). Compare to current results 
-examples [EX025](https://github.com/keboola/generic-extractor/tree/master/doc/examples/025-naming-conflict)
-and [EX076](https://github.com/keboola/generic-extractor/tree/master/doc/examples/076-user-data).
+Compare the results of examples
+[EX124](https://github.com/keboola/generic-extractor/tree/master/doc/examples/124-naming-conflict-legacy)
+and 
+[EX125](https://github.com/keboola/generic-extractor/tree/master/doc/examples/125-user-data-legacy),
+using compatibility level 1 with the result produced by examples 
+[EX025](https://github.com/keboola/generic-extractor/tree/master/doc/examples/025-naming-conflict)
+and 
+[EX076](https://github.com/keboola/generic-extractor/tree/master/doc/examples/076-user-data)
+which use the current JSON parser.

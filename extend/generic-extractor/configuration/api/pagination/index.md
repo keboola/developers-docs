@@ -237,7 +237,7 @@ The supported options are:
 - `field` (required, string) --- path to the key which contains the value with total number of items
 
 The two options are **mutually exclusive**, but one of them is required. In both cases, the total number of items may not be
-honored exactly. If the total amount is not divisible by the page size, then the left over from the last page (if any)
+honored exactly. If the total amount is not divisible by the page size, then the leftover from the last page (if any)
 is extracted too (see example [EX127](https://github.com/keboola/generic-extractor/tree/master/doc/examples/127-pagination-stop-field)).
 This is an example or the `limitStop` setting:
 
@@ -250,8 +250,8 @@ This is an example or the `limitStop` setting:
 }
 {% endhighlight %}
 
-The above configuration will look in the response for a key `count` inside a key `items`. The obtained value is
-expected to be the total number of items to extract. In a sample response below, it will be `4`:
+The above configuration will search the response for the key `count` inside the key `items`. The obtained value is
+expected to be the total number of items to extract. In the sample response below, it will be `4`:
 
 {% highlight json %}
 {
@@ -272,7 +272,7 @@ expected to be the total number of items to extract. In a sample response below,
 }
 {% endhighlight %}
 
-Note that if the field does not exist in the response (e.g you misspell it in the configuration), paging stops after the first page.
+Note that if the field does not exist in the response (e.g., you misspell it in the configuration), paging stops after the first page.
 See [example [EX126]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/126-pagination-stop-liimit)
 (a modified version of [EX049](https://github.com/keboola/generic-extractor/tree/master/doc/examples/049-pagination-offset-rename).
 For `count` configuration, see [example [EX127]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/127-pagination-stop-field)
@@ -308,8 +308,13 @@ will stop if **any** of the following is true:
 - The `isLast` field is not present in the response.
 
 ## Next Page Flag Examples
+In this section, we want to show you the following examples of the Next Page Flag stopping strategy:
 
-### Has-More Type Scrolling
+- Has-More Scrolling
+- Non-Boolean Has-More Scrolling
+- Is-Last Scrolling
+
+### Has-More Scrolling
 Assume that the API returns a response which contains a `hasMore` field. The field is present in
 every response and has always the value `true` except for the last response where it is `false`.
 The following pagination configuration can be used to configure the stopping strategy:
@@ -330,7 +335,7 @@ In this case, setting `ifNotSet` is not necessary.
 
 See [example [EX045]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/045-next-page-flag-has-more).
 
-### Non-Boolean Has-More Type Scrolling
+### Non-Boolean Has-More Scrolling
 Assume that the API returns a response which contains a `hasMore` field. The field is present only in the
 last response and has the value `"no"` there.
 The following pagination configuration can be used to configure the stopping strategy:
@@ -354,7 +359,7 @@ to false. In this case setting `ifNotSet` is mandatory.
 
 See [example [EX046]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/046-next-page-flag-has-more-2).
 
-### Is-Last Type of Scrolling
+### Is-Last Scrolling
 Assume that the API returns a response which contains an `isLast` field. The field is present only in the
 last response and has the value `true` there.
 The following pagination configuration can be used to configure the stopping strategy:
