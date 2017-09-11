@@ -247,7 +247,7 @@ Level 1 uses a JSON parser which cannot handle duplicate columns properly. This 
 {% highlight json %}
 {
     "parent_id": 1,
-    "name"" "someName"
+    "name": "someName"
 }
 {% endhighlight %}
 - The user data contains a column which is present in the response.
