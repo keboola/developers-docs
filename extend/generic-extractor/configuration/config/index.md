@@ -259,6 +259,10 @@ numbered suffix. If you are upgrading from a Level 1 extractor, delete the colum
 with hash from the target Storage table, otherwise you'll get an error (`Some columns are missing in 
 the csv files`).
 
+There are also some differences in naming of very long columns. For example a property 
+`data.modules.#DistributionGroups.outputs.groupCharacteristics.persistent` is shortened to `d__m__DistributionGroups_outputs_groupCharacteristics_persistent` in Level 1 extractor, and 
+to `DistributionGroups_outputs_groupCharacteristics_persistent` in Level 2 and above extractor.
+
 Compare the results of examples
 [EX124](https://github.com/keboola/generic-extractor/tree/master/doc/examples/124-naming-conflict-legacy)
 and 
