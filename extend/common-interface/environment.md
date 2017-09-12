@@ -22,7 +22,8 @@ The following environment variables are injected in the container:
  - `KBC_CONFIGID`: Id of the configuration or hash of configuration data if the configuration
  is not named (`configData` was used in
  [API call](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job/create-a-run-job)).
-
+ - `KBC_COMPONENTID`: Id of the component 
+ 
  The following variables are available only if specifically requested in the [component registration](/extend/registration/)
  (and approved by us):
 
