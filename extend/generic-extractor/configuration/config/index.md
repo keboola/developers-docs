@@ -175,8 +175,11 @@ you to force the old compatibility level and **temporarily** maintain the old be
 compatibility level is **3**. The `compatLevel` setting is intended only to ease updates and migrations, 
 never use it in new configurations (any version of old behavior is considered unsupported). 
 
-**Note:** Configurations which were already run, use the legacy ([Level 1](#level-1)) JSON parser. This is
-displayed in events as the following warning: `Using legacy JSON parser, because it is in configuration state.`
+**Note:** When a Level is introduced, the following will happen:
+
+- Configurations that explicitly specify `compatLevel` or that have never been run will stay unchanged.
+- Configurations that have been run will be automatically modified to use `compatLevel: 1`. This means that they 
+will use the legacy (Level 1) JSON parser, and you will see the following warning in events: `Using legacy JSON parser because it is in configuration state.` 
 
 ### Level 2
 Level 2 has different behavior in [`responseFilter`](/extend/generic-extractor/configuration/config/jobs/#response-filter) handling. 
@@ -259,9 +262,10 @@ numbered suffix. If you are upgrading from a Level 1 extractor, delete the colum
 with hash from the target Storage table, otherwise you'll get an error (`Some columns are missing in 
 the csv files`).
 
-There are also some differences in naming of very long columns. For example a property 
-`data.modules.#DistributionGroups.outputs.groupCharacteristics.persistent` is shortened to `d__m__DistributionGroups_outputs_groupCharacteristics_persistent` in Level 1 extractor, and 
-to `DistributionGroups_outputs_groupCharacteristics_persistent` in Level 2 and above extractor.
+There are also some differences in the naming of very long columns. For example, a property 
+`data.modules.#DistributionGroups.outputs.groupCharacteristics.persistent` is shortened to 
+`d__m__DistributionGroups_outputs_groupCharacteristics_persistent` in a Level 1 extractor, and 
+to `DistributionGroups_outputs_groupCharacteristics_persistent` in Level 2 and above.
 
 Compare the results of examples
 [EX124](https://github.com/keboola/generic-extractor/tree/master/doc/examples/124-naming-conflict-legacy)
