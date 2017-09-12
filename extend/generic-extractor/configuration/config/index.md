@@ -175,11 +175,14 @@ you to force the old compatibility level and **temporarily** maintain the old be
 compatibility level is **3**. The `compatLevel` setting is intended only to ease updates and migrations, 
 never use it in new configurations (any version of old behavior is considered unsupported). 
 
-**Note:** When a Level is introduced, the following will happen:
+When a new Level is introduced, the following will happen:
 
-- Configurations that explicitly specify `compatLevel` or that have never been run will stay unchanged.
-- Configurations that have been run will be automatically modified to use `compatLevel: 1`. This means that they 
-will use the legacy (Level 1) JSON parser, and you will see the following warning in events: `Using legacy JSON parser because it is in configuration state.` 
+- Configurations that explicitly specify `compatLevel` will stay unchanged.
+- All other configurations will automatically use the latest level.
+
+Note that there is an exception: all configurations running before Level 3 was introduced will use compatibility
+Level 1. This means that they use the legacy (Level 1) JSON parser, and you will see the following warning in 
+events: `Using legacy JSON parser, because it is in configuration state.`
 
 ### Level 2
 Level 2 has different behavior in [`responseFilter`](/extend/generic-extractor/configuration/config/jobs/#response-filter) handling. 
