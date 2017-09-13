@@ -25,6 +25,7 @@ A sample Login authentication looks like this:
                     "X-Password": "TopSecret"
                 }
             },
+            "format": "json",
             "apiRequest": {
                 "headers": {
                     "X-ApiToken": {
@@ -48,6 +49,8 @@ The following configuration parameters are supported for the `login` type of aut
     - `params` (optional, object) --- an object with key-value properties containing request parameters; object keys are parameters names; values are transformed the [same way as in jobs](/extend/generic-extractor/configuration/config/jobs/#request-parameters).
     - `method` (optional, string) --- an HTTP method to send the request; this defines how the [parameters are sent](/extend/generic-extractor/configuration/config/jobs/#request-parameters) to the API. The default value is `GET`.
     - `headers` (optional, object) --- an object with key-value properties containing HTTP headers. The names will be used as HTTP header names, and the values will be used as the value of the respective header.
+- `format` (optional, string) --- defines the expected format of `loginRequest`, allowed values are `json` (default) and `text`. If the format is text, then it is converted to a json with field `data`
+(see [example](todo).
 - `apiRequest` (optional, object) --- an object which defines how the result of the **login request** will be used in the actual API request; it contains the following properties:
     - `headers` (optional, object) --- an object with key-value properties containing HTTP headers. The names are header names, the values are paths in the JSON response from which the actual values are extracted.
     - `query` (optional, object) --- an object with key-value properties containing URL query parameters. The names are parameter names, and the values are paths in the JSON response from which the actual values are extracted.
@@ -115,6 +118,58 @@ will contain the header:
 
 See [example [EX079]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/079-login-auth-headers).
 
+### Configuration with Headers and Text response
+Let's say you have an API like the above, but it returns the login response as a plain text:
+
+    a1b2c3d435f6
+
+The following API configuration deals with the authentication:
+
+{% highlight json %}
+"api": {
+    "baseUrl": "http://example.com",
+    "authentication": {
+        "type": "login",
+        "loginRequest": {
+            "endpoint": "login",
+            "method": "GET",
+            "headers": {
+                "X-Login": "JohnDoe",
+                "X-Password": "TopSecret"
+            }
+        },
+        "format": "text",
+        "apiRequest": {
+            "headers": {
+                "X-ApiToken": {
+                    "response": "data"
+                }
+            }
+        }
+    }
+}
+{% endhighlight %}
+
+The first request will be sent to `/login` with the HTTP headers:
+
+    X-Login: JohnDoe
+    X-Password: TopSecret
+
+The plain text response `a1b2c3d435f6` is converted to the following JSON:
+
+{% highlight json %}
+{
+    "data": "a1b2c3d435f6"
+}
+{% endhighlight %}
+
+Therefore you can access it in the headers configuration using the `"response": "data"` reference.
+All consecutive requests will be sent to the endpoints specified in the [`jobs`](/extend/generic-extractor/configuration/config/jobs/) section and
+will contain the header:
+
+    X-ApiToken: a1b2c3d435f6
+
+See [example [EX128]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/128-login-auth-text).
 
 ### Configuration with Query Parameters
 Let's say you have an API which requires an [HTTP POST](https://en.wikipedia.org/wiki/POST_(HTTP)) request with `username` and
