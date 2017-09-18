@@ -138,7 +138,7 @@ Also note that if the configuration contains literal `+`, it has to be [urlencod
 
 ### Available Processors
 To obtain a list of available processors, use the [List apps public API](http://docs.kebooladeveloperportal.apiary.io/#reference/0/public-api/list-published-apps) 
-of the Developer portal. By sending a `GET` request to `https://apps.keboola.com/apps`, you'll obtain a list of all
+of the Developer portal. By sending a `GET` request to `https://apps-api.keboola.com/apps`, you'll obtain a list of all
 public KBC components. Processors are components with the type `processor`, for example:
 
 {% highlight json %}

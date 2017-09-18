@@ -105,7 +105,7 @@ and save these to environment variables:
 
  - `KBC_DEVELOPERPORTAL_USERNAME` with the login
  - `KBC_DEVELOPERPORTAL_PASSWORD` with the password
- - `KBC_DEVELOPERPORTAL_URL` with the string `https://apps.keboola.com`
+ - `KBC_DEVELOPERPORTAL_URL` with the string `https://apps-api.keboola.com`
  - `KBC_DEVELOPERPORTAL_VENDOR` with the vendor of the app
  - `KBC_DEVELOPERPORTAL_APP` the appId
  - `KBC_APP_REPOSITORY` the app repository name (ex. `keboola/docker-demo-app`)
