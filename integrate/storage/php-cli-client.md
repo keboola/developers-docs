@@ -8,7 +8,7 @@ permalink: /integrate/storage/php-cli-client/
 
 The Storage API PHP command line interface (CLI) client is a portable command line client which provides
 a simple implementation of [Storage API](http://docs.keboola.apiary.io/).
-It runs on any platform which has PHP CLI or Docker installed.
+It runs on any platform which has Docker installed.
 
 Currently, the client implements
 
@@ -23,34 +23,14 @@ The client docker image is available in [Quay repository](https://quay.io/reposi
 To print available commands:
 
 {% highlight bash %}
-docker run -i -t quay.io/keboola/storage-api-cli
+docker run quay.io/keboola/storage-api-cli:latest
 {% endhighlight %}
 
 The `latest` image tag always corresponds to the latest tagged version.
 
 ## Running Phar
-<a href='https://s3.amazonaws.com/keboola-storage-api-cli/builds/sapi-client.phar' download>Download the latest version</a>.
 
-You may place the downloaded file anywhere that will make it easy for you to access
-(such as `/usr/local/bin`). If you use *nix platform, you need to `chmod` the file
-`chmod 755 composer.phar`. You may rename it to `sapi-client` to avoid having to type the .phar
-extension every time.
-
-Storage API CLI requires PHP 5.6 or newer.
-
-- For PHP 5.5 use
-<a href=' https://s3.amazonaws.com/keboola-storage-api-cli/builds/sapi-client.0.6.0.phar' download>version
-0.6.0</a>.
-- For PHP 5.4 use
-<a href='https://s3.amazonaws.com/keboola-storage-api-cli/builds/sapi-client.0.2.9.phar' download>version 0.2.9</a>.
-(5.4 version is no longer supported)
-- For PHP 5.3 use
-<a href='https://s3.amazonaws.com/keboola-storage-api-cli/builds/sapi-client.0.1.9.phar' download>version 0.1.9</a>.
-
-To print available commands (assuming that the current directory is the directory you installed the client to), run
-{% highlight bash %}
-php sapi-client.phar
-{% endhighlight %}
+PHAR is now deprecated, but there are still some older versions available, see the [repository documentation](https://github.com/keboola/storage-api-cli#running-phar-deprecated).
 
 ### Example --- Create a Table
 To create a new table in Storage, use the `create-table` command. Provide the name of an
@@ -59,13 +39,7 @@ existing bucket, the name of the new table and a CSV file with the table's conte
 To create the`new-table` table in the `in.c-main` bucket, use
 
 {% highlight bash %}
-php sapi-client.phar create-table in.c-main new-table new-table.csv --token=storage_token
-{% endhighlight %}
-
-or 
-
-{% highlight bash %}
-docker run -i -t quay.io/keboola/storage-api-cli create-table in.c-main new-table new-table.csv --token=storage_token
+docker run quay.io/keboola/storage-api-cli:latest create-table in.c-main new-table new-table.csv --token=storage_token
 {% endhighlight %}
 
 The above command will import the contents of `new-table.csv` in the current directory into the newly
@@ -84,13 +58,7 @@ the ID (*bucketName.tableName*) of an existing table.
 To import data into the `new-table` table in the `in.c-main` bucket, use
 
 {% highlight bash %}
-php sapi-client.phar write-table in.c-main.new-table new-data.csv --token=storage_token --incremental
-{% endhighlight %}
-
-or 
-
-{% highlight bash %}
-docker run -i -t quay.io/keboola/storage-api-cli write-table in.c-main.new-table new-data.csv --token=storage_token --incremental
+docker run quay.io/keboola/storage-api-cli:latest write-table in.c-main.new-table new-data.csv --token=storage_token --incremental
 {% endhighlight %}
 
 The above command will import the contents of the `new-data.csv` file into the existing table. If the
@@ -119,13 +87,7 @@ the ID (*bucketName.tableName*) of an existing table.
 To export data from the `old-table` table in `in.c-main` bucket, use
 
 {% highlight bash %}
-php sapi-client.phar export-table in.c-main.old-table old-data.csv --token=storage_token
-{% endhighlight %}
-
-or 
-
-{% highlight bash %}
-docker run -i -t quay.io/keboola/storage-api-cli export-table in.c-main.old-table old-data.csv --token=storage_token
+docker run quay.io/keboola/storage-api-cli:latest export-table in.c-main.old-table old-data.csv --token=storage_token
 {% endhighlight %}
 
 The above command will export the table from Storage and save it as `old-data.csv` in
