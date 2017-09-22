@@ -131,6 +131,7 @@ The following configuration takes the `contacts` property from the response and 
 {% endhighlight %}
 
 ## Examples
+The following examples demonstrate how to map json responses to csv files.
 
 ### Automatic Mapping
 Without any configuration the following JSON response:

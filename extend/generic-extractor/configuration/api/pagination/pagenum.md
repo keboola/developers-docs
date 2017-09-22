@@ -41,6 +41,7 @@ in the `pagenum` scroller, the **`limit` parameter is not required** and has **n
 the scrolling will stop only if an empty page is encountered.
 
 ## Examples
+This section contains three API pagination examples where the Page Number Scroller is used.
 
 ### Basic Scrolling
 The most simple scrolling setup is the following:

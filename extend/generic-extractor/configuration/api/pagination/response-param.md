@@ -42,6 +42,7 @@ the key, the extraction will not go beyond the first page.
 [Common stopping conditions](/extend/generic-extractor/configuration/api/pagination/#stopping-strategy) also apply.
 
 ## Examples
+The following API pagination examples demonstrate the use of the Response Parameter Scroller.
 
 ### Basic Configuration
 Assume you have an API which returns, for instance, the next page number inside the response:

@@ -65,6 +65,7 @@ Note that the values in `apiRequest.headers` and `apiRequest.query` take precede
 is called only once before all other requests. To call the login request before every request (e.g., to obtain access token from refresh token), set `"expires": 0`.
 
 ## Examples
+Below are several examples showing you how to use various login authentication related features in Generic Extractor.
 
 ### Configuration with Headers
 Let's say you have an API which requires every API call to be authorized with the `X-ApiToken` header. The value of that header (an API

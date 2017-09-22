@@ -150,6 +150,7 @@ to not contain the value `" employee"` (which is probably not what you intended 
 **case sensitive**.
 
 ## Examples
+This section contains a number of examples using child jobs.
 
 ### Basic Example
 Let's say that you have an API with two endpoints:

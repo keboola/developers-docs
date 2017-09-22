@@ -381,6 +381,7 @@ If `scroller` is not set, the pagination method specified in the [`api` configur
 is used. If there is no pagination method specified, the job has no pagination.
 
 ## Examples
+The following examples show how simple objects are extracted from different objects.
 
 ### Simple array
 To extract data from the following API response:

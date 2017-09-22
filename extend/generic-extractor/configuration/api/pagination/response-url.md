@@ -44,6 +44,7 @@ key name, the extraction will not go beyond the first page.
 [Common stopping conditions](/extend/generic-extractor/configuration/api/pagination/#stopping-strategy) also apply.
 
 ## Examples
+This section provides three API pagination examples where the Response URL Scroller is used.
 
 ### Basic Configuration
 To configure pagination for an API that supports the [JSON API specification](http://jsonapi.org/format/#fetching-pagination),

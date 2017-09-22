@@ -90,6 +90,7 @@ will be sent with the API requests. Both fields also allow and practically requi
 are available in the [OAuth function context](/extend/generic-extractor/functions/#oauth-20-authentication-context).
 
 ## Examples
+The following two examples demonstrate the support for OAuth 2 in Generic Extractor.
 
 ### Bearer Authentication
 The most basic OAuth authentication method is with "Bearer Token". If you have an API which supports 

@@ -42,6 +42,7 @@ The difference, however, is in the [function context](/extend/generic-extractor/
 The **login request** is assumed to require the OAuth2 authorization and its response must be in JSON format (plaintext is not supported).
 
 ## Examples
+The following examples demonstrate how to use OAuth with a basic login request and Google API in Generic Extractor.
 
 ### Basic Configuration
 The following configuration shows how to set up an OAuth **login request**:

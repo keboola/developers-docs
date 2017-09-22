@@ -84,6 +84,7 @@ which is expected.
 All [common stopping conditions](/extend/generic-extractor/configuration/api/pagination/#stopping-strategy) apply as well.
 
 ## Examples
+This section contains three examples of API pagination using the Offset Scroller.
 
 ### Basic Scrolling
 This is the simplest scrolling setup:

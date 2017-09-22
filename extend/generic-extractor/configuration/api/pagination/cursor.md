@@ -6,7 +6,7 @@ permalink: /extend/generic-extractor/configuration/api/pagination/cursor/
 * TOC
 {:toc}
 
-The Cursors Scroller can be used with an API which expects the client to maintain a cursor (pointer)
+The Cursor Scroller can be used with an API which expects the client to maintain a cursor (pointer)
 to the last obtained item. For example, on the first request, it returns items with ID 1-100; for the second
 request, you must tell the API to start with ID 101. 
 
@@ -50,6 +50,7 @@ run with the `cursor` scroller produces a similar warning:
 This is expected behavior. [Common stopping conditions](/extend/generic-extractor/configuration/api/pagination/#stopping-strategy) also apply.
 
 ## Examples
+This section contains two API pagination examples where the Cursor Scroller is used.
 
 ### Basic Configuration
 Let's say you have an API which has an endpoint `/users` returning the following response:
