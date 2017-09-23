@@ -26,7 +26,7 @@ There are four Storage clients with different feature sets available:
 use it programatically in PHP.
 2. [R client library](/integrate/storage/r-client/) --- an R library supporting most data manipulation features of the Storage API; 
 use it programatically in R.
-3. [PHP CLI client](https://github.com/keboola/storage-api-cli) --- a CLI (command line interface) application supporting 
+3. [Docker CLI client](https://github.com/keboola/storage-api-cli) --- a CLI (command line interface) application supporting 
 basic data manipulation features of the Storage API; use it from the command line provided that you have Docker available.
 4. [Windows CLI client](/integrate/storage/win-cli-client/) --- a CLI application supporting basic data manipulation features;
 use it from the Windows command line.

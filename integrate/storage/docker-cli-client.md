@@ -1,6 +1,7 @@
 ---
 title: Storage Docker CLI Client
 permalink: /integrate/storage/docker-cli-client/
+redirect_from: /integrate/storage/php-cli-client/
 ---
 
 * TOC
@@ -39,7 +40,13 @@ existing bucket, the name of the new table and a CSV file with the table's conte
 To create the`new-table` table in the `in.c-main` bucket, use
 
 {% highlight bash %}
-docker run --volume=/home/my-user/my-data:/data quay.io/keboola/storage-api-cli:latest create-table in.c-main new-table /data/new-table.csv --token=storage_token
+docker run --volume=/$("pwd"):/data quay.io/keboola/storage-api-cli:latest create-table in.c-main new-table /data/new-table.csv --token=storage_token
+{% endhighlight %}
+
+or on Windows:
+
+{% highlight bash %}
+docker run --volume=C:\Users\name\some-dir:/data quay.io/keboola/storage-api-cli:latest create-table in.c-main new-table /data/new-table.csv --token=storage_token
 {% endhighlight %}
 
 The above command will import the contents of `new-table.csv` in the current directory into the newly
@@ -51,10 +58,9 @@ created table. You should see an output similar to this one:
     Table create end
     Table id: in.c-main.new-table
     
-*Please note, that the Docker container can only access folders within the container, so you need to mount local folder. 
+*Please note that the Docker container can only access folders within the container, so you need to mount local folder. 
 In the example above, the local folder `/home/my-user/my-data` is mounted as `/data` into the container. 
-The table is then accessibne in this this folder. The same approach applies for all other commands working with local files.* 
-    
+The table is then accessible in this this folder. The same approach applies for all other commands working with local files.*
 
 ### Example --- Importing Data
 If you want only to import new data into the table, use the `write-table` command and provide
@@ -101,18 +107,3 @@ the current directory. You should see an output similar to this one:
     Authorized as: ondrej.popelka@keboola.com (Tutorial)
     Table found ok
     Export done in 17 secs.
-
-## Troubleshooting
-The newest version of the client verifies that your system is configured properly and will print 
-an error message if cURL or gzip cannot be used. For older versions of the client read on.
-
-If the client does not seem to respond (hangs, prints no error or information message), make sure that your Docker installation can
-communicate properly and securely. You can verify this by running e.g. the following command:
-
-{% highlight bash %}
-curl --request GET --header "X-StorageApi-Token:yourtoken" "https://connection.keboola.com/v2/storage/buckets"
-{% endhighlight %}
-
-This should print a JSON with a list of buckets in the project. If the command returns an error, you need to 
-resolve that error first before running the Storage Docker CLI client. This usually means [installing the cURL library](https://curl.haxx.se/download.html).
-If the above command works and the CLI client still does not, then your Docker installation is probably not configured correctly.
