@@ -49,7 +49,7 @@ The following configuration parameters are supported for the `login` type of aut
     - `params` (optional, object) --- an object with key-value properties containing request parameters; object keys are parameters names; values are transformed the [same way as in jobs](/extend/generic-extractor/configuration/config/jobs/#request-parameters).
     - `method` (optional, string) --- an HTTP method to send the request; this defines how the [parameters are sent](/extend/generic-extractor/configuration/config/jobs/#request-parameters) to the API. The default value is `GET`.
     - `headers` (optional, object) --- an object with key-value properties containing HTTP headers. The names will be used as HTTP header names, and the values will be used as the value of the respective header.
-- `format` (optional, string) --- defines the expected format of `loginRequest`, allowed values are `json` (default) and `text`. If the format is text, then it is converted to a json with field `data` (see [example](#configuration-with-headers-and-text-response). This conversion will also be applied in case the response is a JSON [scalar](/extend/generic-extractor/tutorial/json/#data-values). But in that case, format `json` has to be used (see [example [EX129]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/129-login-auth-scalar))
+- `format` (optional, string) --- defines the expected format of `loginRequest`; the allowed values are `json` (default) and `text`. If the format is text, then it is converted to a json with field `data` (see [example](#configuration-with-headers-and-text-response). This conversion will also be applied in case the response is a JSON [scalar](/extend/generic-extractor/tutorial/json/#data-values). But in that case, format `json` has to be used (see [example [EX129]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/129-login-auth-scalar)).
 - `apiRequest` (optional, object) --- an object which defines how the result of the **login request** will be used in the actual API request; it contains the following properties:
     - `headers` (optional, object) --- an object with key-value properties containing HTTP headers. The names are header names, the values are paths in the JSON response from which the actual values are extracted.
     - `query` (optional, object) --- an object with key-value properties containing URL query parameters. The names are parameter names, and the values are paths in the JSON response from which the actual values are extracted.
@@ -118,7 +118,7 @@ will contain the header:
 
 See [example [EX079]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/079-login-auth-headers).
 
-### Configuration with Headers and Text response
+### Configuration with Headers and Text Response
 Let's say you have an API like the above, but it returns the login response as a plain text:
 
     a1b2c3d435f6
@@ -179,7 +179,7 @@ On a successful login, it returns the following response:
 {% highlight json %}
 {
     "authentication": [
-        {
+        { 	
             "secret": "a1b2c3d435f6"
         },
         {
