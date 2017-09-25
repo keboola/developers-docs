@@ -215,19 +215,19 @@ items:
       - url: /integrate/storage/
         title: Storage
         items:
-          - url: /integrate/storage/php-client
+          - url: /integrate/storage/php-client/
             title: PHP client library
 
-          - url: /integrate/storage/r-client
+          - url: /integrate/storage/r-client/
             title: R client library
 
-          - url: /integrate/storage/docker-cli-client
+          - url: /integrate/storage/docker-cli-client/
             title: Docker CLI client
 
-          - url: /integrate/storage/win-cli-client
+          - url: /integrate/storage/win-cli-client/
             title: Windows CLI client
 
-          - url: /integrate/storage/api
+          - url: /integrate/storage/api/
             title: Using API
             items:
               - url: /integrate/storage/api/importer/

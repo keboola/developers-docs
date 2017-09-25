@@ -45,9 +45,7 @@ docker run --volume=$("pwd"):/data quay.io/keboola/storage-api-cli:latest create
 
 or on Windows:
 
-{% highlight bash %}
-docker run --volume=C:\Users\name\some-dir:/data quay.io/keboola/storage-api-cli:latest create-table in.c-main new-table /data/new-table.csv --token=storage_token
-{% endhighlight %}
+    docker run --volume=C:\Users\name\some-dir:/data quay.io/keboola/storage-api-cli:latest create-table in.c-main new-table /data/new-table.csv --token=storage_token
 
 The above command will import the contents of `new-table.csv` in the current directory into the newly
 created table. You should see an output similar to this one:
@@ -58,8 +56,8 @@ created table. You should see an output similar to this one:
     Table create end
     Table id: in.c-main.new-table
     
-*Please note that the Docker container can only access folders within the container, so you need to mount local folder. 
-In the example above, the local folder `$("pwd")` (replaced by the absolute path on runtime) is mounted as `/data` into the container. 
+*Please note that the Docker container can only access folders within the container, so you need to mount a local folder. 
+In the example above, the local folder `$("pwd")` (replaced by the absolute path at runtime) is mounted as `/data` into the container. 
 The table is then accessible in this this folder. The same approach applies for all other commands working with local files.*
 
 ### Example --- Importing Data
