@@ -40,7 +40,7 @@ existing bucket, the name of the new table and a CSV file with the table's conte
 To create the`new-table` table in the `in.c-main` bucket, use
 
 {% highlight bash %}
-docker run --volume=/$("pwd"):/data quay.io/keboola/storage-api-cli:latest create-table in.c-main new-table /data/new-table.csv --token=storage_token
+docker run --volume=$("pwd"):/data quay.io/keboola/storage-api-cli:latest create-table in.c-main new-table /data/new-table.csv --token=storage_token
 {% endhighlight %}
 
 or on Windows:
@@ -59,7 +59,7 @@ created table. You should see an output similar to this one:
     Table id: in.c-main.new-table
     
 *Please note that the Docker container can only access folders within the container, so you need to mount local folder. 
-In the example above, the local folder `/home/my-user/my-data` is mounted as `/data` into the container. 
+In the example above, the local folder `$("pwd")` (replaced by the absolute path on runtime) is mounted as `/data` into the container. 
 The table is then accessible in this this folder. The same approach applies for all other commands working with local files.*
 
 ### Example --- Importing Data
@@ -69,7 +69,7 @@ the ID (*bucketName.tableName*) of an existing table.
 To import data into the `new-table` table in the `in.c-main` bucket, use
 
 {% highlight bash %}
-docker run --volume=/home/my-user/my-data:/data quay.io/keboola/storage-api-cli:latest write-table in.c-main.new-table /data/new-data.csv --token=storage_token --incremental
+docker run --volume=$("pwd"):/data quay.io/keboola/storage-api-cli:latest write-table in.c-main.new-table /data/new-data.csv --token=storage_token --incremental
 {% endhighlight %}
 
 The above command will import the contents of the `new-data.csv` file into the existing table. If the
@@ -98,7 +98,7 @@ the ID (*bucketName.tableName*) of an existing table.
 To export data from the `old-table` table in `in.c-main` bucket, use
 
 {% highlight bash %}
-docker run --volume=/home/my-user/my-data:/data quay.io/keboola/storage-api-cli:latest export-table in.c-main.old-table /data/old-data.csv --token=storage_token
+docker run --volume=$("pwd"):/data quay.io/keboola/storage-api-cli:latest export-table in.c-main.old-table /data/old-data.csv --token=storage_token
 {% endhighlight %}
 
 The above command will export the table from Storage and save it as `old-data.csv` in
