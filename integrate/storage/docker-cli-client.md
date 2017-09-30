@@ -18,7 +18,7 @@ Currently, the client implements
 - the [project backup feature](https://help.keboola.com/management/project-export/).
 
 The client source is available in our [Github repository](https://github.com/keboola/storage-api-cli).
-The client docker image is available in [Quay repository](https://quay.io/repository/keboola/storage-api-cli?tab=tags).
+The client docker image is available in the [Quay repository](https://quay.io/repository/keboola/storage-api-cli?tab=tags).
 
 ## Running in Docker
 To print available commands:
@@ -27,13 +27,13 @@ To print available commands:
 docker run quay.io/keboola/storage-api-cli:latest
 {% endhighlight %}
 
-The `latest` image tag always corresponds to the latest tagged version.
+The `latest` image tag always refers to the latest tagged version.
 
 ## Running Phar
 
-PHAR is now deprecated, but there are still some older versions available, see the [repository documentation](https://github.com/keboola/storage-api-cli#running-phar-deprecated).
+PHAR (PHP Archive) is now deprecated, but there are still some older versions available. See the [repository documentation](https://github.com/keboola/storage-api-cli#running-phar-deprecated).
 
-### Example --- Create a Table
+### Example --- Creating a Table
 To create a new table in Storage, use the `create-table` command. Provide the name of an
 existing bucket, the name of the new table and a CSV file with the table's contents.
 
@@ -58,10 +58,10 @@ created table. You should see an output similar to this one:
     
 *Please note that the Docker container can only access folders within the container, so you need to mount a local folder. 
 In the example above, the local folder `$("pwd")` (replaced by the absolute path at runtime) is mounted as `/data` into the container. 
-The table is then accessible in this this folder. The same approach applies for all other commands working with local files.*
+The table is then accessible in this folder. The same approach applies to all other commands working with local files.*
 
 ### Example --- Importing Data
-If you want only to import new data into the table, use the `write-table` command and provide
+If you only want to import new data into the table, use the `write-table` command and provide
 the ID (*bucketName.tableName*) of an existing table.
 
 To import data into the `new-table` table in the `in.c-main` bucket, use
@@ -93,7 +93,7 @@ supplied, the table contents will be overwritten. You should see an output simil
 If you want to export a table from Storage, use the `export-table` command. Provide
 the ID (*bucketName.tableName*) of an existing table.
 
-To export data from the `old-table` table in `in.c-main` bucket, use
+To export data from the `old-table` table in the `in.c-main` bucket, use
 
 {% highlight bash %}
 docker run --volume=$("pwd"):/data quay.io/keboola/storage-api-cli:latest export-table in.c-main.old-table /data/old-data.csv --token=storage_token
