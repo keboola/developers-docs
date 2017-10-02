@@ -52,8 +52,8 @@ It means the password will always be encrypted and the username will not be encr
 pass `#username` because the application does not expect such a key to exist (although its value will be decrypted
 normally). Also the application itself must expect the items `username` nad `#password` -- i.e. there
 **will be `password` element in the configuration.
-Internally, the [Encrypt and Store configuration API call](http://docs.kebooladocker.apiary.io/#reference/encrypt/encrypt-and-store-configuration/save-configuration)
-is used.
+Internally, the [Encrypt API call](http://docs.kebooladocker.apiary.io/#reference/encrypt/encryption/encrypt-data)
+is used to retrieve encrypted values before saving them.
 
 ### Automated Configuration Adjustment
 
@@ -113,7 +113,6 @@ yields
 }
 {% endhighlight %}
 
-
 If you want to encrypt a single string, a password for instance, the body of the request is simply the text string you want to encrypt (no JSON or quotation is used). To give an example, encrypting
 
     mySecretPassword
@@ -122,31 +121,32 @@ yields
 
     KBC::Encrypted==ENCODEDSTRING==
 
+The `Content-Type` header is used to distinguish between treating the body as a string (`text/plain`) or JSON (`application/json`).
 
 If you happen to receive the following error
 
     This API call is only supported for components that use the 'encrypt' flag.
 
-ask a Keboola Developer to enable encryption for your [Docker extension](/extend/docker/), or your
+you need to enable encryption for your [Docker extension](/extend/docker/), or your
 [Custom Science](/extend/custom-science/).
 
 You can use sample Postman requests from collection
-[![Run in Postman](https://run.pstmn.io/button.png)](https://app.getpostman.com/run-collection/7dc2e4b41225738f5411)
+[![Run in Postman](https://run.pstmn.io/button.png)](https://app.getpostman.com/run-collection/eef1ca9e35eb79265a17)
 
 {: .image-popup}
 ![Postman screenshot](/overview/encryption-postman.png)
 
 
 ## Encryption Options
-Our [Docker component](/integrate/docker-bundle/) provides [Encryption API](http://docs.kebooladocker.apiary.io/#reference/encrypt).
+Our [Docker component](/integrate/docker-bundle/) provides [Encryption API](http://docs.kebooladocker.apiary.io/#reference/encrypt/encryption/encrypt-data).
 There are three options available:
 
-- [Base Encryption](http://docs.kebooladocker.apiary.io/#reference/encrypt/base-encryption/encrypt-data); use only with multiple components and a very good reason for transferable ciphers.
-- [Image Encryption](http://docs.kebooladocker.apiary.io/#reference/encrypt/image-encryption/encrypt-data) (`/docker/*{componentId}*/encrypt`); use when the encrypted value has to be readable within multiple projects.
-- [Image Configuration Encryption](http://docs.kebooladocker.apiary.io/#reference/encrypt/image-configuration-encryption/encrypt-data) (`/docker/*{componentId}*/**configs**/encrypt`); use when the encrypted value does not have to be transferable between projects.
+- Base Encryption; use only with multiple components and a very good reason for transferable ciphers.
+- Image Encryption (`/docker/encrypt?componentId={componentId}`); use when the encrypted value has to be readable within multiple projects.
+- Configuration Encryption (`/docker/encrypt?componentId={componentId}&projectId={projectId}`); use when the encrypted value does not have to be transferable between projects.
 
 ### Base Encryption
-[Base Encryption](http://docs.kebooladocker.apiary.io/#reference/encrypt/base-encryption/encrypt-data) encrypts data,
+Base Encryption encrypts data,
 so that they are globally usable for all dockerized components. Data encrypted using this method can be decrypted in all projects
 and in all components run by [Docker Runner](/integrate/docker-bundle/) (including Custom Science Applications).
 
@@ -154,20 +154,18 @@ and in all components run by [Docker Runner](/integrate/docker-bundle/) (includi
 decrypted data is never available to the end-user. The encrypted value is identified by the `KBC::Encrypted` string.
 
 ### Image Encryption
-[Image Encryption](http://docs.kebooladocker.apiary.io/#reference/encrypt/image-encryption/encrypt-data)
-encrypts data making it usable within a single KBC component. Data encrypted using this method can be
+Image Encryption encrypts data making it usable within a single KBC component. Data encrypted using this method can be
 decrypted in all projects but always only in the component for which it was encrypted.
-The API call requires an `image` parameter which is the name of the component ID obtained during its [registration](/extend/registration/).
+
+The API call requires the `projectId` parameter which is the component ID obtained during its [registration](/extend/registration/). 
+The data can be decrypted only in the defined project.
 The encrypted value is identified by the `KBC::ComponentEncrypted` string.
 
-### Image Configuration Encryption
-[Image Configuration Encryption](http://docs.kebooladocker.apiary.io/#reference/encrypt/image-configuration-encryption/encrypt-data)
-encrypts data so that they are **usable only in a single KBC component and project**.
+### Configuration Encryption
+Configuration Encryption encrypts data so that they are **usable only in a single KBC component and project**.
 Data encrypted using this method can be decrypted in all configurations;
 however, this can be done only in the project and component for which the data was encrypted.
 
-The API call requires a valid Storage API token for the respective project and `image` parameter
-which is the component ID obtained upon its [registration](/extend/registration/).
-The selected project is derived from the Storage API token. The data can be decrypted only in the project associated with that token.
+The API call requires the `projectId` and `componentId` parameters. The data can be decrypted only in the defined project.
 The encrypted value is identified by the `KBC::ComponentProjectEncrypted` string.
 
