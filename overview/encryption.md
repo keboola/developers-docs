@@ -23,8 +23,7 @@ The decrypted data will be stored on the Docker host drive and will be deleted a
 Your application will always read the decrypted data.
 
 ## UI Interaction
-When saving arbitrary configuration data (this applies especially to [Custom Science](/extend/custom-science/) and
-[Docker extensions](/extend/docker/), values marked by `#` character are automatically encrypted.
+When saving arbitrary configuration data, values marked by `#` character are automatically encrypted.
 
 This means that when saving a value:
 
@@ -127,8 +126,7 @@ If you happen to receive the following error
 
     This API call is only supported for components that use the 'encrypt' flag.
 
-you need to enable encryption for your [Docker extension](/extend/docker/), or your
-[Custom Science](/extend/custom-science/).
+you need to enable encryption for your [component](/extend/registration/).
 
 You can use sample Postman requests from collection
 [![Run in Postman](https://run.pstmn.io/button.png)](https://app.getpostman.com/run-collection/eef1ca9e35eb79265a17)
