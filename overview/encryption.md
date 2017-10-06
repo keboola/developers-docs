@@ -128,11 +128,11 @@ If you happen to receive the following error
 
 you need to enable encryption for your [component](/extend/registration/).
 
-You can use sample Postman requests from collection
-[![Run in Postman](https://run.pstmn.io/button.png)](https://app.getpostman.com/run-collection/eef1ca9e35eb79265a17)
+You can use the [Console in Apiary](http://docs.kebooladocker.apiary.io/#reference/encrypt/encryption/encrypt-data?console=1) to 
+call the API resource endpoint.
 
 {: .image-popup}
-![Postman screenshot](/overview/encryption-postman.png)
+![Console screenshot](/overview/encryption-console.png)
 
 
 ## Encryption Options
