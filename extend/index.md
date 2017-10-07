@@ -3,22 +3,22 @@ title: Extending Keboola Connection
 permalink: /extend/
 ---
 
-As an open system consisting of many built-in, interoperating components, 
-such as Storage or Extractors, [Keboola Connection (KBC)](/overview/) can be extended. 
-We encourage you to **build your own extensions**, whether for your own use or to be offered to other KBC users and customers. 
+As an open system consisting of many built-in, interoperating components,
+such as Storage or Extractors, [Keboola Connection (KBC)](/overview/) can be extended.
+We encourage you to **build your own extensions**, whether for your own use or to be offered to other KBC users and customers.
 
 * TOC
 {:toc}
 
 ## Benefits of Extending KBC
 
-Building extensions for KBC offers many advantages: 
+Building extensions for KBC offers many advantages:
 
 - Easy access to data from many different sources
 - Simple path to delivering the data back to your customers
 - Availability of your application or algorithm to all existing KBC subscribers and implementation partners
-- Opportunity for you to focus only on areas of your product where you are adding value 
-- Keboola in charge of the billing 
+- Opportunity for you to focus only on areas of your product where you are adding value
+- Keboola in charge of the billing
 
 To become a Keboola Development Partner, [get in touch](https://www.keboola.com/contact/). We want to hear
 what you would like to build!
@@ -26,24 +26,24 @@ what you would like to build!
 ## Types of Extensions
 Currently, there are two types of extensions available:
 
-1. **Generic Extractor** -- specific component for implementing extractors 
+1. **Generic Extractor** -- specific component for implementing extractors
 for services with REST API
 2. **Custom Extension** -- component extending KBC with arbitrary code
 
 ### Generic Extractor
-[Generic Extractor](/extend/generic-extractor/) is a KBC component acting like a customizable HTTP REST client. 
-It can be configured to extract data from virtually any API and offers a vast amount of configuration options. 
-With Generic Extractor you can build an entirely new extractor for KBC in less than an hour. 
+[Generic Extractor](/extend/generic-extractor/) is a KBC component acting like a customizable HTTP REST client.
+It can be configured to extract data from virtually any API and offers a vast amount of configuration options.
+With Generic Extractor you can build an entirely new extractor for KBC in less than an hour.
 
 ### Custom Extensions
 Custom Extensions can be used as:
 
 - **Extractors** -- allowing customers to get data from new sources. They only process input tables from external sources (usually API).
-- **Applications** -- further enriching the data or add value in new ways. They process input tables stored in CSV files and generate result tables in CSV files. 
-- **Writers** -- pushing data into new systems and consumption methods. They do not generate any KBC tables. 
-- **Processors** -- adjusting the inputs or outputs of other components. They have to be run together with any of the above extensions. 
+- **Applications** -- further enriching the data or add value in new ways. They process input tables stored in CSV files and generate result tables in CSV files.
+- **Writers** -- pushing data into new systems and consumption methods. They do not generate any KBC tables.
+- **Processors** -- adjusting the inputs or outputs of other components. They have to be run together with any of the above extensions.
 
-All extensions run inside a [Docker component](/integrate/docker-bundle) which takes care of their
+All extensions run inside a [Docker component](/extend/docker-runner/) which takes care of their
 *authentication, starting, stopping, isolation, and reading data from and writing it to KBC Storage*.
 They must adhere to a [common interface](/extend/common-interface/).
 

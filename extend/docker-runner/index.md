@@ -1,38 +1,42 @@
 ---
 title: Docker Runner
-permalink: /integrate/docker-runner/
+permalink: /extend/docker-runner/
 redirect_from:
     - /integrate/docker-bundle/
+    - /integrate/docker-runner/
 ---
 
 * TOC
 {:toc}
 
-Docker Runner is a [KBC component](/overview/) which provides an interface for
+Docker Runner is a core [KBC component](/overview/) which provides an interface for
 running other KBC components. Every component in Keboola Connection is represented by a [Docker image](/extend/docker/tutorial/) in Keboola Connection.
 
-By developing functionality in [Docker](https://www.docker.com/) you will focus only on the application logic; all communication
-with Storage API will be handled by Docker Runner. You can encapsulate any application into an Docker image
+Developing functionality in [Docker](https://www.docker.com/) allows you to focus only on the application logic; all communication
+with [Storage API](http://docs.keboola.apiary.io/#) will be handled by Docker Runner. You can encapsulate any application into an Docker image
 following a set of rules that will allow you to integrate the application into Keboola Connection.
 
-There is a [predefined interface](/extend/common-interface/) with Docker Runner consisting of a
+There is a [predefined interface](/extend/common-interface/) with Docker Runner consisting mainly of a
 [folder structure](/extend/common-interface/) and a [serialized configuration file](/extend/common-interface/config-file/).
 [Custom Science](/extend/custom-science/), [Docker Extensions](/extend/docker/) and also
 R and Python Transformations are all dockerized applications and are run using Docker Runner.
 
 ## Workflow
-The Docker Runner functionality can be described in a few simple steps:
+The Docker Runner functionality can be described in a few steps:
 
 - Download and build the specified Docker image
-- Download all tables and files specified in the input mapping from Storage
-- Create a configuration file (i.e. config.json)
+- Download all [tables](/extend/common-interface/folders/#dataintables-folder) and [files](/extend/common-interface/folders/#datainfiles-folder) specified in the input mapping from Storage
+- Create a [configuration file](/extend/common-interface/config-file/)
 - Run [before processors](/integrate/docker-runner/processors/) if any
 - Run the Docker image (create a Docker container)
 - Run [after processors](/integrate/docker-runner/processors/) if any
-- Upload all tables and files in the output mapping to Storage
+- Upload all [tables](/extend/common-interface/folders/#dataouttables-folder) and [files](/extend/common-interface/folders/#dataoutfiles-folder) in the output mapping to Storage
 - Delete the container and all temporary files
 
 When the application execution is finished, Docker Runner automatically collects the exit code and the content of STDOUT and STDERR.
+The following schema illustrates the workflow of running a dockerized component.
+
+![Docker Workflow](/extend/docker-runner/docker-runner.svg)
 
 ### Features
 The application is responsible for:

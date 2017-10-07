@@ -9,9 +9,6 @@ items:
       - url: /overview/api/
         title: Our APIs
 
-      - url: /overview/jobs/
-        title: Background Jobs
-
       - url: /overview/encryption/
         title: Encryption
 
@@ -107,7 +104,7 @@ items:
 
                       - url: /extend/generic-extractor/configuration/api/pagination/offset/
                         title: Offset Scroller
-                    
+
                       - url: /extend/generic-extractor/configuration/api/pagination/pagenum/
                         title: Page Number Scroller
 
@@ -152,7 +149,7 @@ items:
 
           - url: /extend/generic-extractor/map/
             title: Configuration Map
-            
+
           - url: /extend/generic-extractor/functions/
             title: Functions
 
@@ -199,6 +196,12 @@ items:
               - url: /extend/common-interface/logging/development/
                 title: Local Development
 
+      - url: /extend/docker-runner/
+        title: Docker Runner
+        items:
+          - url: /extend/docker-runner/processors/
+            title: Processors
+
       - url: /extend/registration/
         title: Registration
         items:
@@ -242,11 +245,8 @@ items:
               - url: /integrate/storage/api/tde-exporter/
                 title: TDE Exporter
 
-      - url: /integrate/docker-runner/
-        title: Docker Runner
-        items:
-          - url: /integrate/docker-runner/processors/
-            title: Processors
+      - url: /integrate/jobs/
+        title: Background Jobs
 
       - url: /integrate/transformations/
         title: Transformations

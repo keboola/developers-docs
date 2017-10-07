@@ -1,6 +1,7 @@
 ---
 title: Background Jobs
-permalink: /overview/jobs/
+permalink: /integrate/jobs/
+redirect_from: /overview/jobs/
 ---
 
 * TOC
@@ -45,9 +46,44 @@ A job can have different statuses:
 - cancelled (a job was created, but it was aborted before its execution actually began)
 - terminated (a job was created and it was aborted in the middle of its execution)
 
+## APIs for Working with Jobs
+To create a Job, you need to use Docker Runner API is described on [Apiary.io](http://docs.kebooladocker.apiary.io/). Docker Runner
+has API calls to:
+
+- create a job --- run a [docker extension](/extend/docker/)
+- [encrypt values](/overview/encryption/)
+- [creating sandbox](/extend/common-interface/sandbox/)
+- run a [docker extension](/extend/docker/) with a [specified docker image tag](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job-with-image/run-job), usable for [testing images](https://developers.keboola.com/extend/docker/tutorial/automated-build/#run-test-jobs-of-your-new-image-against-live-configurations)
+
+You also need a *Syrup Queue* API to [poll Job status](http://docs.syrupqueue.apiary.io/#reference/jobs/job/view-job-detail).
+
+The first API requires a component parameter, use the [Component API](http://docs.keboola.apiary.io/#reference/component-configurations/list-components/get-components)
+to get a list of components.
+The second API is generic for all components. To work with the API, use our
+[Syrup PHP Client](https://github.com/keboola/syrup-php-client). In case you want to implement things
+yourself, copy the part of [Job Polling](https://github.com/keboola/syrup-php-client/blob/master/src/Keboola/Syrup/Client.php#L328).
+
+Note that there are some other special cases of asynchronous operations which are
+in principle the same, but may differ in little details. The most common ones are:
+
+- [Storage Jobs](http://docs.keboola.apiary.io/#reference/jobs/manage-jobs/job-detail), triggered, for instance, by
+[asynchronous imports](http://docs.keboola.apiary.io/#reference/tables/create-table-asynchronously/create-new-table-from-csv-file-asynchronously)
+or [exports](http://docs.keboola.apiary.io/#reference/tables/table-export-asynchronously/asynchronous-export)
+- [GoodData Writer Jobs](http://docs.keboolagooddatawriterv2.apiary.io/#introduction/synchronous-vs.-asynchronous-tasks)
+
+Apart from running predefined configurations with a `run` action, each component may
+provide additional options to create an asynchronous background job, or it may also support synchronous actions.
+
+The following diagram shows a typical flow to create a job. Note that It is also possible to create a job without an existing
+configuration --- using the `configData` field.
+
+{: .image-popup}
+![Asynchronous Jobs](/integrate/jobs/async-jobs.svg)
+
+The highlighted [Docker Runner](/extend/docker-runner) part is described in a [separate article](/extend/docker-runner).
+
 ## Creating and Running a Job
-Usually, you need to know the *component URI* and *configurationId* to create a job. There are, however,
-more possibilities how a job can be created. To obtain a list of all components available
+You need to know the *component Id* and *configuration Id* to create a job. To obtain a list of all components available
 in the project, and their configuration, you can use the
 [corresponding API call](http://docs.keboola.apiary.io/#reference/component-configurations/list-components/get-components).
 Which is a GET request to `https://connection.keboola.com/v2/storage/components`, containing your Storage Token in
@@ -103,11 +139,11 @@ A sample of the response is below:
   ...
 {% endhighlight %}
 
-From there, the important part is the `uri` field and `configurations.id` field. For instance, in the
-above, there is a database extractor with `uri` `https://syrup.keboola.com/docker/keboola.ex-db-mysql` and a
+From there, the important part is the `id` field and `configurations.id` field. For instance, in the
+above, there is a database extractor with `id` `keboola.ex-db-mysql` and a
 configuration with id `sampledatabase`.
 
-To [create a job](http://docs.keboolaconnector.apiary.io/#reference/sample-coponent)
+To [create a job](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job/run-job)
 running that configuration, call `POST` to URL `https://syrup.keboola.com/docker/keboola.ex-db-mysql/run`
 with the `X-StorageApi-Token` header containing your Storage token and with request body:
 
@@ -196,26 +232,3 @@ You will receive a response similar to this:
 From the above response, the most important part is the `status` field (`processing`, in this case)
 at this time. To obtain the Job result, send the above API call once the job status changes
 to one of the finished states (or use the `isFinished` field).
-
-## Working with Jobs
-To work with Job API, you need two things:
-
-- [API to create a Job](http://docs.keboolaconnector.apiary.io/#reference/sample-coponent)
-- [API to poll Job status](http://docs.syrupqueue.apiary.io/#reference/jobs/job/view-job-detail)
-
-The first API is specific for each component, so to obtain the actual URLs and parameters,
-use the [Component API](http://docs.keboola.apiary.io/#reference/component-configurations/list-components/get-components).
-The second API is generic for all components. To work with the API, use our
-[Syrup PHP Client](https://github.com/keboola/syrup-php-client). In case you want to implement things
-yourself, copy the part of [Job Polling](https://github.com/keboola/syrup-php-client/blob/master/src/Keboola/Syrup/Client.php#L328).
-
-Note that there are some other special cases of asynchronous operations which are
-in principle the same, but may differ in little details. The most common ones are:
-
-- [Storage Jobs](http://docs.keboola.apiary.io/#reference/jobs/manage-jobs/job-detail), triggered, for instance, by
-[asynchronous imports](http://docs.keboola.apiary.io/#reference/tables/create-table-asynchronously/create-new-table-from-csv-file-asynchronously)
-or [exports](http://docs.keboola.apiary.io/#reference/tables/table-export-asynchronously/asynchronous-export)
-- [GoodData Writer Jobs](http://docs.keboolagooddatawriterv2.apiary.io/#introduction/synchronous-vs.-asynchronous-tasks)
-
-Apart from running predefined configurations with a `run` action, each component may
-provide additional options to create an asynchronous background job, or it may also support synchronous actions.
