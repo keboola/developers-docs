@@ -7,8 +7,8 @@ redirect_from: /overview/jobs/
 * TOC
 {:toc}
 
-Most operations, such as extracting data, or running an application are executed in KBC as
-background, asynchronous, jobs. When an operation is triggered, for example, you run an extractor, a
+Most operations, such as extracting data or running an application are executed in KBC as
+background, asynchronous jobs. When an operation is triggered, for example, you run an extractor, a
 *job* is created and pushed into a *queue*. The job waits in the queue until it is picked up by a worker
 server, which actually executes it. The job queuing and execution are fully automatic.
 So, if you are working with asynchronous parts of your API, you need to
@@ -41,29 +41,29 @@ A job can have different statuses:
 - processing (job stuff is being done)
 - success (a job is finished)
 - error (a job is finished)
-- warning (a job is finished, but some child job failed)
+- warning (a job is finished, but one of its child jobs failed)
 - terminating (a user has requested to abort a job)
 - cancelled (a job was created, but it was aborted before its execution actually began)
 - terminated (a job was created and it was aborted in the middle of its execution)
 
 ## APIs for Working with Jobs
-To create a Job, you need to use Docker Runner API is described on [Apiary.io](http://docs.kebooladocker.apiary.io/). Docker Runner
-has API calls to:
+To create a Job, use our Docker Runner API described on [Apiary.io](http://docs.kebooladocker.apiary.io/). Docker Runner
+has API calls to
 
-- create a job --- run a [docker extension](/extend/docker/)
-- [encrypt values](/overview/encryption/)
-- [creating sandbox](/extend/common-interface/sandbox/)
-- run a [docker extension](/extend/docker/) with a [specified docker image tag](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job-with-image/run-job), usable for [testing images](https://developers.keboola.com/extend/docker/tutorial/automated-build/#run-test-jobs-of-your-new-image-against-live-configurations)
+- create a job --- run a [docker extension](/extend/docker/),
+- [encrypt values](/overview/encryption/),
+- [create a sandbox](/extend/common-interface/sandbox/), and
+- run a [docker extension](/extend/docker/) with a [specified docker image tag](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job-with-image/run-job), usable for [testing images](https://developers.keboola.com/extend/docker/tutorial/automated-build/#run-test-jobs-of-your-new-image-against-live-configurations).
 
 You also need a *Syrup Queue* API to [poll Job status](http://docs.syrupqueue.apiary.io/#reference/jobs/job/view-job-detail).
 
-The first API requires a component parameter, use the [Component API](http://docs.keboola.apiary.io/#reference/component-configurations/list-components/get-components)
+The first API requires a component parameter; use the [Component API](http://docs.keboola.apiary.io/#reference/component-configurations/list-components/get-components)
 to get a list of components.
 The second API is generic for all components. To work with the API, use our
 [Syrup PHP Client](https://github.com/keboola/syrup-php-client). In case you want to implement things
 yourself, copy the part of [Job Polling](https://github.com/keboola/syrup-php-client/blob/master/src/Keboola/Syrup/Client.php#L328).
 
-Note that there are some other special cases of asynchronous operations which are
+Note that there are other special cases of asynchronous operations which are
 in principle the same, but may differ in little details. The most common ones are:
 
 - [Storage Jobs](http://docs.keboola.apiary.io/#reference/jobs/manage-jobs/job-detail), triggered, for instance, by
@@ -74,7 +74,7 @@ or [exports](http://docs.keboola.apiary.io/#reference/tables/table-export-asynch
 Apart from running predefined configurations with a `run` action, each component may
 provide additional options to create an asynchronous background job, or it may also support synchronous actions.
 
-The following diagram shows a typical flow to create a job. Note that It is also possible to create a job without an existing
+The following diagram shows a typical flow of creating a job. Note that it is also possible to create a job without an existing
 configuration --- using the `configData` field.
 
 {: .image-popup}
@@ -86,7 +86,7 @@ The highlighted [Docker Runner](/extend/docker-runner) part is described in a [s
 You need to know the *component Id* and *configuration Id* to create a job. To obtain a list of all components available
 in the project, and their configuration, you can use the
 [corresponding API call](http://docs.keboola.apiary.io/#reference/component-configurations/list-components/get-components).
-Which is a GET request to `https://connection.keboola.com/v2/storage/components`, containing your Storage Token in
+It is a GET request to `https://connection.keboola.com/v2/storage/components`, containing your Storage Token in the
 `X-StorageAPI-Token` header.
 A sample of the response is below:
 
@@ -140,12 +140,12 @@ A sample of the response is below:
 {% endhighlight %}
 
 From there, the important part is the `id` field and `configurations.id` field. For instance, in the
-above, there is a database extractor with `id` `keboola.ex-db-mysql` and a
-configuration with id `sampledatabase`.
+above, there is a database extractor with the `id` `keboola.ex-db-mysql` and a
+configuration with the id `sampledatabase`.
 
 To [create a job](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job/run-job)
-running that configuration, call `POST` to URL `https://syrup.keboola.com/docker/keboola.ex-db-mysql/run`
-with the `X-StorageApi-Token` header containing your Storage token and with request body:
+running that configuration, call `POST` to the URL `https://syrup.keboola.com/docker/keboola.ex-db-mysql/run`
+with the `X-StorageApi-Token` header containing your Storage token and with the request body:
 
 {% highlight json %}
 {
@@ -170,13 +170,13 @@ When a job is created, you will obtain a response similar to this:
 {% endhighlight %}
 
 This means that the job was created (and `waiting` in the queue) and will automatically start executing.
-From the above response, the most important part is `url` which gives you URL of the resource for
+From the above response, the most important part is `url`, which gives you the URL of the resource for
 [Job status polling](https://en.wikipedia.org/wiki/Polling_(computer_science)).
 
 ## Job Polling
 If you want to get the actual job result, poll the [Job API](http://docs.syrupqueue.apiary.io/#reference/jobs/job/view-job-detail)
 for the current state of the job. For example, to poll for the above job, send a `GET` request to
-`https://syrup.keboola.com/queue/job/189164612` with `X-StorageApi-Token` header containing your Storage token:
+`https://syrup.keboola.com/queue/job/189164612` with the `X-StorageApi-Token` header containing your Storage token:
 
 {% highlight bash %}
 curl --header "X-StorageAPI-Token: storage-token" https://syrup.keboola.com/queue/job/189164612

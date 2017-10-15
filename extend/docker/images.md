@@ -20,38 +20,38 @@ Custom Science Extensions:
 - docker-custom-r:
 [Quay](https://quay.io/repository/keboola/docker-custom-r),
 [Dockerfile](https://github.com/keboola/docker-custom-r) --
-Image for Custom Science R.
+Image for Custom Science R
 - docker-custom-python:
 [Quay](https://quay.io/repository/keboola/docker-custom-python),
 [Dockerfile](https://github.com/keboola/docker-custom-python) --
-Image for Custom Science Python 3.x.
+Image for Custom Science Python 3.x
 - docker-custom-python2:
 [Quay](https://quay.io/repository/keboola/docker-custom-python2),
 [Dockerfile](https://github.com/keboola/docker-custom-python2) --
-Image for Custom Science Python 2.x.
+Image for Custom Science Python 2.x
 
 Transformations:
 
 - python-transformation:
 [Quay](https://quay.io/repository/keboola/python-transformation),
 [Dockerfile](https://github.com/keboola/python-transformation) --
-Image for Python transformations.
+Image for Python transformations
 - r-transformation:
 [Quay](https://quay.io/repository/keboola/r-transformation),
 [Dockerfile](https://github.com/keboola/r-transformation) --
-Image for R transformations.
+Image for R transformations
 
 Sandboxes:
 
 - docker-jupyter:
 [Quay](https://quay.io/repository/keboola/docker-jupyter),
 [Dockerfile](https://github.com/keboola/docker-jupyter) --
-Image for Python Jupyter Sandbox.
+Image for Python Jupyter Sandbox
 - docker-rstudio:
 [Quay](https://quay.io/repository/keboola/docker-rstudio),
 [Dockerfile](https://github.com/keboola/docker-rstudio) --
-Image for RStudio Sandbox.
+Image for RStudio Sandbox
 
 All of the repositories use [Semantic versioning](http://semver.org/) tags. These are always fixed to a specific image build.
 Additionally the `latest` tag is available and it always points to the latest tagged build. That means that the `latest` tag
-and can be used safely (though it refers to different versions over time).
+can be used safely (though it refers to different versions over time).
