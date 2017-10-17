@@ -179,11 +179,7 @@ An input file manifest stores metadata about a downloaded file.
         "tag1",
         "tag2"
     ],
-    "max_age_days": 180,
-    "creator_token": {
-        "id": 3800,
-        "description": "ondrej.hlavacek@keboola.com"
-    }
+    "max_age_days": 180
 }
 {% endhighlight %}
 
