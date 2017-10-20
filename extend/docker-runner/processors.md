@@ -15,8 +15,9 @@ the image outputs. For example, if an extractor extracts CSV data in a non-UTF8 
 convert the CSV to UTF-8 as expected by [Storage](https://help.keboola.com/storage/).
 
 ## Configuration
-Processors are technically supported in any configuration. However, the option may not always be available in
-the UI. To manually configure processors, you have to use the [Component Configuration API](http://docs.keboola.apiary.io/#reference/component-configurations). By running the
+Processors are technically supported in any configuration. However, the option may not always be
+[available in the UI](/extend/registration/#genericdockerui-processors). To manually configure processors,
+you have to use the [Component Configuration API](http://docs.keboola.apiary.io/#reference/component-configurations). By running the
 [Get Configuration Detail](http://docs.keboola.apiary.io/#reference/component-configurations/manage-configurations/configuration-detail)
 request for a specific component ID and configuration ID, you obtain the actual configuration contents, for example:
 
@@ -138,7 +139,8 @@ It is also advisable to [minify the JSON](http://www.cleancss.com/json-minify/) 
 Also note that if the configuration contains literal `+`, it has to be [urlencoded](https://www.urlencoder.org/) as `%2B`.
 
 ### Available Processors
-To obtain a list of available processors, use the [List apps public API](http://docs.kebooladeveloperportal.apiary.io/#reference/0/public-api/list-published-apps)
+You can obtain a list of available processors using the
+[Developer Portal UI](https://apps.keboola.com/apps?type=processor) or using the [List apps public API](http://docs.kebooladeveloperportal.apiary.io/#reference/0/public-api/list-published-apps)
 of the Developer portal. By sending a `GET` request to `https://apps-api.keboola.com/apps`, you'll obtain a list of all
 public KBC components. Processors are components with the type `processor`, for example:
 

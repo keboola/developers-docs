@@ -52,7 +52,7 @@ items:
               - url: /extend/docker/tutorial/howto/
                 title: Creating Dockerized App
 
-              - url: /extend/docker/tutorial/automated-build/
+              - url: /extend/docker/tutorial/build/
                 title: Automated Build
 
           - url: /extend/docker/running/
@@ -206,8 +206,8 @@ items:
         title: Registration
         items:
 
-          - url: /extend/registration/checklist/
-            title: Submission Checklist
+          - url: /extend/docker/registration/deployment/
+            title: Deployment
 
           - url: /extend/registration/configuration-schema/
             title: Configuration Schema
