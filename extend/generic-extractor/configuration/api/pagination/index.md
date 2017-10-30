@@ -273,7 +273,7 @@ expected to be the total number of items to extract. In the sample response belo
 {% endhighlight %}
 
 Note that if the field does not exist in the response (e.g., you misspell it in the configuration), paging stops after the first page.
-See [example [EX126]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/126-pagination-stop-liimit)
+See [example [EX126]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/126-pagination-stop-limit)
 (a modified version of [EX049](https://github.com/keboola/generic-extractor/tree/master/doc/examples/049-pagination-offset-rename).
 For `count` configuration, see [example [EX127]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/127-pagination-stop-field)
 (a modified version of [EX051](https://github.com/keboola/generic-extractor/tree/master/doc/examples/051-pagination-pagenum-basic).

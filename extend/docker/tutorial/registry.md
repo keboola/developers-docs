@@ -1,6 +1,7 @@
 ---
-title: Automated Build
-permalink: /extend/docker/tutorial/build/
+title: Docker Registry
+permalink: /extend/docker/tutorial/registry/
+redirect_from: /extend/docker/tutorial/automated-build/
 ---
 
 * TOC
@@ -9,34 +10,34 @@ permalink: /extend/docker/tutorial/build/
 An important part of the Docker ecosystem is a **Docker registry**. It acts as a folder of images, taking
 care of their storing and building.
 [Docker Hub](https://hub.docker.com/) is the official Docker registry.
-There are also alternative registries, such as [Quay](https://quay.io/), or completely private registries
-such as [AWS ECR](https://aws.amazon.com/ecr/) where we are keen to host your images for you.
 
-We support public and private images on both Docker Hub and Quay registries, as well as private images on AWS ECR.
-Other registries are not yet supported.
-
-For reliability reasons, we strongly recommend to use the [**AWS ECR**](#setting-up-a-repository-on-aws-ecr)
-provisioned by the **Keboola Developer Portal**.
+For reliability reasons, we strongly recommend to use the [Amazon AWS ECR](https://aws.amazon.com/ecr/)
+[provisioned by the **Keboola Developer Portal**](/extend/registration/deployment/).
+We also support Docker Hub and [Quay](https://quay.io/), both public and private repositories.
 
 ## Working with a Registry
 In order to run an image, **pull** (`docker pull`) that image to your machine. The `docker run`
 command does that automatically for you. So, when you do:
 
-    docker run -i quay.io/keboola/base-php70
+    docker run -i quay.io/keboola/docker-custom-php
 
 you will see something like this:
 
-    Unable to find image 'quay.io/keboola/base-php70:latest' locally
-    latest: Pulling from keboola/base-php70
-    a3ed95caeb02: Pull complete
+    Unable to find image 'quay.io/keboola/docker-custom-php:latest' locally
+    latest: Pulling from keboola/docker-custom-php
+    ad74af05f5a2: Pull complete
+    8fa9669af8ec: Pull complete
+    Digest: sha256:ff21e0f0e58614aa5d8104d9f263552e583e6ddeb6215e83cae181d5169a150a
+    Status: Downloaded newer image for quay.io/keboola/docker-custom-php:latest
+    Interactive shell
 
 When you build an image locally, **push** (`docker push`) it to the Docker registry. Then the
 image can be shared with anyone (if public), or with your organization (if private).
 
 Because the image is defined only by the Dockerfile instructions (and optionally *build context*), you can take
 a shortcut and give the registry only the Dockerfile. The registry will then build the image on its own
-infrastructure. This is best done by setting up an automated build which links a git repository
-containing the Dockerfile (and usually the application code) with the registry.
+infrastructure. This is best done by setting up an [automated deploy script](/extend/registration/deployment/) or
+by linking a git repository containing the Dockerfile (and usually the application code) with the registry.
 
 ## Setting up a Repository on Quay
 This may get slightly confusing because we will create a new *Image Repository* and link
@@ -63,7 +64,7 @@ Then link the image repository to a Github repository
 After that, configure the build trigger. The easiest way to do that is setting the trigger to
 `All Branches and Tags`.
 It will trigger an image rebuild on every commit to the repository.
-You can also set the build trigger only to a specific branch, for example, `heads/master`:
+You can also set the build trigger only to a specific branch, for example, `head/master`:
 
 {: .image-popup}
 ![Configure build trigger for branch](/extend/docker/tutorial/quay-build-trigger-master.png)
@@ -85,4 +86,4 @@ trigger a new build of the Docker Image. Also note that the image automatically 
 or branch name. So, when you push a commit to the `master` branch, you will get an image with a tag master (which
 will move away from any older image builds). When creating a `1.0.0` tag, you will get an image with a `1.0.0` tag.
 
-When using images in Keboola Connection, we **highly recommend to use our [ECR repository](/extend/docker/registration/deployment/)**.
+When using images in Keboola Connection, we **highly recommend to use our [ECR repository](/extend/registration/deployment/)**.

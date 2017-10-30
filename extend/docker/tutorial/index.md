@@ -26,15 +26,15 @@ isolated from the image itself and cannot make permanent changes to it; this is 
 surprising). When you run the Image again (and create a new Container), it won't be affected in any way by the previous
 Container. Docker Image is therefore stateless and acts like a template. The state is stored only in the container.
 
-
 ## Docker Images
 *Docker Images* are created by executing instructions written in *Dockerfile*. Dockerfile is a simple text
 file consisting mostly of shell commands which must be executed to prepare the application for running.
 Docker Images can be based on other Images. So if
 you need minor modification to a system, you do not have to build the whole thing from scratch. If you want Images to be
 reused, *push* your Dockerfile to Docker *Registry*. The Registry ([Dockerhub](https://hub.docker.com/),
-[Quay](https://quay.io/)) will build the image; anyone interested in using it can download it. 
-[AWS ECR](https://aws.amazon.com/ecr/) is a private repository and has no build triggers, you need to push the images manually or using a deploy script in your CI pipeline.
+[Quay](https://quay.io/)) will build the image; anyone interested in using it can download it.
+[AWS ECR](https://aws.amazon.com/ecr/) is a private repository and has no build triggers, you need to push the images manually or
+using a [deploy script](https://github.com/keboola/docker-demo-app/blob/master/deploy.sh) in your CI pipeline.
 
 Docker Images names are based on the following scheme: `registry-name/account-name/image-name:tag` Where _registry-name_
 and _acoount-name_ can sometimes be omitted. For example, you can refer to a Docker _hello-world_ image as: `hello-world`
@@ -45,18 +45,16 @@ and `latest` refers to the _tag_.
 
 Image tags work similarly to Git tags as they refer to a specific build of the image. However, Docker tags can be moved
 easily, so they do not need to always refer to the same build. The general convention is that the *latest*
-and *master* tags both point to the same (latest) build and are movable. Please note, that some of our
-[Keboola images](/extend/docker/images/) do not follow this convention.
+tag points to the same (latest) build and is movable.
 
 ## Running Docker Images in KBC
-We have wrapped Docker in our [Docker Runner component](/integrate/docker-bundle/). The component
+We have wrapped Docker in our [Docker Runner component](/extend/docker-runner/). The component
 runs [registered](/extend/registration/) Docker Images. Docker Runner
-has an [API](http://docs.kebooladocker.apiary.io/#)
+has an [API](/extend/docker-runner/#api)
 which allows to run Docker Images and encrypt arbitrary values.
-[Docker Runner](/integrate/docker-bundle/) takes
+[Docker Runner](/extend/docker-runner/) takes
 care of injecting the right data, creating, running, and terminating the container, and uploading
 the result data to KBC Storage. All images to be run in KBC must have an `ENTRYPOINT`.
-We also recommend that you base your image on [one of our images](/extend/docker/images/).
 
 Before you run Docker applications in KBC, make sure to
 [set up your Docker environment](/extend/docker/tutorial/setup/).
@@ -70,7 +68,6 @@ The demo application itself starts with a single
 The application can exist independently (without Docker), and contains unit and functional tests.
 The repository includes also the Docker Image definition in
 [**Dockerfile**](https://github.com/keboola/docker-demo-app/blob/master/Dockerfile). The Docker environment including the application
-is prepared by the Docker Image definition. A hook from Dockerhub builds Docker Image automatically on every commit.
+is prepared by the Docker Image definition. The [Travis CI](https://docs.travis-ci.com/) service is used to builds Docker Image automatically on every commit and
+[deploy it to KBC](/extend/registration/deployment/) and public registries.
 A similar application is also available [in Python](https://github.com/keboola/python-custom-application-text-splitter).
-
-

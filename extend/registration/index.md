@@ -52,10 +52,9 @@ application.
 **Important: changes made in Developer Portal take up to 5 minutes to propagate to all Keboola Connection instances in all regions.**
 
 ## Application Repository
-We offer free hosting of your images in **[AWS ECR](https://aws.amazon.com/ecr/)** under our own account.
-All repositories in AWS ECR are private. When registering your component, you will receive
-[credentials for deployment](/extend/docker/registration/deployment/) to the repository and you can either push the
-images manually or use a CI pipeline to push images.
+We offer free hosting of your images in a private repository in **[Amazon AWS ECR](https://aws.amazon.com/ecr/)**.
+To use the repository provisioned by us, follow the steps outlined in [setting up KBC deployment](/extend/registration/deployment/).
+The repository will be configured automatically for you.
 
 We also support DockerHub and Quay.io registries, both public and private. However, we recommend that you use AWS ECR
 unless you require DockerHub or Quay for some reason (e.g. that the image is public).
@@ -201,7 +200,7 @@ We recommend that you [contact us on support](mailto:support@keboola.com) when r
 {: .image-popup}
 ![Runtime configuration screenshot](/extend/registration/runtime-1.png)
 
-## Publish your Extension in KBC App Store
+## Publishing your Extension
 When you register an extension (be it either [Docker Extension](/extend/docker/) or [Custom Science](/extend/custom-science/) or
 [Generic Extractor](/extend/generic-extractor/)), it is not published. A component not published
 can be used without limitations but it is not accessible in the KBC UI. This means that it can only be
@@ -215,23 +214,51 @@ your application and will publish the application or contact you with required c
 {: .image-popup}
 ![Approval screenshot](/extend/registration/approve.png)
 
-The goal of the review is to maintain
-reasonable end-user experience and application reliability. The following best practices should be followed:
+### Application Review
+The goal of the application review is to maintain
+reasonable end-user experience and application reliability. Before applying for application registration, make sure that the same application does
+not exist yet. If a similar application exists (e.g. an extractor for the same service) exists, make sure that application description clearly states
+the differences. During application review, the following best practices are checked:
 
-- Application name and description:
-    - Name should not contain words like `extractor`, `application`, `writer`. (Good: *Cloudera Impala*, Bad: *Cloudera Extractor*)
-    - Short description is more of a description of the service (which allow the user to find it) then a description of the component. (Good: *Native analytic database for Apache Hadoop.* Bad: *This extractor extracts data from Cloudera Impala*)
-    - Long description should provide additional information about the **data** extracted/written. What will the end-user obtain? What must the end-user provide? The long description should not contain instructions how to configure the component. This is because the long description is displayed before the end-user attempts to configure the component. However, if there are any special requirements (external approval, specific account setting), they should be stated. (Good: *This component allows you to extract currency exchange rates as published by European Central Bank (ECB) The exchange rates are available from base currency (either USD or EUR) to 30 destination currencies (AUD, BGN, BRL, CAD, CNY, CZK, EUR, GBP, HKD, HRK, HUF, CHF, IDR, ILS, INR, JPY, KRW, MXN, MYR, NOK, NZD, PHP, PLN, RON, RUB, SEK, SGD, THB, TRY, ZAR). Rates are available for all working days from 4th of January 1999 up to present.*)
-    - Application Icon must be representative and not blurred :)
-    - The application must correctly state the data flow --- UI flags `appInfo.dataOut` (typically writers), `appInfo.dataIn` (typically extractors).
-    - Licensing information must be valid and Vendor description must be current.
-- Application Configuration:
-    - Use only the necessary flags (i.e. if there are no output files, don't use `genericDockerUI-fileOutput`).
-    - Use [Configuration Schema](/extend/registration/configuration-schema/).
-    - Use Configuration description if the configuration is not trivial / self-explainable. Provide links to resources (e.g. when doing Elastic extractor, not everyone is familiar with ElasticSearch query syntax).
-- Application Internals:
-    - Make sure that the amount consumed **memory does not depend** on the amount of processed data. Use streaming or processing in chunks to maintain a limited amount of consumed memory. If not possible, then state the expected usage in the **Application Limits**.
-    - The application must distinguish between [User and Application errors](/extend/common-interface/environment/#return-values).
-    - The application must validate its parameters, invalid configuration must result in an user error.
-    - The events produced must be reasonable. Provide status messages if possible and with reasonable frequency. Avoid internal messages with no meaning to the end-user. Avoid flooding the event log or sending data files in the event log.
-    - Set up [Continuos Deployment](/extend/docker/registration/deployment/) so that you can keep the application up-date.
+
+#### Application name and description
+
+- Name should not contain words like `extractor`, `application`, `writer`. (Good: *Cloudera Impala*, Bad: *Cloudera Extractor*)
+- Short description is more of a description of the service (which allow the user to find it) then a description of the component. (Good: *Native analytic database for Apache Hadoop.* Bad: *This extractor extracts data from Cloudera Impala*)
+- Long description should provide additional information about the **data** extracted/written. What will the end-user obtain? What must the end-user provide? The long description should not contain instructions how to configure the component. This is because the long description is displayed before the end-user attempts to configure the component. However, if there are any special requirements (external approval, specific account setting), they should be stated. (Good: *This component allows you to extract currency exchange rates as published by European Central Bank (ECB) The exchange rates are available from base currency (either USD or EUR) to 30 destination currencies (AUD, BGN, BRL, CAD, CNY, CZK, EUR, GBP, HKD, HRK, HUF, CHF, IDR, ILS, INR, JPY, KRW, MXN, MYR, NOK, NZD, PHP, PLN, RON, RUB, SEK, SGD, THB, TRY, ZAR). Rates are available for all working days from 4th of January 1999 up to present.*)
+- Application Icon must be representative and reasonable quality. Make sure the icon license allows you to use it.
+- The application must correctly state the data flow --- UI flags `appInfo.dataOut` (typically writers), `appInfo.dataIn` (typically extractors).
+- Licensing information must be valid and Vendor description must be current.
+
+
+#### Application Configuration
+
+- Use only the necessary flags (i.e. if there are no output files, don't use `genericDockerUI-fileOutput`).
+- Use [Configuration Schema](/extend/registration/configuration-schema/).
+    - List all properties in the `required` field.
+    - Always use `propertyOrder` to explicitly define the order of fields in the form.
+    - Use short `title` without colon.
+    - Use `description` to provide an explanatory sentence if needed.
+    <br>Good: ![Good Schema](/extend/registration/schema-good.png)
+    <br>Bad: ![Bad Schema](/extend/registration/schema-bad.png)
+- Use Configuration description only if the configuration is not trivial / self-explainable. Provide links to resources (e.g. when doing Elastic extractor, not everyone is familiar with ElasticSearch query syntax). The configuration description supports markdown. The markdown should not start with a header and should use only level 3 and level 4 headers (a level 2 header is prepended before the configuration description). <br>Good: <br><code>some introduction text<br><br>### Input Description<br>
+description of input tables<br>
+<br>
+#### First Table<br>
+some other text<br>
+</code>Bad:<br><code>
+## Configuration Description<br>
+some introduction text<br>
+<br>
+#### Input Description<br>
+description of input tables
+</code>
+
+
+#### Application Internals
+
+- Make sure that the amount consumed **memory does not depend** on the amount of processed data. Use streaming or processing in chunks to maintain a limited amount of consumed memory. If not possible, then state the expected usage in the **Application Limits**.
+- The application must distinguish between [User and Application errors](/extend/common-interface/environment/#return-values).
+- The application must validate its parameters, invalid configuration must result in an user error.
+- The events produced must be reasonable. Provide status messages if possible and with reasonable frequency. Avoid internal messages with no meaning to the end-user. Avoid flooding the event log or sending data files in the event log.
+- Set up [Continuos Deployment](/extend/registration/deployment/) so that you can keep the application up-date.
