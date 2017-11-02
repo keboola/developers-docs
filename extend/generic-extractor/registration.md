@@ -27,13 +27,13 @@ Also, try to make the extractor [work incrementally](/extend/generic-extractor/i
 if possible.
 
 ## Submission
-The following fields from the [registration](/extend/registration/) are
-not applicable:
+The following settings should be used when [registering](/extend/registration/) a new component
+based on Generic Extractor:
 
 - **Application Type** --- always `extractor`
 - **Docker image URL** --- see [repository configuration](/extend/registration/#generic-extractor)
 - **Docker image tag** --- see [repository configuration](/extend/registration/#generic-extractor)
-- **Required memory** --- not used, provided by Keboola
+- **Required memory** --- provided by Keboola
 - **Encryption** --- always `true`
 - **Token forwarding** --- always `false`
 - **UI options** --- always `genericTemplatesUI`

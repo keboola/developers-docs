@@ -21,73 +21,78 @@ That being said, any KBC user can use any registered component, unless
 - the KBC user (or their token) has a [limited access to the component](https://help.keboola.com/storage/tokens/),
 - the component itself limits where it can run (in what projects and for which users).
 
-## Registration
-To register and application, you need to have an account in [Keboola Developer Portal](https://apps.keboola.com/auth/create-account).
-The registration is free and quick, it requires a working email (to which a confirmation email will be sent) and
+## Obtaining Account
+To register and application, you need to have an account in [Keboola Developer Portal](https://apps.keboola.com/). The Developer Portal is a completely separate application 
+which manages the list of components available in KBC. As it is a separate application, it uses 
+different credentials than KBC and you have to obtain an account.
+[Creating an account](https://apps.keboola.com/auth/create-account) is free and quick, it requires a working email (to which a confirmation email will be sent) and
 a mobile phone for a mandatory two-factor authorization. When you log in to the developer portal, you have to join a
-**vendor**. A vendor is organization of developers. Every application in KBC has to belong to vendor. If you work for no company, we
+**vendor**. A vendor is an organization of developers. Every application in KBC has to belong to a vendor. If you work for no company, we
 suggest to create a vendor with your name. Even if you want to create a single component, it still has to belong to a vendor.
 
-If you join an existing vendor, an administrator of that vendor has to approve your request. If you want to create a
-new vendor, a Keboola Administrator has to approve your request.
+If you join an existing vendor, an administrator of that vendor has to approve your request. If you 
+want to create a new vendor, a Keboola Administrator has to approve your request. When you create a new
+vendor you should provide us with a channel for receiving internal errors from your applications.
+Basically anything supported by [Papertrail notifications](https://help.papertrailapp.com/kb/how-it-works/alerts#supported-services) is available, though e-mail or Slack channel is most commonly used.
 
 {: .image-popup}
 ![Screenshot -- Join a vendor](/extend/registration/join-vendor.png)
 
-To add an application, follow the instructions and fill in the application name and ID:
+When you are confirmed as a member of a vendor, you may proceed to creating your own applications.
+
+## Creating Application
+To add an application, use the **Create App** button and fill in the application name and ID:
 
 {: .image-popup}
 ![Screenshot -- Create application](/extend/registration/register-app.png)
 
-**Do not use the words 'extractor', 'writer' or 'application' in application name.**
-When creating an application, you will obtain the **Component ID** (in form `vendor.app-id`) -- e.g. `ujovlado.ex-wuzzzup`.
-Once you have the Component ID, you can create configurations for the application. You can also review the
-application in Keboola Connection by visiting a URL:
+**Do not use the words 'extractor', 'writer' or 'application' in the application name.**
+When creating an application, you will obtain the **Component ID** (in the form `vendor.app-id`) -- e.g. `ujovlado.ex-wuzzzup`.
+Once you have the Component ID, you can create configurations for the application in KBC. You can also review the
+application in KBC by visiting an URL:
 
     https://connection.keboola.com/admin/projects/{PROJECT_ID}/extractors/{COMPONENT_ID}
 
 Note however that the configuration will not be runnable until you configure the **Repository** section of the
 application.
 
-**Important: changes made in Developer Portal take up to 5 minutes to propagate to all Keboola Connection instances in all regions.**
+**Important: changes made in the Developer Portal take up to 5 minutes to propagate to all Keboola Connection instances in all regions.**
 
 ## Application Repository
-We offer free hosting of your images in a private repository in **[Amazon AWS ECR](https://aws.amazon.com/ecr/)**.
-To use the repository provisioned by us, follow the steps outlined in [setting up KBC deployment](/extend/registration/deployment/).
-The repository will be configured automatically for you.
+Application Repository is crucial part of the application registration, because it 
+actually defines what [Docker image](/extend/docker/tutorial/) will be used when running the application.
+We offer free hosting of your docker images in **[Amazon Container Registry (AWS ECR)](https://aws.amazon.com/ecr/)** under our own account.
+All repositories in AWS ECR are private. When registering your component, you will receive
+[credentials for deployment](/extend/docker/registration/deployment/) to the repository and you can either push the images manually or use an automated script to push images.
 
-We also support DockerHub and Quay.io registries, both public and private. However, we recommend that you use AWS ECR
-unless you require DockerHub or Quay for some reason (e.g. that the image is public).
-The main benefit of AWS ECR is its reliability, as Quay.io and DockerHub are more prone to outages and are beyond our control.
+We also support the DockerHub and Quay.io registries, both public and private. However, we recommend that you use AWS ECR
+unless you require DockerHub or Quay for some reason (e.g. you required that the image is public).
+The main benefit of our AWS ECR is its reliability, as Quay.io and DockerHub are more prone to outages and are beyond our control.
 
 ### Generic Extractor
-For registering a component based on [Generic Extractor](https://developers.keboola.com/extend/generic-extractor/), use the following repository:
+For registering a component based on the [Generic Extractor](https://developers.keboola.com/extend/generic-extractor/), use the following repository:
 
     147946154733.dkr.ecr.us-east-1.amazonaws.com/developer-portal-v2/ex-generic-v2
 
-For a list of available tags, see [Generic Extractor repository](https://github.com/keboola/generic-extractor/releases).
+For a list of available tags, see the [Generic Extractor Github repository](https://github.com/keboola/generic-extractor/releases) or [Generic Extractor Quay Repository](https://quay.io/repository/keboola/generic-extractor), both
+of which contain the same tags as the above AWS ECR repository.
 It is also possible to use the `latest` tag, which points to the highest available tag. However we recommend that you
 register your component with a specific tag and update manually to avoid problems with breaking changes in future Generic
 Extractor releases.
 
 ### Custom Science
 When registering Custom science applications, one of [our images](https://developers.keboola.com/extend/docker/images/)
-should be used. The registration of Custom Science applications is not supported yet on developer portal, so please
+should be used. The registration of Custom Science applications is not supported yet in the Developer Portal, so please
 [contact us on support](mailto:support@keboola.com).
 If you are registering a [Custom Science](/extend/custom-science/) extension and want to use a private git repository,
 provide us with [encrypted credentials to the git repository](/extend/custom-science/development/#encryption-beforehand).
 
 ## UI Options
 Each extension needs to specify how its user interface (UI) will look. Without any configuration, the component cannot
-be configured via UI (it can still be configured through the API though).
-
-will receive a **Generic UI**. The generic UI will always show a text field for entering the
-component configuration in JSON format. Additionally, you can request other parts of the generic UI by
-adding any of the `genericDockerUI`, `genericDockerUI-tableInput`, `genericDockerUI-tableOutput`,
-`genericDockerUI-fileInput`, `genericDockerUI-fileOutput`  flags in the checklist. All of the flags
-may combined freely.
-
-Each of the options is shown below:
+be configured via UI (it can still be configured using the API though). The most basic configuration
+is `genericDockerUI`. The generic UI will always show a text field for entering the
+component configuration in JSON format. Other components of the UI are turned on using other flags
+(e.g. `genericDockerUI-tableInput`, `genericDockerUI-tableOutput`). All of the flags may combined freely.
 
 ### genericDockerUI
 This provides a basic textarea for setting extension parameters as a JSON; the textarea has
@@ -118,7 +123,10 @@ With this UI, you can set:
 ![Table input result screenshot](/extend/registration/table-input-2.png)
 
 ### genericDockerUI-tableOutput
-This flag provides a UI for setting the table output [mapping](https://help.keboola.com/manipulation/transformations/mappings/). With this UI, you can set:
+This flag provides a UI for setting the table output [mapping](https://help.keboola.com/manipulation/transformations/mappings/). This UI part **should not be used**
+if the component is using the [default bucket](/extend/common-interface/folders/#default-bucket) setting.
+
+With this UI, you can set:
 
 - *Source* --- the name of the .csv file retrieved from the application
 - *Destination* --- the name of the table in Storage, the destination bucket should exist already
@@ -136,8 +144,8 @@ This flag provides a UI for setting the table output [mapping](https://help.kebo
 ![Table output result screenshot](/extend/registration/table-output-2.png)
 
 ### genericDockerUI-processors
-This flag provides UI for [Processor configuration](/extend/docker-runner/processors/).
-It provides a basic textarea for setting processors and their parameters as a JSON; the textarea has
+This flag provides a UI for the [Processor configuration](/extend/docker-runner/processors/).
+It provides a basic textarea for setting the processors and their parameters as a JSON; the textarea has
 JSON validation and syntax highlighting.
 
 {: .image-popup}
@@ -178,7 +186,7 @@ This flag provides a UI for setting the file output mapping. With this UI, you c
 ![File output result screenshot](/extend/registration/file-output-2.png)
 
 ### genericDockerUI-authorization
-This flag provides UI for setting [OAuth2 Authorization](/extend/common-interface/oauth/). However, to
+This flag provides a UI for setting [OAuth2 Authorization](/extend/common-interface/oauth/). However, to
 actually activate OAuth for your component, you have to [contact us on support](mailto:support@keboola.com).
 
 {: .image-popup}
@@ -188,10 +196,11 @@ actually activate OAuth for your component, you have to [contact us on support](
 ![Authorization detail screenshot](/extend/registration/auth-1.png)
 
 ### genericTemplatesUI
-This flag is used to provide UI for components based on [Generic Extractor](/extend/generic-extractor/registration/).
+This flag is used to provide UI for components based on the [Generic Extractor](/extend/generic-extractor/). It allows the end-user to select a 
+[Generic Extractor template](/extend/generic-extractor/registration/).
 
 ### genericDockerUI-runtime
-This flag provides UI for setting parameters for [Custom Science](/extend/custom-science/).
+This flag provides a UI for setting parameters for [Custom Science](/extend/custom-science/).
 We recommend that you [contact us on support](mailto:support@keboola.com) when registering a Custom Science application.
 
 {: .image-popup}
@@ -200,16 +209,16 @@ We recommend that you [contact us on support](mailto:support@keboola.com) when r
 {: .image-popup}
 ![Runtime configuration screenshot](/extend/registration/runtime-1.png)
 
-## Publishing your Extension
+## Publish your Extension in KBC App Store
 When you register an extension (be it either [Docker Extension](/extend/docker/) or [Custom Science](/extend/custom-science/) or
-[Generic Extractor](/extend/generic-extractor/)), it is not published. A component not published
-can be used without limitations but it is not accessible in the KBC UI. This means that it can only be
-used only by directly visiting a link with the specific component ID or via the API. Unpublished components are also not part
-of the [Public Component list](https://apps.keboola.com/apps). A configuration of non-public component is accessible the same way as any other component.
+[Generic Extractor](/extend/generic-extractor/)), it is *not published*. A non-published component
+can be used without limitations but it is not offered in the KBC UI. This means that it can only be
+used by directly visiting a link with the specific component ID or via the API. Unpublished components are also not part
+of the [Public Component list](https://apps.keboola.com/apps). An existing configuration of a non-public component is accessible the same way as a configuration of any other component.
 
-To publish an application, you have to request an application approval from Keboola. This is done in
+To publish an application, you have to request application approval from Keboola. This is done in
 [Keboola Developer](https://apps.keboola.com/) portal by requesting approval from the application list. A member of our staff will review
-your application and will publish the application or contact you with required changes.
+your application and publish the application or contact you with the required changes.
 
 {: .image-popup}
 ![Approval screenshot](/extend/registration/approve.png)
@@ -234,8 +243,11 @@ the differences. During application review, the following best practices are che
 #### Application Configuration
 
 - Use only the necessary flags (i.e. if there are no output files, don't use `genericDockerUI-fileOutput`).
+- For extractors, always use [Default bucket](/extend/common-interface/folders/#default-bucket).
 - Use [Configuration Schema](/extend/registration/configuration-schema/).
     - List all properties in the `required` field.
+    - Use [encryption](/overview/encryption/) to store sensitive values. No plain-text passwords!
+- Application Internals:
     - Always use `propertyOrder` to explicitly define the order of fields in the form.
     - Use short `title` without colon.
     - Use `description` to provide an explanatory sentence if needed.
@@ -262,3 +274,4 @@ description of input tables
 - The application must validate its parameters, invalid configuration must result in an user error.
 - The events produced must be reasonable. Provide status messages if possible and with reasonable frequency. Avoid internal messages with no meaning to the end-user. Avoid flooding the event log or sending data files in the event log.
 - Set up [Continuos Deployment](/extend/registration/deployment/) so that you can keep the application up-date.
+- Use [semantic versioning](http://semver.org/) to mark and deploy versions of your application. Do not use `latest` image tag in production.
