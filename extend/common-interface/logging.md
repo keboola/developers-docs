@@ -121,6 +121,10 @@ logger = logging.getLogger()
 logging_gelf_handler = logging_gelf.handlers.GELFTCPSocketHandler(host=os.getenv('KBC_LOGGER_ADDR'), port=int(os.getenv('KBC_LOGGER_PORT')))
 logging_gelf_handler.setFormatter(logging_gelf.formatters.GELFFormatter(null_character=True))
 logger.addHandler(logging_gelf_handler)
+
+# remove default logging to stdout
+logger.removeHandler(logger.handlers[0])
+
 logging.critical('A sample emergency message')
 {% endhighlight %}
 
