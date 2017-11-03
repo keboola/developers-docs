@@ -12,7 +12,7 @@ will automatically deploy a new version of your application to Keboola Connectio
 
 ## Before You Start
 - Have a [KBC project](/#development-project) where you can test your code.
-- Have a [Developer Portal account](https://apps.keboola.com/) and be a [member of a vendor](/extend/registration/#registration).
+- Have a [Developer Portal account](https://apps.keboola.com/) and be a [member of a vendor](/extend/registration/#obtaining-account).
 
 ## Step 1 --- Preliminaries
 - Have your [docker extension](/extend/docker/quick-start/) code ready in a git repository. For turbo start, you can fork
@@ -179,9 +179,6 @@ The commands will need two extra environment variables apart from the
 If you are still using our [sample application code](https://github.com/keboola/docs-deploy-example-tests),
 use the [sample table](/extend/source.csv) as input.
 
-Note that if you want to run multiple test jobs, simply repeat the command with the different configuration IDs
-that you would like to test.
-
 Then add the following steps to your `script` section in `.travis.yml` to run the test jobs.
 
 {% highlight yaml %}
@@ -210,20 +207,23 @@ deploy:
     tags: true
 {% endhighlight %}
 
-You can see the code in the [Sample repository](https://github.com/keboola/docs-deploy-example-tests).
-
 The commands above do as follows:
+
 - Build the application image and tag it `my-application`.
 - Pull the developer portal cli client [Developer Portal CLI](https://github.com/keboola/developer-portal-cli-v2).
 - Get the application's KBC repository url from the developer portal.
 - Tag the image as `master`.
 - Push the image to the repository.
 - Pull the job runner cli client [Syrup PHP CLI](https://github.com/keboola/syrup-php-cli).
-- Run the specified test job on KBC using the `/{component}/{config}/run/tag/{tag}` -- [Keboola Docker API].(http://docs.kebooladocker.apiary.io/#reference/run/create-a-job-with-image/run-job).
+- Run the specified test job on KBC using the `/{component}/{config}/run/tag/{tag}` -- [Keboola Docker API](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job-with-image/run-job).
 
-Now when you commit to the application repository, the docker image will be built and using a `master` tag, it will be tested in production KBC.
+Note that if you want to run multiple test jobs, simply repeat the command with the different configuration IDs
+that you would like to test.
+
+When you commit to the application repository, the docker image will be built and using a `master` tag, it will be tested in production KBC.
 It will not be deployed to production however! When you create a new tag (`x.y.z`) in the repository, the docker image will be build and tested using the
 `master` tag and if all succeeds, it will deploy the specified tag (`x.y.z`) into KBC --- a new version will be available in production.
+You can see the code in the [Sample repository](https://github.com/keboola/docs-deploy-example-tests).
 
 You can see both [`.travis.yml`](https://github.com/keboola/docker-demo-app/blob/master/.travis.yml) and
 the deploy script ([`deploy.sh`](https://github.com/keboola/docker-demo-app/blob/master/deploy.sh))

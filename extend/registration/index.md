@@ -7,7 +7,6 @@ redirect_from: /extend/registration/checklist/
 * TOC
 {:toc}
 
-## Introduction
 As described in the [architecture overview](/overview/), Keboola Connection (KBC) consists of many different components.
 Only those components that are registered in our **Component List** are generally available in KBC.
 The list is provided by our [Storage Component API](http://docs.keboola.apiary.io/#) in the dedicated [Components section](http://docs.keboola.apiary.io/#reference/components).
@@ -22,17 +21,17 @@ That being said, any KBC user can use any registered component, unless
 - the component itself limits where it can run (in what projects and for which users).
 
 ## Obtaining Account
-To register and application, you need to have an account in [Keboola Developer Portal](https://apps.keboola.com/). The Developer Portal is a completely separate application 
-which manages the list of components available in KBC. As it is a separate application, it uses 
+To register and application, you need to have an account in [Keboola Developer Portal](https://apps.keboola.com/). The Developer Portal is a completely separate application
+which manages the list of components available in KBC. As it is a separate application, it uses
 different credentials than KBC and you have to obtain an account.
 [Creating an account](https://apps.keboola.com/auth/create-account) is free and quick, it requires a working email (to which a confirmation email will be sent) and
 a mobile phone for a mandatory two-factor authorization. When you log in to the developer portal, you have to join a
 **vendor**. A vendor is an organization of developers. Every application in KBC has to belong to a vendor. If you work for no company, we
 suggest to create a vendor with your name. Even if you want to create a single component, it still has to belong to a vendor.
 
-If you join an existing vendor, an administrator of that vendor has to approve your request. If you 
+If you join an existing vendor, an administrator of that vendor has to approve your request. If you
 want to create a new vendor, a Keboola Administrator has to approve your request. When you create a new
-vendor you should provide us with a channel for receiving internal errors from your applications.
+vendor you will receive a development project in KBC and you should provide us with a channel for receiving internal errors from your applications.
 Basically anything supported by [Papertrail notifications](https://help.papertrailapp.com/kb/how-it-works/alerts#supported-services) is available, though e-mail or Slack channel is most commonly used.
 
 {: .image-popup}
@@ -48,33 +47,35 @@ To add an application, use the **Create App** button and fill in the application
 
 **Do not use the words 'extractor', 'writer' or 'application' in the application name.**
 When creating an application, you will obtain the **Component ID** (in the form `vendor.app-id`) -- e.g. `ujovlado.ex-wuzzzup`.
-Once you have the Component ID, you can create configurations for the application in KBC. You can also review the
+Once you have the Component ID, you can create configurations of the application in KBC. You can also review the
 application in KBC by visiting an URL:
 
     https://connection.keboola.com/admin/projects/{PROJECT_ID}/extractors/{COMPONENT_ID}
 
-Note however that the configuration will not be runnable until you configure the **Repository** section of the
+Note that the configuration will not be runnable until you configure the **Repository** section of the
 application.
 
 **Important: changes made in the Developer Portal take up to 5 minutes to propagate to all Keboola Connection instances in all regions.**
 
 ## Application Repository
-Application Repository is crucial part of the application registration, because it 
+Application Repository is crucial part of the application registration, because it
 actually defines what [Docker image](/extend/docker/tutorial/) will be used when running the application.
 We offer free hosting of your docker images in **[Amazon Container Registry (AWS ECR)](https://aws.amazon.com/ecr/)** under our own account.
 All repositories in AWS ECR are private. When registering your component, you will receive
-[credentials for deployment](/extend/docker/registration/deployment/) to the repository and you can either push the images manually or use an automated script to push images.
+[credentials for deployment](/extend/registration/deployment/) to the repository and you can either push the images
+manually or use an [automated script](/extend/registration/deployment/#step-2-----add-deploy-script) to push images.
 
 We also support the DockerHub and Quay.io registries, both public and private. However, we recommend that you use AWS ECR
-unless you require DockerHub or Quay for some reason (e.g. you required that the image is public).
+unless you require DockerHub or Quay for some reason (e.g. you require that the image is public).
 The main benefit of our AWS ECR is its reliability, as Quay.io and DockerHub are more prone to outages and are beyond our control.
 
 ### Generic Extractor
-For registering a component based on the [Generic Extractor](https://developers.keboola.com/extend/generic-extractor/), use the following repository:
+For registering a component based on the [Generic Extractor](/extend/generic-extractor/), use the following repository:
 
     147946154733.dkr.ecr.us-east-1.amazonaws.com/developer-portal-v2/ex-generic-v2
 
-For a list of available tags, see the [Generic Extractor Github repository](https://github.com/keboola/generic-extractor/releases) or [Generic Extractor Quay Repository](https://quay.io/repository/keboola/generic-extractor), both
+For a list of available tags, see the [Generic Extractor Github repository](https://github.com/keboola/generic-extractor/releases)
+or [Generic Extractor Quay Repository](https://quay.io/repository/keboola/generic-extractor), both
 of which contain the same tags as the above AWS ECR repository.
 It is also possible to use the `latest` tag, which points to the highest available tag. However we recommend that you
 register your component with a specific tag and update manually to avoid problems with breaking changes in future Generic
@@ -196,7 +197,7 @@ actually activate OAuth for your component, you have to [contact us on support](
 ![Authorization detail screenshot](/extend/registration/auth-1.png)
 
 ### genericTemplatesUI
-This flag is used to provide UI for components based on the [Generic Extractor](/extend/generic-extractor/). It allows the end-user to select a 
+This flag is used to provide UI for components based on the [Generic Extractor](/extend/generic-extractor/). It allows the end-user to select a
 [Generic Extractor template](/extend/generic-extractor/registration/).
 
 ### genericDockerUI-runtime
@@ -226,30 +227,29 @@ your application and publish the application or contact you with the required ch
 ### Application Review
 The goal of the application review is to maintain
 reasonable end-user experience and application reliability. Before applying for application registration, make sure that the same application does
-not exist yet. If a similar application exists (e.g. an extractor for the same service) exists, make sure that application description clearly states
+not exist yet. If a similar application exists (e.g. an extractor for the same service), make sure that application description clearly states
 the differences. During application review, the following best practices are checked:
 
 
 #### Application name and description
 
 - Name should not contain words like `extractor`, `application`, `writer`. (Good: *Cloudera Impala*, Bad: *Cloudera Extractor*)
-- Short description is more of a description of the service (which allow the user to find it) then a description of the component. (Good: *Native analytic database for Apache Hadoop.* Bad: *This extractor extracts data from Cloudera Impala*)
+- Short description is more of a description of the service (which allows the user to find it) then a description of the component. (Good: *Native analytic database for Apache Hadoop.* Bad: *This extractor extracts data from Cloudera Impala*)
 - Long description should provide additional information about the **data** extracted/written. What will the end-user obtain? What must the end-user provide? The long description should not contain instructions how to configure the component. This is because the long description is displayed before the end-user attempts to configure the component. However, if there are any special requirements (external approval, specific account setting), they should be stated. (Good: *This component allows you to extract currency exchange rates as published by European Central Bank (ECB) The exchange rates are available from base currency (either USD or EUR) to 30 destination currencies (AUD, BGN, BRL, CAD, CNY, CZK, EUR, GBP, HKD, HRK, HUF, CHF, IDR, ILS, INR, JPY, KRW, MXN, MYR, NOK, NZD, PHP, PLN, RON, RUB, SEK, SGD, THB, TRY, ZAR). Rates are available for all working days from 4th of January 1999 up to present.*)
 - Application Icon must be representative and reasonable quality. Make sure the icon license allows you to use it.
 - The application must correctly state the data flow --- UI flags `appInfo.dataOut` (typically writers), `appInfo.dataIn` (typically extractors).
-- Licensing information must be valid and Vendor description must be current.
+- Licensing information must be valid and vendor description must be current.
 
 
 #### Application Configuration
 
 - Use only the necessary flags (i.e. if there are no output files, don't use `genericDockerUI-fileOutput`).
-- For extractors, always use [Default bucket](/extend/common-interface/folders/#default-bucket).
+- For extractors, always use [Default bucket](/extend/common-interface/folders/#default-bucket) --- that means, don't use `genericDockerUI-tableOutput` flag.
+- Use [encryption](/overview/encryption/) to store sensitive values. No plain-text passwords!
 - Use [Configuration Schema](/extend/registration/configuration-schema/).
     - List all properties in the `required` field.
-    - Use [encryption](/overview/encryption/) to store sensitive values. No plain-text passwords!
-- Application Internals:
-    - Always use `propertyOrder` to explicitly define the order of fields in the form.
-    - Use short `title` without colon.
+    - Always use `propertyOrder` to explicitly define the order of the fields in the form.
+    - Use short `title` without a colon.
     - Use `description` to provide an explanatory sentence if needed.
     <br>Good: ![Good Schema](/extend/registration/schema-good.png)
     <br>Bad: ![Bad Schema](/extend/registration/schema-bad.png)
@@ -269,7 +269,7 @@ description of input tables
 
 #### Application Internals
 
-- Make sure that the amount consumed **memory does not depend** on the amount of processed data. Use streaming or processing in chunks to maintain a limited amount of consumed memory. If not possible, then state the expected usage in the **Application Limits**.
+- Make sure that the amount consumed **memory does not depend** on the amount of processed data. Use streaming or processing in chunks to maintain a limited amount of consumed memory. If not possible, state the expected usage in the **Application Limits**.
 - The application must distinguish between [User and Application errors](/extend/common-interface/environment/#return-values).
 - The application must validate its parameters, invalid configuration must result in an user error.
 - The events produced must be reasonable. Provide status messages if possible and with reasonable frequency. Avoid internal messages with no meaning to the end-user. Avoid flooding the event log or sending data files in the event log.
