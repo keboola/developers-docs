@@ -11,6 +11,7 @@ redirect_from:
 
 Docker Runner is a core [KBC component](/overview/#important-components) which provides an interface for
 running other KBC components. Every component in Keboola Connection is represented by a [Docker image](/extend/docker/tutorial/) in Keboola Connection.
+Running a component means creating and executing an [asynchronous job](/integrate/jobs/).
 
 Developing functionality in [Docker](https://www.docker.com/) allows you to focus only on the application logic; all communication
 with [Storage API](http://docs.keboola.apiary.io/#) will be handled by Docker Runner. You can encapsulate any application into an Docker image
@@ -71,7 +72,7 @@ has API calls to
 - run a [docker extension](/extend/docker/),
 - [encrypt values](/overview/encryption/),
 - [create a sandbox](/extend/common-interface/sandbox/),
-- run [component actions](/extend/common-interface/actions/), and 
+- run [component actions](/extend/common-interface/actions/), and
 - run a [docker extension](/extend/docker/) with a [specified docker image tag](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job-with-image/run-job), usable for [testing images](https://developers.keboola.com/extend/docker/tutorial/automated-build/#run-test-jobs-of-your-new-image-against-live-configurations).
 
 ## Configuration
