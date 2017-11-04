@@ -62,6 +62,10 @@ Notice that the JSON editor allows modification only to the [`config`](/extend/g
 section. Other sections, such as [`api`](/extend/generic-extractor/configuration/api/) or
 [`authorization.oauth_api`](/extend/generic-extractor/configuration/api/authentication/#oauth) may not be modified by the end-user.
 
+You can review existing templates in their [Github repository](https://github.com/keboola/kbc-ui-templates/tree/master/resources).
+If you feel confident, you can send a pull request with your templates, otherwise [contact us on support](mailto:support@keboola.com)
+to activate templates for your extractor.
+
 ## Example
 Let's say you have the following working API configuration
 (see [example [EX111]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/111-templates-example)):

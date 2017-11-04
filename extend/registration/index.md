@@ -10,10 +10,10 @@ redirect_from: /extend/registration/checklist/
 As described in the [architecture overview](/overview/), Keboola Connection (KBC) consists of many different components.
 Only those components that are registered in our **Component List** are generally available in KBC.
 The list is provided by our [Storage Component API](http://docs.keboola.apiary.io/#) in the dedicated [Components section](http://docs.keboola.apiary.io/#reference/components).
-The list of Components is manages using [Keboola Developer](https://apps.keboola.com/) portal.
+The list of Components is managed using the [Keboola Developer](https://apps.keboola.com/) portal.
 
 While a [Custom Science extension](/extend/custom-science/) requires registration only when offered to all KBC users,
-registering a [Docker extension](/extend/docker/) is mandatory at all times.
+registering a [Docker extension](/extend/docker/) is mandatory at all times (although the application may still be [hidden](#publishing-the-extension).
 
 That being said, any KBC user can use any registered component, unless
 
@@ -26,8 +26,8 @@ which manages the list of components available in KBC. As it is a separate appli
 different credentials than KBC and you have to obtain an account.
 [Creating an account](https://apps.keboola.com/auth/create-account) is free and quick, it requires a working email (to which a confirmation email will be sent) and
 a mobile phone for a mandatory two-factor authorization. When you log in to the developer portal, you have to join a
-**vendor**. A vendor is an organization of developers. Every application in KBC has to belong to a vendor. If you work for no company, we
-suggest to create a vendor with your name. Even if you want to create a single component, it still has to belong to a vendor.
+**vendor**. A vendor is an organization of developers. Every application in KBC has to belong to a vendor. If you don't work for a company, we
+suggest you create a vendor with your name. Even if you want to create a single component, it still has to belong to a vendor.
 
 If you join an existing vendor, an administrator of that vendor has to approve your request. If you
 want to create a new vendor, a Keboola Administrator has to approve your request. When you create a new
@@ -79,7 +79,8 @@ or [Generic Extractor Quay Repository](https://quay.io/repository/keboola/generi
 of which contain the same tags as the above AWS ECR repository.
 It is also possible to use the `latest` tag, which points to the highest available tag. However we recommend that you
 register your component with a specific tag and update manually to avoid problems with breaking changes in future Generic
-Extractor releases.
+Extractor releases. For more details on registering components based on Generic Extractor, see
+the [dedicated page](/extend/generic-extractor/registration/#submission).
 
 ### Custom Science
 When registering Custom science applications, one of [our images](https://developers.keboola.com/extend/docker/images/)
@@ -210,7 +211,7 @@ We recommend that you [contact us on support](mailto:support@keboola.com) when r
 {: .image-popup}
 ![Runtime configuration screenshot](/extend/registration/runtime-1.png)
 
-## Publish your Extension in KBC App Store
+## Publishing the Extension
 When you register an extension (be it either [Docker Extension](/extend/docker/) or [Custom Science](/extend/custom-science/) or
 [Generic Extractor](/extend/generic-extractor/)), it is *not published*. A non-published component
 can be used without limitations but it is not offered in the KBC UI. This means that it can only be
@@ -274,4 +275,4 @@ description of input tables
 - The application must validate its parameters, invalid configuration must result in an user error.
 - The events produced must be reasonable. Provide status messages if possible and with reasonable frequency. Avoid internal messages with no meaning to the end-user. Avoid flooding the event log or sending data files in the event log.
 - Set up [Continuos Deployment](/extend/registration/deployment/) so that you can keep the application up-date.
-- Use [semantic versioning](http://semver.org/) to mark and deploy versions of your application. Do not use `latest` image tag in production.
+- Use [semantic versioning](http://semver.org/) to mark and deploy versions of your application. Using other tags (e.g. `latest`, `master`) in production is not allowed.

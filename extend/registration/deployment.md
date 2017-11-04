@@ -73,7 +73,7 @@ repository and credentials to our AWS ECR registry. The `ecr:get-repository` com
 associated with the user in the variable `KBC_DEVELOPERPORTAL_USERNAME`. The `ecr:get-login` command returns a
 `docker login ...` command to authenticate to that repository.
 
-Make sure that the `deploy.sh` file line endings is set to *Unix (LF)*. Also make sure that the file is executable, i.e. by executing:
+Make sure that the `deploy.sh` file line endings is set to *Unix (LF)*. Also make sure that the file is executable, i.e. by executing
 `git update-index --chmod=+x deploy.sh`. Commit the deploy script to your application repository.
 
 ## Step 3 --- Add Deploy Automation
@@ -189,15 +189,15 @@ services:
 
 script:
   - docker build --tag=my-application .
-  # push master image to ECR
+  # push test image to ECR
   - docker pull quay.io/keboola/developer-portal-cli-v2:latest
   - export REPOSITORY=`docker run --rm -e KBC_DEVELOPERPORTAL_USERNAME -e KBC_DEVELOPERPORTAL_PASSWORD -e KBC_DEVELOPERPORTAL_URL quay.io/keboola/developer-portal-cli-v2:latest ecr:get-repository $KBC_DEVELOPERPORTAL_VENDOR $KBC_DEVELOPERPORTAL_APP`
-  - docker tag $KBC_APP_REPOSITORY:latest $REPOSITORY:master
+  - docker tag $KBC_APP_REPOSITORY:latest $REPOSITORY:test
   - eval $(docker run --rm -e KBC_DEVELOPERPORTAL_USERNAME -e KBC_DEVELOPERPORTAL_PASSWORD -e KBC_DEVELOPERPORTAL_URL quay.io/keboola/developer-portal-cli-v2:latest ecr:get-login $KBC_DEVELOPERPORTAL_VENDOR $KBC_DEVELOPERPORTAL_APP)
-  - docker push $REPOSITORY:master
-  # Run live test job on new master image
+  - docker push $REPOSITORY:test
+  # Run live test job on new test image
   - docker pull quay.io/keboola/syrup-cli:latest
-  - docker run --rm -e KBC_STORAGE_TOKEN quay.io/keboola/syrup-cli:latest run-job $KBC_DEVELOPERPORTAL_APP $KBC_APP_TEST_CONFIG master
+  - docker run --rm -e KBC_STORAGE_TOKEN quay.io/keboola/syrup-cli:latest run-job $KBC_DEVELOPERPORTAL_APP $KBC_APP_TEST_CONFIG test
 
 deploy:
   provider: script
@@ -212,7 +212,7 @@ The commands above do as follows:
 - Build the application image and tag it `my-application`.
 - Pull the developer portal cli client [Developer Portal CLI](https://github.com/keboola/developer-portal-cli-v2).
 - Get the application's KBC repository url from the developer portal.
-- Tag the image as `master`.
+- Tag the image as `test`.
 - Push the image to the repository.
 - Pull the job runner cli client [Syrup PHP CLI](https://github.com/keboola/syrup-php-cli).
 - Run the specified test job on KBC using the `/{component}/{config}/run/tag/{tag}` -- [Keboola Docker API](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job-with-image/run-job).
@@ -220,9 +220,9 @@ The commands above do as follows:
 Note that if you want to run multiple test jobs, simply repeat the command with the different configuration IDs
 that you would like to test.
 
-When you commit to the application repository, the docker image will be built and using a `master` tag, it will be tested in production KBC.
+When you commit to the application repository, the docker image will be built and using a `test` tag, it will be tested in production KBC.
 It will not be deployed to production however! When you create a new tag (`x.y.z`) in the repository, the docker image will be build and tested using the
-`master` tag and if all succeeds, it will deploy the specified tag (`x.y.z`) into KBC --- a new version will be available in production.
+`test` tag and if all succeeds, it will deploy the specified tag (`x.y.z`) into KBC --- a new version will be available in production.
 You can see the code in the [Sample repository](https://github.com/keboola/docs-deploy-example-tests).
 
 You can see both [`.travis.yml`](https://github.com/keboola/docker-demo-app/blob/master/.travis.yml) and

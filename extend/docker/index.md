@@ -13,7 +13,7 @@ CSV files in [designated directories](/extend/common-interface/).
 Advantages:
 
 * Customizable UI (input/output mapping)
-* Configuration using [JSON Schema editor](/extend/registration/configuration-schema/), or your own UI can be used
+* Configuration using [JSON Schema editor](/extend/registration/configuration-schema/)
 * Branding possible; Documentation and extended description can be provided
 * Arbitrary application environment; can be fully private
 * Automatically offered to all KBC users
