@@ -7,8 +7,7 @@ permalink: /extend/docker/tutorial/howto/
 {:toc}
 
 The following are the basic steps for developing KBC Docker Images. There is no need to know everything about the Docker stack since this is a very limited set of Docker features.
-The official [Windows](https://docs.docker.com/docker-for-windows/install/),
-[Mac OS X](https://docs.docker.com/docker-for-mac/install/), and other [Tutorials](https://docs.docker.com/engine/installation/) are not being replaced here.
+The official [Tutorial](https://docs.docker.com/get-started/) is not being replaced here.
 Before you start, make sure you have [Docker installed](/extend/docker/tutorial/setup/).
 
 The code discussed below is available in our [sample repository](https://github.com/keboola/docs-docker-example-image).
@@ -39,12 +38,11 @@ Note that in Dockerfile, each instruction is executed in its own shell. Therefor
 Create an empty folder, and then create a Dockerfile with the following contents inside the folder.
 
 {% highlight dockerfile %}
-FROM quay.io/keboola/base
+FROM alpine
 ENTRYPOINT ping -c 2 example.com
 {% endhighlight %}
 
-The `FROM` instruction means we start with our [base image](https://quay.io/repository/keboola/base)
-which, in turn, is based on the [CentOS](https://hub.docker.com/_/centos/) image.
+The `FROM` instruction means we start with the [Alpine Linux image](https://hub.docker.com/_/alpine/).
 The second instruction means that when you run the image, it will ping _example.com_ twice and exit.
 When you run
 
@@ -52,56 +50,50 @@ When you run
 
 you should see an output like this:
 
-    Sending build context to Docker daemon 3.584 kB
-    Step 1 : FROM quay.io/keboola/base
-    latest: Pulling from keboola/base
-    a3ed95caeb02: Already exists
-    3286cdf780ef: Already exists
-    ecfdc5e942e9: Already exists
-    Digest: sha256:cbd64500481e64bff852f8a34ab7fdcd35befb03afabde29adb6cf33643f8e2d
-    Status: Downloaded newer image for quay.io/keboola/base:latest
-    ---> 4ed770742c49
-    Step 2 : ENTRYPOINT ping -c 2 example.com
-    ---> Running in 2bb58014055f
-    ---> b818507de866
-    Removing intermediate container 2bb58014055f
-    Successfully built b818507de866
+    Sending build context to Docker daemon  2.048kB
+    Step 1/2 : FROM alpine
+    ---> 37eec16f1872
+    Step 2/2 : ENTRYPOINT ping -c 2 example.com
+    ---> Running in 8339a4e2e1c2
+    ---> ad16195c696d
+    Removing intermediate container 8339a4e2e1c2
+    Successfully built ad16195c696d
 
-The `b818507de866` is a volatile image hash which is used to refer to the image and can be abbreviated to first three
-characters (`b81` in this case).
+The `ad16195c696d` is a volatile image hash which is used to refer to the image and can be abbreviated to first three
+characters (`ad1` in this case).
 Additionally, you can name the image by passing the `--tag` option, e.g.
 
     docker build --tag=my-image .
 
-After an image has been built, run it using `docker run -i b81` or
+After an image has been built, run it using `docker run ad1` or
 
-    docker run -i my-image .
+    docker run my-image .
 
-The switch _-i_ is important for receiving an interactive output. You should see an output like this:
+You should see an output like this:
 
-    docker run -i my-image
-    PING example.com (93.184.216.34) 56(84) bytes of data.
-    64 bytes from 93.184.216.34: icmp_seq=1 ttl=50 time=121 ms
-    64 bytes from 93.184.216.34: icmp_seq=2 ttl=50 time=121 ms
+    docker run my-image .
+    PING example.com (93.184.216.34): 56 data bytes
+    64 bytes from 93.184.216.34: seq=0 ttl=37 time=137.057 ms
+    64 bytes from 93.184.216.34: seq=1 ttl=37 time=145.279 ms
 
     --- example.com ping statistics ---
-    2 packets transmitted, 2 received, 0% packet loss, time 1000ms
-    rtt min/avg/max/mdev = 121.615/121.721/121.828/0.364 ms
+    2 packets transmitted, 2 packets received, 0% packet loss
+    round-trip min/avg/max = 137.057/141.168/145.279 ms
 
 ### Inspecting the Image
 When building your own image, the ability to run arbitrary commands in the image is very useful. Override the entrypoint using the `--entrypoint`
-option (which means that your application will not execute, and you will have to run it manually). The `-t`
-option opens **i**nteractive **t**erminal:
+option (which means that your application will not execute, and you will have to run it manually). The `-i` and `-t`
+options opens **i**nteractive **t**erminal:
 
-    docker run -i -t --entrypoint=/bin/bash my-image
+    docker run -i -t --entrypoint=/bin/sh my-image
 
 The option `--entrypoint` overrides the `ENTRYPOINT` specified in the `Dockerfile`. This ensures that a
-bash shell is run instead of your application. You then have to run the `ping` command, previously defined in the entrypoint, manually.
+sh shell is run instead of your application. You then have to run the `ping` command, previously defined in the entrypoint, manually.
 
 It is also possible to inspect a running container. Assume you have the following `Dockerfile`:
 
 {% highlight dockerfile %}
-FROM quay.io/keboola/base
+FROM alpine
 ENTRYPOINT ping example.com
 {% endhighlight %}
 
@@ -119,8 +111,8 @@ Open a new command line window and run:
 
 This will show you a list of running containers - something like:
 
-    CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS               NAMES
-    dafd708d0d7e        my-image            "/bin/sh -c 'ping exa"   58 seconds ago      Up 57 seconds                           jolly_rosalind
+    CONTAINER ID  IMAGE     COMMAND                  CREATED          STATUS         NAMES
+    f7def769a470  my-image  "/bin/sh -c 'ping ..."   16 seconds ago   Up 13 seconds  sharp_ptolemy
 
 The important part is the *container ID*. You can then run an arbitrary command in the running container with
 the following command:
@@ -129,38 +121,40 @@ the following command:
 
 For example:
 
-    docker exec -i -t daf /bin/bash
+    docker exec -i -t f7d /bin/sh
 
-will execute **i**nteractive **t**erminal with the bash shell in the container *daf* (container ID can
+will execute **i**nteractive **t**erminal with the shell in the container *daf* (container ID can
 be shortened to first 3 letters). Verify that `ping` is still running by:
 
     ps -A
 
 which will give you something like:
 
-    PID     TTY     TIME        CMD
-    1 ?             00:00:01    ping
-    25 ?            00:00:00    bash
-    41 ?            00:00:00    ps
-
+    PID  USER   TIME   COMMAND
+    1    root   0:00   /bin/sh -c ping example.com .
+    5    root   0:00   ping example.com
+    11   root   0:00   /bin/sh
+    15   root   0:00   /bin/sh
+    19   root   0:00   ps -A
 
 ### Installing Things
 Chances are that your application requires something special. You can install whatever you need
 using standard commands. You can create Dockerfile:
 
 {% highlight dockerfile %}
-FROM quay.io/keboola/base
-RUN yum -y install php-cli
+FROM debian
+RUN apt-get update
+RUN apt-get install -y php-cli
 ENTRYPOINT php -r "echo 'Hello world from PHP';"
 {% endhighlight %}
 
-The `RUN` command will install the specified `php-cli` package. Build the image with:
+The `RUN` commands will install the specified `php-cli` package. Build the image with:
 
     docker build --tag=my-image .
 
 and then run the image (and create a new container):
 
-    docker run -i my-image
+    docker run my-image
 
 You should see the following output:
 
@@ -181,28 +175,28 @@ echo "Hello world from PHP file";
 Then change the Dockerfile to:
 
 {% highlight dockerfile %}
-FROM quay.io/keboola/base
-RUN yum -y install php-cli
-COPY . /home/
-ENTRYPOINT php /home/test.php
+FROM debian
+RUN apt-get update
+RUN apt-get install -y php-cli
+ENTRYPOINT php -r "echo 'Hello world from PHP';"
+COPY . /code/
+ENTRYPOINT php /code/test.php
 {% endhighlight %}
 
-The `COPY` command copies the entire contents of the folder with Dockerfile into the `/home/`
+The `COPY` command copies the entire contents of the folder with Dockerfile into the `/code/`
 folder inside the image. The `ENTRYPOINT` command then simply executes the file when the image
 is run. When you `docker build` and `docker run` the image, you will receive:
 
     Hello world from PHP file
 
-
 ## Dockerfile Gotchas
-
 - Make absolutely sure that the *Dockerfile* script requires no interaction.
 - Each Dockerfile instruction runs in its own shell and there is no state maintained between them.
 This means that, for instance, having `RUN export foo=bar` makes no sense. Use `ENV foo=bar` instruction
 to create environment variables.
-- When you look at the [existing Dockerfiles](https://github.com/keboola/docker-base-php70/blob/master/Dockerfile),
+- When you look at the [existing Dockerfiles](https://github.com/keboola/docker-custom-python/blob/master/Dockerfile),
 you will realize that commands are squashed together
-to a [single instruction](https://github.com/keboola/docker-base-php70/blob/master/Dockerfile#L9). This is
+to a [single instruction](https://github.com/keboola/docker-custom-python/blob/master/Dockerfile#L6). This is
 because each instruction creates a *layer* and there is a limited number of layers (layers are counted for the base
 images too). However, this approach makes debugging more complicated. So, you better start with having
 
@@ -222,10 +216,10 @@ RUN instruction1 \
 rebuilt by a Docker registry.
 - Be careful about storing private things in the image (like credentials or keys); they will remain in
 the image unless you delete them.
-- Be sure to delete temporary files, as they bloat the image. That's why we add `yum clean all` everywhere.
+- Be sure to delete temporary files, as they bloat the image. That's why we add `rm -rf /var/lib/apt/lists/*` everywhere.
 - Consult
 the [Dockerfile Best Practices](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/)
 for more detailed information.
 
 Now that you are able to create dockerized applications, get yourself familiar with the
-[Docker registry](/extend/docker/tutorial/automated-build/).
+[Docker registry](/extend/docker/tutorial/registry/).

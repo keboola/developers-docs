@@ -43,14 +43,14 @@ Custom Extensions can be used as:
 - **Writers** -- pushing data into new systems and consumption methods. They do not generate any KBC tables.
 - **Processors** -- adjusting the inputs or outputs of other components. They have to be run together with any of the above extensions.
 
-All extensions run inside a [Docker component](/extend/docker-runner/) which takes care of their
+All extensions are run using a [Docker component](/extend/docker-runner/) which takes care of their
 *authentication, starting, stopping, isolation, and reading data from and writing it to KBC Storage*.
 They must adhere to a [common interface](/extend/common-interface/).
 
 There are two types of Custom extensions differing in the level of integration and implementation flexibility:
 
-1. [**Custom Science extension**](/extend/custom-science/) - easier to implement, less features available
-2. [**Docker extension**](/extend/docker/) - maximum implementation flexibility
+1. [**Custom Science extension**](/extend/custom-science/) --- easier to implement, less features available
+2. [**Docker extension**](/extend/docker/) --- maximum implementation flexibility
 
 ## Comparison of Extensions
 The following table provides an overview of the **main characteristics** of KBC extensions:

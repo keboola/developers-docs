@@ -37,7 +37,7 @@ running them regularly at scheduled times
 
 ## Component Common Features
 All components share some common behaviour such as [running jobs](/overview/jobs/), *Component Configuration*, or
-*Components API*, which allows each component to be run in [Orchestrations](https://help.keboola.com/automate/).
+*Components API*, which allows each component to be run in [Orchestrations](https://help.keboola.com/orchestrator/).
 This means that once worked your way through one component, you have seen them all.
 **Most of our components are open source**. If you are interested in their code, have a look at
 [our repositories](/overview/repositories/).

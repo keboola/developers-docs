@@ -82,4 +82,14 @@ Extensions executed by Docker Runner store their configurations in
 
 When creating the configuration, use
 [this JSON schema](https://github.com/keboola/docker-bundle/blob/master/Resources/schemas/configuration.json)
-to validate the configuration before storing it.
+to validate the configuration before storing it. The configuration contains the following nodes:
+
+- `parameters` --- An arbitrary object passed to the dockerzied application itself.
+- `storage` --- Configuration of [input and output mapping](https://developers.keboola.com/extend/common-interface/folders/). Specific options correspond to the options of the 
+[Unload table](http://docs.keboola.apiary.io/#reference/tables/unload-data-asynchronously) and
+[Load table](http://docs.keboola.apiary.io/#reference/tables/load-data-asynchronously) API calls.
+- `runtime` --- Configuration for running [Custom Science](https://developers.keboola.com/extend/custom-science/) extensions.
+- `processors` --- Configuration of [Processors](https://developers.keboola.com/extend/docker-runner/processors/)
+- `authorization` --- OAuth authorization [injected to the configuration](https://developers.keboola.com/extend/common-interface/oauth/). Not stored in Component Configuration.
+- `image_parameters` --- An arbitrary object passed from the [registered component](https://developers.keboola.com/extend/registration/). Not stored in Component Configuration.
+- `action` --- An [Action](https://developers.keboola.com/extend/common-interface/actions/) being executed. Not stored in Component Configuration.

@@ -39,9 +39,6 @@ items:
         title: Docker Extensions
         items:
 
-          - url: /extend/docker/quick-start/
-            title: Quick Start
-
           - url: /extend/docker/tutorial/
             title: About Docker
             items:
@@ -52,8 +49,11 @@ items:
               - url: /extend/docker/tutorial/howto/
                 title: Creating Dockerized App
 
-              - url: /extend/docker/tutorial/automated-build/
-                title: Automated Build
+              - url: /extend/docker/tutorial/registry/
+                title: Docker Registry
+
+          - url: /extend/docker/quick-start/
+            title: Quick Start
 
           - url: /extend/docker/running/
             title: Running Images
@@ -206,8 +206,8 @@ items:
         title: Registration
         items:
 
-          - url: /extend/registration/checklist/
-            title: Submission Checklist
+          - url: /extend/registration/deployment/
+            title: Deployment
 
           - url: /extend/registration/configuration-schema/
             title: Configuration Schema
