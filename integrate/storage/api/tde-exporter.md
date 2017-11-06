@@ -25,18 +25,12 @@ To run the TDE exporter with a stored configuration, first
 [create the configuration](http://docs.keboola.apiary.io/#reference/component-configurations/component-configs/create-config).
 See [below](#custom-configuration) for the required configuration contents.
 This call will give you the ID of the newly created configuration (for instance, `new-configuration-id`).
-Then make an HTTP POST request to `https://syrup.keboola.com/docker/tde-exporter/run` with the following request body:
+Then [create a job](/integrate/jobs/) with the specified configuration:
 
 {% highlight json %}
 {
     "config": "new-configuration-id"
 }
-{% endhighlight %}
-
-Using [cURL](/overview/api/#curl), do this:
-
-{% highlight bash %}
-curl --request POST --header "X-StorageAPI-Token: storage-token" --data "{\"config\": \"odinuv-test-90\"}" https://syrup.keboola.com/docker/tde-exporter/run
 {% endhighlight %}
 
 ### Custom Configuration
