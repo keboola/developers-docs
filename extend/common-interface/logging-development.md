@@ -6,16 +6,16 @@ permalink: /extend/common-interface/logging/development/
 * TOC
 {:toc}
 
-When developing an application which is using GELF logging, you need the GELF server to listen to its messages. 
+When developing an application which is using GELF logging, you need the GELF server to listen to its messages.
 You can use the following two servers:
 
 - Fully fledged official Graylog server - see the [installation guide](http://docs.graylog.org/en/2.0/pages/installation.html); or
 - [Mock server](https://github.com/keboola/docs-example-logging-mock-server), based on [PHP server](https://github.com/keboola/gelf-server) or [Node JS Server](https://github.com/wavded/graygelf), for example.
 
 ## Using Mock Server with Docker Compose
-A convenient way to use the [mock server](https://github.com/keboola/docs-example-logging-mock-server) is using [Docker Compose](https://docs.docker.com/compose/). 
-That way you can set both your docker image and the log server to run together and set the networking stuff automatically. 
-Each of our sample repositories mentioned above contains a `docker-compose.yml` sample which you can use to derive your own. 
+A convenient way to use the [mock server](https://github.com/keboola/docs-example-logging-mock-server) is using [Docker Compose](https://docs.docker.com/compose/).
+That way you can set both your docker image and the log server to run together and set the networking stuff automatically.
+Each of our sample repositories mentioned above contains a `docker-compose.yml` sample which you can use to derive your own.
 To give an example, the [sample PHP client](https://github.com/keboola/docs-example-logging-php) contains the following
 [`docker-compose.yml`](https://github.com/keboola/docs-example-logging-php/blob/master/docker-compose.yml):
 
@@ -70,8 +70,8 @@ and terminate, which is indicated by the message `docsexampleloggingphp_client_1
 just prints every received message to the standard output, so you can see that it indeed received the messages from the client.
 The server will keep running until you press CTRL+C and terminate it.
 
-The above setup can be modified simply by changing the `image` of the `client` in the docker-compose.yml so that your own image is used. 
-Note that the port 12202 is hardcoded in the mock server and should not be changed in `docker-compose.yml`.
+The above setup can be modified simply by changing the `image` of the `client` in the docker-compose.yml so that your own image is used.
+Note that the port 12202 in the mock server may be changed by setting `PORT` environment variable in `docker-compose.yml`.
 
 ## Using Mock Server Manually
 If you want to set things manually, start the [mock server](https://github.com/keboola/docs-example-logging-mock-server) by the following command:

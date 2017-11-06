@@ -86,86 +86,66 @@ The highlighted [Docker Runner](/extend/docker-runner) part is described in a [s
 You need to know the *component Id* and *configuration Id* to create a job. To obtain a list of all components available
 in the project, and their configuration, you can use the
 [corresponding API call](http://docs.keboola.apiary.io/#reference/component-configurations/list-components/get-components).
-It is a GET request to `https://connection.keboola.com/v2/storage/components`, containing your Storage Token in the
-`X-StorageAPI-Token` header.
-A sample of the response is below:
+See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#5dca0c54-a974-1601-47f4-14c2ba9b56fc).
+A snippet of the response is below:
 
 {% highlight json %}
-  ...
+[
   {
-    "id": "keboola.ex-db-mysql",
+    "id": "keboola.ex-db-snowflake",
     "type": "extractor",
-    "name": "MySQL",
-    "description": "World's most popular open source database",
-    "longDescription": "Extracts data from [MySQL](https://www.mysql.com/) Database.",
-    "hasUI": false,
-    "hasRun": false,
-    "ico32": "https://d3iz2gfan5zufq.cloudfront.net/images/cloud-services/wr-db-mysql-32-1.png",
-    "ico64": "https://d3iz2gfan5zufq.cloudfront.net/images/cloud-services/wr-db-mysql-64-1.png",
-    "data": {
-      "definition": {
-        "type": "quayio",
-        "uri": "keboola/db-extractor-mysql",
-        "tag": "0.0.13"
-      },
-      "synchronous_actions": [
-        "testConnection"
-      ]
-    },
-    "flags": [
-      "encrypt",
-      "genericDockerUI"
-    ],
-    "configurationSchema": {},
-    "emptyConfiguration": {},
-    "configurationDescription": null,
-    "uri": "https://syrup.keboola.com/docker/keboola.ex-db-mysql",
-    "documentationUrl": "http://wiki.keboola.com/home/keboola-connection/user-space/extractors/next-generation-generic-extractor-tutorial/ex-db-mysql",
+    "name": "Snowflake",
+    "description": "Cloud-Native Elastic Data Warehouse Service",
+    "uri": "https://syrup.keboola.com/docker/keboola.ex-db-snowflake",
+    "documentationUrl": "https://github.com/keboola/db-extractor-snowflake/blob/master/README.md",
     "configurations": [
       {
-        "id": "sampledatabase",
-        "name": "sample-database",
+        "id": "328864809",
+        "name": "Sample database",
         "description": "",
-        "created": "2016-05-27T23:26:53+0200",
+        "created": "2017-11-06T13:28:48+0100",
         "creatorToken": {
-          "id": 53044,
+          "id": 27865,
           "description": "ondrej.popelka@keboola.com"
         },
-        "version": 2,
-        "changeDescription": ""
+        "version": 3,
+        "changeDescription": "Create query account",
+        "isDeleted": false,
+        "currentVersion": {
+          "created": "2017-11-06T13:30:12+0100",
+          "creatorToken": {
+            "id": 27865,
+            "description": "ondrej.popelka@keboola.com"
+          },
+          "changeDescription": "Create query account"
+        }
       }
     ]
-  },
-  ...
+  }
+]
 {% endhighlight %}
 
 From there, the important part is the `id` field and `configurations.id` field. For instance, in the
-above, there is a database extractor with the `id` `keboola.ex-db-mysql` and a
-configuration with the id `sampledatabase`.
+above, there is a database extractor with the `id` `keboola.ex-db-snowflake` and a
+configuration with the id `328864809`.
 
-To [create a job](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job/run-job)
-running that configuration, call `POST` to the URL `https://syrup.keboola.com/docker/keboola.ex-db-mysql/run`
-with the `X-StorageApi-Token` header containing your Storage token and with the request body:
+Then use the [create a job](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job/run-job)
+API call and pass the configuration ID in request body:
 
 {% highlight json %}
 {
-    "config": "sampledatabase"
+    "config": "328864809"
 }
 {% endhighlight %}
 
-With [cURL](/overview/api/#curl), you do it by:
-
-{% highlight bash %}
-curl --request POST --header "X-StorageAPI-Token: storage-token" --data "{\"config\": \"odinuv-test-90\"}" "https://syrup.keboola.com/docker/keboola.ex-db-mysql/run"
-{% endhighlight %}
-
+See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#8a7302c6-cb27-f39d-656c-b0f1d99bb421).
 When a job is created, you will obtain a response similar to this:
 
 {% highlight json %}
 {
-  "id": "189164612",
-  "url": "https://syrup.keboola.com/queue/job/189164612",
-  "status": "waiting"
+    "id": "328865608",
+    "url": "https://syrup.keboola.com/queue/job/328865608",
+    "status": "waiting"
 }
 {% endhighlight %}
 
@@ -175,46 +155,53 @@ From the above response, the most important part is `url`, which gives you the U
 
 ## Job Polling
 If you want to get the actual job result, poll the [Job API](http://docs.syrupqueue.apiary.io/#reference/jobs/job/view-job-detail)
-for the current state of the job. For example, to poll for the above job, send a `GET` request to
-`https://syrup.keboola.com/queue/job/189164612` with the `X-StorageApi-Token` header containing your Storage token:
-
-{% highlight bash %}
-curl --header "X-StorageAPI-Token: storage-token" https://syrup.keboola.com/queue/job/189164612
-{% endhighlight %}
+for the current state of the job. See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#00d466ec-a65e-ae88-1785-67efcafd6f8d).
 
 You will receive a response similar to this:
 
 {% highlight json %}
 {
-  "id": 189164918,
-  "runId": "189164919",
-  "lockName": "docker-1134-keboola.ex-db-mysql-sampledatabase",
+  "id": 328865608,
+  "runId": "328865609",
+  "lockName": "docker-572-keboola.ex-db-snowflake-328864809",
   "project": {
-    "id": 1134,
-    "name": "Tutorial"
+    "id": 572,
+    "name": "Testing"
   },
   "token": {
-    "id": "53044",
+    "id": "27865",
     "description": "ondrej.popelka@keboola.com"
   },
   "component": "docker",
   "command": "run",
   "params": {
-    "config": "sampledatabase",
-    "component": "keboola.ex-db-mysql",
+    "config": 328864809,
+    "component": "keboola.ex-db-snowflake",
     "mode": "run"
   },
-  "result": {},
-  "status": "processing",
-  "process": {
-    "host": "kbc-vpc-syrup-docker-worker-i-f14fe56c",
-    "pid": 17116
+  "result": {
+    "message": "Component processing finished.",
+    "images": [
+      [
+        {
+          "id": "147946154733.dkr.ecr.us-east-1.amazonaws.com/developer-portal-v2/keboola.ex-db-snowflake:1.2.5",
+          "digests": [
+            "147946154733.dkr.ecr.us-east-1.amazonaws.com/developer-portal-v2/keboola.ex-db-snowflake@sha256:84aaf9ed2b233da38d47f6f53a386ae53f0d12dbb8c6046494923c0a173c25af"
+          ]
+        }
+      ]
+    ]
   },
-  "createdTime": "2016-05-29T09:39:28+02:00",
-  "startTime": "2016-05-29T09:39:29+02:00",
-  "endTime": null,
-  "durationSeconds": null,
-  "waitSeconds": null,
+  "status": "success",
+  "process": {
+    "host": "kbc-us-east-1-syrup-docker-i-0a8853007e0a668e1",
+    "pid": 69880
+  },
+  "createdTime": "2017-11-06T13:35:41+01:00",
+  "startTime": "2017-11-06T13:35:41+01:00",
+  "endTime": "2017-11-06T13:36:23+01:00",
+  "durationSeconds": 42,
+  "waitSeconds": 0,
   "nestingLevel": 0,
   "encrypted": true,
   "error": null,
@@ -223,12 +210,13 @@ You will receive a response similar to this:
     "id": null,
     "description": null
   },
-  "_index": "prod_syrup_docker_2015_2",
+  "usage": [],
+  "_index": "prod_syrup_docker_2017_3",
   "_type": "jobs",
-  "isFinished": false
+  "isFinished": true
 }
 {% endhighlight %}
 
 From the above response, the most important part is the `status` field (`processing`, in this case)
 at this time. To obtain the Job result, send the above API call once the job status changes
-to one of the finished states (or use the `isFinished` field).
+to one of the finished states or until `isFinished` is true.
