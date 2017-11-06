@@ -23,29 +23,38 @@ Then they will archive the whole `/data/` folder and upload it to your KBC proje
 None of these API calls will write any tables or files other than the archive,
 so they are very safe to run.
 
+The [Sandbox](http://docs.kebooladocker.apiary.io/#reference/sandbox) API call is useful for obtaining a
+sample environment configuration when starting with development of a new Docker Extension or
+Custom Science extension.
+
+The [Input](http://docs.kebooladocker.apiary.io/#reference/input) API call is useful for obtaining an
+environment configuration for a registered Docker extension (without encryption) or Transformations.
+
+The [Dry run](http://docs.kebooladocker.apiary.io/#reference/dry-run) API call is the last step.
+It will do everything except the output mapping and is therefore useful for debugging an existing application
+in production without modifying files and tables in a KBC project.
+
 The body structure of the first two API calls is the same.
 Before you start, you need a [KBC project](/#development-project). We recommend that you use [Apiary or Postman](/overview/api/) to call the API.
-
+A [collection of examples](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#91a2cf62-d7b1-b75f-73ff-406f2afa92a9) of the
+Sandbox API calls is available in Postman Docs.
 
 ## Create Sandbox API Call
 
 ### Prepare
 [Create a table](https://help.keboola.com/tutorial/load/) in KBC Storage which contains a column named `number`.
 You can use the [sample table](/extend/source.csv). In the following example, the
-table is stored in the `in.c-main` bucket and the table name is `test`. The table ID is therefore
-`in.c-main.test`.
+table is stored in the `in.c-main` bucket and the table name is `sample`. The table ID is therefore
+`in.c-main.sample`.
 
 {: .image-popup}
 ![Storage Screenshot](/extend/common-interface/sandbox-data.png)
 
-You also need your Storage API token which can be found by clicking the icon at the top right corner.
+You also need a [Storage API token](https://help.keboola.com/storage/tokens/).
 
-
-### Create the API Request
-
-Get a [collection of sample](/overview/api/) requests in Postman
-here: [![Run in Postman](https://run.pstmn.io/button.png)](https://app.getpostman.com/run-collection/7dc2e4b41225738f5411)
-There is a *Sandbox introduction* request with the following JSON contents in its body:
+### Send the API Request
+In the [collection of sample requests](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#91a2cf62-d7b1-b75f-73ff-406f2afa92a9),
+there is an *Introduction* example with the the following JSON in its body:
 
 {% highlight json %}
 {
@@ -54,7 +63,7 @@ There is a *Sandbox introduction* request with the following JSON contents in it
             "input": {
                 "tables": [
                     {
-                        "source": "in.c-main.test",
+                        "source": "in.c-main.sample",
                         "destination": "source.csv"
                     }
                 ]
@@ -75,12 +84,9 @@ For registered components with a UI, the entire `configData.storage` node is gen
 The node `parameters` contains arbitrary parameters which are passed to the application.
 
 The URL of the request is `https://syrup.keboola.com/docker/sandbox`. The request body is in JSON.
+Enter your Storage API token into *X-StorageAPI-Token* header and run the request.
 
-Enter your Storage API token into *Headers* - *X-StorageAPI-Token*.
-
-
-### Run the API Request
-
+### Getting the Result
 When running the request with valid parameters, you should receive a response similar to this:
 
 {% highlight json %}
@@ -91,16 +97,15 @@ When running the request with valid parameters, you should receive a response si
 }
 {% endhighlight %}
 
-This means an asynchronous job which will prepare the sandbox has been created.
+This means an [asynchronous job](/integrate/jobs/) which will prepare the sandbox has been created.
 If curious, view the job progress under *Jobs* in KBC:
 
 {: .image-popup}
 ![Job progress screenshot](/extend/common-interface/sandbox-progress.png)
 
-The job will be usually executed very quickly, so you might as well go straight to *Storage* - *File Uploads* in
+The job will be usually executed very quickly, so you might as well go straight to *Storage* --- *Files* in
 KBC. There you will find a `data.zip` file with a sample data folder. You can now use this folder with your
 [Docker extension](/extend/docker/) or [Custom Science](/extend/custom-science/)
-
 
 ## Input Data API Call
 The input API call differs in that it *must* be used with an existing component. It requires *componentId* obtained
@@ -118,34 +123,33 @@ Where you replace `{projectId}` with the Id of the project in KBC (you can find 
 create the configuration. The equivalent to what we have used in the [Sandbox above](#create-sandbox-api-call) call would be
 
 {: .image-popup}
-![Configuration screnshot](/extend/common-interface/input-configuration.png)
+![Configuration screenshot](/extend/common-interface/input-configuration.png)
 
 ### Run the API Request
-When you created the configuration, it was assigned a configuration Id --- `sample-configuration-27` --- in our example.
+When you created the configuration, it was assigned a configuration Id --- `328831433` --- in our example.
 Use this Id instead of manually crafting the request body.
 
-You can see an *Input data Introduction* sample request in [our collection of requests](/overview/api/) in Postman
-: [![Run in Postman](https://run.pstmn.io/button.png)](https://app.getpostman.com/run-collection/7dc2e4b41225738f5411).
+You can see an *Introduction* sample request in [our collection of requests](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#4c9c7c9f-6cd6-58e7-27e3-aef62538e0ba).
 
 The following is the request body:
 
 {% highlight json %}
 {
-    "config": "sample-configuration-27"
+    "config": "328831433"
 }
 {% endhighlight %}
 
-Where you need to replace `sample-configuration-27` with your own configuration ID. The request URL is
+Where you need to replace `328831433` with your own configuration ID. The request URL is
 
     https://syrup.keboola.com/docker/keboola.docs-docker-example-parameters/input/
 
 Where `keboola.docs-docker-example-parameters` is the component ID (you can replace that with your own component if you like).
-Again, do not forget to enter your Storage API token into *Headers* - *X-StorageAPI-Token*.
+Again, do not forget to enter your Storage API token into *X-StorageAPI-Token* header.
 
 As with the [Sandbox call](#create-sandbox-api-call), running the API call will create a job which will execute and produce a
-`data.zip` file in *Storage* - *File Uploads*.
+`data.zip` file in *Storage* --- *Files*.
 
-**Important**: If you actually want to *run* the above *sample-configuration-27* configuration, you also need
+**Important**: If you actually want to *run* the above *328831433* configuration, you also need
 to set the output mapping from `destination.csv` to some table.
 
 ## Summary

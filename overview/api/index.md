@@ -92,18 +92,11 @@ however, it has no history and no other useful features.
 
 ### Postman Client
 [Postman](https://www.getpostman.com/) is a generic HTTP API client. Use it if you work with KBC API on a more regular basis.
-We also provide a collection of useful API calls. They can be imported either by clicking the following button,
-
-[![Run in Postman](https://run.pstmn.io/button.png)](https://app.getpostman.com/run-collection/7dc2e4b41225738f5411)
-
-or with the following procedure:
-
-- Get and run [Postman](https://www.getpostman.com/)
-- Go to **Import** - **From URL**
-- Enter [https://www.getpostman.com/collections/87da6ac847f5edcac776](https://www.getpostman.com/collections/87da6ac847f5edcac776)
+We also provide a collection of [useful API calls](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#4c9c7c9f-6cd6-58e7-27e3-aef62538e0ba) with examples.
+The collection contains code examples in various languages, the requests can also be imported into Postman application.
 
 {: .image-popup}
-![Apiary console](/overview/api/postman-import.png)
+![Postman Docs](/overview/api/postman-import.png)
 
 ### cURL
 [cURL](https://curl.haxx.se/) is a common library used by many systems. There is also

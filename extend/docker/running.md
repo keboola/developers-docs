@@ -29,12 +29,12 @@ please make sure it is the current version in the Docker repository.
 ## Basic Run
 The basic run command that we use is:
 
-    docker run --volume=/Users/JohnDoe/data/:/data --memory=8192m --cpu-shares=1024 --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-78 quay.io/keboola/docs-docker-example-parameters
+    docker run --volume=/Users/JohnDoe/data/:/data --memory=8000m --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-78 quay.io/keboola/docs-docker-example-parameters
 
 The `--volume` parameter ensures the `/data/` folder will be mounted into the image. This is used
 to inject the input data and configuration into the image. Make sure not to put any spaces around the `:` character.
 
-The `--memory` `--cpu-shares` and `--net` parameters are component limits and are defined by the options you specify
+The `--memory` and `--net` parameters are component limits and are defined by the options you specify
 when [registering the application](/extend/registration/). Components maintained by Keboola have
 their limits described in their documentation.
 
@@ -44,7 +44,7 @@ environment variables on the command line, do _not_ put any spaces around the `=
 ### Test it
 Download our [sample data folder](/extend/docker/data-parameters.zip), extract it into your *host folder* and run:
 
-    docker run --volume=/Users/JohnDoe/data/:/data --memory=8192m --cpu-shares=1024 --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-78 quay.io/keboola/docs-docker-example-parameters
+    docker run --volume=/Users/JohnDoe/data/:/data --memory=8000m --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-78 quay.io/keboola/docs-docker-example-parameters
 
 You should see the following output:
 
@@ -67,7 +67,7 @@ In addition, the `destination.csv` file will be created in your *host folder* in
 
 If you encounter any errors, you can run the image interactively:
 
-    docker run --volume=/Users/JohnDoe/data/:/data --memory=8192m --cpu-shares=1024 --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-78 -i -t --entrypoint=/bin/bash quay.io/keboola/docs-docker-example-parameters
+    docker run --volume=/Users/JohnDoe/data/:/data --memory=8000m --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-78 -i -t --entrypoint=/bin/bash quay.io/keboola/docs-docker-example-parameters
 
 Then you can inspect the container with standard OS (CentOS) commands and/or run the script manually with
 `php /home/main.php`.
@@ -82,45 +82,32 @@ Unregistered Docker extensions do not have their component Id yet. This is somew
 get only a sample of the data the component will receive by using
 the [Sandbox call](/extend/common-interface/sandbox/#create-sandbox-api-call). In the
 [API call](http://docs.kebooladocker.apiary.io/#reference/sandbox/sandbox/create-a-sandbox-job), manually
-specify the input/output mapping and parameters.
-
-[![Run in Postman](https://run.pstmn.io/button.png)](https://app.getpostman.com/run-collection/7dc2e4b41225738f5411)
-
-You can use *Sandbox introduction* request for a simple start or the more advanced *Sandbox Example* which provides
-more configuration options. The request URL is e.g. `https://syrup.keboola.com/docker/sandbox`.
+specify the input/output mapping and parameters. See [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#91a2cf62-d7b1-b75f-73ff-406f2afa92a9).
 
 To run the component, use the command line. For example:
 
-    docker run --volume=/Users/JohnDoe/data/:/data --memory=8192m --cpu-shares=1024
+    docker run --volume=/Users/JohnDoe/data/:/data --memory=8000m
     --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/
     -e KBC_CONFIGID=test-78 quay.io/keboola/docs-example-parameters
 
 Where the `/Users/JohnDoe/data/` path refers to the contents of the data folder, which you
-obtained in the above Sandbox API call (`data.zip` file stored in the *Storage* - *File uploads*). The
+obtained in the above Sandbox API call (`data.zip` file stored in the *Storage* -- *Files*). The
 `quay.io/keboola/docs-example-parameters` parameter should be replaced by your Docker image name.
-
 
 ## Running a Registered Docker Extension
 Already [registered](/extend/registration/) Docker extensions have been assigned their *component ID*
 (in the form of *vendor.componentName*, e.g. *keboola.docs-docker-example-parameters*). To obtain the sample data for
 a registered component, use the [Input data](/extend/common-interface/sandbox/#input-data-api-call) call.
 In the [API call](http://docs.kebooladocker.apiary.io/#reference/sandbox/input-data/create-an-input-job), either specify the full configuration (using the `configData` node) or refer to an existing configuration
-of the component (using the `config` node). 
-
-[![Run in Postman](https://run.pstmn.io/button.png)](https://app.getpostman.com/run-collection/7dc2e4b41225738f5411)
-
-You can use an *Input Data introduction* request for a sample request referring to an existing configuration, or
-*Input Data full example* for a request specifying the whole configuration. The request URL is
-e.g. `https://syrup.keboola.com/docker/keboola.docs-docker-example-parameters/input where `keboola.docs-docker-example-parameters` must be replaced with your component ID.
+of the component (using the `config` node). See [Example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#4c9c7c9f-6cd6-58e7-27e3-aef62538e0ba).
 
 To run the component, use the command line. For example:
 
-    docker run --volume=/Users/JohnDoe/data/:/data --memory=8192m --cpu-shares=1024 --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-78 quay.io/keboola/docs-docker-example-parameters
+    docker run --volume=/Users/JohnDoe/data/:/data --memory=8000m --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-78 quay.io/keboola/docs-docker-example-parameters
 
 The `/Users/JohnDoe/data/` path refers to the contents of the data folder, which you
 obtained in the above Input data API call (`data.zip` file stored in the *Storage* - *File uploads*), and
 `quay.io/keboola/docs-example-parameters` should be replaced by your Docker image name.
-
 
 Note: If your extension uses encryption, the Input Data API call will be disabled (for security reasons):
 
@@ -128,24 +115,17 @@ Note: If your extension uses encryption, the Input Data API call will be disable
 
 In that case, revert to the [Sandbox call](/extend/common-interface/sandbox/#create-sandbox-api-call).
 
-
 ## Running Custom Science Extensions
 Running Custom Science extensions is slightly more complicated, because their Docker images are built dynamically
 on execution. Also, because the Custom Science component uses encryption,
 the [Sandbox call](/extend/common-interface/sandbox/#create-sandbox-api-call) must be used. In the
 [API call](http://docs.kebooladocker.apiary.io/#reference/sandbox/sandbox/create-a-sandbox-job), manually
-specify the input/output mapping and parameters. The configuration format must be *JSON*.
-
-[![Run in Postman](https://run.pstmn.io/button.png)](https://app.getpostman.com/run-collection/7dc2e4b41225738f5411)
-
-Use either *Sandbox introduction* request for a simple start, or the more advanced *Sandbox Example* in case you wish to have
-more configuration options available. The request URL is e.g. `https://syrup.keboola.com/docker/sandbox`
+specify the input/output mapping and parameters. See [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#91a2cf62-d7b1-b75f-73ff-406f2afa92a9).
 
 ### Custom Science R
-
 You can run the image with
 
-    docker run --volume=/Users/JohnDoe/data/:/data --memory=8192m --cpu-shares=1024 --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-78 -i -t --entrypoint=/bin/bash/ [quay.io/keboola/docker-custom-r](https://quay.io/repository/keboola/docker-custom-r):1.0.2
+    docker run --volume=/Users/JohnDoe/data/:/data --memory=8000m --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-78 -i -t --entrypoint=/bin/bash/ quay.io/keboola/docker-custom-r
 
 then
 
@@ -166,16 +146,15 @@ and then run the application with:
 You can also use docker-compose as described in [Integration using Docker Compose](/extend/custom-science/r/#integration-using-docker-compose).
 
 ### Custom Science Python
-
 You can run the image with
 
-    docker run --volume=/Users/JohnDoe/data/:/data --memory=8192m --cpu-shares=1024 --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-78 -i -t --entrypoint=/bin/bash/ [quay.io/keboola/docker-custom-python](https://quay.io/repository/keboola/docker-custom-python):0.0.4
+    docker run --volume=/Users/JohnDoe/data/:/data --memory=8000m --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-78 -i -t --entrypoint=/bin/bash/ quay.io/keboola/docker-custom-python
 
 then
 
     cd /data/
 
-(Note: for running Python 2.x applications, use the `quay.io/keboola/docker-custom-python2:0.0.2` image)
+(Note: for running Python 2.x applications, use the `quay.io/keboola/docker-custom-python2` image)
 
 Then execute
 
@@ -183,57 +162,26 @@ Then execute
 
 for example,
 
-    git clone -b 1.0.0 --depth 1 https://github.com/keboola/docs-custom-science-example-python-parameters.git /home/
+    git clone -b 1.0.1 --depth 1 https://github.com/keboola/docs-custom-science-example-python-parameters.git /home/
 
 and then run the application with:
 
     python /home/main.py
 
-
 ## Running Transformations
 Both R and Python Transformations are implemented as Docker components. They can be run
 locally as well. Use the [Input data](/extend/common-interface/sandbox/#input-data-api-call) call.
-In the [API call](http://docs.kebooladocker.apiary.io/#reference/sandbox/input-data/create-an-input-job), specify full configuration (using `configData` node). The configuration format is
-
-[![Run in Postman](https://run.pstmn.io/button.png)](https://app.getpostman.com/run-collection/7dc2e4b41225738f5411)
-
-Use *R Transformations* request for a sample request. The only special thing about the request is that
-the body of the transformation is passed in `parameters.script` node either as a string or as an
-array of lines. The request URL is, for instance,
-`https://syrup.keboola.com/docker/keboola.r-transformation/input` for R transformations,
-or `https://syrup.keboola.com/docker/keboola.python-transformation/input` for Python transformations.
+In the [API call](http://docs.kebooladocker.apiary.io/#reference/sandbox/input-data/create-an-input-job), specify full
+configuration (using `configData` node). See [Example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#4c9c7c9f-6cd6-58e7-27e3-aef62538e0ba)
+for both R and Python transformation.
 
 To run R Transformations, use:
 
-    docker run --volume=/Users/JohnDoe/data/:/data --memory=8192m --cpu-shares=1024 --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-78 [quay.io/keboola/r-transformation](https://quay.io/repository/keboola/r-transformation):0.0.8
+    docker run --volume=/Users/JohnDoe/data/:/data --memory=8000m --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-78 quay.io/keboola/r-transformation
 
 To run Python transformations, use:
 
-    docker run --volume=/Users/JohnDoe/data/:/data --memory=8192m --cpu-shares=1024 --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-78 [quay.io/keboola/python-transformation](https://quay.io/repository/keboola/python-transformation):0.0.14
+    docker run --volume=/Users/JohnDoe/data/:/data --memory=8000m --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-78 quay.io/keboola/python-transformation
 
 The transformation will run automatically and produce results. If you want to get into
 the container interactively, use the [`--entrypoint`](/extend/docker/tutorial/howto/) parameter.
-
-
-### Debugging
-
-For debugging purposes, it is possible to obtain the [sandbox](/extend/common-interface/sandbox/).
-There are three API calls available for that purpose:
-
-  - [Sandbox](http://docs.kebooladocker.apiary.io/#reference/sandbox/sandbox/create-a-sandbox-job)
-  - [Input](http://docs.kebooladocker.apiary.io/#reference/sandbox/input-data/create-an-input-job)
-  - [Dry run](http://docs.kebooladocker.apiary.io/#reference/sandbox/dry-run/create-a-dry-run-job)
-
-The [Sandbox](http://docs.kebooladocker.apiary.io/#reference/sandbox) API call is useful for obtaining a
-sample environment configuration when starting with development of a new Docker Extension or
-Custom Science extension.
-
-The [Input](http://docs.kebooladocker.apiary.io/#reference/input) API call is useful for obtaining an
-environment configuration for a registered Docker extension (without encryption) or Transformations.
-
-The [Dry run](http://docs.kebooladocker.apiary.io/#reference/dry-run) API call is the last step.
-It will do everything except the output mapping and is therefore useful for debugging an existing application
-in production without modifying files and tables in a KBC project.
-
-
-

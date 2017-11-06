@@ -16,8 +16,8 @@ As in the [Custom Science Quick Start](/extend/custom-science/quick-start/), the
 able to [run `docker`](/extend/docker/tutorial/setup/) commands.
 - You should be able to send API requests. Although you can use the [Apiary](https://apiary.io/) client console, we
 recommend using [Postman](https://www.getpostman.com/) as it is
-more convenient. If you do use Postman, you can [import a list](/overview/api/)
-of [sample requests](https://www.getpostman.com/collections/87da6ac847f5edcac776).
+more convenient. A list of [sample requests](https://documenter.getpostman.com/view/3086797/collection/77h845D)
+is available.
 
 ## Step 1 -- Preliminaries
 
@@ -190,7 +190,7 @@ You can then inspect the container contents: 'ls /data/'. For more details, see 
 It is best to use a Docker registry and set up [automated builds](/extend/docker/tutorial/automated-build/) for deployment. To
 be usable in KBC, the image must be available in one of the supported registries ([Dockerhub](https://hub.docker.com/), [Quay](https://quay.io/)) or [AWS ECR](https://aws.amazon.com/ecr/).
 We support both public and private images.
-AWS ECR supports only private images and we will host your image and prodvide you with push credentials. 
+AWS ECR supports only private images and we will host your image and prodvide you with push credentials.
 Contact us at [support@keboola.com](mailto:support@keboola.com) to obtain AWS ECR credentials for your image.
 
 To deploy the application to production, it must first be [registered](/extend/registration/). Once the
