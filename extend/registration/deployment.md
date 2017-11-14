@@ -49,8 +49,8 @@ eval $(docker run --rm \
     ecr:get-login ${KBC_DEVELOPERPORTAL_VENDOR} ${KBC_DEVELOPERPORTAL_APP})
 
 # Push to the repository
-docker tag ${KBC_APP_REPOSITORY}:latest ${REPOSITORY}:${TRAVIS_TAG}
-docker tag ${KBC_APP_REPOSITORY}:latest ${REPOSITORY}:latest
+docker tag ${DOCKER_APP_IMAGE}:latest ${REPOSITORY}:${TRAVIS_TAG}
+docker tag ${DOCKER_APP_IMAGE}:latest ${REPOSITORY}:latest
 docker push ${REPOSITORY}:${TRAVIS_TAG}
 docker push ${REPOSITORY}:latest
 
@@ -119,7 +119,7 @@ Set the following environment variables in the repository configuration:
  - `KBC_DEVELOPERPORTAL_URL` with the string `https://apps-api.keboola.com`
  - `KBC_DEVELOPERPORTAL_VENDOR` with the vendor of the application -- in the [above example](/extend/registration/deployment/#step-1-----preliminaries): `ujovlado`
  - `KBC_DEVELOPERPORTAL_APP` the application id -- in the [above example](/extend/registration/deployment/#step-1-----preliminaries): `ujovlado.ex-wuzzzup`
- - `KBC_APP_REPOSITORY` the docker repository name (tag used when building the application with docker) (ex. `my-application`)
+ - `DOCKER_APP_IMAGE` the docker repository name (tag used when building the application with docker) (ex. `my-application`)
 
 {: .image-popup}
 ![Screenshot -- Repository Configuration](/extend/registration/deploy-config-3.png)
@@ -192,7 +192,7 @@ script:
   # push test image to ECR
   - docker pull quay.io/keboola/developer-portal-cli-v2:latest
   - export REPOSITORY=`docker run --rm -e KBC_DEVELOPERPORTAL_USERNAME -e KBC_DEVELOPERPORTAL_PASSWORD -e KBC_DEVELOPERPORTAL_URL quay.io/keboola/developer-portal-cli-v2:latest ecr:get-repository $KBC_DEVELOPERPORTAL_VENDOR $KBC_DEVELOPERPORTAL_APP`
-  - docker tag $KBC_APP_REPOSITORY:latest $REPOSITORY:test
+  - docker tag $DOCKER_APP_IMAGE:latest $REPOSITORY:test
   - eval $(docker run --rm -e KBC_DEVELOPERPORTAL_USERNAME -e KBC_DEVELOPERPORTAL_PASSWORD -e KBC_DEVELOPERPORTAL_URL quay.io/keboola/developer-portal-cli-v2:latest ecr:get-login $KBC_DEVELOPERPORTAL_VENDOR $KBC_DEVELOPERPORTAL_APP)
   - docker push $REPOSITORY:test
   # Run live test job on new test image
