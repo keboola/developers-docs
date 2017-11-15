@@ -192,7 +192,7 @@ script:
   # push test image to ECR
   - docker pull quay.io/keboola/developer-portal-cli-v2:latest
   - export REPOSITORY=`docker run --rm -e KBC_DEVELOPERPORTAL_USERNAME -e KBC_DEVELOPERPORTAL_PASSWORD -e KBC_DEVELOPERPORTAL_URL quay.io/keboola/developer-portal-cli-v2:latest ecr:get-repository $KBC_DEVELOPERPORTAL_VENDOR $KBC_DEVELOPERPORTAL_APP`
-  - docker tag $DOCKER_APP_IMAGE:latest $REPOSITORY:test
+  - docker tag $APP_IMAGE:latest $REPOSITORY:test
   - eval $(docker run --rm -e KBC_DEVELOPERPORTAL_USERNAME -e KBC_DEVELOPERPORTAL_PASSWORD -e KBC_DEVELOPERPORTAL_URL quay.io/keboola/developer-portal-cli-v2:latest ecr:get-login $KBC_DEVELOPERPORTAL_VENDOR $KBC_DEVELOPERPORTAL_APP)
   - docker push $REPOSITORY:test
   # Run live test job on new test image
