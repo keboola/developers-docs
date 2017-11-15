@@ -40,19 +40,19 @@ Otherwise you will obtain `Invalid Token` or unauthorized errors. The *authorita
 {% highlight json %}
 {
     ...,
-	"services": [
+    "services": [
         {
-    		"id": "docker-runner",
-	    	"url": "https:\/\/docker-runner.keboola.com"
-	    },
+            "id": "docker-runner",
+            "url": "https:\/\/docker-runner.keboola.com"
+        },
         {
-		    "id": "import",
-		    "url": "https:\/\/import.keboola.com"
-	    },
+            "id": "import",
+            "url": "https:\/\/import.keboola.com"
+        },
         {
-		    "id": "syrup",
-	    	"url": "https:\/\/syrup.keboola.com"
-	    }
+            "id": "syrup",
+            "url": "https:\/\/syrup.keboola.com"
+        }
     ]
 }
 {% endhighlight %}

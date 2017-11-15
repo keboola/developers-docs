@@ -47,7 +47,13 @@ or on Windows:
 
     docker run --volume=C:\Users\name\some-dir:/data quay.io/keboola/storage-api-cli:latest create-table in.c-main new-table /data/new-table.csv --token=storage_token
 
-The above command will import the contents of `new-table.csv` in the current directory into the newly
+or when using other then [default US region](/overview/api/#regions-and-endpoints), you need to provide the Storage API address:
+
+{% highlight bash %}
+docker run --volume=$("pwd"):/data quay.io/keboola/storage-api-cli:latest create-table in.c-main new-table /data/new-table.csv --token=storage_token --url="https://connection.eu-central-1.keboola.com/"
+{% endhighlight %}
+
+Any of the above commands will import the contents of `new-table.csv` in the current directory into the newly
 created table. You should see an output similar to this one:
 
     Authorized as: ondrej.popelka@keboola.com (Odinuv Sandbox)
