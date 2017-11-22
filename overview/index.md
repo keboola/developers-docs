@@ -49,7 +49,7 @@ Each component has a `/run` API call that accepts either a reference to componen
 [queues an asynchronous job](/overview/jobs/).
 
 For more details, see
-[full API description](http://docs.keboolaconnector.apiary.io/#reference/sample-component's-api-calls-required-for-orchestration).
+[full API description](https://kebooladocker.docs.apiary.io/#reference/run/run-job).
 
 ### Components Configuration
 All components store their configuration in [Storage](/integrate/storage/). Management of the
