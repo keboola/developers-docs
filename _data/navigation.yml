@@ -224,6 +224,9 @@ items:
           - url: /integrate/storage/r-client/
             title: R client library
 
+          - url: /integrate/storage/python-client/
+            title: Python client library
+
           - url: /integrate/storage/docker-cli-client/
             title: Docker CLI client
 

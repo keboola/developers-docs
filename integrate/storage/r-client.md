@@ -6,11 +6,11 @@ permalink: /integrate/storage/r-client/
 * TOC
 {:toc}
 
-The R client library is a [Storage API client](http://docs.keboola.apiary.io/) which you can use in your R code. 
+The R client library is a [Storage API client](http://docs.keboola.apiary.io/) which you can use in your R code.
 The current implementation supports all basic data manipulations:
 
 - Importing data
-- Exporting data 
+- Exporting data
 - Creating and deleting buckets and tables
 
 The client source code is available in our [Github repository](https://github.com/keboola/sapi-r-client).
@@ -52,7 +52,7 @@ client <- SapiClient$new(
 {% endhighlight %}
 
 ### Example --- Create a Table and Import Data
-To create a new table in Storage, use the `saveTable` function. Provide the name of an existing bucket, 
+To create a new table in Storage, use the `saveTable` function. Provide the name of an existing bucket,
 the name of the new table and a CSV file with the table's contents.
 
 To create the `new-table` table in the `in.c-main` bucket, use
@@ -80,7 +80,7 @@ the ID (*bucketName.tableName*) of an existing table.
 
 To export data from the `old-table` table in the `in.c-main` bucket, use
 
-{% highlight PowerShell %}
+{% highlight r %}
 client <- SapiClient$new(
   token = 'your-token'
 )
