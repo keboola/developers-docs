@@ -51,7 +51,10 @@ To create the `new-table` table in the `in.c-main` bucket, use
 from kbcstorage.client import Client
 
 client = Client('https://connection.keboola.com', 'your-token')
-client.tables.create(name='new-table', bucket_id='in.c-main', file_path='coords.csv', primary_key=['id'])
+client.tables.create(name='new-table',
+                     bucket_id='in.c-main',
+                     file_path='coords.csv',
+                     primary_key=['id'])
 {% endhighlight %}
 
 The above command will import the contents of the `coords.csv` file into the newly created table. It will
