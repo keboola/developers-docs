@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     $("span.s2:contains('\"params\"')").first().wrap("<a href='/extend/generic-extractor/configuration/api/#default-request-parameters'></a>");
     $("span.s2:contains('\"defaultOptions\"')").wrap("<a href='/extend/generic-extractor/configuration/api/#default-request-parameters'></a>");
     $("span.s2:contains('\"requiredHeaders\"')").wrap("<a href='/extend/generic-extractor/configuration/api/#required-headers'></a>");
+    $("span.s2:contains('\"ignoreErrors\"')").wrap("<a href='/extend/generic-extractor/configuration/api/#ignore-errors'></a>");
     $("span.s2:contains('\"pagination\"')").wrap("<a href='/extend/generic-extractor/configuration/api/pagination/'></a>");
     $("span.s2:contains('\"scrollers\"')").wrap("<a href='/extend/generic-extractor/configuration/api/pagination/multiple/'></a>");
     $("span.s2:contains('\"method\"')").first().wrap("<a href='/extend/generic-extractor/configuration/api/pagination/#paging-strategy'></a>");

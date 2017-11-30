@@ -40,7 +40,8 @@ A sample API configuration can look like this:
                     "company": 123
                 }
             },
-            "requiredHeaders": ["X-AppKey"]
+            "requiredHeaders": ["X-AppKey"],
+            "ignoreErrors": [405]
         }
     }
 }
@@ -207,6 +208,36 @@ Failing to provide the header values in the `config` section will cause an error
     Missing required header Accept in config.http.headers!
 
 See the full [example](/extend/generic-extractor/configuration/api/#required-headers).
+
+### Ignore Errors
+The `ignoreErrors` option allows you to force Generic Extractor to ignore certain extraction errors. 
+The option lists HTTP codes for which any errors occuring during downloading 
+and JSON parsing the response will be ignored. The `ignoreErrors` option error is an array of HTTP 
+response status codes; default value is empty array. If the `ignoreErrors` is set to non-empty array -- e.g.:
+
+{% highlight json %}
+"http": {
+    "ignoreErrors": [404]
+}
+{% endhighlight %}
+
+Then
+- a response with status 2XX is processed normally
+- a response with status 404 is processed as if it were a success response
+    - if parsing of the response body JSON succedees it is added as any other row
+    - if parsing of the response body JSON fails, it is added as a row with `errorData` field
+- a response with status 4XX (other than 404) causes the extration to fail
+- a response with status 5XX causes the request to be [retried](#retry-configuration), and if that does 
+not help it causes the extraction to fail
+
+If the `ignoreErrors` contains 5XX status codes, the [Retry rules](#retry-configuration) are still applied. 
+But regardless of the outcome of the retries, the response will be considered as success.
+
+See [example [EX132]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/132-ignore-errors).
+
+**Important: Use this feature with caution! This feature is designed to workaround weird or buggy REST 
+API implemntations and should not be used if other solutions exist. When ignoring errors, you might miss 
+some actual errors which require your attention.** 
 
 ## Examples
 

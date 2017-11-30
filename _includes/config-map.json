@@ -27,7 +27,8 @@
                         "company": 123
                     }
                 },
-                "requiredHeaders": ["X-AppKey"]
+                "requiredHeaders": ["X-AppKey"],
+                "ignoreErrors": [405]
             }
         },
         "config": {
