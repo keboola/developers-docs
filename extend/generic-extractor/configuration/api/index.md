@@ -236,7 +236,7 @@ But regardless of the outcome of the retries, the response will be considered as
 See [example [EX132]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/132-ignore-errors).
 
 **Important: Use this feature with caution! This feature is designed to workaround weird or buggy REST 
-API implemntations and should not be used if other solutions exist. When ignoring errors, you might miss 
+API implemntations and should not be used blindly if other solutions may be applied (e.g. [`responseFilter`](/extend/generic-extractor/configuration/config/jobs/#response-filter). When ignoring errors, you might miss 
 some actual errors which require your attention.** 
 
 ## Examples
