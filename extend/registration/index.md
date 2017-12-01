@@ -256,17 +256,13 @@ the differences. During application review, the following best practices are che
     <br>Bad: ![Bad Schema](/extend/registration/schema-bad.png)
 - Use Configuration description only if the configuration is not trivial / self-explainable. Provide links to resources (e.g. when doing Elastic extractor, not everyone is familiar with ElasticSearch query syntax). The configuration description supports markdown. The markdown should not start with a header and should use only level 3 and level 4 headers (a level 2 header is prepended before the configuration description). <br>Good: <br><code>some introduction text<br><br>### Input Description<br>
 description of input tables<br>
-<br>
-#### First Table<br>
+<br>#### First Table<br>
 some other text<br>
-</code>Bad:<br><code>
-## Configuration Description<br>
+</code>Bad:<br><code>## Configuration Description<br>
 some introduction text<br>
-<br>
-#### Input Description<br>
+<br>#### Input Description<br>
 description of input tables
 </code>
-
 
 #### Application Internals
 
