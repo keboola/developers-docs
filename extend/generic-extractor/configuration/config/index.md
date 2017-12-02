@@ -155,16 +155,14 @@ and the following response:
 
 will produce the following `users` table:
 
-{% highlight json %}
 |id|name|tag|mode|
 |123|John Doe|fullExtract|development|
 |234|Jane Doe|fullExtract|development|
-{% endhighlight %}
 
 The `userData` values are added to the parent jobs only. They will not affect the
 [child jobs](/extend/generic-extractor/configuration/config/jobs/children). If the result table contains
-columns with the same names as the `userData` properties, the original column will be overwritten 
-by the values of `userData`.
+columns with the same names as the `userData` properties. If there is already a column with the same name, 
+the `userData` column will be renamed.
 
 See [example [EX076]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/076-user-data).
 
