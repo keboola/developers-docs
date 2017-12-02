@@ -227,7 +227,8 @@ after extracting 69 bytes of minified JSON data (whichever comes first).
 }
 {% endhighlight %}
 
-See [example [EX048]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/048-force-stop).
+See [example [EX048]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/048-force-stop)
+and [example [EX116]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/116-multiple-conditions-multiple-jobs).
 
 ### Limit Stop
 Limit stop configuration allows you to stop scrolling when a specified number of items is extracted.
