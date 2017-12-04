@@ -22,7 +22,7 @@ A sample `config` configuration can look like this:
         "host": "proxy.example.com",
         "user": "proxy",
         "port": 22,
-        "privateKey": "-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----"
+        "#privateKey": "-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----"
     }
 }
 {% endhighlight %}
@@ -86,7 +86,7 @@ cat public.key >> ~/.ssh/authorized_keys
         "host": "your-ssh-proxy-host",
         "user": "ssh-proxy-user",
         "port": 22,
-        "privateKey": "your-generated-private-key"
+        "#privateKey": "your-generated-private-key"
     }
 }
 {% endhighlight %}

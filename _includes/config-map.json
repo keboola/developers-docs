@@ -114,7 +114,7 @@
             "host": "proxy.example.com",
             "user": "proxy",
             "port": 22,
-            "privateKey": "-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----"
+            "#privateKey": "-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----"
         }
     },
     "authorization": {
