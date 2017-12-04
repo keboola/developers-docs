@@ -119,5 +119,11 @@
                 "#appSecret": "clientSecret"
             }
         }
+    },
+    "sshProxy": {
+        "host": "proxy.example.com",
+        "user": "proxy",
+        "port": 22,
+        "privateKey": "-----BEGIN RSA PRIVATE KEY-----\n****"
     }
 }

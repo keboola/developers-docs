@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mappings
     $("span.s2:contains('\"type\"')").last().wrap("<a href='/extend/generic-extractor/configuration/config/mappings/#configuration'></a>");
     $("span.s2:contains('\"column\"')").wrap("<a href='/extend/generic-extractor/configuration/config/mappings/#column-mapping'></a>");
-    $("span.s2:contains('\"user\"')").wrap("<a href='/extend/generic-extractor/configuration/config/mappings/#user-mapping'></a>");
+    $("span.s2:contains('\"user\"')").first().wrap("<a href='/extend/generic-extractor/configuration/config/mappings/#user-mapping'></a>");
     $("span.s2:contains('\"table\"')").wrap("<a href='/extend/generic-extractor/configuration/config/mappings/#table-mapping'></a>");
     $("span.s2:contains('\"mapping\"')").wrap("<a href='/extend/generic-extractor/configuration/config/mappings/#column-mapping'></a>");
     $("span.s2:contains('\"tableMapping\"')").wrap("<a href='/extend/generic-extractor/configuration/config/mappings/#table-mapping'></a>");
@@ -54,4 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
     $("span.s2:contains('\"credentials\"')").wrap("<a href='/extend/generic-extractor/configuration/api/authentication/#oauth'></a>");
 
     $("span.s2:contains('\"iterations\"')").wrap("<a href='/extend/generic-extractor/iterations/'></a>");
+
+    // Ssh Proxy
+    $("span.s2:contains('\sshProxy\"')").wrap("<a href='/extend/generic-extractor/configuration/ssh-proxy/'></a>");
 }, false);

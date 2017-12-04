@@ -147,6 +147,9 @@ items:
                   - url: /extend/generic-extractor/configuration/config/mappings/
                     title: Mappings
 
+              - url: /extend/generic-extractor/configuration/ssh-proxy/
+                title: SSH Proxy Configuration
+
           - url: /extend/generic-extractor/map/
             title: Configuration Map
 

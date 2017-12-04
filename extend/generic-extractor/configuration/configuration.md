@@ -43,6 +43,7 @@ nesting. The **configuration map** is also available as a [separate article](/ex
 		Storage incrementally.
 		- [**userData**](/extend/generic-extractor/configuration/config/#user-data) --- adds arbitrary data to 
 		extracted records.
+	- [**sshProxy**](/extend/generic-extractor/configuration/ssh-proxy/) --- Securely access HTTP(s) endpoints inside your private Network.
 - [**iterations**](/extend/generic-extractor/iterations/) --- executes a configuration multiple times, each time 
 with different values.
 - [**authorization**](/extend/generic-extractor/configuration/api/authentication/#oauth) --- allows injecting OAuth authentication.
