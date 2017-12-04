@@ -29,12 +29,15 @@ document.addEventListener('DOMContentLoaded', function() {
     $("span.s2:contains('\"placeholders\"')").wrap("<a href='/extend/generic-extractor/configuration/config/jobs/children/#placeholders'></a>");
 
     // Config root
+    $("span.s2:contains('\"api\"')").wrap("<a href='/extend/generic-extractor/configuration/api/'></a>");
     $("span.s2:contains('\"config\"')").wrap("<a href='/extend/generic-extractor/configuration/config/'></a>");
+    $("span.s2:contains('\"sshProxy\"')").wrap("<a href='/extend/generic-extractor/configuration/ssh-proxy/'></a>");
+
+    // Configuration
     $("span.s2:contains('\"debug\"')").wrap("<a href='/extend/generic-extractor/running/#debug-mode'></a>");
     $("span.s2:contains('\"incrementalOutput\"')").wrap("<a href='/extend/generic-extractor/incremental/'></a>");
     $("span.s2:contains('\"jobs\"')").wrap("<a href='/extend/generic-extractor/configuration/config/jobs/'></a>");
     $("span.s2:contains('\"mappings\"')").wrap("<a href='/extend/generic-extractor/configuration/config/mappings/'></a>");
-    $("span.s2:contains('\"api\"')").wrap("<a href='/extend/generic-extractor/configuration/api/'></a>");
     $("span.s2:contains('\"outputBucket\"')").wrap("<a href='/extend/generic-extractor/configuration/config/#output-bucket'></a>");
     $("span.s2:contains('\"http\"')").last().wrap("<a href='/extend/generic-extractor/configuration/config/#http'></a>");
     $("span.s2:contains('\"userData\"')").last().wrap("<a href='/extend/generic-extractor/configuration/config/#user-data'></a>");
@@ -43,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mappings
     $("span.s2:contains('\"type\"')").last().wrap("<a href='/extend/generic-extractor/configuration/config/mappings/#configuration'></a>");
     $("span.s2:contains('\"column\"')").wrap("<a href='/extend/generic-extractor/configuration/config/mappings/#column-mapping'></a>");
-    $("span.s2:contains('\"user\"')").wrap("<a href='/extend/generic-extractor/configuration/config/mappings/#user-mapping'></a>");
+    $("span.s2:contains('\"user\"')").first().wrap("<a href='/extend/generic-extractor/configuration/config/mappings/#user-mapping'></a>");
     $("span.s2:contains('\"table\"')").wrap("<a href='/extend/generic-extractor/configuration/config/mappings/#table-mapping'></a>");
     $("span.s2:contains('\"mapping\"')").wrap("<a href='/extend/generic-extractor/configuration/config/mappings/#column-mapping'></a>");
     $("span.s2:contains('\"tableMapping\"')").wrap("<a href='/extend/generic-extractor/configuration/config/mappings/#table-mapping'></a>");

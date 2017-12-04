@@ -101,16 +101,22 @@
             "userData": {
                 "tag": "development"
             }
+        },
+        "iterations": [
+            {
+                "userType": "active"
+            },
+            {
+                "userType": "inactive"
+            }
+        ],
+        "sshProxy": {
+            "host": "proxy.example.com",
+            "user": "proxy",
+            "port": 22,
+            "privateKey": "-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----"
         }
     },
-    "iterations": [
-        {
-            "userType": "active"
-        },
-        {
-            "userType": "inactive"
-        }
-    ],
     "authorization": {
         "oauth_api": {
             "credentials": {
