@@ -29,12 +29,15 @@ document.addEventListener('DOMContentLoaded', function() {
     $("span.s2:contains('\"placeholders\"')").wrap("<a href='/extend/generic-extractor/configuration/config/jobs/children/#placeholders'></a>");
 
     // Config root
+    $("span.s2:contains('\"api\"')").wrap("<a href='/extend/generic-extractor/configuration/api/'></a>");
     $("span.s2:contains('\"config\"')").wrap("<a href='/extend/generic-extractor/configuration/config/'></a>");
+    $("span.s2:contains('\"sshProxy\"')").wrap("<a href='/extend/generic-extractor/configuration/ssh-proxy/'></a>");
+
+    // Configuration
     $("span.s2:contains('\"debug\"')").wrap("<a href='/extend/generic-extractor/running/#debug-mode'></a>");
     $("span.s2:contains('\"incrementalOutput\"')").wrap("<a href='/extend/generic-extractor/incremental/'></a>");
     $("span.s2:contains('\"jobs\"')").wrap("<a href='/extend/generic-extractor/configuration/config/jobs/'></a>");
     $("span.s2:contains('\"mappings\"')").wrap("<a href='/extend/generic-extractor/configuration/config/mappings/'></a>");
-    $("span.s2:contains('\"api\"')").wrap("<a href='/extend/generic-extractor/configuration/api/'></a>");
     $("span.s2:contains('\"outputBucket\"')").wrap("<a href='/extend/generic-extractor/configuration/config/#output-bucket'></a>");
     $("span.s2:contains('\"http\"')").last().wrap("<a href='/extend/generic-extractor/configuration/config/#http'></a>");
     $("span.s2:contains('\"userData\"')").last().wrap("<a href='/extend/generic-extractor/configuration/config/#user-data'></a>");
@@ -54,7 +57,4 @@ document.addEventListener('DOMContentLoaded', function() {
     $("span.s2:contains('\"credentials\"')").wrap("<a href='/extend/generic-extractor/configuration/api/authentication/#oauth'></a>");
 
     $("span.s2:contains('\"iterations\"')").wrap("<a href='/extend/generic-extractor/iterations/'></a>");
-
-    // Ssh Proxy
-    $("span.s2:contains('\sshProxy\"')").wrap("<a href='/extend/generic-extractor/configuration/ssh-proxy/'></a>");
 }, false);

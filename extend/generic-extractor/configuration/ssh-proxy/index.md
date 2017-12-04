@@ -7,11 +7,11 @@ permalink: /extend/generic-extractor/configuration/ssh-proxy/
 {:toc}
 
 *To configure your first Generic Extractor, follow our [tutorial](/extend/generic-extractor/tutorial/).*
-*Use [Parameter Map](/extend/generic-extractor/map/) to help you navigate among various 
+*Use [Parameter Map](/extend/generic-extractor/map/) to help you navigate among various
 configuration options.*
 
-SSH proxy for Generic Extractor allows you tu securely access HTTP(s) endpoints inside your private Network.
-It creates a SSH tunnel, all traffic from Generic Extractor is forwarded down the tunnel to the destination server.
+SSH proxy for Generic Extractor allows you tu securely access HTTP(s) endpoints inside your private network.
+It creates a SSH tunnel, all traffic from Generic Extractor is forwarded through the tunnel to the destination server.
 
 A sample `config` configuration can look like this:
 
@@ -22,7 +22,7 @@ A sample `config` configuration can look like this:
         "host": "proxy.example.com",
         "user": "proxy",
         "port": 22,
-        "privateKey": "-----BEGIN RSA PRIVATE KEY-----\n****"
+        "privateKey": "-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----"
     }
 }
 {% endhighlight %}
@@ -91,5 +91,5 @@ cat public.key >> ~/.ssh/authorized_keys
 }
 {% endhighlight %}
 
-
-
+See [example [EX131]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/131-ssh-tunnel).
+and [example [EX133]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/133-ssh-tunnel-iterations-params).
