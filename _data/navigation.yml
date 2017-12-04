@@ -147,6 +147,9 @@ items:
                   - url: /extend/generic-extractor/configuration/config/mappings/
                     title: Mappings
 
+              - url: /extend/generic-extractor/configuration/iterations/
+                title: Iterations
+
               - url: /extend/generic-extractor/configuration/ssh-proxy/
                 title: SSH Proxy Configuration
 
@@ -158,9 +161,6 @@ items:
 
           - url: /extend/generic-extractor/incremental/
             title: Incremental Extraction
-
-          - url: /extend/generic-extractor/iterations/
-            title: Iterations
 
           - url: /extend/generic-extractor/running/
             title: Running Generic Extractor

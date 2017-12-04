@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
     $("span.s2:contains('\"api\"')").wrap("<a href='/extend/generic-extractor/configuration/api/'></a>");
     $("span.s2:contains('\"config\"')").wrap("<a href='/extend/generic-extractor/configuration/config/'></a>");
     $("span.s2:contains('\"sshProxy\"')").wrap("<a href='/extend/generic-extractor/configuration/ssh-proxy/'></a>");
+    $("span.s2:contains('\"iterations\"')").wrap("<a href='/extend/generic-extractor/configuration/iterations/'></a>");
 
     // Configuration
     $("span.s2:contains('\"debug\"')").wrap("<a href='/extend/generic-extractor/running/#debug-mode'></a>");
@@ -55,6 +56,4 @@ document.addEventListener('DOMContentLoaded', function() {
     $("span.s2:contains('\"authorization\"')").wrap("<a href='/extend/generic-extractor/configuration/api/authentication/#oauth'></a>");
     $("span.s2:contains('\"oauth_api\"')").wrap("<a href='/extend/generic-extractor/configuration/api/authentication/#oauth'></a>");
     $("span.s2:contains('\"credentials\"')").wrap("<a href='/extend/generic-extractor/configuration/api/authentication/#oauth'></a>");
-
-    $("span.s2:contains('\"iterations\"')").wrap("<a href='/extend/generic-extractor/iterations/'></a>");
 }, false);
