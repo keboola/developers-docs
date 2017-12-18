@@ -734,8 +734,11 @@ way, the 1:N relationship between Members and Tags is represented.
 See [example [EX010]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/010-object-with-nested-array).
 
 If the response contains an array nested in an array, Generic extractor is not able to process it.
-In such case the, contents of the array are extracted as a JSON encoded string.
-See [example [EX130]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/130-unsupported-nested-array).
+In such case the, contents of the array are extracted as a JSON encoded string. See [example [EX130]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/130-unsupported-nested-array).
+You will also see a warning in the extraction events, e.g.:
+
+    Converting nested array 'rows.[]' to JSON string.
+
 
 ### Upgrading to array
 You may encounter the following API response:
