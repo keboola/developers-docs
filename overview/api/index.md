@@ -111,6 +111,6 @@ curl --data "{\"config\": \"sampledatabase\"}" --header "X-StorageAPI-Token: You
 To call the [encryption API](/overview/encryption/) for [R Custom Science](/extend/custom-science/), use
 
 {% highlight shell %}
-curl --data "sometext" --header "X-StorageAPI-Token: YourStorageToken" --header "Content-Type: text/plain" https://syrup.keboola.com/docker/dca-custom-science-r/encrypt
+curl --data "sometext" --header "X-StorageAPI-Token: YourStorageToken" --header "Content-Type: text/plain" https://syrup.keboola.com/docker/encrypt?componentId=dca-custom-science-r
 {% endhighlight %}
 

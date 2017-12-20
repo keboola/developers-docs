@@ -28,25 +28,29 @@ There are some components which are probably more important than others:
 
 - [Storage](/integrate/storage/) component which is used to store all data in your KBC projects (data in tables,
 file uploads, configurations and logs)
-- [Docker Runner](/integrate/docker-bundle) component which is used internally to run all
-[dockerized components](/extend/docker/); therefore many extractors, writers and applications share its features
+- [Docker Runner](/integrate/docker-bundle) component which is used internally to run almost all
+[components](/extend/docker/); therefore all extractors, writers and applications share its features
 - [Transformations](/integrate/transformations/) component which encapsulates all types of transformations (SQL with
 various backends, R, Python)
 - [Orchestrator](/automate/) component which takes care of grouping different tasks together and
 running them regularly at scheduled times
 
 ## Component Common Features
-All components share some common behaviour such as [running jobs](/overview/jobs/), *Component Configuration*, or
-*Components API*, which allows each component to be run in [Orchestrations](https://help.keboola.com/orchestrator/).
+All components share some common behaviour such as [*Component Configuration*](/integrate/storage/api/configurations/)
+[Running Jobs](/overview/jobs/), which allows each component to be run in [Orchestrations](https://help.keboola.com/orchestrator/).
 This means that once worked your way through one component, you have seen them all.
 **Most of our components are open source**. If you are interested in their code, have a look at
 [our repositories](/overview/repositories/).
+Apart from that common features, some components define additional [synchronous actions](/extend/common-interface/actions/).
+This (and many other information) can be retrieved using the [Developer Portal API](https://kebooladeveloperportal.docs.apiary.io/#)
+(specifically the [Get app detail call](https://kebooladeveloperportal.docs.apiary.io/#reference/0/public-api/get-app-detail)
+which lists all components available in KBC.
 
-### Components API
+### Running Jobs
 What each component does is defined purely by that component, and so is the content of the configuration.
 Each component has a `/run` API call that accepts either a reference to component configuration
 (`config` field) or full component configuration (`configData` field) in JSON body, and
-[queues an asynchronous job](/overview/jobs/).
+[queues an asynchronous job](/integrate/jobs/).
 
 For more details, see
 [full API description](https://kebooladocker.docs.apiary.io/#reference/run/run-job).
@@ -56,12 +60,6 @@ All components store their configuration in [Storage](/integrate/storage/). Mana
 configurations is done through
 [Storage Components Configurations API](http://docs.keboola.apiary.io/#reference/component-configurations).
 Stored configurations can be referenced in `/run` API calls.
-
-{% comment %}
-TODO dát link na component detail endpoint
-
-TODO doplnit schemata
-{% endcomment %}
 
 Configuration can be defined with a JSON schema stored within the Component detail.
 Docker Extensions without their own schemas can use a generic [Docker Extension schema](/integrate/docker-bundle/#configuration).
