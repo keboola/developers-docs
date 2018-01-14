@@ -13,26 +13,31 @@ The list is provided by our [Storage Component API](http://docs.keboola.apiary.i
 The list of Components is managed using the [Keboola Developer](https://apps.keboola.com/) portal.
 
 While a [Custom Science extension](/extend/custom-science/) requires registration only when offered to all KBC users,
-registering a [Docker extension](/extend/docker/) is mandatory at all times (although the application may still be [hidden](#publishing-the-extension).
+registering a [Docker extension](/extend/docker/) is mandatory at all times (although the application may still be [hidden](#publishing-the-extension)).
 
 That being said, any KBC user can use any registered component, unless
 
-- the KBC user (or their token) has a [limited access to the component](https://help.keboola.com/storage/tokens/),
+- the KBC user (or their token) has a [limited access to the component](https://help.keboola.com/storage/tokens/).
 - the component itself limits where it can run (in what projects and for which users).
 
 ## Obtaining Account
-To register and application, you need to have an account in [Keboola Developer Portal](https://apps.keboola.com/). The Developer Portal is a completely separate application
-which manages the list of components available in KBC. As it is a separate application, it uses
-different credentials than KBC and you have to obtain an account.
-[Creating an account](https://apps.keboola.com/auth/create-account) is free and quick, it requires a working email (to which a confirmation email will be sent) and
-a mobile phone for a mandatory two-factor authorization. When you log in to the developer portal, you have to join a
-**vendor**. A vendor is an organization of developers. Every application in KBC has to belong to a vendor. If you don't work for a company, we
-suggest you create a vendor with your name. Even if you want to create a single component, it still has to belong to a vendor.
+To register an application, you need to have an account in [Keboola Developer Portal](https://apps.keboola.com/). 
+The Developer Portal is a completely separate application which manages the list of components available in KBC. 
+As it is a separate application, it uses different credentials than KBC, and you have to obtain an account.
+
+[Creating an account](https://apps.keboola.com/auth/create-account) is free and quick; it requires a working email (
+to which a confirmation email will be sent) and a mobile phone for a mandatory two-factor authorization. 
+When you log in to the developer portal, you have to join a **vendor**. A vendor is an organization of developers. 
+Every application in KBC has to belong to a vendor. If you do not work for a company, we suggest you create a vendor 
+with your name. Even if you want to create a single component, it still has to belong to a vendor.
 
 If you join an existing vendor, an administrator of that vendor has to approve your request. If you
-want to create a new vendor, a Keboola Administrator has to approve your request. When you create a new
-vendor you will receive a development project in KBC and you should provide us with a channel for receiving internal errors from your applications.
-Basically anything supported by [Papertrail notifications](https://help.papertrailapp.com/kb/how-it-works/alerts#supported-services) is available, though e-mail or Slack channel is most commonly used.
+want to create a new vendor
+
+- a Keboola Administrator has to approve your request, 
+- you will receive a development project in KBC, and 
+- you should provide us with a channel for receiving internal errors from your applications.
+Basically anything supported by [Papertrail notifications](https://help.papertrailapp.com/kb/how-it-works/alerts#supported-services) is available, though e-mail or a Slack channel is most commonly used.
 
 {: .image-popup}
 ![Screenshot -- Join a vendor](/extend/registration/join-vendor.png)
@@ -40,33 +45,34 @@ Basically anything supported by [Papertrail notifications](https://help.papertra
 When you are confirmed as a member of a vendor, you may proceed to creating your own applications.
 
 ## Creating Application
-To add an application, use the **Create App** button and fill in the application name and ID:
+To add an application, use the **Create App** button, and fill in the application name and ID:
 
 {: .image-popup}
 ![Screenshot -- Create application](/extend/registration/register-app.png)
 
 **Do not use the words 'extractor', 'writer' or 'application' in the application name.**
-When creating an application, you will obtain the **Component ID** (in the form `vendor.app-id`) -- e.g. `ujovlado.ex-wuzzzup`.
+
+When creating an application, you will obtain the **Component ID** (in the form `vendor.app-id`) -- e.g., `ujovlado.ex-wuzzzup`.
 Once you have the Component ID, you can create configurations of the application in KBC. You can also review the
-application in KBC by visiting an URL:
+application in KBC by visiting a URL:
 
     https://connection.keboola.com/admin/projects/{PROJECT_ID}/extractors/{COMPONENT_ID}
 
 Note that the configuration will not be runnable until you configure the **Repository** section of the
 application.
 
-**Important: changes made in the Developer Portal take up to 5 minutes to propagate to all Keboola Connection instances in all regions.**
+**Important**: Changes made in the Developer Portal take up to 5 minutes to propagate to all Keboola Connection instances in all regions.
 
 ## Application Repository
-Application Repository is crucial part of the application registration, because it
+The Application Repository is a crucial part of the application registration, because it
 actually defines what [Docker image](/extend/docker/tutorial/) will be used when running the application.
-We offer free hosting of your docker images in **[Amazon Container Registry (AWS ECR)](https://aws.amazon.com/ecr/)** under our own account.
+We offer free hosting of your docker images in the **[Amazon Container Registry (AWS ECR)](https://aws.amazon.com/ecr/)** under our own account.
 All repositories in AWS ECR are private. When registering your component, you will receive
 [credentials for deployment](/extend/registration/deployment/) to the repository and you can either push the images
 manually or use an [automated script](/extend/registration/deployment/#step-2-----add-deploy-script) to push images.
 
 We also support the DockerHub and Quay.io registries, both public and private. However, we recommend that you use AWS ECR
-unless you require DockerHub or Quay for some reason (e.g. you require that the image is public).
+unless you require DockerHub or Quay for some reason (e.g., you require that the image is public).
 The main benefit of our AWS ECR is its reliability, as Quay.io and DockerHub are more prone to outages and are beyond our control.
 
 ### Generic Extractor
