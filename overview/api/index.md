@@ -32,10 +32,10 @@ The main APIs for our components are:
 | [Developer Portal API](http://docs.kebooladeveloperportal.apiary.io/#) | Developer Portal is an application separated from KBC for [registering components](/extend/registration/). | [APIB](https://github.com/keboola/developer-portal/blob/master/apiary.apib)
 
 ## Regions and Endpoints
-Keboola Connection is available in multiple regions --- currently US (connection.keboola.com) and EU (connection.eu-central-1.keboola.com).
-Each region instance is a completely independent full **stack** of Keboola Connection services.
-In all of the above API documentations, the US region is used. If you are using other region, you have to use the correct endpoints for the APIs you wish to use.
-Otherwise you will obtain `Invalid Token` or unauthorized errors. The *authoritative list* of available endpoints is provided by the [Storage API Index Call](https://keboola.docs.apiary.io/#reference/miscellaneous/api-index/component-list). The the following is a sample response:
+Keboola Connection is available in multiple regions --- currently in the US (connection.keboola.com) and EU (connection.eu-central-1.keboola.com).
+Each region instance is a completely independent **full stack** of Keboola Connection services.
+In all the API documentation above, the US region is used. If you are using another region, modify the endpoints accordingly.
+Otherwise you will obtain an `Invalid Token` or unauthorized errors. The *authoritative list* of available endpoints is provided by the [Storage API Index Call](https://keboola.docs.apiary.io/#reference/miscellaneous/api-index/component-list). The following is a sample response:
 
 {% highlight json %}
 {
@@ -74,7 +74,7 @@ The services listed above are:
 |Importer|`import`|US|https://import.keboola.com|
 |Importer|`import`|EU|https://import.eu-central-1.keboola.com|
 
-Important: Each of the stacks also uses its own set of [IP addresses](https://help.keboola.com/extractors/ip-addresses/).
+**Important**: Each of the stacks also uses its own set of [IP addresses](https://help.keboola.com/extractors/ip-addresses/).
 
 ## Calling API
 
@@ -91,9 +91,9 @@ The Apiary console is fine if you send API requests only occasionally. It requir
 however, it has no history and no other useful features.
 
 ### Postman Client
-[Postman](https://www.getpostman.com/) is a generic HTTP API client. Use it if you work with KBC API on a more regular basis.
+[Postman](https://www.getpostman.com/) is a generic HTTP API client. Use it if you work with KBC APIs on a more regular basis.
 We also provide a collection of [useful API calls](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#4c9c7c9f-6cd6-58e7-27e3-aef62538e0ba) with examples.
-The collection contains code examples in various languages, the requests can also be imported into Postman application.
+The collection contains code examples in various languages, the requests can also be imported into the Postman application.
 
 {: .image-popup}
 ![Postman Docs](/overview/api/postman-import.png)
@@ -101,7 +101,7 @@ The collection contains code examples in various languages, the requests can als
 ### cURL
 [cURL](https://curl.haxx.se/) is a common library used by many systems. There is also
 a [command-line interface (CLI)](https://curl.haxx.se/docs/manpage.html) available.
-You can use the cURL CLI to create simple scripts working with KBC API. For example, to [Run a Job](/overview/jobs/),
+You can use the cURL CLI to create simple scripts working with KBC APIs. For example, to [Run a Job](/overview/jobs/),
 use
 
 {% highlight shell %}
