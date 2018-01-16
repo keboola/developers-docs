@@ -1377,3 +1377,61 @@ no effect. This also means that the `favoriteColors` column configuration **must
 mapping (even though it is not used by the users in the API response). 
 
 See [example [EX072]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/072-mapping-pk-disable).
+
+#### Using User Data in mapping
+
+There are situations when you need to add custom columns to the output data. For this purpose the
+[User Data](/extend/generic-extractor/configuration/config/#user-data) functionality can be used.
+
+Consider this API response:
+
+{% highlight json %}
+[
+    {
+        "id": 123,
+        "name": "John Doe"
+    },
+    {
+        "id": 234,
+        "name": "Jane Doe"
+    }
+]
+{% endhighlight %}
+
+Let's say you want to add a `country` column to output data, but you want to use custom mapping. To
+handle this situation, you have to define mapping also for the User Data.
+
+{% highlight json %}
+"userData": {
+    "country": "UK"
+},
+"mappings": {
+    "users": {
+        "id": {
+            "type": "column",
+            "mapping": {
+                "destination": "id"
+            }
+        },
+        "name": {
+            "type": "column",
+            "mapping": {
+                "destination": "name"
+            }
+        },
+        "country": {
+            "type": "user",
+            "mapping": {
+                "destination": "country"
+            }
+        }
+    }
+}
+{% endhighlight %}
+
+The produced user table will look like this:
+
+|id|name|country|
+|---|---|---|
+|123|John Doe|UK|
+|234|Jane Doe|UK|
