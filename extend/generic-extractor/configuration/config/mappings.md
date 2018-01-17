@@ -1435,3 +1435,5 @@ The produced user table will look like this:
 |---|---|---|
 |123|John Doe|UK|
 |234|Jane Doe|UK|
+
+See [example [EX134]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/134-user-data-in-mapping).
