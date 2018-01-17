@@ -34,7 +34,9 @@ The main APIs for our components are:
 ## Regions and Endpoints
 Keboola Connection is available in multiple regions --- currently in the US (connection.keboola.com) and EU (connection.eu-central-1.keboola.com).
 Each region instance is a completely independent **full stack** of Keboola Connection services.
-In all the API documentation above, the US region is used. If you are using another region, modify the endpoints accordingly.
+In all the API documentation above, the US region is used. 
+
+If you are using another region, modify the endpoints accordingly.
 Otherwise you will obtain an `Invalid Token` or unauthorized errors. The *authoritative list* of available endpoints is provided by the [Storage API Index Call](https://keboola.docs.apiary.io/#reference/miscellaneous/api-index/component-list). The following is a sample response:
 
 {% highlight json %}
@@ -93,7 +95,7 @@ however, it has no history and no other useful features.
 ### Postman Client
 [Postman](https://www.getpostman.com/) is a generic HTTP API client. Use it if you work with KBC APIs on a more regular basis.
 We also provide a collection of [useful API calls](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#4c9c7c9f-6cd6-58e7-27e3-aef62538e0ba) with examples.
-The collection contains code examples in various languages, the requests can also be imported into the Postman application.
+The collection contains code examples in various languages; the requests can also be imported into the Postman application.
 
 {: .image-popup}
 ![Postman Docs](/overview/api/postman-import.png)
