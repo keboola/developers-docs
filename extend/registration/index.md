@@ -21,22 +21,19 @@ That being said, any KBC user can use any registered component, unless
 - the component itself limits where it can run (in what projects and for which users).
 
 ## Obtaining Account
-To register an application, you need to have an account in [Keboola Developer Portal](https://apps.keboola.com/). 
-The Developer Portal is a completely separate application which manages the list of components available in KBC. 
-As it is a separate application, it uses different credentials than KBC, and you have to obtain an account.
+To register your application, you need to have an account in the [Keboola Developer Portal](https://apps.keboola.com/),
+which manages the list of components available in KBC. 
 
-[Creating an account](https://apps.keboola.com/auth/create-account) is free and quick; it requires a working email (
-to which a confirmation email will be sent) and a mobile phone for a mandatory two-factor authorization. 
-When you log in to the developer portal, you have to join a **vendor**. A vendor is an organization of developers. 
-Every application in KBC has to belong to a vendor. If you do not work for a company, we suggest you create a vendor 
-with your name. Even if you want to create a single component, it still has to belong to a vendor.
+The portal uses different credentials than KBC. 
+[Creating an account](https://apps.keboola.com/auth/create-account) is free and quick; it requires a working email address
+(to which a confirmation email will be sent) and a mobile phone for a mandatory two-factor authorization. 
 
-If you join an existing vendor, an administrator of that vendor has to approve your request. If you
-want to create a new vendor
+When you log in to the developer portal, you have to join a **vendor** --- an organization of developers. Every KBC
+application has to have a vendor assigned. If you join an existing vendor, an administrator of that vendor has to approve 
+your request. If you do not work for a company, create a vendor with your name (even a single component has to be assigned 
+to a vendor). 
 
-- a Keboola Administrator has to approve your request, 
-- you will receive a development project in KBC, and 
-- you should provide us with a channel for receiving internal errors from your applications.
+In order to create a **new vendor**, a Keboola Administrator has to approve your request, and you will receive a development project in KBC. Also, you should provide us with a channel for receiving internal errors from your applications.
 Basically anything supported by [Papertrail notifications](https://help.papertrailapp.com/kb/how-it-works/alerts#supported-services) is available, though e-mail or a Slack channel is most commonly used.
 
 {: .image-popup}
@@ -54,7 +51,7 @@ To add an application, use the **Create App** button, and fill in the applicatio
 
 When creating an application, you will obtain the **Component ID** (in the form `vendor.app-id`) -- e.g., `ujovlado.ex-wuzzzup`.
 Once you have the Component ID, you can create configurations of the application in KBC. You can also review the
-application in KBC by visiting a URL:
+application in KBC by visiting the following URL:
 
     https://connection.keboola.com/admin/projects/{PROJECT_ID}/extractors/{COMPONENT_ID}
 
