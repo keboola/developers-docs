@@ -31,6 +31,9 @@ The main APIs for our components are:
 | [Orchestrator API](http://docs.keboolaorchestratorv2api.apiary.io/#) | Orchestrator is a component [automating and scheduling tasks](https://help.keboola.com/tutorial/automate/) in your project. | [APIB](https://github.com/keboola/orchestrator-bundle/blob/master/apiary.apib)
 | [Developer Portal API](http://docs.kebooladeveloperportal.apiary.io/#) | Developer Portal is an application separated from KBC for [registering components](/extend/registration/). | [APIB](https://github.com/keboola/developer-portal/blob/master/apiary.apib)
 
+If you don't know which API to use, see our [integration guide](/integrate/) which describes different roles of the APIs and contains examples of commonly
+performed actions.
+
 ## Regions and Endpoints
 Keboola Connection is available in multiple regions --- currently in the US (connection.keboola.com) and EU (connection.eu-central-1.keboola.com).
 Each region instance is a completely independent **full stack** of Keboola Connection services.
