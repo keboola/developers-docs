@@ -56,7 +56,9 @@ application in KBC by visiting the following URL:
     https://connection.keboola.com/admin/projects/{PROJECT_ID}/extractors/{COMPONENT_ID}
 
 Note that the configuration will not be runnable until you configure the **Repository** section of the
-application.
+application. When you register an application, it will have assigned a memory limit of **64MB** and 
+run timeout of **1 hour**. If you need to change those limits, please 
+[contact us on support](mailto:support@keboola.com).
 
 **Important**: Changes made in the Developer Portal take up to 5 minutes to propagate to all Keboola Connection instances in all regions.
 
