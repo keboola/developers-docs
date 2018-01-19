@@ -43,7 +43,7 @@ Basically anything supported by [Papertrail notifications](https://help.papertra
 When you are confirmed as a member of a vendor, you may proceed to creating your own applications.
 
 ## Creating Application
-To add an application, use the **Add App** button, and fill in the application name and ID:
+To add an application, use the **Create App** button, and fill in the application name and ID:
 
 {: .image-popup}
 ![Screenshot -- Create application](/extend/registration/register-app.png)
@@ -59,7 +59,7 @@ application in KBC by visiting the following URL:
 Note that the configuration will not be runnable until you configure the **Repository** section of the
 application. When you register an application, it will have assigned a memory limit of **64MB** and 
 run timeout of **1 hour**. If you need to change those limits, please 
-[contact us on support](mailto:support@keboola.com).
+[contact our support](mailto:support@keboola.com).
 
 **Important**: Changes made in the Developer Portal take up to 5 minutes to propagate to all Keboola Connection instances in all regions.
 
@@ -72,7 +72,7 @@ All repositories in AWS ECR are private. When registering your component, you wi
 manually or use an [automated script](/extend/registration/deployment/#step-2-----add-deploy-script) to do it.
 
 We also support the DockerHub and Quay.io registries, both public and private. However, we recommend that you use AWS ECR
-unless you require DockerHub or Quay for some reason (e.g., you require that the image is public).
+unless you require DockerHub or Quay for some reason (e.g., you want the image to be public).
 The main benefit of our AWS ECR is its reliability, as Quay.io and DockerHub are more prone to outages and are beyond our control.
 
 ### Generic Extractor
@@ -97,7 +97,7 @@ provide us with [encrypted credentials to the git repository](/extend/custom-sci
 
 ## UI Options
 Each extension needs to specify how its user interface (UI) will look. Without any configuration, the component cannot
-be configured via UI (it can still be configured using the API though). The most basic configuration
+be configured via the UI (it can still be configured using the API though). The most basic configuration
 is `genericDockerUI`. The generic UI will always show a text field for entering the
 component configuration in JSON format. Other parts of the UI are turned on using other flags
 (for example, `genericDockerUI-tableInput`, `genericDockerUI-tableOutput`). All of the flags may be combined freely.
@@ -218,65 +218,66 @@ We recommend that you [contact our support](mailto:support@keboola.com) when reg
 ![Runtime configuration screenshot](/extend/registration/runtime-1.png)
 
 ## Publishing the Extension
-When you register an extension (be it either a [Docker extension](/extend/docker/), [Custom Science extension](/extend/custom-science/) or
-[Generic Extractor](/extend/generic-extractor/)), it is *not published*. A non-published component
-can be used without limitations but it is not offered in the KBC UI. This means that it can only be
-used by directly visiting a link with the specific component ID or via the API. Unpublished components are also not part
-of the [Public Component list](https://apps.keboola.com/apps). An existing configuration of a non-public component is 
-accessible the same way as a configuration of any other component.
+When you register an extension (a [Docker extension](/extend/docker/), [Custom Science extension](/extend/custom-science/), 
+and [Generic Extractor](/extend/generic-extractor/)), it is *not published*. A non-published component can be used without 
+limitations, but it is not offered in the KBC UI. It can only be used by directly visiting a link with the specific 
+component ID or via the API. Unpublished components are also not part of the [Public Component list](https://apps.keboola.com/apps). 
+An existing configuration of a non-public component is accessible the same way as a configuration of any other component.
 
-To publish an application, you have to request application approval from Keboola. This is done in the
-[Keboola Developer](https://apps.keboola.com/) portal by requesting approval from the application list. A member of our staff will review
-your application and either publish it or contact you with the required changes.
+Before your application can be published, it must be approved by Keboola. Request the approval from the application list in 
+the [Keboola Developer](https://apps.keboola.com/) portal. A member of our staff will review your application and either 
+publish it or contact you with the required changes.
 
 {: .image-popup}
 ![Approval screenshot](/extend/registration/approve.png)
 
 ### Application Review
-The goal of the application review is to maintain
-reasonable end-user experience and application reliability. Before applying for application registration, make sure that the same application does
-not exist yet. If a similar application exists (e.g. an extractor for the same service), make sure that the new 
-application's description clearly states the differences. During our application review, the best practices in the next sections are followed.
+The goal of the application review is to maintain reasonable end-user experience and application reliability. Before 
+applying for application registration, make sure that the same application does not exist already. If there is a similar one 
+(e.g., an extractor for the same service), clearly state the differences in the new application's description. During our 
+application review, the best practices in the next sections are followed.
 
 #### Application name and description
 
-- Names should not contain words like `extractor`, `application`, `writer` (Good: *Cloudera Impala*, Bad: *Cloudera Extractor*).
-- Short description is more of a description of the service (which allows the user to find it) than a description of the 
-component. (Good: *Native analytic database for Apache Hadoop.* Bad: *This extractor extracts data from Cloudera Impala*)
-- Long description should provide additional information about the **data** extracted/written: What will the end-user get? 
-What must the end-user provide? The long description should not contain instructions on how to configure the component. This 
-is because the long description is displayed before the end-user attempts to configure the component. However, if there are 
-any special requirements (external approval, specific account setting), they should be stated. (Good: *This component allows 
-you to extract currency exchange rates as published by the European Central Bank (ECB). The exchange rates are available from 
-a base currency (either USD or EUR) to 30 destination currencies (AUD, BGN, BRL, CAD, CNY, CZK, EUR, GBP, HKD, HRK, HUF, CHF, 
-IDR, ILS, INR, JPY, KRW, MXN, MYR, NOK, NZD, PHP, PLN, RON, RUB, SEK, SGD, THB, TRY, ZAR). The rates are available for all 
-working days from 4 January 1999 up to present.*)
-- Application Icon must be of representative and reasonable quality. Make sure the icon license allows you to use it.
-- The application must correctly state the data flow --- UI flags `appInfo.dataOut` (typically writers), `appInfo.dataIn` (typically extractors).
-- Licensing information must be valid and the vendor description must be current.
-
+- Names should not contain words like `extractor`, `application`, and `writer`. 
+<br>*OK: Cloudera Impala*
+<br>*WRONG: Cloudera Extractor*
+- The short description describes the **service** (helping the user find it) rather than the component. 
+<br>*OK: Native analytic database for Apache Hadoop*
+<br>*WRONG: This extractor extracts data from Cloudera Impala*
+- The long description provides **additional information** about the extracted/written **data**: What will the end-user get? 
+What must the end-user provide? Configuration instructions should not be included, because the long description is displayed 
+before the end-user starts configuring the component. However, if there are any special requirements (external approval, 
+specific account setting), they should be stated. 
+<br>*OK: This component allows you to extract currency exchange rates as published by the European Central Bank (ECB). The 
+exchange rates are available from a base currency (USD, EUR) to 30 destination currencies (AUD, BGN, BRL, CAD, CNY, 
+CZK, EUR, GBP, HKD, HRK, HUF, CHF, IDR, ILS, INR, JPY, KRW, MXN, MYR, NOK, NZD, PHP, PLN, RON, RUB, SEK, SGD, THB, TRY, 
+ZAR). The rates are available for all working days from 4 January 1999 up to present.*
+- Application Icons must be of representative and reasonable quality. Make sure the icon license allows you to use it.
+- Applications must correctly state the data flow --- UI flags `appInfo.dataOut` (typically writers), `appInfo.dataIn` (typically extractors).
+- Licensing information must be valid, and the vendor description must be current.
 
 #### Application Configuration
 
-- Use only the necessary flags (i.e., if there are no output files, don't use `genericDockerUI-fileOutput`).
-- For extractors, always use the [Default bucket](/extend/common-interface/folders/#default-bucket) --- that means, don't use the `genericDockerUI-tableOutput` flag.
+- Use only the necessary flags (i.e., if there are no output files, do not use `genericDockerUI-fileOutput`).
+- For extractors, always use the [default bucket](/extend/common-interface/folders/#default-bucket) --- do not use the `genericDockerUI-tableOutput` flag.
 - Use [encryption](/overview/encryption/) to store sensitive values. No plain-text passwords!
 - Use a [Configuration Schema](/extend/registration/configuration-schema/).
     - List all properties in the `required` field.
     - Always use `propertyOrder` to explicitly define the order of the fields in the form.
-    - Use a short `title` without a colon.
+    - Use your short `title` without a colon, period, etc.
     - Use a `description` to provide an explanatory sentence if needed.
-    <br>Good: ![Good Schema](/extend/registration/schema-good.png)
-    <br>Bad: ![Bad Schema](/extend/registration/schema-bad.png)
-- Use Configuration description only if the configuration is not trivial / self-explainable. Provide links to resources 
-(for instance, when doing Elastic extractor, not everyone is familiar with ElasticSearch query syntax). The configuration description 
-supports markdown. The markdown should not start with a header and should use only level 3 and level 4 headers (level 2 
-header is prepended before the configuration description). <br>Good: <br><code>some introduction text<br><br>### Input 
+    <br>OK: ![Good Schema](/extend/registration/schema-good.png)
+    <br>WRONG: ![Bad Schema](/extend/registration/schema-bad.png)
+- Use configuration description only if the configuration is not trivial / self-explainable. Provide links to resources 
+(for instance, when creating an Elastic extractor, not everyone is familiar with the ElasticSearch query syntax). The 
+configuration description supports markdown. Your markdown should not start with a header and should use only level 3 and 
+level 4 headers (level 2 header is prepended before the configuration description). <br>OK: <br><code>some introduction text<br><br>### Input 
 Description<br>
 description of input tables<br>
 <br>#### First Table<br>
 some other text<br>
-</code>Bad:<br><code>## Configuration Description<br>
+</code>WRONG:<br><code>## Configuration Description<br>
 some introduction text<br>
 <br>#### Input Description<br>
 description of input tables
@@ -288,8 +289,8 @@ description of input tables
 processing in chunks to maintain a limited amount of consumed memory. If not possible, state the expected usage in 
 the **Application Limits**.
 - The application must distinguish between [User and Application errors](/extend/common-interface/environment/#return-values).
-- The application must validate its parameters, an invalid configuration must result in a user error.
-- The events produced must be reasonable. Provide status messages if possible and with reasonable frequency. Avoid internal messages with no meaning to the end-user. Avoid flooding the event log or sending data files in the event log.
-- Set up [Continuous Deployment](/extend/registration/deployment/) so that you can keep the application up-date.
+- The application must validate its parameters; an invalid configuration must result in a user error.
+- The events produced must be reasonable. Provide status messages if possible and with a reasonable frequency. Avoid internal messages with no meaning to the end-user. Also avoid flooding the event log or sending data files in the event log.
+- Set up [Continuous Deployment](/extend/registration/deployment/) so that you can keep the application up to date.
 - Use [semantic versioning](http://semver.org/) to mark and deploy versions of your application. Using other tags (e.g.,
 `latest`, `master`) in production is not allowed.
