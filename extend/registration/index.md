@@ -33,7 +33,8 @@ application has to have a vendor assigned. If you join an existing vendor, an ad
 your request. If you do not work for a company, create a vendor with your name (even a single component has to be assigned 
 to a vendor). 
 
-In order to create a **new vendor**, a Keboola Administrator has to approve your request, and you will receive a development project in KBC. Also, you should provide us with a channel for receiving internal errors from your applications.
+In order to create a **new vendor**, a Keboola Administrator has to approve your request, and you will receive a development
+project in KBC. Also, you need to provide us with a channel for receiving internal errors from your applications.
 Basically anything supported by [Papertrail notifications](https://help.papertrailapp.com/kb/how-it-works/alerts#supported-services) is available, though e-mail or a Slack channel is most commonly used.
 
 {: .image-popup}
@@ -47,9 +48,9 @@ To add an application, use the **Create App** button, and fill in the applicatio
 {: .image-popup}
 ![Screenshot -- Create application](/extend/registration/register-app.png)
 
-**Do not use the words 'extractor', 'writer' or 'application' in the application name.**
+**Important:** Do **not** use the words 'extractor', 'writer' or 'application' in the application name.
 
-When creating an application, you will obtain the **Component ID** (in the form `vendor.app-id`) -- e.g., `ujovlado.ex-wuzzzup`.
+When creating an application, you will get a **Component ID** (in the form `vendor.app-id`, for instance, `ujovlado.ex-wuzzzup`).
 Once you have the Component ID, you can create configurations of the application in KBC. You can also review the
 application in KBC by visiting the following URL:
 
@@ -58,7 +59,7 @@ application in KBC by visiting the following URL:
 Note that the configuration will not be runnable until you configure the **Repository** section of the
 application. When you register an application, it will have assigned a memory limit of **64MB** and 
 run timeout of **1 hour**. If you need to change those limits, please 
-[contact us on support](mailto:support@keboola.com).
+[contact our support](mailto:support@keboola.com).
 
 **Important**: Changes made in the Developer Portal take up to 5 minutes to propagate to all Keboola Connection instances in all regions.
 
@@ -67,11 +68,11 @@ The Application Repository is a crucial part of the application registration, be
 actually defines what [Docker image](/extend/docker/tutorial/) will be used when running the application.
 We offer free hosting of your docker images in the **[Amazon Container Registry (AWS ECR)](https://aws.amazon.com/ecr/)** under our own account.
 All repositories in AWS ECR are private. When registering your component, you will receive
-[credentials for deployment](/extend/registration/deployment/) to the repository and you can either push the images
-manually or use an [automated script](/extend/registration/deployment/#step-2-----add-deploy-script) to push images.
+[credentials for deployment](/extend/registration/deployment/) to the repository, and you can either push the images
+manually or use an [automated script](/extend/registration/deployment/#step-2-----add-deploy-script) to do it.
 
 We also support the DockerHub and Quay.io registries, both public and private. However, we recommend that you use AWS ECR
-unless you require DockerHub or Quay for some reason (e.g., you require that the image is public).
+unless you require DockerHub or Quay for some reason (e.g., you want the image to be public).
 The main benefit of our AWS ECR is its reliability, as Quay.io and DockerHub are more prone to outages and are beyond our control.
 
 ### Generic Extractor
@@ -82,33 +83,33 @@ For registering a component based on the [Generic Extractor](/extend/generic-ext
 For a list of available tags, see the [Generic Extractor Github repository](https://github.com/keboola/generic-extractor/releases)
 or [Generic Extractor Quay Repository](https://quay.io/repository/keboola/generic-extractor), both
 of which contain the same tags as the above AWS ECR repository.
-It is also possible to use the `latest` tag, which points to the highest available tag. However we recommend that you
-register your component with a specific tag and update manually to avoid problems with breaking changes in future Generic
+It is also possible to use the `latest` tag, which points to the highest available tag. However, we recommend that you
+register your component with a specific tag and update it manually to avoid problems with breaking changes in future Generic
 Extractor releases. For more details on registering components based on Generic Extractor, see
 the [dedicated page](/extend/generic-extractor/registration/#submission).
 
 ### Custom Science
-When registering Custom science applications, one of [our images](https://developers.keboola.com/extend/docker/images/)
-should be used. The registration of Custom Science applications is not supported yet in the Developer Portal, so please
-[contact us on support](mailto:support@keboola.com).
+When registering Custom Science applications, one of [our images](https://developers.keboola.com/extend/docker/images/)
+should be used. The registration of Custom Science applications is not yet supported in the Developer Portal, so please
+[contact our support](mailto:support@keboola.com).
 If you are registering a [Custom Science](/extend/custom-science/) extension and want to use a private git repository,
 provide us with [encrypted credentials to the git repository](/extend/custom-science/development/#encryption-beforehand).
 
 ## UI Options
 Each extension needs to specify how its user interface (UI) will look. Without any configuration, the component cannot
-be configured via UI (it can still be configured using the API though). The most basic configuration
+be configured via the UI (it can still be configured using the API though). The most basic configuration
 is `genericDockerUI`. The generic UI will always show a text field for entering the
-component configuration in JSON format. Other components of the UI are turned on using other flags
-(e.g. `genericDockerUI-tableInput`, `genericDockerUI-tableOutput`). All of the flags may combined freely.
+component configuration in JSON format. Other parts of the UI are turned on using other flags
+(for example, `genericDockerUI-tableInput`, `genericDockerUI-tableOutput`). All of the flags may be combined freely.
 
 ### genericDockerUI
-This provides a basic textarea for setting extension parameters as a JSON; the textarea has
+This provides a basic text area for setting extension parameters as a JSON; the text area has
 JSON validation and syntax highlighting.
 
 {: .image-popup}
 ![Generic configuration screenshot](/extend/registration/configuration.png)
 
-Defining a [configuration schema](/extend/registration/configuration-schema/) will replace the JSON textarea with a form.
+Defining a [configuration schema](/extend/registration/configuration-schema/) will replace the JSON text area with a form.
 
 ### genericDockerUI-tableInput
 This flag provides a UI for setting the table input [mapping](https://help.keboola.com/manipulation/transformations/mappings/).
@@ -152,7 +153,7 @@ With this UI, you can set:
 
 ### genericDockerUI-processors
 This flag provides a UI for the [Processor configuration](/extend/docker-runner/processors/).
-It provides a basic textarea for setting the processors and their parameters as a JSON; the textarea has
+It provides a basic text area for setting the processors and their parameters as a JSON; the text area has
 JSON validation and syntax highlighting.
 
 {: .image-popup}
@@ -194,7 +195,7 @@ This flag provides a UI for setting the file output mapping. With this UI, you c
 
 ### genericDockerUI-authorization
 This flag provides a UI for setting [OAuth2 Authorization](/extend/common-interface/oauth/). However, to
-actually activate OAuth for your component, you have to [contact us on support](mailto:support@keboola.com).
+actually activate OAuth for your component, you have to [contact our support](mailto:support@keboola.com).
 
 {: .image-popup}
 ![Authorization screenshot](/extend/registration/auth-0.png)
@@ -208,7 +209,7 @@ This flag is used to provide UI for components based on the [Generic Extractor](
 
 ### genericDockerUI-runtime
 This flag provides a UI for setting parameters for [Custom Science](/extend/custom-science/).
-We recommend that you [contact us on support](mailto:support@keboola.com) when registering a Custom Science application.
+We recommend that you [contact our support](mailto:support@keboola.com) when registering a Custom Science application.
 
 {: .image-popup}
 ![Runtime configuration screenshot](/extend/registration/runtime-0.png)
@@ -217,53 +218,66 @@ We recommend that you [contact us on support](mailto:support@keboola.com) when r
 ![Runtime configuration screenshot](/extend/registration/runtime-1.png)
 
 ## Publishing the Extension
-When you register an extension (be it either [Docker Extension](/extend/docker/) or [Custom Science](/extend/custom-science/) or
-[Generic Extractor](/extend/generic-extractor/)), it is *not published*. A non-published component
-can be used without limitations but it is not offered in the KBC UI. This means that it can only be
-used by directly visiting a link with the specific component ID or via the API. Unpublished components are also not part
-of the [Public Component list](https://apps.keboola.com/apps). An existing configuration of a non-public component is accessible the same way as a configuration of any other component.
+When you register an extension (a [Docker extension](/extend/docker/), [Custom Science extension](/extend/custom-science/), 
+and [Generic Extractor](/extend/generic-extractor/)), it is *not published*. A non-published component can be used without 
+limitations, but it is not offered in the KBC UI. It can only be used by directly visiting a link with the specific 
+component ID or via the API. Unpublished components are also not part of the [Public Component list](https://apps.keboola.com/apps). 
+An existing configuration of a non-public component is accessible the same way as a configuration of any other component.
 
-To publish an application, you have to request application approval from Keboola. This is done in
-[Keboola Developer](https://apps.keboola.com/) portal by requesting approval from the application list. A member of our staff will review
-your application and publish the application or contact you with the required changes.
+Before your application can be published, it must be approved by Keboola. Request the approval from the application list in 
+the [Keboola Developer](https://apps.keboola.com/) portal. A member of our staff will review your application and either 
+publish it or contact you with the required changes.
 
 {: .image-popup}
 ![Approval screenshot](/extend/registration/approve.png)
 
 ### Application Review
-The goal of the application review is to maintain
-reasonable end-user experience and application reliability. Before applying for application registration, make sure that the same application does
-not exist yet. If a similar application exists (e.g. an extractor for the same service), make sure that application description clearly states
-the differences. During application review, the following best practices are checked:
-
+The goal of the application review is to maintain reasonable end-user experience and application reliability. Before 
+applying for application registration, make sure that the same application does not exist already. If there is a similar one 
+(e.g., an extractor for the same service), clearly state the differences in the new application's description. During our 
+application review, the best practices in the next sections are followed.
 
 #### Application name and description
 
-- Name should not contain words like `extractor`, `application`, `writer`. (Good: *Cloudera Impala*, Bad: *Cloudera Extractor*)
-- Short description is more of a description of the service (which allows the user to find it) then a description of the component. (Good: *Native analytic database for Apache Hadoop.* Bad: *This extractor extracts data from Cloudera Impala*)
-- Long description should provide additional information about the **data** extracted/written. What will the end-user obtain? What must the end-user provide? The long description should not contain instructions how to configure the component. This is because the long description is displayed before the end-user attempts to configure the component. However, if there are any special requirements (external approval, specific account setting), they should be stated. (Good: *This component allows you to extract currency exchange rates as published by European Central Bank (ECB) The exchange rates are available from base currency (either USD or EUR) to 30 destination currencies (AUD, BGN, BRL, CAD, CNY, CZK, EUR, GBP, HKD, HRK, HUF, CHF, IDR, ILS, INR, JPY, KRW, MXN, MYR, NOK, NZD, PHP, PLN, RON, RUB, SEK, SGD, THB, TRY, ZAR). Rates are available for all working days from 4th of January 1999 up to present.*)
-- Application Icon must be representative and reasonable quality. Make sure the icon license allows you to use it.
-- The application must correctly state the data flow --- UI flags `appInfo.dataOut` (typically writers), `appInfo.dataIn` (typically extractors).
-- Licensing information must be valid and vendor description must be current.
-
+- Names should not contain words like `extractor`, `application`, and `writer`. 
+<br>*OK: Cloudera Impala*
+<br>*WRONG: Cloudera Extractor*
+- The short description describes the **service** (helping the user find it) rather than the component. 
+<br>*OK: Native analytic database for Apache Hadoop*
+<br>*WRONG: This extractor extracts data from Cloudera Impala*
+- The long description provides **additional information** about the extracted/written **data**: What will the end-user get? 
+What must the end-user provide? Configuration instructions should not be included, because the long description is displayed 
+before the end-user starts configuring the component. However, if there are any special requirements (external approval, 
+specific account setting), they should be stated. 
+<br>*OK: This component allows you to extract currency exchange rates as published by the European Central Bank (ECB). The 
+exchange rates are available from a base currency (USD, EUR) to 30 destination currencies (AUD, BGN, BRL, CAD, CNY, 
+CZK, EUR, GBP, HKD, HRK, HUF, CHF, IDR, ILS, INR, JPY, KRW, MXN, MYR, NOK, NZD, PHP, PLN, RON, RUB, SEK, SGD, THB, TRY, 
+ZAR). The rates are available for all working days from 4 January 1999 up to present.*
+- Application Icons must be of representative and reasonable quality. Make sure the icon license allows you to use it.
+- Applications must correctly state the data flow --- UI flags `appInfo.dataOut` (typically writers), `appInfo.dataIn` (typically extractors).
+- Licensing information must be valid, and the vendor description must be current.
 
 #### Application Configuration
 
-- Use only the necessary flags (i.e. if there are no output files, don't use `genericDockerUI-fileOutput`).
-- For extractors, always use [Default bucket](/extend/common-interface/folders/#default-bucket) --- that means, don't use `genericDockerUI-tableOutput` flag.
+- Use only the necessary flags (i.e., if there are no output files, do not use `genericDockerUI-fileOutput`).
+- For extractors, always use the [default bucket](/extend/common-interface/folders/#default-bucket) --- do not use the `genericDockerUI-tableOutput` flag.
 - Use [encryption](/overview/encryption/) to store sensitive values. No plain-text passwords!
-- Use [Configuration Schema](/extend/registration/configuration-schema/).
+- Use a [Configuration Schema](/extend/registration/configuration-schema/).
     - List all properties in the `required` field.
     - Always use `propertyOrder` to explicitly define the order of the fields in the form.
-    - Use short `title` without a colon.
-    - Use `description` to provide an explanatory sentence if needed.
-    <br>Good: ![Good Schema](/extend/registration/schema-good.png)
-    <br>Bad: ![Bad Schema](/extend/registration/schema-bad.png)
-- Use Configuration description only if the configuration is not trivial / self-explainable. Provide links to resources (e.g. when doing Elastic extractor, not everyone is familiar with ElasticSearch query syntax). The configuration description supports markdown. The markdown should not start with a header and should use only level 3 and level 4 headers (a level 2 header is prepended before the configuration description). <br>Good: <br><code>some introduction text<br><br>### Input Description<br>
+    - Use your short `title` without a colon, period, etc.
+    - Use a `description` to provide an explanatory sentence if needed.
+    <br>OK: ![Good Schema](/extend/registration/schema-good.png)
+    <br>WRONG: ![Bad Schema](/extend/registration/schema-bad.png)
+- Use configuration description only if the configuration is not trivial / self-explainable. Provide links to resources 
+(for instance, when creating an Elastic extractor, not everyone is familiar with the ElasticSearch query syntax). The 
+configuration description supports markdown. Your markdown should not start with a header and should use only level 3 and 
+level 4 headers (level 2 header is prepended before the configuration description). <br>OK: <br><code>some introduction text<br><br>### Input 
+Description<br>
 description of input tables<br>
 <br>#### First Table<br>
 some other text<br>
-</code>Bad:<br><code>## Configuration Description<br>
+</code>WRONG:<br><code>## Configuration Description<br>
 some introduction text<br>
 <br>#### Input Description<br>
 description of input tables
@@ -271,9 +285,12 @@ description of input tables
 
 #### Application Internals
 
-- Make sure that the amount consumed **memory does not depend** on the amount of processed data. Use streaming or processing in chunks to maintain a limited amount of consumed memory. If not possible, state the expected usage in the **Application Limits**.
+- Make sure that the amount of consumed **memory does not depend** on the amount of processed data. Use streaming or 
+processing in chunks to maintain a limited amount of consumed memory. If not possible, state the expected usage in 
+the **Application Limits**.
 - The application must distinguish between [User and Application errors](/extend/common-interface/environment/#return-values).
-- The application must validate its parameters, invalid configuration must result in an user error.
-- The events produced must be reasonable. Provide status messages if possible and with reasonable frequency. Avoid internal messages with no meaning to the end-user. Avoid flooding the event log or sending data files in the event log.
-- Set up [Continuos Deployment](/extend/registration/deployment/) so that you can keep the application up-date.
-- Use [semantic versioning](http://semver.org/) to mark and deploy versions of your application. Using other tags (e.g. `latest`, `master`) in production is not allowed.
+- The application must validate its parameters; an invalid configuration must result in a user error.
+- The events produced must be reasonable. Provide status messages if possible and with a reasonable frequency. Avoid internal messages with no meaning to the end-user. Also avoid flooding the event log or sending data files in the event log.
+- Set up [Continuous Deployment](/extend/registration/deployment/) so that you can keep the application up to date.
+- Use [semantic versioning](http://semver.org/) to mark and deploy versions of your application. Using other tags (e.g.,
+`latest`, `master`) in production is not allowed.
