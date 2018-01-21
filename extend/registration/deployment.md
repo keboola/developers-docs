@@ -7,18 +7,19 @@ redirect_from: /extend/docker/tutorial/automated-build/
 * TOC
 {:toc}
 
-When you create a new [Docker extension](/extend/docker/), we recommend that you set up an automated deployment. This
-will automatically deploy a new version of your application to Keboola Connection.
+When you create a new [Docker extension](/extend/docker/), we recommend setting up an automated deployment. This
+will automatically deploy a new version of your application to Keboola Connection (KBC).
 
 ## Before You Start
 - Have a [KBC project](/#development-project) where you can test your code.
-- Have a [Developer Portal account](https://apps.keboola.com/) and be a [member of a vendor](/extend/registration/#obtaining-account).
+- Have a [Developer Portal account](https://apps.keboola.com/), and be a [member of a vendor](/extend/registration/#obtaining-account).
 
 ## Step 1 --- Preliminaries
-- Have your [docker extension](/extend/docker/quick-start/) code ready in a git repository. For turbo start, you can fork
+- Have your [docker extension](/extend/docker/quick-start/) code ready in a git repository. For a swift start, fork
 [our example repository](https://github.com/keboola/docs-deploy-example).
-- [Register your application](/extend/registration/). It does not need to be approved nor working, you only need to obtain the **application id** e.g. `ujovlado.ex-wuzzzup`.
-- Create a **Service Account** in [Developer Portal](https://apps.keboola.com/):
+- [Register your application](/extend/registration/). It does not need to be approved, nor does it have to be working; 
+you only need to get an **application id**, e.g., `ujovlado.ex-wuzzzup`.
+- Create a **service account** in the [Developer Portal](https://apps.keboola.com/):
 
 {: .image-popup}
 ![Screenshot -- Create account](/extend/registration/portal-service-account-1.png)
@@ -26,10 +27,10 @@ will automatically deploy a new version of your application to Keboola Connectio
 {: .image-popup}
 ![Screenshot -- Account details](/extend/registration/portal-service-account-2.png)
 
-Note both username and password.
+Notice both the username and the password.
 
 ## Step 2 --- Add Deploy Script
-Add the following deploy script to your repository, let's name it `deploy.sh`
+Add the following deploy script to your repository; name it `deploy.sh`.
 
 {% highlight bash %}
 #!/bin/bash
@@ -64,7 +65,7 @@ docker run --rm \
 
 This code will tag your image with the relevant tags (`latest` and the tag of the build) and push them to
 our registry.
-Finally, it will update the application in Developer Portal to use the current tag. This means that the new version
+Finally, it will update the application in the Developer Portal to use the current tag. This means that the new version
 of the application is immediately deployed into KBC.
 
 This sample deployment script uses the [Developer Portal CLI](https://github.com/keboola/developer-portal-cli-v2)
@@ -73,12 +74,12 @@ repository and credentials to our AWS ECR registry. The `ecr:get-repository` com
 associated with the user in the variable `KBC_DEVELOPERPORTAL_USERNAME`. The `ecr:get-login` command returns a
 `docker login ...` command to authenticate to that repository.
 
-Make sure that the `deploy.sh` file line endings is set to *Unix (LF)*. Also make sure that the file is executable, i.e. by executing
+Make sure the `deploy.sh` file line ending is set to *Unix (LF)*. Also make sure that the file is executable, i.e., by executing
 `git update-index --chmod=+x deploy.sh`. Commit the deploy script to your application repository.
 
 ## Step 3 --- Add Deploy Automation
-There are multiple options for automating application development. We recommend using [Travis CI](https://docs.travis-ci.com/) service, to
-use it, add the following `.travis.yml` file:
+There are multiple options for automating the application development. We recommend using [Travis CI](https://docs.travis-ci.com/) service. 
+To use it, add the following `.travis.yml` file:
 
 {% highlight yaml %}
 language: bash
@@ -98,8 +99,8 @@ deploy:
 {% endhighlight %}
 
 The above configuration defines that whenever you commit and push to the repository, the command `docker build --tag=my-application .` will get executed.
-If that command executes successfully and a tag was created, the `deploy.sh` script in the repository will be executed. Commit the deploy configuration to your application
-repository.
+If that command executes successfully and a tag is created, the `deploy.sh` script in the repository will be executed. 
+Commit the deploy configuration to your application repository.
 
 ## Step 4 --- Configure Deploy Automation
 Go to [Travis CI](https://travis-ci.org/) and add a new repository:
@@ -107,7 +108,7 @@ Go to [Travis CI](https://travis-ci.org/) and add a new repository:
 {: .image-popup}
 ![Screenshot -- Add Repository](/extend/registration/deploy-config-1.png)
 
-Turn on building of the repository and go to repository configuration:
+Turn on building of the repository, and then go to the repository configuration:
 
 {: .image-popup}
 ![Screenshot -- Configure Repository](/extend/registration/deploy-config-2.png)
@@ -140,38 +141,38 @@ In Travis, you should see an output similar to this:
 {: .image-popup}
 ![Screenshot -- Build and Deploy Log](/extend/registration/deploy-log-1.png)
 
-If no errors occurred, the application is now deployed into KBC. You can verify that in the Developer portal, the
-application repository and tag was automatically set:
+If no errors occurred, the application is now deployed into KBC. You can verify that in the Developer Portal, the
+application repository and tag were automatically set:
 
 {: .image-popup}
 ![Screenshot -- Deploy Verification](/extend/registration/deploy-final.png)
 
 The application is now runnable in KBC. You can view all settings in our
 [example repository](https://github.com/keboola/docs-docker-example-basic). You can also
-review [Travis Configuration](https://travis-ci.org/keboola/docs-deploy-example)
+review [Travis Configuration](https://travis-ci.org/keboola/docs-deploy-example).
 
-*Note that it takes up to **5 minutes** before the changes in Developer Portal are propagated to all KBC instances in all regions.*
+*Note that it takes up to **5 minutes** before the changes in the Developer Portal propagate to all KBC instances in all regions.*
 
 ## Manual Deployment
-If you want to use some other continuous integration setting or deploy to the repository manually, you can do so without limitations.
+If you want to use another continuous integration setting or deploy to the repository manually, you can do so without limitations.
 As in the [above script](/extend/registration/deployment/#step-2-----add-deploy-script),
-we recommend using [Developer Portal CLI client](https://github.com/keboola/developer-portal-cli-v2). This CLI tools (runnable in Docker or PHP)
+we recommend using the [Developer Portal CLI client](https://github.com/keboola/developer-portal-cli-v2). This CLI tools (runnable in Docker or PHP)
 allows you to obtain the repository for an application and push credentials to that repository. If you want to get even more low level, you
-can also use the [Developer Portal API](http://docs.kebooladeveloperportal.apiary.io/#) which has the same functions. It also allows you
-to generate [Generate credentials for a service account](http://docs.kebooladeveloperportal.apiary.io/#reference/0/vendors/generate-credentials-for-service-account)
+can also use the [Developer Portal API](http://docs.kebooladeveloperportal.apiary.io/#), which has the same functions. It also allows you
+to [generate credentials for a service account](http://docs.kebooladeveloperportal.apiary.io/#reference/0/vendors/generate-credentials-for-service-account)
 programmatically.
 
 ## Test Live Configurations
-Before deploying your new image to the developer portal, you may want to try it out on some 'real' configurations
+Before deploying your new image to the Developer Portal, you may want to try it out on some 'real' configurations
 in your project. You can do this by adding some environment variables to Travis with an appropriate
 [Storage token](https://help.keboola.com/storage/tokens/)
-and configuration Id. It is highly recommended to create a dedicated token for this task.
+and configuration ID. It is highly recommended to create a dedicated token for this task.
 
 The commands will need two extra environment variables apart from the
 [ones listed above](/extend/registration/deployment/#step-4-----configure-deploy-automation):
 
 - `KBC_STORAGE_TOKEN` --- the Storage token that the test(s) will run under
-- `KBC_APP_TEST_CONFIG` --- ID of the configuration to test
+- `KBC_APP_TEST_CONFIG` --- the ID of the configuration to test
 
 {: .image-popup}
 ![Screenshot -- Sample Configurations](/extend/registration/configuration-sample.png)
@@ -217,12 +218,12 @@ The commands above do as follows:
 - Pull the job runner cli client [Syrup PHP CLI](https://github.com/keboola/syrup-php-cli).
 - Run the specified test job on KBC using the `/{component}/{config}/run/tag/{tag}` -- [Keboola Docker API](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job-with-image/run-job).
 
-Note that if you want to run multiple test jobs, simply repeat the command with the different configuration IDs
+If you want to run multiple test jobs, simply repeat the command with the different configuration IDs
 that you would like to test.
 
-When you commit to the application repository, the Docker image will be built and using a `test` tag, it will be tested in production KBC.
-It will not be deployed to production however! When you create a new tag (`x.y.z`) in the repository, the docker image will be build and tested using the
-`test` tag and if all succeeds, it will deploy the specified tag (`x.y.z`) into KBC --- a new version will be available in production.
+When you commit to the application repository, the Docker image will be built and using a `test` tag; it will be tested in production KBC.
+However, it will not be deployed to production! When you create a new tag (`x.y.z`) in the repository, the Docker image will be built and tested using the
+`test` tag. If all succeeds, it will deploy the specified tag (`x.y.z`) into KBC --- a new version will be available in production.
 You can see the code in the [Sample repository](https://github.com/keboola/docs-deploy-example-tests).
 
 You can see both [`.travis.yml`](https://github.com/keboola/docker-demo-app/blob/master/.travis.yml) and
