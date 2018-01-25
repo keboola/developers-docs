@@ -3,7 +3,7 @@ title: Configuration Schema
 permalink: /extend/registration/configuration-schema/
 ---
 
-The default input for a component configuration is a JSON textarea.
+The default input for a component configuration is a JSON text area.
 
 {: .image-popup}
 ![Generic configuration screenshot](/extend/registration/configuration.png)
@@ -20,7 +20,7 @@ Using the configuration schema also allows us to validate the user input on fron
 
 JSON schemas are well documented on the [json-schema.org](http://json-schema.org/) website. For their developing and testing,
 use, for example, JSON Editor available [on-line](http://jeremydorn.com/json-editor/).
-Make sure to list all configuration properties as `required`.
+Remember to list all configuration properties as `required`.
 This is to make sure that the actual configuration will always contain all properties.
 If you want a property to be optional, set a default value for it. The supported formatting options for
 the editor are available in the [official editor documentation](https://github.com/jdorn/json-editor#format).
@@ -40,12 +40,12 @@ Let's assume your application accepts the following configuration:
 
 {% endhighlight %}
 
-This looks like an appropriate form.
+This looks like an appropriate form:
 
 {: .image-popup}
 ![Configuration form](/extend/registration/form.png)
 
-The form above can be created using this JSON Schema.
+The form above can be created using this JSON Schema:
 
 {% highlight json %}
 {
@@ -76,7 +76,7 @@ The form above can be created using this JSON Schema.
 		"dateFrom": {
 			"title": "Date from",
 			"type": "string",
-			"description": "Any date accepted by strtotime (http://php.net/manual/en/function.strtotime.php) function.",
+			"description": "Any date accepted by strtotime (http://php.net/manual/en/function.strtotime.php) function",
 			"minLength": 1,
 			"default": "",
 			"propertyOrder": 3
@@ -84,7 +84,7 @@ The form above can be created using this JSON Schema.
 		"dateTo": {
 			"title": "Date to",
 			"type": "string",
-			"description": "Any date accepted by strtotime (http://php.net/manual/en/function.strtotime.php) function.",
+			"description": "Any date accepted by strtotime (http://php.net/manual/en/function.strtotime.php) function",
 			"minLength": 1,
 			"default": "",
 			"propertyOrder": 4
