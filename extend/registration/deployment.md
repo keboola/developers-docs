@@ -27,7 +27,7 @@ you only need to get an **application id**, e.g., `ujovlado.ex-wuzzzup`.
 {: .image-popup}
 ![Screenshot -- Account details](/extend/registration/portal-service-account-2.png)
 
-Notice both the username and the password.
+Take a note of the username and the password.
 
 ## Step 2 --- Add Deploy Script
 Add the following deploy script to your repository; name it `deploy.sh`.
@@ -108,7 +108,7 @@ Go to [Travis CI](https://travis-ci.org/) and add a new repository:
 {: .image-popup}
 ![Screenshot -- Add Repository](/extend/registration/deploy-config-1.png)
 
-Turn on building of the repository, and then go to the repository configuration:
+Enable builds for the repository, and then go to the repository configuration:
 
 {: .image-popup}
 ![Screenshot -- Configure Repository](/extend/registration/deploy-config-2.png)
@@ -126,7 +126,7 @@ Set the following environment variables in the repository configuration:
 ![Screenshot -- Repository Configuration](/extend/registration/deploy-config-3.png)
 
 ## Step 5 --- Trigger the build
-Commit and push anything to the repository. In Travis, you should see an output similar to this:
+Commit and push anything to the repository to trigger the build. In Travis, you should see an output similar to this:
 
 {: .image-popup}
 ![Screenshot -- Build Log](/extend/registration/deploy-log-1.png)
@@ -141,7 +141,7 @@ In Travis, you should see an output similar to this:
 {: .image-popup}
 ![Screenshot -- Build and Deploy Log](/extend/registration/deploy-log-1.png)
 
-If no errors occurred, the application is now deployed into KBC. You can verify that in the Developer Portal, the
+If no errors occurred, the application is now deployed into KBC. In the Developer Portal, you can verify that the
 application repository and tag were automatically set:
 
 {: .image-popup}
@@ -156,7 +156,7 @@ review [Travis Configuration](https://travis-ci.org/keboola/docs-deploy-example)
 ## Manual Deployment
 If you want to use another continuous integration setting or deploy to the repository manually, you can do so without limitations.
 As in the [above script](/extend/registration/deployment/#step-2-----add-deploy-script),
-we recommend using the [Developer Portal CLI client](https://github.com/keboola/developer-portal-cli-v2). This CLI tools (runnable in Docker or PHP)
+we recommend using the [Developer Portal CLI client](https://github.com/keboola/developer-portal-cli-v2). This CLI tool (runnable in Docker or PHP)
 allows you to obtain the repository for an application and push credentials to that repository. If you want to get even more low level, you
 can also use the [Developer Portal API](http://docs.kebooladeveloperportal.apiary.io/#), which has the same functions. It also allows you
 to [generate credentials for a service account](http://docs.kebooladeveloperportal.apiary.io/#reference/0/vendors/generate-credentials-for-service-account)
@@ -164,7 +164,7 @@ programmatically.
 
 ## Test Live Configurations
 Before deploying your new image to the Developer Portal, you may want to try it out on some 'real' configurations
-in your project. You can do this by adding some environment variables to Travis with an appropriate
+in your project. You can do this by adding certain environment variables to Travis with an appropriate
 [Storage token](https://help.keboola.com/storage/tokens/)
 and configuration ID. It is highly recommended to create a dedicated token for this task.
 
@@ -211,20 +211,22 @@ deploy:
 The commands above do as follows:
 
 - Build the application image and tag it `my-application`.
-- Pull the developer portal cli client [Developer Portal CLI](https://github.com/keboola/developer-portal-cli-v2).
+- Pull the [Developer Portal CLI client](https://github.com/keboola/developer-portal-cli-v2).
 - Get the application's KBC repository url from the developer portal.
 - Tag the image as `test`.
 - Push the image to the repository.
-- Pull the job runner cli client [Syrup PHP CLI](https://github.com/keboola/syrup-php-cli).
+- Pull the job runner CLI client ([Syrup PHP CLI](https://github.com/keboola/syrup-php-cli)).
 - Run the specified test job on KBC using the `/{component}/{config}/run/tag/{tag}` -- [Keboola Docker API](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job-with-image/run-job).
 
 If you want to run multiple test jobs, simply repeat the command with the different configuration IDs
 that you would like to test.
 
 When you commit to the application repository, the Docker image will be built and using a `test` tag; it will be tested in production KBC.
-However, it will not be deployed to production! When you create a new tag (`x.y.z`) in the repository, the Docker image will be built and tested using the
-`test` tag. If all succeeds, it will deploy the specified tag (`x.y.z`) into KBC --- a new version will be available in production.
+However, it will not be deployed to production! 
+To get it into production, create a new tag (`x.y.z`) in the repository. 
+The Docker image will be built and tested using the `test` tag, and if all succeeds, it will be deployed with the `x.y.z` tag into KBC --- a new version will be available in production.
 You can see the code in the [Sample repository](https://github.com/keboola/docs-deploy-example-tests).
+
 
 You can see both [`.travis.yml`](https://github.com/keboola/docker-demo-app/blob/master/.travis.yml) and
 the deploy script ([`deploy.sh`](https://github.com/keboola/docker-demo-app/blob/master/deploy.sh))
