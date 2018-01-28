@@ -52,7 +52,7 @@ table is stored in the `in.c-main` bucket and the table name is `sample`. The ta
 
 You also need a [Storage API token](https://help.keboola.com/storage/tokens/).
 
-### Send the API Request
+### Send API Request
 In the [collection of sample requests](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#91a2cf62-d7b1-b75f-73ff-406f2afa92a9),
 there is an *Introduction* example with the the following JSON in its body:
 
@@ -86,7 +86,7 @@ The node `parameters` contains arbitrary parameters which are passed to the appl
 The URL of the request is `https://syrup.keboola.com/docker/sandbox`. The request body is in JSON.
 Enter your Storage API token into *X-StorageAPI-Token* header and run the request.
 
-### Getting the Result
+### Getting Result
 When running the request with valid parameters, you should receive a response similar to this:
 
 {% highlight json %}
@@ -110,7 +110,7 @@ KBC. There you will find a `data.zip` file with a sample data folder. You can no
 ## Input Data API Call
 The input API call differs in that it *must* be used with an existing component. It requires *componentId* obtained
 from the [component registration](/extend/registration/). This also means that this call can be used both
-with existing configurations as well as ad-hoc configurations (as in the above [sandbox](#create-sandbox-api-call) request.
+with existing configurations as well as ad-hoc configurations (as in the above [sandbox](#create-sandbox-api-call) request).
 
 ### Prepare
 We assume you have the same `in.c-main.test` source table as in the [previous request](#prepare).
@@ -119,15 +119,15 @@ visiting the following URL:
 
     https://connection.keboola.com/admin/projects/{projectId}/applications/keboola.docs-docker-example-parameters
 
-Where you replace `{projectId}` with the Id of the project in KBC (you can find that in the URL). Then
+Where you replace `{projectId}` with the ID of the project in KBC (you can find that in the URL). Then
 create the configuration. The equivalent to what we have used in the [Sandbox above](#create-sandbox-api-call) call would be
 
 {: .image-popup}
 ![Configuration screenshot](/extend/common-interface/input-configuration.png)
 
 ### Run the API Request
-When you created the configuration, it was assigned a configuration Id --- `328831433` --- in our example.
-Use this Id instead of manually crafting the request body.
+When you created the configuration, it was assigned a configuration ID --- `328831433` --- in our example.
+Use this ID instead of manually crafting the request body.
 
 You can see an *Introduction* sample request in [our collection of requests](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#4c9c7c9f-6cd6-58e7-27e3-aef62538e0ba).
 
@@ -144,24 +144,24 @@ Where you need to replace `328831433` with your own configuration ID. The reques
     https://syrup.keboola.com/docker/keboola.docs-docker-example-parameters/input/
 
 Where `keboola.docs-docker-example-parameters` is the component ID (you can replace that with your own component if you like).
-Again, do not forget to enter your Storage API token into *X-StorageAPI-Token* header.
+Again, do not forget to enter your Storage API token into the *X-StorageAPI-Token* header.
 
 As with the [Sandbox call](#create-sandbox-api-call), running the API call will create a job which will execute and produce a
 `data.zip` file in *Storage* --- *Files*.
 
 **Important**: If you actually want to *run* the above *328831433* configuration, you also need
-to set the output mapping from `destination.csv` to some table.
+to set the output mapping from `destination.csv` to a table.
 
 ## Summary
 - For unregistered components, use the Sandbox call:
-  - the whole configuration must be passed as the body (`configData` node) of the API call in JSON format
-  - the source data is limited to 50 rows
+  - The whole configuration must be passed as the body (`configData` node) of the API call in JSON format.
+  - The source data is limited to 50 rows.
 - For registered components, use the Input data call:
-  - the configuration can be either passed as the body (`configData` node), or it can refer to an
-existing configuration (`config` node)
-  - the source data is exported unlimited --- this can lead to large data folders!
+  - The configuration can be either passed as the body (`configData` node), or it can refer to an
+existing configuration (`config` node).
+  - The source data is exported unlimited --- this can lead to large data folders!
 - Both the Sandbox and Input calls create a job (automatically executed) which produces a `data.zip` file
-in your *Storage* - *File Uploads*
-  - the `data.zip` folder can be extracted and mapped to your dockerized application
-  - the `data.zip` contains the input tables and files, their manifests and configuration file
-  - the `data.zip` does not contain any data in the `out` folder, your application has to produce it
+in your *Storage* - *File Uploads*:
+  - The `data.zip` folder can be extracted and mapped to your dockerized application.
+  - The `data.zip` contains the input tables and files, their manifests and configuration file.
+  - The `data.zip` does not contain any data in the `out` folder, your application has to produce it.

@@ -120,11 +120,11 @@ got in the above input data API call (`data.zip` file stored in the *Storage* - 
 In that case, revert to the [Sandbox call](/extend/common-interface/sandbox/#create-sandbox-api-call).
 
 ## Running Custom Science Extensions
-Running Custom Science extensions is slightly more complicated, because their Docker images are built dynamically
+Running Custom Science extensions is slightly more complicated because their Docker images are built dynamically
 on execution. Also, because the Custom Science component uses encryption,
 the [Sandbox call](/extend/common-interface/sandbox/#create-sandbox-api-call) must be used. In the
 [API call](http://docs.kebooladocker.apiary.io/#reference/sandbox/sandbox/create-a-sandbox-job), manually
-specify the input/output mapping and parameters. See [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#91a2cf62-d7b1-b75f-73ff-406f2afa92a9).
+specify the input/output mapping and parameters. See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#91a2cf62-d7b1-b75f-73ff-406f2afa92a9).
 
 ### Custom Science R
 You can run the [Custom Science R image](https://quay.io/repository/keboola/docker-custom-r) with
@@ -176,7 +176,7 @@ and then run the application with:
 Both R and Python Transformations are implemented as Docker components. They can be run
 locally as well. Use the [Input data](/extend/common-interface/sandbox/#input-data-api-call) call.
 In the [API call](http://docs.kebooladocker.apiary.io/#reference/sandbox/input-data/create-an-input-job), specify full
-configuration (using `configData` node). See [Example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#4c9c7c9f-6cd6-58e7-27e3-aef62538e0ba)
+configuration (using `configData` node). See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#4c9c7c9f-6cd6-58e7-27e3-aef62538e0ba)
 for both R and Python transformation.
 
 To run R Transformations, use:
