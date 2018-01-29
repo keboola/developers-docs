@@ -18,12 +18,13 @@ The following environment variables are injected in the container:
  - `KBC_DATADIR`: This is always `/data/` in KBC; use this environment variable during application
  development to create development and testing environments.
  - `KBC_RUNID`: RunId from Storage; it couples all events within an API call (use this for logging)
- - `KBC_PROJECTID`: Id of the project in KBC.
+ - `KBC_PROJECTID`: Id of the project in KBC within a [KBC stack](/overview/api/#regions-and-endpoints).
+ - `KBC_STACKID`: Id of the [KBC stack](/overview/api/#regions-and-endpoints).
  - `KBC_CONFIGID`: Id of the configuration or hash of configuration data if the configuration
  is not named (`configData` was used in
  [API call](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job/create-a-run-job)).
- - `KBC_COMPONENTID`: Id of the component 
- 
+ - `KBC_COMPONENTID`: Id of the component
+
  The following variables are available only if specifically requested in the [component registration](/extend/registration/)
  (and approved by us):
 
@@ -59,7 +60,7 @@ User Exception, the end-user will see a full error message. Therefore,
 - Provide guidance on what the user should do. For example, 'The input table is missing; make sure the output mapping produces the 'items.csv' table'.
 
 In case of an *Application Exception*, the end-user will see only a canned response ('An application error occurred') with
-the option to contact support. The actual output of the application will be sent to our internal logs only. You can request us to retrieve the internal logs. 
+the option to contact support. The actual output of the application will be sent to our internal logs only. You can request us to retrieve the internal logs.
 
 In case of [Docker extensions](/extend/docker/) the output can be forwarded to a place specified by you in your
 [component registration](/extend/registration/), while in case of [Custom Science](/extend/custom-science/), it cannot.
