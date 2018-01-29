@@ -7,7 +7,9 @@ permalink: /extend/docker/quick-start/
 {:toc}
 
 This tutorial guides you through the process of creating a simple Docker Application in PHP.
-As in the [Custom Science Quick Start](/extend/custom-science/quick-start/), the application logic is trivial: it takes a table with numbers as an input, and creates another table with an extra column containing those numbers multiplied by two. A test in KBC is included.
+As in the [Custom Science Quick Start](/extend/custom-science/quick-start/), the application logic is trivial: it takes a 
+table with numbers as an input and creates another table with an extra column containing those numbers multiplied by two. A 
+test in KBC is included.
 
 ## Before You Start
 
@@ -23,7 +25,7 @@ is available.
 
 Create a public git repository ([Github](https://github.com/) or [Bitbucket](https://bitbucket.org/) is recommended, although any other host should work as well).
 
-## Step 2 -- Write the Application Code
+## Step 2 -- Write Application Code
 
 In the root of your repository, create a PHP script named
 [`main.php`](https://github.com/keboola/docs-docker-example-basic/blob/master/main.php) with the following contents:
@@ -54,7 +56,7 @@ We take care to properly find the column index (`$numberIndex`), as the order of
 Finally, the result is written to another CSV file. Note that we open both the input and output files simultaneously; as soon as a row is processed,
 it is immediately written to _destination.csv_. This approach keeps only a single row of data in the memory and is
 generally very efficient. It is recommended to implement the processing in this way because data files
-coming from KBC can by quite large (i.e. dozens of Gigabytes).
+coming from KBC can by quite large (i.e., dozens of Gigabytes).
 
 You can test the code with our [sample table](/extend/source.csv):
 
@@ -67,10 +69,10 @@ number | someText | double_number
 30 | ij | 60
 
 
-## Step 3 -- Wrap the Application in a Docker Image
+## Step 3 -- Wrap Application in Docker Image
 You need to create a Docker Image containing your application.
 
-### Step 3.1 -- Wrap the Application in an Image
+### Step 3.1 -- Wrap Application in Image
 Create a file named
 [`Dockerfile`](https://github.com/keboola/docs-docker-example-basic/blob/master/Dockerfile) in the root of the repository:
 
@@ -112,15 +114,14 @@ It should produce output similar to the one below:
     Successfully built c9c00d6a99fd
     Successfully tagged test:latest
 
-Out of that output, the most important thing is the *Successfully built c9c00d6a99fd* which
-means that everything went ok and we can use the tag of the image: `test`.
+Out of that output, the most important thing is the *Successfully built c9c00d6a99fd*. It
+means that everything went ok, and we can use the tag of the image: `test`.
 
 ## Step 4 -- Obtaining Sample Data and Configuration
 Data between KBC and your Docker image are exchanged using [CSV files](/extend/common-interface/) in
 designated [directories](/extend/common-interface/folders/); they will be
 injected into the image when we run it. To simulate this, download an archive containing the data files
-and [configuration](/extend/common-interface/config-file/) in the exact same format as you will obtain it
-in the production environment.
+and [configuration](/extend/common-interface/config-file/) in the exact same format you get in the production environment.
 
 To obtain the configuration, send a [Sandbox API Request](/extend/common-interface/sandbox/). You will receive an
 archive containing a [/data/ folder](/extend/common-interface/) with tables and files from the input mapping, and a
@@ -163,7 +164,7 @@ available only after your extension has been completed and [registered](/extend/
 Alternatively -- to quickly get the picture, download a [random sample data folder](/extend/docker/data.zip),
 which can be used together with the above [sample application](https://github.com/keboola/docs-docker-example-basic).
 
-## Step 5 -- Running the Application with Sample Data
+## Step 5 -- Running Application with Sample Data
 Once you have prepared the data folder with sample data and configuration, inject it into the Docker Image.
 In addition to the options shown in the example, there are many [other options](/extend/common-interface/config-file/) available.
 
@@ -173,7 +174,7 @@ Use the following command to run the image:
     docker run --volume=physicalhostpath:/data/ imageTag
 
 An Image tag can be either the tag you supplied in the `--tag` parameter for `docker build` (`test` in the above example)
-or the image hash you received when the image was build (`c9c` in the above example).
+or the image hash you received when the image was built (`c9c` in the above example).
 The physical host path depends on the system you are running. If in doubt,
 see [Setting up Docker](/extend/docker/tutorial/setup/#sharing-files). In our example image with default Windows
 installation of Docker, this would be:
@@ -184,7 +185,7 @@ Where the contents of the sample data folder are put in the user's home director
 you should see **All done**; and a `destination.csv` file will appear in the `data/out/tables/` folder.
 
 ### Step 5.1 -- Debugging
-Chances are, that you received an ugly error or warning. In that case, you might want to check out the
+Chances are that you received an ugly error message or warning. In that case, you might want to check the
 contents of the image; specifically, if all the files are where you expect
 them to be.
 
