@@ -6,7 +6,7 @@ permalink: /extend/common-interface/config-file/
 * TOC
 {:toc}
 
-Configuration files are one of the [possible channels](/extend/common-interface/) for exchanging data 
+Configuration files are one of the [possible channels](/extend/common-interface/) for exchanging data
 between extensions (and other dockerized applications) and Keboola Connection (KBC).
 
 To create a sample configuration file (together with the data directory),
@@ -14,14 +14,13 @@ use the [create sandbox](/extend/common-interface/sandbox/#create-sandbox-api-ca
 [Docker Runner API](http://docs.kebooladocker.apiary.io/#reference/sandbox).
 You will get a zip archive containing all the resources you need in your extension.
 
-## Configuration File Format
-All configuration files are always stored in `JSON` format. 
+All configuration files are always stored in `JSON` format.
 
 ## Configuration File Structure
 Each configuration file has the following root nodes:
 
-- `storage`: Contains both the input and output [mapping](https://help.keboola.com/manipulation/transformations/mappings/) for both files and tables. 
-This section is important if your application uses a dynamic input/output mapping. 
+- `storage`: Contains both the input and output [mapping](https://help.keboola.com/manipulation/transformations/mappings/) for both files and tables.
+This section is important if your application uses a dynamic input/output mapping.
 Simple applications can be created with a static input/output mapping.
 They do not use this configuration section at all (see [Custom Science Quick Start](/extend/custom-science/quick-start/)).
 - `parameters`: Contains arbitrary parameters passed from the UI to the application. This section can be used in any
@@ -33,7 +32,7 @@ global application parameters (such as token, URL, version of your API).
 - `authorization`: Available only for [registered Docker extensions](/extend/registration/). Contains Oauth2
 [authorization contents](/extend/common-interface/oauth/).
 - `action`: Name of the [action](/extend/common-interface/actions/) to execute; defaults to `run`. Other actions available upon [registration](/extend/registration/)
-and all other actions except `run` have a strict execution time limit of 30 seconds. 
+and all other actions except `run` have a strict execution time limit of 30 seconds.
 See [actions](/extend/common-interface/actions/) for more details.
 
 
@@ -58,7 +57,7 @@ A state object is saved to configuration storage only when actually running the 
 Because the state is stored as part of a
 [Component configuration](http://docs.keboola.apiary.io/#reference/component-configurations),
 the value of the state object is somewhat limited (should not generally exceed 1MB). It should not
-be used to store large amounts of data. 
+be used to store large amounts of data.
 
 Also, the end-user cannot easily access the data through the UI.
 The data can be, however, modified outside of the dockerized application itself using the
@@ -71,9 +70,9 @@ loaded from some API to enable incremental loads.
 
 ## Usage File
 
-Unlike the state file, the **usage file is one way only** and has a pre-defined structure. 
-The usage file is used to pass information from the application to Keboola Connection. 
-Metrics stored are used to determine how much resources the job consumed and translate the usage to KBC 
+Unlike the state file, the **usage file is one way only** and has a pre-defined structure.
+The usage file is used to pass information from the application to Keboola Connection.
+Metrics stored are used to determine how much resources the job consumed and translate the usage to KBC
 credits; this is very useful when you need your customers to pay using your application or service.
 
 The usage file is located at `/data/out/usage.json`. It should contain an array of objects
@@ -91,10 +90,10 @@ and `value`, as in the example bellow:
 
 This structure is processed and stored within a job, so it can be analyzed, processed and aggregated later.
 
-To keep track of the consumed resources in the case of an application failure, **it is recommended to 
+To keep track of the consumed resources in the case of an application failure, **it is recommended to
 write the usage file regularly** during the application run, not only at the end.
 
-*Note: As the structure of the state file is pre-defined, the content of the usage file is strictly 
+*Note: As the structure of the state file is pre-defined, the content of the usage file is strictly
 validated and a wrong format will cause an application failure.*
 
 ## Examples
