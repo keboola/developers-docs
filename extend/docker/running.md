@@ -20,8 +20,8 @@ You can also run your application in your own environment. In that case, set the
 variable to point to the data folder. With this approach, you loose the advantage of the properly defined
 environment, but in some cases, it may be a nice shortcut.
 
-For more details on how to develop an application, see the corresponding tutorials for
-[Docker extension](/extend/docker/quick-start/) or [Custom Science](/extend/custom-science/quick-start/). 
+For more details on how to develop an application, see the corresponding tutorials for creating a
+[Docker extension](/extend/docker/quick-start/) or a [Custom Science extension](/extend/custom-science/quick-start/). 
 Regardless of the chosen approach, the image -- when being run -- should consume tables and files from `in` subfolders and
 produce result tables and files in the respective `out` subfolders.
 
@@ -77,7 +77,7 @@ also check [Automated testing for R Custom Science extensions](/extend/custom-sc
 [Automated testing for Python Custom Science extensions](/extend/custom-science/python/#continuous-integration-and-testing).
 
 ## Running Unregistered Docker Extension
-Unregistered Docker extensions do not have their component Id yet. This is somewhat limiting because you
+Unregistered Docker extensions do not have their component ID yet. This is somewhat limiting because you
 get only a sample of the data the component will receive by using
 the [Sandbox call](/extend/common-interface/sandbox/#create-sandbox-api-call). In the
 [API call](http://docs.kebooladocker.apiary.io/#reference/sandbox/sandbox/create-a-sandbox-job), manually
@@ -95,14 +95,14 @@ obtained in the above Sandbox API call (`data.zip` file stored in the *Storage* 
 
 ## Running Registered Docker Extension
 Already [registered](/extend/registration/) Docker extensions have been assigned their *component ID*
-(in the form of *vendor.componentName*, e.g. *keboola.docs-docker-example-parameters*). To get the sample data for
+(in the form of *vendor.componentName*, e.g., *keboola.docs-docker-example-parameters*). To get the sample data for
 a registered component, use the [input data](/extend/common-interface/sandbox/#input-data-api-call) API call.
 In the [API call](http://docs.kebooladocker.apiary.io/#reference/sandbox/input-data/create-an-input-job), either specify the 
 full configuration (using the `configData` node) or refer to an existing configuration
 of the component (using the `config` node). 
 See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#4c9c7c9f-6cd6-58e7-27e3-aef62538e0ba).
 
-The request URL is, e.g., `https://syrup.keboola.com/docker/keboola.docs-docker-example-parameters/input where 
+The request URL is, e.g., `https://syrup.keboola.com/docker/keboola.docs-docker-example-parameters/input, where 
 `keboola.docs-docker-example-parameters` must be replaced with your component ID.
 
 To run the component, use the command line. For example:
@@ -158,7 +158,7 @@ then
 
     cd /data/
 
-(Note: for running Python 2.x applications, use the `quay.io/keboola/docker-custom-python2` image)
+(Note: For running Python 2.x applications, use the `quay.io/keboola/docker-custom-python2` image.)
 
 Then execute
 
@@ -196,7 +196,7 @@ There are three API calls available for that purpose:
 
   - [Sandbox](http://docs.kebooladocker.apiary.io/#reference/sandbox/sandbox/create-a-sandbox-job)
   - [Input](http://docs.kebooladocker.apiary.io/#reference/sandbox/input-data/create-an-input-job)
-  - [Dry run](http://docs.kebooladocker.apiary.io/#reference/sandbox/dry-run/create-a-dry-run-job)
+  - [Dry Run](http://docs.kebooladocker.apiary.io/#reference/sandbox/dry-run/create-a-dry-run-job)
 
 The [Sandbox](http://docs.kebooladocker.apiary.io/#reference/sandbox) API call is useful for obtaining a
 sample environment configuration when starting with development of a new Docker Extension or
@@ -205,6 +205,6 @@ Custom Science extension.
 The [Input](http://docs.kebooladocker.apiary.io/#reference/input) API call is useful for obtaining an
 environment configuration for a registered Docker extension (without encryption) or Transformations.
 
-The [Dry run](http://docs.kebooladocker.apiary.io/#reference/dry-run) API call is the last step.
+The [Dry Run](http://docs.kebooladocker.apiary.io/#reference/dry-run) API call is the last step.
 It will do everything except the output mapping and is therefore useful for debugging an existing application
 in production without modifying files and tables in a KBC project.
