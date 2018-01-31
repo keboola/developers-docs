@@ -139,7 +139,7 @@ Now push a tag to the repository (we recommend using [Semantic Versioning](http:
 In Travis, you should see an output similar to this:
 
 {: .image-popup}
-![Screenshot -- Build and Deploy Log](/extend/registration/deploy-log-1.png)
+![Screenshot -- Build and Deploy Log](/extend/registration/deploy-log-2.png)
 
 If no errors occurred, the application is now deployed into KBC. In the Developer Portal, you can verify that the
 application repository and tag were automatically set:
