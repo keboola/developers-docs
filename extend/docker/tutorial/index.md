@@ -6,25 +6,25 @@ permalink: /extend/docker/tutorial/
 * TOC
 {:toc}
 
-Docker is a technology stack for running things in virtualized environments. In KBC, we use a limited set of Docker features.
+Docker is a technology stack for running things in virtualized environments. In Keboola Connection (KBC), we use a limited set of Docker features.
 Their description follows. For a full technical description of Docker, consult its
 [official documentation](https://docs.docker.com/).
 
 ## What Docker Is
 At first sight, Docker is similar to other virtualization technologies (such as VMware or VirtualBox).
-However, there are some [fundamental differences](https://docs.docker.com/engine/understanding-docker/).
-The main difference is that Docker runs only virtualized applications, not the entire OS.
+However, there are some [fundamental differences](https://docs.docker.com/engine/understanding-docker/), 
+the main one being that Docker runs only virtualized applications, not the entire OS.
 
 Docker has **Docker Images** and **Docker Containers**. To create a Docker image, create a **Dockerfile**. 
 Dockerfiles contain instructions on how the Docker image should be built, and this represents the environment 
 (OS + modifications) in which an application runs.
 
-A Docker image contains everything that is required to run an application. An image usually has an **entrypoint**, which is
-a single command that is executed when the image is run.
+A Docker image contains everything required to run an application. It usually has an **entrypoint**, which is
+a single command executed when the image is run.
 
 When you run an image (start an application in it), a **Docker container** is created. The container is a sandbox
-isolated from the image itself and cannot make permanent changes to it; this is very important (and maybe somewhat
-surprising). When you run the image again (and create a new container), it won't be affected in any way by the previous
+isolated from the image itself and cannot make permanent changes to it. Maybe somewhat surprising, this is very important. 
+When you run the image again (and create a new container), it won't be affected in any way by the previous
 container. The Docker image is therefore stateless and acts as a template. The state is stored only in the container.
 
 ## Docker Images

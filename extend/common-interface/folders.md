@@ -8,7 +8,7 @@ permalink: /extend/common-interface/folders/
 
 Data folders are one of the [possible channels](/extend/common-interface/) to exchange data between your application and Keboola Connection (KBC).
 
-## /data/ Root Folder
+## Root Folder /data/ 
 
 The `/data/` folder is the root folder for exchanging data.
 Your application reads its input from the `/data/in` folder and writes its results to the `/data/out` folder.
@@ -30,14 +30,14 @@ The predefined data exchange folder structure is as follows:
     /data/out/files
 
 This folder structure is always available to your application. For Custom Science, the current directory
-will always be set to `/data/`, so the above folders can be accessed both with absolute and relative paths (e.g. `in/tables`).
-For Docker Extensions, the current directory is up to you.
+will always be set to `/data/`, so the above folders can be accessed both with absolute and relative paths (e.g., `in/tables`).
+For Docker extensions, the current directory is up to you.
 Do not put arbitrary files in the `/data/` folder as they will be uploaded into the user project
 (or cause errors in the output [mapping](https://help.keboola.com/manipulation/transformations/mappings/)).
 For working or temporary files, use either the `/home/` or `/tmp/` folder.
 The working directories have 10GB of free space.
 
-### `/data/in/tables/` Folder
+### Folder /data/in/tables/ 
 
 The folder contains tables defined in the input [mapping](https://help.keboola.com/manipulation/transformations/mappings/);
 they are serialized in the CSV format:
@@ -49,60 +49,59 @@ they are serialized in the CSV format:
 File names are specified in the input mapping, defaulting to `{tableId}` (a file name can be changed in the UI).
 The table metadata is stored in a [manifest file](/extend/common-interface/manifest-files/).
 
-### `/data/out/tables/` Folder
+### Folder /data/out/tables/ 
 
 All output tables from your application must be placed in this folder. The destination table in
 [Storage](https://help.keboola.com/storage/) is defined by the following rules (listed in order):
 
 - If `defaultBucket` (see [below](#default-bucket)) is specified, it applies only
-to the [Docker extension](/extend/docker/). The table will be uploaded to a
-bucket whose name is created from the extension and configuration names.
-- If the output mapping is specified (through the UI, usually) and its *source* matches the physical file name in the
-`/data/out/tables` folder, the *destination* is the name of the table in Storage. An output mapping which cannot be
-matched to a physical file produces an error (i.e. fulfilling the output mapping is mandatory).
-- If a [manifest file](/extend/common-interface/manifest-files/) exists, it can specify the *destination* of
+to the [Docker extension](/extend/docker/). The table will be uploaded to a bucket whose name is created 
+from the extension and configuration names.
+- If the output mapping is specified (through the UI, usually) and its **source** matches the physical file name 
+in the `/data/out/tables` folder, the **destination** is the name of the table in Storage. An output mapping which 
+cannot be matched to a physical file produces an error (i.e., fulfilling the output mapping is mandatory).
+- If a [manifest file](/extend/common-interface/manifest-files/) exists, it can specify the **destination** of
 the table in Storage if no output mapping is present.
 - If none of the above options are used, the destination is defined by the name of the file
-(for example, `out.c-data.my-table.csv` will create a *my-table* table in the *out-c-data* bucket). The filename must have
-at least two dots.
+(for example, `out.c-data.my-table.csv` will create a **my-table** table in the **out-c-data** bucket). The file name 
+must have at least two dots.
 - If neither rule can be applied, an error is thrown.
 
-Basically, manifests allow you to process files in the `/data/out` folder without explicitly being defined in the
+Manifests allow you to process files in the `/data/out` folder without explicitly being defined in the
 output mapping. That allows for a flexible and dynamic output mapping where the structure is unknown at the beginning.
-Using filenames (e.g. `out.c-data.my-table.csv`) for an output mapping is great for saving implementation time in simple or
-POC applications.
+Using file names (e.g., `out.c-data.my-table.csv`) for an output mapping is great for saving implementation time 
+in simple or POC applications.
 
-**Important**: All files in the `/data/out/tables` folder will be uploaded, not only those specified in the output mapping or
-manifests.
+**Important**: All files in the `/data/out/tables` folder will be uploaded, not only those specified in the output 
+mapping or manifests.
 
-The expected CSV format ([RFC 4180](https://tools.ietf.org/html/rfc4180)):
+This is the expected CSV format ([RFC 4180](https://tools.ietf.org/html/rfc4180)):
 
   - string enclosure `"`
   - delimiter `,`
   - no escape character
 
-A [manifest file](/extend/common-interface/manifest-files/) can specify a different enclosure and delimiter. The
-CSV file may also be [gzipped](http://www.gzip.org/).
+A [manifest file](/extend/common-interface/manifest-files/) can specify a different enclosure and delimiter. 
+The CSV file may also be [gzipped](http://www.gzip.org/).
 
 #### Default Bucket
 If you cannot define a bucket or want to get it automatically, request setting
 the `default_bucket` flag during your [extension registration](/extend/registration/).
 
 All tables in `/data/out/tables` will then be uploaded to a bucket identified by your
-component id (created upon the extension registration),
-configuration id (created when an end-user adds a new extension configuration) and stage (`in` or `out`).
+component id (created upon the extension registration), configuration id (created when an end-user adds a new extension configuration) and stage (`in` or `out`).
 The file name (without the `.csv` suffix) will be used as the table name. The `destination` attributes
 in the output mapping and file manifests will be overridden.
 
 **Important**: The `default_bucket` flag always requires the `config` parameter when creating a job manually using
-API even if the `config` configuration does not exist in Storage. This feature
+the API even if the `config` configuration does not exist in Storage. This feature 
 is available only for [Docker extensions](/extend/docker/).
 
 #### Sliced Tables
 
-Sometimes your application will download the CSV file in slices (chunks). You do not need to manually merge them, simply put them
-in a subfolder with the same name as you would use for a single file. All files found in the subfolder are considered
-slices of the table.
+Sometimes your application will download the CSV file in slices (chunks). You do not need to manually merge them, 
+simply put them in a subfolder with the same name you would use for a single file. All files found in the 
+subfolder are considered slices of the table.
 
     /data/out/tables/myfile.csv/part01
     /data/out/tables/myfile.csv/part02
@@ -119,19 +118,19 @@ The following is an example of specifying columns in the manifest file `/data/ou
     }
 
 All files from the folder are uploaded irrespective of their name or extension. They are uploaded
-to Storage in parallel and in an undefined order. Use sliced tables in case you want to upload tables [larger then 5GB](https://help.keboola.com/storage/file-uploads/#limits). The slices may be compressed by gzip.
+to Storage in parallel and in an undefined order. Use sliced tables in case you want to upload tables [larger than 5GB](https://help.keboola.com/storage/file-uploads/#limits). The slices may be compressed by gzip.
 
 **Important**: Please be reasonable with the total volume and number of slices.
-A rule of thumb is that slices are best around 100 MB in size and the total number of slices should not exceed 1000 files.
+A rule of thumb is that slices are best around 100 MB in size, and the total number of slices should not exceed 1000 files.
 The total size of all slices combined should not exceed 50 GB.
 
-### `/data/in/files/` Folder
+### Folder /data/in/files/ 
 
 All files defined in the input mapping are stored in their raw form. File names are numeric and
 equal to `{fileId}_{filename}` in Storage. All other information about the files is available
 in the [manifest file](/extend/common-interface/manifest-files/).
 
-### `/data/out/files/` Folder
+### Folder /data/out/files/ 
 
 All files in this folder are uploaded to Storage. File names are preserved, and tags and other upload options
 can be specified in the [manifest file](/extend/common-interface/manifest-files/).
@@ -140,9 +139,9 @@ Note that all files in the `/data/out/files` folder will be uploaded, not only t
 ## Exchanging Data via S3
 The application may also exchange data with Storage [using Amazon S3](https://aws.amazon.com/documentation/s3/).
 In this case, the data folders contain only [manifest files](/extend/common-interface/manifest-files/) and
-not the actual data. This mode of operation can be enabled by setting the `staging_storage` option to `S3` during
-[application registration](/extend/registration/). If this option is enabled, all the data folders
+not the actual data. This mode of operation can be enabled by setting the `staging_storage` option to `S3` during 
+the [application registration](/extend/registration/). If this option is enabled, all the data folders
 will contain only manifest files, extended with an additional
 [`s3` section](/extend/common-interface/manifest-files/#s3-section).
 
-Note: Exchanging data via S3 is currently only available for input mapping.
+**Note**: Exchanging data via S3 is currently only available for input mapping.
