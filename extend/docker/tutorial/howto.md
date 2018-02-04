@@ -6,19 +6,20 @@ permalink: /extend/docker/tutorial/howto/
 * TOC
 {:toc}
 
-The following are the basic steps for developing KBC Docker Images. There is no need to know everything about the Docker stack since this is a very limited set of Docker features.
-The official [Tutorial](https://docs.docker.com/get-started/) is not being replaced here.
+The following are the basic steps for developing KBC Docker Images. There is no need to know everything about the 
+Docker stack since this is a very limited set of Docker features.
+The official [tutorial](https://docs.docker.com/get-started/) is not being replaced here.
 Before you start, make sure you have [Docker installed](/extend/docker/tutorial/setup/).
 
 The code discussed below is available in our [sample repository](https://github.com/keboola/docs-docker-example-image).
 
 ## Creating Your Own Image
 To create your own image, create a [Dockerfile](https://docs.docker.com/engine/reference/builder/).
-Dockerfile is a set of shell instructions leading to a configured OS environment. You can think of it as a
+A Dockerfile is a set of shell instructions leading to a configured OS environment. You can think of it as a
 bash shell script with some specifics. Each Dockerfile should be placed in its own folder because the folder
-becomes *Build Context* of the Docker image. Build context contains files which can be injected into the
-Image. There is no other way to inject arbitrary files into the image other than through the build
-context or download them from the Internet.
+becomes a **Build Context** of the Docker image. The build context contains files which can be injected into the
+image. There is no other way to inject arbitrary files into the image other than through the build
+context or via downloading them from the Internet.
 
 Useful Dockerfile instructions:
 
@@ -29,20 +30,20 @@ will be executed when the image is run; this is the command that will actually r
 When the command finishes, the container finishes too.
 - [`ENV`](https://docs.docker.com/engine/reference/builder/#env): Set an environment variable, use this instead of `export`.
 - [`WORKDIR`](https://docs.docker.com/engine/reference/builder/#workdir): Set the current working folder.
-- [`COPY`](https://docs.docker.com/engine/reference/builder/#copy): Copy files from Build context into the image.
+- [`COPY`](https://docs.docker.com/engine/reference/builder/#copy): Copy files from the build context into the image.
 
 Note that in Dockerfile, each instruction is executed in its own shell. Therefore, the
-`ENV` and `WORKDIR` instructions *MUST* be used to set environment variables and the current folder.
+`ENV` and `WORKDIR` instructions **MUST** be used to set environment variables and the current folder.
 
 ### Sample Image
-Create an empty folder, and then create a Dockerfile with the following contents inside the folder.
+Create an empty folder. Then create a Dockerfile with the following contents inside the folder.
 
 {% highlight dockerfile %}
 FROM alpine
 ENTRYPOINT ping -c 2 example.com
 {% endhighlight %}
 
-The `FROM` instruction means we start with the [Alpine Linux image](https://hub.docker.com/_/alpine/).
+The `FROM` instruction means you start with the [Alpine Linux image](https://hub.docker.com/_/alpine/).
 The second instruction means that when you run the image, it will ping _example.com_ twice and exit.
 When you run
 
@@ -61,11 +62,11 @@ you should see an output like this:
 
 The `ad16195c696d` is a volatile image hash which is used to refer to the image and can be abbreviated to first three
 characters (`ad1` in this case).
-Additionally, you can name the image by passing the `--tag` option, e.g.
+Additionally, you can name the image by passing the `--tag` option, e.g.,
 
     docker build --tag=my-image .
 
-After an image has been built, run it using `docker run ad1` or
+After the image has been built, run it using `docker run ad1` or
 
     docker run my-image .
 
@@ -80,10 +81,10 @@ You should see an output like this:
     2 packets transmitted, 2 packets received, 0% packet loss
     round-trip min/avg/max = 137.057/141.168/145.279 ms
 
-### Inspecting the Image
+### Inspecting Image
 When building your own image, the ability to run arbitrary commands in the image is very useful. Override the entrypoint using the `--entrypoint`
 option (which means that your application will not execute, and you will have to run it manually). The `-i` and `-t`
-options opens **i**nteractive **t**erminal:
+options open **i**nteractive **t**erminal:
 
     docker run -i -t --entrypoint=/bin/sh my-image
 
@@ -109,12 +110,12 @@ Open a new command line window and run:
 
     docker ps
 
-This will show you a list of running containers - something like:
+This will show you a list of running containers --- something like:
 
     CONTAINER ID  IMAGE     COMMAND                  CREATED          STATUS         NAMES
     f7def769a470  my-image  "/bin/sh -c 'ping ..."   16 seconds ago   Up 13 seconds  sharp_ptolemy
 
-The important part is the *container ID*. You can then run an arbitrary command in the running container with
+The important part is the **container ID**. You can then run an arbitrary command in the running container with
 the following command:
 
     docker exec *container_id* *command*
@@ -123,7 +124,7 @@ For example:
 
     docker exec -i -t f7d /bin/sh
 
-will execute **i**nteractive **t**erminal with the shell in the container *daf* (container ID can
+will execute **i**nteractive **t**erminal with the shell in the container **daf** (container ID can
 be shortened to first 3 letters). Verify that `ping` is still running by:
 
     ps -A
@@ -162,9 +163,9 @@ You should see the following output:
 
 
 ### Loading Files into Image
-When you need to add files into your image, use the *build context* (which is simply
-the folder in which the *Dockerfile* is and in which you are building the image). Create a `test.php`
-file in the same folder as the *Dockerfile* with the following contents:
+When you need to add files into your image, use the **build context** (which is simply
+the folder in which the **Dockerfile** is and in which you are building the image). Create a `test.php`
+file in the same folder as the **Dockerfile** with the following contents:
 
 {% highlight php %}
 <?php
@@ -190,14 +191,14 @@ is run. When you `docker build` and `docker run` the image, you will receive:
     Hello world from PHP file
 
 ## Dockerfile Gotchas
-- Make absolutely sure that the *Dockerfile* script requires no interaction.
-- Each Dockerfile instruction runs in its own shell and there is no state maintained between them.
+- Make absolutely sure that the **Dockerfile** script requires no interaction.
+- Each Dockerfile instruction runs in its own shell, and there is no state maintained between them.
 This means that, for instance, having `RUN export foo=bar` makes no sense. Use `ENV foo=bar` instruction
 to create environment variables.
 - When you look at the [existing Dockerfiles](https://github.com/keboola/docker-custom-python/blob/master/Dockerfile),
 you will realize that commands are squashed together
 to a [single instruction](https://github.com/keboola/docker-custom-python/blob/master/Dockerfile#L6). This is
-because each instruction creates a *layer* and there is a limited number of layers (layers are counted for the base
+because each instruction creates a **layer** and there is a limited number of layers (layers are counted for the base
 images too). However, this approach makes debugging more complicated. So, you better start with having
 
 {% highlight dockerfile %}

@@ -15,8 +15,8 @@ For reliability reasons, we strongly recommend to use the [Amazon AWS ECR](https
 [provisioned by the **Keboola Developer Portal**](/extend/registration/deployment/).
 We also support Docker Hub and [Quay](https://quay.io/), both public and private repositories.
 
-## Working with a Registry
-In order to run an image, **pull** (`docker pull`) that image to your machine. The `docker run`
+## Working with Registry
+In order to run an image, **pull** (`docker pull`) the image to your machine. The `docker run`
 command does that automatically for you. So, when you do:
 
     docker run -i quay.io/keboola/docker-custom-php
@@ -34,29 +34,29 @@ you will see something like this:
 When you build an image locally, **push** (`docker push`) it to the Docker registry. Then the
 image can be shared with anyone (if public), or with your organization (if private).
 
-Because the image is defined only by the Dockerfile instructions (and optionally *build context*), you can take
+Because the image is defined only by the Dockerfile instructions (and optionally **build context**), you can take
 a shortcut and give the registry only the Dockerfile. The registry will then build the image on its own
 infrastructure. This is best done by setting up an [automated deploy script](/extend/registration/deployment/) or
 by linking a git repository containing the Dockerfile (and usually the application code) with the registry.
 
-## Setting up a Repository on Quay
-This may get slightly confusing because we will create a new *Image Repository* and link
-that to an existing *Github Repository*. Use the
+## Setting up Repository on Quay
+This may get slightly confusing because we will create a new **Image Repository** and link
+that to an existing **Github Repository**. Use the
 [sample repository](https://github.com/keboola/docs-docker-example-basic)
 created in our [tutorial](/extend/docker/tutorial/howto/).
 
-Create an account and organization, and then *Create a New Repository*:
+Create an account and organization, and then **create a new repository**:
 
 {: .image-popup}
 ![Create Repository](/extend/docker/tutorial/quay-intro.png)
 
-In the repository configuration, select *Link to a Github Repository Push*:
+In the repository configuration, select **Link to a Github Repository Push**:
 
 {: .image-popup}
 ![Repository configuration](/extend/docker/tutorial/quay-new-repository.png)
 
-Then link the image repository to a Github repository
-(you can use our [sample repository](https://github.com/keboola/docs-docker-example-basic)):
+Then link the image repository to a Github repository. You can use 
+our [sample repository](https://github.com/keboola/docs-docker-example-basic):
 
 {: .image-popup}
 ![Link repositories](/extend/docker/tutorial/quay-link-repository.png)
@@ -82,7 +82,7 @@ Regardless of your chosen approach, finish setting up the trigger by completing 
 ![Configure build trigger](/extend/docker/tutorial/quay-build-trigger.png)
 
 Pushing a new commit into a git repository or creating a new tag (depending on the trigger setting) will now
-trigger a new build of the Docker Image. Also note that the image automatically inherits the git repository tag
+trigger a new build of the Docker image. Also note that the image automatically inherits the git repository tag
 or branch name. So, when you push a commit to the `master` branch, you will get an image with a tag master (which
 will move away from any older image builds). When creating a `1.0.0` tag, you will get an image with a `1.0.0` tag.
 
