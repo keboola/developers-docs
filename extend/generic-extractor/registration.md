@@ -45,8 +45,8 @@ based on Generic Extractor:
 Because the UI is assumed to be `genericTemplatesUI`, provide a
 [**configuration schema**](/extend/registration/configuration-schema/) and
 a **template** to be used in conjunction with the schema.
-Optionally, the templates UI may contain interface to negotiate [OAuth authentication](/extend/generic-extractor/configuration/api/authentication/#oauth).
-An example of the templates UI is shown in the picture below.
+Optionally, the template UI may contain an interface to negotiate [OAuth authentication](/extend/generic-extractor/configuration/api/authentication/#oauth).
+An example of the template UI is shown in the picture below.
 
 {: .image-popup}
 ![Screenshot - Generic templates UI](/extend/generic-extractor/template-1.png)
@@ -63,7 +63,7 @@ section. Other sections, such as [`api`](/extend/generic-extractor/configuration
 [`authorization.oauth_api`](/extend/generic-extractor/configuration/api/authentication/#oauth) may not be modified by the end-user.
 
 You can review existing templates in their [Github repository](https://github.com/keboola/kbc-ui-templates/tree/master/resources).
-If you feel confident, you can send a pull request with your templates, otherwise [contact us on support](mailto:support@keboola.com)
+If you feel confident, you can send a pull request with your templates, otherwise [contact our support](mailto:support@keboola.com)
 to activate templates for your extractor.
 
 ## Example
@@ -130,9 +130,9 @@ For each of them, create a parameter of the appropriate type:
 - `JohnDoe` --- a string parameter `login`
 - `TopSecret` --- a string parameter `#password` (it will be encrypted)
 - `123` --- a numeric parameter `accountId`
-- `active` --- a enumeration parameter `userType` with values `active`, `inactive`, `all`
+- `active` --- an enumeration parameter `userType` with values `active`, `inactive`, `all`
 
-The parameters names are completely arbitrary. However, they must not conflict with existing
+The parameter names are completely arbitrary. However, they must not conflict with existing
 configuration properties of [Generic Extractor](/extend/generic-extractor/configuration/config/) (e.g., `jobs`, `mappings`).
 Now create a [configuration schema](/extend/registration/configuration-schema/) for the four parameters.
 
@@ -265,7 +265,7 @@ modify the configuration so that it reads them from there using [functions and r
 {% endhighlight %}
 
 The argument to the `base64_encode` function is now the
-[`concat` function](/extend/generic-extractor/functions/#concat) which joins together the
+[`concat` function](/extend/generic-extractor/functions/#concat), which joins together the
 values of the `username` and `#password` fields. The `accountId` parameter needs to be moved to the
 `jobs` section because the `http.defaultOptions.params` section does not support function calls (yet!).
 The `type` parameter was changed to a reference to the `userType` field

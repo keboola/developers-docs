@@ -83,7 +83,7 @@ Regardless of your chosen approach, finish setting up the trigger by completing 
 
 Pushing a new commit into a git repository or creating a new tag (depending on the trigger setting) will now
 trigger a new build of the Docker image. Also note that the image automatically inherits the git repository tag
-or branch name. So, when you push a commit to the `master` branch, you will get an image with a tag master (which
+or branch name. So, when you push a commit to the `master` branch, you will get an image with a tag `master` (which
 will move away from any older image builds). When creating a `1.0.0` tag, you will get an image with a `1.0.0` tag.
 
 When using images in Keboola Connection, we **highly recommend to use our [ECR repository](/extend/registration/deployment/)**.

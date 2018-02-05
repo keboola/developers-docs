@@ -6,8 +6,8 @@ permalink: /extend/docker/tutorial/setup/
 * TOC
 {:toc}
 
-To work with Docker, you need to have it installed. If you have a computer with a Docker machine at hand, you can obtain a
-cheap [hosted server](https://www.digitalocean.com/features/one-click-apps/docker/) or
+To work with Docker, you need to have it installed. If you do not have a computer with a Docker machine, you can obtain a
+cheap [hosted server](https://www.digitalocean.com/features/one-click-apps/docker/). You can also
 run everything locally. To install a Docker machine on Win/Mac,
 use [Docker Community Edition](https://store.docker.com/search?type=edition&offering=community). For
 other systems, see the [documentation](https://docs.docker.com/engine/installation/).
@@ -18,7 +18,8 @@ from the Docker [documentation](https://docs.docker.com/get-started/).
 Run the following commands on the command line:
 
     docker run hello-world
-,
+	
+
 or
 
     docker run docker.io/library/hello-world:latest
