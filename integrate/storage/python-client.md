@@ -23,8 +23,8 @@ recommend that you use the `pip` package to install it:
     pip3 install git+https://github.com/keboola/sapi-python-client.git
 
 ## Usage
-The client contains a `Client` class which encapsulates all API endpoints and hold storage token and URL. Each API endpoint is
-represented by its own class (`Files`, `Buckets`, `Jobs`, ...) which can be used standalone if you only work with one endpoint.
+The client contains a `Client` class, which encapsulates all API endpoints and holds a storage token and URL. Each API endpoint is
+represented by its own class (`Files`, `Buckets`, `Jobs`, etc.), which can be used standalone if you only work with one endpoint.
 This means that the two following examples are equivalent:
 
 {% highlight python %}
@@ -41,11 +41,11 @@ tables = Tables('https://connection.keboola.com', 'your-token')
 tables.detail('in.c-demo.some-table')
 {% endhighlight %}
 
-### Example --- Create a Table and Import Data
+### Example --- Create Table and Import Data
 To create a new table in Storage, use the `create` function of the `Tables` class. Provide the name of an existing bucket,
 the name of the new table and a CSV file with the table's contents.
 
-To create the `new-table` table in the `in.c-main` bucket, use
+To create the `new-table` table in the `in.c-main` bucket, use:
 
 {% highlight python %}
 from kbcstorage.client import Client
@@ -64,7 +64,7 @@ also mark the `id` column as the primary key.
 If you want to export a table from Storage and import it into Python, use the `importTable` function. Provide
 the ID (*bucketName.tableName*) of an existing table.
 
-To export data from the `old-table` table in the `in.c-main` bucket, use
+To export data from the `old-table` table in the `in.c-main` bucket, use:
 
 {% highlight python %}
 from kbcstorage.client import Client
@@ -79,7 +79,7 @@ with open('./new-table', mode='rt', encoding='utf-8') as in_file:
         print(row)
 {% endhighlight %}
 
-The above command will export the table from Storage into file `new-table` and read it using
+The above command will export the table from Storage into the file `new-table` and read it using
 [CSV Reader](https://docs.python.org/3.6/library/csv.html#reader-objects).
 
 ### Other Examples

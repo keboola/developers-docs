@@ -211,9 +211,11 @@ See the full [example](/extend/generic-extractor/configuration/api/#required-hea
 
 ### Ignore Errors
 The `ignoreErrors` option allows you to force Generic Extractor to ignore certain extraction errors. 
-The option lists HTTP codes for which any errors occuring during downloading 
+The option lists HTTP codes for which any errors occurring during downloading 
 and JSON parsing the response will be ignored. The `ignoreErrors` option error is an array of HTTP 
-response status codes; default value is empty array. If the `ignoreErrors` is set to non-empty array -- e.g.:
+response status codes; the default value is an empty array. 
+
+If the `ignoreErrors` is set to a non-empty array -- for instance:
 
 {% highlight json %}
 "http": {
@@ -221,23 +223,25 @@ response status codes; default value is empty array. If the `ignoreErrors` is se
 }
 {% endhighlight %}
 
-Then
-- a response with status 2XX is processed normally
-- a response with status 404 is processed as if it were a success response
-    - if parsing of the response body JSON succedees it is added as any other row
-    - if parsing of the response body JSON fails, it is added as a row with `errorData` field
-- a response with status 4XX (other than 404) causes the extration to fail
-- a response with status 5XX causes the request to be [retried](#retry-configuration), and if that does 
-not help it causes the extraction to fail
+Then the following happens:
+
+- A response with status 2XX is processed normally.
+- A response with status 404 is processed as if it were a success response.
+    - If parsing of the response body JSON succeeds, it is added as any other row.
+    - If parsing of the response body JSON fails, it is added as a row with the `errorData` field.
+- A response with status 4XX (other than 404) causes the extraction to fail.
+- A response with status 5XX causes the request to be [retried](#retry-configuration). If that does 
+not help, it causes the extraction to fail.
 
 If the `ignoreErrors` contains 5XX status codes, the [Retry rules](#retry-configuration) are still applied. 
 But regardless of the outcome of the retries, the response will be considered as success.
 
 See [example [EX132]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/132-ignore-errors).
 
-**Important: Use this feature with caution! This feature is designed to workaround weird or buggy REST 
-API implemntations and should not be used blindly if other solutions may be applied (e.g. [`responseFilter`](/extend/generic-extractor/configuration/config/jobs/#response-filter). When ignoring errors, you might miss 
-some actual errors which require your attention.** 
+**Important**: Use this feature with **caution**! It is designed to workaround weird or buggy REST 
+API implementations and should not be used blindly if other solutions may be applied (e.g.,
+[`responseFilter`](/extend/generic-extractor/configuration/config/jobs/#response-filter). When ignoring errors, 
+**you might miss even those errors that require your attention.**
 
 ## Examples
 
