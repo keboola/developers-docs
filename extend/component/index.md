@@ -4,6 +4,8 @@ permalink: /extend/component/
 redirect_from:
     - /extend/docker/
     - /extend/custom-science/
+    - /extend/custom-science/development/
+
 ---
 
 Components allow you to [extend](/extend/) KBC in an arbitrary way.

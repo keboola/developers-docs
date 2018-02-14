@@ -3,6 +3,9 @@ title: Implementation
 permalink: /extend/component/implementation/
 redirect_from:
     - /extend/docker/images/
+    - /extend/custom-science/r/
+    - /extend/custom-science/python/
+    - /extend/custom-science/python/
 ---
 
 * TOC
