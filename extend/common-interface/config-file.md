@@ -51,7 +51,7 @@ The application reads the input state file and writes any content to the output 
 file (valid JSON) that
 will be available to the next API call. A missing or an empty file will remove the state value.
 A state object is saved to configuration storage only when actually running the app
-(not in [sandbox API calls](/extend/common-interface/sandbox/). The state must be a valid JSON file.
+(not in [sandbox API calls](/extend/common-interface/sandbox/). The state must be a valid JSON file and is not encrypted when storing or decrypted when loading.
 
 ### State File Properties
 Because the state is stored as part of a
