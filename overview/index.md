@@ -28,7 +28,7 @@ There are some components which are probably more important than others:
 
 - [Storage](/integrate/storage/) component which is used to store all data in your KBC projects (data in tables,
 file uploads, configurations and logs)
-- [Docker Runner](/integrate/docker-bundle) component which is used internally to run almost all
+- [Docker Runner](/extend/docker-runner) component which is used internally to run almost all
 [components](/extend/component/); therefore all extractors, writers and applications share its features
 - [Transformations](/integrate/transformations/) component which encapsulates all types of transformations (SQL with
 various backends, R, Python)

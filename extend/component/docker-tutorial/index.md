@@ -64,7 +64,7 @@ Before you run components in KBC, make sure to
 Before you develop a dockerized component for KBC, you should be able to
 [create and run dockerized applications](/extend/component/docker-tutorial/howto/) in your own environment.
 
-If you are already familiar with Docker, jump straight into [component development tutorial](/component/tutorial/)
+If you are already familiar with Docker, jump straight into [component development tutorial](/extend/component/tutorial/)
 or explore our sample component code [in PHP](https://github.com/keboola/docker-demo-app).
 The demo component itself starts with a single
 [`/src/run.php`](https://github.com/keboola/docker-demo-app/blob/master/run.php) script,

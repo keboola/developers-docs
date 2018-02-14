@@ -46,8 +46,9 @@ from our side. It also takes care of executing your component in its own
 Before you start developing a new component, you need to:
 
 - Have a [KBC project](/#development-project) where you can test your code.
-- Get yourself acquainted with [Docker](/extend/component/docker-tutorial/). You must be
-able to [run `docker`](/extend/component/docker-tutorial/setup/) commands.
+- Get yourself acquainted with [Docker](/extend/component/docker-tutorial/). You should be
+able to [run `docker`](/extend/component/docker-tutorial/setup/) commands. Strictly speaking, you can get away
+without using it, but it will certainly speed things up for you.
 - You should be able to send API requests. Although you can use the [Apiary](https://apiary.io/) client console, we
 recommend using [Postman](https://www.getpostman.com/) as it is
 more convenient. A list of [sample requests](https://documenter.getpostman.com/view/3086797/collection/77h845D)
@@ -69,3 +70,39 @@ along with a [guide to setting up Docker](/extend/component/docker-tutorial/setu
 - Request [publication](/extend/publish/) of your component.
 
 ## Custom Science Migration Guide
+Previously we have supported a Custom Science component, which was offered as an intermediate before a fully fledged component.
+We believe it was fully superseded by components and we [encourage you to migrate](todo).
+
+Follow these steps to migrate:
+
+- If you don't have it yet, create an account in our [Developer Portal](https://components.keboola.com/).
+- Create new or [join an existing Vendor](/extend/component/tutorial/#before-you-start).
+- Create a [service account](/extend/component/tutorial/#creating-a-deployment-account)
+- Add a [new component](/extend/component/tutorial/#creating-a-component).
+- Set `genericDockerUI-tableInput` and `genericDockerUI-tableOutput` in the UI options of the component.
+- Migrate the component code.
+
+### Code Migration
+There should be no changes required in the component code. The easiest way to migrate is
+to use our [Component Generator tool](https://github.com/keboola/component-generator).
+Run it with:
+
+    docker run -i -t --volume=/path/to/repository/:/code/ quay.io/keboola/component-generator --update
+
+where `/path/to/repository/` is the path to your Custom Science git repository. Choose a template according to the
+language used - `python-simple`, `php-simple` or `r-simple` and skip overwriting the `main.*` file.
+
+If you don't want the component generator to touch your repository, see the [deployment template](https://github.com/keboola/component-generator/tree/master/templates-common)
+and [language templates](https://github.com/keboola/component-generator/tree/master/templates). You can copy the files to your
+repository manually. You can still use the Component Generator, to setup travis integration:
+
+    docker run -i -t --volume=/path/to/repository/:/code/ quay.io/keboola/component-generator --setup-only
+
+If you want to setup the deployment integration manually, read the [deployment documentation](/extend/component/deployment/).
+It also describes integration with [Bitbucket](/extend/component/deployment/#bitbucket-integration) which is also seamless.
+Basically you need to:
+
+- enable building of the repository (either on Travis or in [Bucket Pipelines](https://bitbucket.org/product/features/pipelines))
+- set the [environment variables](/extend/component/deployment/#deploy-configuration)
+- create a [normal version](https://semver.org/#spec-item-2) git tag (`x.y.z` tag) and push to the repository
+- wait for the build finish and automatically deploy the new version of your component to KBC
