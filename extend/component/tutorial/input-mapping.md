@@ -11,7 +11,7 @@ defines what data your component receives from the end-users' project. A compone
 operates on data in project [Storage](https://help.keboola.com/storage/),
 it always receives a copy of the selected data.
 
-Input mapping is therefore used when your application needs to read data from the customer
+Input mapping is therefore used when your component needs to read data from the customer
 project -- these are typically *writers* and *applications*. Implementing the input mapping requires three steps:
 
 - adding input mapping to the component UI
@@ -21,7 +21,7 @@ project -- these are typically *writers* and *applications*. Implementing the in
 ## Adding Input Mapping to UI
 Adding the input mapping to the component UI is very simple. In the [Developer Portal](https://components.keboola.com/), edit the component
 and add `genericDockerUI-tableInput` or `genericDockerUI-fileInput` flags (or both).
-You can read more about all available [UI options](todo).
+You can read more about all available [UI options](/extend/component/ui-options/).
 
 {: .image-popup}
 ![Screenshot -- Input Mapping Configuration](/extend/component/tutorial/input-mapping-1.png)
@@ -38,7 +38,7 @@ You also need to modify the source code so that it works with the input data. Th
 use absolute paths (or [`KBC_DATADIR`](/extend/common-interface/environment/#environment-variables) environment variable).
 
 Therefore you can modify the [example component](/extend/component/tutorial/) code to, for example, the
-following one, which works with table input mapping.
+[following one](https://github.com/keboola/ex-docs-tutorial), which works with table input mapping.
 
 {% highlight python %}
 import csv

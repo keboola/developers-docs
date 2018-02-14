@@ -8,11 +8,11 @@ permalink: /extend/common-interface/oauth/
 
 [OAuth API V2](https://github.com/keboola/oauth-v2-bundle) integration provides a safe way to retrieve stored authorizations.
 
-When you are building an application that communicates with a 3rd party API and that API authorizes using OAuth,
+When you are building an component that communicates with a 3rd party API and that API authorizes using OAuth,
 Keboola Connection (KBC) stores the users' credentials/access tokens in OAuth API V2. They are revealed and
 decrypted only for a target component and project. End-users can be assured that their authorized access will not leak.
 
-This feature is available only for [registered extensions](/extend/registration/).
+Note: This feature must be enabled by our [support](mailto:support@keboola.com).
 
 ## Initialize
 Create a configuration for the given component and project in OAuth API V2.
@@ -32,7 +32,7 @@ The `OAUTH_API_ID` is the id provided when storing authorization via OAuth API V
 {% endhighlight %}
 
 ## Authorize
-[Docker Runner](/integrate/docker-bundle/) then retrieves, decrypts and injects the credentials to the
+[Docker Runner](/extend/docker-runner/) then retrieves, decrypts and injects the credentials to the
 configuration file in the `authorization.oauth_api.credentials` attribute.
 
 {% highlight json %}
@@ -64,12 +64,12 @@ The `authorization.oauth_api.credentials.#data` configuration node stores the re
 the authorized API as a raw string. Parse the string accordingly, as OAuth API V2 has intentionally
 no knowledge about the authorized APIs.
 
-**Important:** None of the [sandbox API calls](/extend/common-interface/sandbox)
+**Important:** None of the [sandbox API calls](/extend/component/running/)
 decrypt the `authorization.oauth_api.credentials.#data` and `authorization.oauth_api.credentials.#appSecret` keys.
 
 ## Credentials Injection
 
-If you want to bypass OAuth API V2 integration, you can paste all required credential parameters in the configuration directly. 
+If you want to bypass OAuth API V2 integration, you can paste all required credential parameters in the configuration directly.
 Fields requiring encryption will be encrypted and decrypted as usual. That means, that you can save the following configuration.
 
 {% highlight json %}

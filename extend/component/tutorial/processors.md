@@ -6,7 +6,7 @@ permalink: /extend/component/tutorial/processors/
 * TOC
 {:toc}
 
-[Processors](/extend/docker-runner/processors/) are optional part of a component configuration.
+[Processors](/extend/component/processors/) are optional part of a component configuration.
 While they are **not at all necessary** in developing new components for KBC, we think that you
 should know about them, because using them can save you a lot of time in some cases.
 To get a list of currently available processors, see the
@@ -21,7 +21,7 @@ a new UI element in the component configuration in KBC:
 {: .image-popup}
 ![Screenshot -- Processors Empty](/extend/component/tutorial/processors-1.png)
 
-Taking the [example component](/extend/tutorial/processors/), you might want to use the
+Taking the [example component](/extend/component/tutorial/), you might want to use the
 *Add Row Number Column* processor in your component to add a sequential number to every
 row of the table imported into KBC. From the
 [processor documentation](https://github.com/keboola/processor-add-row-number-column/blob/master/README.md#usage)
@@ -58,7 +58,7 @@ If you run the above configuration, you'll receive an error:
 
 This is expected, because the [Add Row Number Column processor documentation](https://github.com/keboola/processor-add-row-number-column/blob/master/README.md#prerequisites)
 clearly states, that the processed CSV files must have
-[manifests](todo) and not have headers. Since the example component is very simple and does
+[manifests](/extend/common-interface/manifest-files/) and not have headers. Since the example component is very simple and does
 not generate manifests (or header-less CSV files), you have to add other processors to do that
 for you:
 
@@ -92,7 +92,7 @@ for you:
 {% endhighlight %}
 
 The `after` configuration is an array of three processors. The first one creates
-[manifest files](todo) for whatever data files were produced by your component. The manifest
+[manifest files](/extend/common-interface/manifest-files/) for whatever data files were produced by your component. The manifest
 files will contain header read from the data files. The second processor removes the header
 from the data files. The third processor adds the row number column.
 

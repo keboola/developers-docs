@@ -11,8 +11,8 @@ examine the component while it is running. However there some options how the pr
 replicated locally, so that you can analyze what is happening if something is not right.
 
 ## Check Errors and Version
-There are two [types of errors](/extend/common-interface/environment/#return-values), in case of application errors, you (or any other end-user) will only see a generic
-error message in the job result:
+There are two [types of errors](/extend/common-interface/environment/#return-values), in case of
+application errors, you (or any other end-user) will only see a generic error message in the job result:
 
     Internal Error Something is broken. Our developers were notified about this error and will let you know what went wrong.
 
@@ -37,6 +37,10 @@ and [configuration](/extend/common-interface/config-file/) in the exact same for
 
 Use the [Input data API call](https://kebooladocker.docs.apiary.io/#reference/sandbox/input-data/create-an-input-job).
 You can see it in our [API requests collection](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#4c9c7c9f-6cd6-58e7-27e3-aef62538e0ba).
+In the [API call](http://docs.kebooladocker.apiary.io/#reference/sandbox/input-data/create-an-input-job), either specify the
+full configuration (using the `configData` node) or refer to an existing configuration
+of the component (using the `config` node). See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#4c9c7c9f-6cd6-58e7-27e3-aef62538e0ba).
+
 The Input data API call will prepare the data folder for the component and put it inside an archive and upload it to KBC Storage.
 When running the request with valid parameters, you should receive a response similar to this:
 
@@ -91,7 +95,7 @@ the API request. In such case, use the `configData` attribute in request body, e
 The above request corresponds to the following setting in the UI:
 
 {: .image-popup}
-![Configuration Screenshot](/extend/docker/configuration-sample.png)
+![Configuration Screenshot](/extend/component/tutorial/configuration-sample.png)
 
 ### Step 2 -- Build the Image
 Then you can build your component code locally:
@@ -107,11 +111,11 @@ in the component directory. It should produce output similar to the one below:
 {: .image-popup}
 ![Screenshot -- Building](/extend/component/tutorial/debug-3.png)
 
-### Step 3 -- Running Application with Sample Data
+### Step 3 -- Running Component with Sample Data
 Once you have prepared the data folder with sample data and configuration, inject it into the Docker Image.
 In addition to the options shown in the example, there are many [other options](/extend/common-interface/config-file/) available.
 
-When you run an image, a *container* is created in which the application is running isolated.
+When you run an image, a *container* is created in which the component is running isolated.
 Use the following command to run the image:
 
     docker run --volume=physicalhostpath:/data/ imageTag
@@ -137,7 +141,7 @@ Chances are that you received an ugly error message or warning. In that case, yo
 contents of the image; specifically, if all the files are where you expect
 them to be.
 
-To work with the application container interactively, use the following command:
+To work with the component container interactively, use the following command:
 
     docker run --volume=physicalhostpath:/data/ -i -t --entrypoint=/bin/bash imageTag
 
@@ -148,11 +152,11 @@ For instance:
 This will override the default command specified in the `Dockerfile` -- `CMD ["python", "-u", "/code/main.py"]`
 to launch [Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell)) instead. The [`-i` and `-t` flags](https://docs.docker.com/engine/reference/commandline/run/)
 ensure that the container runs in interactive mode.
-You can then inspect the container contents: 'ls /data/'. For more details, see [Howto](/extend/component/docker-tutorial/running/).
+You can then inspect the container contents: 'ls /data/'. For more details, see [Howto](/extend/component/docker-tutorial/howto/).
 
 ### Step 4 -- Modifying
-Chances are that you want to modify the component code often. If you modify, the component code, you have to rebuild the
-docker image. This is slow and tedious, instead, you can run the image by the following command:
+Chances are that you want to modify the component code often. If you modify the component code, you have to rebuild the
+docker image. This is slow and tedious. Instead, you can run the image with the following command:
 
     docker run --volume=physicalhostpathtodata:/data/ --volume=physicalhostpathtocode:/code/ -i -t my-component
 
@@ -160,7 +164,7 @@ For instance:
 
     docker run --volume=C:\Users\JohnDoe\data\:/data/ --volume=D:\wwwroot\ex-docs-tutorial\:/code/ -i -t my-component
 
-This means that the directory with the application code will shadow the one inside the image (defined by the `COPY . /code/`
+This means that the directory with the component code will shadow the one inside the image (defined by the `COPY . /code/`
 instruction in `Dockerfile`) and you will run the current code in the image environment.
 
 ## Running Specific Tags
@@ -204,6 +208,8 @@ that the script printed out all files in `/data/in/tables/` folder
 ![Screenshot -- Image Results](/extend/component/tutorial/debug-4.png)
 
 ## Summary
+You can find more information about [running components](/extend/component/running/) in the
+corresponding part of the [documentation](/extend/component/running/).
 This concludes our development tutorial which showed the most important aspects of creating components for KBC. Our platform offers a lot more features,
 so we encourage you to read more in our documentation:
 
@@ -211,6 +217,6 @@ so we encourage you to read more in our documentation:
 - [manifest files](/extend/common-interface/manifest-files/)
 - [OAuth support](/extend/common-interface/oauth/)
 - or general information about the [common interface](/extend/common-interface/)
-- [deployment settings](todo)
-- [UI settings](todo)
-- [Running images](todo)
+- [deployment settings](/extend/component/deployment/)
+- [UI settings](/extend/component/ui-options/)
+- [Running components locally](/extend/component/running/)

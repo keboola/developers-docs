@@ -50,10 +50,10 @@ A job can have different statuses:
 To create a Job, use our Docker Runner API described on [Apiary.io](http://docs.kebooladocker.apiary.io/). Docker Runner
 has API calls to
 
-- create a job --- run a [docker extension](/extend/docker/),
+- create a job --- run a [component](/extend/component/),
 - [encrypt values](/overview/encryption/),
-- [create a sandbox](/extend/common-interface/sandbox/), and
-- run a [docker extension](/extend/docker/) with a [specified docker image tag](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job-with-image/run-job), usable for [testing images](https://developers.keboola.com/extend/docker/tutorial/automated-build/#run-test-jobs-of-your-new-image-against-live-configurations).
+- [prepare the data folder](/extend/component/running/#preparing-the-data-folder), and
+- run a [component](/extend/component/) with a [specified docker image tag](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job-with-image/run-job), usable for [testing images](/extend/component/deployment/#test-live-configurations).
 
 You also need a *Syrup Queue* API to [poll Job status](http://docs.syrupqueue.apiary.io/#reference/jobs/job/view-job-detail).
 

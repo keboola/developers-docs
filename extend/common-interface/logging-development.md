@@ -6,7 +6,7 @@ permalink: /extend/common-interface/logging/development/
 * TOC
 {:toc}
 
-When developing an application which is using GELF logging, you need the GELF server to listen to its messages.
+When developing a component which is using GELF logging, you need the GELF server to listen to its messages.
 You can use the following two servers:
 
 - Fully fledged official Graylog server - see the [installation guide](http://docs.graylog.org/en/2.0/pages/installation.html); or
