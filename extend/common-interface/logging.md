@@ -6,48 +6,43 @@ permalink: /extend/common-interface/logging/
 * TOC
 {:toc}
 
-There are two main, mutually exclusive, ways in which your application can display events to KBC end-users:
+There are two main, mutually exclusive, ways in which your component can display events to KBC end-users:
 
 1. Using [standard output and standard error](https://en.wikipedia.org/wiki/Standard_streams)
 2. Using [Graylog GELF](http://docs.graylog.org/en/2.0/pages/gelf.html) compatible logger
 
-Using the standard output option requires **no extra work** from you or your application.
+Using the standard output option requires **no extra work** from you or your component.
 You just print all informational messages to the standard output and all error messages to the standard error.
-These will be forwarded to Storage Events as informational or error messages. As the simplest approach, it is also
-recommended for [Custom Science](/extend/custom-science/) extensions.
+These will be forwarded to Storage Events as informational or error messages. See
+[implementation notes](/extend/component/implementation/) for best practices in logging.
 
 Using a [GELF](http://docs.graylog.org/en/2.0/pages/gelf.html) compatible logger requires implementing or including
-such a logger in your application. However, it offers much **greater flexibility**: you can send different kinds of messages (such as error, informational, warning, debug) and the messages can contain additional structured information (not only a plain text string)..
+such a logger in your component. However, it offers much **greater flexibility**: you can send different
+kinds of messages (such as error, informational, warning, debug) and the messages can contain additional
+structured information (not only a plain text string)..
 
 ## Standard Output and Standard Error
-By default, the Docker Runner listens to [STDOUT](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_.28stdout.29)
+By default -- unless you have turned on [GELF logging](/extend/common-interface/logging/#gelf-logger) in the
+[component configuration](https://components.keboola.com/),
+[Docker Runner](/extend/docker-runner) listens to [STDOUT](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_.28stdout.29)
 and [STDERR](https://en.wikipedia.org/wiki/Standard_streams#Standard_error_.28stderr.29)
-of the application and forwards any content live to [Storage API Events](http://docs.keboola.apiary.io/#events)
-(log levels `info` and `error`). The events are displayed in a [Job detail](https://help.keboola.com/management/jobs/).
-
-Make sure your application does not use any output buffering, otherwise all events will be cached after the application finishes.
-In **R applications**, the outputs printed in rapid succession are sometimes joined into a single event;
-this is a known behavior of R and it has no workaround. In **Python applications**, the output is buffered, but the output buffering may be [switched off](http://stackoverflow.com/questions/107705/disable-output-buffering). The easiest solution is to run your script with the `-u` option -- you would use `CMD python -u ./main.py` in your `Dockerfile`.
-
-The events serve to pass only informational and error messages; **no data** can be passed through.
-The event message size is limited (about 64KB). If live events are turned off,
-the amount of complete application output is also limited (about 1MB). If the limit is exceeded, the message will be trimmed.
+of the component and forwards the STDOUT content live to [Storage API Events](http://docs.keboola.apiary.io/#events)
+(log level `info`). The content of STDERR is collected and added (if not empty) as the last event of the job with level `error`.
+The events are displayed in a [Job detail](https://help.keboola.com/management/jobs/).
 
 ## Gelf Logger
-
 [GELF](http://docs.graylog.org/en/2.0/pages/gelf.html) is a log format allowing you to
 send [structured](http://docs.graylog.org/en/2.0/pages/gelf.html#gelf-format-specification) event messages.
 The messages can be sent over several transports and you can specify whether they will be silenced or displayed based on their level.
 
 ### Setting Up
-
-If you turn on GELF logging in the [component registration](/extend/registration/),
-our [Docker Runner](/integrate/docker-bundle/) will listen
+If you turn on GELF logging in the [component configuration](https://components.keboola.com/),
+our [Docker Runner](/extend/docker-runner/) will listen
 for messages on the **transport** you specify ([UDP](https://en.wikipedia.org/wiki/User_Datagram_Protocol),
 [TCP](https://en.wikipedia.org/wiki/Transmission_Control_Protocol) and
 [HTTP](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol) are supported).
 We suggest using TCP as it offers a nice compromise between transport overhead and reliability, but the final choice is up to you.
-If you choose UDP as a transport, make sure that there is a little delay between your application start
+If you choose UDP as a transport, make sure that there is a little delay between your component start
 and the first message sent (about 1s) to give the network sockets some time to initialize.
 
 Additionally, you can set the visibility of each event message as follows:
@@ -77,8 +72,8 @@ which will be injected into your component by our Docker Runner.
 
 **Important:** Never rely on the default logger settings.
 
-When developing your application, you need the [GELF server for development](/extend/common-interface/logging/development/).
-
+When developing your component, you may want to use the [GELF server for development](/extend/common-interface/logging/development/) to
+test the logging.
 
 #### PHP
 For PHP, use the official [GELF client](https://github.com/bzikarsky/gelf-php) library. To install it, use
