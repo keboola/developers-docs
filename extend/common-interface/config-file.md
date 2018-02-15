@@ -34,6 +34,12 @@ global component parameters (such as token, URL, version of your API).
 actions except `run` have a strict execution time limit of 30 seconds.
 See [actions](/extend/common-interface/actions/) for more details.
 
+### Validation
+Your application should implement validation of the `parameters` section, which is passed without modification from the UI.
+Your application might also implement validation of the `storage` section, if you have some specific requirements on the
+input mapping or output mapping setting (e.g. certain number of tables, certain names). If you chose to do any validation
+outside the `parameters` section, it must always be forward compatible -- i.e. benevolent. While we maintain backward compatibility
+very carefully, it is possible for new keys to appear in the configuration structure as we introduce new features.
 
 ## State File
 The state file is used to store the component state for the next run. It provides a two-way communication between

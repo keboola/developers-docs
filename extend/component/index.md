@@ -79,11 +79,12 @@ Follow these steps to migrate:
 - Create new or [join an existing Vendor](/extend/component/tutorial/#before-you-start).
 - Create a [service account](/extend/component/tutorial/#creating-a-deployment-account)
 - Add a [new component](/extend/component/tutorial/#creating-a-component).
-- Set `genericDockerUI-tableInput` and `genericDockerUI-tableOutput` in the UI options of the component.
+- Set `genericDockerUI-tableInput` and `genericDockerUI-tableOutput` (possibly also `genericDockerUI-fileInput` if you need it) in the UI options of the component.
 - Migrate the component code.
 
 ### Code Migration
-There should be no changes required in the component code. The easiest way to migrate is
+There should be no changes required in the component code. The only difference you might run into is that your
+code is no longer put in the `/home/` directory, but in the `/code/` directory. The easiest way to migrate is
 to use our [Component Generator tool](https://github.com/keboola/component-generator).
 Run it with:
 
