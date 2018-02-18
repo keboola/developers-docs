@@ -71,16 +71,18 @@ along with a [guide to setting up Docker](/extend/component/docker-tutorial/setu
 
 ## Custom Science Migration Guide
 Previously we have supported a Custom Science component, which was offered as an intermediate before a fully fledged component.
-We believe it was fully superseded by components and we [encourage you to migrate](todo).
+We believe it was fully superseded by components and we [encourage you to migrate](http://status.keboola.com/farewell-to-custom-science).
 
 Follow these steps to migrate:
 
 - If you don't have it yet, create an account in our [Developer Portal](https://components.keboola.com/).
 - Create new or [join an existing Vendor](/extend/component/tutorial/#before-you-start).
-- Create a [service account](/extend/component/tutorial/#creating-a-deployment-account)
 - Add a [new component](/extend/component/tutorial/#creating-a-component).
 - Set `genericDockerUI-tableInput` and `genericDockerUI-tableOutput` (possibly also `genericDockerUI-fileInput` if you need it) in the UI options of the component.
+- Create a [service account](/extend/component/tutorial/#creating-a-deployment-account)
 - Migrate the component code.
+
+**Important:** Every component the amount of RAM limited to 64M by default. If you need more, ask us at [support@keboola.com](mailto:support@keboola.com). For R code, you'll probably need at least 300M.
 
 ### Code Migration
 There should be no changes required in the component code. The only difference you might run into is that your

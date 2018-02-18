@@ -181,7 +181,6 @@ Then change the Dockerfile to:
 FROM debian
 RUN apt-get update
 RUN apt-get install -y php-cli
-ENTRYPOINT php -r "echo 'Hello world from PHP';"
 COPY . /code/
 ENTRYPOINT php /code/test.php
 {% endhighlight %}

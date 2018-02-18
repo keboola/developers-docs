@@ -213,12 +213,6 @@ for (i in 1:nrow(tables)) {
 }
 {% endhighlight %}
 
-The above code is located in a [sample repository](https://github.com/keboola/docs-custom-science-example-r-dynamic), so you can use it
-with the *runtime settings*. Supply any number of input tables.
-
-- Repository: `https://github.com/keboola/docs-custom-science-example-dynamic.git`
-- Version: `0.0.1`
-
 To test the code, set an arbitrary number of input/output mapping tables. Keep in mind to set the same number
 of inputs and outputs. The names of the CSV files are arbitrary.
 
