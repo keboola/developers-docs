@@ -223,14 +223,64 @@ pipelines:
           - ./deploy.sh
 {% endhighlight %}
 
-You also have to replace the `TRAVIS_TAG` variable with [`BITBUCKET_TAG`](https://confluence.atlassian.com/bitbucket/environment-variables-794502608.html) in the
-[`deploy.sh` script](https://github.com/keboola/component-generator/blob/master/templates/bitbucket-deploy/deploy.sh). When done, you can
-commit and push and a build will automatically appear in the **Pipelines** section:
+Also add the [`deploy.sh` script](https://github.com/keboola/component-generator/blob/master/templates/bitbucket-deploy/deploy.sh)
+which is modified to use the [`BITBUCKET_TAG`](https://confluence.atlassian.com/bitbucket/environment-variables-794502608.html) variable (instead of `TRAVIS_TAG`). When done, commit and push and a build will automatically appear in the **Pipelines** section:
 
 {: .image-popup}
 ![Screenshot -- Bitbucket Build](/extend/component/deployment/bitbucket-3.png)
 
 With the above settings, the Bitbucket Pipelines will behave in exactly the same way as the Travis configuration described above.
+
+## GitLab Integration
+The [development tutorial](/extend/component/tutorial/) as well as the above description assume you're using
+Travis CI Service for building and deploying the image. Travis integrates very well with [Github](https://github.com/), but not with with
+[GitLab](https://gitlab.com/). However GitLab has its own continuous integration service --
+[CI Pipelines](https://docs.gitlab.com/ee/ci/pipelines.html).
+
+You have to set the environment variables in settings:
+
+{: .image-popup}
+![Screenshot -- GitLab Environment Variables](/extend/component/deployment/gitlab-1.png)
+
+Then add the following [`bitbucket-pipelines.yml`](https://github.com/keboola/component-generator/blob/master/templates/gitlab-deploy/.gitlab-ci.yml) file to your repository:
+
+{% highlight yaml %}
+image: docker:latest
+
+variables:
+  DOCKER_DRIVER: overlay2
+  APP_IMAGE: my-component
+
+services:
+- docker:dind
+
+before_script:
+- docker info
+
+build-component:
+  stage: build
+  script:
+    - docker build . --tag=$APP_IMAGE
+
+deploy-component:
+  stage: deploy
+  script:
+    - docker build . --tag=$APP_IMAGE
+    - pwd
+    - ls -la
+    - export    
+    - ./deploy.sh
+  only:
+    - tags
+{% endhighlight %}
+
+Also add the [`deploy.sh` script](https://github.com/keboola/component-generator/blob/master/templates/gitlab-deploy/deploy.sh)
+which is modified to use the [`CI_COMMIT_TAG`](https://docs.gitlab.com/ce/ci/variables/README.html) (instead of `TRAVIS_TAG`) and use `sh` shell (instead of `bash`). When done, commit and push and a build will automatically appear in the **Pipelines** section:
+
+{: .image-popup}
+![Screenshot -- GitLab Build](/extend/component/deployment/gitlab-2.png)
+
+With the above settings, the GitLab CI Pipelines will behave in exactly the same way as the Travis configuration described above.
 
 ## Manual Deployment
 If you want to use another continuous integration setting or deploy to the repository manually, you can do so without limitations.
