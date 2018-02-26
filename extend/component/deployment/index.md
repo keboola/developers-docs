@@ -230,6 +230,7 @@ which is modified to use the [`BITBUCKET_TAG`](https://confluence.atlassian.com/
 ![Screenshot -- Bitbucket Build](/extend/component/deployment/bitbucket-3.png)
 
 With the above settings, the Bitbucket Pipelines will behave in exactly the same way as the Travis configuration described above.
+You can also have a look at a [10 minute video](https://www.youtube.com/watch?v=Pf_hfM_zNyU) showing the Bitbucket setup on a new component.
 
 ## GitLab Integration
 The [development tutorial](/extend/component/tutorial/) as well as the above description assume you're using
@@ -268,7 +269,7 @@ deploy-component:
     - docker build . --tag=$APP_IMAGE
     - pwd
     - ls -la
-    - export    
+    - export
     - ./deploy.sh
   only:
     - tags
@@ -281,6 +282,7 @@ which is modified to use the [`CI_COMMIT_TAG`](https://docs.gitlab.com/ce/ci/var
 ![Screenshot -- GitLab Build](/extend/component/deployment/gitlab-2.png)
 
 With the above settings, the GitLab CI Pipelines will behave in exactly the same way as the Travis configuration described above.
+You can also have a look at a [10 minute video](https://www.youtube.com/watch?v=TC-tN-zYgEw) showing the Gitlab setup on a new component.
 
 ## Manual Deployment
 If you want to use another continuous integration setting or deploy to the repository manually, you can do so without limitations.

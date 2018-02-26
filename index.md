@@ -10,14 +10,14 @@ For end-users, there is a separate documentation ready at [help.keboola.com](htt
 * TOC
 {:toc}
 
-### What KBC Is
+## What KBC Is
 Cloud based, extremely open and extendable, KBC is the ideal environment for working with your data, be it loading from various sources,
 manipulating, enriching, or finally, pushing the data to new systems and consumption methods.
 
 The KBC system consists of many independent and loosely connected [**components**](/overview/),
 such as Extractors, Storage or Writers, that are orchestrated together through (mostly REST) APIs.
 
-### Where to Start
+## Where to Start
 In this documentation, we will show you how to
 
 - [**Integrate KBC with other systems**](/integrate/).

@@ -95,17 +95,18 @@ Run it with:
 where `/path/to/repository/` is the path to your Custom Science git repository. Choose a template according to the
 language used - `python-simple`, `php-simple` or `r-simple` and skip overwriting the `main.*` file.
 
-If you don't want the component generator to touch your repository, see the [deployment template](https://github.com/keboola/component-generator/tree/master/templates-common)
+If you don't want the component generator to touch your repository, see the [deployment templates](https://github.com/keboola/component-generator/tree/master/templates-common)
 and [language templates](https://github.com/keboola/component-generator/tree/master/templates). You can copy the files to your
-repository manually. You can still use the Component Generator, to setup travis integration:
+repository manually. You can still use the Component Generator, to setup Travis integration:
 
     docker run -i -t --volume=/path/to/repository/:/code/ quay.io/keboola/component-generator --setup-only
 
 If you want to setup the deployment integration manually, read the [deployment documentation](/extend/component/deployment/).
-It also describes integration with [Bitbucket](/extend/component/deployment/#bitbucket-integration) which is also seamless.
+It also describes integration with [Bitbucket](/extend/component/deployment/#bitbucket-integration)
+and [GitLab](/extend/component/deployment/#gitlab-integration) which is also seamless.
 Basically you need to:
 
-- enable building of the repository (either on Travis or in [Bucket Pipelines](https://bitbucket.org/product/features/pipelines))
+- enable building of the repository (either on [Travis](https://docs.travis-ci.com/) or in [BitBucket Pipelines](https://bitbucket.org/product/features/pipelines) or [GitLab CI](https://about.gitlab.com/features/gitlab-ci-cd/))
 - set the [environment variables](/extend/component/deployment/#deploy-configuration)
 - create a [normal version](https://semver.org/#spec-item-2) git tag (`x.y.z` tag) and push to the repository
 - wait for the build finish and automatically deploy the new version of your component to KBC
