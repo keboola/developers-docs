@@ -17,11 +17,11 @@ You can use this field to pass arbitrary configuration parameters to your compon
 The parameters will be available in the [/data/config.json](/extend/common-interface/config-file/) file provided to the
 component when it is [run](/extend/docker-runner/).
 
-Let's assume you want to make the [sample component](/extend/component/output-mapping/)
+Let's assume you want to make the [sample component](/extend/component/tutorial/output-mapping/)
 add a given sound to each row a given number of times. For that you'll need two parameters `sound` and `repeat`.
 
 ## Modifying the Source Code
-To implement the above, you can change the [sample component](/extend/component/output-mapping/) to:
+To implement the above, you can change the [sample component](/extend/component/tutorial/output-mapping/) to:
 
 {% highlight python %}
 
@@ -96,8 +96,9 @@ Run the component and examine the job results. In the `odd` result table, you sh
 ## Creating the UI
 Entering configuration parameters using JSON data is quite low-level. Therefore you should
 provide an UI for the end-user. The easiest option is to take advantage of the
-[JSON editor](https://github.com/jdorn/json-editor) based on JSON schema. For the above
-configuration, the following schema can be used:
+[JSON editor](https://github.com/jdorn/json-editor) based on
+[Configuration schema](/extend/component/ui-options/configuration-schema/). For the above
+configuration, the following schema can be created:
 
 {% highlight json %}
 {

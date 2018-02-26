@@ -53,7 +53,7 @@ flexibility when needed.
 
 Generic Extractor can be run from within the [**KBC user interface**](/extend/generic-extractor/running/) (only
 configuration [JSON](/extend/generic-extractor/tutorial/json/) needed), or [**locally**](/extend/generic-extractor/running/#running-locally)
-([Docker](/extend/docker/tutorial/) needed).
+([Docker](/extend/component/docker-tutorial/) needed).
 
 ### Configuration Map
 The following sample configuration shows various configuration options and their nesting.

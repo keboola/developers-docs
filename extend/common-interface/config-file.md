@@ -7,12 +7,12 @@ permalink: /extend/common-interface/config-file/
 {:toc}
 
 Configuration files are one of the [possible channels](/extend/common-interface/) for exchanging data
-between extensions (and other dockerized applications) and Keboola Connection (KBC).
+between components and Keboola Connection (KBC).
 
 To create a sample configuration file (together with the data directory),
-use the [create sandbox](/extend/common-interface/sandbox/#create-sandbox-api-call) call via the
-[Docker Runner API](http://docs.kebooladocker.apiary.io/#reference/sandbox).
-You will get a zip archive containing all the resources you need in your extension.
+use the [Input Data API call](/extend/component/running/#preparing-the-data-folder) via the
+[Docker Runner API](https://kebooladocker.docs.apiary.io/#reference/sandbox/input-data).
+You will get a zip archive containing all the resources you need in your component.
 
 All configuration files are always stored in `JSON` format.
 
@@ -20,26 +20,30 @@ All configuration files are always stored in `JSON` format.
 Each configuration file has the following root nodes:
 
 - `storage`: Contains both the input and output [mapping](https://help.keboola.com/manipulation/transformations/mappings/) for both files and tables.
-This section is important if your application uses a dynamic input/output mapping.
-Simple applications can be created with a static input/output mapping.
-They do not use this configuration section at all (see [Custom Science Quick Start](/extend/custom-science/quick-start/)).
-- `parameters`: Contains arbitrary parameters passed from the UI to the application. This section can be used in any
-way you wish. Your application should validate the contents of this section. For passing sensitive
+This section is important if your component uses a dynamic input/output mapping.
+Simple components can be created with a static input/output mapping.
+They do not use this configuration section at all (see [Tutorial](/extend/component/tutorial/)).
+- `parameters`: Contains arbitrary parameters passed from the UI to the component. This section can be used in any
+way you wish. Your component should validate the contents of this section. For passing sensitive
 data, use [encryption](/overview/encryption/). This section is not available in Transformations.
-- `image_parameters`: Available only for [registered Docker extensions](/extend/registration/). Contains arbitrary
-parameters passed to the application. They cannot be modified by the end-user. The typical use for this section are
-global application parameters (such as token, URL, version of your API).
-- `authorization`: Available only for [registered Docker extensions](/extend/registration/). Contains Oauth2
-[authorization contents](/extend/common-interface/oauth/).
-- `action`: Name of the [action](/extend/common-interface/actions/) to execute; defaults to `run`. Other actions available upon [registration](/extend/registration/)
-and all other actions except `run` have a strict execution time limit of 30 seconds.
+- `image_parameters`: Configured in the [component settings](https://components.keboola.com/). Contains arbitrary
+parameters passed to the component. They cannot be modified by the end-user. The typical use for this section are
+global component parameters (such as token, URL, version of your API).
+- `authorization`: Contains Oauth2 [authorization contents](/extend/common-interface/oauth/).
+- `action`: Name of the [action](/extend/common-interface/actions/) to execute; defaults to `run`. All
+actions except `run` have a strict execution time limit of 30 seconds.
 See [actions](/extend/common-interface/actions/) for more details.
 
+### Validation
+Your application should implement validation of the `parameters` section, which is passed without modification from the UI.
+Your application might also implement validation of the `storage` section, if you have some specific requirements on the
+input mapping or output mapping setting (e.g. certain number of tables, certain names). If you chose to do any validation
+outside the `parameters` section, it must always be forward compatible -- i.e. benevolent. While we maintain backward compatibility
+very carefully, it is possible for new keys to appear in the configuration structure as we introduce new features.
 
 ## State File
-
 The state file is used to store the component state for the next run. It provides a two-way communication between
-KBC configuration state storage and the application. The state file only works if the API call
+KBC configuration state storage and the component. The state file only works if the API call
 references a stored configuration (`config` is used, not `configData`).
 
 The location of the state file is:
@@ -47,11 +51,11 @@ The location of the state file is:
 - `/data/in/state.json` loaded from a configuration state storage
 - `/data/out/state.json` saved to a configuration state storage
 
-The application reads the input state file and writes any content to the output state
+The component reads the input state file and writes any content to the output state
 file (valid JSON) that
 will be available to the next API call. A missing or an empty file will remove the state value.
 A state object is saved to configuration storage only when actually running the app
-(not in [sandbox API calls](/extend/common-interface/sandbox/). The state must be a valid JSON file.
+(not in [sandbox API calls](https://kebooladocker.docs.apiary.io/#reference/sandbox). The state must be a valid JSON file.
 
 ### State File Properties
 Because the state is stored as part of a
@@ -60,7 +64,7 @@ the value of the state object is somewhat limited (should not generally exceed 1
 be used to store large amounts of data.
 
 Also, the end-user cannot easily access the data through the UI.
-The data can be, however, modified outside of the dockerized application itself using the
+The data can be, however, modified outside of the component itself using the
 [Component configuration](http://docs.keboola.apiary.io/#reference/component-configurations) API calls.
 
 **Important:** The state file is not thread-safe. If multiple instances of the *same configuration*
@@ -71,9 +75,9 @@ loaded from some API to enable incremental loads.
 ## Usage File
 
 Unlike the state file, the **usage file is one way only** and has a pre-defined structure.
-The usage file is used to pass information from the application to Keboola Connection.
+The usage file is used to pass information from the component to Keboola Connection.
 Metrics stored are used to determine how much resources the job consumed and translate the usage to KBC
-credits; this is very useful when you need your customers to pay using your application or service.
+credits; this is very useful when you need your customers to pay using your component or service.
 
 The usage file is located at `/data/out/usage.json`. It should contain an array of objects
 keeping information about the consumed resources. The objects have to contain only two keys, `metric`
@@ -90,17 +94,17 @@ and `value`, as in the example bellow:
 
 This structure is processed and stored within a job, so it can be analyzed, processed and aggregated later.
 
-To keep track of the consumed resources in the case of an application failure, **it is recommended to
-write the usage file regularly** during the application run, not only at the end.
+To keep track of the consumed resources in the case of an component failure, **it is recommended to
+write the usage file regularly** during the component run, not only at the end.
 
 *Note: As the structure of the state file is pre-defined, the content of the usage file is strictly
-validated and a wrong format will cause an application failure.*
+validated and a wrong format will cause an component failure.*
 
 ## Examples
-To create an example configuration, use the [sandbox API calls](/extend/common-interface/sandbox/). You will get a
+To create an example configuration, use the [Input Data API call](/extend/component/running/#preparing-the-data-folder). You will get a
 `data.zip` archive in your *Storage* --- *File uploads*, which will contain the `config.json` file.
-You can also use these structures to create an API request for [creating a sandbox](/extend/common-interface/sandbox/),
-as well as for actually [running dockerized applications](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job).
+You can also use these configuration structure to create an API request for
+actually [running a component](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job).
 If you want to manually pass configuration options in the API request, be sure to wrap it around in the `configData` node.
 
 A sample configuration file might look like this:

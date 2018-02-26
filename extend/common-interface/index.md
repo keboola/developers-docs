@@ -3,7 +3,7 @@ title: Common Interface
 permalink: /extend/common-interface/
 ---
 
-To exchange data between your extension and Keboola Connection (KBC), use
+To exchange data between your component and Keboola Connection (KBC), use
 
 * a predefined set of input and output [folders](/extend/common-interface/folders) for tables and files,
 * a [configuration file](/extend/common-interface/config-file/),
@@ -16,17 +16,18 @@ Optionally, you can use
 * the [OAuth](/extend/common-interface/oauth/) part of the configuration file, and
 * [actions](/extend/common-interface/actions/) for quick synchronous tasks.
 
-In addition to that, [Docker Runner](/integrate/docker-bundle/) provides tools for
+In addition to that, [Docker Runner](/extend/docker-runner/) provides tools for
 [encryption](/overview/encryption) and [OAuth2 authorization](/extend/common-interface/oauth/).
 
-### Extension Limits
+To quickly get the picture, have a look a [random sample data folder](/extend/data.zip).
 
-Even though you can define your own limits for your extension, all extensions are also subject to the following service limits:
+### Component Limits
+Even though you can define your own limits for your component, all components are also subject to the following service limits:
 
 * Both memory and swap sizes are set to an equal value
 * Docker [devicemapper](https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/) size is set to 10 GB
 
-The size allocated for devicemapper is consumed by memory swapping, `/tmp/` and all other operations in the extension
+The size allocated for devicemapper is consumed by memory swapping, `/tmp/` and all other operations in the component
 (for instance, ad hoc module installations); only input and output folders (`/data/`) are excluded.
 As the swap size cannot be larger than the allocated disk space, we cannot safely increase the memory limit over 8 GB.
 

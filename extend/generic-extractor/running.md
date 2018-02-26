@@ -6,13 +6,13 @@ permalink: /extend/generic-extractor/running/
 * TOC
 {:toc}
 
-Generic Extractor is normally run from within the KBC user interface. It can be found in the **Extractors** section 
+Generic Extractor is normally run from within the KBC user interface. It can be found in the **Extractors** section
 and all you need to do is provide its configuration JSON. No other settings are necessary.
 
 {: .image-popup}
 ![Screenshot - Generic Extractor Configuration](/extend/generic-extractor/configuration.png)
 
-Because creating the configuration JSON can be a non-trivial task, there are some things which can help 
+Because creating the configuration JSON can be a non-trivial task, there are some things which can help
 you in developing the configuration.
 
 ## Debug Mode
@@ -30,7 +30,7 @@ Debug mode can be turned on by setting `"debug": true` in the `config` section o
 }
 {% endhighlight %}
 
-In debug mode, the extractor displays all API requests it sends, helping you understand what is really happening, 
+In debug mode, the extractor displays all API requests it sends, helping you understand what is really happening,
 why something is skipped, etc.
 
 {: .image-popup}
@@ -41,12 +41,12 @@ visible in the events. Also, debug mode considerably slows the extraction. There
 be turned on in production configurations.
 
 ## Running Locally
-If you are working on a complicated configuration, or developing a new component based on 
-Generic Extractor, running every configuration from KBC UI may be slow and tedious. 
-You may run Generic Extractor locally, provided that you have access to [Docker](/extend/docker/tutorial/). 
+If you are working on a complicated configuration, or developing a new component based on
+Generic Extractor, running every configuration from KBC UI may be slow and tedious.
+You may run Generic Extractor locally, provided that you have access to [Docker](/extend/component/docker-tutorial/).
 The following is **not necessary** to run or configure Generic Extractor in KBC.
 
-### Run Build Version
+### Run Built Version
 Create an empty directory somewhere and in it create a `config.json` file with a
 configuration you want to execute. For example:
 
@@ -93,7 +93,7 @@ You should see:
 along with the output tables created in `/out/tables` sub-directory of the current directory.
 It is recommended to remove the contents of the `out/tables` directory before running the extractor again.
 
-**Important:** Generic Extractor itself is not able to decrypt encrypted values. That means that when you 
+**Important:** Generic Extractor itself is not able to decrypt encrypted values. That means that when you
 supply the configuration directly in the `config.json` file, you must always provide decrypted values --- e.g.:
 
 {% highlight json %}
@@ -120,7 +120,7 @@ When you store such configuration in KBC UI, it will automatically be encrypted:
 }
 {% endhighlight %}
 
-The above configuration then **cannot** be run locally. 
+The above configuration then **cannot** be run locally.
 Read more about [encryption](/overview/encryption/).
 
 ### Building and Running the Image
@@ -143,10 +143,10 @@ running `docker-compose run --rm extractor rm -rf data/out`.
 
 ## Running Examples
 [All examples](https://github.com/keboola/generic-extractor/tree/master/doc) referenced in this documentation are actually runnable against the proper API. Because
-it is difficult to find the specific API for the case (and gain access to it), you can test 
-these configurations against a [mock server](https://github.com/keboola/ex-generic-mock-server). 
-Each example contains a set of requests (`*.request` file) and responses (`*.response`) and 
-optionally their headers (`*.requestHeaders` and `*.responseHeaders`). 
+it is difficult to find the specific API for the case (and gain access to it), you can test
+these configurations against a [mock server](https://github.com/keboola/ex-generic-mock-server).
+Each example contains a set of requests (`*.request` file) and responses (`*.response`) and
+optionally their headers (`*.requestHeaders` and `*.responseHeaders`).
 
 To run the examples:
 

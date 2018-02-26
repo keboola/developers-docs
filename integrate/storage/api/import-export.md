@@ -114,7 +114,7 @@ curl --request POST --header "X-StorageApi-Token:storage-token" --form "name=new
 {% endhighlight %}
 
 This will create an asynchronous job, importing data from the `192726698` file into the `new-table` destination table in the `in.c-main` bucket.
-Then [poll for the job results](/overview/jobs/#job-polling), or review its status in the UI.
+Then [poll for the job results](/integrate/jobs/#job-polling), or review its status in the UI.
 
 #### Python Example
 The above process is implemented in the following example script in Python. This script uses the
@@ -171,17 +171,17 @@ The above will return a response similar to this:
 }
 {% endhighlight %}
 
-Now use the information in the response to upload the file to s3. All necessary information is stored 
-in the `uploadParams` response property. You can upload the file by doing an HTTP POST to the url you obtain 
+Now use the information in the response to upload the file to s3. All necessary information is stored
+in the `uploadParams` response property. You can upload the file by doing an HTTP POST to the url you obtain
 in the response:
 
 {% highlight bash %}
 curl --form "key=exp-180/578/files/2017/02/16/237360074.new_file.csv" --form "acl=private" --form "policy=eyJ...IU=" --form "AWSAccessKeyId=AKI...VLQ" --form "file=@auto.csv" https://kbc-sapi-files.s3.amazonaws.com
 {% endhighlight %}
 
-The last `--form` parameter must be the actual file you want to upload; the value must be 
-prefixed by the `@` character. Note that this upload method sends the entire file in a single 
-HTTP request and may therefore suffer from timeouts, especially for large files. 
+The last `--form` parameter must be the actual file you want to upload; the value must be
+prefixed by the `@` character. Note that this upload method sends the entire file in a single
+HTTP request and may therefore suffer from timeouts, especially for large files.
 Also, this type of file upload is not supported for the `eu-central-1` and `ap-northeast-2` regions.
 We generally recommend using the approach with the [federationToken token](#manually-uploading-a-file) as
 it is more reliable and universal.
@@ -233,7 +233,7 @@ which will run the import job and return:
 }
 {% endhighlight %}
 
-Then [poll for the job status](/overview/jobs/) or review the job progress in UI.
+Then [poll for the job status](/integrate/jobs/) or review the job progress in UI.
 The table importer will take all files with the specified tags (`new-data`) and import them into
 the specified table (`in.c-main.new-table`). Table Importer records the last processed files, so
 that each file is processed only once. The last processed file is recorded in table attributes:

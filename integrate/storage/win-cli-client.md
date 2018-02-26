@@ -9,7 +9,7 @@ permalink: /integrate/storage/win-cli-client/
 The Storage API Command line interface (CLI) client for Microsoft Windows is a simple implementation
 of [Storage API](http://docs.keboola.apiary.io/), currently supporting only a
 very **limited** set of the API features: loading data into Storage.
-In case you need more data manipulation features, check out the [PHP CLI client](/integrate/storage/php-cli-client/).
+In case you need more data manipulation features, check out the [CLI client](/integrate/storage/docker-cli-client/).
 
 The client source code is available in our [Github repository](https://github.com/keboola/storage-api-dotnet-client).
 

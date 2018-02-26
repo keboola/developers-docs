@@ -20,16 +20,16 @@ The main APIs for our components are:
 |-|-|-
 | [KBC Storage API](http://docs.keboola.apiary.io/#) | [Storage](/integrate/storage/) is the main KBC component storing all data. | [APIB](https://github.com/keboola/storage-api-php-client/blob/master/apiary.apib)
 | [KBC Management API](http://docs.keboolamanagementapi.apiary.io/#) | API managing KBC projects and users (and notifications and features). | [APIB](https://github.com/keboola/kbc-manage-api-php-client/blob/master/apiary.apib)
-| [Docker Runner API](http://docs.kebooladocker.apiary.io/#) | [Docker Runner](/integrate/docker-bundle/) is the component running other KBC components. | [APIB](https://github.com/keboola/docker-bundle/blob/master/apiary.apib)
+| [Docker Runner API](http://docs.kebooladocker.apiary.io/#) | [Docker Runner](/extend/docker-runner/) is the component running other KBC components. | [APIB](https://github.com/keboola/docker-bundle/blob/master/apiary.apib)
 | [JSON Parser API](http://docs.jsonparserapi.apiary.io/#) | JSON Parser is a service [converting JSON files to CSV](https://json-parser.keboola.com/). | [APIB](https://github.com/keboola/jsonparser-api/blob/master/apiary.apib)
 | [Transformation API](http://docs.keboolatransformationapi.apiary.io/) | [Transformations](/integrate/transformations/) is the component running [SQL/R/Python transformations](https://help.keboola.com/manipulation/transformations/). | ---
 | [Provisioning API](http://docs.provisioningapi.apiary.io/) | Provisioning is a service creating accounts for [sandboxes](https://help.keboola.com/manipulation/transformations/sandbox/), [transformations](https://help.keboola.com/manipulation/transformations/) and database writers. | [APIB](https://github.com/keboola/provisioning-client/blob/master/apiary.apib)
 | [Provisioning Management API](http://docs.provisioningmanagementapi.apiary.io/) | API managing servers for [sandboxes](https://help.keboola.com/manipulation/transformations/sandbox/), [transformations](https://help.keboola.com/manipulation/transformations/). | [APIB](https://github.com/keboola/provisioning-bundle/blob/master/apiary.apib)
-| [Syrup Queue API](http://docs.syrupqueue.apiary.io/#) | Syrup Queue is a component managing [Jobs](/overview/jobs/). | [APIB](https://github.com/keboola/syrup-queue/blob/master/apiary.apib)
+| [Syrup Queue API](http://docs.syrupqueue.apiary.io/#) | Syrup Queue is a component managing [Jobs](/integrate/jobs/). | [APIB](https://github.com/keboola/syrup-queue/blob/master/apiary.apib)
 | [OAuth Manager API](http://docs.oauthv2.apiary.io/) | OAuth2 is a component managing [OAuth authorizations](/extend/common-interface/oauth/#authorize) of other components. | [APIB](https://github.com/keboola/oauth-v2-bundle/blob/master/apiary.apib)
 | [GoodData Writer API](http://docs.keboolagooddatawriterv2.apiary.io/#) | GoodData Writer is a component [loading data into GoodData](https://help.keboola.com/tutorial/write/gooddata/). | [APIB](https://github.com/keboola/gooddata-writer/blob/master/apiary.apib)
 | [Orchestrator API](http://docs.keboolaorchestratorv2api.apiary.io/#) | Orchestrator is a component [automating and scheduling tasks](https://help.keboola.com/tutorial/automate/) in your project. | [APIB](https://github.com/keboola/orchestrator-bundle/blob/master/apiary.apib)
-| [Developer Portal API](http://docs.kebooladeveloperportal.apiary.io/#) | Developer Portal is an application separated from KBC for [registering components](/extend/registration/). | [APIB](https://github.com/keboola/developer-portal/blob/master/apiary.apib)
+| [Developer Portal API](http://docs.kebooladeveloperportal.apiary.io/#) | Developer Portal is an application separated from KBC for [creating components](/extend/component/). | [APIB](https://github.com/keboola/developer-portal/blob/master/apiary.apib)
 
 If you don't know which API to use, see our [integration guide](/integrate/), which describes different roles of the APIs and contains examples of commonly
 performed actions.
@@ -37,7 +37,7 @@ performed actions.
 ## Regions and Endpoints
 Keboola Connection is available in multiple regions --- currently in the US (connection.keboola.com) and EU (connection.eu-central-1.keboola.com).
 Each region instance is a completely independent **full stack** of Keboola Connection services.
-In all the API documentation above, the US region is used. 
+In all the API documentation above, the US region is used.
 
 If you are using another region, modify the endpoints accordingly.
 Otherwise you will obtain an `Invalid Token` or unauthorized errors. The *authoritative list* of available endpoints is provided by the [Storage API Index Call](https://keboola.docs.apiary.io/#reference/miscellaneous/api-index/component-list). The following is a sample response:
@@ -106,16 +106,9 @@ The collection contains code examples in various languages; the requests can als
 ### cURL
 [cURL](https://curl.haxx.se/) is a common library used by many systems. There is also
 a [command-line interface (CLI)](https://curl.haxx.se/docs/manpage.html) available.
-You can use the cURL CLI to create simple scripts working with KBC APIs. For example, to [Run a Job](/overview/jobs/),
+You can use the cURL CLI to create simple scripts working with KBC APIs. For example, to [Run a Job](/integrate/jobs/),
 use
 
 {% highlight shell %}
 curl --data "{\"config\": \"sampledatabase\"}" --header "X-StorageAPI-Token: YourStorageToken" https://syrup.keboola.com/keboola.ex-db-mysql/run
 {% endhighlight %}
-
-To call the [encryption API](/overview/encryption/) for [R Custom Science](/extend/custom-science/), use
-
-{% highlight shell %}
-curl --data "sometext" --header "X-StorageAPI-Token: YourStorageToken" --header "Content-Type: text/plain" https://syrup.keboola.com/docker/encrypt?componentId=dca-custom-science-r
-{% endhighlight %}
-

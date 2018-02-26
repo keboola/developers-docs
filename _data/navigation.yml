@@ -15,51 +15,57 @@ items:
   - url: /extend/
     title: Extending KBC
     items:
-
-      - url: /extend/custom-science/
-        title: Custom Science Extensions
+      - url: /extend/component/
+        title: Components
         items:
-
-          - url: /extend/custom-science/quick-start/
-            title: Quick Start
-
-          - url: /extend/custom-science/development/
-            title: Development Guide
-
-          - url: /extend/custom-science/r/
-            title: Custom Science R
-
-          - url: /extend/custom-science/python/
-            title: Custom Science Python
-
-          - url: /extend/custom-science/php/
-            title: Custom Science PHP
-
-      - url: /extend/docker/
-        title: Docker Extensions
-        items:
-
-          - url: /extend/docker/tutorial/
+          - url: /extend/component/docker-tutorial/
             title: About Docker
             items:
 
-              - url: /extend/docker/tutorial/setup/
+              - url: /extend/component/docker-tutorial/setup/
                 title: Installation and Running
 
-              - url: /extend/docker/tutorial/howto/
+              - url: /extend/component/docker-tutorial/howto/
                 title: Creating Dockerized App
 
-              - url: /extend/docker/tutorial/registry/
+              - url: /extend/component/docker-tutorial/registry/
                 title: Docker Registry
 
-          - url: /extend/docker/quick-start/
-            title: Quick Start
+          - url: /extend/component/tutorial/
+            title: Tutorial
+            items:
+              - url: /extend/component/tutorial/input-mapping/
+                title: Input Mapping
 
-          - url: /extend/docker/running/
-            title: Running Images
+              - url: /extend/component/tutorial/output-mapping/
+                title: Output Mapping
 
-          - url: /extend/docker/images/
-            title: Keboola Images
+              - url: /extend/component/tutorial/configuration/
+                title: Configuration
+
+              - url: /extend/component/tutorial/processors/
+                title: Processors
+
+              - url: /extend/component/tutorial/debugging/
+                title: Debugging
+
+          - url: /extend/component/processors/
+            title: Processors
+
+          - url: /extend/component/implementation/
+            title: Implementation Notes
+
+          - url: /extend/component/running/
+            title: Running Components
+
+          - url: /extend/component/ui-options/
+            title: UI Options
+            items:
+              - url: /extend/component/ui-options/configuration-schema/
+                title: Configuration Schema
+
+          - url: /extend/component/deployment/
+            title: Deployment
 
       - url: /extend/generic-extractor/
         title: Generic Extractor
@@ -165,15 +171,12 @@ items:
           - url: /extend/generic-extractor/running/
             title: Running Generic Extractor
 
-          - url: /extend/generic-extractor/registration/
-            title: Component Registration
+          - url: /extend/generic-extractor/publish/
+            title: Publishing Component
 
       - url: /extend/common-interface/
         title: Common Interface
         items:
-
-          - url: /extend/common-interface/sandbox/
-            title: Creating Sandbox
 
           - url: /extend/common-interface/folders/
             title: Data Folders
@@ -201,19 +204,9 @@ items:
 
       - url: /extend/docker-runner/
         title: Docker Runner
-        items:
-          - url: /extend/docker-runner/processors/
-            title: Processors
 
-      - url: /extend/registration/
-        title: Registration
-        items:
-
-          - url: /extend/registration/deployment/
-            title: Deployment
-
-          - url: /extend/registration/configuration-schema/
-            title: Configuration Schema
+      - url: /extend/publish/
+        title: Publishing Component
 
   - url: /integrate/
     title: Integration

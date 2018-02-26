@@ -11,12 +11,12 @@ permalink: /integrate/storage/api/tde-exporter/
 This component is normally a part of the [Tableau Writer](https://help.keboola.com/tutorial/write/),
 but it can also be used as a standalone component.
 
-Users can [run a TDE exporter job](/overview/jobs/) as any other KBC component or register it
+Users can [run a TDE exporter job](/integrate/jobs/) as any other KBC component or register it
 as an orchestration task. After the exporter finishes, the resulting TDE files will be available in the
 *Storage* --- *File uploads* section where you can download them via UI or [API](/integrate/storage/api/import-export/).
 
 ##  Running the Component
-The TDE Exporter is a Keboola [Docker component](/extend/docker/) supporting both
+The TDE Exporter is a Keboola [component](/extend/component/) supporting both
 [stored](/integrate/storage/api/configurations/) and
 custom configurations supplied directly in the `run` request.
 

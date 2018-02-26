@@ -1,8 +1,9 @@
 ---
 title: Component Quick Start
 permalink: /extend/component/tutorial/
-#redirect_from:
-#    - /extend/docker/quick-start/
+redirect_from:
+    - /extend/docker/quick-start/
+    - /extend/custom-science/quick-start/
 ---
 
 * TOC
@@ -20,12 +21,12 @@ The Developer portal uses different credentials than KBC. [Creating an account](
 (to which a confirmation email will be sent) and a mobile phone for a mandatory two-factor authorization.
 
 When you log in to the developer portal, you have to join a **vendor** --- an organization of
-developers. Every KBC application has to have a vendor assigned. If you join an existing vendor, an
+developers. Every KBC component has to have a vendor assigned. If you join an existing vendor, an
 administrator of that vendor has to approve your request. If you do not work for a company, create a
 vendor with your name (even a single developer has to be assigned to a vendor).
 
 {: .image-popup}
-![Screenshot -- Join a vendor](/extend/registration/join-vendor.png)
+![Screenshot -- Join a vendor](/extend/component/tutorial/join-vendor.png)
 
 In order to create a **new vendor**, a Keboola Administrator has to approve your request, and you will
 receive a [development project](/#development-project) in KBC. Also, you need to provide us
@@ -45,7 +46,7 @@ Before you continue with this tutorial, make sure you:
 To add a component, use the **Create Component** button on the main page, and fill in the component name and type:
 
 {: .image-popup}
-![Screenshot -- Create application](/extend/component/tutorial/create-component-2.png)
+![Screenshot -- Create component](/extend/component/tutorial/create-component-2.png)
 
 **Important:** Do **not** use the words 'extractor', 'writer' or 'application' in the component name.
 
@@ -62,7 +63,7 @@ When you fill the form, you will obtain a **Component ID** (in the
 form `vendor-id.component-name`, for instance, `keboola-test.ex-docs-tutorial`). *Take note of the Component ID.*
 
 ## Creating a deployment account
-To be able to deploy the application to KBC, you will need **Service credentials**. For security
+To be able to deploy the component to KBC, you will need **Service credentials**. For security
 reasons we strongly advice against using your own credentials in any deployment service. To create
 new deployment credentials, click the **Create a service account** button on the *Service accounts* page.
 
@@ -83,7 +84,7 @@ Take note of the **Username** and **Password**.
 Once you have the **Component Id** and service account **Username** and **Password**,
 you can user our [Component generator tool](https://github.com/keboola/component-generator) to create a component skeleton for you in your favorite programming language.
 
-Create an empty [Github](https://github.com/keboola/) repository. The name of the repository is
+Create an empty [Github](https://github.com/) repository. The name of the repository is
 arbitrary, but using the component is probably a good idea to avoid confusion.
 
 {: .image-popup}
@@ -99,7 +100,7 @@ the on-screen instructions:
 {: .image-popup}
 ![Screenshot -- Component Generator](/extend/component/tutorial/component-generator.png)
 
-When done, you will have an initialized repository with a "Hello, World!" application.
+When done, you will have an initialized repository with a "Hello, World!" component.
 In the above example, I choose the `simple-python` template which contains:
 
 - template.md -- description of the template files,
@@ -131,14 +132,14 @@ can verify that in the component details in the Developer Portal:
 {: .image-popup}
 ![Screenshot -- Component Deployed](/extend/component/tutorial/component-deployed.png)
 
-This means that the application deployment is fully automated. If you change the component
+This means that the component deployment is fully automated. If you change the component
 source code, all you need to do is push the changes to the git repository and tag them
 with [normal version tag](https://semver.org/#spec-item-2).
 
 ## Running the Component
-Once the application is deployed, it becomes available in KBC. Note that it
+Once the component is deployed, it becomes available in KBC. Note that it
 takes **up to 5 minutes** to propagate the changes to all KBC instances. Once propagated,
-you can configure the application by visiting the following URL:
+you can configure the component by visiting the following URL:
 
     https://connection.keboola.com/admin/projects/{PROJECT_ID}/extractors/{COMPONENT_ID}
 
@@ -152,6 +153,21 @@ And you should see the "Hello, World" message in the events:
 {: .image-popup}
 ![Screenshot -- Component Events](/extend/component/tutorial/hello-world.png)
 
+When you create a component, it will have assigned a memory limit of **64MB** and
+run timeout of **1 hour**. If you need to change those limits, please
+[contact our support](mailto:support@keboola.com).
+
+## Component Repository
+The component component is a crucial part of the component setting, because it
+actually defines what [Docker image](/extend/component/docker-tutorial/) will be used when running the component.
+We offer free hosting of your docker images in the **[Amazon Container Registry (AWS ECR)](https://aws.amazon.com/ecr/)** under our own account.
+All repositories in AWS ECR are private. When you create your component using the method shown above, we
+have just provisioned you with the docker image hosting and you don't need to worry about it any more.
+
+We also support the DockerHub and Quay.io registries, both public and private. However, we recommend that you use AWS ECR
+unless you require DockerHub or Quay for some reason (e.g., you want the image to be public).
+The main benefit of our AWS ECR is its reliability, as Quay.io and DockerHub are more prone to outages and are beyond our control.
+
 ## Summary
 You have just created your own KBC component. Although it does not do much, it show the easiest path
 to bring your own application logic to KBC. You can now continue with other parts of the tutorial:
@@ -161,7 +177,7 @@ to bring your own application logic to KBC. You can now continue with other part
  - using [configuration parameters](/extend/component/tutorial/configuration/)
  - [configuring a processor](/extend/component/tutorial/processors/)
  - [debugging a component](/extend/component/tutorial/debugging/)
- - implementation notes for specific languages
+ - [implementation notes](/extend/component/implementation/) for specific languages
 
 Although you usually don't need everything (e.g. you don't need input mapping when building an extractor), we suggest you go through all of the above
  to gain a general overview of the available options. You can also read all the details in the respective parts of the documentation:
@@ -170,5 +186,5 @@ Although you usually don't need everything (e.g. you don't need input mapping wh
 - [manifest files](/extend/common-interface/manifest-files/)
 - [OAuth support](/extend/common-interface/oauth/)
 - or general information about the [common interface](/extend/common-interface/)
-- [deployment settings](todo)
-- [UI settings](todo)
+- [deployment settings](/extend/component/deployment/) (including [Bitbucket integration](/extend/component/deployment/#bitbucket-integration))
+- [UI settings](/extend/component/ui-options/)

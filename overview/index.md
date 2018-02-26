@@ -28,8 +28,8 @@ There are some components which are probably more important than others:
 
 - [Storage](/integrate/storage/) component which is used to store all data in your KBC projects (data in tables,
 file uploads, configurations and logs)
-- [Docker Runner](/integrate/docker-bundle) component which is used internally to run almost all
-[components](/extend/docker/); therefore all extractors, writers and applications share its features
+- [Docker Runner](/extend/docker-runner) component which is used internally to run almost all
+[components](/extend/component/); therefore all extractors, writers and applications share its features
 - [Transformations](/integrate/transformations/) component which encapsulates all types of transformations (SQL with
 various backends, R, Python)
 - [Orchestrator](/automate/) component which takes care of grouping different tasks together and
@@ -37,7 +37,7 @@ running them regularly at scheduled times
 
 ## Component Common Features
 All components share some common behaviour such as [*Component Configuration*](/integrate/storage/api/configurations/)
-[Running Jobs](/overview/jobs/), which allows each component to be run in [Orchestrations](https://help.keboola.com/orchestrator/).
+[Running Jobs](/integrate/jobs/), which allows each component to be run in [Orchestrations](https://help.keboola.com/orchestrator/).
 This means that once worked your way through one component, you have seen them all.
 **Most of our components are open source**. If you are interested in their code, have a look at
 [our repositories](/overview/repositories/).
@@ -62,7 +62,7 @@ configurations is done through
 Stored configurations can be referenced in `/run` API calls.
 
 Configuration can be defined with a JSON schema stored within the Component detail.
-Docker Extensions without their own schemas can use a generic [Docker Extension schema](/integrate/docker-bundle/#configuration).
+Docker Components without their own schemas can use a generic [Docker Component schema](/extend/docker-runner/#configuration).
 
 ## Specific Components
 
