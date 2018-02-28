@@ -17,7 +17,7 @@ You need to have a computer with working [Docker](https://www.docker.com/what-do
 To be able to create new components, you also need to have an account in the [Keboola Developer Portal](https://components.keboola.com/),
 which manages the list of components available in KBC.
 
-The Developer portal uses different credentials than KBC. [Creating an account](https://apps.keboola.com/auth/create-account) is free; it requires a working email address
+The Developer portal uses different credentials than KBC. [Creating an account](https://components.keboola.com/auth/create-account) is free; it requires a working email address
 (to which a confirmation email will be sent) and a mobile phone for a mandatory two-factor authorization.
 
 When you log in to the developer portal, you have to join a **vendor** --- an organization of
