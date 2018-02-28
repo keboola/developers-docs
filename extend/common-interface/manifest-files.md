@@ -185,8 +185,8 @@ These parameters can be used (taken from [Storage API File Import](http://docs.k
 - If `is_permanent` is false, the file will be automatically deleted after 180 days.
 - When `notify` is true, the members of the project will be notified that a file has been uploaded to the project.
 
-### S3 Section
-When using [Amazon S3 for data exchange](/extend/common-interface/folders/#exchanging-data-via-s3),
+### S3 Staging
+When using [AWS S3 for direct data exchange](/extend/common-interface/folders/#exchanging-data-via-s3),
 the manifest files will contain an additional `s3` section with
 credentials for downloading the actual file data.
 
@@ -211,4 +211,4 @@ credentials for downloading the actual file data.
 If the file is sliced and you need to merge it into a single file, read through the guide to
 [working with sliced files](/integrate/storage/api/import-export/#working-with-sliced-files).
 
-Note: Exchanging data via S3 is currently available only for input mapping.
+Note: Exchanging data via AWS S3 is currently available only for input mapping.
