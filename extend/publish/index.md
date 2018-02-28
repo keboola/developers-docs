@@ -32,7 +32,7 @@ visiting a link with the specific component ID:
     https://connection.keboola.com/admin/projects/{PROJECT_ID}/extractors/{COMPONENT_ID}
 
 This way you can fully test your component before requesting its publication. Unpublished
-components are also not part of the [Public Component list](https://apps.keboola.com/apps).
+components are also not part of the [Public Component list](https://components.keboola.com/components).
 An existing configuration of a non-public component is accessible the same way as a configuration of any other component.
 
 **Important**: Changes made in the Developer Portal take up to 5 minutes to propagate to all Keboola Connection instances in all regions.
