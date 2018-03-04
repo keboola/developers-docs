@@ -11,27 +11,27 @@ redirect_from:
 * TOC
 {:toc}
 
-Components allow you to [extend](/extend/) Keboola Connection (KBC) in an arbitrary way.
+Components allow you to [extend](/extend/) Keboola Connection (KBC).
 The data interface to components is very similar to [Transformations](https://help.keboola.com/manipulation/transformations/) --- data is exchanged as
 CSV files in [designated directories](/extend/common-interface/).
 
 ### Intro to Component Creation
-As a developer, you have to implement the application logic in an arbitrary language and store it in a
+As a developer, you implement the application logic in a language of your choice and store it in a
 git repository. The component must adhere to our [common interface](/extend/common-interface/).
-There is a [component generator](https://github.com/keboola/component-generator) ready for you. It allows 
-you to quickly bootstrap the component.
-
-We also provide libraries to help you with implementation in
+To start quickly, use our [component generator](https://github.com/keboola/component-generator) that can generate a skeleton of the component for you. We also provide libraries to help you with implementation in
 [R](https://github.com/keboola/r-docker-application),
 [Python](https://github.com/keboola/python-docker-application), and
 [PHP](https://github.com/keboola/php-docker-application).
 Check our example component in [PHP](https://github.com/keboola/docker-demo-app).
 
-The main part of the [common interface](/extend/common-interface/) is that
-all components process input tables stored in [CSV files](/extend/common-interface/folders/) and
-generate result tables in CSV files. Extractors work the same way. However, instead of reading their
-input from KBC tables, they get it from an external source (usually an API). Similarly, writers
-do not generate any KBC tables.
+The main part of the [common interface](/extend/common-interface/) is the specification how 
+[CSV files and designated folders](/extend/common-interface/folders/) are used to exchange data between KBC and components:
+
+- Applications process input tables stored in CSV files and generate result tables in CSV files.
+- Extractors write results in the same way as applications, but instead of reading their
+input from KBC tables, they get it from an external source (usually an API).
+- Writers, on the other hand, access their input tables in the same way as applications, but push their results into external systems and do not generate any KBC tables.
+
 
 Apart from this basic usage, the common interface offers many more features, such as:
 
@@ -70,7 +70,7 @@ it must be [published](/extend/publish/).
 along with a [guide to setting up Docker](/extend/component/docker-tutorial/setup/) and a
 [guide to building dockerized applications](/extend/component/docker-tutorial/howto/).
 - Follow the [next steps](/extend/component/tutorial/input-mapping/) of the tutorial to understand how your component interacts with KBC.
-- See more about [testing and debugging components](/extend/component/tutorial/debugging/) in the KBC environment.
+- See more about [testing and debugging of components](/extend/component/tutorial/debugging/) in the KBC environment.
 - Request [publication](/extend/publish/) of your component.
 
 ## Custom Science Migration Guide
@@ -102,7 +102,7 @@ language used - `python-simple`, `php-simple` or `r-simple` and skip overwriting
 
 If you do not want the component generator to touch your repository, see the [deployment templates](https://github.com/keboola/component-generator/tree/master/templates-common)
 and [language templates](https://github.com/keboola/component-generator/tree/master/templates). You can copy the files to your
-repository manually. You can still use the component generator, to set up Travis integration:
+repository manually. You can still use the component generator to set up Travis integration:
 
     docker run -i -t --volume=/path/to/repository/:/code/ quay.io/keboola/component-generator --setup-only
 
