@@ -18,6 +18,9 @@ the Docker container. The decrypted data are stored on the Docker host drive and
 deleted immediately after the container finishes. The actual component code always reads
 the decrypted data.
 
+*Note: Encryption and decryption is available only for components which have encryption enabled.
+Encrypted values passed to component without encryption will not be decryped.*
+
 ## UI Interaction
 When saving arbitrary configuration data, values marked by the `#` character are automatically encrypted.
 Given the following configuration:
@@ -49,7 +52,7 @@ cannot pass `#username` because the component does not expect such a key to exis
 [encrypt API call](#encrypting-data-with-api) is used to encrypt the values before saving them.
 
 ### Automated Configuration Adjustment
-*Note: Automated adjustment applies only to the UI -- for components which have encryption enabled.*
+*Note: Automated adjustment applies only to the UI.*
 
 There are a few automatic configuration adjustments the UI does for you:
 

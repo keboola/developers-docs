@@ -19,6 +19,8 @@ JSON validation and syntax highlighting.
 {: .image-popup}
 ![Generic configuration screenshot](/extend/component/ui-options/configuration.png)
 
+The configuration provided in this input is available in the `parameters` section of the
+[configuration file](/extend/common-interface/config-file/#configuration-file-structure).
 Defining a [configuration schema](/extend/component/ui-options/configuration-schema/) will replace the JSON text area with a form.
 
 ## genericDockerUI-tableInput
@@ -40,6 +42,9 @@ With this UI, you can set:
 {: .image-popup}
 ![Table input result screenshot](/extend/component/ui-options/table-input-2.png)
 
+The configuration provided in this input is available in the `storage.input` section of the
+[configuration file](/extend/common-interface/config-file/#configuration-file-structure).
+
 ## genericDockerUI-tableOutput
 This flag provides a UI for setting the table output [mapping](https://help.keboola.com/manipulation/transformations/mappings/). This UI part **should not be used**
 if the component is using the [default bucket](/extend/common-interface/folders/#default-bucket) setting.
@@ -60,6 +65,9 @@ With this UI, you can set:
 
 {: .image-popup}
 ![Table output result screenshot](/extend/component/ui-options/table-output-2.png)
+
+The configuration provided in this input is available in the `storage.output` section of the
+[configuration file](/extend/common-interface/config-file/#configuration-file-structure).
 
 ## genericDockerUI-processors
 This flag provides a UI for the [Processor configuration](/extend/component/processors/).
@@ -86,6 +94,9 @@ to select files from *File Uploads*
 {: .image-popup}
 ![File input result screenshot](/extend/component/ui-options/file-input-2.png)
 
+The configuration provided in this input is available in the `storage.input` section of the
+[configuration file](/extend/common-interface/config-file/#configuration-file-structure).
+
 ## genericDockerUI-fileOutput
 This flag provides a UI for setting the file output mapping. With this UI, you can set:
 
@@ -103,6 +114,9 @@ This flag provides a UI for setting the file output mapping. With this UI, you c
 {: .image-popup}
 ![File output result screenshot](/extend/component/ui-options/file-output-2.png)
 
+The configuration provided in this input is available in the `storage.output` section of the
+[configuration file](/extend/common-interface/config-file/#configuration-file-structure).
+
 ## genericDockerUI-authorization
 This flag provides a UI for setting [OAuth2 Authorization](/extend/common-interface/oauth/). However, to
 actually activate OAuth for your component, you have to [contact our support](mailto:support@keboola.com).
@@ -112,6 +126,9 @@ actually activate OAuth for your component, you have to [contact our support](ma
 
 {: .image-popup}
 ![Authorization detail screenshot](/extend/component/ui-options/auth-1.png)
+
+The configuration provided in this input is available in the `authorization` section of the
+[configuration file](/extend/common-interface/config-file/#configuration-file-structure).
 
 ## genericTemplatesUI
 This flag is used to provide UI for components based on the [Generic Extractor](/extend/generic-extractor/). It allows the end-user to select a

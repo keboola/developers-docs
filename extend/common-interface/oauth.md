@@ -12,7 +12,7 @@ When you are building an component that communicates with a 3rd party API and th
 Keboola Connection (KBC) stores the users' credentials/access tokens in OAuth API V2. They are revealed and
 decrypted only for a target component and project. End-users can be assured that their authorized access will not leak.
 
-Note: This feature must be enabled by our [support](mailto:support@keboola.com).
+*Note: This feature must be enabled by our [support](mailto:support@keboola.com).*
 
 ## Initialize
 Create a configuration for the given component and project in OAuth API V2.
@@ -70,7 +70,8 @@ decrypt the `authorization.oauth_api.credentials.#data` and `authorization.oauth
 ## Credentials Injection
 
 If you want to bypass OAuth API V2 integration, you can paste all required credential parameters in the configuration directly.
-Fields requiring encryption will be encrypted and decrypted as usual. That means, that you can save the following configuration.
+Fields requiring encryption will be encrypted and decrypted as usual. That means, that you can save the following configuration
+via the [configuration API](/integrate/storage/api/configurations/).
 
 {% highlight json %}
 {
@@ -88,4 +89,4 @@ Fields requiring encryption will be encrypted and decrypted as usual. That means
 }
 {% endhighlight %}
 
-This comes in very handy for quick Generic extractor iterations.
+This comes in very handy for quick component iterations and for testing whether your component works before having the OAuth support enabled.
