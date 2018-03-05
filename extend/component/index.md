@@ -33,30 +33,31 @@ input from KBC tables, they get it from an external source (usually an API).
 - Writers, on the other hand, access their input tables in the same way as applications, but push their results into external systems and do not generate any KBC tables.
 
 
-Apart from this basic usage, the common interface offers many more features, such as:
+Apart from this basic usage, the common interface offers many more features:
 
-- Passing parameters
-- Error control
-- Working with metadata
+- passing parameters
+- error control
+- working with metadata
 - OAuth support
-- Working with non-CSV files
-- Logging configuration
+- working with non-CSV files
+- logging configuration
+- etc.
 
 Our [Docker Runner component](/extend/docker-runner/) makes sure that the common interface is honoured
 from our side. It also takes care of executing your component in its own [isolated environment](/extend/docker-runner/).
 
 ## Requirements
-Before you start developing a new component, you should:
+Before you start developing a new component, you should
 
-- Have a [KBC project](/#development-project) where you can test your code.
-- Get yourself acquainted with [Docker](/extend/component/docker-tutorial/). You should be
+- have a [KBC project](/#development-project) where you can test your code.
+- get yourself acquainted with [Docker](/extend/component/docker-tutorial/). You should be
 able to [run `docker`](/extend/component/docker-tutorial/setup/) commands. Strictly speaking, you can get away
 without using it, but it will certainly speed things up for you.
-- Be able to send API requests. Although you can use the [Apiary](https://apiary.io/) client console, we
+- be able to send API requests. Although you can use the [Apiary](https://apiary.io/) client console, we
 recommend using [Postman](https://www.getpostman.com/) as it is
 more convenient. A list of [sample requests](https://documenter.getpostman.com/view/3086797/collection/77h845D)
 is available.
-- Have a git repository ([Github](https://github.com/) or [Bitbucket](https://bitbucket.org/) are recommended, 
+- have a git repository ([Github](https://github.com/) or [Bitbucket](https://bitbucket.org/) are recommended, 
 although any other host should work as well).
 
 You can work with your component in your KBC projects immediately as soon as you
