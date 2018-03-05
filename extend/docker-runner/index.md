@@ -20,7 +20,7 @@ following a set of rules that will allow you to integrate the application into K
 
 There is a [predefined interface](/extend/common-interface/) with Docker Runner, consisting
 mainly of a [folder structure](/extend/common-interface/folders/) and a [serialized configuration file](/extend/common-interface/config-file/).
-All [components](/extend/component/) including R and Python Transformations are run using Docker Runner.
+All [components](/extend/component/), including our internal R and Python Transformations, are run using Docker Runner.
 
 ## Workflow
 The Docker Runner functionality can be described in the following steps:
