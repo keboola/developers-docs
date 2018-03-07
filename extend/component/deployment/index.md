@@ -102,16 +102,11 @@ docker push ${REPOSITORY}:${TRAVIS_TAG}
 docker push ${REPOSITORY}:latest
 
 # Update the tag in Keboola Developer Portal -> Deploy to KBC
-if echo ${TRAVIS_TAG} | grep -c '^[0-9]\+\.[0-9]\+\.[0-9]\+$'
-then
-    docker run --rm \
-        -e KBC_DEVELOPERPORTAL_USERNAME \
-        -e KBC_DEVELOPERPORTAL_PASSWORD \
-        quay.io/keboola/developer-portal-cli-v2:latest \
-        update-app-repository ${KBC_DEVELOPERPORTAL_VENDOR} ${KBC_DEVELOPERPORTAL_APP} ${TRAVIS_TAG} ecr ${REPOSITORY}
-else
-    echo "Skipping deployment to KBC, tag ${TRAVIS_TAG} is not allowed."
-fi
+docker run --rm \
+    -e KBC_DEVELOPERPORTAL_USERNAME \
+    -e KBC_DEVELOPERPORTAL_PASSWORD \
+    quay.io/keboola/developer-portal-cli-v2:latest \
+    update-app-repository ${KBC_DEVELOPERPORTAL_VENDOR} ${KBC_DEVELOPERPORTAL_APP} ${TRAVIS_TAG} ecr ${REPOSITORY}
 {% endhighlight %}
 
 The scripts uses our [Developer Portal CLI tool](https://github.com/keboola/developer-portal-cli-v2) to communicate with
