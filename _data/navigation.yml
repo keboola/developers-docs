@@ -54,6 +54,15 @@ items:
 
           - url: /extend/component/implementation/
             title: Implementation Notes
+            items:
+              - url: /extend/component/implementation/php/
+                title: PHP Implementation Notes
+
+              - url: /extend/component/implementation/python/
+                title: Python Implementation Notes
+
+              - url: /extend/component/implementation/r/
+                title: R Implementation Notes
 
           - url: /extend/component/running/
             title: Running Components

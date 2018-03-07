@@ -11,7 +11,7 @@ available in the UI, use the API if you want to manipulate them programmatically
 
 When working with the [component configurations API](http://docs.keboola.apiary.io/#reference/component-configurations),
 you usually need to know the `componentId`.
-You can get a list of all available components with the [API index call](http://docs.keboola.apiary.io/#reference/miscellaneous/api-index/get),
+You can see a list of public components in [the developer portal](https://components.keboola.com/components), or you can get a list of all available components with the [API index call](http://docs.keboola.apiary.io/#reference/miscellaneous/api-index/get),
 see [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#f0e321e0-6533-0074-662d-fe4ab85a15d5).
 
 It will give you something like this:
@@ -35,13 +35,7 @@ It will give you something like this:
                     "uri": "147946154733.dkr.ecr.us-east-1.amazonaws.com/developer-portal-v2/keboola.ex-db-snowflake",
                     "tag": "1.2.5"
                 },
-                "vendor": {
-                    "contact": [
-                        "Keboola",
-                        "Křižíkova 488/115, Praha, CZ",
-                        "support@keboola.com"
-                    ]
-                }
+                "vendor": {...}
             },
             "flags": [
                 "genericDockerUI",
@@ -51,23 +45,8 @@ It will give you something like this:
             "documentationUrl": "https://github.com/keboola/db-extractor-snowflake/blob/master/README.md"
         }
     ],
-    "services": [
-        {
-            "id": "docker-runner",
-            "url": "https://docker-runner.keboola.com"
-        },
-        {
-            "id": "import",
-            "url": "https://import.keboola.com"
-        },
-        {
-            "id": "syrup",
-            "url": "https://syrup.keboola.com"
-        }
-    ],
-    "urlTemplates": {
-        "orchestrationJob": "/admin/projects/&&projectId&&/orchestrations/&&orchestrationId&&/jobs/&&jobId&&"
-    }
+    "services": [...],
+    "urlTemplates": {...}
 }
 {% endhighlight %}
 
