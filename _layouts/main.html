@@ -9,6 +9,7 @@
 	<title>{{ page.title }} | Keboola Connection Developers Knowledge Base</title>
 	<link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="{{ '/assets/css/style.css' | prepend: site.baseurl }}">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
 </head>
 <body>
 {% include gtm-body.html %}
@@ -18,10 +19,12 @@
 				<a href="{{ '/' | prepend: site.baseurl }}" class="logo"><img src="{{ '/assets/img/logo.png' | prepend: site.baseurl }}"></a>
 				<span class="label">DEVELOPERS DOCS</span>
 
-				<form role="search" action="{{ '/search/' | prepend: site.baseurl }}">
-					<input name="q" size="30" type="text" class="form-control"
-						   placeholder="Search Developers Documentation">
-				</form>
+				<div class="keboola-algolia-docsearch">
+					<input size="30" type="text" class="form-control"
+						   id="keboola-algolia-docsearch-dropdown"
+						   placeholder="Search documentation"
+					/>
+				</div>
 			</div>
 		</div>
 
@@ -82,5 +85,13 @@
 		}});
 	});
 	</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+  apiKey: '157049a881510c7a785af33a79362421',
+  indexName: 'keboola_developers',
+  inputSelector: '#keboola-algolia-docsearch-dropdown',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+</script>
 </body>
 </html>
