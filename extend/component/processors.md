@@ -17,113 +17,94 @@ the image outputs. For example, if an extractor extracts CSV data in a non-UTF8 
 convert the CSV to UTF-8 as expected by [Storage](https://help.keboola.com/storage/). See the
 [tutorial](/extend/component/tutorial/configuration/) for a quick example of using processors.
 
-## Configuration
-Processors are technically supported in any configuration. However, the option may not always be
+Processors are technically supported in any configuration of any component. However, the option may not always be
 [available in the UI](/extend/component/ui-options/#genericdockerui-processors). To manually configure processors,
-you have to use the [Component Configuration API](http://docs.keboola.apiary.io/#reference/component-configurations). By running the
+you have to use the [Component Configuration API](http://docs.keboola.apiary.io/#reference/component-configurations).
+See the respective part of [documentation](/integrate/storage/api/configurations/) for
+examples of working with [Component Configuration API](/integrate/storage/api/configurations/).
+If you want to implement your own processor, see the [Implementation notes](/extend/component/implementation/#implementing-processors)
+
+## Configuration
+By running the
 [Get Configuration Detail](http://docs.keboola.apiary.io/#reference/component-configurations/manage-configurations/configuration-detail)
-request for a specific component ID and configuration ID, you obtain the actual configuration contents, for example:
+request for a specific component ID and configuration ID, you obtain the actual configuration contents.
+You can see [an example request](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb)
+for getting configuration with ID `365111648` for the Email Attachments Extractors component (ID `keboola.ex-email-attachments`):
 
 {% highlight json %}
 {
-    "id": "308777544",
-    "name": "test processor",
-    "description": "Sample configuration",
-    "created": "2017-08-15T17:56:27+0200",
+    "id": "365111648",
+    "name": "Processor test",
+    "description": "",
+    "created": "2018-03-10T08:13:08+0100",
     "creatorToken": {
-        "id": 27978,
+        "id": 27865,
         "description": "ondrej.popelka@keboola.com"
     },
-    "version": 7,
-    "changeDescription": "",
+    "version": 3,
+    "changeDescription": "Update name",
     "isDeleted": false,
     "configuration": {
         "parameters": {
-            "port": null,
-            "user": "sample-user",
-            "#pass": "KBC::ComponentProjectEncrypted==UqmyW3WbQ=",
-            "ftpUrl": "ftp.example.com",
-            "mappings": [
-                {
-                    "compression": "NONE",
-                    "ftpPath": "/html/tmp/sample2.tsv",
-                    "delimiter": "\\t",
-                    "srcCharset": "UTF-8",
-                    "sapiPath": "in.c-processor-test.sample2-tsv",
-                    "pkey": [],
-                    "enclosure": "'",
-                    "prefix": "",
-                    "isFolder": 0,
-                    "incremental": 0,
-                    "extension": "csv"
-                }
-            ],
-            "protocol": "FTP",
-            "timezone": "Europe/Prague"
-        },
-        "processors": {
-            "after": [
-                {
-                    "definition": {
-                        "component": "keboola.processor-headers"
-                    },
-                    "parameters": {
-                        "delimiter": "|",
-                        "enclosure": "'"
-                    }
-                }
-            ]
+            "email": "572-365111648-5aa3858e91ed1@import.keboola.com",
+            "delimiter": ",",
+            "enclosure": "\"",
+            "primaryKey": [],
+            "incremental": false
         }
     },
+    "rowsSortOrder": [],
     "rows": [],
-    "state": [],
+    "state": {
+        "lastDownloadedFileTimestamp": "1520666119"
+    },
     "currentVersion": {
-        "created": "2017-08-16T21:20:37+0200",
+        "created": "2018-03-10T08:16:54+0100",
         "creatorToken": {
-            "id": 27978,
+            "id": 27865,
             "description": "ondrej.popelka@keboola.com"
         },
-        "changeDescription": ""
+        "changeDescription": "Update name"
     }
 }
 {% endhighlight %}
 
-From this, the actual configuration is the contents of the `configuration` node. Therefore:
+From this, the actual configuration is the **contents** of the `configuration` node. Therefore:
 
 {% highlight json %}
 {
     "parameters": {
-        "port": null,
-        "user": "sample-user",
-        "#pass": "KBC::ComponentProjectEncrypted==UqmyW3WbQ=",
-        "ftpUrl": "ftp.example.com",
-        "mappings": [
-            {
-                "compression": "NONE",
-                "ftpPath": "/html/tmp/sample2.tsv",
-                "delimiter": "\\t",
-                "srcCharset": "UTF-8",
-                "sapiPath": "in.c-processor-test.sample2-tsv",
-                "pkey": [],
-                "enclosure": "'",
-                "prefix": "",
-                "isFolder": 0,
-                "incremental": 0,
-                "extension": "csv"
-            }
-        ],
-        "protocol": "FTP",
-        "timezone": "Europe/Prague"
+        "email": "572-365111648-5aa3858e91ed1@import.keboola.com",
+        "delimiter": ",",
+        "enclosure": "\"",
+        "primaryKey": [],
+        "incremental": false
+    }
+}
+{% endhighlight %}
+
+## Adding a processor
+Processors are configured in the `processors` section in the `before` array or the `after` array (rarely both).
+For example, you might want to configure the [`processor-skip-lines`](https://github.com/keboola/processor-skip-lines):
+
+{% highlight json %}
+{
+    "parameters": {
+        "email": "572-365111648-5aa3858e91ed1@import.keboola.com",
+        "delimiter": ",",
+        "enclosure": "\"",
+        "primaryKey": [],
+        "incremental": false
     },
     "processors": {
         "after": [
             {
                 "definition": {
-                    "component": "keboola.processor-headers"
+                    "component": "keboola.processor-skip-lines"
                 },
                 "parameters": {
-                    "delimiter": "|",
-                    "enclosure": "'"
+                    "lines": 1,
+                    "direction_from": "top"
                 }
             }
         ]
@@ -131,15 +112,22 @@ From this, the actual configuration is the contents of the `configuration` node.
 }
 {% endhighlight %}
 
-Processors are configured in the `processors` section in the `before` array or the `after` array (rarely both).
-The above configuration defines that a `keboola.processor-headers` processor (the headers processor fills missing
-columns in a CSV file) will run **after** this particular configuration of an FTP extractor is finished,
-but **before** its results are loaded into Storage. After the processor is finished, its outputs are loaded
+The configuration parameters of the processor are always described in [its documentation](https://github.com/keboola/processor-skip-lines).
+The above configuration defines that a `keboola.processor-skip-lines` (which removes certain number of lines from the file)
+will run **after** this particular configuration of the Email Attachment extractor is finished,
+but **before** its results are loaded into Storage. When the processor is finished, its outputs are loaded
 into Storage as if they were the outputs of the extractor itself.
 
 To save the configuration, you need to use the [Update Configuration API call](http://docs.keboola.apiary.io/#reference/component-configurations/manage-configurations/update-configuration).
-It is also advisable to [minify the JSON](http://www.cleancss.com/json-minify/) to avoid whitespace issues.
-Also note that if the configuration contains literal `+`, it has to be [urlencoded](https://www.urlencoder.org/) as `%2B`.
+When updating the configuration, you to provide `componentId`, `configurationId` and the actual contents of
+the configuration in the `configuration` form field. Take care to supply only the **contents** of the `configuration`
+node and to properly escape the form data.
+
+See the [Configuration documentation](/integrate/storage/api/configurations/#modifying-a-configuration) for
+a more thorough description and the *Add processor to Email Attachments Extractor Configuration* example
+in our [collection](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#91e2060c-0c14-7a09-0cc3-537eb6057ada).
+Remember, the processors can be [chained](http://localhost:4000/extend/component/tutorial/processors/#chaining-processors) to
+achieve more advanced processing.
 
 ### Available Processors
 You can obtain a list of available processors using the
@@ -149,7 +137,7 @@ and `documentationUrl`, which describes additional parameters of the processor.
 
 ### Configuring parameters
 A processor may allow (or require) parameters. These are entered in the `parameters` section.
-The below configuration sets the value for two parameters --- `delimiter` and `enclosure`:
+The below configuration sets the value for two parameters --- `lines` and `direction_from`:
 
 {% highlight json %}
 {
@@ -157,11 +145,11 @@ The below configuration sets the value for two parameters --- `delimiter` and `e
         "after": [
             {
                 "definition": {
-                    "component": "keboola.processor-headers"
+                    "component": "keboola.processor-skip-lines"
                 },
                 "parameters": {
-                    "delimiter": "|",
-                    "enclosure": "'"
+                    "lines": 1,
+                    "direction_from": "top"
                 }
             }
         ]
@@ -169,37 +157,129 @@ The below configuration sets the value for two parameters --- `delimiter` and `e
 }
 {% endhighlight %}
 
-The names and allowed values of parameters are fully up to the processor interpretation and validation.
+The names and allowed values of parameters are fully up to the processor interpretation and validation
+and are described in the respective processor documentation.
 
-## Implementing Processors
-Implementing a processor is in principle the same as implementing any other
-[component](/extend/component/). However, processors are designed to be
-[Single Responsibility](https://en.wikipedia.org/wiki/Single_responsibility_principle) components. This
-means, for example, that processors should require no or very little configuration, should not communicate
-over a network and should be fast. To maintain the implementation of processors as simple as possible,
-simple scalar parameters can be injected into the environment variables. For instance, the parameters:
+### Using Processors with Configuration Rows
+If the configuration uses [Configuration Rows](/integrate/storage/api/configurations/#configuration-rows),
+you have to use the [Update Configuration Row](https://keboola.docs.apiary.io/#reference/component-configurations/manage-configuration-rows/update-row)
+API call to set the processors.
+
+You need to provide `componentId`, `configurationId`, `rowId` and the contents of the configuration in
+the same manner as when [adding a processor to configuration](#adding-a-processor).
+
+You can see an example *Add processor to S3 Extractor configuration Row* in
+[our collection](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#1e7fd94e-f22c-4a77-82c1-babc8602f9cd)
+It shows how to set a processor for the configuration row with ID `364481153` in configuration `364479526` of
+the AWS S3 Extractor (component ID `keboola.ex-aws-s3`). The configuration is the following:
 
 {% highlight json %}
 {
     "parameters": {
-        "delimiter": "|",
-        "enclosure": "'"
+        "bucket": "travis-php-db-import-tests-s3filesbucket-vm9zhtm5jd7s",
+        "key": "tw_accounts.csv",
+        "saveAs": "first-table",
+        "includeSubfolders": false,
+        "newFilesOnly": true
+    },
+    "processors": {
+        "after": [
+            {
+                "definition": {
+                    "component": "keboola.processor-skip-lines"
+                },
+                "parameters": {
+                    "lines": 1
+                }
+            }
+        ]
     }
 }
 {% endhighlight %}
 
-will be available in the processor as the environment variables `KBC_PARAMETER_DELIMITER` and
-`KBC_PARAMETER_ENCLOSURE`. This simplifies the implementation in that it is not necessary to process the
-[configuration file](/extend/common-interface/config-file/). This parameter
-injection works only if the values of the parameters are scalar. If you need non-scalar values, you have to pass them through the config file (and disable `injectEnvironment` component setting).
+## Chaining Processors
+Remember, the processors can be [chained](/extend/component/tutorial/processors/#chaining-processors), so
+the processor should be as simple as possible. For example a processor reading tables in CSV should assume that these are
+available in the [Standard format](https://help.keboola.com/storage/tables/csv-files/#output-csv-format) and that the
+table manifests are available.
 
-### Publishing a Processor
-The process of processor registration is the same as the
-[publishing any other component](/extend/publish/). However, many of the fields do not apply.
-The following fields are important:
+### Extractor Example
+For example, assume that you have a component which extracts the following data:
 
-- Vendor
-- Component name and component type (`processor`)
-- Short and Full Description
-- Component Documentation (`documentationUrl`)
-- Whether to inject the environment variables (`injectEnvironment`)
+    Dump from ACME Anvil CRM
+    SLA: 24h
+    Day|AnvilsDelivered
+    2050-12-10|100|5|4|4
+    2050-12-11|56|1|2
+    2050-12-12|131|9|7|3
+
+You would first apply the [processor-skip-lines](https://github.com/keboola/processor-skip-lines) to obtain something
+resembling a CSV file
+
+    Day|AnvilsDelivered
+    2050-12-10|100|5|4|4
+    2050-12-11|56|1|2
+    2050-12-12|131|9|7|3
+
+Then you would apply the [processor-create-manifest](https://github.com/keboola/processor-create-manifest) to
+set the delimiter and enclosure in the file manifest.
+
+Then you can use the [processor-format-csv](https://github.com/keboola/processor-format-csv) to convert the file
+from the format specified in the manifest to the standard format:
+
+    "Day","AnvilsDelivered"
+    "2050-12-10","100","5","4","4"
+    "2050-12-11","56","1","2"
+    "2050-12-12","131","9","7","3"
+
+Then you can use the [processor-headers](https://github.com/keboola/processor-headers) to make the data orthogonal:
+
+    "Day","AnvilsDelivered","col1","col2","col3"
+    "2050-12-10","100","5","4","4"
+    "2050-12-11","56","1","2",""
+    "2050-12-12","131","9","7","3"
+
+### Writer Example
+A chain similar to the above can be used for a writer too. Assume that you need to send the following data to
+the very special ACME Anvil CRM:
+
+    Import: CRM
+    ImportFormat: AnvilPSV
+    Date: 2018-10-01
+    Type: MANF-DLVR-PLAN
+
+    Day|AnvilManufacturingPlan|AnvilDeliveryPlan
+    2050-12-10|100|533
+    2050-12-11|100|695
+    2050-12-12|100|923
+
+The data exported from Storage will be in the following format:
+
+    "Day","AnvilManufacturingPlan","AnvilDeliveryPlan"
+    "2050-12-10","100","533"
+    "2050-12-11","100","695"
+    "2050-12-12","100","923"
+
+Then you would apply the [processor-format-csv](https://github.com/keboola/processor-format-csv) to convert the file
+from the format standard format to the format required by the Anvil CRM writer:
+
+    Day|AnvilManufacturingPlan|AnvilDeliveryPlan
+    2050-12-10|100|533
+    2050-12-11|100|695
+    2050-12-12|100|923
+
+Then you could create a custom processor to put the header in:
+
+    Import: CRM
+    ImportFormat: AnvilPSV
+    Date: 2018-10-01
+    Type: MANF-DLVR-PLAN
+
+    Day|AnvilManufacturingPlan|AnvilDeliveryPlan
+    2050-12-10|100|533
+    2050-12-11|100|695
+    2050-12-12|100|923
+
+and then the Anvil CRM writer can send the result to the CRM system. Or you can have the header function be part of the
+writer itself. That decision should be made depending on whether the header must always be present (part of the writer) or is optional (processor).
+

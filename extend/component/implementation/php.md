@@ -77,6 +77,154 @@ foreach ($inFile as $rowNum => $row) {
 }
 {% endhighlight %}
 
+## Using the KBC Package
+The KBC [PHP component package](https://github.com/keboola/php-component) provides functions to:
+
+- Read and parse the configuration file and parameters -- `getConfig` method or `getConfig()->getParameters()` methods
+- List input files and tables - `getConfig()->getInputFiles()`, `getConfig()->getInputTables()` methods.
+- Work with manifests containing table and file metadata -  `getManifestManager()->getTableManifest()`, `getManifestManager()->writeTableManifest()`, `getManifestManager()->getFileManifest()`, `getManifestManager()->writeFileManifest()` methods.
+- List expected outputs - `getConfig()->getExpectedOutputFiles()` or `getConfig()->getExpectedOutputTables()` methods.
+
+You can go through the [generated docs](https://keboola.github.io/php-component/master/classes.html) of all available methods and classes.
+The package can be installed by [Composer](https://getcomposer.org/):
+
+    composer require keboola/php-component
+
+The package can be used standalone (good for existing code), or you can inherit your own component from it (good for new components).
+When inheriting from the package, see the [Github repository](https://github.com/keboola/php-component) for examples, or
+our [component template](https://github.com/keboola/component-generator/tree/master/templates).
+Using the package as a standalone class does not require anything else then creating it instance:
+
+{% highlight php %}
+<?php
+
+require "vendor/autoload.php";
+
+$component = new \Keboola\Component\BaseComponent();
+$parameters = $component->getConfig()->getValue(['parameters']);
+var_export($parameters);
+
+$inputTables = $component->getConfig()->getInputTables();
+var_export($inputTables);
+{% endhighlight %}
+
+The configuration is read from the [data folder](/extend/common-interface/config-file/) specified by the
+[KBC_DATADIR environment variable](https://developers.keboola.com/extend/common-interface/environment/).
+Given the following `config.json` file:
+
+{% highlight json %}
+{
+    "storage": {
+        "input": {
+            "tables": [
+                {
+                    "source": "in.c-main.sample",
+                    "destination": "source.csv"
+                }
+            ],
+            "files": []
+        }
+    },
+    "parameters": {
+        "myParameter": "myValue",
+        "repeat": 2
+    }
+}
+{% endhighlight %}
+
+The above PHP code, would output:
+
+{% highlight php %}
+array (
+  'myParameter' => 'myValue',
+  'repeat' => 2,
+)array (
+  0 =>
+  array (
+    'source' => 'in.c-main.sample',
+    'destination' => 'source.csv',
+  ),
+)
+{% endhighlight %}
+
+### Dynamic Input/Output Mapping
+In the [tutorial](/extend/component/tutorial/) and the above examples, we have shown
+applications which have names of their input/output tables hard-coded.
+The following example shows how to read an input and output mapping specified by the end-user,
+which is accessible in the [configuration file](/extend/common-interface/config-file/). It demonstrates
+how to read and write tables and table manifests. File manifests are handled the same way. For a full authoritative list
+of items returned in table list and manifest contents, see [the specification](/extend/common-interface/config-file/)
+
+Note that the `destination` label in the script refers to the destination from the
+[mappers](/extend/component/tutorial/input-mapping/) perspective.
+The input mapper takes `source` tables from user's storage, and produces `destination` tables that become
+the input of your component. The output tables of your component are consumed by the output mapper
+whose `destination` are the resulting tables in Storage.
+
+The following piece of code reads and arbitrary number of tables and adds auto generated primary key
+to them. The name of the added column is configured in parameters (`primaryKeyName`), also the
+step of the generator is configured in parameters (`primaryKeyStep`). The end of the code writes
+table [manifest file](/extend/common-interface/manifest-files/) which stores the configuration of
+the primary key and optional table metadata.
+
+{% highlight php %}
+<?php
+
+require "vendor/autoload.php";
+
+$component = new \Keboola\Component\BaseComponent();
+$inputTables = $component->getConfig()->getInputTables();
+
+$j = 0;
+foreach ($inputTables as $inputTable) {
+    // get csv file name
+    $inFileName = $component->getDataDir() . '/in/tables/' . $inputTable['destination'];
+
+    // get file name from output mapping
+    $outFileName = $component->getDataDir() . '/out/tables/' .
+        $component->getConfig()->getExpectedOutputTables()[$j]['destination'];
+
+    // read table manifest
+    $manifest = $component->getManifestManager()->getTableManifest($inFileName);
+
+    // open input and output files
+    $inFile = new \Keboola\Csv\CsvFile($inFileName);
+    $outFile = new \Keboola\Csv\CsvFile($outFileName);
+    // get value of `primaryKeyName` parameter
+    $columnName = $component->getConfig()->getParameters()['primaryKeyName'];
+
+    // process table data
+    $header = $inFile->getHeader();
+    array_push($header, $columnName);
+    $outFile->writeRow($header);
+    $i = 0;
+    foreach ($inFile as $row) {
+        // skip the first line with header
+        if ($i != 0) {
+            // add generated primary key
+            array_push($row, $i);
+            $outFile->writeRow($row);
+        }
+        // get value of `primaryKeyStep` parameter (different approach to `primaryKeyName` above)
+        $i = $i + $component->getConfig()->getValue(['parameters', 'primaryKeyStep']);
+    }
+
+    // store table metadata
+    $metadata = $manifest['metadata'];
+    array_push($metadata, [["key" => "sample", "value" => "metadata"]]);
+
+    // create table manifest with primary ket and metadata
+    $component->getManifestManager()->writeTableManifestFromArray(
+        $outFileName,
+        [
+            'primary_key' => [$columnName],
+            'metadata' => $metadata,
+        ]
+    );
+    $j++;
+}
+{% endhighlight %}
+
 ## Logging
 For simple applications, printing with `echo` or `print` is enough. To print to STDERR, you have to use
 e.g. `fwrite(STDERR, "Hello, world!" . PHP_EOL);`. The best option is to use the [Monolog package](https://github.com/Seldaek/monolog).

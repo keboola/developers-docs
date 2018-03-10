@@ -241,14 +241,14 @@ items:
           - url: /integrate/storage/api/
             title: Using API
             items:
+              - url: /integrate/storage/api/configurations/
+                title: Configurations API
+
               - url: /integrate/storage/api/importer/
                 title: Storage API Importer
 
               - url: /integrate/storage/api/import-export/
                 title: Manually importing and exporting data
-
-              - url: /integrate/storage/api/configurations/
-                title: Working with configurations
 
               - url: /integrate/storage/api/tde-exporter/
                 title: TDE Exporter

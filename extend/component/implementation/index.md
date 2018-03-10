@@ -12,6 +12,32 @@ In this article some good practices in developing the component code are describ
 your component, we strongly suggest that you follow these. Here are some best practices which should be
 followed across all components. We also recommend that you check our [component templates](https://github.com/keboola/component-generator).
 
+Developing a component is a challenging task. Here are a couple of advices and best practices, which should help you to
+do the work more efficiently:
+
+- Do not repeat the functions of existing components. For example if you want to download data from Google Drive and transpose the
+table, you don't have to create a component for that -- you can load the table using the existing extractor and transpose it using
+an existing Transpose application.
+- Every component should do only one thing. For example, if you want to extract data from some API and compute some metrics on them,
+make two components -- one for extracting the data and a second one for computing the metrics.
+- Do as little data processing as possible. As in the above example -- having the processing tied to extraction makes it hard to
+identify errors in data (was it extracted wrong, or was it processed badly). It also allows the end user to split the
+task into smaller ones and have better control over their execution.
+- Avoid optional data modification. For example, if you have a component which sometimes extracts data in ISO8892 encoding and sometimes
+in UTF8 encoding, you don't need to implement this conversion in the component. You can let the end-user to configure [processors](/extend/component/processors/)
+to load the incompatible data.
+- Avoid iterations. For example, your component is downloading multiple files from some system and converts them to CSV files for Storage
+import. You don't need to implement the loop around the files, you can use [configuration rows](/integrate/storage/api/configurations/#configuration-rows)
+and implement processing of only a single table.
+
+Before you create any complex components, be sure to read about
+[Configurations](/integrate/storage/api/configurations/) and [Processors](/extend/component/processors/)
+as they can substantially simplify your component code. We also recommend that you use our
+[common interface](/extend/common-interface/) library, which is available for
+[Python](/extend/component/implementation/python/#using-the-kbc-package)
+[R](/extend/component/implementation/r/#using-the-kbc-package)
+and [PHP](/extend/component/implementation/php/#using-the-kbc-package)
+
 ## Docker
 You may use any docker image, you see fit. We recommend to base your images on the [official library](https://hub.docker.com/explore/)
 as that is the most stable.
@@ -94,3 +120,68 @@ Also keep in mind that the output of the components (Job events) serve to pass o
 The event message size is limited (about 64KB). If the limit is exceeded, the message will be trimmed. If the component produces
 obscene amount (dozens of MBs) of output in very short time, it may be terminated with internal error.
 Also make sure your component does not use any [output buffering](#langauge-specific-notes), otherwise all events will be cached after the application finishes.
+
+## Implementing Processors
+[Processors](/extend/component/processors/)
+allow the end-user to customize the input to the component and output from it. That means
+that they many custom requirements can be solved by processors, keeping the component
+code general.
+
+Choosing whether to implement a specific feature as processor or as part of your
+component may be difficult. Processor might be a good solution if the following are true:
+
+- the feature is simple (one operation, contains no internal logic)
+- the feature is optional (not all end-users are interested in it)
+- the feature is universal (it is always applied to all input/output or none)
+
+If processors are used together with [configuration rows](/integrate/storage/api/configurations/#configuration-rows),
+the last condition is weakened, because a different set of processors may be applied to each configuration row.
+
+### Configuration
+Implementing a processor is in principle the same as implementing any other
+[component](/extend/component/). However, processors are designed to be
+[Single Responsibility](https://en.wikipedia.org/wiki/Single_responsibility_principle) components. This
+means, for example, that processors should require no or very little configuration, should not communicate
+over a network and should be fast. To maintain the implementation of processors as simple as possible,
+simple scalar parameters can be injected into the environment variables. For instance, the parameters:
+
+{% highlight json %}
+{
+    "parameters": {
+        "delimiter": "|",
+        "enclosure": "'"
+    }
+}
+{% endhighlight %}
+
+will be available in the processor as the environment variables `KBC_PARAMETER_DELIMITER` and
+`KBC_PARAMETER_ENCLOSURE`. This simplifies the implementation in that it is not necessary to process the
+[configuration file](/extend/common-interface/config-file/). This parameter
+injection works only if the values of the parameters are scalar. If you need non-scalar values, you have to pass them through the config file (and disable `injectEnvironment` component setting).
+
+### Design
+Processors take data from the `in` [data folders](/extend/common-interface/folders/) and
+store them in the `out` [data folders](/extend/common-interface/folders/) as any other components. Keep in mind however
+that any files not copied to the `out` folders will be ignored (i.e. lost). That means if a processor is supposed to
+"not touch" something, it actually has to copy that something to the `out` folder.
+
+Keep in mind that processors can be [chained](/extend/component/processors/#chaining-processors). That means that
+you can for example rely on:
+
+- the table CSV files being in [standard format](https://help.keboola.com/storage/tables/csv-files/#output-csv-format)
+- table manifest always present
+- the CSV file being orthogonal
+
+If the above conditions are not met, then another processor should be added before yours. I.e. you should keep the
+processor simple and delegate the assumptions to other processors (and document them!).
+
+### Publishing a Processor
+The process of processor registration is the same as the
+[publishing any other component](/extend/publish/). However, many of the fields do not apply, because processors have no UI.
+The following fields are important:
+
+- Vendor
+- Component name and component type (`processor`)
+- Short and Full Description
+- Component Documentation (`documentationUrl`)
+- Whether to inject the environment variables (`injectEnvironment`)
