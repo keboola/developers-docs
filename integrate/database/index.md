@@ -7,7 +7,7 @@ permalink: /integrate/database/
 {:toc}
 
 If you wish to use [any of our database extractors](http://help.keboola.com/extractors/database/), we highly recommend
-that you set up an SSH [Tunnel](https://en.wikipedia.org/wiki/Tunneling_protocol) between your and our private networks. 
+that you set up an SSH [Tunnel](https://en.wikipedia.org/wiki/Tunneling_protocol) between your and our private networks.
 This way your database server will not be open to the whole internet.
 
 A Secure Shell (SSH) tunnel consists of an encrypted tunnel created through an SSH protocol connection.
@@ -26,7 +26,7 @@ Complete the following steps to setup an SSH tunnel to your database server:
 ### 1. Setup SSH Proxy Server
 Here is a very basic example [Dockerfile](https://docs.docker.com/engine/reference/builder/).
 All it does is run an sshd daemon and exposes port 22. You can, of course, set this up in your system in
-a similar way without using docker.
+a similar way without using Docker.
 
 {% highlight dockerfile %}
 FROM ubuntu:14.04
@@ -85,6 +85,6 @@ Various DB extractors could have different fields, but the principle remains the
 
 ## Local Tunnel
 It is also possible to use your database server as an *SSH proxy server* and setup your database to only accept connections from localhost.
-In this case, set the *Host Name* to `127.0.0.1`. 
+In this case, set the *Host Name* to `127.0.0.1`.
 
 **Important**: Do **not** use the word `localhost`! Our extractors have a problem with that.

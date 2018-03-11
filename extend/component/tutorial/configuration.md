@@ -136,7 +136,8 @@ Once the change propagates to your KBC instance, you should see the form in the 
 {: .image-popup}
 ![Screenshot -- Configuration Form](/extend/component/tutorial/configuration-4.png)
 
-The end-user can now configure your component without writing the JSON with parameters.
+The end-user can now configure your component without writing the JSON with parameters. For very complex UI, the
+JSON schema editor is not really suitable, contact us about available options.
 
 ## Summary
 Your component can now successfully read configuration parameters provided by the end-user. You can read more about all the features of the

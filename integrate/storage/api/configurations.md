@@ -367,7 +367,7 @@ A sample result for AWS S3 extractor looks like this:
 {% endhighlight %}
 
 ### Modifying a Configuration
-**Note: Configurations modified through the API might not be supported in the KBC UI.**
+**Note: Configurations modified through the API might not be editable in the KBC UI.** They can be run or used in orchestration without any problems.
 
 Modifying a configuration means that a new version of that configuration is created.
 For modifying a configuration, use the
@@ -489,6 +489,19 @@ which would give you an output similar to the one below:
 {% endhighlight %}
 
 The field `version` represents the `version_id` in the following API example.
+
+### Rollback a Configuration
+When you have chosen a particular version, you can revert to that version by
+[rolling back](https://keboola.docs.apiary.io/#reference/component-configurations/rollback-configuration-version/rollback-version)
+out of it. See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#2050856a-66b3-4120-9552-d1278a96621e)
+how to rollback the configuration `364479526` of the `keboola.ex-aws-s3` component to version `3`.
+
+It will create a new verison of the configuration and return the ID of the version:
+{% highlight json %}
+{
+  "version": "26"
+}
+{% endhighlight %}
 
 ### Creating a Configuration Copy
 When you have chosen a particular version, you can create a new independent

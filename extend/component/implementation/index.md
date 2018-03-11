@@ -1,5 +1,5 @@
 ---
-title: Implementation
+title: Implementation Notes
 permalink: /extend/component/implementation/
 redirect_from:
     - /extend/docker/images/
@@ -34,16 +34,16 @@ Before you create any complex components, be sure to read about
 [Configurations](/integrate/storage/api/configurations/) and [Processors](/extend/component/processors/)
 as they can substantially simplify your component code. We also recommend that you use our
 [common interface](/extend/common-interface/) library, which is available for
-[Python](/extend/component/implementation/python/#using-the-kbc-package)
+[Python](/extend/component/implementation/python/#using-the-kbc-package),
 [R](/extend/component/implementation/r/#using-the-kbc-package)
 and [PHP](/extend/component/implementation/php/#using-the-kbc-package)
 
 ## Docker
-You may use any docker image, you see fit. We recommend to base your images on the [official library](https://hub.docker.com/explore/)
+You may use any Docker image, you see fit. We recommend to base your images on the [official library](https://hub.docker.com/explore/)
 as that is the most stable.
 
 We publicly provide the images for transformations and sandboxes.
-The images for *Sandboxes* and *Transformations* both share the same common ancestor image *Custom* with a couple
+The images for *Sandboxes* and *Transformations* both share the same common ancestor image with a couple
 of pre-installed packages (that saves a lot of time when building the image yourself).
 This means that the images for R and Python share the same common code base and always use the
 exact same version of R and Python respectively.
@@ -163,7 +163,8 @@ injection works only if the values of the parameters are scalar. If you need non
 Processors take data from the `in` [data folders](/extend/common-interface/folders/) and
 store them in the `out` [data folders](/extend/common-interface/folders/) as any other components. Keep in mind however
 that any files not copied to the `out` folders will be ignored (i.e. lost). That means if a processor is supposed to
-"not touch" something, it actually has to copy that something to the `out` folder.
+"not touch" something, it actually has to copy that something to the `out` folder. The processors should not process
+the [manifest files](/extend/common-interface/manifest-files/).
 
 Keep in mind that processors can be [chained](/extend/component/processors/#chaining-processors). That means that
 you can for example rely on:

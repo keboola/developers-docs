@@ -10,9 +10,9 @@ redirect_from:
 {:toc}
 
 Processors are additional components which may be used before or after running an arbitrary component
-(extractor, writer, ...). When [Docker Runner](/extend/docker-runner/) runs a docker image, a processor
-may be used to pre-process the inputs (files or tables) supplied to that image, or it may be used to post-process
-the image outputs. For example, if an extractor extracts CSV data in a non-UTF8 encoding, you can use the
+(extractor, writer, ...). When [Docker Runner](/extend/docker-runner/) runs a docker image (a container is created), a processor
+may be used to pre-process the inputs (files or tables) supplied to that container, or it may be used to post-process
+the container outputs. For example, if an extractor extracts CSV data in a non-UTF8 encoding, you can use the
 [`iconv` processor](https://github.com/keboola/processor-iconv/blob/master/README.md) as a post-processor to
 convert the CSV to UTF-8 as expected by [Storage](https://help.keboola.com/storage/). See the
 [tutorial](/extend/component/tutorial/configuration/) for a quick example of using processors.
@@ -23,6 +23,13 @@ you have to use the [Component Configuration API](http://docs.keboola.apiary.io/
 See the respective part of [documentation](/integrate/storage/api/configurations/) for
 examples of working with [Component Configuration API](/integrate/storage/api/configurations/).
 If you want to implement your own processor, see the [Implementation notes](/extend/component/implementation/#implementing-processors)
+
+Processors are considered as an advanced feature with little to no support in the UI. If the
+component does not contain the [respective configuration field](/extend/component/ui-options/#genericdockerui-processors) nor
+an [advanced configuration mode](https://help.keboola.com/extractors/other/aws-s3/#advanced), then processors are
+completely invisible in the UI. In such case, modifying the configuration through the UI may delete the processor configuration
+(though you can always [rollback](https://keboola.docs.apiary.io/#reference/component-configurations/rollback-configuration-version/rollback-version)).
+Therefore be sure to add an appropriate warning to the configuration description.
 
 ## Configuration
 By running the
@@ -126,12 +133,12 @@ node and to properly escape the form data.
 See the [Configuration documentation](/integrate/storage/api/configurations/#modifying-a-configuration) for
 a more thorough description and the *Add processor to Email Attachments Extractor Configuration* example
 in our [collection](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#91e2060c-0c14-7a09-0cc3-537eb6057ada).
-Remember, the processors can be [chained](http://localhost:4000/extend/component/tutorial/processors/#chaining-processors) to
+Remember, the processors can be [chained](/extend/component/tutorial/processors/#chaining-processors) to
 achieve more advanced processing.
 
 ### Available Processors
 You can obtain a list of available processors using the
-[Developer Portal UI](https://components.keboola.com/components) or using the [List apps public API](http://docs.kebooladeveloperportal.apiary.io/#reference/0/public-api/list-published-apps)
+[Developer Portal UI](https://components.keboola.com/components) or using the [List components public API](http://docs.kebooladeveloperportal.apiary.io/#reference/0/public-api/list-published-apps)
 of the Developer portal. The important parts are `id`, which is required for configuration,
 and `documentationUrl`, which describes additional parameters of the processor.
 
