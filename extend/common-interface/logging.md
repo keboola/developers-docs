@@ -12,14 +12,14 @@ There are two main, mutually exclusive, ways in which your component can display
 2. Using [Graylog GELF](http://docs.graylog.org/en/2.0/pages/gelf.html) compatible logger
 
 Using the standard output option requires **no extra work** from you or your component.
-You just print all informational messages to the standard output and all error messages to the standard error.
+You just print all informational messages to standard output and all error messages to standard error.
 These will be forwarded to Storage Events as informational or error messages. See
 [implementation notes](/extend/component/implementation/) for best practices in logging.
 
 Using a [GELF](http://docs.graylog.org/en/2.0/pages/gelf.html) compatible logger requires implementing or including
 such a logger in your component. However, it offers much **greater flexibility**: you can send different
-kinds of messages (such as error, informational, warning, debug) and the messages can contain additional
-structured information (not only a plain text string)..
+kinds of messages (such as error, informational, warning, debug), and they can contain additional
+structured information (not only a plain text string).
 
 ## Standard Output and Standard Error
 By default -- unless you have turned on [GELF logging](/extend/common-interface/logging/#gelf-logger) in the
@@ -30,7 +30,7 @@ of the component and forwards the STDOUT content live to [Storage API Events](ht
 (log level `info`). The content of STDERR is collected and added (if not empty) as the last event of the job with level `error`.
 The events are displayed in a [Job detail](https://help.keboola.com/management/jobs/).
 
-## Gelf Logger
+## GELF Logger
 [GELF](http://docs.graylog.org/en/2.0/pages/gelf.html) is a log format allowing you to
 send [structured](http://docs.graylog.org/en/2.0/pages/gelf.html#gelf-format-specification) event messages.
 The messages can be sent over several transports and you can specify whether they will be silenced or displayed based on their level.
@@ -47,10 +47,10 @@ and the first message sent (about 1s) to give the network sockets some time to i
 
 Additionally, you can set the visibility of each event message as follows:
 
-- `none` - Message is ignored entirely.
-- `camouflage` - Generic error message is shown to the end-user instead of the real message content; the full message is logged internally.
-- `normal` - Event message (GELF `short_message` field) is shown to the end-user; the full message is logged internally.
-- `verbose` - Full message is shown to the user including GELF additional fields.
+- `none` -- Message is ignored entirely.
+- `camouflage` -- Generic error message is shown to the end-user instead of the real message content; the full message is logged internally.
+- `normal` -- Event message (GELF `short_message` field) is shown to the end-user; the full message is logged internally.
+- `verbose` -- Full message is shown to the user including GELF additional fields.
 
 Default settings for message visibilities:
 
@@ -80,7 +80,8 @@ For PHP, use the official [GELF client](https://github.com/bzikarsky/gelf-php) l
 
     composer require graylog2/gelf-php
 
-Test the logging with this simple script:
+Then test that logging works with this simple script:
+
 
 {% highlight php %}
 <?php
@@ -93,7 +94,7 @@ $logger = new \Gelf\Logger($transport);
 $logger->emergency("A sample emergency message", ["some" => ["structured" => "data"]]);
 {% endhighlight %}
 
-You can see a complete component in
+You can see the complete component in
 a [sample repository](https://github.com/keboola/docs-example-logging-php). For other transports, use the
 `UdpTransport` or `HttpTransport` class (AMQP transport is not supported yet). For additional examples on using the library,
 see its [official documentation](https://github.com/bzikarsky/gelf-php).
@@ -103,7 +104,7 @@ For Python, there are [a number of libraries](https://marketplace.graylog.org/ad
 
     pip3 install logging_gelf
 
-Test the logging with the following simple script:
+Then test that logging works with this simple script:
 
 {% highlight python %}
 import logging_gelf.handlers
@@ -132,7 +133,7 @@ For example, the [GrayGelf library](https://github.com/wavded/graygelf).
 
     npm install graygelf
 
-Test the logging with this simple script:
+Then test that logging works with this simple script:
 
 {% highlight js %}
 var log = require('graygelf')({
