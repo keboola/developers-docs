@@ -270,9 +270,8 @@ job, the actual executions are still completely isolated. I.e. there is no way t
 (apart from the common `configuration`). It also means that the outputs of the first row are available in the KBC project before
 the second row started and also that the inputs for the second row are read only after the first row finished processing.
 
-What is considered as 'first' and 'second' -- i.e. the order of rows -- is defined by the `rowsSortOrder` configuration node.
-The `rowsSortOrder` is an array of Row IDs. If that array is empty, the rows are executed in the order in which they are
-stored. See [below](#modifying-a-configuration) for example of modifying the row order.
+What is considered as 'first' and 'second' -- i.e. the order of rows -- is defined by order of items in the `rows` array.
+See [below](#modifying-a-configuration) for example of modifying the row order.
 
 Theoretically, configuration rows are supported for every component as long as the effective configuration matches what
 the component expects. Configuration rows can be used to split the configuration into a common part (typically credentials) and

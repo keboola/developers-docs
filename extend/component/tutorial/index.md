@@ -23,7 +23,8 @@ The developer portal uses different credentials than KBC. [Creating an account](
 When you log in to the developer portal, you have to join a **vendor** --- an organization of
 developers. Every KBC component has to have a vendor assigned. If you join an existing vendor, a
 vendor administrator has to approve your request. If you do not work for a company, create a
-vendor with your name (even a single developer has to be assigned to a vendor).
+vendor with your name (even a single developer has to be assigned to a vendor). When you join or create a vendor
+you should also receive access to a development KBC project.
 
 {: .image-popup}
 ![Screenshot -- Join a vendor](/extend/component/tutorial/join-vendor.png)
@@ -170,23 +171,23 @@ We offer free hosting of your Docker images in the **[Amazon Container Registry 
 All repositories in AWS ECR are private. When you create your component using the method shown above, we
 have just provisioned you with the Docker image hosting and you do not need to worry about it any more.
 
-We also support the DockerHub and Quay.io registries, both public and private. However, as they are more prone to 
-outages and beyond our control, we recommend using our reliable AWS ECR. Use DockerHub or Quay.io only if you, 
+We also support the DockerHub and Quay.io registries, both public and private. However, as they are more prone to
+outages and beyond our control, we recommend using our reliable AWS ECR. Use DockerHub or Quay.io only if you,
 for instance, want the image to be public.
 
 ## Summary
 You have just created your own KBC component. Although it does not do much, it shows the easiest path
 to bringing your own application logic to KBC. You can now continue with other parts of the tutorial:
 
- - using [input](/extend/component/tutorial/input-mapping/) and 
+ - using [input](/extend/component/tutorial/input-mapping/) and
    [output mapping](/extend/component/tutorial/output-mapping/)
  - using [configuration parameters](/extend/component/tutorial/configuration/)
  - [configuring a processor](/extend/component/tutorial/processors/)
  - [debugging a component](/extend/component/tutorial/debugging/)
  - [implementation notes](/extend/component/implementation/) for specific languages
 
-Although you rarely need all of the above parts (e.g., you do not need input mapping when building an extractor), 
-we suggest you go through all of them to gain a general overview of the available options. You can also read 
+Although you rarely need all of the above parts (e.g., you do not need input mapping when building an extractor),
+we suggest you go through all of them to gain a general overview of the available options. You can also read
 all the details in the respective parts of the documentation:
 
 - general information about the [common interface](/extend/common-interface/)
