@@ -6,7 +6,7 @@ permalink: /extend/generic-extractor/configuration/api/authentication/oauth20-lo
 * TOC
 {:toc}
 
-The OAuth Login method is useful when you need to send a one-time **login request** to obtain temporary credentials 
+The OAuth Login method is useful when you need to send a one-time **login request** to obtain temporary credentials
 for authentication of all the other API requests. A sample OAuth Login authentication looks like this:
 
 {% highlight json %}
@@ -25,7 +25,9 @@ for authentication of all the other API requests. A sample OAuth Login authentic
             },
             "apiRequest": {
                 "headers": {
-                    "X-ApiToken": "authorization.token"
+                    "X-ApiToken": {
+                        "response": "authorization.token"
+                    }
                 }
             }
         }
@@ -67,7 +69,9 @@ The following configuration shows how to set up an OAuth **login request**:
                 },
                 "apiRequest": {
                     "headers": {
-                        "X-Access-Token": "credentials.access_token"
+                        "X-Access-Token": {
+                            "response": "credentials.access_token"
+                        }
                     }
                 }
             }
@@ -94,8 +98,8 @@ The following configuration shows how to set up an OAuth **login request**:
 }
 {% endhighlight %}
 
-First, an OAuth login is negotiated. The result of this authentication is a response from the API (inserted into 
-the `authorization.oauth_api.credentials.#data` property): 
+First, an OAuth login is negotiated. The result of this authentication is a response from the API (inserted into
+the `authorization.oauth_api.credentials.#data` property):
 
 {% highlight json %}
 {
@@ -129,15 +133,15 @@ See [example [EX105]](https://github.com/keboola/generic-extractor/tree/master/d
 ### Google API Configuration
 The following example shows how to set up the OAuth authentication for Google APIs. The access token is refreshed with each API call.
 
-#### Generate access tokens 
-First, visit [Google API Console](https://console.developers.google.com/apis/credentials) to obtain OAuth 2.0 credentials, such as a 
+#### Generate access tokens
+First, visit [Google API Console](https://console.developers.google.com/apis/credentials) to obtain OAuth 2.0 credentials, such as a
 **Client ID** and **Client secret**.
 
 Add `https://developers.google.com/oauthplayground` to Authorized redirect URIs:
 
 {: .image-popup}
 ![Google API Console](/extend/generic-extractor/configuration/api/authentication/oauth20-login-console.png)
- 
+
 Then, generate **access** and **refresh** tokens using [Google OAuth 2.0 Playground](https://developers.google.com/oauthplayground/).
 
 Provide your Client ID and Client secret in the settings of OAuth 2.0 Playground:
@@ -159,8 +163,8 @@ Then exchange the authorization code for tokens:
 
 Use the generated tokens in the Generic Extractor configuration.
 
-#### Configuration 
-Paste the JSON response with the generated access and refresh tokens as a string under the `#data` key in 
+#### Configuration
+Paste the JSON response with the generated access and refresh tokens as a string under the `#data` key in
 `authorization.oauth_api.credentials`.
 Escape double quotes `"` in the JSON response and preferably remove newlines too, so it looks like this:
 
@@ -196,7 +200,9 @@ Here is a complete configuration example for AdSense:
         },
         "apiRequest": {
           "query": {
-            "access_token": "access_token"
+            "access_token": {
+                "response": "access_token"
+            }
           }
         }
       }
@@ -225,4 +231,4 @@ Here is a complete configuration example for AdSense:
 }
 {% endhighlight %}
 
-See [example [EX114]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/114-oauth2-google). 
+See [example [EX114]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/114-oauth2-google).

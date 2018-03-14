@@ -541,9 +541,9 @@ See an [example](#user-data).
 ### Login Authentication Context
 The Login Authentication function context is used in the
 [login authentication](/extend/generic-extractor/configuration/api/authentication/login/) method.
-The Headers function context contains [configuration attributes](/#function-contexts).
 Functions are supported in both [`loginRequest`](/extend/generic-extractor/configuration/api/authentication/login/#configuration-parameters)
 and [`apiRequest` ](/extend/generic-extractor/configuration/api/authentication/login/#configuration-parameters) configurations.
+The `loginRequest` function context contains [configuration attributes](/#function-contexts).
 In the `apiRequest` context, the flattened reponse of the login request is available additionally
 to the [configuration attributes](/#function-contexts).
 The login authentication context is the same for both `params` and `headers`
@@ -564,12 +564,18 @@ The following function context will be available in the API request headers and 
 
 {% highlight json %}
 {
-    "user": "John Doe",
-	"authorization.token": "quiteSecret",
-	"authorization.validUntil": "2017-20-12 12:20:17"
+    "attr": {
+		"outputBucket": "mock-server"
+    },
+    "response": {
+        "user": "John Doe",
+        "authorization.token": "quiteSecret",
+        "authorization.validUntil": "2017-20-12 12:20:17"
+    }
 }
 {% endhighlight %}
 
+The login response is available in the `response` node. The `attr` node contains [configuration attributes](/extend/generic-extractor/functions/#configuration-attributes).
 See an [example](/extend/generic-extractor/configuration/api/authentication/login/#login-authentication-with-functions) and a more
 [complicated example](/extend/generic-extractor/configuration/api/authentication/login/#login-authentication-with-login-and-api-request) of using functions in
 both login request and API request.
@@ -757,6 +763,7 @@ The OAuth Login Authentication Context is used for the
 OAuth information split into the properties `consumer` (response obtained from the service provider) and
 `user` (data obtained from the user). This context is available for
 both the `headers` and `params` sections of the `oauth20` authentication methods.
+For the context available in the `apiRequest` configuration, see the [login authentication](/extend/generic-extractor/functions/#login-authentication-context).
 
 The following configuration:
 
