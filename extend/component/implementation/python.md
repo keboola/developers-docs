@@ -13,7 +13,7 @@ Use the [official images](https://hub.docker.com/_/python/) if possible. Usually
 smallest and fastest. We recommend using [our templates](https://github.com/keboola/component-generator/tree/master/templates).
 
 ## Working with CSV Files
-We recommend that you follow the guidelines for the [Python transformation](https://help.keboola.com/manipulation/transformations/python/#development-tutorial).
+We advise you to follow the guidelines for the [Python transformation](https://help.keboola.com/manipulation/transformations/python/#development-tutorial).
 
 The build-in CSV functions for Python work well except when the data in the CSV file contain a null character. This is
 [usually fixed](https://stackoverflow.com/questions/4166070/python-csv-error-line-contains-null-byte) by
@@ -43,7 +43,7 @@ with open('in/tables/source.csv', mode='rt', encoding='utf-8') as in_file, open(
 Note that we open both the input and output files simultaneously; as soon as a row is processed,
 it is immediately written to the output file. This approach keeps only a single row of data in the memory and is
 generally very efficient. It is recommended to implement the processing in this way because data files
-coming from KBC can by quite large (i.e., dozens of gigabytes).
+coming from KBC can be quite large (i.e., dozens of gigabytes).
 
 ## Using KBC Package
 The KBC [Python component package](https://github.com/keboola/python-docker-application) provides functions to
@@ -121,7 +121,7 @@ how to read and write tables and table manifests. File manifests are handled the
 of items returned in table list and manifest contents, see [the specification](/extend/common-interface/config-file/).
 
 Note that the `destination` label in the script refers to the destination from the
-[mappers](/extend/component/tutorial/input-mapping/) perspective.
+[mapper](/extend/component/tutorial/input-mapping/) perspective.
 The input mapper takes `source` tables from the user's storage and produces `destination` tables that become
 the input of your component. The output tables of your component are consumed by the output mapper
 whose `destination` are the resulting tables in Storage.
@@ -183,7 +183,7 @@ for table in tables:
 {% endhighlight %}
 
 ## Logging
-In Python components, the output is buffered, but the output buffering may be [switched off](http://stackoverflow.com/questions/107705/disable-output-buffering). The easiest solution is to run your script with the `-u` option -- you would use `CMD python -u ./main.py` in your `Dockerfile`.
+In Python components, the output is buffered, but the buffering may be [switched off](http://stackoverflow.com/questions/107705/disable-output-buffering). The easiest solution is to run your script with the `-u` option: you would use `CMD python -u ./main.py` in your `Dockerfile`.
 See a [dedicated article](/extend/common-interface/logging/#examples) if you want to
 implement a GELF logger.
 

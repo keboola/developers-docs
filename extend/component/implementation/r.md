@@ -71,7 +71,7 @@ how to read and write tables and table manifests. File manifests are handled the
 of items returned in table list and manifest contents, see [the specification](/extend/common-interface/config-file/).
 
 Note that the `destination` label in the script refers to the destination from the
-[mappers perspective](/extend/component/tutorial/input-mapping/). The input mapper takes `source` tables
+[mapper perspective](/extend/component/tutorial/input-mapping/). The input mapper takes `source` tables
 from the user's storage and produces `destination` tables that become the input of the component. The output tables
 of the component are consumed by the output mapper whose `destination` are the resulting tables in Storage.
 
