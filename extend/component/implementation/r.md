@@ -9,13 +9,13 @@ redirect_from:
 {:toc}
 
 ## Docker
-We recommend using the [Rocker Version-stable](https://github.com/rocker-org/rocker-versioned) [images](https://hub.docker.com/r/rocker/r-ver/).
+We recommend using the [Rocker version-stable](https://github.com/rocker-org/rocker-versioned) [images](https://hub.docker.com/r/rocker/r-ver/).
 The [R base image](https://hub.docker.com/r/rocker/r-base/) does not keep older R versions, so the upgrades are not under your control.
 If you want to use the same environment as in transformations, use [our image](#docker).
 
-## Working with CSV files
+## Working with CSV Files
 We recommend that you follow the guidelines for the [R transformation](https://help.keboola.com/manipulation/transformations/r/#development-tutorial).
-The standard R functions for CSV files work without problems
+The standard R functions for CSV files work without problems:
 
 {% highlight R %}
 data <- read.csv(file = "in/tables/source.csv");
@@ -27,20 +27,20 @@ df <- data.frame(
 write.csv(df, file = "out/tables/result.csv", row.names = FALSE)
 {% endhighlight %}
 
-You can also use the `write_csv` function from the [readr packages](https://cran.r-project.org/web/packages/readr/readr.pdf), which is faster.
+You can also use the `write_csv` function from the [readr packages](https://cran.r-project.org/web/packages/readr/readr.pdf). It is faster.
 
-## Using the KBC Package
-The KBC [R component package](https://github.com/keboola/r-docker-application) provides functions to:
+## Using KBC Package
+KBC's [R component package](https://github.com/keboola/r-docker-application) provides functions to
 
-- Read and parse the configuration file and parameters - `configData` property and `getParameters()` method.
-- List input files and tables - `getInputFiles()`, `getInputTables()` methods.
-- Work with manifests containing table and file metadata - `getTableManifest()`, `getFileManifest()`, `writeTableManifest()`, `writeFileManifest()` methods.
-- List expected outputs - `getExpectedOutputFiles()` and `getExpectedOutputTables()` methods.
+- read and parse the configuration file and parameters: `configData` property and `getParameters()` method.
+- list input files and tables: `getInputFiles()`, `getInputTables()` methods.
+- work with manifests containing table and file metadata: `getTableManifest()`, `getFileManifest()`, `writeTableManifest()`, `writeFileManifest()` methods.
+- list expected outputs: `getExpectedOutputFiles()` and `getExpectedOutputTables()` methods.
 
 The library is a standard R package that is available by default in the production environment.
-It is [available on Github](https://github.com/keboola/r-docker-application), so it can be installed locally with `devtools::install_github('keboola/r-docker-application', ref = 'master')`.
+[Ready for use on GitHub](https://github.com/keboola/r-docker-application), it can be installed locally with `devtools::install_github('keboola/r-docker-application', ref = 'master')`.
 
-To use the library to read the user-supplied configuration parameter 'myParameter':
+Use the library to read a user-supplied configuration parameter 'myParameter':
 
 {% highlight r %}
 library(keboola.r.docker.application)
@@ -52,8 +52,8 @@ app$readConfig()
 app$getParameters()$myParameter
 {% endhighlight %}
 
-The library contains a single [RC class](http://adv-r.had.co.nz/OO-essentials.html#rc) `DockerApplication`; a parameter of the constructor is the path to the data directory.
-Call `readConfig()` to actually read and parse the configuration file. The above would read the `myParameter` parameter from the user-supplied configuration:
+The library contains a single [RC class](http://adv-r.had.co.nz/OO-essentials.html#rc) `DockerApplication`; the parameter of the constructor is the path to the data directory.
+After that you can call `readConfig()` to actually read and parse the configuration file, and then read the `myParameter` parameter from the user-supplied configuration:
 
 {% highlight json %}
 {
@@ -64,15 +64,15 @@ Call `readConfig()` to actually read and parse the configuration file. The above
 You can obtain inline help and the list of library functions by running the `?DockerApplication` command.
 
 ### Dynamic Input/Output Mapping
-In the [tutorial](/extend/component/tutorial/), we have shown components which have names of their input/output tables hard-coded.
-This example shows how to read the input and output mapping specified by the end-user,
+In our [tutorial](/extend/component/tutorial/), we show components which have names of their input/output tables hard-coded.
+The following example shows how to read the input and output mapping specified by the end user,
 which is accessible in the [configuration file](/extend/common-interface/config-file/). It demonstrates
 how to read and write tables and table manifests. File manifests are handled the same way. For a full authoritative list
-of items returned in table list and manifest contents, see [the specification](/extend/common-interface/config-file/)
+of items returned in table list and manifest contents, see [the specification](/extend/common-interface/config-file/).
 
 Note that the `destination` label in the script refers to the destination from the
 [mappers perspective](/extend/component/tutorial/input-mapping/). The input mapper takes `source` tables
-from user's storage, and produces `destination` tables that become the input of the component. The output tables
+from the user's storage and produces `destination` tables that become the input of the component. The output tables
 of the component are consumed by the output mapper whose `destination` are the resulting tables in Storage.
 
 {% highlight r %}
