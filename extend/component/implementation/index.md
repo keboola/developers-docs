@@ -130,10 +130,13 @@ code general.
 Choosing whether to implement a specific feature as processor or as part of your
 component may be difficult. Processor might be a good solution if the following are true:
 
-- the feature is simple (one operation, contains no internal logic)
 - the feature is optional (not all end-users are interested in it)
+- the feature is simple (one operation, contains no internal logic)
 - the feature is universal (it is always applied to all input/output or none)
 
+The first condition is especially important. Another way to read it is that a processor must never supply a function expected from the component.
+In other words: **Each component should be able to consume/generate a valid input/output without any processors.** For example, if and extractor can
+produce tables without any further processing, good, let it be tables, but if can not, it should output only files and processors should do the rest.
 If processors are used together with [configuration rows](/integrate/storage/api/configurations/#configuration-rows),
 the last condition is weakened, because a different set of processors may be applied to each configuration row.
 
@@ -163,8 +166,15 @@ injection works only if the values of the parameters are scalar. If you need non
 Processors take data from the `in` [data folders](/extend/common-interface/folders/) and
 store them in the `out` [data folders](/extend/common-interface/folders/) as any other components. Keep in mind however
 that any files not copied to the `out` folders will be ignored (i.e. lost). That means if a processor is supposed to
-"not touch" something, it actually has to copy that something to the `out` folder. The processors should not process
-the [manifest files](/extend/common-interface/manifest-files/).
+"not touch" something, it actually has to copy that something to the `out` folder.
+
+The processors should be aware of [manifest files](/extend/common-interface/manifest-files/). This means that
+the processor:
+
+- Must exclude manifests from processing (they are not data files).
+- If the processor changes something stored in the manifest, it must process it (read the manifests in `in` folder, modify and store it in the `out` folder). Typical example is modification of table columns which must be reflected in the manifest.
+- If the processor is doing change unrelated to manifest, it should copy the manifest from `in` to `out`.
+- If the processor is not doing a 1:1 operation (e.g merges multiple tables into one), it should not do anything about the manifest, which means that it will be discarded.
 
 Keep in mind that processors can be [chained](/extend/component/processors/#chaining-processors). That means that
 you can for example rely on:
@@ -174,7 +184,9 @@ you can for example rely on:
 - the CSV file being orthogonal
 
 If the above conditions are not met, then another processor should be added before yours. I.e. you should keep the
-processor simple and delegate the assumptions to other processors (and document them!).
+processor simple and delegate the assumptions to other processors (and [document them](#publishing-a-processor)). If possible the
+processor should also assume that the CSV files are headless and stored in arbitrary sub-folders. When implemented with this assumption
+the processor will support [sliced tables]([sliced tables](/extend/common-interface/folders/#sliced-tables).
 
 ### Publishing a Processor
 The process of processor registration is the same as the
@@ -184,5 +196,7 @@ The following fields are important:
 - Vendor
 - Component name and component type (`processor`)
 - Short and Full Description
-- Component Documentation (`documentationUrl`)
-- Whether to inject the environment variables (`injectEnvironment`)
+- Component Documentation (`documentationUrl`):
+    - Must be public
+    - Must state whether the processor is capable of working with [sliced tables](/extend/common-interface/folders/#sliced-tables)
+    - Whether it requires/processes manifests
