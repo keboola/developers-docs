@@ -10,14 +10,13 @@ redirect_from:
 
 ## Docker
 Use the [official images](https://hub.docker.com/_/php/) if possible. Usually, the `alpine` versions are sufficient and are the
-smallest and fastest. If you need composer, use its [official image](https://hub.docker.com/_/composer/) or
+smallest and fastest. If you need Composer, use its [official image](https://hub.docker.com/_/composer/) or
 [our templates](https://github.com/keboola/component-generator/blob/master/templates/).
 
-## Working with CSV files
-We recommend using our [CSV library](https://github.com/keboola/php-csv) which provides a convenience wrapper
-around the build-in [CSV functions](http://php.net/manual/en/function.fgetcsv.php).
-The build-in [CSV functions](http://php.net/manual/en/function.fgetcsv.php) in PHP work well on their own too.
-If you are using bare PHP, the following code illustrates their use:
+## Working with CSV Files
+We recommend using our [CSV library](https://github.com/keboola/php-csv), which provides a convenience wrapper
+around the build-in [CSV functions](http://php.net/manual/en/function.fgetcsv.php). However, the functions work well on their own too.
+If you are using bare PHP functions, the following code illustrates their use:
 
 {% highlight php %}
 <?php
@@ -38,11 +37,11 @@ echo "All done";
 Note that we open both the input and output files simultaneously; as soon as a row is processed,
 it is immediately written to the destination file. This approach keeps only a single row of data in the memory and is
 generally very efficient. It is recommended to implement the processing in this way because data files
-coming from KBC can by quite large.
+coming from KBC can be quite large.
 
-The same can be achieved using the [CSV library](https://github.com/keboola/php-csv). Install the
-pacakge with `composer require keboola/csv`. The following
-piece of code shows using it as well as reading the [configuration file](/extend/common-interface/config-file/).
+The same can be achieved via the [CSV library](https://github.com/keboola/php-csv). Install the
+package with `composer require keboola/csv`. The following
+piece of code uses it and reads the [configuration file](/extend/common-interface/config-file/).
 
 {% highlight php %}
 <?php
@@ -77,13 +76,14 @@ foreach ($inFile as $rowNum => $row) {
 }
 {% endhighlight %}
 
-## Using the KBC Package
-The KBC [PHP component package](https://github.com/keboola/php-component) provides functions to:
+## Using KBC Package
+KBC's [PHP component package](https://github.com/keboola/php-component) provides functions to
 
-- Read and parse the configuration file and parameters -- `getConfig` method or `getConfig()->getParameters()` methods
-- List input files and tables - `getConfig()->getInputFiles()`, `getConfig()->getInputTables()` methods.
-- Work with manifests containing table and file metadata -  `getManifestManager()->getTableManifest()`, `getManifestManager()->writeTableManifest()`, `getManifestManager()->getFileManifest()`, `getManifestManager()->writeFileManifest()` methods.
-- List expected outputs - `getConfig()->getExpectedOutputFiles()` or `getConfig()->getExpectedOutputTables()` methods.
+- read and parse the configuration file and parameters: 
+	`getConfig` method or `getConfig()->getParameters()` methods.
+- list input files and tables: `getConfig()->getInputFiles()`, `getConfig()->getInputTables()` methods.
+- work with manifests containing table and file metadata: `getManifestManager()->getTableManifest()`, `getManifestManager()->writeTableManifest()`, `getManifestManager()->getFileManifest()`, `getManifestManager()->writeFileManifest()` methods.
+- list expected outputs: `getConfig()->getExpectedOutputFiles()` or `getConfig()->getExpectedOutputTables()` methods.
 
 You can go through the [generated docs](https://keboola.github.io/php-component/master/classes.html) of all available methods and classes.
 The package can be installed by [Composer](https://getcomposer.org/):
@@ -91,9 +91,9 @@ The package can be installed by [Composer](https://getcomposer.org/):
     composer require keboola/php-component
 
 The package can be used standalone (good for existing code), or you can inherit your own component from it (good for new components).
-When inheriting from the package, see the [Github repository](https://github.com/keboola/php-component) for examples, or
+When inheriting from the package, see the [GitHub repository](https://github.com/keboola/php-component) for examples, or
 our [component template](https://github.com/keboola/component-generator/tree/master/templates).
-Using the package as a standalone class does not require anything else then creating it instance:
+Using the package as a standalone class does not require anything else than creating its instance:
 
 {% highlight php %}
 <?php
@@ -132,7 +132,7 @@ Given the following `config.json` file:
 }
 {% endhighlight %}
 
-The above PHP code, would output:
+The above PHP code would output:
 
 {% highlight php %}
 array (
@@ -148,23 +148,23 @@ array (
 {% endhighlight %}
 
 ### Dynamic Input/Output Mapping
-In the [tutorial](/extend/component/tutorial/) and the above examples, we have shown
+In the [tutorial](/extend/component/tutorial/) and the above examples, we show
 applications which have names of their input/output tables hard-coded.
-The following example shows how to read an input and output mapping specified by the end-user,
+The following example shows how to read an input and output mapping specified by the end user,
 which is accessible in the [configuration file](/extend/common-interface/config-file/). It demonstrates
 how to read and write tables and table manifests. File manifests are handled the same way. For a full authoritative list
-of items returned in table list and manifest contents, see [the specification](/extend/common-interface/config-file/)
+of items returned in table list and manifest contents, see [the specification](/extend/common-interface/config-file/).
 
 Note that the `destination` label in the script refers to the destination from the
-[mappers](/extend/component/tutorial/input-mapping/) perspective.
-The input mapper takes `source` tables from user's storage, and produces `destination` tables that become
+[mapper](/extend/component/tutorial/input-mapping/) perspective.
+The input mapper takes `source` tables from the user's storage and produces `destination` tables that become
 the input of your component. The output tables of your component are consumed by the output mapper
 whose `destination` are the resulting tables in Storage.
 
-The following piece of code reads and arbitrary number of tables and adds auto generated primary key
-to them. The name of the added column is configured in parameters (`primaryKeyName`), also the
+The following piece of code reads an arbitrary number of tables and adds an auto-generated primary key
+to them. The name of the added column is configured in parameters (`primaryKeyName`). Also, the
 step of the generator is configured in parameters (`primaryKeyStep`). The end of the code writes
-table [manifest file](/extend/common-interface/manifest-files/) which stores the configuration of
+a table [manifest file](/extend/common-interface/manifest-files/) which stores the configuration of
 the primary key and optional table metadata.
 
 {% highlight php %}
@@ -227,7 +227,7 @@ foreach ($inputTables as $inputTable) {
 
 ## Logging
 For simple applications, printing with `echo` or `print` is enough. To print to STDERR, you have to use
-e.g. `fwrite(STDERR, "Hello, world!" . PHP_EOL);`. The best option is to use the [Monolog package](https://github.com/Seldaek/monolog).
+e.g., `fwrite(STDERR, "Hello, world!" . PHP_EOL);`. The best option is to use the [Monolog package](https://github.com/Seldaek/monolog).
 The following is a useful initialization:
 
 {% highlight php %}
@@ -239,11 +239,11 @@ $handler->setFormatter($formatter);
 $logger = new Logger('main', [$errHandler, $handler]);
 {% endhighlight %}
 
-This means that and log with [level notice](https://github.com/Seldaek/monolog/blob/master/doc/01-usage.md#log-levels) and above
-will go to STDERR, and info level will go to STDOUT. The formatter removes unnecessary fields like timestamp and context.
+This means that a log with the [NOTICE level](https://github.com/Seldaek/monolog/blob/master/doc/01-usage.md#log-levels) and above
+will go to STDERR, and the INFO level will go to STDOUT. The formatter removes unnecessary fields like `timestamp` and `context`.
 
 ## Error Handling
-The following [piece of code](https://github.com/keboola/component-generator/blob/master/templates/php-keboola/src/run.php) is a good entrypoint:
+The following [piece of code](https://github.com/keboola/component-generator/blob/master/templates/php-keboola/src/run.php) is a good entry point:
 
 {% highlight php %}
 $dataDir = getenv('KBC_DATADIR') === false ? '/data/' : getenv('KBC_DATADIR');
@@ -265,8 +265,8 @@ try {
 }
 {% endhighlight %}
 
-In this case, we consider everything derived from `UserException` to be an error which should be shown to the end-user.
-You have to create that exception class in your component. Every other error will lead to a generic message and only
-the developer will see the details and the code will follow the [general error handling rules](#error-handling).
+In this case, we consider everything derived from `UserException` to be an error which should be shown to the end user.
+You have to create that exception class in your component. Every other error will lead to a generic message; only
+the developer will see the details, and the code will follow the [general error handling rules](#error-handling).
 Here we use the [`Throwable`](http://php.net/manual/en/class.throwable.php) ancestor, which also catches PHP errors. You can, of
 course, modify this logic to your liking.
