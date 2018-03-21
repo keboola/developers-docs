@@ -10,8 +10,8 @@ permalink: /extend/generic-extractor/configuration/ssh-proxy/
 *Use [Parameter Map](/extend/generic-extractor/map/) to help you navigate among various
 configuration options.*
 
-SSH proxy for Generic Extractor allows you tu securely access HTTP(s) endpoints inside your private network.
-It creates a SSH tunnel, all traffic from Generic Extractor is forwarded through the tunnel to the destination server.
+An SSH proxy for Generic Extractor allows you tu securely access HTTP(s) endpoints inside your private network.
+It creates an SSH tunnel, and all traffic from Generic Extractor is forwarded through the tunnel to the destination server.
 
 A sample `config` configuration can look like this:
 
@@ -29,15 +29,15 @@ A sample `config` configuration can look like this:
 
 
 ## Usage
-Before using an SSH proxy , setup an *SSH proxy server*
+Before using an SSH proxy, set up an **SSH proxy server**
 to act as a gateway to your private network where your destination server resides.
 
-Complete the following steps to setup an SSH Proxy for Generic Extractor:
+Complete the following steps to set up an SSH proxy for Generic Extractor:
 
-### 1. Setup SSH Proxy Server
-Here is a very basic example [Dockerfile](https://docs.docker.com/engine/reference/builder/).
-All it does is run an sshd daemon and exposes port 22. You can, of course, set this up in your system in
-a similar way without using docker.
+### 1. Set Up SSH Proxy Server
+Here is a very basic [Dockerfile](https://docs.docker.com/engine/reference/builder/) example.
+All it does is run an sshd daemon and expose port 22. You can, of course, set this up in your system in
+a similar way without using Docker.
 
 {% highlight dockerfile %}
 FROM ubuntu:14.04
@@ -60,7 +60,7 @@ CMD    ["/usr/sbin/sshd", "-D"]
 This server should be in the same private network where your destination server resides. It should be accessible publicly from the internet via SSH.
 The default port for SSH is 22, but you can choose a different port.
 
-We highly recommend to allow access only from [Keboola Connection IP address ranges](https://help.keboola.com/extractors/ip-addresses/).
+We highly recommend to allow access only from the [Keboola Connection IP address ranges](https://help.keboola.com/extractors/ip-addresses/).
 
 See the following pages for more information about setting up SSH on your server:
 
@@ -69,15 +69,15 @@ See the following pages for more information about setting up SSH on your server
 
 
 ### 2. Generate SSH Key Pair
-Generate an SSH key pair and copy the public key to your *SSH proxy server*.
-Paste it to the *public.key* file and then append it to the authorized_keys file.
+Generate an SSH key pair and copy the public key to your **SSH proxy server**.
+Paste it to the **public.key** file, and then append it to the authorized_keys file.
 
 {% highlight bash %}
 mkdir ~/.ssh
 cat public.key >> ~/.ssh/authorized_keys
 {% endhighlight %}
 
-### 3. Configure Generic Extractor SSH proxy
+### 3. Configure Generic Extractor SSH Proxy
 
 {% highlight json %}
 {
