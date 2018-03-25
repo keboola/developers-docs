@@ -17,10 +17,10 @@ You need to have a computer with working [Docker](https://www.docker.com/what-do
 To be able to create new components, you also need to have an account in the [Keboola Developer Portal](https://components.keboola.com/),
 which manages the list of components available in KBC.
 
-The developer portal uses different credentials than KBC. [Creating an account](https://components.keboola.com/auth/create-account) is free; it requires a working email address
+The Developer Portal uses different credentials than KBC. [Creating an account](https://components.keboola.com/auth/create-account) is free; it requires a working email address
 (to which a confirmation email will be sent) and a mobile phone for a mandatory two-factor authorization.
 
-When you log in to the developer portal, you have to join a **vendor** --- an organization of
+When you log in to the Developer Portal, you have to join a **vendor** --- an organization of
 developers. Every KBC component has to have a vendor assigned. If you join an existing vendor, a
 vendor administrator has to approve your request. If you do not work for a company, create a
 vendor with your name (even a single developer has to be assigned to a vendor). When you join or create a vendor
@@ -40,10 +40,10 @@ The example component is written in the Python language, but no knowledge of Pyt
 Before you continue with this tutorial, make sure you
 
 - can log in to the [Developer Portal](https://components.keboola.com/).
-- can log in to the KBC either in the [US region](https://connection.keboola.com) or [EU region](https://connection.eu-central-1.keboola.com/).
+- can log in to KBC either in the [US region](https://connection.keboola.com) or [EU region](https://connection.eu-central-1.keboola.com/).
 - have a [Github](https://github.com/) account.
 
-*Note: The tutorial assumes using [Github](https://github.com/) + [Travis](https://travis-ci.org/) services, they are not required for extending KBC.
+*Note: Even though the tutorial assumes using [GitHub](https://github.com/) + [Travis](https://travis-ci.org/) services, they are not required for extending KBC.
 We use them because we like them the most. The [deployment documentation](/extend/component/deployment/) shows how to configure,
 for example, [Bitbucket](/extend/component/deployment/#bitbucket-integration) and [GitLab](/extend/component/deployment/#gitlab-integration)
 integrations.*

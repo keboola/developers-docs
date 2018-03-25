@@ -447,7 +447,7 @@ See [example [EX073]](https://github.com/keboola/generic-extractor/tree/master/d
 
 ### Table Mapping Examples
 
-#### Basic Table Mapping
+#### Basic table mapping
 Because all output columns must be listed in a mapping, using only column mapping settings skips 
 the `interests` property of the response:
 
@@ -520,7 +520,7 @@ The above configuration produces the same result as the automatic mapping of col
 
 See [example [EX066]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/066-mapping-tables-basic).
 
-#### Nested Properties
+#### Nested properties
 Let's say that you have an API which returns a response like this (it will be used in the following two examples as well):
 
 {% highlight json %}
@@ -667,7 +667,7 @@ user-address:
 
 See [example [EX067]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/067-mapping-tables-nested).
 
-#### Array Items
+#### Array items
 Consider the same API response as above:
 <details>
   <summary>Click to expand the response.</summary>
@@ -819,7 +819,7 @@ array and stores it in the `secondary-address` table.
 
 See [example [EX068]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/068-mapping-tables-nested-array).
 
-#### Directly Mapping Array
+#### Directly mapping array
 Consider the same API response as above:
 <details> 
  <summary>Click to expand the response.</summary> 
@@ -950,7 +950,7 @@ The user table now contains an additional column --- `primary-address`:
 
 See [example [EX069]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/069-mapping-tables-nested-direct).
 
-#### Using Primary Keys
+#### Using primary keys
 In the above example, you can see that the `primary-address` table contains 
 an auto-generated key to link back to users. This is unnecessary, because you can safely link to
 the user ID. To do this, you only need to specify the primary key for the table:
@@ -1057,7 +1057,7 @@ primary-address:
 
 See [example [EX070]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/070-mapping-tables-nested-direct-pk).
 
-#### Multiple Primary Key Columns
+#### Multiple primary key columns
 Generic Extractor allows you to set only a single (primary) key for a table. This means that 
 if you set `primaryKey` on multiple columns, you will create a compound primary key. Let's say
 that you have an API with the following response:
@@ -1140,7 +1140,7 @@ values, the rows will not be imported!
 
 See [example [EX071]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/071-mapping-multiple-pk).
 
-#### Multiple Primary Key From Nested Columns
+#### Multiple primary keys from nested columns
 The [above example](#multiple-primary-key-columns) shows how to set a compound primary key. 
 It is also possible to create a compound key using a [parent column](#using-primary-keys).
 Let's say that you have an API with the following response:
@@ -1295,7 +1295,7 @@ values, the rows will not be imported!
 
 See [example [EX115]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/115-multiple-pk-parent).
 
-#### Disabled Parent Key
+#### Disabled parent key
 It is also possible to entirely disable the relationships between parts of the response objects. 
 Consider, for example, this API response:
 
@@ -1378,10 +1378,10 @@ mapping (even though it is not used by the users in the API response).
 
 See [example [EX072]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/072-mapping-pk-disable).
 
-#### Using User Data in mapping
+#### User data in mapping
 
-There are situations when you need to add custom columns to the output data. For this purpose the
-[User Data](/extend/generic-extractor/configuration/config/#user-data) functionality can be used.
+There are situations when you need to add custom columns to the output data. For this purpose, the
+[`userData` functionality](/extend/generic-extractor/configuration/config/#user-data) can be used.
 
 Consider this API response:
 
@@ -1399,7 +1399,7 @@ Consider this API response:
 {% endhighlight %}
 
 Let's say you want to add a `country` column to output data, but you want to use custom mapping. To
-handle this situation, you have to define mapping also for the User Data.
+handle this situation, you have to define mapping also for the `userData`.
 
 {% highlight json %}
 "userData": {
