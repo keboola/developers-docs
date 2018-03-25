@@ -295,6 +295,70 @@ user-detail:
 
 See [example [EX022]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/022-basic-child-job-datatype).
 
+### Basic Job With Array Values
+It is also possible that the main job returns object which contain direct references 
+to the children:
+
+{% highlight json %}
+[
+    {
+        "id": 123,
+        "name": "John Doe",
+        "children": ["a1", "a2"]
+    },
+    {
+        "id": 234,
+        "name": "Jane Doe",
+        "children": ["a3"]
+    }
+]
+{% endhighlight %}
+
+The following configuration same is the same as in the 
+[previous example](/extend/generic-extractor/configuration/config/jobs/children/#basic-example):
+
+{% highlight json %}
+"jobs": [
+    {
+        "endpoint": "users",
+        "children": [
+            {
+                "endpoint": "user/{child-id}",
+                "dataField": ".",
+                "placeholders": {
+                    "child-id": "children"
+                }
+            }
+        ]
+    }
+]
+{% endhighlight %}
+
+The child jobs will iterate both over the returned array of objects and
+the array of each `children`. Therefore the following tables will be extracted:
+
+users:
+
+|id|name|
+|---|---|
+|123|John Doe|
+|234|Jane Doe|
+
+user-detail:
+
+|id|name|address\_city|address\_country|address\_street|parent\_id|
+|---|---|---|---|---|---|
+|123|John Doe|London|UK|Whitehaven Mansions|123|
+|234|Jane Doe|St Mary Mead|UK|High Street|234|
+
+|id|name|address_city|address_country|address_street|parent_children|
+|---|---|---|---|---|---|
+|a1|John Doe|London|UK|Whitehaven Mansions|a1|
+|a2|Jane Doe|St Mary Mead|UK|High Street|a2|
+|a3|Jimmy Doe|Scaryville|Nowhere|Cemetery Lane|a3|
+
+See [example [EX135]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/135-basic-child-job-array).
+
 ### Accessing Nested ID
 If the placeholder value is nested within the response object, you can use
 dot notation to access child properties of the response object. For instance, if the
