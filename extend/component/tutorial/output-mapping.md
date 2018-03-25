@@ -7,33 +7,33 @@ permalink: /extend/component/tutorial/output-mapping/
 {:toc}
 
 In this part of the [tutorial](/extend/component/tutorial/), you will see how to use **output mapping**.
-Similarly to [input mapping](/extend/component/tutorial/input-mapping/), the Output mapping
-defines what data your component produces in the end-users' project. A component cannot directly
-write data to the project [Storage](https://help.keboola.com/storage/),
-the produced data are stored in the end-users' project when the component [finishes](/extend/docker-runner/).
+Similarly to [input mapping](/extend/component/tutorial/input-mapping/), the output mapping
+defines what data your component produces in the end users' project. A component cannot directly
+write data to the project [Storage](https://help.keboola.com/storage/);
+the produced data are stored in the end users' project when the component [finishes](/extend/docker-runner/).
 
 Output mapping is therefore used when your application needs to send data to the customer
-project -- these are typically *extractors* and *applications*. Implementing the input mapping requires three steps:
+project -- these are typically **extractors** and **applications**. Implementing the input mapping requires three steps:
 
 - turning on the default bucket option (or adding input mapping to the component UI)
 - adding output mapping to the component source code
 - verifying
 
 Unlike [input mapping](/extend/component/tutorial/input-mapping/), the output mapping is fully optional. That means that
-it can be configured similarly to the input mapping (using [`genericDockerUI-tableOutput`](/extend/component/ui-options/) flag) or configured
+it can be configured similarly to the input mapping (using the [`genericDockerUI-tableOutput`](/extend/component/ui-options/) flag) or
 using the [Default bucket](/extend/common-interface/folders/#default-bucket) option. The latter means that all tables produced in the
 `/data/out/tables/` folder will be uploaded to a [Storage bucket](https://help.keboola.com/storage/buckets/) with a generated name.
 
 ## Configuring Default Bucket
-Using default bucket is the preferred option as it allows simpler configuration of the component.
-To enable default bucket for your component, simply go the [Developer Portal](https://components.keboola.com/) and tick the respective
+Using the default bucket is the preferred option as it allows simpler configuration of the component.
+To enable the default bucket for your component, simply go the [Developer Portal](https://components.keboola.com/) and tick the respective
 checkbox. You also need to select the [stage](https://help.keboola.com/storage/buckets/) of the bucket. We recommend using `in` for
 extractors and `out` for other components.
 
 {: .image-popup}
 ![Screenshot -- Default Bucket Configuration](/extend/component/tutorial/output-mapping-1.png)
 
-## Modifying the Source Code
+## Modifying Source Code
 You can modify the [sample component](/extend/component/tutorial/) code to, for example, the one below.
 The code takes a single arbitrary table on input and produces two tables -- one with
 even rows and one with odd rows.
@@ -71,16 +71,16 @@ with open('/data/in/tables/source.csv', mode='rt', encoding='utf-8') as in_file,
         i = i + 1
 {% endhighlight %}
 
-This script reads a CSV file line by line and checks whether it is odd or even
+This script reads a CSV file line by line and checks whether it is odd or even.
 Finally, the result is written to either `odd.csv` or `even.csv`.
 
-Commit and push the code in your repository and tag it with [normal version tag](https://semver.org/#spec-item-2).
+Commit and push the code in your repository and tag it with a [normal version tag](https://semver.org/#spec-item-2).
 This will trigger a [build on Travis CI](/extend/component/tutorial/#building-the-component) and automatically
-deploy the new version into KBC. Keep in mind that after the deploy it may take up to 5 minutes for the update to propagate to all KBC instances.
+deploy the new version into KBC. Keep in mind that after the deployment, it may take up to 5 minutes for the update to propagate to all KBC instances.
 
 ## Verifying
 If you configured the default bucket option, nothing changes in the UI. If you followed the
-[previous part of tutorial](/extend/component/tutorial/input-mapping/#verifying) you don't have to do anything.
+[previous part of our tutorial](/extend/component/tutorial/input-mapping/#verifying), you don't have to do anything.
 Just run the component and you should see that two tables were produced.
 
 {: .image-popup}
@@ -97,5 +97,5 @@ Your component can now successfully write tables to a KBC project. You can read
 more about other output mapping options in the
 [data folder specification](/extend/common-interface/folders/). Also, the
 [manifest files](/extend/common-interface/manifest-files/) contain metadata which
-you might want to set (e.g. primary key). The next part of the tutorial will show you
+you might want to set (e.g., primary key). The next part of the tutorial will show you
 how to work with [configuration parameters](/extend/component/tutorial/configuration/).
