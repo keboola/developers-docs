@@ -15,7 +15,7 @@ the produced data are stored in the end users' project when the component [finis
 Output mapping is therefore used when your application needs to send data to the customer
 project -- these are typically **extractors** and **applications**. Implementing the input mapping requires three steps:
 
-- turning on the default bucket option (or adding input mapping to the component UI)
+- turning on the default bucket option (or adding output mapping to the component UI)
 - adding output mapping to the component source code
 - verifying
 
