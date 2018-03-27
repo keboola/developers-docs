@@ -344,12 +344,7 @@ users:
 |123|John Doe|
 |234|Jane Doe|
 
-user-detail:
-
-|id|name|address\_city|address\_country|address\_street|parent\_id|
-|---|---|---|---|---|---|
-|123|John Doe|London|UK|Whitehaven Mansions|123|
-|234|Jane Doe|St Mary Mead|UK|High Street|234|
+user-child:
 
 |id|name|address_city|address_country|address_street|parent_children|
 |---|---|---|---|---|---|
