@@ -51,7 +51,8 @@ services:
   - docker
 
 before_script:
-  - docker build . --tag=my-component
+  - export APP_IMAGE=keboola-component
+  - docker build . --tag=$APP_IMAGE
 
 after_success:
   - docker images
@@ -67,7 +68,7 @@ deploy:
 The `.travis.yml` file offers a vast number of [configuration options](https://docs.travis-ci.com/user/customizing-the-build/).
 We only need a few of them though. The options `sudo`, `language` and `services` define that all we need is docker.
 The `before_script` section executes a single shell command which
-[builds the image](/extend/component/tutorial/debugging/#step-2--build-the-image) and tags it `my-component`. The
+[builds the image](/extend/component/tutorial/debugging/#step-2--build-the-image) and tags it `keboola-component`. The
 tag is completely arbitrary at this moment, but we'll need it later. The `after_success` section simply lists the
 built images in the log.
 
@@ -122,14 +123,13 @@ image `quay.io/keboola/developer-portal-cli-v2`. The entire script uses the foll
 - `KBC_DEVELOPERPORTAL_PASSWORD` -- Service account password
 - `KBC_DEVELOPERPORTAL_VENDOR` -- Vendor ID
 - `KBC_DEVELOPERPORTAL_APP` -- Component ID
-- `APP_IMAGE` -- Local name of the built image (`my-component` in the above `.travis.yml` file)
 
 You can read more details about using the Developer Portal CLI in [chapter about running components](/extend/component/running/#running-a-component).
 The deploy script first pulls the image, then calls the `ecr:get-repository` command (while passing in the `KBC_DEVELOPERPORTAL_USERNAME` and `KBC_DEVELOPERPORTAL_PASSWORD` variables). The result of that command is stored in the `REPOSITORY` variable. Then the `ecr:get-login` command is called, which returns
 a command line to authorize against our AWS ECR registry (e.g `docker login -u AWS -p ey...ODAzOH0= 147946154733.dkr.ecr.us-east-1.amazonaws.com`). That
 return value is `eval`ed -- i.e. the login command is executed.
 
-Then there are tow `docker tag` and `docker push` commands which tag the image build as `my-component` with the `latest` tag
+Then there are two `docker tag` and `docker push` commands which tag the image build as `keboola-component` with the `latest` tag
 and the git commit tag (stored in `TRAVIS_TAG` variable). And then push the two resulting images into the AWS ECR registry.
 
 The last part of the script begins with check that the commit tag (`TRAVIS_TAG`) is a [normal version tag](https://semver.org/#spec-item-2)
@@ -146,9 +146,8 @@ i.e., by executing `git update-index --chmod=+x deploy.sh`. If the script is not
 
 
 ### Deploy Configuration
-The above deploy script requires five environment variables to be set. Set the following environment variables in the repository configuration:
+The above deploy script requires four environment variables to be set. Set the following environment variables in the repository configuration:
 
- - `APP_IMAGE` the Docker image name (tag used when building the component with Docker) (ex. `my-component`)
  - `KBC_DEVELOPERPORTAL_APP` the component id -- e.g.: `keboola-test.ex-docs-tutorial`
  - `KBC_DEVELOPERPORTAL_PASSWORD` with the [**Service Account**](/extend/component/tutorial/#creating-a-deployment-account) password
  - `KBC_DEVELOPERPORTAL_USERNAME` with the [**Service Account**](/extend/component/tutorial/#creating-a-deployment-account) login
@@ -211,14 +210,16 @@ pipelines:
   default:
     - step:
         script:
-          - docker build . --tag=my-component
+          - export APP_IMAGE=keboola-component
+          - docker build . --tag=$APP_IMAGE
           - docker images
 
   tags:
     '*':
       - step:
           script:
-          - docker build . --tag=my-component
+          - export APP_IMAGE=keboola-component
+          - docker build . --tag=$APP_IMAGE
           - docker images
           - ./deploy.sh
 {% endhighlight %}
@@ -250,7 +251,7 @@ image: docker:latest
 
 variables:
   DOCKER_DRIVER: overlay2
-  APP_IMAGE: my-component
+  APP_IMAGE: keboola-component
 
 services:
 - docker:dind
@@ -326,9 +327,10 @@ services:
   - docker
 
 before_script:
-  - docker build -t my-component .
-  - docker run my-component flake8
-  - docker run my-component python -m unittest discover
+  - export APP_IMAGE=keboola-component
+  - docker build -t $APP_IMAGE .
+  - docker run $APP_IMAGE flake8
+  - docker run $APP_IMAGE python -m unittest discover
   # push test image to ECR
   - docker pull quay.io/keboola/developer-portal-cli-v2:latest
   - export REPOSITORY=`docker run --rm -e KBC_DEVELOPERPORTAL_USERNAME -e KBC_DEVELOPERPORTAL_PASSWORD -e KBC_DEVELOPERPORTAL_URL quay.io/keboola/developer-portal-cli-v2:latest ecr:get-repository $KBC_DEVELOPERPORTAL_VENDOR $KBC_DEVELOPERPORTAL_APP`
@@ -353,7 +355,7 @@ deploy:
 
 The commands above do as follows:
 
-- Build the component image and tag it `my-component`.
+- Build the component image and tag it `keboola-component`.
 - Run the [flake8](http://flake8.pycqa.org/en/latest/) code style check.
 - Run [unittest](https://docs.python.org/3.6/library/unittest.html) tests.
 - Pull the [Developer Portal CLI client](https://github.com/keboola/developer-portal-cli-v2).
