@@ -14,20 +14,20 @@ same environment defined by the Docker image. When running in KBC, there are, ho
 environment bindings for you to take care of.
 
 Before you start, make sure you have [Docker set up correctly](/extend/component/docker-tutorial/setup/),
-particularly that you know your *host path* for [sharing files](/extend/component/docker-tutorial/setup#sharing-files)
+particularly that you know your **host path** for [sharing files](/extend/component/docker-tutorial/setup#sharing-files)
 and that you understand the basic concepts of creating a [Dockerized application](/extend/component/docker-tutorial/howto/).
-In this guide, we will use `/user/johndoe/data/` as the *host path* containing the
+In this guide, we will use `/user/johndoe/data/` as the **host path** containing the
 [data folder](/extend/common-interface/folders/).
 
 You can also run your component in your own environment. In that case, set the `KBC_DATADIR` environment
 variable to point to the data folder. With this approach, you loose the advantage of the properly defined
 environment, but in some cases, it may be a nice shortcut.
 
-For more details on how to develop a component, see the corresponding [tutorial](/extend/component/tutorial/)
+For more details on how to develop a component, see the corresponding [tutorial](/extend/component/tutorial/),
 especially the part on [debugging](/extend/component/tutorial/debugging/).
 
 ## Basic Run
-The basic run command we use (assuming that we want to run
+The basic run command we use (assuming that we want to run the
 [`keboola-test.ex-docs-tutorial`](https://github.com/keboola/ex-docs-tutorial) component) is as follows:
 
     docker run --volume=/user/johndoe/data/:/data --memory=4000m --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-123 quay.io/keboola/keboola-test.ex-docs-tutorial
@@ -38,10 +38,10 @@ to inject the input data and configuration into the image. Make sure not to put 
 The `--memory` and `--net` parameters are component limits and are specified in the [Developer Portal](https://components.keboola.com/).
 
 The `-e` parameters define [environment variables](/extend/common-interface/environment/). When entering
-environment variables on the command line, do _not_ put any spaces around the `=` character.
+environment variables on the command line, do **not** put any spaces around the `=` character.
 
 ### Test
-Download our [sample data folder](/extend/data.zip), extract it into your *host folder*, and run this command:
+Download our [sample data folder](/extend/data.zip), extract it into your **host folder**, and run this command:
 
     docker run --volume=/user/johndoe/data/:/data --memory=4000m --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-123 quay.io/keboola/keboola-test.ex-docs-tutorial
 
@@ -55,7 +55,7 @@ You should see the following output:
     KBC_DATADIR: /data/
     KBC_CONFIGID: test-123
 
-In addition, the `destination.csv` file will be created in your *host folder* in the `data/out/tables/` folder, with the following contents:
+In addition, the `destination.csv` file will be created in your **host folder** in the `data/out/tables/` folder, with the following contents:
 
     number,someText,double_number
     10,ab,20
@@ -91,12 +91,12 @@ The above API calls resolve and validate the input mapping and create a configur
 None of these API calls write any tables or files other than the archive, so they are very safe to run.
 
 The [Run Tag](https://kebooladocker.docs.apiary.io/#reference/run/create-a-job-with-image/create-a-dry-run-job)
-API call allows you to run a job in production environment but using a specific tag of the docker image.
+API call allows you to run a job in the production environment but using a specific tag of the Docker image.
 This means you can test your unreleased image on real configurations in real projects without affecting
 any users using that component. See the [tutorial](/extend/component/tutorial/debugging/#running-specific-tags)
 for instructions.
 
-## Preparing the Data folder
+## Preparing Data folder
 In order to run and debug a KBC component (including [R](https://help.keboola.com/manipulation/transformations/r/) and [Python](https://help.keboola.com/manipulation/transformations/python/) Transformations)
 on your own computer, you need to manually supply the component with
 a [data folder and configuration file](/extend/common-interface/). The above mentioned
@@ -108,7 +108,7 @@ A [collection of examples](https://documenter.getpostman.com/view/3086797/kbc-sa
 Sandbox API calls is available in Postman Docs.
 
 ### Prepare
-[Create a table](https://help.keboola.com/tutorial/load/) in KBC Storage an arbitrary table.
+[Create a table](https://help.keboola.com/tutorial/load/) in KBC Storage.
 In the following example, the table is stored in the `in.c-main` bucket and is called `sample`. The table ID is
 therefore `in.c-main.sample`. You also need a [Storage API token](https://help.keboola.com/storage/tokens/).
 
@@ -117,7 +117,7 @@ therefore `in.c-main.sample`. You also need a [Storage API token](https://help.k
 
 ### Running without Configuration
 In the [collection of sample requests](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#4c9c7c9f-6cd6-58e7-27e3-aef62538e0ba),
-there is an **Run without Configuration** example with the the following JSON in its body:
+there is a **Run without Configuration** example with the following JSON in its body:
 
 {% highlight json %}
 {
@@ -147,14 +147,14 @@ destination to which the table will be downloaded for the component; it will the
 
 The entire `configData.storage` node is generated by the UI. The node `parameters` contains arbitrary
 parameters which are passed to the component. The URL of the request
-is `https://syrup.keboola.com/docker/{{componentId}}/input` (in the [US Region](/overview/api/#regions-and-endpoints).
-The request body is in JSON. You need to replace the `componentId` by the ID of the component for which you
-want to generate the config file (e.g. `keboola-test.ex-docs-tutorial`). Enter your Storage API token
+is `https://syrup.keboola.com/docker/{{componentId}}/input` (in the [US Region](/overview/api/#regions-and-endpoints)).
+The request body is in JSON. Replace the `componentId` by the ID of the component for which you
+want to generate the config file (e.g., `keboola-test.ex-docs-tutorial`). Enter your Storage API token
 into **X-StorageAPI-Token** header and run the request.
 
 ### Running with Configuration
 In the [collection of sample requests](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#4c9c7c9f-6cd6-58e7-27e3-aef62538e0ba),
-there is an **Run with Configuration** example with the the following JSON in its body:
+there is a **Run with Configuration** example with the the following JSON in its body:
 
 {% highlight json %}
 {
@@ -169,7 +169,7 @@ configuration ID. The request URL is as follows:
 {: .image-popup}
 ![Configuration screenshot](/extend/component/running/input-configuration.png)
 
-You can create configuration for non-public components by visiting the direct URL:
+You can create a configuration for non-public components by visiting the direct URL:
 
     https://connection.keboola.com/admin/projects/{PROJECT_ID}/extractors/{COMPONENT_ID}
 
@@ -189,7 +189,7 @@ When running the request with valid parameters, you should receive a response si
 }
 {% endhighlight %}
 
-This means an [asynchronous job](/integrate/jobs/) which will prepare the archive of the data folder has been created.
+This means that an [asynchronous job](/integrate/jobs/) which will prepare the archive of the data folder has been created.
 If curious, view the job progress under **Jobs** in KBC:
 
 {: .image-popup}
@@ -203,21 +203,23 @@ the component locally.
 
     This API call is not supported for components that use the 'encrypt' flag.
 
-In that case you either have to craft the contents of the data directory manually or make a temporary copy of the component (even if it were with the same image) without the encryption turned on and work on the component copy. The new component won't be able to decrypt the encrypted values of the old one.
+In that case you either have to craft the contents of the data directory manually or make a temporary copy of the component (even if it 
+were with the same image) without the encryption turned on and work on the component copy. The new component won't be able to decrypt 
+the encrypted values of the old one.
 
 If you successfully created the data folder, you should now be able to run the component with it:
 
     docker run --volume=/user/johndoe/data/:/data --memory=4000m --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-123 -i -t --entrypoint=/bin/bash quay.io/keboola/keboola-test.ex-docs-tutorial
 
 
-## Running a Component
+## Running Component
 If you want to run a component during development, it is the easiest to build it locally and
-[run the built version](/extend/component/tutorial/debugging/). If you want to run an production code component, you
-need to do a couple of things. Let's assume you want to run `keboola-test.ex-docs-tutorial` component and you have
+[run the built version](/extend/component/tutorial/debugging/). If you want to run a production code component, you
+need to do a couple of things. Let's assume you want to run the `keboola-test.ex-docs-tutorial` component and you have
 already [prepared the data directory](#preparing-the-data-folder).
 
-The next step is that you need to obtain the repository settings and credentials from the
-[Developer portal](https://components.keboola.com/). You can either use the [API](https://kebooladeveloperportal.docs.apiary.io/#) or
+The next step is to obtain the repository settings and credentials from the
+[Developer Portal](https://components.keboola.com/). You can either use the [API](https://kebooladeveloperportal.docs.apiary.io/#) or
 the [CLI](https://github.com/keboola/developer-portal-cli-v2). The CLI is easier to use. First set your service account credentials
 in the environment:
 
@@ -233,7 +235,7 @@ on Windows. Then run the command to obtain the component repository:
 
     docker run --rm  -e KBC_DEVELOPERPORTAL_USERNAME -e KBC_DEVELOPERPORTAL_PASSWORD quay.io/keboola/developer-portal-cli-v2 ecr:get-repository vendor component-id
 
-e.g.
+for example:
 
     docker run --rm  -e KBC_DEVELOPERPORTAL_USERNAME -e KBC_DEVELOPERPORTAL_PASSWORD quay.io/keboola/developer-portal-cli-v2 ecr:get-repository keboola-test keboola-test.ex-docs-tutorial
 
@@ -241,19 +243,19 @@ You will receive the repository URI, e.g.:
 
     147946154733.dkr.ecr.us-east-1.amazonaws.com/developer-portal-v2/keboola-test.ex-docs-tutorial
 
-Then you can call a command to obtain credentials for the component repository:
+Then call a command to obtain credentials for the component repository:
 
     docker run --rm -e KBC_DEVELOPERPORTAL_USERNAME -e KBC_DEVELOPERPORTAL_PASSWORD quay.io/keboola/developer-portal-cli-v2 ecr:get-login vendor component-id
 
-e.g.
+for example:
 
     docker run --rm -e KBC_DEVELOPERPORTAL_USERNAME -e KBC_DEVELOPERPORTAL_PASSWORD quay.io/keboola/developer-portal-cli-v2 ecr:get-login keboola-test keboola-test.ex-docs-tutorial
 
-You will receive a `docker login` command which will authorize you to fetch the repository
+You will receive a `docker login` command which will authorize you to fetch the repository:
 
     docker login -u AWS -p ey...ODAzOH0= 147946154733.dkr.ecr.us-east-1.amazonaws.com
 
-Then you can pull the image from the registry:
+Then pull the image from the registry:
 
     docker pull 147946154733.dkr.ecr.us-east-1.amazonaws.com/developer-portal-v2/keboola-test.ex-docs-tutorial
 
@@ -263,7 +265,7 @@ Or run it directly:
 
 The `/user/johndoe/data/` path refers to the contents of the data folder.
 
-*Note for Windows users:*
+**Note for Windows users:**
 If you receive the error `The stub received bad data.`, you have to modify the `%userprofile%\.docker\config.json` to e.g.:
 {% highlight json %}
 {
@@ -275,16 +277,16 @@ If you receive the error `The stub received bad data.`, you have to modify the `
 }
 {% endhighlight %}
 
-This is a known [bug in docker](https://github.com/docker/for-win/issues/1306), see [the workaround](https://github.com/Azure/azure-cli/issues/4843)
+This is a known [bug in Docker](https://github.com/docker/for-win/issues/1306), see [the workaround](https://github.com/Azure/azure-cli/issues/4843).
 
 ## Running Transformations
-Both R and Python Transformations are implemented as Docker components. They can be run
-locally as well. Use the [Input data](/extend/component/running/#preparing-the-data-folder) call to obtain the data directory.
+Both R and Python transformations are implemented as Docker components. They can be run
+locally as well. Use the [Input Data](/extend/component/running/#preparing-the-data-folder) call to obtain the data directory.
 In the [API call](http://docs.kebooladocker.apiary.io/#reference/sandbox/input-data/create-an-input-job), specify the full
-configuration (using `configData` node). See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#4c9c7c9f-6cd6-58e7-27e3-aef62538e0ba)
-for both R and Python transformation.
+configuration (using the `configData` node). See [examples](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#4c9c7c9f-6cd6-58e7-27e3-aef62538e0ba)
+for both R and Python transformations.
 
-To run R Transformations, use:
+To run R transformations, use:
 
     docker run --volume=/user/johndoe/data/:/data --memory=4000m --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-123 [quay.io/keboola/r-transformation](https://quay.io/repository/keboola/r-transformation):latest
 
