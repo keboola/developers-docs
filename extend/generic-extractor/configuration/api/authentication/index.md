@@ -31,7 +31,7 @@ An example authentication configuration looks like this:
 {
     "api": {
         "authentication": {
-            "type": "url.query",
+            "type": "query",
             "query": {
                 "apiKey": "2267709"
             }

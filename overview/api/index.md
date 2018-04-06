@@ -20,8 +20,8 @@ The main APIs for our components are:
 |-|-|-
 | [KBC Storage API](http://docs.keboola.apiary.io/#) | [Storage](/integrate/storage/) is the main KBC component storing all data. | [APIB](https://github.com/keboola/storage-api-php-client/blob/master/apiary.apib)
 | [KBC Management API](http://docs.keboolamanagementapi.apiary.io/#) | API managing KBC projects and users (and notifications and features). | [APIB](https://github.com/keboola/kbc-manage-api-php-client/blob/master/apiary.apib)
-| [Encryption API](https://keboolaencryption.docs.apiary.io/#) | [Docker Runner](/extend/docker-runner/) is the component running other KBC components. | [APIB](https://github.com/keboola/encryption-api/blob/master/apiary.apib)
-| [Docker Runner API](http://docs.kebooladocker.apiary.io/#) | Provides [Encryption](/overview/encryption/). | [APIB](https://github.com/keboola/docker-bundle/blob/master/apiary.apib)
+| [Encryption API](https://keboolaencryption.docs.apiary.io/#) | Provides [Encryption](/overview/encryption/). | [APIB](https://github.com/keboola/encryption-api/blob/master/apiary.apib)
+| [Docker Runner API](http://docs.kebooladocker.apiary.io/#) | [Docker Runner](/extend/docker-runner/) is the component running other KBC components. | [APIB](https://github.com/keboola/docker-bundle/blob/master/apiary.apib)
 | [JSON Parser API](http://docs.jsonparserapi.apiary.io/#) | JSON Parser is a service [converting JSON files to CSV](https://json-parser.keboola.com/). | [APIB](https://github.com/keboola/jsonparser-api/blob/master/apiary.apib)
 | [Transformation API](http://docs.keboolatransformationapi.apiary.io/) | [Transformations](/integrate/transformations/) is the component running [SQL/R/Python transformations](https://help.keboola.com/manipulation/transformations/). | ---
 | [Provisioning API](http://docs.provisioningapi.apiary.io/) | Provisioning is a service creating accounts for [sandboxes](https://help.keboola.com/manipulation/transformations/sandbox/), [transformations](https://help.keboola.com/manipulation/transformations/) and database writers. | [APIB](https://github.com/keboola/provisioning-client/blob/master/apiary.apib)
