@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-It is possible to publish a Generic Extractor configuration as completely separate component.
+It is possible to publish a Generic Extractor configuration as a completely separate component.
 This enables sharing the API extractor between various projects and simplifies its further configuration.
 
 ## Configuration Considerations
@@ -16,7 +16,7 @@ Before converting your configuration to a universally available component, consi
 what values in the configuration should be provided by the end-user (typically authentication values).
 Then design a [configuration schema](/extend/component/ui-options/configuration-schema/) for setting
 those values. You can [test the schema online](http://jeremydorn.com/json-editor/).
-The values obtained from the end-user will be stored in the [`config` property](/extend/generic-extractor/configuration/config/).
+The values obtained from the end user will be stored in the [`config` property](/extend/generic-extractor/configuration/config/).
 Modify your configuration to read those values from there.
 
 Do not forget that if you prefix a value with a hash `#`, it will be
@@ -25,24 +25,23 @@ Also, try to make the extractor [work incrementally](/extend/generic-extractor/i
 if possible.
 
 ## Publishing
-To publish your generic extractor configuration, you need to [create a new Component](/extend/component/tutorial/) in
-the [Developer Portal](https://components.keboola.com/). Choose an appropriate name and type `extractor`. Once you
+To publish your Generic Extractor configuration, you need to [create a new component](/extend/component/tutorial/) in
+the [Developer Portal](https://components.keboola.com/). Choose an appropriate name and the type `extractor`. Once you
 have created the component, edit it, and fill in the following details:
 
 - **Repository**
     - **Type** --- AWS ECR
     - **Image Name** -- `147946154733.dkr.ecr.us-east-1.amazonaws.com/developer-portal-v2/ex-generic-v2`
-    - **Tag** -- see the [Generic Extractor Github repository](https://github.com/keboola/generic-extractor/releases)
+    - **Tag** -- see the [Generic Extractor GitHub repository](https://github.com/keboola/generic-extractor/releases)
     - **Region** -- leave empty
 - **Encryption** --- set to `true`
 - **UI options** --- set to `genericTemplatesUI` and `appInfo.dataIn`
 
-For a list of available tags,
-or [Generic Extractor Quay Repository](https://quay.io/repository/keboola/generic-extractor), both
-of which contain the same tags as the above AWS ECR repository.
-It is also possible to use the `latest` tag, which points to the highest available tag. However, we recommend that you
-configure your component with a specific tag and update it manually to avoid problems with breaking changes in future Generic
-Extractor releases.
+For a list of available tags, see the [Generic Extractor GitHub repository](https://github.com/keboola/generic-extractor/) or 
+[Generic Extractor Quay repository](https://quay.io/repository/keboola/generic-extractor/), both of which contain the same tags 
+as the above AWS ECR repository. It is also possible to use the `latest` tag, which points to the highest available tag. However, 
+we recommend that you configure your component with a specific tag and update it manually to avoid problems with breaking changes 
+in future Generic Extractor releases.
 
 Because the UI is assumed to be `genericTemplatesUI`, provide a
 [**configuration schema**](/extend/component/ui-options/configuration-schema/) and
@@ -59,13 +58,13 @@ Generic Extractor.
 
 For example, you might want to provide one configuration for incremental loading
 and a different configuration for full loading. The template UI also has the option to
-`Switch to JSON editor`, which displays the configuration JSON and allows the end-user to modify it.
+`Switch to JSON editor`, which displays the configuration JSON and allows the end user to modify it.
 Notice that the JSON editor allows modification only to the [`config`](/extend/generic-extractor/configuration/config/)
 section. Other sections, such as [`api`](/extend/generic-extractor/configuration/api/) or
-[`authorization.oauth_api`](/extend/generic-extractor/configuration/api/authentication/#oauth) may not be modified by the end-user.
+[`authorization.oauth_api`](/extend/generic-extractor/configuration/api/authentication/#oauth), may not be modified by the end user.
 
-You can review existing templates in their [Github repository](https://github.com/keboola/kbc-ui-templates/tree/master/resources).
-If you feel confident, you can send a pull request with your templates, otherwise submit it when requesting
+You can review existing templates in their [GitHub repository](https://github.com/keboola/kbc-ui-templates/tree/master/resources).
+If you feel confident, you can send a pull request with your templates, otherwise submit it when requesting the
 [publication of your component](/extend/publish/).
 
 ## Example
@@ -124,10 +123,10 @@ Let's say you have the following working API configuration
 }
 {% endhighlight %}
 
-and you identify that four values of that configuration need to be specified by the end-user:
+and you identify that four values of that configuration need to be specified by the end user:
 `JohnDoe`, `TopSecret`, `123`, and `active`.
 
-For each of them, create a parameter of the appropriate type:
+For each of the values, create a parameter of the appropriate type:
 
 - `JohnDoe` --- a string parameter `login`
 - `TopSecret` --- a string parameter `#password` (it will be encrypted)
