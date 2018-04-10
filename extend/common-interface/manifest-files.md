@@ -34,7 +34,7 @@ filenames are expected:
 #### `/data/in/tables` manifests
 An input table manifest stores metadata about a downloaded table. For example, a table
 with the ID `in.c-docker-demo.data` will be downloaded into
-`/in/tables/in.c-docker-demo.data.csv' (unless stated otherwise in the
+`/in/tables/in.c-docker-demo.data.csv` (unless stated otherwise in the
 [input mapping](/extend/common-interface/config-file/) and a manifest file
 '/in/tables/in.c-docker-demo.data.csv.manifest' will be created with the following
 contents:
@@ -78,7 +78,10 @@ The `metadata` and `column_metadata` fields contains
 
 An output table manifest sets options for transferring a table to Storage. The following examples list available
 manifest fields; **all of them are optional**. The `destination` field overrides the table name generated
-from the file name; it can (and commonly is) overridden by the end-user configuration.
+from the file name; it can (and commonly is) overridden by the end-user configuration. The `columns` option defines
+the columns of the imported table. If the `columns` option is provided, then the CSV files are **assumed to be headless**.
+If you the component is producing [Sliced tables](/extend/common-interface/folders/#sliced-tables), then they are always
+assumed to be headless and you *have to* use the `columns` option.
 
 {% highlight json %}
 {
