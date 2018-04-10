@@ -67,12 +67,12 @@ exchange rates are available from a base currency (USD, EUR) to 30 destination c
 CZK, EUR, GBP, HKD, HRK, HUF, CHF, IDR, ILS, INR, JPY, KRW, MXN, MYR, NOK, NZD, PHP, PLN, RON, RUB, SEK, SGD, THB, TRY,
 ZAR). The rates are available for all working days from 4 January 1999 up to present.*
 - Component icons must be of representative and reasonable quality. Make sure the icon license allows you to use it.
-- Components must correctly state the data flow --- UI flags `appInfo.dataOut` (typically writers), `appInfo.dataIn` (typically extractors).
+- Components must correctly state the data flow --- [UI options](/extend/component/ui-options/) `appInfo.dataOut` (typically writers), `appInfo.dataIn` (typically extractors).
 - Licensing information must be valid, and the vendor description must be current.
 
 ### Component Configuration
 
-- Use only the necessary flags (i.e., if there are no output files, do not use `genericDockerUI-fileOutput`).
+- Use only the necessary [UI options](/extend/component/ui-options/) (i.e., if there are no output files, do not use `genericDockerUI-fileOutput`).
 - For extractors, always use the [default bucket](/extend/common-interface/folders/#default-bucket) --- do not use the `genericDockerUI-tableOutput` flag.
 - Use [encryption](/overview/encryption/) to store sensitive values. No plain-text passwords!
 - Use a [configuration schema](/extend/component/ui-options/configuration-schema/).

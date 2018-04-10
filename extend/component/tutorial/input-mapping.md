@@ -20,8 +20,7 @@ project -- these are typically **writers** and **applications**. Implementing th
 
 ## Adding Input Mapping to UI
 Adding the input mapping to the component UI is very simple. In the [Developer Portal](https://components.keboola.com/), edit the component
-and add `genericDockerUI-tableInput` or `genericDockerUI-fileInput` (or both) flags.
-You can read more about all available [UI options](/extend/component/ui-options/).
+and add `genericDockerUI-tableInput` or `genericDockerUI-fileInput` (or both) [UI options](/extend/component/ui-options/).
 
 {: .image-popup}
 ![Screenshot -- Input Mapping Configuration](/extend/component/tutorial/input-mapping-1.png)

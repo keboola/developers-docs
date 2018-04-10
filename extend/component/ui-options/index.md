@@ -7,11 +7,11 @@ permalink: /extend/component/ui-options/
 {:toc}
 
 Each component needs to specify how its user interface (UI) will look. Otherwise the component cannot
-be configured via the UI (it can still be configured using the API though). 
+be configured via the UI (it can still be configured using the API though).
 
 The most basic UI configuration is `genericDockerUI`. The generic UI will always show a text field for entering the
-component configuration in JSON format. Other parts of the UI are turned on using other flags
-(for example, `genericDockerUI-tableInput`, `genericDockerUI-tableOutput`). All of the flags may be combined freely.
+component configuration in JSON format. Other parts of the UI are turned on using other [UI options](/extend/component/ui-options/)
+(for example, `genericDockerUI-tableInput`, `genericDockerUI-tableOutput`). All of the [UI options](/extend/component/ui-options/) may be combined freely.
 
 ## genericDockerUI
 This provides a basic text area for setting component parameters as a JSON; the text area has
@@ -25,7 +25,7 @@ The configuration provided in this input is available in the `parameters` sectio
 Defining a [configuration schema](/extend/component/ui-options/configuration-schema/) will replace the JSON text area with a form.
 
 ## genericDockerUI-tableInput
-This flag provides a UI for setting the table input [mapping](https://help.keboola.com/manipulation/transformations/mappings/). 
+This flag provides a UI for setting the table input [mapping](https://help.keboola.com/manipulation/transformations/mappings/).
 You can set the following options:
 
 - *Source* --- the name of the table in Storage
