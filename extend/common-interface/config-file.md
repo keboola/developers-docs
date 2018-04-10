@@ -10,7 +10,7 @@ Configuration files are one of the [possible channels](/extend/common-interface/
 between components and Keboola Connection (KBC).
 
 To create a sample configuration file (together with the data directory),
-use the [Input Data API call](/extend/component/running/#preparing-the-data-folder) via the
+use the [Debug API call](/extend/component/running/#preparing-the-data-folder) via the
 [Docker Runner API](https://kebooladocker.docs.apiary.io/#reference/sandbox/input-data).
 You will get a zip archive containing all the resources you need in your component.
 
@@ -101,8 +101,8 @@ write the usage file regularly** during the component run, not only at the end.
 validated and a wrong format will cause an component failure.*
 
 ## Examples
-To create an example configuration, use the [Input Data API call](/extend/component/running/#preparing-the-data-folder). You will get a
-`data.zip` archive in your *Storage* --- *File uploads*, which will contain the `config.json` file.
+To create an example configuration, use the [Debug API call](/extend/component/running/#preparing-the-data-folder). You will get a
+`stage_0.zip` archive in your *Storage* --- *File uploads*, which will contain the `config.json` file.
 You can also use these configuration structure to create an API request for
 actually [running a component](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job).
 If you want to manually pass configuration options in the API request, be sure to wrap it around in the `configData` node.

@@ -35,13 +35,13 @@ designated [directories](/extend/common-interface/folders/); they will be
 injected into the image when you [run it](/extend/docker-runner/). To simulate this, download an archive containing the data files
 and [configuration](/extend/common-interface/config-file/) in the exact same format you get in the production environment.
 
-Use the [Input Data API call](https://kebooladocker.docs.apiary.io/#reference/sandbox/input-data/create-an-input-job).
+Use the [Debug API call](https://kebooladocker.docs.apiary.io/#reference/debug/debug-component/create-a-debug-job).
 You can see it in our [API request collection](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#4c9c7c9f-6cd6-58e7-27e3-aef62538e0ba).
-In the [API call](http://docs.kebooladocker.apiary.io/#reference/sandbox/input-data/create-an-input-job), either specify the
+In the [API call](https://kebooladocker.docs.apiary.io/#reference/debug/debug-component/create-a-debug-job), either specify the
 full configuration (using the `configData` node) or refer to an existing configuration
 of the component (using the `config` node). See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#4c9c7c9f-6cd6-58e7-27e3-aef62538e0ba).
 
-The Input Data API call will prepare the data folder for the component, put it inside an archive and upload it to KBC Storage.
+The Debug API call will prepare the data folder for the component, put it inside an archive and upload it to KBC Storage.
 When running the request with valid parameters, you should receive a response similar to this:
 
 {% highlight json %}
@@ -54,14 +54,12 @@ When running the request with valid parameters, you should receive a response si
 
 This means an [asynchronous job](/integrate/jobs/) for preparing the archive has been created.
 If curious, view the job progress under **Jobs** in KBC.
-When the job finishes, you'll see a `data.zip` file uploaded to your project.
-The job will be usually executed very quickly, so you might as well go straight to **Storage** --- **Files** in
-KBC.
+When the job finishes, you'll see a `stage_0.zip` file uploaded to your project.
 
 {: .image-popup}
 ![Screenshot -- Job Tags](/extend/component/tutorial/debug-2.png)
 
-You can send the Input API call with a reference to an existing configuration id, or you can also supply the configuration directly in
+You can send the Debug API call with a reference to an existing configuration id, or you can also supply the configuration directly in
 the API request. In such case, use the `configData` attribute in the request body, e.g.:
 
 {% highlight json %}
@@ -168,8 +166,8 @@ This means that the directory with the component code will shadow the one inside
 instruction in `Dockerfile`) and you will run the current code in the image environment.
 
 ## Running Specific Tags
-The Input Data API call has its limitations, namely, it cannot run when encryption is enabled.
-In such situations, an alternative may be to run a specific image tag.
+The Debug API call is very powerful but it always runs the production version of component. There are cases where you might want to
+run a test or development version of a component. In such situations, an alternative may be to run a specific image tag.
 
 Let's say that you need to list all files on input for some reason. Following the
 [example component](/extend/component/tutorial/), you would have to add something like this
@@ -201,7 +199,7 @@ following API call:
     "config": "354678919"
     }'
 
-In the job detail -- under **Parameters & Results**, , you'll see that a specific tag was requested. In the job events, you can then 
+In the job detail -- under **Parameters & Results**, , you'll see that a specific tag was requested. In the job events, you can then
 see that it was indeed used and that the script printed out all files in the `/data/in/tables/` folder.
 
 {: .image-popup}
@@ -210,7 +208,7 @@ see that it was indeed used and that the script printed out all files in the `/d
 ## Summary
 You can find more information about running components in the corresponding part of the [documentation](/extend/component/running/).
 
-This concludes our development tutorial on the most important aspects of creating KBC components. However, our platform offers a 
+This concludes our development tutorial on the most important aspects of creating KBC components. However, our platform offers a
 lot more; we encourage you to read about other features in our documentation:
 
 - exchanging data in [data folders](/extend/common-interface/folders/)

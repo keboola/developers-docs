@@ -18,8 +18,8 @@ The data folders contain actual data files (tables and files) and metadata.
 For each datafile, a [manifest file](/extend/common-interface/manifest-files/) is created.
 It contains metadata information (creation time, keys for tables, etc.).
 
-To create a data folder sample, use the [input data](/extend/component/running/#preparing-the-data-folder) call via the
-[Docker Runner API](http://docs.kebooladocker.apiary.io/#reference/sandbox).
+To create a data folder sample, use the [Debug API](/extend/component/running/#preparing-the-data-folder) call via the
+[Docker Runner API](https://kebooladocker.docs.apiary.io/#reference/debug).
 All the resources you need in your component will be provided in a ZIP archive.
 
 The predefined data exchange folder structure is as follows:

@@ -74,21 +74,19 @@ Then you can inspect the container with standard OS (CentOS) commands and/or run
 After you have mastered this step, you can run any Docker component on your machine.
 
 ## Debugging
-There are three API calls available for debugging purposes:
+There are two API calls available for debugging purposes:
 
-  - [Input Data](http://docs.kebooladocker.apiary.io/#reference/sandbox/input-data/create-an-input-job)
-  - [Dry Run](http://docs.kebooladocker.apiary.io/#reference/sandbox/dry-run/create-a-dry-run-job)
+  - [Debug](https://kebooladocker.docs.apiary.io/#reference/debug/debug-component/create-a-debug-job)
   - [Run Tag](https://kebooladocker.docs.apiary.io/#reference/run/create-a-job-with-image/create-a-dry-run-job)
 
-The [Input](http://docs.kebooladocker.apiary.io/#reference/input) API call is useful for obtaining an
-environment configuration for a component (without encryption).
-
-The [Dry Run](http://docs.kebooladocker.apiary.io/#reference/dry-run) API call will do everything
-except the output mapping and is therefore useful for debugging an existing component
-in production without modifying files and tables in a KBC project.
-
-The above API calls resolve and validate the input mapping and create a configuration file.
-None of these API calls write any tables or files other than the archive, so they are very safe to run.
+The [Debug](https://kebooladocker.docs.apiary.io/#reference/debug) API call is useful for obtaining an
+environment configuration for a component. It will create a snapshot of the
+[data folder](/extend/common-interface/folders/)
+(including input mapping and configuration files) and then it will upload the snapshot to the [Files section](https://help.keboola.com/storage/file-uploads/)
+of Storage. Then the component will be run and another snapshot will be created with the resulting contents of the data directory.
+This gives you snapshots of the data directory before and after a component is run. The debug
+API call does not write any tables or files (other than the archive) to the KBC project, so it is very safe to run. Note however that
+any side effects of the component are still performed (e.g. writers still write data to their destination).
 
 The [Run Tag](https://kebooladocker.docs.apiary.io/#reference/run/create-a-job-with-image/create-a-dry-run-job)
 API call allows you to run a job in the production environment but using a specific tag of the Docker image.
@@ -100,12 +98,12 @@ for instructions.
 In order to run and debug a KBC component (including [R](https://help.keboola.com/manipulation/transformations/r/) and [Python](https://help.keboola.com/manipulation/transformations/python/) Transformations)
 on your own computer, you need to manually supply the component with
 a [data folder and configuration file](/extend/common-interface/). The above mentioned
-[Input Data API call](http://docs.kebooladocker.apiary.io/#reference/sandbox/input-data/create-an-input-job)
+[Debug API call](https://kebooladocker.docs.apiary.io/#reference/debug/debug-component/create-a-debug-job)
 is designed to do that.
 
 We recommend that you use [Apiary or Postman](/overview/api/) to call the API.
 A [collection of examples](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#91a2cf62-d7b1-b75f-73ff-406f2afa92a9) of the
-Sandbox API calls is available in Postman Docs.
+Debug API calls is available in Postman Docs.
 
 ### Prepare
 [Create a table](https://help.keboola.com/tutorial/load/) in KBC Storage.
@@ -158,7 +156,7 @@ there is a **Run with Configuration** example with the the following JSON in its
 
 {% highlight json %}
 {
-    "config": "328831433""
+    "config": "328831433"
 }
 {% endhighlight %}
 
@@ -195,19 +193,10 @@ If curious, view the job progress under **Jobs** in KBC:
 {: .image-popup}
 ![Job progress screenshot](/extend/component/running/sandbox-progress.png)
 
-The job will be usually executed very quickly, so you might as well go straight to **Storage** --- **Files** in
-KBC. There you will find a `data.zip` file with a sample data folder. You can now use this folder to run
-the component locally.
-
-**Note:** If your component uses encryption, the input data API call will be disabled (for security reasons):
-
-    This API call is not supported for components that use the 'encrypt' flag.
-
-In that case you either have to craft the contents of the data directory manually or make a temporary copy of the component (even if it 
-were with the same image) without the encryption turned on and work on the component copy. The new component won't be able to decrypt 
-the encrypted values of the old one.
-
-If you successfully created the data folder, you should now be able to run the component with it:
+The job will usually take slightly longer than the normal run job. When finished go to **Storage** --- **Files** in
+KBC. There you will find a `stage_0.zip` file with the data folder before the component was run and `stage_output.zip` before
+the component output mapping was supposed to be done. You can now use this folder from `stage_0.zip` to run
+the component locally. You should now be able to run the component with it:
 
     docker run --volume=/user/johndoe/data/:/data --memory=4000m --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-123 -i -t --entrypoint=/bin/bash quay.io/keboola/keboola-test.ex-docs-tutorial
 
@@ -281,7 +270,7 @@ This is a known [bug in Docker](https://github.com/docker/for-win/issues/1306), 
 
 ## Running Transformations
 Both R and Python transformations are implemented as Docker components. They can be run
-locally as well. Use the [Input Data](/extend/component/running/#preparing-the-data-folder) call to obtain the data directory.
+locally as well. Use the [Debug API](/extend/component/running/#preparing-the-data-folder) call to obtain the data directory.
 In the [API call](http://docs.kebooladocker.apiary.io/#reference/sandbox/input-data/create-an-input-job), specify the full
 configuration (using the `configData` node). See [examples](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#4c9c7c9f-6cd6-58e7-27e3-aef62538e0ba)
 for both R and Python transformations.
