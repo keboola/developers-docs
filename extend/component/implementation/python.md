@@ -57,7 +57,7 @@ Additionally, it also defines KBC's [CSV dialect](https://docs.python.org/3/libr
 to shorten up the CSV manipulation code.
 The library is a standard Python package that is available by default in the production environment.
 It is [ready for use on GitHub](https://github.com/keboola/python-docker-application), so it can be installed
-locally with `pip install git+git://github.com/keboola/python-docker-application.git`.
+locally with `pip3 install https://github.com/keboola/python-docker-application/zipball/master`.
 A generated [documentation](https://github.com/keboola/python-docker-application/blob/master/doc/keboola.docker.html)
 is available for the package, and an actual working example can be found in our
 [sample component](https://github.com/keboola/python-custom-application-text-splitter/blob/master/main.py).
