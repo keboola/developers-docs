@@ -113,7 +113,7 @@ the component exit code is correct. On the other hand, the user error is suppose
 - Avoid **nonsense** messages. For example: 'Banana Error: Exceeding trifling witling' or only numeric errors.
 - Avoid **errors users cannot solve**. For example: 'An outdated OpenSSL library, update to OpenSSL 1.0.2'.
 - Provide **guidance** on what the user should do. For example: 'The input table is missing; make sure the output mapping destination is set to `items.csv`'.
-- Avoid **leaking** sensitive information. For example: credentials, tokens.
+- Avoid deliberate **leaking** sensitive information. For example: credentials, tokens. The output of each component is [filtered](/extend/common-interface/logging/#standard-output-and-standard-error) to prevent *accidental* leaks of sensitive information. That means you don't need to implement filtering for example for exception messages.
 
 Also keep in mind that the output of the components (job events) serve to pass only informational and error messages; **no data** can be passed through.
 The event message size is limited (about 64KB). If the limit is exceeded, the message will be trimmed. If the component produces

@@ -52,5 +52,5 @@ and the contents of both STDOUT and STDERR will be sent to internal logs.
 
 It is possible to modify the above behavior so that regardless of the exit code, all errors are User Errors.
 This is done by setting `no_application_errors` in [component configuration](https://components.keboola.com/).
-See the [implementation notes](/extend/component/implementation/) for tips on distinguishing between a *User Error*
-and *Application Error*.
+See the [implementation notes](/extend/component/implementation/) for tips on distinguishing 
+between a *User Error* and *Application Error*.

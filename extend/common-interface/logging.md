@@ -30,6 +30,11 @@ of the component and forwards the STDOUT content live to [Storage API Events](ht
 (log level `info`). The content of STDERR is collected and added (if not empty) as the last event of the job with level `error`.
 The events are displayed in a [Job detail](https://help.keboola.com/management/jobs/).
 
+The entire output from a component is filter for sensitive values. The [Runner](/extend/docker-runner/)
+keeps track of all encrypted values and if it encounters them in the component output, it replaces
+them by `[hidden]` placeholder. This prevents accidental leaking of sensitive information for
+example in exception traces.
+
 ## GELF Logger
 [GELF](http://docs.graylog.org/en/2.0/pages/gelf.html) is a log format allowing you to
 send [structured](http://docs.graylog.org/en/2.0/pages/gelf.html#gelf-format-specification) event messages.
