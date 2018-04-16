@@ -167,11 +167,9 @@ you can, for example, rely on
 - the CSV file being orthogonal.
 
 If the above conditions are not met, then another processor should be added before yours. I.e. you should keep the
-processor simple and delegate the assumptions to other processors (and [document them](#publishing-a-processor)). If possible the
+processor simple and delegate the assumptions to other processors (and [**document** them](#publishing-a-processor)). If possible the
 processor should also assume that the CSV files are headless and stored in arbitrary sub-folders. When implemented with this assumption
-the processor will support [sliced tables]([sliced tables](/extend/common-interface/folders/#sliced-tables).
-If the above conditions are not met, then another processor should be added before yours. I.e., you should keep the
-processor simple and delegate the assumptions to other processors. Make sure to **document** them.
+the processor will support [sliced tables]([sliced tables](/extend/common-interface/folders/#sliced-tables)).
 
 ### Publishing Processor
 The process of processor registration is the same as [publishing any other component](/extend/publish/).

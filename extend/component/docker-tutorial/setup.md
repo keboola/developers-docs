@@ -33,7 +33,7 @@ official troubleshooting ([Windows](https://docs.docker.com/docker-for-windows/t
 
 ## Generally Useful Commands
 - [`docker run`](https://docs.docker.com/engine/reference/run/): Run an
-image (create a container and run the command in `ENTRYPOINT` section of **Dockerfile**).
+image (create a container and run the command in `ENTRYPOINT` or `CMD` section of **Dockerfile**).
 - [`docker build`](https://docs.docker.com/engine/reference/commandline/build/): Build
 an image (execute instructions in **Dockerfile** and create a runnable image).
 - [`docker pull`](https://docs.docker.com/engine/reference/commandline/pull/): Pull

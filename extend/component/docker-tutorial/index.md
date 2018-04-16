@@ -57,7 +57,7 @@ has an [API](/extend/docker-runner/#api)
 which allows to run Docker Images and encrypt arbitrary values.
 [Docker Runner](/extend/docker-runner/) takes
 care of injecting the right data, creating, running, and terminating the container, and uploading
-the result data to KBC Storage. All images to be run in KBC must have an `ENTRYPOINT`.
+the result data to KBC Storage. All images to be run in KBC must have an `ENTRYPOINT` or `CMD`.
 
 Before you run components in KBC, make sure to
 [set up your Docker environment](/extend/component/docker-tutorial/setup/).

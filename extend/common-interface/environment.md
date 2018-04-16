@@ -40,7 +40,7 @@ The following variables are available when [GELF Logger](/extend/common-interfac
 - `KBC_LOGGER_PORT`: Port of the GELF server
 
 ## Return Values
-The script defined in Dockerfile [`ENTRYPOINT`](/extend/component/docker-tutorial/howto/) should provide an exit status. The
+The script defined in Dockerfile [`ENTRYPOINT` or `CMD`](/extend/component/docker-tutorial/howto/) should provide an exit status. The
 following rules apply:
 
 - `exit code = 0`  The execution is considered successful.
