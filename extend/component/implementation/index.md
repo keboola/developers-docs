@@ -134,7 +134,7 @@ component may be difficult. A processor might be a good solution if the followin
 - The feature is **universal** (it is always applied to all input/output or none).
 
 The first condition is especially important. Another way to read it is that a processor must never supply a function expected from the component.
-In other words: **Each component should be able to consume/generate a valid input/output without any processors.** For example, if and extractor can
+In other words: **Each component should be able to consume/generate a valid input/output without any processors.** For example, if an extractor can
 produce tables without any further processing, good, let it be tables, but if can not, it should output only files and processors should do the rest.
 If processors are used together with [configuration rows](/integrate/storage/api/configurations/#configuration-rows),
 the last condition is weakened, because a different set of processors may be applied to each configuration row.
