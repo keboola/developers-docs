@@ -123,7 +123,7 @@ You will also obtain a path to your Travis CI configuration
 When done exploring, push to the repository.
 This will automatically trigger a build on the Travis service; you can view the build
 progress by visiting the provided link. In fact, two builds will be triggered: one
-for the `master` branch, and one for the `0.0.1` tag.
+for the `master` branch, and one for the `0.1.0` tag.
 
 {: .image-popup}
 ![Screenshot -- Travis Build](/extend/component/tutorial/travis-build-1.png)
