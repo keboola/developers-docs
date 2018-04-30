@@ -7,16 +7,17 @@ permalink: /integrate/storage/api/configurations/
 {:toc}
 
 [Configurations](https://help.keboola.com/storage/configurations/) are an important part of a KBC project. Most operations are
-available in the UI, use the API if you want to manipulate the configurations programmatically.
+available in the UI. Use the API if you want to manipulate the configurations programmatically.
 
-Configurations represent *instances* of components in project. Each KBC component has different configuration
-options and requirements which must be respected. As such, KBC configurations provide a general framework for configuring
-components, while the specific implementation details are left to them.
+Configurations represent component **instances** in a project. Each KBC component has different configuration
+options and requirements, which must be respected. As such, KBC configurations provide a general framework for configuring
+components, while the specific implementation details are left to the components themselves.
 
-When working with the [component configurations API](http://docs.keboola.apiary.io/#reference/component-configurations),
+When working with the [Component Configurations API](http://docs.keboola.apiary.io/#reference/component-configurations),
 you need to know the `componentId` of the component being configured.
-You can see a list of public components in [the developer portal](https://components.keboola.com/components), or you can get a list of all available components with the [API index call](https://keboola.docs.apiary.io/#reference/miscellaneous/api-index/component-list),
-see [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#f0e321e0-6533-0074-662d-fe4ab85a15d5).
+You can see a list of public components in [the Developer Portal](https://components.keboola.com/components), or you can get 
+a list of all available components with the [API index call](https://keboola.docs.apiary.io/#reference/miscellaneous/api-index/component-list). 
+See our [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#f0e321e0-6533-0074-662d-fe4ab85a15d5).
 
 It will give you something like this:
 
@@ -87,17 +88,17 @@ It will give you something like this:
 {% endhighlight %}
 
 From here, you can see all available information about a particular component. In the following examples, we
-will use `keboola.ex-aws-s3` --- the AWS S3 Extractor.
+will use `keboola.ex-aws-s3` --- the AWS S3 extractor.
 
 ## Configuration Structure
 Component configurations are largely dependent on the actual component being configured. This makes creating configurations manually
 a bit tricky. Rather than starting from scratch, we recommend creating a configuration through the UI and then modifying it when you understand it.
 
-### Inspecting a Configuration
-To obtain an existing configuration, you can either use the List of configurations above or
+### Inspecting Configuration
+To obtain an existing configuration, you can either use the list of configurations above or
 the [Configuration Detail](https://keboola.docs.apiary.io/#reference/component-configurations/component-configurations/configuration-detail)
 API call. See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb) for obtaining a
-configuration of `keboola.ex-aws-s3` component. You will receive a response similar to this:
+configuration of the `keboola.ex-aws-s3` component. You will receive a response similar to this:
 
 {% highlight json %}
 {
@@ -197,26 +198,26 @@ configuration of `keboola.ex-aws-s3` component. You will receive a response simi
 
 The actual component configuration is split into three parts:
 
-- `configuration` node, containing arbitrary component configuration
-- `state` node, containing component [state file](/extend/common-interface/config-file/#state-file)
-- `rows` node, containing iterations of `configuration` and `state`.
+- `configuration` node, containing an arbitrary component configuration
+- `state` node, containing a component [state file](/extend/common-interface/config-file/#state-file)
+- `rows` node, containing iterations of `configuration` and `state`
 
-The important part is the id of the configuration you want to work with. In the following examples, we will use
+The important part is the ID of the configuration you want to work with. In the following examples, we will use
 `364479526`.
 
 ### Configuration
 The `configuration` node maps to the [configuration file](/extend/common-interface/config-file/#configuration-file-structure).
-It can contain `storage`, `parameters`, `processors` and `authorization` child nodes (the `image_parameters` and `action` nodes found in the config file
-are injected at runtime and not stored in the configuration). The `authorization` node is set in the configuration only when
-[Credentials injection](/extend/common-interface/oauth/#credentials-injection) should be used, otherwise it is also set during runtime.
+It can contain the `storage`, `parameters`, `processors` and `authorization` child nodes (the `image_parameters` and `action` nodes found in the config file
+are injected at runtime and are not stored in the configuration). The `authorization` node is set in the configuration only when
+[credentials injection](/extend/common-interface/oauth/#credentials-injection) should be used, otherwise it is also set during the runtime.
 The `processors` node defines the [processors and their configuration](/extend/component/processors/).
-The most common sub-nodes stored in the `configuration` node are therefore `parameters` (containing arbitrary component configuration)
+The most common sub-nodes stored in the `configuration` node are therefore `parameters` (containing an arbitrary component configuration)
 and `storage` (containing [input](/extend/component/tutorial/input-mapping/) and [output mapping](/extend/component/tutorial/output-mapping/)).
 Both are transferred to the
-configuration file without modification, that means that the [`storage` configuration](/extend/common-interface/config-file/#configuration-file-structure)
+configuration file without modification; that means that the [`storage` configuration](/extend/common-interface/config-file/#configuration-file-structure)
 is directly usable in the `configuration` node. The `parameters` node is fully dependent on the component and has no universal specification or rules.
 
-In the above example, the `configuration` node contains:
+In the above example, the `configuration` node contains the following:
 
 {% highlight json %}
 "parameters": {
@@ -226,17 +227,17 @@ In the above example, the `configuration` node contains:
 {% endhighlight %}
 
 That means that the component is not using input mapping nor output mapping. The allowed contents of `parameters` are described
-in the [AWS S3 Extractor code documentation](https://github.com/keboola/aws-s3-extractor#configuration-options).
+in the [AWS S3 extractor code documentation](https://github.com/keboola/aws-s3-extractor#configuration-options).
 
 ### Configuration Rows
 The `rows` node contains iterations of the configuration. The interpretation of configuration rows is again dependent on the
-component implementation. In the presented case of `keboola.ex-aws-s3` component, each row corresponds to a single extracted table.
+component implementation. In the presented case of the `keboola.ex-aws-s3` component, each row corresponds to a single extracted table.
 When `rows` node is non-empty, the component behavior is slightly modified. It behaves as if it were executed as many times as
-there are rows. For each row the `configuration` node from root and the `configuration` node from `rows` are merged, with
-the latter overwriting the former in case of conflict.
+there are rows. For each row, the `configuration` node from `root` and the `configuration` node from `rows` are merged, with
+the latter overwriting the former in the case of conflict.
 
 Given the above configuration, the **effective configuration** passed to the component
-[configuration file](/extend/common-interface/config-file/#configuration-file-structure) will be:
+[configuration file](/extend/common-interface/config-file/#configuration-file-structure) will be as follows:
 
 {% highlight json %}
 {
@@ -254,10 +255,11 @@ Given the above configuration, the **effective configuration** passed to the com
 
 The first two parameters (`accessKeyId` and `#secretAccessKey`) are taken from the root `configuration`, the other
 parameters are taken from the first rows' `configuration`. The `processors` node is never passed to the configuration file.
-With the above configuration, the component will be executed only once, because there is one row. If there were no rows, the
-component will still be executed once. If there were two rows, the component will be executed twice.
+With the above configuration, the component will be executed only once, because there is one row. If there are no rows, the
+component will still be executed once. If there were two rows, the component would be executed twice.
 
 If the component is executed more than once, the operations are executed in the following order:
+
 - input mapping for the first row
 - run with the first row configuration (merged with root configuration)
 - output mapping for the first row
@@ -265,16 +267,16 @@ If the component is executed more than once, the operations are executed in the 
 - run with the second row configuration (merged with root configuration)
 - output mapping for the second row
 
-All of these are executed in a single [Job](/integrate/jobs/). However, even though multiple rows are executed in a single
-job, the actual executions are still completely isolated. I.e. there is no way to share anything between the rows
+All of these are executed in a single [job](/integrate/jobs/). However, even though multiple rows are executed in a single
+job, the actual executions are still completely isolated. I.e., there is no way to share anything between the rows
 (apart from the common `configuration`). It also means that the outputs of the first row are available in the KBC project before
-the second row started and also that the inputs for the second row are read only after the first row finished processing.
+the second row starts, and the inputs for the second row are read only after the first row finishes processing.
 
-What is considered as 'first' and 'second' -- i.e. the order of rows -- is defined by order of items in the `rows` array.
-See [below](#modifying-a-configuration) for example of modifying the row order.
+What is considered 'first' and 'second' -- i.e. the order of rows -- is defined by the order of items in the `rows` array.
+See [below](#modifying-a-configuration) for an example of modifying the row order.
 
 Theoretically, configuration rows are supported for every component as long as the effective configuration matches what
-the component expects. Configuration rows can be used to split the configuration into a common part (typically credentials) and
+the component expects. Configuration rows can be used to split the configuration into a common part (typically credentials) and an
 iterable part which is repeated many times. Keep in mind that configurations heavily modified through the API might **not be supported
 in the UI**.
 
@@ -292,9 +294,9 @@ the state is:
 }
 {% endhighlight %}
 
-State is considered as an internal property of a component and you should avoid modifying it. The only reasonable modification of
-state is to delete it -- in that case, the configuration will run as if it were run the first time. To delete the state, set it to `{}`.
-If configuration rows are used, then the state is stored separately for each row and the `state` node in configuration root is
+`State` is considered an internal property of a component and you should avoid modifying it. The only reasonable modification of
+`state` is to delete it -- in that case, the configuration will run as if it were run for the first time. To delete the `state`, set it to `{}`.
+If configuration rows are used, then the `state` is stored separately for each row and the `state` node in configuration root is
 not used.
 
 ## Working with Configurations
@@ -310,9 +312,9 @@ which will return all the configuration details. This means
 - configuration state (`state`) --- [component state](/extend/common-interface/config-file/#state-file).
 
 Please note that the contents
-of the `configuration`, `rows` and `state` section depend purely on the component itself. See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#9b84ef26-51aa-b281-e219-cc90c867fd9d)
+of the `configuration`, `rows` and `state` sections depend purely on the component itself. See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#9b84ef26-51aa-b281-e219-cc90c867fd9d).
 
-A sample result for AWS S3 extractor looks like this:
+A sample result for the AWS S3 extractor looks like this:
 
 {% highlight json %}
 [
@@ -365,14 +367,14 @@ A sample result for AWS S3 extractor looks like this:
 ]
 {% endhighlight %}
 
-### Modifying a Configuration
-**Note: Configurations modified through the API might not be editable in the KBC UI.** They can be run or used in orchestration without any problems.
+### Modifying Configuration
+**Note: Configurations modified through the API might not be editable in the KBC UI.** They can be run or used in an orchestration without any problems.
 
 Modifying a configuration means that a new version of that configuration is created.
 For modifying a configuration, use the
 [Update Configuration](https://keboola.docs.apiary.io/#reference/component-configurations/manage-configurations/update-configuration) API call.
 See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#91e2060c-0c14-7a09-0cc3-537eb6057ada) in which the
-configuration is modified to:
+configuration is modified to the following to set new credentials:
 
 {% highlight json %}
 {
@@ -383,7 +385,7 @@ configuration is modified to:
 }
 {% endhighlight %}
 
-To set new credentials. Notice that configuration must be sent in the form field `configuration` as the endpoint does not accept pure JSON (yet).
+Notice that the configuration must be sent in the form field `configuration` as the endpoint does not accept pure JSON (yet).
 Take great care to pass **only the contents** of the `configuration` node as in the above example. The configuration **must not be wrapped** in the
 `configuration` node, otherwise the component will not
 receive the configuration it expects. Also take care to properly escape the JSON using [URL encoding](https://en.wikipedia.org/wiki/Percent-encoding),
@@ -395,15 +397,15 @@ otherwise it may be misinterpreted. The raw HTTP request should look similar to 
     --header 'X-StorageAPI-Token: {{token}}' \
     --data configuration=%7B%0A%09%22parameters%22%3A%20%7B%0A%09%09%22accessKeyId%22%3A%20%22a%22%2C%0A%09%09%22%23secretAccessKey%22%3A%20%22b%22%0A%09%7D%0A%7D
 
-Also note that the entire configuration must be always sent, there is no way to patch only part of the configuration.
-The same way, the `configuration` is modified, other properties can be modified to. For example, you may want to
-reset `state` by setting it to `{}` or you can change the order of the configuration rows by setting the `rowsSortOrder` property.
+Also note that the entire configuration must be always sent, there is no way to patch only part of it.
+The same way the `configuration` is modified, other properties can be modified too. For example, you may want to
+reset `state` by setting it to `{}`, or you can change the order of the configuration rows by setting the `rowsSortOrder` property.
 The `rowsSortOrder` is an array of row ids -- see an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#91e2060c-0c14-7a09-0cc3-537eb6057ada) (Set Row order of S3 extractor)
 for the exact example request.
 
 ### Modifying Configuration Row
-Modifying a configuration row is very similar to modifying a configuration. Modifying a configuration row means that a new version of
-the *entire configuration* is created. For modifying a configuration, use the
+Very similar to modifying a configuration, modifying a configuration **row** means that a new version of
+the **entire configuration** is created. For modifying a configuration row, use the
 [Update Row](https://keboola.docs.apiary.io/#reference/component-configurations/manage-configuration-rows/update-row) API call.
 
 See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#1e7fd94e-f22c-4a77-82c1-babc8602f9cd) in which the
@@ -422,16 +424,16 @@ configuration row is modified to:
 
 The rules for updating a configuration row are the same as for [updating a configuration](#modifying-a-configuration). Also note that
 a configuration row is never evaluated alone, it is always merged with the root `configuration`. If the same properties are defined
-in the root `configuration` and row `configuration`, then the value from the row are used. There is also an
-[example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#1e7fd94e-f22c-4a77-82c1-babc8602f9cd) to reset the row
-state, by setting `state` to `{}`.
+in the root `configuration` and row `configuration`, the values from the row are used. There is also an
+[example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#1e7fd94e-f22c-4a77-82c1-babc8602f9cd) of how to reset the row
+state by setting `state` to `{}`.
 
 ### Configuration Versions
 When you [update a configuration](http://docs.keboola.apiary.io/#reference/component-configurations/manage-configs/update-config),
-actually a new configuration version is created. In the above calls, only the last (active/published) configuration
+a new configuration version is actually created. In the above calls, only the last (active/published) configuration
 is returned. To obtain a list of all recorded versions, use the
-[list versions call](http://docs.keboola.apiary.io/#reference/component-configurations/list-configs-versions/versions-list).
-See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#3e962568-9c38-207a-58bb-a92144adbe41)
+[List Versions API call](http://docs.keboola.apiary.io/#reference/component-configurations/list-configs-versions/versions-list).
+See this [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#3e962568-9c38-207a-58bb-a92144adbe41)
 which would give you an output similar to the one below:
 
 {% highlight json %}
@@ -489,24 +491,24 @@ which would give you an output similar to the one below:
 
 The field `version` represents the `version_id` in the following API example.
 
-### Rollback a Configuration
-When you have chosen a particular version, you can revert to that version by
-[rolling back](https://keboola.docs.apiary.io/#reference/component-configurations/rollback-configuration-version/rollback-version)
-out of it. See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#2050856a-66b3-4120-9552-d1278a96621e)
-how to rollback the configuration `364479526` of the `keboola.ex-aws-s3` component to version `3`.
+### Rollback Configuration
+After choosing a particular version, you can revert to that version by
+[rolling back](https://keboola.docs.apiary.io/#reference/component-configurations/rollback-configuration-version/rollback-version), 
+i.e., making a new version identical to the chosen one.  See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#2050856a-66b3-4120-9552-d1278a96621e)
+of how to rollback the configuration `364479526` of the `keboola.ex-aws-s3` component to version `3`.
 
-It will create a new verison of the configuration and return the ID of the version:
+It will create a new version of the configuration and return the ID of the version:
 {% highlight json %}
 {
   "version": "26"
 }
 {% endhighlight %}
 
-### Creating a Configuration Copy
-When you have chosen a particular version, you can create a new independent
+### Creating Configuration Copy
+After choosing a particular version, you can create a new independent
 [configuration copy](http://docs.keboola.apiary.io/#reference/component-configurations/copy-configs/create-config-copy)
-out of it. See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#1591dcb4-2084-e5fe-2f3f-cd7f546f7315)
-how to create a new configuration called `test-copy` from version `3` of the `364479526` configuration
+of it. See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#1591dcb4-2084-e5fe-2f3f-cd7f546f7315)
+of how to create a new configuration called `test-copy` from version `3` of the `364479526` configuration
 for the `keboola.ex-aws-s3` component.
 
 It will return the ID of the newly created configuration:
