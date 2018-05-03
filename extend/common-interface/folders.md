@@ -115,10 +115,8 @@ The following is an example of specifying columns in the manifest file `/data/ou
 
 All files from the folder are uploaded irrespective of their name or extension. They are uploaded
 to Storage in parallel and in an undefined order. Use sliced tables in case you want to upload tables [larger than 5GB](https://help.keboola.com/storage/file-uploads/#limits). The slices may be compressed by gzip.
+A rule of thumb is that slices are [best around 10-100 MB](https://docs.snowflake.net/manuals/user-guide/data-load-considerations-prepare.html#splitting-large-data-files-before-loading) in size **compressed**.
 
-**Important**: Please be reasonable with the total volume and number of slices.
-A rule of thumb is that slices are best around 100 MB in size, and the total number of slices should not exceed 1000 files.
-The total size of all slices combined should not exceed 50 GB.
 
 ### Folder /data/in/files/
 
