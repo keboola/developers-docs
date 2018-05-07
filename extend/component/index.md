@@ -87,7 +87,7 @@ Follow these steps to migrate:
 - Create a [service account](/extend/component/tutorial/#creating-a-deployment-account).
 - Migrate the component code.
 
-**Important:** Every component has the amount of RAM limited to 64M by default. If you need more, ask us at 
+**Important:** Every component has the amount of RAM limited to 256M by default. If you need more, ask us at 
 [support@keboola.com](mailto:support@keboola.com). For R code, you probably need at least 300M.
 
 ### Code Migration
