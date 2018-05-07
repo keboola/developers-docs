@@ -160,7 +160,7 @@ And you should see the "Hello, World" message in the events:
 {: .image-popup}
 ![Screenshot -- Component Events](/extend/component/tutorial/hello-world.png)
 
-When you create a component, it will have assigned a memory limit of **64MB** and
+When you create a component, it will have assigned a memory limit of **256MB** and
 run timeout of **1 hour**. If you need to change those limits, please
 [contact our support](mailto:support@keboola.com).
 
