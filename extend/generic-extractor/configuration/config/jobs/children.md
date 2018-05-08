@@ -296,7 +296,7 @@ user-detail:
 See [example [EX022]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/022-basic-child-job-datatype).
 
 ### Basic Job With Array Values
-It is also possible that the main job returns object which contain direct references 
+It is also possible that the main job returns objects which contain direct references 
 to the children:
 
 {% highlight json %}
@@ -314,7 +314,7 @@ to the children:
 ]
 {% endhighlight %}
 
-The following configuration same is the same as in the 
+The following configuration is the same as in the 
 [previous example](/extend/generic-extractor/configuration/config/jobs/children/#basic-example):
 
 {% highlight json %}
