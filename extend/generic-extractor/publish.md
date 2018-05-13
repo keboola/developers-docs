@@ -34,13 +34,12 @@ have created the component, edit it, and fill in the following details:
     - **Image Name** -- `147946154733.dkr.ecr.us-east-1.amazonaws.com/developer-portal-v2/ex-generic-v2`
     - **Tag** -- see the [Generic Extractor GitHub repository](https://github.com/keboola/generic-extractor/releases)
     - **Region** -- leave empty
-- **Encryption** --- set to `true`
 - **UI options** --- set to `genericTemplatesUI` and `appInfo.dataIn`
 
-For a list of available tags, see the [Generic Extractor GitHub repository](https://github.com/keboola/generic-extractor/) or 
-[Generic Extractor Quay repository](https://quay.io/repository/keboola/generic-extractor/), both of which contain the same tags 
-as the above AWS ECR repository. It is also possible to use the `latest` tag, which points to the highest available tag. However, 
-we recommend that you configure your component with a specific tag and update it manually to avoid problems with breaking changes 
+For a list of available tags, see the [Generic Extractor GitHub repository](https://github.com/keboola/generic-extractor/) or
+[Generic Extractor Quay repository](https://quay.io/repository/keboola/generic-extractor/), both of which contain the same tags
+as the above AWS ECR repository. It is also possible to use the `latest` tag, which points to the highest available tag. However,
+we recommend that you configure your component with a specific tag and update it manually to avoid problems with breaking changes
 in future Generic Extractor releases.
 
 Because the UI is assumed to be `genericTemplatesUI`, provide a

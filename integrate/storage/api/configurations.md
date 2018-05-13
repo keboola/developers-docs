@@ -15,8 +15,8 @@ components, while the specific implementation details are left to the components
 
 When working with the [Component Configurations API](http://docs.keboola.apiary.io/#reference/component-configurations),
 you need to know the `componentId` of the component being configured.
-You can see a list of public components in [the Developer Portal](https://components.keboola.com/components), or you can get 
-a list of all available components with the [API index call](https://keboola.docs.apiary.io/#reference/miscellaneous/api-index/component-list). 
+You can see a list of public components in [the Developer Portal](https://components.keboola.com/components), or you can get
+a list of all available components with the [API index call](https://keboola.docs.apiary.io/#reference/miscellaneous/api-index/component-list).
 See our [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#f0e321e0-6533-0074-662d-fe4ab85a15d5).
 
 It will give you something like this:
@@ -71,8 +71,7 @@ It will give you something like this:
             "flags": [
                 "genericDockerUI",
                 "genericDockerUI-processors",
-                "appInfo.dataIn",
-                "encrypt"
+                "appInfo.dataIn"
             ],
             "configurationSchema": {},
             "emptyConfiguration": {},
@@ -493,7 +492,7 @@ The field `version` represents the `version_id` in the following API example.
 
 ### Rollback Configuration
 After choosing a particular version, you can revert to that version by
-[rolling back](https://keboola.docs.apiary.io/#reference/component-configurations/rollback-configuration-version/rollback-version), 
+[rolling back](https://keboola.docs.apiary.io/#reference/component-configurations/rollback-configuration-version/rollback-version),
 i.e., making a new version identical to the chosen one.  See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#2050856a-66b3-4120-9552-d1278a96621e)
 of how to rollback the configuration `364479526` of the `keboola.ex-aws-s3` component to version `3`.
 
