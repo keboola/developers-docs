@@ -179,7 +179,7 @@ On a successful login, it returns the following response:
 {% highlight json %}
 {
     "authentication": [
-        { 	
+        {
             "secret": "a1b2c3d435f6"
         },
         {
@@ -232,6 +232,7 @@ so the second API call will be sent as:
     GET /users?secretKey=a1b2c3d435f6&tokenId=123
 
 See [example [EX080]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/080-login-auth-query).
+Notice that the example uses completely different URL for the login request.
 
 ### Parameter Overriding
 The above examples show how to use query parameters and headers separately. However, they can be mixed freely; they can also be

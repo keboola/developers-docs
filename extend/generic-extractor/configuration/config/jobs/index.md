@@ -152,6 +152,7 @@ The following table summarizes possible outcomes:
 |`https://example.com/3.0/`|`https://eu.example.com/3.0/`|`https://eu.example.com/3.0/campaign`|
 |`https://example.com/`|`campaign`|`https://example.com/campaign`|
 |`https://example.com`|`campaign`|`https://example.comcampaign`|
+|`https://example.com/`|`https://elpmaxe.com/endpoint`|`https://elpmaxe.com/endpoint`|
 
 It is highly recommended to use the relative URL fragments. This means that the
 `baseURL` property of the `api` section **must end** with a slash.
