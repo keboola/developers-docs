@@ -18,9 +18,6 @@ the Docker container. The decrypted data are stored on the Docker host drive and
 deleted immediately after the container finishes. The actual component code always reads
 the decrypted data.
 
-*Note: Encryption and decryption is available only for components which have encryption enabled.
-Encrypted values passed to component without encryption will not be decryped.*
-
 ## UI Interaction
 When saving arbitrary configuration data, values marked by the `#` character are automatically encrypted.
 Given the following configuration:
@@ -119,12 +116,6 @@ yields
 
 The `Content-Type` header is used to distinguish between treating the body as a string (`text/plain`) or JSON (`application/json`).
 
-If you happen to receive the following error
-
-    This API call is only supported for components that use the 'encrypt' flag.
-
-you need to enable encryption for your component in [Developer Portal](https://components.keboola.com/).
-
 You can use the [Console in Apiary](https://kebooladocker.docs.apiary.io/#reference/encrypt/encryption/encrypt-data?console=1) to
 call the API resource endpoint.
 
@@ -135,7 +126,7 @@ call the API resource endpoint.
 The [Encryption API](https://kebooladocker.docs.apiary.io/#reference/encrypt/encryption/encrypt-data)
 is provided by the [Docker component](/extend/docker-runner/) and accepts the following parameters:
 
-- `componentId` (required) --- id of a [KBC component](/extend/component/tutorial/#creating-a-component); the component must have the `encrypt` flag enabled.
+- `componentId` (required) --- id of a [KBC component](/extend/component/tutorial/#creating-a-component)
 - `projectId` (optional) --- id of a KBC project
 - `configId` (optional) --- id of a component configuration
 
