@@ -26,9 +26,7 @@ They do not use this configuration section at all (see [Tutorial](/extend/compon
 - `parameters`: Contains arbitrary parameters passed from the UI to the component. This section can be used in any
 way you wish. Your component should validate the contents of this section. For passing sensitive
 data, use [encryption](/overview/encryption/). This section is not available in Transformations.
-- `image_parameters`: Configured in the [component settings](https://components.keboola.com/). Contains arbitrary
-parameters passed to the component. They cannot be modified by the end-user. The typical use for this section are
-global component parameters (such as token, URL, version of your API).
+- `image_parameters`: See [below](#image-parameters).
 - `authorization`: Contains Oauth2 [authorization contents](/extend/common-interface/oauth/).
 - `action`: Name of the [action](/extend/common-interface/actions/) to execute; defaults to `run`. All
 actions except `run` have a strict execution time limit of 30 seconds.
@@ -40,6 +38,85 @@ Your application might also implement validation of the `storage` section, if yo
 input mapping or output mapping setting (e.g. certain number of tables, certain names). If you chose to do any validation
 outside the `parameters` section, it must always be forward compatible -- i.e. benevolent. While we maintain backward compatibility
 very carefully, it is possible for new keys to appear in the configuration structure as we introduce new features.
+
+### Image Parameters
+The `image_parameters` section contains configuration options which are same for every configuration of a component.
+They cannot be modified by the end-user. The typical use for this section are global component
+parameters (such as token, URL, version of your API) which for any reason are not practical to be part of the component image itself.
+The `image_parameters` contents are configured in the [component settings](https://components.keboola.com/) in two
+sections: **Image Parameters** and **Stack Parameters**.
+
+Both sections are merged into the `image_parameters` of the configuration file. The *Stack Parameters* serves the purpose of
+providing different values for different [KBC Stacks](/overview/api/#regions-and-endpoints). Values in
+*Stack Parameters* are merged with those in *Image Parameters* with *Stack Parameters* having a higher priority.
+*Stack Parameters* are indexed with [Storage URL](/overview/api/#regions-and-endpoints) or the given region.
+
+Given the following *Image Parameters*:
+
+{% highlight json %}
+{
+    "name": "my-app-name",
+    "token": "default"
+}
+{% endhighlight %}
+
+And the following *Stack Parameters*:
+
+{% highlight json %}
+{
+    "connection.keboola.com": {
+        "url": "https://my-us-api/",
+        "token": "abc"
+    },
+    "connection.eu-central-1.keboola.com": {
+        "url": "https://my-eu-api/",
+        "token": "def"
+    }
+}
+{% endhighlight %}
+
+The component will receive the following `image_parameters` in the configuration file when run in the **EU region**:
+{% highlight json %}
+{
+    "image_parameters": {
+        "name": "my-app-name",
+        "url": "https://my-eu-api/",
+        "token": "def"
+    }
+}
+{% endhighlight %}
+
+The component will receive the following `image_parameters` in the configuration file when run in the **US region**:
+{% highlight json %}
+{
+    "image_parameters": {
+        "name": "my-app-name",
+        "url": "https://my-us-api/",
+        "token": "abc"
+    }
+}
+{% endhighlight %}
+
+When working with the API, note that the [Developer Portal API](https://kebooladeveloperportal.docs.apiary.io/)
+(specifically the [Component Detail API call](https://kebooladeveloperportal.docs.apiary.io/#reference/0/app/get-app-detail))
+shows separate `stack_parameters` and `image_parameters`, because the API is region agnostic.
+
+However when working with the [Storage API](https://keboola.docs.apiary.io/)
+(specifically the [Component list API call](https://keboola.docs.apiary.io/#reference/miscellaneous/api-index/component-list)),
+then the `stack_parameters` and `image_parameters` values are already merged and only those designated for the
+current region are visible.
+
+#### Encryption
+Both *Image Parameters* and *Stack Parameters* support [encrypted values](/overview/encryption/). In practice, however,
+the encrypted values must always be stored in *Stack Parameters*, because ciphers are not transferable between regions
+(i.e. an encrypted value is only usable in the region in which it was encrypted).
+
+As with configurations, the encrypted values must be prefixed with the hash sign `#`. However, unlike in KBC configurations,
+you **have to encrypt values manually via the API** -- they will not be encrypted automatically when you store *Stack Parameters*!
+When using the [encryption API](https://keboolaencryption.docs.apiary.io/#), provide only the `componentId`
+parameter (using `projectId` or `configId` will make the cipher unusable).
+Also take care to use the correct [API URL](https://developers.keboola.com/overview/api/#regions-and-endpoints) to obtain
+ciphers for each region you need.
 
 ## State File
 The state file is used to store the component state for the next run. It provides a two-way communication between
