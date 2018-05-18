@@ -146,6 +146,10 @@ i.e., by executing `git update-index --chmod=+x deploy.sh`. If the script is not
 
 	Script failed with status 127
 
+or
+
+  bash: ./deploy.sh: Permission denied
+
 
 ### Deploy Configuration
 The above deploy script requires four environment variables to be set. Set the following environment variables in the repository configuration:
