@@ -34,20 +34,20 @@ See [actions](/extend/common-interface/actions/) for more details.
 
 ### Validation
 Your application should implement validation of the `parameters` section, which is passed without modification from the UI.
-Your application might also implement validation of the `storage` section, if you have some specific requirements on the
-input mapping or output mapping setting (e.g. certain number of tables, certain names). If you chose to do any validation
+Your application might also implement validation of the `storage` section if you have some specific requirements on the
+input mapping or output mapping setting (e.g., certain number of tables, certain names). If you chose to do any validation
 outside the `parameters` section, it must always be forward compatible -- i.e. benevolent. While we maintain backward compatibility
 very carefully, it is possible for new keys to appear in the configuration structure as we introduce new features.
 
 ### Image Parameters
-The `image_parameters` section contains configuration options which are same for every configuration of a component.
-They cannot be modified by the end-user. The typical use for this section are global component
-parameters (such as token, URL, version of your API) which for any reason are not practical to be part of the component image itself.
+The `image_parameters` section contains configuration options, which are the same for every configuration of a component.
+They cannot be modified by the end-user. This section is typically used for global component
+parameters (such as a token, URL, version of your API) which, for any reason, are not practical to be part of the component image itself.
 The `image_parameters` contents are configured in the [component settings](https://components.keboola.com/) in two
-sections: **Image Parameters** and **Stack Parameters**.
+text fields: **Image Parameters** and **Stack Parameters**.
 
-Both sections are merged into the `image_parameters` of the configuration file. The *Stack Parameters* serves the purpose of
-providing different values for different [KBC Stacks](/overview/api/#regions-and-endpoints). Values in
+Both texts are merged into the `image_parameters` of the configuration file. The *Stack Parameters* 
+provide different values for different [KBC Stacks](/overview/api/#regions-and-endpoints). Values in
 *Stack Parameters* are merged with those in *Image Parameters* with *Stack Parameters* having a higher priority.
 *Stack Parameters* are indexed with [Storage URL](/overview/api/#regions-and-endpoints) or the given region.
 
@@ -101,9 +101,9 @@ When working with the API, note that the [Developer Portal API](https://keboolad
 (specifically the [Component Detail API call](https://kebooladeveloperportal.docs.apiary.io/#reference/0/app/get-app-detail))
 shows separate `stack_parameters` and `image_parameters`, because the API is region agnostic.
 
-However when working with the [Storage API](https://keboola.docs.apiary.io/)
+However, when working with the [Storage API](https://keboola.docs.apiary.io/)
 (specifically the [Component list API call](https://keboola.docs.apiary.io/#reference/miscellaneous/api-index/component-list)),
-then the `stack_parameters` and `image_parameters` values are already merged and only those designated for the
+the `stack_parameters` and `image_parameters` values are already merged and only those designated for the
 current region are visible.
 
 #### Encryption
@@ -144,9 +144,9 @@ Also, the end-user cannot easily access the data through the UI.
 The data can be, however, modified outside of the component itself using the
 [Component configuration](http://docs.keboola.apiary.io/#reference/component-configurations) API calls.
 
-**Important:** The state file is not thread-safe. If multiple instances of the *same configuration*
-are run simultaneously in the *same project*, the one writing data later wins. Use the state file more
-as an HTTP Cookie than as a Database. A typical use for the state file would be saving the last record
+**Important:** The state file is not thread-safe. If multiple instances of the **same configuration**
+are run simultaneously in the **same project**, the one writing data later wins. Use the state file more
+as an HTTP cookie than as a database. A typical use for the state file would be saving the last record
 loaded from some API to enable incremental loads.
 
 ## Usage File
@@ -171,15 +171,15 @@ and `value`, as in the example bellow:
 
 This structure is processed and stored within a job, so it can be analyzed, processed and aggregated later.
 
-To keep track of the consumed resources in the case of an component failure, **it is recommended to
+To keep track of the consumed resources in the case of a component failure, **it is recommended to
 write the usage file regularly** during the component run, not only at the end.
 
 *Note: As the structure of the state file is pre-defined, the content of the usage file is strictly
-validated and a wrong format will cause an component failure.*
+validated and a wrong format will cause a component failure.*
 
 ## Examples
 To create an example configuration, use the [Debug API call](/extend/component/running/#preparing-the-data-folder). You will get a
-`stage_0.zip` archive in your *Storage* --- *File uploads*, which will contain the `config.json` file.
+`stage_0.zip` archive in your **Storage** --- **File uploads**, which will contain the `config.json` file.
 You can also use these configuration structure to create an API request for
 actually [running a component](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job).
 If you want to manually pass configuration options in the API request, be sure to wrap it around in the `configData` node.
@@ -388,7 +388,7 @@ Upload `/data/out/tables/out.c-main.data.csv` to `out.c-main.data`.
 {% endhighlight %}
 
 #### Output Mapping --- Headless CSV
-Upload CSV file `/data/out/tables/data.csv` that does not have headers on the first line to table `out.c-main.data`.
+Upload `/data/out/tables/data.csv`, a CSV file without headers on its first line, to the table `out.c-main.data`.
 
 {% highlight json %}
 {
@@ -407,8 +407,8 @@ Upload CSV file `/data/out/tables/data.csv` that does not have headers on the fi
 {% endhighlight %}
 
 #### Output Mapping --- Set Additional Properties
-Incrementally upload `/data/out/tables/data.csv` to `out.c-main.data`.
-with a compound primary key set on columns `column1` and `column2`.
+Incrementally upload `/data/out/tables/data.csv` to `out.c-main.data`
+with a compound primary key set on the columns `column1` and `column2`.
 
 {% highlight json %}
 {
@@ -478,17 +478,17 @@ The name of each file has the `fileId_fileName` format. Each file will also cont
 {% endhighlight %}
 
 This will download with files with matching `.zip` **and** having the `docker-demo` tag. Depending on the contents of your
-*File uploads* in *Storage*, this may produce something like:
+**File uploads** in **Storage**, this may produce something like:
 
     /data/in/files/75807542_fooBar.zip
     /data/in/files/75807542_fooBar.zip.manifest
     /data/in/files/75807657_fooBarBaz.zip
     /data/in/files/75807657_fooBarBaz.zip.manifest
 
-#### Input Mapping --- Run Id
-Use the `filter_by_run_id` option to select only files which are related to the job
-currently being executed. If `filter_by_run_id` is specified, we will download only files which
-satisfy the filter (either `tags` or `query`) *and* were uploaded by a parent job (a job with same
+#### Input Mapping --- Run ID
+Use the `filter_by_run_id` option to select only the files which are related to the job
+currently being executed. If `filter_by_run_id` is specified, we will download only those files which
+satisfy the filter (either `tags` or `query`) **and** were uploaded by a parent job (a job with same
 or parent runId). This allows you to further limit downloaded files only to those related to a
 current chain of jobs.
 
@@ -537,12 +537,12 @@ If that file is not present in the `/data/out/files` folder, an error will be th
 
 #### Incremental Processing
 Docker containers may be used to process unknown files incrementally. This means that when a container is run,
-it will download any files not yet downloaded, and process them. To achieve this behavior, it is necessary
+it will download any files not yet downloaded and process them. To achieve this behavior, it is necessary
 to select only the files which have not been processed yet and tag the processed files.
 To achieve the former, use a proper
-[ElasticSearch query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax).
+[Elasticsearch query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax).
 The latter is achieved using the `processed_tags` setting. The `processed_tags` setting is an array of tags
-which will be added to the *input* files once they are downloaded. A sample contents of `configData`:
+which will be added to the **input** files once they are downloaded. A sample contents of `configData`:
 
 {% highlight json %}
 {
@@ -559,5 +559,6 @@ which will be added to the *input* files once they are downloaded. A sample cont
 }
 {% endhighlight %}
 
-The above request will download every file with the `toprocess` tag **except** for the files having the `downloaded` tag. It will mark each such file with the `downloaded` tag; therefore the query will exclude them on the next run.
+The above request will download every file with the `toprocess` tag **except** for the files having the `downloaded` tag. 
+It will mark each such file with the `downloaded` tag; therefore the query will exclude them on the next run.
 This allows you to set up an incremental file processing pipeline.
