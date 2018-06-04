@@ -8,7 +8,8 @@ permalink: /extend/common-interface/environment/
 
 Components use several [channels](/extend/common-interface/) to exchange information with Keboola Connection,
 primarily [structured folders](/extend/common-interface/) and [configuration files](/extend/common-interface/config-file/).
-
+Each component has full access to the outside network (network type `bridge`), unless changed to `none` in 
+[Developer portal](https://components.keboola.com).
 Additional parts of the environment in which your component is executed are specified below.
 
 ## Environment Variables

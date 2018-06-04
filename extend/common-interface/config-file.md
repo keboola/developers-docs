@@ -43,10 +43,10 @@ very carefully, it is possible for new keys to appear in the configuration struc
 The `image_parameters` section contains configuration options, which are the same for every configuration of a component.
 They cannot be modified by the end-user. This section is typically used for global component
 parameters (such as a token, URL, version of your API) which, for any reason, are not practical to be part of the component image itself.
-The `image_parameters` contents are configured in the [component settings](https://components.keboola.com/) in two
+The `image_parameters` contents are configured in the [component settings](https://components.keboola.com/) in JSON format in two
 text fields: **Image Parameters** and **Stack Parameters**.
 
-Both texts are merged into the `image_parameters` of the configuration file. The *Stack Parameters* 
+Both JSONs are merged into the `image_parameters` of the configuration file. The *Stack Parameters* 
 provide different values for different [KBC Stacks](/overview/api/#regions-and-endpoints). Values in
 *Stack Parameters* are merged with those in *Image Parameters* with *Stack Parameters* having a higher priority.
 *Stack Parameters* are indexed with [Storage URL](/overview/api/#regions-and-endpoints) or the given region.
