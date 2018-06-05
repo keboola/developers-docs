@@ -132,7 +132,9 @@ The component reads the input state file and writes any content to the output st
 file (valid JSON) that
 will be available to the next API call. A missing or an empty file will remove the state value.
 A state object is saved to configuration storage only when actually running the app
-(not in [sandbox API calls](https://kebooladocker.docs.apiary.io/#reference/sandbox). The state must be a valid JSON file.
+(not in [debug API calls](https://kebooladocker.docs.apiary.io/#reference/debug). The state must be a valid JSON file.
+[Encryption](/overview/encryption/#encrypting-data-with-api) is applied to the state the same way it is applied to
+configurations, `KBC::ProjectSecure::` ciphers are used. 
 
 ### State File Properties
 Because the state is stored as part of a
