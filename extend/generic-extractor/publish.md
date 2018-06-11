@@ -34,7 +34,7 @@ have created the component, edit it, and fill in the following details:
     - **Image Name** -- `147946154733.dkr.ecr.us-east-1.amazonaws.com/developer-portal-v2/ex-generic-v2`
     - **Tag** -- see the [Generic Extractor GitHub repository](https://github.com/keboola/generic-extractor/releases)
     - **Region** -- leave empty
-- **UI options** --- set to `genericTemplatesUI` and `appInfo.dataIn`
+- **UI options** --- set to `genericTemplatesUI`
 
 For a list of available tags, see the [Generic Extractor GitHub repository](https://github.com/keboola/generic-extractor/) or
 [Generic Extractor Quay repository](https://quay.io/repository/keboola/generic-extractor/), both of which contain the same tags
