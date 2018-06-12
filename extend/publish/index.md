@@ -69,7 +69,7 @@ ZAR). The rates are available for all working days from 4 January 1999 up to pre
 - Component icons must be of representative and reasonable quality. Make sure the icon license allows you to use it.
 - Components must correctly state the data flow --- [UI options](/extend/component/ui-options/). Use
 `appInfo.dataOut` and `appInfo.dataIn` for this purpose:
-    - Use `appInfo.dataOut` for extractors which send data outside (omit `appInfo.dataIn` for extractors).
+    - Use `appInfo.dataOut` for extractors which send data outside of KBC project (omit `appInfo.dataIn` for extractors).
     - Use `appInfo.dataIn` for writers which bring data into KBC project (omit `appInfo.dataOut` for writers).
     - Use `appInfo.dataOut` and/or `appInfo.dataOut` for applications.
 - Licensing information must be valid, and the vendor description must be current.
