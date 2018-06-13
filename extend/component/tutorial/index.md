@@ -49,7 +49,7 @@ for example, [Bitbucket](/extend/component/deployment/#bitbucket-integration) an
 integrations.*
 
 ## Creating Component
-To add a component, use the **Create Component** button on the main page, and fill in the component name and type:
+To add a component, use the **Add a component** button on the main page, and fill in the component name and type:
 
 {: .image-popup}
 ![Screenshot -- Create component](/extend/component/tutorial/create-component-2.png)
