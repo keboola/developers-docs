@@ -446,7 +446,7 @@ See [example [EX083]](https://github.com/keboola/generic-extractor/tree/master/d
 ### Relative Expiration from Response
 In case the API returns credentials validity in the **login request** and that validity is expressed in seconds,
 use the `expires` option together with setting `relative` to `true`.
-The result is the behavior of the [first example](#configuration-with-headers) but the value is taken
+The result is the behavior of the [first example](#expiration-basic) but the value is taken
 from the response as in the [second example](#expiration-from-response).
 
 {% highlight json %}
