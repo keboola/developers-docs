@@ -69,14 +69,15 @@ To read the user-supplied configuration parameter 'myParameter', use the followi
 from keboola import docker
 
 # initialize library
-cfg = docker.Config('/data/')
+cfg = docker.Config()
 params = cfg.get_parameters()
 
 # access the supplied value of 'myParameter'
 multiplier = cfg.get_parameters()['myParameter']
 {% endhighlight %}
 
-The library contains a single class `Config`; the parameter of the constructor is the path to the data directory.
+The library contains a single class `Config`; the optional parameter of the constructor is the path to the data directory.
+If not provided, [`KBC_DATADIR` environment variable](/extend/common-interface/environment/#environment-variables) will be used.
 The above would read the `myParameter` parameter from the user-supplied configuration:
 
 {% highlight json %}
@@ -92,7 +93,7 @@ import csv
 from keboola import docker
 
 # initialize the library and read parameter 'multiplier'
-cfg = docker.Config('/data/')
+cfg = docker.Config()
 multiplier = cfg.get_parameters()['multiplier']
 
 # open the input and output files
@@ -131,7 +132,7 @@ import csv
 from keboola import docker
 
 # initialize the library
-cfg = docker.Config('/data/')
+cfg = docker.Config()
 
 # get list of input tables
 tables = cfg.get_input_tables()
