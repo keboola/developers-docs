@@ -23,6 +23,9 @@ Unlike [input mapping](/extend/component/tutorial/input-mapping/), the output ma
 it can be configured similarly to the input mapping (using the [`genericDockerUI-tableOutput`](/extend/component/ui-options/) flag) or
 using the [Default bucket](/extend/common-interface/folders/#default-bucket) option. The latter means that all tables produced in the
 `/data/out/tables/` folder will be uploaded to a [Storage bucket](https://help.keboola.com/storage/buckets/) with a generated name.
+This is almost identical to writing
+[Transformation code](https://help.keboola.com/manipulation/transformations/) -- the only difference is that you need to
+use absolute paths (or the [`KBC_DATADIR`](/extend/common-interface/environment/#environment-variables) environment variable).
 
 ## Configuring Default Bucket
 Using the default bucket is the preferred option as it allows simpler configuration of the component.

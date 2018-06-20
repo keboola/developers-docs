@@ -7,7 +7,7 @@ permalink: /extend/common-interface/manifest-files/
 {:toc}
 
 A manifest file contains additional information about tables and files injected to the
-[`/data/in` folders](/extend/common-interface/).
+[`/data/in` folders](/extend/common-interface/folders/).
 It also provides a way to specify options for tables and files transferred back to Storage from `/data/out`
 folders. Manifest files have the `.manifest` suffix to the original file.
 

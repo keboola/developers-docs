@@ -45,7 +45,7 @@ Use the library to read a user-supplied configuration parameter 'myParameter':
 {% highlight r %}
 library(keboola.r.docker.application)
 # initialize library
-app <- keboola.r.docker.application::DockerApplication$new('/data/')
+app <- keboola.r.docker.application::DockerApplication$new()
 app$readConfig()
 
 # access the supplied value of 'myParameter'
@@ -61,6 +61,8 @@ After that you can call `readConfig()` to actually read and parse the configurat
 }
 {% endhighlight %}
 
+When the application is initialized `app <- keboola.r.docker.application::DockerApplication$new()`, it read the configuration file from the constructor
+argument, if no argument is provided, the [`KBC_DATADIR` environment variable](/extend/common-interface/environment/#environment-variables) is used.
 You can obtain inline help and the list of library functions by running the `?DockerApplication` command.
 
 ### Dynamic Input/Output Mapping
@@ -77,7 +79,7 @@ of the component are consumed by the output mapper whose `destination` are the r
 
 {% highlight r %}
 # initialize library
-app <- DockerApplication$new('/data/')
+app <- DockerApplication$new()
 app$readConfig()
 
 # get list of input tables

@@ -17,6 +17,8 @@ You can use this field to pass arbitrary configuration parameters to your compon
 The parameters will be available in the [/data/config.json](/extend/common-interface/config-file/) file provided to the
 component when it is [run](/extend/docker-runner/).
 
+Note: if you don't want to hard-code the [`/data/` directory](/extend/common-interface/folders/#root-folder-data) use the [`KBC_DATADIR`](/extend/common-interface/environment/#environment-variables) environment variable.
+
 Let's assume you want to make the [sample component](/extend/component/tutorial/output-mapping/)
 add a given sound to each row a given number of times. For that you'll need two parameters: `sound` and `repeat`.
 
