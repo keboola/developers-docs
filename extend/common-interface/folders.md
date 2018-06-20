@@ -17,7 +17,7 @@ The data folders contain actual data files (tables and files) and metadata.
 For each datafile, a [manifest file](/extend/common-interface/manifest-files/) is created.
 It contains metadata information (creation time, keys for tables, etc.).
 
-The data folder is always available in the component under the absolute `/data/` path. Relative path to the data folder
+The data folder is always available in the component under the **absolute `/data/` path**. Relative path to the data folder
 depends fully on your component code (or Dockerfile). If you want use different path (for component development),
 **use the [`KBC_DATADIR` environment variable](/extend/common-interface/environment/#environment-variables)**. In production,
 this variable will be always set to `/data/`. During development you can set it to your liking.
@@ -36,8 +36,7 @@ The predefined data exchange folder structure is as follows:
 This folder structure is always available to your component.
 Do not put arbitrary files in the `/data/` folder as they will be uploaded into the user project
 (or cause errors in the output [mapping](https://help.keboola.com/manipulation/transformations/mappings/)).
-For working or temporary files, use either the `/home/` or `/tmp/` folder.
-The working directories have 10GB of free space.
+For working or temporary files, use the `/tmp/` folder. Other directories have 10GB of free space in total.
 
 ### Folder /data/in/tables/
 
