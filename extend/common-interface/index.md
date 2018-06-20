@@ -25,10 +25,10 @@ To quickly get the picture, have a look a [random sample data folder](/extend/da
 Even though you can define your own limits for your component, all components are also subject to the following service limits:
 
 * Both memory and swap sizes are set to an equal value
-* Docker [devicemapper](https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/) size is set to 10 GB
+* Docker [overlay2](https://docs.docker.com/storage/storagedriver/overlayfs-driver/) size is set to 10 GB
 
-The size allocated for devicemapper is consumed by memory swapping, `/tmp/` and all other operations in the component
-(for instance, ad hoc module installations); only input and output folders (`/data/`) are excluded.
+The size allocated for overlay2 is consumed by memory swapping, and all other operations in the component
+(for instance, ad hoc module installations); only input and output folders (`/data/`) and `/tmp/` are excluded.
 As the swap size cannot be larger than the allocated disk space, we cannot safely increase the memory limit over 8 GB.
 
 If you need more than 8 GB of memory/swap or larger disk space, get in touch with us to discuss possible solutions.
