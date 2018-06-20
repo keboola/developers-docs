@@ -48,24 +48,15 @@ cannot pass `#username` because the component does not expect such a key to exis
 (although its value will be encrypted and decrypted normally). Internally, the
 [encrypt API call](#encrypting-data-with-api) is used to encrypt the values before saving them.
 
-### Automated Configuration Adjustment
-*Note: Automated adjustment applies only to the UI.*
-
-There are a few automatic configuration adjustments the UI does for you:
-
-1. It prefers encrypted values to plain values; if you provide both `password` and `#password`, only the latter will be saved.
-2. It uses plain values instead of empty encrypted values; if you provide both `password` and `#password` and
-`#password` is null/empty, its value will be taken from the plain value.
-3. It removes all encrypted keys with null/empty values.
-
-Applying the above conditions, the following configuration
+### UI Configuration Adjustment
+The UI prefers encrypted values to plain values; if you provide both `password` and `#password`, only the latter will be saved.
+The following configuration
 
 {% highlight json %}
 {
     "username": "JohnDoe",
-    "#password": "",
+    "#password": "KBC::ProjectSecure::ENCODEDSTRING",
     "password": "secret",
-    "#token": ""
 }
 {% endhighlight %}
 
@@ -74,7 +65,7 @@ will become
 {% highlight json %}
 {
     "username": "JohnDoe",
-    "#password": "secret"
+    "#password": "KBC::ProjectSecure::ENCODEDSTRING"
 }
 {% endhighlight %}
 
