@@ -132,6 +132,11 @@ pip install requests
 {% endhighlight %}
 
 #### Upload Files Using HTTP
+
+Please note this type of file upload is not supported for the `eu-central-1` and `ap-northeast-2` regions.
+We generally recommend using the approach with the [federationToken token](#manually-uploading-a-file) as
+it is more reliable and universal.
+
 In case you need to avoid using an S3 client, it is also possible to upload the files by
 a simple HTTP request. To do so, create a new file, but set the `federationToken` to false:
 
@@ -182,9 +187,6 @@ curl --form "key=exp-180/578/files/2017/02/16/237360074.new_file.csv" --form "ac
 The last `--form` parameter must be the actual file you want to upload; the value must be
 prefixed by the `@` character. Note that this upload method sends the entire file in a single
 HTTP request and may therefore suffer from timeouts, especially for large files.
-Also, this type of file upload is not supported for the `eu-central-1` and `ap-northeast-2` regions.
-We generally recommend using the approach with the [federationToken token](#manually-uploading-a-file) as
-it is more reliable and universal.
 
 ### Table Importer Service
 The process of importing data into Storage Tables can be simplified a bit by using the
