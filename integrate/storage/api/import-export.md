@@ -186,61 +186,6 @@ Also, this type of file upload is not supported for the `eu-central-1` and `ap-n
 We generally recommend using the approach with the [federationToken token](#manually-uploading-a-file) as
 it is more reliable and universal.
 
-### Table Importer Service
-The process of importing data into Storage Tables can be simplified a bit by using the
-[*Table Importer*](https://github.com/keboola/sapi-table-importer)
-(not to be confused with [Storage API Importer](/integrate/storage/api/importer/). The Table Importer
-is a KBC component which takes files from KBC File Storage (*File Uploads*) and imports them into KBC Table Storage (*Tables*).
-The advantage of Table Importer is that it can be configured as part of the KBC orchestration.
-
-To use the importer service, create a configuration table for it. The table must be placed in
-the `sys.c-table-importer` bucket. Its name may be arbitrary. The configuration of a
-[sample table](/integrate/storage/sys.c-table-importer.test-config.csv) is shown below:
-
-{: .image-popup}
-![Screenshot - Table importer configuration](/integrate/storage/api/api-table-exporter-setting.png)
-
-Any table in the `sys.c-table-importer` bucket can contain any number of rows; each row corresponds to a single destination table and has to have the following columns:
-
-- `table` --- Full name of the destination table in Storage in the following format: `bucketName`.`tableName`;
-- `tag` --- Tag of an uploaded file which will be converted into the destination table;
-- `rowId` --- Unique (sequential) identifier of the row;
-- `primaryKey` --- Optional name of the column marked as the primary column in the table;
-- `incremental` --- 0 or 1 for an incremental load of the destination table (append data to a table);
-- `enclosure` --- CSV enclosure for strings (by default `"`);
-- `delimiter` --- CSV delimiter (by default `,`);
-- `escapedBy` --- CSV escape character for enclosure; leave empty to escape by double enclosure.
-
-Test the above configuration by uploading a [CSV file](/integrate/storage/new-table.csv) into *File Uploads*
-and assigning a tag `new-data` to it.
-You can do so programatically via the API or via the UI.
-
-{: .image-popup}
-![Screenshot - File upload Tag](/integrate/storage/api/api-upload-file.png)
-
-Then run the configuration by executing the [`run` API call](http://docs.sapitableimporter.apiary.io/#reference/api/importer-run/run-import):
-
-{% highlight bash %}
-curl --request POST --header "X-StorageApi-Token:storage-token" https://syrup.keboola.com/table-importer/run
-{% endhighlight %}
-
-which will run the import job and return:
-{% highlight json %}
-{
-  "id": "192637706",
-  "url": "https://syrup.keboola.com/queue/job/192637706",
-  "status": "waiting"
-}
-{% endhighlight %}
-
-Then [poll for the job status](/integrate/jobs/) or review the job progress in UI.
-The table importer will take all files with the specified tags (`new-data`) and import them into
-the specified table (`in.c-main.new-table`). Table Importer records the last processed files, so
-that each file is processed only once. The last processed file is recorded in table attributes:
-
-{: .image-popup}
-![Screenshot - Table attributes](/integrate/storage/api/table-importer-last-processed.png)
-
 ### Working with Sliced Files
 Depending on the backend and table size, the data file may be sliced into chunks.
 Requirements for uploading sliced files are described in the respective part of the
