@@ -133,6 +133,8 @@ pip install requests
 
 #### Upload Files Using HTTP
 
+**This method is deprecated and won't be supported in future. Please use  use the approach with the [federationToken token](#manually-uploading-a-file) instead.**
+
 Please note this type of file upload is not supported for the `eu-central-1` and `ap-northeast-2` regions.
 We generally recommend using the approach with the [federationToken token](#manually-uploading-a-file) as
 it is more reliable and universal.
