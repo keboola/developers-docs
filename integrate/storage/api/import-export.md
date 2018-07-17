@@ -106,7 +106,7 @@ aws s3 cp new-table.csv s3://kbc-sapi-files/exp-180/1134/files/2016/06/22/192726
 After that, import the file into Table Storage, by calling either
 [Create Table API call](http://docs.keboola.apiary.io/#reference/tables/create-table-asynchronously/create-new-table-from-csv-file-asynchronously)
 (for a new table) or
-[Load Data API call](http://docs.keboola.apiary.io/#reference/tables/load-data-asynchronously/create-new-table-from-csv-file-asynchronously)
+[Load Data API call](https://keboola.docs.apiary.io/#reference/tables/load-data-asynchronously/import-data)
 (for an existing table).
 
 {% highlight bash %}
@@ -130,6 +130,47 @@ pip install requests
 {% highlight python %}
 {% include async-create.py %}
 {% endhighlight %}
+
+#### Upload Files Using Storage API Importer
+
+We generally recommend using the approach with the [federationToken token](#manually-uploading-a-file) as
+it is more reliable and universal.
+In case you need to avoid using an S3 client, it is also possible to upload the 
+files by a simple HTTP request to [Storage API Importer Service](/integrate/storage/api/importer/).
+
+{% highlight bash %}
+curl --request POST --header "X-StorageApi-Token:storage-token" --form "data=@new-file.csv" https://import.keboola.com/upload-file
+{% endhighlight %}
+
+The above will return a response similar to this:
+
+{% highlight json %}
+{
+  "id": 418137780,
+  "created": "2018-07-17T13:48:57+0200",
+  "isPublic": false,
+  "isSliced": false,
+  "isEncrypted": true,
+  "name": "404.md",
+  "url": "https:\/\/kbc-sapi-files.s3.amazonaws.com\/exp-180\/4088\/files\/2018\/07\/17\/418137779.new-file.csv...truncated",
+  "region": "us-east-1",
+  "sizeBytes": 1765,
+  "tags": [],
+  "maxAgeDays": 180,
+  "runId": null,
+  "runIds": [],
+  "creatorToken": {
+    "id": 144880,
+    "description": "file upload"
+  }
+}
+{% endhighlight %}
+
+After that, import the file into Table Storage, by calling either
+[Create Table API call](http://docs.keboola.apiary.io/#reference/tables/create-table-asynchronously/create-new-table-from-csv-file-asynchronously)
+(for a new table) or
+[Load Data API call](https://keboola.docs.apiary.io/#reference/tables/load-data-asynchronously/import-data)
+(for an existing table).
 
 #### Upload Files Using HTTP
 
