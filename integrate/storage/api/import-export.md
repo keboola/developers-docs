@@ -197,7 +197,7 @@ together. For a reference implementation of this process, see
 our [TableExporter class](https://github.com/keboola/storage-api-php-client/blob/master/src/Keboola/StorageApi/TableExporter.php).
 
 **Important:** When exporting a table through the *Table* --- *Export* UI, the file will
-be already merged and not listed in the *File Uploads* section.
+be already merged and listed in the *File Uploads* section with the `storage-merged-export` tag.
 
 If you want to download a sliced file, [get credentials](http://docs.keboola.apiary.io/#reference/files/manage-files/file-detail)
 to download the file from AWS S3. Assuming that the file ID is 192611596, for example, call
