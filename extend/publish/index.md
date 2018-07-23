@@ -51,25 +51,30 @@ applying for component registration, make sure the same component does not alrea
 component review, the best practices in the next sections are followed.
 
 ### Component Name and Description
+Before you name and describe your component, check out our YouTube, Facebook Pages, Dark Sky, and ECB Currency Rates components for inspiration. 
 
-- Names should not contain words like `extractor`, `application`, and `writer`.
-<br>*OK: Cloudera Impala*
-<br>*WRONG: Cloudera Extractor*
+- Names should not contain words like `extractor`, `application`, and `writer`. 
+<br>OK: *Cloudera Impala*
+<br>WRONG: *Cloudera Extractor*
 - The short description describes the **service** (helping the user find it) rather than the component.
-<br>*OK: Native analytic database for Apache Hadoop*
-<br>*WRONG: This extractor extracts data from Cloudera Impala*
-- The long description provides **additional information** about the extracted/written **data**: What will the end user get?
-What must the end user provide? Configuration instructions should not be included, because the long description is displayed
-before the end user starts configuring the component. However, if there are any special requirements (external approval,
+Obviously for large services like Facebook or Gmail, describe the part of the service relevant to the component.
+<br>OK: *Native analytic database for Apache Hadoop*
+<br>WRONG: *This extractor extracts data from Cloudera Impala*
+<br>OK: *Facebook Pages connect your business with people. Facebook Insights help you get good at it.*
+<br>WRONG: *Facebook connects you with friends, family and other people you know, allows you to share photos and videos, send messages and get updates.*
+- The long description provides **additional information about the extracted/written data**: 
+What will the end user get? What must the end user provide? Is the data going to be imported incrementally? Are there links to 
+available resources? <br>Configuration instructions should not be included in the long description, because the long description 
+is displayed before the end user starts configuring the component. However, if there are any special requirements (external approval,
 specific account setting), they should be stated.
-<br>*OK: This component allows you to extract currency exchange rates as published by the European Central Bank (ECB). The
+<br>OK: *This component allows you to extract currency exchange rates as published by the European Central Bank (ECB). The
 exchange rates are available from a base currency (USD, EUR) to 30 destination currencies (AUD, BGN, BRL, CAD, CNY,
 CZK, EUR, GBP, HKD, HRK, HUF, CHF, IDR, ILS, INR, JPY, KRW, MXN, MYR, NOK, NZD, PHP, PLN, RON, RUB, SEK, SGD, THB, TRY,
 ZAR). The rates are available for all working days from 4 January 1999 up to present.*
 - Component icons must be of representative and reasonable quality. Make sure the icon license allows you to use it.
 - Components must correctly state the data flow --- [UI options](/extend/component/ui-options/). Use
 `appInfo.dataOut` and `appInfo.dataIn` for this purpose:
-    - Use `appInfo.dataOut` for extractors which send data outside of KBC project (omit `appInfo.dataIn` for extractors).
+    - Use `appInfo.dataOut` for extractors which send data outside (omit `appInfo.dataIn` for extractors).
     - Use `appInfo.dataIn` for writers which bring data into KBC project (omit `appInfo.dataOut` for writers).
     - Use `appInfo.dataOut` and/or `appInfo.dataOut` for applications.
 - Licensing information must be valid, and the vendor description must be current.
@@ -86,7 +91,7 @@ ZAR). The rates are available for all working days from 4 January 1999 up to pre
     - Use a `description` to provide an explanatory sentence if needed.
     <br>OK: ![Good Schema](/extend/publish/schema-good.png)
     <br>WRONG: ![Bad Schema](/extend/publish/schema-bad.png)
-- Use a configuration description only if the configuration is not trivial/self-explanatory. Provide links to resources
+- Use a configuration description only if the configuration is not trivial/self-explanatory. Provide **links to resources**
 (for instance, when creating an Elastic extractor, not everyone is familiar with the ElasticSearch query syntax). The
 configuration description supports markdown. Your markdown should not start with a header and should use only level 3 and
 level 4 headers (level 2 header is prepended before the configuration description). <br>OK: <br><code>some introduction text<br><br>### Input
