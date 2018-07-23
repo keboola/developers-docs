@@ -132,11 +132,10 @@ pip install requests
 {% endhighlight %}
 
 #### Upload Files Using Storage API Importer
-
-We generally recommend using the approach with the [federationToken token](#manually-uploading-a-file) as
-it is more reliable and universal.
+For production setup, we recommend using the approach [outlined above](#manually-uploading-a-file)
+with direct upload to S3 as it is more reliable and universal.
 In case you need to avoid using an S3 client, it is also possible to upload the 
-files by a simple HTTP request to [Storage API Importer Service](/integrate/storage/api/importer/).
+file by a simple HTTP request to [Storage API Importer Service](/integrate/storage/api/importer/).
 
 {% highlight bash %}
 curl --request POST --header "X-StorageApi-Token:storage-token" --form "data=@new-file.csv" https://import.keboola.com/upload-file
@@ -174,14 +173,14 @@ After that, import the file into Table Storage, by calling either
 
 #### Upload Files Using HTTP
 
-**This method is deprecated and won't be supported in future. Please use  use the approach with the [federationToken token](#manually-uploading-a-file) instead.**
+**This method is deprecated and won't be supported in future. Please use the approach with the [direct S3 upload](#manually-uploading-a-file) instead.**
 
-Please note this type of file upload is not supported for the `eu-central-1` and `ap-northeast-2` regions.
-We generally recommend using the approach with the [federationToken token](#manually-uploading-a-file) as
-it is more reliable and universal.
+**This type of file upload is not supported for the `eu-central-1` and `ap-northeast-2` regions.**
 
-In case you need to avoid using an S3 client, it is also possible to upload the files by
-a simple HTTP request. To do so, create a new file, but set the `federationToken` to false:
+We recommend using the approach with the [direct S3 upload](#manually-uploading-a-file) as
+it is more reliable and universal. In case you need to avoid using an S3 client, it is also 
+possible to upload the files by a simple HTTP request. To do so, create a new file, but set 
+the `federationToken` to false:
 
 {% highlight bash %}
 curl --request POST --header "X-StorageApi-Token:storage-token" --form "name=new-file.csv" https://connection.keboola.com/v2/storage/files/prepare?federationToken=0
