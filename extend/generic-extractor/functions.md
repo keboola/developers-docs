@@ -54,10 +54,10 @@ a configuration value in three possible ways:
     ...,
     "baseUrl": {
         "function": "concat",
-        "args": {
+        "args": [
             "http://",
             "example.com"
-        }
+        ]
     }
 }
 {% endhighlight %}
