@@ -10,9 +10,9 @@ permalink: /extend/generic-extractor/configuration/config/mappings/
 * TOC
 {:toc}
 
-Mapping allows you to **modify a response conversion process** in which Generic Extractor receives JSON responses, 
-[merges them together](/extend/generic-extractor/configuration/config/jobs/#merging-responses) and 
-converts them to CSV files which are then imported to KBC. 
+Mapping allows you to **modify a response conversion process** in which Generic Extractor receives JSON responses,
+[merges them together](/extend/generic-extractor/configuration/config/jobs/#merging-responses) and
+converts them to CSV files which are then imported to KBC.
 
 Manually define mapping if you wish to do the following:
 
@@ -26,13 +26,13 @@ The automatic conversion between JSON and CSV (Storage Tables) is defined by the
 
 - If the value of a JSON field is a [scalar](/extend/generic-extractor/tutorial/json/#data-values), it is saved as \
 the value of the column with the name of the field.
-- If the value of a JSON field is an [object](/extend/generic-extractor/tutorial/json/#data-values), each of the 
+- If the value of a JSON field is an [object](/extend/generic-extractor/tutorial/json/#data-values), each of the
 object property values will be added as a value of a column with an auto-generated name.
-- If the value of a JSON field is an [array](/extend/generic-extractor/tutorial/json/#data-values), a new table 
+- If the value of a JSON field is an [array](/extend/generic-extractor/tutorial/json/#data-values), a new table
 will be created and linked by the `JSON_parentId` column.
 
-Mapping configuration allows you to manually modify or override this behavior for a 
-[`dataType`](/extend/generic-extractor/configuration/config/jobs/#data-type) 
+Mapping configuration allows you to manually modify or override this behavior for a
+[`dataType`](/extend/generic-extractor/configuration/config/jobs/#data-type)
 defined in a job. The following is a mapping configuration example:
 
 {% highlight json %}
@@ -49,9 +49,9 @@ defined in a job. The following is a mapping configuration example:
 {% endhighlight %}
 
 ## Configuration
-The `mappings` configuration is a deeply nested object. The first level of keys are `dataType` 
-values used in the [job configurations](/extend/generic-extractor/configuration/config/jobs/#data-type). The 
-second level of keys are the names of the properties found (or expected) in the response. 
+The `mappings` configuration is a deeply nested object. The first level of keys are `dataType`
+values used in the [job configurations](/extend/generic-extractor/configuration/config/jobs/#data-type). The
+second level of keys are the names of the properties found (or expected) in the response.
 Then the value is an object with the following properties:
 
 - `type` (optional, string) --- Mapping type, either `column`, `table` or `user`. The default value is `column`.
@@ -73,15 +73,15 @@ The following configuration shows a sample mapping configuration for dataType `u
 {% endhighlight %}
 
 ### Column Mapping
-Column mapping represents a basic mapping type which allows you to select extracted 
-columns, rename them and optionally set a primary key on them. The mapping 
+Column mapping represents a basic mapping type which allows you to select extracted
+columns, rename them and optionally set a primary key on them. The mapping
 configuration requires:
 
 - `type` (optional, string) --- Can be omitted or must be `column`.
 - `mapping` (required, object) --- Object with two properties:
   - `destination` (required, string) --- Name of the column in the output table
   - `primaryKey` (optional, boolean) --- If `true`, then a primary key will be set on the column. The default value is `false`.
-- `forceType` (optional, boolean) --- If set to `true`, the property will not be processed and will be stored as an encoded 
+- `forceType` (optional, boolean) --- If set to `true`, the property will not be processed and will be stored as an encoded
 JSON (see an [example](#mapping-without-processing)).
 
 ### User Mapping
@@ -95,14 +95,14 @@ mapping is, by default, used for arrays. The mapping configuration requires:
 
 - `type` (required, string) --- Must be set to `table`.
 - `destination` (required, string) --- Name of the output table.
-- `tableMapping` (required, object) --- Object with another mapping configuration (required unless `parentKey.disable` is 
+- `tableMapping` (required, object) --- Object with another mapping configuration (required unless `parentKey.disable` is
 set to `true` --- see below).
 - `parentKey` (optional, object) --- Configuration of the parent-child relationship between tables:
-    - `destination` (optional, string) --- Name of the column which links to the parent table. The default value is the name 
+    - `destination` (optional, string) --- Name of the column which links to the parent table. The default value is the name
 	of the parent table with suffix `_pkey`. See an [example](#using-primary-keys).
-    - `primaryKey` (optional, boolean) --- Set to `true` to mark the link column as a primary key for the child table too. 
+    - `primaryKey` (optional, boolean) --- Set to `true` to mark the link column as a primary key for the child table too.
 	The default value is `false`. See an [example](#using-primary-keys).
-    - `disable` (optional, boolean) --- Completely disables the parent-child relationship, disables configured 
+    - `disable` (optional, boolean) --- Completely disables the parent-child relationship, disables configured
 	`tableMapping`. See an [example](#disabled-parent-key).
 
 The following configuration takes the `contacts` property from the response and makes a new table
@@ -184,9 +184,9 @@ users_interests:
 |cars|users_aeb1d126471eef24c0769437f4e7adaa|
 |flowers|users_aeb1d126471eef24c0769437f4e7adaa|
 
-The nested properties `address.street`, `address.county` and `address_city` were automatically 
-flattened into columns named as concatenation of the parent and child property name. The 
-array property `interests` was turned into a separate table and linked through using 
+The nested properties `address.street`, `address.county` and `address_city` were automatically
+flattened into columns named as concatenation of the parent and child property name. The
+array property `interests` was turned into a separate table and linked through using
 `JSON_parentId` column and auto-generated keys.
 
 See [example [EX063]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/063-mapping-automatic).
@@ -232,24 +232,24 @@ to three columns: `country`, `name` and `id`. The following mapping configuratio
                     }
                 }
             }
-        }    
+        }
     }
 }
 {% endhighlight %}
 
 The `mappings` settings has the key `users` which is the value of the `job.dataType` property. The keys in
 the `users` objects are the names of the properties in the JSON response. The values are the mapping configurations for
-each property. The mapping is always exhaustive; only the mentioned properties get processed while the others are 
+each property. The mapping is always exhaustive; only the mentioned properties get processed while the others are
 completely ignored. The above configuration also sets the primary key on the `id` column.
 
-All three mapped properties are mapped to columns (the `id` property relies on the default value for `type`). 
+All three mapped properties are mapped to columns (the `id` property relies on the default value for `type`).
 Notice that in the nested properties, you need to enter the name/path in the JSON response (`address.country`).
-You cannot use the auto-generated name produced without any mapping (`address_country`), because the automatic 
+You cannot use the auto-generated name produced without any mapping (`address_country`), because the automatic
 processing is turned off by the mapping.
 
-Take great care to **use the correct keys** in the mapping! If you misspell the first-level key, the entire configuration 
-will be ignored (it will refer to a non-existent data type). If you misspell the second-level key, you will get 
-an empty column in the result (referring to a non-existent property of the response). With the 
+Take great care to **use the correct keys** in the mapping! If you misspell the first-level key, the entire configuration
+will be ignored (it will refer to a non-existent data type). If you misspell the second-level key, you will get
+an empty column in the result (referring to a non-existent property of the response). With the
 correct settings, the following table will be produced:
 
 |country|name|id|
@@ -275,7 +275,7 @@ Let's say that you have an API endpoint `/users` which returns a response simila
 ]
 {% endhighlight %}
 
-More details about the user can be retrieved through another endpoint --- `/user/{id}`, where `{id}` is 
+More details about the user can be retrieved through another endpoint --- `/user/{id}`, where `{id}` is
 the user ID:
 
 {% highlight json %}
@@ -293,7 +293,7 @@ the user ID:
 }
 {% endhighlight %}
 
-To handle this situation in Generic Extractor, use a [child job](/extend/generic-extractor/configuration/config/jobs/#children): 
+To handle this situation in Generic Extractor, use a [child job](/extend/generic-extractor/configuration/config/jobs/#children):
 
 {% highlight json %}
 "jobs": [
@@ -320,6 +320,9 @@ The produced user-detail table will look like this:
 |---|---|---|---|---|---|---|
 |123|John Doe|London|UK|Whitehaven Mansions|user-detail_3484bd6e10690a3a2e77079f69ceaa42|123|
 |234|Jane Doe|St Mary Mead|UK|High Street|user-detail_a7655e39a0399dc842b44365778cd295|234|
+
+Note that the name of the column `parent_id` depends on the [placeholder configuration](/extend/generic-extractor/configuration/config/jobs/children/#basic-example)
+and is not always `parent_id` (see [example](/extend/generic-extractor/configuration/config/jobs/children/#basic-job-with-array-values)).
 
 Now you can use the following mapping to shape the table:
 
@@ -349,8 +352,8 @@ and get the following user-detail table:
 |UK|123|
 |UK|234|
 
-The important part in the mapping configuration is that you **must** use `"type": "user"` 
-for the mapping type of the `parent_id` (`user_id`) column. This is because the 
+The important part in the mapping configuration is that you **must** use `"type": "user"`
+for the mapping type of the `parent_id` (`user_id`) column. This is because the
 column `parent_id` does not really exist in the response as it is generated dynamically for the child job.
 
 See [example [EX065]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/065-mapping-child-jobs).
@@ -448,7 +451,7 @@ See [example [EX073]](https://github.com/keboola/generic-extractor/tree/master/d
 ### Table Mapping Examples
 
 #### Basic table mapping
-Because all output columns must be listed in a mapping, using only column mapping settings skips 
+Because all output columns must be listed in a mapping, using only column mapping settings skips
 the `interests` property of the response:
 
 {% highlight json %}
@@ -495,7 +498,7 @@ The `interests` property cannot be saved as a column, therefore a mapping of the
             "mapping": {
                 "destination": "id"
             }
-        },                
+        },
         "interests": {
             "type": "table",
             "destination": "user-interests",
@@ -512,10 +515,10 @@ The `interests` property cannot be saved as a column, therefore a mapping of the
 }
 {% endhighlight %}
 
-The table mapping follows the same structure as a normal mapping. Each item is another mapping 
+The table mapping follows the same structure as a normal mapping. Each item is another mapping
 definition identified by the property name in the JSON file. Because the `interests` property
 itself is an array, its value has no name and therefore the key is only a dot `"."`. The mapping
-value is a standard [column mapping](/extend/generic-extractor/configuration/config/mappings/#column-mapping). 
+value is a standard [column mapping](/extend/generic-extractor/configuration/config/mappings/#column-mapping).
 The above configuration produces the same result as the automatic mapping of columns.
 
 See [example [EX066]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/066-mapping-tables-basic).
@@ -579,8 +582,8 @@ users.contacts:
 |Whiteheaven Mansions|United Kingdom|London|users.contacts_912c86dec7acdb9d8a17c97eb464aec6|
 |Whiteheaven Mansions|United Kingdom|London|users.contacts_4cf9e859113127acb138872cc630e75f|
 
-This might not be exactly what you want. Perhaps you would like the contacts to be separate from the users and 
-addresses. This can be done using the following mapping configuration: 
+This might not be exactly what you want. Perhaps you would like the contacts to be separate from the users and
+addresses. This can be done using the following mapping configuration:
 
 {% highlight json %}
 "mappings": {
@@ -638,8 +641,8 @@ addresses. This can be done using the following mapping configuration:
 {% endhighlight %}
 
 The above configuration defines that the `contacts` field will be mapped into a separate table
-with the columns `email` and `tel` (value of `mapping.destination`). The `address` field will be 
-mapped into yet another separate table with the columns `street` and `country`. 
+with the columns `email` and `tel` (value of `mapping.destination`). The `address` field will be
+mapped into yet another separate table with the columns `street` and `country`.
 
 With the above configuration, the following tables will be created:
 
@@ -671,7 +674,7 @@ See [example [EX067]](https://github.com/keboola/generic-extractor/tree/master/d
 Consider the same API response as above:
 <details>
   <summary>Click to expand the response.</summary>
- 
+
 {% highlight json %}
 [
     {
@@ -812,18 +815,18 @@ The important part of the pretty long configuration is:
 }
 {% endhighlight %}
 
-This picks the first item (remember that arrays indexes are 
+This picks the first item (remember that arrays indexes are
 [zero-based](/extend/generic-extractor/tutorial/json/#references)) and places it in the
-`primary-address` table. Analogously, the `addresses.1` mapping picks the second item from the `addresses` 
+`primary-address` table. Analogously, the `addresses.1` mapping picks the second item from the `addresses`
 array and stores it in the `secondary-address` table.
 
 See [example [EX068]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/068-mapping-tables-nested-array).
 
 #### Directly mapping array
 Consider the same API response as above:
-<details> 
- <summary>Click to expand the response.</summary> 
-  
+<details>
+ <summary>Click to expand the response.</summary>
+
 {% highlight json %}
 [
     {
@@ -873,7 +876,7 @@ If you map the table as in the [previous example](#array-items), you will receiv
 |Whiteheaven Mansions|United Kingdom|605e865710f95dba665f6d0e8bc19f1a|
 
 Notice that the records link to the `user-contact` table. This may produce unnecessarily complicated
-links between the tables, because from the response it is obvious that each address is assigned to 
+links between the tables, because from the response it is obvious that each address is assigned to
 a specific user. To avoid this, you can directly map a nested property:
 
 {% highlight json %}
@@ -933,7 +936,7 @@ a specific user. To avoid this, you can directly map a nested property:
 
 The mapping for the `primary-address` table is now **not nested** inside the mapping for the
 `contacts` table. Therefore it links directly to the `users` table. The content is the same because
-the mapping still refers to the same property --- the first item of the `addresses` property of `contacts` 
+the mapping still refers to the same property --- the first item of the `addresses` property of `contacts`
 (`contacts.addresses.0`). The following table is produced:
 
 |street|country|users_pk|
@@ -951,7 +954,7 @@ The user table now contains an additional column --- `primary-address`:
 See [example [EX069]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/069-mapping-tables-nested-direct).
 
 #### Using primary keys
-In the above example, you can see that the `primary-address` table contains 
+In the above example, you can see that the `primary-address` table contains
 an auto-generated key to link back to users. This is unnecessary, because you can safely link to
 the user ID. To do this, you only need to specify the primary key for the table:
 
@@ -1015,13 +1018,13 @@ the user ID. To do this, you only need to specify the primary key for the table:
 }
 {% endhighlight %}
 
-The most important part in the above configuration is the `"primaryKey": true` setting for 
+The most important part in the above configuration is the `"primaryKey": true` setting for
 the `id` column in the `users` table. Thanks to this, Generic Extractor is able to automatically link
 all related records to this ID. In the `user-contact` and `primary-address` tables, the column
 `users_pk` will be created which will contain the user ID. The name is auto-generated as the
-name of the parent table with suffix `_pk`. 
+name of the parent table with suffix `_pk`.
 
-To override this auto-generated name, the following configuration is used in the `user-contact` 
+To override this auto-generated name, the following configuration is used in the `user-contact`
 table, renaming the `users_pk` column to `userId`.
 
 {% highlight json %}
@@ -1058,7 +1061,7 @@ primary-address:
 See [example [EX070]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/070-mapping-tables-nested-direct-pk).
 
 #### Multiple primary key columns
-Generic Extractor allows you to set only a single (primary) key for a table. This means that 
+Generic Extractor allows you to set only a single (primary) key for a table. This means that
 if you set `primaryKey` on multiple columns, you will create a compound primary key. Let's say
 that you have an API with the following response:
 
@@ -1081,7 +1084,7 @@ that you have an API with the following response:
 ]
 {% endhighlight %}
 
-Notice that the response does not contain a single unique property (id). You can create the 
+Notice that the response does not contain a single unique property (id). You can create the
 following configuration:
 
 {% highlight json %}
@@ -1141,7 +1144,7 @@ values, the rows will not be imported!
 See [example [EX071]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/071-mapping-multiple-pk).
 
 #### Multiple primary keys from nested columns
-The [above example](#multiple-primary-key-columns) shows how to set a compound primary key. 
+The [above example](#multiple-primary-key-columns) shows how to set a compound primary key.
 It is also possible to create a compound key using a [parent column](#using-primary-keys).
 Let's say that you have an API with the following response:
 
@@ -1179,9 +1182,9 @@ Let's say that you have an API with the following response:
 ]
 {% endhighlight %}
 
-Notice that the `addresses` response does not contain a single unique property, but there is an `index` 
+Notice that the `addresses` response does not contain a single unique property, but there is an `index`
 property which is unique within a specific user. The primary key for an address would therefore be the
-combination of `id` and `index`. 
+combination of `id` and `index`.
 
 Create the following configuration:
 
@@ -1249,7 +1252,7 @@ user-address:
 |1|Whiteheaven Mansions|United Kingdom|234|
 
 When imported to Storage, the primary key for the `user-address` table will be set to
-the combination of `index` and `userId`. The configuration has three important parts. 
+the combination of `index` and `userId`. The configuration has three important parts.
 
 The first part:
 
@@ -1262,7 +1265,7 @@ The first part:
 }
 {% endhighlight %}
 
-sets the `id` property from a user as the primary key for the resulting table. 
+sets the `id` property from a user as the primary key for the resulting table.
 
 The second part:
 
@@ -1273,10 +1276,10 @@ The second part:
 }
 {% endhighlight %}
 
-adds the primary key from users (i.e., the `id` property) to the child table `user-address` as a `userId` column. 
+adds the primary key from users (i.e., the `id` property) to the child table `user-address` as a `userId` column.
 It also sets it as the primary key for the `user-address` table.
 
-And the third part: 
+And the third part:
 
 {% highlight json %}
 "index": {
@@ -1296,7 +1299,7 @@ values, the rows will not be imported!
 See [example [EX115]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/115-multiple-pk-parent).
 
 #### Disabled parent key
-It is also possible to entirely disable the relationships between parts of the response objects. 
+It is also possible to entirely disable the relationships between parts of the response objects.
 Consider, for example, this API response:
 
 {% highlight json %}
@@ -1367,14 +1370,14 @@ disabling the relationship:
 }
 {% endhighlight %}
 
-The important part is `parentKey.disable` set to `true` in the `children` mapping. Then an already 
-existing mapping can be referenced --- `"destination": "users"` defines that the children are to be mapped using 
-the same configuration as their parents. 
+The important part is `parentKey.disable` set to `true` in the `children` mapping. Then an already
+existing mapping can be referenced --- `"destination": "users"` defines that the children are to be mapped using
+the same configuration as their parents.
 
-Notice that the `children` mapping contains no `tableMapping` configuration. This is because the mapping of 
-the `users` data type is used both for users and their children. Setting `tableMapping` for `children` would have 
-no effect. This also means that the `favoriteColors` column configuration **must be** defined in the `users` 
-mapping (even though it is not used by the users in the API response). 
+Notice that the `children` mapping contains no `tableMapping` configuration. This is because the mapping of
+the `users` data type is used both for users and their children. Setting `tableMapping` for `children` would have
+no effect. This also means that the `favoriteColors` column configuration **must be** defined in the `users`
+mapping (even though it is not used by the users in the API response).
 
 See [example [EX072]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/072-mapping-pk-disable).
 
