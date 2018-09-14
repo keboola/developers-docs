@@ -70,7 +70,7 @@ will become
 {% endhighlight %}
 
 ## Encrypting Data with API
-The [Encryption API](https://kebooladocker.docs.apiary.io/#reference/encrypt/encryption/encrypt-data) can encrypt
+The [Encryption API](https://keboolaencryption.docs.apiary.io/#reference/encrypt/encryption/encrypt-data) can encrypt
 either strings or arbitrary JSON data. For strings, the whole string is encrypted. For JSON data,
 only the keys which start with the `#` character and are scalar are encrypted. For example, encrypting
 
@@ -107,7 +107,7 @@ yields
 
 The `Content-Type` header is used to distinguish between treating the body as a string (`text/plain`) or JSON (`application/json`).
 
-You can use the [Console in Apiary](https://kebooladocker.docs.apiary.io/#reference/encrypt/encryption/encrypt-data?console=1) to
+You can use the [Console in Apiary](https://keboolaencryption.docs.apiary.io/#reference/encrypt/encryption/encrypt-data?console=1) to
 call the API resource endpoint.
 
 {: .image-popup}
