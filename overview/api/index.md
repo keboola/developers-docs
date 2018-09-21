@@ -36,7 +36,7 @@ If you don't know which API to use, see our [integration guide](/integrate/), wh
 performed actions.
 
 ## Regions and Endpoints
-Keboola Connection is available in multiple regions --- currently in the US (connection.keboola.com) and EU (connection.eu-central-1.keboola.com).
+Keboola Connection is available in multiple regions --- currently in the US (connection.keboola.com), EU (connection.eu-central-1.keboola.com) and AUS (connection.ap-southeast-2.keboola.com).
 Each region instance is a completely independent **full stack** of Keboola Connection services.
 In all the API documentation above, the US region is used.
 
@@ -73,12 +73,16 @@ The services listed above are:
 |---|-------|------|---|
 |Storage||US|https://connection.keboola.com/|
 |Storage||EU|https://connection.eu-central-1.keboola.com/|
+|Storage||AUS|https://connection.ap-southeast-2.keboola.com/|
 |Run Jobs|`syrup`|US|https://syrup.keboola.com|
 |Run Jobs|`syrup`|EU|https://syrup.eu-central-1.keboola.com|
+|Run Jobs|`syrup`|AUS|https://syrup.ap-southeast-2.keboola.com|
 |Sync Actions|`docker-runner`|US|https://docker-runner.keboola.com|
 |Sync Actions|`docker-runner`|EU|https://docker-runner.eu-central-1.keboola.com|
+|Sync Actions|`docker-runner`|AUS|https://docker-runner.ap-southeast-2.keboola.com|
 |Importer|`import`|US|https://import.keboola.com|
 |Importer|`import`|EU|https://import.eu-central-1.keboola.com|
+|Importer|`import`|AUS|https://import.ap-southeast-2.keboola.com|
 
 **Important**: Each of the stacks also uses its own set of [IP addresses](https://help.keboola.com/extractors/ip-addresses/).
 
