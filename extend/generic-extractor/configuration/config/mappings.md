@@ -671,6 +671,9 @@ user-address:
 See [example [EX067]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/067-mapping-tables-nested).
 
 #### Array items
+The following examples deal with *arrays of objects*, if you need to deal with *array of scalar* values, see
+the [corresponding example](#multiple-primary-key-columns).
+
 Consider the same API response as above:
 <details>
   <summary>Click to expand the response.</summary>
