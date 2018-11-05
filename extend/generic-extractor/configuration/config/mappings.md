@@ -826,6 +826,9 @@ array and stores it in the `secondary-address` table.
 See [example [EX068]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/068-mapping-tables-nested-array).
 
 #### Directly mapping array
+The following examples deal with *arrays of objects*, if you need to deal with *array of scalar* values, see
+the [corresponding example](#multiple-primary-key-columns).
+
 Consider the same API response as above:
 <details>
  <summary>Click to expand the response.</summary>
