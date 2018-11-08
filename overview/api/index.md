@@ -59,6 +59,10 @@ Otherwise you will obtain an `Invalid Token` or unauthorized errors. The *author
         {
             "id": "syrup",
             "url": "https:\/\/syrup.keboola.com"
+        },
+        {
+            "id": "oauth",
+            "url": "https:\/\/oauth.keboola.com"
         }
     ]
 }
