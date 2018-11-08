@@ -73,6 +73,7 @@ The services listed above are:
 - `docker-runner` --- [Service for Running Sync Actions](/extend/common-interface/actions/)
 - `import` --- [Storage Importer Service](/integrate/storage/api/importer/)
 - `syrup` --- [Service for Running Components](/extend/docker-runner/)
+- `oauth` --- [OAuth Manager Service](/extend/common-interface/oauth/)
 
 |API|Service|Region|URL|
 |---|-------|------|---|
@@ -88,6 +89,9 @@ The services listed above are:
 |Importer|`import`|US|https://import.keboola.com|
 |Importer|`import`|EU|https://import.eu-central-1.keboola.com|
 |Importer|`import`|AU|https://import.ap-southeast-2.keboola.com|
+|OAuth (v3)|`oauth`|US|https://oauth.keboola.com|
+|OAuth (v3)|`oauth`|EU|https://oauth.eu-central-1.keboola.com|
+|OAuth (v3)|`oauth`|AU|https://oauth.ap-southeast-2.keboola.com|
 
 **Important**: Each of the stacks also uses its own set of [IP addresses](https://help.keboola.com/extractors/ip-addresses/).
 
