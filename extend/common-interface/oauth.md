@@ -1,22 +1,23 @@
 ---
-title: OAuth2 Interface Specification
+title: OAuth Interface Specification
 permalink: /extend/common-interface/oauth/
 ---
 
 * TOC
 {:toc}
 
-[OAuth API V2](https://github.com/keboola/oauth-v2-bundle) integration provides a safe way to retrieve stored authorizations.
+[OAuth Broker API](https://github.com/keboola/oauth-api) integration provides a safe way to retrieve stored authorizations.
 
 When you are building an component that communicates with a 3rd party API and that API authorizes using OAuth,
-Keboola Connection (KBC) stores the users' credentials/access tokens in OAuth API V2. They are revealed and
+Keboola Connection (KBC) stores the users' credentials/access tokens in OAuth Broker API. They are revealed and
 decrypted only for a target component and project. End-users can be assured that their authorized access will not leak.
 
 *Note: This feature must be enabled by our [support](mailto:support@keboola.com).*
 
 ## Initialize
-Create a configuration for the given component and project in OAuth API V2.
-The `OAUTH_API_ID` is the id provided when storing authorization via OAuth API V2.
+Create a configuration for the given component and project in OAuth Broker API.
+The `OAUTH_API_ID` is the id provided when storing authorization via OAuth Broker API.
+Set `"version": 3` to use the latest OAuth Broker API. The old OAuth V2 API is deprecated but still usable.  
 
 {% highlight json %}
 {
@@ -26,6 +27,7 @@ The `OAUTH_API_ID` is the id provided when storing authorization via OAuth API V
     "authorization": {
         "oauth_api": {
             "id": "{OAUTH_API_ID}"
+            "version": 3
         }
     }
 }

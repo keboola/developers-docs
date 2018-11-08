@@ -27,8 +27,8 @@ The main APIs for our components are:
 | [Provisioning API](http://docs.provisioningapi.apiary.io/) | Provisioning is a service creating accounts for [sandboxes](https://help.keboola.com/manipulation/transformations/sandbox/), [transformations](https://help.keboola.com/manipulation/transformations/) and database writers. | [APIB](https://github.com/keboola/provisioning-client/blob/master/apiary.apib)
 | [Provisioning Management API](http://docs.provisioningmanagementapi.apiary.io/) | API managing servers for [sandboxes](https://help.keboola.com/manipulation/transformations/sandbox/), [transformations](https://help.keboola.com/manipulation/transformations/). | [APIB](https://github.com/keboola/provisioning-bundle/blob/master/apiary.apib)
 | [Syrup Queue API](http://docs.syrupqueue.apiary.io/#) | Syrup Queue is a component managing [Jobs](/integrate/jobs/). | [APIB](https://github.com/keboola/syrup-queue/blob/master/apiary.apib)
-| [OAuth Manager API v2](http://docs.oauthv2.apiary.io/) | OAuth Manager (v2) is a component managing [OAuth authorizations](/extend/common-interface/oauth/#authorize) of other components. | [APIB](https://github.com/keboola/oauth-v2-bundle/blob/master/apiary.apib)
-| [OAuth Manager API v3](https://oauthapi3.docs.apiary.io/#) | OAuth Manager (v3) is a component managing [OAuth authorizations](/extend/common-interface/oauth/#authorize) of other components. | [Swagger](https://github.com/keboola/oauth-api/blob/master/swagger.yaml)
+| [OAuth Manager API](http://docs.oauthv2.apiary.io/) | DEPRECATED. Use OAuth Broker API instead. | [APIB](https://github.com/keboola/oauth-v2-bundle/blob/master/apiary.apib)
+| [OAuth Broker API](https://oauthapi3.docs.apiary.io/#) | OAuth Broker is a component managing [OAuth authorizations](/extend/common-interface/oauth/#authorize) of other components. | [Swagger](https://github.com/keboola/oauth-api/blob/master/swagger.yaml)
 | [GoodData Writer API](http://docs.keboolagooddatawriterv2.apiary.io/#) | GoodData Writer is a component [loading data into GoodData](https://help.keboola.com/tutorial/write/gooddata/). | [APIB](https://github.com/keboola/gooddata-writer/blob/master/apiary.apib)
 | [Orchestrator API](http://docs.keboolaorchestratorv2api.apiary.io/#) | Orchestrator is a component [automating and scheduling tasks](https://help.keboola.com/tutorial/automate/) in your project. | [APIB](https://github.com/keboola/orchestrator-bundle/blob/master/apiary.apib)
 | [Developer Portal API](http://docs.kebooladeveloperportal.apiary.io/#) | Developer Portal is an application separated from KBC for [creating components](/extend/component/). | [APIB](https://github.com/keboola/developer-portal/blob/master/apiary.apib)
@@ -89,9 +89,9 @@ The services listed above are:
 |Importer|`import`|US|https://import.keboola.com|
 |Importer|`import`|EU|https://import.eu-central-1.keboola.com|
 |Importer|`import`|AU|https://import.ap-southeast-2.keboola.com|
-|OAuth (v3)|`oauth`|US|https://oauth.keboola.com|
-|OAuth (v3)|`oauth`|EU|https://oauth.eu-central-1.keboola.com|
-|OAuth (v3)|`oauth`|AU|https://oauth.ap-southeast-2.keboola.com|
+|OAuth|`oauth`|US|https://oauth.keboola.com|
+|OAuth|`oauth`|EU|https://oauth.eu-central-1.keboola.com|
+|OAuth|`oauth`|AU|https://oauth.ap-southeast-2.keboola.com|
 
 **Important**: Each of the stacks also uses its own set of [IP addresses](https://help.keboola.com/extractors/ip-addresses/).
 
