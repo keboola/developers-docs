@@ -125,10 +125,10 @@ image `quay.io/keboola/developer-portal-cli-v2`. The entire script uses the foll
 - `KBC_DEVELOPERPORTAL_APP` -- Component ID
 
 You can read more about using the Developer Portal CLI in the [chapter about running components](/extend/component/running/#running-a-component).
-The deploy script first pulls the image and then calls the `ecr:get-repository` command (while passing in the 
-`KBC_DEVELOPERPORTAL_USERNAME` and `KBC_DEVELOPERPORTAL_PASSWORD` variables). The result of that command is stored in the `REPOSITORY` 
+The deploy script first pulls the image and then calls the `ecr:get-repository` command (while passing in the
+`KBC_DEVELOPERPORTAL_USERNAME` and `KBC_DEVELOPERPORTAL_PASSWORD` variables). The result of that command is stored in the `REPOSITORY`
 variable. After that the `ecr:get-login` command is called; it returns
-a command line to authorize against our AWS ECR registry (e.g `docker login -u AWS -p ey...ODAzOH0= 
+a command line to authorize against our AWS ECR registry (e.g `docker login -u AWS -p ey...ODAzOH0=
 147946154733.dkr.ecr.us-east-1.amazonaws.com`). The return value is `eval`ed -- i.e., the login command is executed.
 
 Then there are two `docker tag` and `docker push` commands which tag the image build as `keboola-component` with the `latest` tag
@@ -250,7 +250,7 @@ You have to set the environment variables in settings:
 {: .image-popup}
 ![Screenshot -- GitLab Environment Variables](/extend/component/deployment/gitlab-1.png)
 
-Then add the following [`bitbucket-pipelines.yml`](https://github.com/keboola/component-generator/blob/master/templates/gitlab-deploy/.gitlab-ci.yml) file to your repository:
+Then add the following [`.gitlab-ci.yml`](https://github.com/keboola/component-generator/blob/master/templates/gitlab-deploy/.gitlab-ci.yml) file to your repository:
 
 {% highlight yaml %}
 image: docker:latest
@@ -359,7 +359,7 @@ deploy:
     tags: true
 {% endhighlight %}
 
-The commands above 
+The commands above
 
 - build the component image and tag it `keboola-component`.
 - run the [flake8](http://flake8.pycqa.org/en/latest/) code style check.
