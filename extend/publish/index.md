@@ -51,9 +51,9 @@ applying for component registration, make sure the same component does not alrea
 component review, the best practices in the next sections are followed.
 
 ### Component Name and Description
-Before you name and describe your component, check out our YouTube, Facebook Pages, Dark Sky, and ECB Currency Rates components for inspiration. 
+Before you name and describe your component, check out our YouTube, Facebook Pages, Dark Sky, and ECB Currency Rates components for inspiration.
 
-- Names should not contain words like `extractor`, `application`, and `writer`. 
+- Names should not contain words like `extractor`, `application`, and `writer`.
 <br>OK: *Cloudera Impala*
 <br>WRONG: *Cloudera Extractor*
 - The short description describes the **service** (helping the user find it) rather than the component.
@@ -62,9 +62,9 @@ Obviously for large services like Facebook or Gmail, describe the part of the se
 <br>WRONG: *This extractor extracts data from Cloudera Impala*
 <br>OK: *Facebook Pages connect your business with people. Facebook Insights help you get good at it.*
 <br>WRONG: *Facebook connects you with friends, family and other people you know, allows you to share photos and videos, send messages and get updates.*
-- The long description provides **additional information about the extracted/written data**: 
-What will the end user get? What must the end user provide? Is the data going to be imported incrementally? Are there links to 
-available resources? <br>Configuration instructions should not be included in the long description, because the long description 
+- The long description provides **additional information about the extracted/written data**:
+What will the end user get? What must the end user provide? Is the data going to be imported incrementally? Are there links to
+available resources? <br>Configuration instructions should not be included in the long description, because the long description
 is displayed before the end user starts configuring the component. However, if there are any special requirements (external approval,
 specific account setting), they should be stated.
 <br>OK: *This component allows you to extract currency exchange rates as published by the European Central Bank (ECB). The
@@ -77,6 +77,7 @@ ZAR). The rates are available for all working days from 4 January 1999 up to pre
     - Use `appInfo.dataOut` for extractors which send data outside (omit `appInfo.dataIn` for extractors).
     - Use `appInfo.dataIn` for writers which bring data into KBC project (omit `appInfo.dataOut` for writers).
     - Use `appInfo.dataOut` and/or `appInfo.dataOut` for applications.
+- Use `appInfo.beta` in [UI options](/extend/component/ui-options/) if you suspect changes to the component behavior.
 - Licensing information must be valid, and the vendor description must be current.
 
 ### Component Configuration
