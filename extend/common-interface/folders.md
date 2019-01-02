@@ -82,7 +82,6 @@ This is the expected CSV format ([RFC 4180](https://tools.ietf.org/html/rfc4180)
   - no escape character
 
 A [manifest file](/extend/common-interface/manifest-files/) can specify a different enclosure and delimiter.
-The CSV file may also be [gzipped](http://www.gzip.org/).
 
 #### Default Bucket
 If you cannot define a bucket or want to get it automatically, set
