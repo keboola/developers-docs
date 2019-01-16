@@ -1360,7 +1360,9 @@ The above configuration produces the following table:
 |234|Jane Doe||
 |345|Jimmy Doe||
 
-See [example [EX033]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/033-job-parameters).
+See [example [EX033]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/033-job-parameters)
+or [example [EX136]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/136-post-request-functions) which is also using
+[functions](/extend/generic-extractor/functions/).
 
 ### POST request
 You may encounter an API which is not exactly [RESTful](/extend/generic-extractor/tutorial/rest/)

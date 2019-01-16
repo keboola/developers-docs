@@ -1163,6 +1163,7 @@ root (using the `attr` reference). This is useful in case the configuration is u
 
 See [example [EX089]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/089-function-job-parameters-md5)
 or an alternative [example [EX090] with SHA1 hash](https://github.com/keboola/generic-extractor/tree/master/doc/examples/090-function-job-parameters-sha1).
+or an alternative [example [EX136]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/136-post-request-functions) with more deeply nested functions.
 
 ### Optional Job Parameters
 Let's say you have an API which allows you to send the list of columns to be contained in the API response.
