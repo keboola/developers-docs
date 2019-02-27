@@ -44,6 +44,7 @@ configuration file in the `authorization.oauth_api.credentials` attribute.
     "authorization": {
         "oauth_api": {
             "id": "{OAUTH_API_ID}",
+            "version": 3,
             "credentials": {
                 "id": "main",
                 "authorizedFor": "Myself",
@@ -63,7 +64,7 @@ configuration file in the `authorization.oauth_api.credentials` attribute.
 {% endhighlight %}
 
 The `authorization.oauth_api.credentials.#data` configuration node stores the response from
-the authorized API as a raw string. Parse the string accordingly, as OAuth API V2 has intentionally
+the authorized API as a raw string. Parse the string accordingly, as OAuth Broker API has intentionally
 no knowledge about the authorized APIs.
 
 **Important:** None of the [sandbox API calls](/extend/component/running/)
@@ -71,7 +72,7 @@ decrypt the `authorization.oauth_api.credentials.#data` and `authorization.oauth
 
 ## Credentials Injection
 
-If you want to bypass OAuth API V2 integration, you can paste all required credential parameters in the configuration directly.
+If you want to bypass OAuth Broker API integration, you can paste all required credential parameters in the configuration directly.
 Fields requiring encryption will be encrypted and decrypted as usual. That means, that you can save the following configuration
 via the [configuration API](/integrate/storage/api/configurations/).
 
