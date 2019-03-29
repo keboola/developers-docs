@@ -128,7 +128,7 @@ configuration, the following schema can be created:
 
 In the schema the two properties `sound` and `repeat` are declared along with the specification
 of their form input fields.
-You can test the above schema [online](http://jeremydorn.com/json-editor/) and verify that the
+You can test the above schema [online](http://jeremydorn.com/json-editor/) ([alternative](https://mozilla-services.github.io/react-jsonschema-form/)) and verify that the
 form generated from it produces the desired JSON structure. Once satisfied with the result,
 simply paste the schema into the **Configuration schema** in your component properties in the
 [Developer Portal](https://components.keboola.com/).

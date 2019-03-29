@@ -20,7 +20,7 @@ Using the configuration schema also allows us to validate the user input on fron
 
 ## Creating Schema
 JSON schemas are well documented on the [json-schema.org](http://json-schema.org/) website. For their developing and testing,
-use, for example, JSON Editor available [on-line](http://jeremydorn.com/json-editor/).
+use, for example, JSON Editor available [on-line](http://jeremydorn.com/json-editor/) ([alternative](https://mozilla-services.github.io/react-jsonschema-form/)).
 Remember to list all configuration properties as `required`.
 This is to make sure that the actual configuration will always contain all properties.
 If you want a property to be optional, set a default value for it. The supported formatting options for

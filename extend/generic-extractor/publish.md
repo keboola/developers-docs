@@ -15,7 +15,7 @@ This enables sharing the API extractor between various projects and simplifies i
 Before converting your configuration to a universally available component, consider
 what values in the configuration should be provided by the end-user (typically authentication values).
 Then design a [configuration schema](/extend/component/ui-options/configuration-schema/) for setting
-those values. You can [test the schema online](http://jeremydorn.com/json-editor/).
+those values. You can [test the schema online](http://jeremydorn.com/json-editor/) ([alternative](https://mozilla-services.github.io/react-jsonschema-form/)).
 The values obtained from the end user will be stored in the [`config` property](/extend/generic-extractor/configuration/config/).
 Modify your configuration to read those values from there.
 
@@ -176,7 +176,7 @@ Now create a [configuration schema](/extend/component/ui-options/configuration-s
 }
 {% endhighlight %}
 
-When you test the [schema online](http://jeremydorn.com/json-editor/), it will produce a
+When you test the [schema online](http://jeremydorn.com/json-editor/) ([alternative](https://mozilla-services.github.io/react-jsonschema-form/)), it will produce a
 configuration JSON:
 
 {: .image-popup}
