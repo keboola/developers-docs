@@ -30,6 +30,7 @@ The main APIs for our components are:
 | [OAuth Manager API](http://docs.oauthv2.apiary.io/) | DEPRECATED. Use OAuth Broker API instead. | [APIB](https://github.com/keboola/oauth-v2-bundle/blob/master/apiary.apib)
 | [OAuth Broker API](https://oauthapi3.docs.apiary.io/#) | OAuth Broker is a component managing [OAuth authorizations](/extend/common-interface/oauth/#authorize) of other components. | [Swagger](https://github.com/keboola/oauth-api/blob/master/swagger.yaml)
 | [GoodData Writer API](http://docs.keboolagooddatawriterv2.apiary.io/#) | GoodData Writer is a component [loading data into GoodData](https://help.keboola.com/tutorial/write/gooddata/). | [APIB](https://github.com/keboola/gooddata-writer/blob/master/apiary.apib)
+| [GoodData Provisioning API](https://keboolagooddataprovisioning.docs.apiary.io/#) | GoodData provisioning is an application for managing GoodData projects and users. | [APIB](https://github.com/keboola/gooddata-provisioning/blob/master/apiary.apib)
 | [Orchestrator API](http://docs.keboolaorchestratorv2api.apiary.io/#) | Orchestrator is a component [automating and scheduling tasks](https://help.keboola.com/tutorial/automate/) in your project. | [APIB](https://github.com/keboola/orchestrator-bundle/blob/master/apiary.apib)
 | [Developer Portal API](http://docs.kebooladeveloperportal.apiary.io/#) | Developer Portal is an application separated from KBC for [creating components](/extend/component/). | [APIB](https://github.com/keboola/developer-portal/blob/master/apiary.apib)
 
