@@ -6,7 +6,7 @@ permalink: /extend/common-interface/oauth/
 * TOC
 {:toc}
 
-[OAuth Broker API](https://github.com/keboola/oauth-api) integration provides a safe way to retrieve stored authorizations.
+[OAuth Broker API](https://oauthapi3.docs.apiary.io) integration provides a safe way to retrieve stored authorizations.
 
 When you are building an component that communicates with a 3rd party API and that API authorizes using OAuth,
 Keboola Connection (KBC) stores the users' credentials/access tokens in OAuth Broker API. They are revealed and
