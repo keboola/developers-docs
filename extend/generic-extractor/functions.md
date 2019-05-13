@@ -678,6 +678,7 @@ The following configuration:
             "baseUrl": "http://example.com/",
             "authentication": {
                 "type": "oauth20",
+                "format": "json",
                 "headers": {
                     "Authorization": {
                         "function": "concat",
