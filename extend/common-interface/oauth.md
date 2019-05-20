@@ -8,15 +8,15 @@ permalink: /extend/common-interface/oauth/
 
 [OAuth Broker API](https://oauthapi3.docs.apiary.io) integration provides a safe way to retrieve stored authorizations.
 
-When you are building an component that communicates with a 3rd party API and that API authorizes using OAuth,
-Keboola Connection (KBC) stores the users' credentials/access tokens in OAuth Broker API. They are revealed and
+When you are building a component that communicates with a 3rd party API and that API authorizes using OAuth,
+Keboola Connection (KBC) stores the users' credentials/access tokens in the OAuth Broker API. They are revealed and
 decrypted only for a target component and project. End-users can be assured that their authorized access will not leak.
 
 *Note: This feature must be enabled by our [support](mailto:support@keboola.com).*
 
 ## Initialize
-Create a configuration for the given component and project in OAuth Broker API.
-The `OAUTH_API_ID` is the id provided when storing authorization via OAuth Broker API.
+Create a configuration for the given component and project in the OAuth Broker API.
+The `OAUTH_API_ID` is the id provided when storing authorization via the OAuth Broker API.
 Set `"version": 3` to use the latest OAuth Broker API. The old OAuth V2 API is deprecated but still usable.  
 
 {% highlight json %}
@@ -72,8 +72,8 @@ decrypt the `authorization.oauth_api.credentials.#data` and `authorization.oauth
 
 ## Credentials Injection
 
-If you want to bypass OAuth Broker API integration, you can paste all required credential parameters in the configuration directly.
-Fields requiring encryption will be encrypted and decrypted as usual. That means, that you can save the following configuration
+If you want to bypass the OAuth Broker API integration, you can paste all required credential parameters in the configuration directly.
+Fields requiring encryption will be encrypted and decrypted as usual. That means that you can save the following configuration
 via the [configuration API](/integrate/storage/api/configurations/).
 
 {% highlight json %}

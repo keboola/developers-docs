@@ -165,7 +165,7 @@ The above will return a response similar to this:
 }
 {% endhighlight %}
 
-After that, import the file into Table Storage, by calling either
+After that, import the file into Table Storage by calling either
 [Create Table API call](http://docs.keboola.apiary.io/#reference/tables/create-table-asynchronously/create-new-table-from-csv-file-asynchronously)
 (for a new table) or
 [Load Data API call](https://keboola.docs.apiary.io/#reference/tables/load-data-asynchronously/import-data)
@@ -173,7 +173,7 @@ After that, import the file into Table Storage, by calling either
 
 #### Upload Files Using HTTP
 
-**This method is deprecated and won't be supported in future. Please use the approach with the [direct S3 upload](#manually-uploading-a-file) instead.**
+**This method is deprecated and won't be supported in the future. Please use the approach with the [direct S3 upload](#manually-uploading-a-file) instead.**
 
 **This type of file upload is not supported for the `eu-central-1` and `ap-northeast-2` regions.**
 
@@ -218,8 +218,8 @@ The above will return a response similar to this:
 }
 {% endhighlight %}
 
-Now use the information in the response to upload the file to s3. All necessary information is stored
-in the `uploadParams` response property. You can upload the file by doing an HTTP POST to the url you obtain
+Now use the information in the response to upload the file to S3. All necessary information is stored
+in the `uploadParams` response property. You can upload the file by doing an HTTP POST to the URL you obtain
 in the response:
 
 {% highlight bash %}
