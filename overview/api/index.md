@@ -51,19 +51,39 @@ Otherwise you will obtain an `Invalid Token` or unauthorized errors. The *author
     "services": [
         {
             "id": "docker-runner",
-            "url": "https:\/\/docker-runner.keboola.com"
+            "url": "https://docker-runner.keboola.com"
         },
         {
             "id": "import",
-            "url": "https:\/\/import.keboola.com"
+            "url": "https://import.keboola.com"
         },
         {
             "id": "syrup",
-            "url": "https:\/\/syrup.keboola.com"
+            "url": "https://syrup.keboola.com"
         },
         {
             "id": "oauth",
-            "url": "https:\/\/oauth.keboola.com"
+            "url": "https://oauth.keboola.com"
+        },
+        {
+            "id": "sqldep-analyzer",
+            "url": "https://sqldep.keboola.com"
+        },
+        {
+            "id": "sync-actions",
+            "url": "https://sync-actions.keboola.com/"
+        },
+        {
+            "id": "gooddata-provisioning",
+            "url": "https://gooddata-provisioning.keboola.com"
+        },
+        {
+            "id": "graph",
+            "url": "https://graph.keboola.com"
+        },
+        {
+            "id": "encryption",
+            "url": "https://encryption.keboola.com"
         }
     ]
 }
@@ -71,28 +91,38 @@ Otherwise you will obtain an `Invalid Token` or unauthorized errors. The *author
 
 The services listed above are:
 
-- `docker-runner` --- [Service for Running Sync Actions](/extend/common-interface/actions/)
+- `docker-runner` --- [Legacy Service for Running Sync Actions](/extend/common-interface/actions/)
 - `import` --- [Storage Importer Service](/integrate/storage/api/importer/)
 - `syrup` --- [Service for Running Components](/extend/docker-runner/)
 - `oauth` --- [OAuth Manager Service](/extend/common-interface/oauth/)
+- `sqldep-analyzer` --- SQLdep Integration Service for SQL query validation.
+- `sync-actions` --- [Service for Running Sync Actions](/extend/common-interface/actions/)
+- `gooddata-provisioning` --- [Service for User and Project management of GoodData projects](https://keboolagooddataprovisioning.docs.apiary.io/#)
+- `graph` --- Service for generating project lineage and graphs.
+- `encryption` --- Service for [encryption](https://developers.keboola.com/overview/encryption/).
 
 |API|Service|Region|URL|
 |---|-------|------|---|
 |Storage||US|https://connection.keboola.com/|
 |Storage||EU|https://connection.eu-central-1.keboola.com/|
-|Storage||AU|https://connection.ap-southeast-2.keboola.com/|
 |Run Jobs|`syrup`|US|https://syrup.keboola.com|
 |Run Jobs|`syrup`|EU|https://syrup.eu-central-1.keboola.com|
-|Run Jobs|`syrup`|AU|https://syrup.ap-southeast-2.keboola.com|
 |Sync Actions|`docker-runner`|US|https://docker-runner.keboola.com|
 |Sync Actions|`docker-runner`|EU|https://docker-runner.eu-central-1.keboola.com|
-|Sync Actions|`docker-runner`|AU|https://docker-runner.ap-southeast-2.keboola.com|
 |Importer|`import`|US|https://import.keboola.com|
 |Importer|`import`|EU|https://import.eu-central-1.keboola.com|
-|Importer|`import`|AU|https://import.ap-southeast-2.keboola.com|
 |OAuth|`oauth`|US|https://oauth.keboola.com|
 |OAuth|`oauth`|EU|https://oauth.eu-central-1.keboola.com|
-|OAuth|`oauth`|AU|https://oauth.ap-southeast-2.keboola.com|
+|SQLdep Analyzer|`sqldep-analyzer`|US|https://sqldep.keboola.com|
+|SQLdep Analyzer|`sqldep-analyzer`|EU|https://sqldep.eu-central-1.keboola.com|
+|Sync Actions|`sync-actions`|US|https://sync-actions.keboola.com/|
+|Sync Actions|`sync-actions`|EU|https://sync-actions.eu-central-1.keboola.com|
+|GoodData Provisioning|`gooddata-provisioning`|US|https://gooddata-provisioning.keboola.com|
+|GoodData Provisioning|`gooddata-provisioning`|EU|https://gooddata-provisioning.eu-central-1.keboola.com|
+|Graph|`graph`|US|https://graph.keboola.com|
+|Graph|`graph`|EU|https://graph.eu-central-1.keboola.com|
+|Encryption|`encryption`|US|https://encryption.keboola.com|
+|Encryption|`encryption`|EU|https://encryption.eu-central-1.keboola.com|
 
 **Important**: Each of the stacks also uses its own set of [IP addresses](https://help.keboola.com/extractors/ip-addresses/).
 

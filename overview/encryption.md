@@ -114,8 +114,8 @@ call the API resource endpoint.
 ![Console screenshot](/overview/encryption-console.png)
 
 ### Encryption Parameters
-The [Encryption API](https://kebooladocker.docs.apiary.io/#reference/encrypt/encryption/encrypt-data)
-is provided by the [Docker component](/extend/docker-runner/) and accepts the following parameters:
+The [Encryption API](https://keboolaencryption.docs.apiary.io/#reference/encrypt/encryption/encrypt-data)
+accepts the following parameters:
 
 - `componentId` (required) --- id of a [KBC component](/extend/component/tutorial/#creating-a-component)
 - `projectId` (optional) --- id of a KBC project
