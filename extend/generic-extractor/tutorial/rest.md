@@ -127,8 +127,6 @@ arbitrary order and must yield the same results. It is not correct for an API to
 `setFilter` and`getFilteredResult` because they imply that any state (a filter) is retained between those API 
 endpoints.
 
-See also [some examples](https://spring.io/understanding/REST).
-
 ## Summary
 The above describes the basic concepts of an API, HTTP protocol and HTTP REST API. When you 
 understand these concepts (and the associated jargon), you can use Generic Extractor 
