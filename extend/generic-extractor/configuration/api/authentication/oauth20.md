@@ -81,8 +81,8 @@ The following configuration parameters are supported for the `oauth20` authentic
 
 - `format` (optional, string) --- If the OAuth service provider response is JSON, use the only possible
 value -- `json`. Otherwise do not specify format at all (plaintext is assumed).
-- `headers` (optional, object) --- Object whose properties represent the key-value pairs of the URL query.
-- `query` (optional, object) --- Object whose properties represent the key-value pairs sent as HTTP headers.
+- `headers` (optional, object) --- Object whose properties represent the key-value pairs sent as HTTP headers.
+- `query` (optional, object) --- Object whose properties represent the key-value pairs of the URL query.
 
 At least one of the `headers` or `query` options should always be specified; otherwise no authentication
 will be sent with the API requests. Both fields also allow and practically require using
