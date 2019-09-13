@@ -23,8 +23,8 @@ recommend that you use the `devtools` package to install it.
 # first install the devtools package if it isn't already installed
 install.packages("devtools")
 
-# install dependencies (another github package for aws request signature generation)
-devtools::install_github("cloudyr/aws.signature")
+# install dependencies (another github package for aws requests)
+devtools::install_github("cloudyr/aws.s3")
 
 # install the SAPI R client package
 devtools::install_github("keboola/sapi-r-client")
