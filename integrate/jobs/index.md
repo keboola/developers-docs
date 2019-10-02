@@ -64,12 +64,10 @@ The second API is generic for all components. To work with the API, use our
 yourself, copy the part of [Job Polling](https://github.com/keboola/syrup-php-client/blob/master/src/Keboola/Syrup/Client.php#L328).
 
 Note that there are other special cases of asynchronous operations which are
-in principle the same, but may differ in little details. The most common ones are:
-
-- [Storage Jobs](http://docs.keboola.apiary.io/#reference/jobs/manage-jobs/job-detail), triggered, for instance, by
+in principle the same, but may differ in little details. The most common one is:
+[Storage Jobs](http://docs.keboola.apiary.io/#reference/jobs/manage-jobs/job-detail), triggered, for instance, by
 [asynchronous imports](http://docs.keboola.apiary.io/#reference/tables/create-table-asynchronously/create-new-table-from-csv-file-asynchronously)
 or [exports](http://docs.keboola.apiary.io/#reference/tables/table-export-asynchronously/asynchronous-export)
-- [GoodData Writer Jobs](http://docs.keboolagooddatawriterv2.apiary.io/#introduction/synchronous-vs.-asynchronous-tasks)
 
 Apart from running predefined configurations with a `run` action, each component may
 provide additional options to create an asynchronous background job, or it may also support synchronous actions.
