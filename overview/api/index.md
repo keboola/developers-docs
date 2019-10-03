@@ -31,7 +31,7 @@ The main APIs for our components are:
 | [OAuth Broker API](https://oauthapi3.docs.apiary.io/#) | OAuth Broker is a component managing [OAuth authorizations](/extend/common-interface/oauth/#authorize) of other components. | [Swagger](https://github.com/keboola/sapi-importer/blob/master/api-docs/swagger.yaml)
 | [GoodData Provisioning API](https://keboolagooddataprovisioning.docs.apiary.io/#) | GoodData provisioning is an application for managing GoodData projects and users. | [APIB](https://github.com/keboola/gooddata-provisioning/blob/master/apiary.apib)
 | [Orchestrator API](http://docs.keboolaorchestratorv2api.apiary.io/#) | Orchestrator is a component [automating and scheduling tasks](https://help.keboola.com/tutorial/automate/) in your project. | [APIB](https://github.com/keboola/orchestrator-bundle/blob/master/apiary.apib)
-| [Importer API](https://app.swaggerhub.com/apis-docs/keboola/import/1.0.0) | [Importer](/integrate/storage/api/importer/) is a helper service for easy table imports | [Swagger]()
+| [Importer API](https://app.swaggerhub.com/apis-docs/keboola/import/1.0.0) | [Importer](/integrate/storage/api/importer/) is a helper service for easy table imports | [Swagger](https://github.com/keboola/sapi-importer/blob/master/api-docs/swagger.yaml)
 | [Developer Portal API](http://docs.kebooladeveloperportal.apiary.io/#) | Developer Portal is an application separated from KBC for [creating components](/extend/component/). | [APIB](https://github.com/keboola/developer-portal/blob/master/apiary.apib)
 
 If you don't know which API to use, see our [integration guide](/integrate/). It describes different roles of the APIs and contains examples of commonly
