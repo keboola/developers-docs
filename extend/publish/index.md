@@ -117,3 +117,4 @@ the **Component Limits**.
 - Set up [continuous deployment](/extend/component/deployment/) so that you can keep the component up to date.
 - Use [semantic versioning](http://semver.org/) to mark and deploy versions of your component. Using other tags (e.g.,
 `latest`, `master`) in production is not allowed.
+- Error messages should clearly state what's wrong and what the user should do to fix the issue. E. g. `Invalid configuration.` is wrong, `Login failed, check your credentials.` is better.
