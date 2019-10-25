@@ -112,8 +112,9 @@ description of input tables
 processing in chunks to maintain a limited amount of consumed memory. If not possible, state the expected usage in
 the **Component Limits**.
 - The component must distinguish between [user and application errors](/extend/common-interface/environment/#return-values).
-- The component must [validate](/extend/common-interface/config-file/#validation) its parameters; an invalid configuration must result in a user error.
+- The component must [validate](/extend/common-interface/config-file/#validation) its parameters; an invalid configuration must result in a user error. User error messages must clearly state what's wrong and what the user should do to fix the issue. E.g. `Invalid configuration.` is wrong, `Login failed, check your credentials.` is better.
 - The events produced must be reasonable. Provide status messages if possible and with a reasonable frequency. Avoid internal messages with no meaning to the end user. Also avoid flooding the event log or sending data files in the event log.
 - Set up [continuous deployment](/extend/component/deployment/) so that you can keep the component up to date.
 - Use [semantic versioning](http://semver.org/) to mark and deploy versions of your component. Using other tags (e.g.,
 `latest`, `master`) in production is not allowed.
+
