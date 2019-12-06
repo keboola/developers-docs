@@ -14,7 +14,7 @@ If you define a JSON schema, we are able to display a nice form and
 let the user to fill the JSON using a set of defined inputs.
 
 {: .image-popup}
-![Configuration schema](/extend/component/ui-options/configuration-schema.png)
+![Configuration schema](/extend/component/ui-options/configuration-schema-1.png)
 
 Using the configuration schema also allows us to validate the user input on frontend.
 
@@ -93,3 +93,69 @@ The form above can be created using this JSON Schema:
 }
 {% endhighlight %}
 
+### Links Example
+If you want to provide links to external resources, keep in mind that the configuration schema does not support markdown, 
+but it has a `links` feature. The above example can be modified so that the links are clickable:
+
+{% highlight json %}
+{
+    "title": "Parameters",
+    "type": "object",
+    "required": [
+        "dateFrom",
+        "dateTo",
+        "username",
+        "#password"
+    ],
+    "properties": {
+        "username": {
+            "title": "Username",
+            "type": "string",
+            "minLength": 1,
+            "default": "",
+            "propertyOrder": 1
+        },
+        "#password": {
+            "title": "Password",
+            "type": "string",
+            "format": "password",
+            "minLength": 1,
+            "default": "",
+            "propertyOrder": 2
+        },
+        "dateFrom": {
+            "title": "Date from",
+            "type": "string",
+            "description": "Any date accepted by the strtotime function",            
+            "minLength": 1,
+            "default": "",
+            "propertyOrder": 3,
+            "links": [
+                {
+                    "rel": "strtotime Documentation",
+                    "href": "http://php.net/manual/en/function.strtotime.php"
+                }
+            ]
+        },
+        "dateTo": {
+            "title": "Date to",
+            "type": "string",
+            "description": "Any date accepted by the strtotime function",
+            "minLength": 1,
+            "default": "",
+            "propertyOrder": 4,
+            "links": [
+                {
+                    "rel": "strtotime Documentation",
+                    "href": "http://php.net/manual/en/function.strtotime.php"
+                }
+            ]
+        }
+    }
+}
+{% endhighlight %}
+
+Which renders like this:
+
+{: .image-popup}
+![Configuration Schema with links](/extend/component/ui-options/configuration-schema-2.png)
