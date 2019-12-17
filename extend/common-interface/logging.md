@@ -9,14 +9,14 @@ permalink: /extend/common-interface/logging/
 There are two main, mutually exclusive, ways in which your component can display events to KBC end-users:
 
 1. Using [standard output and standard error](https://en.wikipedia.org/wiki/Standard_streams)
-2. Using [Graylog GELF](http://docs.graylog.org/en/2.0/pages/gelf.html) compatible logger
+2. Using [Graylog GELF](http://docs.graylog.org/en/3.1/pages/gelf.html) compatible logger
 
 Using the standard output option requires **no extra work** from you or your component.
 You just print all informational messages to standard output and all error messages to standard error.
 These will be forwarded to Storage Events as informational or error messages. See
 [implementation notes](/extend/component/implementation/) for best practices in logging.
 
-Using a [GELF](http://docs.graylog.org/en/2.0/pages/gelf.html) compatible logger requires implementing or including
+Using a [GELF](http://docs.graylog.org/en/3.1/pages/gelf.html) compatible logger requires implementing or including
 such a logger in your component. However, it offers much **greater flexibility**: you can send different
 kinds of messages (such as error, informational, warning, debug), and they can contain additional
 structured information (not only a plain text string).
@@ -26,7 +26,7 @@ By default -- unless you have turned on [GELF logging](/extend/common-interface/
 [component configuration](https://components.keboola.com/),
 [Docker Runner](/extend/docker-runner) listens to [STDOUT](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_.28stdout.29)
 and [STDERR](https://en.wikipedia.org/wiki/Standard_streams#Standard_error_.28stderr.29)
-of the component and forwards the STDOUT content live to [Storage API Events](http://docs.keboola.apiary.io/#events)
+of the component and forwards the STDOUT content live to [Storage API Events](https://keboola.docs.apiary.io/#reference/events)
 (log level `info`). The content of STDERR is collected and added (if not empty) as the last event of the job with level `error`.
 The events are displayed in a [Job detail](https://help.keboola.com/management/jobs/).
 
@@ -36,8 +36,8 @@ them by `[hidden]` placeholder. This prevents accidental leaking of sensitive in
 example in exception traces.
 
 ## GELF Logger
-[GELF](http://docs.graylog.org/en/2.0/pages/gelf.html) is a log format allowing you to
-send [structured](http://docs.graylog.org/en/2.0/pages/gelf.html#gelf-format-specification) event messages.
+[GELF](http://docs.graylog.org/en/3.1/pages/gelf.html) is a log format allowing you to
+send [structured](http://docs.graylog.org/en/3.1/pages/gelf.html#gelf-payload-specification) event messages.
 The messages can be sent over several transports and you can specify whether they will be silenced or displayed based on their level.
 
 ### Setting Up
@@ -105,7 +105,7 @@ a [sample repository](https://github.com/keboola/docs-example-logging-php). For 
 see its [official documentation](https://github.com/bzikarsky/gelf-php).
 
 #### Python
-For Python, there are [a number of libraries](https://marketplace.graylog.org/addons?kind=gelf&tag=python) available. For example, the [logging-gelf library](https://pypi.python.org/pypi/logging-gelf). To install it, use
+For Python, there are [a number of libraries](https://marketplace.graylog.org/addons?kind=gelf&tag=python) available. For example, the [logging-gelf library](https://pypi.org/project/logging-gelf/). To install it, use
 
     pip3 install logging_gelf
 
@@ -129,7 +129,7 @@ logger.removeHandler(logger.handlers[0])
 logging.critical('A sample emergency message')
 {% endhighlight %}
 
-Due to the nature of Python logging, only [some error levels](https://docs.python.org/2/library/logging.html#logging-levels) are
+Due to the nature of Python logging, only [some error levels](https://docs.python.org/3.8/library/logging.html#logging-levels) are
 permitted.
 
 #### Node.js

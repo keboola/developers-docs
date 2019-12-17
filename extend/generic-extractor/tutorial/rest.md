@@ -111,7 +111,7 @@ is associated with a successful response. There are many HTTP Statuses, but the 
 - Status codes `5xx` represent a server error (the server failed to create the response).
 
 ## REST API
-[REST (Representational state transfer)](http://www.restapitutorial.com/lessons/whatisrest.html) (or RESTful) 
+[REST (Representational state transfer)](https://www.restapitutorial.com/lessons/whatisrest.html) (or RESTful) 
 is an API which follows a set of [loosely defined](http://restcookbook.com/Miscellaneous/rest-and-http/) principles:
 
 - The API URLs (or URIs) represent individual **resources**. Each API endpoint should represent a resource of 

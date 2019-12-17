@@ -13,11 +13,11 @@ Configurations represent component **instances** in a project. Each KBC componen
 options and requirements, which must be respected. As such, KBC configurations provide a general framework for configuring
 components, while the specific implementation details are left to the components themselves.
 
-When working with the [Component Configurations API](http://docs.keboola.apiary.io/#reference/component-configurations),
+When working with the [Component Configurations API](https://keboola.docs.apiary.io/#reference/component-configurations),
 you need to know the `componentId` of the component being configured.
 You can see a list of public components in [the Developer Portal](https://components.keboola.com/components), or you can get
 a list of all available components with the [API index call](https://keboola.docs.apiary.io/#reference/miscellaneous/api-index/component-list).
-See our [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#f0e321e0-6533-0074-662d-fe4ab85a15d5).
+See our [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb).
 
 It will give you something like this:
 
@@ -27,7 +27,7 @@ It will give you something like this:
     "api": "storage",
     "version": "v2",
     "revision": "21fb56a0f6d61a307f350247a45950b1e4049625",
-    "documentation": "http://docs.keboola.apiary.io/",
+    "documentation": "https://keboola.docs.apiary.io/",
     "components": [
         {
             "id": "keboola.ex-aws-s3",
@@ -96,7 +96,7 @@ a bit tricky. Rather than starting from scratch, we recommend creating a configu
 ### Inspecting Configuration
 To obtain an existing configuration, you can either use the list of configurations above or
 the [Configuration Detail](https://keboola.docs.apiary.io/#reference/component-configurations/component-configurations/configuration-detail)
-API call. See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb) for obtaining a
+API call. See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb) for obtaining a
 configuration of the `keboola.ex-aws-s3` component. You will receive a response similar to this:
 
 {% highlight json %}
@@ -303,7 +303,7 @@ Here, the most common operations done with configurations are described in examp
 [API reference](https://keboola.docs.apiary.io/#reference/component-configurations) for a full authoritative list of configuration features.
 
 ### List Configurations
-To obtain configuration details, use the [List Configs call](http://docs.keboola.apiary.io/#reference/component-configurations/component-configs/list-configs),
+To obtain configuration details, use the [List Configs call](https://keboola.docs.apiary.io/#reference/component-configurations/component-configurations/list-configurations),
 which will return all the configuration details. This means
 
 - the configuration itself (`configuration`) --- [section on configuration](#modifying-a-configuration) follows;
@@ -311,7 +311,7 @@ which will return all the configuration details. This means
 - configuration state (`state`) --- [component state](/extend/common-interface/config-file/#state-file).
 
 Please note that the contents
-of the `configuration`, `rows` and `state` sections depend purely on the component itself. See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#9b84ef26-51aa-b281-e219-cc90c867fd9d).
+of the `configuration`, `rows` and `state` sections depend purely on the component itself. See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb).
 
 A sample result for the AWS S3 extractor looks like this:
 
@@ -372,7 +372,7 @@ A sample result for the AWS S3 extractor looks like this:
 Modifying a configuration means that a new version of that configuration is created.
 For modifying a configuration, use the
 [Update Configuration](https://keboola.docs.apiary.io/#reference/component-configurations/manage-configurations/update-configuration) API call.
-See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#91e2060c-0c14-7a09-0cc3-537eb6057ada) in which the
+See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb) in which the
 configuration is modified to the following to set new credentials:
 
 {% highlight json %}
@@ -399,7 +399,7 @@ otherwise it may be misinterpreted. The raw HTTP request should look similar to 
 Also note that the entire configuration must be always sent, there is no way to patch only part of it.
 The same way the `configuration` is modified, other properties can be modified too. For example, you may want to
 reset `state` by setting it to `{}`, or you can change the order of the configuration rows by setting the `rowsSortOrder` property.
-The `rowsSortOrder` is an array of row ids -- see an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#91e2060c-0c14-7a09-0cc3-537eb6057ada) (Set Row order of S3 extractor)
+The `rowsSortOrder` is an array of row ids -- see an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb) (Set Row order of S3 extractor)
 for the exact example request.
 
 ### Modifying Configuration Row
@@ -407,7 +407,7 @@ Very similar to modifying a configuration, modifying a configuration **row** mea
 the **entire configuration** is created. For modifying a configuration row, use the
 [Update Row](https://keboola.docs.apiary.io/#reference/component-configurations/manage-configuration-rows/update-row) API call.
 
-See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#1e7fd94e-f22c-4a77-82c1-babc8602f9cd) in which the
+See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb) in which the
 configuration row is modified to:
 
 {% highlight json %}
@@ -424,15 +424,15 @@ configuration row is modified to:
 The rules for updating a configuration row are the same as for [updating a configuration](#modifying-a-configuration). Also note that
 a configuration row is never evaluated alone, it is always merged with the root `configuration`. If the same properties are defined
 in the root `configuration` and row `configuration`, the values from the row are used. There is also an
-[example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#1e7fd94e-f22c-4a77-82c1-babc8602f9cd) of how to reset the row
+[example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb) of how to reset the row
 state by setting `state` to `{}`.
 
 ### Configuration Versions
-When you [update a configuration](http://docs.keboola.apiary.io/#reference/component-configurations/manage-configs/update-config),
+When you [update a configuration](https://keboola.docs.apiary.io/#reference/component-configurations/manage-configurations/update-configuration),
 a new configuration version is actually created. In the above calls, only the last (active/published) configuration
 is returned. To obtain a list of all recorded versions, use the
-[List Versions API call](http://docs.keboola.apiary.io/#reference/component-configurations/list-configs-versions/versions-list).
-See this [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#3e962568-9c38-207a-58bb-a92144adbe41)
+[List Versions API call](https://keboola.docs.apiary.io/#reference/component-configurations/list-configuration-versions/versions-list).
+See this [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb)
 which would give you an output similar to the one below:
 
 {% highlight json %}
@@ -505,8 +505,8 @@ It will create a new version of the configuration and return the ID of the versi
 
 ### Creating Configuration Copy
 After choosing a particular version, you can create a new independent
-[configuration copy](http://docs.keboola.apiary.io/#reference/component-configurations/copy-configs/create-config-copy)
-of it. See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#1591dcb4-2084-e5fe-2f3f-cd7f546f7315)
+[configuration copy](https://keboola.docs.apiary.io/#reference/component-configurations/copy-configurations/create-configuration-copy)
+of it. See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb)
 of how to create a new configuration called `test-copy` from version `3` of the `364479526` configuration
 for the `keboola.ex-aws-s3` component.
 

@@ -31,7 +31,7 @@ contains the `action` property with the name of the currently executed action. J
 All actions must be explicitly specified in the component configuration in [Developer Portal](https://components.keboola.com/).
 
 ## Running Actions
-Actions are available through the [API](http://docs.kebooladocker.apiary.io/#reference/actions/run-custom-component-action).
+Actions are available through the [API](https://kebooladocker.docs.apiary.io/#reference/actions/run-custom-component-action).
 They do not load the configuration from Storage, so you need to fully specify the whole configuration in the request body.
 If any of your parameters are encrypted, they will be decrypted before they are passed to your component.
 

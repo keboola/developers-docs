@@ -55,7 +55,7 @@ using the `method` option:
 ### Choosing Paging Strategy
 If the API responses contain direct links to the next set of results, use the
 [`response.url` method](/extend/generic-extractor/configuration/api/pagination/response-url/).
-This applies to the APIs following the [JSON API specification](http://jsonapi.org). The response usually
+This applies to the APIs following the [JSON API specification](https://jsonapi.org/). The response usually
 contains a `links` section:
 
 {% highlight json %}

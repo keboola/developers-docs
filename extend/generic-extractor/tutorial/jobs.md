@@ -43,7 +43,7 @@ property in the Generic Extractor configuration:
 All sub-resources are retrieved by configuring the `children` property; its structure is the same as the 
 structure of the `jobs` property, but it must additionally define `placeholders`.
 The `dataField` property must refer to an array, i.e. `items` or `_links` in our case 
-(see the [documentation](http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/send-checklist/)). 
+(see the [documentation](https://mailchimp.com/developer/reference/campaigns/campaign-checklist/)). 
 Let's set it to `items`. See [below](#Multiple_Jobs) how to refer to the whole sub-resource with a dot.
 
 {% highlight json %}
@@ -68,7 +68,7 @@ The `children` are executed for each element retrieved from the parent endpoint,
 The `placeholders` setting connects the placeholders used in the `endpoint` property with 
 the data in the actual parent response. 
 That means that the `campaign_id` placeholder in the `campaigns/{campaign_id}/send-checklist` endpoint 
-will be replaced by the `id` property of the JSON [response](http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/): 
+will be replaced by the `id` property of the JSON [response](https://mailchimp.com/developer/reference/campaigns/): 
 
 {: .image-popup}
 ![Screenshot - Mailchimp docs](/extend/generic-extractor/tutorial/mailchimp-api-docs-2.png)
@@ -160,7 +160,7 @@ endpoints in a single configuration. Let's pick the campaign `content` sub-resou
 ]
 {% endhighlight %}
 
-The question is what to put in the `dataField`. If you examine the sample [response](http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/content/),
+The question is what to put in the `dataField`. If you examine the sample [response](https://mailchimp.com/developer/reference/campaigns/campaign-content/),
 it looks like this:
 
 {% highlight json %}

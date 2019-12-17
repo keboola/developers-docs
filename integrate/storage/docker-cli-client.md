@@ -8,7 +8,7 @@ redirect_from: /integrate/storage/php-cli-client/
 {:toc}
 
 The Storage API Docker command line interface (CLI) client is a portable command line client which provides
-a simple implementation of [Storage API](http://docs.keboola.apiary.io/).
+a simple implementation of [Storage API](https://keboola.docs.apiary.io/#).
 It runs on any platform which has Docker installed.
 
 Currently, the client implements

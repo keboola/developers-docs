@@ -9,7 +9,7 @@ permalink: /extend/common-interface/logging/development/
 When developing a component which is using GELF logging, you need the GELF server to listen to its messages.
 You can use the following two servers:
 
-- Fully fledged official Graylog server - see the [installation guide](http://docs.graylog.org/en/2.0/pages/installation.html); or
+- Fully fledged official Graylog server - see the [installation guide](http://docs.graylog.org/en/3.1/pages/installation.html); or
 - [Mock server](https://github.com/keboola/docs-example-logging-mock-server), based on [PHP server](https://github.com/keboola/gelf-server) or [Node JS Server](https://github.com/wavded/graygelf), for example.
 
 ## Using Mock Server with Docker Compose

@@ -92,7 +92,7 @@ These forms can be combined freely. They can be also nested in a virtually unlim
 ## Supported Functions
 
 ### md5
-The [`md5` function](http://php.net/manual/en/function.md5.php) calculates the [MD5 hash](https://en.wikipedia.org/wiki/MD5) of a
+The [`md5` function](https://www.php.net/manual/en/function.md5.php) calculates the [MD5 hash](https://en.wikipedia.org/wiki/MD5) of a
 string. The function takes one argument, which is the string to hash.
 
 {% highlight json %}
@@ -109,7 +109,7 @@ The above will produce `1228d3ff5089f27721f1e0403ad86e73`.
 See an [example](#job-parameters).
 
 ### sha1
-The [`sha1` function](http://php.net/manual/en/function.sha1.php) calculates the [SHA-1 hash](https://en.wikipedia.org/wiki/SHA-1) of a
+The [`sha1` function](https://www.php.net/manual/en/function.sha1.php) calculates the [SHA-1 hash](https://en.wikipedia.org/wiki/SHA-1) of a
 string. The function takes one argument which is the string to hash.
 
 {% highlight json %}
@@ -126,7 +126,7 @@ The above will produce `64d5d2977cc2573afbd187ff5e71d1529fd7f6d8`.
 See an [example](#job-parameters).
 
 ### base64_encode
-The [`base64_encode` function](http://php.net/manual/en/function.base64-encode.php) converts a
+The [`base64_encode` function](https://www.php.net/manual/en/function.base64-encode.php) converts a
 string to the [MIME Base64 encoding](https://en.wikipedia.org/wiki/Base64#MIME). The function
 takes one argument which is the string to encode.
 
@@ -144,13 +144,13 @@ The above will produce `VGVhUG90`.
 See an [example](#nested-functions).
 
 ### hash_hmac
-The [`hash_hmac` function](http://php.net/manual/en/function.hash-hmac.php) creates
+The [`hash_hmac` function](https://www.php.net/manual/en/function.hash-hmac.php) creates
 an [HMAC (Hash-based message authentication code)](https://en.wikipedia.org/wiki/Hash-based_message_authentication_code)
 from a string. The function takes
 three arguments:
 
 1. Name of a hashing algorithm (see the
-[list of supported algorithms](http://php.net/manual/en/function.hash-algos.php#refsect1-function.hash-algos-examples))
+[list of supported algorithms](https://www.php.net/manual/en/function.hash-algos.php#refsect1-function.hash-algos-examples))
 2. Value to hash
 3. Secret key
 
@@ -170,7 +170,7 @@ The above will return `d868d581b2f2edd09e8e7ce12c00723b3fcffb6a5d74c40eae9d94181
 See an [example](#api-default-parameters).
 
 ### time
-The [`time` function](http://php.net/manual/en/function.time.php) returns the current time as a
+The [`time` function](https://www.php.net/manual/en/function.time.php) returns the current time as a
 [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time).
 To obtain the current time in a more readable format, use the
 the [`date` function](#date). It takes no arguments.
@@ -184,10 +184,10 @@ the [`date` function](#date). It takes no arguments.
 The above will produce something like `1492674974`.
 
 ### date
-The [`date` function](http://php.net/manual/en/function.date.php) formats the provided or the current
+The [`date` function](https://www.php.net/manual/en/function.date.php) formats the provided or the current
 timestamp into a human readable format. The function takes either one or two arguments:
 
-1. [Formatting string](http://php.net/manual/en/function.date.php#refsect1-function.date-parameters)
+1. [Formatting string](https://www.php.net/manual/en/function.date.php#refsect1-function.date-parameters)
 2. Optional [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time); if not provided, the current time is used.
 
 {% highlight json %}
@@ -216,7 +216,7 @@ The above will produce `2017-03-20 8:53:20`.
 See an [example](#user-data).
 
 ### strtotime
-The [`strtotime` function](http://php.net/manual/en/function.strtotime.php) converts a string date into a [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time). The function takes
+The [`strtotime` function](https://www.php.net/manual/en/function.strtotime.php) converts a string date into a [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time). The function takes
 one or two arguments:
 
 1. String date
@@ -232,7 +232,7 @@ one or two arguments:
 {% endhighlight %}
 
 The above will produce `1508620560`, which represents the date `2017-10-21 21:16:00`. However, the
-[`strtotime` function](http://php.net/manual/en/function.strtotime.php) is most useful with relative dates which it also allows. For example, you can
+[`strtotime` function](https://www.php.net/manual/en/function.strtotime.php) is most useful with relative dates which it also allows. For example, you can
 write:
 
 {% highlight json %}
@@ -255,10 +255,10 @@ See an [example](#nested-strtotime).
 
 ### sprintf
 The `sprintf` function formats values and inserts them into a string. The `sprintf` function maps directly to
-the [original PHP function](http://php.net/manual/en/function.sprintf.php), which is very versatile and has many
+the [original PHP function](https://www.php.net/manual/en/function.sprintf.php), which is very versatile and has many
 uses. The function accepts two or more arguments:
 
-1. String with [formatting directives](http://php.net/manual/en/function.sprintf.php) (marked with the percent character `%`)
+1. String with [formatting directives](https://www.php.net/manual/en/function.sprintf.php) (marked with the percent character `%`)
 2. Values inserted into the string:
 
 {% highlight json %}
@@ -295,7 +295,7 @@ The above will produce `HenOrEgg` (see [example 1](#api-base-url), [example 2](#
 [`implode` function](#implode).
 
 ### implode
-The [`implode` function](http://php.net/manual/en/function.implode.php) concatenates an arbitrary number
+The [`implode` function](https://www.php.net/manual/en/function.implode.php) concatenates an arbitrary number
 of strings into one using a delimiter. The function takes
 two arguments:
 
@@ -1073,10 +1073,10 @@ looks like this:
 
 To obtain the details of the first user, the user-id has to be padded to five digits. The details API call for the
 first user must be sent to `/user/00003`, and for the second user to `/user/00234`. To achieve this, use the
-`sprintf` function, which allows [number padding](http://php.net/manual/en/function.sprintf.php#example-5484).
+`sprintf` function, which allows [number padding](https://www.php.net/manual/en/function.sprintf.php#example-6129).
 
 The following `placeholders` configuration in the child job calls the function with the first argument set to
-`%'.05d` (which is a sprintf [format](http://php.net/manual/en/function.sprintf.php) to pad with zero to five digits)
+`%'.05d` (which is a sprintf [format](https://www.php.net/manual/en/function.sprintf.php) to pad with zero to five digits)
 and the second argument set to the value of the `id` property found in the parent response. The placeholder path must
 be specified in the `path` property. That means that the configuration:
 

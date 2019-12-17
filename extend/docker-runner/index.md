@@ -15,7 +15,7 @@ represented by a [Docker image](/extend/component/docker-tutorial/).
 Running a component means creating and executing an [asynchronous job](/integrate/jobs/).
 
 Developing functionality in [Docker](https://www.docker.com/) allows you to focus only on the application logic; all communication
-with the [Storage API](http://docs.keboola.apiary.io/#) will be handled by Docker Runner. You can encapsulate any application into a Docker image
+with the [Storage API](https://keboola.docs.apiary.io/#) will be handled by Docker Runner. You can encapsulate any application into a Docker image
 following a set of rules that will allow you to integrate the application into KBC.
 
 There is a [predefined interface](/extend/common-interface/) with Docker Runner, consisting
@@ -64,18 +64,18 @@ containers; the component cannot be affected by other running components. It may
 to have no network access.
 
 ## API
-The Docker Runner API is described on [Apiary.io](http://docs.kebooladocker.apiary.io/). Docker Runner
+The Docker Runner API is described on [Apiary.io](https://kebooladocker.docs.apiary.io/#). Docker Runner
 has API calls to
 
 - run a [component](/extend/component/).
 - [encrypt values](/overview/encryption/).
 - [prepare the data folder](/extend/component/running/#preparing-the-data-folder).
 - run [component actions](/extend/common-interface/actions/).
-- run a [component](/extend/component/) with a [specified Docker image tag](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job-with-image/run-job), usable for [testing images](/extend/component/deployment/#test-live-configurations).
+- run a [component](/extend/component/) with a [specified Docker image tag](https://kebooladocker.docs.apiary.io/#reference/run/create-a-job-with-image/run-job), usable for [testing images](/extend/component/deployment/#test-live-configurations).
 
 ## Configuration
 Components executed by Docker Runner store their configurations in
-[Storage API components configurations](http://docs.keboola.apiary.io/#reference/component-configurations).
+[Storage API components configurations](https://keboola.docs.apiary.io/#reference/component-configurations).
 
 When creating the configuration, use
 [this JSON schema](https://github.com/keboola/docker-bundle/blob/master/Resources/schemas/configuration.json)
@@ -84,8 +84,8 @@ all of them are optional:
 
 - `parameters` --- an arbitrary object passed to the dockerized application itself
 - `storage` --- configuration of [input and output mapping](/extend/common-interface/folders/); specific options correspond to the options of the
-[unload data](http://docs.keboola.apiary.io/#reference/tables/unload-data-asynchronously) and
-[load data](http://docs.keboola.apiary.io/#reference/tables/load-data-asynchronously) API calls.
+[unload data](https://keboola.docs.apiary.io/#reference/tables/unload-data-asynchronously) and
+[load data](https://keboola.docs.apiary.io/#reference/tables/load-data-asynchronously) API calls.
 - `runtime` --- configuration for modifying some image parameters at run time
 - `processors` --- configuration of [Processors](/extend/component/processors/)
 - `authorization` --- OAuth authorization [injected to the configuration](/extend/common-interface/oauth/); not stored in the component configuration

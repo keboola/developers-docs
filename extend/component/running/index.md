@@ -102,7 +102,7 @@ a [data folder and configuration file](/extend/common-interface/). The above men
 is designed to do that.
 
 We recommend that you use [Apiary or Postman](/overview/api/) to call the API.
-A [collection of examples](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#91a2cf62-d7b1-b75f-73ff-406f2afa92a9) of the
+A [collection of examples](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb) of the
 Debug API calls is available in Postman Docs.
 
 ### Prepare
@@ -114,7 +114,7 @@ therefore `in.c-main.sample`. You also need a [Storage API token](https://help.k
 ![Storage Screenshot](/extend/component/running/sandbox-data.png)
 
 ### Running without Configuration
-In the [collection of sample requests](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#4c9c7c9f-6cd6-58e7-27e3-aef62538e0ba),
+In the [collection of sample requests](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb),
 there is a **Run without Configuration** example with the following JSON in its body:
 
 {% highlight json %}
@@ -151,7 +151,7 @@ want to generate the config file (e.g., `keboola-test.ex-docs-tutorial`). Enter 
 into **X-StorageAPI-Token** header and run the request.
 
 ### Running with Configuration
-In the [collection of sample requests](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#4c9c7c9f-6cd6-58e7-27e3-aef62538e0ba),
+In the [collection of sample requests](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb),
 there is a **Run with Configuration** example with the the following JSON in its body:
 
 {% highlight json %}
@@ -271,8 +271,8 @@ This is a known [bug in Docker](https://github.com/docker/for-win/issues/1306), 
 ## Running Transformations
 Both R and Python transformations are implemented as Docker components. They can be run
 locally as well. Use the [Debug API](/extend/component/running/#preparing-the-data-folder) call to obtain the data directory.
-In the [API call](http://docs.kebooladocker.apiary.io/#reference/sandbox/input-data/create-an-input-job), specify the full
-configuration (using the `configData` node). See [examples](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#4c9c7c9f-6cd6-58e7-27e3-aef62538e0ba)
+In the [API call](https://kebooladocker.docs.apiary.io/#reference/debug/debug-component/create-a-debug-job), specify the full
+configuration (using the `configData` node). See [examples](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb)
 for both R and Python transformations.
 
 To run R transformations, use:

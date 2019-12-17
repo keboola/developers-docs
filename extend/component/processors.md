@@ -21,7 +21,7 @@ convert the CSV to UTF-8 as expected by [Storage](https://help.keboola.com/stora
 
 Processors are technically supported in any configuration of any component. However, as an **advanced feature**, they have little to no 
 [support in the UI](/extend/component/ui-options/#genericdockerui-processors). To manually configure processors, 
-you have to use the [Component Configuration API](http://docs.keboola.apiary.io/#reference/component-configurations).
+you have to use the [Component Configuration API](https://keboola.docs.apiary.io/#reference/component-configurations).
 See the respective part of our [documentation](/integrate/storage/api/configurations/) for
 examples of working with the [Component Configuration API](/integrate/storage/api/configurations/).
 If you want to implement your own processor, see our [implementation notes](/extend/component/implementation/#implementing-processors).
@@ -34,9 +34,9 @@ Therefore be sure to add an **appropriate warning** to the configuration descrip
 
 ## Configuration
 By running the
-[Get Configuration Detail](http://docs.keboola.apiary.io/#reference/component-configurations/manage-configurations/configuration-detail)
+[Get Configuration Detail](https://keboola.docs.apiary.io/#reference/component-configurations/manage-configurations/configuration-detail)
 request for a specific component ID and configuration ID, you obtain the actual configuration contents.
-You can see [an example request](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb)
+You can see [an example request](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb)
 for getting a configuration with ID `365111648` for the component called Email Attachments extractor (ID `keboola.ex-email-attachments`):
 
 {% highlight json %}
@@ -126,20 +126,20 @@ will run **after** this particular configuration of the Email Attachment extract
 but **before** its results are loaded into Storage. When the processor is finished, its outputs are loaded
 into Storage as if they were the outputs of the extractor itself.
 
-To save the configuration, you need to use the [Update Configuration API call](http://docs.keboola.apiary.io/#reference/component-configurations/manage-configurations/update-configuration).
+To save the configuration, you need to use the [Update Configuration API call](https://keboola.docs.apiary.io/#reference/component-configurations/manage-configurations/update-configuration).
 When updating the configuration, you must provide `componentId`, `configurationId`, and the actual contents of
 the configuration in the `configuration` form field. Make sure to supply only the **contents** of the `configuration`
 node and to properly escape the form data.
 
 See our [configuration documentation](/integrate/storage/api/configurations/#modifying-a-configuration) for
 a more thorough description and the *Add processor to Email Attachments Extractor Configuration* example
-in our [collection](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#91e2060c-0c14-7a09-0cc3-537eb6057ada).
+in our [collection](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb).
 Remember, the processors can be [chained](/extend/component/tutorial/processors/#chaining-processors) to
 achieve more advanced processing.
 
 ### Available Processors
 You can obtain a list of available processors using the
-[Developer Portal UI](https://components.keboola.com/components) or the [List Components Public API](http://docs.kebooladeveloperportal.apiary.io/#reference/0/public-api/list-published-apps)
+[Developer Portal UI](https://components.keboola.com/components) or the [List Components Public API](https://kebooladeveloperportal.docs.apiary.io/#reference/0/public-api/list-published-apps)
 of the Developer Portal. The important parts are `id`, which is required for configuration,
 and `documentationUrl`, which describes additional parameters of the processor.
 
@@ -177,7 +177,7 @@ Provide `componentId`, `configurationId`, `rowId` and the contents of the config
 the same manner as when [adding a processor to configuration](#adding-a-processor).
 
 See an example *Add processor to S3 Extractor configuration Row* in
-[our collection](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#1e7fd94e-f22c-4a77-82c1-babc8602f9cd).
+[our collection](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb).
 It shows how to set a processor for the configuration row with ID `364481153` in configuration `364479526` of
 the AWS S3 extractor (component ID `keboola.ex-aws-s3`). The configuration is the following:
 

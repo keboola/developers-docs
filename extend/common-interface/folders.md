@@ -133,7 +133,7 @@ can be specified in the [manifest file](/extend/common-interface/manifest-files/
 Note that all files in the `/data/out/files` folder will be uploaded, not only those specified in the output mapping.
 
 ## Exchanging Data via S3
-The component may also exchange data with Storage [using Amazon S3](https://aws.amazon.com/documentation/s3/).
+The component may also exchange data with Storage [using Amazon S3](https://docs.aws.amazon.com/s3/index.html).
 In this case, the data folders contain only [manifest files](/extend/common-interface/manifest-files/) and
 not the actual data. This mode of operation can be enabled by setting the `Staging storage input` option to `S3` in
 [component settings](https://components.keboola.com/). If this option is enabled, all the data folders

@@ -1,7 +1,6 @@
 ---
 title: Keboola Connection Developers Documentation
 permalink: /
-showLinkToGithubPage: false
 ---
 
 This documentation site is aimed for developers who are working with Keboola Connection (KBC) programmatically.
