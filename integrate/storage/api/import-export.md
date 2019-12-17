@@ -297,7 +297,7 @@ using it, [pass the credentials](https://docs.aws.amazon.com/cli/latest/topic/co
 by executing , for instance, the following commands
 
 on *nix systems:
-{% highlight bash %}
+{% highlight bash %}  
 export AWS_ACCESS_KEY_ID=ASI...UQQ
 export AWS_SECRET_ACCESS_KEY=LHU...HAp
 export AWS_SESSION_TOKEN=Ago...wU=
