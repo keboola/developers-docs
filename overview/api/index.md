@@ -16,23 +16,23 @@ All parts of the Keboola Connection platform can be controlled via an API.
 The main APIs for our components are:
 
 |---
-| API | Description | APIB
+| API | Description
 |-|-|-
-| [KBC Storage API](http://docs.keboola.apiary.io/#) | [Storage](/integrate/storage/) is the main KBC component storing all data. | [APIB](https://github.com/keboola/storage-api-php-client/blob/master/apiary.apib)
-| [KBC Management API](http://docs.keboolamanagementapi.apiary.io/#) | API managing KBC projects and users (and notifications and features). | [APIB](https://github.com/keboola/kbc-manage-api-php-client/blob/master/apiary.apib)
-| [Encryption API](https://keboolaencryption.docs.apiary.io/#) | Provides [Encryption](/overview/encryption/). | [APIB](https://github.com/keboola/encryption-api/blob/master/apiary.apib)
-| [Docker Runner API](http://docs.kebooladocker.apiary.io/#) | [Docker Runner](/extend/docker-runner/) is the component running other KBC components. | [APIB](https://github.com/keboola/docker-bundle/blob/master/apiary.apib)
-| [JSON Parser API](http://docs.jsonparserapi.apiary.io/#) | JSON Parser is a service [converting JSON files to CSV](https://json-parser.keboola.com/). | [APIB](https://github.com/keboola/jsonparser-api/blob/master/apiary.apib)
-| [Transformation API](http://docs.keboolatransformationapi.apiary.io/) | [Transformations](/integrate/transformations/) is the component running [SQL/R/Python transformations](https://help.keboola.com/manipulation/transformations/). | ---
-| [Provisioning API](http://docs.provisioningapi.apiary.io/) | Provisioning is a service creating accounts for [sandboxes](https://help.keboola.com/manipulation/transformations/sandbox/), [transformations](https://help.keboola.com/manipulation/transformations/) and database writers. | [APIB](https://github.com/keboola/provisioning-client/blob/master/apiary.apib)
-| [Provisioning Management API](http://docs.provisioningmanagementapi.apiary.io/) | API managing servers for [sandboxes](https://help.keboola.com/manipulation/transformations/sandbox/), [transformations](https://help.keboola.com/manipulation/transformations/). | ---
-| [Syrup Queue API](http://docs.syrupqueue.apiary.io/#) | Syrup Queue is a component managing [Jobs](/integrate/jobs/). | [APIB](https://github.com/keboola/syrup-queue/blob/master/apiary.apib)
-| [OAuth Manager API](http://docs.oauthv2.apiary.io/) | DEPRECATED. Use the OAuth Broker API instead. | [APIB](https://github.com/keboola/oauth-v2-bundle/blob/master/apiary.apib)
-| [OAuth Broker API](https://oauthapi3.docs.apiary.io/#) | OAuth Broker is a component managing [OAuth authorizations](/extend/common-interface/oauth/#authorize) of other components. | [Swagger](https://github.com/keboola/sapi-importer/blob/master/api-docs/swagger.yaml)
-| [GoodData Provisioning API](https://keboolagooddataprovisioning.docs.apiary.io/#) | GoodData provisioning is an application for managing GoodData projects and users. | [APIB](https://github.com/keboola/gooddata-provisioning/blob/master/apiary.apib)
-| [Orchestrator API](http://docs.keboolaorchestratorv2api.apiary.io/#) | Orchestrator is a component [automating and scheduling tasks](https://help.keboola.com/tutorial/automate/) in your project. | [APIB](https://github.com/keboola/orchestrator-bundle/blob/master/apiary.apib)
-| [Importer API](https://app.swaggerhub.com/apis-docs/keboola/import/1.0.0) | [Importer](/integrate/storage/api/importer/) is a helper service for easy table imports | [Swagger](https://github.com/keboola/sapi-importer/blob/master/api-docs/swagger.yaml)
-| [Developer Portal API](http://docs.kebooladeveloperportal.apiary.io/#) | Developer Portal is an application separated from KBC for [creating components](/extend/component/). | [APIB](https://github.com/keboola/developer-portal/blob/master/apiary.apib)
+| [KBC Storage API](https://keboola.docs.apiary.io/) | [Storage](/integrate/storage/) is the main KBC component storing all data. 
+| [KBC Management API](https://keboolamanagementapi.docs.apiary.io/) | API managing KBC projects and users (and notifications and features). 
+| [Encryption API](https://keboolaencryption.docs.apiary.io/#) | Provides [Encryption](/overview/encryption/). 
+| [Docker Runner API](https://kebooladocker.docs.apiary.io/#) | [Docker Runner](/extend/docker-runner/) is the component running other KBC components. 
+| [JSON Parser API](https://jsonparserapi.docs.apiary.io/#) | JSON Parser is a service [converting JSON files to CSV](https://json-parser.keboola.com/). 
+| [Transformation API](https://keboolatransformationapi.docs.apiary.io/#) | [Transformations](/integrate/transformations/) is the component running [SQL/R/Python transformations](https://help.keboola.com/manipulation/transformations/). 
+| [Provisioning API](https://provisioningapi.docs.apiary.io/#) | Provisioning is a service creating accounts for [sandboxes](https://help.keboola.com/manipulation/transformations/sandbox/), [transformations](https://help.keboola.com/manipulation/transformations/) and database writers. 
+| [Provisioning Management API](https://provisioningmanagementapi.docs.apiary.io/#) | API managing servers for [sandboxes](https://help.keboola.com/manipulation/transformations/sandbox/), [transformations](https://help.keboola.com/manipulation/transformations/). 
+| [Syrup Queue API](https://syrupqueue.docs.apiary.io/#) | Syrup Queue is a component managing [Jobs](/integrate/jobs/). 
+| [OAuth Manager API](https://oauthv2.docs.apiary.io/#) | DEPRECATED. Use the OAuth Broker API instead. 
+| [OAuth Broker API](https://oauthapi3.docs.apiary.io/#) | OAuth Broker is a component managing [OAuth authorizations](/extend/common-interface/oauth/#authorize) of other components. 
+| [GoodData Provisioning API](https://keboolagooddataprovisioning.docs.apiary.io/#) | GoodData provisioning is an application for managing GoodData projects and users. 
+| [Orchestrator API](https://keboolaorchestratorv2api.docs.apiary.io/#) | Orchestrator is a component [automating and scheduling tasks](https://help.keboola.com/tutorial/automate/) in your project. 
+| [Importer API](https://app.swaggerhub.com/apis-docs/keboola/import/1.0.0) | [Importer](/integrate/storage/api/importer/) is a helper service for easy table imports 
+| [Developer Portal API](https://kebooladeveloperportal.docs.apiary.io/#) | Developer Portal is an application separated from KBC for [creating components](/extend/component/).
 
 If you don't know which API to use, see our [integration guide](/integrate/). It describes different roles of the APIs and contains examples of commonly
 performed actions.
@@ -142,7 +142,7 @@ however, it has no history and no other useful features.
 
 ### Postman Client
 [Postman](https://www.getpostman.com/) is a generic HTTP API client. Use it if you work with KBC APIs on a more regular basis.
-We also provide a collection of [useful API calls](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#4c9c7c9f-6cd6-58e7-27e3-aef62538e0ba) with examples.
+We also provide a collection of [useful API calls](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb) with examples.
 The collection contains code examples in various languages; the requests can also be imported into the Postman application.
 
 {: .image-popup}

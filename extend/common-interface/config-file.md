@@ -138,13 +138,13 @@ configurations, `KBC::ProjectSecure::` ciphers are used.
 
 ### State File Properties
 Because the state is stored as part of a
-[Component configuration](http://docs.keboola.apiary.io/#reference/component-configurations),
+[Component configuration](https://keboola.docs.apiary.io/#reference/component-configurations),
 the value of the state object is somewhat limited (should not generally exceed 1MB). It should not
 be used to store large amounts of data.
 
 Also, the end-user cannot easily access the data through the UI.
 The data can be, however, modified outside of the component itself using the
-[Component configuration](http://docs.keboola.apiary.io/#reference/component-configurations) API calls.
+[Component configuration](https://keboola.docs.apiary.io/#reference/component-configurations) API calls.
 
 **Important:** The state file is not thread-safe. If multiple instances of the **same configuration**
 are run simultaneously in the **same project**, the one writing data later wins. Use the state file more
@@ -183,7 +183,7 @@ validated and a wrong format will cause a component failure.*
 To create an example configuration, use the [Debug API call](/extend/component/running/#preparing-the-data-folder). You will get a
 `stage_0.zip` archive in your **Storage** --- **File uploads**, which will contain the `config.json` file.
 You can also use these configuration structure to create an API request for
-actually [running a component](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job).
+actually [running a component](https://kebooladocker.docs.apiary.io/#reference/run/create-a-job).
 If you want to manually pass configuration options in the API request, be sure to wrap it around in the `configData` node.
 
 A sample configuration file might look like this:
@@ -239,7 +239,7 @@ A sample configuration file might look like this:
 
 ### Tables
 Tables from the input mapping are mounted to `/data/in/tables`.
-Input mapping parameters are similar to the [Storage API export table options ](http://docs.keboola.apiary.io/#tables).
+Input mapping parameters are similar to the [Storage API export table options](https://keboola.docs.apiary.io/#reference/tables/unload-data-asynchronously).
 If `destination` is not set, the CSV file will have the same name as the table (without adding `.csv` suffix).
 The tables element in a configuration of the **input mapping** is an array and supports the following attributes:
 

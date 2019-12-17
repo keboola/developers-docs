@@ -72,7 +72,7 @@ contents:
 
 The `name` node refers to the name of the component configuration.
 The `metadata` and `column_metadata` fields contains
-[Metadata](http://docs.keboola.apiary.io/#reference/metadata) for the table and its columns.
+[Metadata](https://keboola.docs.apiary.io/#reference/metadata) for the table and its columns.
 
 #### `/data/out/tables` manifests
 
@@ -112,9 +112,9 @@ table is imported. See an [example](/extend/common-interface/config-file/#output
 Using this option makes sense only with [incremental loads](/extend/generic-extractor/incremental/).
 
 The `metadata` and `column_metadata` fields allow you to set
-[Metadata](http://docs.keboola.apiary.io/#reference/metadata) for the table and its columns.
-The `metadata` field corresponds to the [Table Metadata API call](http://docs.keboola.apiary.io/#reference/metadata/table-metadata/create-or-update).
-The `column_metadata` field corresponds to the [Column Metadata API call](http://docs.keboola.apiary.io/#reference/metadata/column-metadata/create-or-update).
+[Metadata](https://keboola.docs.apiary.io/#reference/metadata) for the table and its columns.
+The `metadata` field corresponds to the [Table Metadata API call](https://keboola.docs.apiary.io/#reference/metadata/table-metadata/create-or-update).
+The `column_metadata` field corresponds to the [Column Metadata API call](https://keboola.docs.apiary.io/#reference/metadata/column-metadata/create-or-update).
 In both cases, the `key` and `value` are passed directly to the API; the `provider` value is
 filled by the Id of the running component (e.g., `keboola.ex-db-snowflake`).
 
@@ -183,7 +183,7 @@ manifest fields; all of them are optional.
 }
 {% endhighlight %}
 
-These parameters can be used (taken from [Storage API File Import](http://docs.keboola.apiary.io/#files)):
+These parameters can be used (taken from [Storage API File Import](https://keboola.docs.apiary.io/#reference/files/upload-file/create-file-resource)):
 
 - If `is_permanent` is false, the file will be automatically deleted after 180 days.
 - When `notify` is true, the members of the project will be notified that a file has been uploaded to the project.

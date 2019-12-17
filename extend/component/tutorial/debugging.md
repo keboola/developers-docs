@@ -36,10 +36,10 @@ injected into the image when you [run it](/extend/docker-runner/). To simulate t
 and [configuration](/extend/common-interface/config-file/) in the exact same format you get in the production environment.
 
 Use the [Debug API call](https://kebooladocker.docs.apiary.io/#reference/debug/debug-component/create-a-debug-job).
-You can see it in our [API request collection](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#4c9c7c9f-6cd6-58e7-27e3-aef62538e0ba).
+You can see it in our [API request collection](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb).
 In the [API call](https://kebooladocker.docs.apiary.io/#reference/debug/debug-component/create-a-debug-job), either specify the
 full configuration (using the `configData` node) or refer to an existing configuration
-of the component (using the `config` node). See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#4c9c7c9f-6cd6-58e7-27e3-aef62538e0ba).
+of the component (using the `config` node). See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb).
 
 The Debug API call will prepare the data folder for the component, put it inside an archive and upload it to KBC Storage.
 When running the request with valid parameters, you should receive a response similar to this:
@@ -185,7 +185,7 @@ Since you are debugging, it is not wise to add this for all customers. Therefore
 the code and tag it with a **non-**[normal version tag](https://semver.org/#spec-item-2), for example, `0.0.7-test`.
 Such a tag will be deployed as a Docker image, but it won't (automatically) update in the
 Developer Portal. That means the previous tag will be still used for all jobs. However, you can
-run the new tag manually, using the [Run Tag API call](https://kebooladocker.docs.apiary.io/#reference/run/create-a-job-with-image/run-job). Again, feel free to use our [collection](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#e8adcb14-951c-6199-2484-367ad6620c08).
+run the new tag manually, using the [Run Tag API call](https://kebooladocker.docs.apiary.io/#reference/run/create-a-job-with-image/run-job). Again, feel free to use our [collection](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb).
 
 If you added the above debug code to the component `keboola-test.ex-docs-tutorial` and
 tagged the release `0.0.7-test`, you can run the configuration `354678919` by issuing the

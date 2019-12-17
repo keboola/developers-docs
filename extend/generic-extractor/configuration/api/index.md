@@ -103,7 +103,7 @@ value may be as follows:
 
 - Number of seconds before the next request
 - [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time) of the time of the next request
-- String date in [RFC 1123 format](http://php.net/manual/en/class.datetime.php#datetime.constants.rfc1123) of the
+- String date in [RFC 1123 format](https://www.php.net/manual/en/class.datetime.php#datetime.constants.rfc1123) of the
 time of the next request
 
 The second and third options are often called **Rate Limit Reset** as they describe when the next successful request

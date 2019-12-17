@@ -8,7 +8,7 @@ permalink: /extend/generic-extractor/configuration/api/pagination/response-url/
 
 The Response URL Scroller can be used with APIs that provide the URL of the 
 next page in the response. This scroller is suitable for APIs supporting the 
-[JSON API specification](http://jsonapi.org/format/#fetching-pagination).
+[JSON API specification](https://jsonapi.org/format/#fetching-pagination).
 
 {% highlight json %}
 {
@@ -47,7 +47,7 @@ key name, the extraction will not go beyond the first page.
 This section provides three API pagination examples where the Response URL Scroller is used.
 
 ### Basic Configuration
-To configure pagination for an API that supports the [JSON API specification](http://jsonapi.org/format/#fetching-pagination),
+To configure pagination for an API that supports the [JSON API specification](https://jsonapi.org/format/#fetching-pagination),
 use the configuration below:
 
 {% highlight json %}

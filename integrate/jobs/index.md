@@ -47,17 +47,17 @@ A job can have different statuses:
 - terminated (a job was created and it was aborted in the middle of its execution)
 
 ## APIs for Working with Jobs
-To create a Job, use our Docker Runner API described on [Apiary.io](http://docs.kebooladocker.apiary.io/). Docker Runner
+To create a Job, use our Docker Runner API described on [Apiary.io](https://kebooladocker.docs.apiary.io/#). Docker Runner
 has API calls to
 
 - create a job --- run a [component](/extend/component/),
 - [encrypt values](/overview/encryption/),
 - [prepare the data folder](/extend/component/running/#preparing-the-data-folder), and
-- run a [component](/extend/component/) with a [specified docker image tag](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job-with-image/run-job), usable for [testing images](/extend/component/deployment/#test-live-configurations).
+- run a [component](/extend/component/) with a [specified docker image tag](https://kebooladocker.docs.apiary.io/#reference/run/create-a-job-with-image/run-job), usable for [testing images](/extend/component/deployment/#test-live-configurations).
 
-You also need a *Syrup Queue* API to [poll Job status](http://docs.syrupqueue.apiary.io/#reference/jobs/job/view-job-detail).
+You also need a *Syrup Queue* API to [poll Job status](https://syrupqueue.docs.apiary.io/#reference/jobs/job/view-job-detail).
 
-The first API requires a component parameter; use the [Component API](http://docs.keboola.apiary.io/#reference/component-configurations/list-components/get-components)
+The first API requires a component parameter; use the [Component API](https://keboola.docs.apiary.io/#reference/component-configurations/list-components/get-components)
 to get a list of components.
 The second API is generic for all components. To work with the API, use our
 [Syrup PHP Client](https://github.com/keboola/syrup-php-client). In case you want to implement things
@@ -65,9 +65,9 @@ yourself, copy the part of [Job Polling](https://github.com/keboola/syrup-php-cl
 
 Note that there are other special cases of asynchronous operations which are
 in principle the same, but may differ in little details. The most common one is:
-[Storage Jobs](http://docs.keboola.apiary.io/#reference/jobs/manage-jobs/job-detail), triggered, for instance, by
-[asynchronous imports](http://docs.keboola.apiary.io/#reference/tables/create-table-asynchronously/create-new-table-from-csv-file-asynchronously)
-or [exports](http://docs.keboola.apiary.io/#reference/tables/table-export-asynchronously/asynchronous-export)
+[Storage Jobs](https://keboola.docs.apiary.io/#reference/jobs/manage-jobs/job-detail), triggered, for instance, by
+[asynchronous imports](https://keboola.docs.apiary.io/#reference/tables/create-table-asynchronously/create-new-table-from-csv-file-asynchronously)
+or [exports](https://keboola.docs.apiary.io/#reference/tables/unload-data-asynchronously/asynchronous-export)
 
 Apart from running predefined configurations with a `run` action, each component may
 provide additional options to create an asynchronous background job, or it may also support synchronous actions.
@@ -83,8 +83,8 @@ The highlighted [Docker Runner](/extend/docker-runner) part is described in a [s
 ## Creating and Running a Job
 You need to know the *component Id* and *configuration Id* to create a job. To obtain a list of all components available
 in the project, and their configuration, you can use the
-[corresponding API call](http://docs.keboola.apiary.io/#reference/component-configurations/list-components/get-components).
-See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#5dca0c54-a974-1601-47f4-14c2ba9b56fc).
+[corresponding API call](https://keboola.docs.apiary.io/#reference/component-configurations/list-components/get-components).
+See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb).
 A snippet of the response is below:
 
 {% highlight json %}
@@ -127,7 +127,7 @@ From there, the important part is the `id` field and `configurations.id` field. 
 above, there is a database extractor with the `id` `keboola.ex-db-snowflake` and a
 configuration with the id `328864809`.
 
-Then use the [create a job](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job/run-job)
+Then use the [create a job](https://kebooladocker.docs.apiary.io/#reference/run/create-a-job/run-job)
 API call and pass the configuration ID in request body:
 
 {% highlight json %}
@@ -136,7 +136,7 @@ API call and pass the configuration ID in request body:
 }
 {% endhighlight %}
 
-See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#8a7302c6-cb27-f39d-656c-b0f1d99bb421).
+See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb).
 When a job is created, you will obtain a response similar to this:
 
 {% highlight json %}
@@ -152,8 +152,8 @@ From the above response, the most important part is `url`, which gives you the U
 [Job status polling](https://en.wikipedia.org/wiki/Polling_(computer_science)).
 
 ## Job Polling
-If you want to get the actual job result, poll the [Job API](http://docs.syrupqueue.apiary.io/#reference/jobs/job/view-job-detail)
-for the current state of the job. See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D#00d466ec-a65e-ae88-1785-67efcafd6f8d).
+If you want to get the actual job result, poll the [Job API](https://syrupqueue.docs.apiary.io/#reference/jobs/job/view-job-detail)
+for the current state of the job. See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb).
 
 You will receive a response similar to this:
 

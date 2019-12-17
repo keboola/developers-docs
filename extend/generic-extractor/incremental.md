@@ -80,7 +80,7 @@ See [example [EX107]](https://github.com/keboola/generic-extractor/tree/master/d
 
 The last successful time is stored in the [configuration state](/extend/common-interface/config-file/#state-file).
 If for some reason you need to reset it, 
-[update the configuration via API](http://docs.keboola.apiary.io/#reference/component-configurations/manage-configurations/update-configuration).
+[update the configuration via API](https://keboola.docs.apiary.io/#reference/component-configurations/manage-configurations/update-configuration).
 
 ### Previous Start Date
 If an API similar to the one in the [above example](#previous-start-example) requires the date to be 
@@ -113,7 +113,7 @@ This sends a request like:
 
     GET /users?modified_since=2017-04-19%2012%3A46%3A46
 
-in a more readable [url-decoded](http://meyerweb.com/eric/tools/dencoder/) form:
+in a more readable [url-decoded](https://meyerweb.com/eric/tools/dencoder/) form:
 
 	GET /users?modified_since=2017-04-19 12:46:46
 

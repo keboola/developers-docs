@@ -242,7 +242,7 @@ You can also have a look at a [10 minute video](https://www.youtube.com/watch?v=
 ## GitLab Integration
 The [development tutorial](/extend/component/tutorial/) as well as the above description assume you're using
 Travis CI Service for building and deploying the image. Travis integrates very well with [GitHub](https://github.com/), but not with
-[GitLab](https://gitlab.com/). However, GitLab has its own continuous integration service --
+[GitLab](https://about.gitlab.com/). However, GitLab has its own continuous integration service --
 [CI Pipelines](https://docs.gitlab.com/ee/ci/pipelines.html).
 
 You have to set the environment variables in settings:
@@ -297,15 +297,15 @@ As in the [above script](/extend/component/deployment/#deploy-script),
 we recommend using the [Developer Portal CLI client](https://github.com/keboola/developer-portal-cli-v2). This CLI tool (runnable in Docker or PHP)
 allows you to obtain the repository for a component and push credentials to that repository. See the chapter about
 [running components](/extend/component/running/#running-a-component), for example, how to obtain the AWS registry credentials.
-If you want to get even more low level, you can use the [Developer Portal API](http://docs.kebooladeveloperportal.apiary.io/#) directly.
-It also allows you to [generate credentials for a service account](http://docs.kebooladeveloperportal.apiary.io/#reference/0/vendors/generate-credentials-for-service-account)
+If you want to get even more low level, you can use the [Developer Portal API](https://kebooladeveloperportal.docs.apiary.io/#) directly.
+It also allows you to [generate credentials for a service account](https://kebooladeveloperportal.docs.apiary.io/#reference/0/vendor/create-service-account)
 programmatically. Apart from our AWS ECR registry, we also support running images stored in [Quay.io](https://quay.io/repository/)
 and [Docker Hub](https://hub.docker.com/) registries.
 
 ## Test Live Configurations
 Testing your component can be simply added as part of the script in `.travis.yml` file. See an example in
 [Python](https://github.com/keboola/component-generator/blob/master/templates/python-tests/.travis.yml) or
-[PHP](https://github.com/keboola/component-generator/blob/master/templates/php-keboola/.travis.yml).
+[PHP](https://github.com/keboola/component-generator/blob/master/templates/php-component/.travis.yml).
 
 However, you may want to test the component on some 'real' configurations
 in your project. You can do this by extending the build script and adding certain environment variables to
@@ -370,7 +370,7 @@ The commands above
 - get the command to login to the registry (`ecr:get-login`) and execute it (i.e., log in).
 - push the image to the registry.
 - pull the job runner CLI client ([Syrup PHP CLI](https://github.com/keboola/syrup-php-cli)).
-- run the specified test job on KBC using the `/{component}/{config}/run/tag/{tag}` -- [Keboola Docker API](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job-with-image/run-job). The tag used is `test`.
+- run the specified test job on KBC using the `/{component}/{config}/run/tag/{tag}` -- [Keboola Docker API](https://kebooladocker.docs.apiary.io/#reference/run/create-a-job-with-image/run-job). The tag used is `test`.
 
 If you want to run multiple test jobs, simply repeat the command with the different configuration IDs
 that you would like to test.
@@ -380,6 +380,6 @@ However, it will not be deployed to production! To get it into production, creat
 The Docker image will be built and tested using the `test` tag, and if all succeeds, it will be deployed
 with the `x.y.z` tag into KBC --- a new version will be available in production.
 You can see the [Python code](https://github.com/keboola/component-generator/tree/master/templates/python-tests) or
-[PHP code](https://github.com/keboola/component-generator/tree/master/templates/php-keboola) in our
+[PHP code](https://github.com/keboola/component-generator/tree/master/templates/php-component/) in our
 [Templates repository](https://github.com/keboola/component-generator/tree/master/templates)
 or in our [Docker Demo App](https://github.com/keboola/docker-demo-app) GitHub repository.

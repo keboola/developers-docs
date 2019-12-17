@@ -6,7 +6,7 @@ permalink: /integrate/storage/python-client/
 * TOC
 {:toc}
 
-The Python client library is a [Storage API client](http://docs.keboola.apiary.io/) which you can use in your Python code.
+The Python client library is a [Storage API client](https://keboola.docs.apiary.io/#) which you can use in your Python code.
 The current implementation supports all basic data manipulations:
 
 - Importing data

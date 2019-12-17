@@ -22,7 +22,7 @@ The following environment variables are injected in the container:
  - `KBC_STACKID`: Id of the [KBC stack](/overview/api/#regions-and-endpoints).
  - `KBC_CONFIGID`: Id of the configuration or hash of configuration data if the configuration
  is not named (`configData` was used in
- [API call](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job/create-a-run-job)).
+ [API call](https://kebooladocker.docs.apiary.io/#reference/run/create-a-job/run-job)).
  - `KBC_COMPONENTID`: Id of the component
 
  The following variables are available only if "Forwards token" and "Forwards token details" are

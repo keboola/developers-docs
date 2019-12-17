@@ -55,7 +55,7 @@ able to [run `docker`](/extend/component/docker-tutorial/setup/) commands. Stric
 without using it, but it will certainly speed things up for you.
 - be able to send API requests. Although you can use the [Apiary](https://apiary.io/) client console, we
 recommend using [Postman](https://www.getpostman.com/) as it is
-more convenient. A list of [sample requests](https://documenter.getpostman.com/view/3086797/collection/77h845D)
+more convenient. A list of [sample requests](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest)
 is available.
 - have a git repository ([Github](https://github.com/) or [Bitbucket](https://bitbucket.org/) are recommended, 
 although any other host should work as well).
@@ -111,7 +111,7 @@ If you want to set up the deployment integration manually, read the [deployment 
 It also describes integration with [Bitbucket](/extend/component/deployment/#bitbucket-integration)
 and [GitLab](/extend/component/deployment/#gitlab-integration), which is also seamless. Basically, you need to do the following:
 
-- Enable the building of the repository (either on [Travis](https://docs.travis-ci.com/) or in [BitBucket Pipelines](https://bitbucket.org/product/features/pipelines) or [GitLab CI](https://about.gitlab.com/features/gitlab-ci-cd/)).
+- Enable the building of the repository (either on [Travis](https://docs.travis-ci.com/) or in [BitBucket Pipelines](https://bitbucket.org/product/features/pipelines) or [GitLab CI](https://about.gitlab.com/product/continuous-integration/)).
 - Set the [environment variables](/extend/component/deployment/#deploy-configuration).
 - Create a [normal version](https://semver.org/#spec-item-2) git tag (`x.y.z` tag) and push to the repository.
 - Wait for the build to finish and automatically deploy the new version of your component to KBC.

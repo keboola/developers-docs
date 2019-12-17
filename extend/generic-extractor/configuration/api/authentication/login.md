@@ -55,7 +55,7 @@ The following configuration parameters are supported for the `login` type of aut
     - `query` (optional, object) --- an object with key-value properties containing URL query parameters. The names are parameter names, and the values are paths in the JSON response from which the actual values are extracted.
 - `expires` (optional, mixed) --- either an integer value specifying a fixed number of seconds after which the **login request** will be sent again (see an [example](#expiration-basic)); or, an object with the following properties:
     - `response` (required, string) --- a path in the JSON response which contains the expiration time. It can be either:
-        - a string which can be processed by the [`strtotime` function](http://php.net/manual/en/function.strtotime.php) (see an [example](#expiration-from-response)), or
+        - a string which can be processed by the [`strtotime` function](https://www.php.net/manual/en/function.strtotime.php) (see an [example](#expiration-from-response)), or
         - a numeric [timestamp](https://en.wikipedia.org/wiki/Unix_time) (with `"relative": false`), or
         - a number of seconds for which the credentials are valid (with `"relative": true`).
     - `relative` (optional, boolean) --- When true, the expiration time is relative to the current time. The default value is `false`.

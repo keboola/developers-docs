@@ -38,7 +38,7 @@ as they can substantially simplify your component code. We also recommend that y
 and [PHP](/extend/component/implementation/php/#using-the-kbc-package).
 
 ## Docker
-You may use any Docker image you see fit. We recommend to base your images on those from an [official repository](https://hub.docker.com/explore/)
+You may use any Docker image you see fit. We recommend to base your images on those from an [official repository](https://hub.docker.com/search?q=&type=image)
 because they are the most stable ones.
 
 We publicly provide images for transformations and sandboxes.
@@ -169,7 +169,7 @@ you can, for example, rely on
 If the above conditions are not met, then another processor should be added before yours. I.e. you should keep the
 processor simple and delegate the assumptions to other processors (and [**document** them](#publishing-a-processor)). If possible the
 processor should also assume that the CSV files are headless and stored in arbitrary sub-folders. When implemented with this assumption
-the processor will support [sliced tables]([sliced tables](/extend/common-interface/folders/#sliced-tables)).
+the processor will support [sliced tables](/extend/common-interface/folders/#sliced-tables).
 
 ### Publishing Processor
 The process of processor registration is the same as [publishing any other component](/extend/publish/).

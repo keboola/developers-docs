@@ -9,10 +9,10 @@ redirect_from:
 {:toc}
 
 To work with Docker, you need to have it installed. If you do not have a computer with a Docker machine, you can obtain a
-cheap [hosted server](https://www.digitalocean.com/features/one-click-apps/docker/). You can also
+cheap [hosted server](https://marketplace.digitalocean.com/apps/docker). You can also
 run everything locally. To install a Docker machine on Win/Mac,
-use [Docker Community Edition](https://store.docker.com/search?type=edition&offering=community). For
-other systems, see the [documentation](https://docs.docker.com/engine/installation/).
+use [Docker Community Edition](https://hub.docker.com/search?type=edition&offering=community). For
+other systems, see the [documentation](https://docs.docker.com/install/).
 
 ## Getting Started
 To test that everything is running correctly, start with an example
@@ -45,7 +45,7 @@ Sharing files between the host OS and the container is done using the `--volume`
     docker run --volume=/hostPath/:/containerPath/ imageName
 
 Do not use any spaces around `:`. The details of file sharing are somewhat
-[dependent on the host OS](https://docs.docker.com/engine/admin/volumes/volumes/#start-a-container-with-a-volume) you are using.
+[dependent on the host OS](https://docs.docker.com/storage/volumes/) you are using.
 There is a very
 useful [guide for Rocker image](https://github.com/rocker-org/rocker/wiki/Sharing-files-with-host-machine), which
 describes all the sharing options in great detail.

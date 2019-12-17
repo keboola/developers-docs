@@ -13,26 +13,26 @@ Storage is a layer on top of a [database backend](https://help.keboola.com/stora
 
 To upload a table, take the following steps:
 
-- Request a [file upload](http://docs.keboola.apiary.io/#reference/files/upload-file/upload-arbitrary-file-to-keboola) from
+- Request a [file upload](https://keboola.docs.apiary.io/#reference/files/upload-file/create-file-resource) from
 KBC File Storage. You will be given a destination for the uploaded file on an S3 server.
 - Upload the file there. When the upload is finished, the data file will be available in the *File Uploads* section.
-- Initiate an [asynchronous table import](http://docs.keboola.apiary.io/#reference/tables/load-data-asynchronously/imports-data)
+- Initiate an [asynchronous table import](https://keboola.docs.apiary.io/#reference/tables/load-data-asynchronously/import-data)
 from the uploaded file (use it as the `dataFileId` parameter) into the destination table.
 The import is asynchronous, so the request only creates a job and you need to poll for its results.
-The imported files must conform to the [supported CSV format](http://docs.keboola.apiary.io/#reference/csv-files-formats).
+The imported files must conform to the [RFC4180 Specification](https://tools.ietf.org/html/rfc4180).
 
 {: .image-popup}
 ![Schema of file upload process](/integrate/storage/api/async-import-handling.svg)
 
 Exporting a table from Storage is analogous to its importing. First, data is [asynchronously
-exported](http://docs.keboola.apiary.io/#reference/tables/unload-data-asynchronously/asynchronous-export) from
+exported](https://keboola.docs.apiary.io/#reference/tables/unload-data-asynchronously/asynchronous-export) from
 Table Storage into File Uploads. Then you can request to [download
-the file](http://docs.keboola.apiary.io/#reference/files/manage-files/file-detail), which will give you
+the file](https://keboola.docs.apiary.io/#reference/files/manage-files/file-detail), which will give you
 access to an S3 server for the actual file download.
 
 ### Manually Uploading a File
 To upload a file to KBC File Storage, follow the instructions outlined in the
-[API documentation](http://docs.keboola.apiary.io/#reference/files/upload-file/upload-arbitrary-file-to-keboola).
+[API documentation](https://keboola.docs.apiary.io/#reference/files/upload-file/create-file-resource).
 First create a file resource; to create a new file called
 [`new-file.csv`](/integrate/storage/new-table.csv) with `52` bytes, call:
 
@@ -80,8 +80,8 @@ which gives you credentials to AWS S3 to upload your file, and
 the `key` and `bucket` nodes, which define the target S3 destination as *s3://`bucket`/`key`*.
 To upload the files to S3, you need an S3 client. There are a large number of clients available:
 for example, use the
-[S3 AWS command line client](http://docs.aws.amazon.com/cli/latest/userguide/installing.html).
-Before using it, [pass the credentials](http://docs.aws.amazon.com/cli/latest/topic/config-vars.html#credentials)
+[S3 AWS command line client](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html).
+Before using it, [pass the credentials](https://docs.aws.amazon.com/cli/latest/topic/config-vars.html#credentials)
 by executing, for instance, the following commands
 
 on *nix systems:
@@ -98,13 +98,13 @@ SET AWS_SECRET_ACCESS_KEY=QbO...7qu
 SET AWS_SESSION_TOKEN=Ago...bsF
 {% endhighlight %}
 
-Then you can actually upload the `new-table.csv` file by executing the AWS S3 CLI [cp command](http://docs.aws.amazon.com/cli/latest/reference/s3/cp.html):
+Then you can actually upload the `new-table.csv` file by executing the AWS S3 CLI [cp command](https://docs.aws.amazon.com/cli/latest/reference/s3/cp.html):
 {% highlight bash %}
 aws s3 cp new-table.csv s3://kbc-sapi-files/exp-180/1134/files/2016/06/22/192726697.new_file2.csv
 {% endhighlight %}
 
 After that, import the file into Table Storage, by calling either
-[Create Table API call](http://docs.keboola.apiary.io/#reference/tables/create-table-asynchronously/create-new-table-from-csv-file-asynchronously)
+[Create Table API call](https://keboola.docs.apiary.io/#reference/tables/create-table-asynchronously/create-new-table-from-csv-file-asynchronously)
 (for a new table) or
 [Load Data API call](https://keboola.docs.apiary.io/#reference/tables/load-data-asynchronously/import-data)
 (for an existing table).
@@ -118,7 +118,7 @@ Then [poll for the job results](/integrate/jobs/#job-polling), or review its sta
 
 #### Python Example
 The above process is implemented in the following example script in Python. This script uses the
-[Requests](http://docs.python-requests.org/en/master/) library for sending HTTP requests and
+[Requests](https://2.python-requests.org/en/master/) library for sending HTTP requests and
 the [Boto 3](https://github.com/boto/boto3) library for working with Amazon S3. Both libraries can be
 installed using pip:
 
@@ -166,7 +166,7 @@ The above will return a response similar to this:
 {% endhighlight %}
 
 After that, import the file into Table Storage by calling either
-[Create Table API call](http://docs.keboola.apiary.io/#reference/tables/create-table-asynchronously/create-new-table-from-csv-file-asynchronously)
+[Create Table API call](https://keboola.docs.apiary.io/#reference/tables/create-table-asynchronously/create-new-table-from-csv-file-asynchronously)
 (for a new table) or
 [Load Data API call](https://keboola.docs.apiary.io/#reference/tables/load-data-asynchronously/import-data)
 (for an existing table).
@@ -233,7 +233,7 @@ HTTP request and may therefore suffer from timeouts, especially for large files.
 ### Working with Sliced Files
 Depending on the backend and table size, the data file may be sliced into chunks.
 Requirements for uploading sliced files are described in the respective part of the
-[API documentation](http://docs.keboola.apiary.io/#reference/files/upload-file/upload-arbitrary-file-to-keboola).
+[API documentation](https://keboola.docs.apiary.io/#reference/files/upload-file/create-file-resource).
 
 When you attempt to download a sliced file, you will instead obtain its manifest
 listing the individual parts. Download the parts individually and join them
@@ -243,7 +243,7 @@ our [TableExporter class](https://github.com/keboola/storage-api-php-client/blob
 **Important:** When exporting a table through the *Table* --- *Export* UI, the file will
 be already merged and listed in the *File Uploads* section with the `storage-merged-export` tag.
 
-If you want to download a sliced file, [get credentials](http://docs.keboola.apiary.io/#reference/files/manage-files/file-detail)
+If you want to download a sliced file, [get credentials](https://keboola.docs.apiary.io/#reference/files/manage-files/file-detail)
 to download the file from AWS S3. Assuming that the file ID is 192611596, for example, call
 
 {% highlight bash %}
@@ -292,8 +292,8 @@ similar to this:
 Now you can download the actual data file slices. URLs are provided in the manifest file, and credentials to them
 are returned as part of the previous file info call. To download the files from S3, you need an S3 client. There
 are a wide number of clients available; for example, use the
-[S3 AWS command line client](http://docs.aws.amazon.com/cli/latest/userguide/installing.html). Before
-using it, [pass the credentials](http://docs.aws.amazon.com/cli/latest/topic/config-vars.html#credentials)
+[S3 AWS command line client](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html). Before
+using it, [pass the credentials](https://docs.aws.amazon.com/cli/latest/topic/config-vars.html#credentials)
 by executing , for instance, the following commands
 
 on *nix systems:
@@ -310,7 +310,7 @@ SET AWS_SECRET_ACCESS_KEY=LHU...HAp
 SET AWS_SESSION_TOKEN=Ago...wU=
 {% endhighlight %}
 
-Then you can actually download the files by executing the AWS S3 CLI [cp command](http://docs.aws.amazon.com/cli/latest/reference/s3/cp.html):
+Then you can actually download the files by executing the AWS S3 CLI [cp command](https://docs.aws.amazon.com/cli/latest/reference/s3/cp.html):
 {% highlight bash %}
 aws s3 cp s3://kbc-sapi-files/exp-30/578/table-exports/in/c-redshift/blog-data/192611594.csv0000_part_00 192611594.csv0000_part_00
 aws s3 cp s3://kbc-sapi-files/exp-30/578/table-exports/in/c-redshift/blog-data/192611594.csv0001_part_00 192611594.csv0001_part_00

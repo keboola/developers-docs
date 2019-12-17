@@ -7,7 +7,7 @@ permalink: /integrate/storage/api/tde-exporter/
 {:toc}
 
 [TDE Exporter](https://github.com/keboola/tde-exporter) exports tables from KBC Storage into the
-[TDE file format (Tableau Data Extract)](http://www.tableau.com/about/blog/2014/7/understanding-tableau-data-extracts-part1).
+[TDE file format (Tableau Data Extract)](https://www.tableau.com/about/blog/2014/7/understanding-tableau-data-extracts-part1).
 This component is normally a part of the [Tableau Writer](https://help.keboola.com/tutorial/write/),
 but it can also be used as a standalone component.
 
@@ -22,7 +22,7 @@ custom configurations supplied directly in the `run` request.
 
 ### Stored Configuration
 To run the TDE exporter with a stored configuration, first
-[create the configuration](http://docs.keboola.apiary.io/#reference/component-configurations/component-configs/create-config).
+[create the configuration](https://keboola.docs.apiary.io/#reference/component-configurations/component-configurations/create-configuration).
 See [below](#custom-configuration) for the required configuration contents.
 This call will give you the ID of the newly created configuration (for instance, `new-configuration-id`).
 Then [create a job](/integrate/jobs/) with the specified configuration:
@@ -73,12 +73,12 @@ The `parameters` section contains:
 The type definitions are entered as an object whose name must match the name of the table in the
 `storage.input.tables.source` node (`in.c-main.old-table` in the above example). Object properties
 are names of the table columns; each must have the `type` property which is one of the
-[supported column types](https://onlinehelp.tableau.com/current/pro/online/mac/en-us/datafields_typesandroles_datatypes.html):
+[supported column types](https://help.tableau.com/current/pro/desktop/en-us/datafields_typesandroles_datatypes.htm):
 `boolean`, `number`, `decimal`, `date`, `datetime` and `string`.
 
 ## Date and DateTime
 Data for these data types can be specified in the format used
-in the [strptime function](http://pubs.opengroup.org/onlinepubs/009695399/functions/strptime.html). The format is specified as part of the column's type definition. For example:
+in the [strptime function](https://pubs.opengroup.org/onlinepubs/009695399/functions/strptime.html). The format is specified as part of the column's type definition. For example:
 
 {% highlight json %}
 {

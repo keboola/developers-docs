@@ -43,7 +43,7 @@ A [component](/extend/component/) can be used as:
 
 All components are run using [Docker Runner](/extend/docker-runner/), a component that takes
 care of their authentication, starting, stopping, isolation, reading data from and writing it to KBC Storage. They must adhere to the
-[common interface](/extend/common-interface/). Creating components requires an elementary knowledge of [Docker](https://www.docker.com/what-docker).
+[common interface](/extend/common-interface/). Creating components requires an elementary knowledge of [Docker](https://www.docker.com/why-docker).
 They can be implemented in virtually any programming language and be fully customized and tailored to anyone's needs.
 They also support OAuth authorization. To get started with building a component, see our [**tutorial**](/extend/component/tutorial/).
 

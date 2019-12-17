@@ -17,7 +17,7 @@ The following chart shows how KBC is structured. All KBC parts are briefly descr
 
 ## Working with KBC
 Everything you can do in the KBC UI can be done programatically using the API of the corresponding component.
-All of our components have API documentation on [Apiary](http://docs.keboola.apiary.io/) and
+All of our components have API documentation on [Apiary](https://keboola.docs.apiary.io/#) and
 most of them have a public [Github repository](https://github.com/keboola/).
 Our Docker components are built either on [DockerHub](https://github.com/keboola/), [Quay](https://quay.io/organization/keboola) or privately on [AWS ECR](https://aws.amazon.com/ecr/).
 
@@ -58,7 +58,7 @@ For more details, see
 ### Components Configuration
 All components store their configuration in [Storage](/integrate/storage/). Management of the
 configurations is done through
-[Storage Components Configurations API](http://docs.keboola.apiary.io/#reference/component-configurations).
+[Storage Components Configurations API](https://keboola.docs.apiary.io/#reference/component-configurations).
 Stored configurations can be referenced in `/run` API calls.
 
 Configuration can be defined with a JSON schema stored within the Component detail.

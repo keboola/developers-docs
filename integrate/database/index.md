@@ -6,7 +6,7 @@ permalink: /integrate/database/
 * TOC
 {:toc}
 
-If you wish to use [any of our database extractors](http://help.keboola.com/extractors/database/), we highly recommend
+If you wish to use [any of our database extractors](https://help.keboola.com/components/extractors/database/), we highly recommend
 that you set up an SSH [Tunnel](https://en.wikipedia.org/wiki/Tunneling_protocol) between your and our private networks.
 This way your database server will not be open to the whole internet.
 

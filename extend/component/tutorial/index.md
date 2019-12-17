@@ -13,7 +13,7 @@ In this tutorial, you will create a simple "Hello, World!" component which runs 
 Keboola Connection (KBC).
 
 ## Before You Start
-You need to have a computer with working [Docker](https://www.docker.com/what-docker) to develop the KBC component code.
+You need to have a computer with working [Docker](https://www.docker.com/why-docker) to develop the KBC component code.
 To be able to create new components, you also need to have an account in the [Keboola Developer Portal](https://components.keboola.com/),
 which manages the list of components available in KBC.
 

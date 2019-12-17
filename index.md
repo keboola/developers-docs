@@ -1,7 +1,6 @@
 ---
 title: Keboola Connection Developers Documentation
 permalink: /
-showLinkToGithubPage: false
 ---
 
 This documentation site is aimed for developers who are working with Keboola Connection (KBC) programmatically.
@@ -15,7 +14,7 @@ Cloud based, extremely open and extendable, KBC is the ideal environment for wor
 manipulating, enriching, or finally, pushing the data to new systems and consumption methods.
 
 The KBC system consists of many independent and loosely connected [**components**](/overview/),
-such as Extractors, Storage or Writers, that are orchestrated together through (mostly REST) APIs.
+such as Extractors, Storage or Writers, that are orchestrated together through (mostly REST) [APIs](/overview/api/).
 
 ## Where to Start
 In this documentation, we will show you how to

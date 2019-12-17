@@ -24,7 +24,7 @@ It is configured by setting the `type` key to `oauth20`:
 }
 {% endhighlight %}
 
-The OAuth 2.0 authentication process is described by the [following diagram](http://docs.spring.io/spring-social/docs/1.0.0.M3/reference/html/serviceprovider.html):
+The OAuth 2.0 authentication process is described by the [following diagram](https://docs.spring.io/spring-social/docs/1.0.0.M3/reference/html/serviceprovider.html):
 
 ![Diagram - OAuth 2.0 authentication](/extend/generic-extractor/configuration/api/authentication/oauth20-diagram.png)
 
