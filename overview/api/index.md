@@ -26,7 +26,8 @@ The main APIs for our components are:
 | [Transformation API](https://keboolatransformationapi.docs.apiary.io/#) | [Transformations](/integrate/transformations/) is the component running [SQL/R/Python transformations](https://help.keboola.com/manipulation/transformations/). 
 | [Provisioning API](https://provisioningapi.docs.apiary.io/#) | Provisioning is a service creating accounts for [sandboxes](https://help.keboola.com/manipulation/transformations/sandbox/), [transformations](https://help.keboola.com/manipulation/transformations/) and database writers. 
 | [Provisioning Management API](https://provisioningmanagementapi.docs.apiary.io/#) | API managing servers for [sandboxes](https://help.keboola.com/manipulation/transformations/sandbox/), [transformations](https://help.keboola.com/manipulation/transformations/). 
-| [Syrup Queue API](https://syrupqueue.docs.apiary.io/#) | Syrup Queue is a component managing [Jobs](/integrate/jobs/). 
+| [Syrup Queue API](https://syrupqueue.docs.apiary.io/#) | Syrup Queue is a component managing [Jobs](/integrate/jobs/). Being replaced by Queue API.
+| [Queue API](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api/1.0.0) | Queue is a service for [running components](/extend/docker-runner/) and managing [Jobs](/integrated/jobs/).
 | [OAuth Broker API](https://oauthapi3.docs.apiary.io/#) | OAuth Broker is a component managing [OAuth authorizations](/extend/common-interface/oauth/#authorize) of other components. 
 | [GoodData Provisioning API](https://keboolagooddataprovisioning.docs.apiary.io/#) | GoodData provisioning is an application for managing GoodData projects and users. 
 | [Orchestrator API](https://keboolaorchestratorv2api.docs.apiary.io/#) | Orchestrator is a component [automating and scheduling tasks](https://help.keboola.com/tutorial/automate/) in your project. 
@@ -61,6 +62,10 @@ Otherwise you will obtain an `Invalid Token` or unauthorized errors. The *author
             "url": "https://syrup.keboola.com"
         },
         {
+            "id": "queue",
+            "url": "https://queue.keboola.com"
+        },
+        {
             "id": "oauth",
             "url": "https://oauth.keboola.com"
         },
@@ -93,6 +98,7 @@ The services listed above are:
 - `docker-runner` --- [Legacy Service for Running Sync Actions](/extend/common-interface/actions/)
 - `import` --- [Storage Importer Service](/integrate/storage/api/importer/)
 - `syrup` --- [Service for Running Components](/extend/docker-runner/)
+- `queue` --- [New Service for Running Components](/extend/docker-runner/)
 - `oauth` --- [OAuth Manager Service](/extend/common-interface/oauth/)
 - `sqldep-analyzer` --- SQLdep Integration Service for SQL query validation.
 - `sync-actions` --- [Service for Running Sync Actions](/extend/common-interface/actions/)
@@ -108,6 +114,8 @@ The services listed above are:
 |Run Jobs|`syrup`|EU|https://syrup.eu-central-1.keboola.com|
 |Sync Actions|`docker-runner`|US|https://docker-runner.keboola.com|
 |Sync Actions|`docker-runner`|EU|https://docker-runner.eu-central-1.keboola.com|
+|Queue|`queue`|US|https://queue.keboola.com|
+|Queue|`queue`|EU|https://queue.eu-central-1.keboola.com|
 |Importer|`import`|US|https://import.keboola.com|
 |Importer|`import`|EU|https://import.eu-central-1.keboola.com|
 |OAuth|`oauth`|US|https://oauth.keboola.com|
