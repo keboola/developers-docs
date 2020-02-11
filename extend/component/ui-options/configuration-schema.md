@@ -19,12 +19,16 @@ let the user to fill the JSON using a set of defined inputs.
 Using the configuration schema also allows us to validate the user input on frontend.
 
 ## Creating Schema
-JSON schemas are well documented on the [json-schema.org](https://json-schema.org/) website. For their developing and testing,
-use, for example, JSON Editor available [on-line](http://jeremydorn.com/json-editor/) ([alternative](https://mozilla-services.github.io/react-jsonschema-form/)).
-Remember to list all configuration properties as `required`.
-This is to make sure that the actual configuration will always contain all properties.
-If you want a property to be optional, set a default value for it. The supported formatting options for
-the editor are available in the [official editor documentation](https://github.com/jdorn/json-editor#format).
+
+JSON schemas are well documented on the [json-schema.org](https://json-schema.org/) website.
+
+We use [JSON Editor](https://github.com/json-editor/json-editor) for displaying schema.
+The supported formatting options for
+the editor are available in the [official editor documentation](https://github.com/json-editor/json-editor#format).
+
+For developing and testing,
+use, for example JSON Editor available [on-line](http://jeremydorn.com/json-editor/) or
+[JSON Editor Interactive Playground](https://pmk65.github.io/jedemov2/dist/demo.html).
 
 ### Example
 Let's assume your component accepts the following configuration:
