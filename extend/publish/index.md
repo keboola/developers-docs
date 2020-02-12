@@ -80,6 +80,10 @@ ZAR). The rates are available for all working days from 4 January 1999 up to pre
 - Use `appInfo.beta` in [UI options](/extend/component/ui-options/) if you suspect changes to the component behavior.
 - Licensing information must be valid, and the vendor description must be current.
 
+### Component Icon
+
+- Use PNG image with size at least 256x256px
+
 ### Component Configuration
 
 - Use only the necessary [UI options](/extend/component/ui-options/) (i.e., if there are no output files, do not use `genericDockerUI-fileOutput`).
