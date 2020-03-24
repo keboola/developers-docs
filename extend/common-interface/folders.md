@@ -135,9 +135,59 @@ Note that all files in the `/data/out/files` folder will be uploaded, not only t
 ## Exchanging Data via S3
 The component may also exchange data with Storage [using Amazon S3](https://docs.aws.amazon.com/s3/index.html).
 In this case, the data folders contain only [manifest files](/extend/common-interface/manifest-files/) and
-not the actual data. This mode of operation can be enabled by setting the `Staging storage input` option to `S3` in
+not the actual data. This mode of operation can be enabled by setting the **Staging storage input** option to **AWS S3** in
 [component settings](https://components.keboola.com/). If this option is enabled, all the data folders
 will contain only manifest files, extended with an additional
 [`s3` section](/extend/common-interface/manifest-files/#s3-section).
 
 **Note**: Exchanging data via S3 is currently only available for input mapping.
+
+## Exchanging Data via Workspace
+
+*Note: this is a preview feature and may change considerably in future.*
+
+The component may also exchange data with Storage [using Workspaces](https://keboola.docs.apiary.io/#reference/workspaces).
+This mode of operation can be enabled by setting the **Staging storage input** or **Staging storage output** option 
+to **Workspace Snowflake** or **Workspace Redshift**. A workspaces is an isolated database to which data are loaded before 
+the component job is run and unloaded when the job finishes. The workspace is created just before the job starts and is 
+deleted when the job is terminated. 
+
+If this option is enabled, the table data folder will contain only manifest files. The actual data will be loaded as 
+database tables into the workspace database. The `destination` in input and `source` in output refer to database
+table names. This mode of operation is useful for components which want to manipulate data using SQL queries.
+The component can run arbitrary queries against the database. The database credentials are available in the 
+[`authorization` section](/extend/common-interface/config-file/#configuration-file-structure) of the configuration file:
+
+{% highlight json %}
+{
+  "storage": {
+
+  },
+  "parameters": {
+    ...
+  },
+  "authorization": {
+    "workspace": {
+      "host": "database.example.com",
+      "warehouse": "test",
+      "database": "my-db",
+      "schema": "my-schema"
+      "user": "john-doe",
+      "password": "secret"
+    }
+  }
+}
+{% endhighlight %}
+
+Notice that some of the values might be empty for different workspace backends (e.g. Redshift is not using `warehouse`).
+They will be always present, though.
+
+When exchanging data via workspace, there are couple of differences to loading data into files:
+- Loading to workspaces supports only [storage tables](/storage/tables/), [storage files](/storage/file-uploads/) 
+are always saved to the directory structure.
+- The `days` attribute is not supported for filtering table, use `changed_since` instead.
+- [Automatic Incremental Processing](https://help.keboola.com/storage/tables/#automatic-incremental-processing) (also known as Adaptive Input Mapping) is not supported.
+- When used for output mapping, the `columns` of the output table **must be** specified, this can be done either in the [output manifest](/extend/common-interface/manifest-files/#dataouttables-manifests) or in the [output mapping](/extend/common-interface/config-file/#output-mapping--headless-csv).
+
+**Note**: Currently only some combinations of input/output staging storage settings are supported: 
+`local<->local`, `local<->s3`, `workspace-snowflake<->workspace-snowflake`, `workspace-redshift<->workspace-redshift`.
