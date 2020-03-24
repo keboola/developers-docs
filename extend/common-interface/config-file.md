@@ -27,7 +27,8 @@ They do not use this configuration section at all (see [Tutorial](/extend/compon
 way you wish. Your component should validate the contents of this section. For passing sensitive
 data, use [encryption](/overview/encryption/). This section is not available in Transformations.
 - `image_parameters`: See [below](#image-parameters).
-- `authorization`: Contains Oauth2 [authorization contents](/extend/common-interface/oauth/).
+- `authorization`: Contains Oauth2 [authorization contents](/extend/common-interface/oauth/) or 
+[Workspace credentials](/extend/common-interface/folders/#exchanging-data-via-workspace) .
 - `action`: Name of the [action](/extend/common-interface/actions/) to execute; defaults to `run`. All
 actions except `run` have a strict execution time limit of 30 seconds.
 See [actions](/extend/common-interface/actions/) for more details.
