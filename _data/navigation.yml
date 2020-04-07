@@ -259,6 +259,9 @@ items:
       - url: /integrate/transformations/
         title: Transformations
 
+      - url: /integrate/variables/
+        title: Variables
+
       - url: /integrate/database/
         title: SSH Tunnel for Database Extractors
 
