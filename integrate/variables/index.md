@@ -22,13 +22,13 @@ I.e you can't use variables in name or description of a configuration.
 Variables are entered using the [Moustache syntax](https://mustache.github.io/mustache.5.html), i.e `{{ "{{ variableName " }}}}`. To work with variables
 three things are needed:
 
-- Main configuration -- the configuration in which variables are replaced (used),
-- Variable configuration -- a configuration in which variables are defined,
+- Main configuration -- the configuration in which variables are replaced (used); this can be a configuration of any component (e.g. a configuration of transformation, extractor, writer, etc.), 
+- Variable configuration -- a configuration in which variables are defined; this is a configuration of a special `keboola.variables` component,
 - Variable values -- actual values which will be placed in the main configuration.
 
 To enable replacement of variables, the *main configuration* has to reference the *variable configuration*. If there is no
 *variable configuration* referenced, no replacement is made (the *main configuration* is completely static). 
-Variables can be used in any place of any configuration except legacy transformations and orchestrator (see [below](todo)). 
+Variables can be used in any place of any configuration except legacy transformations (component with id `transformation`, it can be used in specific transformations -- e.g. `keboola.python-transformation` or `keboola.snowflake-transformation`, etc.) and orchestrator (see [below](#orchestrator-integration)). 
 
 ## Variable Configuration
 A *variable configuration* is a standard configuration tied to a special dedicated `keboola.variables` component. The variable configuration
@@ -511,7 +511,7 @@ in the root of the orchestration configuration, e.g.:
 
 See [an example](https://documenter.getpostman.com/view/3086797/77h845D?version=latest#13b201f7-78b2-4b1e-8e17-ce47bc5bf732).
 
-## Variable Values Sequence
+## Variables evaluation sequence
 There is a number of places where variable values can be provided (either as a reference to an existing row with 
 values or an array of `values`):
 
@@ -521,9 +521,20 @@ values or an array of `values`):
 - Job parameters
 - Default values stored in configuration (`variables_values_id` property).
 
+The following diagram shows the parameters mentioned on this page and to what they refer to:
+
+{: .image-popup}
+![Screenshot -- Properties references](/integrate/variables/variables.svg)
+
+In a nutshell, `variableValuesId` always refers to the row of the variables configuration associated with the 
+main configuration. The main configuration is referenced in the `config` parameter. From another point of view,
+the `config` parameter represents the configuration (either component or orchestration) to be run.
+Note that in stored configurations snake_case is used instead of camelCase.
+
 The following rules describe the evaluation sequence:
 
 - Values provided in job parameters (component job or orchestration job) override the stored values.
 - Values provided in orchestration job override the stored values in tasks `actionParameters`.
+- `variableValuesData` and `variableValuesId` can't be used together so neither takes precedence.
 - If no values are provided anywhere, then the default values are used. If no default values are present an error is raised.
 - A reference to stored values can't be mixed with providing the values inline. 
