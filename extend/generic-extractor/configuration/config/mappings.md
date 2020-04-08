@@ -1245,10 +1245,10 @@ to extract the following tables:
 
 users:
 
-|first\_name|last\_name|
+|id|name|
 |---|---|
-|John|Doe|
-|Jane|Doe|
+|123|John Doe|
+|234|Jane Doe|
 
 user-address:
 
