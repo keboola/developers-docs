@@ -64,6 +64,43 @@ You can work with your component in your KBC projects immediately as soon as you
 [create it](/extend/component/tutorial/). However, to make the component publicly available to all users,
 it must be [published](/extend/publish/).
 
+## Component Types
+The following component types are currently allowed:
+
+- **Extractor** -- Component designed to bring data into Keboola Connection Storage.
+- **Writer** -- Component designed to bring data to an external system.
+- **Application** -- Other arbitrary component.
+- **Processor** -- A [processor](/extend/component/processors/).
+- Transformation -- A special type of component for transformations.
+- Other -- A completely special component.
+
+The type of the component has no effect on the component internals -- i.e. all components regardless of their type 
+share the identical features of the [Common interface](/extend/common-interface/). The component type is used to
+described expectations of the component behavior to the end-user. For example, an extractor is expected to extract 
+data from an external system. Nothing prevents it from processing data from Storage (and e.g. 
+[Geocoding](https://help.keboola.com/components/extractors/other/geocoding-augmentation/) does that), but the primary 
+reason of existence is to bring data into Storage.
+
+The expectations of the above component types can be described as:
+
+- **Extractor** -- A component that extracts data from an external system into Storage, no Storage tables on input. A component with UI.
+- **Writer** -- A component that loads data from Storage into an external system, no Storage tables on output. A component with UI.
+- **Application** -- A component that processes data in Storage, either something like a wrapped transformation or using an external service. Or 
+a component which does not work with data in Storage at all. A component with UI.
+- **Processor** -- A component designed for post-processing or pre-processing data of other components. It is not designed to run alone and has no UI.
+- Transformation -- A component representing transformation engine. The UI treats these components specially and expects that they have similar capabilities
+and configuration options. These are created by Keboola, if you wish to bring your own, please contact us first.
+- Other -- A component with some special role in the UI, the do not have standard component UI. Notable "other" components are:
+    - `orchestrator` -- [Orchestrator service](https://help.keboola.com/orchestrator/) configurations. To work with either configurations or jobs, use the [dedicated API](https://keboolaorchestratorv2api.docs.apiary.io/#).
+    - `transformation` -- [Transformation service](https://help.keboola.com/transformations/) configurations. To work with configurations, you can use the standard [configurations API](https://keboola.docs.apiary.io/#reference/component-configurations). To work with jobs, 
+    use the [dedicated API](https://keboolatransformationapi.docs.apiary.io/#).    
+    - `provisioning` -- [Sandbox provisioning service](https://help.keboola.com/transformations/sandbox/). No configurations can be made, 
+    to work with jobs, use the [dedicated API](https://provisioningapi.docs.apiary.io/#).
+    - `keboola.oauth-v2` -- [OAuth integration service](/extend/common-interface/oauth/). Neither configurations nor jobs can be made. Use the [dedicated API](https://provisioningapi.docs.apiary.io/#) to work with the service.
+    - `keboola.variables` -- Component for storing [variables](/integrate/variables/) configurations. You can use the standard [configurations API](https://keboola.docs.apiary.io/#reference/component-configurations). No jobs can be made.
+    - `keboola.storage` -- Placeholder component for actions from Storage service. Neither configurations nor jobs can be made. Use the
+    [dedicated API](https://keboola.docs.apiary.io/) to work with Storage.
+
 ## Next Steps
 - Create a [developer account](/extend/component/tutorial/#before-you-start) so that you can create your own components.
 - Follow our [tutorial](/extend/component/tutorial/) to build a "Hello, World!" component in 10 minutes.
@@ -73,45 +110,3 @@ along with a [guide to setting up Docker](/extend/component/docker-tutorial/setu
 - Follow the [next steps](/extend/component/tutorial/input-mapping/) of the tutorial to understand how your component interacts with KBC.
 - See more about [testing and debugging of components](/extend/component/tutorial/debugging/) in the KBC environment.
 - Request [publication](/extend/publish/) of your component.
-
-## Custom Science Migration Guide
-Previously we have supported a Custom Science component, which was offered as an intermediate before a fully fledged component.
-We believe it was fully superseded by components and we [encourage you to migrate](http://status.keboola.com/farewell-to-custom-science).
-
-Follow these steps to migrate:
-
-- If you do not have it yet, create an account in our [Developer Portal](https://components.keboola.com/).
-- [Join an existing vendor](/extend/component/tutorial/#before-you-start) or create a new one.
-- Add a [new component](/extend/component/tutorial/#creating-a-component).
-- Set `genericDockerUI-tableInput` and `genericDockerUI-tableOutput` (possibly also `genericDockerUI-fileInput` if you need it) in the UI options of the component.
-- Create a [service account](/extend/component/tutorial/#creating-a-deployment-account).
-- Migrate the component code.
-
-**Important:** Every component has the amount of RAM limited to 256M by default. If you need more, ask us at 
-[support@keboola.com](mailto:support@keboola.com). For R code, you probably need at least 300M.
-
-### Code Migration
-There should be no changes required in the component code. The only difference you might run into is that your
-code is no longer put in the `/home/` directory, but in the `/code/` directory. The easiest way to migrate is
-to use our [component generator tool](https://github.com/keboola/component-generator).
-Run it with:
-
-    docker run -i -t --volume=/path/to/repository/:/code/ quay.io/keboola/component-generator --update
-
-where `/path/to/repository/` is the path to your Custom Science git repository. Choose a template according to the
-language used - `python-simple`, `php-simple` or `r-simple` and skip overwriting the `main.*` file.
-
-If you do not want the component generator to touch your repository, see the [deployment templates](https://github.com/keboola/component-generator/tree/master/templates-common)
-and [language templates](https://github.com/keboola/component-generator/tree/master/templates). You can copy the files to your
-repository manually. You can still use the component generator to set up Travis integration:
-
-    docker run -i -t --volume=/path/to/repository/:/code/ quay.io/keboola/component-generator --setup-only
-
-If you want to set up the deployment integration manually, read the [deployment documentation](/extend/component/deployment/).
-It also describes integration with [Bitbucket](/extend/component/deployment/#bitbucket-integration)
-and [GitLab](/extend/component/deployment/#gitlab-integration), which is also seamless. Basically, you need to do the following:
-
-- Enable the building of the repository (either on [Travis](https://docs.travis-ci.com/) or in [BitBucket Pipelines](https://bitbucket.org/product/features/pipelines) or [GitLab CI](https://about.gitlab.com/product/continuous-integration/)).
-- Set the [environment variables](/extend/component/deployment/#deploy-configuration).
-- Create a [normal version](https://semver.org/#spec-item-2) git tag (`x.y.z` tag) and push to the repository.
-- Wait for the build to finish and automatically deploy the new version of your component to KBC.
