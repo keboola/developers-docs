@@ -56,7 +56,7 @@ To add a component, use the **Add a component** button on the main page, and fil
 
 **Important:** Do **not** use the words 'extractor', 'writer', or 'application' in the component name.
 
-Choose the appropriate component type:
+Choose the appropriate [component type](/extend/component/#component-types):
 
 - `extractor` -- brings data into KBC
 - `writer` -- sends data out of KBC
