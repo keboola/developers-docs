@@ -17,10 +17,10 @@ The data folders contain actual data files (tables and files) and metadata.
 For each datafile, a [manifest file](/extend/common-interface/manifest-files/) is created.
 It contains metadata information (creation time, keys for tables, etc.).
 
-The data folder is always available in the component under the **absolute `/data/` path**. Relative path to the data folder
-depends fully on your component code (or Dockerfile). If you want use different path (for component development),
+The data folder is always available in the component under the **absolute `/data/` path**. The relative path to the data folder
+depends fully on your component code (or Dockerfile). If you want to use a different path (for component development),
 **use the [`KBC_DATADIR` environment variable](/extend/common-interface/environment/#environment-variables)**. In production,
-this variable will be always set to `/data/`. During development you can set it to your liking.
+this variable will always be set to `/data/`. During development, you can set it to your liking.
 
 To create a data folder sample, use the [Debug API](/extend/component/running/#preparing-the-data-folder) call via the
 [Docker Runner API](https://kebooladocker.docs.apiary.io/#reference/debug).
@@ -70,7 +70,7 @@ must have at least two dots.
 Manifests allow you to process files in the `/data/out` folder without explicitly being defined in the
 output mapping. That allows for a flexible and dynamic output mapping where the structure is unknown at the beginning.
 Using file names (e.g., `out.c-data.my-table.csv`) for an output mapping is great for saving implementation time
-in simple or POC component.
+in a simple or POC component.
 
 **Important**: All files in the `/data/out/tables` folder will be uploaded, not only those specified in the output
 mapping or manifests.
@@ -148,7 +148,7 @@ will contain only manifest files, extended with an additional
 
 The component may also exchange data with Storage [using Workspaces](https://keboola.docs.apiary.io/#reference/workspaces).
 This mode of operation can be enabled by setting the **Staging storage input** or **Staging storage output** option 
-to **Workspace Snowflake** or **Workspace Redshift**. A workspaces is an isolated database to which data are loaded before 
+to **Workspace Snowflake** or **Workspace Redshift**. A workspace is an isolated database to which data are loaded before 
 the component job is run and unloaded when the job finishes. The workspace is created just before the job starts and is 
 deleted when the job is terminated. 
 
@@ -179,8 +179,8 @@ The component can run arbitrary queries against the database. The database crede
 }
 {% endhighlight %}
 
-Notice that some of the values might be empty for different workspace backends (e.g. Redshift is not using `warehouse`).
-They will be always present, though.
+Notice that some of the values might be empty for different workspace backends (e.g., Redshift is not using `warehouse`).
+They will be always present though.
 
 When exchanging data via workspace, there are couple of differences to loading data into files:
 - Loading to workspaces supports only [storage tables](/storage/tables/), [storage files](/storage/file-uploads/) 
