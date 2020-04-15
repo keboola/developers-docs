@@ -180,7 +180,7 @@ The component can run arbitrary queries against the database. The database crede
 {% endhighlight %}
 
 Notice that some of the values might be empty for different workspace backends (e.g., Redshift is not using `warehouse`).
-They will be always present though.
+They will be always present, though.
 
 When exchanging data via workspace, there are couple of differences to loading data into files:
 - Loading to workspaces supports only [storage tables](/storage/tables/), [storage files](/storage/file-uploads/) 
