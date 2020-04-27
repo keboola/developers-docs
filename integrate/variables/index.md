@@ -17,8 +17,7 @@ the [Job API](/integrate/jobs/) before reading on.*
 ## Introduction
 When using variables, the configuration is treated as a [Moustache template](https://mustache.github.io/mustache.5.html). 
 You can enter variables anywhere in the JSON of the configuration body. The configuration body is the contents of 
-the `configuration` node when you [retrieve a configuration]
-(https://keboola.docs.apiary.io/#reference/component-configurations/manage-configurations/configuration-detail).
+the `configuration` node when you [retrieve a configuration](https://keboola.docs.apiary.io/#reference/component-configurations/manage-configurations/configuration-detail).
  I.e., you can't use variables in a name or in a configuration description. 
 
 Variables are entered using the [Moustache syntax](https://mustache.github.io/mustache.5.html), 
@@ -235,13 +234,13 @@ There are three options for providing variable values when running a job:
 - Provide values using the `variableValuesData` property in job parameters
 
 The rules for running a job are that you always **have to** provide values for the defined variables. 
-Note that it is important to what variables are *defined* in the variable configuration, it does not matter what
-variables you use the configuration JSON code. For example, the main configuration references a variable 
-configuration with *firstVar* and *secondVar* variables. You're using `{{ "{{ firstVar " }}}}` and
-`{{ "{{ thirdVar " }}}}` in the configuration code. Then you have to provide values to *firstVar* and *secondVar*
-variables. If you provide values for all *firstVar*, *secondVar* and *thirdVar*, all of them will be replaced. 
-If you omit *thirdVar*, it will be replaced by an empty string. If you omit one of *firstVar*, *secondVar*, 
-an error will be raised.
+Note that it is important which variables are *defined* in the variable configuration, not which
+variables you actually use in the main configuration. For example, the main configuration references a variable 
+configuration with *firstVar* and *secondVar* variables, but you're using `{{ "{{ firstVar " }}}}` and
+`{{ "{{ thirdVar " }}}}` in the configuration code. Then you have to provide values at least for *firstVar* 
+and *secondVar* variables. If you provide values for all *firstVar*, *secondVar* and *thirdVar*, all of them will 
+be replaced. If you omit *thirdVar*, it will be replaced by an empty string. If you omit one of *firstVar*, 
+*secondVar*, an error will be raised.
 
 The second rule is that the three options of passing values are mutually exclusive. If you provide values using 
 `variablesValuesId` or `variableValuesData`, it overrides the default values (if provided). You can't use 
@@ -261,8 +260,9 @@ with the following body:
 
 The `config` property contains the ID of the [main configuration](/integrate/variables/#step-3--create-main-configuration).
 Before executing the API call, you have to create the source table. Unless you modified the mapping in the 
-[example](/integrate/variables/#step-3--create-main-configuration), you have to create a bucket named **variable-testing** in the **in** stage.
-Then create a table called **batman** with columns  **COUNTRY** and **CARS**. You can use this [sample CSV file](/integrate/variables/countries.csv).
+[example](/integrate/variables/#step-3--create-main-configuration), you have to create a bucket named
+**variable-testing** in the **in** stage. Then create a table called **batman** with columns  **COUNTRY** 
+and **CARS**. You can use this [sample CSV file](/integrate/variables/countries.csv).
 
 After you create the input table, you can run the job. 
 See an [example](https://documenter.getpostman.com/view/3086797/77h845D?version=latest#31486ac2-ea52-4f19-a039-2ee1b1ae5863). 
@@ -353,7 +353,7 @@ You will obtain an ID of the row. Then create a table called **watman** with
 columns  **COUNTRY** and **CARS**. You can use this [sample CSV file](/integrate/variables/countries.csv).
 
 Run a job with parameters and provide the ID of the main configuration in the `config` property and 
-ID of the values row in `variableValuesId`:
+the ID of the value row in `variableValuesId`:
 
 {% highlight json %}
 {
@@ -410,7 +410,7 @@ Variables in a configuration interact with an orchestrator in two ways:
 - Variables can be entered when running an orchestration.
 
 Entering variable values in task configurations allows the orchestration to run configurations with variables. 
-Variable values are entered in `actionParameters` property. The parameters are identical to 
+Variable values are entered in the `actionParameters` property. The parameters are identical to 
 [running a job](/integrate/variables/#step-4--run-job).
 
 When running an orchestration, you can also provide variable values for an entire orchestration. In that case, 
@@ -440,18 +440,19 @@ You can use the following request body:
 }
 {% endhighlight %}
 
-The contents of the `actionParameters` property are identical to the body of the [run job API call](/integrate/variables/#step-4--run-job).
-Here, the value **789** refers to the ID of the main configuration, and **147** refers to the ID 
-of the configuration row with variable values.
+The contents of the `actionParameters` property are identical to the body 
+of the [run job API call](/integrate/variables/#step-4--run-job). Here, the value **789** refers to the ID 
+of the main configuration, and **147** refers to the ID of the configuration row with variable values.
 See an [example](https://documenter.getpostman.com/view/3086797/77h845D?version=latest#9f2f9da0-59eb-4f33-a206-e5add24725d1).
 
 ### Step 6 -- Run Orchestration
-When running an orchestration, which contains configurations, which reference variables, you have to provide 
+When running an orchestration which contains configurations referencing variables, you have to provide their
 values. You can either rely on the stored values or you can provide the values at runtime.
 
 #### Option 1 -- Rely on stored values
-Use the [Run Orchestration API call](https://keboolaorchestratorv2api.docs.apiary.io/#reference/jobs/jobs-collection/run-a-job) to run an orchestration.
-In its simplest form, the request body needs to contain just the ID of the orchestration (obtained in the previous step):
+Use the [Run Orchestration API call](https://keboolaorchestratorv2api.docs.apiary.io/#reference/jobs/jobs-collection/run-a-job) 
+to run an orchestration. In its simplest form, the request body needs to contain just the ID of the orchestration
+(obtained in the previous step):
 
 {% highlight json %}
 {
@@ -462,11 +463,11 @@ In its simplest form, the request body needs to contain just the ID of the orche
 As long as the variable values can be found somewhere, this is sufficient. See [an example](https://documenter.getpostman.com/view/3086797/77h845D?version=latest#3ebdc3f5-a940-4f0d-860b-ec311f704a7e).
 
 #### Option 2 -- Provide values
-Use the [Run Orchestration API call](https://keboolaorchestratorv2api.docs.apiary.io/#reference/jobs/jobs-collection/run-a-job) to run an orchestration.
-Additionally, you can use the `variableValuesId` or `variableValuesData` property to override variable values 
-set to individual tasks. 
-The calling convention is the same as in the [run job API call](/integrate/variables/#step-4--run-job). 
-The same rules also apply, notably that you can't use `variableValuesId` and `variableValuesData` together. 
+Use the [Run Orchestration API call](https://keboolaorchestratorv2api.docs.apiary.io/#reference/jobs/jobs-collection/run-a-job) 
+to run an orchestration. Additionally, you can use the `variableValuesId` or `variableValuesData` property 
+to override variable values set to individual tasks. The calling convention is the same as in the 
+[run job API call](/integrate/variables/#step-4--run-job). The same rules also apply, notably that you can't 
+use `variableValuesId` and `variableValuesData` together. 
 A sample request body:
 
 {% highlight json %}
@@ -490,9 +491,9 @@ A sample request body:
 See [an example](https://documenter.getpostman.com/view/3086797/77h845D?version=latest#f4fcf7af-afbe-4c29-999e-0f4c50aa477b).
 
 ### Step 7 -- Schedule Orchestration
-If you want to schedule an orchestration with configuration with variables, you have to store the values 
+If you want to schedule an orchestration that uses a configuration with variables, you have to store the values 
 with the orchestration instead of supplying them at runtime. Again, you can use either `variableValuesId` or 
-`variableValuesData` but not both. The properties are entered in the root of the orchestration configuration, e.g.:
+`variableValuesData`, but not both. The properties are entered in the root of the orchestration configuration, e.g.:
 
 {% highlight json %}
 {
@@ -550,6 +551,6 @@ The following rules describe the evaluation sequence:
 
 - Values provided in job parameters (a component job or an orchestration job) override the stored values.
 - Values provided in an orchestration job override the stored values in tasks `actionParameters`.
-- `variableValuesData` and `variableValuesId` can't be used together, so neither takes precedence.
+- `variableValuesData` and `variableValuesId` can't be used together, so neither of them takes precedence.
 - If no values are provided anywhere, the default values are used. If no default values are present, an error is raised.
 - A reference to stored values can't be mixed with providing the values inline. 
