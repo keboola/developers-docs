@@ -11,33 +11,33 @@ permalink: /integrate/variables/
 **Variables** are placeholders used in [configurations](/integrate/storage/api/configurations/). Their value is 
 resolved at [job runtime](/integrate/jobs/). 
 
-*Note: Make sure you're familiar with the [Configuration API](/integrate/storage/api/configurations/) and 
-the [Job API](/integrate/jobs/) before reading on.*
+**Important:** Make sure you're familiar with the [Configuration API](/integrate/storage/api/configurations/) and 
+the [Job API](/integrate/jobs/) before reading on.
 
 ## Introduction
 When using variables, the configuration is treated as a [Moustache template](https://mustache.github.io/mustache.5.html). 
 You can enter variables anywhere in the JSON of the configuration body. The configuration body is the contents of 
 the `configuration` node when you [retrieve a configuration](https://keboola.docs.apiary.io/#reference/component-configurations/manage-configurations/configuration-detail).
- I.e., you can't use variables in a name or in a configuration description. 
+This means that you can't use variables in a name or in a configuration description. 
 
 Variables are entered using the [Moustache syntax](https://mustache.github.io/mustache.5.html), 
 i.e., `{{ "{{ variableName " }}}}`. To work with variables, three things are needed:
 
 - Main configuration -- the configuration in which variables are replaced (used); this can be a configuration of any component (e.g., a configuration of a transformation, extractor, writer, etc.).
 - Variable configuration -- a configuration in which variables are defined; this is a configuration of a special `keboola.variables` component.
-- Variable values -- actual values which will be placed in the main configuration.
+- Variable values -- actual values that will be placed in the main configuration.
 
-To enable replacement of variables, the *main configuration* has to reference the *variable configuration*. If there is no
-*variable configuration* referenced, no replacement is made (the *main configuration* is completely static). 
-Variables can be used in any place of any configuration except legacy transformations (component with id `transformation`, 
-it can be used in specific transformations -- e.g., `keboola.python-transformation` or `keboola.snowflake-transformation`, 
-etc.), and an orchestrator (see [below](#orchestrator-integration)). 
+To enable replacement of variables, the *main configuration* has to reference the *variable configuration*. 
+If there is no *variable configuration* referenced, no replacement is made (the *main configuration* is completely
+static). Variables can be used in any place of any configuration except legacy transformations (the component with 
+the ID `transformation`; it can still be used in a specific transformation -- e.g., `keboola.python-transformation` 
+or `keboola.snowflake-transformation`, etc.), and an orchestrator (see [below](#orchestrator-integration)). 
 
 ## Variable Configuration
-A *variable configuration* is a standard configuration tied to a special dedicated `keboola.variables` component. The
-variable configuration defines names of variables to be replaced in the main configuration. You can create the configuration
-using the [Create configuration API call](https://keboola.docs.apiary.io/#reference/component-configurations/component-configurations/create-configuration). 
-This is an example contents of such a configuration:
+A *variable configuration* is a standard configuration tied to a special dedicated `keboola.variables` component. 
+The variable configuration defines names of variables to be replaced in the main configuration. You can create 
+the configuration using the [Create Configuration API call](https://keboola.docs.apiary.io/#reference/component-configurations/component-configurations/create-configuration). 
+This is an example of the contents of such a configuration:
 
 {% highlight json %}
 "variables": [
@@ -94,11 +94,11 @@ You can either store the variable values as [configuration rows](/integrate/stor
 *variable configuration* and provide the row ID of the stored values at run time, or you can provide the variable values directly at run 
 time. There are three options how you can provide values to the variables:
 
-- reference values using `variables_values_id` property in the *main configuration* (default values),
-- reference values using `variablesValuesId` property in job parameters,
-- provide values using  `variableValuesData` property in job parameters.
+- Reference values using `variables_values_id` property in the *main configuration* (default values).
+- Reference values using `variablesValuesId` property in job parameters.
+- Provide values using  `variableValuesData` property in job parameters.
 
-The structure of variable values, regardless of whether it is stored in configuration or provided at runtime, is:
+The structure of variable values, regardless of whether it is stored in configuration or provided at runtime, is as follows:
 
 {% highlight json %}
 {
@@ -112,8 +112,10 @@ The structure of variable values, regardless of whether it is stored in configur
 {% endhighlight %}
 
 ## Example Using Python Transformations
-In this example, we will configure a Python transformation using variables. Note that this is using new transformations and bypassing the
-current [Transformation Service](https://keboolatransformationapi.docs.apiary.io/#). Such configurations are not supported in the UI yet.
+In this example, we will configure a Python transformation using variables. Note that we are using the new 
+transformations and bypassing the current 
+[Transformation Service](https://keboolatransformationapi.docs.apiary.io/#). Such configurations are not 
+supported in the UI yet.
 
 ### Step 1 -- Create Variable Configuration
 Use the [Create Configuration API call](https://keboola.docs.apiary.io/#reference/component-configurations/component-configurations/create-configuration) 
@@ -136,8 +138,8 @@ for the `keboola.variables` component with the following content:
 
 See an [example](https://documenter.getpostman.com/view/3086797/77h845D?version=latest#16a5d721-b6a4-4daa-9196-8e90250ed16b).
 
-### Step 2 -- Create Default Values for Variable
-Note that this step is optional, you can use variables without default values.
+### Step 2 -- Create Default Values for Variables
+Note that this step is optional -- you can use variables without default values.
 In the previous step, you obtained an ID of the variable configuration. Use the 
 [Create Configuration Row API call](https://keboola.docs.apiary.io/#reference/component-configurations/create-or-list-configuration-rows/create-configuration-row).
 Use the ID of the variable configuration and `keboola.variables` as a component. Use the following body:
@@ -161,7 +163,7 @@ See an [example](https://documenter.getpostman.com/view/3086797/77h845D?version=
 
 ### Step 3 -- Create Main Configuration
 Now it is time to create the actual configuration which will contain a Python transformation.
-Use the following configuration body, the `storage` section describes the standard [input](/extend/common-interface/config-file/#input-mapping--basic) 
+Use the following configuration body. The `storage` section describes the standard [input](/extend/common-interface/config-file/#input-mapping--basic) 
 and [output](/extend/common-interface/config-file/#output-mapping--basic) mapping.
 
 {% highlight json %}
@@ -229,22 +231,22 @@ See an [example](https://documenter.getpostman.com/view/3086797/77h845D?version=
 ### Step 4 -- Run Job
 There are three options for providing variable values when running a job:
 
-- Rely on default variables
-- Provide ID of values using the `variablesValuesId` property in job parameters
-- Provide values using the `variableValuesData` property in job parameters
+- Relying on default variables
+- Providing ID of values using the `variablesValuesId` property in job parameters
+- Providing values using the `variableValuesData` property in job parameters
 
-The rules for running a job are that you always **have to** provide values for the defined variables. 
+Following the rules for running a job, you always **have to** provide values for the defined variables. 
 Note that it is important which variables are *defined* in the variable configuration, not which
 variables you actually use in the main configuration. For example, the main configuration references a variable 
 configuration with *firstVar* and *secondVar* variables, but you're using `{{ "{{ firstVar " }}}}` and
 `{{ "{{ thirdVar " }}}}` in the configuration code. Then you have to provide values at least for *firstVar* 
-and *secondVar* variables. If you provide values for all *firstVar*, *secondVar* and *thirdVar*, all of them will 
+and *secondVar* variables. If you provide values for all *firstVar*, *secondVar*, and *thirdVar*, all of them will 
 be replaced. If you omit *thirdVar*, it will be replaced by an empty string. If you omit one of *firstVar*, 
 *secondVar*, an error will be raised.
 
 The second rule is that the three options of passing values are mutually exclusive. If you provide values using 
 `variablesValuesId` or `variableValuesData`, it overrides the default values (if provided). You can't use 
-`variablesValuesId` and `variableValuesData` together in a single call, an error will be raised.
+`variablesValuesId` and `variableValuesData` together in a single call. If you do that, an error will be raised.
 If no default values are set and none of the `variablesValuesId` or `variableValuesData` is provided, an error 
 will be raised.
 
@@ -266,8 +268,8 @@ and **CARS**. You can use this [sample CSV file](/integrate/variables/countries.
 
 After you create the input table, you can run the job. 
 See an [example](https://documenter.getpostman.com/view/3086797/77h845D?version=latest#31486ac2-ea52-4f19-a039-2ee1b1ae5863). 
-It will create a new table in Storage -- **out.c-variable-testing.cars**. The contents
-of the tables should contain the default values, e.g.:
+It will create a new table in Storage -- **out.c-variable-testing.cars**. The tables should contain the default 
+values, e.g.:
 
 |COUNTRY|CARS|
 |---|---|
@@ -331,7 +333,7 @@ where you can verify that the variables were replaced.
 
 #### Option 2 -- Run a job with stored values
 Similarly to the [default values](http://localhost:4000/integrate/variables/#step-2--create-default-values-for-variable), 
-you can store another set of values. Let's add another configuration row to the *existing* variables configuration:
+you can store another set of values. Let's add another configuration row to the *existing* variable configuration:
 
 {% highlight json %}
 {
@@ -529,11 +531,11 @@ See [an example](https://documenter.getpostman.com/view/3086797/77h845D?version=
 
 ## Variables Evaluation Sequence
 There is a number of places where variable values can be provided (either as a reference to an existing row with 
-values or an array of `values`):
+values or as an array of `values`):
 
 - Orchestration itself (for scheduled orchestrations)
 - Orchestration job parameters
-- Orchestration Task `actionParameters`
+- Orchestration task `actionParameters`
 - Job parameters
 - Default values stored in configuration (`variables_values_id` property)
 
