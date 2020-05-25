@@ -5,6 +5,7 @@ permalink: /integrate/storage/win-cli-client/
 
 * TOC
 {:toc}
+The Storage CLI Client for Microsoft Windows is *DEPRECATED*, please use another Storage client.
 
 The Storage API Command line interface (CLI) client for Microsoft Windows is a simple implementation
 of [Storage API](https://keboola.docs.apiary.io/#), currently supporting only a
