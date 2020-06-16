@@ -191,6 +191,11 @@ array property `interests` was turned into a separate table and linked through u
 
 See [example [EX063]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/063-mapping-automatic).
 
+**Note:** When using Automatic mapping you may get result tables with **changing structure**. A typical example is 
+when the API returns a completely empty response in which case no tables are created for the job.
+When Manual mapping is used, the generated table structure always honors the mapping setting.
+See [example [EX137]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/137-mapping-tables-nested-empty).
+
 ### Basic Manual Mapping
 Maybe you are not interested in the user `interests` and want to simplify the users table
 to three columns: `country`, `name` and `id`. The following mapping configuration does the trick:
