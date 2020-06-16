@@ -30,8 +30,6 @@ use it programmatically in R.
 workspace manipulation features of the Storage API; use it programmatically in Python.
 4. [Docker CLI client](https://github.com/keboola/storage-api-cli) --- a CLI (command line interface) application supporting
 basic data manipulation features of the Storage API; use it from the command line provided that you have Docker available.
-5. [Windows CLI client](/integrate/storage/win-cli-client/) --- a CLI application supporting basic data manipulation features;
-use it from the Windows command line.
 
 Additional tools:
 
