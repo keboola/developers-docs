@@ -50,11 +50,11 @@ Which will return a response similar to this:
   "isSliced": false,
   "isEncrypted": false,
   "name": "new_file2.csv",
-  "url": "https://s3.amazonaws.com/kbc-sapi-files/exp-180/1134/files/2016/06/22/192726697.new_file2?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJ2N244XSWYVVYVLQ%2F20160622%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20160622T084435Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=86136cced74cdf919953cde9e2a0b837bd0b8f147aa6b7b30c2febde3b92d83d",
+  "url": "https://s3.amazonaws.com/kbc-sapi-files/exp-15/1134/files/2016/06/22/192726697.new_file2?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJ2N244XSWYVVYVLQ%2F20160622%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20160622T084435Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=86136cced74cdf919953cde9e2a0b837bd0b8f147aa6b7b30c2febde3b92d83d",
   "region": "us-east-1",
   "sizeBytes": 52,
   "tags": [],
-  "maxAgeDays": 180,
+  "maxAgeDays": 15,
   "runId": null,
   "runIds": [],
   "creatorToken": {
@@ -62,7 +62,7 @@ Which will return a response similar to this:
     "description": "ondrej.popelka@keboola.com"
   },
   "uploadParams": {
-    "key": "exp-180/1134/files/2016/06/22/192726697.new_file2.csv",
+    "key": "exp-15/1134/files/2016/06/22/192726697.new_file2.csv",
     "bucket": "kbc-sapi-files",
     "acl": "private",
     "credentials": {
@@ -100,7 +100,7 @@ SET AWS_SESSION_TOKEN=Ago...bsF
 
 Then you can actually upload the `new-table.csv` file by executing the AWS S3 CLI [cp command](https://docs.aws.amazon.com/cli/latest/reference/s3/cp.html):
 {% highlight bash %}
-aws s3 cp new-table.csv s3://kbc-sapi-files/exp-180/1134/files/2016/06/22/192726697.new_file2.csv
+aws s3 cp new-table.csv s3://kbc-sapi-files/exp-15/1134/files/2016/06/22/192726697.new_file2.csv
 {% endhighlight %}
 
 After that, import the file into Table Storage, by calling either
@@ -151,11 +151,11 @@ The above will return a response similar to this:
   "isSliced": false,
   "isEncrypted": true,
   "name": "404.md",
-  "url": "https:\/\/kbc-sapi-files.s3.amazonaws.com\/exp-180\/4088\/files\/2018\/07\/17\/418137779.new-file.csv...truncated",
+  "url": "https:\/\/kbc-sapi-files.s3.amazonaws.com\/exp-15\/4088\/files\/2018\/07\/17\/418137779.new-file.csv...truncated",
   "region": "us-east-1",
   "sizeBytes": 1765,
   "tags": [],
-  "maxAgeDays": 180,
+  "maxAgeDays": 15,
   "runId": null,
   "runIds": [],
   "creatorToken": {
@@ -196,11 +196,11 @@ The above will return a response similar to this:
   "isSliced": false,
   "isEncrypted": false,
   "name": "new_file.csv",
-  "url": "https://s3.amazonaws.com/kbc-sapi-files/exp-180/578/files/2017/02/16/237360074.new_file.csv?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJ2N244XSWYVVYVLQ%2F20170216%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20170216T002118Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=6e959a81efc3047b2333ab8d471e0855fc3e5f98183fb7fe84af6359b071553b",
+  "url": "https://s3.amazonaws.com/kbc-sapi-files/exp-15/578/files/2017/02/16/237360074.new_file.csv?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJ2N244XSWYVVYVLQ%2F20170216%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20170216T002118Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=6e959a81efc3047b2333ab8d471e0855fc3e5f98183fb7fe84af6359b071553b",
   "region": "us-east-1",
   "sizeBytes": null,
   "tags": [],
-  "maxAgeDays": 180,
+  "maxAgeDays": 15,
   "runId": null,
   "runIds": [],
   "creatorToken": {
@@ -210,7 +210,7 @@ The above will return a response similar to this:
   "uploadParams": {
     "url": "https://kbc-sapi-files.s3.amazonaws.com",
     "acl": "private",
-    "key": "exp-180/578/files/2017/02/16/237360074.new_file.csv",
+    "key": "exp-15/578/files/2017/02/16/237360074.new_file.csv",
     "AWSAccessKeyId": "AKI...VLQ",
     "policy": "eyJ...Q==",
     "signature": "TRQ4soSMdt7AzyL1nVp/lzFFxIU="
@@ -223,7 +223,7 @@ in the `uploadParams` response property. You can upload the file by doing an HTT
 in the response:
 
 {% highlight bash %}
-curl --form "key=exp-180/578/files/2017/02/16/237360074.new_file.csv" --form "acl=private" --form "policy=eyJ...IU=" --form "AWSAccessKeyId=AKI...VLQ" --form "file=@auto.csv" https://kbc-sapi-files.s3.amazonaws.com
+curl --form "key=exp-15/578/files/2017/02/16/237360074.new_file.csv" --form "acl=private" --form "policy=eyJ...IU=" --form "AWSAccessKeyId=AKI...VLQ" --form "file=@auto.csv" https://kbc-sapi-files.s3.amazonaws.com
 {% endhighlight %}
 
 The last `--form` parameter must be the actual file you want to upload; the value must be
@@ -257,7 +257,7 @@ which will return a response similar to this:
   "id": 192611596,
   "created": "2016-06-21T15:25:35+0200",
   "name": "in.c-redshift.blog-data.csv",
-  "url": "https://s3.amazonaws.com/kbc-sapi-files/exp-30/578/table-exports/in/c-redshift/blog-data/192611594.csvmanifest?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJ2N244XSWYVVYVLQ%2F20160621%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20160621T135137Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=ee69d94f0af06bcf924df0f710dcd92e6503a13c8a11a86be2606552bf9a8b26",
+  "url": "https://s3.amazonaws.com/kbc-sapi-files/exp-2/578/table-exports/in/c-redshift/blog-data/192611594.csvmanifest?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJ2N244XSWYVVYVLQ%2F20160621%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20160621T135137Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=ee69d94f0af06bcf924df0f710dcd92e6503a13c8a11a86be2606552bf9a8b26",
   "region": "us-east-1",
   "sizeBytes": 24541,
   "tags": [
@@ -266,7 +266,7 @@ which will return a response similar to this:
   ...
   "s3Path": {
     "bucket": "kbc-sapi-files",
-    "key": "exp-30/578/table-exports/in/c-redshift/blog-data/192611594.csv"
+    "key": "exp-2/578/table-exports/in/c-redshift/blog-data/192611594.csv"
   },
   "credentials": {
     "AccessKeyId": "ASI...UQQ",
@@ -283,8 +283,8 @@ similar to this:
 {% highlight json %}
 {
   "entries": [
-    {"url":"s3://kbc-sapi-files/exp-30/578/table-exports/in/c-redshift/blog-data/192611594.csv0000_part_00"},
-    {"url":"s3://kbc-sapi-files/exp-30/578/table-exports/in/c-redshift/blog-data/192611594.csv0001_part_00"}
+    {"url":"s3://kbc-sapi-files/exp-2/578/table-exports/in/c-redshift/blog-data/192611594.csv0000_part_00"},
+    {"url":"s3://kbc-sapi-files/exp-2/578/table-exports/in/c-redshift/blog-data/192611594.csv0001_part_00"}
   ]
 }
 {% endhighlight %}
@@ -312,8 +312,8 @@ SET AWS_SESSION_TOKEN=Ago...wU=
 
 Then you can actually download the files by executing the AWS S3 CLI [cp command](https://docs.aws.amazon.com/cli/latest/reference/s3/cp.html):
 {% highlight bash %}
-aws s3 cp s3://kbc-sapi-files/exp-30/578/table-exports/in/c-redshift/blog-data/192611594.csv0000_part_00 192611594.csv0000_part_00
-aws s3 cp s3://kbc-sapi-files/exp-30/578/table-exports/in/c-redshift/blog-data/192611594.csv0001_part_00 192611594.csv0001_part_00
+aws s3 cp s3://kbc-sapi-files/exp-2/578/table-exports/in/c-redshift/blog-data/192611594.csv0000_part_00 192611594.csv0000_part_00
+aws s3 cp s3://kbc-sapi-files/exp-2/578/table-exports/in/c-redshift/blog-data/192611594.csv0001_part_00 192611594.csv0001_part_00
 {% endhighlight %}
 
 After that, merge the files together by executing the following commands
