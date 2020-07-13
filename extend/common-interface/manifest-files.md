@@ -161,7 +161,7 @@ An input file manifest stores metadata about a downloaded file.
         "tag1",
         "tag2"
     ],
-    "max_age_days": 180
+    "max_age_days": 15
 }
 {% endhighlight %}
 
@@ -185,7 +185,7 @@ manifest fields; all of them are optional.
 
 These parameters can be used (taken from [Storage API File Import](https://keboola.docs.apiary.io/#reference/files/upload-file/create-file-resource)):
 
-- If `is_permanent` is false, the file will be automatically deleted after 180 days.
+- If `is_permanent` is false, the file will be automatically deleted after 15 days.
 - When `notify` is true, the members of the project will be notified that a file has been uploaded to the project.
 
 ### S3 Staging
@@ -201,7 +201,7 @@ credentials for downloading the actual file data.
         "isSliced": true,
         "region": "us-east-1",
         "bucket": "kbc-sapi-files",
-        "key": "exp-30/1581/table-exports/in/c-docker-test/test/243100072.csv.gzmanifest",
+        "key": "exp-2/1581/table-exports/in/c-docker-test/test/243100072.csv.gzmanifest",
         "credentials": {
             "access_key_id": "ASI...CDQ",
             "secret_access_key": "tCE..I+T",
