@@ -556,3 +556,133 @@ The following rules describe the evaluation sequence:
 - `variableValuesData` and `variableValuesId` can't be used together, so neither of them takes precedence.
 - If no values are provided anywhere, the default values are used. If no default values are present, an error is raised.
 - A reference to stored values can't be mixed with providing the values inline. 
+
+## Shared Code
+Related to variables is the Shared Code feature. Shared code allows to share parts of configuration code. In a 
+configuration it is also replaced using the [Moustache syntax](https://mustache.github.io/mustache.5.html). Shared code
+is referenced using `shared_code_id` and `shared_code_row_ids` configuration nodes. Unlike variables, shared code can't 
+be overridden at runtime (so there are no parameters to set when running a job or in orchestration).
+Shared code can, however, contain its own variables which need to be merged to those of the main configuration.
+
+### Creating Shared Code
+Shared code pieces is stored as configuration rows of a dedicated component `keboola.shared-code`. Before creating a 
+piece of a shared code, you first have to create a configuration. Notice that the UI uses certain configurations for
+certain components so you might want to check the existing configurations of `keboola.shared-code` component before
+crating a new configuration.
+
+To create a configuration, use the [create configuration API call](https://keboola.docs.apiary.io/#reference/component-configurations/component-configurations/create-configuration). The configuration content is ignored, i.e all you need to provide is name:
+
+{% highlight bash %}
+curl --location --request POST 'https://connection.keboola.com/v2/storage/components/keboola.shared-code/configs' \
+--header 'X-StorageAPI-Token: my-token' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--data-urlencode 'name=python-code'
+{% endhighlight %}
+
+Let's assume that the created configuration ID is `618884794`.
+Next step is to create the shared code piece itself. To do this create a configuration row of the above configuration
+with the configuration row content containing a piece of share code, for example:
+
+{% highlight json %}
+{
+	"code_content": "from os import listdir\nfrom os.path import isfile, join\n\nmypath = '\''/data/in/files'\''\nonlyfiles = [f for f in listdir(mypath)]\nprint(onlyfiles)\nmypath = '\''/data/in/user'\''\nonlyfiles = [f for f in listdir(mypath)]\nprint(onlyfiles)"
+}
+{% endhighlight %}
+
+It is advisable to set a reasonable `rowId` of the row, because it will be used later to reference the shared code:
+
+{% highlight bash %}
+curl --location --request POST 'https://connection.keboola.com/v2/storage/components/keboola.shared-code/configs/618884794/rows' \
+--header 'X-StorageApi-Token: my-token' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--data-urlencode 'configuration={
+	"code_content": "from os import listdir\nfrom os.path import isfile, join\n\nmypath = '\''/data/in/files'\''\nonlyfiles = [f for f in listdir(mypath)]\nprint(onlyfiles)\nmypath = '\''/data/in/user'\''\nonlyfiles = [f for f in listdir(mypath)]\nprint(onlyfiles)"
+}
+' \
+--data-urlencode 'rowId=dumpfiles'
+{% endhighlight %}
+
+The above example creates a piece of shared python code named `dumpfiles` which contains the 
+following python code:
+
+{% highlight python %}
+from os import listdir
+from os.path import isfile, join
+
+mypath = '/data/in/files'
+onlyfiles = [f for f in listdir(mypath)]
+print(onlyfiles)
+mypath = '/data/in/user'
+onlyfiles = [f for f in listdir(mypath)]
+print(onlyfiles)
+{% endhighlight %}
+
+### Using Shared Code
+To use a piece of shared code, you have to reference it in a configuration using `shared_code_id` which is the ID of the shared code configuration and `shared_code_row_ids` which is an array of IDS of shared code pieces. With the above example you need to add the following nodes to the configuration:
+
+{% highlight json %}
+"shared_code_id": "618884794",
+"shared_code_row_ids": ["dumpfiles"]
+{% endhighlight %}
+
+With that all moustache references to `{{dumpfiles}}` will be replaced by the shared code piece. All other
+moustache references will be kept untouched and be treated like variables. E.g: the following configuration:
+
+{% highlight json %}
+{
+    "storage": {},
+    "parameters": {
+        "blocks": [
+            {
+                "name": "Main block",
+                "codes": [
+                    {
+                        "name": "Main code",
+                        "script": [{{someOtherPlaceholder}}]
+                    },
+                    {
+                        "name": "Debug",
+                        "script": ["{{dumpfiles}}"]
+                    }
+                ]
+            }
+        ]
+    },
+    "variables_id": "618878103",
+    "variables_values_id": "618878104",
+    "shared_code_id": "618884794",
+    "shared_code_row_ids": ["dumpfiles"]
+}
+{% endhighlight %}
+
+Will be modified to:
+
+{% highlight json %}
+{
+    "storage": {},
+    "parameters": {
+        "blocks": [
+            {
+                "name": "Main block",
+                "codes": [
+                    {
+                        "name": "Main code",
+                        "script": [{{someOtherPlaceholder}}]
+                    },
+                    {
+                        "name": "Debug",
+                        "script": ["from os import listdir\nfrom os.path import isfile, join\n\nmypath = '\''/data/in/files'\''\nonlyfiles = [f for f in listdir(mypath)]\nprint(onlyfiles)\nmypath = '\''/data/in/user'\''\nonlyfiles = [f for f in listdir(mypath)]\nprint(onlyfiles)"]
+                    }
+                ]
+            }
+        ]
+    },
+    "variables_id": "618878103",
+    "variables_values_id": "618878104",
+    "shared_code_id": "618884794",
+    "shared_code_row_ids": ["dumpfiles"]
+}
+{% endhighlight %}
+
+The variables then need to contain `someOtherPlaceholder` variable in order to produce a fully functional configuration.
+The same way if the shared code piece contains any variables, they have to be set when running the configuration.
