@@ -621,11 +621,15 @@ print(onlyfiles)
 To use a piece of shared code, you have to reference it in a configuration using `shared_code_id` which is the ID of the shared code configuration and `shared_code_row_ids` which is an array of IDS of shared code pieces. With the above example you need to add the following nodes to the configuration:
 
 {% highlight json %}
-"shared_code_id": "618884794",
-"shared_code_row_ids": ["dumpfiles"]
+{
+    "storage": {...},
+    "parameters": {...},
+    "shared_code_id": "618884794",
+    "shared_code_row_ids": ["dumpfiles"]
+}
 {% endhighlight %}
 
-With that all moustache references to `{{dumpfiles}}` will be replaced by the shared code piece. All other
+With that all moustache references to `{{ "{{ dumpfiles " }}}}` will be replaced by the shared code piece. All other
 moustache references will be kept untouched and be treated like variables. E.g: the following configuration:
 
 {% highlight json %}
@@ -638,11 +642,11 @@ moustache references will be kept untouched and be treated like variables. E.g: 
                 "codes": [
                     {
                         "name": "Main code",
-                        "script": [{{someOtherPlaceholder}}]
+                        "script": ["{{ "{{ someOtherPlaceholder " }}}}"]
                     },
                     {
                         "name": "Debug",
-                        "script": ["{{dumpfiles}}"]
+                        "script": ["{{ "{{ dumpfiles " }}}}"]
                     }
                 ]
             }
@@ -667,7 +671,7 @@ Will be modified to:
                 "codes": [
                     {
                         "name": "Main code",
-                        "script": [{{someOtherPlaceholder}}]
+                        "script": ["{{ "{{ someOtherPlaceholder "}}}}"]
                     },
                     {
                         "name": "Debug",
