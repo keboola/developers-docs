@@ -27,6 +27,8 @@ The following configuration parameters are supported for the `response.url` pagi
 
 - `urlKey` (optional, string) --- path in the response to the field which contains the URL of the next request; 
 the default value is `next_page`.
+- `delimiter` (optional, string) --- char used as the delimiter of the nested keys in the `urlKey`; 
+the default value is `.`.
 - `paramIsQuery` (optional, boolean) 
 	- if `true` --- URL is assumed to be only [query string](/extend/generic-extractor/tutorial/rest/#url) parameters; 
 	the parameters in the response **override** the [parameters in the job](/extend/generic-extractor/configuration/config/jobs/#request-parameters). 
