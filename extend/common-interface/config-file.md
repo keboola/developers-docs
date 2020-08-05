@@ -248,6 +248,7 @@ The tables element in a configuration of the **input mapping** is an array and s
 - `destination`
 - `days` (internally converted to `changed_since`)
 - `columns`
+- `column_types`
 - `where_column`
 - `where_operator`
 - `where_values`
@@ -345,6 +346,34 @@ Download 2 days of data from the `in.c-storage.StoredData` table to `/data/table
                 {
                     "source": "in.c-ex-salesforce.Leads",
                     "columns": ["Id", "Revenue", "Date", "Status"]
+                }
+            ]
+        }
+    }
+}
+{% endhighlight %}
+
+#### Input Mapping --- Column types
+This is applicable only to [workspace mapping](/extend/common-interface/folders/#exchanging-data-via-workspace), for CSV files this setting has no effect. The `column_types` setting maps to [Storage API load options](https://keboola.docs.apiary.io/#reference/workspaces/load-data/load-data). It also acts the same way as `columns` setting allowing you to limit the table columns.
+If both `column_types` and `columns` setting are used, then the listed columns must match. If you omit `columns` and use only `column_types` (recommended) then `columns` will be propagated automatically from `column_types`.
+
+{% highlight json %}
+{
+    "storage": {
+        "input": {
+            "tables": [
+                {
+                    "source": "in.c-ex-salesforce.Leads",
+                    "column_types": [
+                        {
+                            "source": "Id",
+                            "type": "VARCHAR",
+                            "destination": "id",
+                            "length": "255",
+                            "nullable": false,
+                            "convert_empty_values_to_null": false
+                        }
+                    ]
                 }
             ]
         }
