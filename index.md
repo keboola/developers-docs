@@ -56,4 +56,3 @@ If you don't have it, or need a development project for other reasons,
 	Hello,
 	I'm *XY* (from the *YZ* company) and I'd like to develop an *extractor|writer|application* for KBC.
 	My component will do *some really awesome things*.
-
