@@ -138,9 +138,19 @@ In this case, the data folders contain only [manifest files](/extend/common-inte
 not the actual data. This mode of operation can be enabled by setting the **Staging storage input** option to **AWS S3** in
 [component settings](https://components.keboola.com/). If this option is enabled, all the data folders
 will contain only manifest files, extended with an additional
-[`s3` section](/extend/common-interface/manifest-files/#s3-section).
+[`s3` section](/extend/common-interface/manifest-files/#s3-staging).
 
 **Note**: Exchanging data via S3 is currently only available for input mapping.
+
+## Exchanging Data via ABS
+The component may also exchange data with Storage [using Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/) (ABS).
+In this case, the data folders contain only [manifest files](/extend/common-interface/manifest-files/) and
+not the actual data. This mode of operation can be enabled by setting the **Staging storage input** option to **ABS** in
+[component settings](https://components.keboola.com/). If this option is enabled, all the data folders
+will contain only manifest files, extended with an additional
+[`abs` section](/extend/common-interface/manifest-files/#abs-staging).
+
+**Note**: Exchanging data via ABS is currently only available for input mapping.
 
 ## Exchanging Data via Workspace
 

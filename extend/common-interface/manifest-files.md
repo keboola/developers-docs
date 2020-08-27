@@ -215,3 +215,30 @@ If the file is sliced and you need to merge it into a single file, read through 
 [working with sliced files](/integrate/storage/api/import-export/#working-with-sliced-files).
 
 Note: Exchanging data via AWS S3 is currently available only for input mapping.
+
+### ABS Staging
+When using [Azure Blob Storage for direct data exchange](/extend/common-interface/folders/#exchanging-data-via-abs),
+the manifest files will contain an additional `abs` section with
+credentials for downloading the actual file data.
+
+{% highlight json %}
+{
+    "id": "in.c-docker-demo.data",
+    ...
+    "abs": {
+        "is_sliced": true,
+        "region": "us-east-1",
+        "container": "kbc-sapi-files",
+        "name": "exp-2/1581/table-exports/in/c-docker-test/test/243100072.csv.gzmanifest",
+        "credentials": {
+            "sas_connection_string": "ASI...CDQ",
+            "expiration": "tCE..I+T"
+        }
+    }
+}
+{% endhighlight %}
+
+If the file is sliced and you need to merge it into a single file, read through the guide to
+[working with sliced files](/integrate/storage/api/import-export/#working-with-sliced-files).
+
+Note: Exchanging data via Azure ABS is currently available only for input mapping.
