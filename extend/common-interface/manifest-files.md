@@ -228,11 +228,11 @@ credentials for downloading the actual file data.
     "abs": {
         "is_sliced": true,
         "region": "us-east-1",
-        "container": "kbc-sapi-files",
-        "name": "exp-2/1581/table-exports/in/c-docker-test/test/243100072.csv.gzmanifest",
+        "container": "exp-2-export-7647-627703071-in-c-docker-test-test",
+        "name": "627703071.csv.gz",
         "credentials": {
-            "sas_connection_string": "ASI...CDQ",
-            "expiration": "tCE..I+T"
+            "sas_connection_string": "BlobEndpoint=https://kbcfsdxcgtsezztoqc.blob.core.windows.net;SharedAccessSignature=sv=2017-11-09&sr=c&st=2020-08-27T08:42:08Z&se=2020-08-27T20:42:08Z&sp=rl&sig=UJW4DPh%2Baaaaaaaaaa",
+            "expiration": "2020-08-27T22:42:08+0200"
         }
     }
 }
