@@ -213,6 +213,7 @@ credentials for downloading the actual file data.
 
 If the file is sliced and you need to merge it into a single file, read through the guide to
 [working with sliced files](/integrate/storage/api/import-export/#working-with-sliced-files).
+In that case, the `key` points to another manifest, which contains a list of sliced files.
 
 Note: Exchanging data via AWS S3 is currently available only for input mapping.
 
@@ -229,7 +230,7 @@ credentials for downloading the actual file data.
         "is_sliced": true,
         "region": "us-east-1",
         "container": "exp-2-export-7647-627703071-in-c-docker-test-test",
-        "name": "627703071.csv.gz",
+        "name": "627703071.csv.gzmanifest",
         "credentials": {
             "sas_connection_string": "BlobEndpoint=https://kbcfsdxcgtsezztoqc.blob.core.windows.net;SharedAccessSignature=sv=2017-11-09&sr=c&st=2020-08-27T08:42:08Z&se=2020-08-27T20:42:08Z&sp=rl&sig=UJW4DPh%2Baaaaaaaaaa",
             "expiration": "2020-08-27T22:42:08+0200"
@@ -240,5 +241,6 @@ credentials for downloading the actual file data.
 
 If the file is sliced and you need to merge it into a single file, read through the guide to
 [working with sliced files](/integrate/storage/api/import-export/#working-with-sliced-files).
+In that case, the `name` points to another manifest, which contains a list of sliced files.
 
 Note: Exchanging data via Azure ABS is currently available only for input mapping.
