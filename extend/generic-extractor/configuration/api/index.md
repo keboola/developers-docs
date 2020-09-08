@@ -55,10 +55,12 @@ See the [`endpoint` configuration](/extend/generic-extractor/configuration/confi
 how `api.baseUrl` and `jobs.endpoint` work together.
 
 ## CA certificate
-The `caCertificate` configuration **defines custom certificate authority bundle in `crt`/`pem` format**.
-It makes possible connection to a server with a untrusted/self-signed certificate.
+The `caCertificate` configuration **defines custom certificate authority bundle in 
+[`crt`/`pem` format](https://serverfault.com/questions/9708/what-is-a-pem-file-and-how-does-it-differ-from-other-openssl-generated-key-file)**.
+It allows connecting to a HTTPS server with a untrusted/self-signed certificate.
 The value is not certificate of the server, but a certificate of the certificate authority used to generate the server certificate.
-You can define a single root certificate, or a bundle of root and intermediate certificates.
+You can define a single root certificate, or a bundle of root and intermediate certificates
+(see [EX141](https://github.com/keboola/generic-extractor/tree/master/doc/examples/141-https-self-signed)).
 
 ## Pagination
 Pagination (or scrolling) **describes how the API pages through a large set of results**. Because
