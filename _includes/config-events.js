@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Api
     $("span:contains('\"baseUrl\"')").wrap("<a href='/extend/generic-extractor/configuration/api/#base-url'></a>");
+    $("span:contains('\"caCertificate\"')").wrap("<a href='/extend/generic-extractor/configuration/api/#ca-certificate'></a>");
     $("span:contains('\"retryConfig\"')").wrap("<a href='/extend/generic-extractor/configuration/api/#retry-configuration'></a>");
     $("span:contains('\"http\"')").first().wrap("<a href='/extend/generic-extractor/configuration/api/#default-http-options'></a>");
     $("span:contains('\"headers\"')").first().wrap("<a href='/extend/generic-extractor/configuration/api/#headers'></a>");
