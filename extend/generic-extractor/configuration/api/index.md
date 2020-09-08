@@ -20,6 +20,7 @@ A sample API configuration can look like this:
     ...,
     "api": {
         "baseUrl": "https://example.com/v3.0/",
+        "caCertificate": "-----BEGIN CERTIFICATE-----\nMIIFaz....",
         "pagination": {
             "method": "offset",
             "offsetParam": "offset",
@@ -52,6 +53,14 @@ The `baseUrl` configuration **defines the URL to which the API requests should b
 recommend that the URL ends with a slash so that the `jobs.endpoint` can be set easily.
 See the [`endpoint` configuration](/extend/generic-extractor/configuration/config/jobs/#endpoint) for a detailed description of
 how `api.baseUrl` and `jobs.endpoint` work together.
+
+## CA certificate
+The `caCertificate` configuration **defines custom certificate authority bundle in 
+[`crt`/`pem` format](https://serverfault.com/questions/9708/what-is-a-pem-file-and-how-does-it-differ-from-other-openssl-generated-key-file)**.
+It allows connecting to a HTTPS server with a untrusted/self-signed certificate.
+The value is not certificate of the server, but a certificate of the certificate authority used to generate the server certificate.
+You can define a single root certificate, or a bundle of root and intermediate certificates
+(see [EX141](https://github.com/keboola/generic-extractor/tree/master/doc/examples/141-https-self-signed)).
 
 ## Pagination
 Pagination (or scrolling) **describes how the API pages through a large set of results**. Because
