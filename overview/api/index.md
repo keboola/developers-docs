@@ -35,6 +35,8 @@ The main APIs for our components are:
 | [Developer Portal API](https://kebooladeveloperportal.docs.apiary.io/#) | Developer Portal is an application separated from KBC for [creating components](/extend/component/).
 | [Billing API](https://keboolabillingapi.docs.apiary.io/#) | Billing API for Pay as You Go projects.
 | [Workspaces API](https://keboolasandboxes.docs.apiary.io/#) | Workspaces API for V2 workspaces.
+| Graph API | Service for generating project lineage and graphs.
+
 
 If you don't know which API to use, see our [integration guide](/integrate/). It describes different roles of the APIs and contains examples of commonly
 performed actions.
