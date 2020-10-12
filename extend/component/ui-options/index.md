@@ -134,6 +134,3 @@ The configuration provided in this input is available in the `authorization` sec
 ## genericTemplatesUI
 This flag is used to provide a UI for components based on the [Generic Extractor](/extend/generic-extractor/). It allows the end user to select a
 [Generic Extractor template](/extend/generic-extractor/publish/).
-
-## genericDockerUI-runtime
-This flag is **deprecated**. It provides a UI for setting parameters for Custom Science.
