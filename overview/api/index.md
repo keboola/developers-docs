@@ -41,12 +41,21 @@ The main APIs for our components are:
 If you don't know which API to use, see our [integration guide](/integrate/). It describes different roles of the APIs and contains examples of commonly
 performed actions.
 
-## Regions and Endpoints
-Keboola Connection is available in multiple regions --- currently in the US (connection.keboola.com), EU (connection.eu-central-1.keboola.com) and AU (connection.ap-southeast-2.keboola.com).
-Each region instance is a completely independent **full stack** of Keboola Connection services.
-In all the API documentation above, the US region is used.
+## Stacks and Endpoints
+Keboola Connection is available in multiple [stacks](https://help.keboola.com/overview/#stacks). These can be 
+either multi-tenant or single-tenant. Current multi-tenant stacks are:
 
-If you are using another region, modify the endpoints accordingly.
+- US AWS -- [connection.keboola.com](https://connection.keboola.com), 
+- EU AWS -- [connection.eu-central-1.keboola.com](https://connection.eu-central-1.keboola.com),
+- US Azure -- [connection.north-europe.azure.keboola.com](https://connection.north-europe.azure.keboola.com). 
+
+Each stack is a completely independent instance of Keboola Connection services.
+In all the API documentation above, the AWS US stack is used.
+
+Single-tenant stacks are available for a single enterprise customer with a domain name 
+in form `connection.CUSTOMER_NAME.keboola.com`.
+
+If you are using another stack, modify the endpoints accordingly.
 Otherwise you will obtain an `Invalid Token` or unauthorized errors. The *authoritative list* of available endpoints is provided by the [Storage API Index Call](https://keboola.docs.apiary.io/#reference/miscellaneous/api-index/component-list). The following is a sample response:
 
 {% highlight json %}
