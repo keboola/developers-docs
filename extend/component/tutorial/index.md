@@ -40,7 +40,7 @@ The example component is written in the Python language, but no knowledge of Pyt
 Before you continue with this tutorial, make sure you
 
 - can log in to the [Developer Portal](https://components.keboola.com/).
-- can log in to KBC either in the [US region](https://connection.keboola.com) or [EU region](https://connection.eu-central-1.keboola.com/).
+- can log in to one of the KBC [stacks](https://help.keboola.com/overview/#stacks)
 - have a [Github](https://github.com/) account.
 
 *Note: Even though the tutorial assumes using [GitHub](https://github.com/) + [Travis](https://travis-ci.org/) services, they are not required for extending KBC.

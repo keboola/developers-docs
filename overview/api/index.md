@@ -47,7 +47,7 @@ either multi-tenant or single-tenant. Current multi-tenant stacks are:
 
 - US AWS -- [connection.keboola.com](https://connection.keboola.com), 
 - EU AWS -- [connection.eu-central-1.keboola.com](https://connection.eu-central-1.keboola.com),
-- US Azure -- [connection.north-europe.azure.keboola.com](https://connection.north-europe.azure.keboola.com). 
+- EU Azure -- [connection.north-europe.azure.keboola.com](https://connection.north-europe.azure.keboola.com). 
 
 Each stack is a completely independent instance of Keboola Connection services.
 In all the API documentation above, the AWS US stack is used.
