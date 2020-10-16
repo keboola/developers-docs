@@ -37,7 +37,8 @@ Depending on your role, extending KBC offers various advantages:
 A [component](/extend/component/) can be used as:
 
 - **Extractor**, allowing customers to get data from new sources. It only processes input tables from external sources (usually API).
-- **Application**, further enriching the data or adding value in new ways. It processes input tables stored as CSV files and generates result tables as CSV files.
+- **Application**, further enriching the data or adding value in new ways. It processes input tables stored as CSV files or database tables and generates result tables as CSV files or database tables.
+- **Transformation**, allowing customers to modify their data. It is a constrained form of an application.
 - **Writer**, pushing data into new systems and consumption methods. It does not generate any data in KBC projects.
 - **Processor**, adjusting the inputs or outputs of other components. It has to be run together with one of the above components.
 
