@@ -52,6 +52,18 @@ items:
           - url: /extend/component/processors/
             title: Processors
 
+          - url: /extend/component/code-pattern/
+            title: Code Patterns
+            items:
+              - url: /extend/component/code-pattern/overview
+                title: Overview
+
+              - url: /extend/component/code-pattern/interface
+                title: Interface
+
+              - url: /extend/component/code-pattern/tutorial
+                title: Tutorial
+
           - url: /extend/component/implementation/
             title: Implementation Notes
             items:
