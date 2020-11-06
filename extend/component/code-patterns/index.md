@@ -1,6 +1,6 @@
 ---
-title: Code Pattern
-permalink: /extend/component/code-pattern/
+title: Code Patterns
+permalink: /extend/component/code-patterns/
 ---
 
 * TOC
@@ -18,6 +18,6 @@ Code Pattern
 ## Next Steps
 
 For more information, see these subpages:
-- [Overview](/extend/component/code-pattern/overview) explains the code patterns from the user's point of view.
-- [Interface](/extend/component/code-pattern/interface) explains integration of the code patterns to the Keboola Connection.
-- [Tutorial](/extend/component/code-pattern/tutorial) helps you to implement your first code pattern.
+- [Overview](/extend/component/code-patterns/overview) explains the code patterns from the user's point of view.
+- [Interface](/extend/component/code-patterns/interface) explains integration of the code patterns to the Keboola Connection.
+- [Tutorial](/extend/component/code-patterns/tutorial) helps you to implement your first code pattern.

@@ -52,16 +52,16 @@ items:
           - url: /extend/component/processors/
             title: Processors
 
-          - url: /extend/component/code-pattern/
+          - url: /extend/component/code-patterns/
             title: Code Patterns
             items:
-              - url: /extend/component/code-pattern/overview
+              - url: /extend/component/code-patterns/overview
                 title: Overview
 
-              - url: /extend/component/code-pattern/interface
+              - url: /extend/component/code-patterns/interface
                 title: Interface
 
-              - url: /extend/component/code-pattern/tutorial
+              - url: /extend/component/code-patterns/tutorial
                 title: Tutorial
 
           - url: /extend/component/implementation/
