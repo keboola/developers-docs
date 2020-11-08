@@ -7,7 +7,7 @@ permalink: /extend/component/code-patterns/
 {:toc}
 
 Code Pattern
-- allows you to use **generated code** in the [New Transformations](https://help.keboola.com/transformations/#new-transformations).
+- **generates code** for the [Transformations](https://help.keboola.com/transformations/#new-transformations).
 - is a special type of the [Component](/extend/component/).
 - implements the [Generate Action](/extend/component/code-patterns/interface#generate-action).
 - use the [Configuration Format](/extend/component/code-patterns/interface#configuration-format).

@@ -71,6 +71,7 @@ The following component types are currently allowed:
 - **Writer** -- a component designed to bring data to an external system
 - **Application** -- another arbitrary component
 - **Processor** -- a [processor](/extend/component/processors/)
+- **Code Pattern** -- a [code pattern](/extend/component/code-patterns/)
 - Transformation -- a special type of component for transformations
 - Other -- a completely special component
 
@@ -87,6 +88,7 @@ The expected behavior of the above component types can be described in more deta
 - **Writer** -- loads data from Storage into an external system, generates no Storage tables on output, has a UI.
 - **Application** -- processes data in Storage, either something like a wrapped transformation or using an external service. Or, it does not work with data in Storage at all. This component has a UI.
 - **Processor** -- is designed for post-processing or pre-processing data of other components. It is not designed to run alone and has no UI.
+- **Code Pattern** -- generates code for the transformation's component. This component has a UI.
 - Transformation -- represents a transformation engine. The UI treats these components specially and expects that they have similar capabilities
 and configuration options. These are created by Keboola. If you wish to bring your own, please contact us first.
 - Other -- this component type has a special role in the UI, it has no standard component UI. Notable "other" components are:
