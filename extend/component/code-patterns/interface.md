@@ -148,13 +148,13 @@ Example output. Examples of the `storage` key can be found [here](/extend/common
 }
 ```
 
-## Configuration in the Developer Portal
+## Developer Portal
 
-It is necessary to register component in the [Keboola Developer Portal](https://components.keboola.com/),
+Component must be registered in the [Keboola Developer Portal](https://components.keboola.com/),
 see [Component Quick Start](/extend/component/tutorial/#before-you-start).
 
  
-For code pattern component it is necessary to take some extra steps, described in this section.
+For code pattern component it is necessary to take following extra steps.
 
 First, create a component with the `Code Pattern` type.
 
@@ -192,8 +192,8 @@ then the [published](/extend/publish/) code pattern will be available in the sel
 {: .image-popup}
 ![Screenshot -- Create a new transformation](/extend/component/code-patterns/interface-4-new-transformation.png)
 
-The code pattern's [Configuration](/extend/component/code-patterns/interface#configuration) contains `parameters._componentId` key
-based on it is possible to distinguish for which transformation's component the code is generated.
+The code pattern's [Configuration](/extend/component/code-patterns/interface#configuration) contains `parameters._componentId` key,
+so it is possible to distinguish for which transformation's component the code is generated.
 
 ## Next Steps
 

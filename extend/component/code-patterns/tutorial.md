@@ -6,7 +6,7 @@ permalink: /extend/component/code-patterns/tutorial
 * TOC
 {:toc}
 
-[action](/extend/common-interface/actions/)
+
 
 
 ## Next Steps
