@@ -60,7 +60,9 @@ Choose the appropriate [component type](/extend/component/#component-types):
 
 - `extractor` -- brings data into KBC
 - `writer` -- sends data out of KBC
-- `application` -- does some transformation of the data, or something completely different
+- `transformation` -- does some transformation of the data, [read more](https://help.keboola.com/transformations/#new-transformations)
+- `code pattern` -- generates code for transformation's component, [read more](/extend/component/code-patterns)
+- `application` -- another arbitrary component
 
 The above does not mean technically that, for example, an extractor cannot send data out of KBC
 or an application cannot bring new data into KBC. It is a matter of user perception,
