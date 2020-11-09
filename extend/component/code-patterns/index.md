@@ -11,7 +11,7 @@ Code Pattern
 - is a special type of the [Component](/extend/component/).
 - implements the [Generate Action](/extend/component/code-patterns/interface#generate-action).
 - use the [Configuration Format](/extend/component/code-patterns/interface#configuration-format).
-- the generated code is written in the [JSON output format](/extend/component/code-patterns/interface#output-json-format).
+- the generated code is written in the [Output Format](/extend/component/code-patterns/interface#output-format).
 
 ## Next Steps
 

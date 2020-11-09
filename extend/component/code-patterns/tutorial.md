@@ -64,7 +64,7 @@ The first way is to call the [Generate Action](/extend/component/code-patterns/i
 
 ### Modify transformation via API
 
-The second way is to modify the transformation to use an [unpublished](#publishing-component) code pattern.
+The second way is to modify the transformation to use an unpublished code pattern.
 
 #### Create a Empty Transformation
 

@@ -19,7 +19,7 @@ In the links below you can find the basic information to integrate your own comp
 
 **Let's highlight the most important information.**
 - Component code is wrapped in a [Docker](/extend/component/docker-tutorial/) image.
-- Component gets the [Configuration File](/extend/common-interface/config-file/).
+- Component gets the [Configuration File](#configuration).
 - The correct exit code must be used.
     - See [Return Values](/extend/common-interface/environment/#return-values)
     - See [Handling User and Application errors](https://developers.keboola.com/extend/common-interface/actions/#handling-user-and-application-errors).
@@ -34,15 +34,15 @@ In the links below you can find the basic information to integrate your own comp
 This section shows how the code generation process works from start to end.
 
 - First, there must be a [published](/extend/publish/) code pattern component, for example `keboola.example-pattern`.
-- The component must have configured [Supported Transformations List](#supported-transformations-list).
+- The component must have configured [Supported Transformations](#supported-components).
     - For example, it supports `keboola.snowflake-transformation`.
 - [Create a transformation with the code pattern](/extend/component/code-patterns/overview#new-transformation-with-code-pattern) in the user interface.
 - Click the **Generate Code** button.
 - User interface calls the [Generate Action](#generate-action) on the `keboola.example-pattern` component.
 - The action finishes with the correct exit code:
     - If **success**, `exit code = 0`
-        - The component `stdout` contains [JSON Output](#output-json-format). 
-        - The [Storage](#storage) and the [Code Blocks](#code-blocks) are stored to the transformation.
+        - The component `stdout` contains JSON in the [Output Format](#output-format). 
+        - The code blocks in the [parameters](#output-format) are stored to the transformation.
     - If **failure** `exit code = 1 or 2`
         - The error is processed according to the exit code, see [Return Values](/extend/common-interface/environment/#return-values).
         - The previous version of the generated code remains in the transformation.
@@ -57,7 +57,7 @@ There are two types of the component’s actions:
 
 Code patterns:
 - do not implement the **run** action.
-- implement only the **generate** [synchronous action]((/extend/common-interface/actions/)).
+- implement only the **generate** [synchronous action](/extend/common-interface/actions/).
 
 Expected behavior of the **generate** action :
 - The action is started by the [Run component action](https://kebooladocker.docs.apiary.io/#reference/actions/run-custom-component-action/process-action) API call.
@@ -80,8 +80,8 @@ The [Configuration File](/extend/common-interface/config-file/) `config.json` fi
     - **`_componentId`** key contains the id of the target transformation component.
         - For example `keboola.snowflake-transformation`.
         - Based on this, it is possible to modify the generated code, e.g. for various SQL dialects.
-    - The other keys are provided from the [Parameters](/extend/component/code-patterns/overview#parameters) form, filled in by the user.
-        - The schema of the form [is defined](#parameters-form) in the Keboola Developer Portal.
+    - The other keys are provided from the [Parameters Form](/extend/component/code-patterns/overview#parameters-form), filled in by the user.
+        - The schema of the form is defined [in the Configuration Schema](#configuration-schema).
         - The values should be [validated](/extend/common-interface/config-file/#validation) in the component's code.
     
 **Note**: Read more about `KBC_DATADIR` environment variable in the [Environment](/extend/common-interface/environment/).
@@ -109,7 +109,7 @@ Example configuration. Examples of the `storage` key can be found [here](/extend
 
 ### Output Format
 
-The component must write the generated code to `stdout` in the JSON format:
+The component must write the generated code to `stdout` in the following JSON format:
 - **`storage`** key contains a new transformation's input and output mapping.
     - It is optional, if absent, the mapping remains unchanged.
     - It is copied into the transformation's configuration `storage` key.
@@ -152,7 +152,7 @@ Example output. Examples of the `storage` key can be found [here](/extend/common
 ## Developer Portal
 
 Component must be registered in the [Keboola Developer Portal](https://components.keboola.com/),
-see [Component Quick Start](/extend/component/tutorial/#before-you-start).
+see [Component Quick Start](/extend/component/tutorial/).
 
  
 For code pattern component it is necessary to take following extra steps.
