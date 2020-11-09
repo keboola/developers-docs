@@ -1,6 +1,6 @@
 ---
 title: Code Pattern Quick Start
-permalink: /extend/component/code-patterns/tutorial
+permalink: /extend/component/code-patterns/tutorial/
 ---
 
 * TOC

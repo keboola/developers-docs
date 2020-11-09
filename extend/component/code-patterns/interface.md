@@ -1,6 +1,6 @@
 ---
 title: Code Pattern Interface
-permalink: /extend/component/code-patterns/interface
+permalink: /extend/component/code-patterns/interface/
 ---
 
 * TOC
