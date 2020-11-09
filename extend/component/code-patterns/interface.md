@@ -6,8 +6,8 @@ permalink: /extend/component/code-patterns/interface
 * TOC
 {:toc}
 
-In the [Overview](/extend/component/code-patterns/overview) you could see the code pattern from the user's point of view.
-This page describes how the code patterns are integrated to the other parts of Keboola Connection.
+In the [Overview](/extend/component/code-patterns/overview) you could see the code patterns from the user's point of view.
+This page describes how the code patterns works internally, as a part of Keboola Connection.
 
 ## Common Interface
 
@@ -71,7 +71,7 @@ Expected behavior of the **generate** action :
 
 ### Configuration
 
-The [Configuration File](/extend/common-interface/config-file/) `/data/config.json` contains:
+The [Configuration File](/extend/common-interface/config-file/) `config.json` file in the `KBC_DATADIR` contains:
 - **`action`** key, with the `generate` value, name of the [Action](/extend/common-interface/actions/).
 - **`storage`** key contains current input and output mapping from the transformation.
     - In the [Configuration File - Tables](/extend/common-interface/config-file/#tables) is described a schema and examples.
@@ -84,6 +84,7 @@ The [Configuration File](/extend/common-interface/config-file/) `/data/config.js
         - The schema of the form [is defined](#parameters-form) in the Keboola Developer Portal.
         - The values should be [validated](/extend/common-interface/config-file/#validation) in the component's code.
     
+**Note**: Read more about `KBC_DATADIR` environment variable in the [Environment](/extend/common-interface/environment/).
 
 Example configuration. Examples of the `storage` key can be found [here](/extend/common-interface/config-file/#tables).
 ```json
@@ -186,7 +187,7 @@ Each code pattern can generate a code for one or more types of the transformatio
 ![Screenshot -- List of the supported components](/extend/component/code-patterns/interface-3-supported-list.png)
 
 
-When creating one of the listed transformation's component,  
+Now, when creating one of the listed transformation's component,  
 then the [published](/extend/publish/) code pattern will be available in the select box.
 
 {: .image-popup}

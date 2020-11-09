@@ -16,5 +16,5 @@ Code Pattern
 ## Next Steps
 
 - [Overview](/extend/component/code-patterns/overview) shows the code patterns from the user's point of view.
-- [Interface](/extend/component/code-patterns/interface) explains integration of the code patterns to the Keboola Connection.
+- [Interface](/extend/component/code-patterns/interface) describes how the code patterns work internally.
 - [Tutorial](/extend/component/code-patterns/tutorial) helps you to implement your first code pattern.

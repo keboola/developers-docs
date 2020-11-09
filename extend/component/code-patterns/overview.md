@@ -6,7 +6,7 @@ permalink: /extend/component/code-patterns/overview
 * TOC
 {:toc}
 
-Code Pattern is a special type of the [Component](/extend/component/).
+Code Pattern is a type of the [Component](/extend/component/).
 It can be used in the user interface of the [New Transformations](https://help.keboola.com/transformations/#new-transformations)
 to generate code based on the specified [parameters](#parameters).
 
@@ -105,5 +105,5 @@ After the code has been generated, you can [run the job](https://help.keboola.co
 
 ## Next Steps
 
-- [Interface](/extend/component/code-patterns/interface) explains integration of the code patterns to the Keboola Connection.
+- [Interface](/extend/component/code-patterns/interface) describes how the code patterns work internally.
 - [Tutorial](/extend/component/code-patterns/tutorial) helps you to implement your first code pattern.
