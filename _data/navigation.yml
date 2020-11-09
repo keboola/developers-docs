@@ -55,9 +55,6 @@ items:
           - url: /extend/component/code-patterns/
             title: Code Patterns
             items:
-              - url: /extend/component/code-patterns/overview
-                title: Overview
-
               - url: /extend/component/code-patterns/interface
                 title: Interface
 

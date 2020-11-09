@@ -6,7 +6,6 @@ permalink: /extend/component/code-patterns/tutorial
 * TOC
 {:toc}
 
-In the [Overview](/extend/component/code-patterns/overview) you could see the code patterns from the user's point of view.
 In the [Interface](/extend/component/code-patterns/interface) is described how the code patterns work internally.
 This page explains how to create your own code pattern component.
 
@@ -160,7 +159,7 @@ Example response, some keys omitted.
 }
 ```
 
-The transformation now uses the code pattern, and you can **test it in the [user interface](/extend/component/code-patterns/overview#configuration)**.
+The transformation now uses the code pattern, and you can **test it in the [user interface](https://help.keboola.com/transformations/code-patterns/#configuration)**.
 
 ## Publishing Component
 
@@ -171,6 +170,5 @@ Follow the [Publish Component](/extend/publish/) tutorial.
 [](/extend/publish/)
 
 ## Next Steps
-
-- [Overview](/extend/component/code-patterns/overview) shows the code patterns from the user's point of view.
 - [Interface](/extend/component/code-patterns/interface) describes how the code patterns work internally.
+- [Code Patterns Help](https://help.keboola.com/transformations/code-patterns/) shows the code patterns from the user's point of view.

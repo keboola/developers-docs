@@ -6,7 +6,6 @@ permalink: /extend/component/code-patterns/interface
 * TOC
 {:toc}
 
-In the [Overview](/extend/component/code-patterns/overview) you could see the code patterns from the user's point of view.
 This page describes how the code patterns works internally, as a part of Keboola Connection.
 
 ## Common Interface
@@ -36,7 +35,7 @@ This section shows how the code generation process works from start to end.
 - First, there must be a [published](/extend/publish/) code pattern component, for example `keboola.example-pattern`.
 - The component must have configured [Supported Transformations](#supported-components).
     - For example, it supports `keboola.snowflake-transformation`.
-- [Create a transformation with the code pattern](/extend/component/code-patterns/overview#new-transformation-with-code-pattern) in the user interface.
+- [Create a transformation with the code pattern](https://help.keboola.com/transformations/code-patterns/#new-transformation-with-code-pattern) in the user interface.
 - Click the **Generate Code** button.
 - User interface calls the [Generate Action](#generate-action) on the `keboola.example-pattern` component.
 - The action finishes with the correct exit code:
@@ -75,12 +74,12 @@ The [Configuration File](/extend/common-interface/config-file/) `config.json` fi
 - **`action`** key, with the `generate` value, name of the [Action](/extend/common-interface/actions/).
 - **`storage`** key contains current input and output mapping from the transformation.
     - In the [Configuration File - Tables](/extend/common-interface/config-file/#tables) is described a schema and examples.
-    - In the [Overview - Input and Output Mapping](/extend/component/code-patterns/overview#input-and-output-mapping) is shown exemplary user interface.
+    - In the [Overview - Input and Output Mapping](https://help.keboola.com/transformations/code-patterns/#input-and-output-mapping) is shown exemplary user interface.
 - **`parameters`** key modifies generated code.
     - **`_componentId`** key contains the id of the target transformation component.
         - For example `keboola.snowflake-transformation`.
         - Based on this, it is possible to modify the generated code, e.g. for various SQL dialects.
-    - The other keys are provided from the [Parameters Form](/extend/component/code-patterns/overview#parameters-form), filled in by the user.
+    - The other keys are provided from the [Parameters Form](https://help.keboola.com/transformations/code-patterns/#parameters-form), filled in by the user.
         - The schema of the form is defined [in the Configuration Schema](#configuration-schema).
         - The values should be [validated](/extend/common-interface/config-file/#validation) in the component's code.
     
@@ -169,7 +168,7 @@ Open the component edit page and modify the settings described in the following 
 
 ### Configuration Schema
 
-- [Parameters Form](/extend/component/code-patterns/overview#parameters-form) in the user interface
+- [Parameters Form](https://help.keboola.com/transformations/code-patterns/#parameters-form) in the user interface
 is generated from the [Configration Schema](/extend/component/ui-options/configuration-schema/).
 - Click on the **Preview** button, to see the preview of the form. 
 
@@ -197,6 +196,5 @@ The code pattern's [Configuration](/extend/component/code-patterns/interface#con
 so it is possible to distinguish for which transformation's component the code is generated.
 
 ## Next Steps
-
-- [Overview](/extend/component/code-patterns/overview) shows the code patterns from the user's point of view.
 - [Tutorial](/extend/component/code-patterns/tutorial) helps you to implement your first code pattern.
+- [Code Patterns Help](https://help.keboola.com/transformations/code-patterns/) shows the code patterns from the user's point of view.
