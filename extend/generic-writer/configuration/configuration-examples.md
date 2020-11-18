@@ -322,7 +322,7 @@ Send notifications to slack channels via API. Note that you need to create an ap
 
 
 
-** Input Table:**
+**Input Table:**
 
 | channel        | text       |
 |----------------|------------|
