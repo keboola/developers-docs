@@ -316,3 +316,59 @@ POST `https://track.customer.io/api/v1/customers/a@test.com/events`
 ```
 
 ### Slack notification
+
+Send notifications to slack channels via API. Note that you need to create an app with appropriate permissions at https://api.slack.com/apps
+ and retrieve the API token.
+
+
+
+** Input Table:**
+
+| channel        | text       |
+|----------------|------------|
+| AC098098   | Hello        |
+| AC092131   | World        |
+
+
+**Configuration:**
+
+```json
+{
+  "path": "https://slack.com/api/chat.postMessage",
+  "mode": "JSON",
+  "method": "POST",
+  "user_parameters": {
+    "#token": "",
+    "token_encoded": {
+      "function": "concat",
+      "args": [
+        "Bearer ",
+        {
+          "attr": "#token"
+        }
+      ]
+    }
+  },
+  "headers": [
+    {
+      "key": "Authorization",
+      "value": {
+        "attr": "token_encoded"
+      }
+    },
+    {
+      "key": "Content-type",
+      "value": "application/json"
+    }
+  ],
+  "additional_requests_pars": [],
+  "json_data_config": {
+    "chunk_size": 1,
+    "infer_types_for_unknown": true,
+    "delimiter": "_",
+    "column_types": []
+  },
+  "debug": true
+}
+
+```
