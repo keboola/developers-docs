@@ -62,6 +62,24 @@ The value is not certificate of the server, but a certificate of the certificate
 You can define a single root certificate, or a bundle of root and intermediate certificates
 (see [EX141](https://github.com/keboola/generic-extractor/tree/master/doc/examples/141-https-self-signed)).
 
+## Client certificate
+The `#clientCertificate` configuration **defines the client certificate and private key**. This is required
+if the server requires two-way SSL authentication, so in addition to the verification of the server,
+the server also verifies the client (see [EX142](https://github.com/keboola/generic-extractor/tree/master/doc/examples/142-https-client-cert)).
+
+**Value is the client certificate, followed by the private key. Both
+in [`crt`/`pem` format](https://serverfault.com/questions/9708/what-is-a-pem-file-and-how-does-it-differ-from-other-openssl-generated-key-file)**.
+
+Example:
+```json
+{
+  "api": {
+    "baseUrl": "https://my-server.com",
+    "#clientCertificate": "-----BEGIN CERTIFICATE-----\n...\n----END CERTIFICATE-----\n-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----\n"
+  }
+}
+```
+
 ## Pagination
 Pagination (or scrolling) **describes how the API pages through a large set of results**. Because
 there are many different pagination strategies, the configuration is described on a
