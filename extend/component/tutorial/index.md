@@ -136,7 +136,7 @@ We are more interested in the latter because that is going to trigger the deploy
 ![Screenshot -- Travis Build Detail](/extend/component/tutorial/travis-build-2.png)
 
 If the deployment passes without errors, the component will become available in KBC. You
-can verify that in the component details in the Developer Portal:
+can verify that in the component details (action Edit) in the Developer Portal:
 
 {: .image-popup}
 ![Screenshot -- Component Deployed](/extend/component/tutorial/component-deployed.png)
@@ -150,9 +150,9 @@ Once the component is deployed, it becomes available in KBC. Note that it
 takes **up to 5 minutes** for the changes to propagate to all KBC instances. After that,
 you can configure the component by visiting the following URL:
 
-    https://connection.keboola.com/admin/projects/{PROJECT_ID}/extractors/{COMPONENT_ID}
+    https://connection.keboola.com/admin/projects/{DEFINED PROJECT_ID}/extractors/{YOUR COMPONENT_ID}
 
-You can then run the configuration without any settings.
+On this URL, you can create a configuration and run it without any settings.
 
 {: .image-popup}
 ![Screenshot -- Component Configuration](/extend/component/tutorial/component-configuration.png)
