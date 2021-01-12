@@ -123,7 +123,7 @@ following piece of code
 }
 {% endhighlight %}
 
-Will be interpreted as (assuming that there are variables `alias=batman` and `size=big` defined):
+will be interpreted as (assuming the variables `alias=batman` and `size=big` are defined):
 
 {% highlight json %}
 {
