@@ -111,6 +111,28 @@ The structure of variable values, regardless of whether it is stored in configur
 }
 {% endhighlight %}
 
+## Variable Delimiter
+The default variable delimiter is `{{ "{{" }}` and `}}`. If the delimiter interferes with your code, it can
+be changed as per the [Moustache docs](https://mustache.github.io/mustache.5.html). For example the 
+following piece of code
+
+{% highlight json %}
+{
+    "code": "SELECT \"COUNTRY\" || '{{ "{{ alias " }}}}' || '{{ "{{=<< >>=" }}}} {{ "{{ as-is " }}}} <<={{ "{{ " }}}}=>>' 
+    AS \"COUNTRY\", \"CARS\" || '{{ "{{ size " }}}}' AS \"CARS\" FROM \"my-table\""
+}
+{% endhighlight %}
+
+will be interpreted as (assuming the variables `alias=batman` and `size=big` are defined):
+
+{% highlight json %}
+{
+    "code": "SELECT \"COUNTRY\" || 'batman' || '{{ "{{ as-is " }}}}' 
+    AS \"COUNTRY\", \"CARS\" || 'big' AS \"CARS\" FROM \"my-table\""
+}
+{% endhighlight %}
+
+
 ## Example Using Python Transformations
 In this example, we will configure a Python transformation using variables. Note that we are using the new 
 transformations and bypassing the current 
