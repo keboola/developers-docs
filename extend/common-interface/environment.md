@@ -25,6 +25,7 @@ The following environment variables are injected in the container:
  [API call](https://kebooladocker.docs.apiary.io/#reference/run/create-a-job/run-job)).
  - `KBC_COMPONENTID`: Id of the component
  - `KBC_CONFIGROWID`: Id of the configuration row if available.
+ - `KBC_BRANCHID`: Id of the [development branch](https://keboola.docs.apiary.io/#reference/development-branches/branches).
 
  The following variables are available only if "Forwards token" and "Forwards token details" are
  enabled in [component configuration](https://components.keboola.com/) (and approved by us):
