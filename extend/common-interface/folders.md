@@ -152,20 +152,20 @@ will contain only manifest files, extended with an additional
 
 **Note**: Exchanging data via ABS is currently only available for input mapping.
 
-## Exchanging Data via Workspace
+## Exchanging Data via Database Workspace
 
 *Note: this is a preview feature and may change considerably in future.*
 
 The component may also exchange data with Storage [using Workspaces](https://keboola.docs.apiary.io/#reference/workspaces).
-This mode of operation can be enabled by setting the **Staging storage input** or **Staging storage output** option 
-to **Workspace Snowflake** or **Workspace Redshift**. A workspace is an isolated database to which data are loaded before 
-the component job is run and unloaded when the job finishes. The workspace is created just before the job starts and is 
-deleted when the job is terminated. 
+This mode of operation can be enabled by setting the **Staging storage input** or **Staging storage output** option
+to **Workspace Snowflake** or **Workspace Redshift**. A workspace is an isolated database to which data are loaded before
+the component job is run and unloaded when the job finishes. The workspace is created just before the job starts and is
+deleted when the job is terminated.
 
-If this option is enabled, the table data folder will contain only manifest files. The actual data will be loaded as 
+If this option is enabled, the table data folder will contain only manifest files. The actual data will be loaded as
 database tables into the workspace database. The `destination` in input and `source` in output refer to database
 table names. This mode of operation is useful for components which want to manipulate data using SQL queries.
-The component can run arbitrary queries against the database. The database credentials are available in the 
+The component can run arbitrary queries against the database. The database credentials are available in the
 [`authorization` section](/extend/common-interface/config-file/#configuration-file-structure) of the configuration file:
 
 {% highlight json %}
@@ -193,11 +193,53 @@ Notice that some of the values might be empty for different workspace backends (
 They will be always present, though.
 
 When exchanging data via workspace, there are couple of differences to loading data into files:
-- Loading to workspaces supports only [storage tables](/storage/tables/), [storage files](/storage/file-uploads/) 
+- Loading to workspaces supports only [storage tables](/storage/tables/), [storage files](/storage/file-uploads/)
 are always saved to the directory structure.
 - The `days` attribute is not supported for filtering table, use `changed_since` instead.
 - [Automatic Incremental Processing](https://help.keboola.com/storage/tables/#automatic-incremental-processing) (also known as Adaptive Input Mapping) is not supported.
 - When used for output mapping, the `columns` of the output table **must be** specified, this can be done either in the [output manifest](/extend/common-interface/manifest-files/#dataouttables-manifests) or in the [output mapping](/extend/common-interface/config-file/#output-mapping--headless-csv).
 
-**Note**: Currently only some combinations of input/output staging storage settings are supported: 
+**Note**: Currently only some combinations of input/output staging storage settings are supported:
 `local<->local`, `local<->s3`, `workspace-snowflake<->workspace-snowflake`, `workspace-redshift<->workspace-redshift`.
+
+## Exchanging Data via File System Workspace
+*Note: this is a preview feature and may change considerably in future.*
+*Note: currently only Azure Blob Storage workspaces (abs-workspace) are supported for this type and those only work with synapse storage backend
+
+The component may also exchange data with a provisioned file workspace (Azure Blob Storage) [using Workspaces](https://keboola.docs.apiary.io/#reference/workspaces).
+This mode of operation can be enabled by setting the **Staging storage input** or **Staging storage output** option
+to **Workspace ABS**. A filesystem workspace is an isolated file storage to which data are loaded before the component job is run (when staging storage input is set)
+and unloaded from when the job finishes (when staging storage output is set).
+The workspace is created just before the job starts and is deleted when the job is terminated.
+
+If this option is enabled, the data and the manifests will be loaded to the azure storage blob container under the data folder similarly to how it does when using the default local filesystem.
+For example, if a file 'test.txt' with ID '12345' is in the input mapping then the file will appear in the storage blob container with URL https://[storage_account_name].blob.core.windows.net/[container-name]/data/in/files/12345_test.txt/12345
+
+In order to write a file for 'source' for the output mapping, write the file to `[containerName]/data/out/files/my-file-name` and it will be exported if it is listed in the output mapping.
+
+For tables, [**Note that this is only available on Synapse storage backend], since Synapse is only able to export tables as sliced files, it will be necessary to concatenate them in your script.
+For example, if you set as table input mapping the table `in.c-main.my-input` as source and `my-input.csv` as destination then in the ABS workspace you will find it with the following structure:
+- [containerName]/data/in/tables/my-inpupt.csv/[random identifier1].txt
+- [containerName]/data/in/tables/my-inpupt.csv/[random identifier2].txt
+- [containerName]/data/in/tables/my-inpupt.csv/[random identifier3].txt
+So it will be necessary for either the component or the user to concatenate these entries.
+
+[`authorization` section](/extend/common-interface/config-file/#configuration-file-structure) of the configuration file:
+
+{% highlight json %}
+{
+  "storage": {
+    ...
+  },
+  "parameters": {
+    ...
+  },
+  "authorization": {
+    "workspace": {
+      "container": "azure-storage-blob-container",
+      "connectionString": "azure-storage-blob-SAS-connection-string",
+    }
+  }
+}
+{% endhighlight %}
+
