@@ -25,22 +25,30 @@ add a given sound to each row a given number of times. For that you'll need two 
 ## Modifying Source Code
 To implement the above, you can change the [sample component](/extend/component/tutorial/output-mapping/) to:
 
-{% highlight python %}
-
+```python
 import csv
+import os
+
 # Load the KBC library to process the config file
-from keboola import docker
-cfg = docker.Config('/data/')
-params = cfg.get_parameters()
+from keboola.component import CommonInterface
+
+# Rely on the KBC_DATADIR environment variable by default,
+# alternatively provide a data folder path in the constructor (CommonInterface('data'))
+ci = CommonInterface()
+params = ci.configuration.parameters
 
 print("Hello world from python")
 
 csvlt = '\n'
 csvdel = ','
 csvquo = '"'
-with open('/data/in/tables/source.csv', mode='rt', encoding='utf-8') as in_file, \
-        open('/data/out/tables/odd.csv', mode='wt', encoding='utf-8') as odd_file, \
-        open('/data/out/tables/even.csv', mode='wt', encoding='utf-8') as even_file:
+
+# get input table definition by name
+in_table = ci.get_input_table_definition_by_name('source.csv')
+
+with open(in_table.full_path, mode='rt', encoding='utf-8') as in_file, \
+        open(os.path.join(ci.tables_out_path, 'odd.csv'), mode='wt', encoding='utf-8') as odd_file, \
+        open(os.path.join(ci.tables_out_path, 'even.csv'), mode='wt', encoding='utf-8') as even_file:
     lazy_lines = (line.replace('\0', '') for line in in_file)
     reader = csv.DictReader(lazy_lines, lineterminator=csvlt, delimiter=csvdel,
                             quotechar=csvquo)
@@ -65,13 +73,16 @@ with open('/data/in/tables/source.csv', mode='rt', encoding='utf-8') as in_file,
             odd_writer.writerow(newRow)
         i = i + 1
 
-{% endhighlight %}
 
-At the beginning, the [KBC Docker library](https://github.com/keboola/python-docker-application) is imported and
-initialized by reading the `data` directory (`docker.Config('/data/')`). Its method `get_parameters` will provide the
-configuration parameters as a dictionary. The library is currently available for the [R language](https://github.com/keboola/r-docker-application) and
-[Python](https://github.com/keboola/python-docker-application). It does no magic or rocket science, so you can
-read the [config file](/extend/common-interface/config-file/) directly if you wish.
+```
+
+At the beginning, the [KBC Python library](https://github.com/keboola/python-component) is imported and
+initialized by reading the `data` directory (`CommonInterface()`). Its property `configuration.parameters` will provide the
+configuration parameters as a dictionary. Apart from that the [Python library](https://github.com/keboola/python-component)
+ provides methods to handle input / output files and many more (see [here](/extend/component/implementation/python/) for more information). 
+
+Similar library is currently available also for the [R language](https://github.com/keboola/r-docker-application). 
+It does no magic or rocket science, so you can read the [config file](/extend/common-interface/config-file/) directly if you wish.
 
 Commit and push the code in your repository and tag it with a [normal version tag](https://semver.org/#spec-item-2).
 This will trigger a [build on Travis CI](https://docs.travis-ci.com/) and automatically
