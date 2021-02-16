@@ -29,7 +29,7 @@ To implement the above, you can change the [sample component](/extend/component/
 import csv
 import os
 
-# Load the KBC library to process the config file
+# Load the Component library to process the config file
 from keboola.component import CommonInterface
 
 # Rely on the KBC_DATADIR environment variable by default,
@@ -76,7 +76,7 @@ with open(in_table.full_path, mode='rt', encoding='utf-8') as in_file, \
 
 ```
 
-At the beginning, the [KBC Python library](https://github.com/keboola/python-component) is imported and
+At the beginning, the [Keboola Python Component library](https://github.com/keboola/python-component) is imported and
 initialized by reading the `data` directory (`CommonInterface()`). Its property `configuration.parameters` will provide the
 configuration parameters as a dictionary. Apart from that the [Python library](https://github.com/keboola/python-component)
  provides methods to handle input / output files and many more (see [here](/extend/component/implementation/python/) for more information). 
