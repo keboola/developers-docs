@@ -146,6 +146,39 @@ be used to store large amounts of data.
 Also, the end-user cannot easily access the data through the UI.
 The data can be, however, modified outside of the component itself using the
 [Component configuration](https://keboola.docs.apiary.io/#reference/component-configurations) API calls.
+Note however that the content in the contents of the state file is nested:
+
+i.e. Assume that the component generates a state file with the following contents:
+
+{% highlight json %}
+{
+    "time": {
+        "previousStart": 1587980435
+    }
+}
+{% endhighlight %}
+
+If you read the configuration through the Component configuration API call, you'll see:
+
+{% highlight json %}
+"state": {
+    "component": {
+        "time": {
+            "previousStart": 1587980435
+        }
+    },
+    "storage": {
+      "input": {
+        "tables": []
+      }
+    }
+  }
+{% endhighlight %}
+
+That means the contents of the state file are nested inside the `component` node. There
+is also a `storage` node, which is related to the 
+[Automatic incremental processing](https://help.keboola.com/storage/tables/#automatic-incremental-processing)
+You need to maintain the above structure when manually changing the configuration via the API.
 
 **Important:** The state file is not thread-safe. If multiple instances of the **same configuration**
 are run simultaneously in the **same project**, the one writing data later wins. Use the state file more
