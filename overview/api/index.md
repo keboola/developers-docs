@@ -35,8 +35,7 @@ The main APIs for our components are:
 | [Developer Portal API](https://kebooladeveloperportal.docs.apiary.io/#) | Developer Portal is an application separated from KBC for [creating components](/extend/component/).
 | [Billing API](https://keboolabillingapi.docs.apiary.io/#) | Billing API for Pay as You Go projects.
 | [Workspaces API](https://keboolasandboxes.docs.apiary.io/#) | Workspaces API for V2 workspaces.
-| [Synchronous Actions API](https://syncactions.docs.apiary.io/#) | API to trigger [Synchronous Actions](/extend/common-interface/actions/). This is 
-a partial replacement of Docker Runner API and may not be available on all stacks.
+| [Synchronous Actions API](https://syncactions.docs.apiary.io/#) | API to trigger [Synchronous Actions](/extend/common-interface/actions/). This is a partial replacement of Docker Runner API and may not be available on all stacks.
 
 If you don't know which API to use, see our [integration guide](/integrate/). It describes different roles of the APIs and contains examples of commonly
 performed actions.
