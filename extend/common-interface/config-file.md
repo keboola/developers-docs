@@ -178,7 +178,8 @@ If you read the configuration through the Component configuration API call, you'
 
 That means the contents of the state file are nested inside the `component` node. There
 is also a `storage` node, which is related to the 
-[Automatic incremental processing](https://help.keboola.com/storage/tables/#automatic-incremental-processing)
+[Automatic incremental processing](https://help.keboola.com/storage/tables/#automatic-incremental-processing).
+
 You need to maintain the above structure when manually changing the configuration via the API.
 
 **Important:** The state file is not thread-safe. If multiple instances of the **same configuration**
