@@ -148,7 +148,8 @@ The data can be, however, modified outside of the component itself using the
 [Component configuration](https://keboola.docs.apiary.io/#reference/component-configurations) API calls.
 Note however that the content in the contents of the state file is nested:
 
-i.e. Assume that the component generates a state file with the following contents:
+I.e., assume that the component generates a state file with the following contents:
+
 
 {% highlight json %}
 {
