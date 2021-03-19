@@ -14,6 +14,8 @@ resolved at [job runtime](/integrate/jobs/).
 **Important:** Make sure you're familiar with the [Configuration API](/integrate/storage/api/configurations/) and 
 the [Job API](/integrate/jobs/) before reading on.
 
+See [Tutorial](/integrate/variables/tutorial) for step-by-step example.
+
 ## Introduction
 When using variables, the configuration is treated as a [Moustache template](https://mustache.github.io/mustache.5.html). 
 You can enter variables anywhere in the JSON of the configuration body. The configuration body is the contents of 
