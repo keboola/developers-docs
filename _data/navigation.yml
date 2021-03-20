@@ -267,6 +267,10 @@ items:
 
       - url: /integrate/variables/
         title: Variables
+        items:
+            - url: /integrate/variables/tutorial/
+              title: Tutorial
+
 
       - url: /integrate/database/
         title: SSH Tunnel for Database Extractors
