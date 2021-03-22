@@ -1,6 +1,6 @@
 ---
 title: Variables Tutorial
-permalink: /integrate/variables/tutorial
+permalink: /integrate/variables/tutorial/
 ---
 
 * TOC
