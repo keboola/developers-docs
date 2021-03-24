@@ -154,13 +154,17 @@ will contain only manifest files, extended with an additional
 
 ## Exchanging Data via Database Workspace
 
-*Note: this is a preview feature and may change considerably in future.*
+*Note: this is a preview feature and may change considerably in the future.*
 
-The component may also exchange data with Storage [using Workspaces](https://keboola.docs.apiary.io/#reference/workspaces).
+The component may also exchange data with Storage [using Workspaces](https://keboola.docs.apiary.
+io/#reference/workspaces).
 This mode of operation can be enabled by setting the **Staging storage input** or **Staging storage output** option
-to **Workspace Snowflake** or **Workspace Redshift**. A workspace is an isolated database to which data are loaded before
-the component job is run and unloaded when the job finishes. The workspace is created just before the job starts and is
+to **Workspace Snowflake**, **Workspace Redshift**, or **Workspace Synapse**. A workspace is an isolated database to 
+which data are loaded before the component job is run and unloaded when the job finishes. The workspace is created just before the job starts and is
 deleted when the job is terminated.
+
+Using this option will load Storage Tables into the provided storage workspace, but Storage Files will still be 
+loaded into the local filesystem like in the standard configuration.
 
 If this option is enabled, the table data folder will contain only manifest files. The actual data will be loaded as
 database tables into the workspace database. The `destination` in input and `source` in output refer to database
@@ -212,7 +216,8 @@ to **Workspace ABS**. A filesystem workspace is an isolated file storage to whic
 and unloaded from when the job finishes (when staging storage output is set).
 The workspace is created just before the job starts and is deleted when the job is terminated.
 
-If this option is enabled, the data and the manifests will be loaded to the azure storage blob container under the data folder similarly to how it does when using the default local filesystem.
+If this option is enabled, the data and the manifests will be loaded to the azure storage blob container under the 
+data folder similarly to how it does when using the default [local filesystem](extend/common-interface/folders/#root-folder-data).
 For example, if a file 'test.txt' with ID '12345' is in the input mapping then the file will appear in the storage blob container with URL https://[storage_account_name].blob.core.windows.net/[container-name]/data/in/files/12345_test.txt/12345
 
 In order to write a file for 'source' for the output mapping, write the file to `[containerName]/data/out/files/my-file-name` and it will be exported if it is listed in the output mapping.
