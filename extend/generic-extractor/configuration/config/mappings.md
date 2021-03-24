@@ -260,36 +260,34 @@ correct settings, the following table will be produced:
 See [example [EX064]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/064-mapping-basic).
 
 ### Mapping Child Jobs
-Let's say that you have an API endpoint `/users` which returns a response similar to:
+Let's say that you have an API endpoint `/recipes` which returns a response similar to:
 
 {% highlight json %}
 [
     {
         "id": 123,
-        "name": "John Doe"
+        "name": "Apple Pie"
     },
     {
         "id": 234,
-        "name": "Jane Doe"
+        "name": "Banana Bread"
     }
 ]
 {% endhighlight %}
 
-More details about the user can be retrieved through another endpoint --- `/user/{id}`, where `{id}` is
-the user ID:
+More details about the fruit can be retrieved through another endpoint --- `/fruit/{id}`, where `{id}` is
+the fruit ID:
 
 {% highlight json %}
 {
     "id": 123,
-    "name": "John Doe",
-    "address": {
-        "city": "London",
-        "country": "UK",
-        "street": "Whitehaven Mansions"
+    "name": "Apple Pie",
+    "instructions": {
+        "preparation": "Cut the apples and so on ...",
+        "cooking": "bake the pie in the oven",
+        "serving": "cut it up"
     },
-    "interests": [
-        "girls", "cars", "flowers"
-    ]
+    "ingredients": ["apples", "cinnamon", "pie crust"] 
 }
 {% endhighlight %}
 
@@ -298,15 +296,15 @@ To handle this situation in Generic Extractor, use a [child job](/extend/generic
 {% highlight json %}
 "jobs": [
     {
-        "endpoint": "users",
+        "endpoint": "fruit",
         "dataType": "users",
         "children": [
             {
-                "endpoint": "user/{user-id}",
-                "dataType": "user-detail",
+                "endpoint": "fruit/{fruit-id}",
+                "dataType": "fruit-detail",
                 "dataField": ".",
                 "placeholders": {
-                    "user-id": "id"
+                    "fruit-id": "id"
                 }
             }
         ]
@@ -316,10 +314,10 @@ To handle this situation in Generic Extractor, use a [child job](/extend/generic
 
 The produced user-detail table will look like this:
 
-|id|name|address\_city|address\_country|address\_street|interests|parent_id|
+|id|name|properties\_shape|properties\_color|recipes|parent_id|
 |---|---|---|---|---|---|---|
-|123|John Doe|London|UK|Whitehaven Mansions|user-detail_3484bd6e10690a3a2e77079f69ceaa42|123|
-|234|Jane Doe|St Mary Mead|UK|High Street|user-detail_a7655e39a0399dc842b44365778cd295|234|
+|123|Apple|round|red|fruit-detail_3484bd6e10690a3a2e77079f69ceaa42|123|
+|234|Banana|oblong|yellow|fruit-detail_a7655e39a0399dc842b44365778cd295|234|
 
 Note that the name of the column `parent_id` depends on the [placeholder configuration](/extend/generic-extractor/configuration/config/jobs/children/#basic-example)
 and is not always `parent_id` (see [example](/extend/generic-extractor/configuration/config/jobs/children/#basic-job-with-array-values)).
@@ -328,8 +326,8 @@ Now you can use the following mapping to shape the table:
 
 {% highlight json %}
 "mapping": {
-    "user-detail": {
-        "address.country": {
+    "fruit-detail": {
+        "properties.country": {
             "type": "column",
             "mapping": {
                 "destination": "country"
