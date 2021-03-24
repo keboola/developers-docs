@@ -218,11 +218,35 @@ The workspace is created just before the job starts and is deleted when the job 
 
 If this option is enabled, the data and the manifests will be loaded to the azure storage blob container under the 
 data folder similarly to how it does when using the default [local filesystem](extend/common-interface/folders/#root-folder-data).
-For example, if a file 'test.txt' with ID '12345' is in the input mapping then the file will appear in the storage blob container with URL https://[storage_account_name].blob.core.windows.net/[container-name]/data/in/files/12345_test.txt/12345
-
+### Files
+For example, if a file 'test.txt' with ID '12345' is in the input mapping then the file will appear in the storage blob container with URL https://[storage_account_name].blob.core.windows.net/[container-name]/data/in/files/test.txt/12345
 In order to write a file for 'source' for the output mapping, write the file to `[containerName]/data/out/files/my-file-name` and it will be exported if it is listed in the output mapping.
 
-For tables, [**Note that this is only available on Synapse storage backend], since Synapse is only able to export tables as sliced files, it will be necessary to concatenate them in your script.
+{% highlight json %}
+{
+  "storage": {
+    "output": {
+      "tables": [
+        {
+          "source": "my-output-table.csv",  // this will use the file found at https://[storage_account_name].blob.core.windows.net/[container-name]/data/out/tables/my-output-table.csv
+          "destination": "in.c-main.my-table-from-abs-workspace"
+        },
+        ...
+      ],
+      "files": [
+        {
+          "source": "my-file.txt", // this will use the file found at https://[storage_account_name].blob.core.windows.net/[container-name]/data/out/files/my-file.txt
+          "tags": ["uploaded-from-abs-workspace"]
+        }
+      ] 
+    }
+  },
+  ...
+}
+{% endhighlight %}
+
+### Tables
+[**Note that this is only available on Synapse storage backend], since Synapse is only able to export tables as sliced files, it will be necessary to concatenate them in your script.
 For example, if you set as table input mapping the table `in.c-main.my-input` as source and `my-input.csv` as destination then in the ABS workspace you will find it with the following structure:
 - [containerName]/data/in/tables/my-inpupt.csv/[random identifier1].txt
 - [containerName]/data/in/tables/my-inpupt.csv/[random identifier2].txt
