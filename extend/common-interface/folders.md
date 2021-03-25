@@ -229,27 +229,7 @@ For example, if you set as table input mapping the table `in.c-main.my-input` as
 - [containerName]/data/in/tables/my-inpupt.csv/[random identifier2].txt
 - [containerName]/data/in/tables/my-inpupt.csv/[random identifier3].txt
 So it will be necessary for either the component or the user to concatenate these entries.
-
-### Authorization
-[`authorization` section](/extend/common-interface/config-file/#configuration-file-structure) of the configuration file:
-
-{% highlight json %}
-{
-  "storage": {
-    ...
-  },
-  "parameters": {
-    ...
-  },
-  "authorization": {
-    "workspace": {
-      "container": "azure-storage-blob-container",
-      "connectionString": "azure-storage-blob-SAS-connection-string",
-    }
-  }
-}
-{% endhighlight %}
-
+  
 ### Mappings
 
 To sum up, below is a sample storage configuration and where the files are written from and to:
@@ -297,3 +277,27 @@ To sum up, below is a sample storage configuration and where the files are writt
   ...
 }
 {% endhighlight %}
+
+### Authorization
+[`authorization` section](/extend/common-interface/config-file/#configuration-file-structure) of the configuration file:
+
+To connect to the ABS storage workspace you need to use the [SAS connection string](https://docs.microsoft.com/en-us/azure/storage/common/storage-configure-connection-string) which is stored in the authorization section as 
+shown below.
+
+{% highlight json %}
+{
+  "storage": {
+    ...
+  },
+  "parameters": {
+    ...
+  },
+  "authorization": {
+    "workspace": {
+      "container": "azure-storage-blob-container",
+      "connectionString": "azure-storage-blob-SAS-connection-string",
+    }
+  }
+}
+{% endhighlight %}
+
