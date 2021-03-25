@@ -224,7 +224,7 @@ Files are loaded into the workspace as `[file name]/[file ID]`.  For example, if
 the input mapping then the file will appear in the storage blob container with URL `https://[storage_account_name].blob.core.windows.net/[container-name]/data/in/files/test.txt/12345`
 
 ### Tables
-[**Note that this is only available on Synapse storage backend] 
+*Note that this is only available on Synapse storage backend*
 
 Synapse only exports tables as sliced files.
 So for example, if you set as table input mapping the table `in.c-main.my-input` as source and `my-input.csv` as 
@@ -303,4 +303,3 @@ shown below.
   }
 }
 {% endhighlight %}
-
