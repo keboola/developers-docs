@@ -254,14 +254,12 @@ So it will be necessary for either the component or the user to concatenate thes
 
 To sum up, below is a sample storage configuration and where the files are written from and to:
 
-
-| Direction | Source | Destination
-|---|---|---|
-| input | in.c-main.my-table-from-abs-workspace | Many slices like `[containerName]/data/in/tables/my-inpupt-table.csv/[random identifier1].txt`
-| input | file with tag `my-input-files` named `input-file.txt` | `https://[storage_account_name].blob.core.windows.net/[container-name]/data/in/files/test.txt/12345`
-| output | https://[storage_account_name].blob.core.windows.net/[container-name]/data/out/tables/my-output-table.csv | out.c-main.my-table-from-abs-workspace
-| output | https://[storage_account_name].blob.core.windows.net/[container-name]/data/out/files/my-file.txt | file 
-`my-file.txt` with tag `uploaded-from-abs-workspace`
+| Direction | Source | Destination |
+| --- | --- | --- |
+| input | in.c-main.my-table-from-abs-workspace | Many slices like `[abs-workspace-root]/data/in/tables/my-inpupt-table.csv/[random identifier].txt` |
+| input | file with tag `my-input-files` named `input-file.txt` | `[abs-workspace-root]/data/in/files/test.txt/12345` |
+| output | [abs-workspace-root]/data/out/tables/my-output-table.csv | out.c-main.my-table-from-abs-workspace |
+| output | [abs-workspace-root]/data/out/files/my-file.txt | file `my-file.txt` with tag `uploaded-from-abs-workspace` |
 
 {% highlight json %}
 {
