@@ -218,17 +218,20 @@ The workspace is created just before the job starts and is deleted when the job 
 
 If this option is enabled, the data and the manifests will be loaded to the azure storage blob container under the 
 data folder similarly to how it does when using the default [local filesystem](extend/common-interface/folders/#root-folder-data).
+
 ### Files
 Files are loaded into the workspace as `[file name]/[file ID]`.  For example, if a file 'test.txt' with ID '12345' is in 
 the input mapping then the file will appear in the storage blob container with URL `https://[storage_account_name].blob.core.windows.net/[container-name]/data/in/files/test.txt/12345`
 
 ### Tables
-[**Note that this is only available on Synapse storage backend], since Synapse is only able to export tables as sliced files, it will be necessary to concatenate them in your script.
-For example, if you set as table input mapping the table `in.c-main.my-input` as source and `my-input.csv` as destination then in the ABS workspace you will find it with the following structure:
+[**Note that this is only available on Synapse storage backend] 
+
+Synapse only exports tables as sliced files.
+So for example, if you set as table input mapping the table `in.c-main.my-input` as source and `my-input.csv` as 
+destination then in the ABS workspace you will find it with the following structure:
 - [containerName]/data/in/tables/my-inpupt.csv/[random identifier1].txt
 - [containerName]/data/in/tables/my-inpupt.csv/[random identifier2].txt
 - [containerName]/data/in/tables/my-inpupt.csv/[random identifier3].txt
-So it will be necessary for either the component or the user to concatenate these entries.
   
 ### Mappings
 
