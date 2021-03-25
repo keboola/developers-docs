@@ -219,31 +219,8 @@ The workspace is created just before the job starts and is deleted when the job 
 If this option is enabled, the data and the manifests will be loaded to the azure storage blob container under the 
 data folder similarly to how it does when using the default [local filesystem](extend/common-interface/folders/#root-folder-data).
 ### Files
-For example, if a file 'test.txt' with ID '12345' is in the input mapping then the file will appear in the storage blob container with URL https://[storage_account_name].blob.core.windows.net/[container-name]/data/in/files/test.txt/12345
-In order to write a file for 'source' for the output mapping, write the file to `[containerName]/data/out/files/my-file-name` and it will be exported if it is listed in the output mapping.
-
-{% highlight json %}
-{
-  "storage": {
-    "output": {
-      "tables": [
-        {
-          "source": "my-output-table.csv",  // this will use the file found at https://[storage_account_name].blob.core.windows.net/[container-name]/data/out/tables/my-output-table.csv
-          "destination": "in.c-main.my-table-from-abs-workspace"
-        },
-        ...
-      ],
-      "files": [
-        {
-          "source": "my-file.txt", // this will use the file found at https://[storage_account_name].blob.core.windows.net/[container-name]/data/out/files/my-file.txt
-          "tags": ["uploaded-from-abs-workspace"]
-        }
-      ] 
-    }
-  },
-  ...
-}
-{% endhighlight %}
+Files are loaded into the workspace as `[file name]/[file ID]`.  For example, if a file 'test.txt' with ID '12345' is in 
+the input mapping then the file will appear in the storage blob container with URL `https://[storage_account_name].blob.core.windows.net/[container-name]/data/in/files/test.txt/12345`
 
 ### Tables
 [**Note that this is only available on Synapse storage backend], since Synapse is only able to export tables as sliced files, it will be necessary to concatenate them in your script.
@@ -253,6 +230,7 @@ For example, if you set as table input mapping the table `in.c-main.my-input` as
 - [containerName]/data/in/tables/my-inpupt.csv/[random identifier3].txt
 So it will be necessary for either the component or the user to concatenate these entries.
 
+### Authorization
 [`authorization` section](/extend/common-interface/config-file/#configuration-file-structure) of the configuration file:
 
 {% highlight json %}
@@ -269,5 +247,55 @@ So it will be necessary for either the component or the user to concatenate thes
       "connectionString": "azure-storage-blob-SAS-connection-string",
     }
   }
+}
+{% endhighlight %}
+
+### Mappings
+
+To sum up, below is a sample storage configuration and where the files are written from and to:
+
+
+| Direction | Source | Destination
+|---|---|---|
+| input | in.c-main.my-table-from-abs-workspace | Many slices like `[containerName]/data/in/tables/my-inpupt-table.csv/[random identifier1].txt`
+| input | file with tag `my-input-files` named `input-file.txt` | `https://[storage_account_name].blob.core.windows.net/[container-name]/data/in/files/test.txt/12345`
+| output | https://[storage_account_name].blob.core.windows.net/[container-name]/data/out/tables/my-output-table.csv | out.c-main.my-table-from-abs-workspace
+| output | https://[storage_account_name].blob.core.windows.net/[container-name]/data/out/files/my-file.txt | file 
+`my-file.txt` with tag `uploaded-from-abs-workspace`
+
+{% highlight json %}
+{
+  "storage": {
+    "input": {
+      "tables": [
+        {
+          "source": "in.c-main.my-table-from-abs-workspace",
+          "destination": "my-input-table.csv"
+        },
+        ...
+      ],
+      "files": [
+        {
+          "tags": ["my-input-files"]
+        }
+      ]
+    }
+    "output": {
+      "tables": [
+        {
+          "source": "my-output-table.csv",
+          "destination": "out.c-main.my-table-from-abs-workspace"
+        },
+        ...
+      ],
+      "files": [
+        {
+          "source": "my-file.txt",
+          "tags": ["uploaded-from-abs-workspace"]
+        }
+      ]
+    }
+  },
+  ...
 }
 {% endhighlight %}
