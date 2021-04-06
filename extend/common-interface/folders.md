@@ -242,7 +242,7 @@ To sum up, below is a sample storage configuration and where the files are writt
 | input | in.c-main.my-table-from-abs-workspace | Many slices like `[abs-workspace-root]/data/in/tables/my-inpupt-table.csv/[random identifier].txt` |
 | input | file with tag `my-input-files` named `input-file.txt` | `[abs-workspace-root]/data/in/files/test.txt/12345` |
 | output | `[abs-workspace-root]/data/out/tables/my-output-table.csv` | out.c-main.my-table-from-abs-workspace |
-| output | [abs-workspace-root]/data/out/files/my-file.txt | file `my-file.txt` with tag `uploaded-from-abs-workspace` |
+| output | `[abs-workspace-root]/data/out/files/my-file.txt` | file `my-file.txt` with tag `uploaded-from-abs-workspace` |
 
 {% highlight json %}
 {
