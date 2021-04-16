@@ -6,97 +6,87 @@ permalink: /extend/component/code-patterns/tutorial/
 * TOC
 {:toc}
 
-In the [Interface](/extend/component/code-patterns/interface) is described how the code patterns work internally.
-This page explains how to create your own code pattern component.
+Code patterns are a special type of [component](/extend/component/). 
+Their behavior is specified in their  [interface](/extend/component/code-patterns/interface).
 
-Code Pattern is a type of the [Component](/extend/component/), 
-so its creation is partially described in the [Component Quick Start](/extend/component/tutorial/).
-Here are explained only the extra steps, that are specific for the code patterns.
+The instructions below refer to the general [component quick start](/extend/component/tutorial/), 
+highlighting the steps specific to code patterns.
 
 ## Creating Component
+First, follow the common steps for [creating a component](/extend/component/tutorial/):
 
-Follow the [Component Quick Start](/extend/component/tutorial/).
-- [Before You Start](/extend/component/tutorial/#before-you-start) 
-- [Creating Component](/extend/component/tutorial/#creating-component)
-- [Creating Deployment Account](/extend/component/tutorial/#creating-deployment-account)
+- [Before you start](/extend/component/tutorial/#before-you-start) 
+- [Create a component](/extend/component/tutorial/#creating-component)
+- [Create a deployment account](/extend/component/tutorial/#creating-deployment-account)
 
-Use the `Code Pattern` type, when creating a component.
+Select `Code Pattern` as the type.
 
 {: .image-popup}
 ![Screenshot -- Add component](/extend/component/code-patterns/tutorial-1-add-component.png)
 
-Modify the settings described in the [Interface - Developer Portal](/extend/component/code-patterns/interface#developer-portal).
+Modify the settings described in [Interface - Developer Portal](/extend/component/code-patterns/interface#developer-portal).
 
 ## Implementation
+Go on following the [component quick start](/extend/component/tutorial/):
 
-Follow the [Component Quick Start](/extend/component/tutorial/).
-- [Initializing Component](/extend/component/tutorial/#initializing-component) 
-- [Building Component](/extend/component/tutorial/#building-component)
+- [Initialize a component](/extend/component/tutorial/#initializing-component) 
+- [Build a component](/extend/component/tutorial/#building-component)
 
-Learn how the whole process works in the [Code Generation Process](/extend/component/code-patterns/interface#code-generation-process).
+Learn how the whole [code generation process](/extend/component/code-patterns/interface#code-generation-process) works.
 
-**Implement the Generate Action** as specified in [Interface - Generate Action](/extend/component/code-patterns/interface#generate-action).
-- First, load the [Configuration](/extend/component/code-patterns/interface#configuration).
+**Implement the Generate action** as specified in [Interface - Generate Action](/extend/component/code-patterns/interface#generate-action):
+
+- First, load the [configuration](/extend/component/code-patterns/interface#configuration).
 - Validate the configuration, `action = generate` is expected.
-- Other actions should not be implemented (not even `run`).
-- In case of error, use correct [Return Value](/extend/common-interface/environment/#return-values).
+- Do not implement other actions (not even `run`).
+- In case of an error, use the correct [return value](/extend/common-interface/environment/#return-values).
 - Generate code based on the configuration.
-- Write the result in [Output Format](/extend/component/code-patterns/interface#output-format) on `stdout`.
-- Exit with the `exit code = 0` if success.
+- Write the result in the standard [output format](/extend/component/code-patterns/interface#output-format) to `stdout`.
+- Exit with the `exit code = 0` if successful.
 
 ## Running Component
+Unlike other components, the code pattern component [**cannot be run**](/extend/component/tutorial/#running-component),
+and will be **invisible in the user interface until it is [published](#publishing-component)**.
 
-The code pattern component is specific. 
-
-It **cannot** be run as described in [Component Quick Start - Running Component](/extend/component/tutorial/#running-component).
-
-The code pattern component will be **invisible in the user interface until it is [published](#publishing-component)**.
-
-But there are two other ways to try it as a component.
+However, there are two other ways to try it as a component, as described below.
 
 ### Run via API
+The first option is to call the [generate action](/extend/component/code-patterns/interface#generate-action) via the API:
 
-The first way is to call the [Generate Action](/extend/component/code-patterns/interface#generate-action) via the API.
-- In this way, you can test that the component returns the desired results based on the specified inputs.
-- Usa the [Run component action](https://kebooladocker.docs.apiary.io/#reference/actions/run-custom-component-action/process-action) API call.
-- The [API token](https://help.keboola.com/management/project/tokens/) is needed.
+- You can test that the component returns the desired results based on the specified inputs.
+- Use the [Run Component Action](https://kebooladocker.docs.apiary.io/#reference/actions/run-custom-component-action/process-action) API call.
+- An [API token](https://help.keboola.com/management/project/tokens/) is needed.
 
-### Modify transformation via API
+### Modify Transformation via API
+The second option is to modify the transformation to use an unpublished code pattern.
 
-The second way is to modify the transformation to use an unpublished code pattern.
-
-#### Create a Empty Transformation
-
-First, click **Transformations** on the project menu.
-
-Then click **New Transformation** to create a new transformation.
+#### Create empty transformation
+First, click **Transformations** on the project menu. Then click **New Transformation** to create a new transformation.
 
 {: .image-popup}
 ![Screenshot -- Transformations page](/extend/component/code-patterns/tutorial-2-project.png)
 
-In the modal click on the selected **type of the transformation**.
+In the modal, click on the selected **type of the transformation**.
 
 {: .image-popup}
 ![Screenshot -- Add new transformation modal](/extend/component/code-patterns/tutorial-3-modal.png)
 
-Fill in the **name** and optionally the **description**. 
-
-Do not select any code pattern.
+Fill in the **name** and, optionally, the **description**. Do not select any code pattern.
 
 {: .image-popup}
 ![Screenshot -- Net transformation](/extend/component/code-patterns/tutorial-4-new-transformation.png)
 
 You have created an empty transformation.
 
-#### Set Code Pattern to Transformation
+#### Set code pattern to transformation
 
-**Make note of the component and configuration id from the URL.**  You will need them in the API calls.
+**Make note of the component and configuration ID from the URL.** You will need them in the API calls.
 
 ```
 /admin/projects/{PROJECT_ID}/transformations-v2/{COMPONENT_ID}/{CONFIGURATION_ID}
 ```
 
-**Set the code pattern to transformation via [Storage API](/overview/api/).**
+**Set the code pattern to the transformation via [Storage API](/overview/api/).**
 
 Load the configuration in the JSON format via the [Configuration Detail](https://keboola.docs.apiary.io/#reference/component-configurations/manage-configurations/configuration-detail) API call.
 
@@ -107,9 +97,9 @@ curl \
 '{STORAGE API}/v2/storage/components/{COMPONENT_ID}/configs/{CONFIGURATION_ID}'
 ```
 
-Example response, some keys omitted.
+This is an example response, some keys are omitted.
 
-``` json
+```json
 {
   "id": "1234",
   "name": "API test",
@@ -117,7 +107,8 @@ Example response, some keys omitted.
 }
 ```
 
-It is necessary to set the **id of the code pattern component** to the configuration.
+It is necessary to set the **ID of the code pattern component** to the configuration.
+
 ```json
 {
   "configuration": {
@@ -143,7 +134,7 @@ curl
 '{STORAGE API}/v2/storage/components/{COMPONENT_ID}/configs/{CONFIGURATION_ID}'
 ```
 
-Example response, some keys omitted.
+This is an example response, some keys are omitted.
 
 ``` json
 {
@@ -162,12 +153,8 @@ Example response, some keys omitted.
 The transformation now uses the code pattern, and you can **test it in the [user interface](https://help.keboola.com/transformations/code-patterns/#configuration)**.
 
 ## Publishing Component
-
-Make sure the component is set up according the [Interface - Developer Portal](/extend/component/code-patterns/interface#developer-portal).
-
-Follow the [Publish Component](/extend/publish/) tutorial.
-
-[](/extend/publish/)
+Make sure the component is set up according to [Interface - Developer Portal](/extend/component/code-patterns/interface#developer-portal).
+Then follow the tutorial [Publish Component](/extend/publish/).
 
 ## Next Steps
 - [Interface](/extend/component/code-patterns/interface) describes how the code patterns work internally.

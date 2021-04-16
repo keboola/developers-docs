@@ -262,9 +262,6 @@ items:
       - url: /integrate/jobs/
         title: Background Jobs
 
-      - url: /integrate/transformations/
-        title: Transformations
-
       - url: /integrate/variables/
         title: Variables
         items:
