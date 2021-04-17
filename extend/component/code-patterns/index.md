@@ -6,15 +6,16 @@ permalink: /extend/component/code-patterns/
 * TOC
 {:toc}
 
-Code Pattern
-- **generates code** for the [Transformations](https://help.keboola.com/transformations/#new-transformations).
-- is a special type of the [Component](/extend/component/).
-- implements the [Generate Action](/extend/component/code-patterns/interface#generate-action).
-- use the [Configuration Format](/extend/component/code-patterns/interface#configuration-format).
-- the generated code is written in the [Output Format](/extend/component/code-patterns/interface#output-format).
+Code Patterns are a special type of [component](/extend/component/). They
+ 
+- **generate code** for [transformations](https://help.keboola.com/transformations/#new-transformations),
+- implement the [generate action](/extend/component/code-patterns/interface#generate-action), and
+- use the [configuration format](/extend/component/code-patterns/interface#configuration-format).
+
+The generated code is written in a specific [output format](/extend/component/code-patterns/interface#output-format).
 
 ## Next Steps
 
-- [Code Patterns Help](https://help.keboola.com/transformations/code-patterns/) shows the code patterns from the user's point of view.
-- [Interface](/extend/component/code-patterns/interface) describes how the code patterns work internally.
-- [Tutorial](/extend/component/code-patterns/tutorial) helps you to implement your first code pattern.
+- To see code patterns from users' perspective, go to [Code Patterns Help](https://help.keboola.com/transformations/code-patterns/).
+- To learn how code patterns work internally, go to [Interface](/extend/component/code-patterns/interface).
+- To implement your first code pattern, see this [tutorial](/extend/component/code-patterns/tutorial).
