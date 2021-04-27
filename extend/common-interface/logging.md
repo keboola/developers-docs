@@ -40,6 +40,8 @@ example in exception traces.
 send [structured](http://docs.graylog.org/en/3.1/pages/gelf.html#gelf-payload-specification) event messages.
 The messages can be sent over several transports and you can specify whether they will be silenced or displayed based on their level.
 
+*Note: The size of the messages is limited. Sending a message larger than 200KB will cause the component job to fail.*
+
 ### Setting Up
 If you turn on GELF logging in the [component configuration](https://components.keboola.com/),
 our [Docker Runner](/extend/docker-runner/) will listen
