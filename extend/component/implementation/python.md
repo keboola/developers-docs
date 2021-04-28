@@ -166,7 +166,7 @@ Apart from that, all input tables provided by user also include manifest file wi
 
 Tables and their manifest files are represented by the `keboola.component.dao.TableDefinition` object and may be loaded 
 using the convenience method `get_input_tables_definitions()`. The result object contains all metadata about the table,
-such as [manifest file](/extend/common-interface/manifest-files/#dataintables-manifests) representations, system path and name.
+such as [manifest file](/extend/common-interface/manifest-files/#dataintables-manifests) representations (if present), system path and name.
 
 #### Manifest & input folder content
 
@@ -186,6 +186,16 @@ logging.info(f'The first table named: "{first_table.name}" is at path: {first_ta
 # get information from table manifest
 logging.info(f'The first table has following columns defined in the manifest {first_table.columns}')
 
+```
+
+#### Get input table by name
+
+```python
+from keboola.component import CommonInterface
+
+# init the interface
+ci = CommonInterface()
+table_def = ci.get_input_table_definition_by_name('input.csv')
 ```
 
 #### Using I/O mapping
@@ -214,7 +224,7 @@ for table in tables:
     outDestination = ci.configuration.tables_output_mapping[j]['destination']
 ```
 
-### I/O table manifests and processing results
+### Output tables - manifest files and processing results
 
 The component may define output [manifest files](https://developers.keboola.com/extend/common-interface/manifest-files/#dataouttables-manifests) 
 that define options on storing the results back to the Keboola Connection Storage. This library provides methods that simplifies 
@@ -255,44 +265,6 @@ result_table.table_metadata.add_column_data_type('id', dao.SupportedDataTypes.ST
 ci.write_tabledef_manifest(result_table)
 ```
 
-#### Get input table by name
-
-```python
-from keboola.component import CommonInterface
-
-# init the interface
-ci = CommonInterface()
-table_def = ci.get_input_table_definition_by_name('input.csv')
-```
-
-#### Initializing TableDefinition object from the manifest file
-
-```python
-from keboola.component import dao
-
-table_def = dao.TableDefinition.build_from_manifest('data/in/tables/table.csv.manifest')
-
-# print table.csv full-path if present:
-print(table_def.full_path)
-
-# rows count
-print(table_def.rows_count)
-```
-
-#### Retrieve raw manifest file definition (CommonInterface compatible)
-
-To retrieve the manifest file representation that is compliant with Keboola Connection Common Interface 
-use the `table_def.get_manifest_dictionary()` method. 
-
-
-```python
-from keboola.component import dao
-
-table_def = dao.TableDefinition.build_from_manifest('data/in/tables/table.csv.manifest')
-
-# get the  manifest file representation
-manifest_dict = table_def.get_manifest_dictionary()
-```
 
 ### Processing input files
 
@@ -386,21 +358,17 @@ ci = CommonInterface()
 logging.info("Info message")
 ```
 
-You may also choose to override the settings by enabling the GELF or STDOUT explicitly and specifying the host/port parameters:
+To fully leverage the benefits of the GELF logger such as outputting the `Stack Trace` into the log event detail (available by clicking on the log event) 
+log exceptions using `logger.exception(ex)`.
+
+**TIP:** When the logger verbosity is set to `verbose` you may leverage `extra` fields to log the detailed message 
+in the detail of the log event by adding extra fields to you messages:
 
 ```python
-from keboola.component import CommonInterface
-import os
-import logging
-
-# init the interface
-ci = CommonInterface()
-os.environ['KBC_LOGGER_ADDR'] = 'localhost'
-os.environ['KBC_LOGGER_PORT'] = 12201
-ci.set_gelf_logger(log_level=logging.INFO, transport_layer='UDP')
-
-logging.info("Info message")
+logging.error(f'{error}. See log detail for full query. ',
+                         extra={"failed_query": json.dumps(query)})
 ```
+
 
 If you use STDOUT logging note that in Python components, the output is buffered. The buffering may 
 be [switched off](https://stackoverflow.com/questions/107705/disable-output-buffering). The easiest solution is to run your script
