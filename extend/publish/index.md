@@ -122,3 +122,6 @@ the **Component Limits**.
 - Use [semantic versioning](http://semver.org/) to mark and deploy versions of your component. Using other tags (e.g.,
 `latest`, `master`) in production is not allowed.
 
+### Checklist
+
+Before requesting to publish a component please check all rules using [this checklist](/extend/publish/checklist).
