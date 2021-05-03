@@ -225,6 +225,10 @@ items:
 
       - url: /extend/publish/
         title: Publishing Component
+        items:
+          - url: /extend/publish/checklist/
+            title: Checklist
+
 
   - url: /integrate/
     title: Integration
