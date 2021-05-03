@@ -21,14 +21,14 @@ See [Publish Component tutorial](/extend/publish/) for details.
 
 **Component Configuration**
 - <input type="checkbox"> Sensitive values [use encryption](/overview/encryption/).
-- Configuration description (if used)
-  - <input type="checkbox"> Contains only 3 `###` and level 4 `####` headers.
-  - <input type="checkbox"> Doesn't describe all properties. Property `description` should be used instead if possible. 
 - [Configuration and Row schema](/extend/publish/#component-configuration)
     - <input type="checkbox"> Titles are short and without a colon, period, etc..
     - <input type="checkbox"> Required properties are listed in `required` field.
     - <input type="checkbox"> Each property has defined `propertyOrder`.
     - <input type="checkbox"> Properties have an explanatory `description` if they are not trivial.
+- Configuration description (if used)
+  - <input type="checkbox"> Contains only 3 `###` and level 4 `####` headers.
+  - <input type="checkbox"> Doesn't repeat what it is obvious from Configuration and Row schema.
 
 
 **Component Internals**
