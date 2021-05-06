@@ -81,6 +81,9 @@ items:
             items:
               - url: /extend/component/ui-options/configuration-schema/
                 title: Configuration Schema
+                items:
+                  - url: /extend/component/ui-options/configuration-schema/examples
+                    title: Examples
 
           - url: /extend/component/deployment/
             title: Deployment
