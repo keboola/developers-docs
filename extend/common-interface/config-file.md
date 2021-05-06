@@ -27,7 +27,8 @@ They do not use this configuration section at all (see [Tutorial](/extend/compon
 way you wish. Your component should validate the contents of this section. For passing sensitive
 data, use [encryption](/overview/encryption/). This section is not available in Transformations.
 - `image_parameters`: See [below](#image-parameters).
-- `authorization`: Contains Oauth2 [authorization contents](/extend/common-interface/oauth/).
+- `authorization`: Contains Oauth2 [authorization contents](/extend/common-interface/oauth/) or 
+[Workspace credentials](/extend/common-interface/folders/#exchanging-data-via-workspace) .
 - `action`: Name of the [action](/extend/common-interface/actions/) to execute; defaults to `run`. All
 actions except `run` have a strict execution time limit of 30 seconds.
 See [actions](/extend/common-interface/actions/) for more details.
@@ -138,13 +139,48 @@ configurations, `KBC::ProjectSecure::` ciphers are used.
 
 ### State File Properties
 Because the state is stored as part of a
-[Component configuration](http://docs.keboola.apiary.io/#reference/component-configurations),
+[Component configuration](https://keboola.docs.apiary.io/#reference/component-configurations),
 the value of the state object is somewhat limited (should not generally exceed 1MB). It should not
 be used to store large amounts of data.
 
 Also, the end-user cannot easily access the data through the UI.
 The data can be, however, modified outside of the component itself using the
-[Component configuration](http://docs.keboola.apiary.io/#reference/component-configurations) API calls.
+[Component configuration](https://keboola.docs.apiary.io/#reference/component-configurations) API calls.
+Note however that the content in the contents of the state file is nested:
+
+I.e., assume that the component generates a state file with the following contents:
+
+
+{% highlight json %}
+{
+    "time": {
+        "previousStart": 1587980435
+    }
+}
+{% endhighlight %}
+
+If you read the configuration through the Component configuration API call, you'll see:
+
+{% highlight json %}
+"state": {
+    "component": {
+        "time": {
+            "previousStart": 1587980435
+        }
+    },
+    "storage": {
+      "input": {
+        "tables": []
+      }
+    }
+  }
+{% endhighlight %}
+
+That means the contents of the state file are nested inside the `component` node. There
+is also a `storage` node, which is related to the 
+[Automatic incremental processing](https://help.keboola.com/storage/tables/#automatic-incremental-processing).
+
+You need to maintain the above structure when manually changing the configuration via the API.
 
 **Important:** The state file is not thread-safe. If multiple instances of the **same configuration**
 are run simultaneously in the **same project**, the one writing data later wins. Use the state file more
@@ -183,7 +219,7 @@ validated and a wrong format will cause a component failure.*
 To create an example configuration, use the [Debug API call](/extend/component/running/#preparing-the-data-folder). You will get a
 `stage_0.zip` archive in your **Storage** --- **File uploads**, which will contain the `config.json` file.
 You can also use these configuration structure to create an API request for
-actually [running a component](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job).
+actually [running a component](https://kebooladocker.docs.apiary.io/#reference/run/create-a-job).
 If you want to manually pass configuration options in the API request, be sure to wrap it around in the `configData` node.
 
 A sample configuration file might look like this:
@@ -239,7 +275,7 @@ A sample configuration file might look like this:
 
 ### Tables
 Tables from the input mapping are mounted to `/data/in/tables`.
-Input mapping parameters are similar to the [Storage API export table options ](http://docs.keboola.apiary.io/#tables).
+Input mapping parameters are similar to the [Storage API export table options](https://keboola.docs.apiary.io/#reference/tables/unload-data-asynchronously).
 If `destination` is not set, the CSV file will have the same name as the table (without adding `.csv` suffix).
 The tables element in a configuration of the **input mapping** is an array and supports the following attributes:
 
@@ -247,6 +283,7 @@ The tables element in a configuration of the **input mapping** is an array and s
 - `destination`
 - `days` (internally converted to `changed_since`)
 - `columns`
+- `column_types`
 - `where_column`
 - `where_operator`
 - `where_values`
@@ -344,6 +381,34 @@ Download 2 days of data from the `in.c-storage.StoredData` table to `/data/table
                 {
                     "source": "in.c-ex-salesforce.Leads",
                     "columns": ["Id", "Revenue", "Date", "Status"]
+                }
+            ]
+        }
+    }
+}
+{% endhighlight %}
+
+#### Input Mapping --- Column types
+This is applicable only to [workspace mapping](/extend/common-interface/folders/#exchanging-data-via-workspace), for CSV files this setting has no effect. The `column_types` setting maps to [Storage API load options](https://keboola.docs.apiary.io/#reference/workspaces/load-data/load-data). It also acts the same way as `columns` setting allowing you to limit the table columns.
+If both `column_types` and `columns` setting are used, then the listed columns must match. If you omit `columns` and use only `column_types` (recommended) then `columns` will be propagated automatically from `column_types`.
+
+{% highlight json %}
+{
+    "storage": {
+        "input": {
+            "tables": [
+                {
+                    "source": "in.c-ex-salesforce.Leads",
+                    "column_types": [
+                        {
+                            "source": "Id",
+                            "type": "VARCHAR",
+                            "destination": "id",
+                            "length": "255",
+                            "nullable": false,
+                            "convert_empty_values_to_null": false
+                        }
+                    ]
                 }
             ]
         }

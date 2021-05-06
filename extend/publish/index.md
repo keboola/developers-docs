@@ -11,7 +11,7 @@ redirect_from:
 
 As described in the [architecture overview](/overview/), Keboola Connection (KBC) consists of many different components.
 Only those components that are published in our **Component List** are generally available in KBC.
-The list can be found in our [Storage Component API](http://docs.keboola.apiary.io/#) in the dedicated [Components section](http://docs.keboola.apiary.io/#reference/components).
+The list can be found in our [Storage Component API](https://keboola.docs.apiary.io/#) in the dedicated [Components section](https://keboola.docs.apiary.io/#reference/component-configurations/list-components).
 The list of components is managed using the Keboola [Developer Portal](https://components.keboola.com/).
 
 That being said, any KBC user can use any component, unless
@@ -80,6 +80,10 @@ ZAR). The rates are available for all working days from 4 January 1999 up to pre
 - Use `appInfo.beta` in [UI options](/extend/component/ui-options/) if you suspect changes to the component behavior.
 - Licensing information must be valid, and the vendor description must be current.
 
+### Component Icon
+
+- Use PNG image with size at least 256x256px
+
 ### Component Configuration
 
 - Use only the necessary [UI options](/extend/component/ui-options/) (i.e., if there are no output files, do not use `genericDockerUI-fileOutput`).
@@ -112,8 +116,12 @@ description of input tables
 processing in chunks to maintain a limited amount of consumed memory. If not possible, state the expected usage in
 the **Component Limits**.
 - The component must distinguish between [user and application errors](/extend/common-interface/environment/#return-values).
-- The component must [validate](/extend/common-interface/config-file/#validation) its parameters; an invalid configuration must result in a user error.
+- The component must [validate](/extend/common-interface/config-file/#validation) its parameters; an invalid configuration must result in a user error. User error messages must clearly state what's wrong and what the user should do to fix the issue. E.g. `Invalid configuration.` is wrong, `Login failed, check your credentials.` is better.
 - The events produced must be reasonable. Provide status messages if possible and with a reasonable frequency. Avoid internal messages with no meaning to the end user. Also avoid flooding the event log or sending data files in the event log.
 - Set up [continuous deployment](/extend/component/deployment/) so that you can keep the component up to date.
 - Use [semantic versioning](http://semver.org/) to mark and deploy versions of your component. Using other tags (e.g.,
 `latest`, `master`) in production is not allowed.
+
+### Checklist
+
+Before requesting to publish a component please check all rules using [this checklist](/extend/publish/checklist).

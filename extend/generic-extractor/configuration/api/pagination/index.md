@@ -55,7 +55,7 @@ using the `method` option:
 ### Choosing Paging Strategy
 If the API responses contain direct links to the next set of results, use the
 [`response.url` method](/extend/generic-extractor/configuration/api/pagination/response-url/).
-This applies to the APIs following the [JSON API specification](http://jsonapi.org). The response usually
+This applies to the APIs following the [JSON API specification](https://jsonapi.org/). The response usually
 contains a `links` section:
 
 {% highlight json %}
@@ -228,7 +228,10 @@ after extracting 69 bytes of minified JSON data (whichever comes first).
 {% endhighlight %}
 
 See [example [EX048]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/048-force-stop)
-and [example [EX116]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/116-multiple-conditions-multiple-jobs).
+and [example [EX116]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/116-multiple-conditions-multiple-jobs)
+(combining multiple conditions)
+and [example [EX140]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/140-pagination-forcestop-child-filter)
+(combining with child jobs).
 
 ### Limit Stop
 Limit stop configuration allows you to stop scrolling when a specified number of items is extracted.
@@ -239,7 +242,7 @@ The supported options are:
 
 The two options are **mutually exclusive**, but one of them is required. In both cases, the total number of items may not be
 honored exactly. If the total amount is not divisible by the page size, then the leftover from the last page (if any)
-is extracted too (see example [EX127](https://github.com/keboola/generic-extractor/tree/master/doc/examples/127-pagination-stop-field)).
+is extracted too (see example [EX127](https://github.com/keboola/generic-extractor/tree/master/doc/examples/127-pagination-stop-field) and [EX138](https://github.com/keboola/generic-extractor/tree/master/doc/examples/138-pagination-stop-field-child-filter) (combining with child jobs)).
 This is an example or the `limitStop` setting:
 
 {% highlight json %}
@@ -334,7 +337,8 @@ The following pagination configuration can be used to configure the stopping str
 It means that the scrolling will **continue** till the field `hasMore` is present in the response and true.
 In this case, setting `ifNotSet` is not necessary.
 
-See [example [EX045]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/045-next-page-flag-has-more).
+See [example [EX045]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/045-next-page-flag-has-more)
+and [example [EX139]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/139-pagination-hasmore-child-filter)] (combining with child jobs).
 
 ### Non-Boolean Has-More Scrolling
 Assume that the API returns a response which contains a `hasMore` field. The field is present only in the

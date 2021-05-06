@@ -13,7 +13,7 @@ As the central KBC component, Storage
 - Logs all data manipulations as **events**;
 - Maintains the index of all other KBC **components** and stores their **configurations**.
 
-All this (and a few other things) is available through [Storage API (SAPI)](http://docs.keboola.apiary.io/#).
+All this (and a few other things) is available through [Storage API (SAPI)](https://keboola.docs.apiary.io/#).
 To authorize access to a specific project, most calls to Storage API require
 a [Storage API Token](https://help.keboola.com/storage/tokens/) along with your request.
 It is required regardless of whether you use the bare API or any of the clients.
@@ -30,8 +30,6 @@ use it programmatically in R.
 workspace manipulation features of the Storage API; use it programmatically in Python.
 4. [Docker CLI client](https://github.com/keboola/storage-api-cli) --- a CLI (command line interface) application supporting
 basic data manipulation features of the Storage API; use it from the command line provided that you have Docker available.
-5. [Windows CLI client](/integrate/storage/win-cli-client/) --- a CLI application supporting basic data manipulation features;
-use it from the Windows command line.
 
 Additional tools:
 

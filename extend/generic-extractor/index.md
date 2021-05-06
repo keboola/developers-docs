@@ -34,8 +34,6 @@ If you intend to develop a more complicated configuration, check out how to
 [run Generic Extractor locally](/extend/generic-extractor/running/).
 There are a [number of examples](https://github.com/keboola/generic-extractor/tree/master/doc) accompanying the
 documentation which [can be run locally](/extend/generic-extractor/running/#running-examples) too.
-In addition, several working configuration snippets, which have not made it to complete extractors yet, are
-available in our [Wiki](https://sites.google.com/a/keboola.com/wiki/home/generic-extractor-configurations).
 
 ## Publishing Generic Extractor Configuration
 Each configuration of Generic Extractor can be [published](/extend/generic-extractor/publish/) as

@@ -184,7 +184,7 @@ for table in tables:
 {% endhighlight %}
 
 ## Logging
-In Python components, the output is buffered, but the buffering may be [switched off](http://stackoverflow.com/questions/107705/disable-output-buffering). The easiest solution is to run your script with the `-u` option: you would use `CMD python -u ./main.py` in your `Dockerfile`.
+In Python components, the output is buffered, but the buffering may be [switched off](https://stackoverflow.com/questions/107705/disable-output-buffering). The easiest solution is to run your script with the `-u` option: you would use `CMD python -u ./main.py` in your `Dockerfile`.
 See a [dedicated article](/extend/common-interface/logging/#examples) if you want to
 implement a GELF logger.
 

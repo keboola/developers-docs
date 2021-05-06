@@ -72,7 +72,7 @@ contents:
 
 The `name` node refers to the name of the component configuration.
 The `metadata` and `column_metadata` fields contains
-[Metadata](http://docs.keboola.apiary.io/#reference/metadata) for the table and its columns.
+[Metadata](https://keboola.docs.apiary.io/#reference/metadata) for the table and its columns.
 
 #### `/data/out/tables` manifests
 
@@ -112,9 +112,9 @@ table is imported. See an [example](/extend/common-interface/config-file/#output
 Using this option makes sense only with [incremental loads](/extend/generic-extractor/incremental/).
 
 The `metadata` and `column_metadata` fields allow you to set
-[Metadata](http://docs.keboola.apiary.io/#reference/metadata) for the table and its columns.
-The `metadata` field corresponds to the [Table Metadata API call](http://docs.keboola.apiary.io/#reference/metadata/table-metadata/create-or-update).
-The `column_metadata` field corresponds to the [Column Metadata API call](http://docs.keboola.apiary.io/#reference/metadata/column-metadata/create-or-update).
+[Metadata](https://keboola.docs.apiary.io/#reference/metadata) for the table and its columns.
+The `metadata` field corresponds to the [Table Metadata API call](https://keboola.docs.apiary.io/#reference/metadata/table-metadata/create-or-update).
+The `column_metadata` field corresponds to the [Column Metadata API call](https://keboola.docs.apiary.io/#reference/metadata/column-metadata/create-or-update).
 In both cases, the `key` and `value` are passed directly to the API; the `provider` value is
 filled by the Id of the running component (e.g., `keboola.ex-db-snowflake`).
 
@@ -161,7 +161,7 @@ An input file manifest stores metadata about a downloaded file.
         "tag1",
         "tag2"
     ],
-    "max_age_days": 180
+    "max_age_days": 15
 }
 {% endhighlight %}
 
@@ -183,9 +183,9 @@ manifest fields; all of them are optional.
 }
 {% endhighlight %}
 
-These parameters can be used (taken from [Storage API File Import](http://docs.keboola.apiary.io/#files)):
+These parameters can be used (taken from [Storage API File Import](https://keboola.docs.apiary.io/#reference/files/upload-file/create-file-resource)):
 
-- If `is_permanent` is false, the file will be automatically deleted after 180 days.
+- If `is_permanent` is false, the file will be automatically deleted after 15 days.
 - When `notify` is true, the members of the project will be notified that a file has been uploaded to the project.
 
 ### S3 Staging
@@ -201,7 +201,7 @@ credentials for downloading the actual file data.
         "isSliced": true,
         "region": "us-east-1",
         "bucket": "kbc-sapi-files",
-        "key": "exp-30/1581/table-exports/in/c-docker-test/test/243100072.csv.gzmanifest",
+        "key": "exp-2/1581/table-exports/in/c-docker-test/test/243100072.csv.gzmanifest",
         "credentials": {
             "access_key_id": "ASI...CDQ",
             "secret_access_key": "tCE..I+T",
@@ -213,5 +213,34 @@ credentials for downloading the actual file data.
 
 If the file is sliced and you need to merge it into a single file, read through the guide to
 [working with sliced files](/integrate/storage/api/import-export/#working-with-sliced-files).
+In that case, the `key` points to another manifest, which contains a list of sliced files.
 
 Note: Exchanging data via AWS S3 is currently available only for input mapping.
+
+### ABS Staging
+When using [Azure Blob Storage for direct data exchange](/extend/common-interface/folders/#exchanging-data-via-abs),
+the manifest files will contain an additional `abs` section with
+credentials for downloading the actual file data.
+
+{% highlight json %}
+{
+    "id": "in.c-docker-demo.data",
+    ...
+    "abs": {
+        "is_sliced": true,
+        "region": "us-east-1",
+        "container": "exp-2-export-7647-627703071-in-c-docker-test-test",
+        "name": "627703071.csv.gzmanifest",
+        "credentials": {
+            "sas_connection_string": "BlobEndpoint=https://kbcfsdxcgtsezztoqc.blob.core.windows.net;SharedAccessSignature=sv=2017-11-09&sr=c&st=2020-08-27T08:42:08Z&se=2020-08-27T20:42:08Z&sp=rl&sig=UJW4DPh%2Baaaaaaaaaa",
+            "expiration": "2020-08-27T22:42:08+0200"
+        }
+    }
+}
+{% endhighlight %}
+
+If the file is sliced and you need to merge it into a single file, read through the guide to
+[working with sliced files](/integrate/storage/api/import-export/#working-with-sliced-files).
+In that case, the `name` points to another manifest, which contains a list of sliced files.
+
+Note: Exchanging data via Azure ABS is currently available only for input mapping.

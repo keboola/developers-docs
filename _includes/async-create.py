@@ -15,7 +15,7 @@ tableName = 'my-new-table'
 print('\nCreating upload file')
 
 # Create a new file in Storage
-# See http://docs.keboola.apiary.io/#reference/files/upload-file/upload-arbitrary-file-to-keboola
+# See https://keboola.docs.apiary.io/#reference/files/upload-file
 response = requests.post(
     'https://connection.keboola.com/v2/storage/files/prepare?federationToken=1',
     data={
@@ -38,7 +38,7 @@ fileId = parsed['id']
 print('\nUploading to S3')
 
 # Upload file to S3
-# See http://boto3.readthedocs.io/en/latest/guide/configuration.html
+# See https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html
 s3 = boto3.resource('s3', region_name=region, aws_access_key_id=accessKeyId, aws_secret_access_key=accessKeySecret, aws_session_token=sessionToken)
 data = open(fileName, 'rb')
 s3.Bucket(parsed['uploadParams']['bucket']).put_object(Key=parsed['uploadParams']['key'], Body=data)
@@ -46,7 +46,7 @@ s3.Bucket(parsed['uploadParams']['bucket']).put_object(Key=parsed['uploadParams'
 print('\nCreating table')
 
 # Load data from file into the Storage table
-# See http://docs.keboola.apiary.io/#reference/tables/create-table-asynchronously/create-new-table-from-csv-file-asynchronously
+# See https://keboola.docs.apiary.io/#reference/tables/create-table-asynchronously/create-new-table-from-csv-file-asynchronously
 response = requests.post(
     'https://connection.keboola.com/v2/storage/buckets/%s/tables-async' % bucketName,
     data={'name': tableName, 'dataFileId': fileId, 'delimiter': ',', 'enclosure': '"'},
@@ -61,7 +61,7 @@ if (parsed['status'] == 'error'):
 status = parsed['status']
 while (status == 'waiting') or (status == 'processing'):
     print('\nWaiting for import to finish')
-    # See http://docs.keboola.apiary.io/#reference/jobs/manage-jobs/job-detail
+    # See https://keboola.docs.apiary.io/#reference/jobs/manage-jobs/job-detail
     response = requests.get(parsed['url'], headers={'X-StorageApi-Token': storageToken})
     jobParsed = json.loads(response.content.decode('utf-8'))
     status = jobParsed['status']

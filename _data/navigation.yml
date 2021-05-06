@@ -52,6 +52,15 @@ items:
           - url: /extend/component/processors/
             title: Processors
 
+          - url: /extend/component/code-patterns/
+            title: Code Patterns
+            items:
+              - url: /extend/component/code-patterns/interface/
+                title: Interface
+
+              - url: /extend/component/code-patterns/tutorial/
+                title: Tutorial
+
           - url: /extend/component/implementation/
             title: Implementation Notes
             items:
@@ -216,6 +225,10 @@ items:
 
       - url: /extend/publish/
         title: Publishing Component
+        items:
+          - url: /extend/publish/checklist/
+            title: Checklist
+
 
   - url: /integrate/
     title: Integration
@@ -235,9 +248,6 @@ items:
           - url: /integrate/storage/docker-cli-client/
             title: Docker CLI client
 
-          - url: /integrate/storage/win-cli-client/
-            title: Windows CLI client
-
           - url: /integrate/storage/api/
             title: Using API
             items:
@@ -256,12 +266,15 @@ items:
       - url: /integrate/jobs/
         title: Background Jobs
 
-      - url: /integrate/transformations/
-        title: Transformations
+      - url: /integrate/variables/
+        title: Variables
+        items:
+            - url: /integrate/variables/tutorial/
+              title: Tutorial
+
 
       - url: /integrate/database/
         title: SSH Tunnel for Database Extractors
 
   - url: /automate/
     title: Automation/Common Tasks
-

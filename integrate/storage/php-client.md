@@ -7,7 +7,7 @@ permalink: /integrate/storage/php-client/
 {:toc}
 
 The Storage API PHP client library is a portable command line client providing
-the most complete [Storage API](http://docs.keboola.apiary.io/) implementation.
+the most complete [Storage API](https://keboola.docs.apiary.io/#) implementation.
 It runs on any platform which has PHP installed.
 Currently this client implements almost all Storage API functions including, of course, exporting and importing tables.
 
@@ -52,7 +52,7 @@ Then add the generated autoloader in your bootstrap script:
 require 'vendor/autoload.php';
 {% endhighlight %}
 
-You can read more in the [Composer documentation](http://getcomposer.org/doc/01-basic-usage.md). Packages
+You can read more in the [Composer documentation](https://getcomposer.org/doc/01-basic-usage.md). Packages
 installable by Composer can be browsed at [Packagist package repository](https://packagist.org/).
 
 ## Usage
@@ -127,7 +127,7 @@ $csvFile = new CsvFile('./new-table.csv');
 $client->writeTableAsync('in.c-main.new-table', $csvFile, ['incremental' => true]);
 {% endhighlight %}
 
-All available upload options are listed in the [API documentation](http://docs.keboola.apiary.io/#reference/tables/load-data).
+All available upload options are listed in the [API documentation](https://keboola.docs.apiary.io/#reference/tables/load-data-asynchronously/import-data).
 
 ### Example --- Export Data
 To export data from a Storage table to a CSV file, use the

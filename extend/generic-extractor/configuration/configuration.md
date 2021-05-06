@@ -20,6 +20,8 @@ nesting. The **configuration map** is also available as a [separate article](/ex
 	- [**api**](/extend/generic-extractor/configuration/api/) --- sets the basic properties of the API.
 		- [**baseUrl**](/extend/generic-extractor/configuration/api/#base-url) --- defines the URL to which the
 		API requests should be sent.
+		- [**caCertificate**](/extend/generic-extractor/configuration/api/#ca-certificate) --- defines custom certificate authority bundle in `crt`/`pem` format.
+		- [**#clientCertificate**](/extend/generic-extractor/configuration/api/#client-certificate) --- defines client certificate and private key in `crt`/`pem` format.
 		- [**pagination**](/extend/generic-extractor/configuration/api/pagination/) --- breaks a result with a
 		large number of items into separate pages.
 		- [**authentication**](/extend/generic-extractor/configuration/api/authentication/) --- needs to be

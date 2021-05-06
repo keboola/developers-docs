@@ -15,7 +15,7 @@ smallest and fastest. If you need Composer, use its [official image](https://hub
 
 ## Working with CSV Files
 We recommend using our [CSV library](https://github.com/keboola/php-csv), which provides a convenience wrapper
-around the build-in [CSV functions](http://php.net/manual/en/function.fgetcsv.php). However, the functions work well on their own too.
+around the build-in [CSV functions](https://www.php.net/manual/en/function.fgetcsv.php). However, the functions work well on their own too.
 If you are using bare PHP functions, the following code illustrates their use:
 
 {% highlight php %}
@@ -243,24 +243,28 @@ This means that a log with the [NOTICE level](https://github.com/Seldaek/monolog
 will go to STDERR, and the INFO level will go to STDOUT. The formatter removes unnecessary fields like `timestamp` and `context`.
 
 ## Error Handling
-The following [piece of code](https://github.com/keboola/component-generator/blob/master/templates/php-keboola/src/run.php) is a good entry point:
+The following [piece of code](https://github.com/keboola/component-generator/blob/master/templates/php-component/src/run.php) is a good entry point:
 
 {% highlight php %}
-$dataDir = getenv('KBC_DATADIR') === false ? '/data/' : getenv('KBC_DATADIR');
+$logger = new Logger();
 try {
-    $app = new Application($dataDir);
-    $app->run();
+    $app = new Component($logger);
+    $app->execute();
     exit(0);
 } catch (UserException $e) {
-    echo $e->getMessage();
+    $logger->error($e->getMessage());
     exit(1);
-} catch(\Throwable $e) {
-    echo $e->getMessage();
-    echo "errFile:" . $e->getFile();
-    echo "errLine:" . $e->getLine();
-    echo "code:" . $e->getCode();
-    echo "trace :";
-    var_export($e->getTrace())
+} catch (\Throwable $e) {
+    $logger->critical(
+        get_class($e) . ':' . $e->getMessage(),
+        [
+            'errFile' => $e->getFile(),
+            'errLine' => $e->getLine(),
+            'errCode' => $e->getCode(),
+            'errTrace' => $e->getTraceAsString(),
+            'errPrevious' => $e->getPrevious() ? get_class($e->getPrevious()) : '',
+        ]
+    );
     exit(2);
 }
 {% endhighlight %}
@@ -268,5 +272,5 @@ try {
 In this case, we consider everything derived from `UserException` to be an error which should be shown to the end user.
 You have to create that exception class in your component. Every other error will lead to a generic message; only
 the developer will see the details, and the code will follow the [general error handling rules](#error-handling).
-Here we use the [`Throwable`](http://php.net/manual/en/class.throwable.php) ancestor, which also catches PHP errors. You can, of
+Here we use the [`Throwable`](https://www.php.net/manual/en/class.throwable.php) ancestor, which also catches PHP errors. You can, of
 course, modify this logic to your liking.

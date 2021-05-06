@@ -22,9 +22,11 @@ The following environment variables are injected in the container:
  - `KBC_STACKID`: Id of the [KBC stack](/overview/api/#regions-and-endpoints).
  - `KBC_CONFIGID`: Id of the configuration or hash of configuration data if the configuration
  is not named (`configData` was used in
- [API call](http://docs.kebooladocker.apiary.io/#reference/run/create-a-job/create-a-run-job)).
+ [API call](https://kebooladocker.docs.apiary.io/#reference/run/create-a-job/run-job)).
  - `KBC_COMPONENTID`: Id of the component
-
+ - `KBC_CONFIGROWID`: Id of the configuration row if available.
+ - `KBC_BRANCHID`: Id of the [development branch](https://keboola.docs.apiary.io/#reference/development-branches/branches).
+ 
  The following variables are available only if "Forwards token" and "Forwards token details" are
  enabled in [component configuration](https://components.keboola.com/) (and approved by us):
 
@@ -33,6 +35,7 @@ The following environment variables are injected in the container:
  - `KBC_TOKENDESC`: Description (user name or token name) of the token running the container.
  - `KBC_TOKEN`: The actual token running the container.
  - `KBC_URL`: The Storage API URL.
+ - `KBC_REALUSER`: Id of the user provided by a [SAML](https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language) authentication.
 
 The following variables are available when [GELF Logger](/extend/common-interface/logging/#gelf-logger) is enabled in the
 [component configuration](https://components.keboola.com/):

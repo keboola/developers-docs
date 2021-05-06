@@ -104,7 +104,7 @@ This flag provides a UI for setting the file output mapping. You can set the fol
 - *Source* --- the name of the file produced by the component
 - *File tags* --- the file tags assigned to the produced file
 - *Is public* --- the file is accessible to anyone knowing its URL
-- *Is permanent* --- the file will not be deleted after 180 days
+- *Is permanent* --- the file will not be deleted after 15 days
 
 {: .image-popup}
 ![File output screenshot](/extend/component/ui-options/file-output-0.png)
@@ -134,6 +134,3 @@ The configuration provided in this input is available in the `authorization` sec
 ## genericTemplatesUI
 This flag is used to provide a UI for components based on the [Generic Extractor](/extend/generic-extractor/). It allows the end user to select a
 [Generic Extractor template](/extend/generic-extractor/publish/).
-
-## genericDockerUI-runtime
-This flag is **deprecated**. It provides a UI for setting parameters for Custom Science.

@@ -9,7 +9,7 @@ permalink: /extend/generic-extractor/tutorial/basic/
 Before you start configuring Generic Extractor, you should have a basic understanding
 of [REST API](/extend/generic-extractor/tutorial/rest/) and
 [JSON format](/extend/generic-extractor/tutorial/json/). This tutorial uses the
-[MailChimp API](http://developer.mailchimp.com/documentation/mailchimp/reference/overview/), so
+[MailChimp API](https://mailchimp.com/developer/reference/), so
 have its documentation at hand. You also need the
 [MailChimp API key](/extend/generic-extractor/tutorial/#prepare).
 
@@ -108,7 +108,7 @@ If you run this configuration, you will get an error similar to this:
     (endpoint: campaigns, arrays in the response root: campaigns, _links)
 
 This means that the extractor got the response, but cannot automatically process it. Examine the sample
-[response in the documentation](http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/#),
+[response in the documentation](https://mailchimp.com/developer/reference/campaigns/),
 and you will see that it is an object with three items: `campaigns`, `total_items` and `_links`:
 
 {% highlight json %}

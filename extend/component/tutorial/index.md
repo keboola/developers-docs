@@ -13,7 +13,7 @@ In this tutorial, you will create a simple "Hello, World!" component which runs 
 Keboola Connection (KBC).
 
 ## Before You Start
-You need to have a computer with working [Docker](https://www.docker.com/what-docker) to develop the KBC component code.
+You need to have a computer with working [Docker](https://www.docker.com/why-docker) to develop the KBC component code.
 To be able to create new components, you also need to have an account in the [Keboola Developer Portal](https://components.keboola.com/),
 which manages the list of components available in KBC.
 
@@ -40,7 +40,7 @@ The example component is written in the Python language, but no knowledge of Pyt
 Before you continue with this tutorial, make sure you
 
 - can log in to the [Developer Portal](https://components.keboola.com/).
-- can log in to KBC either in the [US region](https://connection.keboola.com) or [EU region](https://connection.eu-central-1.keboola.com/).
+- can log in to one of the KBC [stacks](https://help.keboola.com/overview/#stacks)
 - have a [Github](https://github.com/) account.
 
 *Note: Even though the tutorial assumes using [GitHub](https://github.com/) + [Travis](https://travis-ci.org/) services, they are not required for extending KBC.
@@ -56,11 +56,13 @@ To add a component, use the **Add a component** button on the main page, and fil
 
 **Important:** Do **not** use the words 'extractor', 'writer', or 'application' in the component name.
 
-Choose the appropriate component type:
+Choose the appropriate [component type](/extend/component/#component-types):
 
 - `extractor` -- brings data into KBC
 - `writer` -- sends data out of KBC
-- `application` -- does some transformation of the data, or something completely different
+- `transformation` -- does some transformation of the data, [read more](https://help.keboola.com/transformations/#new-transformations)
+- `code pattern` -- generates code for transformation's component, [read more](/extend/component/code-patterns)
+- `application` -- another arbitrary component
 
 The above does not mean technically that, for example, an extractor cannot send data out of KBC
 or an application cannot bring new data into KBC. It is a matter of user perception,
@@ -134,7 +136,7 @@ We are more interested in the latter because that is going to trigger the deploy
 ![Screenshot -- Travis Build Detail](/extend/component/tutorial/travis-build-2.png)
 
 If the deployment passes without errors, the component will become available in KBC. You
-can verify that in the component details in the Developer Portal:
+can verify that in the component details (action Edit) in the Developer Portal:
 
 {: .image-popup}
 ![Screenshot -- Component Deployed](/extend/component/tutorial/component-deployed.png)
@@ -148,9 +150,9 @@ Once the component is deployed, it becomes available in KBC. Note that it
 takes **up to 5 minutes** for the changes to propagate to all KBC instances. After that,
 you can configure the component by visiting the following URL:
 
-    https://connection.keboola.com/admin/projects/{PROJECT_ID}/extractors/{COMPONENT_ID}
+    https://connection.keboola.com/admin/projects/{DEFINED PROJECT_ID}/extractors/{YOUR COMPONENT_ID}
 
-You can then run the configuration without any settings.
+On this URL, you can create a configuration and run it without any settings.
 
 {: .image-popup}
 ![Screenshot -- Component Configuration](/extend/component/tutorial/component-configuration.png)

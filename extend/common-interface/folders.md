@@ -17,10 +17,10 @@ The data folders contain actual data files (tables and files) and metadata.
 For each datafile, a [manifest file](/extend/common-interface/manifest-files/) is created.
 It contains metadata information (creation time, keys for tables, etc.).
 
-The data folder is always available in the component under the **absolute `/data/` path**. Relative path to the data folder
-depends fully on your component code (or Dockerfile). If you want use different path (for component development),
+The data folder is always available in the component under the **absolute `/data/` path**. The relative path to the data folder
+depends fully on your component code (or Dockerfile). If you want to use a different path (for component development),
 **use the [`KBC_DATADIR` environment variable](/extend/common-interface/environment/#environment-variables)**. In production,
-this variable will be always set to `/data/`. During development you can set it to your liking.
+this variable will always be set to `/data/`. During development, you can set it to your liking.
 
 To create a data folder sample, use the [Debug API](/extend/component/running/#preparing-the-data-folder) call via the
 [Docker Runner API](https://kebooladocker.docs.apiary.io/#reference/debug).
@@ -70,7 +70,7 @@ must have at least two dots.
 Manifests allow you to process files in the `/data/out` folder without explicitly being defined in the
 output mapping. That allows for a flexible and dynamic output mapping where the structure is unknown at the beginning.
 Using file names (e.g., `out.c-data.my-table.csv`) for an output mapping is great for saving implementation time
-in simple or POC component.
+in a simple or POC component.
 
 **Important**: All files in the `/data/out/tables` folder will be uploaded, not only those specified in the output
 mapping or manifests.
@@ -133,11 +133,173 @@ can be specified in the [manifest file](/extend/common-interface/manifest-files/
 Note that all files in the `/data/out/files` folder will be uploaded, not only those specified in the output mapping.
 
 ## Exchanging Data via S3
-The component may also exchange data with Storage [using Amazon S3](https://aws.amazon.com/documentation/s3/).
+The component may also exchange data with Storage [using Amazon S3](https://docs.aws.amazon.com/s3/index.html).
 In this case, the data folders contain only [manifest files](/extend/common-interface/manifest-files/) and
-not the actual data. This mode of operation can be enabled by setting the `Staging storage input` option to `S3` in
+not the actual data. This mode of operation can be enabled by setting the **Staging storage input** option to **AWS S3** in
 [component settings](https://components.keboola.com/). If this option is enabled, all the data folders
 will contain only manifest files, extended with an additional
-[`s3` section](/extend/common-interface/manifest-files/#s3-section).
+[`s3` section](/extend/common-interface/manifest-files/#s3-staging).
 
 **Note**: Exchanging data via S3 is currently only available for input mapping.
+
+## Exchanging Data via ABS
+The component may also exchange data with Storage [using Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/) (ABS).
+In this case, the data folders contain only [manifest files](/extend/common-interface/manifest-files/) and
+not the actual data. This mode of operation can be enabled by setting the **Staging storage input** option to **ABS** in
+[component settings](https://components.keboola.com/). If this option is enabled, all the data folders
+will contain only manifest files, extended with an additional
+[`abs` section](/extend/common-interface/manifest-files/#abs-staging).
+
+**Note**: Exchanging data via ABS is currently only available for input mapping.
+
+## Exchanging Data via Database Workspace
+
+*Note: this is a preview feature and may change considerably in the future.*
+
+The component may also exchange data with Storage [using Workspaces](https://keboola.docs.apiary.
+io/#reference/workspaces).
+This mode of operation can be enabled by setting the **Staging storage input** or **Staging storage output** option
+to **Workspace Snowflake**, **Workspace Redshift**, or **Workspace Synapse**. A workspace is an isolated database to 
+which data are loaded before the component job is run and unloaded when the job finishes. The workspace is created just before the job starts and is
+deleted when the job is terminated.
+
+Using this option will load Storage Tables into the provided storage workspace, but Storage Files will still be 
+loaded into the local filesystem like in the standard configuration.
+
+If this option is enabled, the table data folder will contain only manifest files. The actual data will be loaded as
+database tables into the workspace database. The `destination` in input and `source` in output refer to database
+table names. This mode of operation is useful for components which want to manipulate data using SQL queries.
+The component can run arbitrary queries against the database. The database credentials are available in the
+[`authorization` section](/extend/common-interface/config-file/#configuration-file-structure) of the configuration file:
+
+{% highlight json %}
+{
+  "storage": {
+
+  },
+  "parameters": {
+    ...
+  },
+  "authorization": {
+    "workspace": {
+      "host": "database.example.com",
+      "warehouse": "test",
+      "database": "my-db",
+      "schema": "my-schema"
+      "user": "john-doe",
+      "password": "secret"
+    }
+  }
+}
+{% endhighlight %}
+
+Notice that some of the values might be empty for different workspace backends (e.g., Redshift is not using `warehouse`).
+They will be always present, though.
+
+When exchanging data via workspace, there are couple of differences to loading data into files:
+- Loading to workspaces supports only [storage tables](/storage/tables/), [storage files](/storage/file-uploads/)
+are always saved to the directory structure.
+- The `days` attribute is not supported for filtering table, use `changed_since` instead.
+- [Automatic Incremental Processing](https://help.keboola.com/storage/tables/#automatic-incremental-processing) (also known as Adaptive Input Mapping) is not supported.
+- When used for output mapping, the `columns` of the output table **must be** specified, this can be done either in the [output manifest](/extend/common-interface/manifest-files/#dataouttables-manifests) or in the [output mapping](/extend/common-interface/config-file/#output-mapping--headless-csv).
+
+**Note**: Currently only some combinations of input/output staging storage settings are supported:
+`local<->local`, `local<->s3`, `workspace-snowflake<->workspace-snowflake`, `workspace-redshift<->workspace-redshift`.
+
+## Exchanging Data via File System Workspace
+*Note: this is a preview feature and may change considerably in future.*
+*Note: currently only Azure Blob Storage workspaces (abs-workspace) are supported for this type and those only work with Synapse storage backend
+
+The component may also exchange data with a provisioned file workspace (Azure Blob Storage) [using Workspaces](https://keboola.docs.apiary.io/#reference/workspaces).
+This mode of operation can be enabled by setting the **Staging storage input** or **Staging storage output** option
+to **Workspace ABS**. A filesystem workspace is an isolated file storage to which data are loaded before the component job is run (when staging storage input is set)
+and unloaded from when the job finishes (when staging storage output is set).
+The workspace is created just before the job starts and is deleted when the job is terminated.
+
+If this option is enabled, the data and the manifests will be loaded to the azure storage blob container under the 
+data folder similarly to how it does when using the default [local filesystem](extend/common-interface/folders/#root-folder-data).
+
+### Files
+Files are loaded into the workspace as `[file name]/[file ID]`.  For example, if a file 'test.txt' with ID '12345' is in 
+the input mapping then the file will appear in the storage blob container with URL `https://[storage_account_name].blob.core.windows.net/[container-name]/data/in/files/test.txt/12345`
+
+### Tables
+*Note that this is only available on Synapse storage backend*
+
+Synapse only exports tables as sliced files.
+So for example, if you set as table input mapping the table `in.c-main.my-input` as source and `my-input.csv` as 
+destination then in the ABS workspace you will find it with the following structure:
+- [containerName]/data/in/tables/my-inpupt.csv/[random identifier1].txt
+- [containerName]/data/in/tables/my-inpupt.csv/[random identifier2].txt
+- [containerName]/data/in/tables/my-inpupt.csv/[random identifier3].txt
+  
+### Mappings
+
+To sum up, below is a sample storage configuration and where the files are written from and to:
+
+| Direction | Source | Destination |
+| --- | --- | --- |
+| input | in.c-main.my-table-from-abs-workspace | Many slices like `[abs-workspace-root]/data/in/tables/my-inpupt-table.csv/[random identifier].txt` |
+| input | file with tag `my-input-files` named `input-file.txt` | `[abs-workspace-root]/data/in/files/test.txt/12345` |
+| output | `[abs-workspace-root]/data/out/tables/my-output-table.csv` | out.c-main.my-table-from-abs-workspace |
+| output | `[abs-workspace-root]/data/out/files/my-file.txt` | file `my-file.txt` with tag `uploaded-from-abs-workspace` |
+
+{% highlight json %}
+{
+  "storage": {
+    "input": {
+      "tables": [
+        {
+          "source": "in.c-main.my-table-from-abs-workspace",
+          "destination": "my-input-table.csv"
+        },
+        ...
+      ],
+      "files": [
+        {
+          "tags": ["my-input-files"]
+        }
+      ]
+    }
+    "output": {
+      "tables": [
+        {
+          "source": "my-output-table.csv",
+          "destination": "out.c-main.my-table-from-abs-workspace"
+        },
+        ...
+      ],
+      "files": [
+        {
+          "source": "my-file.txt",
+          "tags": ["uploaded-from-abs-workspace"]
+        }
+      ]
+    }
+  },
+  ...
+}
+{% endhighlight %}
+
+### Authorization
+[`authorization` section](/extend/common-interface/config-file/#configuration-file-structure) of the configuration file:
+
+To connect to the ABS storage workspace you need to use the [SAS connection string](https://docs.microsoft.com/en-us/azure/storage/common/storage-configure-connection-string) which is stored in the authorization section as 
+shown below.
+
+{% highlight json %}
+{
+  "storage": {
+    ...
+  },
+  "parameters": {
+    ...
+  },
+  "authorization": {
+    "workspace": {
+      "container": "azure-storage-blob-container",
+      "connectionString": "azure-storage-blob-SAS-connection-string",
+    }
+  }
+}
+{% endhighlight %}
