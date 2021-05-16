@@ -107,7 +107,9 @@ a [sample repository](https://github.com/keboola/docs-example-logging-php). For 
 see its [official documentation](https://github.com/bzikarsky/gelf-php).
 
 #### Python
-For Python, there are [a number of libraries](https://marketplace.graylog.org/addons?kind=gelf&tag=python) available. For example, the [logging-gelf library](https://pypi.org/project/logging-gelf/). To install it, use
+For Python, we strongly suggest using the prepared [Component package](/extend/component/implementation/python/#using-keboola-python-package) which takes care of the setup automatically.
+
+If you want to set a GELF logger yourself, you need to choose from [a number of libraries](https://marketplace.graylog.org/addons?kind=gelf&tag=python) available. For example, the [logging-gelf library](https://pypi.org/project/logging-gelf/). To install it, use
 
     pip3 install logging_gelf
 

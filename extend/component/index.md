@@ -20,7 +20,7 @@ As a developer, you implement the application logic in a language of your choice
 git repository. The component must adhere to our [common interface](/extend/common-interface/).
 To start quickly, use our [component generator](https://github.com/keboola/component-generator) that can generate a skeleton of the component for you. We also provide libraries to help you with implementation in
 [R](https://github.com/keboola/r-docker-application),
-[Python](https://github.com/keboola/python-docker-application), and
+[Python](https://github.com/keboola/python-component), and
 [PHP](https://github.com/keboola/php-docker-application).
 Check our example component in [PHP](https://github.com/keboola/docker-demo-app).
 
