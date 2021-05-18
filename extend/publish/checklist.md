@@ -42,4 +42,5 @@ See [Publish Component tutorial](/extend/publish/) for details.
   - <input type="checkbox"> An expected error occurs (eg. not found, too many requests, ...).
 - <input type="checkbox"> Internal messages (eg. stack trace) with no meaning for the user are not logged.
 
-
+**Publication Request**
+- <input type="checkbox"> A link to the pull request with changes in the [documentation](https://help.keboola.com/) is included (if any). 
