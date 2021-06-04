@@ -1,5 +1,5 @@
 ---
-title: UI Elements examples
+title: UI Elements Examples
 permalink: /extend/component/ui-options/configuration-schema/examples/
 
 ---
@@ -8,7 +8,7 @@ permalink: /extend/component/ui-options/configuration-schema/examples/
 {:toc}
 
 [JSON schema](https://json-schema.org/) allows for design of some advanced UI elements. Some of these are often reused 
-in many components. This page contains list of commonly used UI elements and some advanced tips for UI design.
+in many components. This page contains a list of the commonly used UI elements and some advanced tips for UI design.
 
 ### API Token & Secret Values
 
@@ -98,13 +98,14 @@ The above code will create the following user interface:
 {: .image-popup}
 ![multiselect](/extend/component/ui-options/ui-examples/multi_select.png)
 
-### Date range
+### Date Range
 
-When date range is applicable it should be bounded by two parameters *From Date* and *To Date*. 
-These should be text fields that accept particular date in specified format or a string defining a relative interval in [strtotime](https://www.php.net/manual/en/function.strtotime.php) manner. 
+When a date range is applicable, it should be bounded by two parameters: *From Date* and *To Date*. 
+These should be the text fields that accept a particular date in a specified format or a string defining a relative 
+interval in [strtotime](https://www.php.net/manual/en/function.strtotime.php) manner. 
 
-**TIP** A convenient Python function for parsing such values and conversion to date can be found in the Keboola python-utils library 
-([parse_datetime_interval](https://github.com/keboola/python-utils#getting-converted-date-period-from-string))
+**Tip:** A convenient Python function for parsing such values and conversion to date can be found in the Keboola python-utils library 
+([parse_datetime_interval](https://github.com/keboola/python-utils#getting-converted-date-period-from-string)).
 
 ```json
 {
@@ -130,7 +131,7 @@ The above code will create the following user interface:
 ![Date period](/extend/component/ui-options/ui-examples/det_period.png)
 
 
-### Loading options (Incremental vs Full)
+### Loading Options (Incremental vs Full)
 
 This may be combined in [loading options block](/extend/component/ui-options/configuration-schema/examples/#example-1---object-blocks-loading-options).
 
@@ -161,13 +162,12 @@ The above code will create the following user interface:
 {: .image-popup}
 ![Date period](/extend/component/ui-options/ui-examples/load_type.png)
 
-### Visual separation of sections
+### Visual Separation of Sections
 
 It often happens that the configuration can be split into multiple sections. 
 It is advisable to split these visually using JSON Schema objects or arrays to achieve it using the generic UI.
 
-
-#### Example 1 - Object blocks (Loading Options)
+#### Example 1 – Object blocks (loading options)
 
 Loading options block:
 
@@ -225,9 +225,7 @@ The above code will create the following user interface:
 {: .image-popup}
 ![loading options block](/extend/component/ui-options/ui-examples/loading_options_block.png)
 
-
-
-#### Example 2 - Optional blocks using Arrays
+#### Example 2 – Optional blocks using arrays
 
 Create an array with parameter `"maxItems": 1` to create optional blocks.
 
@@ -277,13 +275,14 @@ The above code will create the following user interface:
 ![optional block](/extend/component/ui-options/ui-examples/optional_block_array.gif)
 
 
-### Changing set of options dynamically based on selection
+### Changing Set of Options Dynamically Based on Selection
 
-In some cases different set of options is available for different types of the same object, e.g. Report type. 
+In some cases, a different set of options is available for different types of the same object, e.g., Report type. 
 JSON Schema allows to define different schemas based on selection. 
-This may be useful in configuration rows scenario, where each row could represent different type of Report, Endpoint, etc.
+This may be useful in the configuration rows scenario, where each row could represent a different type of Report, Endpoint, etc.
 
-**NOTE:** An alternative notation of the below code is by using the [dependencies](https://github.com/json-editor/json-editor#dependencies). 
+***Note:** Alternatively, the below code can be expressed via  [dependencies](https://github.com/json-editor/json-editor#dependencies).* 
+
 
 ```json
 {

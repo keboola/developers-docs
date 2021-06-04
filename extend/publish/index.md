@@ -19,15 +19,14 @@ That being said, any KBC user can use any component, unless
 - the KBC user (or their token) has a [limited access to the component](https://help.keboola.com/storage/tokens/).
 - the component itself limits where it can run (in what projects and for which users).
 
-If you have not yet created your component, please go through the [tutorial](/extend/component/tutorial/) which will
+If you have not yet created your component, please go through the [tutorial](/extend/component/tutorial/), which will
 navigate you through creating an account in the [Developer Portal](https://components.keboola.com/) and
 [initializing the component](/extend/component/tutorial/).
 
 ## Publishing Component
-A non-published component can be used without
-limitations, but it is not offered in the KBC UI. It can only be used via
-the [API](https://keboola.docs.apiary.io/#reference/component-configurations) or by directly
-visiting a link with the specific component ID:
+A non-published component can be used without limitations, but it is not offered in the KBC UI. It can only be used via
+the [API](https://keboola.docs.apiary.io/#reference/component-configurations) or by directly visiting a link with the 
+specific component ID:
 
     https://connection.keboola.com/admin/projects/{PROJECT_ID}/extractors/{COMPONENT_ID}
 
@@ -35,11 +34,11 @@ This way you can fully test your component before requesting its publication. Al
 components are not part of our [list of public components](https://components.keboola.com/components).
 An existing configuration of a non-public component is accessible the same way as a configuration of any other component.
 
-**Important**: Changes made in the Developer Portal take up to 5 minutes to propagate to all Keboola Connection instances in all regions.
+**Important:** Changes made in the Developer Portal take up to 5 minutes to propagate to all Keboola Connection instances in all regions.
 
 Before your component can be published, it must be approved by Keboola. Request the approval from the component list in
-the [Developer Portal](https://components.keboola.com/). We will review your component and either
-publish it or contact you with required changes.
+the [Developer Portal](https://components.keboola.com/). We will review your component and either publish it or contact you
+with required changes.
 
 {: .image-popup}
 ![Approval screenshot](/extend/publish/approve.png)
@@ -51,7 +50,8 @@ applying for component registration, make sure the same component does not alrea
 component review, the best practices in the next sections are followed.
 
 ### Component Name and Description
-Before you name and describe your component, check out our YouTube, Facebook Pages, Dark Sky, and ECB Currency Rates components for inspiration.
+Before you name and describe your component, check out our YouTube, Facebook Pages, Dark Sky, and ECB Currency Rates 
+components for inspiration.
 
 - Names should not contain words like `extractor`, `application`, and `writer`.
 <br>OK: *Cloudera Impala*
@@ -74,15 +74,15 @@ ZAR). The rates are available for all working days from 4 January 1999 up to pre
 - Component icons must be of representative and reasonable quality. Make sure the icon license allows you to use it.
 - Components must correctly state the data flow --- [UI options](/extend/component/ui-options/). Use
 `appInfo.dataOut` and `appInfo.dataIn` for this purpose:
-    - Use `appInfo.dataOut` for extractors which send data outside (omit `appInfo.dataIn` for extractors).
-    - Use `appInfo.dataIn` for writers which bring data into KBC project (omit `appInfo.dataOut` for writers).
-    - Use `appInfo.dataOut` and/or `appInfo.dataOut` for applications.
+    - Use `appInfo.dataIn` for extractors, which bring data into a KBC project (omit `appInfo.dataOut` for extractors).
+    - Use `appInfo.dataOut` for writers, which send data outside (omit `appInfo.dataIn` for writers).
+    - Use `appInfo.dataIn` and/or `appInfo.dataOut` for applications.
 - Use `appInfo.beta` in [UI options](/extend/component/ui-options/) if you suspect changes to the component behavior.
 - Licensing information must be valid, and the vendor description must be current.
 
 ### Component Icon
 
-- Use PNG image with size at least 256x256px
+- Use a PNG image that is at least 256x256px large.
 
 ### Component Configuration
 
@@ -93,7 +93,7 @@ ZAR). The rates are available for all working days from 4 January 1999 up to pre
     - List all properties in the `required` field.
     - Always use `propertyOrder` to explicitly define the order of the fields in the form.
     - Use your short `title` without a colon, period, etc.
-    - Use a `description` to provide an explanatory sentence if needed.
+    - Use `description` to provide an explanatory sentence if needed.
     <br>OK: ![Good Schema](/extend/publish/schema-good.png)
     <br>WRONG: ![Bad Schema](/extend/publish/schema-bad.png)
 - Use a configuration description only if the configuration is not trivial/self-explanatory. Provide **links to resources**
@@ -116,7 +116,7 @@ description of input tables
 processing in chunks to maintain a limited amount of consumed memory. If not possible, state the expected usage in
 the **Component Limits**.
 - The component must distinguish between [user and application errors](/extend/common-interface/environment/#return-values).
-- The component must [validate](/extend/common-interface/config-file/#validation) its parameters; an invalid configuration must result in a user error. User error messages must clearly state what's wrong and what the user should do to fix the issue. E.g. `Invalid configuration.` is wrong, `Login failed, check your credentials.` is better.
+- The component must [validate](/extend/common-interface/config-file/#validation) its parameters; an invalid configuration must result in a user error. User error messages must clearly state what's wrong and what the user should do to fix the issue. E.g., `Invalid configuration.` is wrong, `Login failed, check your credentials.` is better.
 - The events produced must be reasonable. Provide status messages if possible and with a reasonable frequency. Avoid internal messages with no meaning to the end user. Also avoid flooding the event log or sending data files in the event log.
 - Set up [continuous deployment](/extend/component/deployment/) so that you can keep the component up to date.
 - Use [semantic versioning](http://semver.org/) to mark and deploy versions of your component. Using other tags (e.g.,
@@ -124,4 +124,4 @@ the **Component Limits**.
 
 ### Checklist
 
-Before requesting to publish a component please check all rules using [this checklist](/extend/publish/checklist).
+Before requesting to publish a component, please check all rules using [this checklist](/extend/publish/checklist).
