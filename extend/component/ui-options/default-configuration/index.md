@@ -12,6 +12,9 @@ the component in [Keboola Connection](/overview).
 In those situations you can use *Default Configuration* and *Default Row Configuration*
 options when configuring your component in [Keboola Developer Portal](https://components.keboola.com/).
 
+{: .image-popup}
+![Setting Default Configuration in Developer Portal](/extend/component/ui-options/default-configuration/developer-portal-01.png)
+
 ## Default configuration
 
 If you define *Default configuration* for your component, then all new configurations
