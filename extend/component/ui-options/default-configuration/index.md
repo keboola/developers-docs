@@ -6,21 +6,19 @@ permalink: /extend/component/ui-options/default-configuration/
 * TOC
 {:toc}
 
-There are situations when you want to help users to speed up configuration of
-the component in [Keboola Connection](/overview).
-
-In those situations you can use *Default Configuration* and *Default Row Configuration*
-options when configuring your component in [Keboola Developer Portal](https://components.keboola.com/).
+To make configuring a component easier for users, you can provide a default configuration for it. 
+This can be done by defining either *Default Configuration* or *Default Row Configuration* 
+in [Keboola Developer Portal](https://components.keboola.com/): 
 
 {: .image-popup}
 ![Setting Default Configuration in Developer Portal](/extend/component/ui-options/default-configuration/developer-portal-01.png)
 
-## Default configuration
+## Default Configuration
 
-If you define *Default configuration* for your component, then all new configurations
+If you define *Default Configuration* for your component, all new configurations
 will be created with this configuration.
 
-Let's assume your component has this JSON set as *Default Configuration*:
+Let's assume your component has the following JSON set as *Default Configuration*:
 
 {% highlight json %}
 
@@ -32,7 +30,7 @@ Let's assume your component has this JSON set as *Default Configuration*:
 
 {% endhighlight %}
 
-Then, after new configuration creation, the configuration JSON will look like this:
+Once the new configuration is created, the configuration JSON will look like this:
 
 {% highlight json %}
 
@@ -53,10 +51,10 @@ Then, after new configuration creation, the configuration JSON will look like th
 
 {% endhighlight %}
 
-## Default Row configuration
+## Default Row Configuration
 
-The same applies also for rows. If component has *Default Row configuration*
-defined, e.g. like this:
+The same also applies to rows. If a component has *Default Row Configuration*
+defined, e.g., like this:
 
 {% highlight json %}
 
@@ -68,7 +66,7 @@ defined, e.g. like this:
 
 {% endhighlight %}
 
-Then adding a new row to configuration will use also the default values, and the final configuration
+Then adding a new row to the configuration will use the default values too, and the final configuration
 will look like this:
 
 {% highlight json %}
