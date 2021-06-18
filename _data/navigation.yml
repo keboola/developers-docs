@@ -197,6 +197,16 @@ items:
           - url: /extend/generic-extractor/publish/
             title: Publishing Component
 
+      - url: /extend/generic-writer/
+        title: Generic Writer
+        items:
+
+          - url: /extend/generic-writer/configuration/
+            title: Configuration
+
+          - url: /extend/generic-writer/configuration-examples/
+            title: Configuration Examples
+
       - url: /extend/common-interface/
         title: Common Interface
         items:
