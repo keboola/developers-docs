@@ -15,6 +15,7 @@ See [Publish Component tutorial](/extend/publish/) for details.
 - <input type="checkbox"> The short description describes the **service**, NOT `This extractor extracts ...`.
 - <input type="checkbox"> Licensing information is valid, and the vendor description is current.
 - <input type="checkbox"> License and documentation URLs are publicly accessible, no link to a private repository.
+- <input type="checkbox"> The source code is publicly accessible and filled in the `Source code URL` field.
 - <input type="checkbox"> The tag is set to the expected value and uses [semantic versioning](https://semver.org/).
 - <input type="checkbox"> The correct [data flow is set in UI options](/extend/publish/#component-name-and-description).
 
