@@ -116,24 +116,40 @@ In the above example, we chose the `simple-python` template, which contains the 
 - main.py -- a "Hello, World!" Python script
 - Dockerfile -- a [Dockerfile](/extend/component/docker-tutorial/) defining the environment in which the script runs
 - deploy.sh -- a Bash script to deploy the component to KBC
+
+For Travis CI template contain:
 - .travis.yml -- a configuration file for [Travis CI](https://docs.travis-ci.com/) to automate the deployment
 
-You will also obtain a path to your Travis CI configuration
-(in the above example [https://travis-ci.org/keboola/ex-docs-tutorial](https://travis-ci.org/keboola/ex-docs-tutorial)).
+For GitHub Actions CI template contain:
+- .github/workflows/push.yml -- a configuration file for [GitHub Actions CI](https://github.com/features/actions) to automate the deploy
 
 ## Building Component
 When done exploring, push to the repository.
-This will automatically trigger a build on the Travis service; you can view the build
+This will automatically trigger a build on the Travis or GitHub Actions services; you can view the build
 progress by visiting the provided link. In fact, two builds will be triggered: one
 for the `master` branch, and one for the `0.1.0` tag.
+
+Travis:
 
 {: .image-popup}
 ![Screenshot -- Travis Build](/extend/component/tutorial/travis-build-1.png)
 
+GitHub Actions:
+
+{: .image-popup}
+![Screenshot -- GitHub Actions Build](/extend/component/tutorial/gh-build-1.png)
+
 We are more interested in the latter because that is going to trigger the deployment to KBC.
+
+Travis:
 
 {: .image-popup}
 ![Screenshot -- Travis Build Detail](/extend/component/tutorial/travis-build-2.png)
+
+GitHub Actions:
+
+{: .image-popup}
+![Screenshot -- GitHub Actions Build Detail](/extend/component/tutorial/gh-build-2.png)
 
 If the deployment passes without errors, the component will become available in KBC. You
 can verify that in the component details (action Edit) in the Developer Portal:
