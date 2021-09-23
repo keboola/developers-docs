@@ -40,7 +40,6 @@ You can apply for a development project with the following features:
 - Snowflake backend
 - 10 users
 - 3 orchestrations
-- Possibility to create a demo development project in GoodData with 0.5GB storage and 10 users (expires in 1 month)
 
 Under the following conditions:
 

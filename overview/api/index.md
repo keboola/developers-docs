@@ -29,12 +29,11 @@ The main APIs for our components are:
 | [Syrup Queue API](https://syrupqueue.docs.apiary.io/#) | Syrup Queue is a component managing [Jobs](/integrate/jobs/). Being replaced by Queue API. |
 | [Queue API](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api/1.1.0) | Queue is a service for [running components](/extend/docker-runner/) and managing [Jobs](/integrated/jobs/). |
 | [OAuth Broker API](https://oauthapi3.docs.apiary.io/#) | OAuth Broker is a component managing [OAuth authorizations](/extend/common-interface/oauth/#authorize) of other components. |
-| [GoodData Provisioning API](https://keboolagooddataprovisioning.docs.apiary.io/#) | GoodData provisioning is an application for managing GoodData projects and users. |
 | [Orchestrator API](https://keboolaorchestratorv2api.docs.apiary.io/#) | Orchestrator is a component [automating and scheduling tasks](https://help.keboola.com/tutorial/automate/) in your project. |
 | [Importer API](https://app.swaggerhub.com/apis-docs/keboola/import/1.0.0) | [Importer](/integrate/storage/api/importer/) is a helper service for easy table imports |
 | [Developer Portal API](https://kebooladeveloperportal.docs.apiary.io/#) | Developer Portal is an application separated from KBC for [creating components](/extend/component/). |
 | [Billing API](https://keboolabillingapi.docs.apiary.io/#) | Billing API for Pay as You Go projects. |
-| [Workspaces API](https://keboolasandboxes.docs.apiary.io/#) | Workspaces API for V2 workspaces. |
+| [Workspaces API](https://sandboxes.keboola.com/documentation) | Workspaces API for V2 workspaces. |
 | [Synchronous Actions API](https://app.swaggerhub.com/apis/odinuv/sync-actions/1.0.0) | API to trigger [Synchronous Actions](/extend/common-interface/actions/). This is a partial replacement of Docker Runner API and may not be available on all stacks. |
 | [Scheduler API](https://app.swaggerhub.com/apis/odinuv/scheduler/1.0.0) | API to automate configurations (replacement for Orchestrator API) |
 | [Notifications API](https://app.swaggerhub.com/apis/odinuv/notifications-service/1.0.0) | API to subscribe to events - e.g. failed orchestrations (replacement for Orchestrator API) |
@@ -92,10 +91,6 @@ Otherwise you will obtain an `Invalid Token` or unauthorized errors. The *author
             "url": "https://sync-actions.keboola.com/"
         },
         {
-            "id": "gooddata-provisioning",
-            "url": "https://gooddata-provisioning.keboola.com"
-        },
-        {
             "id": "graph",
             "url": "https://graph.keboola.com"
         },
@@ -116,7 +111,6 @@ The services listed above are:
 - `oauth` --- [OAuth Manager Service](/extend/common-interface/oauth/)
 - `sqldep-analyzer` --- SQLdep Integration Service for SQL query validation.
 - `sync-actions` --- [Service for Running Synchronous Actions](/extend/common-interface/actions/)
-- `gooddata-provisioning` --- [Service for User and Project management of GoodData projects](https://keboolagooddataprovisioning.docs.apiary.io/#)
 - `graph` --- Service for generating project lineage and graphs.
 - `encryption` --- Service for [encryption](https://developers.keboola.com/overview/encryption/).
 
@@ -138,8 +132,6 @@ The services listed above are:
 |SQLdep Analyzer|`sqldep-analyzer`|EU|https://sqldep.eu-central-1.keboola.com|
 |Sync Actions|`sync-actions`|US|https://sync-actions.keboola.com/|
 |Sync Actions|`sync-actions`|EU|https://sync-actions.eu-central-1.keboola.com|
-|GoodData Provisioning|`gooddata-provisioning`|US|https://gooddata-provisioning.keboola.com|
-|GoodData Provisioning|`gooddata-provisioning`|EU|https://gooddata-provisioning.eu-central-1.keboola.com|
 |Graph|`graph`|US|https://graph.keboola.com|
 |Graph|`graph`|EU|https://graph.eu-central-1.keboola.com|
 |Encryption|`encryption`|US|https://encryption.keboola.com|
