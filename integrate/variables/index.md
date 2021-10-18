@@ -609,7 +609,9 @@ with the configuration row content containing a piece of share code, for example
 
 {% highlight json %}
 {
-	"code_content": "from os import listdir\nfrom os.path import isfile, join\n\nmypath = '\''/data/in/files'\''\nonlyfiles = [f for f in listdir(mypath)]\nprint(onlyfiles)\nmypath = '\''/data/in/user'\''\nonlyfiles = [f for f in listdir(mypath)]\nprint(onlyfiles)"
+    "code_content": [
+        "from os import listdir\nfrom os.path import isfile, join\n\nmypath = '\''/data/in/files'\''\nonlyfiles = [f for f in listdir(mypath)]\nprint(onlyfiles)\nmypath = '\''/data/in/user'\''\nonlyfiles = [f for f in listdir(mypath)]\nprint(onlyfiles)"
+    ]
 }
 {% endhighlight %}
 
@@ -620,7 +622,7 @@ curl --location --request POST 'https://connection.keboola.com/v2/storage/compon
 --header 'X-StorageApi-Token: my-token' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --data-urlencode 'configuration={
-	"code_content": "from os import listdir\nfrom os.path import isfile, join\n\nmypath = '\''/data/in/files'\''\nonlyfiles = [f for f in listdir(mypath)]\nprint(onlyfiles)\nmypath = '\''/data/in/user'\''\nonlyfiles = [f for f in listdir(mypath)]\nprint(onlyfiles)"
+	"code_content": ["from os import listdir\nfrom os.path import isfile, join\n\nmypath = '\''/data/in/files'\''\nonlyfiles = [f for f in listdir(mypath)]\nprint(onlyfiles)\nmypath = '\''/data/in/user'\''\nonlyfiles = [f for f in listdir(mypath)]\nprint(onlyfiles)"]
 }
 ' \
 --data-urlencode 'rowId=dumpfiles'
@@ -712,5 +714,11 @@ Will be modified to:
 }
 {% endhighlight %}
 
+
 The variables then need to contain `someOtherPlaceholder` variable in order to produce a fully functional configuration.
 The same way if the shared code piece contains any variables, they have to be set when running the configuration.
+
+**Important:** The replacement of the shared code piece occurs only within an array of the configuration JSON. In the above code, the shared code reference is `"script": ["{{ "{{ someOtherPlaceholder "}}}}"]` which is the only valid form of a Shared Code reference. For example
+`"script": ["some code {{ "{{ someOtherPlaceholder "}}}} some other code"]` or `"script": "{{ "{{ someOtherPlaceholder "}}}}"` are invalid Shared Code references which may not be replaced the way you intend.
+
+**Important:** The replacement of the shared code piece merges the `code_content` array containing the shared code definition with the array containing the shared code reference. With a shared code reference in form `"script": ["a", "{{ "{{ someOtherPlaceholder "}}}}", "b"]` and shared code definition in form `"code_content": ["c", "d"]` the resulting replacement would be `"script": ["a", "c", "d", "b"]`.
