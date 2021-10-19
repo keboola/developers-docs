@@ -1,20 +1,37 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Api
-    $("span:contains('\"path\"')").wrap("<a href='/extend/generic-writer/configuration/#path'></a>");
-    $("span:contains('\"mode\"')").wrap("<a href='/extend/generic-writer/configuration/#mode'></a>");
+    $("span:contains('\"api\"')").wrap("<a href='/extend/generic-writer/configuration/#api'></a>");
+    $("span:contains('\"base_url\"')").wrap("<a href='/extend/generic-writer/configuration/#base-url'></a>");
+    $("span:contains('\"default_query_parameters\"')").wrap("<a href='/extend/generic-writer/configuration/#default-query-parameters'></a>");
+    $("span:contains('\"default_headers\"')").first().wrap("<a href='/extend/generic-writer/configuration/#default-headers'></a>");
+    $("span:contains('\"retry_config\"')").first().wrap("<a href='/extend/generic-writer/configuration/#retry-config'></a>");
+    $("span:contains('\"authentication\"')").first().wrap("<a href='/extend/generic-writer/configuration/#authentication '></a>");
+
+
+    $("span:contains('\"user_parameters\"')").first().wrap("<a href='/extend/generic-writer/configuration/#user-parameters '></a>");
+
+    // Request options
+    $("span:contains('\"request_options\"')").wrap("<a href='/extend/generic-writer/configuration/#request-options'></a>");
+    $("span:contains('\"api_request\"')").wrap("<a href='/extend/generic-writer/configuration/#api-request'></a>");
     $("span:contains('\"method\"')").wrap("<a href='/extend/generic-writer/configuration/#method'></a>");
-    $("span:contains('\"iteration_mode\"')").first().wrap("<a href='/extend/generic-writer/configuration/#iteration_mode'></a>");
-    $("span:contains('\"user_parameters\"')").first().wrap("<a href='/extend/generic-writer/configuration/#user_parameters'></a>");
+    $("span:contains('\"endpoint_path\"')").first().wrap("<a href='/extend/generic-writer/configuration/#endpoint-path'></a>");
     $("span:contains('\"headers\"')").first().wrap("<a href='/extend/generic-writer/configuration/#headers'></a>");
-    $("span:contains('\"additional_requests_pars\"')").wrap("<a href='/extend/generic-writer/configuration/#additional_request_pars'></a>");
+    $("span:contains('\"query_parameters\"')").first().wrap("<a href='/extend/generic-writer/configuration/#query-parameters'></a>");
+
+    // Content
+    $("span:contains('\"content\"')").first().wrap("<a href='/extend/generic-writer/configuration/#content'></a>");
+    $("span:contains('\"content_type\"')").first().wrap("<a href='/extend/generic-writer/configuration/#content-type'></a>");
 
     // JSON CONFIG
-    $("span:contains('\"json_data_config\"')").wrap("<a href='/extend/generic-writer/configuration/#json_data_config'></a>");
+    $("span:contains('\"json_mapping\"')").wrap("<a href='/extend/generic-writer/configuration/#json-mapping'></a>");
     $("span:contains('\"chunk_size\"')").wrap("<a href='/extend/generic-writer/configuration/#chunk_size'></a>");
-    $("span:contains('\"delimiter\"')").wrap("<a href='/extend/generic-writer/configuration/#delimiter'></a>");
-    $("span:contains('\"request_data_wrapper\"')").wrap("<a href='/extend/generic-writer/configuration/#request_data_wrapper'></a>");
-    $("span:contains('\"infer_types_for_unknown\"')").first().wrap("<a href='/extend/generic-writer/configuration/#infer_types_for_unknown'></a>");
-    $("span:contains('\"column_types\"')").wrap("<a href='/extend/generic-writer/configuration/#column_types'></a>");
+    $("span:contains('\"nesting_delimiter\"')").wrap("<a href='/extend/generic-writer/configuration/#nesting-delimiter'></a>");
+    $("span:contains('\"request_data_wrapper\"')").wrap("<a href='/extend/generic-writer/configuration/#request-data-wrapper'></a>");
+    $("span:contains('\"autodetect\"')").first().wrap("<a href='/extend/generic-writer/configuration/#autodetect'></a>");
+    $("span:contains('\"column_data_types\"')").wrap("<a href='/extend/generic-writer/configuration/#column-data-types'></a>");
+    $("span:contains('\"datatype_override\"')").wrap("<a href='/extend/generic-writer/configuration/#column-data-types'></a>");
+    $("span:contains('\"column_names_override\"')").wrap("<a href='/extend/generic-writer/configuration/#datatype-override'></a>");
+    $("span:contains('\"iterate_by_columns\"')").wrap("<a href='/extend/generic-writer/configuration/#iterate-by-columns'></a>");
 
     // Configuration
     $("span:contains('\"debug\"')").wrap("<a href='/extend/generic-writer/configuration/#debug'></a>");

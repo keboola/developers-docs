@@ -1,29 +1,25 @@
 {
   "parameters": {
-    "path": "https://example.com/test/[[id]]",
-    "mode": "JSON",
-    "method": "POST",
-    "iteration_mode": {
-      "iteration_par_columns": [
-        "id"
-      ]
+    "api": {
+      "base_url": "https://example.com/api",
+      "default_query_parameters": {
+        "content_type": "json"
+      },
+      "default_headers": {
+        "Authorization": {
+          "attr": "#token"
+        }
+      },
+      "retry_config": {
+        "max_retries": 5,
+        "codes": [
+          500,
+          429
+        ]
+      }
     },
     "user_parameters": {
       "#token": "Bearer 123456",
-      "token_encoded": {
-        "function": "concat",
-        "args": [
-          "Basic ",
-          {
-            "function": "base64_encode",
-            "args": [
-              {
-                "attr": "#token"
-              }
-            ]
-          }
-        ]
-      },
       "date": {
         "function": "concat",
         "args": [
@@ -38,76 +34,50 @@
         ]
       }
     },
-    "headers": [
-      {
-        "key": "Authorization",
-        "value": {
-          "attr": "token_encoded"
-        }
-      },
-      {
-        "key": "Content-Type",
-        "value": "application/json"
-      }
-    ],
-    "additional_requests_pars": [
-      {
-        "key": "params",
-        "value": {
+    "request_options": {
+      "api_request": {
+        "method": "POST",
+        "endpoint_path": "/customer/[[id]]",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "query_parameters": {
           "date": {
             "attr": "date"
           }
         }
+      },
+      "content": {
+        "content_type": "JSON",
+        "json_mapping": {
+          "nesting_delimiter": "__",
+          "chunk_size": 100,
+          "column_data_types": {
+            "autodetect": true,
+            "datatype_override": [
+              {
+                "column": "phone",
+                "type": "string"
+              },
+              {
+                "column": "rank",
+                "type": "number"
+              },
+              {
+                "column": "is_active",
+                "type": "bool"
+              }
+            ]
+          },
+          "request_data_wrapper": "{ \"data\": [[data]]}",
+          "column_names_override": {
+            "full_name": "FULL|NAME"
+          }
+        },
+        "iterate_by_columns": [
+          "id"
+        ]
       }
-    ],
-    "json_data_config": {
-      "chunk_size": 1,
-      "delimiter": "_",
-      "request_data_wrapper": "{ \"data\": [[data]]}",
-      "infer_types_for_unknown": true,
-      "column_types": [
-        {
-          "column": "bool_bool2",
-          "type": "number"
-        },
-        {
-          "column": "bool_bool1",
-          "type": "bool"
-        },
-        {
-          "column": "id",
-          "type": "string"
-        },
-        {
-          "column": "field.id",
-          "type": "string"
-        },
-        {
-          "column": "ansconcat",
-          "type": "string"
-        },
-        {
-          "column": "time_submitted",
-          "type": "string"
-        },
-        {
-          "column": "id2",
-          "type": "string"
-        },
-        {
-          "column": "time_11",
-          "type": "bool"
-        },
-        {
-          "column": "time_reviewed_r2",
-          "type": "bool"
-        },
-        {
-          "column": "time_reviewed_r1_r1",
-          "type": "bool"
-        }
-      ]
-    },
-    "debug": true
+    }
   }
 }
