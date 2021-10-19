@@ -134,7 +134,40 @@ This is mostly useful for creating Generic Writer templates and registered compo
  
 ### Authentication
 
-TBD
+Some APIs require authenticated requests to be made. This section allows selecting from predefined auth methods.
+
+The Authentication object is always in following format:
+
+```json
+{
+        "type": "SupportedType",
+        "parameters": {
+          "some_parameter": "test_user"
+        }
+      }
+```
+**NOTE** Parameters may be also referenced from the `user_parameters` section using the `{"attr":""}` syntax, 
+see [example 025](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/docs/examples/025-simple-json-basic-http-auth-from-user-params)
+
+#### BasicHttp
+
+Basic HTTP authentication using username and password.
+
+**Example**:
+
+```json
+    "api": {
+      "base_url": "http://localhost:8000",
+      "authentication": {
+        "type": "BasicHttp",
+        "parameters": {
+          "username": "test_user",
+          "#password": "pass"
+        }
+      }
+    }
+```
+See [example 024](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/docs/examples/024-simple-json-basic-http-auth)
 
 
 ## User Parameters
