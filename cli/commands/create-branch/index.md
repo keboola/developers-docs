@@ -11,10 +11,9 @@ kbc create branch [flags]
 ```
 
 Create a new dev branch as a copy of the main branch in the project and pull its state back to the local directory. 
-If you have some local changes of the main branch push them to the project first. Note that branches 
-cannot be created locally and pushed to the project.
+If you have some local changes of the main branch, push them to the project first. 
 
-*Note: Branches cannot be created locally and pushed to the project, this is the required way.*
+*Note: Branches cannot be created locally and pushed to the project. It is not permitted.*
 
 ### Options
 
