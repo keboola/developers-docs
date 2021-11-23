@@ -58,7 +58,7 @@ kbc --version
 
 ## Installing from Source
 
-1. Install the [Go environment](https://golang.org/doc/install) (if you haven't already).
+1. Install the [Go environment](https://golang.org/doc/install) (if you haven't done so already).
 2. Clone the Git source (or if you don't yet have a version of Git installed,
    [download and extract it](https://github.com/keboola/keboola-as-code/archive/refs/heads/main.zip)):
 
@@ -68,7 +68,7 @@ kbc --version
 
         make build-local
 
-4. The installation script will show you the location of the built binary (e.g. `target/kbc_darwin_amd64/kbc`). 
+4. The installation script will show you the location of the built binary (e.g., `target/kbc_darwin_amd64/kbc`). 
 
 ## Next Steps
 
