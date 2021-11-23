@@ -6,10 +6,10 @@ permalink: /cli/structure/
 * TOC
 {:toc}
 
-Initial configuration of your local directory can be done using [init command](/cli/commands/init/). It initiates 
+Initial configuration of your local directory can be done using the [init command](/cli/commands/init/). It initiates 
 the directory and pulls configurations from the project.
 
-Storage token to your project is stored in the file `.env.local` under `KBC_STORAGE_API_TOKEN` directive. Currently, 
+The Storage token to your project is stored in the file `.env.local` under `KBC_STORAGE_API_TOKEN` directive. Currently, 
 it is necessary to use [Master tokens](https://help.keboola.com/management/project/tokens/#master-tokens).
 
 ```
@@ -59,14 +59,14 @@ it is necessary to use [Master tokens](https://help.keboola.com/management/proje
 ## Branches
 
 The tool works with [dev branches](/components/branches/) by default. You can choose the branches from the project 
-you want to work with locally in [init](/cli/commands/init/) command. You can ignore dev branches concept and work with 
-the main branch only of course but note that all its configurations will be stored in the directory `main`.
+you want to work with locally in the [init](/cli/commands/init/) command. You can ignore the dev branches concept and work with 
+the main branch only, of course. But note that all its configurations will be stored in the directory `main`.
 
-The directory of the main branch is called simply `main` and does not contain the branch id so that it is easily 
-recognizable from the other branches.
+The directory of the main branch is called simply `main` and does not contain the branch ID. This way it is easily 
+distinguishable from the other branches.
 
-The directory contains `description.md` where you can write description formatted in [Markdown](https://www.markdownguide.org/) 
-and `meta.json` containing the name of the branch and flag if it is default or not.
+The directory contains `description.md` where you can write the description formatted in [Markdown](https://www.markdownguide.org/) 
+and `meta.json` containing the name of the branch and flag if it is the default or not.
 
 Example of `meta.json`:
 ```json
@@ -86,8 +86,8 @@ Example of a branch folder with components configurations:
 
 ## Configurations
 
-Directory of each configuration contains `config.json` with parameters specific for each component, `description.md` 
-where you can write description formatted in [Markdown](https://www.markdownguide.org/) and `meta.json` containing name 
+The directory of each configuration contains `config.json` with parameters specific for each component, `description.md` 
+where you can write description formatted in [Markdown](https://www.markdownguide.org/) and `meta.json` containing the name 
 of the configuration.
 
 Example of `config.json` for Generic Extractor:
@@ -107,13 +107,13 @@ Example of `meta.json`:
 ```
 
 Configuration directories can be copied freely inside the project and between other projects. Their IDs are stored 
-in the [manifest](/cli/structure/#manifest). So after the copy & paste make sure to run 
-the [persist command](/cli/commands/persist/) which generates a new ID for the configuration and saves it in the manifest.
+in the [manifest](/cli/structure/#manifest). So after the copy & paste, make sure to run 
+the [persist command](/cli/commands/persist/), which generates a new ID for the configuration and saves it in the manifest.
 
 ## Configuration Rows
 
 The directory structure of configuration rows is the same as the configuration itself. The component configuration
-contains directory `rows` that includes a directory for each row. That directory contains `config.json`, 
+contains a directory `rows` that includes a directory for each row. That directory contains `config.json`, 
 `description.md` and `meta.json`.
 
 Example of `meta.json`:
@@ -131,8 +131,8 @@ Example of a Google Drive Extractor configuration:
 
 ## Transformations
 
-In addition to other configurations, the transformations directories contain `blocks` directory and in it a list of codes.
-Codes are stored in native files according to the type of transformation. I.e. Snowflake transformations store the codes
+In addition to other configurations, the transformations directories contain a `blocks` directory and in it a list of codes.
+Codes are stored in native files according to the type of transformation. I.e., Snowflake transformations store the codes
 in `.sql` files.
 
 Example of a Snowflake Transformation configuration:
@@ -142,15 +142,15 @@ Example of a Snowflake Transformation configuration:
 
 ## Variables
 
-[Variables](https://help.keboola.com/transformations/variables/#variables) directory in addition to standard 
-configuration layout contains directory `values`.
+The [variables](https://help.keboola.com/transformations/variables/#variables) directory in addition to the standard 
+configuration layout contains the directory `values`.
 
 Let's say you have these two variables in your transformation:
 
 {: .image-popup}
 ![Screenshot -- Variables in the UI](/cli/structure/variables-ui.jpg)
 
-When you [pull](/cli/commands/pull/) them to the local directory it will look like this:
+When you [pull](/cli/commands/pull/) them to the local directory, it will look like this:
 
 {: .image-popup}
 ![Screenshot -- Configuration directory with the variables](/cli/structure/variables-directory.jpg)
@@ -189,12 +189,12 @@ Default values configuration in `variables/values/default/config.json`:
 }
 ```
 
-## Shared Codes
+## Shared Code
 
 [Shared code](https://help.keboola.com/transformations/variables/#shared-code) blocks are stored in the branch directory 
-under `_shared` subdirectory so that they can be reused between different configurations.
+under the `_shared` subdirectory so that they can be reused between different configurations.
 
-If you create a shared code from your block:
+If you create shared code from your block:
 
 {: .image-popup}
 ![Screenshot -- Shared code directory](/cli/structure/shared-code-ui.jpg)
@@ -204,7 +204,7 @@ It will move to the `_shared` directory:
 {: .image-popup}
 ![Screenshot -- Shared code directory](/cli/structure/shared-code-directory.jpg)
 
-And the code in the transformation file `blocks/block-1/join/code.sql` is changed to:
+And the code in the transformation file `blocks/block-1/join/code.sql` will be changed to:
 
 {: .image-popup}
 ![Screenshot -- Shared code code](/cli/structure/shared-code-code.jpg)
@@ -238,7 +238,7 @@ This example shows a schedule to be run at minute 40 past every hour:
 
 ## Orchestrations
 
-The Orchestrator directories contain `phases` directory and in it a list of tasks.
+The Orchestrator directories contain the `phases` directory and in it a list of tasks.
 
 Example:
 
@@ -272,7 +272,7 @@ A `task.json` example:
 
 ## Manifest
 
-The local state of the project is stored in the manifest file `.keboola/manifest.json`. It is not recommended to modifying
+The local state of the project is stored in the manifest file `.keboola/manifest.json`. It is not recommended to modify
 this file manually.
 
 This is its basic structure:
@@ -280,27 +280,27 @@ This is its basic structure:
 - `version` - current supported version is `2`
 - `project` - information about the project
   - `id` - ID of the project
-  - `apiHost` - url of the Keboola Connection instance (e.g. `connection.keboola.com`)
+  - `apiHost` - URL of the Keboola Connection instance (e.g., `connection.keboola.com`)
 - `sortBy` - name of the configuration property used for sorting (default `id`)
 - `naming` - rules for directory names, [see the details](/cli/structure/#naming)
 - `allowedBranches` - array of branches to work with
 - `ignoredComponents` - array of components to not work with
 - `branches` - array of used branches
   - `id` - ID of the branch
-  - `path` - name of the directory containing the branch configuration (e.g. `main`)
+  - `path` - name of the directory containing the branch configuration (e.g., `main`)
 - `configurations` - array of component configurations
   - `branchId` - ID of the branch the configuration belongs to
-  - `componentId` - ID of the component (e.g. `keboola.ex-aws-s3`)
+  - `componentId` - ID of the component (e.g., `keboola.ex-aws-s3`)
   - `id` - ID of the configuration
-  - `path` - path to the configuration in the local directory (e.g. `extractor/keboola.ex-aws-s3/7241111/my-aws-s3-data-source`)
+  - `path` - path to the configuration in the local directory (e.g., `extractor/keboola.ex-aws-s3/7241111/my-aws-s3-data-source`)
   - `rows` - array of configuration rows (if the component supports rows)
     - `id` - ID of the row
-    - `path` - path to the row from the configuration directory (e.g. `rows/cities`)
+    - `path` - path to the row from the configuration directory (e.g., `rows/cities`)
 
 ### Naming
 
-Names of the directories of different configuration types are subject to rules defined in 
-the [manifest](/cli/structure/#manifest) under `naming` section. These are the default values:
+Names of the directories of different configuration types are subject to the rules defined in 
+the [manifest](/cli/structure/#manifest) under the `naming` section. These are the default values:
 
 ```json
 {
@@ -315,7 +315,7 @@ the [manifest](/cli/structure/#manifest) under `naming` section. These are the d
   }
 ```
 
-And in case you let the object IDs be included in directory names (see [init](/cli/commands/init/) command for more details):
+In case you let the object IDs be included in directory names (see [init](/cli/commands/init/) command for more details):
 
 ```json
 {
@@ -330,7 +330,7 @@ And in case you let the object IDs be included in directory names (see [init](/c
   }
 ```
 
-You can change them according to your wish and let the project directory be rebuilt using 
+You can change them according to your wishes and let the project directory be rebuilt using the
 [fix-paths](/cli/commands/fix-paths) command.
 
 ## Next Steps
