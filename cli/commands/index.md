@@ -7,16 +7,16 @@ permalink: /cli/commands/
 {:toc}
 
 [create branch](/cli/commands/create-branch/)
-: Create branch
+: Create a branch
 
 [create config](/cli/commands/create-config/)
-: Create configuration
+: Create a configuration
 
 [create row](/cli/commands/create-row/)
-: Create configuration row
+: Create a configuration row
 
 [diff](/cli/commands/diff/)
-: Show differences between local directory and the project
+: Show differences between the local directory and the project
 
 [encrypt](/cli/commands/encrypt/)
 : Encrypt unencrypted values in your local directory
@@ -25,7 +25,7 @@ permalink: /cli/commands/
 : Ensure that all local paths match configured naming
 
 [help](/cli/commands/help/)
-: Show help about any command
+: Show help for any command
 
 [init](/cli/commands/init/)
 : Initialize local directory of your project and run pull
@@ -51,11 +51,12 @@ permalink: /cli/commands/
 ## Options 
 
 Options can be passed to each command from environment variables. In that case, the starting `--` becomes `KBC_`,
-all letters are changed to uppercase and dashes to underscores, e.g. option `--log-file` becomes `KBC_LOG_FILE`.
+all letters are changed to uppercase and dashes to underscores, e.g., the option `--log-file` becomes `KBC_LOG_FILE`.
 
 You can also put the environment variables to [.env files](https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use).
 
-Reading of the options by commands takes this priority:
+Reading the options by commands takes this priority:
+
 1. Command-line flags
 2. Environment variables from the OS environment
 3. Environment variables from .env files in the working directory
@@ -79,7 +80,7 @@ Reading of the options by commands takes this priority:
 : Log each API request and its response
 
 `-V, --version`
-: Show version
+: Show the version
 
 `-d, --working-dir <string>`
 : Use another working directory
