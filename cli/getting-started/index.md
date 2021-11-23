@@ -8,7 +8,7 @@ permalink: /cli/getting-started/
 
 ## Init the Directory
 
-To manage a project using Keboola CLI you need to initialize a directory. Create an empty directory, hop into it and run
+To manage a project using Keboola CLI, you need to initialize a directory. Create an empty directory, hop into it and run
 the init command.
 
 ```
@@ -17,17 +17,17 @@ cd my-kbc-project
 kbc init
 ```
 
-The command runs interactively by default and asks for URL of the Keboola instance you want to use and
+The command runs interactively by default and asks for the URL of the Keboola instance you want to use and
 a [Master token](https://help.keboola.com/management/project/tokens/#master-tokens) to your project. It pulls all 
 configurations from the project to the local directory.
 
 ```
 ➜ kbc init
 
-Please enter Keboola Storage API host, eg. "connection.keboola.com".
+Please enter the Keboola Storage API host, e.g., "connection.keboola.com".
 ? API host connection.north-europe.azure.keboola.com
 
-Please enter Keboola Storage API token. The value will be hidden.
+Please enter the Keboola Storage API token. Its value will be hidden.
 ? API token ***************************************************
 
 Please select which project's branches you want to use with this CLI.
@@ -67,7 +67,7 @@ The init command can prepare workflows for GitHub Actions to keep your directory
 
 ## Push Changes to the Project
 
-When you update your local directory you can compare the changes with the project:
+When you update your local directory, you can compare the changes with the project:
 
 ```
 ➜ kbc diff --details
@@ -79,7 +79,7 @@ Diff:
 * C main/extractor/keboola.ex-google-drive/my-google-drive-data-source | changed: configuration
 ```
 
-Before pushing the changes to the project you are able to preview them first:
+Before pushing the changes to the project, you are able to preview them first:
 
 ```
 ➜ kbc push --dry-run
@@ -89,7 +89,7 @@ Dry run, nothing changed.
 Push done.
 ```
 
-And finally perform the actual changes to the project:
+And finally, perform the actual changes to the project:
 
 ```
 ➜ kbc push
@@ -101,7 +101,7 @@ Push done.
 ## Create New Configurations
 
 Let's say you want to download some data from Wikipedia. You can run [`kbc create`](/cli/commands/create-config/) 
-without options and be guided by an interactive dialog or fill all the options:
+without options and be guided by an interactive dialog, or fill all the options:
 
 ```
 ➜ kbc create config -b main -c ex-generic-v2 -n wiki
@@ -110,7 +110,7 @@ Created new config "main/extractor/ex-generic-v2/wiki"
 
 Edit file `main/extractor/ex-generic-v2/wiki/config.json` as 
 a [Generic Extractor](/extend/generic-extractor/) configuration. A super basic 
-configuration could look like:
+configuration could look like this:
 
 ```json
 {
@@ -155,7 +155,7 @@ The directory name is fixed and the configuration added to the manifest:
 
 ## Pull Changes from the Project
 
-When you create or change configurations in the project you can pull them to the local directory.
+When you create or change configurations in the project, you can pull them to the local directory.
 
 Show the changes between the project and the local directory:
 
@@ -183,7 +183,7 @@ Dry run, nothing changed.
 Pull done.
 ```
 
-And finally pull the changes to the local directory. Note that it will override any changes to your local directory:
+And finally, pull the changes to the local directory. Note that it will override any changes to your local directory:
 
 ```
 ➜ kbc pull
