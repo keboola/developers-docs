@@ -28,7 +28,7 @@ to match the local state.
 
 ## Example
 
-When you [create a configuration](/cli/commands/create-config/) of MySQL extractor the command will look like:
+When you [create a configuration](/cli/commands/create-config/) of the MySQL extractor, the command will look like this:
 
 ```
 ➜ kbc push --dry-run
