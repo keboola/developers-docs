@@ -10,7 +10,7 @@ permalink: /cli/commands/status/
 kbc status [flags]
 ```
 
-Show information about current project directory, metadata directory and working directory.
+Show information about the current project directory, metadata directory and working directory.
 
 ## Options
 
