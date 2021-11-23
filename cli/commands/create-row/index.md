@@ -10,11 +10,11 @@ permalink: /cli/commands/create-row/
 kbc create row [flags]
 ```
 
-Create a new configuration row in local directory and assign it a unique ID (i.e. [persist](/cli/commands/persist/)
-command is called automatically). To save it to the project, call [push](/cli/commands/push/) afterward. You will
-be prompted for name, branch, and component ID.
+Create a new configuration row in your local directory and assign it a unique ID (i.e., the [persist](/cli/commands/persist/)
+command is called automatically). To save it to the project, call [push](/cli/commands/push/) afterwards. You will
+be prompted for a name, a branch, and a component ID.
 
-*Tip: You can create a new configuration row by copying an existing one and running [persist](/cli/commands/persist/) command.*
+*Tip: You can create a new configuration row by copying an existing one and running the [persist](/cli/commands/persist/) command.*
 
 ### Options
 
