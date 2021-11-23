@@ -10,8 +10,8 @@ permalink: /cli/commands/encrypt/
 kbc encrypt [flags]
 ```
 
-Encrypt unencrypted values in your local directory (i.e. values of properties prefixed by `#` that were not encrypted 
-yet.) For example `{"#someSecretProperty": "secret value"}` will be transformed into 
+Encrypt unencrypted values in your local directory (i.e., the values of properties prefixed by `#` that were not encrypted 
+yet.) For example, `{"#someSecretProperty": "secret value"}` will be transformed into 
 `{"#someSecretProperty": "KBC::ProjectSecure::<encryptedcontent>"}`.
 
 ## Options
@@ -23,7 +23,7 @@ yet.) For example `{"#someSecretProperty": "secret value"}` will be transformed 
 
 ## Examples
 
-Let's say you create a configuration for MySQL extractor:
+Let's say you create a configuration for the MySQL extractor:
 
 ```json
 {
@@ -55,7 +55,7 @@ Plan for "encrypt" operation:
 Encrypt done.
 ```
 
-And the configuration now looks this way:
+And the configuration now looks like this:
 
 ```json
 {
