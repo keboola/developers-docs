@@ -10,11 +10,11 @@ permalink: /cli/commands/create-config/
 kbc create config [flags]
 ```
 
-Create a new configuration in local directory and assign it a unique ID (i.e. [persist](/cli/commands/persist/) 
+Create a new configuration in your local directory and assign it a unique ID (i.e., the [persist](/cli/commands/persist/) 
 command is called automatically). To save it to the project, call [push](/cli/commands/push/) afterward. You will 
-be prompted for name, branch, and component ID.
+be prompted for a name, a branch, and a component ID.
 
-*Tip: You can create a new configuration by copying an existing one and running [persist](/cli/commands/persist/) 
+*Tip: You can create a new configuration by copying an existing one and running the [persist](/cli/commands/persist/) 
 command.*
 
 ### Options
