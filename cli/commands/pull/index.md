@@ -13,7 +13,7 @@ kbc pull [flags]
 Pull configurations from the project to the local directory. Local changes will be overwritten to match the state 
 of the project. 
 
-If your local state is invalid the command will fail unless you use `--force` flag.
+If your local state is invalid, the command will fail unless you use the `--force` flag.
 
 ## Options
 
