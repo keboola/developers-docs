@@ -13,7 +13,7 @@ kbc workflows [flags]
 Generate workflows for GitHub Actions:
 - `validate` - validates all branches on change
 - `push` - pushes each change in the main branch to the project
-- `pull` - pulls the main branch from the project every 5 minutes
+- `pull` - pulls the main branch from the project every five minutes
 
 You will be prompted which workflows you want to generate.
 
@@ -23,13 +23,13 @@ You will be prompted which workflows you want to generate.
 : Name of the main branch for push/pull workflows (default "main")
 
 `--ci-pull <bool>`
-: Create workflow to sync main branch from the project every 5 minutes (default true)
+: Create a workflow to sync the main branch from the project every five minutes (default true)
 
 `--ci-push <bool>`
-: Create workflow to push changes in main branch to the project (default true)
+: Create a workflow to push changes in the main branch to the project (default true)
 
 `--ci-validate <bool>`
-: Create workflow to validate all branches on change to a GitHub branch (default true)
+: Create a workflow to validate all branches on change to a GitHub branch (default true)
 
 [Global Options](/cli/commands/#global-options)
 
@@ -38,7 +38,7 @@ You will be prompted which workflows you want to generate.
 ```
 ➜ kbc workflows
 
-Please confirm GitHub Actions you want to generate.
+Please confirm the GitHub Actions you want to generate.
 
 ? Generate "validate" workflow?
 All GitHub branches will be validated on change. Yes
@@ -47,8 +47,8 @@ All GitHub branches will be validated on change. Yes
 Each change in the main GitHub branch will be pushed to the project. Yes
 
 ? Generate "pull" workflow?
-The main GitHub branch will be synchronized every 5 minutes.
-If a change found, then a new commit is created and pushed. Yes
+The main GitHub branch will be synchronized every five minutes.
+If a change is found, a new commit is created and pushed. Yes
 
 ? Please select the main GitHub branch name: main
 
