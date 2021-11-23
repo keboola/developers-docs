@@ -10,10 +10,10 @@ permalink: /cli/commands/persist/
 kbc persist [flags]
 ```
 
-Propagate changes in the local directory to the manifest. When you manually create a configuration or a row (e.g. by 
-copy & paste of another existing configuration) the command will add its record to the manifest and generate a new ID. 
-When you delete a configuration/row directory the command will remove its record from the manifest. If you want 
-to propagate the changes to the project call the [push](/cli/commands/push/) command afterward.
+Propagate changes in the local directory to the manifest. When you manually create a configuration or a row (e.g., by 
+copy & paste of another existing configuration), the command will add its record to the manifest and generate a new ID. 
+When you delete a configuration/row directory, the command will remove its record from the manifest. If you want 
+to propagate the changes to the project, call the [push](/cli/commands/push/) command afterwards.
 
 ## Options
 
@@ -24,7 +24,7 @@ to propagate the changes to the project call the [push](/cli/commands/push/) com
 
 ## Examples
 
-When you copy & paste directory of a MySQL extractor configuration the command will look like:
+When you copy & paste a directory of a MySQL extractor configuration, the command will look like this:
 
 ```
 ➜ kbc persist --dry-run
