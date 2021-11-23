@@ -10,7 +10,7 @@ permalink: /cli/commands/validate/
 kbc validate [flags]
 ```
 
-Validate directory structure and file contents of the local directory. Configurations of components having JSON schema
+Validate the directory structure and file contents of the local directory. Configurations of components having JSON schema
 will be validated against the schema.
 
 ## Options
