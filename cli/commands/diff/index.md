@@ -10,7 +10,7 @@ permalink: /cli/commands/diff/
 kbc diff [flags]
 ```
 
-Show differences between local and remote state of the project.
+Show differences between the local and remote states of the project.
 
 ## Options
 
@@ -21,8 +21,8 @@ Show differences between local and remote state of the project.
 
 ## Examples
 
-When you change a configuration option of one component (e.g. output table for a sheet 
-in [Google Drive Extractor](/components/extractors/storage/google-drive/)) the output will look like:
+When you change a configuration option of one component (e.g., an output table for a sheet 
+in the [Google Drive extractor](/components/extractors/storage/google-drive/)), the output will look like this:
 
 ```
 ➜ kbc diff
