@@ -24,7 +24,7 @@ and directory names. It is run automatically after [pull](/cli/commands/pull/).
 
 ## Examples
 
-When you have a config and rename it in its `meta.json` run the command afterwards. It will rename the directory name:
+When you have a config and rename it in its `meta.json`, run the command afterwards. It will rename the directory:
 
 ```
 ➜ kbc fix-paths --dry-run
