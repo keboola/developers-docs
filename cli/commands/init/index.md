@@ -10,11 +10,11 @@ permalink: /cli/commands/init/
 kbc init [flags]
 ```
 
-Initialize local directory of your project and run first [pull](/cli/commands/pull/) from Keboola Connection.
+Initialize a local directory of your project and run the first [pull](/cli/commands/pull/) from Keboola Connection.
 
-If the command is run without options it will start interactive dialog asking for URL of the Keboola Connection instance 
-you want to use, [Master token](https://help.keboola.com/management/project/tokens/#master-tokens) to your project, 
-allowed branches to work with, and will offer you to create GitHub Actions workflows in the directory.
+If the command is run without options, it will start an interactive dialog asking for a URL of the Keboola Connection instance 
+you want to use, a [master token](https://help.keboola.com/management/project/tokens/#master-tokens) to your project, and
+allowed branches to work with. It will offer you to create GitHub Actions workflows in the directory.
 
 You can choose if the directories will contain object IDs or not. Example:
 - path with IDs:    83065-dev-branch/writer/keboola.wr-db-snowflake/734333057-power-bi/rows/734333064-orders
@@ -47,10 +47,10 @@ You can choose if the directories will contain object IDs or not. Example:
 ```
 ➜ kbc init
 
-Please enter Keboola Storage API host, eg. "connection.keboola.com".
+Please enter the Keboola Storage API host, e.g., "connection.keboola.com".
 ? API host connection.north-europe.azure.keboola.com
 
-Please enter Keboola Storage API token. The value will be hidden.
+Please enter the Keboola Storage API token. Its value will be hidden.
 ? API token ***************************************************
 
 Please select which project's branches you want to use with this CLI.
