@@ -50,7 +50,7 @@ configuration does not become a complete mess.
 See [example [EX077]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/077-query-auth).
 
 ## Configuration With Cyphered Token Example
-Usually you want the value used for authentication cyphered (`api-token` parameter with value 2267709 in our example), so you are not exposing it to other users and also not storing it in the configuration versions history. The following authentication configuration combined with parameter defined in `config` section does that (the value prefixed with `#` is cyphered upon saving the configuration):
+Usually you want the value used for authentication cyphered (the `api-token` parameter with the value 2267709 in our example), so you are not exposing it to other users and also not storing it in the configuration versions history. The following authentication configuration combined with the parameter defined in the `config` section does that (the value with the prefix `#` is cyphered upon saving the configuration):
 
 {% highlight json %}
 {
