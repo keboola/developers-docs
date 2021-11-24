@@ -56,6 +56,11 @@ sudo apk add keboola-cli
 kbc --version
 ```
 
+## Windows
+
+We don't provide installation for Windows from a package repository yet. Use a [precompiled binary](https://cli-dist.keboola.com/?prefix=zip/) 
+or install from the source.
+
 ## Installing from Source
 
 1. Install the [Go environment](https://golang.org/doc/install) (if you haven't done so already).
