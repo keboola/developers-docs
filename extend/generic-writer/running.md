@@ -6,13 +6,13 @@ permalink: /extend/generic-extractor/running/
 * TOC
 {:toc}
 
-Generic Extractor is normally run from within the KBC user interface. It can be found in the **Extractors** section
+Generic Extractor is normally run from within the Keboola Connection user interface. It can be found in the **Components/Directory/Data sources** section
 and all you need to do is provide its configuration JSON. No other settings are necessary.
 
 {: .image-popup}
 ![Screenshot - Generic Extractor Configuration](/extend/generic-extractor/configuration.png)
 
-Because creating the configuration JSON can be a non-trivial task, there are some things which can help
+Because creating the configuration JSON can be a non-trivial task, there are some things that can help
 you in developing the configuration.
 
 ## Debug Mode
@@ -36,15 +36,15 @@ why something is skipped, etc.
 {: .image-popup}
 ![Screenshot - Debug Logs](/extend/generic-extractor/events.png)
 
-**Warning:** If the API sends sensitive data (e.g. authorization token) in the URL, these may become
+**Warning:** If the API sends sensitive data (e.g., the authorization token) in the URL, these may become
 visible in the events. Also, debug mode considerably slows the extraction. Therefore it should never
 be turned on in production configurations.
 
 ## Running Locally
 If you are working on a complicated configuration, or developing a new component based on
-Generic Extractor, running every configuration from KBC UI may be slow and tedious.
+Generic Extractor, running every configuration from Keboola Connection UI may be slow and tedious.
 You may run Generic Extractor locally, provided that you have access to [Docker](/extend/component/docker-tutorial/).
-The following is **not necessary** to run or configure Generic Extractor in KBC.
+The following is **not necessary** to run or configure Generic Extractor in Keboola Connection.
 
 ### Run Built Version
 Create an empty directory somewhere and in it create a `config.json` file with a
@@ -107,7 +107,7 @@ supply the configuration directly in the `config.json` file, you must always pro
 }
 {% endhighlight %}
 
-When you store such configuration in KBC UI, it will automatically be encrypted:
+When you store such configuration in Keboola Connection UI, it will automatically be encrypted:
 
 {% highlight json %}
 {
