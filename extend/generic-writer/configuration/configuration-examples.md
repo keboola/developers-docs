@@ -1,5 +1,5 @@
 ---
-title: Generic Writer Configuration examples
+title: Generic Writer Configuration Examples
 permalink: /extend/generic-writer/configuration-examples/
 ---
 
@@ -7,9 +7,9 @@ permalink: /extend/generic-writer/configuration-examples/
 {:toc}
 
 
-### Configuration example - Iterations
+### Configuration Example – Iterations
 
-This configuration sends POST request to `https://example.com/test/[[id]]` where `[[id]]` is column expected in the input table. 
+This configuration sends the POST request to `https://example.com/test/[[id]]` where `[[id]]` is a column expected in the input table. 
 It will send as many requests as there are rows in the input table. Each request object is wrapped in `{"data":{}}` object.
 
 ```json
@@ -126,9 +126,9 @@ It will send as many requests as there are rows in the input table. Each request
   }
 ```
 
-### Exponea batch events writer
+### Exponea Batch Events Writer
 
-Writes customer [Events](https://docs.exponea.com/reference#add-event) into [Exponea API](https://docs.exponea.com) 
+Write customer [events](https://docs.exponea.com/reference#add-event) into the [Exponea API](https://docs.exponea.com) 
 in [batches](https://docs.exponea.com/reference#batch-commands) of `40` requests.
 
 **Input table:**
@@ -190,7 +190,7 @@ in [batches](https://docs.exponea.com/reference#batch-commands) of `40` requests
 ```
 
 
-**Writer config**
+**Writer config:**
 
 ```json
 {
@@ -238,9 +238,9 @@ in [batches](https://docs.exponea.com/reference#batch-commands) of `40` requests
 }
 ```
 
-### Customer.io User event
+### Customer.io User Event
 
-Updates user events via [Customer.io API](https://customer.io/docs/api/#apitrackeventsevent_add) based on user_id column.
+Update user events via the [Customer.io API](https://customer.io/docs/api/#apitrackeventsevent_add) based on the user_id column.
 
 The API uses Basic http authentication which is mimicked by the `base64_encode` function. The field `#token` is expected to contain 
 `user:password`.
@@ -255,7 +255,7 @@ The API uses Basic http authentication which is mimicked by the `base64_encode` 
 
 **Json request:**
 
-For each row in input one request:
+For each row in the input one request:
 
 POST `https://track.customer.io/api/v1/customers/a@test.com/events`
 
@@ -315,9 +315,9 @@ POST `https://track.customer.io/api/v1/customers/a@test.com/events`
 }
 ```
 
-### Slack notification
+### Slack Notification
 
-Send notifications to slack channels via API. Note that you need to create an app with appropriate permissions at https://api.slack.com/apps
+Send notifications to Slack channels via an API. Note that you need to create an app with appropriate permissions at https://api.slack.com/apps
  and retrieve the API token.
 
 
