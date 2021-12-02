@@ -36,8 +36,8 @@ The data can be sent in two ways:
     - [**api_request**](/extend/generic-writer/configuration/#api-request/)
         - [**method**](/extend/generic-writer/configuration/#method) --- defines the HTTP method of the requests.
         - [**endpoint_path**](/extend/generic-writer/configuration/#enpoint-path) --- relative path of the endpoint.
-        - [**query_parameters**](/extend/generic-writer/configuration/api/#query-parameters) --- query parameters sent with each request
-        - [**headers**](/extend/generic-writer/configuration/api/#headers) --- headers sent with each request
+        - [**query_parameters**](/extend/generic-writer/configuration/#query-parameters) --- query parameters sent with each request
+        - [**headers**](/extend/generic-writer/configuration/#headers) --- headers sent with each request
     - [**content**](/extend/generic-writer/configuration/#content) --- defines how the data is sent
         - [**content_type**](/extend/generic-writer/configuration/#content-type) --- defines how the data is transferred (JSON, binary file, Empty, etc.)
         - [**json_mapping**](/extend/generic-writer/configuration/#json-mapping) --- defines the CSV 2 JSON conversion in case of JSON content type.
@@ -198,10 +198,17 @@ It allows referencing another values from `user_parameters` referenced by `{"att
         }
 ```
 
-**Referencing parameters**
+### Referencing parameters
 
-All parameters defined here can be then referrenced using the `{"attr":"PARAMETER_KEY"}` syntax. You may reference them in headers and query parameters
- in the `request_options.api_request` and `api` sections.
+All parameters defined here can be then referenced using the `{"attr":"PARAMETER_KEY"}` syntax. 
+You may reference them in the following sections:
+
+- in the `user_parameters` section itself.
+- [`api.default_query_parameters`](/extend/generic-writer/configuration/#default-query-parameters)
+- [`api.default_headers`](/extend/generic-writer/configuration/#default-headers)
+- [`request_options.api_request.headers`](/extend/generic-writer/configuration/#headers)
+- [`request_options.api_request.query parameters`](/extend/generic-writer/configuration/#query-parameters)
+
  
  See example [010](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/docs/examples/010-simple-json-user-parameters-various)
 
@@ -653,7 +660,7 @@ The function takes two arguments:
 }
 ```
 
-The above value is then available in supported contexts as:
+The above value is then available in [supported contexts](/extend/generic-writer/configuration/#referencing-parameters) as:
 
 ```json
 "to_date": {"attr": "yesterday_date"}
