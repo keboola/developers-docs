@@ -27,6 +27,8 @@ A sample AWS signature configuration looks like this:
 }
 {% endhighlight %}
 
+See [example [EX143]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/143-aws-signature-request).
+
 ## AWS Signature Credentials
 - **accessKeyId** --- AWS access key ID
 - **#secretKey** --- AWS secret access key
