@@ -7,7 +7,7 @@ permalink: /extend/generic-extractor/configuration/aws-signature
 {:toc}
 
 Generic extractor allows signaturing requests by [**AWS**](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
-Signature is the process to add authentication information to your requests.
+Signature is the process to add authentication information to your requests. When you use AWS tools, extractor sign your API request.
 
 A sample AWS signature configuration looks like this:
 
