@@ -32,6 +32,16 @@
                 "ignoreErrors": [405]
             }
         },
+        "aws": {
+            "signature": {
+                "credentials": {
+                    "accessKeyId": "testAccessKey",
+                    "#secretKey": "testSecretKey",
+                    "serviceName": "testService",
+                    "regionName": "testRegion"
+                }
+            }
+        },
         "config": {
             "debug": true,
             "username": "dummy",

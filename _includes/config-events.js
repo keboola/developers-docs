@@ -14,6 +14,10 @@ document.addEventListener('DOMContentLoaded', function() {
     $("span:contains('\"method\"')").first().wrap("<a href='/extend/generic-extractor/configuration/api/pagination/#paging-strategy'></a>");
     $("span:contains('\"authentication\"')").wrap("<a href='/extend/generic-extractor/configuration/api/authentication'></a>");
 
+    // AWS Signature
+    $("span:contains('\"signature\"')").wrap("<a href='/extend/generic-extractor/configuration/aws-signature'></a>");
+    $("span:contains('\"credentials\"')").first().wrap("<a href='/extend/generic-extractor/configuration/aws-signature#aws-signature-credentials'></a>");
+
     // Jobs
     $("span:contains('\"endpoint\"')").wrap("<a href='/extend/generic-extractor/configuration/config/jobs/#endpoint'></a>");
     $("span:contains('\"params\"')").last().wrap("<a href='/extend/generic-extractor/configuration/config/jobs/#request-parameters'></a>");
@@ -55,5 +59,5 @@ document.addEventListener('DOMContentLoaded', function() {
     // Authorization
     $("span:contains('\"authorization\"')").wrap("<a href='/extend/generic-extractor/configuration/api/authentication/#oauth'></a>");
     $("span:contains('\"oauth_api\"')").wrap("<a href='/extend/generic-extractor/configuration/api/authentication/#oauth'></a>");
-    $("span:contains('\"credentials\"')").wrap("<a href='/extend/generic-extractor/configuration/api/authentication/#oauth'></a>");
+    $("span:contains('\"credentials\"')").last().wrap("<a href='/extend/generic-extractor/configuration/api/authentication/#oauth'></a>");
 }, false);
