@@ -17,37 +17,39 @@ nesting. The **configuration map** is also available as a [separate article](/ex
 *Click on the section names if you want to learn more.*
 
 - **parameters**
-	- [**api**](/extend/generic-extractor/configuration/api/) --- sets the basic properties of the API.
-		- [**baseUrl**](/extend/generic-extractor/configuration/api/#base-url) --- defines the URL to which the
-		API requests should be sent.
-		- [**caCertificate**](/extend/generic-extractor/configuration/api/#ca-certificate) --- defines custom certificate authority bundle in `crt`/`pem` format.
-		- [**#clientCertificate**](/extend/generic-extractor/configuration/api/#client-certificate) --- defines client certificate and private key in `crt`/`pem` format.
-		- [**pagination**](/extend/generic-extractor/configuration/api/pagination/) --- breaks a result with a
-		large number of items into separate pages.
-		- [**authentication**](/extend/generic-extractor/configuration/api/authentication/) --- needs to be
-		configured for any API which is not public.
-		- [**retryConfig**](/extend/generic-extractor/configuration/api/#retry-configuration) --- automatically,
-		and repeatedly, retries failed HTTP requests.
-		- [**http**](/extend/generic-extractor/configuration/api/#default-http-options) --- sets the default
-		headers and parameters sent with each API call.
-	- [**config**](/extend/generic-extractor/configuration/config/) --- describes the actual extraction.
-		- [**debug**](/extend/generic-extractor/running/#debug-mode) --- shows all HTTP requests sent by
-		Generic Extractor.
-		- [**outputBucket**](/extend/generic-extractor/configuration/config/#output-bucket) --- defines the name
-		of a Storage Bucket in which the extracted tables will be stored.
-		- [**http**](/extend/generic-extractor/configuration/config/#http) --- sets the HTTP headers sent with
-		every request.
-		- [**jobs**](/extend/generic-extractor/configuration/config/jobs/) --- describes the API endpoints
-		(resources) to be extracted.
-		- [**mappings**](/extend/generic-extractor/configuration/config/#mappings) --- describes how the JSON
-		response is converted into CSV files that will be imported into Storage.
-		- [**incrementalOutput**](/extend/generic-extractor/incremental/) ---  loads the extracted data into
-		Storage incrementally.
-		- [**userData**](/extend/generic-extractor/configuration/config/#user-data) --- adds arbitrary data to
-		extracted records.
-	- [**sshProxy**](/extend/generic-extractor/configuration/ssh-proxy/) --- securely access HTTP(s) endpoints inside your private Network.
-	- [**iterations**](/extend/generic-extractor/configuration/iterations/) --- executes a configuration multiple times, each time
-with different values.
+    - [**api**](/extend/generic-extractor/configuration/api/) --- sets the basic properties of the API.
+        - [**baseUrl**](/extend/generic-extractor/configuration/api/#base-url) --- defines the URL to which the
+        API requests should be sent.
+        - [**caCertificate**](/extend/generic-extractor/configuration/api/#ca-certificate) --- defines custom certificate authority bundle in `crt`/`pem` format.
+        - [**#clientCertificate**](/extend/generic-extractor/configuration/api/#client-certificate) --- defines client certificate and private key in `crt`/`pem` format.
+        - [**pagination**](/extend/generic-extractor/configuration/api/pagination/) --- breaks a result with a
+        large number of items into separate pages.
+        - [**authentication**](/extend/generic-extractor/configuration/api/authentication/) --- needs to be
+        configured for any API which is not public.
+        - [**retryConfig**](/extend/generic-extractor/configuration/api/#retry-configuration) --- automatically,
+        and repeatedly, retries failed HTTP requests.
+        - [**http**](/extend/generic-extractor/configuration/api/#default-http-options) --- sets the default
+        headers and parameters sent with each API call.
+    - **aws**
+      - [**signature**](/extend/generic-extractor/configuration/aws-signature) --- defines AWS credentials for signature request
+    - [**config**](/extend/generic-extractor/configuration/config/) --- describes the actual extraction.
+        - [**debug**](/extend/generic-extractor/running/#debug-mode) --- shows all HTTP requests sent by
+        Generic Extractor.
+        - [**outputBucket**](/extend/generic-extractor/configuration/config/#output-bucket) --- defines the name
+        of a Storage Bucket in which the extracted tables will be stored.
+        - [**http**](/extend/generic-extractor/configuration/config/#http) --- sets the HTTP headers sent with
+        every request.
+        - [**jobs**](/extend/generic-extractor/configuration/config/jobs/) --- describes the API endpoints
+        (resources) to be extracted.
+        - [**mappings**](/extend/generic-extractor/configuration/config/#mappings) --- describes how the JSON
+        response is converted into CSV files that will be imported into Storage.
+        - [**incrementalOutput**](/extend/generic-extractor/incremental/) ---  loads the extracted data into
+        Storage incrementally.
+        - [**userData**](/extend/generic-extractor/configuration/config/#user-data) --- adds arbitrary data to
+        extracted records.
+        - [**sshProxy**](/extend/generic-extractor/configuration/ssh-proxy/) --- securely access HTTP(s) endpoints inside your private Network.
+        - [**iterations**](/extend/generic-extractor/configuration/iterations/) --- executes a configuration multiple times, each time
+  with different values.
 - [**authorization**](/extend/generic-extractor/configuration/api/authentication/#oauth) --- allows injecting OAuth authentication.
 
 There are also simple pre-defined [**functions**](/extend/generic-extractor/functions/) available, adding extra
