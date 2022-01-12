@@ -1,6 +1,6 @@
 ---
 title: AWS Signature
-permalink: /extend/generic-extractor/configuration/aws-signature
+permalink: /extend/generic-extractor/configuration/aws-signature/
 ---
 
 * TOC
