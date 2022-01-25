@@ -269,7 +269,7 @@ items:
                 title: TDE Exporter
 
       - url: /integrate/jobs/
-        title: Background Jobs
+        title: Component Jobs
 
       - url: /integrate/variables/
         title: Variables
