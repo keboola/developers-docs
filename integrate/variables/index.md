@@ -32,31 +32,35 @@ i.e., `{{ "{{ variableName " }}}}`. To work with variables, three things are nee
 To enable replacement of variables, the *main configuration* has to reference the *variable configuration*. 
 If there is no *variable configuration* referenced, no replacement is made (the *main configuration* is completely
 static). Variables can be used in any place of any configuration except legacy transformations (the component with 
-the ID `transformation`; it can still be used in a specific transformation -- e.g., `keboola.python-transformation` 
+the ID `transformation`; it can still be used in a specific transformation -- e.g., `keboola.python-transformation-v2` 
 or `keboola.snowflake-transformation`, etc.), and an orchestrator (see [below](#orchestrator-integration)). 
 
 ## Variable Configuration
 A *variable configuration* is a standard configuration tied to a special dedicated `keboola.variables` component. 
 The variable configuration defines names of variables to be replaced in the main configuration. You can create 
-the configuration using the [Create Configuration API call](https://keboola.docs.apiary.io/#reference/component-configurations/component-configurations/create-configuration). 
+the configuration using the 
+[Create Configuration API call](https://keboola.docs.apiary.io/#reference/components-and-configurations/component-configurations/create-configuration). 
 This is an example of the contents of such a configuration:
 
 {% highlight json %}
-"variables": [
-    {
-        "name": "firstVariable",
-        "type": "string"
-    },
-    {
-        "name": "secondVariable",
-        "type": "string"
-    }
-]
+{
+    "variables": [
+        {
+            "name": "firstVariable",
+            "type": "string"
+        },
+        {
+            "name": "secondVariable",
+            "type": "string"
+        }
+    ]
+}
 {% endhighlight %}
 
 Note that `type` is always `string`.
 
 ## Main Configuration
+When you create a variable configuration, you'll obtain an ID of the configuration - e.g., `807940806`. 
 In the *main configuration*, you have to reference the *variable configuration* ID using the `variables_id` node. 
 Then you can use the variables in the configuration body:
 
@@ -86,7 +90,7 @@ Then you can use the variables in the configuration body:
             "print('{{firstVariable}}')"
         ]
     },
-    "variables_id": "123456789"
+    "variables_id": "807940806"
 }
 {% endraw %}
 {% endhighlight %}
@@ -177,7 +181,7 @@ Use the ID of the variable configuration and `keboola.variables` as a component.
         },
         {
             "name": "size",
-            "value": 42
+            "value": "42"
         }
     ]
 }
@@ -212,18 +216,28 @@ and [output](/extend/common-interface/config-file/#output-mapping--basic) mappin
         }
     },
     "parameters": {
-        "script": [
-            "import csv\ncsvlt = '\\n'\ncsvdel = ','\ncsvquo = '\"'\nwith open('in/tables/{{alias}}.csv', mode='rt', encoding='utf-8') as in_file, open('out/tables/new-table.csv', mode='wt', encoding='utf-8') as out_file:\n    writer = csv.DictWriter(out_file, fieldnames=['COUNTRY', 'CARS'], lineterminator=csvlt, delimiter=csvdel, quotechar=csvquo)\n    writer.writeheader()\n\n    lazy_lines = (line.replace('\\0', '') for line in in_file)\n    reader = csv.DictReader(lazy_lines, lineterminator=csvlt, delimiter=csvdel, quotechar=csvquo)\n    for row in reader:\n        writer.writerow({'COUNTRY': row['COUNTRY'] %2B '{{ alias }}', 'CARS': row['CARS'] %2B '{{ size }}'})\nfrom pathlib import Path\nimport sys\ncontents = Path('/data/config.json').read_text()\nprint(contents, file=sys.stdout)"
+        "blocks": [
+            {
+                "name": "First Block",
+                "codes": [
+                    {
+                        "name": "First Code",
+                        "script": [
+                            "import csv\ncsvlt = '\\n'\ncsvdel = ','\ncsvquo = '\"'\nwith open('in/tables/{{alias}}.csv', mode='rt', encoding='utf-8') as in_file, open('out/tables/new-table.csv', mode='wt', encoding='utf-8') as out_file:\n    writer = csv.DictWriter(out_file, fieldnames=['COUNTRY', 'CARS'], lineterminator=csvlt, delimiter=csvdel, quotechar=csvquo)\n    writer.writeheader()\n\n    lazy_lines = (line.replace('\\0', '') for line in in_file)\n    reader = csv.DictReader(lazy_lines, lineterminator=csvlt, delimiter=csvdel, quotechar=csvquo)\n    for row in reader:\n        writer.writerow({'COUNTRY': row['COUNTRY'] + '{{ alias }}', 'CARS': row['CARS'] + '{{ size }}'})\nfrom pathlib import Path\nimport sys\ncontents = Path('/data/config.json').read_text()\nprint(contents, file=sys.stdout)"
+                        ]
+                    }
+                ]
+            }
         ]
-    },
-    "variables_id": "123",
-    "variables_values_id": "456"
+    }
+    "variables_id": "807968875",
+    "variables_values_id": "807952812"
 }
 {% endraw %}
 {% endhighlight %}
 
-The `variables_id` property contains the ID of the [variable configuration](/integrate/variables/#step-1--create-variables-configuration). The
-`variables_values_id` property is optional and contains the ID of the [row with default values](/integrate/variables/#step-2--create-default-values-for-variable).
+The `variables_id` property contains the ID of the [variable configuration](/integrate/variables/#step-1--create-variables-configuration) - e.g., `807968875`. The
+`variables_values_id` property is optional and contains the ID of the [row with default values](/integrate/variables/#step-2--create-default-values-for-variable) - e.g., `807952812`.
 The `parameters` section contains a script with the following Python code:
 
 {% highlight python %}
@@ -275,12 +289,14 @@ If no default values are set and none of the `variablesValuesId` or `variableVal
 will be raised.
 
 #### Option 1 -- Rely on default variables
-If you created the default values, you can now directly run the job. Use the [Run Job API call](https://kebooladocker.docs.apiary.io/#reference/run/create-a-job/run-job)
+If you created the default values, you can now directly run the job. Use the [Create Job API call](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api/1.2.4#/Jobs/createJob)
 with the following body:
 
 {% highlight json %}
 {
-	"config": "789"
+    "component": "keboola.python-transformation-v2",
+    "config": "807943784",
+    "mode": "run"
 }
 {% endhighlight %}
 
@@ -342,12 +358,22 @@ where you can verify that the variables were replaced.
         }
     },
     "parameters": {
-        "script": [
-            "import csv\ncsvlt = '\\n'\ncsvdel = ','\ncsvquo = '\"'\nwith open('in\/tables\/batman.csv', mode='rt', encoding='utf-8') as in_file, open('out\/tables\/new-table.csv', mode='wt', encoding='utf-8') as out_file:\n writer = csv.DictWriter(out_file, fieldnames=['COUNTRY', 'CARS'], lineterminator=csvlt, delimiter=csvdel, quotechar=csvquo)\n writer.writeheader()\n\n lazy_lines = (line.replace('\\0', '') for line in in_file)\n reader = csv.DictReader(lazy_lines, lineterminator=csvlt, delimiter=csvdel, quotechar=csvquo)\n for row in reader:\n writer.writerow({'COUNTRY': row['COUNTRY'] + 'batman', 'CARS': row['CARS'] + '42'})\nfrom pathlib import Path\nimport sys\ncontents = Path('\/data\/config.json').read_text()\nprint(contents, file=sys.stdout)"
+        "blocks": [
+            {
+                "name": "First Block",
+                "codes": [
+                    {
+                        "name": "First Code",
+                        "script": [
+                            "import csv\ncsvlt = '\\n'\ncsvdel = ','\ncsvquo = '\"'\nwith open('in/tables/{{alias}}.csv', mode='rt', encoding='utf-8') as in_file, open('out/tables/new-table.csv', mode='wt', encoding='utf-8') as out_file:\n    writer = csv.DictWriter(out_file, fieldnames=['COUNTRY', 'CARS'], lineterminator=csvlt, delimiter=csvdel, quotechar=csvquo)\n    writer.writeheader()\n\n    lazy_lines = (line.replace('\\0', '') for line in in_file)\n    reader = csv.DictReader(lazy_lines, lineterminator=csvlt, delimiter=csvdel, quotechar=csvquo)\n    for row in reader:\n        writer.writerow({'COUNTRY': row['COUNTRY'] + '{{ alias }}', 'CARS': row['CARS'] + '{{ size }}'})\nfrom pathlib import Path\nimport sys\ncontents = Path('/data/config.json').read_text()\nprint(contents, file=sys.stdout)"
+                        ]
+                    }
+                ]
+            }
         ]
     },
-    "variables_id": "123",
-    "variables_values_id": "456",
+    "variables_id": "807943784",
+    "variables_values_id": "807952812",
     "image_parameters": {},
     "action": "run",
     "authorization": {}
@@ -368,7 +394,7 @@ you can store another set of values. Let's add another configuration row to the 
         },
         {
             "name": "size",
-            "value": 4200
+            "value": "4200"
         }
     ]
 }
@@ -383,8 +409,10 @@ the ID of the value row in `variableValuesId`:
 
 {% highlight json %}
 {
-	"config": "789",
-	"variableValuesId": "147"
+    "component": "keboola.python-transformation-v2",
+    "config": "807968875,
+    "mode": "run",
+    "variableValuesId": "807957572"
 }
 {% endhighlight %}
 
@@ -403,8 +431,10 @@ Variable values are entered in the `variableValuesData` property:
 
 {% highlight json %}
 {
-	"config": "{{main_config_id}}",
-	"variableValuesData": {
+    "component": "keboola.python-transformation-v2",
+    "config": "807968875",
+    "mode": "run",
+    "variableValuesData": {
         "values": [
             {
                 "name": "alias",
@@ -445,97 +475,77 @@ to [running a job](/integrate/variables/#step-4--run-job).
 
 ### Step 5 -- Create Orchestration
 You have to use the 
-[Create Orchestration API call](https://keboolaorchestratorv2api.docs.apiary.io/#reference/orchestrations/orchestrations-collection/create-a-orchestration).
-You can use the following request body:
+[Create Configuration API call](https://keboola.docs.apiary.io/#reference/component-configurations/component-configurations/create-configuration)
+to create a configuration of the `keboola.orchestrator` component. 
+You can use the following data in the configuration:
 
 {% highlight json %}
 {
-    "name": "Orchestration with Variables",
-    "notifications": [],
+    "phases": [
+        {
+            "id": 2468,
+            "name": "Extractors",
+            "dependsOn": []
+        }
+    ],
     "tasks": [
         {
-            "component": "keboola.python-transformation",
-            "action": "run",
-            "actionParameters": {
-                "config": "789",
-                "variableValuesId": "147"
+            "id": 13579,
+            "name": "Example",
+            "phase": 2468,
+            "task": {
+                "componentId": "keboola.python-transformation-v2",
+                "configId": "807968875",
+                "mode": "run",
+                "variableValuesId": "807952812"
             },
-            "active": true
+            "continueOnFailure": false,
+            "enabled": true
         }
     ]
 }
 {% endhighlight %}
 
-The contents of the `actionParameters` property are identical to the body 
-of the [run job API call](/integrate/variables/#step-4--run-job). Here, the value **789** refers to the ID 
-of the main configuration, and **147** refers to the ID of the configuration row with variable values.
+The contents of the `task` property are identical to the body 
+of the [run job API call](/integrate/variables/#step-4--run-job). Here, the value `807968875` refers to the ID 
+of the main configuration, and `807952812` refers to the ID of the configuration row with variable values.
+You can use the `variableValuesData` field in the same manner.
+Creating the above configuration will return a response containing the configuration ID, e.g., `807969959`.
 See an [example](https://documenter.getpostman.com/view/3086797/77h845D?version=latest#9f2f9da0-59eb-4f33-a206-e5add24725d1).
 
 ### Step 6 -- Run Orchestration
 When running an orchestration which contains configurations referencing variables, you have to provide their
-values. You can either rely on the stored values or you can provide the values at runtime.
+values. You can either rely on the stored values (either at the component configuration or in the orchestration task) 
+or you can provide the values at runtime.
 
 #### Option 1 -- Rely on stored values
-Use the [Run Orchestration API call](https://keboolaorchestratorv2api.docs.apiary.io/#reference/jobs/jobs-collection/run-a-job) 
+Use the [Run Job API call](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api/1.2.4#/Jobs/createJob) 
 to run an orchestration. In its simplest form, the request body needs to contain just the ID of the orchestration
 (obtained in the previous step):
 
 {% highlight json %}
 {
-	"config": "987"
+    "component": "keboola.orchestrator",
+    "config": "807969959",
+    "mode": "run"
 }
 {% endhighlight %}
 
 As long as the variable values can be found somewhere, this is sufficient. See [an example](https://documenter.getpostman.com/view/3086797/77h845D?version=latest#3ebdc3f5-a940-4f0d-860b-ec311f704a7e).
 
 #### Option 2 -- Provide values
-Use the [Run Orchestration API call](https://keboolaorchestratorv2api.docs.apiary.io/#reference/jobs/jobs-collection/run-a-job) 
+Use the [Run Job API call](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api/1.2.4#/Jobs/createJob) 
 to run an orchestration. Additionally, you can use the `variableValuesId` or `variableValuesData` property 
-to override variable values set to individual tasks. The calling convention is the same as in the 
-[run job API call](/integrate/variables/#step-4--run-job). The same rules also apply, notably that you can't 
+to override variable values set to individual tasks. The calling convention is the same as shown in the 
+[basic job run](/integrate/variables/#step-4--run-job). The same rules also apply, notably that you can't 
 use `variableValuesId` and `variableValuesData` together. 
 A sample request body:
 
 {% highlight json %}
 {
-	"config": "987",
-	"variableValuesData": {
-        "values": [
-            {
-                "name": "alias",
-                "value": "batman"
-            },
-            {
-                "name": "size",
-                "value": "scatman"
-            }
-        ]		
-	}
-}
-{% endhighlight %}
-
-See [an example](https://documenter.getpostman.com/view/3086797/77h845D?version=latest#f4fcf7af-afbe-4c29-999e-0f4c50aa477b).
-
-### Step 7 -- Schedule Orchestration
-If you want to schedule an orchestration that uses a configuration with variables, you have to store the values 
-with the orchestration instead of supplying them at runtime. Again, you can use either `variableValuesId` or 
-`variableValuesData`, but not both. The properties are entered in the root of the orchestration configuration, e.g.:
-
-{% highlight json %}
-{
-    "name": "Scheduled Orchestration with Variables",
-    "notifications": [],
-    "crontabRecord": "* * * * *",
-    "tasks": [
-        {
-            "component": "keboola.python-transformation",
-            "action": "run",
-            "actionParameters": {
-                "config": "789"	
-            },
-            "active": true
-        }
-    ],
+    "component": "keboola.orchestrator",
+    "config": "807969959",
+    "mode": "run",
     "variableValuesData": {
         "values": [
             {
@@ -551,16 +561,15 @@ with the orchestration instead of supplying them at runtime. Again, you can use 
 }
 {% endhighlight %}
 
-See [an example](https://documenter.getpostman.com/view/3086797/77h845D?version=latest#13b201f7-78b2-4b1e-8e17-ce47bc5bf732).
+See [an example](https://documenter.getpostman.com/view/3086797/77h845D?version=latest#f4fcf7af-afbe-4c29-999e-0f4c50aa477b).
 
 ## Variables Evaluation Sequence
 There is a number of places where variable values can be provided (either as a reference to an existing row with 
 values or as an array of `values`):
 
-- Orchestration itself (for scheduled orchestrations)
-- Orchestration job parameters
-- Orchestration task `actionParameters`
-- Job parameters
+- Parameters in the orchestration
+- Parameters in `task` setting of the orchestration
+- Parameters in the component job itself
 - Default values stored in configuration (`variables_values_id` property)
 
 The following diagram shows the parameters mentioned on this page and to what they refer to:
@@ -576,10 +585,10 @@ Note that in stored configurations snake_case is used instead of camelCase.
 The following rules describe the evaluation sequence:
 
 - Values provided in job parameters (a component job or an orchestration job) override the stored values.
-- Values provided in an orchestration job override the stored values in tasks `actionParameters`.
-- `variableValuesData` and `variableValuesId` can't be used together, so neither of them takes precedence.
+- Values provided in an orchestration job override the stored values in `task`.
+- Values provided in `task` override values stored in the component configuration.
+- `variableValuesData` and `variableValuesId` can't be used together, so neither of them takes precedence. A reference to stored values can't be mixed with providing the values inline. 
 - If no values are provided anywhere, the default values are used. If no default values are present, an error is raised.
-- A reference to stored values can't be mixed with providing the values inline. 
 
 ## Shared Code
 Related to variables is the Shared Code feature. Shared code allows to share parts of configuration code. In a 
