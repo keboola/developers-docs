@@ -60,7 +60,7 @@ This is an example of the contents of such a configuration:
 Note that `type` is always `string`.
 
 ## Main Configuration
-When you create a variables configuration, you'll obtain ID of the configuration - e.g. `807940806`. 
+When you create a variable configuration, you'll obtain an ID of the configuration - e.g., `807940806`. 
 In the *main configuration*, you have to reference the *variable configuration* ID using the `variables_id` node. 
 Then you can use the variables in the configuration body:
 
@@ -236,8 +236,8 @@ and [output](/extend/common-interface/config-file/#output-mapping--basic) mappin
 {% endraw %}
 {% endhighlight %}
 
-The `variables_id` property contains the ID of the [variable configuration](/integrate/variables/#step-1--create-variables-configuration) - e.g. `807968875`. The
-`variables_values_id` property is optional and contains the ID of the [row with default values](/integrate/variables/#step-2--create-default-values-for-variable) - e.g. `807952812`.
+The `variables_id` property contains the ID of the [variable configuration](/integrate/variables/#step-1--create-variables-configuration) - e.g., `807968875`. The
+`variables_values_id` property is optional and contains the ID of the [row with default values](/integrate/variables/#step-2--create-default-values-for-variable) - e.g., `807952812`.
 The `parameters` section contains a script with the following Python code:
 
 {% highlight python %}
@@ -477,7 +477,7 @@ to [running a job](/integrate/variables/#step-4--run-job).
 You have to use the 
 [Create Configuration API call](https://keboola.docs.apiary.io/#reference/component-configurations/component-configurations/create-configuration)
 to create a configuration of the `keboola.orchestrator` component. 
-You can use the following data in configuration:
+You can use the following data in the configuration:
 
 {% highlight json %}
 {
@@ -510,7 +510,7 @@ The contents of the `task` property are identical to the body
 of the [run job API call](/integrate/variables/#step-4--run-job). Here, the value `807968875` refers to the ID 
 of the main configuration, and `807952812` refers to the ID of the configuration row with variable values.
 You can use the `variableValuesData` field in the same manner.
-Creating the above configuration will return a response containing the configuration ID e.g. `807969959`.
+Creating the above configuration will return a response containing the configuration ID, e.g., `807969959`.
 See an [example](https://documenter.getpostman.com/view/3086797/77h845D?version=latest#9f2f9da0-59eb-4f33-a206-e5add24725d1).
 
 ### Step 6 -- Run Orchestration
