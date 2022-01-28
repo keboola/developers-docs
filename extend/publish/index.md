@@ -82,7 +82,7 @@ ZAR). The rates are available for all working days from 4 January 1999 up to pre
 
 ### Component Icon
 
-- Use a PNG image that is at least 256x256px large.
+- Use a PNG image that is at least 256x256px large and has transparent background.
 
 ### Component Configuration
 
