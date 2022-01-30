@@ -277,12 +277,20 @@ items:
             - url: /integrate/variables/tutorial/
               title: Tutorial
 
-
       - url: /integrate/database/
         title: SSH Tunnel for Database Extractors
 
   - url: /automate/
     title: Automation/Common Tasks
+    items:
+      - url: /automate/run-job/
+        title: Run Job
+
+      - url: /automate/run-orchestration/
+        title: Run Orchestration
+
+      - url: /automate/set-schedule/
+        title: Set Schedule
 
   - url: /cli/
     title: CLI
