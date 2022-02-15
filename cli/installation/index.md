@@ -58,7 +58,18 @@ kbc --version
 
 ## Windows
 
-We don't provide installation for Windows from a package repository yet. Use a [precompiled binary](https://cli-dist.keboola.com/?prefix=zip/) 
+### Scoop
+
+If you don't have Scoop available on your system, [install it](https://scoop.sh/) before continuing.
+
+```shell
+scoop bucket add keboola https://github.com/keboola/scoop-keboola-cli.git
+scoop install keboola/keboola-cli
+```
+
+### Download
+
+You can use a [msi installer](https://cli-dist.keboola.com/?prefix=msi/), [precompiled binary](https://cli-dist.keboola.com/?prefix=zip/) 
 or install from the source.
 
 ## Installing from Source
