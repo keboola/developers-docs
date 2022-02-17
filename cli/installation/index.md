@@ -69,8 +69,8 @@ scoop install keboola/keboola-cli
 
 ### Download
 
-You can use a [msi installer](https://cli-dist.keboola.com/?prefix=msi/), [precompiled binary](https://cli-dist.keboola.com/?prefix=zip/) 
-or install from the source.
+Use an [msi installer](https://cli-dist.keboola.com/?prefix=msi/) or a [precompiled binary](https://cli-dist.keboola.com/?prefix=zip/). 
+You can also install from the source.
 
 ## Installing from Source
 
