@@ -25,7 +25,7 @@ kbc --version
 Upgrade:
 
 ```bash
-brew reinstall keboola/keboola-cli/keboola-cli
+brew upgrade keboola-cli
 ```
 
 ## Debian / Ubuntu
