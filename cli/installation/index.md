@@ -14,14 +14,23 @@ Otherwise, they can be installed from a platform-specific repository or built fr
 Installation on macOS is managed by Homebrew. If you don't have Homebrew available on your system,
 [install it](https://docs.brew.sh/Installation.html) before continuing.
 
-You can install the Keboola CLI on macOS by updating your brew repository information and running the install command:
+Install:
 
 ```bash
-brew install keboola/keboola-cli/keboola-cli
+brew tap keboola/keboola-cli
+brew install keboola-cli
 kbc --version
 ```
 
+Upgrade:
+
+```bash
+brew reinstall keboola/keboola-cli/keboola-cli
+```
+
 ## Debian / Ubuntu
+
+Install:
 
 ```bash
 sudo wget -P /etc/apt/trusted.gpg.d https://cli-dist.keboola.com/deb/keboola.gpg
@@ -31,7 +40,16 @@ sudo apt-get install keboola-cli
 kbc --version
 ```
 
+Upgrade:
+
+```bash
+sudo apt-get update
+sudo apt-get install keboola-cli
+```
+
 ## Fedora
+
+Install:
 
 ```bash
 sudo rpm --import https://cli-dist.keboola.com/rpm/keboola.gpg
@@ -46,7 +64,15 @@ sudo dnf install keboola-cli
 kbc --version
 ```
 
+Upgrade:
+
+```bash
+sudo dnf update keboola-cli
+```
+
 ## Alpine
+
+Install:
 
 ```bash
 echo "https://cli-dist.keboola.com/apk" | sudo tee -a /etc/apk/repositories
@@ -56,15 +82,46 @@ sudo apk add keboola-cli
 kbc --version
 ```
 
+Upgrade:
+
+```bash
+apk update
+apk add --upgrade keboola-cli
+```
+
 ## Windows
+
+### Chocolatey
+
+If you don't have Chocolatey available on your system, [install it](https://chocolatey.org/install) before continuing.
+
+Install:
+
+```shell
+choco install keboola-cli
+```
+
+Upgrade:
+
+```shell
+choco upgrade keboola-cli
+```
 
 ### Scoop
 
 If you don't have Scoop available on your system, [install it](https://scoop.sh/) before continuing.
 
+Install:
+
 ```shell
 scoop bucket add keboola https://github.com/keboola/scoop-keboola-cli.git
 scoop install keboola/keboola-cli
+```
+
+Upgrade:
+
+```shell
+scoop update keboola/keboola-cli
 ```
 
 ### Download
