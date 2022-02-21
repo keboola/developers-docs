@@ -1,21 +1,21 @@
 ---
 title: Workflows
-permalink: /cli/commands/workflows/
+permalink: /cli/commands/ci/workflows/
 ---
 
 * TOC
 {:toc}
 
+**Generate workflows for [GitHub Actions integration](/cli/github-integration/).**
+
 ```
-kbc workflows [flags]
+kbc ci workflows [flags]
 ```
 
-Generate workflows for GitHub Actions:
+You will be prompted which workflows you want to generate:
 - `validate` - validates all branches on change
 - `push` - pushes each change in the main branch to the project
 - `pull` - pulls the main branch from the project every five minutes
-
-You will be prompted which workflows you want to generate.
 
 ## Options
 

@@ -1,18 +1,34 @@
 ---
-title: Create Component Configuration
-permalink: /cli/commands/create-config/
+title: Create Configuration
+permalink: /cli/commands/local/create/config/
 ---
 
 * TOC
 {:toc}
 
+**Create an empty [configuration](https://help.keboola.com/components/).**
+
+```
+kbc local create config [flags]
+```
+
+Or shorter:
+
 ```
 kbc create config [flags]
 ```
 
-Create a new configuration in your local directory and assign it a unique ID (i.e., the [persist](/cli/commands/persist/) 
+```
+kbc c config [flags]
+```
+
+Create an empty configuration in your [local directory](/cli/structure/) and assign it a unique ID (i.e., the [persist](/cli/commands/persist/) 
 command is called automatically). To save it to the project, call [push](/cli/commands/push/) afterwards. You will 
 be prompted for a name, a branch, and a component ID.
+
+Some components have a default content that will be used (if specified by the component author). 
+For others, `config.json` will only contain an empty JSON document `{}`.
+
 
 *Tip: You can create a new configuration by copying an existing one and running the [persist](/cli/commands/persist/) 
 command.*

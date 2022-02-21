@@ -1,0 +1,21 @@
+---
+title: Sync Command
+permalink: /cli/commands/sync/
+---
+
+* TOC
+{:toc}
+
+**Synchronization between [local directory](/cli/structure/) and [project](/cli/#subsystems).**
+
+```
+kbc sync [command]
+```
+
+|---
+| Command | Description
+|-|-|-
+| [kbc sync init](/cli/commands/sync/init/) | Initialize a new local directory and run `kbc sync pull`. |
+| [kbc sync pull](/cli/commands/sync/pull/) | Sync project to the local directory. |
+| [kbc sync push](/cli/commands/sync/push/) | Sync local directory to the project. |
+| [kbc sync diff](/cli/commands/sync/diff/) | Show differences between local directory and project. |

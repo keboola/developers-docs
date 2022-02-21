@@ -1,24 +1,31 @@
 ---
-title: Init
-permalink: /cli/commands/init/
+title: Init Command
+permalink: /cli/commands/sync/init/
 ---
 
 * TOC
 {:toc}
 
+**Initialize a new [local directory](/cli/structure/) and run the first [pull](/cli/commands/sync/pull/).**
+
+```
+kbc sync init [flags]
+```
+
+Or shorter:
 ```
 kbc init [flags]
+kbc i [flags]
 ```
 
-Initialize a local directory of your project and run the first [pull](/cli/commands/pull/) from Keboola Connection.
+The command must be run in an empty directory.
 
-If the command is run without options, it will start an interactive dialog asking for a URL of the Keboola Connection instance 
-you want to use, a [master token](https://help.keboola.com/management/project/tokens/#master-tokens) to your project, and
-allowed branches to work with. It will offer you to create GitHub Actions workflows in the directory.
+If the command is run without options, it will start an interactive dialog asking for:
+- URL of the [stack](https://help.keboola.com/overview/#stacks), for example `connection.keboola.com`.
+- [Master token](https://help.keboola.com/management/project/tokens/#master-tokens) to your project.
+- Allowed [branches](https://help.keboola.com/tutorial/branches/) to work with.
 
-You can choose if the directories will contain object IDs or not. Example:
-- path with IDs:    83065-dev-branch/writer/keboola.wr-db-snowflake/734333057-power-bi/rows/734333064-orders
-- path without IDs: dev-branch/writer/keboola.wr-db-snowflake/power-bi/rows/orders
+It will offer you to create GitHub Actions workflows in the directory.
 
 ## Options
 
@@ -57,20 +64,12 @@ Please select which project's branches you want to use with this CLI.
 The other branches will still exist, but they will be invisible in the CLI.
 ? Allowed project's branches: only main branch
 
-The directory structure can optionally contain object IDs. Example:
-- path with IDs:    83065-dev-branch/writer/keboola.wr-db-snowflake/power-bi/rows/orders
-- path without IDs: dev-branch/writer/keboola.wr-db-snowflake/power-bi/rows/orders
-? Do you want to include object IDs in directory structure? No
 Created metadata directory ".keboola".
 Created manifest file ".keboola/manifest.json".
 Created file ".env.local" - it contains the API token, keep it local and secret.
 Created file ".env.dist" - an ".env.local" template.
 Created file ".gitignore" - to keep ".env.local" local.
 
-The directory structure can optionally contain object IDs. Example:
-- path with IDs:    83065-dev-branch/writer/keboola.wr-db-snowflake/734333057-power-bi/rows/734333064-orders
-- path without IDs: dev-branch/writer/keboola.wr-db-snowflake/power-bi/rows/orders
-? Do you want to include object IDs in directory structure? No
 ? Generate workflows files for GitHub Actions? No
 
 Init done. Running pull.
@@ -92,4 +91,7 @@ Pull done.
 
 ## Next Steps
 
-- [Persist](/cli/commands/persist/)
+- [All Commands](/cli/commands/)
+- [Pull](/cli/commands/sync/pull/)
+- [Push](/cli/commands/sync/push/)
+- [Diff](/cli/commands/sync/diff/)

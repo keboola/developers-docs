@@ -1,19 +1,22 @@
 ---
 title: Create Branch
-permalink: /cli/commands/create-branch/
+permalink: /cli/commands/remote/create/branch/
 ---
 
 * TOC
 {:toc}
 
+**Create a new [branch](https://help.keboola.com/components/branches/) from the `main` branch.**
+
 ```
-kbc create branch [flags]
+kbc remote create branch [flags]
 ```
 
 Create a new dev branch as a copy of the main branch in the project and pull its state back to the local directory. 
 If you have some local changes of the main branch, push them to the project first. 
 
-*Note: Branches cannot be created locally and pushed to the project. It is not permitted.*
+**Limitation:**  
+Branch cannot be created locally, it must be created directly in the project, from the `main` branch.
 
 ### Options
 

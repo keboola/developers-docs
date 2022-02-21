@@ -34,10 +34,6 @@ Please select which project's branches you want to use with this CLI.
 The other branches will still exist, but they will be invisible in the CLI.
 ? Allowed project's branches: only main branch
 
-The directory structure can optionally contain object IDs. Example:
-- path with IDs:    83065-dev-branch/writer/keboola.wr-db-snowflake/734333057-power-bi/rows/734333064-orders
-- path without IDs: dev-branch/writer/keboola.wr-db-snowflake/power-bi/rows/orders
-? Do you want to include object IDs in directory structure? No
 Created metadata directory ".keboola".
 Created manifest file ".keboola/manifest.json".
 Created file ".env.local" - it contains the API token, keep it local and secret.
@@ -51,8 +47,8 @@ Plan for "pull" operation:
 + B main
 + C main/extractor/keboola.ex-aws-s3/my-aws-s-3-data-source
 + R main/extractor/keboola.ex-aws-s3/my-aws-s-3-data-source/rows/share-cities
-+ C main/extractor/keboola.ex-google-drive/my-google-drive-data-source
-+ C main/extractor/keboola.ex-google-drive/my-google-drive-data-source/schedules/scheduler-for-7241051
++ C main/extractor/keboola.ex-google-drive/my-config
++ C main/extractor/keboola.ex-google-drive/my-config/schedules/scheduler-for-7241051
 + C main/other/keboola.orchestrator/daily
 + C main/other/keboola.orchestrator/daily/schedules/scheduler-for-7243915
 + C main/other/keboola.sandboxes/address
@@ -76,7 +72,7 @@ When you update your local directory, you can compare the changes with the proje
 + local state
 
 Diff:
-* C main/extractor/keboola.ex-google-drive/my-google-drive-data-source | changed: configuration
+* C main/extractor/keboola.ex-google-drive/my-config | changed: configuration
 ```
 
 Before pushing the changes to the project, you are able to preview them first:
@@ -84,7 +80,7 @@ Before pushing the changes to the project, you are able to preview them first:
 ```
 ➜ kbc push --dry-run
 Plan for "push" operation:
-  * C main/extractor/keboola.ex-google-drive/my-google-drive-data-source | changed: configuration
+  * C main/extractor/keboola.ex-google-drive/my-config | changed: configuration
 Dry run, nothing changed.
 Push done.
 ```
@@ -94,12 +90,15 @@ And finally, perform the actual changes to the project:
 ```
 ➜ kbc push
 Plan for "push" operation:
-  * C main/extractor/keboola.ex-google-drive/my-google-drive-data-source | changed: configuration
+  * C main/extractor/keboola.ex-google-drive/my-config | changed: configuration
 Push done.
 ```
 
 ## Create New Configurations
 
+The configuration can be created in two ways. You can create an empty configuration or copy an existing one.
+
+### Create Empty Configuration
 Let's say you want to download some data from Wikipedia. You can run [`kbc create`](/cli/commands/create-config/) 
 without options and be guided by an interactive dialog, or fill all the options:
 

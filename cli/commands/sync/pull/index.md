@@ -1,17 +1,24 @@
 ---
-title: Pull
-permalink: /cli/commands/pull/
+title: Pull Command
+permalink: /cli/commands/sync/pull/
 ---
 
 * TOC 
 {:toc}
 
+**Sync [project](/cli/#subsystems) to the [local directory](/cli/structure/).**
+
 ```
-kbc pull [flags]
+kbc sync pull [flags]
 ```
 
-Pull configurations from the project to the local directory. Local changes will be overwritten to match the state 
-of the project. 
+Or shorter:
+```
+kbc pull [flags]
+kbc pl [flags]
+```
+
+Local changes will be overwritten to match the state of the project. 
 
 If your local state is invalid, the command will fail unless you use the `--force` flag.
 
@@ -38,4 +45,7 @@ Pull done.
 
 ## Next Steps
 
-- [Push](/cli/commands/push/)
+- [All Commands](/cli/commands/)
+- [Init](/cli/commands/sync/init/)
+- [Push](/cli/commands/sync/push/)
+- [Diff](/cli/commands/sync/diff/)

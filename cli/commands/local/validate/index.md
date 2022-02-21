@@ -1,13 +1,21 @@
 ---
-title: Validate
-permalink: /cli/commands/validate/
+title: Validate Command
+permalink: /cli/commands/local/validate/
 ---
 
 * TOC
 {:toc}
 
+
+**Validate the [local directory](/cli/structure/).**
+
 ```
-kbc validate [flags]
+kbc local validate [flags]
+```
+
+Or shorter:
+```
+kbc v [flags]
 ```
 
 Validate the directory structure and file contents of the local directory. Configurations of components having JSON schema

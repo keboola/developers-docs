@@ -6,8 +6,14 @@ permalink: /cli/installation/
 * TOC
 {:toc}
 
-Precompiled binaries for all platforms can be downloaded from [cli-dist.keboola.com](https://cli-dist.keboola.com/?prefix=zip/).
-Otherwise, they can be installed from a platform-specific repository or built from the source.
+The recommended way to install Keboola CLI is with one of the package managers listed below.
+This allows you to easily upgrade to a new version.
+
+Alternatively, you can:
+- Download precompiled binaries from [cli-dist.keboola.com](https://cli-dist.keboola.com/?prefix=zip/). 
+- Or build binary from [source code](#build-from-source).
+
+Changelog can be found at [github.com/keboola/keboola-as-code/releases](https://github.com/keboola/keboola-as-code/releases).
 
 ## macOS
 
@@ -147,21 +153,27 @@ scoop update keboola/keboola-cli
 ### Download
 
 Use a [msi installer](https://cli-dist.keboola.com/?prefix=msi/) or a [precompiled binary](https://cli-dist.keboola.com/?prefix=zip/). 
-You can also install from the source.
 
-## Installing from Source
+## Build From Source
 
 1. Install the [Go environment](https://golang.org/doc/install) (if you haven't done so already).
-2. Clone the Git source (or if you don't yet have a version of Git installed,
-   [download and extract it](https://github.com/keboola/keboola-as-code/archive/refs/heads/main.zip)):
+2. Clone the source from GitHub:
+```
+git clone https://github.com/keboola/keboola-as-code
+cd keboola-as-code
+```
 
-        git clone https://github.com/keboola/keboola-as-code
+3. Run the build:  
+On Linux or macOS:
+```
+go build -o target/kbc ./cmd/kbc/main.go
+```
+On Windows:
+```
+go build -o target/kbc.exe ./cmd/kbc/main.go
+```
 
-3. Run the installation script:
-
-        make build-local
-
-4. The installation script will show you the location of the built binary (e.g., `target/kbc_darwin_amd64/kbc`). 
+4. Binary is located in `target/kbc` or `target/kbc.exe`.
 
 ## Next Steps
 

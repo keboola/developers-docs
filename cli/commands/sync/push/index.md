@@ -1,17 +1,24 @@
 ---
-title: Push
-permalink: /cli/commands/push/
+title: Push Command
+permalink: /cli/commands/sync/push/
 ---
 
 * TOC
 {:toc}
 
+**Sync [local directory](/cli/structure/) to the [project](/cli/#subsystems).**
+
 ```
-kbc push [flags]
+kbc sync push [flags]
 ```
 
-Push configurations from the local directory to the project in Keboola Connection. Its state will be overwritten 
-to match the local state.
+Or shorter:
+```
+kbc push [flags]
+kbc ph [flags]
+```
+
+The project state will be overwritten to match the local state.
 
 ## Options
 
@@ -42,4 +49,7 @@ Push done.
 
 ## Next Steps
 
-- [Status](/cli/commands/status/)
+- [All Commands](/cli/commands/)
+- [Init](/cli/commands/sync/init/)
+- [Pull](/cli/commands/sync/pull/)
+- [Diff](/cli/commands/sync/diff/)

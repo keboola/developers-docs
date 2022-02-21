@@ -6,63 +6,110 @@ permalink: /cli/commands/
 * TOC
 {:toc}
 
-[create branch](/cli/commands/create-branch/)
-: Create a branch
 
-[create config](/cli/commands/create-config/)
-: Create a configuration
+Run `help` to list all available commands.
+```
+kbc help
+```
 
-[create row](/cli/commands/create-row/)
-: Create a configuration row
+You can also get details of any command.
+```
+kbc help <command>
+kbc help local create row
+```
 
-[diff](/cli/commands/diff/)
-: Show differences between the local directory and the project
+## Available Commands
 
-[encrypt](/cli/commands/encrypt/)
-: Encrypt unencrypted values in your local directory
+|---
+| Command | Description
+|-|-|-
+| [kbc help](/cli/commands/help/) | Show help for any command. |
+| [kbc status](/cli/commands/status/) | Show information about working directory. |
+| | |
+| **[kbc sync](/cli/commands/sync/)** | **Synchronization between [local directory](/cli/structure/) and [project](/cli/#subsystems).** |
+| [kbc sync init](/cli/commands/sync/init/) | Initialize a new local directory and run `kbc sync pull`. |
+| [kbc sync pull](/cli/commands/sync/pull/) | Sync project to the local directory. |
+| [kbc sync push](/cli/commands/sync/push/) | Sync local directory to the project. |
+| [kbc sync diff](/cli/commands/sync/diff/) | Show differences between local directory and project. |
+| | |
+| **[kbc ci](/cli/commands/ci/)** | **Manage CI/CD pipeline.** |
+| [kbc ci workflows](/cli/commands/ci/workflows/) | Generate workflows for [GitHub Actions integration](/cli/github-integration/). |
+| | |
+| **[kbc local](/cli/commands/local/)** | **Operations in the [local directory](/cli/structure/), don't affect the project.** |
+| [kbc local create](/cli/commands/local/create/) | Create an object in the local directory. |
+| [kbc local create config](/cli/commands/local/create/config/) | Create an empty [configuration](https://help.keboola.com/components/). |
+| [kbc local create row](/cli/commands/local/create/row/) | Create an empty [configuration row](https://help.keboola.com/components/#configuration-rows). |
+| [kbc local persist](/cli/commands/local/persist/) | Detect new directories with [configuration](https://help.keboola.com/components/) or [configuration row](https://help.keboola.com/components/#configuration-rows). |
+| [kbc local encrypt](/cli/commands/local/encrypt/) | Encrypt all [unencrypted secrets](/overview/encryption/#encrypting-data-with-api). |
+| [kbc local validate](/cli/commands/local/validate/) | Validate the local directory. |
+| [kbc local fix-paths](/cli/commands/local/fix-paths/) | Ensure that all local paths match [configured naming](/cli/structure/#naming). |
+| | |
+| **[kbc remote](/cli/commands/remote/)** | **Operations directly in the [project](/cli/#subsystems).** |
+| [kbc remote create](/cli/commands/remote/create/) | Create an object in the project. |
+| [kbc remote create branch](/cli/commands/remote/create/branch/) | Create a new [branch](https://help.keboola.com/components/branches/) from the `main` branch. |
 
-[fix-paths](/cli/commands/fix-paths/)
-: Ensure that all local paths match configured naming
 
-[help](/cli/commands/help/)
-: Show help for any command
+## Aliases
 
-[init](/cli/commands/init/)
-: Initialize local directory of your project and run pull
+The most used commands have their shorter aliases.
 
-[persist](/cli/commands/persist/)
-: Propagate changes in the local directory to the manifest
+For example, you can use `kbc c` instead of `kbc local create`.
 
-[pull](/cli/commands/pull/)        
-: Pull configurations from the project to the local directory
-
-[push](/cli/commands/push/)
-: Push configurations from the local directory to the Keboola Connection project
-
-[status](/cli/commands/status/)
-: Show information about the local directory
-
-[validate](/cli/commands/validate/)
-: Validate the local directory
-
-[workflows](/cli/commands/workflows/)   
-: Generate GitHub Actions workflows
+|---
+| Full Command | Aliases
+|-|-|-
+| `kbc sync init`      |  `kbc init`, `kbc i`
+| `kbc sync diff`      |  `kbc diff`, `kbc d`
+| `kbc sync pull`      |  `kbc pull`, `kbc pl` 
+| `kbc sync push`      |  `kbc push`, `kbc ph`
+| `kbc local validate` |  `kbc validate`, `kbc v`
+| `kbc local persist`  |  `kbc persist`, `kbc pt`
+| `kbc local create`   |  `kbc create`, `kbc c`
+| `kbc local encrypt`  |  `kbc encrypt`, `kbc e`
 
 ## Options 
 
-Options can be passed to each command from environment variables. In that case, the starting `--` becomes `KBC_`,
-all letters are changed to uppercase and dashes to underscores, e.g., the option `--log-file` becomes `KBC_LOG_FILE`.
+Option is a way to modify the behavior of a command, it can be:
+- **[Global](#global-options)**, for all commands, see below.
+- **Local**, only for a specific command, see command help.
 
-You can also put the environment variables to [.env files](https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use).
+#### Command-line Flags
 
-Reading the options by commands takes this priority:
+- Entered as part of the CLI command.
+- One-letter flags start with `-`, for example `-v`.
+- Longer flags start with `--`, for example `--verbose`.
+- **Flags take precedence over environment variables.**
 
-1. Command-line flags
-2. Environment variables from the OS environment
-3. Environment variables from .env files in the working directory
-4. Environment variables from .env files in the project directory
 
-## Global Options
+#### Environment Variables
+
+- Each flag can be defined via environment variable.
+- Variable name is based on the flag name, and starts with `KBC_`.
+- All letters are changed to uppercase and dashes to underscores.
+- For example, flag `--log-file` can be defined by `KBC_LOG_FILE` environment variable.
+- Sources and priority of the environment variables:
+    1. From the OS environment.
+    2. From environment files in the working directory.
+    3. From environment files in the project directory.
+
+All found environment files are automatically loaded.  
+Variables are merged together according to the following priority.
+
+|---
+| Environment File | Environment | Priority
+|-|-|-
+| `.env.development.local`  | Development | The highest |  
+| `.env.test.local`         | Test |  |
+| `.env.production.local`   | Production |  |
+| `.env.local`              | Wherever the file is |  |
+| `.env.development`        | Development|  |
+| `.env.test`               | Test|  |
+| `.env.production`         | Production|  |
+| `.env`                    | All | The lowest  |
+
+**Note:** All `.*local` environment files should be part of the `.gitignore` file, if used.
+
+### Global Options
 
 `-h, --help`
 : Show help for the command
@@ -87,4 +134,8 @@ Reading the options by commands takes this priority:
 
 ## Next Steps
 
-- [Create Branch](/cli/commands/create-branch/)
+- [Installation](/cli/installation/)
+- [Getting Started](/cli/getting-started/)
+- [Directory Structure](/cli/structure/)
+- [GitHub Integration](/cli/github-integration/)
+

@@ -1,18 +1,29 @@
 ---
 title: Create Configuration Row
-permalink: /cli/commands/create-row/
+permalink: /cli/commands/local/create/row/
 ---
 
 * TOC
 {:toc}
 
+**Create an empty [configuration row](https://help.keboola.com/components/#configuration-rows).**
+
 ```
-kbc create row [flags]
+kbc local create row [flags]
 ```
 
-Create a new configuration row in your local directory and assign it a unique ID (i.e., the [persist](/cli/commands/persist/)
+Or shorter:
+```
+kbc create row [flags]
+kbc c row [flags]
+```
+
+Create a new configuration row in your [local directory](/cli/structure/) and assign it a unique ID (i.e., the [persist](/cli/commands/persist/)
 command is called automatically). To save it to the project, call [push](/cli/commands/push/) afterwards. You will
 be prompted for a name, a branch, and a component ID.
+
+Some components have a default content that will be used (if specified by the component author).
+For others, `config.json` will only contain an empty JSON document `{}`.
 
 *Tip: You can create a new configuration row by copying an existing one and running the [persist](/cli/commands/persist/) command.*
 

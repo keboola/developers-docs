@@ -304,33 +304,51 @@ items:
       - url: /cli/commands/
         title: Commands
         items:
-          - url: /cli/commands/create-branch/
-            title: create branch
-          - url: /cli/commands/create-config/
-            title: create config
-          - url: /cli/commands/create-row/
-            title: create row
-          - url: /cli/commands/diff/
-            title: diff
-          - url: /cli/commands/encrypt/
-            title: encrypt
-          - url: /cli/commands/fix-paths/
-            title: fix-paths
           - url: /cli/commands/help/
             title: help
-          - url: /cli/commands/init/
-            title: init
-          - url: /cli/commands/persist/
-            title: persist
-          - url: /cli/commands/pull/
-            title: pull
-          - url: /cli/commands/push/
-            title: push
           - url: /cli/commands/status/
             title: status
-          - url: /cli/commands/validate/
-            title: validate
-          - url: /cli/commands/workflows/
-            title: workflows
+          - url: /cli/commands/sync/
+            title: sync
+            items:
+              - url: /cli/commands/sync/init/
+                title: init
+              - url: /cli/commands/sync/pull/
+                title: pull
+              - url: /cli/commands/sync/push/
+                title: push
+              - url: /cli/commands/sync/diff/
+                title: diff
+          - url: /cli/commands/ci/
+            title: ci
+            items:
+              - url: /cli/commands/ci/workflows/
+                title: workflows
+          - url: /cli/commands/local/
+            title: local
+            items:
+              - url: /cli/commands/local/create/
+                title: create
+                items:
+                  - url: /cli/commands/local/create/config/
+                    title: config
+                  - url: /cli/commands/local/create/row/
+                    title: row
+              - url: /cli/commands/local/persist/
+                title: persist
+              - url: /cli/commands/local/encrypt/
+                title: encrypt
+              - url: /cli/commands/local/validate/
+                title: validate
+              - url: /cli/commands/local/fix-paths/
+                title: fix-paths
+          - url: /cli/commands/remote/
+            title: remote
+            items:
+              - url: /cli/commands/remote/create/
+                title: create
+                items:
+                  - url: /cli/commands/remote/create/branch/
+                    title: branch
       - url: /cli/github-integration/
         title: GitHub Integration

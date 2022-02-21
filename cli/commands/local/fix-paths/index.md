@@ -1,19 +1,20 @@
 ---
-title: Fix Paths
-permalink: /cli/commands/fix-paths/
+title: Fix Paths Command
+permalink: /cli/commands/local/fix-paths/
 ---
 
 * TOC
 {:toc}
 
+**Ensure that all local paths match [configured naming](/cli/structure/#naming).**
+
 ```
-kbc fix-paths [flags]
+kbc local fix-paths [flags]
 ```
 
-Ensure that all local paths match configured naming according to the manifest file (located in `.keboola/manifest.json).
-
-The command unifies names of configurations, rows, and code blocks in transformations in the manifest, `config.json` 
-and directory names. It is run automatically after [pull](/cli/commands/pull/). 
+The command unifies names of configurations, rows, and other directories according [configured naming](/cli/structure/#naming).
+For example, if the configuration name in `meta.json` changes, this command renames the directory by that name.
+It is run automatically after [pull](/cli/commands/pull/). 
 
 ## Options
 
