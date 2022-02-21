@@ -35,7 +35,7 @@ The project state will be overwritten to match the local state.
 
 ## Example
 
-When you [create a configuration](/cli/commands/create-config/) of the MySQL extractor, the command will look like this:
+When you [create a configuration](/cli/commands/local/create/config/) of the MySQL extractor, the command will look like this:
 
 ```
 ➜ kbc push --dry-run

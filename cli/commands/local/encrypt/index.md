@@ -78,4 +78,6 @@ And the configuration now looks like this:
 
 ## Next Steps
 
-- [Fix Paths](/cli/commands/fix-paths/)
+- [All Commands](/cli/commands/)
+- [Diff](/cli/commands/sync/diff/)
+- [Push](/cli/commands/sync/push/)

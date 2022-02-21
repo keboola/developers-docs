@@ -40,4 +40,7 @@ Created new branch "try1".
 
 ## Next Steps
 
-- [Create Config](/cli/commands/create-config/)
+- [All Commands](/cli/commands/)
+- [Create Configuration](/cli/commands/local/create/config/)
+- [Create Configuration Row](/cli/commands/local/create/row/)
+

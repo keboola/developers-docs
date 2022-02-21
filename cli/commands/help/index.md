@@ -25,4 +25,4 @@ kbc help local create config
 ## Next Steps
 
 - [All Commands](/cli/commands/)
-- [Init](/cli/commands/init/)
+- [Init](/cli/commands/sync/init/)

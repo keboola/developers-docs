@@ -34,4 +34,7 @@ Everything is good.
 
 ## Next Steps
 
-- [Workflows](/cli/commands/workflows/)
+- [All Commands](/cli/commands/)
+- [Diff](/cli/commands/sync/diff/)
+- [Push](/cli/commands/sync/push/)
+- [Fix Paths](/cli/commands/local/fix-paths/)

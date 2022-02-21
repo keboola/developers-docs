@@ -67,4 +67,5 @@ See: https://docs.github.com/en/actions/reference/encrypted-secrets
 
 ## Next Steps
 
+- [All Commands](/cli/commands/)
 - [GitHub Integration](/cli/github-integration/)

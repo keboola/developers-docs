@@ -99,7 +99,7 @@ Push done.
 The configuration can be created in two ways. You can create an empty configuration or copy an existing one.
 
 ### Create Empty Configuration
-Let's say you want to download some data from Wikipedia. You can run [`kbc create`](/cli/commands/create-config/) 
+Let's say you want to download some data from Wikipedia. You can run [`kbc create`](/cli/commands/local/create/config/) 
 without options and be guided by an interactive dialog, or fill all the options:
 
 ```

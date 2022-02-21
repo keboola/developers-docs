@@ -51,4 +51,4 @@ Directory "/home/kbc-test" is not a project or template repository.
 ## Next Steps
 
 - [All Commands](/cli/commands/)
-- [Validate](/cli/commands/validate/)
+- [Init](/cli/commands/sync/init/)

@@ -20,7 +20,7 @@ kbc p [flags]
 Propagate changes in the [local directory](/cli/structure/) to the manifest. When you manually create a configuration or a row (e.g., by 
 copy & paste of another existing configuration), the command will add its record to the [manifest](/cli/structure/#manifest) and generate a new ID. 
 When you delete a configuration/row directory, the command will remove its record from the [manifest](/cli/structure/#manifest). If you want 
-to propagate the changes to the project, call the [push](/cli/commands/push/) command afterwards.
+to propagate the changes to the project, call the [push](/cli/commands/sync/push/) command afterwards.
 
 ## Options
 
@@ -44,4 +44,7 @@ Persist done.
 
 ## Next Steps
 
-- [Pull](/cli/commands/pull/)
+- [All Commands](/cli/commands/)
+- [Diff](/cli/commands/sync/diff/)
+- [Push](/cli/commands/sync/push/)
+- [Fix Paths](/cli/commands/local/fix-paths/)

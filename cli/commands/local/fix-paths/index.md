@@ -14,7 +14,7 @@ kbc local fix-paths [flags]
 
 The command unifies names of configurations, rows, and other directories according [configured naming](/cli/structure/#naming).
 For example, if the configuration name in `meta.json` changes, this command renames the directory by that name.
-It is run automatically after [pull](/cli/commands/pull/). 
+It is run automatically after [pull](/cli/commands/sync/pull/). 
 
 ## Options
 
@@ -37,4 +37,5 @@ Fix paths done.
 
 ## Next Steps
 
-- [Help](/cli/commands/help/)
+- [All Commands](/cli/commands/)
+- [Persist](/cli/commands/local/persist)

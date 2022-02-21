@@ -18,14 +18,14 @@ kbc create row [flags]
 kbc c row [flags]
 ```
 
-Create a new configuration row in your [local directory](/cli/structure/) and assign it a unique ID (i.e., the [persist](/cli/commands/persist/)
-command is called automatically). To save it to the project, call [push](/cli/commands/push/) afterwards. You will
+Create a new configuration row in your [local directory](/cli/structure/) and assign it a unique ID (i.e., the [persist](/cli/commands/local/persist/)
+command is called automatically). To save it to the project, call [push](/cli/commands/local/push/) afterwards. You will
 be prompted for a name, a branch, and a component ID.
 
 Some components have a default content that will be used (if specified by the component author).
 For others, `config.json` will only contain an empty JSON document `{}`.
 
-*Tip: You can create a new configuration row by copying an existing one and running the [persist](/cli/commands/persist/) command.*
+*Tip: You can create a new configuration row by copying an existing one and running the [persist](/cli/commands/local/persist/) command.*
 
 ### Options
 
@@ -60,4 +60,6 @@ Created new config row "main/extractor/keboola.ex-db-mysql/invoices/rows/custome
 
 ## Next Steps
 
-- [Diff](/cli/commands/diff/)
+- [All Commands](/cli/commands/)
+- [Create Configuration](/cli/commands/local/create/config/)
+- [Create Branch](/cli/commands/remote/create/brabch/)
