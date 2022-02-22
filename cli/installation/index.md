@@ -99,7 +99,15 @@ Install:
 
 ```shell
 winget install Keboola.KeboolaCLI
+kbc --version
 ```
+
+Upgrade:
+
+```shell
+winget upgrade Keboola.KeboolaCLI
+```
+
 
 ### Chocolatey
 
@@ -109,6 +117,7 @@ Install:
 
 ```shell
 choco install keboola-cli
+kbc --version
 ```
 
 Upgrade:
@@ -126,6 +135,7 @@ Install:
 ```shell
 scoop bucket add keboola https://github.com/keboola/scoop-keboola-cli.git
 scoop install keboola/keboola-cli
+kbc --version
 ```
 
 Upgrade:
@@ -136,7 +146,7 @@ scoop update keboola/keboola-cli
 
 ### Download
 
-Use an [msi installer](https://cli-dist.keboola.com/?prefix=msi/) or a [precompiled binary](https://cli-dist.keboola.com/?prefix=zip/). 
+Use a [msi installer](https://cli-dist.keboola.com/?prefix=msi/) or a [precompiled binary](https://cli-dist.keboola.com/?prefix=zip/). 
 You can also install from the source.
 
 ## Installing from Source
