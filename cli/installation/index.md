@@ -91,6 +91,16 @@ apk add --upgrade keboola-cli
 
 ## Windows
 
+### WinGet
+
+If you don't have WinGet available on your system, [install it](https://winget.run/) before continuing.
+
+Install:
+
+```shell
+winget install Keboola.KeboolaCLI
+```
+
 ### Chocolatey
 
 If you don't have Chocolatey available on your system, [install it](https://chocolatey.org/install) before continuing.
