@@ -18,7 +18,7 @@ Or shorter:
 kbc v [flags]
 ```
 
-Validate the directory structure and file contents of the local directory. Configurations of components having JSON schema
+Validate the directory structure and file contents of the local directory. Configurations of components having a JSON schema
 will be validated against the schema.
 
 ## Options
