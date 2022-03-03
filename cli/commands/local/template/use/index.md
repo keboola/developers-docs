@@ -6,7 +6,7 @@ permalink: /cli/commands/local/template/use/
 * TOC
 {:toc}
 
-**Use [template](/cli/templates/structure/#template) in the [local directory](/cli/structure/).**
+**Use a [template](/cli/templates/structure/#template) in the [local directory](/cli/structure/).**
 
 ```
 kbc local template use <repository>/<template>/<version> [flags]
@@ -14,7 +14,7 @@ kbc local template use <repository>/<template>/<version> [flags]
 
 Applies the [template](/cli/templates/structure/#template) to the [project directory](/cli/structure/).
 Changes are made only locally. To save changes to the project, run [kbc sync push](/cli/commands/sync/push/) afterwards.
-You will be prompted for target branch and [user inputs](/cli/templates/structure/inputs/).
+You will be prompted for a target branch and [user inputs](/cli/templates/structure/inputs/).
 
 ### Options
 
