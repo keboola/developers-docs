@@ -15,21 +15,21 @@ All user inputs are defined in
 `src` / 
 `inputs.jsonnet`.
 
-User must fill in these inputs before the template is applied.
-In template [Jsonnet files](/cli/templates/structure/jsonnet-files/) are inputs referenced by the [Input function](/cli/templates/structure/jsonnet-files/#functions), 
+Users must fill in these inputs before the template is applied.
+In the template [Jsonnet files](/cli/templates/structure/jsonnet-files/), inputs are referenced by the [Input function](/cli/templates/structure/jsonnet-files/#functions). 
 
 ## Definition
 
 **Structure of the `inputs.jsonnet` file**:
 - `inputs` - array of inputs definitions
     - `id` string - input ID
-      - used in [Jsonnet](/cli/templates/structure/jsonnet-files) function `Input`, e.g. `Input("id")`
+      - used in [Jsonnet](/cli/templates/structure/jsonnet-files) function `Input`, e.g., `Input("id")`
     - `name` string - input name
     - `description` string - input description
     - `type` string - input data type
       - one of `string`, `int`, `double`, `bool`, `string[]`
-    - `kind` string - input visual style, see bellow
-    - `default` - default value, must match `type`
+    - `kind` string - input visual style, see bellow.
+    - `default` - default value, must match `type`.
     - `rules` string - comma separated validation rules, [read more](#rules) about syntax.
     - `showIf` string - condition when the input should be displayed, [read more](#show-if) about syntax.
     - `options` array of options, only for `kind = select/multiselect`
@@ -39,9 +39,9 @@ In template [Jsonnet files](/cli/templates/structure/jsonnet-files/) are inputs 
 **Allowed combinations of `type` and `kind`**:
 - Type `string`
   - Kind `input` - one line text
-  - Kind `hidden`  - one line text, characters are masked
+  - Kind `hidden`  - one line text, characters are masked.
   - Kind `textarea` - multi-line text
-  - Kind `select` - drop-down list, one option must be selected
+  - Kind `select` - drop-down list, one option must be selected.
 - Type `int`
   - Kind `input` - one line text
 - Type `double`
@@ -49,7 +49,7 @@ In template [Jsonnet files](/cli/templates/structure/jsonnet-files/) are inputs 
 - Type `bool`
   - Kind `confirm` - yes/no prompt 
 - Type `string[]`
-  - Kind `multiselect` - drop-down list, multiple options can be selected
+  - Kind `multiselect` - drop-down list, multiple options can be selected.
 
 
 **Example of `inputs.jsonnet`**:
@@ -73,17 +73,17 @@ In template [Jsonnet files](/cli/templates/structure/jsonnet-files/) are inputs 
 Each user input can have validation `rules`.
 - Rules are separated by `,`.
 - Rule parameters are separated by `=`.
-- E.g. rule `required,min=0` specifies that value cannot be empty and must be `0` or more.
-- Rules are interpreted by [go-playground/validator](https://pkg.go.dev/github.com/go-playground/validator) library.
-- See full [list of available rules](https://pkg.go.dev/github.com/go-playground/validator/v10#hdr-Required).
+- E.g.. the rule `required,min=0` specifies that value cannot be empty and must be `0` or more.
+- Rules are interpreted by the [go-playground/validator](https://pkg.go.dev/github.com/go-playground/validator) library.
+- See the full [list of available rules](https://pkg.go.dev/github.com/go-playground/validator/v10#hdr-Required).
 
 ### Show If
 
-Each user input can have `showIf` condition.
+Each user input can have the `showIf` condition.
 - It can be used to show/hide the input based on the previous values.
-- The value of a previous inputs is referenced by `[<input-id>]`
-- E.g. condition `[some-previous-input] == 'value'` specifies that the input will be displayed only if the previous input `some-previous-input` has the value `value`.
-- Condition is interpreted by [Knetic/govaluate](https://github.com/Knetic/govaluate) library.
+- The value of a previous input is referenced by `[<input-id>]`.
+- E.g., the condition `[some-previous-input] == 'value'` specifies that the input will be displayed only if the previous input `some-previous-input` has the value `value`.
+- Condition is interpreted by the [Knetic/govaluate](https://github.com/Knetic/govaluate) library.
 - See available [operators and types](https://github.com/Knetic/govaluate/blob/master/MANUAL.md#operators).
 
 ## Example Inputs
