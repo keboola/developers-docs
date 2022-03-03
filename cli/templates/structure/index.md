@@ -13,7 +13,7 @@ permalink: /cli/templates/structure/
 Templates repository is a directory stored in:
 - Local filesystem.
 - Git repository.
-  - Must be root directory, not subdirectory.
+  - Must be a root directory, not a subdirectory.
   - One git repository is one template repository.
 
 The repository contains a manifest and directories with templates.
@@ -78,16 +78,16 @@ Repository manifest structure:
 ### Git integration
 
 **Creating template**
-- Commands to manage repository works with local directories.
+- A command to manage a repository works with local directories.
 - You can push changes into a git repository in the standard way using the `git` command.
 
 **Using template**
-- Template can be used in a project directly from a git repository.
-- Repository must be defined in the [project manifest](/cli/structure/#manifest), in `templates.repositories` key.
+- A template can be used in a project directly from a git repository.
+- The repository must be defined in the [project manifest](/cli/structure/#manifest), in `templates.repositories` key.
 
 ## Template
 
-Template directory is stored in the [repository](#repository) and contains directories with template [versions](#versioning).
+A template directory is stored in the [repository](#repository) and contains directories with template [versions](#versioning).
 
 ```
 📂 [template]
@@ -99,7 +99,7 @@ Template directory is stored in the [repository](#repository) and contains direc
   ┃ ┗ 📂 [component-type]        
   ┃   ┗ 📂 [component-id]
   ┃     ┗ 📂 [config-name]       - structure is similar to the project structure,
-  ┃       ┣ 🟪 config.jsonnet      but instead of JSON files are JSONNET templates
+  ┃       ┣ 🟪 config.jsonnet      but instead of JSON files there are JSONNET templates
   ┃       ┣ 🟪 meta.jsonet    
   ┃       ┣ 🟩 description.md
   ┃       ... 
@@ -111,21 +111,21 @@ Template directory is stored in the [repository](#repository) and contains direc
 
 ### Versioning
 
-Template is identified by `<repository>/<template-id>/<version>`,  e.g. `keboola/my-template/1.2.3`.
+Template is identified by `<repository>/<template-id>/<version>`,  e.g., `keboola/my-template/1.2.3`.
 Each template version is stored in a separate directory, see [directory structure](#template).
 
 Templates use [semantic versioning](https://semver.org/):
 - Version format is `<major>.<minor>.<patch>`.
-- For example `v1.2.3`, prefix `v` is optional.
+- For example, `v1.2.3`, prefix `v` is optional.
 - Versions are defined in the [repository manifest](#manifest).
 - Multiple versions of the template may be available at the same time.
 - By default, the latest stable version is applied.
-- User doesn't have to enter the full version. For example:
+- Users don't have to enter the full version. For example:
   - `my-template/v1` references the latest available version `1.x.x`.
   - `my-template/v1.4` references the latest available version `1.4.x`.
 - Name of the version directory doesn't matter.
   - It is recommended to call the directory according to the `<major>` version.
-  - For example for version `3.2.1` the directory name should be `v3`.
+  - For example, for version `3.2.1` the directory name should be `v3`.
 
 #### New Version
 
@@ -137,10 +137,10 @@ For **small changes** in the template, it is recommended to update the existing 
 - User will NOT be able to rollback.
 
 For **larger changes** in the template, it is recommended to create a new `<major>` version.
-- Copy the directory with the latest version, e.g. `v3` -> `v4`.
-- Make changes and register the new version in the [repository manifest](#manifest), e.g. `4.0.0`.
-- User will be able to upgrade to the new version, e.g. `v3` -> `v4`.
-- User will be able to rollback, e.g. `v4` -> `v3`.
+- Copy the directory with the latest version, e.g., `v3` -> `v4`.
+- Make changes and register the new version in the [repository manifest](#manifest), e.g., `4.0.0`.
+- User will be able to upgrade to the new version, e.g., `v3` -> `v4`.
+- User will be able to rollback, e.g., `v4` -> `v3`.
 
 ### Manifest
 
