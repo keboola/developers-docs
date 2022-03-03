@@ -17,7 +17,7 @@ Or shorter:
 kbc e [flags]
 ```
 
-[Unencrypted secrets](/overview/encryption/#encrypting-data-with-api) are values of properties prefixed by `#` that were not encrypted 
+[Unencrypted secrets](/overview/encryption/#encrypting-data-with-api) are values of properties prefixed by `#` that have not been encrypted 
 yet. 
 
 For example `{"#someSecretProperty": "secret value"}`  
