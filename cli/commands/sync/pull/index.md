@@ -6,7 +6,7 @@ permalink: /cli/commands/sync/pull/
 * TOC 
 {:toc}
 
-**Sync [project](/cli/#subsystems) to the [local directory](/cli/structure/).**
+**Sync a [project](/cli/#subsystems) to the [local directory](/cli/structure/).**
 
 ```
 kbc sync pull [flags]
