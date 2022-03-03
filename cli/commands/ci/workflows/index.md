@@ -12,7 +12,7 @@ permalink: /cli/commands/ci/workflows/
 kbc ci workflows [flags]
 ```
 
-You will be prompted which workflows you want to generate:
+You will be prompted to choose which workflows you want to generate:
 - `validate` - validates all branches on change
 - `push` - pushes each change in the main branch to the project
 - `pull` - pulls the main branch from the project every five minutes
