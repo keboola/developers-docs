@@ -6,7 +6,7 @@ permalink: /cli/commands/sync/
 * TOC
 {:toc}
 
-**Synchronization between [local directory](/cli/structure/) and [project](/cli/#subsystems).**
+**Synchronization between a [local directory](/cli/structure/) and a [project](/cli/#subsystems).**
 
 ```
 kbc sync [command]
