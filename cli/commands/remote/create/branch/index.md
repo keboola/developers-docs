@@ -16,7 +16,7 @@ Create a new dev branch as a copy of the main branch in the project and pull its
 If you have some local changes of the main branch, push them to the project first. 
 
 **Limitation:**  
-Branch cannot be created locally, it must be created directly in the project, from the `main` branch.
+A branch cannot be created locally, it must be created directly in the project from the `main` branch.
 
 ### Options
 
