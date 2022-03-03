@@ -6,7 +6,7 @@ permalink: /cli/commands/local/persist/
 * TOC
 {:toc}
 
-**Detect new directories with [configuration](https://help.keboola.com/components/) or [configuration row](https://help.keboola.com/components/#configuration-rows) in the [local directory](/cli/structure/).**
+**Detect new directories with a [configuration](https://help.keboola.com/components/) or a [configuration row](https://help.keboola.com/components/#configuration-rows) in the [local directory](/cli/structure/).**
 
 ```
 kbc local persist [flags]
