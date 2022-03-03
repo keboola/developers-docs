@@ -24,22 +24,22 @@ kbc help local create row
 | Command | Description
 |-|-|-
 | [kbc help](/cli/commands/help/) | Show help for any command. |
-| [kbc status](/cli/commands/status/) | Show information about working directory. |
+| [kbc status](/cli/commands/status/) | Show information about a working directory. |
 | | |
-| **[kbc sync](/cli/commands/sync/)** | **Synchronization between [local directory](/cli/structure/) and [project](/cli/#subsystems).** |
+| **[kbc sync](/cli/commands/sync/)** | **Synchronization between a [local directory](/cli/structure/) and a [project](/cli/#subsystems).** |
 | [kbc sync init](/cli/commands/sync/init/) | Initialize a new local directory and run `kbc sync pull`. |
-| [kbc sync pull](/cli/commands/sync/pull/) | Sync project to the local directory. |
-| [kbc sync push](/cli/commands/sync/push/) | Sync local directory to the project. |
-| [kbc sync diff](/cli/commands/sync/diff/) | Show differences between local directory and project. |
+| [kbc sync pull](/cli/commands/sync/pull/) | Sync a project to the local directory. |
+| [kbc sync push](/cli/commands/sync/push/) | Sync a local directory to the project. |
+| [kbc sync diff](/cli/commands/sync/diff/) | Show differences between a local directory and a project. |
 | | |
-| **[kbc ci](/cli/commands/ci/)** | **Manage CI/CD pipeline.** |
+| **[kbc ci](/cli/commands/ci/)** | **Manage the CI/CD pipeline.** |
 | [kbc ci workflows](/cli/commands/ci/workflows/) | Generate workflows for [GitHub Actions integration](/cli/github-integration/). |
 | | |
-| **[kbc local](/cli/commands/local/)** | **Operations in the [local directory](/cli/structure/), don't affect the project.** |
+| **[kbc local](/cli/commands/local/)** | **Operations in the [local directory](/cli/structure/) don't affect the project.** |
 | [kbc local create](/cli/commands/local/create/) | Create an object in the local directory. |
 | [kbc local create config](/cli/commands/local/create/config/) | Create an empty [configuration](https://help.keboola.com/components/). |
 | [kbc local create row](/cli/commands/local/create/row/) | Create an empty [configuration row](https://help.keboola.com/components/#configuration-rows). |
-| [kbc local persist](/cli/commands/local/persist/) | Detect new directories with [configuration](https://help.keboola.com/components/) or [configuration row](https://help.keboola.com/components/#configuration-rows). |
+| [kbc local persist](/cli/commands/local/persist/) | Detect new directories with a [configuration](https://help.keboola.com/components/) or a [configuration row](https://help.keboola.com/components/#configuration-rows). |
 | [kbc local encrypt](/cli/commands/local/encrypt/) | Encrypt all [unencrypted secrets](/overview/encryption/#encrypting-data-with-api). |
 | [kbc local validate](/cli/commands/local/validate/) | Validate the local directory. |
 | [kbc local fix-paths](/cli/commands/local/fix-paths/) | Ensure that all local paths match [configured naming](/cli/structure/#naming). |
@@ -69,11 +69,11 @@ For example, you can use `kbc c` instead of `kbc local create`.
 
 ## Options 
 
-Option is a way to modify the behavior of a command, it can be:
+Options are a way to modify the behavior of a command, they can be:
 - **[Global](#global-options)**, for all commands, see below.
-- **Local**, only for a specific command, see command help.
+- **Local**, only for a specific command, see the command help.
 
-#### Command-line Flags
+#### Command-line flags
 
 - Entered as part of the CLI command.
 - One-letter flags start with `-`, for example `-v`.
@@ -81,12 +81,12 @@ Option is a way to modify the behavior of a command, it can be:
 - **Flags take precedence over environment variables.**
 
 
-#### Environment Variables
+#### Environment variables
 
-- Each flag can be defined via environment variable.
+- Each flag can be defined via an environment variable.
 - Variable name is based on the flag name, and starts with `KBC_`.
 - All letters are changed to uppercase and dashes to underscores.
-- For example, flag `--log-file` can be defined by `KBC_LOG_FILE` environment variable.
+- For example, flag `--log-file` can be defined by the `KBC_LOG_FILE` environment variable.
 - Sources and priority of the environment variables:
     1. From the OS environment.
     2. From environment files in the working directory.
