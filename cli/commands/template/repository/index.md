@@ -6,7 +6,7 @@ permalink: /cli/commands/template/repository/
 * TOC
 {:toc}
 
-**Manage [template repository](/cli/templates/structure/#repository).**
+**Manage a [template repository](/cli/templates/structure/#repository).**
 
 ```
 kbc template repository [command]
