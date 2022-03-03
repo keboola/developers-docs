@@ -12,11 +12,11 @@ permalink: /cli/commands/template/create/
 kbc template create [flags]
 ```
 
-An interactive dialog will start, which will guide you through the process of creating a new template.
+An interactive dialog will start. It will guide you through the process of creating a new template.
 See [Create Template Tutorial](/cli/templates/tutorial).
 
 
-Command must be run in the [repository directory](/cli/templates/structure#repository).
+The command must be run in the [repository directory](/cli/templates/structure#repository).
 
 ## Options
 
