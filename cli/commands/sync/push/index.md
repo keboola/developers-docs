@@ -6,7 +6,7 @@ permalink: /cli/commands/sync/push/
 * TOC
 {:toc}
 
-**Sync [local directory](/cli/structure/) to the [project](/cli/#subsystems).**
+**Sync a [local directory](/cli/structure/) to the [project](/cli/#subsystems).**
 
 ```
 kbc sync push [flags]
