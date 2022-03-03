@@ -476,7 +476,7 @@ Repository directory must be root directory of the git repository.
 
 Then edit [.keboola/manifest.json](/cli/structure/#manifest) file in the project directory in which you want to use the template.
 Add repository definition to `templates.repositories` key.
-Key `url` is URL of the public git repository. Key `ref` is `branch` or `tag` used internal by `git checkout`.
+Key `url` is URL of the public git repository. Key `ref` is `branch` or `tag` used internally by `git checkout`.
 
 Example `.keboola/manifest.json`:
 ```
