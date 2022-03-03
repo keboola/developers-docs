@@ -342,6 +342,11 @@ items:
                 title: validate
               - url: /cli/commands/local/fix-paths/
                 title: fix-paths
+              - url: /cli/commands/local/template/
+                title: template
+                items:
+                  - url: /cli/commands/local/template/use/
+                    title: use
           - url: /cli/commands/remote/
             title: remote
             items:
@@ -350,5 +355,27 @@ items:
                 items:
                   - url: /cli/commands/remote/create/branch/
                     title: branch
+          - url: /cli/commands/template/
+            title: template
+            items:
+              - url: /cli/commands/template/repository/
+                title: repository
+                items:
+                  - url: /cli/commands/template/repository/init/
+                    title: init
+              - url: /cli/commands/template/create/
+                title: create
       - url: /cli/github-integration/
         title: GitHub Integration
+      - url: /cli/templates/
+        title: Templates
+        items:
+          - url: /cli/templates/tutorial/
+            title: Create Template Tutorial
+          - url: /cli/templates/structure/
+            title: Structure
+            items:
+              - url: /cli/templates/structure/jsonnet-files/
+                title: Jsonnet Files
+              - url: /cli/templates/structure/inputs/
+                title: Inputs

@@ -1,5 +1,5 @@
 ---
-title: Directory Structure
+title: Project Directory Structure
 permalink: /cli/structure/
 ---
 
@@ -31,7 +31,7 @@ A more detailed description can be found in the chapters below.
 🟫 .env.local                   - contains Storage API token
 🟫 .env.dist                    - template for .env.local
 📂 .keboola                     - project metadata directory
-┗ 🟦 manifest.json              - object IDs, naming and other configuration
+┗ 🟦 manifest.json              - object IDs, paths, naming and other configuration
 📂 [branch-name]                - branch directory, e.g. main
 ┣ 🟦 meta.json
 ┣ 🟩 description.md
