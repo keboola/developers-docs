@@ -6,7 +6,7 @@ permalink: /cli/commands/sync/diff/
 * TOC
 {:toc}
 
-**Show differences between [local directory](/cli/structure/) and [project](/cli/#subsystems).**
+**Show differences between a [local directory](/cli/structure/) and a [project](/cli/#subsystems).**
 
 ```
 kbc sync diff [flags]
