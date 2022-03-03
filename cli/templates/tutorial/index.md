@@ -166,7 +166,7 @@ When you have finished editing, save the file and close the editor.
 
 ### Select User Inputs
 
-Potential [user input](/cli/templates/structure/inputs/) are detected in the `parameters` fields, in all configurations and configuration rows.
+Potential [user inputs](/cli/templates/structure/inputs/) are detected in the `parameters` fields, in all configurations and configuration rows.
 
 ```
 Please select which fields in the configurations should be user inputs.
