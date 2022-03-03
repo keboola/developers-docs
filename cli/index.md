@@ -14,12 +14,12 @@ The whole Keboola project is represented by a local [directory structure](/cli/s
 
 ## Use Cases
 
-Keboola CLI can be used for example to:
-- Pull your entire project to a local directory in seconds. See [init](/cli/commands/sync/init/) and [pull](/cli/commands/sync/pull/) commands.
+Keboola CLI can be used, for example, to:
+- Pull your entire project to a local directory in seconds. See the [init](/cli/commands/sync/init/) and [pull](/cli/commands/sync/pull/) commands.
 - Bulk edit [component configurations](https://help.keboola.com/components) in your IDE.
-- Compare the local version with the current project state. See [diff](/cli/commands/sync/diff/) command.
-- Copy [configuration](https://help.keboola.com/components) as a directory in the project and between projects. See [persist](/cli/commands/local/persist/) command.
-- Apply all changes back to the project in a moment. See [push](/cli/commands/sync/push/) command.
+- Compare the local version with the current project state. See the [diff](/cli/commands/sync/diff/) command.
+- Copy a [configuration](https://help.keboola.com/components) as a directory in the project and between projects. See the [persist](/cli/commands/local/persist/) command.
+- Apply all changes back to the project in a moment. See the [push](/cli/commands/sync/push/) command.
 - Manage project history in a git repository.
 - Automate the whole process in a CI/CD pipeline. See [GitHub Integration](/cli/github-integration/).
 
@@ -35,11 +35,11 @@ Brief overview of supported subsystems of the project.
 
 ### Development Branches
 
-- [Branch](https://help.keboola.com/components/branches/)  can be [pulled](/cli/commands/sync/pull/) and then edited or deleted locally. 
+- A [branch](https://help.keboola.com/components/branches/)  can be [pulled](/cli/commands/sync/pull/) and then edited or deleted locally. 
 - Changes can be [pushed](/cli/commands/sync/push/) back to the project.
-- There is one limitation, **branch cannot be created locally**. 
-  - Branch must be created directly in the project, from the `main` branch.
-  - See [Create Branch](/cli/commands/remote/create/branch/) command.
+- There is one limitation, **a branch cannot be created locally**. 
+  - A branch must be created directly in the project, from the `main` branch.
+  - See the [Create Branch](/cli/commands/remote/create/branch/) command.
 
 ### Storage
 
