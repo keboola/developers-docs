@@ -6,7 +6,7 @@ permalink: /cli/commands/ci/
 * TOC
 {:toc}
 
-Commands to manage CI/CD pipeline.
+Commands to manage the CI/CD pipeline.
 
 ```
 kbc ci [command]
