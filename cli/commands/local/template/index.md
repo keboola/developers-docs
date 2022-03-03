@@ -15,4 +15,4 @@ kbc local template [command]
 |---
 | Command | Description
 |-|-|-
-| [kbc local template use](/cli/commands/local/template/use/) | Use template in the project directory. |
+| [kbc local template use](/cli/commands/local/template/use/) | Use the template in the project directory. |
