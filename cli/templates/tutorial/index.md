@@ -177,7 +177,7 @@ Follow the instructions in the definition file:
 1. **Mark which fields should be user inputs.**
     - Encrypted values are automatically pre-marked.
     - User inputs are marked with `[x]`.
-    - Ignore fields are marked with`[ ]`.
+    - Ignored fields are marked with`[ ]`.
 2. **Modify `<input-id>` if the pre-generated value is not sufficient.**
 
 Example definition file that opens in the editor:
