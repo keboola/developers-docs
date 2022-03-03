@@ -1,16 +1,22 @@
 ---
-title: Diff
-permalink: /cli/commands/diff/
+title: Diff Command
+permalink: /cli/commands/sync/diff/
 ---
 
 * TOC
 {:toc}
 
+**Show differences between a [local directory](/cli/structure/) and a [project](/cli/#subsystems).**
+
 ```
-kbc diff [flags]
+kbc sync diff [flags]
 ```
 
-Show differences between the local and remote states of the project.
+Or shorter:
+```
+kbc diff [flags]
+kbc d [flags]
+```
 
 ## Options
 
@@ -58,4 +64,7 @@ Diff:
 
 ## Next Steps
 
-- [Encrypt](/cli/commands/encrypt/)
+- [All Commands](/cli/commands/)
+- [Init](/cli/commands/sync/init/)
+- [Pull](/cli/commands/sync/pull/)
+- [Push](/cli/commands/sync/push/)

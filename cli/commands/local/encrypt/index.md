@@ -1,18 +1,27 @@
 ---
-title: Encrypt
-permalink: /cli/commands/encrypt/
+title: Encrypt Command
+permalink: /cli/commands/local/encrypt/
 ---
 
 * TOC
 {:toc}
 
+Encrypt all [unencrypted secrets](/overview/encryption/#encrypting-data-with-api) in the [local directory](/cli/structure/).
+
 ```
-kbc encrypt [flags]
+kbc local encrypt [flags]
 ```
 
-Encrypt unencrypted values in your local directory (i.e., the values of properties prefixed by `#` that were not encrypted 
-yet.) For example, `{"#someSecretProperty": "secret value"}` will be transformed into 
-`{"#someSecretProperty": "KBC::ProjectSecure::<encryptedcontent>"}`.
+Or shorter:
+```
+kbc e [flags]
+```
+
+[Unencrypted secrets](/overview/encryption/#encrypting-data-with-api) are values of properties prefixed by `#` that have not been encrypted 
+yet. 
+
+For example `{"#someSecretProperty": "secret value"}`  
+will be transformed into `{"#someSecretProperty": "KBC::ProjectSecure::<encryptedcontent>"}`.
 
 ## Options
 
@@ -69,4 +78,6 @@ And the configuration now looks like this:
 
 ## Next Steps
 
-- [Fix Paths](/cli/commands/fix-paths/)
+- [All Commands](/cli/commands/)
+- [Diff](/cli/commands/sync/diff/)
+- [Push](/cli/commands/sync/push/)

@@ -6,60 +6,85 @@ permalink: /cli/structure/
 * TOC
 {:toc}
 
-Initial configuration of your local directory can be done using the [init command](/cli/commands/init/). It initiates 
+Initial configuration of your local directory can be done using the [init command](/cli/commands/sync/init/). It initiates 
 the directory and pulls configurations from the project.
 
-The Storage token to your project is stored in the file `.env.local` under `KBC_STORAGE_API_TOKEN` directive. Currently, 
-it is necessary to use [Master tokens](https://help.keboola.com/management/project/tokens/#master-tokens).
+The **Storage API token** to your project is stored in the file `.env.local` under `KBC_STORAGE_API_TOKEN` directive. 
+Currently, it is necessary to use [Master tokens](https://help.keboola.com/management/project/tokens/#master-tokens).
+Your token must be secret, so the file `.env.local` is included in the `.gitignore` file.
+
+[Manifest - Naming](#naming) defines directories names.
+It is usually not necessary to change this setting. 
+It is guaranteed that each object (branch, config, row) will have its own unique directory, 
+even if the objects have the same name.
+
+
+The following is an example of a default project directory structure. 
+Some files and directories are specific to component type. 
+For example, transformations are represented by native files.
+A more detailed description can be found in the chapters below.
+
+<br>
 
 ```
-├─ .gitignore
-├─ .env.local                        - contains API token
-├─ .env.dist                         - template for .env.local
-├─ .keboola                          - metadata
-   └─ manifest.json
-└─ [branch-name]                     - e.g. test
-   ├─ description.md
-   ├─ meta.json                 
-   └─ [component-type]               - e.g. extractor
-      └─ [component-id]              - e.g. keboola.ex-db-oracle
-         └─ [config-name]            - e.g. oauth-test
-            ├─ config.json           
-            ├─ description.md
-            ├─ meta.json        
-            └─ rows
-               └─ [row-name]         - e.g. prod-fact-table
-                  ├─ config.json     
-                  ├─ description.md
-                  └─ meta.json
-            └─ schedules
-               └─ [schedule-name]
-                  ├─ config.json     
-                  ├─ description.md
-                  └─ meta.json
-            └─ variables
-               └─ values
-                  └─ default
-                     ├─ config.json     - variables default values
-                     ├─ description.md       
-                     └─ meta.json
-               ├─ config.json           - variables configuration
-               ├─ description.md
-               └─ meta.json
-   └─ _shared
-      └─ [component-id]
-         └─ codes
-            └─ [code-name]
-               ├─ code.[ext]            - e.g. code.sql
-               ├─ config.json
-               ├─ description.md
-               └─ meta.json
+🟫 .gitignore                   - excludes ".env.local" from git repository
+🟫 .env.local                   - contains Storage API token
+🟫 .env.dist                    - template for .env.local
+📂 .keboola                     - project metadata directory
+┗ 🟦 manifest.json              - object IDs, naming and other configuration
+📂 [branch-name]                - branch directory, e.g. main
+┣ 🟦 meta.json
+┣ 🟩 description.md
+┣ 📂 _shared                    - shared codes directory
+┃ ┗ 📂 [target-component]       - target, e.g., keboola.python-transfomation
+┃   ┗ 📂 codes      
+┃     ┗ 📂[code-name]           - shared code directory
+┃       ┣ 🟫 code.[ext]         - native file, e.g., ".sql" or ".py"
+┃       ┣ 🟦 config.json    
+┃       ┣ 🟦 meta.json   
+┃       ┗ 🟩 description.md
+┗ 📂 [component-type]           - e.g., extractor
+  ┗ 📂 [component-id]           - e.g., keboola.ex-db-oracle
+    ┗ 📂 [config-name]          - configuration directory, e.g., raw-data
+      ┣ 🟦 config.json           
+      ┣ 🟦 meta.json    
+      ┣ 🟩 description.md    
+      ┣ 📂 rows                 - only if the configuration has some rows
+      ┃ ┗ 📂 [row-name]         - configuration row directory, e.g., prod-fact-table
+      ┃   ┣ 🟦 config.json     
+      ┃   ┣ 🟦 meta.json
+      ┃   ┗ 🟩 description.md
+      ┣ 📂 blocks               - only if the configuration is a transformation
+      ┃ ┗ 📂 001-block-1        - block directory
+      ┃   ┣ 🟦 meta.json   
+      ┃   ┗ 📂 001-code-1       - code directory
+      ┃     ┣ 🟫 code.[ext]     - native file, e.g., ".sql" or ".py"
+      ┃     ┗ 🟦 meta.json   
+      ┣ 📂 phases               - only if the configuration is an orchestration
+      ┃ ┗ 📂 001-phase          - phase directory
+      ┃   ┣ 🟦 phase.json   
+      ┃   ┗ 📂 001-task         - task directory
+      ┃     ┗ 🟦 task.json   
+      ┣ 📂 schedules            - only if the configuration has some schedules
+      ┃ ┗ 📂 [schedule-name]    - schedule directory
+      ┃   ┣ 🟦 config.json     
+      ┃   ┣ 🟦 meta.json
+      ┃   ┗ 🟩 description.md
+      ┗ 📂 variables            - only if the configuration has defined some variables
+        ┣ 🟦 config.json        - variables definition, name and type
+        ┣ 🟦 meta.json
+        ┣ 🟩 description.md
+        ┗ 📂 values             - multiple sets of values can be defined
+          ┗ 📂 default          - default values directory
+            ┣ 🟦 config.json    - default values     
+            ┣ 🟦 meta.json
+            ┗ 🟩 description.md  
 ```
 
 ## Branches
 
 The tool works with [dev branches](/components/branches/) by default. You can choose the branches from the project 
-you want to work with locally in the [init](/cli/commands/init/) command. You can ignore the dev branches concept and work with 
+you want to work with locally in the [init](/cli/commands/sync/init/) command. You can ignore the dev branches concept and work with 
 the main branch only, of course. But note that all its configurations will be stored in the directory `main`.
 
 The directory of the main branch is called simply `main` and does not contain the branch ID. This way it is easily 
@@ -108,7 +133,7 @@ Example of `meta.json`:
 
 Configuration directories can be copied freely inside the project and between other projects. Their IDs are stored 
 in the [manifest](/cli/structure/#manifest). So after the copy & paste, make sure to run 
-the [persist command](/cli/commands/persist/), which generates a new ID for the configuration and saves it in the manifest.
+the [persist command](/cli/commands/local/persist/), which generates a new ID for the configuration and saves it in the manifest.
 
 ## Configuration Rows
 
@@ -150,7 +175,7 @@ Let's say you have these two variables in your transformation:
 {: .image-popup}
 ![Screenshot -- Variables in the UI](/cli/structure/variables-ui.jpg)
 
-When you [pull](/cli/commands/pull/) them to the local directory, it will look like this:
+When you [pull](/cli/commands/sync/pull/) them to the local directory, it will look like this:
 
 {: .image-popup}
 ![Screenshot -- Configuration directory with the variables](/cli/structure/variables-directory.jpg)
@@ -277,7 +302,7 @@ this file manually.
 
 This is its basic structure:
 
-- `version` - current supported version is `2`
+- `version` - current major version, now `2`
 - `project` - information about the project
   - `id` - ID of the project
   - `apiHost` - URL of the Keboola Connection instance (e.g., `connection.keboola.com`)
@@ -285,6 +310,19 @@ This is its basic structure:
 - `naming` - rules for directory names, [see the details](/cli/structure/#naming)
 - `allowedBranches` - array of branches to work with
 - `ignoredComponents` - array of components to not work with
+- `templates`
+  - `repositories` (*array*):
+    - local repository:
+      - `type` = `dir`
+      - `name` - repository name
+      - `path` - absolute or relative path to a local directory
+        - relative path must be relative to the project directory
+    - git repository:
+      - `type` = `git`
+      - `name` - repository name
+      - `url` - URL of the git repository
+        - e.g. `https://github.com/keboola/keboola-as-code-templates.git`
+      - `ref` - git `branch` or `tag`, e.g. `main` or `v1.2.3`
 - `branches` - array of used branches
   - `id` - ID of the branch
   - `path` - name of the directory containing the branch configuration (e.g., `main`)
@@ -315,7 +353,7 @@ the [manifest](/cli/structure/#manifest) under the `naming` section. These are t
   }
 ```
 
-In case you let the object IDs be included in directory names (see [init](/cli/commands/init/) command for more details):
+If you want to include object IDs in directory names, use these values:
 
 ```json
 {
@@ -331,7 +369,7 @@ In case you let the object IDs be included in directory names (see [init](/cli/c
 ```
 
 You can change them according to your wishes and let the project directory be rebuilt using the
-[fix-paths](/cli/commands/fix-paths) command.
+[fix-paths](/cli/commands/local/fix-paths/) command.
 
 ## Next Steps
 
