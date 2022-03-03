@@ -12,7 +12,7 @@ permalink: /cli/commands/local/fix-paths/
 kbc local fix-paths [flags]
 ```
 
-The command unifies names of configurations, rows, and other directories according [configured naming](/cli/structure/#naming).
+The command unifies names of configurations, rows, and other directories based on [configured naming](/cli/structure/#naming).
 For example, if the configuration name in `meta.json` changes, this command renames the directory by that name.
 It is run automatically after [pull](/cli/commands/sync/pull/). 
 
