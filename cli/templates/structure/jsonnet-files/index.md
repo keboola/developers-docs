@@ -8,9 +8,9 @@ permalink: /cli/templates/structure/jsonnet-files/
 
 **Warning: "templates" is an experimental feature.**
 
-All project [JSON files](/cli/structure/) are in template defined by [Jsonnet](https://jsonnet.org/) files.
+All project [JSON files](/cli/structure/) are in a template defined by [Jsonnet](https://jsonnet.org/) files.
 Jsonnet is based on JSON syntax. Valid JSON is also valid Jsonnet.
-In addition, Jsonnet offers more language constructs such as [conditions, cycles, variables, ...](https://jsonnet.org/learning/tutorial.html)
+In addition, Jsonnet offers more language constructs such as [conditions, cycles, variables, ...](https://jsonnet.org/learning/tutorial.html).
 
 
 ## Functions
@@ -19,13 +19,13 @@ In addition to the [standard Jsonnet functions](https://jsonnet.org/ref/stdlib.h
 
 **`ConfigId("<config-id>")`**
 
-- **Replaces configuration human-readable ID by a generated unique ID.**
-- In template, each configuration has a human-readable name, e.g. `my-config`.
-- When applying template, human-readable ID is replaced by a generated unique ID, e.g. `5038695485`.
-- As a result, it is possible to create multiple instances of template.
-- `ConfigId` function is primarily used in [template manifest](/cli/templates/structure/#manifest-1), but it can be used in any Jsonnet file.
+- **Replaces a configuration human-readable ID by a generated unique ID.**
+- In a template, each configuration has a human-readable name, e.g., `my-config`.
+- When applying a template, a human-readable ID is replaced by a generated unique ID, e.g., `5038695485`.
+- As a result, it is possible to create multiple instances of a template.
+- `ConfigId` function is primarily used in the [template manifest](/cli/templates/structure/#manifest-1), but it can be used in any Jsonnet file.
 
-For example, a bucket ID that contains configuration ID can be composed in this way:
+For example, a bucket ID that contains a configuration ID can be composed in this way:
 ```jsonnet
 {
  storage: {
@@ -40,15 +40,15 @@ For example, a bucket ID that contains configuration ID can be composed in this 
 
 **`ConfigRowId("<row-id>")`**
 
-- **Replaces configuration row human-readable ID by a generated unique ID.**
+- **Replaces a configuration row human-readable ID by a generated unique ID.**
 - Similar to `ConfigId`, but for configuration rows.
 
 **`Input("<input-id>")`**
 
-- **Returns value of the [user input](/cli/templates/structure/inputs/).**
+- **Returns the value of the [user input](/cli/templates/structure/inputs/).**
 - If the input is hidden, because the [showIf](/cli/templates/structure/inputs/#show-if) condition was evaluated as `false`:
-  - Function returns default value of the input, if it is defined. 
-  - Otherwise, it returns empty value, e.g. `0` for `int` type, `false` for `bool` type, ...
+  - Function returns the default value of the input, if it is defined. 
+  - Otherwise, it returns an empty value, e.g., `0` for `int` type, `false` for `bool` type, ...
 
 Example:
 ```jsonnet
