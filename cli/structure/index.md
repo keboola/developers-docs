@@ -11,7 +11,7 @@ the directory and pulls configurations from the project.
 
 The **Storage API token** to your project is stored in the file `.env.local` under `KBC_STORAGE_API_TOKEN` directive. 
 Currently, it is necessary to use [Master tokens](https://help.keboola.com/management/project/tokens/#master-tokens).
-Your token must be secret, so file `.env.local` is included in `.gitignore` file.
+Your token must be secret, so the file `.env.local` is included in the `.gitignore` file.
 
 [Manifest - Naming](#naming) defines directories names.
 It is usually not necessary to change this setting. 
@@ -36,41 +36,41 @@ A more detailed description can be found in the chapters below.
 ┣ 🟦 meta.json
 ┣ 🟩 description.md
 ┣ 📂 _shared                    - shared codes directory
-┃ ┗ 📂 [target-component]       - target, e.g. keboola.python-transfomation
+┃ ┗ 📂 [target-component]       - target, e.g., keboola.python-transfomation
 ┃   ┗ 📂 codes      
 ┃     ┗ 📂[code-name]           - shared code directory
-┃       ┣ 🟫 code.[ext]         - native file, e.g. ".sql" or ".py"
+┃       ┣ 🟫 code.[ext]         - native file, e.g., ".sql" or ".py"
 ┃       ┣ 🟦 config.json    
 ┃       ┣ 🟦 meta.json   
 ┃       ┗ 🟩 description.md
-┗ 📂 [component-type]           - e.g. extractor
-  ┗ 📂 [component-id]           - e.g. keboola.ex-db-oracle
-    ┗ 📂 [config-name]          - configuration directory, e.g. raw-data
+┗ 📂 [component-type]           - e.g., extractor
+  ┗ 📂 [component-id]           - e.g., keboola.ex-db-oracle
+    ┗ 📂 [config-name]          - configuration directory, e.g., raw-data
       ┣ 🟦 config.json           
       ┣ 🟦 meta.json    
       ┣ 🟩 description.md    
-      ┣ 📂 rows                 - only if configuration has some rows
-      ┃ ┗ 📂 [row-name]         - configuration row directory, e.g. prod-fact-table
+      ┣ 📂 rows                 - only if the configuration has some rows
+      ┃ ┗ 📂 [row-name]         - configuration row directory, e.g., prod-fact-table
       ┃   ┣ 🟦 config.json     
       ┃   ┣ 🟦 meta.json
       ┃   ┗ 🟩 description.md
-      ┣ 📂 blocks               - only if configuration is a transformation
+      ┣ 📂 blocks               - only if the configuration is a transformation
       ┃ ┗ 📂 001-block-1        - block directory
       ┃   ┣ 🟦 meta.json   
       ┃   ┗ 📂 001-code-1       - code directory
-      ┃     ┣ 🟫 code.[ext]     - native file, e.g. ".sql" or ".py"
+      ┃     ┣ 🟫 code.[ext]     - native file, e.g., ".sql" or ".py"
       ┃     ┗ 🟦 meta.json   
-      ┣ 📂 phases               - only if configuration is an orchestration
+      ┣ 📂 phases               - only if the configuration is an orchestration
       ┃ ┗ 📂 001-phase          - phase directory
       ┃   ┣ 🟦 phase.json   
       ┃   ┗ 📂 001-task         - task directory
       ┃     ┗ 🟦 task.json   
-      ┣ 📂 schedules            - only if configuration has some schedules
+      ┣ 📂 schedules            - only if the configuration has some schedules
       ┃ ┗ 📂 [schedule-name]    - schedule directory
       ┃   ┣ 🟦 config.json     
       ┃   ┣ 🟦 meta.json
       ┃   ┗ 🟩 description.md
-      ┗ 📂 variables            - only if configuration has defined some variables
+      ┗ 📂 variables            - only if the configuration has defined some variables
         ┣ 🟦 config.json        - variables definition, name and type
         ┣ 🟦 meta.json
         ┣ 🟩 description.md
@@ -353,7 +353,7 @@ the [manifest](/cli/structure/#manifest) under the `naming` section. These are t
   }
 ```
 
-If you want to include object IDs in directory names use these values:
+If you want to include object IDs in directory names, use these values:
 
 ```json
 {
