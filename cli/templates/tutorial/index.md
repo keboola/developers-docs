@@ -528,7 +528,7 @@ Select target branch where the template should be applied:
 > Main (251721)
 ```
 
-Fills in all [user inputs](/cli/templates/structure/inputs/).
+Fill in all [user inputs](/cli/templates/structure/inputs/).
 ```
 ? MySQL Host: my-mysql.com
 
