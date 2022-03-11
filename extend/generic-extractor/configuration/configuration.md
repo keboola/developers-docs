@@ -28,7 +28,7 @@ nesting. The **configuration map** is also available as a [separate article](/ex
         configured for any API which is not public.
         - [**retryConfig**](/extend/generic-extractor/configuration/api/#retry-configuration) --- automatically,
         and repeatedly, retries failed HTTP requests.
-        - [**http**](/extend/generic-extractor/configuration/api/#default-http-options) --- sets the default
+        - [**http**](/extend/generic-extractor/configuration/api/#default-http-options) --- sets the timeouts, default
         headers and parameters sent with each API call.
     - **aws**
       - [**signature**](/extend/generic-extractor/configuration/aws-signature) --- defines AWS credentials for signature request

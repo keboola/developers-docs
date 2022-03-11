@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', function() {
     $("span:contains('\"defaultOptions\"')").wrap("<a href='/extend/generic-extractor/configuration/api/#default-request-parameters'></a>");
     $("span:contains('\"requiredHeaders\"')").wrap("<a href='/extend/generic-extractor/configuration/api/#required-headers'></a>");
     $("span:contains('\"ignoreErrors\"')").wrap("<a href='/extend/generic-extractor/configuration/api/#ignore-errors'></a>");
+    $("span:contains('\"connectTimeout\"')").wrap("<a href='/extend/generic-extractor/configuration/api/#connect-timeout'></a>");
+    $("span:contains('\"requestTimeout\"')").wrap("<a href='/extend/generic-extractor/configuration/api/#request-timeout'></a>");
     $("span:contains('\"pagination\"')").wrap("<a href='/extend/generic-extractor/configuration/api/pagination/'></a>");
     $("span:contains('\"scrollers\"')").wrap("<a href='/extend/generic-extractor/configuration/api/pagination/multiple/'></a>");
     $("span:contains('\"method\"')").first().wrap("<a href='/extend/generic-extractor/configuration/api/pagination/#paging-strategy'></a>");

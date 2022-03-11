@@ -29,7 +29,9 @@
                     }
                 },
                 "requiredHeaders": ["X-AppKey"],
-                "ignoreErrors": [405]
+                "ignoreErrors": [405],
+                "connectTimeout": 30,
+                "requestTimeout": 300
             }
         },
         "aws": {
