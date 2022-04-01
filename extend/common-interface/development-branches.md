@@ -16,7 +16,11 @@ A component that uses the [Common Interface](/extend/common-interface/) can be r
 
 ### How do you tell component is executed in branch context?
 
-When [runner](/extend/docker-runner/) executes a job in a branch, it sets [`KBC_BRANCHID` environment variable](/extend/common-interface/environment/#environment-variables) to current branch id. This ID is unique for each branch in the whole stack.  
+When [runner](/extend/docker-runner/) executes a job in a branch, it sets [`KBC_BRANCHID` environment variable](/extend/common-interface/environment/#environment-variables) to current branch id. This ID is unique for each branch in the whole stack. 
+
+The fact that the component is executed in a branch is not very important for the component itself. It behaves the same way and all the heavy lifting is done by Keboola Connection job runner. 
+
+The only exception is if the component interacts with storage API directly using forwarded storage token. In that case it needs to take the branch ID into consideration. Any such component is a subject of a separate component review by Keboola to ensure the implementation is correct.  
 
 ### Input and output mapping in development branch
 
