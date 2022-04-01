@@ -44,7 +44,7 @@ Snowflake writer is an example of such component. In production, a Snowflake wri
 
 The limitation is based on component's features. Currently, there are following features:
 
-* **dev-branch-configuration-unsafe**: Components with this feature can be run in development branch, but only after `{configuration:{runtime: {safe: true}}}` is explicitly set in the configuration. This can either be done via API or using the *Safe for run in branch* toggle in the configuration detail in the UI.
+* **dev-branch-configuration-unsafe**: Components with this feature can be run in development branch, but only after `{configuration:{runtime: {safe: true}}}` is explicitly set in the configuration. This can either be done via API or using the *Safe for run in branch* toggle in the configuration detail in the UI. This is transparent to you as a developer. The job runner checks if the component's job can or can not be executed. 
 * **dev-branch-job-blocked**: Component is not allowed to run in development branch under any circumstances.
 * **dev-mapping-allowed**: Component is allowed to use development bucket in default branch input mapping. Normally this is disallowed. 
 
