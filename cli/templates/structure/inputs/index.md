@@ -45,8 +45,8 @@ The template needs to contain at least one group with one step.
       - `rules` string - comma separated validation rules, [read more](#rules) about syntax.
       - `showIf` string - condition when the input should be displayed, [read more](#show-if) about syntax.
       - `options` array of options, only for `kind = select/multiselect`
-          - `id` string - option value
-          - `name` string - option visible name
+          - `value` string - option value
+          - `label` string - option visible name
 
 **Allowed combinations of `type` and `kind`**:
 - Type `string`
