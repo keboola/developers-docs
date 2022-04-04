@@ -12,7 +12,7 @@ Development branches are a feature that handles change management in Keboola Con
 
 ## Running a component in a branch
 
-A component that uses the [Common Interface](/extend/common-interface/) can be run in a branch without any changes to the code. Notable exceptions are components that modify external resources (for example database writers) and components that use injected Storage token to interact with Storage API. 
+A component that uses the [Common Interface](/extend/common-interface/) can be run in a branch without any changes to the code. Notable exceptions are components that modify external resources (for example database writers) and components that use [forwarded Storage token](/extend/common-interface/environment/#environment-variables) to interact with Storage API. 
 
 ### How do you tell component is executed in branch context?
 
@@ -20,7 +20,7 @@ When [runner](/extend/docker-runner/) executes a job in a branch, it sets [`KBC_
 
 The fact that the component is executed in a branch is not very important for the component itself. It behaves the same way and all the heavy lifting is done by Keboola Connection job runner. 
 
-The only exception is if the component interacts with storage API directly using forwarded storage token. In that case it needs to take the branch ID into consideration. Any such component is a subject of a separate component review by Keboola to ensure the implementation is correct.  
+The only exception is if the component interacts with Storage API directly using forwarded storage token. In that case it needs to take the branch ID into consideration. Any such component is a subject of a separate component review by Keboola to ensure the implementation is correct.  
 
 ### Input and output mapping in development branch
 
@@ -44,7 +44,7 @@ Snowflake writer is an example of such component. In production, a Snowflake wri
 
 The limitation is based on component's features. Currently, there are following features:
 
-* **dev-branch-configuration-unsafe**: Components with this feature can be run in development branch, but only after `{configuration:{runtime: {safe: true}}}` is explicitly set in the configuration. This can either be done via API or using the *Safe for run in branch* toggle in the configuration detail in the UI. This is transparent to you as a developer. The job runner checks if the component's job can or can not be executed. 
+* **dev-branch-configuration-unsafe**: Components with this feature can be run in development branch, but only after `{configuration:{runtime: {safe: true}}}` is explicitly set in the configuration. This can either be done via API or using the *Safe for run in branch* toggle in the configuration detail in the UI. This is transparent to you as a developer. The job runner checks if the component's job can or can not be executed. This feature is automatically set for applications and writers. It's not set for extractors. 
 * **dev-branch-job-blocked**: Component is not allowed to run in development branch under any circumstances.
 * **dev-mapping-allowed**: Component is allowed to use development bucket in default branch input mapping. Normally this is disallowed. 
 
