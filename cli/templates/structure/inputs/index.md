@@ -40,7 +40,7 @@ The template needs to contain at least one group with one step.
       - `description` string - input description
       - `type` string - input data type
         - one of `string`, `int`, `double`, `bool`, `string[]`
-      - `kind` string - input visual style, see bellow.
+      - `kind` string - input visual style, see below.
       - `default` - default value, must match `type`.
       - `rules` string - comma separated validation rules, [read more](#rules) about syntax.
       - `showIf` string - condition when the input should be displayed, [read more](#show-if) about syntax.
