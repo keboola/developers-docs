@@ -94,10 +94,11 @@ Here you can set parameters of the request retry in case of failure.
 "base_url": "https://example.com/api",
 "retry_config": {
 "max_retries": 5,
+"backoff_factor": 0.3
 "codes": [
-500,
-429
-]
+    500,
+    429
+    ]
 }
 }
 ```
@@ -144,8 +145,9 @@ Some APIs require authenticated requests to be made. This section allows selecti
 The Authentication object is always in following format:
 
 ```json
+
 {
-  "type": "SupportedType",
+  "type": "{SUPPORTED_TYPE}",
   "parameters": {
     "some_parameter": "test_user"
   }
@@ -162,15 +164,15 @@ Basic HTTP authentication using username and password.
 **Example**:
 
 ```json
-    "api": {
-"base_url": "http://localhost:8000",
-"authentication": {
-"type": "BasicHttp",
-"parameters": {
-"username": "test_user",
-"#password": "pass"
-}
-}
+"api": {
+  "base_url": "http://localhost:8000",
+  "authentication": {
+        "type": "BasicHttp",
+        "parameters": {
+            "username": "test_user",
+            "#password": "pass"
+        }
+    }
 }
 ```
 
