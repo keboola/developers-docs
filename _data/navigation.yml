@@ -225,6 +225,9 @@ items:
               - url: /extend/common-interface/logging/development/
                 title: Local Development
 
+          - url: /extend/common-interface/development-branches/
+            title: Development branches
+
       - url: /extend/docker-runner/
         title: Docker Runner
 
@@ -269,7 +272,7 @@ items:
                 title: TDE Exporter
 
       - url: /integrate/jobs/
-        title: Background Jobs
+        title: Component Jobs
 
       - url: /integrate/variables/
         title: Variables
@@ -277,9 +280,105 @@ items:
             - url: /integrate/variables/tutorial/
               title: Tutorial
 
-
       - url: /integrate/database/
         title: SSH Tunnel for Database Extractors
 
   - url: /automate/
     title: Automation/Common Tasks
+    items:
+      - url: /automate/run-job/
+        title: Run Job
+
+      - url: /automate/run-orchestration/
+        title: Run Orchestration
+
+      - url: /automate/set-schedule/
+        title: Set Schedule
+
+  - url: /cli/
+    title: CLI
+    items:
+      - url: /cli/installation/
+        title: Installation
+      - url: /cli/getting-started/
+        title: Getting Started
+      - url: /cli/structure/
+        title: Structure
+      - url: /cli/commands/
+        title: Commands
+        items:
+          - url: /cli/commands/help/
+            title: help
+          - url: /cli/commands/status/
+            title: status
+          - url: /cli/commands/sync/
+            title: sync
+            items:
+              - url: /cli/commands/sync/init/
+                title: init
+              - url: /cli/commands/sync/pull/
+                title: pull
+              - url: /cli/commands/sync/push/
+                title: push
+              - url: /cli/commands/sync/diff/
+                title: diff
+          - url: /cli/commands/ci/
+            title: ci
+            items:
+              - url: /cli/commands/ci/workflows/
+                title: workflows
+          - url: /cli/commands/local/
+            title: local
+            items:
+              - url: /cli/commands/local/create/
+                title: create
+                items:
+                  - url: /cli/commands/local/create/config/
+                    title: config
+                  - url: /cli/commands/local/create/row/
+                    title: row
+              - url: /cli/commands/local/persist/
+                title: persist
+              - url: /cli/commands/local/encrypt/
+                title: encrypt
+              - url: /cli/commands/local/validate/
+                title: validate
+              - url: /cli/commands/local/fix-paths/
+                title: fix-paths
+              - url: /cli/commands/local/template/
+                title: template
+                items:
+                  - url: /cli/commands/local/template/use/
+                    title: use
+          - url: /cli/commands/remote/
+            title: remote
+            items:
+              - url: /cli/commands/remote/create/
+                title: create
+                items:
+                  - url: /cli/commands/remote/create/branch/
+                    title: branch
+          - url: /cli/commands/template/
+            title: template
+            items:
+              - url: /cli/commands/template/repository/
+                title: repository
+                items:
+                  - url: /cli/commands/template/repository/init/
+                    title: init
+              - url: /cli/commands/template/create/
+                title: create
+      - url: /cli/github-integration/
+        title: GitHub Integration
+      - url: /cli/templates/
+        title: Templates
+        items:
+          - url: /cli/templates/tutorial/
+            title: Create Template Tutorial
+          - url: /cli/templates/structure/
+            title: Structure
+            items:
+              - url: /cli/templates/structure/jsonnet-files/
+                title: Jsonnet Files
+              - url: /cli/templates/structure/inputs/
+                title: Inputs

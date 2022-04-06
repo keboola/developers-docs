@@ -11,7 +11,7 @@ See [Publish Component tutorial](/extend/publish/) for details.
 
 **Developer Portal**
 - <input type="checkbox"> The component name doesn't contain words like `extractor`, `application`, and `writer`.
-- <input type="checkbox"> The component icon is representative and has reasonable quality.
+- <input type="checkbox"> The component icon is representative and has reasonable quality. It is in `PNG` format and without background.
 - <input type="checkbox"> The short description describes the **service**, NOT `This extractor extracts ...`.
 - <input type="checkbox"> Licensing information is valid, and the vendor description is current.
 - <input type="checkbox"> License and documentation URLs are publicly accessible, no link to a private repository.

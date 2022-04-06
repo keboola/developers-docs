@@ -36,7 +36,7 @@
 //@import "bootstrap/badges";
 //@import "bootstrap/jumbotron";
 //@import "bootstrap/thumbnails";
-//@import "bootstrap/alerts";
+@import "bootstrap/alerts";
 //@import "bootstrap/progress-bars";
 //@import "bootstrap/media";
 //@import "bootstrap/list-group";
@@ -88,6 +88,17 @@ pre {
   code {
     font-size: ($code-font-size - 1); // smaller for code block
   }
+}
+
+dl {
+    margin-left: 2em;
+    dt {
+        margin-top: 1em;
+    }
+    dd {
+        padding: 0 1em;
+        margin-bottom: 1em;
+    }
 }
 
 // Baseline styles

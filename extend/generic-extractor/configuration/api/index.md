@@ -42,7 +42,9 @@ A sample API configuration can look like this:
                 }
             },
             "requiredHeaders": ["X-AppKey"],
-            "ignoreErrors": [405]
+            "ignoreErrors": [405],
+            "connectTimeout": 30,
+            "requestTimeout": 300
         }
     }
 }
@@ -178,7 +180,7 @@ If the exponential backoff is used, you will see its sequence of times.
 See an [example](/extend/generic-extractor/configuration/api/#retry-configuration).
 
 ## Default HTTP Options
-The `http` configuration option allows you to set the default headers and parameters sent with each API call
+The `http` configuration option allows you to set the timeouts, default headers and parameters sent with each API call
 (defined later in the [`jobs` section](/extend/generic-extractor/configuration/config/jobs/#request-parameters)).
 
 ### Headers
@@ -269,6 +271,29 @@ See [example [EX132]](https://github.com/keboola/generic-extractor/tree/master/d
 API implementations and should not be used blindly if other solutions may be applied (e.g.,
 [`responseFilter`](/extend/generic-extractor/configuration/config/jobs/#response-filter). When ignoring errors,
 **you might miss even those errors that require your attention.**
+
+### Connect Timeout
+
+The `connectTimeout` option is a float describing the number of seconds to wait while trying to connect to a server. 
+Default value is `30` seconds. Use `0` to wait indefinitely, we do not recommend it.
+
+{% highlight json %}
+"http": {
+    "connectTimeout": 30
+}
+{% endhighlight %}
+
+
+### Request Timeout
+
+The `requestTimeout` option is a float describing the total timeout of the request in seconds.
+Default value is `300` seconds. Use `0` to wait indefinitely, we do not recommend it. 
+
+{% highlight json %}
+"http": {
+    "requestTimeout": 300
+}
+{% endhighlight %}
 
 ## Examples
 

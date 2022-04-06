@@ -1,5 +1,5 @@
 ---
-title: Background Jobs
+title: Component Jobs
 permalink: /integrate/jobs/
 redirect_from: /overview/jobs/
 ---
@@ -7,83 +7,287 @@ redirect_from: /overview/jobs/
 * TOC
 {:toc}
 
-Most operations, such as extracting data or running an application are executed in KBC as
-background, asynchronous jobs. When an operation is triggered, for example, you run an extractor, a
-*job* is created and pushed into a *queue*. The job waits in the queue until it is picked up by a worker
-server, which actually executes it. The job queuing and execution are fully automatic.
-So, if you are working with asynchronous parts of your API, you need to
+Most operations, such as extracting data or running an application are executed in Keboola Connection as
+background, asynchronous [jobs](https://help.keboola.com/management/jobs/). When an operation is triggered, for example, you run an extractor, a
+*job* is created. The job starts executing or waits in the queue until it can start executing. 
+The job execution and queuing are fully automatic. The job execution is asynchronous, so you need to
 
-- *create* a job, and
+- *create* (run) a job, and
 - *wait* for it to finish.
 
-[Components](/overview/) differ in their upper limits on how long can a job run,
-from a couple of seconds to several hours.
+The core API for working with jobs is the [Queue API](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api/). It provides operations for 
+running/creating, terminating and listing jobs. 
+[Components](/overview/) differ in their upper limits on how long a job can be executing and how much memory it is allowed to consume.
+These limits are set by the component developer and act primarily as a safeguard. 
 
-## Job Ids
-When a job is created, *JobId* is assigned to it. When the job is put into a queue, it gets its own *RunId*.
-An executing job can spawn *child jobs* (sub-jobs) and become their *parent-job*.
-Usually, a parent job waits until all its child jobs have finished.
+## Job Properties
+When you create a job it automatically transitions through states until it reaches some of the final states.
+When you create or retrieve a job, you'll obtain a JSON with Job object, whose properties are described below in more detail.
 
-A JobId refers to the job definition, to what should be done. RunId refers to the actual job execution. That is why
-one JobId may, though very rarely, have multiple RunIds.
+<details>
+  <summary>Click to expand the response.</summary>
 
-Jobs can be *hierarchically* organized.
-In such case, a child job's RunId contains its parent's RunId as a prefix.
-For example, assume that a job with ID 123 is executed and assigned RunId 789.
-When it spawns a child job, that child job will have its JobId, for instance, `234`, and its RunId will have `789.` as a prefix,
-for example `789.876`. Jobs may be nested without limits, but in practice they do not go beyond three levels.
+{% highlight json %}
+{
+    "id": "10440535",
+    "runId": "10440530.10440533.10440534.10440535",
+    "parentRunId": "10440530.10440533.10440534",
+    "project": {
+        "id": "66",
+        "name": "Sandbox"
+    },
+    "token": {
+        "id": "7455",
+        "description": "[_internal] Scheduler"
+    },
+    "status": "success",
+    "desiredStatus": "processing",
+    "mode": "run",
+    "component": "keboola.ex-db-snowflake",
+    "config": "493493",
+    "configData": [],
+    "configRowIds": [
+        "41510"
+    ],
+    "tag": "5.5.0",
+    "createdTime": "2022-01-24T22:41:10+00:00",
+    "startTime": "2022-01-24T22:41:13+00:00",
+    "endTime": "2022-01-24T22:41:48+00:00",
+    "durationSeconds": 35,
+    "result": {
+        "input": {
+            "tables": []
+        },
+        "images": [
+            [
+                {
+                    "id": "developer-portal-v2/keboola.ex-db-snowflake:5.5.0",
+                    "digests": [
+                        "developer-portal-v2/keboola.ex-db-snowflake@sha256:0f9428c52afea457ec3865cab7cfe457f4f875f3cf45d36f1876c709211da9cf"
+                    ]
+                }
+            ]
+        ],
+        "output": {
+            "tables": [
+                {
+                    "id": "in.c-keboola-ex-db-snowflake-493493.opportunity",
+                    "name": "opportunity",
+                    "columns": [
+                        {
+                            "name": "Id"
+                        },
+                        {
+                            "name": "Name"
+                        },
+                        {
+                            "name": "AccountId"
+                        },
+                        {
+                            "name": "OwnerId"
+                        },
+                        {
+                            "name": "Amount"
+                        },
+                        {
+                            "name": "StageName"
+                        },
+                        {
+                            "name": "CreatedDate"
+                        },
+                        {
+                            "name": "CloseDate"
+                        },
+                        {
+                            "name": "Probability"
+                        },
+                        {
+                            "name": "Start_Date"
+                        },
+                        {
+                            "name": "End_Date"
+                        },
+                        {
+                            "name": "Record_Type_Name"
+                        },
+                        {
+                            "name": "AdvertiserName"
+                        },
+                        {
+                            "name": "Advertiser_Vertical"
+                        },
+                        {
+                            "name": "Type"
+                        }
+                    ],
+                    "displayName": "opportunity"
+                }
+            ]
+        },
+        "message": "Component processing finished.",
+        "configVersion": "16"
+    },
+    "usageData": [],
+    "isFinished": true,
+    "url": "https://queue.north-europe.azure.keboola.com/jobs/10440535",
+    "branchId": null,
+    "variableValuesId": null,
+    "variableValuesData": {
+        "values": []
+    },
+    "backend": [],
+    "metrics": {
+        "backend": {
+            "size": null
+        },
+        "storage": {
+            "inputTablesBytesSum": 0
+        }
+    },
+    "behavior": {
+        "onError": null
+    },
+    "parallelism": "2",
+    "type": "standard"
+}
+{% endhighlight %}
+</details>
 
-## Job Status
-A job can have different statuses:
+### Job Status
+A job can have different values for `status`:
+- `created` (the job is created, but has not started executing yet)
+- `waiting` (the job is waiting for other jobs to finish)
+- `processing` (job stuff is being done)
+- `success` (the job is finished)
+- `error` (the job is finished)
+- `warning` (the job is finished, but one of its child jobs failed)
+- `terminating` (the user has requested to abort the job)
+- `cancelled` (the job was created, but it was aborted before its execution actually began)
+- `terminated` (the job was created and it was aborted in the middle of its execution)
 
-- created (right after a job is created, but before it is put in a queue)
-- waiting (a job is in a queue, waiting to be picked up by a worker server)
-- processing (job stuff is being done)
-- success (a job is finished)
-- error (a job is finished)
-- warning (a job is finished, but one of its child jobs failed)
-- terminating (a user has requested to abort a job)
-- cancelled (a job was created, but it was aborted before its execution actually began)
-- terminated (a job was created and it was aborted in the middle of its execution)
+{: .image-popup}
+![Job State transitions](/integrate/jobs/states.png)
 
-## APIs for Working with Jobs
-To create a Job, use our Docker Runner API described on [Apiary.io](https://kebooladocker.docs.apiary.io/#). Docker Runner
-has API calls to
+When you create a job it is in the `created` state. In a success scenario it will transition to a `processing` state and when the actual work is done, to the
+ `success` state. If you change your mind and terminate a job, it will enter `terminating` state and then ends with either `terminated` (execution terminated) 
+ or `cancelled` (execution did not actually start). The difference is that you can be sure that a `cancelled` job did absolutely no operations, 
+ whereas a terminated job, could've done even all of the work it was supposed to do.
 
-- create a job --- run a [component](/extend/component/),
-- [encrypt values](/overview/encryption/),
-- [prepare the data folder](/extend/component/running/#preparing-the-data-folder), and
-- run a [component](/extend/component/) with a [specified docker image tag](https://kebooladocker.docs.apiary.io/#reference/run/create-a-job-with-image/run-job), usable for [testing images](/extend/component/deployment/#test-live-configurations).
+ If a job cannot be executed, it will enter the `waiting` state. The waiting state means that the job cannot be executed due to reasons on the Keboola 
+ Connection project side. This means that the reasons for waiting jobs lie solely in what jobs are already running in the given project. There are three core reasons for waiting jobs:
+ - If you run two jobs of the same configuration, the second one will wait until the first one is finished. This behavior is 
+ called "configuration lock" and protects your project from [race conditions](https://en.wikipedia.org/wiki/Race_condition). 
+ - Orchestration [phases](https://help.keboola.com/orchestrator/tasks/#organize-tasks). When you run an orchestration, the jobs for all phases are created. Phases that depend on other phases enter the `waiting` state.
+ - Setting parallel limits. If you run a configuration with 10 tables and set parallelism to 2, then 10 jobs will be created, 2 will enter `processing` 
+ state and 8 of them will immediately enter the `waiting` state. 
+ 
+ If a job cannot be run due to platform reasons (e.g. insufficient resources, platform outage), it will remain in the `created` state. In rare situations 
+ (e.g. hardware failure), the job may return back to created state. Moving the job out of the `created` state is out of the control of the end-user.
+ 
+ Of all the states a job can be in, only the state `processing` is considered to be job runtime (see `durationSeconds` field) and therefore billable. 
+ That means `waiting` or `created` jobs do not have any costs associated with them, they represent a plan of what is going to happen.
 
-You also need a *Syrup Queue* API to [poll Job status](https://syrupqueue.docs.apiary.io/#reference/jobs/job/view-job-detail).
+ The states `terminated`, `cancelled`, `success` and `error` are final and end the job transitions. When a job is in final state, the `isFinished` flag is true.
+ The job object is both immutable and eventually consistent. Once you create a job, you cannot change any of it's properties. Any changing properties are
+ self-modifying and they will stop modifying once the job reaches one of the final states. 
 
-The first API requires a component parameter; use the [Component API](https://keboola.docs.apiary.io/#reference/component-configurations/list-components/get-components)
-to get a list of components.
-The second API is generic for all components. To work with the API, use our
-[Syrup PHP Client](https://github.com/keboola/syrup-php-client). In case you want to implement things
-yourself, copy the part of [Job Polling](https://github.com/keboola/syrup-php-client/blob/master/src/Keboola/Syrup/Client.php#L328).
+Apart from the `status` field, the job also has `desiredStatus` field. This is either `processing` or `terminating`. The desired status is 
+processing until a job termination is requested. This changes the desired status to `terminating`. Other changes are not permitted.
 
-Note that there are other special cases of asynchronous operations which are
-in principle the same, but may differ in little details. The most common one is:
+### Job Id
+When a job is created, an `id` and `runId` and optionally `parentRunId` are assigned to it. The `runId` and `parentRunId` represent 
+parent-child relationship between jobs. Parent-child hierarchical relationship can be defined via the `X-KBC-RunId` header, when used the
+newly created job will become child of the job with the provided `RunId`.
+
+The `runId` field contains job `id`s with representing the job hierarchy. If there is no hierarchy, then `runId` is equal to `id`. If there is 
+hierarchy then `runId` is `parentId` concatenated with `id`. The hierarchy delimiter is dot `.`. Examples:
+
+- `id=123`, `runId=123`, `parentRunId=null` -- Job has no parent
+- `id=345`, `runId=123.345`, `parentRunId=123` -- Job is a child of job `123`.
+- `id=678`, `runId=123.345.678`, `parentRunId=123.345` -- Job is a child of job `345` which in turn is a child of job `123`.
+
+Jobs may be nested without limits. The parent-child relationship itself is a weak relationship. By itself it does not mean anything 
+special outside of UI grouping and the function that terminating a parent job issues a termination request to all its children. 
+Running a job as a child of another job does not by itself cause the parent to wait for child 
+completion or any other added functionality.
+Such functionality is implemented in specific components (e.g. Orchestrator) or for specific [job types](todo).
+
+### Job Configuration
+To create a job, you must provide the [configuration](https://help.keboola.com/components/) to run. A configuration is always tied to a specific 
+[component](/extend/component/).
+
+A configuration can be provided in multiple ways. The easiest is to provide a reference to 
+a stored configuration ID using the `config` field as shown above. Configurations can be stored and listed using the 
+[Component Configurations API endpoint](https://keboola.docs.apiary.io/#reference/components-and-configurations/component-configurations/list-configurations).
+When using a configuration which contains [Configuration Rows](https://help.keboola.com/components/#configuration-rows), the job can optionally execute 
+only certain rows. Use the `configRowIds` field to list row IDs to execute. Note that if you do not list any rows, then all rows will be executed except 
+for disabled rows. When you enumerate rows to execute, then the enumerated rows will be executed even if they are disabled. To run a job of 
+a configuration in a branch, provide the [branch ID](https://keboola.docs.apiary.io/#reference/development-branches/branches/list-branches) 
+in the `branchId` field. If you do not provide `branchId`, then the default branch is used. 
+Take care that only the **combination of component ID, configuration ID and branch ID is unique**. It is possible for two configurations with the 
+same ID to exist (either for different component or for a different branch).
+
+Another option is to provide the entire configuration in the `configData` field. In that case the whole configuration data
+has to be provided in the request. If you are retrieving a 
+[stored configuration](https://keboola.docs.apiary.io/#reference/components-and-configurations/manage-configurations/configuration-detail), take 
+note that the configuration data is the contents of the `configuration` node and not the entire 
+response. When using the `configData` field, the `configRowIds` and `branchId` values are ignored. When using the `configData` field the `config` field 
+is ignored for the purpose of reading the configuration, but may still be required in case the component is using 
+[Default Bucket](https://developers.keboola.com/extend/component/tutorial/output-mapping/#configuring-default-bucket). In that case, the 
+configuration referenced in `config` is used to generate the name of the output bucket. It still holds that configuration data is not read from it. 
+That means that `configData` always fully overrides the `config` field.
+
+### Job Mode
+When creating a job, you need to provide `mode`. This can be one of `run`, `forceRun` and `debug`. The basic `mode` choice is `run`. 
+Use the `forceRun` mode to run a configuration that is disabled. The `debug` can be used during [Component Development & Debugging](https://developers.keboola.com/extend/component/tutorial/debugging/).
+
+### Job Runtime configuration
+You may provide runtime settings for a job. Runtime settings do not affect what the job does, it affects how the job does it. Current 
+available runtime settings are `backend` and `parallelism`. The `backend` parameter defines what Snowflake warehouse is used for the job and currently
+affects mostly Snowflake transformations. Available values for backend size come from [Workspace Create API call](https://keboola.docs.apiary.io/#reference/workspaces/workspaces-collection/create-workspace) and are `small`, `medium`, `large`. 
+
+The `parallelism` allows to run [Configuration Rows](https://help.keboola.com/components/#configuration-rows) (if present in the configuration) in
+parallel. Allowed values are integer values and `infinity` which runs all rows in parallel. When parallelism is not specified, the rows are run sequentially. 
+You may also specify `tag` if you want to run the component with a specific version of code. This is mostly used during component development, testing 
+and debugging.
+
+Runtime parameters can be specified on various levels. The values can be specified in the component configuration. They can also be specified 
+when creating a job, in which case it overrides the configuration. It may also be specified for an orchestration, in which case it overrides what is specified 
+in individual jobs of that orchestration.
+
+### Job Type
+Job can be of one of the four types `standard`, `container`, `phaseContainer` and `orchestrationContainer`. The `standard` is something which does actual work.
+Only standard jobs consume billable time and are counted towards consumption of any resources. Other job types are virtual containers encapsulating standard jobs.
+
+The `container` job represent a job containing [parallel executions](/integrate/jobs/#job-runtime-configuration) 
+of configuration rows. `phaseContainer` type contains standard jobs in a single 
+phase of an orchestration. `orchestrationContainer` job type represents an [orchestration](https://help.keboola.com/orchestrator/) and 
+contains phase jobs of that orchestration. What these job types have in common is a strong 
+[parent-child relationship](/integrate/jobs/#job-id). This means for example that when a child job fails, the container fails too. The 
+behavior can be further controlled by the `onError` setting. You cannot specify job type when creating a job, it is selected automatically as needed.
+
+## Working with the Jobs API
+The main API to run the jobs is [Job Queue API](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api). There are some API calls from other services 
+which might be useful when working with jobs:
+
+- [Create configurations](https://keboola.docs.apiary.io/#reference/components-and-configurations/component-configurations/create-configuration)
+- [List Job Events](https://keboola.docs.apiary.io/#reference/events/events/events-list)
+- [Encrypt values](https://keboolaencryption.docs.apiary.io/#reference/encrypt/encryption/encrypt-data)
+- [Run Synchronous Actions](https://app.swaggerhub.com/apis/odinuv/sync-actions/1.0.0#/default/post_actions)
+- [Subscribe to Job Events](https://app.swaggerhub.com/apis/odinuv/notifications-service/1.1.0#/Project%20Subscriptions/createSubscription)
+- [Schedule jobs](https://app.swaggerhub.com/apis/odinuv/scheduler/1.0.0#/schedules/activate)
+
+The component jobs are asynchronous operations, this means that you create it and then you have to actively wait for the result. Note that there 
+are other *unrelated* cases of asynchronous operations in Keboola Platform which are in principle the same, but may differ in little details. 
+The most common one is:
 [Storage Jobs](https://keboola.docs.apiary.io/#reference/jobs/manage-jobs/job-detail), triggered, for instance, by
 [asynchronous imports](https://keboola.docs.apiary.io/#reference/tables/create-table-asynchronously/create-new-table-from-csv-file-asynchronously)
 or [exports](https://keboola.docs.apiary.io/#reference/tables/unload-data-asynchronously/asynchronous-export)
 
-Apart from running predefined configurations with a `run` action, each component may
-provide additional options to create an asynchronous background job, or it may also support synchronous actions.
-
-The following diagram shows a typical flow of creating a job. Note that it is also possible to create a job without an existing
-configuration --- using the `configData` field.
-
-{: .image-popup}
-![Asynchronous Jobs](/integrate/jobs/async-jobs.svg)
-
-The highlighted [Docker Runner](/extend/docker-runner) part is described in a [separate article](/extend/docker-runner).
-
-## Creating and Running a Job
-You need to know the *component Id* and *configuration Id* to create a job. To obtain a list of all components available
-in the project, and their configuration, you can use the
-[corresponding API call](https://keboola.docs.apiary.io/#reference/component-configurations/list-components/get-components).
+### Run a Job
+You need to know the *component Id* and *configuration Id* to create a job. You can get these from the UI links. To use the API to obtain a 
+list of all components available in the project, and their configuration, you can use the
+[Get components](https://keboola.docs.apiary.io/#reference/component-configurations/list-components/get-components).
 See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb).
 A snippet of the response is below:
 
@@ -97,27 +301,28 @@ A snippet of the response is below:
     "uri": "https://syrup.keboola.com/docker/keboola.ex-db-snowflake",
     "documentationUrl": "https://github.com/keboola/db-extractor-snowflake/blob/master/README.md",
     "configurations": [
-      {
-        "id": "328864809",
-        "name": "Sample database",
-        "description": "",
-        "created": "2017-11-06T13:28:48+0100",
-        "creatorToken": {
-          "id": 27865,
-          "description": "ondrej.popelka@keboola.com"
-        },
-        "version": 3,
-        "changeDescription": "Create query account",
-        "isDeleted": false,
-        "currentVersion": {
-          "created": "2017-11-06T13:30:12+0100",
-          "creatorToken": {
-            "id": 27865,
-            "description": "ondrej.popelka@keboola.com"
-          },
-          "changeDescription": "Create query account"
+        {
+            "id": "554424643",
+            "name": "Sample database",
+            "description": "",
+            "created": "2019-12-03T11:18:28+0100",
+            "creatorToken": {
+                "id": 199182,
+                "description": "ondrej.popelka@keboola.com"
+            },
+            "version": 3,
+            "changeDescription": "Quickstart config creation",
+            "isDisabled": false,
+            "isDeleted": false,
+            "currentVersion": {
+                "created": "2019-12-03T11:19:50+0100",
+                "creatorToken": {
+                    "id": 199182,
+                    "description": "ondrej.popelka@keboola.com"
+                },
+                "changeDescription": "Quickstart config creation"
+            }
         }
-      }
     ]
   }
 ]
@@ -125,96 +330,154 @@ A snippet of the response is below:
 
 From there, the important part is the `id` field and `configurations.id` field. For instance, in the
 above, there is a database extractor with the `id` `keboola.ex-db-snowflake` and a
-configuration with the id `328864809`.
+configuration with the id `554424643`.
 
-Then use the [create a job](https://kebooladocker.docs.apiary.io/#reference/run/create-a-job/run-job)
-API call and pass the configuration ID in request body:
+Then use the [create a job](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api/1.2.4#/Jobs/createJob)
+API call and pass the configuration ID and component ID in request body:
 
-{% highlight json %}
+```json
 {
-    "config": "328864809"
+    "component": "keboola.ex-db-snowflake",
+    "config": "554424643",
+    "mode": "run"
 }
-{% endhighlight %}
+```
 
 See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb).
 When a job is created, you will obtain a response similar to this:
 
-{% highlight json %}
+```json
 {
-    "id": "328865608",
-    "url": "https://syrup.keboola.com/queue/job/328865608",
-    "status": "waiting"
+    "id": "807932655",
+    "runId": "807932655",
+    "parentRunId": "",
+    "project": {
+        "id": "7150",
+        "name": "Sandbox"
+    },
+    "token": {
+        "id": "199182",
+        "description": "ondrej.popelka@keboola.com"
+    },
+    "status": "created",
+    "desiredStatus": "processing",
+    "mode": "run",
+    "component": "keboola.ex-db-snowflake",
+    "config": "554424643",
+    "configData": [],
+    "configRowIds": [],
+    "tag": "5.5.0",
+    "createdTime": "2022-01-25T16:34:40+00:00",
+    "startTime": null,
+    "endTime": null,
+    "durationSeconds": 0,
+    "result": [],
+    "usageData": [],
+    "isFinished": false,
+    "url": "https://queue.keboola.com/jobs/807932655",
+    "branchId": null,
+    "variableValuesId": null,
+    "variableValuesData": {
+        "values": []
+    },
+    "backend": [],
+    "metrics": [],
+    "behavior": {
+        "onError": null
+    },
+    "parallelism": null,
+    "type": "standard"
 }
-{% endhighlight %}
+```
 
-This means that the job was created (and `waiting` in the queue) and will automatically start executing.
+This means that the job was `created` and will automatically start executing.
 From the above response, the most important part is `url`, which gives you the URL of the resource for
 [Job status polling](https://en.wikipedia.org/wiki/Polling_(computer_science)).
 
-## Job Polling
-If you want to get the actual job result, poll the [Job API](https://syrupqueue.docs.apiary.io/#reference/jobs/job/view-job-detail)
+### Job Polling
+If you want to get the actual job result, poll the [Job API](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api/1.2.4#/Jobs/getJob)
 for the current state of the job. See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb).
 
-You will receive a response similar to this:
+You will receive a response in the same format as when you crated the job:
 
-{% highlight json %}
+```json
 {
-  "id": 328865608,
-  "runId": "328865609",
-  "lockName": "docker-572-keboola.ex-db-snowflake-328864809",
-  "project": {
-    "id": 572,
-    "name": "Testing"
-  },
-  "token": {
-    "id": "27865",
-    "description": "ondrej.popelka@keboola.com"
-  },
-  "component": "docker",
-  "command": "run",
-  "params": {
-    "config": 328864809,
+    "id": "807933826",
+    "runId": "807933826",
+    "parentRunId": "",
+    "project": {
+        "id": "7150",
+        "name": "7150"
+    },
+    "token": {
+        "id": "199182",
+        "description": "ondrej.popelka@keboola.com"
+    },
+    "status": "processing",
+    "desiredStatus": "processing",
+    "mode": "run",
     "component": "keboola.ex-db-snowflake",
-    "mode": "run"
-  },
-  "result": {
-    "message": "Component processing finished.",
-    "images": [
-      [
-        {
-          "id": "147946154733.dkr.ecr.us-east-1.amazonaws.com/developer-portal-v2/keboola.ex-db-snowflake:1.2.5",
-          "digests": [
-            "147946154733.dkr.ecr.us-east-1.amazonaws.com/developer-portal-v2/keboola.ex-db-snowflake@sha256:84aaf9ed2b233da38d47f6f53a386ae53f0d12dbb8c6046494923c0a173c25af"
-          ]
-        }
-      ]
-    ]
-  },
-  "status": "success",
-  "process": {
-    "host": "kbc-us-east-1-syrup-docker-i-0a8853007e0a668e1",
-    "pid": 69880
-  },
-  "createdTime": "2017-11-06T13:35:41+01:00",
-  "startTime": "2017-11-06T13:35:41+01:00",
-  "endTime": "2017-11-06T13:36:23+01:00",
-  "durationSeconds": 42,
-  "waitSeconds": 0,
-  "nestingLevel": 0,
-  "encrypted": true,
-  "error": null,
-  "errorNote": null,
-  "terminatedBy": {
-    "id": null,
-    "description": null
-  },
-  "usage": [],
-  "_index": "prod_syrup_docker_2017_3",
-  "_type": "jobs",
-  "isFinished": true
+    "config": "554424643",
+    "configData": [],
+    "configRowIds": [],
+    "tag": "5.5.0",
+    "createdTime": "2022-01-25T16:41:12+00:00",
+    "startTime": "2022-01-25T16:41:22+00:00",
+    "endTime": null,
+    "durationSeconds": 0,
+    "result": [],
+    "usageData": [],
+    "isFinished": false,
+    "url": "https://queue.keboola.com/jobs/807933826",
+    "branchId": null,
+    "variableValuesId": null,
+    "variableValuesData": {
+        "values": []
+    },
+    "backend": [],
+    "metrics": [],
+    "behavior": {
+        "onError": null
+    },
+    "parallelism": null,
+    "type": "standard"
 }
-{% endhighlight %}
+```
 
-From the above response, the most important part is the `status` field (`processing`, in this case)
-at this time. To obtain the Job result, send the above API call once the job status changes
+From the above response, the most important part is the `status` field (`processing`, in this case). 
+To obtain the Job result, periodically send the above API call until the job status changes
 to one of the finished states or until `isFinished` is true.
+
+### Run a Debug job
+To run a debug job, use `debug` for the mode. Optionally you can provide the component version which should run
+to [live test](/extend/component/deployment/#test-live-configurations) an image.
+
+```json
+{
+    "component": "keboola.ex-db-snowflake",
+    "config": "554424643",
+    "mode": "debug",
+    "tag": "5.5.0"
+}
+```
+
+The debug mode creates a job that prepares the data folder including the serialized configuration files. Then it compresses the 
+[data folder](/extend/component/running/#preparing-the-data-folder) and uploads it to your project's Files in Storage. This way you will get a snapshot 
+of what the data folder looked like before the component started. If processors are used, a snapshot of the data folder is created before each processor. After the entire component finishes, another snapshot is made. For example, if you run component A with processor B and C in the after section, you will receive:
+
+- `stage_0` file with contents of the data folder before component A was run
+- `stage_1` file with contents of the data folder before processor B was run
+- `stage_2` file with contents of the data folder before processor C was run
+- `stage_output` file with contents of the data folder before output mapping was about to be performed (after C finished).
+
+If configuration rows are used, then the above is repeated for each configuration row. If the job finishes with and error, only the stages before the error are uploaded.
+
+This API call does not upload any tables or files to Storage. I.e. when the component finishes, its output is discarded and the output mapping to storage 
+is not performed. This makes this API call generally very safe to call, because it cannot break the Keboola Connection project in any way. However keep 
+in mind, that if the component has any outside side effects, these will get executed. This applies typically to writers which will write the data 
+into the external system even with this debug API call.
+
+Note that the snapshot archive will contain all files in the data folder including any temporary files produced be the component. The snapshot will not 
+contain the output state.json file. This is because the snapshot is made before a component is run where the out state of the previous component is 
+not available any more. Also note that all encrypted values are removed from the configuration file and there is no way to retrieve them. It is 
+also advisable to run this command with limited input mapping so that you don't end up with gigabyte size archives.

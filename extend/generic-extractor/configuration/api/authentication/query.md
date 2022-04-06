@@ -48,3 +48,30 @@ However, we recommend using the `authentication` setting for credentials so that
 configuration does not become a complete mess.
 
 See [example [EX077]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/077-query-auth).
+
+## Configuration With Encrypted Token Example
+Usually you want the value used for authentication encrypted (the `api-token` parameter with the value 2267709 in our example), so you are not exposing it to other users and also not storing it in the configuration versions history. The following authentication configuration combined with the parameter defined in the [`config`](https://developers.keboola.com/extend/generic-extractor/configuration/config/) section does that (the value with the prefix `#` is encrypted upon saving the configuration):
+
+{% highlight json %}
+{
+    "api": {
+        ...,
+        "authentication": {
+            "type": "query",
+            "query": {
+                "api-token": {
+                    "attr": "#token"
+                }
+            }
+        }
+    },
+    "config": {
+        ...,
+        "#token": "2267709" 
+        }
+    }
+}
+{% endhighlight %}
+
+
+See [example [EX094]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/094-function-config-headers).
