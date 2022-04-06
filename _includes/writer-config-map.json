@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "api": {
+      "base_url": "https://example.com/api",
+      "default_query_parameters": {
+        "content_type": "json"
+      },
+      "default_headers": {
+        "Authorization": {
+          "attr": "#token"
+        }
+      },
+      "retry_config": {
+        "max_retries": 5,
+        "codes": [
+          500,
+          429
+        ]
+      }
+    },
+    "user_parameters": {
+      "#token": "Bearer 123456",
+      "date": {
+        "function": "concat",
+        "args": [
+          {
+            "function": "string_to_date",
+            "args": [
+              "yesterday",
+              "%Y-%m-%d"
+            ]
+          },
+          "T"
+        ]
+      }
+    },
+    "request_parameters": {
+      "method": "POST",
+      "endpoint_path": "/customer/[[id]]",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "query_parameters": {
+        "date": {
+          "attr": "date"
+        }
+      }
+    },
+    "request_content": {
+      "content_type": "JSON",
+      "json_mapping": {
+        "nesting_delimiter": "__",
+        "chunk_size": 100,
+        "column_data_types": {
+          "autodetect": true,
+          "datatype_override": [
+            {
+              "column": "phone",
+              "type": "string"
+            },
+            {
+              "column": "rank",
+              "type": "number"
+            },
+            {
+              "column": "is_active",
+              "type": "bool"
+            }
+          ]
+        },
+        "request_data_wrapper": "{ \"data\": [[data]]}",
+        "column_names_override": {
+          "full_name": "FULL|NAME"
+        }
+      },
+      "iterate_by_columns": [
+        "id"
+      ]
+    }
+  }
+}
