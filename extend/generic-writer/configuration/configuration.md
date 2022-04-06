@@ -31,18 +31,17 @@ The data can be sent in two ways:
     - [**default_headers**](/extend/generic-writer/configuration/#default-headers) --- sets the default
     query headers sent with each API call.
 - [**user_parameters**](/extend/generic-writer/configuration/#user-parameters) --- user parameters to be used in various contexts, 
-	e.g. passwords. Supports dynamic functions
-- [**request_options**](/extend/generic-writer/configuration/#request-options) --- describes details about requests sent.
-    - [**api_request**](/extend/generic-writer/configuration/#api-request/)
-        - [**method**](/extend/generic-writer/configuration/#method) --- defines the HTTP method of the requests.
-        - [**endpoint_path**](/extend/generic-writer/configuration/#enpoint-path) --- relative path of the endpoint.
-        - [**query_parameters**](/extend/generic-writer/configuration/#query-parameters) --- query parameters sent with each request
-        - [**headers**](/extend/generic-writer/configuration/#headers) --- headers sent with each request
-    - [**content**](/extend/generic-writer/configuration/#content) --- defines how the data is sent
-        - [**content_type**](/extend/generic-writer/configuration/#content-type) --- defines how the data is transferred (JSON, binary file, Empty, etc.)
-        - [**json_mapping**](/extend/generic-writer/configuration/#json-mapping) --- defines the CSV 2 JSON conversion in case of JSON content type.
-        - [**iterate_by_columns**](/extend/generic-writer/configuration/#iterate-by-columns) --- defines set of columns in the input data that are excluded 
-        from the content and may be used instead of placeholders within the request_options. The input table is iterated row by row, e.g. 1 row = 1 request
+    e.g. passwords. Supports dynamic functions
+- [**request_parameters**](/extend/generic-writer/configuration/#request-parameters) -- HTTP parameters of the request
+  - [**method**](/extend/generic-writer/configuration/#method) --- defines the HTTP method of the requests.
+  - [**endpoint_path**](/extend/generic-writer/configuration/#enpoint-path) --- relative path of the endpoint.
+  - [**query_parameters**](/extend/generic-writer/configuration/#query-parameters) --- query parameters sent with each request
+  - [**headers**](/extend/generic-writer/configuration/#headers) --- headers sent with each request
+- [**request_content**](/extend/generic-writer/configuration/#request-content) --- defines how the data is sent
+  - [**content_type**](/extend/generic-writer/configuration/#content-type) --- defines how the data is transferred (JSON, binary file, Empty, etc.)
+  - [**json_mapping**](/extend/generic-writer/configuration/#json-mapping) --- defines the CSV 2 JSON conversion in case of JSON content type.
+  - [**iterate_by_columns**](/extend/generic-writer/configuration/#iterate-by-columns) --- defines set of columns in the input data that are excluded 
+from the content and may be used instead of placeholders within the request_options. The input table is iterated row by row, e.g. 1 row = 1 request
 
 There are also simple pre-defined [**functions**](/extend/generic-writer/configuration/#dynamic-functions) available, adding extra
 flexibility when needed.
@@ -214,15 +213,11 @@ You may reference them in the following sections:
 
 
 
-## Request options
-
-[REQUIRED] 
-
-### Api Request
+## Request Parameters
 
 [REQUIRED] Define parameters of the HTTP request sent.
 
-#### Method
+### Method
 
 [REQUIRED] Request method - POST, PUT, UPDATE, DELETE etc.
 
@@ -234,7 +229,7 @@ Supported methods: `['GET', 'POST', 'PATCH', 'UPDATE', 'PUT', 'DELETE']`
                  ...
 ```
 
-#### Endpoint path
+### Endpoint path
 
 [REQUIRED] A relative path of the endpoint. The final request URL is `base_url` and `endpoint_path` combined. 
 
@@ -250,7 +245,7 @@ e.g. when `base_url` is set to `https://example.com/api` and `endpoint_path` to 
                 ...
 ```
 
-#### Headers
+### Headers
 
 [OPTIONAL] Allows you to define default query parameters that are being sent with each request. 
 
@@ -268,7 +263,7 @@ e.g. when `base_url` is set to `https://example.com/api` and `endpoint_path` to 
 ```
 See [example 006](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/docs/examples/006-simple-json-custom-headers/)
 
-#### Query parameters
+### Query parameters
 
 [OPTIONAL] Allows you to define default query parameters that are being sent with each request.
 
@@ -291,11 +286,11 @@ See [example 006](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/
 See [example 009](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/docs/examples/009-simple-json-request-parameters/)
 
 
-### Content
+## Request Content
 
 [REQUIRED] Defines how to process the input and how the sent content should look like.
 
-#### Content Type
+### Content Type
 
 [REQUIRED]  Defines how the input table is translated to a request:
 
@@ -316,11 +311,11 @@ See [example 022](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/
             ....
 ```
 
-#### JSON Mapping
+### JSON Mapping
 
 [REQUIRED for JSON based content type] This section defines the CSV 2 JSON conversion in case of JSON content type. 
 
-##### Nesting delimiter
+#### Nesting delimiter
 
 [REQUIRED] A string that is used for nesting. e.g. `__`. This way you can define nested objects based on column names.
 
@@ -339,7 +334,7 @@ e.g. When set to `__` a column value `address__streed` will be converted to `{"a
 See example [008](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/docs/examples/008-simple-json-nested-object-delimiter/)
 
 
-##### Chunk size
+#### Chunk size
 [REQUIRED] Defines how many rows are being sent in a single request. When set to `1` a single object is sent `{}` (see [example 002](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/docs/examples/002-simple-json-chunked-single/)), 
 when set to >1 an array of objects is sent `[{}, {}]` (see [example 003](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/docs/examples/003-simple-json-chunked-multi/))
 
@@ -353,7 +348,7 @@ when set to >1 an array of objects is sent `[{}, {}]` (see [example 003](https:/
                     "chunk_size": 1,
 ```
 
-##### Column datatypes
+#### Column datatypes
 
 
 Optional configuration of column types. This version supports nesting (three levels) and three datatypes:
@@ -363,14 +358,14 @@ Optional configuration of column types. This version supports nesting (three lev
 - `number` - Number
 - `object` - Object - valid JSON array or JSON object, e.g. ["1","2"], {"key":"val"}
 
-###### Autodetect
+##### Autodetect
 
 [OPTIONAL] Default value `true
 `
 Set this option to `true` to make the parser automatically detect the above datatypes. It may be used in combination with 
 `datatype_override` option to force datatype to some columns.
 
-###### Column datatype override
+##### Column datatype override
 
 [OPTIONAL]
 
@@ -414,7 +409,7 @@ If the value should be an array or object `object` -  valid JSON array or JSON o
 
 See [example 007](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/docs/examples/007-simple-json-force-datatype/)
 
-##### Request Data Wrapper
+#### Request Data Wrapper
 
 [OPTIONAL]
 
@@ -449,7 +444,7 @@ Given a single column `user__id` and `chunksize` = 2, the above will cause each 
 
 See examples: [012](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/docs/examples/012-simple-json-request-data-wrapper/)
 
-##### Column names override
+#### Column names override
 
 You may override specific column names using the `column_names_override` parameter 
 to be able to generate fields with characters not supported in Storage column names.
@@ -479,7 +474,7 @@ For more details refer to examples: [20](https://bitbucket.org/kds_consulting_te
 and [23](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/docs/examples/023-simple-json-nested-object-rename-column/)
 
 
-#### Iterate By Columns
+### Iterate By Columns
 
 This parameter allows performing the requests in iterations based on provided parameters within data. The user specifies
 columns in the source table that will be used as parameters for each request. The column values may be then used instead of placeholders 

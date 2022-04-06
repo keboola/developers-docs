@@ -34,50 +34,48 @@
         ]
       }
     },
-    "request_options": {
-      "api_request": {
-        "method": "POST",
-        "endpoint_path": "/customer/[[id]]",
-        "headers": {
-          "Content-Type": "application/json"
+    "request_parameters": {
+      "method": "POST",
+      "endpoint_path": "/customer/[[id]]",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "query_parameters": {
+        "date": {
+          "attr": "date"
+        }
+      }
+    },
+    "request_content": {
+      "content_type": "JSON",
+      "json_mapping": {
+        "nesting_delimiter": "__",
+        "chunk_size": 100,
+        "column_data_types": {
+          "autodetect": true,
+          "datatype_override": [
+            {
+              "column": "phone",
+              "type": "string"
+            },
+            {
+              "column": "rank",
+              "type": "number"
+            },
+            {
+              "column": "is_active",
+              "type": "bool"
+            }
+          ]
         },
-        "query_parameters": {
-          "date": {
-            "attr": "date"
-          }
+        "request_data_wrapper": "{ \"data\": [[data]]}",
+        "column_names_override": {
+          "full_name": "FULL|NAME"
         }
       },
-      "content": {
-        "content_type": "JSON",
-        "json_mapping": {
-          "nesting_delimiter": "__",
-          "chunk_size": 100,
-          "column_data_types": {
-            "autodetect": true,
-            "datatype_override": [
-              {
-                "column": "phone",
-                "type": "string"
-              },
-              {
-                "column": "rank",
-                "type": "number"
-              },
-              {
-                "column": "is_active",
-                "type": "bool"
-              }
-            ]
-          },
-          "request_data_wrapper": "{ \"data\": [[data]]}",
-          "column_names_override": {
-            "full_name": "FULL|NAME"
-          }
-        },
-        "iterate_by_columns": [
-          "id"
-        ]
-      }
+      "iterate_by_columns": [
+        "id"
+      ]
     }
   }
 }
