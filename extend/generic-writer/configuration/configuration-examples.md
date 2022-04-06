@@ -14,122 +14,115 @@ It will send as many requests as there are rows in the input table. Each request
 
 ```json
 {
-    "path": "https://example.com/test/[[id]]",
-    "mode": "JSON",
-    "method": "POST",
-    "iteration_mode": {
-      "iteration_par_columns": [
-        "id"
-      ]
+ "api": {
+  "base_url": "https://example.com"
+ },
+ "user_parameters": {
+  "date": {
+   "function": "concat",
+   "args": [
+    {
+     "function": "string_to_date",
+     "args": [
+      "yesterday",
+      "%Y-%m-%d"
+     ]
     },
-    "user_parameters": {
-      "#token": "Bearer 123456",
-    "token_encoded": {
-      "function": "concat",
-      "args": [
-        "Basic ",
-        {
-          "function": "base64_encode",
-          "args": [
-            {
-              "attr": "#token"
-            }
-          ]
-        }
-      ]
-    },
-      "date": {
-        "function": "concat",
-        "args": [
-          {
-            "function": "string_to_date",
-            "args": [
-              "yesterday",
-              "%Y-%m-%d"
-            ]
-          },
-          "T"
-        ]
-      }
-    },
-    "headers": [
-      {
-        "key": "Authorization",
-        "value": {
-          "attr": "token_encoded"
-        }
-      },
-      {
-        "key": "Content-Type",
-        "value": "application/json"
-      }
-    ],
-    "additional_requests_pars": [
-      {
-        "key": "params",
-        "value": {
-          "date": {
-            "attr": "date"
-          }
-        }
-      }
-    ],
-    "json_data_config": {
-      "chunk_size": 1,
-      "delimiter": "_",
-      "request_data_wrapper": "{ \"data\": [[data]]}",
-      "infer_types_for_unknown": true,
-      "column_types": [
-        {
-          "column": "bool_bool2",
-          "type": "number"
-        },
-        {
-          "column": "bool_bool1",
-          "type": "bool"
-        },
-        {
-          "column": "id",
-          "type": "string"
-        },
-        {
-          "column": "field.id",
-          "type": "string"
-        },
-        {
-          "column": "ansconcat",
-          "type": "string"
-        },
-        {
-          "column": "time_submitted",
-          "type": "string"
-        },
-        {
-          "column": "id2",
-          "type": "string"
-        },
-        {
-          "column": "time_11",
-          "type": "bool"
-        },
-        {
-          "column": "time_reviewed_r2",
-          "type": "bool"
-        },
-        {
-          "column": "time_reviewed_r1_r1",
-          "type": "bool"
-        }
-      ]
-    },
-    "debug": true
+    "T"
+   ]
   }
+ },
+ "request_parameters": {
+  "method": "POST",
+  "endpoint_path": "/test/[[id]]?",
+  "headers": {
+   "Authorization": {
+    "attr": "token_encoded"
+   },
+   "Content-Type": "application/json"
+  },
+  "query_parameters": {
+   "date": {
+    "attr": "date"
+   }
+  }
+ },
+ "request_content": {
+  "content_type": "JSON",
+  "json_mapping": {
+   "nesting_delimiter": "_",
+   "chunk_size": 1,
+   "column_data_types": {
+    "autodetect": true
+   },
+   "request_data_wrapper": "{ \"data\": [[data]]}",
+   "column_names_override": {}
+  },
+  "iterate_by_columns": [
+   "id"
+  ]
+ }
+}
 ```
 
 ### Exponea Batch Events Writer
 
 Write customer [events](https://docs.exponea.com/reference#add-event) into the [Exponea API](https://docs.exponea.com) 
-in [batches](https://docs.exponea.com/reference#batch-commands) of `40` requests.
+in [batches](https://docs.exponea.com/reference#batch-commands) of `3` requests.
+
+
+**Writer config:**
+
+```json
+{
+ "debug": false,
+ "api": {
+  "base_url": "https://api-demoapp.exponea.com"
+ },
+ "user_parameters": {
+  "#token": "12345",
+  "token_encoded": {
+   "function": "concat",
+   "args": [
+    "Basic ",
+    {
+     "function": "base64_encode",
+     "args": [
+      {
+       "attr": "#token"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "request_parameters": {
+  "method": "POST",
+  "endpoint_path": "/track/v2/projects/1234566/batch?",
+  "headers": {
+   "Authorization": {
+    "attr": "token_encoded"
+   },
+   "Content-type": "application/csv"
+  },
+  "query_parameters": {}
+ },
+ "request_content": {
+  "content_type": "JSON",
+  "json_mapping": {
+   "nesting_delimiter": "__",
+   "chunk_size": 3,
+   "column_data_types": {
+    "autodetect": true,
+    "datatype_override": []
+   },
+   "request_data_wrapper": "{\"commands\":{{data}}}",
+   "column_names_override": {}
+  },
+  "iterate_by_columns": []
+ }
+}
+```
 
 **Input table:**
 
@@ -190,60 +183,58 @@ in [batches](https://docs.exponea.com/reference#batch-commands) of `40` requests
 ```
 
 
-**Writer config:**
-
-```json
-{
-  "path": "https://api-demoapp.exponea.com/track/v2/projects/1234566/batch",
-  "mode": "JSON",
-  "method": "POST",
-  "user_parameters": {
-    "#token": "12345",
-    "token_encoded": {
-      "function": "concat",
-      "args": [
-        "Basic ",
-        {
-          "function": "base64_encode",
-          "args": [
-            {
-              "attr": "#token"
-            }
-          ]
-        }
-      ]
-    }
-  },
-  "headers": [
-    {
-      "key": "Authorization",
-      "value": {
-        "attr": "token_encoded"
-      }
-    },
-    {
-      "key": "Content-type",
-      "value": "application/csv"
-    }
-  ],
-  "additional_requests_pars": [],
-  "json_data_config": {
-    "chunk_size": 40,
-    "request_data_wrapper": "{\"commands\":{{data}}}",
-    "infer_types_for_unknown": true,
-    "delimiter": "__",
-    "column_types": []
-  },
-  "debug": true
-}
-```
 
 ### Customer.io User Event
 
 Update user events via the [Customer.io API](https://customer.io/docs/api/#apitrackeventsevent_add) based on the user_id column.
 
-The API uses Basic http authentication which is mimicked by the `base64_encode` function. The field `#token` is expected to contain 
-`user:password`.
+The API uses Basic http authentication.
+
+
+**Writer config:**
+
+```json
+{
+ "api": {
+  "base_url": "https://track.customer.io",
+  "authentication": {
+        "type": "BasicHttp",
+        "parameters": {
+          "username": "test_user",
+          "#password": "pass"
+        }
+      }
+ },
+ "user_parameters": {},
+ "request_parameters": {
+  "method": "POST",
+  "endpoint_path": "/api/v1/customers/{{user_id}}/events?",
+  "headers": {
+   "Authorization": {
+    "attr": "token_encoded"
+   },
+   "Content-type": "application/csv"
+  },
+  "query_parameters": {}
+ },
+ "request_content": {
+  "content_type": "JSON",
+  "json_mapping": {
+   "nesting_delimiter": "_",
+   "chunk_size": 1,
+   "column_data_types": {
+    "autodetect": true,
+    "datatype_override": []
+   },
+   "request_data_wrapper": "",
+   "column_names_override": {}
+  },
+  "iterate_by_columns": [
+   "user_id"
+  ]
+ }
+}
+```
 
 ** Input Table:**
 
@@ -263,57 +254,6 @@ POST `https://track.customer.io/api/v1/customers/a@test.com/events`
 {"data": {"price": 150, "date": "1.1.20"}, "name": "testing_event"}
 ```
 
-**Writer config:**
-
-```json
-{
-  "path": "https://track.customer.io/api/v1/customers/{{user_id}}/events",
-  "mode": "JSON",
-  "method": "POST",
-  "user_parameters": {
-    "#token": "1234",
-    "token_encoded": {
-      "function": "concat",
-      "args": [
-        "Basic ",
-        {
-          "function": "base64_encode",
-          "args": [
-            {
-              "attr": "#token"
-            }
-          ]
-        }
-      ]
-    }
-  },
-  "iteration_mode": {
-    "iteration_par_columns": [
-      "user_id"
-    ]
-  },
-  "headers": [
-    {
-      "key": "Authorization",
-      "value": {
-        "attr": "token_encoded"
-      }
-    },
-    {
-      "key": "Content-type",
-      "value": "application/csv"
-    }
-  ],
-  "additional_requests_pars": [],
-  "json_data_config": {
-    "chunk_size": 1,
-    "infer_types_for_unknown": true,
-    "delimiter": "_",
-    "column_types": []
-  },
-  "debug": true
-}
-```
 
 ### Slack Notification
 
@@ -334,41 +274,47 @@ Send notifications to Slack channels via an API. Note that you need to create an
 
 ```json
 {
-  "path": "https://slack.com/api/chat.postMessage",
-  "mode": "JSON",
+ "debug": true,
+ "api": {
+  "base_url": "https://slack.com"
+ },
+ "user_parameters": {
+  "#token": "",
+  "token_encoded": {
+   "function": "concat",
+   "args": [
+    "Bearer ",
+    {
+     "attr": "#token"
+    }
+   ]
+  }
+ },
+ "request_parameters": {
   "method": "POST",
-  "user_parameters": {
-    "#token": "",
-    "token_encoded": {
-      "function": "concat",
-      "args": [
-        "Bearer ",
-        {
-          "attr": "#token"
-        }
-      ]
-    }
+  "endpoint_path": "/api/chat.postMessage?",
+  "headers": {
+   "Authorization": {
+    "attr": "token_encoded"
+   },
+   "Content-type": "application/json"
   },
-  "headers": [
-    {
-      "key": "Authorization",
-      "value": {
-        "attr": "token_encoded"
-      }
-    },
-    {
-      "key": "Content-type",
-      "value": "application/json"
-    }
-  ],
-  "additional_requests_pars": [],
-  "json_data_config": {
-    "chunk_size": 1,
-    "infer_types_for_unknown": true,
-    "delimiter": "_",
-    "column_types": []
+  "query_parameters": {}
+ },
+ "request_content": {
+  "content_type": "JSON",
+  "json_mapping": {
+   "nesting_delimiter": "_",
+   "chunk_size": 1,
+   "column_data_types": {
+    "autodetect": true,
+    "datatype_override": []
+   },
+   "request_data_wrapper": "",
+   "column_names_override": {}
   },
-  "debug": true
+  "iterate_by_columns": []
+ }
 }
 
 ```
