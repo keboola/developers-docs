@@ -67,7 +67,7 @@ It will send as many requests as there are rows in the input table. Each request
 
 ### Exponea Batch Events Writer
 
-Write customer [events](https://docs.exponea.com/reference#add-event) into the [Exponea API](https://docs.exponea.com) 
+Write customer [events](https://docs.exponea.com/reference#add-event) into the [Exponea API](https://docs.exponea.com)
 in [batches](https://docs.exponea.com/reference#batch-commands) of `3` requests.
 
 
@@ -182,14 +182,11 @@ in [batches](https://docs.exponea.com/reference#batch-commands) of `3` requests.
 
 ```
 
-
-
 ### Customer.io User Event
 
 Update user events via the [Customer.io API](https://customer.io/docs/api/#apitrackeventsevent_add) based on the user_id column.
 
 The API uses Basic http authentication.
-
 
 **Writer config:**
 
@@ -235,6 +232,13 @@ The API uses Basic http authentication.
  }
 }
 ```
+
+### Customer.io User Event
+
+Update user events via the [Customer.io API](https://customer.io/docs/api/#apitrackeventsevent_add) based on the user_id column.
+
+The API uses Basic http authentication which is mimicked by the `base64_encode` function. The field `#token` is expected to contain 
+`user:password`.
 
 ** Input Table:**
 
