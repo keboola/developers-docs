@@ -19,8 +19,8 @@ The data can be sent in two ways:
 
 *Click on the section names if you want to learn more.*
 
-- [**api**](/extend/generic-writer/configuration/#api/) --- sets the basic properties of the API.
-    - [**base_url**](/extend/generic-writer/configuration/#base-url) --- defines the URL to which the API requests
+- [**api**](/extend/generic-writer/configuration/#api/) --- [REQUIRED] sets the basic properties of the API.
+    - [**base_url**](/extend/generic-writer/configuration/#base-url) ---  [REQUIRED] defines the URL to which the API requests
       should be sent.
     - [**authentication**](/extend/generic-writer/configuration/#authentication) --- needs to be configured for any API
       which is not public.
@@ -32,14 +32,14 @@ The data can be sent in two ways:
       sent with each API call.
 - [**user_parameters**](/extend/generic-writer/configuration/#user-parameters) --- user parameters to be used in various
   contexts, e.g. passwords. Supports dynamic functions
-- [**request_parameters**](/extend/generic-writer/configuration/#request-parameters) -- HTTP parameters of the request
-    - [**method**](/extend/generic-writer/configuration/#method) --- defines the HTTP method of the requests.
-    - [**endpoint_path**](/extend/generic-writer/configuration/#enpoint-path) --- relative path of the endpoint.
+- [**request_parameters**](/extend/generic-writer/configuration/#request-parameters) -- [REQUIRED] HTTP parameters of the request
+    - [**method**](/extend/generic-writer/configuration/#method) --- [REQUIRED] defines the HTTP method of the requests.
+    - [**endpoint_path**](/extend/generic-writer/configuration/#enpoint-path) --- [REQUIRED] relative path of the endpoint.
     - [**query_parameters**](/extend/generic-writer/configuration/#query-parameters) --- query parameters sent with each
       request
     - [**headers**](/extend/generic-writer/configuration/#headers) --- headers sent with each request
-- [**request_content**](/extend/generic-writer/configuration/#request-content) --- defines how the data is sent
-    - [**content_type**](/extend/generic-writer/configuration/#content-type) --- defines how the data is transferred (
+- [**request_content**](/extend/generic-writer/configuration/#request-content) --- [REQUIRED] defines how the data is sent
+    - [**content_type**](/extend/generic-writer/configuration/#content-type) --- [REQUIRED] defines how the data is transferred (
       JSON, binary file, Empty, etc.)
     - [**json_mapping**](/extend/generic-writer/configuration/#json-mapping) --- defines the CSV 2 JSON conversion in
       case of JSON content type.
@@ -73,7 +73,7 @@ etc.
 
 ### Base URL
 
-[REQUIRED] An URL of the endpoint where the payload is being sent. e.g. `www.example.com/api/v1`.
+An URL of the endpoint where the payload is being sent. e.g. `www.example.com/api/v1`.
 
 **NOTE** May contain placeholders for iterations wrapped in `[[]]`,e.g. ``www.example.com/api/v[[api_version]]``.  
 But in most cases you would set this up on the `endpoint_path` level.
@@ -83,7 +83,7 @@ set as an iteration parameter column.
 
 ### Retry Config
 
-[OPTIONAL] Here you can set parameters of the request retry in case of failure.
+Here you can set parameters of the request retry in case of failure.
 
 - `max_retries` --- Number of maximum retries before failure (DEFAULT `1`)
 - `codes` --- List of HTTP codes to retry on, e.g. [503, 429] (DEFAULT `(500, 502, 504)`)
@@ -104,7 +104,7 @@ set as an iteration parameter column.
 
 ### Default Query Parameters
 
-[OPTIONAL] Allows you to define default query parameters that are being sent with each request. This is useful for
+Allows you to define default query parameters that are being sent with each request. This is useful for
 instance for authentication purposes. This is mostly useful for creating Generic Writer templates and registered
 components.
 
@@ -124,7 +124,7 @@ _type":"json",
 
 ### Default Headers
 
-[OPTIONAL] Allows you to define default query parameters that are being sent with each req This is mostly useful for
+Allows you to define default query parameters that are being sent with each req This is mostly useful for
 creating Generic Writer templates and registered components.
 
 **NOTE** That you can reference parameters defined in `user_parameters` using the `{"attr":"SOME_KEY"}` syntax.
@@ -178,7 +178,7 @@ See [example 024](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/
 
 ## User Parameters
 
-[OPTIONAL] In this section you can defined user parameters to be used in various contexts, e.g. passwords. This is also
+In this section you can defined user parameters to be used in various contexts, e.g. passwords. This is also
 the place to use the [dynamic functions]().
 
 It allows referencing another values from `user_parameters` referenced by `{"attr":"par"}` notation.
@@ -220,11 +220,11 @@ example [010](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/
 
 ## Request Parameters
 
-[REQUIRED] Define parameters of the HTTP request sent.
+Define parameters of the HTTP request sent.
 
 ### Method
 
-[REQUIRED] Request method - POST, PUT, UPDATE, DELETE etc.
+Request method - POST, PUT, UPDATE, DELETE etc.
 
 Supported methods: `['GET', 'POST', 'PATCH', 'UPDATE', 'PUT', 'DELETE']`
 
@@ -236,7 +236,7 @@ Supported methods: `['GET', 'POST', 'PATCH', 'UPDATE', 'PUT', 'DELETE']`
 
 ### Endpoint path
 
-[REQUIRED] A relative path of the endpoint. The final request URL is `base_url` and `endpoint_path` combined.
+A relative path of the endpoint. The final request URL is `base_url` and `endpoint_path` combined.
 
 e.g. when `base_url` is set to `https://example.com/api` and `endpoint_path` to `/customer` the resulting URL
 is `https://example.com/api/customer`
@@ -255,7 +255,7 @@ in [example 005](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/s
 
 ### Headers
 
-[OPTIONAL] Allows you to define default query parameters that are being sent with each request.
+Allows you to define default query parameters that are being sent with each request.
 
 **NOTE** That you can reference parameters defined in `user_parameters` using the `{"attr":"SOME_KEY"}` syntax.
 
@@ -273,7 +273,7 @@ See [example 006](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/
 
 ### Query parameters
 
-[OPTIONAL] Allows you to define default query parameters that are being sent with each request.
+Allows you to define default query parameters that are being sent with each request.
 
 **NOTE** That you can reference parameters defined in `user_parameters` using the `{"attr":"SOME_KEY"}` syntax.
 
@@ -294,11 +294,11 @@ See [example 009](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/
 
 ## Request Content
 
-[REQUIRED] Defines how to process the input and how the sent content should look like.
+Defines how to process the input and how the sent content should look like.
 
 ### Content Type
 
-[REQUIRED]  Defines how the input table is translated to a request:
+ Defines how the input table is translated to a request:
 
 - `JSON` - input table is converted into a JSON (see `json_mapping`) sent as `application/json` type.
   See [example 001](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/docs/examples/001-simple-json/)
@@ -325,7 +325,7 @@ See [example 009](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/
 
 #### Nesting delimiter
 
-[REQUIRED] A string that is used for nesting. e.g. `__`. This way you can define nested objects based on column names.
+A string that is used for nesting. e.g. `__`. This way you can define nested objects based on column names.
 
 e.g. When set to `__` a column value `address__streed` will be converted to `{"address"{"street":"COLUMN_VALUE"}}`
 
@@ -342,7 +342,7 @@ example [008](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/
 
 #### Chunk size
 
-[REQUIRED] Defines how many rows are being sent in a single request. When set to `1` a single object is sent `{}` (
+Defines how many rows are being sent in a single request. When set to `1` a single object is sent `{}` (
 see [example 002](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/docs/examples/002-simple-json-chunked-single/))
 , when set to >1 an array of objects is sent `[{}, {}]` (
 see [example 003](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/docs/examples/003-simple-json-chunked-multi/))
@@ -368,7 +368,7 @@ Optional configuration of column types. This version supports nesting (three lev
 
 ##### Autodetect
 
-[OPTIONAL] Default value `true
+Default value `true
 `
 Set this option to `true` to make the parser automatically detect the above datatypes. It may be used in combination
 with
