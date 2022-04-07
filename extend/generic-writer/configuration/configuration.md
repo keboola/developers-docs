@@ -1,8 +1,10 @@
 ---
-title: Generic Writer Configuration permalink: /extend/generic-writer/configuration/
+title: Generic Writer Configuration 
+permalink: /extend/generic-writer/configuration/
 ---
 
-* TOC {:toc}
+* TOC 
+{:toc}
 
 This component allows you to write data to a specified endpoint in a specified format. It currently supports single
 table and single endpoint per configuration.
@@ -90,16 +92,18 @@ Here you can set parameters of the request retry in case of failure.
 - `backoff_factor` --- backoff factor of the exponential backoff. (DEFAULT `0.3`)
 
 ```json
-"api": {
-"base_url": "https://example.com/api",
-"retry_config": {
-"max_retries": 5,
-"backoff_factor": 0.3
-"codes": [
-    500,
-    429
-    ]
-}
+{
+  "api": {
+    "base_url": "https://example.com/api",
+    "retry_config": {
+      "max_retries": 5,
+      "backoff_factor": 0.3
+      "codes": [
+        500,
+        429
+      ]
+    }
+  }
 }
 ```
 
@@ -112,14 +116,16 @@ components.
 **NOTE** That you can reference parameters defined in `user_parameters` using the `{"attr":"SOME_KEY"}` syntax.
 
 ```json
-        "api": {
-"base_url": "https://example.com/api",
-"default_query_parameters": {
-"content
-_type":"json",
-"token": {
-"attr": "#token"
-}
+{
+  "api": {
+    "base_url": "https://example.com/api",
+    "default_query_parameters": {
+      "content_type": "json",
+      "token": {
+        "attr": "#token"
+      }
+    }
+  }
 }
 ```
 
@@ -131,10 +137,15 @@ creating Generic Writer templates and registered components.
 **NOTE** That you can reference parameters defined in `user_parameters` using the `{"attr":"SOME_KEY"}` syntax.
 
 ```json
-        "api": {
-"base_url": "https://example.com/api",
-"default_headers": {
-"Authorization": {"attr": "#token"}
+ {
+  "api": {
+    "base_url": "https://example.com/api",
+    "default_headers": {
+      "Authorization": {
+        "attr": "#token"
+      }
+    }
+  }
 }
 ```
 
@@ -188,21 +199,23 @@ It allows referencing another values from `user_parameters` referenced by `{"att
 **NOTE** Any parameters prefixed by `#` will be encrypted in the Keboola platform on configuration save.
 
 ```json
-        "user_parameters": {
-"#token": "Bearer 123456",
-"date": {
-"function": "concat",
-"args": [
 {
-"function": "string_to_date",
-"args": [
-"yesterday",
-"%Y-%m-%d"
-]
-},
-"T"
-]
-}
+  "user_parameters": {
+    "#token": "Bearer 123456",
+    "date": {
+      "function": "concat",
+      "args": [
+        {
+          "function": "string_to_date",
+          "args": [
+            "yesterday",
+            "%Y-%m-%d"
+          ]
+        },
+        "T"
+      ]
+    }
+  }
 }
 ```
 
@@ -232,8 +245,8 @@ Supported methods: `['GET', 'POST', 'PATCH', 'UPDATE', 'PUT', 'DELETE']`
 
 ```json
 "request_parameters": {
-"method": "POST",
-...
+    "method": "POST",
+    ...
 ```
 
 ### Endpoint path
@@ -248,11 +261,12 @@ using [iteration columns](/extend/generic-writer/configuration/#iterate-by-colum
 in [example 005](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/docs/examples/005-json-iterations/)
 
 ```json
-
-"request_parameters": {
-"method": "POST",
-"endpoint_path": "/customer",
-...
+{
+  "request_parameters": {
+    "method": "POST",
+    "endpoint_path": "/customer"
+  }
+}
 ```
 
 ### Headers
@@ -262,13 +276,15 @@ Allows you to define default query parameters that are being sent with each requ
 **NOTE** That you can reference parameters defined in `user_parameters` using the `{"attr":"SOME_KEY"}` syntax.
 
 ```json
-"request_parameters": {
-"method": "POST",
-"endpoint_path": "/customer",
-"headers": {
-"Last-updated": 123343534
-},
-...
+{
+  "request_parameters": {
+    "method": "POST",
+    "endpoint_path": "/customer",
+    "headers": {
+      "Last-updated": 123343534
+    }
+  }
+}
 ```
 
 See [example 006](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/docs/examples/006-simple-json-custom-headers/)
@@ -280,15 +296,17 @@ Allows you to define default query parameters that are being sent with each requ
 **NOTE** That you can reference parameters defined in `user_parameters` using the `{"attr":"SOME_KEY"}` syntax.
 
 ```json
-            "request_parameters": {
-"method": "POST",
-"endpoint_path": "/customer/[[id]]",
-"query_parameters": {
-"dryRun": true,
-"date": {
-"attr": "date"
-}
-}
+ {
+  "request_parameters": {
+    "method": "POST",
+    "endpoint_path": "/customer/[[id]]",
+    "query_parameters": {
+      "dryRun": true,
+      "date": {
+        "attr": "date"
+      }
+    }
+  }
 }
 ```
 
@@ -317,7 +335,7 @@ Defines how to process the input and how the sent content should look like.
 ```json
 
 "request_content": {
-"content_type": "JSON",
+    "content_type": "JSON",
 ....
 ```
 
@@ -333,9 +351,9 @@ e.g. When set to `__` a column value `address__streed` will be converted to `{"a
 
 ```json
 "request_content": {
-"content_type": "JSON",
-"json_mapping": {
-"nesting_delimiter": "_",
+    "content_type": "JSON",
+    "json_mapping": {
+        "nesting_delimiter": "_",
 ...
 ```
 
@@ -351,10 +369,10 @@ see [example 003](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/
 
 ```json
 "request_content": {
-"content_type": "JSON",
-"json_mapping": {
-"nesting_delimiter": "_",
-"chunk_size": 1,
+    "content_type": "JSON",
+    "json_mapping": {
+        "nesting_delimiter": "_",
+        "chunk_size": 1,
 ...
 ```
 
@@ -394,27 +412,31 @@ If the value should be an array or object `object` - valid JSON array or JSON ob
 **Note** If the `autodetect` option is turned off all unspecified column will be treated as a string.
 
 ```json
-"request_content": {
-"content_type": "JSON",
-"json_mapping": {
-"nesting_delimiter": "_",
-"chunk_size": 1,
-"column_data_types": {
-"autodetect": true,
-"datatype_override": [
 {
-"column": "phone",
-"type": "string"
-}, {
-"column": "rank",
-"type": "number"
-}, {
-"column": "is_active",
-"type": "bool"
-}
-]
-}
-}
+  "request_content": {
+    "content_type": "JSON",
+    "json_mapping": {
+      "nesting_delimiter": "_",
+      "chunk_size": 1,
+      "column_data_types": {
+        "autodetect": true,
+        "datatype_override": [
+          {
+            "column": "phone",
+            "type": "string"
+          },
+          {
+            "column": "rank",
+            "type": "number"
+          },
+          {
+            "column": "is_active",
+            "type": "bool"
+          }
+        ]
+      }
+    }
+  }
 }
 ```
 
@@ -428,12 +450,13 @@ A wrapper/mask of the parsed data. It needs to be json-encoded json. E.g
 
 ```json
 "request_content": {
-"content_type": "JSON",
-"json_mapping": {
-"nesting_delimiter": "__",
-"chunk_size": 1,
-"request_data_wrapper": "{ \"data\": [[data]]}",
-...
+    "content_type": "JSON",
+    "json_mapping": {
+        "nesting_delimiter": "__",
+        "chunk_size": 1,
+        "request_data_wrapper": "{ \"data\": [[data]]}",
+    ...
+}
 ```
 
 Given a single column `user__id` and `chunksize` = 2, the above will cause each request being sent as:
@@ -475,15 +498,17 @@ See [example 23](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/s
 
 ```json
 "request_content": {
-"content_type": "JSON",
-"json_mapping": {
-"nesting_delimiter": "_",
-"chunk_size": 1,
-"column_names_override": {
-"field_id": "field-id",
-"full_name": "FULL.NAME"
-}
+    "content_type": "JSON",
+        "json_mapping": {
+            "nesting_delimiter": "_",
+            "chunk_size": 1,
+            "column_names_override": {
+                "field_id": "field-id",
+                "full_name": "FULL.NAME"
+            }
+    }
 ...
+}
 ```
 
 For more details refer to
@@ -498,10 +523,10 @@ of placeholders within the `request_options`. The input table is iterated row by
 
 ```json
 "request_content": {
-"content_type": "JSON",
-"iterate_by_columns": [
-"id", "date"
-]
+    "content_type": "JSON",
+        "iterate_by_columns": [
+          "id", "date"
+        ]
 }
 
 ```
@@ -514,15 +539,16 @@ These will be injected in:
   value is specified like:
 
 ```json
-
-"request_parameters": {
-"method": "POST",
-"endpoint_path": "/customer/[[id]]",
-"query_parameters": {
-"date": {
-"attr": "date"
-}
-}
+{
+  "request_parameters": {
+    "method": "POST",
+    "endpoint_path": "/customer/[[id]]",
+    "query_parameters": {
+      "date": {
+        "attr": "date"
+      }
+    }
+  }
 }
 
 
@@ -553,21 +579,23 @@ Let's have this table on the input:
 Consider following request options:
 
 ```json
-"request_parameters": {
-"method": "POST",
-"endpoint_path": "/user/[[id]]",
-"query_parameters": {
-"date": {
-"attr": "date"
-}
-}
-},
-"request_content": {
-"content_type": "JSON",
-"iterate_by_columns": [
-"id", "date"
-]
-}
+{
+  "request_parameters": {
+    "method": "POST",
+    "endpoint_path": "/user/[[id]]",
+    "query_parameters": {
+      "date": {
+        "attr": "date"
+      }
+    }
+  },
+  "request_content": {
+    "content_type": "JSON",
+    "iterate_by_columns": [
+      "id",
+      "date"
+    ]
+  }
 }
 
 ```
