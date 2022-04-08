@@ -21,7 +21,7 @@ The data can be sent in two ways:
 
 *Click on the section names if you want to learn more.*
 
-- [**api**](/extend/generic-writer/configuration/#api/) --- [REQUIRED] sets the basic properties of the API.
+- [**api**](/extend/generic-writer/configuration/#api) --- [REQUIRED] sets the basic properties of the API.
     - [**base_url**](/extend/generic-writer/configuration/#base-url) ---  [REQUIRED] defines the URL to which the API requests
       should be sent.
     - [**authentication**](/extend/generic-writer/configuration/#authentication) --- needs to be configured for any API
@@ -48,6 +48,7 @@ The data can be sent in two ways:
     - [**iterate_by_columns**](/extend/generic-writer/configuration/#iterate-by-columns) --- defines set of columns in
       the input data that are excluded from the content and may be used instead of placeholders within the
       request_options. The input table is iterated row by row, e.g. 1 row = 1 request
+- [**debug**](/extend/generic-writer/configuration/#debug) --- Turns on more verbose logging for debugging purposes.
 
 There are also simple pre-defined [**functions**](/extend/generic-writer/configuration/#dynamic-functions) available,
 adding extra flexibility when needed.
@@ -97,7 +98,7 @@ Here you can set parameters of the request retry in case of failure.
     "base_url": "https://example.com/api",
     "retry_config": {
       "max_retries": 5,
-      "backoff_factor": 0.3
+      "backoff_factor": 0.3,
       "codes": [
         500,
         429
@@ -758,3 +759,26 @@ The above value is then available in contexts as:
 "token": {"attr": "token"}
 ```
 
+## Debug
+
+By setting the root parameter `debug` to `true`, it is possible to enable more verbose logging that will help debugging.
+
+**CAUTION** Note that higher verbosity causes the writer to print parts of the actual content into the job log, so use with caution. 
+Always make sure to turn this option off after debugging to prevent any issues.
+
+```json
+{
+  "debug": true,
+  "api": {
+    "base_url": "http://test.com/api/"
+  },
+  "user_parameters": {},
+  "request_parameters": {
+    "method": "POST",
+    "endpoint_path": "users/[[id]]"
+  },
+  "request_content": {
+    "content_type": "BINARY"
+  }
+}
+```

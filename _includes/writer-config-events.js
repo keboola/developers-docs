@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Api
+    $("span:contains('\"debug\"')").wrap("<a href='/extend/generic-writer/configuration/#debug'></a>");
     $("span:contains('\"api\"')").wrap("<a href='/extend/generic-writer/configuration/#api'></a>");
     $("span:contains('\"base_url\"')").wrap("<a href='/extend/generic-writer/configuration/#base-url'></a>");
     $("span:contains('\"default_query_parameters\"')").wrap("<a href='/extend/generic-writer/configuration/#default-query-parameters'></a>");
