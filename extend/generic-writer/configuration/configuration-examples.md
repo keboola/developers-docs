@@ -104,8 +104,7 @@ in [batches](https://docs.exponea.com/reference#batch-commands) of `3` requests.
     "attr": "token_encoded"
    },
    "Content-type": "application/csv"
-  },
-  "query_parameters": {}
+  }
  },
  "request_content": {
   "content_type": "JSON",
@@ -113,13 +112,10 @@ in [batches](https://docs.exponea.com/reference#batch-commands) of `3` requests.
    "nesting_delimiter": "__",
    "chunk_size": 3,
    "column_data_types": {
-    "autodetect": true,
-    "datatype_override": []
+    "autodetect": true
    },
-   "request_data_wrapper": "{\"commands\":{{data}}}",
-   "column_names_override": {}
-  },
-  "iterate_by_columns": []
+   "request_data_wrapper": "{\"commands\":{{data}}}"
+  }
  }
 }
 ```
@@ -202,7 +198,6 @@ The API uses Basic http authentication.
         }
       }
  },
- "user_parameters": {},
  "request_parameters": {
   "method": "POST",
   "endpoint_path": "/api/v1/customers/{{user_id}}/events?",
@@ -211,8 +206,7 @@ The API uses Basic http authentication.
     "attr": "token_encoded"
    },
    "Content-type": "application/csv"
-  },
-  "query_parameters": {}
+  }
  },
  "request_content": {
   "content_type": "JSON",
@@ -220,8 +214,7 @@ The API uses Basic http authentication.
    "nesting_delimiter": "_",
    "chunk_size": 1,
    "column_data_types": {
-    "autodetect": true,
-    "datatype_override": []
+    "autodetect": true
    },
    "request_data_wrapper": "",
    "column_names_override": {}
@@ -233,14 +226,8 @@ The API uses Basic http authentication.
 }
 ```
 
-### Customer.io User Event
 
-Update user events via the [Customer.io API](https://customer.io/docs/api/#apitrackeventsevent_add) based on the user_id column.
-
-The API uses Basic http authentication which is mimicked by the `base64_encode` function. The field `#token` is expected to contain 
-`user:password`.
-
-** Input Table:**
+**Input Table:**
 
 | user_id        | data_price | data_date | name          |
 |----------------|------------|-----------|---------------|
@@ -302,8 +289,7 @@ Send notifications to Slack channels via an API. Note that you need to create an
     "attr": "token_encoded"
    },
    "Content-type": "application/json"
-  },
-  "query_parameters": {}
+  }
  },
  "request_content": {
   "content_type": "JSON",
@@ -311,13 +297,10 @@ Send notifications to Slack channels via an API. Note that you need to create an
    "nesting_delimiter": "_",
    "chunk_size": 1,
    "column_data_types": {
-    "autodetect": true,
-    "datatype_override": []
+    "autodetect": true
    },
-   "request_data_wrapper": "",
-   "column_names_override": {}
-  },
-  "iterate_by_columns": []
+   "request_data_wrapper": ""
+  }
  }
 }
 

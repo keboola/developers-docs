@@ -1,5 +1,6 @@
 {
   "parameters": {
+    "debug": false,
     "api": {
       "base_url": "https://example.com/api",
       "default_query_parameters": {
