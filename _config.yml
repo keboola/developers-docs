@@ -10,7 +10,7 @@ url: "https://developers.keboola.com"
 exclude:
   - docker-compose.yml
   - README.md
-  - deploy.sh
+  - .idea
 
 sass:
   style: compressed
