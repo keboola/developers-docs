@@ -1,6 +1,6 @@
 # Keboola Connection Developers Documentation
 
-[![Build Status](https://travis-ci.com/keboola/developers-docs.svg?branch=master)](https://travis-ci.com/keboola/developers-docs)
+[![Build and deploy](https://github.com/keboola/developers-docs/actions/workflows/main.yml/badge.svg)](https://github.com/keboola/developers-docs/actions/workflows/main.yml)
 
 How to write documentation [https://sites.google.com/keboola.com/devel-internal/dokumentace](https://sites.google.com/keboola.com/devel-internal/dokumentace)
 
