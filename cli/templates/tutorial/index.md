@@ -230,11 +230,16 @@ Follow the instructions in the definition file:
 1. **Complete the [user inputs](/cli/templates/structure/inputs/).**
 2. **Sort the user inputs.**
     - Move text blocks with definitions.
+    - Assign the inputs to different steps. A preview of the created steps structure is suggested in the comment.
     - User will be asked for inputs in the specified order.
 
 ```md
 <!--
 Please complete definition ...
+
+Preview of steps and groups you created:
+- Group 1: Default Group
+  - Step "step-1": Default Step - Description
 -->
 
 ## Input "mysql-host" (string)
@@ -244,6 +249,7 @@ kind: input
 rules: 
 showIf: 
 default:
+step: step-1
 
 ## Input "mysql-port" (int)
 name: MySQL Port
@@ -252,6 +258,7 @@ kind: input
 rules: 
 showIf: 
 default: 3306
+step: step-1
 
 ## Input "mysql-user" (string)
 name: MySQL User
@@ -260,6 +267,7 @@ kind: input
 rules: 
 showIf: 
 default:
+step: step-1
 
 ## Input "mysql-password" (string)
 name: MySQL Password
@@ -267,7 +275,8 @@ description:
 kind: hidden
 rules: 
 showIf: 
-default: 
+default:
+step: step-1
 
 ## Input "mysql-database" (string)
 name: MySQL Database
@@ -276,6 +285,7 @@ kind: input
 rules: 
 showIf: 
 default:
+step: step-1
 ```
 
 ### All Done
