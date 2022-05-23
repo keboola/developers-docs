@@ -38,8 +38,8 @@ It will give you something like this:
             "version": 23,
             "hasUI": false,
             "hasRun": false,
-            "ico32": "https://assets-cdn.kebo...keboola.ex-aws-s3/32/20.png",
-            "ico64": "https://assets-cdn.kebo...keboola.ex-aws-s3/64/20.png",
+            "ico32": "https://ui.keboola-assets.com/.../keboola.ex-aws-s3/32/20.png",
+            "ico64": "https://ui.keboola-assets.com/.../keboola.ex-aws-s3/64/20.png",
             "data": {
                 "definition": {
                     "type": "aws-ecr",
