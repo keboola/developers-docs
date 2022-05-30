@@ -32,6 +32,8 @@ The command must be run in the [repository directory](/cli/templates/structure#r
  Version:              0.0.1 
  Stable:               false 
  Description:          notes 
+ Components:
+   - keboola.ex-aws-s3
   
  Group ID:             g01 
  Description:          Default Group 
