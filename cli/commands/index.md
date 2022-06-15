@@ -47,6 +47,11 @@ kbc help local create row
 | **[kbc remote](/cli/commands/remote/)** | **Operations directly in the [project](/cli/#subsystems).** |
 | [kbc remote create](/cli/commands/remote/create/) | Create an object in the project. |
 | [kbc remote create branch](/cli/commands/remote/create/branch/) | Create a new [branch](https://help.keboola.com/components/branches/) from the `main` branch. |
+| | |
+| **[kbc local template](/cli/commands/local/template/)** | **Manage [templates](/cli/templates/structure/#template) in the [template repository](/cli/templates/structure/#repository).** |
+| [kbc local template delete](/cli/commands/local/template/delete/) | Delete a template instance from the local directory. |
+| [kbc local template list](/cli/commands/local/template/list/) | List templates instances used in the project. |
+| [kbc local template use](/cli/commands/local/template/use/) | Use the template in the project directory. |
 
 
 ## Aliases
@@ -138,4 +143,3 @@ Variables are merged together according to the following priority.
 - [Getting Started](/cli/getting-started/)
 - [Directory Structure](/cli/structure/)
 - [GitHub Integration](/cli/github-integration/)
-
