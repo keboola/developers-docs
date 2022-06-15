@@ -32,6 +32,7 @@ A more detailed description can be found in the chapters below.
 🟫 .env.dist                    - template for .env.local
 📂 .keboola                     - project metadata directory
 ┗ 🟦 manifest.json              - object IDs, paths, naming and other configuration
+🟩 description.md               - project description
 📂 [branch-name]                - branch directory, e.g. main
 ┣ 🟦 meta.json
 ┣ 🟩 description.md
