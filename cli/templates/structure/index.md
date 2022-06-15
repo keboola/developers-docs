@@ -43,6 +43,7 @@ Repository manifest structure:
     - `description` - short description of the version
     - `stable` - is the template ready for production use?
     - `path` - path to the template version directory
+    - `components` *(array)* - list of components used by the template
 
 #### Example
 

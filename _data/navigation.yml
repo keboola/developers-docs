@@ -358,6 +358,8 @@ items:
               - url: /cli/commands/local/template/
                 title: template
                 items:
+                  - url: /cli/commands/local/template/delete/
+                    title: delete
                   - url: /cli/commands/local/template/list/
                     title: list
                   - url: /cli/commands/local/template/use/
@@ -380,6 +382,10 @@ items:
                     title: init
               - url: /cli/commands/template/create/
                 title: create
+              - url: /cli/commands/template/describe/
+                title: describe
+              - url: /cli/commands/template/list/
+                title: list
       - url: /cli/github-integration/
         title: GitHub Integration
       - url: /cli/templates/
