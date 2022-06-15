@@ -360,6 +360,8 @@ items:
                 items:
                   - url: /cli/commands/local/template/delete/
                     title: delete
+                  - url: /cli/commands/local/template/list/
+                    title: list
                   - url: /cli/commands/local/template/use/
                     title: use
           - url: /cli/commands/remote/
