@@ -29,6 +29,7 @@ The template needs to contain at least one group with one step.
   - `required` string, define how many steps need to be selected by the user 
     - one of: `optional`, `exactlyOne`, `atLeastOne`, `zeroOrOne`, `all`
   - `steps` - array of steps within the group
+    - `icon` - component or common icon, [read more](#icons) 
     - `name` string - name of the step
     - `description` string - step description
     - `dialogName` string - name of the step presented to the user in the UI (`name` is used if empty)
@@ -39,14 +40,15 @@ The template needs to contain at least one group with one step.
       - `name` string - input name
       - `description` string - input description
       - `type` string - input data type
-        - one of `string`, `int`, `double`, `bool`, `string[]`
+        - one of `string`, `int`, `double`, `bool`, `string[]`, `object`
       - `kind` string - input visual style, see below.
       - `default` - default value, must match `type`.
-      - `rules` string - comma separated validation rules, [read more](#rules) about syntax.
-      - `showIf` string - condition when the input should be displayed, [read more](#show-if) about syntax.
+      - `rules` string - comma separated validation rules, [read more](#rules) about syntax
+      - `showIf` string - condition when the input should be displayed, [read more](#show-if) about syntax
       - `options` array of options, only for `kind = select/multiselect`
           - `value` string - option value
           - `label` string - option visible name
+      - `componentId` string - id of the component to be authorized for, allowed only for `kind = oauth`
 
 **Allowed combinations of `type` and `kind`**:
 - Type `string`
@@ -62,6 +64,8 @@ The template needs to contain at least one group with one step.
   - Kind `confirm` - yes/no prompt 
 - Type `string[]`
   - Kind `multiselect` - drop-down list, multiple options can be selected.
+- Type `object`
+  - Kind `oauth` - a link to oAuth authorization, also needs `componentId` to be defined
 
 
 **Example of `inputs.jsonnet`**:
@@ -91,6 +95,17 @@ The template needs to contain at least one group with one step.
   ]
 }
 ```
+
+### Icons
+
+There are several places where the template author can specify an icon to be displayed in the UI. For security reasons,
+it is not possible to load images from external sites.
+
+The icon is defined as a string and can have one of these forms:
+
+- `component:<component-id>` eg., `component:keboola.ex-onedrive` - the component icon is used.
+- `common:<icon-name>`, eg. `common:upload` - an icon from the predefined set is used
+  - these icons are currently supported: `upload`, `download`, `settings`, `import`
 
 ### Rules
 
@@ -450,6 +465,47 @@ Input Description
 > [ ]  Name 1
   [x]  Name 2
   [x]  Name 3
+```
+
+#### oAuth authorization
+
+The OAuth authorization is fully supported only in the UI. If you use a template containing `oauth` input in the CLI, it will leave
+an empty value in the input and list links to configurations that need to be authorized additionally.
+
+Definition in `inputs.jsonnet`:
+```jsonnet
+{
+  stepsGroups: [
+    {
+      description: "Data extraction",
+      required: "all",
+      steps: [
+        {
+          name: "Awesome API",
+          description: "Data extraction from Awesome API",
+          inputs: [
+            {
+              id: 'my-oauth',
+              name: 'oAuth',
+              description: 'oAuth Authorization',
+              type: 'object',
+              kind: 'oauth',
+              componentId: 'keboola.ex-google-ads'
+            },
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+CLI output:
+```
+Template "keboola/my-template-id/1.2.3" has been applied, instance ID: inst12345
+
+The template generated configurations that need oAuth authorization. Please follow the links and complete the setup:
+- https://connection.keboola.com/admin/projects/123/components/ex-generic-v2/456789
 ```
 
 ## Next Steps

@@ -33,6 +33,9 @@ All templates are listed in the repository manifest file `.keboola/repository.js
 
 Repository manifest structure:
 - `version` - current major version, now `2`
+- `author` - repository author
+  - `name` - author name
+  - `url` - url to author's website
 - `templates` *(array)* - information about the project
   - `id` - template ID
   - `name` - a human-readable name
@@ -50,6 +53,10 @@ Repository manifest structure:
 ```json
 {
   "version": 2,
+  "author": {
+    "name": "Keboola",
+    "url": "https://keboola.com"
+  },
   "templates": [
     {
       "id": "my-template",
@@ -145,9 +152,14 @@ For **larger changes** in the template, it is recommended to create a new `<majo
 
 ### Manifest
 
-All configurations and configuration rows are defined in the manifest file `manifest.jsonnet`.
+All configurations and configuration rows are defined in the manifest file `manifest.jsonnet`. 
+Each template should have a `mainConfig` that can be started in the UI using the **Run button** after the template is used.
+This is usually the main orchestration.
 
 Template manifest structure:
+- `mainConfig` - main configuration
+  - `componentId` - ID of the component
+  - `id` - human-readable ID of the configuration defined by [`ConfigId` function](/cli/templates/structure/jsonnet-files/#functions)
 - `configurations` - array of component configurations
   - `componentId` - ID of the component
   - `id` - human-readable ID of the configuration defined by [`ConfigId` function](/cli/templates/structure/jsonnet-files/#functions)
@@ -160,6 +172,10 @@ Template manifest structure:
 
 ```jsonnet
 {
+  mainConfig: {
+    componentId: "keboola.orchestrator",
+    id: ConfigId("orchestrator"),
+  },
   configurations: [
     {
       componentId: "keboola.ex-db-mysql",
@@ -185,6 +201,33 @@ Template manifest structure:
 All user inputs are defined in the `inputs.jsonnet`.
 
 Read more in [Template Inputs](/cli/templates/structure/inputs/).
+
+### Common Directory
+
+Files saved in `_common` directory of the template repository can be accessed by every template using `<common>/` prefix.
+
+#### Example
+
+Use of the `_common` directory in `manifest.jsonnet`:
+```jsonnet
+{
+  configurations: [
+    {
+      componentId: "ex-generic-v2",
+      id: ConfigId("myconfig"),
+      path: "<common>/foo/bar/extractor/ex-generic-v2/myconfig",
+      rows: [],
+    }
+  ],
+}
+```
+
+Use of the `_common` directory in a Jsonnet file (`config.jsonnet`):
+```jsonnet
+local part1 = import "lib/part1.jsonnet";
+local part2 = import "/<common>/foo/bar/extractor/ex-generic-v2/myconfig/lib/part2.jsonnet";
+std.mergePatch(part1, part2)
+```
 
 ## Next Steps
 - [Jsonnet Files](/cli/templates/structure/jsonnet-files/)
