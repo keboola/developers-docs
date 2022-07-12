@@ -1,6 +1,6 @@
 ---
 title: Create Remote Object
-permalink: /cli/commands/remote/create
+permalink: /cli/commands/remote/create/
 ---
 
 * TOC
@@ -18,4 +18,3 @@ Shows an interactive dialog if you do not enter a sub-command.
 | Command | Description
 |-|-|-
 | [kbc remote create branch](/cli/commands/remote/create/branch/) | Create a new [branch](https://help.keboola.com/components/branches/) from the `main` branch. |
-
