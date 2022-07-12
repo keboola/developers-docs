@@ -47,8 +47,7 @@ For example, a bucket ID that contains a configuration ID can be composed in thi
 
 - **Returns the value of the [user input](/cli/templates/structure/inputs/).**
 - If the input is hidden, because the [showIf](/cli/templates/structure/inputs/#show-if) condition was evaluated as `false`:
-  - Function returns the default value of the input, if it is defined. 
-  - Otherwise, it returns an empty value, e.g., `0` for `int` type, `false` for `bool` type, ...
+  - Function returns an empty value for the input type, e.g., `0` for `int`, `false` for `bool`, etc.
 
 Example:
 ```jsonnet
@@ -60,6 +59,22 @@ Example:
   },
 }
 ```
+
+**`InputIsAvailable(inputId)`**
+
+- **Returns `true` if the input has been filled in by the user and `false` if the step has been skipped or `showIf = false`**.
+
+**`InstanceId()`**
+
+- **Returns id of current template instance.**
+- e.g. `V1StGXR8IZ5jdHi6BAmyT`
+
+**`InstanceIdShort()`**
+
+- **Returns id of current template instance shorten to 8 characters.**
+- e.g. `V1StGXR8`
+
+
 
 ## Next Steps
 - [User Inputs](/cli/templates/structure/inputs/)
