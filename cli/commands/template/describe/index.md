@@ -4,7 +4,7 @@ permalink: /cli/commands/template/describe/
 ---
 
 * TOC
-  {:toc}
+{:toc}
 
 **Describe [template](/cli/templates/structure/#template) and its inputs in the [repository directory]((/cli/templates/structure/#repository)).**
 

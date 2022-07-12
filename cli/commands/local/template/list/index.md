@@ -3,8 +3,8 @@ title: List Templates Instances
 permalink: /cli/commands/local/template/list/
 ---
 
-* TOC
-  {:toc}
+* TOC 
+{:toc}
 
 **List [templates](/cli/templates/structure/#template) instances used in the project.**
 
