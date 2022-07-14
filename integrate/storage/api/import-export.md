@@ -37,7 +37,7 @@ First create a file resource; to create a new file called
 [`new-file.csv`](/integrate/storage/new-table.csv) with `52` bytes, call:
 
 {% highlight bash %}
-curl --request POST --header "X-StorageApi-Token:storage-token" --form "name=new-file.csv" --form "sizeBytes=52"  https://connection.keboola.com/v2/storage/files/prepare?federationToken=1
+curl --request POST --header "X-StorageApi-Token:storage-token" --form "name=new-file.csv" --form "sizeBytes=52" --form "federationToken=1" https://connection.keboola.com/v2/storage/files/prepare
 {% endhighlight %}
 
 Which will return a response similar to this:
