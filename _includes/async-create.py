@@ -17,10 +17,11 @@ print('\nCreating upload file')
 # Create a new file in Storage
 # See https://keboola.docs.apiary.io/#reference/files/upload-file
 response = requests.post(
-    'https://connection.keboola.com/v2/storage/files/prepare?federationToken=1',
+    'https://connection.keboola.com/v2/storage/files/prepare',
     data={
         'name': fileName,
-        'sizeBytes': os.stat(fileName).st_size
+        'sizeBytes': os.stat(fileName).st_size,
+        'federationToken': 1
     },
     headers={'X-StorageApi-Token': storageToken}
 )
