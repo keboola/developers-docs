@@ -87,8 +87,6 @@ Full configuration example with all artifact types:
 }
 ```
 
-WIP
-
 ## Artifacts life-cycle in a job
 Job runner checks if the project has enabled `artifacts` feature.
 Job runner checks the configuration of the component.
