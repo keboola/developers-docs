@@ -52,7 +52,11 @@ kbc help local create row
 | [kbc local template delete](/cli/commands/local/template/delete/) | Delete a template instance from the local directory. |
 | [kbc local template list](/cli/commands/local/template/list/) | List templates instances used in the project. |
 | [kbc local template use](/cli/commands/local/template/use/) | Use the template in the project directory. |
-
+| | |
+| [kbc template create](/cli/commands/template/create/) | Create template in repository directory. |
+| [kbc template describe](/cli/commands/template/describe/) | Describe template and its inputs. |
+| [kbc template list](/cli/commands/template/list/) | List templates in the repository. |
+| [kbc template repository init](/cli/commands/template/repository/init/) | Init a new repository directory. |
 
 ## Aliases
 
