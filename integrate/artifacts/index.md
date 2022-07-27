@@ -31,20 +31,20 @@ There are three types of artifacts for now `runs`, `custom` and `shared`.
 The type specifies which components will have access to the artifact or which artifacts to download for the component to process.
 Types are used in a configuration of a consumer component to specify which artifacts to download. 
 
-- **runs** - created by previous runs of the same component and configuration
+- **runs** - artifacts from previous runs of the same configuration
 
-- **custom** - defined in configuration which component / configuration / runs to use
+- **custom** - artifacts from previous runs of a different configuration. The configuration which produced the artifacts will be defined in the consumer configuration (configurationId, componentId, branchId)
 
 - **shared** - artifacts shared within an orchestration
 
-`runs` and `custom` types are the same from the producer point of view.
+`runs` and `custom` types are the same from the producer point of view. To produce a `shared` artifact, it has to be written into a `shared` folder. Read more in [File structure](#file-structure) section.
 
 ## File structure
-Artefact is a unique set of files associated with a successful job, component and configuration.
+Artifact is a unique set of files associated with a successful job, component and configuration.
 A component can either produce or consume artifacts or both.
 
 ### Produce
-To produce an artifact, store on or more files in one (or both) of the following `output` directories.
+To produce an artifact, store one or more files in the following `output` directories. Subdirectories are also supported.
 - `/data/artifacts/out/current` to create an artifact of type `runs` / `custom`. 
 - `/data/artifacts/out/shared` to create an artifact of type `shared`, which can be accessed by any component within the same orchestration.
 
@@ -57,6 +57,24 @@ To consume created artifacts you have to specify, in the configuration of a comp
  - `shared` to download artifacts created within the same orchestration by any artifact producing component that has already finished. These will be stored in `/data/artifacts/in/shared/jobs/job-%job_id%` directory.
 
 ## Configuration
+Each type of artifact has a separate node in configuration. All the types can be used simultaneously.
+Each type node has an attribute "enabled", which enables or disables download of the corresponding artifact type.
+
+### Runs
+ - **enabled** [true|false] - enable or disable download of this artifact type
+ - **filter** 
+   - **date_since** - only artifacts from jobs younger than this will be downloaded
+   - **limit** - maximum number of the latest jobs from which to download artifacts 
+
+### Custom
+- **enabled** [true|false] - enable or disable download of this artifact type
+- **filter**
+    - **branch_id**, **component_id**, **config_id**  - specify the configuration to download artifacts from
+    - **date_since** - only artifacts from jobs younger than this will be downloaded
+    - **limit** - maximum number of the latest jobs from which to download artifacts
+
+### Shared
+- **enabled** [true|false] - enable or disable download of this artifact type
 
 Full configuration example with all artifact types:
 
@@ -72,6 +90,7 @@ Full configuration example with all artifact types:
       }
     },
     "custom": {
+      "enabled": true,
       "filter": {
         "component_id": "keboola.python-transformation",
         "config_id": "12345",
@@ -102,7 +121,7 @@ Component finishes and job runner does:
 
 - gzip the content of runs/current
 
-- tag the gzipped it with jobId, componentId, configId, runId, branchId
+- tag the gzipped file with jobId, componentId, configId, runId, branchId and other tags if needed
 
 - upload the file to File Storage 
 
