@@ -162,29 +162,15 @@ Both configurations needs to be in the same orchestration.
 The configuration producing artifact needs to be in a phase that precedes the consuming one.
 
 1. Create "Producer" configuration
-   The configuration will look like this:
+   The Python code will write a file into a shared folder:
 
-   ```json
-   {
-       "parameters": {
-           "blocks": [
-               {
-                   "name": "Block 1",
-                   "codes": [
-                       {
-                           "name": "Upload shared",
-                           "script": [
-                               "import os\npath = \"/data/artifacts/out/shared\"\nwith open(path+\"/myartifact3\", \"w\") as file:\n  file.write(\"value1\")"
-                           ]
-                       }
-                   ]
-               }
-           ]
-       }
-   }
+   ```python
+   import os
+   with open(path+\"/myartifact-shared\", \"w\") as file:
+     file.write(\"value1\")"
    ```
    
-   Run curl command to create it:
+   Run curl command to create the configuration:
 
    ```shell
     curl -X POST "$STORAGE_API_HOST/v2/storage/branch/default/components/keboola.python-transformation-v2/configs" \
@@ -197,23 +183,9 @@ The configuration producing artifact needs to be in a phase that precedes the co
 
 2. Create "Consumer" configuration
 
+   The artifacts configuration:
    ```json
    {
-      "parameters": {
-         "blocks": [
-            {
-               "name": "Block 1",
-               "codes": [
-                  {
-                     "name": "Download shared",
-                     "script": [
-                        "import os\nimport glob\n\n# Download\nprint(glob.glob(\"/data/artifacts/in/shared/*/*\")) "
-                     ]
-                  }
-               ]
-            }
-         ]
-      },
       "artifacts": {
          "shared": {
             "enabled": true
@@ -222,13 +194,21 @@ The configuration producing artifact needs to be in a phase that precedes the co
    }
    ```
    
-   Run curl command to create it:
+   The Python script:
+
+   ```python
+   import os
+   import glob
+   print(glob.glob("/data/artifacts/in/shared/*/*")) 
+   ```
+   
+   Run curl command to create the configurtion:
    
    ```shell
     curl -X POST "$STORAGE_API_HOST/v2/storage/branch/default/components/keboola.python-transformation-v2/configs" \
     -H "X-StorageApi-Token: $TOKEN" \
     -H 'Content-Type: application/x-www-form-urlencoded' \
-    --data-urlencode 'configuration={"parameters":{"blocks":[{"name":"Block 1","codes":[{"name":"Download shared","script":["import os\nimport glob\n\n# Download\nprint(glob.glob(\"/data/artifacts/in/shared/*/*\")) "]}]}]},"artifacts":{"shared":{"enabled":true}}}' \
+    --data-urlencode 'configuration={"parameters":{"blocks":[{"name":"Block 1","codes":[{"name":"Download shared","script":["import os\nimport glob\n\nprint(glob.glob(\"/data/artifacts/in/shared/*/*\")) "]}]}]},"artifacts":{"shared":{"enabled":true}}}' \
     --data-urlencode 'name=Artifacts shared Consumer' \
     --data-urlencode 'description=Artifacts download shared'    
     ```
