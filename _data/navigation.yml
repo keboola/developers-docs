@@ -287,14 +287,14 @@ items:
       - url: /integrate/variables/
         title: Variables
         items:
-            - url: /integrate/variables/tutorial/
-              title: Tutorial
+          - url: /integrate/variables/tutorial/
+            title: Tutorial
 
       - url: /integrate/artifacts/
-          title: Artifacts
-          items:
-            - url: /integrate/artifacts/tutorial/
-              title: Tutorial
+        title: Artifacts
+        items:
+          - url: /integrate/artifacts/tutorial/
+            title: Tutorial
 
       - url: /integrate/database/
         title: SSH Tunnel for Database Extractors
