@@ -23,7 +23,7 @@ In addition to the [standard Jsonnet functions](https://jsonnet.org/ref/stdlib.h
 - In a template, each configuration has a human-readable name, e.g., `my-config`.
 - When applying a template, a human-readable ID is replaced by a generated unique ID, e.g., `5038695485`.
 - As a result, it is possible to create multiple instances of a template.
-- `ConfigId` function is primarily used in the [template manifest](/cli/templates/structure/#manifest-1), but it can be used in any Jsonnet file.
+- `ConfigId` function is primarily used in the [template manifest](/cli/templates/structure/#repository-manifest), but it can be used in any Jsonnet file.
 
 For example, a bucket ID that contains a configuration ID can be composed in this way:
 ```jsonnet

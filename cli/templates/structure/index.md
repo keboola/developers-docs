@@ -20,14 +20,14 @@ The repository contains a manifest and directories with templates.
 
 ```
 📂 .keboola             - metadata directory
-┗ 🟦 repository.json    - manifest, templates paths and versions
-📂 [template]           - template directory, see structure below
+┗ 🟦 repository.json    - manifest, paths and versions
+📂 [template]           - template directory, see below
 ┗ 📂 [template version]
   ┗ ...
 ...
 ```
 
-### Manifest
+### Repository Manifest
 
 All templates are listed in the repository manifest file `.keboola/repository.json`.
 
@@ -39,7 +39,7 @@ Repository manifest structure:
 - `templates` *(array)* - information about the project
   - `id` - template ID
   - `name` - a human-readable name
-  - `description` - short description
+  - `description` - short description of the template
   - `path` - path to the template directory
   - `versions` *(array)*
     - `version` - [semantic version](https://semver.org/)
@@ -103,7 +103,8 @@ A template directory is stored in the [repository](#repository) and contains dir
   ┣ 📂 src
   ┃ ┗ 🟪 inputs.jsonnet          - definition of user inputs
   ┃ ┣ 🟪 manifest.jsonnet        - template manifest, object IDs and paths
-  ┃ ┣ 🟩 README.md               - detailed description of the template
+  ┃ ┣ 🟩 description.md          - description which is displayed on the template detail page
+  ┃ ┣ 🟩 README.md               - detailed information, changelog, ...
   ┃ ┗ 📂 [component-type]        
   ┃   ┗ 📂 [component-id]
   ┃     ┗ 📂 [config-name]       - structure is similar to the project structure,
@@ -116,6 +117,19 @@ A template directory is stored in the [repository](#repository) and contains dir
   
 ...
 ```
+
+### Description
+
+There are three types of template description:
+- `description` field in the [repository.json](#repository):
+  - Short description.
+  - It is displayed on the overview of all templates.
+- `description.md` file in the template [src directory](#template):
+  - Longer description with MarkDown formatting support. 
+  - It is displayed on the template detail page.
+- `README.md` file in the template [src directory](#template):
+  - Detailed information, changelog, data model ...
+  - It is by default collapsed on the template detail page, in the `More Details` section.
 
 ### Versioning
 
@@ -154,7 +168,7 @@ For **larger changes** in the template, it is recommended to create a new `<majo
 
 All configurations and configuration rows are defined in the manifest file `manifest.jsonnet`. 
 Each template should have a `mainConfig` that can be started in the UI using the **Run button** after the template is used.
-This is usually the main orchestration.
+This is usually the main orchestration/flow.
 
 Template manifest structure:
 - `mainConfig` - main configuration
@@ -204,7 +218,7 @@ Read more in [Template Inputs](/cli/templates/structure/inputs/).
 
 ### Common Directory
 
-Files saved in `_common` directory of the template repository can be accessed by every template using `<common>/` prefix.
+Files saved in `_common` directory in the [repository directory](#repository) can be accessed by every template using `<common>/` prefix.
 
 #### Example
 

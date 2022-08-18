@@ -32,8 +32,8 @@ The template needs to contain at least one group with one step.
     - `icon` - component or common icon, [read more](#icons) 
     - `name` string - name of the step
     - `description` string - step description
-    - `dialogName` string - name of the step presented to the user in the UI (`name` is used if empty)
-    - `dialogDescription` string - description of the step presented to the user in the UI (`description` is used if empty)
+    - `dialogName` string - name of the step presented to the user in the UI dialog (`name` is used if empty)
+    - `dialogDescription` string - description of the step presented to the user in the UI dialog (`description` is used if empty)
     - `inputs` - array of inputs definitions
       - `id` string - input ID
         - used in [Jsonnet](/cli/templates/structure/jsonnet-files) function `Input`, e.g., `Input("id")`
@@ -49,6 +49,7 @@ The template needs to contain at least one group with one step.
           - `value` string - option value
           - `label` string - option visible name
       - `componentId` string - id of the component to be authorized for, allowed only for `kind = oauth`
+      - `oauthInputId` string - id of the linked `kind=oauth` input, allowed only for `kind = oauthAccounts`
 
 **Allowed combinations of `type` and `kind`**:
 - Type `string`
@@ -65,7 +66,8 @@ The template needs to contain at least one group with one step.
 - Type `string[]`
   - Kind `multiselect` - drop-down list, multiple options can be selected.
 - Type `object`
-  - Kind `oauth` - a link to oAuth authorization, also needs `componentId` to be defined
+  - Kind `oauth` - oAuth authorization, also needs `componentId` to be defined.
+  - Kind `oauthAccounts` - oAuth accounts selector, also needs `oauthInputId` to be defined.
 
 
 **Example of `inputs.jsonnet`**:
@@ -467,10 +469,12 @@ Input Description
   [x]  Name 3
 ```
 
-#### oAuth authorization
+#### oAuth Authorization
 
-The OAuth authorization is fully supported only in the UI. If you use a template containing `oauth` input in the CLI, it will leave
-an empty value in the input and list links to configurations that need to be authorized additionally.
+The OAuth authorization input (`kind=oauth`) is fully supported only in the UI.
+It can be used for any component that supports oAuth authorization, see `componentId` field.
+If you use a template containing `oauth` input in the CLI, it will leave
+an empty value. Links to configurations that need to be authorized additionally will be printed at the end.
 
 Definition in `inputs.jsonnet`:
 ```jsonnet
@@ -500,12 +504,185 @@ Definition in `inputs.jsonnet`:
 }
 ```
 
+Input usage in a `config.jsonnet`:
+```jsonnet
+{
+  authorization: {
+    oauth_api: Input("my-oauth"),
+  },
+}
+```
+
 CLI output:
 ```
 Template "keboola/my-template-id/1.2.3" has been applied, instance ID: inst12345
 
 The template generated configurations that need oAuth authorization. Please follow the links and complete the setup:
 - https://connection.keboola.com/admin/projects/123/components/ex-generic-v2/456789
+```
+
+
+#### oAuth Accounts
+
+The OAuth accounts input (`kind=oauthAccounts`) is fully supported only in the UI.
+In the CLI, it will leave an empty value.
+It is an additional input to the `kind=oauth` input, they are linked by `oauthInputId` field.
+It allows selection of user accounts, as an oAuth account can have access to multiple accounts.
+
+Definition in `inputs.jsonnet`:
+```jsonnet
+{
+  stepsGroups: [
+    {
+      description: "Instagram",
+      required: "all",
+      steps: [
+        {
+          name: "Instagram",
+          description: "Data extraction from Instagram",
+          inputs: [
+            {
+              {
+                id: "my-oauth",
+                name: "Instagram oAuth",
+                description: "Instagram Authorization",
+                type: "object",
+                kind: "oauth",
+                componentId: "keboola.ex-instagram",
+              },
+              {
+                id: "my-oauth-accounts",
+                name: "Instagram Profiles",
+                description: "Instagram Profiles",
+                type: "object",
+                kind: "oauthAccounts",
+                oauthInputId: "my-oauth",
+              },
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+Inputs usage in a `config.jsonnet`:
+```jsonnet
+{
+  authorization: {
+    oauth_api: Input("my-oauth"),
+  },
+  parameters: Input("my-oauth-accounts") + {
+    other1: "value1",
+    other2: "value2",
+  }
+}
+```
+
+
+OAuth Accounts input can only be used with the components listed below:
+
+##### keboola.ex-google-analytics-v4
+
+Example value for `profiles` mode:
+```json
+{
+  "profiles": [
+    {
+      "id": "PROFILE_ID",
+      "name": "All Web Site Data",
+      "webPropertyId": "WEB_PROPORTY_ID",
+      "webPropertyName": "WEB_PROPRTY_NAME",
+      "accountId": "ACCOUNT_ID",
+      "accountName": "ACCOUNT_NAME"
+    }
+  ]
+}
+```
+
+Example value for `properties` mode:
+```json
+{
+  "properties": [
+    {
+      "accountKey": "accounts/ACCOUNT_ID",
+      "accountName": "ACCOUNT_NAME",
+      "propertyKey": "properties/PROPERTY_ID",
+      "propertyName": "PROPERTY_NAME"
+    }
+  ]
+}
+```
+
+##### keboola.ex-google-ads
+
+Example value:
+```json
+{
+  "customerId": ["1234abcd"],
+  "onlyEnabledCustomers": true
+}
+```
+
+##### keboola.ex-facebook-ads
+
+Example value:
+```json
+{
+  "accounts": {
+    "act_12345678": {
+      "account_id": "12345678",
+      "business_name": "",
+      "currency": "CZK",
+      "id": "act_12345678",
+      "name": "Jane Doe"
+    }
+  }
+}
+```
+
+##### keboola.ex-facebook
+
+Example value:
+```json
+{
+  "accounts": {
+    "123456789101112": {
+      "category": "Just for fun",
+      "category_list": [
+        {
+          "id": "9876543210000",
+          "name": "Just for fun"
+        }
+      ],
+      "name": "PAGE_NAME",
+      "id": "123456789101112",
+      "tasks": [
+        "ANALYZE",
+        "ADVERTISE",
+        "MODERATE",
+        "CREATE_CONTENT",
+        "MANAGE"
+      ]
+    }
+  }
+}
+```
+
+##### keboola.ex-instagram
+
+Example value:
+```json
+{
+  "accounts": {
+    "123456789101112": {
+      "category": "Musician/Band",
+      "fb_page_id": "9876543210000",
+      "id": "123456789101112",
+      "name": "Entita"
+    }
+  }
+}
 ```
 
 ## Next Steps
