@@ -59,11 +59,20 @@ client.tables.create(name='new-table',
 
 The above command will import the contents of the `coords.csv` file into the newly created table. It will
 also mark the `id` column as the primary key.
+### Example --- Load to existing table, incrementally
 
+To load data incrementally into an existing table, we can use the [load](https://github.com/keboola/sapi-python-client/blob/5a93926c2191ccd6b7402c9e24d9912884d87d4c/kbcstorage/tables.py#L207) method, where `table_id` is the ID of the table that you want to load into, and `path` is the path to your csv file containing the data:
+
+{% highlight python %}
+
+from kbcstorage.client import Client
+
+client = Client('https://connection.keboola.com', 'your-token')
+
+client.tables.load(table_id=table_id, file_path=path, is_incremental=True)
+
+{% endhighlight %}
 ### Example --- Export Data
-If you want to export a table from Storage and import it into Python, use the `importTable` function. Provide
-the ID (*bucketName.tableName*) of an existing table.
-
 To export data from the `old-table` table in the `in.c-main` bucket, use:
 
 {% highlight python %}
