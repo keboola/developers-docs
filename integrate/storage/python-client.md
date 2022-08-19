@@ -61,9 +61,6 @@ The above command will import the contents of the `coords.csv` file into the new
 also mark the `id` column as the primary key.
 
 ### Example --- Export Data
-If you want to export a table from Storage and import it into Python, use the `importTable` function. Provide
-the ID (*bucketName.tableName*) of an existing table.
-
 To export data from the `old-table` table in the `in.c-main` bucket, use:
 
 {% highlight python %}
