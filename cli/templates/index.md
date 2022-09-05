@@ -33,6 +33,8 @@ See the [tutorial](/cli/templates/tutorial/) on how to create and use a template
 | [kbc template create](/cli/commands/template/create/) | Create a new template from an existing project. |
 | [kbc template describe](/cli/commands/template/describe/) | Describe the template and its inputs. |
 | [kbc template list](/cli/commands/template/list/) | List the templates in the repository. |
+| [kbc template test](/cli/commands/template/test/) | Manage a template test. |
+| [kbc template test run](/cli/commands/template/test/run/) | Run tests for templates. |
 
 
 

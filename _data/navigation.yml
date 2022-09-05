@@ -392,6 +392,11 @@ items:
                 title: describe
               - url: /cli/commands/template/list/
                 title: list
+              - url: /cli/commands/template/test/
+                title: test
+                items:
+                  - url: /cli/commands/template/test/run/
+                    title: test
       - url: /cli/github-integration/
         title: GitHub Integration
       - url: /cli/templates/
