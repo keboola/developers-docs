@@ -48,15 +48,18 @@ kbc help local create row
 | [kbc remote create](/cli/commands/remote/create/) | Create an object in the project. |
 | [kbc remote create branch](/cli/commands/remote/create/branch/) | Create a new [branch](https://help.keboola.com/components/branches/) from the `main` branch. |
 | | |
-| **[kbc local template](/cli/commands/local/template/)** | **Manage [templates](/cli/templates/structure/#template) in the [template repository](/cli/templates/structure/#repository).** |
+| **[kbc local template](/cli/commands/local/template/)** | **Manage [templates](/cli/templates/structure/#template) instances in the [project directory](/cli/structure/).** |
 | [kbc local template delete](/cli/commands/local/template/delete/) | Delete a template instance from the local directory. |
 | [kbc local template list](/cli/commands/local/template/list/) | List templates instances used in the project. |
 | [kbc local template use](/cli/commands/local/template/use/) | Use the template in the project directory. |
 | | |
+| **[kbc template](/cli/commands/template/)** | **Manage [templates](/cli/templates/structure/#template) in the [template repository](/cli/templates/structure/#repository).** |
 | [kbc template create](/cli/commands/template/create/) | Create template in repository directory. |
 | [kbc template describe](/cli/commands/template/describe/) | Describe template and its inputs. |
 | [kbc template list](/cli/commands/template/list/) | List templates in the repository. |
 | [kbc template repository init](/cli/commands/template/repository/init/) | Init a new repository directory. |
+| [kbc template test](/cli/commands/template/test/) | Manage template tests. |
+| [kbc template test run](/cli/commands/template/test/run/) | Run template tests. |
 
 ## Aliases
 

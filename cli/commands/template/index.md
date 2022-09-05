@@ -20,3 +20,5 @@ kbc template [command]
 | [kbc template create](/cli/commands/template/create/) | Create a new template from an existing project. |
 | [kbc template describe](/cli/commands/template/describe/) | Describe template and its inputs. |
 | [kbc template list](/cli/commands/template/list/) | List templates in the repository. |
+| [kbc template test](/cli/commands/template/test/) | Manage template tests. |
+| [kbc template test run](/cli/commands/template/test/run/) | Run template tests. |

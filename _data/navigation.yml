@@ -396,7 +396,7 @@ items:
                 title: test
                 items:
                   - url: /cli/commands/template/test/run/
-                    title: test
+                    title: run
       - url: /cli/github-integration/
         title: GitHub Integration
       - url: /cli/templates/

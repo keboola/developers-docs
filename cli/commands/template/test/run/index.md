@@ -1,5 +1,5 @@
 ---
-title: Run Templates Tests
+title: Run Template Tests
 permalink: /cli/commands/template/test/run/
 ---
 
