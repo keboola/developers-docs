@@ -1,21 +1,21 @@
 ---
-title: Run Template Tests
-permalink: /cli/commands/template/test/run/
+title: Create Template Tests
+permalink: /cli/commands/template/test/create/
 ---
 
 * TOC
 {:toc}
 
-**Run [templates](/cli/templates/structure/#template) tests in the [repository directory]((/cli/templates/structure/#repository)).
+**Create [templates](/cli/templates/structure/#template) tests in the [repository directory]((/cli/templates/structure/#repository)). 
 See [Tests Structure](/cli/templates/tests/) for more details.**
 
 ```
-kbc template test run [template] [version] [flags]
+kbc template test create [template] [version] [flags]
 ```
 
-The command will run tests for a specified template or all templates in the repository (if you don't provide `template` parameter).
+The command will create a test for the specified template.
 
-If you provide `template` but don't provide `version` parameter, the default version will be used.
+If you don't provide `version` parameter, the default version will be used.
 
 The command must be run in the [repository directory](/cli/templates/structure#repository).
 
@@ -29,17 +29,14 @@ TEST_KBC_PROJECTS="connection.keboola.com|1234|project-1234-token;host2|id2|toke
 
 ## Options
 
-`--local-only <bool>`
-: run only local tests (default false)
-
-`--remote-only <bool>`
-: run only remote tests (default false)
-
 `--test-name <string>`
 : run only a test with specified name
 
+`--inputs-file <string>`
+: path to a file with the template inputs
+
 `--verbose <bool>`
-: show details about running tests (default false)
+: show details (default false)
 
 
 [Global Options](/cli/commands/#global-options)
@@ -47,9 +44,11 @@ TEST_KBC_PROJECTS="connection.keboola.com|1234|project-1234-token;host2|id2|toke
 ### Examples
 
 ```
-➜ kbc template test run --local-only
-PASS keboola/my-template/0.0.1 one local
-PASS keboola/template-2/2.0.0 one local
+➜ kbc template test create my-template 0.0.1 --test-name one --inputs-file ./inputs.json
+New objects from "keboola/my-template/0.0.1" template:
+  + C main/extractor/ex-generic-v2/empty
+Template "keboola/my-template/0.0.1" has been applied, instance ID: 1234
+The test was created in folder tests/one.
 ```
 
 ## Next Steps

@@ -59,6 +59,7 @@ kbc help local create row
 | [kbc template list](/cli/commands/template/list/) | List templates in the repository. |
 | [kbc template repository init](/cli/commands/template/repository/init/) | Init a new repository directory. |
 | [kbc template test](/cli/commands/template/test/) | Manage template tests. |
+| [kbc template test create](/cli/commands/template/test/create/) | Create template tests. |
 | [kbc template test run](/cli/commands/template/test/run/) | Run template tests. |
 
 ## Aliases

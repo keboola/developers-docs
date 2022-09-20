@@ -15,4 +15,5 @@ kbc template test [command]
 |---
 | Command | Description
 |-|-|-
+| [kbc template test create](/cli/commands/template/test/create/) | Create template tests. |
 | [kbc template test run](/cli/commands/template/test/run/) | Run template tests. |

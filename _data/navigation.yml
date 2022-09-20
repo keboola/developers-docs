@@ -395,6 +395,8 @@ items:
               - url: /cli/commands/template/test/
                 title: test
                 items:
+                  - url: /cli/commands/template/test/create/
+                    title: create
                   - url: /cli/commands/template/test/run/
                     title: run
       - url: /cli/github-integration/
@@ -411,3 +413,5 @@ items:
                 title: Jsonnet Files
               - url: /cli/templates/structure/inputs/
                 title: Inputs
+          - url: /cli/templates/tests/
+            title: Tests
