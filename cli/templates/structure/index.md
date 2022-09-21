@@ -114,7 +114,7 @@ A template directory is stored in the [repository](#repository) and contains dir
   ┃       ... 
   ┗ 📂 tests                     -  tests directory
     ┣ 📂 [test name]
-    ┃ ┣ 📂 expected-out          - expected structure of project directory 
+    ┃ ┣ 📂 expected-out          - expected structure of the project directory 
     ┃ ┃                            after applying the template in the test 
     ┃ ┗ 🟪 inputs.json           - sample inputs used to apply the template in the test
     ┗ ...
