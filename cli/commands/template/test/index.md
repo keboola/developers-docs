@@ -1,12 +1,12 @@
 ---
-title: Templates Tests
+title: Template Tests
 permalink: /cli/commands/template/test/
 ---
 
 * TOC
 {:toc}
 
-**Manage [templates](/cli/templates/structure/#template) tests in the [repository directory]((/cli/templates/structure/#repository)).**
+**Manage [template](/cli/templates/structure/#template) tests in the [repository directory]((/cli/templates/structure/#repository)).**
 
 ```
 kbc template test [command]
