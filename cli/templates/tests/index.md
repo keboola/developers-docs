@@ -1,5 +1,5 @@
 ---
-title: Templates Tests
+title: Template Tests
 permalink: /cli/templates/tests/
 ---
 
@@ -35,22 +35,22 @@ Some values in the project manifest cannot be reused freely and are dependent on
 (project id, host, and main branch id) or the template instance (instance id). For these values the template test command
 supports placeholders in the directory:
 
-- `__PROJECT_ID__` is replaced by a current project id during the test run
-- `__STORAGE_API_HOST__` is replaced by a current Keboola stack host of the project during the test run
-- `__MAIN_BRANCH_ID__` is replaced by a current main branch id of the project during the test run
+- `__PROJECT_ID__` is replaced by a current project id during the test run.
+- `__STORAGE_API_HOST__` is replaced by a current Keboola stack host of the project during the test run.
+- `__MAIN_BRANCH_ID__` is replaced by a current main branch id of the project during the test run.
 
 Then you can use wildcards for comparison of dynamic values:
 
-- `%e`: Represents a directory separator, for example `/` on Linux.
+- `%e`: Represents a directory separator, for example, `/` on Linux.
 - `%s`: One or more of anything (character or white space) except the end-of-line character.
 - `%S`: Zero or more of anything (character or white space) except the end-of-line character.
 - `%a`: One or more of anything (character or white space) including the end-of-line character.
 - `%A`: Zero or more of anything (character or white space) including the end-of-line character.
 - `%w`: Zero or more white space characters.
-- `%i`: A signed integer value, for example +3142, -3142.
-- `%d`: An unsigned integer value, for example 123456.
-- `%x`: One or more hexadecimal character. That is, characters in the range 0-9, a-f, A-F.
-- `%f`: A floating point number, for example: 3.142, -3.142, 3.142E-10, 3.142e+10.
+- `%i`: A signed integer value, for example, +3142, -3142.
+- `%d`: An unsigned integer value, for example, 123456.
+- `%x`: One or more hexadecimal character. That is, characters in the range 0-9, a-f, and A-F.
+- `%f`: A floating point number, for example, 3.142, -3.142, 3.142E-10, 3.142e+10.
 - `%c`: A single character of any sort.
 - `%%`: A literal percent character: %.
 
@@ -132,7 +132,7 @@ The file supports complex values and can even refer to an OAuth configuration:
 Sensitive values can be stored in environmental variables and referred to using a placeholder encapsulated by `##`. 
 The variables need to be prefixed by `KBC_SECRET_`. 
 
-This configuration means that input `inputToken` will get value from env variable `KBC_SECRET_MY_TEMPLATE_TOKEN`:
+This configuration means that input `inputToken` will get its value from the env variable `KBC_SECRET_MY_TEMPLATE_TOKEN`:
 
 ```json
 {
