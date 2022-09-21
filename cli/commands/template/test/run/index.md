@@ -7,7 +7,7 @@ permalink: /cli/commands/template/test/run/
 {:toc}
 
 **Run [template](/cli/templates/structure/#template) tests in the [repository directory]((/cli/templates/structure/#repository)).
-See [Tests Structure](/cli/templates/tests/) for more details.**
+See [Test Structure](/cli/templates/tests/) for more details.**
 
 ```
 kbc template test run [template] [version] [flags]
