@@ -24,7 +24,7 @@ See the [tutorial](/cli/templates/tutorial/) on how to create and use a template
 |-|-|-
 | **[kbc local template](/cli/commands/local/template/)** | Manage template instances in the [project directory](/cli/structure/). |
 | [kbc local template delete](/cli/commands/local/template/delete/) | Delete an instance of a template in the project directory. |
-| [kbc local template list](/cli/commands/local/template/list/) | List used templates instances in the project directory. |
+| [kbc local template list](/cli/commands/local/template/list/) | List used template instances in the project directory. |
 | [kbc local template use](/cli/commands/local/template/use/) | Use a template in the project directory. |
 | | |
 | **[kbc template](/cli/commands/template/)** | Manage [templates](/cli/templates/structure/#template) in the [template repository](/cli/templates/structure/#repository). |
