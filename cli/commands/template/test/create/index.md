@@ -20,7 +20,7 @@ If you don't provide the `version` parameter, the default version will be used.
 The command must be run in the [repository directory](/cli/templates/structure#repository).
 
 It requires at least one existing project in a public Keboola stack defined in the environment variable `TEST_KBC_PROJECTS`,
-accepting projects in format `storage_api_host|project_id|project_token` and divided by `;`. 
+accepting projects in the format `storage_api_host|project_id|project_token` and divided by `;`. 
 
 For example: 
 ```
