@@ -83,7 +83,7 @@ Example:
 
 **`InstanceIdShort() string`**
 
-- Returns id of current template instance shorten to 8 characters.
+- Returns id of current template instance shortened to 8 characters.
 - e.g. `V1StGXR8`
 
 --------------------------------------
