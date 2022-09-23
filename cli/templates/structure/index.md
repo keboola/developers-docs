@@ -48,6 +48,15 @@ Repository manifest structure:
     - `path` - path to the template version directory
     - `components` *(array)* - list of components used by the template
 
+#### Snowflake Writer
+
+**Snowflake Writer component ID differs** on AWS and Azure stacks, because staging storage differs.
+- Component ID `keboola.wr-db-snowflake` is used for AWS stacks.
+- Component ID `keboola.wr-snowflake-blob-storage` is used for Azure stacks.
+- Please use:
+  - Placeholder `<keboola.wr-db-snowflake>` in the `repository.json`, in `components` list.
+  - Jsonnet function `SnowflakeWriterComponentId()` in [Jsonnet Files](/cli/templates/structure/jsonnet-files/).
+
 #### Example
 
 ```json
