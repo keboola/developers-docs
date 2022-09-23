@@ -121,9 +121,12 @@ A template directory is stored in the [repository](#repository) and contains dir
   ┃       ┣ 🟪 meta.jsonet    
   ┃       ┣ 🟩 description.md
   ┃       ... 
-  ┗ 📂 tests                     -  tests directory, not yet implemented
-    ┗ 📂 ...
-  
+  ┗ 📂 tests                     -  tests directory
+    ┣ 📂 [test name]
+    ┃ ┣ 📂 expected-out          - expected structure of the project directory 
+    ┃ ┃                            after applying the template in the test 
+    ┃ ┗ 🟪 inputs.json           - sample inputs used to apply the template in the test
+    ┗ ...
 ...
 ```
 
@@ -255,3 +258,4 @@ std.mergePatch(part1, part2)
 ## Next Steps
 - [Jsonnet Files](/cli/templates/structure/jsonnet-files/)
 - [User Inputs](/cli/templates/structure/inputs/)
+- [Tests](/cli/templates/tests/)

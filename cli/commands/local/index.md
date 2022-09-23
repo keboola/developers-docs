@@ -24,7 +24,7 @@ kbc local [command]
 | [kbc local validate](/cli/commands/local/validate/) | Validate the local directory. |
 | [kbc local fix-paths](/cli/commands/local/fix-paths/) | Ensure that all local paths match [configured naming](/cli/structure/#naming). |
 | | |
-| **[kbc local template](/cli/commands/local/template/)** | **Manage [templates](/cli/templates/structure/#template) in the [template repository](/cli/templates/structure/#repository).** |
+| **[kbc local template](/cli/commands/local/template/)** | **Manage [templates](/cli/templates/structure/#template) instances in the [project directory](/cli/structure/).** |
 | [kbc local template delete](/cli/commands/local/template/delete/) | Delete a template instance from the local directory. |
 | [kbc local template list](/cli/commands/local/template/list/) | List templates instances used in the project. |
 | [kbc local template use](/cli/commands/local/template/use/) | Use the template in the project directory. |
