@@ -22,6 +22,7 @@ Keboola CLI can be used, for example, to:
 - Apply all changes back to the project in a moment. See the [push](/cli/commands/sync/push/) command.
 - Manage project history in a git repository.
 - Automate the whole process in a CI/CD pipeline. See [GitHub Integration](/cli/github-integration/).
+- Locally develop and test your dbt transformation code.
 
 ## Subsystems
 
