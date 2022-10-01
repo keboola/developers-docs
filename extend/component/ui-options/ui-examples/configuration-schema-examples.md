@@ -322,7 +322,7 @@ The above code will create the following user interface:
 {: .image-popup}
 ![dynamic selection](/extend/component/ui-options/ui-examples/dynamic_sel.gif)
 
-You can also react on multiple multiple array values or on multiple elements at the same time.:
+You can also react on multiple array values or on multiple elements at the same time.:
 
 ```json
 "options": {
