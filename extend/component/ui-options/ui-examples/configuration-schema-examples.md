@@ -326,12 +326,11 @@ You can also react on multiple array values or on multiple elements at the same 
 
 ```json
 "options": {
-        "dependencies": {
-          "endpoint": [
-            "analytics_data_breakdown_by_content", "analytics_data_breakdown_by_object"
-          ],
-          "filtered": false
-        }
-      }
-    }
+  "dependencies": {
+    "endpoint": [
+      "analytics_data_breakdown_by_content", "analytics_data_breakdown_by_object"
+    ],
+    "filtered": false
+  }
+}
 ```
