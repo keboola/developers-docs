@@ -281,101 +281,39 @@ In some cases, a different set of options is available for different types of th
 JSON Schema allows to define different schemas based on selection. 
 This may be useful in the configuration rows scenario, where each row could represent a different type of Report, Endpoint, etc.
 
-***Note:** Alternatively, the below code can be expressed via  [dependencies](https://github.com/json-editor/json-editor#dependencies).* 
+This can be achieved via [dependencies](https://github.com/json-editor/json-editor#dependencies).* 
 
 
 ```json
 {
-    "query": {
-        "title": "Endpoint",
-        "description": "Fetch data from given date range. i.e. Products, Customers, Orders",
-        "anyOf": [
-            {
-                "title": "Customers",
-                "additionalProperties": false,
-                "properties": {
-                    "endpoint": {
-                        "type": "string",
-                        "enum": [
-                            "customers"
-                        ],
-                        "options": {
-                            "hidden": true
-                        }
-                    }
-                },
-                "type": "object",
-                "options": {
-                    "keep_oneof_values": false
-                }
-            },
-            {
-                "title": "Orders",
-                "additionalProperties": false,
-                "properties": {
-                    "endpoint": {
-                        "type": "string",
-                        "enum": [
-                            "orders"
-                        ],
-                        "options": {
-                            "hidden": true
-                        }
-                    },
-                    "date_from": {
-                        "type": "string",
-                        "title": "Date From",
-                        "description": "Report to download from this data. Date in YYYY-MM-DD format"
-                    },
-                    "date_to": {
-                        "type": "string",
-                        "title": "Date To",
-                        "default": "now",
-                        "description": "Max report date to download. Date in YYYY-MM-DD format or dateparser string i.e. 5 days ago, 1 month ago, yesterday, etc. If left empty, all records are downloaded."
-                    },
-                    "customer_type": {
-                        "type": "string",
-                        "title": "Customer type",
-                        "default": "registered"
-                    }
-                },
-                "type": "object",
-                "options": {
-                    "keep_oneof_values": false
-                }
-            },
-            {
-                "title": "Products",
-                "additionalProperties": false,
-                "properties": {
-                    "endpoint": {
-                        "type": "string",
-                        "enum": [
-                            "products"
-                        ],
-                        "options": {
-                            "hidden": true
-                        }
-                    },
-                    "date_from": {
-                        "type": "string",
-                        "title": "Date From",
-                        "description": "Report to download from this data. Date in YYYY-MM-DD format"
-                    },
-                    "date_to": {
-                        "type": "string",
-                        "title": "Date To",
-                        "default": "now",
-                        "description": "Max report date to download. Date in YYYY-MM-DD format or dateparser string i.e. 5 days ago, 1 month ago, yesterday, etc. If left empty, all records are downloaded."
-                    }
-                },
-                "type": "object",
-                "options": {
-                    "keep_oneof_values": false
-                }
-            }
-        ]
+  "type": "object",
+  "title": "extractor configuration",
+  "required": [
+    "download_attachments"
+
+  ],
+  "properties": {
+    "download_attachments": {
+      "type": "boolean",
+      "format": "checkbox",
+      "title": "Download Attachments",
+      "description": "When set to true, also the attachments will be downloaded. By default into the File Storage. Use processors to control the behaviour.",
+      "default": false,
+      "propertyOrder": 300
+    },
+    "attachment_pattern": {
+      "type": "string",
+      "title": "Attachment Pattern",
+      "description": "Regex pattern to filter particular attachments. e.g. to retrieve only pdf file types use: .+\\.pdf If left empty, all attachments are downloaded.",
+      "default": ".+\\.csv",
+      "options": {
+        "dependencies": {
+          "download_attachments": true
+        }
+      },
+      "propertyOrder": 400
     }
+  }
 }
 ```
 
@@ -383,3 +321,16 @@ The above code will create the following user interface:
 
 {: .image-popup}
 ![dynamic selection](/extend/component/ui-options/ui-examples/dynamic_sel.gif)
+
+You can also react on multiple array values or on multiple elements at the same time.:
+
+```json
+"options": {
+  "dependencies": {
+    "endpoint": [
+      "analytics_data_breakdown_by_content", "analytics_data_breakdown_by_object"
+    ],
+    "filtered": false
+  }
+}
+```
