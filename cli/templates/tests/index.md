@@ -129,15 +129,31 @@ The file supports complex values and can even refer to an OAuth configuration:
 }
 ```
 
-## Sensitive Values
+## Environment Placeholders
 
-Sensitive values can be stored in environmental variables and referred to using a placeholder encapsulated by `##`. 
-The variables need to be prefixed by `KBC_SECRET_`. 
+Environment variables can be referred to using a placeholder encapsulated by `##`.
 
-This `inputs.json` snippet means that input `inputToken` will get its value from the env variable `KBC_SECRET_MY_TEMPLATE_TOKEN`:
+This snippet means that a configuration `incrementalDays` will get its value from environmental variable `INC_DAYS`:
+
+```json
+{
+  "incrementalDays": ##INC_DAYS##
+}
+```
+
+See [GitHub documentation](https://docs.github.com/en/actions/learn-github-actions/environment-variables) on how to define environment variables in Actions workflow.
+
+
+### Sensitive Values
+
+Sensitive values can be stored in GitHub Secrets and will be passed to the tests environmental variables. They need to be prefixed by `KBC_SECRET_`. 
+
+This snippet means that input `inputToken` will get its value from the GitHub secret `KBC_SECRET_MY_TEMPLATE_TOKEN`:
 
 ```json
 {
   "inputToken": "##KBC_SECRET_MY_TEMPLATE_TOKEN##"
 }
 ```
+
+See [GitHub documentation](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository) on how to define GitHub secrets.
