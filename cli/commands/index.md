@@ -61,6 +61,13 @@ kbc help local create row
 | [kbc template test](/cli/commands/template/test/) | Manage template tests. |
 | [kbc template test create](/cli/commands/template/test/create/) | Create template tests. |
 | [kbc template test run](/cli/commands/template/test/run/) | Run template tests. |
+| | |
+| **[kbc dbt](/cli/commands/dbt/)** | **Work with dbt inside your repository.** |
+| [kbc dbt init](/cli/commands/dbt/init/) | Initialize profiles, sources, and environment variables for use with dbt. |
+| [kbc dbt generate](/cli/commands/dbt/generate/) | Generate profiles, sources, or environment variables for use with dbt. |
+| [kbc dbt generate profile](/cli/commands/dbt/generate/profile/) | Generate profile for use with dbt. |
+| [kbc dbt generate sources](/cli/commands/dbt/generate/sources/) | Generate sources for use with dbt. |
+| [kbc dbt generate env](/cli/commands/dbt/generate/env/) | Generate environment variables for use with dbt. |
 
 ## Aliases
 

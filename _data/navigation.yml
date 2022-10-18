@@ -399,6 +399,20 @@ items:
                     title: create
                   - url: /cli/commands/template/test/run/
                     title: run
+          - url: /cli/commands/dbt/
+            title: dbt
+            items:
+              - url: /cli/commands/dbt/init/
+                title: init
+              - url: /cli/commands/dbt/generate/
+                title: generate
+                items:
+                  - url: /cli/commands/dbt/generate/profile/
+                    title: profile
+                  - url: /cli/commands/dbt/generate/sources/
+                    title: sources
+                  - url: /cli/commands/dbt/generate/env/
+                    title: env
       - url: /cli/github-integration/
         title: GitHub Integration
       - url: /cli/templates/
@@ -415,3 +429,5 @@ items:
                 title: Inputs
           - url: /cli/templates/tests/
             title: Tests
+      - url: /cli/dbt/
+        title: dbt
