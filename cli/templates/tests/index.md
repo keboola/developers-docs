@@ -129,10 +129,12 @@ The file supports complex values and can even refer to an OAuth configuration:
 }
 ```
 
+## Sensitive Values
+
 Sensitive values can be stored in environmental variables and referred to using a placeholder encapsulated by `##`. 
 The variables need to be prefixed by `KBC_SECRET_`. 
 
-This configuration means that input `inputToken` will get its value from the env variable `KBC_SECRET_MY_TEMPLATE_TOKEN`:
+This `inputs.json` snippet means that input `inputToken` will get its value from the env variable `KBC_SECRET_MY_TEMPLATE_TOKEN`:
 
 ```json
 {
