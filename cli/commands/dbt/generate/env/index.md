@@ -12,7 +12,7 @@ permalink: /cli/commands/dbt/generate/env/
 kbc dbt generate sources [flags]
 ```
 
-The command must be run in a directory with a dbt project (i.e. containing `dbt_project.yml`).
+The command must be run in a directory with a dbt project (i.e. containing `dbt_project.yml`) or its subdirectory.
 
 The command outputs commands to create environment variables from selected existing Snowflake workspace.
 

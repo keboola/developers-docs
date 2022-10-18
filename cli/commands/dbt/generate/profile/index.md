@@ -12,7 +12,7 @@ permalink: /cli/commands/dbt/generate/profile/
 kbc dbt generate profile [flags]
 ```
 
-The command must be run in a directory with a dbt project (i.e. containing `dbt_project.yml`).
+The command must be run in a directory with a dbt project (i.e. containing `dbt_project.yml`) or its subdirectory.
 
 The command creates a `profiles.yml` file if it does not exist yet and prepares outputs for the selected target.
 

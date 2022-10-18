@@ -8,7 +8,7 @@ permalink: /cli/commands/dbt/
 
 **Work with dbt inside your repository.**
 
-The commands must be run in a directory with a dbt project (i.e. containing `dbt_project.yml`).
+The commands must be run in a directory with a dbt project (i.e. containing `dbt_project.yml`) or its subdirectory.
 
 See [introduction to dbt support](/cli/dbt/) for more information.
 

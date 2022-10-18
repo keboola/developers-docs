@@ -7,7 +7,7 @@ permalink: /cli/dbt/
 {:toc}
 
 Keboola CLI allows you to integrate with your dbt project. The commands must be run in a directory with a dbt project 
-(i.e. containing `dbt_project.yml`).
+(i.e. containing `dbt_project.yml`) or its subdirectory.
 
 [kbc dbt init](/cli/commands/dbt/init/) command creates a Snowflake [workspace](https://help.keboola.com/transformations/workspace/)
 in Keboola, configures a dbt target with it, generates sources files for every table in the Keboola Storage and outputs

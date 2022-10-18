@@ -12,7 +12,7 @@ permalink: /cli/commands/dbt/generate/sources/
 kbc dbt generate sources [flags]
 ```
 
-The command must be run in a directory with a dbt project (i.e. containing `dbt_project.yml`).
+The command must be run in a directory with a dbt project (i.e. containing `dbt_project.yml`) or its subdirectory.
 
 The command creates a file for each Storage bucket in `models/_sources` directory containing dbt source for every table in the bucket.
 

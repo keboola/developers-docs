@@ -12,7 +12,7 @@ permalink: /cli/commands/dbt/init/
 kbc dbt init [flags]
 ```
 
-The command must be run in a directory with a dbt project (i.e. containing `dbt_project.yml`).
+The command must be run in a directory with a dbt project (i.e. containing `dbt_project.yml`) or its subdirectory.
 
 See [introduction to dbt support](/cli/dbt/) for more information.
 
