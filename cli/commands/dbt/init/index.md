@@ -6,7 +6,7 @@ permalink: /cli/commands/dbt/init/
 * TOC
 {:toc}
 
-**Initialize a new Snowflake workspace, generate profile, sources and environment variables to use it in your dbt project.**
+**Initialize a new Snowflake workspace, generate profile, source and environment variables to use in your dbt project.**
 
 ```
 kbc dbt init [flags]
@@ -14,7 +14,7 @@ kbc dbt init [flags]
 
 The command must be run in a directory with a dbt project (i.e. containing `dbt_project.yml`) or its subdirectory.
 
-See [introduction to dbt support](/cli/dbt/) for more information.
+See the [introduction to dbt support](/cli/dbt/) for more information.
 
 ## Options
 
@@ -25,7 +25,7 @@ See [introduction to dbt support](/cli/dbt/) for more information.
 : Target name of the profile
 
 `-W, --workspace-name <string>` 
-: Name of the workspace to create
+: Name of the workspace to be created
 
 [Global Options](/cli/commands/#global-options)
 
@@ -34,22 +34,22 @@ See [introduction to dbt support](/cli/dbt/) for more information.
 ```
 ➜ kbc dbt init
 
-Please enter Keboola Storage API host, eg. "connection.keboola.com".
+Please enter the Keboola Storage API host, e.g. "connection.keboola.com".
 ? API host: connection.north-europe.azure.keboola.com
 
 
-Please enter Keboola Storage API token. The value will be hidden.
+Please enter the Keboola Storage API token. The value will be hidden.
 ? API token: **************************************************
 
 
-Please enter target name.
+Please enter the target name.
 Allowed characters: a-z, A-Z, 0-9, "_".
 ? Target Name: TARGET1
 
 
-? Enter a name for a workspace to create: dbt_workspace
+? Enter a name for a workspace to be created: dbt_workspace
 
-Creating new workspace, please wait.
+Creating a new workspace, please wait.
 Created new workspace "dbt_workspace".
 Profile stored in "profiles.yml".
 Sources stored in "models/_sources" directory.
