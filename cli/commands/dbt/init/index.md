@@ -47,7 +47,7 @@ Allowed characters: a-z, A-Z, 0-9, "_".
 ? Target Name: TARGET1
 
 
-? Enter a name for a workspace to be created: dbt_workspace
+? Enter a name for the workspace to be created: dbt_workspace
 
 Creating a new workspace, please wait.
 Created new workspace "dbt_workspace".
