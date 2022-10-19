@@ -65,7 +65,7 @@ kbc help local create row
 | **[kbc dbt](/cli/commands/dbt/)** | **Work with dbt inside your repository.** |
 | [kbc dbt init](/cli/commands/dbt/init/) | Initialize profiles, sources, and environment variables for use with dbt. |
 | [kbc dbt generate](/cli/commands/dbt/generate/) | Generate profiles, sources, and environment variables for use with dbt. |
-| [kbc dbt generate profile](/cli/commands/dbt/generate/profile/) | Generate a profile for use with dbt. |
+| [kbc dbt generate profile](/cli/commands/dbt/generate/profile/) | Generate profiles for use with dbt. |
 | [kbc dbt generate sources](/cli/commands/dbt/generate/sources/) | Generate sources for use with dbt. |
 | [kbc dbt generate env](/cli/commands/dbt/generate/env/) | Generate environment variables for use with dbt. |
 
@@ -127,7 +127,7 @@ Variables are merged together according to the following priority.
 | `.env.production`         | Production|  |
 | `.env`                    | All | The lowest  |
 
-**Note:** All `.*local` environment files should be part of the `.gitignore` file, if used.
+*Note: All `.*local` environment files should be part of the `.gitignore` file, if used.*
 
 ### Global Options
 
