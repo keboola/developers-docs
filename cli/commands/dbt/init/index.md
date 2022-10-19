@@ -6,7 +6,7 @@ permalink: /cli/commands/dbt/init/
 * TOC
 {:toc}
 
-**Initialize a new Snowflake workspace, generate profile, source and environment variables to use in your dbt project.**
+**Initialize a new Snowflake workspace, generate profiles, sources, and environment variables to use in your dbt project.**
 
 ```
 kbc dbt init [flags]
