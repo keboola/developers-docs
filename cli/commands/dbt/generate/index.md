@@ -17,6 +17,6 @@ kbc dbt generate [command]
 |---
 | Command | Description
 |-|-|-
-| [kbc dbt generate profile](/cli/commands/dbt/generate/profile/) | Generate profile for use with dbt. |
+| [kbc dbt generate profile](/cli/commands/dbt/generate/profile/) | Generate profiles for use with dbt. |
 | [kbc dbt generate sources](/cli/commands/dbt/generate/sources/) | Generate sources for use with dbt. |
 | [kbc dbt generate env](/cli/commands/dbt/generate/env/) | Generate environment variables for use with dbt. |
