@@ -14,9 +14,9 @@ kbc dbt generate sources [flags]
 
 The command must be run in a directory with a dbt project (i.e. containing `dbt_project.yml`) or its subdirectory.
 
-The command creates a file for each Storage bucket in `models/_sources` directory containing dbt source for every table in the bucket.
+The command creates a file for each Storage bucket in the `models/_sources` directory containing a dbt source for every table in the bucket.
 
-See [introduction to dbt support](/cli/dbt/) for more information.
+See the [introduction to dbt support](/cli/dbt/) for more information.
 
 ## Options
 
@@ -33,19 +33,19 @@ See [introduction to dbt support](/cli/dbt/) for more information.
 ```
 ➜ kbc dbt generate sources
 
-Please enter Keboola Storage API host, eg. "connection.keboola.com".
+Please enter the Keboola Storage API host, e.g. "connection.keboola.com".
 ? API host: connection.north-europe.azure.keboola.com
 
 
-Please enter Keboola Storage API token. The value will be hidden.
+Please enter the Keboola Storage API token. The value will be hidden.
 ? API token: **************************************************
 
 
-Please enter target name.
+Please enter the target name.
 Allowed characters: a-z, A-Z, 0-9, "_".
 ? Target Name: target1
 
-Sources stored in "models/_sources" directory.
+Sources stored in the "models/_sources" directory.
 ```
 
 A generated source file `models/_sources/in.c-test.yml`:
