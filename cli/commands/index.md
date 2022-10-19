@@ -50,7 +50,7 @@ kbc help local create row
 | | |
 | **[kbc local template](/cli/commands/local/template/)** | **Manage [template](/cli/templates/structure/#template) instances in the [project directory](/cli/structure/).** |
 | [kbc local template delete](/cli/commands/local/template/delete/) | Delete a template instance from the local directory. |
-| [kbc local template list](/cli/commands/local/template/list/) | List templates instances used in the project. |
+| [kbc local template list](/cli/commands/local/template/list/) | List template instances used in the project. |
 | [kbc local template use](/cli/commands/local/template/use/) | Use the template in the project directory. |
 | | |
 | **[kbc template](/cli/commands/template/)** | **Manage [templates](/cli/templates/structure/#template) in the [template repository](/cli/templates/structure/#repository).** |
@@ -61,6 +61,13 @@ kbc help local create row
 | [kbc template test](/cli/commands/template/test/) | Manage template tests. |
 | [kbc template test create](/cli/commands/template/test/create/) | Create template tests. |
 | [kbc template test run](/cli/commands/template/test/run/) | Run template tests. |
+| | |
+| **[kbc dbt](/cli/commands/dbt/)** | **Work with dbt inside your repository.** |
+| [kbc dbt init](/cli/commands/dbt/init/) | Initialize profiles, sources, and environment variables for use with dbt. |
+| [kbc dbt generate](/cli/commands/dbt/generate/) | Generate profiles, sources, and environment variables for use with dbt. |
+| [kbc dbt generate profile](/cli/commands/dbt/generate/profile/) | Generate profiles for use with dbt. |
+| [kbc dbt generate sources](/cli/commands/dbt/generate/sources/) | Generate sources for use with dbt. |
+| [kbc dbt generate env](/cli/commands/dbt/generate/env/) | Generate environment variables for use with dbt. |
 
 ## Aliases
 
@@ -120,7 +127,7 @@ Variables are merged together according to the following priority.
 | `.env.production`         | Production|  |
 | `.env`                    | All | The lowest  |
 
-**Note:** All `.*local` environment files should be part of the `.gitignore` file, if used.
+*Note: All `.*local` environment files should be part of the `.gitignore` file, if used.*
 
 ### Global Options
 
