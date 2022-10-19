@@ -14,9 +14,9 @@ kbc dbt generate sources [flags]
 
 The command must be run in a directory with a dbt project (i.e. containing `dbt_project.yml`) or its subdirectory.
 
-The command outputs commands to create environment variables from selected existing Snowflake workspace.
+The command outputs commands to create environment variables from a selected existing Snowflake workspace.
 
-See [introduction to dbt support](/cli/dbt/) for more information.
+See the [introduction to dbt support](/cli/dbt/) for more information.
 
 ## Options
 
@@ -36,22 +36,22 @@ See [introduction to dbt support](/cli/dbt/) for more information.
 ```
 ➜ kbc dbt generate env
 
-Please enter Keboola Storage API host, eg. "connection.keboola.com".
+Please enter the Keboola Storage API host, e.g. "connection.keboola.com".
 ? API host: connection.north-europe.azure.keboola.com
 
 
-Please enter Keboola Storage API token. The value will be hidden.
+Please enter the Keboola Storage API token. The value will be hidden.
 ? API token: **************************************************
 
 
-Please enter target name.
+Please enter the target name.
 Allowed characters: a-z, A-Z, 0-9, "_".
 ? Target Name: target1
 
 
 ? Workspace: dbt_workspace (12345678)
 
-Commands to set environment for the dbt target:
+Commands to set the environment for the dbt target:
   export DBT_KBC_TARGET1_TYPE=snowflake
   export DBT_KBC_TARGET1_SCHEMA=WORKSPACE_123456
   export DBT_KBC_TARGET1_WAREHOUSE=KEBOOLA_PROD_SMALL
