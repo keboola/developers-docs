@@ -378,6 +378,17 @@ items:
                 items:
                   - url: /cli/commands/remote/create/branch/
                     title: branch
+              - url: /cli/commands/remote/workspace/
+                title: workspace
+                items:
+                  - url: /cli/commands/remote/workspace/create/
+                    title: create
+                  - url: /cli/commands/remote/workspace/delete/
+                    title: delete
+                  - url: /cli/commands/remote/workspace/detail/
+                    title: detail
+                  - url: /cli/commands/remote/workspace/list/
+                    title: list
           - url: /cli/commands/template/
             title: template
             items:
