@@ -15,7 +15,7 @@ kbc remote workspace list [flags]
 ### Options
 
 `-H, --storage-api-host <string>`
-: Keboola Connection instance url, eg. "connection.keboola.com"
+: Keboola Connection instance URL, e.g. "connection.keboola.com"
 
 [Global Options](/cli/commands/#global-options)
 
