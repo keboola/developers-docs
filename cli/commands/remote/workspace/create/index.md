@@ -18,13 +18,13 @@ kbc remote workspace create [flags]
 : Name of the workspace to be created
 
 `--type <string>`
-: Type of the workspace to be created.
+: Type of the workspace to be created
 
 `--size <string>`
 : Size of the workspace to be created. It is ignored for database workspaces.
 
 `-H, --storage-api-host <string>` 
-: Keboola Connection instance url, eg. "connection.keboola.com"
+: Keboola Connection instance URL, e.g. "connection.keboola.com"
 
 [Global Options](/cli/commands/#global-options)
 
@@ -33,8 +33,8 @@ kbc remote workspace create [flags]
 ```
 ➜ kbc remote workspace create --name foo --type snowflake
 
-Creating new workspace, please wait.
-Created new workspace "foo" (<id>).
+Creating a new workspace, please wait.
+Created the new workspace "foo" (<id>).
 Credentials:
   Host: <host>
   User: <user>
