@@ -15,10 +15,10 @@ kbc remote workspace detail [flags]
 ### Options
 
 `-W, --workspace-id string`
-: Id of the workspace to detail. You can find it using the [List Workspaces](/cli/commands/remote/workspace/list/) command.
+: Id of the workspace to be detailed. You can find it using the [List Workspaces](/cli/commands/remote/workspace/list/) command.
 
 `-H, --storage-api-host <string>` 
-: Keboola Connection instance url, eg. "connection.keboola.com"
+: Keboola Connection instance URL, e.g. "connection.keboola.com"
 
 [Global Options](/cli/commands/#global-options)
 
