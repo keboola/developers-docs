@@ -214,6 +214,7 @@ turned off.
 Optional parameter which allows you to define maximum timeout for each request. If not set, uses default requests value: None.
 
 Possible values: (int, float)
+
 For more information, refer to [requests docs](https://requests.readthedocs.io/en/stable/user/advanced/#timeouts).
 
 
