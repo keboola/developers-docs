@@ -32,6 +32,10 @@ The data can be sent in two ways:
       default query parameters sent with each API call.
     - [**default_headers**](/extend/generic-writer/configuration/#default-headers) --- sets the default query headers
       sent with each API call.
+    - [**ssl_verification**](/extend/generic-writer/configuration/#ssl-verification) --- allows turning of the SSL certificate
+      verification. Use with caution.
+    - [**timeout**](/extend/generic-writer/configuration/#timeout) --- maximum time in seconds for which the component
+      waits after each request (defaults to None if not set)
 - [**user_parameters**](/extend/generic-writer/configuration/#user-parameters) --- user parameters to be used in various
   contexts, e.g. passwords. Supports dynamic functions
 - [**request_parameters**](/extend/generic-writer/configuration/#request-parameters) -- [REQUIRED] HTTP parameters of the request
@@ -189,6 +193,29 @@ Basic HTTP authentication using username and password.
 ```
 
 See [example 024](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/docs/examples/024-simple-json-basic-http-auth)
+
+### SSL Verification
+
+Allows turning of the SSL certificate verification. Use with caution. When set to false the certificate verification is
+turned off.
+
+```json
+
+{
+  "api": {
+    "base_url": "http://localhost:8000",
+    "ssl_verification": false
+  }
+}
+```
+
+### Timeout
+
+Optional parameter which allows you to define maximum timeout for each request. If not set, uses default requests value: None.
+
+Possible values: (int, float)
+For more information, refer to [requests docs](https://requests.readthedocs.io/en/stable/user/advanced/#timeouts).
+
 
 ## User Parameters
 

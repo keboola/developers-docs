@@ -17,7 +17,9 @@
           500,
           429
         ]
-      }
+      },
+      "ssl_verification": true,
+      "timeout": 5
     },
     "user_parameters": {
       "#token": "Bearer 123456",
