@@ -35,10 +35,10 @@ The data can be sent in two ways:
     - [**ssl_verification**](/extend/generic-writer/configuration/#ssl-verification) --- allows turning of the SSL certificate
       verification. Use with caution.
     - [**timeout**](/extend/generic-writer/configuration/#timeout) --- maximum time in seconds for which the component
-      waits after each request (defaults to None if not set)
+      waits after each request (defaults to None if not set).
 - [**user_parameters**](/extend/generic-writer/configuration/#user-parameters) --- user parameters to be used in various
-  contexts, e.g. passwords. Supports dynamic functions
-- [**request_parameters**](/extend/generic-writer/configuration/#request-parameters) -- [REQUIRED] HTTP parameters of the request
+  contexts, e.g. passwords. Supports dynamic functions.
+- [**request_parameters**](/extend/generic-writer/configuration/#request-parameters) --- [REQUIRED] HTTP parameters of the request
     - [**method**](/extend/generic-writer/configuration/#method) --- [REQUIRED] defines the HTTP method of the requests.
     - [**endpoint_path**](/extend/generic-writer/configuration/#enpoint-path) --- [REQUIRED] relative path of the endpoint.
     - [**query_parameters**](/extend/generic-writer/configuration/#query-parameters) --- query parameters sent with each
@@ -196,7 +196,7 @@ See [example 024](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/
 
 ### SSL Verification
 
-Allows turning of the SSL certificate verification. Use with caution. When set to false the certificate verification is
+Allows turning of the SSL certificate verification. Use with caution. When set to false, the certificate verification is
 turned off.
 
 ```json
@@ -211,7 +211,7 @@ turned off.
 
 ### Timeout
 
-Optional parameter which allows you to define maximum timeout for each request. If not set, uses default requests value: None.
+An optional parameter which allows you to define maximum timeout for each request. If not set, it uses the default requests value: None.
 
 Possible values: (int, float)
 
