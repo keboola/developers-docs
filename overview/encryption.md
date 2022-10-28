@@ -117,20 +117,27 @@ call the API resource endpoint.
 The [Encryption API](https://keboolaencryption.docs.apiary.io/#reference/encrypt/encryption/encrypt-data)
 accepts the following parameters:
 
-- `componentId` (required) --- id of a [KBC component](/extend/component/tutorial/#creating-a-component)
-- `projectId` (optional) --- id of a KBC project
+- `componentId` (optional) --- id of a [Keboola Connection component](/extend/component/tutorial/#creating-a-component)
+- `projectId` (optional) --- id of a Keboola Connection project
 - `configId` (optional) --- id of a component configuration
 
 Depending on the provided parameters, different types of ciphers are created:
 
 - If only the component id is provided, then the cipher starts with `KBC::ComponentSecure::` and it can be
-decrypted in all configurations of the given component.
+decrypted in all configurations of the given component. This is recommended for Component specific secrets 
+valid across all customers (e.g. some kind of master authorization token)
 
 - If both the component id and project id are provided, then the cipher starts with `KBC::ProjectSecure::` and it
-can be decrypted in all configurations of the given component within the given project.
+can be decrypted in all configurations of the given component within the given project. This is **recommended for all secrets** 
+used within a typical Keboola Connection project.
 
 - If all three (component id, project id and configuration id) are provided, then the cipher starts with
 `KBC::ConfigSecure::` and it can be decrypted only within the given configuration of the given component in the given project.
+This type of cipher is useful when you want to prevent copying a configuration.
+
+- If only the project id is provided, then the cipher starts with `KBC::ProjectWideSecure::` and it can be
+decrypted in all configurations in the given project. This type of cipher is useful for encrypting things shared across multiple 
+components, e.g. SSH tunel settings.
 
 The following rules apply to all ciphers:
 
