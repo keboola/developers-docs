@@ -30,7 +30,7 @@ There are some components which are probably more important than others:
 file uploads, configurations and logs)
 - [Docker Runner](/extend/docker-runner) component which is used internally to run almost all
 [components](/extend/component/); therefore all extractors, writers and applications share its features
-- [Transformations](/integrate/transformations/) component which encapsulates all types of transformations (SQL with
+- [Transformations](https://help.keboola.com/transformations/) component which encapsulates all types of transformations (SQL with
 various backends, R, Python)
 - [Orchestrator](/automate/) component which takes care of grouping different tasks together and
 running them regularly at scheduled times
