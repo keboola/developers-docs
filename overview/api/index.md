@@ -129,16 +129,16 @@ The services listed above are:
 - `syrup` --- [Service for Running Components](/extend/docker-runner/)
 - `oauth` --- [OAuth Manager Service](/extend/common-interface/oauth/)
 - `queue` --- [Service for Running Components](/extend/docker-runner/)
-- `billing` --- Service for Computing credits
+- `billing` --- Service for Computing Credits
 - `encryption` --- Service for [Encryption](https://developers.keboola.com/overview/encryption/).
-- `sandboxes` --- Workspsace Manager Service
+- `sandboxes` --- Workspace Manager Service
 - `mlflow` --- MLFlow Models Manager Service
 - `scheduler` --- [Service for Configuring Schedules](https://developers.keboola.com/automate/set-schedule/)
 - `sync-actions` --- [Service for Running Synchronous Actions](/extend/common-interface/actions/)
 - `notification` --- Service for Configuring Job Notifications
 - `templates` --- [Service for Applying Templates](https://developers.keboola.com/cli/templates/)
 
-For convenience the following tables lists active services and their URLs, though for an authoritative answer 
+For convenience, the following table lists active services and their URLs, though for an authoritative answer 
 and in application integrations, we strongly suggest using the above API call.
 
 |API|Service|Region|URL|
