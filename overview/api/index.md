@@ -61,7 +61,7 @@ Otherwise you will obtain an `Invalid Token` or unauthorized errors. The *author
 {% highlight json %}
 {
     ...,
-    "services": [
+  "services": [
         {
             "id": "docker-runner",
             "url": "https://docker-runner.keboola.com"
@@ -75,30 +75,50 @@ Otherwise you will obtain an `Invalid Token` or unauthorized errors. The *author
             "url": "https://syrup.keboola.com"
         },
         {
-            "id": "queue",
-            "url": "https://queue.keboola.com"
-        },
-        {
             "id": "oauth",
             "url": "https://oauth.keboola.com"
         },
         {
-            "id": "sqldep-analyzer",
-            "url": "https://sqldep.keboola.com"
+            "id": "queue",
+            "url": "https://queue.keboola.com"
         },
         {
-            "id": "sync-actions",
-            "url": "https://sync-actions.keboola.com/"
-        },
-        {
-            "id": "graph",
-            "url": "https://graph.keboola.com"
+            "id": "billing",
+            "url": "https://billing.keboola.com"
         },
         {
             "id": "encryption",
             "url": "https://encryption.keboola.com"
+        },
+        {
+            "id": "sandboxes",
+            "url": "https://sandboxes.keboola.com"
+        },
+        {
+            "id": "mlflow",
+            "url": "https://mlflow.keboola.com"
+        },
+        {
+            "id": "spark",
+            "url": "https://spark.keboola.com"
+        },
+        {
+            "id": "scheduler",
+            "url": "https://scheduler.keboola.com"
+        },
+        {
+            "id": "sync-actions",
+            "url": "https://sync-actions.keboola.com"
+        },
+        {
+            "id": "notification",
+            "url": "https://notification.keboola.com"
+        },
+        {
+            "id": "templates",
+            "url": "https://templates.keboola.com"
         }
-    ]
+    ],
 }
 {% endhighlight %}
 
@@ -107,35 +127,58 @@ The services listed above are:
 - `docker-runner` --- [Legacy Service for Running Sync Actions](/extend/common-interface/actions/)
 - `import` --- [Storage Importer Service](/integrate/storage/api/importer/)
 - `syrup` --- [Service for Running Components](/extend/docker-runner/)
-- `queue` --- [New Service for Running Components](/extend/docker-runner/)
 - `oauth` --- [OAuth Manager Service](/extend/common-interface/oauth/)
-- `sqldep-analyzer` --- SQLdep Integration Service for SQL query validation.
+- `queue` --- [Service for Running Components](/extend/docker-runner/)
+- `billing` --- Service for Computing Credits
+- `encryption` --- Service for [Encryption](https://developers.keboola.com/overview/encryption/).
+- `sandboxes` --- Workspace Manager Service
+- `mlflow` --- MLFlow Models Manager Service
+- `scheduler` --- [Service for Configuring Schedules](https://developers.keboola.com/automate/set-schedule/)
 - `sync-actions` --- [Service for Running Synchronous Actions](/extend/common-interface/actions/)
-- `graph` --- Service for generating project lineage and graphs.
-- `encryption` --- Service for [encryption](https://developers.keboola.com/overview/encryption/).
+- `notification` --- Service for Configuring Job Notifications
+- `templates` --- [Service for Applying Templates](https://developers.keboola.com/cli/templates/)
+
+For convenience, the following table lists active services and their URLs, though for an authoritative answer 
+and in application integrations, we strongly suggest using the above API call.
 
 |API|Service|Region|URL|
 |---|-------|------|---|
-|Storage||US|https://connection.keboola.com/|
-|Storage||EU|https://connection.eu-central-1.keboola.com/|
-|Run Jobs|`syrup`|US|https://syrup.keboola.com|
-|Run Jobs|`syrup`|EU|https://syrup.eu-central-1.keboola.com|
-|Sync Actions|`docker-runner`|US|https://docker-runner.keboola.com|
-|Sync Actions|`docker-runner`|EU|https://docker-runner.eu-central-1.keboola.com|
-|Queue|`queue`|US|https://queue.keboola.com|
-|Queue|`queue`|EU|https://queue.eu-central-1.keboola.com|
-|Importer|`import`|US|https://import.keboola.com|
-|Importer|`import`|EU|https://import.eu-central-1.keboola.com|
-|OAuth|`oauth`|US|https://oauth.keboola.com|
-|OAuth|`oauth`|EU|https://oauth.eu-central-1.keboola.com|
-|SQLdep Analyzer|`sqldep-analyzer`|US|https://sqldep.keboola.com|
-|SQLdep Analyzer|`sqldep-analyzer`|EU|https://sqldep.eu-central-1.keboola.com|
-|Sync Actions|`sync-actions`|US|https://sync-actions.keboola.com/|
-|Sync Actions|`sync-actions`|EU|https://sync-actions.eu-central-1.keboola.com|
-|Graph|`graph`|US|https://graph.keboola.com|
-|Graph|`graph`|EU|https://graph.eu-central-1.keboola.com|
-|Encryption|`encryption`|US|https://encryption.keboola.com|
-|Encryption|`encryption`|EU|https://encryption.eu-central-1.keboola.com|
+|Billing|`billing`|US AWS|https://billing.keboola.com|
+|Billing|`billing`|EU AWS|https://billing.eu-central-1.keboola.com|
+|Billing|`billing`|EU Azure|https://billing.north-europe.azure.keboola.com|
+|Encryption|`encryption`|US AWS|https://encryption.keboola.com|
+|Encryption|`encryption`|EU AWS|https://encryption.eu-central-1.keboola.com|
+|Encryption|`encryption`|EU Azure|https://encryption.north-europe.azure.keboola.com|
+|Importer|`import`|US AWS|https://import.keboola.com|
+|Importer|`import`|EU AWS|https://import.eu-central-1.keboola.com|
+|Importer|`import`|EU Azure|https://import.north-europe.azure.keboola.com|
+|MLFlow|`mlflow`|US AWS|https://mlflow.keboola.com|
+|MLFlow|`mlflow`|EU AWS|https://mlflow.eu-central-1.keboola.com|
+|MLFlow|`mlflow`|EU Azure|https://mlflow.north-europe.azure.keboola.com|
+|Notification|`notification`|US AWS|https://notification.keboola.com|
+|Notification|`notification`|EU AWS|https://notification.eu-central-1.keboola.com|
+|Notification|`notification`|EU Azure|https://notification.north-europe.azure.keboola.com|
+|OAuth|`oauth`|US AWS|https://oauth.keboola.com|
+|OAuth|`oauth`|EU AWS|https://oauth.eu-central-1.keboola.com|
+|OAuth|`oauth`|EU Azure|https://oauth.north-europe.azure.keboola.com|
+|Queue|`queue`|US AWS|https://queue.keboola.com|
+|Queue|`queue`|EU AWS|https://queue.eu-central-1.keboola.com|
+|Queue|`queue`|EU Azure|https://queue.north-europe.azure.keboola.com|
+|Scheduler|`scheduler`|US AWS|https://scheduler.keboola.com|
+|Scheduler|`scheduler`|EU AWS|https://scheduler.eu-central-1.keboola.com|
+|Scheduler|`scheduler`|EU Azure|https://scheduler.north-europe.azure.keboola.com|
+|Storage||US AWS|https://connection.keboola.com/|
+|Storage||EU AWS|https://connection.eu-central-1.keboola.com/|
+|Storage||EU Azure|https://connection.north-europe.azure.keboola.com/|
+|Sync Actions|`sync-actions`|US AWS|https://sync-actions.keboola.com/|
+|Sync Actions|`sync-actions`|EU AWS|https://sync-actions.eu-central-1.keboola.com|
+|Sync Actions|`sync-actions`|EU Azure|https://sync-actions.north-europe.azure.keboola.com|
+|Templates|`templates`|US AWS|https://templates.keboola.com|
+|Templates|`templates`|EU AWS|https://templates.eu-central-1.keboola.com|
+|Templates|`templates`|EU Azure|https://templates.north-europe.azure.keboola.com|
+|Workspaces / Sandboxes|`sandboxes`|US AWS|https://sandboxes.keboola.com|
+|Workspaces / Sandboxes|`sandboxes`|EU AWS|https://sandboxes.eu-central-1.keboola.com|
+|Workspaces / Sandboxes|`sandboxes`|EU Azure|https://sandboxes.north-europe.azure.keboola.com|
 
 **Important**: Each of the stacks also uses its own set of [IP addresses](https://help.keboola.com/extractors/ip-addresses/).
 
