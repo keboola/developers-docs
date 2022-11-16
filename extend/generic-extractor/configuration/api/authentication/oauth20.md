@@ -7,7 +7,7 @@ permalink: /extend/generic-extractor/configuration/api/authentication/oauth20/
 {:toc}
 
 OAuth 2.0 Authentication is one of [two OAuth methods](/extend/generic-extractor/configuration/api/authentication/#oauth) and
-is supported only for [published components](/extend/generic-extractor/publish/).
+is supported only for [components registered in the developer portal](/extend/generic-extractor/publish/).
 It is configured by setting the `type` key to `oauth20`:
 
 {% highlight json %}
