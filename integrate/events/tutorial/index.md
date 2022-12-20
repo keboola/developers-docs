@@ -22,7 +22,7 @@ To start ingesting events, you must first create a receiver. Send the following 
         "time": "2m"
       },
       "mapping": {
-        "tableId": "in.c-github-issues.events",
+        "tableId": "in.c-github.issues",
         "columns": [
           { "type": "id", "name": "id" },
           { "type": "datetime", "name": "datetime" },
@@ -69,7 +69,7 @@ Upon success, the response will contain the receiver you've just created:
         "time": "2m"
       },
       "mapping": {
-        "tableId": "in.c-github-issues.events",
+        "tableId": "in.c-github.issues",
         "columns": [
           { "type": "id", "name": "id" },
           { "type": "datetime", "name": "datetime" },
@@ -92,22 +92,7 @@ Upon success, the response will contain the receiver you've just created:
 }
 ```
 
-The most important part of the response is the `url` field. This is the endpoint you will point your Github Webhook to.
-
-Here's a quick overview of some of the other fields:
-- `id` and `export.id` - The unique IDs of these resources. They are optional, and generated from the `name` fields if they are omitted.
-- `conditions` - Under which conditions will the data be uploaded to the destination table.
-- `mapping.tableId` - The destination table ID. If they table does not exist, it will be created. 
-- `columns` - The schema for the destination table. If the table already exists, this field must match the existing table's schema.
-- `columns[].type` - Defines how incoming request data should be mapped to the columns. The available column types are:
-  - `id` - the event ID.
-  - `datetime` - the time when the event was received.
-  - `ip` - the IP of the request sender.
-  - `body` - the request body.
-  - `headers` - the request headers.
-  - `template` - a custom mapping using a template language. Currently, we only support [`jsonnet`](https://jsonnet.org/).
-
-Once you've created the receiver and obtained its `url` field, you are ready to configure the Github Webhook:
+The most important part of the response is the `url` field. This is the endpoint you will point your Github Webhook to. Once you've created the receiver and obtained its `url` field, you are ready to configure the Github Webhook:
 
 Go to the `Settings` tab of your repository.
 
@@ -136,3 +121,4 @@ Any events related to issues in your repository will now be received by the Buff
 
 ## Next Steps
 - [Events Overview](/integrate/events/overview/)
+- [Buffer API Reference](https://buffer.keboola.com/v1/documentation/)
