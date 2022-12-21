@@ -29,7 +29,7 @@ The `template` column type currently only supports the `jsonnet` templating lang
 
 The following `jsonnet` globals are available:
 
-|name|description|example|value|
+|name|description|usage example|example value|
 |:-|:-|:-:|:-:|
 | `BodyPath` | Get a field from the request body by path | `BodyPath("deeply.nested.path")` | `1000` |
 | `Body` | Get the entire request body as an object | `Body()` | `{ "a": "b" }` |
