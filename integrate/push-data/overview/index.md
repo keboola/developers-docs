@@ -27,6 +27,16 @@ The available column types are:
 
 The `template` column type currently only supports the `jsonnet` templating language.
 
+The following `jsonnet` globals are available:
+
+|name|description|example|value|
+|:-|:-|:-:|:-:|
+| `BodyPath` | Get a field from the request body by path | `BodyPath("deeply.nested.path")` | `1000` |
+| `Body` | Get the entire request body as an object | `Body()` | `{ "a": "b" }` |
+| `Header` | Get the value of a request header | `Header("Content-Type")` | `"application/json"` |
+| `Headers` | Get all request headers as an object | `Headers()` | `{ "Content-Type": "application/json" }` |
+| `currentDatetime` | Current datetime as a string formatted according to RFC3339 | `currentDatetime` | `"2022-01-02T15:04:05Z01:00"` |
+
 Incoming events are immediately mapped to the schema defined in each export, and each new row is appended to a CSV file. This CSV file is stored in your Keboola project. When certain conditions are met, the data from the file is uploaded to the destination table, and the file is cleared. These `conditions` are defined by the export:
 
 | condition | minimum | maximum | default |

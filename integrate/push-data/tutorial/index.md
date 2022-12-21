@@ -34,7 +34,7 @@ To start ingesting events, you must first create a receiver. Send the following 
             "template": {
               "language": "jsonnet",
               "undefinedValueStrategy": "error",
-              "content": "body.issue.body",
+              "content": "BodyPath(\"issue.body\")",
             }
           }
         ]
@@ -81,7 +81,7 @@ Upon success, the response will contain the receiver you've just created:
             "template": {
               "language": "jsonnet",
               "undefinedValueStrategy": "error",
-              "content": "Body.issue.body",
+              "content": "BodyPath(\"issue.body\")",
             }
           }
         ]
