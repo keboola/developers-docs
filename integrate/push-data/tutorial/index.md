@@ -1,6 +1,6 @@
 ---
-title: Events Tutorial
-permalink: /integrate/events/tutorial/
+title: Push Data Tutorial
+permalink: /integrate/push-data/tutorial/
 ---
 
 * TOC
@@ -120,5 +120,5 @@ Click `Add webhook` at the bottom of the page.
 Any events related to issues in your repository will now be received by the Buffer API and uploaded to your table.
 
 ## Next Steps
-- [Events Overview](/integrate/events/overview/)
+- [Push Data Overview](/integrate/push-data/overview/)
 - [Buffer API Reference](https://buffer.keboola.com/v1/documentation/)

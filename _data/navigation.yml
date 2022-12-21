@@ -299,8 +299,8 @@ items:
       - url: /integrate/database/
         title: SSH Tunnel for Database Extractors
 
-      - url: /integrate/events/
-        title: Events
+      - url: /integrate/push-data/
+        title: Push Data
 
   - url: /automate/
     title: Automation/Common Tasks

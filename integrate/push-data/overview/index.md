@@ -1,6 +1,6 @@
 ---
-title: Events Overview
-permalink: /integrate/events/overview/
+title: Push Data Overview
+permalink: /integrate/push-data/overview/
 ---
 
 * TOC
@@ -64,5 +64,5 @@ A token is generated for each receiver export. These tokens have the minimum pos
 These tokens should not be deleted or refreshed manually. To refresh tokens, use the [`POST /v1/receivers/{receiverId}/tokens/refresh`](https://buffer.keboola.com/v1/documentation/#/configuration/RefreshReceiverTokens) endpoint.
 
 ## Next Steps
-- [Events Tutorial](/integrate/events/tutorial/)
+- [Push Data Tutorial](/integrate/push-data/tutorial/)
 - [Buffer API Reference](https://buffer.keboola.com/v1/documentation/)
