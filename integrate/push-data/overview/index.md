@@ -3,14 +3,16 @@ title: Push Data Overview
 permalink: /integrate/push-data/overview/
 ---
 
+![push data diagram](../push_data.drawio.png)
+
 * TOC
 {:toc}
 
-A receiver represents an endpoint for receiving events. Events are received using HTTP.
+A receiver represents an endpoint for receiving events.
 
 Receivers are managed using the Buffer API. The full API reference is available at https://buffer.keboola.com/v1/documentation/, and the OpenAPI specification is available at https://buffer.keboola.com/v1/documentation/openapi3.json.
 
-Receivers are associated with a maximum of 20 `exports`. Each export represents a `mapping` from event data to `columns` in a destination `table`. Data may be mapped using pre-defined mappings, or a custom `template`.
+Events are received using HTTP. Receivers are associated with a maximum of 20 `exports`. Each export represents a `mapping` from event data to `columns` in a destination `table`. Data may be mapped using pre-defined mappings, or a custom `template`.
 
 The available column types are:
 
