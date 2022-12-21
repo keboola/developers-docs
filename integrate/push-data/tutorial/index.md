@@ -11,6 +11,8 @@ In this tutorial, we will setup a receiver for the [`issues`](https://docs.githu
 
 You will need your project's master token, and a Github repository in which you have the `Admin` role.
 
+### Creating a Receiver
+
 To start ingesting events, you must first create a receiver. Send the following payload to the `https://buffer.keboola.com/v1/receivers` endpoint:
 ```
 {
@@ -18,9 +20,6 @@ To start ingesting events, you must first create a receiver. Send the following 
   "exports": [
     {
       "name": "Events",
-      "conditions": {
-        "time": "2m"
-      },
       "mapping": {
         "tableId": "in.c-github.issues",
         "columns": [
@@ -92,7 +91,9 @@ Upon success, the response will contain the receiver you've just created:
 }
 ```
 
-The most important part of the response is the `url` field. This is the endpoint you will point your Github Webhook to. Once you've created the receiver and obtained its `url` field, you are ready to configure the Github Webhook:
+The most important part of the response is the `url` field. This is the endpoint you will point your Github Webhook to. Once you've created the receiver and obtained its `url` field, you are ready to configure the Github Webhook.
+
+### Configuring the Github Webhook
 
 Go to the `Settings` tab of your repository.
 
