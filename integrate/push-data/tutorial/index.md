@@ -118,7 +118,7 @@ For `Which events would you like to trigger this webhook?`, click `Let me select
 
 Click `Add webhook` at the bottom of the page.
 
-Any events related to issues in your repository will now be received by the Buffer API and uploaded to your table.
+Any events related to issues in your repository will now be buffered by the receiver, and uploaded to your table every minute.
 
 ## Next Steps
 - [Push Data Overview](/integrate/push-data/overview/)
