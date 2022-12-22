@@ -7,9 +7,9 @@ permalink: /integrate/push-data/tutorial/
 {:toc}
 
 
-In this tutorial, we will setup a receiver for the [`issues`](https://docs.github.com/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#issues) event from Github Webhooks. This will allow you to monitor and analyse activity relating to issues on any of your Github repositories.
+In this tutorial, we will set up a receiver for the [`issues`](https://docs.github.com/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#issues) event from GitHub Webhooks. This will allow you to monitor and analyse activity relating to issues in any of your GitHub repositories.
 
-You will need your project's master token, and a Github repository in which you have the `Admin` role.
+You will need your project's master token, and a GitHub repository in which you have the `Admin` role.
 
 ### Creating a Receiver
 
@@ -44,7 +44,7 @@ To start ingesting events, you must first create a receiver. Send the following 
 }
 ```
 
-You can do this using `curl`, or anything else that allows you to send a HTTP request:
+You can do this using `curl`, or anything else that allows you to send an HTTP request:
 ```
 $ curl --header 'Content-Type: application/json' \
        --header 'X-StorageApi-Token: <YOUR_TOKEN>' \
@@ -91,7 +91,7 @@ Upon success, the response will contain the receiver you've just created:
 }
 ```
 
-The most important part of the response is the `url` field. This is the endpoint you will point your Github Webhook to. Once you've created the receiver and obtained its `url` field, you are ready to configure the Github Webhook.
+The most important part of the response is the `url` field. This is the endpoint you will point your GitHub webhook to. Once you've created the receiver and obtained its `url` field, you are ready to configure the GitHub webhook.
 
 ### Configuring the Github Webhook
 
