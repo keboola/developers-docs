@@ -258,8 +258,9 @@ A sample configuration file might look like this:
                     "enclosure": "\""
                 },
                 {
-                    "source": "destination1.csv",
-                    "destination": "out.c-main.test2"
+                    "source": "write-alwayss.csv",
+                    "destination": "out.c-main.output-even-on-error"
+                    "write_always": true
                 }
             ],
             "files": []
@@ -305,6 +306,7 @@ The tables element in a configuration of the **output mapping** is an array and 
   - `delete_where_values`
   - `delimiter`
   - `enclosure`
+  - `write_always`
 
 #### Input Mapping --- Basic
 Download tables `in.c-ex-salesforce.Leads` and `in.c-ex-salesforce.Accounts` to `/data/tables/in/leads.csv`
@@ -487,6 +489,26 @@ with a compound primary key set on the columns `column1` and `column2`.
                     "destination": "out.c-main.data",
                     "incremental": true,
                     "primary_key": ["column1", "column2"]
+                }
+            ]
+        }
+    }
+}
+{% endhighlight %}
+
+#### Output Mapping --- Write even if the job fails
+If you have a table that you are updating during the execution of the job 
+and you want to output that table even if the job fails then you can use the `write_always` flag 
+
+{% highlight json %}
+{
+    "storage": {
+        "output": {
+            "tables": [
+                {
+                    "source": "always-output.csv",
+                    "destination": "out.c-main.always-output",
+                    "write_always": true
                 }
             ]
         }
