@@ -23,7 +23,11 @@ To start ingesting events, you must first create a receiver. Send the following 
       "mapping": {
         "tableId": "in.c-github.issues",
         "columns": [
-          { "type": "id", "name": "id" },
+          {
+            "primaryKey": true,
+            "type": "id",
+            "name": "id"
+          },
           { "type": "datetime", "name": "datetime" },
           { "type": "ip", "name": "ip" },
           { "type": "body", "name": "body" },
@@ -70,7 +74,11 @@ Upon success, the response will contain the receiver you've just created:
       "mapping": {
         "tableId": "in.c-github.issues",
         "columns": [
-          { "type": "id", "name": "id" },
+          {
+            "primaryKey": true,
+            "type": "id",
+            "name": "id"
+          },
           { "type": "datetime", "name": "datetime" },
           { "type": "ip", "name": "ip" },
           { "type": "body", "name": "body" },
