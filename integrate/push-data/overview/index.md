@@ -33,14 +33,16 @@ The available column types are:
 | `headers` | the unaltered request headers |
 | `template` | a custom mapping using a template language |
 
+### Template (Jsonnet)
+
 The `template` column type currently only supports the `jsonnet` templating language.The following `jsonnet` globals are available:
 
 |Name|Description|Usage example|Example value|
 |:-|:-|:-|:-|
 | `Ip()` | IP address of the client | `Ip()` | `127.0.0.1` |
 | `Body()` | Get the entire request body as an object. | `Body()` | `{ "a": "b" }` |
-| `Body(string)` | Get a field from the request body by path. Fails if the header does not exist, in which case the record will not be saved. | `BodyPath("deeply.nested.path")` | `1000` |
-| `Body(string, any)` | Get a field from the request body by path, or a default value. | `BodyPath("deeply.nested.path", 2000)` | `1000` |
+| `Body(string)` | Get a field from the request body by path. Fails if the header does not exist, in which case the record will not be saved. | `Body("deeply.nested.path")` | `1000` |
+| `Body(string, any)` | Get a field from the request body by path, or a default value. | `Body("deeply.nested.path", 2000)` | `1000` |
 | `BodyStr()` | Get the entire request body as a string. | `BodyStr()` | `"{\"a\":\"b\"}"` |
 | `Header()` | Get all request headers. | `Header()` | `{ "Content-Type": "application/json" }` |
 | `Header(string)` | Get the value of a single request header. Fails if the header does not exist, in which case the record will not be saved. | `Header("Content-Type")` | `"application/json"` |

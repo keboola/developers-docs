@@ -20,6 +20,7 @@ To start ingesting events, you must first create a receiver. Send the following 
   "exports": [
     {
       "name": "Events",
+      "conditions": { "count": 1 },
       "mapping": {
         "tableId": "in.c-github.issues",
         "columns": [
@@ -66,9 +67,9 @@ Upon success, the response will contain the receiver you've just created:
       "id": "events",
       "name": "Events",
       "conditions": {
-        "count": 1000,
-        "size": "1MB",
-        "time": "2m"
+        "count": 1,
+        "size": "5MB",
+        "time": "5m"
       },
       "mapping": {
         "tableId": "in.c-github.issues",
@@ -87,8 +88,7 @@ Upon success, the response will contain the receiver you've just created:
             "name": "template",
             "template": {
               "language": "jsonnet",
-              "undefinedValueStrategy": "error",
-              "content": "BodyPath(\"issue.body\")",
+              "content": "'#' + Body('issue.id') + ': ' + Body('issue.body', 'n/a')",
             }
           }
         ]
@@ -126,6 +126,27 @@ For `Which events would you like to trigger this webhook?`, click `Let me select
 Click `Add webhook` at the bottom of the page.
 
 Any events related to issues in your repository will now be buffered by the receiver, and uploaded to your table every minute.
+
+To see your integration working, head over to your repository and [open a few issues](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue).
+
+### Results
+
+The following token was generated.
+
+![Keboola token settings screenshot showing the generated token](./token.png)
+
+This token only has the minimal set of permissions, which in this case is access to a single bucket, and the ability to manipulate files. Currently, files are used as staging storage in order to prevent data loss. You can see these files in your project's Storage.
+
+![Keboola storage file](./github_webhook_export_file.png)
+
+Because the table `in.c-github-issues` did not exist, it was created.
+
+![Keboola storage table](./github_webhook_export_table.png)
+
+And finally, you can take a look at the destination table's data sample to find your data, ready for further processing.
+
+![Keboola storage table sample data](./github_webhook_export_table_data.png)
+
 
 ## Next Steps
 - [Push Data Overview](/integrate/push-data/overview/)
