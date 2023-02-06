@@ -127,7 +127,7 @@ Click `Add webhook` at the bottom of the page.
 
 Any events related to issues in your repository will now be buffered by the receiver, and uploaded to your table every minute.
 
-To see your integration working, head over to your repository and [open a few issues](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue).
+To see your integration at work, head over to your repository and [open a few issues](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue).
 
 ### Results
 
