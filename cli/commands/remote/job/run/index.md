@@ -20,7 +20,7 @@ kbc remote job run [branch1/]component1/config1[@tag] [branch2/]component2/confi
 `--timeout <string>`
 : How long to wait for the job to finish (default "2m")
   
-  Specified as a sequence of decimal numbers with unit suffixes, e.g. "5m10s" or "1.5h". Available units are "ms", "s", "m", and "h".
+  Specified as a sequence of decimal numbers with unit suffixes, e.g., "5m10s" or "1.5h". Available units are "ms", "s", "m", and "h".
 
 `--async`
 : Do not wait for jobs to finish (default false)
