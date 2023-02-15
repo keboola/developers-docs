@@ -9,7 +9,7 @@ permalink: /cli/commands/remote/job/run/
 **Run one or more [jobs](https://help.keboola.com/management/jobs/).**
 
 ```
-kbc remote job run [branch1/]component1/config1 [branch2/]component2/config2 ... [flags]
+kbc remote job run [branch1/]component1/config1[@tag] [branch2/]component2/config2[@tag] ... [flags]
 ```
 
 ### Options
