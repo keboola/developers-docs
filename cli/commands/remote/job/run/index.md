@@ -36,7 +36,7 @@ Started job "328904392" using config "ex-db-snowflake/978904392"
 Waiting for 328904392
 Waiting for 328904392
 Finished job "328904392"
-Finished running all jobs.
+Finished all jobs.
 ```
 
 ```
@@ -49,7 +49,7 @@ Finished job "328904393"
 Waiting for 328904394
 Waiting for 328904394
 Finished job "328904394"
-Finished running all jobs.
+Finished all jobs.
 ```
 
 ```
