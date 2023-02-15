@@ -398,6 +398,11 @@ items:
                     title: detail
                   - url: /cli/commands/remote/workspace/list/
                     title: list
+              - url: /cli/commands/remote/job/
+                title: job
+                items:
+                  - url: /cli/commands/remote/job/run/
+                    title: run
           - url: /cli/commands/template/
             title: template
             items:
