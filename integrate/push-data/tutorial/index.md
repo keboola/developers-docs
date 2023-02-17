@@ -56,7 +56,35 @@ $ curl --header 'Content-Type: application/json' \
        https://buffer.keboola.com/v1/receivers
 ```
 
-Upon success, the response will contain the receiver you've just created:
+The response will contain the task that has been created:
+```
+{
+  "id": "2023-02-16T16:04:39.570Z_Pg7U4",
+  "receiverId": "github-issues",
+  "url": "https://buffer.keboola.com/v1/receivers/github-issues/tasks/receiver.create/2023-02-16T16:04:39.570Z_Pg7U4",
+  "type": "receiver.create",
+  "createdAt": "2023-02-17T11:20:57.406Z",
+  "isFinished": false,
+  "result": ""
+}
+```
+
+You can query the task's status by querying the `url` field and wait until the `isFinished` field is set to `true`:
+```
+{
+  "id": "2023-02-16T16:04:39.570Z_Pg7U4",
+  "receiverId": "github-issues",
+  "url": "https://buffer.keboola.com/v1/receivers/github-issues/tasks/receiver.create/2023-02-16T16:04:39.570Z_Pg7U4",
+  "type": "receiver.create",
+  "createdAt": "2023-02-17T11:20:57.406Z",
+  "finishedAt": "2023-02-17T11:20:57.753Z",
+  "isFinished": true,
+  "duration": 343,
+  "result": "receiver created"
+}
+```
+
+Upon success, query the receiver url `https://buffer.keboola.com/v1/receivers/github-issues` and the response will contain the receiver you've just created:
 ```
 {
   "id": "github-issues",
