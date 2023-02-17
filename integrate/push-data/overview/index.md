@@ -71,6 +71,8 @@ A receiver may be created without any exports. The exports can then be created s
 
 **Warning**: Events sent to a receiver without any exports will be permanently lost. This is because data is buffered per export, not per receiver.
 
+The requests are asynchronous and create a task that must be completed before the receiver or export is ready to use. The task status can be checked using the [`GET /v1/receivers/{receiverId}/tasks/{taskId}`](https://buffer.keboola.com/v1/documentation/#/configuration/GetTask) endpoint.
+
 Export tables are created if they do not exist. If they already exist, the schema defined by `export.columns` must match the existing schema. If the table schema is manually altered and it no longer matches, the upload from staging storage to the table will fail. The data is kept in the staging storage for up to 7 days during which you can recover any failures.
 
 ## Delete Receivers and Exports
