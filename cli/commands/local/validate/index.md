@@ -1,5 +1,5 @@
 ---
-title: Validate Command
+title: Validate Local Project Command
 permalink: /cli/commands/local/validate/
 ---
 
@@ -7,7 +7,7 @@ permalink: /cli/commands/local/validate/
 {:toc}
 
 
-**Validate the [local directory](/cli/structure/).**
+**Validate the [local project directory](/cli/structure/).**
 
 ```
 kbc local validate [flags]
@@ -31,6 +31,16 @@ will be validated against the schema.
 ➜ kbc validate
 Everything is good.
 ```
+
+## Sub Commands
+
+|---
+| Command | Description
+|-|-|-
+| [kbc local validate config](/cli/commands/local/validate/config/) | Validate a configuration JSON file. |
+| [kbc local validate row](/cli/commands/local/validate/row/) | Validate a configuration row JSON file. |
+| [kbc local validate schema](/cli/commands/local/validate/schema/) | Validate a configuration/row JSON file by a JSON schema file. |
+
 
 ## Next Steps
 

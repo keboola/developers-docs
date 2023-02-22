@@ -304,7 +304,7 @@ items:
         items:
           - url: /integrate/push-data/tutorial/
             title: Tutorial
-          
+
           - url: /integrate/push-data/overview/
             title: Overview
 
@@ -368,6 +368,13 @@ items:
                 title: encrypt
               - url: /cli/commands/local/validate/
                 title: validate
+                items:
+                  - url: /cli/commands/local/validate/config/
+                    title: config
+                  - url: /cli/commands/local/validate/row/
+                    title: row
+                  - url: /cli/commands/local/validate/schema/
+                    title: schema
               - url: /cli/commands/local/fix-paths/
                 title: fix-paths
               - url: /cli/commands/local/template/
