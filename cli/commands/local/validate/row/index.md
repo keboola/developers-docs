@@ -15,8 +15,8 @@ kbc local validate row component.id row.json [flags]
 
 Each [component](/extend/component/) definition optionally contains a **schema of the configuration row `parameters` key**.
 
-The command validates content of the specified JSON file against the schema.
-It can be used in a project [local directory](/cli/structure/) but also separately.
+The command validates the content of the specified JSON file against the schema.
+It can be used both in a project [local directory](/cli/structure/) and also separately.
 
 ## Options
 
@@ -24,7 +24,7 @@ It can be used in a project [local directory](/cli/structure/) but also separate
 
 ## Example
 
-Successful run, the configuration row is valid:
+A successful run, the configuration row is valid:
 ```
 ➜ kbc local validate row keboola.ex-azure-cost-management row.json
 Validation done.
