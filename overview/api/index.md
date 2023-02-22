@@ -27,7 +27,7 @@ The main APIs for our components are:
 | [Provisioning API](https://provisioningapi.docs.apiary.io/#) | Provisioning is a service creating accounts for [sandboxes](https://help.keboola.com/manipulation/transformations/sandbox/), [transformations](https://help.keboola.com/manipulation/transformations/) and database writers. |
 | [Provisioning Management API](https://provisioningmanagementapi.docs.apiary.io/#) | API managing servers for [sandboxes](https://help.keboola.com/manipulation/transformations/sandbox/), [transformations](https://help.keboola.com/manipulation/transformations/). |
 | [Syrup Queue API](https://syrupqueue.docs.apiary.io/#) | Syrup Queue is a component managing [Jobs](/integrate/jobs/). Being replaced by Queue API. |
-| [Queue API](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api) | Queue is a service for [running components](/extend/docker-runner/) and managing [Jobs](/integrated/jobs/). |
+| [Queue API](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api) | Queue is a service for [running components](/extend/docker-runner/) and managing [Jobs](/integrate/jobs/). |
 | [OAuth Broker API](https://oauthapi3.docs.apiary.io/#) | OAuth Broker is a component managing [OAuth authorizations](/extend/common-interface/oauth/#authorize) of other components. |
 | [Orchestrator API](https://keboolaorchestratorv2api.docs.apiary.io/#) | Orchestrator is a component [automating and scheduling tasks](https://help.keboola.com/tutorial/automate/) in your project. For legacy orchestrations only. |
 | [Importer API](https://app.swaggerhub.com/apis-docs/keboola/import) | [Importer](/integrate/storage/api/importer/) is a helper service for easy table imports |
