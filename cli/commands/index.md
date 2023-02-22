@@ -42,6 +42,9 @@ kbc help local create row
 | [kbc local persist](/cli/commands/local/persist/) | Detect new directories with a [configuration](https://help.keboola.com/components/) or a [configuration row](https://help.keboola.com/components/#configuration-rows). |
 | [kbc local encrypt](/cli/commands/local/encrypt/) | Encrypt all [unencrypted secrets](/overview/encryption/#encrypting-data-with-api). |
 | [kbc local validate](/cli/commands/local/validate/) | Validate the local directory. |
+| [kbc local validate config](/cli/commands/local/validate/config/) | Validate a configuration JSON file. |
+| [kbc local validate row](/cli/commands/local/validate/row/) | Validate a configuration row JSON file. |
+| [kbc local validate schema](/cli/commands/local/validate/schema/) | Validate a configuration/row JSON file by a JSON schema file. |
 | [kbc local fix-paths](/cli/commands/local/fix-paths/) | Ensure that all local paths match [configured naming](/cli/structure/#naming). |
 | | |
 | **[kbc remote](/cli/commands/remote/)** | **Operations directly in the [project](/cli/#subsystems).** |
