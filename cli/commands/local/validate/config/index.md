@@ -15,8 +15,8 @@ kbc local validate config component.id config.json [flags]
 
 Each [component](/extend/component/) definition optionally contains a **schema of the configuration `parameters` key**.
 
-The command validates content of the specified JSON file against the schema. 
-It can be used in a project [local directory](/cli/structure/) but also separately.
+The command validates the content of the specified JSON file against the schema. 
+It can be used both in a project [local directory](/cli/structure/) and also separately.
 
 ## Options
 
@@ -24,7 +24,7 @@ It can be used in a project [local directory](/cli/structure/) but also separate
 
 ## Example
 
-Successful run, the configuration is valid:
+A successful run, the configuration is valid:
 ```
 ➜ kbc local validate config keboola.ex-azure-cost-management config.json
 Validation done.
