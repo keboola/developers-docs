@@ -394,6 +394,16 @@ items:
                 items:
                   - url: /cli/commands/remote/create/branch/
                     title: branch
+              - url: /cli/commands/remote/file/
+                title: file
+                items:
+                  - url: /cli/commands/remote/file/download/
+                    title: download
+              - url: /cli/commands/remote/job/
+                title: job
+                items:
+                  - url: /cli/commands/remote/job/run/
+                    title: run
               - url: /cli/commands/remote/workspace/
                 title: workspace
                 items:
@@ -405,11 +415,6 @@ items:
                     title: detail
                   - url: /cli/commands/remote/workspace/list/
                     title: list
-              - url: /cli/commands/remote/job/
-                title: job
-                items:
-                  - url: /cli/commands/remote/job/run/
-                    title: run
           - url: /cli/commands/template/
             title: template
             items:
