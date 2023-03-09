@@ -19,6 +19,7 @@ kbc remote [command]
 | [kbc remote create branch](/cli/commands/remote/create/branch/) | Create a new [branch](https://help.keboola.com/components/branches/) from the `main` branch. |
 | [kbc remote file](/cli/commands/remote/file/) | Manage [files](https://help.keboola.com/storage/files/) in Storage. |
 | [kbc remote file download](/cli/commands/remote/file/download/) | Download a [file](https://help.keboola.com/storage/files/) from Storage. |
+| [kbc remote file upload](/cli/commands/remote/file/upload/) | Upload a [file](https://help.keboola.com/storage/files/) to Storage. |
 | [kbc remote job](/cli/commands/remote/job/) | Manage [jobs](https://help.keboola.com/management/jobs/) in the project. |
 | [kbc remote job run](/cli/commands/remote/job/run/) | Run one or more [jobs](https://help.keboola.com/management/jobs/). |
 | [kbc remote workspace](/cli/commands/remote/create/) | Manage workspaces in the project. |
