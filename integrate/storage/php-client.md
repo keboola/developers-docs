@@ -127,7 +127,7 @@ $csvFile = new CsvFile('./new-table.csv');
 $client->writeTableAsync('in.c-main.new-table', $csvFile, ['incremental' => true]);
 {% endhighlight %}
 
-All available upload options are listed in the [API documentation](https://keboola.docs.apiary.io/#reference/tables/load-data-asynchronously/import-data).
+All available upload options are listed in the [API documentation](https://keboola.docs.apiary.io/#reference/tables/load-data-asynchronously/import-data-from-csv-file-asynchronously).
 
 ### Example --- Export Data
 To export data from a Storage table to a CSV file, use the

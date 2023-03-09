@@ -16,7 +16,7 @@ To upload a table, take the following steps:
 - Request a [file upload](https://keboola.docs.apiary.io/#reference/files/upload-file/create-file-resource) from
 KBC File Storage. You will be given a destination for the uploaded file on an S3 server.
 - Upload the file there. When the upload is finished, the data file will be available in the *File Uploads* section.
-- Initiate an [asynchronous table import](https://keboola.docs.apiary.io/#reference/tables/load-data-asynchronously/import-data)
+- Initiate an [asynchronous table import](https://keboola.docs.apiary.io/#reference/tables/load-data-asynchronously/import-data-from-csv-file-asynchronously)
 from the uploaded file (use it as the `dataFileId` parameter) into the destination table.
 The import is asynchronous, so the request only creates a job and you need to poll for its results.
 The imported files must conform to the [RFC4180 Specification](https://tools.ietf.org/html/rfc4180).
@@ -106,7 +106,7 @@ aws s3 cp new-table.csv s3://kbc-sapi-files/exp-15/1134/files/2016/06/22/1927266
 After that, import the file into Table Storage, by calling either
 [Create Table API call](https://keboola.docs.apiary.io/#reference/tables/create-table-asynchronously/create-new-table-from-csv-file-asynchronously)
 (for a new table) or
-[Load Data API call](https://keboola.docs.apiary.io/#reference/tables/load-data-asynchronously/import-data)
+[Load Data API call](https://keboola.docs.apiary.io/#reference/tables/load-data-asynchronously/import-data-from-csv-file-asynchronously)
 (for an existing table).
 
 {% highlight bash %}
@@ -168,7 +168,7 @@ The above will return a response similar to this:
 After that, import the file into Table Storage by calling either
 [Create Table API call](https://keboola.docs.apiary.io/#reference/tables/create-table-asynchronously/create-new-table-from-csv-file-asynchronously)
 (for a new table) or
-[Load Data API call](https://keboola.docs.apiary.io/#reference/tables/load-data-asynchronously/import-data)
+[Load Data API call](https://keboola.docs.apiary.io/#reference/tables/load-data-asynchronously/import-data-from-csv-file-asynchronously)
 (for an existing table).
 
 ### Working with Sliced Files
