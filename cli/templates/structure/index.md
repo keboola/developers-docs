@@ -40,6 +40,8 @@ Repository manifest structure:
   - `id` - template ID
   - `name` - a human-readable name
   - `description` - short description of the template
+  - `categories` - *string[]* - list of the template categories, e.g., `["Data Extraction", "E-commerce"]`
+    - Optional, if it is not set, the template is in the `Other` category.
   - `path` - path to the template directory
   - `versions` *(array)*
     - `version` - [semantic version](https://semver.org/)
