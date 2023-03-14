@@ -33,6 +33,20 @@ kbc remote table preview [table] [flags]
 `--format <string>`
 : Output format. Supported formats are `json`, `csv`, and `pretty`. (default `pretty`)
 
+  `csv` is formatted according to [RFC 4180](https://www.ietf.org/rfc/rfc4180.txt).
+
+  `json` is formatted as follows:
+  ```json
+  {
+    "columns": ["Id", "Name", "Region"],
+    "rows": [
+      ["Id0", "Name0", "Region0"],
+      ["Id1", "Name1", "Region1"],
+      ["Id2", "Name2", "Region2"]
+    ]
+  }
+  ```
+
 `-o, --out <string>`
 : Write the data to a file. Fails if the file already exists.
 
