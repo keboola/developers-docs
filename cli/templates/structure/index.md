@@ -40,6 +40,8 @@ Repository manifest structure:
   - `id` - template ID
   - `name` - a human-readable name
   - `description` - short description of the template
+  - `categories` - *string[]* - list of template categories, e.g., `["Data Extraction", "E-Commerce"]`
+    - Optional, if it is not set, the template is in the `Other` category.
   - `path` - path to the template directory
   - `versions` *(array)*
     - `version` - [semantic version](https://semver.org/)
@@ -50,11 +52,11 @@ Repository manifest structure:
 
 #### Snowflake Writer
 
-**Snowflake Writer component ID differs** on AWS and Azure stacks, because staging storage differs.
+**Snowflake Writer (data destination) component ID differs** on AWS and Azure stacks, because staging storage differs.
 - Component ID `keboola.wr-db-snowflake` is used for AWS stacks.
 - Component ID `keboola.wr-snowflake-blob-storage` is used for Azure stacks.
 - Please use:
-  - Placeholder `<keboola.wr-db-snowflake>` in the `repository.json`, in `components` list.
+  - Placeholder `<keboola.wr-db-snowflake>` in the `repository.json`, in the `components` list.
   - Jsonnet function `SnowflakeWriterComponentId()` in [Jsonnet Files](/cli/templates/structure/jsonnet-files/).
 
 #### Example
@@ -92,7 +94,7 @@ Repository manifest structure:
 
 ```
 
-### Git integration
+### Git Integration
 
 **Creating template**
 - A command to manage a repository works with local directories.
@@ -145,8 +147,8 @@ There are three types of template description:
 
 ### Versioning
 
-Template is identified by `<repository>/<template-id>/<version>`,  e.g., `keboola/my-template/1.2.3`.
-Each template version is stored in a separate directory, see [directory structure](#template).
+A template is identified by `<repository>/<template-id>/<version>`,  e.g., `keboola/my-template/1.2.3`.
+Each template version is stored in a separate directory, see the [directory structure](#template).
 
 Templates use [semantic versioning](https://semver.org/):
 - Version format is `<major>.<minor>.<patch>`.
@@ -179,7 +181,7 @@ For **larger changes** in the template, it is recommended to create a new `<majo
 ### Manifest
 
 All configurations and configuration rows are defined in the manifest file `manifest.jsonnet`. 
-Each template should have a `mainConfig` that can be started in the UI using the **Run button** after the template is used.
+Each template should have a `mainConfig` that can be started in the UI by pressing the **Run** button after the template is used.
 This is usually the main orchestration/flow.
 
 Template manifest structure:
@@ -230,7 +232,7 @@ Read more in [Template Inputs](/cli/templates/structure/inputs/).
 
 ### Common Directory
 
-Files saved in `_common` directory in the [repository directory](#repository) can be accessed by every template using `<common>/` prefix.
+Files saved in the `_common` directory in the [repository directory](#repository) can be accessed by every template using the `<common>/` prefix.
 
 #### Example
 
