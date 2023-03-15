@@ -51,7 +51,7 @@ kbc remote table preview [table] [flags]
 : Write the data to a file. Fails if the file already exists.
 
 `--force`
-: When combined with `--out`, causes the file to be overwritten if it already exists.
+: When combined with `--out`, the file will be overwritten if it already exists.
 
 `--limit <int>`
 : Limit the number of exported rows. (maximum 1000, default 100)
