@@ -409,6 +409,8 @@ items:
                 items:
                   - url: /cli/commands/remote/table/preview/
                     title: preview
+                  - url: /cli/commands/remote/table/detail/
+                    title: detail
               - url: /cli/commands/remote/workspace/
                 title: workspace
                 items:
