@@ -15,4 +15,5 @@ kbc remote table [command]
 |---
 | Command | Description
 |-|-|-
+| [kbc remote table preview](/cli/commands/remote/table/preview/) | Retrieve up to 1000 rows from a table. |
 | [kbc remote table detail](/cli/commands/remote/table/detail/) | Print [table](https://help.keboola.com/storage/tables/) details. |
