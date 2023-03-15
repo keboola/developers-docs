@@ -404,6 +404,11 @@ items:
                 items:
                   - url: /cli/commands/remote/job/run/
                     title: run
+              - url: /cli/commands/remote/table/
+                title: table
+                items:
+                  - url: /cli/commands/remote/table/detail/
+                    title: detail
               - url: /cli/commands/remote/workspace/
                 title: workspace
                 items:
