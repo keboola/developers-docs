@@ -18,7 +18,7 @@ kbc remote table import [table] [file] [flags]
 : Keboola Connection instance URL, e.g., `connection.keboola.com`
 
 `--columns <string>`
-: Comma separated list of column names. If present, the first row in the CSV file is not treated as a header.
+: Comma-separated list of column names. If present, the first row in the CSV file is not treated as a header.
 
 `--incremental-load <bool>`
 : Data are either added to existing data in the table or replace the existing data.
