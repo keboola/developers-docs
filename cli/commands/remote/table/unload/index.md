@@ -36,7 +36,7 @@ kbc remote table unload [table] [flags]
   The `json` format is only supported in projects with the Snowflake backend.
 
 `--limit <int>`
-: Limit the number of exported rows. (maximum 1000, default 100)
+: Limit the number of exported rows. A value of 0 means no limit. (default 0)
 
 `--order <string>`
 : Order the data by one or more columns.
