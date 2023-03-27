@@ -55,6 +55,8 @@ kbc help local create row
 | [kbc remote job](/cli/commands/remote/job/) | Manage [jobs](https://help.keboola.com/management/jobs/) in the project. |
 | [kbc remote job run](/cli/commands/remote/job/run/) | Run one or more [jobs](https://help.keboola.com/management/jobs/). |
 | [kbc remote table](/cli/commands/remote/table/) | Manage [tables](https://help.keboola.com/storage/tables/) in the project. |
+| [kbc remote table upload](/cli/commands/remote/table/upload/) | Upload a CSV file to a [table](https://help.keboola.com/storage/tables/). |
+| [kbc remote table download](/cli/commands/remote/table/download/) | Download data from a [table](https://help.keboola.com/storage/tables/). |
 | [kbc remote table preview](/cli/commands/remote/table/preview/) | Preview up to 1000 rows from a [table](https://help.keboola.com/storage/tables/). |
 | [kbc remote table detail](/cli/commands/remote/table/detail/) | Print [table](https://help.keboola.com/storage/tables/) details. |
 | [kbc remote workspace](/cli/commands/remote/create/) | Manage workspaces in the project. |
