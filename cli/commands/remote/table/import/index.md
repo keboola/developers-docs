@@ -23,7 +23,16 @@ kbc remote table import [table] [file] [flags]
 `--incremental-load <bool>`
 : Data are either added to existing data in the table or replace the existing data.
 
-`--without-headers <bool>`
+`--file-delimiter <string>`
+: Delimiter of the CSV file. Default is `,`.
+
+`--file-enclosure <string>`
+: Enclosure of the CSV file. Default is `"`.
+
+`--file-escaped-by <string>`
+: Escape character of the CSV file. By default, no escaping is used. (Note: you can specify either `enclosure` or `escapedBy` parameter, not both.)
+
+`--file-without-headers`
 : States if the CSV file contains headers on the first row or not.
 
 [Global Options](/cli/commands/#global-options)
