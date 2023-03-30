@@ -17,13 +17,13 @@ kbc remote file upload [flags]
 `-H, --storage-api-host <string>`
 : Keboola Connection instance URL, e.g., `connection.keboola.com`
 
-`--name <string>`
-: Name of the file to be created
-
 `--data <string>`
 : Path and/or name of the source file. If `-`, input is expected from standard input, so the command is pipeable.
 
-`--tags <string>`
+`--file-name <string>`
+: Name of the file to be created
+
+`--file-tags <string>`
 : Comma-separated list of tags
 
 [Global Options](/cli/commands/#global-options)
@@ -51,7 +51,7 @@ File "file1" uploaded with file id "1234567".
 
 If you specify `-` as input, the file will be read from standard input. 
 ```
-➜ cat ./name.csv | kbc remote file upload --name file1 --data -
+➜ cat ./name.csv | kbc remote file upload --file-name file1 --data -
 File "file1" uploaded with file id "1234567". 
 ```
 
