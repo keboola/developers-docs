@@ -9,14 +9,14 @@ permalink: /cli/commands/remote/table/upload/
 **Upload a CSV file to a [table](https://help.keboola.com/storage/tables/).**
 
 ```
-kbc remote table upload [file] [table] [flags]
+kbc remote table upload [table] [file] [flags]
 ```
-
-`file`
-: Path and/or name of the source file. If `-`, input is expected from standard input, so the command is pipeable.
 
 `table`
 : ID of the destination table.
+
+`file`
+: Path and/or name of the source file. If `-`, input is expected from standard input, so the command is pipeable.
 
 ### Options
 
@@ -29,17 +29,27 @@ kbc remote table upload [file] [table] [flags]
 `--incremental-load`
 : Data are either added to existing data in the table or replace the existing data.
 
-`--without-headers`
-: States if the CSV file contains headers on the first row or not.
-
-`--name <string>`
-: Name of the file to be created
-
 `--primary-key <string>`
 : Comma-separated list of columns representing the primary key for the newly created table if the table doesn't exist.
 
-`--tags <string>`
+`--file-name <string>`
+: Name of the file to be created
+
+`--file-tags <string>`
 : Comma-separated list of tags for the uploaded file.
+
+`--file-delimiter <string>`
+: Delimiter of the CSV file. Default is `,`.
+
+`--file-enclosure <string>`
+: Enclosure of the CSV file. Default is `"`.
+
+`--file-escaped-by <string>`
+: Escape character of the CSV file. By default, no escaping is used. (Note: you can specify either `enclosure` or `escapedBy` parameter, not both.)
+
+`--file-without-headers`
+: States if the CSV file contains headers on the first row or not.
+
 
 
 [Global Options](/cli/commands/#global-options)
@@ -48,9 +58,9 @@ kbc remote table upload [file] [table] [flags]
 
 Create a table from a CSV file:
 ```
-➜ kbc remote table upload accounts.csv in.c-users.accounts \
-  --name accounts.csv
-  --tags local-file
+➜ kbc remote table upload in.c-users.accounts accounts.csv \
+  --file-name accounts.csv
+  --file-tags local-file
   --primary-key Id
 File "accounts.csv" uploaded with file id "734370450".
 Table "in.c-users.accounts" does not exist, creating it.
