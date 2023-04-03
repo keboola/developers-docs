@@ -58,6 +58,12 @@ kbc remote table download [table] [flags]
 
   Accepts a semicolon-separated list of expressions, each of which specifies a column and a comparison to one or more values, such as `First_Name=Ivan,Pavel;Birth_Date>=1990-01-01`
 
+`--allow-sliced`
+: Allow sliced files to appear sliced locally. (default false)
+
+  By default, sliced files are stitched together to form a single file.
+  If this flag is set when downloading a sliced file, the resulting file will instead be stored as a directory, and each slice will be stored as a separate file in that directory.
+
 
 [Global Options](/cli/commands/#global-options)
 
