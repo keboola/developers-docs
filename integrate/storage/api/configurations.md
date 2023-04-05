@@ -392,9 +392,16 @@ otherwise it may be misinterpreted. The raw HTTP request should look similar to 
 
     curl --request PUT \
     --url https://connection.keboola.com/v2/storage/components/keboola.ex-aws-s3/configs/364479526 \
-    --header 'Content-Type: application/x-www-form-urlencoded' \
+    --header "Content-Type: application/json" \
     --header 'X-StorageAPI-Token: {{token}}' \
-    --data configuration=%7B%0A%09%22parameters%22%3A%20%7B%0A%09%09%22accessKeyId%22%3A%20%22a%22%2C%0A%09%09%22%23secretAccessKey%22%3A%20%22b%22%0A%09%7D%0A%7D
+    --data-binary "{
+        \"configuration\": {
+            \"parameters\": {
+                \"accessKeyId\": \"a\",
+                \"#secretAccessKey\": \"b\"
+            }
+        }
+    }"
 
 Also note that the entire configuration must be always sent, there is no way to patch only part of it.
 The same way the `configuration` is modified, other properties can be modified too. For example, you may want to
