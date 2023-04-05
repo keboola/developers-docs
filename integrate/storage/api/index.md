@@ -11,7 +11,7 @@ the [Storage component](https://help.keboola.com/storage/) before you start usin
 For a general introduction to working with KBC APIs, see the [API Introduction](/overview/api/).
 [Storage API](https://keboola.docs.apiary.io/) provides a number of functions. These are the most important ones:
 
-- [Component configurations](https://keboola.docs.apiary.io/#reference/component-configurations)
+- [Component configurations](https://keboola.docs.apiary.io/#reference/components-and-configurations)
 - [Storage tables](https://keboola.docs.apiary.io/#reference/tables)
 - [File uploads](https://keboola.docs.apiary.io/#reference/files)
 - [Storage buckets](https://keboola.docs.apiary.io/#reference/buckets)

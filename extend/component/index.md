@@ -93,12 +93,12 @@ The expected behavior of the above component types can be described in more deta
 and configuration options. These are created by Keboola. If you wish to bring your own, please contact us first.
 - Other -- this component type has a special role in the UI, it has no standard component UI. Notable "other" components are:
     - `orchestrator` -- [Orchestrator service](https://help.keboola.com/orchestrator/) configurations. To work with either configurations or jobs, use the [dedicated API](https://keboolaorchestratorv2api.docs.apiary.io/#).
-    - `transformation` -- [Transformation service](https://help.keboola.com/transformations/) configurations. To work with configurations, use the standard [configurations API](https://keboola.docs.apiary.io/#reference/component-configurations). To work with jobs, 
+    - `transformation` -- [Transformation service](https://help.keboola.com/transformations/) configurations. To work with configurations, use the standard [configurations API](https://keboola.docs.apiary.io/#reference/components-and-configurations). To work with jobs, 
     use the [dedicated API](https://keboolatransformationapi.docs.apiary.io/#).    
     - `provisioning` -- [Sandbox provisioning service](https://help.keboola.com/transformations/sandbox/). No configurations can be made. 
     To work with jobs, use the [dedicated API](https://provisioningapi.docs.apiary.io/#).
     - `keboola.oauth-v2` -- [OAuth integration service](/extend/common-interface/oauth/). Neither configurations nor jobs can be made. Use the [dedicated API](https://provisioningapi.docs.apiary.io/#) to work with the service.
-    - `keboola.variables` -- Component for storing [variables](/integrate/variables/) configurations. Use the standard [configurations API](https://keboola.docs.apiary.io/#reference/component-configurations). No jobs can be made.
+    - `keboola.variables` -- Component for storing [variables](/integrate/variables/) configurations. Use the standard [configurations API](https://keboola.docs.apiary.io/#reference/components-and-configurations). No jobs can be made.
     - `keboola.storage` -- Placeholder component for actions from Storage service. Neither configurations nor jobs can be made. Use the
     [dedicated API](https://keboola.docs.apiary.io/) to work with Storage.
 

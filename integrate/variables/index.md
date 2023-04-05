@@ -19,7 +19,7 @@ See [Tutorial](/integrate/variables/tutorial) for step-by-step example.
 ## Introduction
 When using variables, the configuration is treated as a [Moustache template](https://mustache.github.io/mustache.5.html). 
 You can enter variables anywhere in the JSON of the configuration body. The configuration body is the contents of 
-the `configuration` node when you [retrieve a configuration](https://keboola.docs.apiary.io/#reference/component-configurations/manage-configurations/configuration-detail).
+the `configuration` node when you [retrieve a configuration](https://keboola.docs.apiary.io/#reference/components-and-configurations/manage-configurations/configuration-detail).
 This means that you can't use variables in a name or in a configuration description. 
 
 Variables are entered using the [Moustache syntax](https://mustache.github.io/mustache.5.html), 
@@ -146,7 +146,7 @@ transformations and bypassing the current
 supported in the UI yet.
 
 ### Step 1 -- Create Variable Configuration
-Use the [Create Configuration API call](https://keboola.docs.apiary.io/#reference/component-configurations/component-configurations/create-configuration) 
+Use the [Create Configuration API call](https://keboola.docs.apiary.io/#reference/components-and-configurations/component-configurations/create-configuration) 
 for the `keboola.variables` component with the following content:
 
 {% highlight json %}
@@ -169,7 +169,7 @@ See an [example](https://documenter.getpostman.com/view/3086797/77h845D?version=
 ### Step 2 -- Create Default Values for Variables
 Note that this step is optional -- you can use variables without default values.
 In the previous step, you obtained an ID of the variable configuration. Use the 
-[Create Configuration Row API call](https://keboola.docs.apiary.io/#reference/component-configurations/create-or-list-configuration-rows/create-configuration-row).
+[Create Configuration Row API call](https://keboola.docs.apiary.io/#reference/components-and--configurations/create-or-list-configuration-rows/create-configuration-row).
 Use the ID of the variable configuration and `keboola.variables` as a component. Use the following body:
 
 {% highlight json %}
@@ -475,7 +475,7 @@ to [running a job](/integrate/variables/#step-4--run-job).
 
 ### Step 5 -- Create Orchestration
 You have to use the 
-[Create Configuration API call](https://keboola.docs.apiary.io/#reference/component-configurations/component-configurations/create-configuration)
+[Create Configuration API call](https://keboola.docs.apiary.io/#reference/components-and-configurations/component-configurations/create-configuration)
 to create a configuration of the `keboola.orchestrator` component. 
 You can use the following data in the configuration:
 
@@ -603,7 +603,7 @@ piece of a shared code, you first have to create a configuration. Notice that th
 certain components so you might want to check the existing configurations of `keboola.shared-code` component before
 crating a new configuration.
 
-To create a configuration, use the [create configuration API call](https://keboola.docs.apiary.io/#reference/component-configurations/component-configurations/create-configuration). The configuration content is ignored, i.e all you need to provide is name:
+To create a configuration, use the [create configuration API call](https://keboola.docs.apiary.io/#reference/components-and-configurations/component-configurations/create-configuration). The configuration content is ignored, i.e all you need to provide is name:
 
 {% highlight bash %}
 curl --location --request POST 'https://connection.keboola.com/v2/storage/components/keboola.shared-code/configs' \

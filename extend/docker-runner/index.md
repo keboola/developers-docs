@@ -75,7 +75,7 @@ has API calls to
 
 ## Configuration
 Components executed by Docker Runner store their configurations in
-[Storage API components configurations](https://keboola.docs.apiary.io/#reference/component-configurations).
+[Storage API components configurations](https://keboola.docs.apiary.io/#reference/components-and-configurations).
 
 When creating the configuration, use
 [this JSON schema](https://github.com/keboola/docker-bundle/blob/master/Resources/schemas/configuration.json)

@@ -22,7 +22,7 @@ custom configurations supplied directly in the `run` request.
 
 ### Stored Configuration
 To run the TDE exporter with a stored configuration, first
-[create the configuration](https://keboola.docs.apiary.io/#reference/component-configurations/component-configurations/create-configuration).
+[create the configuration](https://keboola.docs.apiary.io/#reference/components-and-configurations/component-configurations/create-configuration).
 See [below](#custom-configuration) for the required configuration contents.
 This call will give you the ID of the newly created configuration (for instance, `new-configuration-id`).
 Then [create a job](/integrate/jobs/) with the specified configuration:

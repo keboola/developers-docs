@@ -139,13 +139,13 @@ configurations, `KBC::ProjectSecure::` ciphers are used.
 
 ### State File Properties
 Because the state is stored as part of a
-[Component configuration](https://keboola.docs.apiary.io/#reference/component-configurations),
+[Component configuration](https://keboola.docs.apiary.io/#reference/components-and-configurations),
 the value of the state object is somewhat limited (should not generally exceed 1MB). It should not
 be used to store large amounts of data.
 
 Also, the end-user cannot easily access the data through the UI.
 The data can be, however, modified outside of the component itself using the
-[Component configuration](https://keboola.docs.apiary.io/#reference/component-configurations) API calls.
+[Component configuration](https://keboola.docs.apiary.io/#reference/components-and-configurations) API calls.
 Note however that the content in the contents of the state file is nested:
 
 I.e., assume that the component generates a state file with the following contents:

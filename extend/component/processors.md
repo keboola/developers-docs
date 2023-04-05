@@ -21,7 +21,7 @@ convert the CSV to UTF-8 as expected by [Storage](https://help.keboola.com/stora
 
 Processors are technically supported in any configuration of any component. However, as an **advanced feature**, they have little to no 
 [support in the UI](/extend/component/ui-options/#genericdockerui-processors). To manually configure processors, 
-you have to use the [Component Configuration API](https://keboola.docs.apiary.io/#reference/component-configurations).
+you have to use the [Component Configuration API](https://keboola.docs.apiary.io/#reference/components-and-configurations).
 See the respective part of our [documentation](/integrate/storage/api/configurations/) for
 examples of working with the [Component Configuration API](/integrate/storage/api/configurations/).
 If you want to implement your own processor, see our [implementation notes](/extend/component/implementation/#implementing-processors).
@@ -29,12 +29,12 @@ If you want to implement your own processor, see our [implementation notes](/ext
 If the component does not contain the [respective configuration field](/extend/component/ui-options/#genericdockerui-processors) or
 an [advanced configuration mode](https://help.keboola.com/extractors/other/aws-s3/#advanced), processors are
 completely **invisible in the UI**. In such case, modifying the configuration through the UI may delete the processor configuration
-(though you can always [rollback](https://keboola.docs.apiary.io/#reference/component-configurations/rollback-configuration-version/rollback-version)).
+(though you can always [rollback](https://keboola.docs.apiary.io/#reference/components-and-configurations/rollback-configuration-version/rollback-version)).
 Therefore be sure to add an **appropriate warning** to the configuration description.
 
 ## Configuration
 By running the
-[Get Configuration Detail](https://keboola.docs.apiary.io/#reference/component-configurations/manage-configurations/configuration-detail)
+[Get Configuration Detail](https://keboola.docs.apiary.io/#reference/components-and-configurations/manage-configurations/configuration-detail)
 request for a specific component ID and configuration ID, you obtain the actual configuration contents.
 You can see [an example request](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb)
 for getting a configuration with ID `365111648` for the component called Email Attachments extractor (ID `keboola.ex-email-attachments`):
@@ -126,7 +126,7 @@ will run **after** this particular configuration of the Email Attachment extract
 but **before** its results are loaded into Storage. When the processor is finished, its outputs are loaded
 into Storage as if they were the outputs of the extractor itself.
 
-To save the configuration, you need to use the [Update Configuration API call](https://keboola.docs.apiary.io/#reference/component-configurations/manage-configurations/update-configuration).
+To save the configuration, you need to use the [Update Configuration API call](https://keboola.docs.apiary.io/#reference/components-and-configurations/manage-configurations/update-configuration).
 When updating the configuration, you must provide `componentId`, `configurationId`, and the actual contents of
 the configuration in the `configuration` form field. Make sure to supply only the **contents** of the `configuration`
 node and to properly escape the form data.
@@ -170,7 +170,7 @@ and are described in the respective processor documentation.
 
 ### Using Processors with Configuration Rows
 If the configuration uses [Configuration Rows](/integrate/storage/api/configurations/#configuration-rows),
-you have to use the [Update Configuration Row](https://keboola.docs.apiary.io/#reference/component-configurations/manage-configuration-rows/update-row)
+you have to use the [Update Configuration Row](https://keboola.docs.apiary.io/#reference/components-and-configurations/manage-configuration-rows/update-row)
 API call to set the processors.
 
 Provide `componentId`, `configurationId`, `rowId` and the contents of the configuration in
