@@ -61,7 +61,9 @@ kbc help local create row
 | [kbc remote table download](/cli/commands/remote/table/download/) | Download data from a [table](https://help.keboola.com/storage/tables/). |
 | [kbc remote table preview](/cli/commands/remote/table/preview/) | Preview up to 1000 rows from a [table](https://help.keboola.com/storage/tables/). |
 | [kbc remote table detail](/cli/commands/remote/table/detail/) | Print [table](https://help.keboola.com/storage/tables/) details. |
+| [kbc remote table import](/cli/commands/remote/table/import/) | Import data to a [table](https://help.keboola.com/storage/tables/) from a [file](https://help.keboola.com/storage/files/). |
 | [kbc remote table unload](/cli/commands/remote/table/unload/) | Unload a [table](https://help.keboola.com/storage/tables/) into a [file](https://help.keboola.com/storage/files/). |
+>>>>>>> 09cd019 (Update index.md)
 | [kbc remote workspace](/cli/commands/remote/create/) | Manage workspaces in the project. |
 | [kbc remote workspace create](/cli/commands/remote/workspace/create/) | Create a workspace in the project. |
 | [kbc remote workspace delete](/cli/commands/remote/workspace/delete/) | Delete a workspace in the project. |

@@ -412,6 +412,8 @@ items:
                     title: preview
                   - url: /cli/commands/remote/table/detail/
                     title: detail
+                  - url: /cli/commands/remote/table/import/
+                    title: import
                   - url: /cli/commands/remote/table/unload/
                     title: unload
               - url: /cli/commands/remote/workspace/
