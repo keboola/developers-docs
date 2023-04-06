@@ -392,6 +392,8 @@ items:
                 items:
                   - url: /cli/commands/remote/file/download/
                     title: download
+                  - url: /cli/commands/remote/file/upload/
+                    title: upload
               - url: /cli/commands/remote/job/
                 title: job
                 items:
