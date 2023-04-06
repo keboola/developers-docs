@@ -50,6 +50,7 @@ kbc help local create row
 | **[kbc remote](/cli/commands/remote/)** | **Operations directly in the [project](/cli/#subsystems).** |
 | [kbc remote create](/cli/commands/remote/create/) | Create an object in the project. |
 | [kbc remote create branch](/cli/commands/remote/create/branch/) | Create a new [branch](https://help.keboola.com/components/branches/) from the `main` branch. |
+| [kbc remote create bucket](/cli/commands/remote/create/bucket/) | Create a new [bucket](https://help.keboola.com/storage/buckets/). |
 | [kbc remote file](/cli/commands/remote/file/) | Manage [files](https://help.keboola.com/storage/files/) in Storage. |
 | [kbc remote file download](/cli/commands/remote/file/download/) | Download a [file](https://help.keboola.com/storage/files/) from Storage. |
 | [kbc remote file upload](/cli/commands/remote/file/upload/) | Upload a [file](https://help.keboola.com/storage/files/) to Storage. |
