@@ -20,6 +20,12 @@ kbc remote file download [id] [flags]
 `-o, --output <string>`
 : Path and/or name of the destination file (if the file is not sliced) or directory (if the file is sliced). If `-`, output goes to `stdout` without any extra text, so the command is pipeable.
 
+`--allow-sliced`
+: Allow sliced files to appear sliced locally. (default false)
+
+  By default, sliced files are stitched together to form a single file.
+  If this flag is set when downloading a sliced file, the resulting file will instead be stored as a directory, and each slice will be stored as a separate file in that directory.
+
 [Global Options](/cli/commands/#global-options)
 
 ### Examples
