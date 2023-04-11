@@ -11,7 +11,7 @@ redirect_from:
 
 As described in the [architecture overview](/overview/), Keboola Connection (KBC) consists of many different components.
 Only those components that are published in our **Component List** are generally available in KBC.
-The list can be found in our [Storage Component API](https://keboola.docs.apiary.io/#) in the dedicated [Components section](https://keboola.docs.apiary.io/#reference/component-configurations/list-components).
+The list can be found in our [Storage Component API](https://keboola.docs.apiary.io/#) in the dedicated [Components section](https://keboola.docs.apiary.io/#reference/components-and-configurations/list-components).
 The list of components is managed using the Keboola [Developer Portal](https://components.keboola.com/).
 
 That being said, any KBC user can use any component, unless
@@ -25,7 +25,7 @@ navigate you through creating an account in the [Developer Portal](https://compo
 
 ## Publishing Component
 A non-published component can be used without limitations, but it is not offered in the KBC UI. It can only be used via
-the [API](https://keboola.docs.apiary.io/#reference/component-configurations) or by directly visiting a link with the 
+the [API](https://keboola.docs.apiary.io/#reference/components-and-configurations) or by directly visiting a link with the 
 specific component ID:
 
     https://connection.keboola.com/admin/projects/{PROJECT_ID}/extractors/{COMPONENT_ID}

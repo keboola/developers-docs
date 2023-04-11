@@ -37,7 +37,7 @@ First create a file resource; to create a new file called
 [`new-file.csv`](/integrate/storage/new-table.csv) with `52` bytes, call:
 
 {% highlight bash %}
-curl --request POST --header "X-StorageApi-Token:storage-token" --form "name=new-file.csv" --form "sizeBytes=52" --form "federationToken=1" https://connection.keboola.com/v2/storage/files/prepare
+curl --request POST --header "Content-Type: application/json" --header "X-StorageApi-Token:storage-token" --data-binary "{ \"name\": \"new-file.csv\", \"sizeBytes\": 52, \"federationToken\": 1 }" https://connection.keboola.com/v2/storage/files/prepare
 {% endhighlight %}
 
 Which will return a response similar to this:
@@ -110,7 +110,7 @@ After that, import the file into Table Storage, by calling either
 (for an existing table).
 
 {% highlight bash %}
-curl --request POST --header "X-StorageApi-Token:storage-token" --form "name=new-table" --form "dataFileId=192726698" https://connection.keboola.com/v2/storage/buckets/in.c-main/tables-async
+curl --request POST --header "Content-Type: application/json" --header "X-StorageApi-Token:storage-token" --data-binary "{ \"dataFileId\": 192726698, \"name\": \"new-table\" }" https://connection.keboola.com/v2/storage/buckets/in.c-main/tables-async
 {% endhighlight %}
 
 This will create an asynchronous job, importing data from the `192726698` file into the `new-table` destination table in the `in.c-main` bucket.

@@ -287,7 +287,7 @@ or [exports](https://keboola.docs.apiary.io/#reference/tables/unload-data-asynch
 ### Run a Job
 You need to know the *component Id* and *configuration Id* to create a job. You can get these from the UI links. To use the API to obtain a 
 list of all components available in the project, and their configuration, you can use the
-[Get components](https://keboola.docs.apiary.io/#reference/component-configurations/list-components/get-components).
+[Get components](https://keboola.docs.apiary.io/#reference/components-and-configurations/list-components/get-components).
 See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb).
 A snippet of the response is below:
 

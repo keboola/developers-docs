@@ -15,7 +15,7 @@ tableName = 'my-new-table'
 print('\nCreating upload file')
 
 # Create a new file in Storage
-# See https://keboola.docs.apiary.io/#reference/files/upload-file
+# See https://keboola.docs.apiary.io/#reference/files/upload-file/create-file-resource
 response = requests.post(
     'https://connection.keboola.com/v2/storage/files/prepare',
     data={

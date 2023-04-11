@@ -58,7 +58,7 @@ For more details, see
 ### Components Configuration
 All components store their configuration in [Storage](/integrate/storage/). Management of the
 configurations is done through
-[Storage Components Configurations API](https://keboola.docs.apiary.io/#reference/component-configurations).
+[Storage Components Configurations API](https://keboola.docs.apiary.io/#reference/components-and-configurations).
 Stored configurations can be referenced in `/run` API calls.
 
 Configuration can be defined with a JSON schema stored within the Component detail.
