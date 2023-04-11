@@ -4,7 +4,7 @@ permalink: /cli/commands/remote/file/upload/
 ---
 
 * TOC
-  {:toc}
+{:toc}
 
 **Upload a [file](https://help.keboola.com/storage/files/) to Storage.**
 
