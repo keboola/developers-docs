@@ -44,9 +44,30 @@ Brief overview of supported subsystems of the project.
 
 ### Storage
 
-- [Storage](https://help.keboola.com/storage/) is NOT supported at this time.
-- It is not possible to work with table definitions or contents.
-- We plan to add storage support in the future.
+At the moment, all [Storage](https://help.keboola.com/storage/) related operations are sub-commands of the [kbc remote](/cli/commands/remote/) command. They operate directly on a project. This means that any changes you make using the CLI are immediately applied to your project. We have plans to add support for managing buckets and tables locally using definition files just like component configurations.
+
+
+#### Files
+
+- To upload file, use the [file upload](/cli/commands/remote/file/upload/) command.
+- To download file, use the [file download](/cli/commands/remote/file/download/) command.
+
+#### Buckets and Tables
+
+These commands can be used to manage the [buckets](https://help.keboola.com/storage/buckets/) and [tables](https://help.keboola.com/storage/tables/) in your project:
+- To create new bucket, use the [create bucket](/cli/commands/remote/create/bucket/). 
+- To create new table, use the [create table](/cli/commands/remote/create/table/) commands.
+
+The resulting [tables](https://help.keboola.com/storage/tables/) will be empty, so you may want to use:
+- The [table import](/cli/commands/remote/table/import/) command to import some data. 
+- The [table unload](/cli/commands/remote/table/unload/) command can be used to take data out of a table and store it in a file.
+
+For convenience, you can use combined commands:
+- The [table upload](/cli/commands/remote/table/upload/) command cobines [file upload](/cli/commands/remote/file/upload/) + [table import](/cli/commands/remote/table/import/) operations.
+- The [table download](/cli/commands/remote/table/download/) command cobines [table unload](/cli/commands/remote/table/unload/) + [file download](/cli/commands/remote/file/download/) operations.
+
+These commands may be a little heavy if you are dealing with a lot of data.
+- If you just want a quick sample, use the [table preview](/cli/commands/remote/table/preview/) command.
 
 ## Next Steps
 
