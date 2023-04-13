@@ -24,7 +24,7 @@ kbc remote create table [flags]
 : Name of the table
 
 `--primary-key <string>`
-: Comma-separated list of columns used as primary key
+: Comma-separated list of columns used as a primary key
 
 [Global Options](/cli/commands/#global-options)
 
@@ -43,7 +43,7 @@ Enter the table name.
 Enter a comma-separated list of column names.
 ? Columns: id,name,age
 
-? Select columns for primary key:  [Use arrows to move, space to select]
+? Select columns for the primary key:  [Use arrows to move, space to select]
 > [x]  id
   [ ]  name
   [ ]  age
