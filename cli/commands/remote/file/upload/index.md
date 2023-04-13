@@ -4,9 +4,9 @@ permalink: /cli/commands/remote/file/upload/
 ---
 
 * TOC
-  {:toc}
+{:toc}
 
-**Upload a [file](https://help.keboola.com/storage/files/) to Storage.**
+**Upload a [file](https://help.keboola.com/storage/files/) to [Storage](https://help.keboola.com/storage/).**
 
 ```
 kbc remote file upload [flags]

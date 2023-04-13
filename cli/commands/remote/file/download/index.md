@@ -4,9 +4,9 @@ permalink: /cli/commands/remote/file/download/
 ---
 
 * TOC
-  {:toc}
+{:toc}
 
-**Download a [file](https://help.keboola.com/storage/files/) from Storage.**
+**Download a [file](https://help.keboola.com/storage/files/) from [Storage](https://help.keboola.com/storage/).**
 
 ```
 kbc remote file download [id] [flags]
