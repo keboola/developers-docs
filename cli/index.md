@@ -26,7 +26,7 @@ Keboola CLI can be used, for example, to:
 
 ## Subsystems
 
-A bief overview of supported subsystems of the project.
+A brief overview of supported subsystems of the project.
 
 ### Configurations
 
