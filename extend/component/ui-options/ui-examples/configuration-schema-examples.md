@@ -98,6 +98,111 @@ The above code will create the following user interface:
 {: .image-popup}
 ![multiselect](/extend/component/ui-options/ui-examples/multi_select.png)
 
+
+### Creatable Multi-Select
+
+Multi select with user creatable values
+
+```json
+{
+  "test_creatable_multi_select": {
+    "propertyOrder": 50,
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "format": "select",
+    "options": {
+      "tags": true
+    },
+    "description": "Mutliselect element with no enum => user creates arbitrary values. Comma separated values are supported",
+    "uniqueItems": true
+  }
+}
+```
+
+The above code will create the following element:
+
+{: .image-popup}
+![multiselect](/extend/component/ui-options/ui-examples/creatable_select.gif)
+
+
+### Codemirror (json/sql/python..) editor
+
+Allow inject Codemirror editor to JSON schema based UI. 
+Allowed options: mode, placeholder, autofocus, lineNumbers lint
+Available modes: `text/x-sfsql`, `text/x-sql`, `text/x-plsql`, `text/x-python`, `text/x-julia`, `text/x-rsrc`, `application/json`
+JSON mode supports encryption. Default mode is `application/json` . You should set type base on mode (string or object).
+
+**JsonSchema examples:**
+
+```json
+{
+  "token": {
+    "type": "object",
+    "format": "editor"
+  }
+}
+```
+
+```json
+{
+  "sql": {
+    "type": "string",
+    "format": "editor",
+    "options": {
+      "editor": {
+        "mode": "text/x-sql"
+      }
+    }
+  }
+}
+```
+
+```json
+{
+  "json_properties": {
+      "type": "object",
+      "title": "User Parameters",
+      "format": "editor",
+      "default": {
+        "debug": false
+      },
+      "options": {
+        "editor": {
+          "lint": true,
+          "mode": "application/json",
+          "lineNumbers": true,
+          "input_height": "100px"
+        }
+      },
+      "description": "User parameters accessible, the result will be injected in standard data/config.json parameters property as in any other component",
+      "propertyOrder": 1
+    }
+}
+```
+
+The above code will create the following element:
+
+{: .image-popup}
+![multiselect](/extend/component/ui-options/ui-examples/code_editor.png)
+
+
+### Trimmed string
+
+Works only for simple string inputs. Value is trimmed before save.
+
+**JsonSchema example:**
+
+```json
+"token": {
+  "type": "string",
+  "format": "trim"
+}
+```
+
+
+
 ### Date Range
 
 When a date range is applicable, it should be bounded by two parameters: *From Date* and *To Date*. 
