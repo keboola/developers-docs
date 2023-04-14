@@ -6,8 +6,6 @@ permalink: /cli/templates/structure/inputs/
 * TOC
 {:toc}
 
-**Warning: "templates" is an experimental feature.**
-
 All user inputs are defined in  
 [repository](/cli/templates/structure/#repository) / 
 [template](/cli/templates/structure/#template) / 

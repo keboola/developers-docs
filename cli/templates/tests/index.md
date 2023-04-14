@@ -6,8 +6,6 @@ permalink: /cli/templates/tests/
 * TOC
 {:toc}
 
-**Warning: "templates" is an experimental feature.**
-
 ## How the Tests Work
 
 Each test can be run locally, remotely, or both ways. See the [CLI command](/cli/commands/template/test/run/) for more information.

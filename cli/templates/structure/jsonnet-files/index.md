@@ -6,8 +6,6 @@ permalink: /cli/templates/structure/jsonnet-files/
 * TOC
 {:toc}
 
-**Warning: "templates" is an experimental feature.**
-
 All project [JSON files](/cli/structure/) are in a template defined by [Jsonnet](https://jsonnet.org/) files.
 Jsonnet is based on JSON syntax. Valid JSON is also valid Jsonnet.
 In addition, Jsonnet offers more language constructs such as [conditions, cycles, variables, ...](https://jsonnet.org/learning/tutorial.html).
