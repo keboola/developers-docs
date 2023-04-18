@@ -10,7 +10,7 @@ permalink: /extend/component/ui-options/configuration-schema/sync-action-example
 Some UI elements are using [sync actions](https://developers.keboola.com/extend/common-interface/actions/) to get some values dynamically 
 from the component code. This section provides a list of the elements currently supported. 
 
-Each element specifies `action` attribute which relates to the name of the sync action registered in the Developer Portal.
+Each element specifies the `action` attribute which relates to the name of the sync action registered in the Developer Portal.
 
 *Note: Support for these elements is also abstracted in the official [Python Component library](https://github.com/keboola/python-component#framework-support).*
 
@@ -82,7 +82,7 @@ The above code will create the following element which triggers an action named 
 }
 ```
 
-The above code will create the following element which triggers an action named `testColumns`:
+The above code will create the following element which triggers the `testColumns` action:
 
 {: .image-popup}
 ![ Screenshot](/extend/component/ui-options/ui-examples/single-drop.gif)
@@ -126,7 +126,7 @@ When used in Python, you can use the [ValidationResult](https://github.com/keboo
 }
 ```
 
-The above code will create the following element which triggers an action named `validate_report`:
+The above code will create the following element which triggers the `validate_report` action:
 
 {: .image-popup}
 ![screenshot](/extend/component/ui-options/ui-examples/generic-button.gif)
@@ -169,7 +169,7 @@ When used in Python, the method does not need to return anything, or it can just
 }
 ```
 
-The above code will create the following element which triggers an action named `testConnection`:
+The above code will create the following element which triggers the `testConnection` action:
 
 {: .image-popup}
 ![multiselect](/extend/component/ui-options/ui-examples/test_connection.png)
