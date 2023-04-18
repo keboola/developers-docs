@@ -1,5 +1,5 @@
 ---
-title: UI Elements Examples
+title: UI Element Examples
 permalink: /extend/component/ui-options/configuration-schema/examples/
 
 ---
@@ -99,7 +99,7 @@ The above code will create the following user interface:
 ![multiselect](/extend/component/ui-options/ui-examples/multi_select.png)
 
 
-### Creatable Multi-Select
+### Creatable Multi Select
 
 Multi select with user creatable values
 
@@ -115,7 +115,7 @@ Multi select with user creatable values
     "options": {
       "tags": true
     },
-    "description": "Mutliselect element with no enum => user creates arbitrary values. Comma separated values are supported",
+    "description": "Multi-select element with no enum => user creates arbitrary values. Comma-separated values are supported.",
     "uniqueItems": true
   }
 }
@@ -127,9 +127,9 @@ The above code will create the following element:
 ![multiselect](/extend/component/ui-options/ui-examples/creatable_select.gif)
 
 
-### Codemirror (json/sql/python..) editor
+### Codemirror (json/sql/python..) Editor
 
-Allow inject Codemirror editor to JSON schema based UI. 
+Allow inject Codemirror editor to a JSON schema based UI. 
 Allowed options: mode, placeholder, autofocus, lineNumbers lint
 Available modes: `text/x-sfsql`, `text/x-sql`, `text/x-plsql`, `text/x-python`, `text/x-julia`, `text/x-rsrc`, `application/json`
 JSON mode supports encryption. Default mode is `application/json` . You should set type base on mode (string or object).
@@ -188,7 +188,7 @@ The above code will create the following element:
 ![multiselect](/extend/component/ui-options/ui-examples/code_editor.png)
 
 
-### Trimmed string
+### Trimmed String
 
 Works only for simple string inputs. Value is trimmed before save.
 
@@ -256,7 +256,7 @@ This may be combined in [loading options block](/extend/component/ui-options/con
         },
         "default": 1,
         "title": "Load type",
-        "description": "If set to Incremental update, the result tables will be updated based on primary key. Full load overwrites the destination table each time. NOTE: If you wish to remove deleted records, this needs to be set to Full load and the Period from attribute empty.",
+        "description": "If set to Incremental update, the result tables will be updated based on the primary key. Full load overwrites the destination table each time. NOTE: If you wish to remove deleted records, this needs to be set to Full load and the Period from attribute empty.",
         "propertyOrder": 365
     }
 }
@@ -293,14 +293,14 @@ Loading options block:
                 "type": "string",
                 "title": "Period from date [including].",
                 "default": "1 week ago",
-                "description": " Date in YYYY-MM-DD format or dateparser string i.e. 5 days ago, 1 month ago, yesterday, etc. If left empty, all records are downloaded.",
+                "description": " Date in YYYY-MM-DD format or dateparser string, i.e., 5 days ago, 1 month ago, yesterday, etc. If left empty, all records are downloaded.",
                 "propertyOrder": 300
             },
             "date_to": {
                 "type": "string",
                 "title": "Period to date [excluding].",
                 "default": "now",
-                "description": " Date in YYYY-MM-DD format or dateparser string i.e. 5 days ago, 1 month ago, yesterday, etc. If left empty, all records are downloaded.",
+                "description": " Date in YYYY-MM-DD format or dateparser string, i.e., 5 days ago, 1 month ago, yesterday, etc. If left empty, all records are downloaded.",
                 "propertyOrder": 400
             },
             "incremental_output": {
@@ -317,7 +317,7 @@ Loading options block:
                 },
                 "default": 1,
                 "title": "Load type",
-                "description": "If set to Incremental update, the result tables will be updated based on primary key. Full load overwrites the destination table each time. NOTE: If you wish to remove deleted records, this needs to be set to Full load and the Period from attribute empty.",
+                "description": "If set to Incremental update, the result tables will be updated based on the primary key. Full load overwrites the destination table each time. NOTE: If you wish to remove deleted records, this needs to be set to Full load and the Period from attribute empty.",
                 "propertyOrder": 450
             }
         }
@@ -364,7 +364,7 @@ Create an array with parameter `"maxItems": 1` to create optional blocks.
                     "options": {
                         "input_height": "100px"
                     },
-                    "description": "Comma separated list of required customer attributes. Each customer may have different set of columns, this is to limit only to attributes you need. All attributes are downloaded if left empty.",
+                    "description": "Comma-separated list of required customer attributes. Each customer may have different set of columns, this is to limit only to attributes you need. All attributes are downloaded if left empty.",
                     "uniqueItems": true,
                     "propertyOrder": 700
                 }
@@ -409,7 +409,7 @@ This can be achieved via [dependencies](https://github.com/json-editor/json-edit
     "attachment_pattern": {
       "type": "string",
       "title": "Attachment Pattern",
-      "description": "Regex pattern to filter particular attachments. e.g. to retrieve only pdf file types use: .+\\.pdf If left empty, all attachments are downloaded.",
+      "description": "Regex pattern to filter particular attachments, e.g., to retrieve only pdf file types use: .+\\.pdf If left empty, all attachments are downloaded.",
       "default": ".+\\.csv",
       "options": {
         "dependencies": {
