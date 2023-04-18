@@ -6,8 +6,6 @@ permalink: /cli/templates/structure/
 * TOC
 {:toc}
 
-**Warning: "templates" is an experimental feature.**
-
 ## Repository
 
 Templates repository is a directory stored in:

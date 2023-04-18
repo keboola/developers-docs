@@ -6,13 +6,6 @@ permalink: /cli/templates/tutorial/
 * TOC
 {:toc}
 
-**Warning: "templates" is an experimental feature.**
-
-If you want to use the experimental "templates" feature, you must enable it by the environment variable:
-```sh
-export KBC_TEMPLATES_PRIVATE_BETA=true
-```
-
 This tutorial will guide you through the process of creating and using a template.
 First, make sure you have the [latest version](https://github.com/keboola/keboola-as-code/releases) of the Keboola CLI.
 

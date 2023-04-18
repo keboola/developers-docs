@@ -6,14 +6,7 @@ permalink: /cli/templates/
 * TOC
 {:toc}
 
-**Warning: "templates" is an experimental feature.**
-
 Keboola CLI allows you to create a template from an existing project and apply it to another project.
-
-If you want to use the experimental "templates" feature, you must enable it by the environment variable:
-```sh
-export KBC_TEMPLATES_PRIVATE_BETA=true
-```
 
 See the [tutorial](/cli/templates/tutorial/) on how to create and use a template.
 
