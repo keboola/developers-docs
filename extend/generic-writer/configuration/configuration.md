@@ -194,6 +194,30 @@ Basic HTTP authentication using username and password.
 
 See [example 024](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/docs/examples/024-simple-json-basic-http-auth)
 
+
+#### BearerToken
+
+Authorization using the `Bearer token` in the header. E.g. each request will be sent with
+header: `"authorization": "Bearer XXXX""`
+
+**Example**:
+
+```json
+{
+  "api": {
+    "base_url": "http://localhost:8000",
+    "authentication": {
+      "type": "BearerToken",
+      "parameters": {
+        "#token": "XXXX"
+      }
+    }
+  }
+}
+```
+
+See [example 030](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/docs/examples/030-bearer-token-auth)
+
 ### SSL Verification
 
 Allows turning of the SSL certificate verification. Use with caution. When set to false, the certificate verification is
