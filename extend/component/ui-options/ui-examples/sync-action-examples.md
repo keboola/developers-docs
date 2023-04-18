@@ -8,17 +8,17 @@ permalink: /extend/component/ui-options/configuration-schema/sync-action-example
 {:toc}
 
 Some UI elements are using [sync actions](https://developers.keboola.com/extend/common-interface/actions/) to get some values dynamically 
-from the component code. This section provides list of the elements currently supported. 
+from the component code. This section provides a list of the elements currently supported. 
 
 Each element specifies `action` attribute which relates to the name of the sync action registered in the Developer Portal.
 
-**NOTE** Support for these elements is also abstracted in the official [Python Component library](https://github.com/keboola/python-component#framework-support)
+*Note: Support for these elements is also abstracted in the official [Python Component library](https://github.com/keboola/python-component#framework-support).*
 
-### Dynamically loaded drop downs
+### Dynamically Loaded Dropdowns
 
-Drop down lists (values and labels) can be loaded by component sync action. 
+Drop-down lists (values and labels) can be loaded by the component sync action. 
 
-The sync action code has to return following stdout:
+The sync action code has to return the following stdout:
 
 ```
 [
@@ -30,16 +30,16 @@ The sync action code has to return following stdout:
 
 The `label` value is optional. 
 
-When used in Python you can use the [SelectElement](https://github.com/keboola/python-component#selectelement) class as return value.
+When used in Python, you can use the [SelectElement](https://github.com/keboola/python-component#selectelement) class as return value.
 
-#### Dynamically loaded multi-select
+#### Dynamically loaded multi select
 
 ```json
 {
     "test_columns": {
       "type": "array",
       "propertyOrder": 10,
-      "description": "Element loaded by arbitrary sync action.",
+      "description": "Element loaded by an arbitrary sync action.",
       "items": {
         "enum": [],
         "type": "string"
@@ -56,7 +56,7 @@ When used in Python you can use the [SelectElement](https://github.com/keboola/p
 }
 ```
 
-The above code will create the following element which triggers action named `testColumns`:
+The above code will create the following element which triggers an action named `testColumns`:
 
 {: .image-popup}
 ![Screenshot](/extend/component/ui-options/ui-examples/dynamic_dropdown_multi.gif)
@@ -69,7 +69,7 @@ The above code will create the following element which triggers action named `te
   "test_columns_single": {
     "propertyOrder": 40,
     "type": "string",
-    "description": "Element loaded by arbitrary sync action. (single)",
+    "description": "Element loaded by an arbitrary sync action. (single)",
     "enum": [],
     "format": "select",
     "options": {
@@ -82,7 +82,7 @@ The above code will create the following element which triggers action named `te
 }
 ```
 
-The above code will create the following element which triggers action named `testColumns`:
+The above code will create the following element which triggers an action named `testColumns`:
 
 {: .image-popup}
 ![ Screenshot](/extend/component/ui-options/ui-examples/single-drop.gif)
@@ -95,7 +95,7 @@ This button can be used to return feedback from the component. The output suppor
 
 Example use-cases are query testing, testing connection, report validation, etc.
 
-The sync action code has to return following stdout (JSON string):
+The sync action code has to return the following stdout (JSON string):
 
 ```json
 {
@@ -106,7 +106,7 @@ The sync action code has to return following stdout (JSON string):
 ```
 
 
-When used in Python you can use the [ValidationResult](https://github.com/keboola/python-component#validationresult) class as return value.
+When used in Python, you can use the [ValidationResult](https://github.com/keboola/python-component#validationresult) class as return value.
 
 #### Example
 
@@ -126,7 +126,7 @@ When used in Python you can use the [ValidationResult](https://github.com/kebool
 }
 ```
 
-The above code will create the following element which triggers action named `validate_report`:
+The above code will create the following element which triggers an action named `validate_report`:
 
 {: .image-popup}
 ![screenshot](/extend/component/ui-options/ui-examples/generic-button.gif)
@@ -137,7 +137,7 @@ The above code will create the following element which triggers action named `va
 
 This button can be used for simple connection tests. 
 
-The sync action code has to return following stdout (JSON string) or error (exit code >0):
+The sync action code has to return the following stdout (JSON string) or error (exit code >0):
 
 ```json
 {
@@ -145,10 +145,10 @@ The sync action code has to return following stdout (JSON string) or error (exit
 }
 ```
 
-The name of this sync action **has to be always `testConnection`**
+The name of this sync action **has to be always `testConnection`.**
 
 
-When used in Python the method does not need to return anything, or just throw an exception.
+When used in Python, the method does not need to return anything, or it can just throw an exception.
 
 
 #### Example
@@ -169,7 +169,7 @@ When used in Python the method does not need to return anything, or just throw a
 }
 ```
 
-The above code will create the following element which triggers action named `testConnection`:
+The above code will create the following element which triggers an action named `testConnection`:
 
 {: .image-popup}
 ![multiselect](/extend/component/ui-options/ui-examples/test_connection.png)
