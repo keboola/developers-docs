@@ -247,3 +247,23 @@ If you are doing a one time ad-hoc extraction, you may skip setting up the mappi
 the extracted data later in [Transformations](https://help.keboola.com/manipulation/transformations/). 
 However, if you intend to use your configuration regularly, or want to make it into its own component, 
 setting up a mapping is recommended.
+
+## Tips and trics
+
+The key of the mapping supports dot notation to traverse into children. So if the key contains a dot, you need to change the delimiter. See the following example: 
+
+{% highlight json %}
+"mappings": {
+    "content": {
+        "created.date": {
+            "delimiter": "/",
+            "type": "column",
+            "mapping": {
+                "destination": "parent_category"
+            }
+        }
+    }
+}
+{% endhighlight %}
+
+As you changed the delimiter from the default `.` to `/`, it's no longer parsed as two separate keys `created` and `date`, but rather just a single key `created.date`.
