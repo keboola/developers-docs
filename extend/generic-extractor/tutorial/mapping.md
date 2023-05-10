@@ -250,6 +250,8 @@ setting up a mapping is recommended.
 
 ## Tips and trics
 
+### Key containing a dot character
+
 The key of the mapping supports dot notation to traverse into children. So if the key contains a dot, you need to change the delimiter. See the following example: 
 
 {% highlight json %}
@@ -259,7 +261,7 @@ The key of the mapping supports dot notation to traverse into children. So if th
             "delimiter": "/",
             "type": "column",
             "mapping": {
-                "destination": "parent_category"
+                "destination": "createdDate"
             }
         }
     }

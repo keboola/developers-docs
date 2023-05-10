@@ -57,6 +57,8 @@ document.addEventListener('DOMContentLoaded', function() {
     $("span:contains('\"table\"')").wrap("<a href='/extend/generic-extractor/configuration/config/mappings/#table-mapping'></a>");
     $("span:contains('\"mapping\"')").wrap("<a href='/extend/generic-extractor/configuration/config/mappings/#column-mapping'></a>");
     $("span:contains('\"tableMapping\"')").wrap("<a href='/extend/generic-extractor/configuration/config/mappings/#table-mapping'></a>");
+    $("span:contains('\"delimiter\"')").wrap("<a" +
+        " href='/extend/generic-extractor/tutorial/mapping/#key-containing-a-dot-character'></a>");
 
     // Authorization
     $("span:contains('\"authorization\"')").wrap("<a href='/extend/generic-extractor/configuration/api/authentication/#oauth'></a>");
