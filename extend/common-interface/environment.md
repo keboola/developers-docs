@@ -28,6 +28,8 @@ The following environment variables are injected in the container:
  - `KBC_BRANCHID`: Id of the [development branch](https://keboola.docs.apiary.io/#reference/development-branches/branches).
  - `KBC_STAGING_FILE_PROVIDER`: Either `aws` or `azure` depending on which kind of [Stack](/overview/api/#regions-and-endpoints) the container is running. The value refers to the file storage used during [file import end export operations](https://developers.keboola.com/integrate/storage/api/import-export/).
  - `KBC_PROJECT_FEATURE_GATES`: Comma separated list of feature gates activated for the current project. Feature gates are considered internal and they may disappear without notice. We recommend that you check with our support before relying on any feature gates.
+ - `KBC_COMPONENT_RUN_MODE`: Either `run` or `debug`. The value `debug` is used in case debug mode was used to run the job
+ https://developers.keboola.com/extend/component/running/#debugging. This environment variable can be useful for example to switch the component to a more verbose logging.
  
  The following variables are available only if "Forwards token" and "Forwards token details" are
  enabled in [component configuration](https://components.keboola.com/) (and approved by us):
