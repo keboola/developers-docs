@@ -1,6 +1,7 @@
 ---
-title: Push Data Tutorial
-permalink: /integrate/push-data/tutorial/
+title: Data Streams Tutorial
+permalink: /integrate/data-streams/tutorial/
+redirect_from: /integrate/push-data/tutorial/
 ---
 
 * TOC
@@ -177,5 +178,6 @@ And finally, you can take a look at the destination table's data sample to find 
 
 
 ## Next Steps
-- [Push Data Overview](/integrate/push-data/overview/)
+
+- [Data Streams Overview](/integrate/data-streams/overview/)
 - [Buffer API Reference](https://buffer.keboola.com/v1/documentation/)
