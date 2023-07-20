@@ -294,13 +294,13 @@ items:
       - url: /integrate/database/
         title: SSH Tunnel for Database Extractors
 
-      - url: /integrate/push-data/
-        title: Push Data
+      - url: /integrate/data-streams/
+        title: Data Streams
         items:
-          - url: /integrate/push-data/tutorial/
+          - url: /integrate/data-streams/tutorial/
             title: Tutorial
 
-          - url: /integrate/push-data/overview/
+          - url: /integrate/data-streams/overview/
             title: Overview
 
   - url: /automate/
