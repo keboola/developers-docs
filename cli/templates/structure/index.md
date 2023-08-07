@@ -40,12 +40,19 @@ Repository manifest structure:
   - `description` - short description of the template
   - `categories` - *string[]* - list of template categories, e.g., `["Data Extraction", "E-Commerce"]`
     - Optional, if it is not set, the template is in the `Other` category.
+  - `deprecated` - *bool* - default `false`
+    - Deprecated template is excluded from the list.
+    - Metadata of the deprecated template can be obtained for existing instances.
   - `path` - path to the template directory
+    - Required if `deprecated=false`.
+    - Must not be set for deprecated templates, if `deprecated=true`. 
   - `versions` *(array)*
     - `version` - [semantic version](https://semver.org/)
     - `description` - short description of the version
     - `stable` - is the template ready for production use?
     - `path` - path to the template version directory
+      - Required if `deprecated=false`.
+      - Must not be set for deprecated templates, if `deprecated=true`.
     - `components` *(array)* - list of components used by the template
 
 #### Snowflake Writer
@@ -254,6 +261,18 @@ local part1 = import "lib/part1.jsonnet";
 local part2 = import "/<common>/foo/bar/extractor/ex-generic-v2/myconfig/lib/part2.jsonnet";
 std.mergePatch(part1, part2)
 ```
+
+### Data Apps
+
+Data App (configuration of the `keboola.data-apps` component) contains the deployment ID, 
+which is stored in `parmeters.id` in the configuration.
+
+This ID is not set when the configuration is created, 
+and is additionally set when the Data App is deployed.
+
+This ID must be kept during upgrade of the template to a new version. 
+
+It happens automatically, no extra work is required.
 
 ## Next Steps
 - [Jsonnet Files](/cli/templates/structure/jsonnet-files/)
