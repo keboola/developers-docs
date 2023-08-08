@@ -45,14 +45,14 @@ Repository manifest structure:
     - Metadata of the deprecated template can be obtained for existing instances.
   - `path` - path to the template directory
     - Required if `deprecated=false`.
-    - Must not be set for deprecated templates, if `deprecated=true`. 
+    - Must not be set for deprecated templates if `deprecated=true`. 
   - `versions` *(array)*
     - `version` - [semantic version](https://semver.org/)
     - `description` - short description of the version
     - `stable` - is the template ready for production use?
     - `path` - path to the template version directory
       - Required if `deprecated=false`.
-      - Must not be set for deprecated templates, if `deprecated=true`.
+      - Must not be set for deprecated templates if `deprecated=true`.
     - `components` *(array)* - list of components used by the template
 
 #### Snowflake Writer
@@ -264,13 +264,13 @@ std.mergePatch(part1, part2)
 
 ### Data Apps
 
-Data App (configuration of the `keboola.data-apps` component) contains the deployment ID, 
+A data app (configuration of the `keboola.data-apps` component) contains the deployment ID, 
 which is stored in `parmeters.id` in the configuration.
 
-This ID is not set when the configuration is created, 
-and is additionally set when the Data App is deployed.
+This ID is not set when the configuration is created. 
+It will be set when the data app is deployed.
 
-This ID must be kept during upgrade of the template to a new version. 
+This ID must be kept during the upgrade of the template to a new version. 
 
 It happens automatically, no extra work is required.
 
