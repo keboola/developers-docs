@@ -141,7 +141,7 @@ Notice that it is not possible to encrypt value for only a single development br
 `KBC::ConfigSecure::` and it can be decrypted only within the given configuration of the given component in the given project.
 This type of cipher is useful when you want to prevent copying a configuration.
 
-- If branch type is added all three IDs (component id, project id and configuration id), then the cipher starts with `KBC::BranchTypeConfigSecure::` and it
+- If branch type is added to all three IDs (component id, project id and configuration id), then the cipher starts with `KBC::BranchTypeConfigSecure::` and it
 can be decrypted and it can be decrypted only within the given configuration of the given component in the given project either in the default production 
 branch or in any of the development branches. This means that such encrypted value is not transferrable from production to development (and vice versa).
 Notice that it is not possible to encrypt value for only a single development branch.
