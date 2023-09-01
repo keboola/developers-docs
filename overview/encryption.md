@@ -159,7 +159,7 @@ The following rules apply to all ciphers:
 
 - Providing only a configuration id without a project id is not allowed. Similarly providing only branch type without project is not allowed.
 - The cipher can be decrypted only in the same [region](/overview/api/#regions-and-endpoints) where it was created. The cipher prefixes can have their 
-own suffixes relating to the underlying technology used in the given region. For example you may see `KBC::ProjectSecureKV::` instead of `KBC::ProjectSecure::` being created and used on some stacks. Regardless of this, the business logic rules are the same. Ciphers with different suffixes are not interchangeable as they always come from different regions.
+own suffixes relating to the underlying technology used in the given region. For example you may see `KBC::ProjectSecureKV::` or `KBC::ProjectSecureGKMS::` instead of `KBC::ProjectSecure::` being created and used on some stacks. Regardless of this, the business logic rules are the same. Ciphers with different suffixes are never interchangeable as they always come from different regions. Though even ciphers with the same suffix might still come from different regions.
 - There is no decryption API, the cipher is decrypted only internally just before a component is run.
 - Ciphering an already encrypted value has no effect.
 - There is no way to retrieve the component, project or configuration id or branch type from the cipher.
