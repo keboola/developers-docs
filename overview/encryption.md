@@ -117,9 +117,10 @@ call the API resource endpoint.
 The [Encryption API](https://keboolaencryption.docs.apiary.io/#reference/encrypt/encryption/encrypt-data)
 accepts the following parameters:
 
-- `componentId` (optional) --- id of a [Keboola Connection component](/extend/component/tutorial/#creating-a-component)
-- `projectId` (optional) --- id of a Keboola Connection project
-- `configId` (optional) --- id of a component configuration
+- `componentId` (optional) --- id of a [Keboola Connection component](/extend/component/tutorial/#creating-a-component),
+- `projectId` (optional) --- id of a Keboola Connection project,
+- `configId` (optional) --- id of a component configuration,
+- `branchType` (optional) --- Branch type --- either `default` (meaning default production branch) or `dev` (meaning any development branch other than the production).
 
 Depending on the provided parameters, different types of ciphers are created:
 
@@ -131,23 +132,39 @@ valid across all customers (e.g. some kind of master authorization token)
 can be decrypted in all configurations of the given component within the given project. This is **recommended for all secrets** 
 used within a typical Keboola Connection project.
 
-- If all three (component id, project id and configuration id) are provided, then the cipher starts with
+- If branch type is added to the both the component id and project id, then the cipher starts with `KBC::BranchTypeSecure::` and it
+can be decrypted in all configurations of the given component within the given project either in the default production branch or in any of 
+the development branches. This means that such encrypted value is not transferrable from production to development (and vice versa).
+Notice that it is not possible to encrypt value for only a single development branch.
+
+- If all three IDs (component id, project id and configuration id) are provided, then the cipher starts with
 `KBC::ConfigSecure::` and it can be decrypted only within the given configuration of the given component in the given project.
 This type of cipher is useful when you want to prevent copying a configuration.
 
+- If branch type is added to all three IDs (component id, project id and configuration id), then the cipher starts with `KBC::BranchTypeConfigSecure::` and it
+can be decrypted and it can be decrypted only within the given configuration of the given component in the given project either in the default production 
+branch or in any of the development branches. This means that such encrypted value is not transferrable from production to development (and vice versa).
+Notice that it is not possible to encrypt value for only a single development branch.
+
 - If only the project id is provided, then the cipher starts with `KBC::ProjectWideSecure::` and it can be
 decrypted in all configurations in the given project. This type of cipher is useful for encrypting things shared across multiple 
-components, e.g. SSH tunel settings.
+components, e.g. SSH tunnel settings.
+
+- If branch type is added to the project id, then the cipher starts with `KBC::ProjectWideBranchTypeSecure::` and it can be
+decrypted in all configurations in the given project either in the default production 
+branch or in any of the development branches. This means that such encrypted value is not transferrable from production to development (and vice versa).
+Notice that it is not possible to encrypt value for only a single development branch. 
 
 The following rules apply to all ciphers:
 
-- Providing only a configuration id without a project id is not allowed.
-- The cipher can be decrypted only in the same [region](/overview/api/#regions-and-endpoints) where it was created.
+- Providing only a configuration id without a project id is not allowed. Similarly providing only branch type without project is not allowed.
+- Cipher decryption is only possible in the [region](/overview/api/#regions-and-endpoints) where the cipher was originally created. One specific example are ciphers with prefixes having different suffixes, such as, `KBC::ProjectSecureKV::` (Azure) or `KBC::ProjectSecureGKMS::` (GCP) instead of `KBC::ProjectSecure::` (AWS). Despite using the same business logic, the region and technology are different and such ciphers are never interchangeable.
 - There is no decryption API, the cipher is decrypted only internally just before a component is run.
 - Ciphering an already encrypted value has no effect.
-- There is no way to retrieve the component, project or configuration id from the cipher.
+- There is no way to retrieve the component, project or configuration id or branch type from the cipher.
+- None of the IDs referenced at the cipher creation have to exist. I.e. you can create a cipher for a component that has not been registered yet and that cipher will start working as soon as the component is registered. Similarly, you can create ciphers for projects and configurations without having any access to them.
 
 By default, values encrypted in component configurations are encrypted using the `KBC::ProjectSecure::` cipher.
-This means that the cipher is not transferable between stacks, components or projects. It is transferable
+This means that the cipher is not transferable between regions, components or projects. It is transferable
 between different configurations of the same component within the project where it was created. If, for some
 reason, you create a configuration containing `KBC::ConfigSecure::` ciphers, note that the configuration will not work when copied.

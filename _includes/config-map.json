@@ -108,6 +108,13 @@
                                 }
                             }
                         }
+                    },
+                    "created.date": {
+                        "delimiter": "/",
+                        "type": "column",
+                        "mapping": {
+                            "destination": "createdDate"
+                        }
                     }
                 }
             },

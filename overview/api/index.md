@@ -39,6 +39,7 @@ The main APIs for our components are:
 | [Notifications API](https://app.swaggerhub.com/apis/odinuv/notifications-service) | API to subscribe to events, e.g., failed orchestrations (replacement for Orchestrator API) |
 | [Templates API](https://templates.keboola.com/v1/documentation/) | The Keboola Templates API allows you to apply a [template](/cli/templates/). |
 | [Buffer API](https://buffer.keboola.com/v1/documentation/) | The Keboola Buffer API allows you to ingest small and frequent events into your project’s storage. |
+| [Vault](https://vault.keboola.com/docs/swagger.yaml) | Service handling variables & credentials storage. |
 
 If you don't know which API to use, see our [integration guide](/integrate/). It describes different roles of the APIs and contains examples of commonly
 performed actions.

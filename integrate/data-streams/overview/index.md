@@ -1,9 +1,10 @@
 ---
-title: Push Data Overview
-permalink: /integrate/push-data/overview/
+title: Data Streams Overview
+permalink: /integrate/data-streams/overview/
+redirect_from: /integrate/push-data/overview/
 ---
 
-![push data diagram](../push_data.drawio.png)
+![Data Streams diagram](../push_data.drawio.png)
 
 * TOC
 {:toc}
@@ -94,5 +95,6 @@ A token is generated for each receiver export. These tokens have the minimum pos
 These tokens should not be deleted or refreshed manually. To refresh tokens, use the [`POST /v1/receivers/{receiverId}/tokens/refresh`](https://buffer.keboola.com/v1/documentation/#/configuration/RefreshReceiverTokens) endpoint.
 
 ## Next Steps
-- [Push Data Tutorial](/integrate/push-data/tutorial/)
+
+- [Data Streams Tutorial](/integrate/data-streams/tutorial/)
 - [Buffer API Reference](https://buffer.keboola.com/v1/documentation/)

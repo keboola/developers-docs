@@ -44,7 +44,7 @@ A more detailed description can be found in the chapters below.
 ┃       ┣ 🟦 config.json    
 ┃       ┣ 🟦 meta.json   
 ┃       ┗ 🟩 description.md
-┗ 📂 [component-type]           - e.g., extractor
+┗ 📂 [component-type]           - e.g., extractor, app, ...
   ┗ 📂 [component-id]           - e.g., keboola.ex-db-oracle
     ┗ 📂 [config-name]          - configuration directory, e.g., raw-data
       ┣ 🟦 config.json           
