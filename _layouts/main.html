@@ -100,5 +100,28 @@
   }
 });
 </script>
+<!-- Begin KAI chatbot -->
+<script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
+<df-messenger
+		location="us-central1"
+		project-id="keboola-ai"
+		agent-id="2400cda3-8b20-435d-8770-11569a61ced0"
+		language-code="en"
+		intent=WELCOME>
+		<df-messenger-chat-bubble
+			chat-title="BETA: Chat with the docs">
+	</df-messenger-chat-bubble>
+</df-messenger>
+<style>
+	df-messenger {
+		z-index: 999;
+		position: fixed;
+		bottom: 16px;
+		right: 16px;
+	}
+</style>
+<!-- End KAI chatbot -->
+</body>
+</html>
 </body>
 </html>
