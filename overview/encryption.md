@@ -6,10 +6,10 @@ permalink: /overview/encryption/
 * TOC
 {:toc}
 
-Many of the [KBC components](/overview/) use the Encryption API, which encrypts sensitive values
+Many [KBC components](/overview/) use the Encryption API to encrypt sensitive values
 intended for secure storage. These values are then decrypted within the component itself. 
 This process ensures that the encrypted values are only accessible inside the components and not
-by API users. Additionally, there is no decryption API available, meaning end-users cannot decrypt
+by API users. Additionally, no decryption API is available, meaning end-users cannot decrypt
 these values.
 
 Decryption occurs solely during the serialization of configuration to the Docker container's 
@@ -23,7 +23,7 @@ For instance, consider the following configuration:
 {: .image-popup}
 ![Screenshot - Configuration editor - before](/overview/encryption-1.png)
 
-After saving, the configuration appears as:
+After saving, the configuration appears as follows:
 
 {: .image-popup}
 ![Screenshot - Configuration editor - after](/overview/encryption-2.png)
@@ -40,7 +40,7 @@ For example, a component requiring the following configuration:
 }
 {% endhighlight %}
 
-indicates that the password will be encrypted, while the username will not. Adding a
+indicates that the password will be encrypted while the username will not. Adding a
 prefix `#` to `username` is ineffective, as the component does not recognize such a key,
 even though its value would be encrypted and decrypted normally. Internally, the
 [Encryption API](#encrypting-data-with-api) encrypts these values before saving.
@@ -93,7 +93,7 @@ results in:
 }
 {% endhighlight %}
 
-To encrypt a single string, such as a password, simply submit the text string for encryption
+To encrypt a single string, such as a password, submit the text string for encryption
 (no JSON or quotation is used). For example, encrypting
 
     mySecretPassword
@@ -104,7 +104,7 @@ yields
 
 The `Content-Type` header in the request differentiates whether the body is treated as a string (`text/plain`) or JSON (`application/json`).
 
-You can use the [Console in Apiary](https://keboolaencryption.docs.apiary.io/#reference/encrypt/encryption/encrypt-data?console=1) to
+Use the [Console in Apiary](https://keboolaencryption.docs.apiary.io/#reference/encrypt/encryption/encrypt-data?console=1) to
 call the API resource endpoint.
 
 {: .image-popup}
@@ -112,7 +112,7 @@ call the API resource endpoint.
 
 ### Encryption Parameters
 The [Encryption API](https://keboolaencryption.docs.apiary.io/#reference/encrypt/encryption/encrypt-data)
-accepts optional parameters such as:
+accepts **optional** parameters such as:
 
 - `componentId` --- ID of a [Keboola Connection component](/extend/component/tutorial/#creating-a-component),
 - `projectId` --- ID of a Keboola Connection project,
@@ -125,38 +125,37 @@ The cipher created depends on the provided parameters:
 across all configurations of that component. This is recommended for **component-specific secrets** 
 applicable across all customers (e.g., a master authorization token).
 
-- Adding `projectId` changes the prefix to `KBC::ProjectSecure::`, making it decryptable within
-the project's component configurations. This is recommended for **all secrets** 
-used within a typical Keboola Connection project.
+- Adding `projectId` to the `componentId` changes the prefix to `KBC::ProjectSecure::`, making the cipher decryptable within
+the project's component configurations. This is recommended for **all secrets** used within a typical Keboola Connection project.
 
-- Including `branchType` with these IDs results in a cipher beginning with `KBC::BranchTypeSecure::`.
-This allows decryption in any setup of the specified component in the project, whether it's in the default production branch or in any
-development branches. This means that an encrypted value with this setting cannot be moved between production and development branches,
-or the other way around. Also, it's not possible to encrypt a value for just one development branch.
+- Including `branchType` with these IDs (`componentId`, `projectId`) results in a cipher beginning with `KBC::BranchTypeSecure::`.
+This allows decryption in any setup of the specified component in the project, whether in the default production branch or any
+development branch. This means an encrypted value with this setting cannot be moved between production and development branches
+or vice versa. Also, it's not possible to encrypt a value for just one development branch.
 
-- Providing all three IDs (`componentI`, `projectId`, `configId`) generates a cipher starting with
+- Providing all three IDs (`componentId`, `projectId`, `configId`) generates a cipher starting with
 `KBC::ConfigSecure::`, limiting decryption to a specific configuration. This is useful for preventing the copying of configurations.
 
 - Combining `branchType` with all three IDs creates a cipher that starts with `KBC::BranchTypeConfigSecure::`. It can only be decrypted
-within a specific configuration of a component in a specific project. It works for both the default production branch and any 
-development branches. This means that such encrypted value is not transferrable betwee production and development (and vice versa).
-Note that encrypting a value for only a single development branch is not possible.
+within a specific component configuration in a specific project. It works for both the default production branch and any 
+development branch. This means such encrypted value is not transferrable between production and development (and vice versa).
+Encrypting a value for only a single development branch is not possible.
 
-- Using only `projectId` yields a `KBC::ProjectWideSecure::` cipher, decryptbale accross the project's configurations.
-This type of cipher is useful for encrypting things shared across multiple components, e.g., SSH tunnel settings.
+- Using only `projectId` yields a cipher that begins with `KBC::ProjectWideSecure::`, decryptable across the project's configurations.
+This cipher type helps encrypt information shared across multiple components, e.g., SSH tunnel settings.
 
-- Combining `branchType` with `projectId` createds a `KBC::ProjectWideBranchTypeSecure::` cipher. This cipher allows
+- Combining `branchType` with `projectId` creates a cipher beginning with `KBC::ProjectWideBranchTypeSecure::`. This cipher allows
 decryption across all configurations in the project, whether in production or development branches. However, encrypted values
-cannot be transferred betweeen these branches, and encrypting for a single development branch alone is not possible. 
+cannot be transferred between these branches, and encrypting for a single development branch alone is not possible. 
 
 The following rules apply to all ciphers:
 
 - Providing only a `configId` without a `projectId` is not allowed. Similarly, providing only `branchType` without `projectId` is also not allowed.
-- Cipher decryption is only possible in the [region](/overview/api/#regions-and-endpoints) where the cipher was originally created. For example, ciphers with prefixes `KBC::ProjectSecureKV::` (Azure) or `KBC::ProjectSecureGKMS::` (GCP), instead of `KBC::ProjectSecure::` (AWS), use the same business logic but are specific to their region and technology and are not interchangeable.
-- There is no decryption API; the cipher is decrypted internally just before a component is run.
+- Cipher decryption is only possible in the [region](/overview/api/#regions-and-endpoints) where the cipher was created. For example, ciphers with prefixes `KBC::ProjectSecureKV::` (Azure) or `KBC::ProjectSecureGKMS::` (GCP), instead of `KBC::ProjectSecure::` (AWS), use the same business logic but are specific to their region and technology and are not interchangeable.
+- There is no decryption API; the cipher is decrypted internally before a component is run.
 - Ciphering a value that is already encrypted does not change its encryption.
-- There is no way to retrieve the component, project, or configuration ID or branch type from the cipher.
-- The IDs referenced during cipher creation do not need to exist at that time. For example, you can create a cipher for a component not yet registered, and it will start working as soon as the component is registered. Similarly, ciphers can be created for projects and configurations without having any access to them.
+- There is no way to retrieve the component, project, configuration ID, or branch type from the cipher.
+- The IDs referenced during cipher creation do not need to exist then. For example, you can create a cipher for a component not yet registered, which will start working as soon as the component is registered. Similarly, ciphers can be created for projects and configurations without access to them.
 
 By default, values encrypted in component configurations are encrypted using the `KBC::ProjectSecure::` cipher, meaning
 the cipher is not transferable between regions, components, or projects. It is transferable between 
