@@ -128,25 +128,19 @@ applicable across all customers (e.g., as a master authorization token).
 - Adding `projectId` to the `componentId` changes the prefix to `KBC::ProjectSecure::`, making the cipher decryptable within
 the project's component configurations. This is recommended for **all secrets** used within a typical Keboola Connection project.
 
-- Including `branchType` with these IDs (`componentId`, `projectId`) results in a cipher beginning with `KBC::BranchTypeSecure::`.
-This allows decryption in any setup of the specified component in the project, either in the default production branch or in any
-development branch. This means an encrypted value with this setting cannot be moved between production and development branches
-or vice versa. Also, it's not possible to encrypt a value for just one development branch.
-
 - Providing all three IDs (`componentId`, `projectId`, `configId`) generates a cipher starting with
 `KBC::ConfigSecure::`, limiting decryption to a specific configuration. This is useful for preventing the copying of configurations.
-
-- Combining `branchType` with all three IDs creates a cipher that starts with `KBC::BranchTypeConfigSecure::`. It can only be decrypted
-within a specific component configuration in a specific project. It works for both the default production branch and any 
-development branch. This means such encrypted value is not transferrable between production and development (and vice versa).
-Encrypting a value for only a single development branch is not possible.
 
 - Using only `projectId` yields a cipher that begins with `KBC::ProjectWideSecure::`, decryptable across the project's configurations.
 This cipher type helps encrypt information shared across multiple components, e.g., SSH tunnel settings.
 
-- Combining `branchType` with `projectId` creates a cipher beginning with `KBC::ProjectWideBranchTypeSecure::`. This cipher allows
-decryption across all configurations in the project, whether in production or development branches. However, encrypted values
-cannot be transferred between these branches, and encrypting for a single development branch alone is not possible. 
+- Adding `branchType` restricts the encryption to the default production branch or to development branches. This means an encrypted value with this setting cannot be moved between production and development branches or vice versa. It is not possible to encrypt a value for just one development branch.
+
+	- Using `branchType` with `componentId` and `projectId` results in a cipher beginning with `KBC::BranchTypeSecure::`. This allows decryption in any production or development configuration of the specified component in the project .
+
+	- Using `branchType` with all three IDs  (`componentId`, `projectId`, `configId`) creates a cipher that starts with `KBC::BranchTypeConfigSecure::`. It can only be decrypted within a specific production or development component configuration in a specific project. 
+
+	- Using `branchType` with `projectId` creates a cipher beginning with `KBC::ProjectWideBranchTypeSecure::`. This cipher allows decryption across all production or development configurations in the project. 
 
 The following rules apply to all ciphers:
 
