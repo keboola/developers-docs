@@ -123,13 +123,13 @@ The cipher created depends on the provided parameters:
 
 - With only `componentId`, the cipher starts with `KBC::ComponentSecure::` and is decryptable
 across all configurations of that component. This is recommended for **component-specific secrets** 
-applicable across all customers (e.g., a master authorization token).
+applicable across all customers (e.g., as a master authorization token).
 
 - Adding `projectId` to the `componentId` changes the prefix to `KBC::ProjectSecure::`, making the cipher decryptable within
 the project's component configurations. This is recommended for **all secrets** used within a typical Keboola Connection project.
 
 - Including `branchType` with these IDs (`componentId`, `projectId`) results in a cipher beginning with `KBC::BranchTypeSecure::`.
-This allows decryption in any setup of the specified component in the project, whether in the default production branch or any
+This allows decryption in any setup of the specified component in the project, either in the default production branch or in any
 development branch. This means an encrypted value with this setting cannot be moved between production and development branches
 or vice versa. Also, it's not possible to encrypt a value for just one development branch.
 
