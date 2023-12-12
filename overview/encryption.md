@@ -112,7 +112,7 @@ call the API resource endpoint.
 
 ### Encryption Parameters
 The [Encryption API](https://keboolaencryption.docs.apiary.io/#reference/encrypt/encryption/encrypt-data)
-accepts **optional** parameters such as:
+accepts the following **optional** parameters:
 
 - `componentId` --- ID of a [Keboola Connection component](/extend/component/tutorial/#creating-a-component),
 - `projectId` --- ID of a Keboola Connection project,
