@@ -17,7 +17,7 @@ configuration file. The decrypted data are stored on the Docker host drive and a
 deleted after the container's completion. The component code exclusively accesses the decrypted data.
 
 ## UI Interaction
-When saving arbitrary configuration data, values prefixed with the `#` character are automatically encrypted.
+When saving arbitrary configuration data, if a key is prefixed with the `#` character, the associated value is automatically encrypted.
 For instance, consider the following configuration:
 
 {: .image-popup}
@@ -136,11 +136,11 @@ This cipher type helps encrypt information shared across multiple components, e.
 
 - Adding `branchType` restricts the encryption to the default production branch or to development branches. This means an encrypted value with this setting cannot be moved between production and development branches or vice versa. It is not possible to encrypt a value for just one development branch.
 
-	- Using `branchType` with `componentId` and `projectId` results in a cipher beginning with `KBC::BranchTypeSecure::`. This allows decryption in any production or development configuration of the specified component in the project .
+	- Using `branchType` with `componentId` and `projectId` results in a cipher beginning with `KBC::BranchTypeSecure::`. This allows decryption either in the production or in the development configuration of the specified component in the project.
 
 	- Using `branchType` with all three IDs  (`componentId`, `projectId`, `configId`) creates a cipher that starts with `KBC::BranchTypeConfigSecure::`. It can only be decrypted within a specific production or development component configuration in a specific project. 
 
-	- Using `branchType` with `projectId` creates a cipher beginning with `KBC::ProjectWideBranchTypeSecure::`. This cipher allows decryption across all production or development configurations in the project. 
+	- Using `branchType` with `projectId` creates a cipher beginning with `KBC::ProjectWideBranchTypeSecure::`. This cipher allows decryption either in the production or in the development configurations in the project. 
 
 The following rules apply to all ciphers:
 
