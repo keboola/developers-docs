@@ -145,8 +145,8 @@ The services listed above are:
 For convenience, the following table lists active services and their URLs, though for an authoritative answer 
 and in application integrations, we strongly suggest using the above API call.
 
-| API | Service | Region | URL |
-| --- | ------- | ------ | --- |
+| API | Service | Region          | URL |
+| --- | ------- |-----------------| --- |
 | Billing | `billing` | US Virginia AWS | https://billing.keboola.com |
 | Billing | `billing` | EU Frankfurt AWS | https://billing.eu-central-1.keboola.com |
 | Billing | `billing` | EU Ireland Azure | https://billing.north-europe.azure.keboola.com |
@@ -162,7 +162,6 @@ and in application integrations, we strongly suggest using the above API call.
 | MLFlow | `mlflow` | US Virginia AWS | https://mlflow.keboola.com |
 | MLFlow | `mlflow` | EU Frankfurt AWS | https://mlflow.eu-central-1.keboola.com |
 | MLFlow | `mlflow` | EU Ireland Azure | https://mlflow.north-europe.azure.keboola.com |
-| MLFlow | `mlflow` | EU Frankfurt GCP | https://mlflow.europe-west3.gcp.keboola.com |
 | Notification | `notification` | US Virginia AWS | https://notification.keboola.com |
 | Notification | `notification` | EU Frankfurt AWS | https://notification.eu-central-1.keboola.com |
 | Notification | `notification` | EU Ireland Azure | https://notification.north-europe.azure.keboola.com |
