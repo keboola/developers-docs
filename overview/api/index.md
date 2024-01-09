@@ -48,9 +48,10 @@ performed actions.
 Keboola Connection is available in multiple [stacks](https://help.keboola.com/overview/#stacks). These can be 
 either multi-tenant or single-tenant. Current multi-tenant stacks are:
 
-- US AWS -- [connection.keboola.com](https://connection.keboola.com), 
-- EU AWS -- [connection.eu-central-1.keboola.com](https://connection.eu-central-1.keboola.com),
-- EU Azure -- [connection.north-europe.azure.keboola.com](https://connection.north-europe.azure.keboola.com). 
+- US Virginia AWS – [connection.keboola.com](https://connection.keboola.com/),
+- EU Frankfurt AWS – [connection.eu-central-1.keboola.com](https://connection.eu-central-1.keboola.com/).
+- EU Ireland Azure – [connection.north-europe.azure.keboola.com](https://connection.north-europe.azure.keboola.com/).
+- EU Frankfurt GCP - [connection.europe-west3.gcp.keboola.com](https://connection.europe-west3.gcp.keboola.com/)
 
 Each stack is a completely independent instance of Keboola Connection services.
 In all the API documentation above, the AWS US stack is used.
@@ -144,44 +145,56 @@ The services listed above are:
 For convenience, the following table lists active services and their URLs, though for an authoritative answer 
 and in application integrations, we strongly suggest using the above API call.
 
-|API|Service|Region|URL|
-|---|-------|------|---|
-|Billing|`billing`|US AWS|https://billing.keboola.com|
-|Billing|`billing`|EU AWS|https://billing.eu-central-1.keboola.com|
-|Billing|`billing`|EU Azure|https://billing.north-europe.azure.keboola.com|
-|Encryption|`encryption`|US AWS|https://encryption.keboola.com|
-|Encryption|`encryption`|EU AWS|https://encryption.eu-central-1.keboola.com|
-|Encryption|`encryption`|EU Azure|https://encryption.north-europe.azure.keboola.com|
-|Importer|`import`|US AWS|https://import.keboola.com|
-|Importer|`import`|EU AWS|https://import.eu-central-1.keboola.com|
-|Importer|`import`|EU Azure|https://import.north-europe.azure.keboola.com|
-|MLFlow|`mlflow`|US AWS|https://mlflow.keboola.com|
-|MLFlow|`mlflow`|EU AWS|https://mlflow.eu-central-1.keboola.com|
-|MLFlow|`mlflow`|EU Azure|https://mlflow.north-europe.azure.keboola.com|
-|Notification|`notification`|US AWS|https://notification.keboola.com|
-|Notification|`notification`|EU AWS|https://notification.eu-central-1.keboola.com|
-|Notification|`notification`|EU Azure|https://notification.north-europe.azure.keboola.com|
-|OAuth|`oauth`|US AWS|https://oauth.keboola.com|
-|OAuth|`oauth`|EU AWS|https://oauth.eu-central-1.keboola.com|
-|OAuth|`oauth`|EU Azure|https://oauth.north-europe.azure.keboola.com|
-|Queue|`queue`|US AWS|https://queue.keboola.com|
-|Queue|`queue`|EU AWS|https://queue.eu-central-1.keboola.com|
-|Queue|`queue`|EU Azure|https://queue.north-europe.azure.keboola.com|
-|Scheduler|`scheduler`|US AWS|https://scheduler.keboola.com|
-|Scheduler|`scheduler`|EU AWS|https://scheduler.eu-central-1.keboola.com|
-|Scheduler|`scheduler`|EU Azure|https://scheduler.north-europe.azure.keboola.com|
-|Storage||US AWS|https://connection.keboola.com/|
-|Storage||EU AWS|https://connection.eu-central-1.keboola.com/|
-|Storage||EU Azure|https://connection.north-europe.azure.keboola.com/|
-|Sync Actions|`sync-actions`|US AWS|https://sync-actions.keboola.com/|
-|Sync Actions|`sync-actions`|EU AWS|https://sync-actions.eu-central-1.keboola.com|
-|Sync Actions|`sync-actions`|EU Azure|https://sync-actions.north-europe.azure.keboola.com|
-|Templates|`templates`|US AWS|https://templates.keboola.com|
-|Templates|`templates`|EU AWS|https://templates.eu-central-1.keboola.com|
-|Templates|`templates`|EU Azure|https://templates.north-europe.azure.keboola.com|
-|Workspaces / Sandboxes|`sandboxes`|US AWS|https://sandboxes.keboola.com|
-|Workspaces / Sandboxes|`sandboxes`|EU AWS|https://sandboxes.eu-central-1.keboola.com|
-|Workspaces / Sandboxes|`sandboxes`|EU Azure|https://sandboxes.north-europe.azure.keboola.com|
+| API | Service | Region          | URL |
+| --- | ------- |-----------------| --- |
+| Billing | `billing` | US Virginia AWS | https://billing.keboola.com |
+| Billing | `billing` | EU Frankfurt AWS | https://billing.eu-central-1.keboola.com |
+| Billing | `billing` | EU Ireland Azure | https://billing.north-europe.azure.keboola.com |
+| Billing | `billing` | EU Frankfurt GCP | https://billing.europe-west3.gcp.keboola.com |
+| Encryption | `encryption` | US Virginia AWS | https://encryption.keboola.com |
+| Encryption | `encryption` | EU Frankfurt AWS | https://encryption.eu-central-1.keboola.com |
+| Encryption | `encryption` | EU Ireland Azure | https://encryption.north-europe.azure.keboola.com |
+| Encryption | `encryption` | EU Frankfurt GCP | https://encryption.europe-west3.gcp.keboola.com |
+| Importer | `import` | US Virginia AWS | https://import.keboola.com |
+| Importer | `import` | EU Frankfurt AWS | https://import.eu-central-1.keboola.com |
+| Importer | `import` | EU Ireland Azure | https://import.north-europe.azure.keboola.com |
+| Importer | `import` | EU Frankfurt GCP | https://import.europe-west3.gcp.keboola.com |
+| MLFlow | `mlflow` | US Virginia AWS | https://mlflow.keboola.com |
+| MLFlow | `mlflow` | EU Frankfurt AWS | https://mlflow.eu-central-1.keboola.com |
+| MLFlow | `mlflow` | EU Ireland Azure | https://mlflow.north-europe.azure.keboola.com |
+| Notification | `notification` | US Virginia AWS | https://notification.keboola.com |
+| Notification | `notification` | EU Frankfurt AWS | https://notification.eu-central-1.keboola.com |
+| Notification | `notification` | EU Ireland Azure | https://notification.north-europe.azure.keboola.com |
+| Notification | `notification` | EU Frankfurt GCP | https://notification.europe-west3.gcp.keboola.com |
+| OAuth | `oauth` | US Virginia AWS | https://oauth.keboola.com |
+| OAuth | `oauth` | EU Frankfurt AWS | https://oauth.eu-central-1.keboola.com |
+| OAuth | `oauth` | EU Ireland Azure | https://oauth.north-europe.azure.keboola.com |
+| OAuth | `oauth` | EU Frankfurt GCP | https://oauth.europe-west3.gcp.keboola.com |
+| Queue | `queue` | US Virginia AWS | https://queue.keboola.com |
+| Queue | `queue` | EU Frankfurt AWS | https://queue.eu-central-1.keboola.com |
+| Queue | `queue` | EU Ireland Azure | https://queue.north-europe.azure.keboola.com |
+| Queue | `queue` | EU Frankfurt GCP | https://queue.europe-west3.gcp.keboola.com |
+| Scheduler | `scheduler` | US Virginia AWS | https://scheduler.keboola.com |
+| Scheduler | `scheduler` | EU Frankfurt AWS | https://scheduler.eu-central-1.keboola.com |
+| Scheduler | `scheduler` | EU Ireland Azure | https://scheduler.north-europe.azure.keboola.com |
+| Scheduler | `scheduler` | EU Frankfurt GCP | https://scheduler.europe-west3.gcp.keboola.com |
+| Storage |  | US Virginia AWS | https://connection.keboola.com/ |
+| Storage |  | EU Frankfurt AWS | https://connection.eu-central-1.keboola.com/ |
+| Storage |  | EU Ireland Azure | https://connection.north-europe.azure.keboola.com/ |
+| Storage |  | EU Frankfurt GCP | https://connection.europe-west3.gcp.keboola.com/ |
+| Sync Actions | `sync-actions` | US Virginia AWS | https://sync-actions.keboola.com/ |
+| Sync Actions | `sync-actions` | EU Frankfurt AWS | https://sync-actions.eu-central-1.keboola.com |
+| Sync Actions | `sync-actions` | EU Ireland Azure | https://sync-actions.north-europe.azure.keboola.com |
+| Sync Actions | `sync-actions` | EU Frankfurt GCP | https://sync-actions.europe-west3.gcp.keboola.com |
+| Templates | `templates` | US Virginia AWS | https://templates.keboola.com |
+| Templates | `templates` | EU Frankfurt AWS | https://templates.eu-central-1.keboola.com |
+| Templates | `templates` | EU Ireland Azure | https://templates.north-europe.azure.keboola.com |
+| Templates | `templates` | EU Frankfurt GCP | https://templates.europe-west3.gcp.keboola.com |
+| Workspaces / Sandboxes | `sandboxes` | US Virginia AWS | https://sandboxes.keboola.com |
+| Workspaces / Sandboxes | `sandboxes` | EU Frankfurt AWS | https://sandboxes.eu-central-1.keboola.com |
+| Workspaces / Sandboxes | `sandboxes` | EU Ireland Azure | https://sandboxes.north-europe.azure.keboola.com |
+| Workspaces / Sandboxes | `sandboxes` | EU Frankfurt GCP | https://sandboxes.europe-west3.gcp.keboola.com |
+
 
 **Important**: Each of the stacks also uses its own set of [IP addresses](https://help.keboola.com/extractors/ip-addresses/).
 
