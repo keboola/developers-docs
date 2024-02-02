@@ -20,6 +20,9 @@ kbc remote create table [flags]
 `--columns <string>`
 : Comma-separated list of column names
 
+`--columns-from <string>`
+: The path to the table definition file in json
+
 `--name <string>`
 : Name of the table
 
@@ -40,6 +43,14 @@ kbc remote create table [flags]
 Enter the table name.
 ? Table name: my-table
 
+Would you define column types?
+? Columns Types Definition: [? for help] (Y/n)
+```
+If you don't want to define column types, choose `n/N` and enter names of columns
+```
+Would you define column types?
+? Columns Types Definition: No
+
 Enter a comma-separated list of column names.
 ? Columns: id,name,age
 
@@ -47,6 +58,37 @@ Enter a comma-separated list of column names.
 > [x]  id
   [ ]  name
   [ ]  age
+
+Created table "in.c-bucket2.my-table".
+```
+To define column types, choose `y/Y`, then start an editor. 
+
+```
+Would you define column types?
+? Columns Types Definition: Yes
+
+Columns definition from file
+? Columns definition from file: [Enter to launch editor]
+```
+Edit or replace this part of the text with your definition. Keep the same format. Then save your changes and close the editor.
+
+```
+- name: id
+  definition:
+    type: VARCHAR
+  basetype: STRING
+- name: name
+  definition:
+    type: VARCHAR
+  basetype: STRING
+```
+```
+Columns definition from file
+? Columns definition from file: <Received>
+
+? Select columns for the primary key:  [Use arrows to move, space to select]
+> [x]  id
+  [ ]  name
 
 Created table "in.c-bucket2.my-table".
 ```
