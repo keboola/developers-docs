@@ -173,3 +173,91 @@ The above code will create the following element which triggers the `testConnect
 
 {: .image-popup}
 ![multiselect](/extend/component/ui-options/ui-examples/test_connection.png)
+
+
+### Autoload
+
+All sync actions types (buttons, selects and multiselects) have an option to automatically trigger the sync action if not defined on UI page load. 
+
+#### Example
+
+```json
+{
+  "endpoint": {
+    "type": "string",
+    "title": "Endpoint",
+    "description": "Use sync action to get a list of available endpoints.",
+    "propertyOrder": 1,
+    "options": {
+      "async": {
+        "label": "List Endpoints",
+        "action": "listEndpoints",
+        "autoload": []
+      }
+    },
+    "items": {
+      "enum": [],
+      "type": "string"
+    },
+    "enum": []
+  }
+}
+```
+
+Additionally, a watch element can be set in autoload array, which when defined or changed will trigger the sync action.
+
+#### Example
+
+```json
+{
+  "field_names": {
+    "type": "array",
+    "format": "select",
+    "title": "Fields (optional)",
+    "description": "List of field names to be downloaded",
+    "propertyOrder": 2,
+    "options": {
+      "async": {
+        "label": "List Fields",
+        "action": "listFields",
+        "autoload": [
+          "parameters.endpoint"
+        ]
+      }
+    },
+    "items": {
+      "enum": [],
+      "type": "string"
+    },
+    "uniqueItems": true
+  }
+}
+```
+
+Autoload option also enables caching of loaded values by default which can be disabled by setting the `autoload.cache` to false.
+
+#### Example
+
+```json
+{
+  "endpoint": {
+    "type": "string",
+    "title": "Endpoint",
+    "description": "Use sync action to get a list of available endpoints.",
+    "propertyOrder": 1,
+    "options": {
+      "async": {
+        "label": "List Endpoints",
+        "action": "listEndpoints",
+        "autoload": [],
+        "cache": false
+      }
+    },
+    "items": {
+      "enum": [],
+      "type": "string"
+    },
+    "enum": []
+  }
+}
+```
