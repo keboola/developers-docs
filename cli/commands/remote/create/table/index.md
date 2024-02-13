@@ -6,8 +6,6 @@ permalink: /cli/commands/remote/create/table/
 * TOC
 {:toc}
 
-## Create a Table from the CLI
-
 To create a [table](https://help.keboola.com/storage/tables/) in Keboola Storage directly from the command line interface, use the following command:
 
 ```
@@ -16,11 +14,20 @@ kbc remote create table [flags]
 
 ### Options
 
-- `--bucket <string>`: Specifies the bucket ID where the table will be created.
-- `--columns <string>`: Defines a comma-separated list of column names for the table.
-- `--columns-from <string>`: Indicates the path to the table definition file in JSON format.
-- `--name <string>`: Sets the name of the new table.
-- `--primary-key <string>`: Determines a comma-separated list of columns to be used as the primary key.
+`--bucket <string>`  
+: Specifies the bucket ID where the table will be created.
+
+`--columns <string>`  
+: Defines a comma-separated list of column names for the table.
+
+`--columns-from <string>`  
+: Indicates the path to the table definition file in JSON format.
+
+`--name <string>`  
+: Sets the name of the new table.
+
+`--primary-key <string>`  
+: Determines a comma-separated list of columns to be used as the primary key.
 
 [Global Options](/cli/commands/#global-options)
 
