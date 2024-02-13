@@ -6,7 +6,7 @@ permalink: /extend/common-interface/development-branches/
 * TOC
 {:toc}
 
-Development branches are a feature that handles change management in Keboola Connection projects. To learn more about how development branches work refer to the [user documentation](https://help.keboola.com/change-management/). 
+Development branches are a feature that handles change management in Keboola Connection projects. To learn more about how development branches work refer to the [user documentation](https://help.keboola.com/components/branches/). 
 
 {% include branches-beta-warning.html %}
 
@@ -26,7 +26,7 @@ The only exception is if the component interacts with Storage API directly using
 
 #### Write
 
-When a component in development branch writes data to storage, the bucket name stored in [input mapping](/transformations/mappings/#table-input-mapping) is dynamically changed by prefixing the branches internal ID. That means that your production bucket will not be overwritten.
+When a component in development branch writes data to storage, the bucket name stored in [input mapping](/extend/component/tutorial/input-mapping/) is dynamically changed by prefixing the branches internal ID. That means that your production bucket will not be overwritten.
 
 #### Read
 
