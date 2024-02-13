@@ -14,19 +14,19 @@ kbc remote create table [flags]
 
 ### Options
 
-`--bucket <string>`  
+`--bucket <string>`
 : Specifies the bucket ID where the table will be created.
 
-`--columns <string>`  
+`--columns <string>`
 : Defines a comma-separated list of column names for the table.
 
-`--columns-from <string>`  
+`--columns-from <string>`
 : Indicates the path to the table definition file in JSON format.
 
-`--name <string>`  
+`--name <string>`
 : Sets the name of the new table.
 
-`--primary-key <string>`  
+`--primary-key <string>`
 : Determines a comma-separated list of columns to be used as the primary key.
 
 [Global Options](/cli/commands/#global-options)
