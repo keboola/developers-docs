@@ -41,7 +41,7 @@ a shortcut and give the registry only the Dockerfile. The registry will then bui
 infrastructure. This is best done by setting up an [automated deploy script](/extend/component/deployment/) or
 by linking a git repository containing the Dockerfile (and usually the application code) with the registry.
 
-## Setting up Repository on Quay
+## Setting Up Repository on Quay
 This may get slightly confusing because we will create a new **Image Repository** and link
 that to an existing **Github Repository**. Use the
 [sample repository](https://github.com/keboola/docs-docker-example-basic)
@@ -88,4 +88,4 @@ trigger a new build of the Docker image. Also note that the image automatically 
 or branch name. So, when you push a commit to the `master` branch, you will get an image with a tag `master` (which
 will move away from any older image builds). When creating a `1.0.0` tag, you will get an image with a `1.0.0` tag.
 
-When using images in Keboola Connection, we **highly recommend to use our [ECR repository](/extend/component/deployment/)**.
+When using images in Keboola, we **highly recommend to use our [ECR repository](/extend/component/deployment/)**.

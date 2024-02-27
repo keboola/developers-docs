@@ -6,7 +6,7 @@ permalink: /extend/common-interface/environment/
 * TOC
 {:toc}
 
-Components use several [channels](/extend/common-interface/) to exchange information with Keboola Connection,
+Components use several [channels](/extend/common-interface/) to exchange information with Keboola,
 primarily [structured folders](/extend/common-interface/) and [configuration files](/extend/common-interface/config-file/).
 Each component has full access to the outside network (network type `bridge`), unless changed to `none` in 
 [Developer portal](https://components.keboola.com).
@@ -15,11 +15,11 @@ Additional parts of the environment in which your component is executed are spec
 ## Environment Variables
 The following environment variables are injected in the container:
 
- - `KBC_DATADIR`: This is always `/data/` in KBC; use this environment variable during component
+ - `KBC_DATADIR`: This is always `/data/` in Keboola; use this environment variable during component
  development to create development and testing environments.
  - `KBC_RUNID`: RunId from Storage; it couples all events within an API call (use this for logging)
- - `KBC_PROJECTID`: Id of the project in KBC within a [KBC stack](/overview/api/#regions-and-endpoints).
- - `KBC_STACKID`: Id of the [KBC stack](/overview/api/#regions-and-endpoints).
+ - `KBC_PROJECTID`: Id of the project in Keboola within a [Keboola stack](/overview/api/#regions-and-endpoints).
+ - `KBC_STACKID`: Id of the [Keboola stack](/overview/api/#regions-and-endpoints).
  - `KBC_CONFIGID`: Id of the configuration or hash of configuration data if the configuration is not named (`configData` was used in [API call](https://kebooladocker.docs.apiary.io/#reference/run/create-a-job/run-job)).
  - `KBC_CONFIGVERSION`: Version of the configuration or empty if the configuration is not named (`configData` was used in [API call](https://kebooladocker.docs.apiary.io/#reference/run/create-a-job/run-job)).
  - `KBC_COMPONENTID`: Id of the component
@@ -33,7 +33,7 @@ The following environment variables are injected in the container:
  The following variables are available only if "Forwards token" and "Forwards token details" are
  enabled in [component configuration](https://components.keboola.com/) (and approved by us):
 
- - `KBC_PROJECTNAME`: Name of the project in KBC.
+ - `KBC_PROJECTNAME`: Name of the project in Keboola.
  - `KBC_TOKENID`: Id of the token running the container.
  - `KBC_TOKENDESC`: Description (user name or token name) of the token running the container.
  - `KBC_TOKEN`: The actual token running the container.

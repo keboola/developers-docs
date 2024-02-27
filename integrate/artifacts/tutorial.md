@@ -32,7 +32,7 @@ For each example we will need [Storage API Token](https://help.keboola.com/manag
 This is very simple example. We will just create a Python Transformation, which will write a file to the artifacts "upload" folder.
 This file will be then uploaded as "artifact" to File Storage. 
 
-1. In Keboola Connection project, create a new Python Transformation and paste this code into it:
+1. In your Keboola project, create a new Python transformation, and paste this code into it:
     ```
     import os        
     with open("/data/artifacts/out/current/myartifact1", "w") as file:
@@ -57,7 +57,7 @@ This file will be then uploaded as "artifact" to File Storage.
 
 To consume (download) artifacts for component to work with, we need to enable and configure artifacts download in the configuration of a component.
 
-We will create another configuration of Python Transformation via API.
+We will create another configuration of the Python transformation via API.
 
 The artifacts part of the configuration will look like this.
 It will enable download of artifacts of type `runs` with limit 5, which means this will download artifacts created by the last 5 runs of the same component configuration

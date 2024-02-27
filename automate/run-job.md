@@ -3,7 +3,7 @@ title: Run a Job
 permalink: /automate/run-job/
 ---
 
-A [job](https://help.keboola.com/management/jobs/) represents a work being done in Keboola Connection. 
+A [job](https://help.keboola.com/management/jobs/) represents a work being done in Keboola. 
 You can create (run) a job from the UI or via scheduled [Orchestrations](https://help.keboola.com/orchestrator/) or Flows. 
 A job can also be created manually via the API. The easiest way to get started is to create
 a [configuration](https://help.keboola.com/components/) of the component you want to run and run it manually in the UI. 

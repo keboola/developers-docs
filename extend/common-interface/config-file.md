@@ -7,7 +7,7 @@ permalink: /extend/common-interface/config-file/
 {:toc}
 
 Configuration files are one of the [possible channels](/extend/common-interface/) for exchanging data
-between components and Keboola Connection (KBC).
+between components and Keboola.
 
 To create a sample configuration file (together with the data directory),
 use the [Debug API call](/extend/component/running/#preparing-the-data-folder) via the
@@ -48,7 +48,7 @@ The `image_parameters` contents are configured in the [component settings](https
 text fields: **Image Parameters** and **Stack Parameters**.
 
 Both JSONs are merged into the `image_parameters` of the configuration file. The *Stack Parameters* 
-provide different values for different [KBC Stacks](/overview/api/#regions-and-endpoints). Values in
+provide different values for different [Keboola Stacks](/overview/api/#regions-and-endpoints). Values in
 *Stack Parameters* are merged with those in *Image Parameters* with *Stack Parameters* having a higher priority.
 *Stack Parameters* are indexed with [Storage URL](/overview/api/#regions-and-endpoints) or the given region.
 
@@ -112,7 +112,7 @@ Both *Image Parameters* and *Stack Parameters* support [encrypted values](/overv
 the encrypted values must always be stored in *Stack Parameters*, because ciphers are not transferable between regions
 (i.e. an encrypted value is only usable in the region in which it was encrypted).
 
-As with configurations, the encrypted values must be prefixed with the hash sign `#`. However, unlike in KBC configurations,
+As with configurations, the encrypted values must be prefixed with the hash sign `#`. However, unlike in Keboola configurations,
 you **have to encrypt values manually via the API** -- they will not be encrypted automatically when you store *Stack Parameters*!
 When using the [encryption API](https://keboolaencryption.docs.apiary.io/#), provide only the `componentId`
 parameter (using `projectId` or `configId` will make the cipher unusable).
@@ -121,7 +121,7 @@ ciphers for each region you need.
 
 ## State File
 The state file is used to store the component state for the next run. It provides a two-way communication between
-KBC configuration state storage and the component. The state file only works if the API call
+Keboola configuration state storage and the component. The state file only works if the API call
 references a stored configuration (`config` is used, not `configData`).
 
 The location of the state file is:
@@ -139,13 +139,13 @@ configurations, `KBC::ProjectSecure::` ciphers are used.
 
 ### State File Properties
 Because the state is stored as part of a
-[Component configuration](https://keboola.docs.apiary.io/#reference/components-and-configurations),
+[component configuration](https://keboola.docs.apiary.io/#reference/components-and-configurations),
 the value of the state object is somewhat limited (should not generally exceed 1MB). It should not
 be used to store large amounts of data.
 
 Also, the end-user cannot easily access the data through the UI.
 The data can be, however, modified outside of the component itself using the
-[Component configuration](https://keboola.docs.apiary.io/#reference/components-and-configurations) API calls.
+[component configuration](https://keboola.docs.apiary.io/#reference/components-and-configurations) API calls.
 Note however that the content in the contents of the state file is nested:
 
 I.e., assume that the component generates a state file with the following contents:
@@ -190,8 +190,8 @@ loaded from some API to enable incremental loads.
 ## Usage File
 
 Unlike the state file, the **usage file is one way only** and has a pre-defined structure.
-The usage file is used to pass information from the component to Keboola Connection.
-Metrics stored are used to determine how much resources the job consumed and translate the usage to KBC
+The usage file is used to pass information from the component to Keboola.
+Metrics stored are used to determine how much resources the job consumed and translate the usage to Keboola
 credits; this is very useful when you need your customers to pay using your component or service.
 
 The usage file is located at `/data/out/usage.json`. It should contain an array of objects
@@ -217,7 +217,7 @@ validated and a wrong format will cause a component failure.*
 
 ## Examples
 To create an example configuration, use the [Debug API call](/extend/component/running/#preparing-the-data-folder). You will get a
-`stage_0.zip` archive in your **Storage** --- **File uploads**, which will contain the `config.json` file.
+`stage_0.zip` archive in your **Storage** > **File Uploads**, which will contain the `config.json` file.
 You can also use these configuration structure to create an API request for
 actually [running a component](https://kebooladocker.docs.apiary.io/#reference/run/create-a-job).
 If you want to manually pass configuration options in the API request, be sure to wrap it around in the `configData` node.
@@ -308,7 +308,7 @@ The tables element in a configuration of the **output mapping** is an array and 
   - `enclosure`
   - `write_always`
 
-#### Input Mapping --- Basic
+#### Input mapping --- basic
 Download tables `in.c-ex-salesforce.Leads` and `in.c-ex-salesforce.Accounts` to `/data/tables/in/leads.csv`
 and `/data/tables/in/accounts.csv`.
 
@@ -355,7 +355,7 @@ In an API request, this would be passed as:
 {% endhighlight %}
 
 
-#### Input Mapping --- Incremental Load
+#### Input mapping --- incremental load
 Download 2 days of data from the `in.c-storage.StoredData` table to `/data/tables/in/in.c-storage.StoredData`.
 
 {% highlight json %}
@@ -373,7 +373,7 @@ Download 2 days of data from the `in.c-storage.StoredData` table to `/data/table
 }
 {% endhighlight %}
 
-#### Input Mapping --- Select Columns
+#### Input mapping --- select columns
 
 {% highlight json %}
 {
@@ -390,7 +390,7 @@ Download 2 days of data from the `in.c-storage.StoredData` table to `/data/table
 }
 {% endhighlight %}
 
-#### Input Mapping --- Column types
+#### Input mapping --- column types
 This is applicable only to [workspace mapping](/extend/common-interface/folders/#exchanging-data-via-workspace), for CSV files this setting has no effect. The `column_types` setting maps to [Storage API load options](https://keboola.docs.apiary.io/#reference/workspaces/load-data/load-data). It also acts the same way as `columns` setting allowing you to limit the table columns.
 If both `column_types` and `columns` setting are used, then the listed columns must match. If you omit `columns` and use only `column_types` (recommended) then `columns` will be propagated automatically from `column_types`.
 
@@ -418,7 +418,7 @@ If both `column_types` and `columns` setting are used, then the listed columns m
 }
 {% endhighlight %}
 
-#### Input Mapping --- Filtered Table
+#### Input mapping --- filtered table
 
 {% highlight json %}
 {
@@ -438,7 +438,7 @@ If both `column_types` and `columns` setting are used, then the listed columns m
 }
 {% endhighlight %}
 
-#### Output Mapping --- Basic
+#### Output mapping --- basic
 Upload `/data/out/tables/out.c-main.data.csv` to `out.c-main.data`.
 
 {% highlight json %}
@@ -456,7 +456,7 @@ Upload `/data/out/tables/out.c-main.data.csv` to `out.c-main.data`.
 }
 {% endhighlight %}
 
-#### Output Mapping --- Headless CSV
+#### Output mapping --- headless CSV
 Upload `/data/out/tables/data.csv`, a CSV file without headers on its first line, to the table `out.c-main.data`.
 
 {% highlight json %}
@@ -475,7 +475,7 @@ Upload `/data/out/tables/data.csv`, a CSV file without headers on its first line
 }
 {% endhighlight %}
 
-#### Output Mapping --- Set Additional Properties
+#### Output mapping --- set additional properties
 Incrementally upload `/data/out/tables/data.csv` to `out.c-main.data`
 with a compound primary key set on the columns `column1` and `column2`.
 
@@ -496,7 +496,7 @@ with a compound primary key set on the columns `column1` and `column2`.
 }
 {% endhighlight %}
 
-#### Output Mapping --- Write even if the job fails
+#### Output mapping --- write even if the job fails
 If you have a table that you are updating during the execution of the job 
 and you want to output that table even if the job fails then you can use the `write_always` flag 
 
@@ -516,7 +516,7 @@ and you want to output that table even if the job fails then you can use the `wr
 }
 {% endhighlight %}
 
-#### Output Mapping --- Delete Rows
+#### Output mapping --- delete rows
 Delete data from the `destination` table before uploading the CSV
 file (only makes sense with `incremental: true`).
 
@@ -549,7 +549,7 @@ All files matching the search will be downloaded to the `/data/in/files` folder.
 The name of each file has the `fileId_fileName` format. Each file will also contain a
 [manifest](/extend/common-interface/manifest-files/) with all information about the file.
 
-#### Input Mapping --- Query
+#### Input mapping --- query
 
 {% highlight json %}
 {
@@ -574,7 +574,7 @@ This will download with files with matching `.zip` **and** having the `docker-de
     /data/in/files/75807657_fooBarBaz.zip
     /data/in/files/75807657_fooBarBaz.zip.manifest
 
-#### Input Mapping --- Run ID
+#### Input mapping --- run ID
 Use the `filter_by_run_id` option to select only the files which are related to the job
 currently being executed. If `filter_by_run_id` is specified, we will download only those files which
 satisfy the filter (either `tags` or `query`) **and** were uploaded by a parent job (a job with same
@@ -599,7 +599,7 @@ current chain of jobs.
 This will download only files with the `fooBar` tag that were produced by a parent job to
 the currently running Docker.
 
-#### Output Mapping --- Basic
+#### Output mapping --- basic
 Define additional properties for uploaded files in the output mapping configuration.
 If that file is not present in the `/data/out/files` folder, an error will be thrown.
 
@@ -624,7 +624,7 @@ If that file is not present in the `/data/out/files` folder, an error will be th
 }
 {% endhighlight %}
 
-#### Incremental Processing
+#### Incremental processing
 Docker containers may be used to process unknown files incrementally. This means that when a container is run,
 it will download any files not yet downloaded and process them. To achieve this behavior, it is necessary
 to select only the files which have not been processed yet and tag the processed files.
