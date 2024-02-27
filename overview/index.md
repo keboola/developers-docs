@@ -10,7 +10,7 @@ Keboola is an open system of many components orchestrated together
 through (mostly REST) APIs. Although quite complex, it is modular and therefore
 you rarely need to work with more than a few components.
 
-**Note:** Initially, the Keboola platform was referred to as Keboola Connection (KBC). While it is now simply known as Keboola, references to "Connection" or the abbreviation "KBC" might still appear in various places.
+***Note:** Initially, the Keboola platform was referred to as Keboola Connection (KBC). While it is now simply known as Keboola, references to "Connection" or the abbreviation "KBC" might still appear in various places.*
 
 ## Keboola Architecture
 The following chart shows how Keboola is structured. All Keboola parts are briefly described [here](https://help.keboola.com/overview/).

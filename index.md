@@ -28,7 +28,7 @@ In this documentation, we will show you how to
 	- [Extend Keboola with arbitrary Docker images](/extend/component/).
 	- Build your own [extractors](/extend/generic-extractor/) for services we do not support yet.
 - [**Automate your processes**](/automate/) to run any component in specified intervals or at specified times of the day.
-	- Control any component of the Keboola [programmatically](/integrate/jobs/) (for example, you can trigger data load when something happens in your system).
+	- Control any component of Keboola [programmatically](/integrate/jobs/) (for example, you can trigger data load when something happens in your system).
 
 ## Development Project
 If you are a **3rd party developer** working with Keboola, chances are that you do not have an access to

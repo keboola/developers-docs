@@ -48,8 +48,8 @@ coming from Keboola can be quite large (i.e., dozens of gigabytes).
 ## Using Keboola Python Package
 The [Python component package](https://github.com/keboola/python-component) provides a Python wrapper over the
 [Keboola Common Interface](https://developers.keboola.com/extend/common-interface/). It simplifies all tasks related
- to the communication of the [Component](https://developers.keboola.com/extend/component/) with 
- the Keboola that is defined by the Common Interface. Such tasks are config manipulation, validation, 
+ to the communication of the [component](https://developers.keboola.com/extend/component/) with 
+ Keboola that is defined by the Common Interface. Such tasks are config manipulation, validation, 
  component state, I/O handling, I/O metadata and manifest files, logging, etc.
  
  **NOTE:** That this package is a replacement for the previous legacy [Python docker application](https://github.com/keboola/python-docker-application)
