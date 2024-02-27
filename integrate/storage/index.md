@@ -6,12 +6,12 @@ permalink: /integrate/storage/
 * TOC
 {:toc}
 
-As the central KBC component, Storage
+As the central Keboola component, Storage
 
 - Keeps all data in [**buckets** and **tables**](https://help.keboola.com/storage/);
 - Controls access to the data using **tokens**;
 - Logs all data manipulations as **events**;
-- Maintains the index of all other KBC **components** and stores their **configurations**.
+- Maintains the index of all other Keboola **components** and stores their **configurations**.
 
 All this (and a few other things) is available through [Storage API (SAPI)](https://keboola.docs.apiary.io/#).
 To authorize access to a specific project, most calls to Storage API require
@@ -33,8 +33,8 @@ basic data manipulation features of the Storage API; use it from the command lin
 
 Additional tools:
 
-- [Storage API Console](https://storage-api-console.keboola.com/) --- a UI to work with KBC Storage;
-this is accessible to anyone with a Storage Token (not necessarily a KBC project administrator)
+- [Storage API Console](https://storage-api-console.keboola.com/) --- a UI to work with Keboola Storage;
+this is accessible to anyone with a Storage Token (not necessarily a Keboola project administrator)
 - [Table Importer Service](/integrate/storage/api/importer/) --- a service designed for simplified table loads
 
 The client choice is purely up to you, but it is best to use the most straightforward solution.

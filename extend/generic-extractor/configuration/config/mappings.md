@@ -12,7 +12,7 @@ permalink: /extend/generic-extractor/configuration/config/mappings/
 
 Mapping allows you to **modify a response conversion process** in which Generic Extractor receives JSON responses,
 [merges them together](/extend/generic-extractor/configuration/config/jobs/#merging-responses) and
-converts them to CSV files which are then imported to KBC.
+converts them to CSV files which are then imported to Keboola.
 
 Manually define mapping if you wish to do the following:
 

@@ -6,7 +6,7 @@ permalink: /overview/encryption/
 * TOC
 {:toc}
 
-Many [KBC components](/overview/) use the Encryption API to encrypt sensitive values
+Many [Keboola components](/overview/) use the Encryption API to encrypt sensitive values
 intended for secure storage. These values are then decrypted within the component itself. 
 This process ensures that the encrypted values are only accessible inside the components and not
 by API users. Additionally, no decryption API is available, meaning end-users cannot decrypt
@@ -114,8 +114,8 @@ call the API resource endpoint.
 The [Encryption API](https://keboolaencryption.docs.apiary.io/#reference/encrypt/encryption/encrypt-data)
 accepts the following **optional** parameters:
 
-- `componentId` --- ID of a [Keboola Connection component](/extend/component/tutorial/#creating-a-component),
-- `projectId` --- ID of a Keboola Connection project,
+- `componentId` --- ID of a [Keboola component](/extend/component/tutorial/#creating-a-component),
+- `projectId` --- ID of a Keboola project,
 - `configId` --- ID of a component configuration, and
 - `branchType` --- Branch type --- either `default` (meaning the default production branch) or `dev` (meaning any development branch other than the production).
 
@@ -126,7 +126,7 @@ across all configurations of that component. This is recommended for **component
 applicable across all customers (e.g., as a master authorization token).
 
 - Adding `projectId` to the `componentId` changes the prefix to `KBC::ProjectSecure::`, making the cipher decryptable within
-the project's component configurations. This is recommended for **all secrets** used within a typical Keboola Connection project.
+the project's component configurations. This is recommended for **all secrets** used within a typical Keboola project.
 
 - Providing all three IDs (`componentId`, `projectId`, `configId`) generates a cipher starting with
 `KBC::ConfigSecure::`, limiting decryption to a specific configuration. This is useful for preventing the copying of configurations.

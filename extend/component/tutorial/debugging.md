@@ -30,7 +30,7 @@ You should be able to trace the tag to a specific version of your source code.
 ## Running Locally
 
 ### Step 1 -- Obtain Sample Data and Configuration
-Data between KBC and your Docker image are exchanged using [CSV files](/extend/common-interface/) in
+Data between Keboola and your Docker image are exchanged using [CSV files](/extend/common-interface/) in
 designated [directories](/extend/common-interface/folders/); they will be
 injected into the image when you [run it](/extend/docker-runner/). To simulate this, download an archive containing the data files
 and [configuration](/extend/common-interface/config-file/) in the exact same format you get in the production environment.
@@ -41,7 +41,7 @@ In the [API call](https://kebooladocker.docs.apiary.io/#reference/debug/debug-co
 full configuration (using the `configData` node) or refer to an existing configuration
 of the component (using the `config` node). See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb).
 
-The Debug API call will prepare the data folder for the component, put it inside an archive and upload it to KBC Storage.
+The Debug API call will prepare the data folder for the component, put it inside an archive and upload it to Keboola Storage.
 When running the request with valid parameters, you should receive a response similar to this:
 
 {% highlight json %}
@@ -53,7 +53,7 @@ When running the request with valid parameters, you should receive a response si
 {% endhighlight %}
 
 This means an [asynchronous job](/integrate/jobs/) for preparing the archive has been created.
-If curious, view the job progress under **Jobs** in KBC.
+If curious, view the job progress under **Jobs** in Keboola.
 When the job finishes, you'll see a `stage_0.zip` file uploaded to your project.
 
 {: .image-popup}
@@ -208,7 +208,7 @@ see that it was indeed used and that the script printed out all files in the `/d
 ## Summary
 You can find more information about running components in the corresponding part of the [documentation](/extend/component/running/).
 
-This concludes our development tutorial on the most important aspects of creating KBC components. However, our platform offers a
+This concludes our development tutorial on the most important aspects of creating Keboola components. However, our platform offers a
 lot more; we encourage you to read about other features in our documentation:
 
 - exchanging data in [data folders](/extend/common-interface/folders/)

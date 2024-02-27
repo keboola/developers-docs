@@ -29,8 +29,8 @@ write.csv(df, file = "out/tables/result.csv", row.names = FALSE)
 
 You can also use the `write_csv` function from the [readr packages](https://cran.r-project.org/web/packages/readr/readr.pdf). It is faster.
 
-## Using KBC Package
-KBC's [R component package](https://github.com/keboola/r-docker-application) provides functions to
+## Using Keboola Package
+Keboola's [R component package](https://github.com/keboola/r-docker-application) provides functions to
 
 - read and parse the configuration file and parameters: `configData` property and `getParameters()` method.
 - list input files and tables: `getInputFiles()`, `getInputTables()` methods.

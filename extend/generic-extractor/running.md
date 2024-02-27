@@ -6,7 +6,7 @@ permalink: /extend/generic-extractor/running/
 * TOC
 {:toc}
 
-Generic Extractor is normally run from within the KBC user interface. It can be found in the **Extractors** section
+Generic Extractor is normally run from within the Keboola user interface. It can be found in the **Extractors** section
 and all you need to do is provide its configuration JSON. No other settings are necessary.
 
 {: .image-popup}
@@ -42,9 +42,9 @@ be turned on in production configurations.
 
 ## Running Locally
 If you are working on a complicated configuration, or developing a new component based on
-Generic Extractor, running every configuration from KBC UI may be slow and tedious.
+Generic Extractor, running every configuration from the Keboola UI may be slow and tedious.
 You may run Generic Extractor locally, provided that you have access to [Docker](/extend/component/docker-tutorial/).
-The following is **not necessary** to run or configure Generic Extractor in KBC.
+The following is **not necessary** to run or configure Generic Extractor in Keboola.
 
 ### Run Built Version
 Create an empty directory somewhere and in it create a `config.json` file with a
@@ -107,7 +107,7 @@ supply the configuration directly in the `config.json` file, you must always pro
 }
 {% endhighlight %}
 
-When you store such configuration in KBC UI, it will automatically be encrypted:
+When you store such configuration in the Keboola UI, it will automatically be encrypted:
 
 {% highlight json %}
 {

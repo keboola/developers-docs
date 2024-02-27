@@ -6,19 +6,19 @@ permalink: /extend/generic-extractor/
 * TOC
 {:toc}
 
-Generic Extractor is a [KBC component](/overview/) which acts like a customizable
+Generic Extractor is a [Keboola component](/overview/) which acts like a customizable
 [HTTP REST](/extend/generic-extractor/tutorial/rest/) client. It can be configured to extract data
 from virtually any sane web API.
 
 Due to the versatility of different APIs running in the wild, Generic Extractor offers a vast amount
 of [**configuration options**](/extend/generic-extractor/configuration/). Even though it may seem somewhat abstract and hard to understand at first,
 once you configure your first extractor, you will see that it is a great tool. With it, you can build
-an entirely new extractor for KBC in **less than an hour**.
+an entirely new extractor for Keboola in **less than an hour**.
 
 To get started quickly, follow our [Generic Extractor tutorial](/extend/generic-extractor/tutorial).
 
 ## Generic Extractor Requirements
-Generic Extractor allows you to extract data from an API into KBC only by configuring it.
+Generic Extractor allows you to extract data from an API into Keboola only by configuring it.
 No programming skills or additional tools are required. You just need to do two easy things before you start:
 
 - Learn how to [write JSON](/extend/generic-extractor/tutorial/json/).
@@ -48,7 +48,7 @@ do not limit the configuration at all. You can always switch to JSON
 Also note that templates can be used only with published components based on Generic Extractor configurations.
 
 ## Generic Extractor Source
-As with any other KBC components, the Generic Extractor source is available on
+As with any other Keboola components, the Generic Extractor source is available on
 [GitHub](https://github.com/keboola/generic-extractor/). Apart from the
 main repository, it uses some vital libraries (which partially define its capabilities):
 

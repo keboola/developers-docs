@@ -15,7 +15,7 @@ kbc remote file upload [flags]
 ### Options
 
 `-H, --storage-api-host <string>`
-: Keboola Connection instance URL, e.g., `connection.keboola.com`
+: Keboola instance URL, e.g., `connection.keboola.com`
 
 `--data <string>`
 : Path and/or name of the source file. If `-`, input is expected from standard input, so the command is pipeable.

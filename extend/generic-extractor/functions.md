@@ -818,7 +818,7 @@ contains the parsed and flattened response fields in the `user` property. The co
 `consumer` property contains the `client_id` and `client_secret` which contain values of
 `authorization.oauth_api.credetials.appKey` and
 `authorization.oauth_api.credetials.appSecret` respectively.
-(These are obtained by KBC when the application is published).
+(These are obtained by Keboola when the application is published).
 
 For usage, see [OAuth Login examples](/extend/generic-extractor/configuration/api/authentication/oauth20-login/).
 

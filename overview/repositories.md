@@ -1,5 +1,5 @@
 ---
-title: KBC Repositories
+title: Keboola Repositories
 permalink: /overview/repositories/
 ---
 

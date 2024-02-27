@@ -97,7 +97,7 @@ The below example loads initializes the common interface class and automatically
 [data folder](https://developers.keboola.com/extend/common-interface/folders/) 
  
  **NOTE:** The `configuration` object is initialized upon access and a ValueError is thrown if the `config.json` does not exist 
- in the data folder. e.g. `cfg = ci.configuration` may throw a ValueError even though the data folder exists and ci (CommonInterface) 
+ in the data folder. E.g., `cfg = ci.configuration` may throw a ValueError even though the data folder exists and ci (CommonInterface) 
  is properly initialized.
 
 ```python
@@ -116,7 +116,7 @@ ci = CommonInterface()
 # Checks for required parameters and throws ValueError if any is missing.
 ci.validate_configuration(REQUIRED_PARAMETERS)
 
-# print KBC Project ID from the environment variable if present:
+# print Keboola Project ID from the environment variable if present:
 logging.info(ci.environment_variables.project_id)
 
 # load particular configuration parameter
