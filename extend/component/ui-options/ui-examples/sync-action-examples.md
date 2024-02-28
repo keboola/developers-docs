@@ -7,12 +7,12 @@ permalink: /extend/component/ui-options/configuration-schema/sync-action-example
 * TOC
 {:toc}
 
-Some UI elements are using [sync actions](https://developers.keboola.com/extend/common-interface/actions/) to get some values dynamically 
+Some UI elements use [sync actions](https://developers.keboola.com/extend/common-interface/actions/) to get some values dynamically 
 from the component code. This section provides a list of the elements currently supported. 
 
-Each element specifies the `action` attribute which relates to the name of the sync action registered in the Developer Portal.
+Each element specifies the `action` attribute, which relates to the name of the sync action registered in the Developer Portal.
 
-*Note: Support for these elements is also abstracted in the official [Python Component library](https://github.com/keboola/python-component#framework-support).*
+***Note:** Support for these elements is also abstracted in the official [Python Component library](https://github.com/keboola/python-component#framework-support).*
 
 ### Dynamically Loaded Dropdowns
 
@@ -30,7 +30,7 @@ The sync action code has to return the following stdout:
 
 The `label` value is optional. 
 
-When used in Python, you can use the [SelectElement](https://github.com/keboola/python-component#selectelement) class as return value.
+When used in Python, you can use the [SelectElement](https://github.com/keboola/python-component#selectelement) class as a return value.
 
 #### Dynamically loaded multi select
 
@@ -56,7 +56,7 @@ When used in Python, you can use the [SelectElement](https://github.com/keboola/
 }
 ```
 
-The above code will create the following element which triggers an action named `testColumns`:
+The above code will create the following element, which triggers an action named `testColumns`:
 
 {: .image-popup}
 ![Screenshot](/extend/component/ui-options/ui-examples/dynamic_dropdown_multi.gif)
@@ -69,7 +69,7 @@ The above code will create the following element which triggers an action named 
   "test_columns_single": {
     "propertyOrder": 40,
     "type": "string",
-    "description": "Element loaded by an arbitrary sync action. (single)",
+    "description": "Element loaded by an arbitrary sync action (single).",
     "enum": [],
     "format": "select",
     "options": {
@@ -82,7 +82,7 @@ The above code will create the following element which triggers an action named 
 }
 ```
 
-The above code will create the following element which triggers the `testColumns` action:
+The above code will create the following element, which triggers the `testColumns` action:
 
 {: .image-popup}
 ![ Screenshot](/extend/component/ui-options/ui-examples/single-drop.gif)
@@ -91,22 +91,22 @@ The above code will create the following element which triggers the `testColumns
 
 ### Generic Validation Button
 
-This button can be used to return feedback from the component. The output supports MarkDown notation.
+This button can be used to return feedback from the component. The output supports Markdown.
 
-Example use-cases are query testing, testing connection, report validation, etc.
+Example use cases are query testing, testing connection, report validation, etc.
 
 The sync action code has to return the following stdout (JSON string):
 
 ```json
 {
-  "message": "###This is display text. \n\n And can contain **Mark Down** notation. ",
+  "message": "###This is display text. \n\n It can contain **Markdown** notation. ",
   "type": "info", //possible values: success, info, warning, danger
   "status": "success" // this is required and will never be other value than "success"
 }
 ```
 
 
-When used in Python, you can use the [ValidationResult](https://github.com/keboola/python-component#validationresult) class as return value.
+When used in Python, you can use the [ValidationResult](https://github.com/keboola/python-component#validationresult) class as a return value.
 
 #### Example
 
@@ -126,14 +126,13 @@ When used in Python, you can use the [ValidationResult](https://github.com/keboo
 }
 ```
 
-The above code will create the following element which triggers the `validate_report` action:
+The above code will create the following element, which triggers the `validate_report` action:
 
 {: .image-popup}
 ![screenshot](/extend/component/ui-options/ui-examples/generic-button.gif)
 
 
 ### Test Connection
-
 
 This button can be used for simple connection tests. 
 
@@ -145,11 +144,9 @@ The sync action code has to return the following stdout (JSON string) or error (
 }
 ```
 
-The name of this sync action **has to be always `testConnection`.**
-
+The name of this sync action **always has to be `testConnection`.**
 
 When used in Python, the method does not need to return anything, or it can just throw an exception.
-
 
 #### Example
 
@@ -169,7 +166,95 @@ When used in Python, the method does not need to return anything, or it can just
 }
 ```
 
-The above code will create the following element which triggers the `testConnection` action:
+The above code will create the following element, which triggers the `testConnection` action:
 
 {: .image-popup}
 ![multiselect](/extend/component/ui-options/ui-examples/test_connection.png)
+
+
+### Autoload
+
+All sync action types (buttons, select, and multi-selects) can automatically trigger the sync action if not defined on the UI page load. 
+
+#### Example
+
+```json
+{
+  "endpoint": {
+    "type": "string",
+    "title": "Endpoint",
+    "description": "Use the sync action to get a list of available endpoints.",
+    "propertyOrder": 1,
+    "options": {
+      "async": {
+        "label": "List Endpoints",
+        "action": "listEndpoints",
+        "autoload": []
+      }
+    },
+    "items": {
+      "enum": [],
+      "type": "string"
+    },
+    "enum": []
+  }
+}
+```
+
+Additionally, a watch element can be set in an autoload array, which, when defined or changed, will trigger the sync action.
+
+#### Example
+
+```json
+{
+  "field_names": {
+    "type": "array",
+    "format": "select",
+    "title": "Fields (optional)",
+    "description": "List of field names to be downloaded",
+    "propertyOrder": 2,
+    "options": {
+      "async": {
+        "label": "List Fields",
+        "action": "listFields",
+        "autoload": [
+          "parameters.endpoint"
+        ]
+      }
+    },
+    "items": {
+      "enum": [],
+      "type": "string"
+    },
+    "uniqueItems": true
+  }
+}
+```
+
+The autoload option also enables caching loaded values by default, which can be disabled by setting the `autoload.cache` to false.
+
+#### Example
+
+```json
+{
+  "endpoint": {
+    "type": "string",
+    "title": "Endpoint",
+    "description": "Use a sync action to get a list of available endpoints.",
+    "propertyOrder": 1,
+    "options": {
+      "async": {
+        "label": "List Endpoints",
+        "action": "listEndpoints",
+        "autoload": [],
+        "cache": false
+      }
+    },
+    "items": {
+      "enum": [],
+      "type": "string"
+    },
+    "enum": []
+  }
+}
+```
