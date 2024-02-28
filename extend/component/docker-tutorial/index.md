@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-Docker is a technology stack for running things in virtualized environments. In Keboola Connection (KBC), we use a limited set of Docker features.
+Docker is a technology stack for running things in virtualized environments. In Keboola, we use a limited set of Docker features.
 Their description follows. For a full technical description of Docker, consult its
 [official documentation](https://docs.docker.com/).
 
@@ -50,18 +50,18 @@ Image tags work similarly to Git tags as they refer to a specific build of the i
 easily, so they do not always need to refer to the same build. The general convention is that the *latest*
 tag points to the same (latest) build and is movable.
 
-## Running Docker Images in KBC
+## Running Docker Images in Keboola
 We have wrapped Docker in our [Docker Runner component](/extend/docker-runner/). The component
 runs [components](/extend/component/) Docker images. Docker Runner
 has an [API](/extend/docker-runner/#api)
 which allows to run Docker Images and encrypt arbitrary values.
 [Docker Runner](/extend/docker-runner/) takes
 care of injecting the right data, creating, running, and terminating the container, and uploading
-the result data to KBC Storage. All images to be run in KBC must have an `ENTRYPOINT` or `CMD`.
+the result data to Keboola Storage. All images to be run in Keboola must have an `ENTRYPOINT` or `CMD`.
 
-Before you run components in KBC, make sure to
+Before you run components in Keboola, make sure to
 [set up your Docker environment](/extend/component/docker-tutorial/setup/).
-Before you develop a dockerized component for KBC, you should be able to
+Before you develop a dockerized component for Keboola, you should be able to
 [create and run dockerized applications](/extend/component/docker-tutorial/howto/) in your own environment.
 
 If you are already familiar with Docker, jump straight into [component development tutorial](/extend/component/tutorial/)
@@ -72,5 +72,5 @@ can exist independently (without Docker), and contains unit and functional tests
 The repository includes also the Docker image definition in the
 [**Dockerfile**](https://github.com/keboola/docker-demo-app/blob/master/Dockerfile). The Docker environment including the component
 is prepared by the Docker image definition. The [Travis CI](https://docs.travis-ci.com/) service is used to builds Docker image automatically on every commit and
-[deploy it to KBC](/extend/component/deployment/) and public registries.
+[deploy it to Keboola](/extend/component/deployment/) and public registries.
 A similar component is also available [in Python](https://github.com/keboola/python-custom-application-text-splitter).

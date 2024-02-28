@@ -9,14 +9,14 @@ redirect_from:
 * TOC
 {:toc}
 
-As described in the [architecture overview](/overview/), Keboola Connection (KBC) consists of many different components.
-Only those components that are published in our **Component List** are generally available in KBC.
+As described in the [architecture overview](/overview/), Keboola consists of many different components.
+Only those components that are published in our **Component List** are generally available in Keboola.
 The list can be found in our [Storage Component API](https://keboola.docs.apiary.io/#) in the dedicated [Components section](https://keboola.docs.apiary.io/#reference/components-and-configurations/list-components).
 The list of components is managed using the Keboola [Developer Portal](https://components.keboola.com/).
 
-That being said, any KBC user can use any component, unless
+That being said, any Keboola user can use any component, unless
 
-- the KBC user (or their token) has a [limited access to the component](https://help.keboola.com/storage/tokens/).
+- the Keboola user (or their token) has a [limited access to the component](https://help.keboola.com/storage/tokens/).
 - the component itself limits where it can run (in what projects and for which users).
 
 If you have not yet created your component, please go through the [tutorial](/extend/component/tutorial/), which will
@@ -24,7 +24,7 @@ navigate you through creating an account in the [Developer Portal](https://compo
 [initializing the component](/extend/component/tutorial/).
 
 ## Publishing Component
-A non-published component can be used without limitations, but it is not offered in the KBC UI. It can only be used via
+A non-published component can be used without limitations, but it is not offered in the Keboola UI. It can only be used via
 the [API](https://keboola.docs.apiary.io/#reference/components-and-configurations) or by directly visiting a link with the 
 specific component ID:
 
@@ -34,7 +34,7 @@ This way you can fully test your component before requesting its publication. Al
 components are not part of our [list of public components](https://components.keboola.com/components).
 An existing configuration of a non-public component is accessible the same way as a configuration of any other component.
 
-**Important:** Changes made in the Developer Portal take up to 5 minutes to propagate to all Keboola Connection instances in all regions.
+**Important:** Changes made in the Developer Portal take up to 5 minutes to propagate to all Keboola instances in all regions.
 
 Before your component can be published, it must be approved by Keboola. Request the approval from the component list in
 the [Developer Portal](https://components.keboola.com/). We will review your component and either publish it or contact you
@@ -74,7 +74,7 @@ ZAR). The rates are available for all working days from 4 January 1999 up to pre
 - Component icons must be of representative and reasonable quality. Make sure the icon license allows you to use it.
 - Components must correctly state the data flow --- [UI options](/extend/component/ui-options/). Use
 `appInfo.dataOut` and `appInfo.dataIn` for this purpose:
-    - Use `appInfo.dataIn` for extractors, which bring data into a KBC project (omit `appInfo.dataOut` for extractors).
+    - Use `appInfo.dataIn` for extractors, which bring data into a Keboola project (omit `appInfo.dataOut` for extractors).
     - Use `appInfo.dataOut` for writers, which send data outside (omit `appInfo.dataIn` for writers).
     - Use `appInfo.dataIn` and/or `appInfo.dataOut` for applications.
 - Use `appInfo.beta` in [UI options](/extend/component/ui-options/) if you suspect changes to the component behavior.

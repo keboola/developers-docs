@@ -87,7 +87,7 @@ which include additional information about the request and response. A typical e
 to `Content-type: application/json` because we are transferring [JSON data](http://www.json.org/). 
 
 Apart from standard headers, there are also non-standard headers; these are marked with the prefix `X-`. An 
-example is the `X-StorageAPIToken` header used with KBC [Storage API](/integrate/storage/api/).
+example is the `X-StorageAPIToken` header used with Keboola [Storage API](/integrate/storage/api/).
 
 ### Body
 The `POST`, `PUT` and `PATCH` requests can send parameters the same way as the `GET` requests in the URL. 

@@ -9,14 +9,14 @@ redirect_from:
 * TOC
 {:toc}
 
-Docker Runner is a core [Keboola Connection (KBC) component](/overview/#important-components) which
-provides an interface for running other KBC components. Every component in KBC is
+Docker Runner is a core [Keboola component](/overview/#important-components), which
+provides an interface for running other Keboola components. Every component in Keboola is
 represented by a [Docker image](/extend/component/docker-tutorial/).
 Running a component means creating and executing an [asynchronous job](/integrate/jobs/).
 
 Developing functionality in [Docker](https://www.docker.com/) allows you to focus only on the application logic; all communication
 with the [Storage API](https://keboola.docs.apiary.io/#) will be handled by Docker Runner. You can encapsulate any application into a Docker image
-following a set of rules that will allow you to integrate the application into KBC.
+following a set of rules that will allow you to integrate the application into Keboola.
 
 There is a [predefined interface](/extend/common-interface/) with Docker Runner, consisting
 mainly of a [folder structure](/extend/common-interface/folders/) and a [serialized configuration file](/extend/common-interface/config-file/).
@@ -50,13 +50,13 @@ The component is responsible for these processes:
 Docker Runner is responsible for the following processes:
 
 - **Authentication:** Docker Runner makes sure the component is run by authorized users/tokens.
-It is not possible to run a component anonymously. The component does not have an access to the KBC token
+It is not possible to run a component anonymously. The component does not have an access to the Keboola token
 itself, and it receives only limited information about the project and the end-user.
 - **Starting and stopping** the component: Docker Runner will boot a Docker container which contains the
 component. This ensures the component runs in a precisely defined environment, which is guaranteed to
 be the same for each component run. No component state is preserved (with the exception of the
 [state file](/extend/common-interface/config-file/#state-file).
-- **Reading and writing data** to KBC Storage: Docker Runner ensures a custom component
+- **Reading and writing data** to Keboola Storage: Docker Runner ensures a custom component
 cannot access arbitrary data in the project. It will only receive the input mapping defined by the end user;
 and only those outputs defined in the output mapping by the end user will be written to the project.
 - **Component isolation**: Each component is run in its own Docker container, which is isolated from other

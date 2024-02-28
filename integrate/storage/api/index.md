@@ -6,9 +6,9 @@ permalink: /integrate/storage/api/
 * TOC
 {:toc}
 
-If you are new to KBC, you should make yourself familiar with
+If you are new to Keboola, you should make yourself familiar with
 the [Storage component](https://help.keboola.com/storage/) before you start using it.
-For a general introduction to working with KBC APIs, see the [API Introduction](/overview/api/).
+For a general introduction to working with Keboola APIs, see the [API Introduction](/overview/api/).
 [Storage API](https://keboola.docs.apiary.io/) provides a number of functions. These are the most important ones:
 
 - [Component configurations](https://keboola.docs.apiary.io/#reference/components-and-configurations)
@@ -19,7 +19,7 @@ For a general introduction to working with KBC APIs, see the [API Introduction](
 Virtually, all API calls require a [Storage API token](https://help.keboola.com/storage/tokens/) to
 be passed as the `X-StorageApi-Token` header.
 Please note that the Storage API calls require the request to be sent
-as `form-data` (unlike the rest of KBC API, which is sent as `application/json`).
+as `form-data` (unlike the rest of Keboola API, which is sent as `application/json`).
 
 For exporting tables from and importing tables to Storage, we highly recommend that you use one of the
 [available clients](/integrate/storage/) or the [Storage API Importer service](/integrate/storage/api/importer/).

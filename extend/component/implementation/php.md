@@ -37,7 +37,7 @@ echo "All done";
 Note that we open both the input and output files simultaneously; as soon as a row is processed,
 it is immediately written to the destination file. This approach keeps only a single row of data in the memory and is
 generally very efficient. It is recommended to implement the processing in this way because data files
-coming from KBC can be quite large.
+coming from Keboola can be quite large.
 
 The same can be achieved via the [CSV library](https://github.com/keboola/php-csv). Install the
 package with `composer require keboola/csv`. The following
@@ -76,8 +76,8 @@ foreach ($inFile as $rowNum => $row) {
 }
 {% endhighlight %}
 
-## Using KBC Package
-KBC's [PHP component package](https://github.com/keboola/php-component) provides functions to
+## Using Keboola Package
+Keboola's [PHP component package](https://github.com/keboola/php-component) provides functions to
 
 - read and parse the configuration file and parameters: 
 	`getConfig` method or `getConfig()->getParameters()` methods.

@@ -6,11 +6,11 @@ permalink: /extend/component/code-patterns/interface/
 * TOC
 {:toc}
 
-This page describes how code patterns work internally as part of Keboola Connection.
+This page describes how code patterns work internally as part of Keboola.
 
 ## Common Interface
 Code pattern is a special type of [component](/extend/component/), therefore the common interface applies to it. 
-To integrate your own components into Keboola Connection, use the following links:
+To integrate your own components into Keboola, use the following links:
 
 - [Component common interface](/extend/common-interface/) 
 - [Environment](/extend/common-interface/environment/)

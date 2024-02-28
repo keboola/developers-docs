@@ -7,23 +7,23 @@ permalink: /extend/component/tutorial/processors/
 {:toc}
 
 [Processors](/extend/component/processors/) are an optional part of a component configuration.
-While they are **not at all necessary** in the development of new components for KBC, we think that you
+While they are **not at all necessary** in the development of new components for Keboola, we think that you
 should know about them; they can save you a lot of time in some cases.
 To get a list of currently available processors, see the
 [official component list](https://components.keboola.com/components).
 
 ## Configuration
-To be able to configure the processors in the KBC UI, go to the
+To be able to configure the processors in the Keboola UI, go to the
 [Developer Portal](https://components.keboola.com/) and add the UI
 flag `genericDockerUI-processors` to your component. You'll then see
-a new UI element in the component configuration in KBC:
+a new UI element in the component configuration in Keboola:
 
 {: .image-popup}
 ![Screenshot -- Processors Empty](/extend/component/tutorial/processors-1.png)
 
 Taking the [example component](/extend/component/tutorial/), you might want to use the
 **Add Row Number Column** processor in your component to add a sequential number to every
-row of the table imported into KBC. From the
+row of the table imported into Keboola. From the
 [processor documentation](https://github.com/keboola/processor-add-row-number-column/blob/master/README.md#usage)
 you can see that the processor is configured as:
 

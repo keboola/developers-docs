@@ -43,13 +43,13 @@ with open('in/tables/source.csv', mode='rt', encoding='utf-8') as in_file, open(
 Note that we open both the input and output files simultaneously; as soon as a row is processed,
 it is immediately written to the output file. This approach keeps only a single row of data in the memory and is
 generally very efficient. It is recommended to implement the processing in this way because data files
-coming from KBC can be quite large (i.e., dozens of gigabytes).
+coming from Keboola can be quite large (i.e., dozens of gigabytes).
 
 ## Using Keboola Python Package
 The [Python component package](https://github.com/keboola/python-component) provides a Python wrapper over the
 [Keboola Common Interface](https://developers.keboola.com/extend/common-interface/). It simplifies all tasks related
- to the communication of the [Component](https://developers.keboola.com/extend/component/) with 
- the Keboola Connection that is defined by the Common Interface. Such tasks are config manipulation, validation, 
+ to the communication of the [component](https://developers.keboola.com/extend/component/) with 
+ Keboola that is defined by the Common Interface. Such tasks are config manipulation, validation, 
  component state, I/O handling, I/O metadata and manifest files, logging, etc.
  
  **NOTE:** That this package is a replacement for the previous legacy [Python docker application](https://github.com/keboola/python-docker-application)
@@ -97,7 +97,7 @@ The below example loads initializes the common interface class and automatically
 [data folder](https://developers.keboola.com/extend/common-interface/folders/) 
  
  **NOTE:** The `configuration` object is initialized upon access and a ValueError is thrown if the `config.json` does not exist 
- in the data folder. e.g. `cfg = ci.configuration` may throw a ValueError even though the data folder exists and ci (CommonInterface) 
+ in the data folder. E.g., `cfg = ci.configuration` may throw a ValueError even though the data folder exists and ci (CommonInterface) 
  is properly initialized.
 
 ```python
@@ -116,7 +116,7 @@ ci = CommonInterface()
 # Checks for required parameters and throws ValueError if any is missing.
 ci.validate_configuration(REQUIRED_PARAMETERS)
 
-# print KBC Project ID from the environment variable if present:
+# print Keboola Project ID from the environment variable if present:
 logging.info(ci.environment_variables.project_id)
 
 # load particular configuration parameter
@@ -227,7 +227,7 @@ for table in tables:
 ### Output tables - manifest files and processing results
 
 The component may define output [manifest files](https://developers.keboola.com/extend/common-interface/manifest-files/#dataouttables-manifests) 
-that define options on storing the results back to the Keboola Connection Storage. This library provides methods that simplifies 
+that define options on storing the results back to the Keboola Storage. This library provides methods that simplifies 
 the manifest file creation and allows defining the export options and metadata of the result table using helper objects `TableDefinition` 
 and `TableMetadata`.
 
@@ -273,7 +273,7 @@ using the convenience method `get_input_files_definitions()`. The result object 
 such as manifest file representations, system path and name.
 
 The `get_input_files_definitions()` supports filter parameters to filter only files with a specific tag or retrieve only the latest file of each. 
-This is especially useful because the KBC input mapping will by default include all versions of files matching specific tag. By default, the method 
+This is especially useful because the Keboola input mapping will by default include all versions of files matching specific tag. By default, the method 
 returns only the latest file of each.
 
 ```python

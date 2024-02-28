@@ -55,7 +55,7 @@ nesting. The **configuration map** is also available as a [separate article](/ex
 There are also simple pre-defined [**functions**](/extend/generic-extractor/functions/) available, adding extra
 flexibility when needed.
 
-Generic Extractor can be run from within the [**KBC user interface**](/extend/generic-extractor/running/) (only
+Generic Extractor can be run from within the [**Keboola user interface**](/extend/generic-extractor/running/) (only
 configuration [JSON](/extend/generic-extractor/tutorial/json/) needed), or [**locally**](/extend/generic-extractor/running/#running-locally)
 ([Docker](/extend/component/docker-tutorial/) needed).
 

@@ -18,7 +18,7 @@ Secret `KBC_STORAGE_API_TOKEN` with your master token needs to be added to the G
 ## Pull
 
 The Pull workflow is set to run automatically every five minutes to [pull](/cli/commands/sync/pull/) the changes from 
-the project in Keboola Connection. If it finds any changes, it creates a commit to the repository.
+the project in Keboola. If it finds any changes, it creates a commit to the repository.
 
 *Note: GitHub does not guarantee periodic running at exact times. The triggers may be delayed a few minutes 
 depending on the current GitHub Actions workload.* 
@@ -34,7 +34,7 @@ The commit contains description of the change:
 ## Push
 
 The Push workflow is triggered by a push to the GitHub repository to [push](/cli/commands/sync/push/) the changes from
-the local directory to the project in Keboola Connection.
+the local directory to the project in Keboola.
 
 ## Validate
 

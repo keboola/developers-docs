@@ -43,7 +43,7 @@ git commit -m "Initial commit"
 
 ## Create Template
 
-The template can be created from any existing project in [Keboola Connection](https://help.keboola.com/overview/).
+The template can be created from any existing project in [Keboola](https://help.keboola.com/overview/).
 
 ### Set Editor
 
@@ -340,7 +340,7 @@ Template "my-template/v0" has been created.
                        ┗ 🟫 code.sql       
 ```
 
-#### Repository Manifest
+#### Repository manifest
 
 Template record is added to the `.keboola/repository.json`:
 ```json
@@ -365,7 +365,7 @@ Template record is added to the `.keboola/repository.json`:
 }
 ```
 
-#### Template Manifest
+#### Template manifest
 
 IDs and paths are defined in `my-template/v0/src/manifest.jsonnet`:
 ```jsonnet
@@ -396,7 +396,7 @@ IDs and paths are defined in `my-template/v0/src/manifest.jsonnet`:
 }
 ```
 
-#### User Inputs
+#### User inputs
 
 User inputs are defined in `my-template/v0/src/inputs.jsonnet`:
 ```jsonnet

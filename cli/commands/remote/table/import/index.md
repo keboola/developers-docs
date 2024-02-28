@@ -15,7 +15,7 @@ kbc remote table import [table] [file] [flags]
 ### Options
 
 `-H, --storage-api-host <string>`
-: Keboola Connection instance URL, e.g., `connection.keboola.com`
+: Keboola instance URL, e.g., `connection.keboola.com`
 
 `--columns <string>`
 : Comma-separated list of column names. If present, the first row in the CSV file is not treated as a header.

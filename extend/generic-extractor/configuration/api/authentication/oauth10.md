@@ -29,7 +29,7 @@ described by the [following diagram](https://oauth.net/core/1.0/#anchor9):
 In the diagram, only the step `G` represents the actual communication with the API (extraction of data).
 The final authorization section of the Generic Extractor configuration is generated between
 steps `F` and `G`. When a component is published, the steps `A` - `F` of the process are handled by
-KBC (and the end-user).
+Keboola (and the end-user).
 
 To **develop and test** a new component with the OAuth authorization, go through
 the steps `A` - `F` manually. At the last step, you obtain a response containing the fields
@@ -113,4 +113,4 @@ The full configuration is, e.g.:
 {% endhighlight %}
 
 See [example [EX102]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/102-oauth1) or
-learn [more about KBC-OAuth integration](/extend/common-interface/oauth).
+learn [more about Keboola-OAuth integration](/extend/common-interface/oauth).

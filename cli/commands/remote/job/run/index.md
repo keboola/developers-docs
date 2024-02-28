@@ -19,7 +19,7 @@ If no `@tag` is specified, the default version of the component is used.
 ### Options
 
 `-H, --storage-api-host <string>`
-: Keboola Connection instance URL, e.g., `connection.keboola.com`
+: Keboola instance URL, e.g., `connection.keboola.com`
 
 `--timeout <string>`
 : How long to wait for the job to finish (default `2m`)
