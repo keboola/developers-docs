@@ -3,7 +3,7 @@ items:
     title: Home
 
   - url: /overview/
-    title: KBC Overview
+    title: Keboola Overview
     items:
       - url: /overview/api/
         title: Our APIs
@@ -12,7 +12,7 @@ items:
         title: Encryption
 
   - url: /extend/
-    title: Extending KBC
+    title: Extending Keboola
     items:
       - url: /extend/component/
         title: Components

@@ -7,14 +7,14 @@ permalink: /integrate/storage/api/import-export/
 {:toc}
 
 ## Working with Data
-KBC Table Storage (Tables) and KBC File Storage (File Uploads) are heavily connected together.
-KBC File Storage is technically a layer on top of the Amazon S3 service, and KBC Table
+Keboola Table Storage (Tables) and Keboola File Storage (File Uploads) are heavily connected together.
+Keboola File Storage is technically a layer on top of the Amazon S3 service, and Keboola Table
 Storage is a layer on top of a [database backend](https://help.keboola.com/storage/#backends).
 
 To upload a table, take the following steps:
 
 - Request a [file upload](https://keboola.docs.apiary.io/#reference/files/upload-file/create-file-resource) from
-KBC File Storage. You will be given a destination for the uploaded file on an S3 server.
+Keboola File Storage. You will be given a destination for the uploaded file on an S3 server.
 - Upload the file there. When the upload is finished, the data file will be available in the *File Uploads* section.
 - Initiate an [asynchronous table import](https://keboola.docs.apiary.io/#reference/tables/load-data-asynchronously/import-data-from-csv-file-asynchronously)
 from the uploaded file (use it as the `dataFileId` parameter) into the destination table.
@@ -31,7 +31,7 @@ the file](https://keboola.docs.apiary.io/#reference/files/manage-files/file-deta
 access to an S3 server for the actual file download.
 
 ### Manually Uploading a File
-To upload a file to KBC File Storage, follow the instructions outlined in the
+To upload a file to Keboola File Storage, follow the instructions outlined in the
 [API documentation](https://keboola.docs.apiary.io/#reference/files/upload-file/create-file-resource).
 First create a file resource; to create a new file called
 [`new-file.csv`](/integrate/storage/new-table.csv) with `52` bytes, call:

@@ -18,7 +18,7 @@ kbc remote workspace delete [flags]
 : Id of the workspace to be deleted. You can find it using the [List Workspaces](/cli/commands/remote/workspace/list/) command.
 
 `-H, --storage-api-host <string>` 
-: Keboola Connection instance URL, e.g. "connection.keboola.com"
+: Keboola instance URL, e.g., "connection.keboola.com"
 
 [Global Options](/cli/commands/#global-options)
 

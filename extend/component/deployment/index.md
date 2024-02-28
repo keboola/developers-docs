@@ -16,7 +16,7 @@ created in the [tutorial](/extend/component/tutorial/), you see the following be
 
 - Every commit & push to the git repository triggers a build on [Travis](https://docs.travis-ci.com/).
 - Every new tag pushes the built image into our [AWS ECR registry](https://aws.amazon.com/ecr/).
-- Every [normal version tag](https://semver.org/#spec-item-2) (x.y.z) updates the image tag in the [Developer Portal](https://components.keboola.com/) and subsequently makes the image available in KBC.
+- Every [normal version tag](https://semver.org/#spec-item-2) (x.y.z) updates the image tag in the [Developer Portal](https://components.keboola.com/) and subsequently makes the image available in Keboola.
 
 We highly recommend the above setup (or a similar one) as it imposes very little extra work on the developer, yet
 it deploys new versions of the component in a controlled and traceable manner.
@@ -102,7 +102,7 @@ docker tag ${APP_IMAGE}:latest ${REPOSITORY}:latest
 docker push ${REPOSITORY}:${TRAVIS_TAG}
 docker push ${REPOSITORY}:latest
 
-# Update the tag in Keboola Developer Portal -> Deploy to KBC
+# Update the tag in Keboola Developer Portal -> Deploy to Keboola
 if echo ${TRAVIS_TAG} | grep -c '^v\?[0-9]\+\.[0-9]\+\.[0-9]\+$'
 then
     docker run --rm \
@@ -138,8 +138,8 @@ The last part of the script begins with a check that the commit tag (`TRAVIS_TAG
 (`x.y.z`). If not, the component is not updated in the Developer Portal. However, at this stage the image was already pushed into the registry
 so it can be used by [running it explicitly](/extend/component/tutorial/debugging/#running-specific-tags). If the git tag
 is a normal version tag, the component is updated in the Developer Portal using the `update-app-repository` command.
-This means that the new version of the component is immediately deployed into KBC. Keep in mind that it takes a couple of minutes
-to propagate the change to all KBC instances.
+This means that the new version of the component is immediately deployed into Keboola. Keep in mind that it takes a couple of minutes
+to propagate the change to all Keboola instances.
 
 When modifying the deploy script, make sure the `deploy.sh` file line ending is set to **Unix (LF)**. Also make sure that the file is executable,
 i.e., by executing `git update-index --chmod=+x deploy.sh`. If the script is not executable, you'll get the following error message:
@@ -178,17 +178,17 @@ In Travis, you should see an output similar to this:
 {: .image-popup}
 ![Screenshot -- Build and Deploy Log](/extend/component/deployment/deploy-log-2.png)
 
-If no errors occurred, the component is now deployed into KBC. In the Developer Portal, you can verify that the
+If no errors occurred, the component is now deployed into Keboola. In the Developer Portal, you can verify that the
 component repository and tag were automatically set:
 
 {: .image-popup}
 ![Screenshot -- Deploy Verification](/extend/component/deployment/deploy-final.png)
 
-The component is now runnable in KBC. You can view all settings in our
+The component is now runnable in Keboola. You can view all settings in our
 [example repository](https://github.com/keboola/ex-docs-tutorial). You can also
 review [Travis Configuration](https://travis-ci.org/keboola/ex-docs-tutorial/).
 
-*Note that it takes up to **5 minutes** before the changes in the Developer Portal propagate to all KBC instances in all regions.*
+*Note that it takes up to **5 minutes** before the changes in the Developer Portal propagate to all Keboola instances in all regions.*
 
 ## Bitbucket Integration
 The [development tutorial](/extend/component/tutorial/) as well as the above description assume you're using
@@ -365,20 +365,20 @@ The commands above
 - run the [flake8](http://flake8.pycqa.org/en/latest/) code style check.
 - run [unittest](https://docs.python.org/3.6/library/unittest.html) tests.
 - pull the [Developer Portal CLI client](https://github.com/keboola/developer-portal-cli-v2).
-- get the component's KBC registry from the Developer Portal and store it in the `REPOSITORY` variable.
+- get the component's Keboola registry from the Developer Portal and store it in the `REPOSITORY` variable.
 - tag the image as `test`.
 - get the command to login to the registry (`ecr:get-login`) and execute it (i.e., log in).
 - push the image to the registry.
 - pull the job runner CLI client ([Syrup PHP CLI](https://github.com/keboola/syrup-php-cli)).
-- run the specified test job on KBC using the `/{component}/{config}/run/tag/{tag}` -- [Keboola Docker API](https://kebooladocker.docs.apiary.io/#reference/run/create-a-job-with-image/run-job). The tag used is `test`.
+- run the specified test job on Keboola using the `/{component}/{config}/run/tag/{tag}` -- [Keboola Docker API](https://kebooladocker.docs.apiary.io/#reference/run/create-a-job-with-image/run-job). The tag used is `test`.
 
 If you want to run multiple test jobs, simply repeat the command with the different configuration IDs
 that you would like to test.
 
-When you commit to the component repository, the Docker image will be built, and using a `test` tag, it will be tested in production KBC.
+When you commit to the component repository, the Docker image will be built, and using a `test` tag, it will be tested in production Keboola.
 However, it will not be deployed to production! To get it into production, create a new normal version tag (`x.y.z`) in the repository.
 The Docker image will be built and tested using the `test` tag, and if all succeeds, it will be deployed
-with the `x.y.z` tag into KBC --- a new version will be available in production.
+with the `x.y.z` tag into Keboola --- a new version will be available in production.
 You can see the [Python code](https://github.com/keboola/component-generator/tree/master/templates/python-tests) or
 [PHP code](https://github.com/keboola/component-generator/tree/master/templates/php-component/) in our
 [Templates repository](https://github.com/keboola/component-generator/tree/master/templates)

@@ -15,7 +15,7 @@ kbc remote file download [id] [flags]
 ### Options
 
 `-H, --storage-api-host <string>`
-: Keboola Connection instance URL, e.g., `connection.keboola.com`
+: Keboola instance URL, e.g., `connection.keboola.com`
 
 `-o, --output <string>`
 : Path and/or name of the destination file (if the file is not sliced) or directory (if the file is sliced). If `-`, output goes to `stdout` without any extra text, so the command is pipeable.

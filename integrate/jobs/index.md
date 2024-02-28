@@ -7,7 +7,7 @@ redirect_from: /overview/jobs/
 * TOC
 {:toc}
 
-Most operations, such as extracting data or running an application are executed in Keboola Connection as
+Most operations, such as extracting data or running an application are executed in Keboola as
 background, asynchronous [jobs](https://help.keboola.com/management/jobs/). When an operation is triggered, for example, you run an extractor, a
 *job* is created. The job starts executing or waits in the queue until it can start executing. 
 The job execution and queuing are fully automatic. The job execution is asynchronous, so you need to
@@ -174,7 +174,7 @@ When you create a job it is in the `created` state. In a success scenario it wil
  whereas a terminated job, could've done even all of the work it was supposed to do.
 
  If a job cannot be executed, it will enter the `waiting` state. The waiting state means that the job cannot be executed due to reasons on the Keboola 
- Connection project side. This means that the reasons for waiting jobs lie solely in what jobs are already running in the given project. There are three core reasons for waiting jobs:
+ project side. This means that the reasons for waiting jobs lie solely in what jobs are already running in the given project. There are three core reasons for waiting jobs:
  - If you run two jobs of the same configuration, the second one will wait until the first one is finished. This behavior is 
  called "configuration lock" and protects your project from [race conditions](https://en.wikipedia.org/wiki/Race_condition). 
  - Orchestration [phases](https://help.keboola.com/orchestrator/tasks/#organize-tasks). When you run an orchestration, the jobs for all phases are created. Phases that depend on other phases enter the `waiting` state.
@@ -194,7 +194,7 @@ When you create a job it is in the `created` state. In a success scenario it wil
 Apart from the `status` field, the job also has `desiredStatus` field. This is either `processing` or `terminating`. The desired status is 
 processing until a job termination is requested. This changes the desired status to `terminating`. Other changes are not permitted.
 
-### Job Id
+### Job ID
 When a job is created, an `id` and `runId` and optionally `parentRunId` are assigned to it. The `runId` and `parentRunId` represent 
 parent-child relationship between jobs. Parent-child hierarchical relationship can be defined via the `X-KBC-RunId` header, when used the
 newly created job will become child of the job with the provided `RunId`.
@@ -473,7 +473,7 @@ of what the data folder looked like before the component started. If processors 
 If configuration rows are used, then the above is repeated for each configuration row. If the job finishes with and error, only the stages before the error are uploaded.
 
 This API call does not upload any tables or files to Storage. I.e. when the component finishes, its output is discarded and the output mapping to storage 
-is not performed. This makes this API call generally very safe to call, because it cannot break the Keboola Connection project in any way. However keep 
+is not performed. This makes this API call generally very safe to call, because it cannot break the Keboola project in any way. However, keep 
 in mind, that if the component has any outside side effects, these will get executed. This applies typically to writers which will write the data 
 into the external system even with this debug API call.
 

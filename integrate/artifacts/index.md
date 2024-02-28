@@ -24,7 +24,7 @@ These could be for example:
 These additional information can be stored in artifacts and processed by another component or 3rd party tool.
 
 ## Storage
-Artifacts are stored in Keboola Connection File Storage.
+Artifacts are stored in Keboola File Storage.
 
 ## Types of artifacts
 There are three types of artifacts for now `runs`, `custom` and `shared`. 

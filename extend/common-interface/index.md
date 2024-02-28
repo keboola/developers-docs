@@ -3,7 +3,7 @@ title: Common Interface
 permalink: /extend/common-interface/
 ---
 
-To exchange data between your component and Keboola Connection (KBC), use
+To exchange data between your component and Keboola, use
 
 * a predefined set of input and output [folders](/extend/common-interface/folders) for tables and files,
 * a [configuration file](/extend/common-interface/config-file/),

@@ -11,7 +11,7 @@ redirect_from:
 * TOC
 {:toc}
 
-Components allow you to [extend](/extend/) Keboola Connection (KBC).
+Components allow you to [extend](/extend/) Keboola.
 The data interface to components is very similar to [Transformations](https://help.keboola.com/manipulation/transformations/) --- data is exchanged as
 CSV files in [designated directories](/extend/common-interface/).
 
@@ -25,12 +25,12 @@ To start quickly, use our [component generator](https://github.com/keboola/compo
 Check our example component in [PHP](https://github.com/keboola/docker-demo-app).
 
 The main part of the [common interface](/extend/common-interface/) is the specification how 
-[CSV files and designated folders](/extend/common-interface/folders/) are used to exchange data between KBC and components:
+[CSV files and designated folders](/extend/common-interface/folders/) are used to exchange data between Keboola and components:
 
 - Applications process input tables stored in CSV files and generate result tables in CSV files.
 - Extractors write results in the same way as applications, but instead of reading their
-input from KBC tables, they get it from an external source (usually an API).
-- Writers, on the other hand, access their input tables in the same way as applications, but push their results into external systems and do not generate any KBC tables.
+input from Keboola tables, they get it from an external source (usually an API).
+- Writers, on the other hand, access their input tables in the same way as applications, but push their results into external systems and do not generate any Keboola tables.
 
 
 Apart from this basic usage, the common interface offers many more features:
@@ -49,7 +49,7 @@ from our side. It also takes care of executing your component in its own [isolat
 ## Requirements
 Before you start developing a new component, you should
 
-- have a [KBC project](/#development-project) where you can test your code.
+- have a [Keboola project](/#development-project) where you can test your code.
 - get yourself acquainted with [Docker](/extend/component/docker-tutorial/). You should be
 able to [run `docker`](/extend/component/docker-tutorial/setup/) commands. Strictly speaking, you can get away
 with not using them, but it will certainly speed things up for you.
@@ -60,14 +60,14 @@ is available.
 - have a git repository ([Github](https://github.com/) or [Bitbucket](https://bitbucket.org/) are recommended, 
 although any other host should work as well).
 
-You can work with your component in your KBC projects immediately as soon as you
+You can work with your component in your Keboola projects immediately as soon as you
 [create it](/extend/component/tutorial/). However, to make the component publicly available to all users,
 it must be [published](/extend/publish/).
 
 ## Component Types
 The following component types are currently allowed:
 
-- **Extractor** -- a component designed to bring data into Keboola Connection Storage
+- **Extractor** -- a component designed to bring data into Keboola Storage
 - **Writer** -- a component designed to bring data to an external system
 - **Application** -- another arbitrary component
 - **Processor** -- a [processor](/extend/component/processors/)
@@ -108,6 +108,6 @@ and configuration options. These are created by Keboola. If you wish to bring yo
 - If new to Docker, follow a [quick introduction](/extend/component/docker-tutorial/),
 along with a [guide to setting up Docker](/extend/component/docker-tutorial/setup/) and a
 [guide to building dockerized applications](/extend/component/docker-tutorial/howto/).
-- Follow the [next steps](/extend/component/tutorial/input-mapping/) of the tutorial to understand how your component interacts with KBC.
-- See more about [testing and debugging of components](/extend/component/tutorial/debugging/) in the KBC environment.
+- Follow the [next steps](/extend/component/tutorial/input-mapping/) of the tutorial to understand how your component interacts with Keboola.
+- See more about [testing and debugging of components](/extend/component/tutorial/debugging/) in the Keboola environment.
 - Request [publication](/extend/publish/) of your component. 

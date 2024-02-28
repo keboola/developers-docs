@@ -86,10 +86,10 @@ It does no magic or rocket science, so you can read the [config file](/extend/co
 
 Commit and push the code in your repository and tag it with a [normal version tag](https://semver.org/#spec-item-2).
 This will trigger a [build on Travis CI](https://docs.travis-ci.com/) and automatically
-deploy the new version into KBC. Keep in mind that after the deployment, it may take up to 5 minutes for the update to propagate to all KBC instances.
+deploy the new version into Keboola. Keep in mind that after the deployment, it may take up to 5 minutes for the update to propagate to all Keboola instances.
 
 ## Verifying
-To verify that the parameters work, simply edit the component configuration in KBC and paste in, for example:
+To verify that the parameters work, simply edit the component configuration in Keboola and paste in, for example:
 
 {% highlight json %}
 {
@@ -144,7 +144,7 @@ form generated from it produces the desired JSON structure. Once satisfied with 
 simply paste the schema into the **Configuration schema** in your component properties in the
 [Developer Portal](https://components.keboola.com/).
 
-Once the change propagates to your KBC instance, you should see the form in the UI:
+Once the change propagates to your Keboola instance, you should see the form in the UI:
 
 {: .image-popup}
 ![Screenshot -- Configuration Form](/extend/component/tutorial/configuration-4.png)

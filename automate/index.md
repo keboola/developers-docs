@@ -5,7 +5,7 @@ permalink: /automate/
 
 ## Automation
 
-Use the KBC Orchestrator component to specify what tasks should be executed in what order and 
+Use the Keboola Orchestrator component to specify what tasks should be executed in what order and 
 configure their automatic execution (specified intervals, specified times of the day, etc.).
 
 The set of [Keboola APIs](/overview/api/) provides full automation of the data warehouse cycle. 
@@ -18,14 +18,14 @@ The whole environment tracks all the [operational metadata](https://keboola.docs
 and can be accessed without needing a server via APIs. This is useful when automating development, testing and 
 production run of data jobs with automatic controls of [pipelines](https://keboola.docs.apiary.io/#reference/development-branches).
 
-As Storage API is part of the wider Keboola Connection platform, it is an essential element in providing coherent data 
+As Storage API is part of the wider Keboola platform, it is an essential element in providing coherent data 
 fabric across clouds, users, services, and on premise.
 
 
 ## CI/CD
 
 No matter whether you use Jenkins, CircleCI, AWS CodeBuilder, or Azure DevOps, you can utilise 
-the Keboola Connection API within your existing CI/CD pipeline to deploy and manage new versions of your data 
+the Keboola API within your existing CI/CD pipeline to deploy and manage new versions of your data 
 pipeline and data process automation tasks.
 
 ## Documentation

@@ -6,12 +6,12 @@ permalink: /integrate/storage/api/tde-exporter/
 * TOC
 {:toc}
 
-[TDE Exporter](https://github.com/keboola/tde-exporter) exports tables from KBC Storage into the
+[TDE Exporter](https://github.com/keboola/tde-exporter) exports tables from Keboola Storage into the
 [TDE file format (Tableau Data Extract)](https://www.tableau.com/about/blog/2014/7/understanding-tableau-data-extracts-part1).
 This component is normally a part of the [Tableau Writer](https://help.keboola.com/tutorial/write/),
 but it can also be used as a standalone component.
 
-Users can [run a TDE exporter job](/integrate/jobs/) as any other KBC component or register it
+Users can [run a TDE exporter job](/integrate/jobs/) as any other Keboola component or register it
 as an orchestration task. After the exporter finishes, the resulting TDE files will be available in the
 *Storage* --- *File uploads* section where you can download them via UI or [API](/integrate/storage/api/import-export/).
 

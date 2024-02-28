@@ -306,7 +306,7 @@ This is its basic structure:
 - `version` - current major version, now `2`
 - `project` - information about the project
   - `id` - ID of the project
-  - `apiHost` - URL of the Keboola Connection instance (e.g., `connection.keboola.com`)
+  - `apiHost` - URL of the Keboola instance (e.g., `connection.keboola.com`)
 - `sortBy` - name of the configuration property used for sorting (default `id`)
 - `naming` - rules for directory names, [see the details](/cli/structure/#naming)
 - `allowedBranches` - array of branches to work with

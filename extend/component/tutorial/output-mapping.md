@@ -79,7 +79,7 @@ Finally, the result is written to either `odd.csv` or `even.csv`.
 
 Commit and push the code in your repository and tag it with a [normal version tag](https://semver.org/#spec-item-2).
 This will trigger a [build on Travis CI](/extend/component/tutorial/#building-the-component) and automatically
-deploy the new version into KBC. Keep in mind that after the deployment, it may take up to 5 minutes for the update to propagate to all KBC instances.
+deploy the new version into Keboola. Keep in mind that after the deployment, it may take up to 5 minutes for the update to propagate to all Keboola instances.
 
 ## Verifying
 If you configured the default bucket option, nothing changes in the UI. If you followed the
@@ -96,7 +96,7 @@ If you happen to see the following error message:
 It means that you have not set the default bucket properly (thus no bucket is generated for the component, and we don't know where to put 'odd').
 
 ## Summary
-Your component can now successfully write tables to a KBC project. You can read
+Your component can now successfully write tables to a Keboola project. You can read
 more about other output mapping options in the
 [data folder specification](/extend/common-interface/folders/). Also, the
 [manifest files](/extend/common-interface/manifest-files/) contain metadata which

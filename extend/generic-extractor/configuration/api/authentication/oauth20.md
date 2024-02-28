@@ -32,7 +32,7 @@ In the diagram, step `6` represents the end of authentication and the actual com
 the API (extraction of data) may begin.
 The final authorization section of the Generic Extractor configuration is generated between
 steps `5` and `6`. When a component is published, steps `1` --- `6` of the process are handled by
-KBC (and the end-user).
+Keboola (and the end-user).
 
 To **develop and test** a new component with the OAuth authorization, go through
 steps `1` --- `6` manually. At step `5`, you will obtain a response which needs to be put
@@ -74,7 +74,7 @@ has three child properties:
 
 Note that the properties `appKey` and `#appSecret` must exist even if not used by the API; set them
 to empty strings. For more information about OAuth 2, see the [official documentation](https://oauth.net/2/)
-or learn [more about KBC-OAuth integration](/extend/common-interface/oauth).
+or learn [more about Keboola-OAuth integration](/extend/common-interface/oauth).
 
 ## Configuration Parameters
 The following configuration parameters are supported for the `oauth20` authentication type:

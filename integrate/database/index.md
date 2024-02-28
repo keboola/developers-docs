@@ -56,7 +56,7 @@ See the following pages for more information about setting up SSH on your server
 
 
 ### 2. Generate SSH Key Pair
-Setup or edit your database extractor in [Keboola Connection](https://connection.keboola.com).
+Setup or edit your database extractor in [Keboola](https://connection.keboola.com).
 Go to **Database Credentials** and check **Enable SSH Tunnel**.
 Generate an SSH key pair and copy the public key to your *SSH proxy server*.
 Paste it to the *public.key* file and then append it to the authorized_keys file.

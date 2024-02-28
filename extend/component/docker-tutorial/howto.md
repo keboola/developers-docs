@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-The following are the basic steps for developing KBC Docker Images. There is no need to know everything about the
+The following are the basic steps for developing Keboola Docker Images. There is no need to know everything about the
 Docker stack since this is a very limited set of Docker features.
 The official [tutorial](https://docs.docker.com/get-started/) is not being replaced here.
 Before you start, make sure you have [Docker installed](/extend/component/docker-tutorial/setup/).

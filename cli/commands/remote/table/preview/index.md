@@ -15,7 +15,7 @@ kbc remote table preview [table] [flags]
 ### Options
 
 `-H, --storage-api-host <string>`
-: Keboola Connection instance URL, e.g., `connection.keboola.com`
+: Keboola instance URL, e.g., `connection.keboola.com`
 
 `--changed-since <string>`
 : Only export rows imported after this date.

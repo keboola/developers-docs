@@ -1,4 +1,4 @@
-# Keboola Connection Developers Documentation
+# Keboola Developers Documentation
 
 [![Build and deploy](https://github.com/keboola/developers-docs/actions/workflows/main.yml/badge.svg)](https://github.com/keboola/developers-docs/actions/workflows/main.yml)
 

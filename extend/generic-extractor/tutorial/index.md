@@ -9,7 +9,7 @@ permalink: /extend/generic-extractor/tutorial/
 In this tutorial, we will guide you through configuring Generic Extractor for a new API.
 In our case, MailChimp --- an email marketing service.
 
-Even though there already is a MailChimp extractor available in KBC as a
+Even though there already is a MailChimp extractor available in Keboola as a
 [component](/extend/generic-extractor/publish/) based on Generic Extractor,
 the [MailChimp](https://mailchimp.com/) API is ideal for this tutorial because it is fairly
 easy to understand and has excellent documentation.
