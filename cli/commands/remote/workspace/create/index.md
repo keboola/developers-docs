@@ -24,7 +24,7 @@ kbc remote workspace create [flags]
 : Size of the workspace to be created. It is ignored for database workspaces.
 
 `-H, --storage-api-host <string>` 
-: Keboola Connection instance URL, e.g. "connection.keboola.com"
+: Keboola instance URL, e.g., "connection.keboola.com"
 
 [Global Options](/cli/commands/#global-options)
 

@@ -10,27 +10,27 @@ redirect_from:
 {:toc}
 
 In this tutorial, you will create a simple "Hello, World!" component which runs in
-Keboola Connection (KBC).
+Keboola.
 
 ## Before You Start
-You need to have a computer with working [Docker](https://www.docker.com/why-docker) to develop the KBC component code.
+You need to have a computer with working [Docker](https://www.docker.com/why-docker) to develop the Keboola component code.
 To be able to create new components, you also need to have an account in the [Keboola Developer Portal](https://components.keboola.com/),
-which manages the list of components available in KBC.
+which manages the list of components available in Keboola.
 
-The Developer Portal uses different credentials than KBC. [Creating an account](https://components.keboola.com/auth/create-account) is free; it requires a working email address
+The Developer Portal uses different credentials than Keboola. [Creating an account](https://components.keboola.com/auth/create-account) is free; it requires a working email address
 (to which a confirmation email will be sent) and a mobile phone for a mandatory two-factor authorization.
 
 When you log in to the Developer Portal, you have to join a **vendor** --- an organization of
-developers. Every KBC component has to have a vendor assigned. If you join an existing vendor, a
+developers. Every Keboola component has to have a vendor assigned. If you join an existing vendor, a
 vendor administrator has to approve your request. If you do not work for a company, create a
 vendor with your name (even a single developer has to be assigned to a vendor). When you join or create a vendor
-you should also receive access to a development KBC project.
+you should also receive access to a development Keboola project.
 
 {: .image-popup}
 ![Screenshot -- Join a vendor](/extend/component/tutorial/join-vendor.png)
 
 In order to create a **new vendor**, a Keboola administrator has to approve your request, and you will
-receive a [development project](/#development-project) in KBC. In addition to that, you need to provide us
+receive a [development project](/#development-project) in Keboola. In addition to that, you need to provide us
 with a channel for receiving internal errors from your components. Anything supported
 by [Papertrail notifications](https://help.papertrailapp.com/kb/how-it-works/alerts#supported-services)
 is available, though e-mail or a Slack channel is most commonly used.
@@ -40,10 +40,10 @@ The example component is written in the Python language, but no knowledge of Pyt
 Before you continue with this tutorial, make sure you
 
 - can log in to the [Developer Portal](https://components.keboola.com/).
-- can log in to one of the KBC [stacks](https://help.keboola.com/overview/#stacks)
+- can log in to one of the Keboola [stacks](https://help.keboola.com/overview/#stacks)
 - have a [Github](https://github.com/) account.
 
-*Note: Even though the tutorial assumes using [GitHub](https://github.com/) + [Travis](https://travis-ci.org/) services, they are not required for extending KBC.
+*Note: Even though the tutorial assumes using [GitHub](https://github.com/) + [Travis](https://travis-ci.org/) services, they are not required for extending Keboola.
 We use them because we like them the most. The [deployment documentation](/extend/component/deployment/) shows how to configure,
 for example, [Bitbucket](/extend/component/deployment/#bitbucket-integration) and [GitLab](/extend/component/deployment/#gitlab-integration)
 integrations.*
@@ -58,21 +58,21 @@ To add a component, use the **Add a component** button on the main page, and fil
 
 Choose the appropriate [component type](/extend/component/#component-types):
 
-- `extractor` -- brings data into KBC
-- `writer` -- sends data out of KBC
+- `extractor` -- brings data into Keboola
+- `writer` -- sends data out of Keboola
 - `transformation` -- does some transformation of the data, [read more](https://help.keboola.com/transformations/#new-transformations)
 - `code pattern` -- generates code for transformation's component, [read more](/extend/component/code-patterns)
 - `application` -- another arbitrary component
 
-The above does not mean technically that, for example, an extractor cannot send data out of KBC
-or an application cannot bring new data into KBC. It is a matter of user perception,
+The above does not mean technically that, for example, an extractor cannot send data out of Keboola
+or an application cannot bring new data into Keboola. It is a matter of user perception,
 so use your judgement to select the correct type.
 
 When you fill the form in, you will obtain a **component ID** (in the
 form `vendor-id.component-name`, for instance, `keboola-test.ex-docs-tutorial`). Make a **note** of the ID.
 
 ## Creating Deployment Account
-To be able to deploy the component to KBC, you will need **service credentials**. For security
+To be able to deploy the component to Keboola, you will need **service credentials**. For security
 reasons, we strongly advice against using your own credentials in any deployment service. To create
 new deployment credentials, click the **Create a service account** button on the **Service accounts** page.
 
@@ -115,7 +115,7 @@ In the above example, we chose the `simple-python` template, which contains the 
 - template.md -- description of the template files
 - main.py -- a "Hello, World!" Python script
 - Dockerfile -- a [Dockerfile](/extend/component/docker-tutorial/) defining the environment in which the script runs
-- deploy.sh -- a Bash script to deploy the component to KBC
+- deploy.sh -- a Bash script to deploy the component to Keboola
 
 For Travis CI template contain:
 - .travis.yml -- a configuration file for [Travis CI](https://docs.travis-ci.com/) to automate the deployment
@@ -139,7 +139,7 @@ GitHub Actions:
 {: .image-popup}
 ![Screenshot -- GitHub Actions Build](/extend/component/tutorial/gh-build-1.png)
 
-We are more interested in the latter because that is going to trigger the deployment to KBC.
+We are more interested in the latter because that is going to trigger the deployment to Keboola.
 
 Travis:
 
@@ -151,7 +151,7 @@ GitHub Actions:
 {: .image-popup}
 ![Screenshot -- GitHub Actions Build Detail](/extend/component/tutorial/gh-build-2.png)
 
-If the deployment passes without errors, the component will become available in KBC. You
+If the deployment passes without errors, the component will become available in Keboola. You
 can verify that in the component details (action Edit) in the Developer Portal:
 
 {: .image-popup}
@@ -162,8 +162,8 @@ source code, all you need to do is push the changes to the git repository and ta
 with the [normal version tag](https://semver.org/#spec-item-2).
 
 ## Running Component
-Once the component is deployed, it becomes available in KBC. Note that it
-takes **up to 5 minutes** for the changes to propagate to all KBC instances. After that,
+Once the component is deployed, it becomes available in Keboola. Note that it
+takes **up to 5 minutes** for the changes to propagate to all Keboola instances. After that,
 you can configure the component by visiting the following URL:
 
     https://connection.keboola.com/admin/projects/{DEFINED PROJECT_ID}/extractors/{YOUR COMPONENT_ID}
@@ -194,8 +194,8 @@ outages and beyond our control, we recommend using our reliable AWS ECR. Use Doc
 for instance, want the image to be public.
 
 ## Summary
-You have just created your own KBC component. Although it does not do much, it shows the easiest path
-to bringing your own application logic to KBC. You can now continue with other parts of the tutorial:
+You have just created your own Keboola component. Although it does not do much, it shows the easiest path
+to bringing your own application logic to Keboola. You can now continue with other parts of the tutorial:
 
  - using [input](/extend/component/tutorial/input-mapping/) and
    [output mapping](/extend/component/tutorial/output-mapping/)

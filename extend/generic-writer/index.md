@@ -6,7 +6,7 @@ permalink: /extend/generic-writer/
 * TOC
 {:toc}
 
-Generic Writer is a [Keboola Connection component](/overview/) that allows you to send any type of HTTP requests with or without data to arbitrary HTTP endpoints. 
+Generic Writer is a [Keboola component](/overview/) that allows you to send any type of HTTP requests with or without data to arbitrary HTTP endpoints. 
 
 It is a counterpart to the [Generic Extractor](/extend/generic-extractor) that allows you to extract data from virtually any API.
 

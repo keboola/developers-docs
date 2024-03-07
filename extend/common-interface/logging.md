@@ -6,7 +6,7 @@ permalink: /extend/common-interface/logging/
 * TOC
 {:toc}
 
-There are two main, mutually exclusive, ways in which your component can display events to KBC end-users:
+There are two main, mutually exclusive, ways in which your component can display events Keboola end-users:
 
 1. Using [standard output and standard error](https://en.wikipedia.org/wiki/Standard_streams)
 2. Using [Graylog GELF](http://docs.graylog.org/en/3.1/pages/gelf.html) compatible logger
@@ -61,7 +61,7 @@ Additionally, you can set the visibility of each event message as follows:
 
 Default settings for message visibilities:
 
-[KBC Level](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md#5-psrlogloglevel) | Gelf Log Method | [Syslog Level](https://en.wikipedia.org/wiki/Syslog#Severity_level) | Default KBC Verbosity
+[Keboola Level](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md#5-psrlogloglevel) | Gelf Log Method | [Syslog Level](https://en.wikipedia.org/wiki/Syslog#Severity_level) | Default Keboola Verbosity
 100 | `debug()` | 7 | none
 200 | `info()`  | 6 | normal
 250 | `notice()` | 5 | normal

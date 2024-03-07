@@ -45,7 +45,7 @@ It will offer you to create GitHub Actions workflows in the directory.
 : Create workflow to validate all branches on change (default true)
 
 `-H, --storage-api-host <string>` 
-: Keboola Connection instance url, eg. "connection.keboola.com"
+: Keboola instance URL, e.g., "connection.keboola.com"
 
 [Global Options](/cli/commands/#global-options)
 

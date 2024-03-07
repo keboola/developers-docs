@@ -85,10 +85,10 @@ Additionally, the `latest` tag is available and always points to the latest tagg
 can be used safely (though it refers to different versions over time).
 
 ## Memory
-KBC [components](/extend/component/) can be used to process substantial amounts of data (i.e., dozens of gigabytes), which are not
+Keboola [components](/extend/component/) can be used to process substantial amounts of data (i.e., dozens of gigabytes), which are not
 going to fit into memory. Every component should therefore be written so that it processes data in chunks of
-a limited size (typically rows of a table). Many of the KBC components run with less than 100MB memory.
-While the KBC platform is capable of running jobs with ~8GB of memory without problems, we are not particularly
+a limited size (typically rows of a table). Many of the Keboola components run with less than 100MB memory.
+While the Keboola platform is capable of running jobs with ~8GB of memory without problems, we are not particularly
 happy to allow it, and we certainly do not want to allow components where the amount of used memory
 depends on the size of the processed data.
 

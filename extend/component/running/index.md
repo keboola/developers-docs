@@ -10,7 +10,7 @@ redirect_from:
 {:toc}
 
 One of the great advantages of dockerized components is that the components always run in the
-same environment defined by the Docker image. When running in KBC, there are, however, some outside
+same environment defined by the Docker image. When running in Keboola, there are, however, some outside
 environment bindings for you to take care of.
 
 Before you start, make sure you have [Docker set up correctly](/extend/component/docker-tutorial/setup/),
@@ -85,7 +85,7 @@ environment configuration for a component. It will create a snapshot of the
 (including input mapping and configuration files) and then it will upload the snapshot to the [Files section](https://help.keboola.com/storage/file-uploads/)
 of Storage. Then the component will be run and another snapshot will be created with the resulting contents of the data directory.
 This gives you snapshots of the data directory before and after a component is run. The debug
-API call does not write any tables or files (other than the archive) to the KBC project, so it is very safe to run. Note however that
+API call does not write any tables or files (other than the archive) to the Keboola project, so it is very safe to run. Note however that
 any side effects of the component are still performed (e.g. writers still write data to their destination).
 
 The [Run Tag](https://kebooladocker.docs.apiary.io/#reference/run/create-a-job-with-image/create-a-dry-run-job)
@@ -95,7 +95,7 @@ any users using that component. See the [tutorial](/extend/component/tutorial/de
 for instructions.
 
 ## Preparing Data folder
-In order to run and debug a KBC component (including [R](https://help.keboola.com/manipulation/transformations/r/) and [Python](https://help.keboola.com/manipulation/transformations/python/) Transformations)
+In order to run and debug a Keboola component (including [R](https://help.keboola.com/manipulation/transformations/r/) and [Python](https://help.keboola.com/manipulation/transformations/python/) Transformations)
 on your own computer, you need to manually supply the component with
 a [data folder and configuration file](/extend/common-interface/). The above mentioned
 [Debug API call](https://kebooladocker.docs.apiary.io/#reference/debug/debug-component/create-a-debug-job)
@@ -106,7 +106,7 @@ A [collection of examples](https://documenter.getpostman.com/view/3086797/kbc-sa
 Debug API calls is available in Postman Docs.
 
 ### Prepare
-[Create a table](https://help.keboola.com/tutorial/load/) in KBC Storage.
+[Create a table](https://help.keboola.com/tutorial/load/) in Keboola Storage.
 In the following example, the table is stored in the `in.c-main` bucket and is called `sample`. The table ID is
 therefore `in.c-main.sample`. You also need a [Storage API token](https://help.keboola.com/storage/tokens/).
 
@@ -160,7 +160,7 @@ there is a **Run with Configuration** example with the the following JSON in its
 }
 {% endhighlight %}
 
-When you create a configuration in KBC, it is assigned a configuration ID --- `328831433` --- in our example.
+When you create a configuration in Keboola, it is assigned a configuration ID --- `328831433` --- in our example.
 Use this ID instead of manually crafting the request body. You need to replace `328831433` with your own
 configuration ID. The request URL is as follows:
 
@@ -188,13 +188,13 @@ When running the request with valid parameters, you should receive a response si
 {% endhighlight %}
 
 This means that an [asynchronous job](/integrate/jobs/) which will prepare the archive of the data folder has been created.
-If curious, view the job progress under **Jobs** in KBC:
+If curious, view the job progress under **Jobs** in Keboola:
 
 {: .image-popup}
 ![Job progress screenshot](/extend/component/running/sandbox-progress.png)
 
 The job will usually take slightly longer than the normal run job. When finished go to **Storage** --- **Files** in
-KBC. There you will find a `stage_0.zip` file with the data folder before the component was run and `stage_output.zip` before
+Keboola. There you will find a `stage_0.zip` file with the data folder before the component was run and `stage_output.zip` before
 the component output mapping was supposed to be done. You can now use this folder from `stage_0.zip` to run
 the component locally. You should now be able to run the component with it:
 

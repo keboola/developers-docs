@@ -26,7 +26,7 @@ and add `genericDockerUI-tableInput` or `genericDockerUI-fileInput` (or both) [U
 ![Screenshot -- Input Mapping Configuration](/extend/component/tutorial/input-mapping-1.png)
 
 Save the changes, and the corresponding UI elements will appear in your component configuration. Keep in mind that the changes
-take up to 5 minutes to propagate to all KBC instances.
+take up to 5 minutes to propagate to all Keboola instances.
 
 ## Modifying Source Code
 You also need to modify the source code so that it works with the input data. The data from input mapping will be available in the
@@ -60,7 +60,7 @@ with open('/data/in/tables/source.csv', mode='rt', encoding='utf-8') as in_file:
 
 Commit and push the code in your repository, and tag it with a [normal version tag](https://semver.org/#spec-item-2).
 This will trigger a [build on Travis CI](https://docs.travis-ci.com/) and automatically
-deploy the new version into KBC. Keep in mind that after the deployment, it may take up to 5 minutes for the update to propagate to all KBC instances.
+deploy the new version into Keboola. Keep in mind that after the deployment, it may take up to 5 minutes for the update to propagate to all Keboola instances.
 
 ## Verifying
 If you configured the UI correctly, you should see the corresponding control in the component

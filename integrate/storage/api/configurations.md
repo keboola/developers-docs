@@ -6,11 +6,11 @@ permalink: /integrate/storage/api/configurations/
 * TOC
 {:toc}
 
-[Configurations](https://help.keboola.com/storage/configurations/) are an important part of a KBC project. Most operations are
+[Configurations](https://help.keboola.com/storage/configurations/) are an important part of a Keboola project. Most operations are
 available in the UI. Use the API if you want to manipulate the configurations programmatically.
 
-Configurations represent component **instances** in a project. Each KBC component has different configuration
-options and requirements, which must be respected. As such, KBC configurations provide a general framework for configuring
+Configurations represent component **instances** in a project. Each Keboola component has different configuration
+options and requirements, which must be respected. As such, Keboola configurations provide a general framework for configuring
 components, while the specific implementation details are left to the components themselves.
 
 When working with the [Component Configurations API](https://keboola.docs.apiary.io/#reference/components-and-configurations),
@@ -268,7 +268,7 @@ If the component is executed more than once, the operations are executed in the 
 
 All of these are executed in a single [job](/integrate/jobs/). However, even though multiple rows are executed in a single
 job, the actual executions are still completely isolated. I.e., there is no way to share anything between the rows
-(apart from the common `configuration`). It also means that the outputs of the first row are available in the KBC project before
+(apart from the common `configuration`). It also means that the outputs of the first row are available in the Keboola project before
 the second row starts, and the inputs for the second row are read only after the first row finishes processing.
 
 What is considered 'first' and 'second' -- i.e. the order of rows -- is defined by the order of items in the `rows` array.
@@ -367,7 +367,7 @@ A sample result for the AWS S3 extractor looks like this:
 {% endhighlight %}
 
 ### Modifying Configuration
-**Note: Configurations modified through the API might not be editable in the KBC UI.** They can be run or used in an orchestration without any problems.
+**Note: Configurations modified through the API might not be editable in the Keboola UI.** They can be run or used in an orchestration without any problems.
 
 Modifying a configuration means that a new version of that configuration is created.
 For modifying a configuration, use the

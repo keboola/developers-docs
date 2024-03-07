@@ -6,22 +6,22 @@ permalink: /overview/api/
 * TOC
 {:toc}
 
-All our [KBC components](/overview/) have a public API on [apiary](https://apiary.io/). For sending requests to our
+All our [Keboola components](/overview/) have a public API on [apiary](https://apiary.io/). For sending requests to our
 API, we recommend either the Apiary Console or Postman Client. Most of our APIs take and produce data in JSON format.
 Many of them require a *Storage API token*, which is entered in the `X-StorageApi-Token` header.
 
 ## List of Keboola APIs
 
-All parts of the Keboola Connection platform can be controlled via an API.
+All parts of the Keboola platform can be controlled via an API.
 The main APIs for our components are:
 
 |---
 | API | Description
 |-|-|-
-| [KBC Storage API](https://keboola.docs.apiary.io/) | [Storage](/integrate/storage/) is the main KBC component storing all data. |
-| [KBC Management API](https://keboolamanagementapi.docs.apiary.io/) | API managing KBC projects and users (and notifications and features). |
+| [Keboola Storage API](https://keboola.docs.apiary.io/) | [Storage](/integrate/storage/) is the main Keboola component storing all data. |
+| [Keboola Management API](https://keboolamanagementapi.docs.apiary.io/) | API managing Keboola projects and users (and notifications and features). |
 | [Encryption API](https://keboolaencryption.docs.apiary.io/#) | Provides [Encryption](/overview/encryption/). |
-| [Docker Runner API](https://kebooladocker.docs.apiary.io/#) | [Docker Runner](/extend/docker-runner/) is the component running other KBC components. |
+| [Docker Runner API](https://kebooladocker.docs.apiary.io/#) | [Docker Runner](/extend/docker-runner/) is the component running other Keboola components. |
 | [JSON Parser API](https://jsonparserapi.docs.apiary.io/#) | JSON Parser is a service [converting JSON files to CSV](https://json-parser.keboola.com/). |
 | [Transformation API](https://keboolatransformationapi.docs.apiary.io/#) | [Transformations](/integrate/transformations/) is the component running [SQL/R/Python transformations](https://help.keboola.com/manipulation/transformations/). |
 | [Provisioning API](https://provisioningapi.docs.apiary.io/#) | Provisioning is a service creating accounts for [sandboxes](https://help.keboola.com/manipulation/transformations/sandbox/), [transformations](https://help.keboola.com/manipulation/transformations/) and database writers. |
@@ -31,7 +31,7 @@ The main APIs for our components are:
 | [OAuth Broker API](https://oauthapi3.docs.apiary.io/#) | OAuth Broker is a component managing [OAuth authorizations](/extend/common-interface/oauth/#authorize) of other components. |
 | [Orchestrator API](https://keboolaorchestratorv2api.docs.apiary.io/#) | Orchestrator is a component [automating and scheduling tasks](https://help.keboola.com/tutorial/automate/) in your project. For legacy orchestrations only. |
 | [Importer API](https://app.swaggerhub.com/apis-docs/keboola/import) | [Importer](/integrate/storage/api/importer/) is a helper service for easy table imports |
-| [Developer Portal API](https://kebooladeveloperportal.docs.apiary.io/#) | Developer Portal is an application separated from KBC for [creating components](/extend/component/). |
+| [Developer Portal API](https://kebooladeveloperportal.docs.apiary.io/#) | Developer Portal is an application separated from Keboola for [creating components](/extend/component/). |
 | [Billing API](https://keboolabillingapi.docs.apiary.io/#) | Billing API for Pay as You Go projects. |
 | [Workspaces API](https://sandboxes.keboola.com/documentation) | Workspaces API for V2 workspaces. |
 | [Synchronous Actions API](https://app.swaggerhub.com/apis/odinuv/sync-actions) | API to trigger [Synchronous Actions](/extend/common-interface/actions/). This is a partial replacement of Docker Runner API and may not be available on all stacks. |
@@ -45,7 +45,7 @@ If you don't know which API to use, see our [integration guide](/integrate/). It
 performed actions.
 
 ## Stacks and Endpoints
-Keboola Connection is available in multiple [stacks](https://help.keboola.com/overview/#stacks). These can be 
+Keboola is available in multiple [stacks](https://help.keboola.com/overview/#stacks). These can be 
 either multi-tenant or single-tenant. Current multi-tenant stacks are:
 
 - US Virginia AWS – [connection.keboola.com](https://connection.keboola.com/),
@@ -53,7 +53,7 @@ either multi-tenant or single-tenant. Current multi-tenant stacks are:
 - EU Ireland Azure – [connection.north-europe.azure.keboola.com](https://connection.north-europe.azure.keboola.com/).
 - EU Frankfurt GCP - [connection.europe-west3.gcp.keboola.com](https://connection.europe-west3.gcp.keboola.com/)
 
-Each stack is a completely independent instance of Keboola Connection services.
+Each stack is a completely independent instance of Keboola services.
 In all the API documentation above, the AWS US stack is used.
 
 Single-tenant stacks are available for a single enterprise customer with a domain name 
@@ -213,7 +213,7 @@ The Apiary console is fine if you send API requests only occasionally. It requir
 however, it has no history and no other useful features.
 
 ### Postman Client
-[Postman](https://www.getpostman.com/) is a generic HTTP API client. Use it if you work with KBC APIs on a more regular basis.
+[Postman](https://www.getpostman.com/) is a generic HTTP API client. Use it if you work with Keboola APIs on a more regular basis.
 We also provide a collection of [useful API calls](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb) with examples.
 The collection contains code examples in various languages; the requests can also be imported into the Postman application.
 
@@ -223,7 +223,7 @@ The collection contains code examples in various languages; the requests can als
 ### cURL
 [cURL](https://curl.haxx.se/) is a common library used by many systems. There is also
 a [command-line interface (CLI)](https://curl.haxx.se/docs/manpage.html) available.
-You can use the cURL CLI to create simple scripts working with KBC APIs. For example, to [Run a Job](/integrate/jobs/),
+You can use the cURL CLI to create simple scripts working with Keboola APIs. For example, to [Run a Job](/integrate/jobs/),
 use
 
 {% highlight shell %}
