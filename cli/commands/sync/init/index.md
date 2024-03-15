@@ -21,28 +21,28 @@ kbc i [flags]
 The command must be run in an empty directory.
 
 If the command is run without options, it will start an interactive dialog asking for:
-- URL of the [stack](https://help.keboola.com/overview/#stacks), for example `connection.keboola.com`.
+- URL of the [stack](https://help.keboola.com/overview/#stacks), for example, `connection.keboola.com`.
 - [Master token](https://help.keboola.com/management/project/tokens/#master-tokens) to your project.
 - Allowed [branches](https://help.keboola.com/tutorial/branches/) to work with.
 
-It will offer you to create GitHub Actions workflows in the directory.
+It will allow you to create GitHub Actions workflows in the directory.
 
 ## Options
 
 `-b, --allowed-branches <string>`
-: Comma-separated list of branch IDs or name globs (use "*" for all) for branches you want to work with locally (default "main"), other branches in the project will be ignored
+: Comma-separated list of branch IDs or name globs (use "*" for all) for branches you want to work with locally (default "main"); other branches in the project will be ignored.
 
 `--ci-main-branch <string>`
 : Name of the main branch for push/pull workflows (default "main")
 
 `--ci-pull <bool>`
-: Create workflow to sync main branch from the project every 5 minutes (default true)
+: Create a workflow to sync the main branch from the project every 5 minutes (default true)
 
 `--ci-push <bool>`
-: Create workflow to push changes in main branch to the project (default true)
+: Create a workflow to push changes in the main branch to the project (default true)
 
 `--ci-validate <bool>`
-: Create workflow to validate all branches on change (default true)
+: Create a workflow to validate all branches on change (default true)
 
 `-H, --storage-api-host <string>` 
 : Keboola instance URL, e.g., "connection.keboola.com"
