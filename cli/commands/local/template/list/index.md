@@ -1,12 +1,12 @@
 ---
-title: List Templates Instances
+title: List Template Instances
 permalink: /cli/commands/local/template/list/
 ---
 
 * TOC 
 {:toc}
 
-**List [templates](/cli/templates/structure/#template) instances used in the project.**
+**List [template](/cli/templates/structure/#template) instances used in the project.**
 
 ```
 kbc local template list [flags]
