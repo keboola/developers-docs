@@ -20,7 +20,7 @@ Deletes all component configurations that were created from a template.
 : branch ID or name
 
 `-i, --instance <string>`
-: Id of the template instance
+: ID of the template instance
 
 `--dry-run`
 : Preview the list of configs to be deleted
