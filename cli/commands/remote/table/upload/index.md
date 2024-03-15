@@ -36,7 +36,7 @@ kbc remote table upload [table] [file] [flags]
 : Name of the file to be created
 
 `--file-tags <string>`
-: Comma-separated list of tags for the uploaded file.
+: Comma-separated list of tags for the uploaded file
 
 `--file-delimiter <string>`
 : Delimiter of the CSV file. Default is `,`.
@@ -45,7 +45,7 @@ kbc remote table upload [table] [file] [flags]
 : Enclosure of the CSV file. Default is `"`.
 
 `--file-escaped-by <string>`
-: Escape character of the CSV file. By default, no escaping is used. (Note: you can specify either `enclosure` or `escapedBy` parameter, not both.)
+: Escape character of the CSV file. By default, no escaping is used. (***Note:** you can specify either the `enclosure` or `escapedBy` parameter, not both.*)
 
 `--file-without-headers`
 : States if the CSV file contains headers on the first row or not.
