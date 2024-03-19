@@ -36,7 +36,7 @@ Table "in.c-demo-keboola-ex-google-drive-1234567.account":
   Last changed at: 2023-02-01T13:09:19.000Z
 ```
 
-Print the details of a table without knowing its id:
+Print the details of a table without knowing its ID:
 ```
 ➜ kbc remote table detail
 ? Table:  [Use arrows to move, type to filter]
