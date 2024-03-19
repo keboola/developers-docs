@@ -30,13 +30,13 @@ TEST_KBC_PROJECTS="connection.keboola.com|1234|project-1234-token;host2|id2|toke
 ## Options
 
 `--test-name <string>`
-: run only a test with a specified name
+: Run only a test with a specified name
 
 `--inputs-file <string>`
-: path to a file with the template inputs
+: Path to a file with the template inputs
 
 `--verbose <bool>`
-: show details (default false)
+: Show details (default false)
 
 
 [Global Options](/cli/commands/#global-options)
