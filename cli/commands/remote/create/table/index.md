@@ -98,7 +98,7 @@ Columns definition from file
 
 Created table "in.c-bucket2.my-table".
 ```
-**Defining column types using JSON file:**
+**Defining column types using a JSON file:**
 
 ```
 kbc remote create table --columns-from <definition.json> [flags]
