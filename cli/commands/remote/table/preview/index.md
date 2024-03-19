@@ -54,7 +54,7 @@ kbc remote table preview [table] [flags]
 : When combined with `--out`, the file will be overwritten if it already exists.
 
 `--limit <int>`
-: Limit the number of exported rows. (maximum 1000, default 100)
+: Limit the number of exported rows (maximum 1000, default 100).
 
 `--order <string>`
 : Order the data by one or more columns.
@@ -98,7 +98,7 @@ Fetching the data, please wait.
 Table "in.c-gdrive.account" preview successfully written to "accounts-preview.csv".
 ```
 
-Preview a table in the terminal without knowing its id:
+Preview a table in the terminal without knowing its ID:
 ```
 ➜ kbc remote table preview
 ? Table:  [Use arrows to move, type to filter]
