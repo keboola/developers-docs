@@ -8,7 +8,7 @@ permalink: /cli/commands/dbt/generate/
 
 **Work with dbt inside your repository.**
 
-The commands must be run in a directory with a dbt project (i.e. containing `dbt_project.yml`) or its subdirectory.
+The commands must be run in a directory with a dbt project (i.e., containing `dbt_project.yml`) or its subdirectory.
 
 ```
 kbc dbt generate [command]
