@@ -30,7 +30,7 @@ kbc remote table import [table] [file] [flags]
 : Enclosure of the CSV file. Default is `"`.
 
 `--file-escaped-by <string>`
-: Escape character of the CSV file. By default, no escaping is used. (Note: you can specify either `enclosure` or `escapedBy` parameter, not both.)
+: Escape character of the CSV file. By default, no escaping is used. (Note: You can specify either the `enclosure` or `escapedBy` parameter, but not both.)
 
 `--file-without-headers`
 : States if the CSV file contains headers on the first row or not.

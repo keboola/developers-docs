@@ -7,10 +7,10 @@ permalink: /cli/dbt/
 {:toc}
 
 Keboola CLI allows you to integrate with your dbt project. The commands must be run in a directory with a dbt project 
-(i.e. containing `dbt_project.yml`) or its subdirectory.
+(i.e., containing `dbt_project.yml`) or its subdirectory.
 
 [kbc dbt init](/cli/commands/dbt/init/) command creates a Snowflake [workspace](https://help.keboola.com/transformations/workspace/)
-in Keboola, configures a dbt target with it, generates source files for every table in the Keboola Storage and outputs
+in Keboola, configures a dbt target with it, generates source files for every table in Keboola Storage and outputs
 commands to create environmental variables so that you don't store Snowflake credentials directly in the dbt configuration files. 
 
 The command output will look like this:
@@ -18,7 +18,7 @@ The command output will look like this:
 ```
 ➜ kbc dbt init
 
-Please enter the Keboola Storage API host, e.g. "connection.keboola.com".
+Please enter the Keboola Storage API host, e.g., "connection.keboola.com".
 ? API host: connection.north-europe.azure.keboola.com
 
 
@@ -85,7 +85,7 @@ in.c-test.yml
 in.c-test1647518938917259000.yml
 ```
 
-And each source file contains the definition for all tables in the specific bucket, like this:
+Each source file contains the definition for all tables in the specific bucket, like this:
 
 {% raw  %}
 ```yaml
@@ -125,7 +125,7 @@ The command in the end outputs commands for setting all environment variables yo
   export DBT_KBC_TARGET1_PASSWORD=abcd1234
   ```
 
-Single steps in this command can be run separately, see [kbc dbt generate](/cli/commands/dbt/generate/).
+Single steps in this command can be run separately; see [kbc dbt generate](/cli/commands/dbt/generate/).
 
 ## Available Commands
 

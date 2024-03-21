@@ -21,28 +21,28 @@ The command must be run in the [repository directory](/cli/templates/structure#r
 ## Options
 
 `-a, --all-configs`
-: use all configs from the branch
+: Use all configs from the branch
 
 `--all-inputs`
-: use all found config/row fields as user inputs
+: Use all found config/row fields as user inputs
 
 `-b, --branch string`
-: source branch ID or name
+: Source branch ID or name
 
 `-c, --configs string`
-: comma separated list of {componentId}:{configId}
+: Comma separated list of {componentId}:{configId}
 
 `--description string`
-: template description
+: Template description
 
 `--id string`
-: template ID
+: Template ID
 
 `--name string`
-: template name
+: Template name
 
 `-H, --storage-api-host string`
-: storage API host, eg. "connection.keboola.com"
+: Storage API host, e.g., "connection.keboola.com"
 
 [Global Options](/cli/commands/#global-options)
 

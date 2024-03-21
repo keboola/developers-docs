@@ -80,7 +80,7 @@ Unloading table, please wait.
 Table "in.c-gdrive.account" unloaded to file "734370450".
 ```
 
-Unload a table in the terminal without knowing its id:
+Unload a table in the terminal without knowing its ID:
 ```
 ➜ kbc remote table unload
 ? Table:  [Use arrows to move, type to filter]

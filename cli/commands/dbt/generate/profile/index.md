@@ -6,17 +6,17 @@ permalink: /cli/commands/dbt/generate/profile/
 * TOC
 {:toc}
 
-**Generates profile file in the dbt project directory.**
+**Generates a profile file in the dbt project directory.**
 
 ```
 kbc dbt generate profile [flags]
 ```
 
-The command must be run in a directory with a dbt project (i.e. containing `dbt_project.yml`) or its subdirectory.
+The command must be run in a directory with a dbt project (i.e., containing `dbt_project.yml`) or its subdirectory.
 
 The command creates a `profiles.yml` file if it does not exist yet and prepares outputs for the selected target.
 
-See [introduction to dbt support](/cli/dbt/) for more information.
+See the [introduction to dbt support](/cli/dbt/) for more information.
 
 ## Options
 

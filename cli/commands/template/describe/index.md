@@ -6,13 +6,13 @@ permalink: /cli/commands/template/describe/
 * TOC
 {:toc}
 
-**Describe [template](/cli/templates/structure/#template) and its inputs in the [repository directory]((/cli/templates/structure/#repository)).**
+**Describe the [template](/cli/templates/structure/#template) and its inputs in the [repository directory]((/cli/templates/structure/#repository)).**
 
 ```
 kbc template describe <template-id> [version] [flags]
 ```
 
-If you don't provide `version` parameter, the default version will be used.
+If you don't provide the `version` parameter, the default version will be used.
 
 The command must be run in the [repository directory](/cli/templates/structure#repository).
 

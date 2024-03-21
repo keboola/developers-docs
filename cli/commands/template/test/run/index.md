@@ -30,16 +30,16 @@ TEST_KBC_PROJECTS="connection.keboola.com|1234|project-1234-token;host2|id2|toke
 ## Options
 
 `--local-only <bool>`
-: run only local tests (default false)
+: Run only local tests (default false)
 
 `--remote-only <bool>`
-: run only remote tests (default false)
+: Run only remote tests (default false)
 
 `--test-name <string>`
-: run only a test with a specified name
+: Run only a test with a specified name
 
 `--verbose <bool>`
-: show details about running tests (default false)
+: Show details about running tests (default false)
 
 
 [Global Options](/cli/commands/#global-options)

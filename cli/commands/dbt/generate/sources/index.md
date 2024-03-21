@@ -12,7 +12,7 @@ permalink: /cli/commands/dbt/generate/sources/
 kbc dbt generate sources [flags]
 ```
 
-The command must be run in a directory with a dbt project (i.e. containing `dbt_project.yml`) or its subdirectory.
+The command must be run in a directory with a dbt project (i.e., containing `dbt_project.yml`) or its subdirectory.
 
 The command creates a file for each Storage bucket in the `models/_sources` directory containing a dbt source for every table in the bucket.
 
@@ -21,7 +21,7 @@ See the [introduction to dbt support](/cli/dbt/) for more information.
 ## Options
 
 `-H, --storage-api-host <string>`
-: Storage API host, e.g. "connection.keboola.com"
+: Storage API host, e.g., "connection.keboola.com"
 
 `-T, --target-name <string>`
 : Target name of the profile
@@ -33,7 +33,7 @@ See the [introduction to dbt support](/cli/dbt/) for more information.
 ```
 ➜ kbc dbt generate sources
 
-Please enter the Keboola Storage API host, e.g. "connection.keboola.com".
+Please enter the Keboola Storage API host, e.g., "connection.keboola.com".
 ? API host: connection.north-europe.azure.keboola.com
 
 
