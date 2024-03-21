@@ -70,7 +70,7 @@ If a receiver or export `id` is omitted, it will be generated from the correspon
 
 A receiver may be created without any exports. The exports can then be created separately using the [`POST /v1/receivers/{receiverId}/exports`](https://buffer.keboola.com/v1/documentation/#/configuration/CreateExport) endpoint.
 
-**Warning**: Events sent to a receiver without any exports will be permanently lost. This is because data is buffered per export, not per receiver.
+***Warning**: Events sent to a receiver without any exports will be permanently lost. This is because data is buffered per export, not per receiver.*
 
 The requests are asynchronous and create a task that must be completed before the receiver or export is ready to use. The task status can be checked using the [`GET /v1/receivers/{receiverId}/tasks/{taskId}`](https://buffer.keboola.com/v1/documentation/#/configuration/GetTask) endpoint.
 
@@ -93,6 +93,23 @@ If an export's `mapping.tableId` is updated, it is handled the same way as in th
 A token is generated for each receiver export. These tokens have the minimum possible scope, which is a `write` permission for the bucket in which the destination table is stored. You can see these tokens at `https://connection.keboola.com/admin/projects/<project-id>/tokens-settings`. Their description is in the format `[_internal] Buffer Export <export-id> for Receiver <receiver-id>`.
 
 These tokens should not be deleted or refreshed manually. To refresh tokens, use the [`POST /v1/receivers/{receiverId}/tokens/refresh`](https://buffer.keboola.com/v1/documentation/#/configuration/RefreshReceiverTokens) endpoint.
+
+## Kafka Integration
+To connect Keboola with [Apache Kafka®](https://kafka.apache.org/) and ingest data from Kafka topics via data streams, use the Kafka Connect HTTP Sink Connector
+to establish a communication channel between Kafka and Keboola.
+
+The Kafka Connect HTTP Sink Connector acts as a bridge, seamlessly integrating Kafka with Keboola's Data Stream HTTP API. Here's a breakdown of the process:
+
+- Data Consumption: The connector continuously reads data records from one or more Kafka topics.
+- Batching: The events can be efficiently grouped based on a predefined maximum size (batch.max.size).
+- API Interaction: The data is sent as the POST request in JSON format to Keboola's Data Stream API URL.
+
+**Key Points to Remember:**
+
+- This integration relies on the Kafka Connect HTTP Sink Connector, requiring configuration on the Kafka side.
+- Data records from Kafka topics are transformed into strings before being sent to Keboola.
+- The target Keboola API URL is represented by the created data stream in Keboola.
+- Only POST HTTP methods are supported for data ingestion.
 
 ## Next Steps
 
