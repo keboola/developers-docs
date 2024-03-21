@@ -74,7 +74,7 @@ Want to define column types?
 Columns definition from file
 ? Columns definition from file: [Enter to launch editor]
 ```
-**Edit the JSON file in the editor:**
+**Edit the YAML file in the editor:**
 
 Edit or replace this part of the text with your definition. Keep the same format. Then save your changes and close the editor.
 
@@ -98,6 +98,32 @@ Columns definition from file
 
 Created table "in.c-bucket2.my-table".
 ```
+**Defining column types using a JSON file:**
+
+```
+kbc remote create table --columns-from <definition.json> [flags]
+```
+Example JSON file:
+```json
+[
+    {
+      "name": "id",
+      "definition": {
+        "type": "VARCHAR"
+      },
+      "basetype": "STRING"
+    },
+    {
+      "name": "name",
+      "definition": {
+        "type": "VARCHAR"
+      },
+      "basetype": "STRING"
+    }
+]
+```
+
+
 
 ## Next Steps
 
