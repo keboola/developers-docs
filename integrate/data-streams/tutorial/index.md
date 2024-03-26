@@ -39,7 +39,7 @@ To start ingesting events, you must first create a receiver. Send the following 
             "name": "template",
             "template": {
               "language": "jsonnet",
-              "content": "'#' + Body('issue.id') + ': ' + Body('issue.body', 'n/a')",
+              "content": "'#' + Body('issue.id') + ': ' + Body('issue.body', 'n/a')"
             }
           }
         ]
