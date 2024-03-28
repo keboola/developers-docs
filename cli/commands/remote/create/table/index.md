@@ -82,10 +82,12 @@ Edit or replace this part of the text with your definition. Keep the same format
 - name: id
   definition:
     type: VARCHAR
+    nullable: false
   basetype: STRING
 - name: name
   definition:
     type: VARCHAR
+    nullable: true
   basetype: STRING
 ```
 ```
@@ -94,7 +96,6 @@ Columns definition from file
 
 ? Select columns for the primary key:  [Use arrows to move, space to select]
 > [x]  id
-  [ ]  name
 
 Created table "in.c-bucket2.my-table".
 ```
@@ -109,14 +110,16 @@ Example JSON file:
     {
       "name": "id",
       "definition": {
-        "type": "VARCHAR"
+        "type": "VARCHAR",
+        "nullable": false
       },
       "basetype": "STRING"
     },
     {
       "name": "name",
       "definition": {
-        "type": "VARCHAR"
+        "type": "VARCHAR",
+        "nullable": true
       },
       "basetype": "STRING"
     }
