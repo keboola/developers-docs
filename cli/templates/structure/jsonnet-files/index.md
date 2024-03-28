@@ -98,6 +98,13 @@ Example:
   - Returns `keboola.wr-db-snowflake` for AWS stacks.
   - Returns `keboola.wr-snowflake-blob-storage` for Azure stacks.
 
+--------------------------------------
+
+**`HasProjectBackend(backends []string) bool`**
+
+- Returns `true` if at least one of the backends is available, `false` otherwise.
+  
+
 ## Next Steps
 - [User Inputs](/cli/templates/structure/inputs/)
 - [Template Structure](/cli/templates/structure/)

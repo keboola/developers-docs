@@ -32,6 +32,7 @@ A more detailed description can be found in the chapters below.
 🟫 .env.dist                    - template for .env.local
 📂 .keboola                     - project metadata directory
 ┗ 🟦 manifest.json              - object IDs, paths, naming and other configuration
+┗ 🟦 project.json               - list of project backends and features, branch ID
 🟩 description.md               - project description
 📂 [branch-name]                - branch directory, e.g. main
 ┣ 🟦 meta.json
@@ -360,7 +361,7 @@ If you want to include object IDs in directory names, use these values:
 {
     "branch": "{branch_id}-{branch_name}",
     "config": "{component_type}/{component_id}/{config_id}-{config_name}",
-    "configRow": "rows/{config_row_id}-{config_row_name}"
+    "configRow": "rows/{config_row_id}-{config_row_name}",
     "schedulerConfig": "schedules/{config_name}",
     "sharedCodeConfig": "_shared/{target_component_id}",
     "sharedCodeConfigRow": "codes/{config_row_name}",
@@ -371,6 +372,31 @@ If you want to include object IDs in directory names, use these values:
 
 You can change them according to your wishes and let the project directory be rebuilt using the
 [fix-paths](/cli/commands/local/fix-paths/) command.
+
+## Project Cache
+
+The local state of the project backends and features are stored in the project file `.keboola/project.json`.
+
+This is its basic structure:
+
+- `backends` - list of the project backends
+- `features` - list of the project features
+- `defaultBranchId` - ID of the default branch
+
+```json
+{
+  "backends": [
+    "snowflake"
+  ],
+  "features": [
+    "workspace-snowflake-dynamic-backend-size",
+    "input-mapping-read-only-storage",
+    "syrup-jobs-limit-10",
+    "oauth-v3"
+  ],
+  "defaultBranchId": 123
+}
+```
 
 ## Next Steps
 
