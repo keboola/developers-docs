@@ -509,7 +509,7 @@ Example `.keboola/manifest.json`:
       {
         "type": "dir",
         "name": "my-repository",
-        "path": "/path/to/repository"
+        "url": "/path/to/repository"
       }
     ]
   },
