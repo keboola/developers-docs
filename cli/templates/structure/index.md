@@ -40,8 +40,11 @@ Repository manifest structure:
   - `description` - short description of the template
   - `requirements` - requirements of the project
     - `backends` - *string[]* - list of project backends, e.g, `["snowflake","bigquery"]`
+      - At least one must match the project backends.
     - `components` - *string[]* - list of project components, e.g, `["keboola.wr-db-snowflake"]`
+      - All must match the project components.
     - `features` - *string[]* - list of project features, e.g, `["foo","bar"]`
+      - All must match the project features.
   - `categories` - *string[]* - list of template categories, e.g., `["Data Extraction", "E-Commerce"]`
     - Optional, if it is not set, the template is in the `Other` category.
   - `deprecated` - *bool* - default `false`

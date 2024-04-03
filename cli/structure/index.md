@@ -32,7 +32,7 @@ A more detailed description can be found in the chapters below.
 🟫 .env.dist                    - template for .env.local
 📂 .keboola                     - project metadata directory
 ┗ 🟦 manifest.json              - object IDs, paths, naming and other configuration
-┗ 🟦 project.json               - list of project backends and features, branch ID
+┗ 🟦 project.json               - project cache for local commands which contains backends, features, etc.
 🟩 description.md               - project description
 📂 [branch-name]                - branch directory, e.g. main
 ┣ 🟦 meta.json
@@ -375,7 +375,7 @@ You can change them according to your wishes and let the project directory be re
 
 ## Project Cache
 
-The local state of the project backends and features are stored in the project file `.keboola/project.json`.
+The cache of the project is stored in the project file `.keboola/project.json`. It is used by local commands, because they don't call authorized requests to the Storage API.
 
 This is its basic structure:
 

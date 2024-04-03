@@ -100,9 +100,9 @@ Example:
 
 --------------------------------------
 
-**`HasProjectBackend(backends []string) bool`**
+**`HasProjectBackend(backend string) bool`**
 
-- Returns `true` if at least one of the backends is available, `false` otherwise.
+- Returns `true` if a backend is available, `false` otherwise.
   
 
 ## Next Steps
