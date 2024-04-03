@@ -307,6 +307,11 @@ This is its basic structure:
 - `project` - information about the project
   - `id` - ID of the project
   - `apiHost` - URL of the Keboola instance (e.g., `connection.keboola.com`)
+- `allowTargetEnv` - boolean, default `false`
+  - If `true`, environment variables `KBC_PROJECT_ID` and `KBC_BRANCH_ID` can be used to temporary override the target project and branch.
+  - The IDs in the manifest will remain unchanged.
+  - Mapping is bidirectional, it is performed on the manifest save and load.
+  - See also the [--allow-target-env](/cli/commands/sync/init/#options) option of the [kbc sync init](/cli/commands/sync/init/) command.
 - `sortBy` - name of the configuration property used for sorting (default `id`)
 - `naming` - rules for directory names, [see the details](/cli/structure/#naming)
 - `allowedBranches` - array of branches to work with
@@ -316,7 +321,7 @@ This is its basic structure:
     - local repository:
       - `type` = `dir`
       - `name` - repository name
-      - `path` - absolute or relative path to a local directory
+      - `url` - absolute or relative path to a local directory
         - relative path must be relative to the project directory
     - git repository:
       - `type` = `git`
