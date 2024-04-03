@@ -9,18 +9,18 @@ permalink: /cli/structure/
 Initial configuration of your local directory can be done using the [init command](/cli/commands/sync/init/). It initiates 
 the directory and pulls configurations from the project.
 
-The **Storage API token** to your project is stored in the file `.env.local` under `KBC_STORAGE_API_TOKEN` directive. 
+The **Storage API token** to your project is stored in the file `.env.local` under the `KBC_STORAGE_API_TOKEN` directive. 
 Currently, it is necessary to use [Master tokens](https://help.keboola.com/management/project/tokens/#master-tokens).
 Your token must be secret, so the file `.env.local` is included in the `.gitignore` file.
 
-[Manifest - Naming](#naming) defines directories names.
+[Manifest - Naming](#naming) defines directory names.
 It is usually not necessary to change this setting. 
-It is guaranteed that each object (branch, config, row) will have its own unique directory, 
+It is guaranteed that each object (branch, config, row) will have its unique directory, 
 even if the objects have the same name.
 
 
 The following is an example of a default project directory structure. 
-Some files and directories are specific to component type. 
+Some files and directories are specific to the component type. 
 For example, transformations are represented by native files.
 A more detailed description can be found in the chapters below.
 
@@ -34,7 +34,7 @@ A more detailed description can be found in the chapters below.
 ┗ 🟦 manifest.json              - object IDs, paths, naming and other configuration
 ┗ 🟦 project.json               - project cache for local commands which contains backends, features, etc.
 🟩 description.md               - project description
-📂 [branch-name]                - branch directory, e.g. main
+📂 [branch-name]                - branch directory, e.g., main
 ┣ 🟦 meta.json
 ┣ 🟩 description.md
 ┣ 📂 _shared                    - shared codes directory
@@ -89,7 +89,7 @@ The tool works with [dev branches](/components/branches/) by default. You can ch
 you want to work with locally in the [init](/cli/commands/sync/init/) command. You can ignore the dev branches concept and work with 
 the main branch only, of course. But note that all its configurations will be stored in the directory `main`.
 
-The directory of the main branch is called simply `main` and does not contain the branch ID. This way it is easily 
+The directory of the main branch is called simply `main` and does not contain the branch ID. This way, it is easily 
 distinguishable from the other branches.
 
 The directory contains `description.md` where you can write the description formatted in [Markdown](https://www.markdownguide.org/) 
@@ -113,8 +113,8 @@ Example of a branch folder with components configurations:
 
 ## Configurations
 
-The directory of each configuration contains `config.json` with parameters specific for each component, `description.md` 
-where you can write description formatted in [Markdown](https://www.markdownguide.org/) and `meta.json` containing the name 
+The directory of each configuration contains `config.json` with parameters specific for each component, `description.md`, 
+where you can write a description formatted in [Markdown](https://www.markdownguide.org/) and `meta.json` containing the name 
 of the configuration.
 
 Example of `config.json` for Generic Extractor:
@@ -151,7 +151,7 @@ Example of `meta.json`:
 }
 ```
 
-Example of a Google Drive Extractor configuration:
+Example of a Google Drive extractor configuration:
 
 {: .image-popup}
 ![Screenshot -- A configuration rows directory example](/cli/structure/directory-rows-example.jpg)
@@ -162,7 +162,7 @@ In addition to other configurations, the transformations directories contain a `
 Codes are stored in native files according to the type of transformation. I.e., Snowflake transformations store the codes
 in `.sql` files.
 
-Example of a Snowflake Transformation configuration:
+Example of a Snowflake transformation configuration:
 
 {: .image-popup}
 ![Screenshot -- A transformation directory example](/cli/structure/directory-transformation-example.jpg)
@@ -245,7 +245,7 @@ automatically and periodically. The schedule resides in a configuration director
 {: .image-popup}
 ![Screenshot -- Scheduler directory](/cli/structure/scheduler-directory.jpg)
 
-The schedule's `config.json` contains [crontab](https://crontab.guru/) format of the schedule, timezone, and flag 
+The schedule's `config.json` contains the [crontab](https://crontab.guru/) format of the schedule, timezone, and flag 
 if it should be enabled or not. 
 
 This example shows a schedule to be run at minute 40 past every hour:
@@ -375,7 +375,7 @@ You can change them according to your wishes and let the project directory be re
 
 ## Project Cache
 
-The cache of the project is stored in the project file `.keboola/project.json`. It is used by local commands, because they don't call authorized requests to the Storage API.
+The project cache is stored in the project file `.keboola/project.json`. Local commands use it because they don't call authorized requests to the Storage API.
 
 This is its basic structure:
 
