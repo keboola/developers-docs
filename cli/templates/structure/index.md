@@ -8,10 +8,10 @@ permalink: /cli/templates/structure/
 
 ## Repository
 
-Templates repository is a directory stored in:
+The templates repository is a directory stored in:
 - Local filesystem.
 - Git repository.
-  - Must be a root directory, not a subdirectory.
+  - It must be a root directory, not a subdirectory.
   - One git repository is one template repository.
 
 The repository contains a manifest and directories with templates.
@@ -33,42 +33,42 @@ Repository manifest structure:
 - `version` - current major version, now `2`
 - `author` - repository author
   - `name` - author name
-  - `url` - url to author's website
+  - `url` - URL to the author's website
 - `templates` *(array)* - information about the project
   - `id` - template ID
   - `name` - a human-readable name
   - `description` - short description of the template
   - `requirements` - requirements of the project
-    - `backends` - *string[]* - list of project backends, e.g, `["snowflake","bigquery"]`
+    - `backends` - *string[]* - list of project backends, e.g., `["snowflake","bigquery"]`
       - At least one must match the project backends.
-    - `components` - *string[]* - list of project components, e.g, `["keboola.wr-db-snowflake"]`
+    - `components` - *string[]* - list of project components, e.g., `["keboola.wr-db-snowflake"]`
       - All must match the project components.
-    - `features` - *string[]* - list of project features, e.g, `["foo","bar"]`
+    - `features` - *string[]* - list of project features, e.g., `["foo","bar"]`
       - All must match the project features.
   - `categories` - *string[]* - list of template categories, e.g., `["Data Extraction", "E-Commerce"]`
-    - Optional, if it is not set, the template is in the `Other` category.
+    - Optional: If it is not set, the template is in the `Other` category.
   - `deprecated` - *bool* - default `false`
-    - Deprecated template is excluded from the list.
+    - A deprecated template is excluded from the list.
     - Metadata of the deprecated template can be obtained for existing instances.
   - `path` - path to the template directory
     - Required if `deprecated=false`.
-    - Must not be set for deprecated templates if `deprecated=true`. 
+    - It must not be set for deprecated templates if `deprecated=true`. 
   - `versions` *(array)*
     - `version` - [semantic version](https://semver.org/)
     - `description` - short description of the version
     - `stable` - is the template ready for production use?
     - `path` - path to the template version directory
       - Required if `deprecated=false`.
-      - Must not be set for deprecated templates if `deprecated=true`.
+      - It must not be set for deprecated templates if `deprecated=true`.
     - `components` *(array)* - list of components used by the template
 
-#### Snowflake Writer
+#### Snowflake writer
 
-**Snowflake Writer (data destination) component ID differs** on AWS and Azure stacks, because staging storage differs.
+**Snowflake writer (data destination) component ID differs** on AWS and Azure stacks because staging storage differs.
 - Component ID `keboola.wr-db-snowflake` is used for AWS stacks.
 - Component ID `keboola.wr-snowflake-blob-storage` is used for Azure stacks.
 - Please use:
-  - Placeholder `<keboola.wr-db-snowflake>` in the `repository.json`, in the `components` list.
+  - Placeholder `<keboola.wr-db-snowflake>` in the `repository.json` in the `components` list.
   - Jsonnet function `SnowflakeWriterComponentId()` in [Jsonnet Files](/cli/templates/structure/jsonnet-files/).
 
 #### Example
@@ -114,7 +114,7 @@ Repository manifest structure:
 
 **Using template**
 - A template can be used in a project directly from a git repository.
-- The repository must be defined in the [project manifest](/cli/structure/#manifest), in `templates.repositories` key.
+- The repository must be defined in the [project manifest](/cli/structure/#manifest) in `templates.repositories` key.
 
 ## Template
 
@@ -131,7 +131,7 @@ A template directory is stored in the [repository](#repository) and contains dir
   ┃ ┗ 📂 [component-type]        
   ┃   ┗ 📂 [component-id]
   ┃     ┗ 📂 [config-name]       - structure is similar to the project structure,
-  ┃       ┣ 🟪 config.jsonnet      but instead of JSON files there are JSONNET templates
+  ┃       ┣ 🟪 config.jsonnet      but instead of JSON files, there are JSONNET templates
   ┃       ┣ 🟪 meta.jsonet    
   ┃       ┣ 🟩 description.md
   ┃       ... 
@@ -146,7 +146,7 @@ A template directory is stored in the [repository](#repository) and contains dir
 
 ### Description
 
-There are three types of template description:
+There are three types of template descriptions:
 - `description` field in the [repository.json](#repository):
   - Short description.
   - It is displayed on the overview of all templates.
@@ -155,40 +155,41 @@ There are three types of template description:
   - It is displayed on the template detail page.
 - `README.md` file in the template [src directory](#template):
   - Detailed information, changelog, data model ...
-  - It is by default collapsed on the template detail page, in the `More Details` section.
+  - It is, by default, collapsed on the template detail page in the `More Details` section.
 
 ### Versioning
 
 A template is identified by `<repository>/<template-id>/<version>`,  e.g., `keboola/my-template/1.2.3`.
-Each template version is stored in a separate directory, see the [directory structure](#template).
+Each template version is stored in a separate directory; see the [directory structure](#template).
 
 Templates use [semantic versioning](https://semver.org/):
 - Version format is `<major>.<minor>.<patch>`.
-- For example, `v1.2.3`, prefix `v` is optional.
+- For example, `v1.2.3`; the prefix `v` is optional.
 - Versions are defined in the [repository manifest](#manifest).
 - Multiple versions of the template may be available at the same time.
 - By default, the latest stable version is applied.
 - Users don't have to enter the full version. For example:
   - `my-template/v1` references the latest available version `1.x.x`.
   - `my-template/v1.4` references the latest available version `1.4.x`.
-- Name of the version directory doesn't matter.
-  - It is recommended to call the directory according to the `<major>` version.
-  - For example, for version `3.2.1` the directory name should be `v3`.
+- The name of the version directory doesn't matter.
+  - It is recommended that the directory be called according to the `<major>` version.
+  - For example, for version `3.2.1`, the directory name should be `v3`.
 
 #### New Version
 
-For **small changes** in the template, it is recommended to update the existing version.
-- Increment `<minor>` or `<patch>` part of the version in the [repository manifest](#manifest).
-- Changes will be clearly visible in git history, because the changes are made in an existing directory.
-- Overwritten old version of the template will not be available.
-- User will be able to upgrade to the new version.
-- User will NOT be able to rollback.
 
-For **larger changes** in the template, it is recommended to create a new `<major>` version.
+It is recommended that the existing version be updated for **small changes** in the template.
+- Increment `<minor>` or `<patch>` part of the version in the [repository manifest](#manifest).
+- Changes will be clearly visible in git history because the changes are made in an existing directory.
+- The overwritten old version of the template will not be available.
+- Users will be able to upgrade to the new version.
+- Users will **not** be able to roll back.
+
+For **more significant changes** in the template, it is recommended to create a new `<major>` version.
 - Copy the directory with the latest version, e.g., `v3` -> `v4`.
 - Make changes and register the new version in the [repository manifest](#manifest), e.g., `4.0.0`.
-- User will be able to upgrade to the new version, e.g., `v3` -> `v4`.
-- User will be able to rollback, e.g., `v4` -> `v3`.
+- Users will be able to upgrade to the new version, e.g., `v3` -> `v4`.
+- Users will be able to roll back, e.g., `v4` -> `v3`.
 
 ### Manifest
 
@@ -277,9 +278,9 @@ which is stored in `parmeters.id` in the configuration.
 This ID is not set when the configuration is created. 
 It will be set when the data app is deployed.
 
-This ID must be kept during the upgrade of the template to a new version. 
+This ID must be kept during the template upgrade to a new version. 
 
-It happens automatically, no extra work is required.
+It happens automatically; no extra work is required.
 
 ## Next Steps
 - [Jsonnet Files](/cli/templates/structure/jsonnet-files/)
