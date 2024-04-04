@@ -21,13 +21,17 @@ kbc remote create table [flags]
 : Defines a comma-separated list of column names for the table.
 
 `--columns-from <string>`
-: Indicates the path to the table definition file in JSON format.
+: Indicates the path to the columns definition file in json.
 
 `--name <string>`
 : Sets the name of the new table.
 
 `--primary-key <string>`
 : Determines a comma-separated list of columns to be used as the primary key.
+
+`--options-from <string>`
+: The path to the table definition file with backend specific options.
+: This flag is enabled only for project with BigQuery backend and must be combined with a `--columns-from` flag, because these settings must have specific columns types.
 
 [Global Options](/cli/commands/#global-options)
 
@@ -124,6 +128,34 @@ Example JSON file:
       "basetype": "STRING"
     }
 ]
+```
+**Defining BigQuery settings JSON file:**
+
+```
+kbc remote create table --columns-from <definition.json> --options-from <options.json> [flags]
+```
+Example JSON file:
+```json
+{
+  "timePartitioning": {
+    "type": "DAY",
+    "expirationMs": 864000000,
+    "field": "time"
+  },
+  "clustering": {
+    "fields": [
+      "id"
+    ]
+  },
+  "rangePartitioning": {
+    "field": "id",
+    "range": {
+      "start": 0,
+      "end": 10,
+      "interval": 1
+    }
+  }
+}
 ```
 
 
