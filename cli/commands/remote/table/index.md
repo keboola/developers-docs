@@ -15,6 +15,7 @@ kbc remote table [command]
 |---
 | Command | Description
 |-|-|-
+| [kbc remote table create](/cli/commands/remote/create/table/) | Create a new table. |
 | [kbc remote table upload](/cli/commands/remote/table/upload/) | Upload a CSV file to a [table](https://help.keboola.com/storage/tables/). |
 | [kbc remote table download](/cli/commands/remote/table/download/) | Download data from a [table](https://help.keboola.com/storage/tables/). |
 | [kbc remote table preview](/cli/commands/remote/table/preview/) | Retrieve up to 1000 rows from a table. |
