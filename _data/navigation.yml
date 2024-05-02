@@ -408,6 +408,8 @@ items:
               - url: /cli/commands/remote/table/
                 title: table
                 items:
+                  - url: /cli/commands/remote/table/create/
+                    title: create
                   - url: /cli/commands/remote/table/upload/
                     title: upload
                   - url: /cli/commands/remote/table/download/

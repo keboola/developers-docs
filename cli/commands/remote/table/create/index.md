@@ -1,6 +1,6 @@
 ---
 title: Create Table
-permalink: /cli/commands/remote/create/table/
+permalink: /cli/commands/remote/table/create/
 ---
 
 * TOC
