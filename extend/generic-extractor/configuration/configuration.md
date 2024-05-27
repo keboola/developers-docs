@@ -13,7 +13,35 @@ To get an overall idea of what to expect when configuring Generic Extractor, tak
 Then go through a [sample configuration](#configuration-map) featuring all configuration options and their
 nesting. The **configuration map** is also available as a [separate article](/extend/generic-extractor/map/).
 
-### Configuration Sections
+
+### User Interface
+
+{% include branches-beta-warning.html %}
+
+Recently, we created a convenient user interface that allows you to build a configuration for the Generic Extractor without the need to write JSON code. 
+You can set up and test the connection in a few clicks just like you are used to in some other popular API development tools. 
+
+Features such as cURL import, request tests, output mapping generator or dynamic function templates and evaluation make the configuration process as easy as ever.
+
+
+{: .image-popup}
+![Generic Extractor - UI Animation](/components/extractors/other/generic/animation.gif)
+
+You can switch between the JSON representation and User interface in the upper right corner of the configuration editor.
+
+{: .image-popup}
+![UI Switch](/extend/generic-extractor/configuration/ui_switch.png)]
+
+#### Backward compatibility
+
+The new User Interface is mostly backward compatible with the old JSON configuration. However, some features are not supported in the new UI yet. 
+In such case you will be notified in the UI what sections are not supported.
+
+**NOTE** The new UI does not affect the functionality of old configurations. All configurations will continue to work. 
+Only in some cases, you might need to perform some manual adjustments in order to make the UI compatible.
+
+
+### JSON Configuration Sections
 *Click on the section names if you want to learn more.*
 
 - **parameters**

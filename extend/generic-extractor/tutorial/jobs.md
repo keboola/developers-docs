@@ -40,11 +40,32 @@ property in the Generic Extractor configuration:
 ]
 {% endhighlight %}
 
-All sub-resources are retrieved by configuring the `children` property; its structure is the same as the 
+All sub-resources are retrieved by configuring the `children` property in JSON; its structure is the same as the 
 structure of the `jobs` property, but it must additionally define `placeholders`.
-The `dataField` property must refer to an array, i.e. `items` or `_links` in our case 
-(see the [documentation](https://mailchimp.com/developer/reference/campaigns/campaign-checklist/)). 
-Let's set it to `items`. See [below](#Multiple_Jobs) how to refer to the whole sub-resource with a dot.
+
+In the UI you just create a new Endpoint and mark it as a `Child Job` of the parent job of your choice. Any placeholders, 
+e.g. variables that will be set from the parent object should be enclosed in curly braces. e.g. `{campaign_id}`. 
+
+{: .image-popup}
+![Create endpoint](/extend/generic-extractor/tutorial/create_endpoint_child.png)
+
+Once the endpoint is created the `Placeholders section` will be prefilled for you. We will set the `Response Path` value to `id`,
+since we want to use the `id` property from the parent response to replace the `{campaign_id}` placeholder in the child endpoint.
+
+{: .image-popup}
+![Child endpoint](/extend/generic-extractor/tutorial/child_endpoint.png)
+
+
+Now you can test the endpoint as in previous examples. 
+The  `Mapping.Data Selector` (aka `dataField`) property must refer to an array, i.e. `items` or `_links` in our case 
+(see the [documentation](https://mailchimp.com/developer/reference/campaigns/campaign-checklist/)).
+
+Now when you look at the debug log you will also see that the connector is making all the parent requests:
+
+{: .image-popup}
+![child_debug](child_debug.png)
+
+**The resulting underlying JSON will look like this:**
 
 {% highlight json %}
 "jobs": [
@@ -63,6 +84,7 @@ Let's set it to `items`. See [below](#Multiple_Jobs) how to refer to the whole s
     }
 ]
 {% endhighlight %}
+
 
 The `children` are executed for each element retrieved from the parent endpoint, i.e. for each campaign.
 The `placeholders` setting connects the placeholders used in the `endpoint` property with 
@@ -136,32 +158,13 @@ You have to remember to what table the `parent_id` column refers though.
 You have probably noticed that the `jobs` and `children` properties are arrays. It means that you can retrieve multiple 
 endpoints in a single configuration. Let's pick the campaign `content` sub-resource too:
 
-{% highlight json %}
-"jobs": [
-    {
-        "endpoint": "campaigns",
-        "dataField": "campaigns",
-        "children": [
-            {
-                "endpoint": "campaigns/{campaign_id}/send-checklist",
-                "dataField": "items",
-                "placeholders": {
-                    "campaign_id": "id"
-                }
-            },
-            {
-                "endpoint": "campaigns/{campaign_id}/content",
-                "placeholders": {
-                    "campaign_id": "id"
-                }
-            }
-        ]
-    }
-]
-{% endhighlight %}
+{: .image-popup}
+![second child](/extend/generic-extractor/tutorial/2_child.png)
 
-The question is what to put in the `dataField`. If you examine the sample [response](https://mailchimp.com/developer/reference/campaigns/campaign-content/),
-it looks like this:
+
+The placeholder configuration is the same, however,
+the question is what to put in the `Data Selector` (`dataField`). If you examine the sample [response](https://mailchimp.com/developer/reference/campaigns/campaign-content/),
+after running the test endpoint, it looks like this:
 
 {% highlight json %}
 
@@ -181,7 +184,7 @@ it looks like this:
 
 {% endhighlight %}
 
-If you use no `dataField` like in the above configuration and run it, you will obtain a table like this:
+If you use JSON configuration with no `dataField` like in the above configuration and run it, you will obtain a table like this:
 
 {: .image-popup}
 ![Screenshot - Job Table](/extend/generic-extractor/tutorial/job-table-2.png)
@@ -190,53 +193,41 @@ This is definitely not what you expected. Instead of obtaining the campaign cont
 got the `_links` property from the response. This is because Generic Extractor automatically 
 picks an array in the response. To get the entire response as a **single table record**, set `dataField` 
 to the [path](/extend/generic-extractor/tutorial/json/#references) in the object. Because you want to use the 
-**entire response**, set `dataField` to `.` to start in the root.
+**entire response**, set `dataField` to `.` to start in the root. 
+
+**NOTE** if you are using the UI editor, the `Data Selector` (`dataField`) is automatically `.` by default.
+
+**The resulting JSON:**
 
 {% highlight json %}
-{
-    "parameters": {
-        "api": {
-            "baseUrl": "https://us13.api.mailchimp.com/3.0/",
-            "authentication": {
-                "type": "basic"
-            },
-            "pagination": {
-                "method": "offset",
-                "offsetParam": "offset",
-                "limitParam": "count",
-                "limit": 1
-            }
-        },
-        "config": {
-            "debug": true,
-            "username": "dummy",
-            "#password": "c40xxxxxxxxxxxxxxxxxxxxxxxxxxxxx-us13",
-            "outputBucket": "ge-tutorial",
-            "jobs": [
-                {
-                    "endpoint": "campaigns",
-                    "dataField": "campaigns",
-                    "children": [
-                        {
-                            "endpoint": "campaigns/{campaign_id}/send-checklist",
-                            "dataField": "items",
-                            "placeholders": {
-                                "campaign_id": "id"
-                            }
-                        },
-                        {
-                            "endpoint": "campaigns/{campaign_id}/content",
-                            "dataField": ".",
-                            "placeholders": {
-                                "campaign_id": "id"
-                            }
-                        }
-                    ]
+"jobs": [
+    {
+        "endpoint": "campaigns",
+        "dataField": "campaigns",
+        "children": [
+            {
+                "endpoint": "campaigns/{campaign_id}/send-checklist",
+                "dataField": {
+                      "path": "items",
+                      "delimiter": "."
+                    },
+                "placeholders": {
+                    "campaign_id": "id"
                 }
-            ]
-        }
+            },
+            {
+                "endpoint": "campaigns/{campaign_id}/content",
+                "dataField": {
+                      "path": ".",
+                      "delimiter": "."
+                    },
+                "placeholders": {
+                    "campaign_id": "id"
+                }
+            }
+        ]
     }
-}
+]
 {% endhighlight %}
 
 Running the above configuration will get you the table `in.c-ge-tutorial.campaigns__campaign_id__content`

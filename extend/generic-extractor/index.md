@@ -11,9 +11,16 @@ Generic Extractor is a [Keboola component](/overview/) which acts like a customi
 from virtually any sane web API.
 
 Due to the versatility of different APIs running in the wild, Generic Extractor offers a vast amount
-of [**configuration options**](/extend/generic-extractor/configuration/). Even though it may seem somewhat abstract and hard to understand at first,
-once you configure your first extractor, you will see that it is a great tool. With it, you can build
+of [**configuration options**](/extend/generic-extractor/configuration/). 
+
+You may opt to use the [**visual builder**](/extend/generic-extractor/configuration/#user-interface), that provides a very convenient way 
+of configuring and testing the configuration. With it, you can build
 an entirely new extractor for Keboola in **less than an hour**.
+
+
+{: .image-popup}
+![Generic Extractor - UI Animation](/components/extractors/other/generic/animation.gif)
+
 
 To get started quickly, follow our [Generic Extractor tutorial](/extend/generic-extractor/tutorial).
 
@@ -21,7 +28,7 @@ To get started quickly, follow our [Generic Extractor tutorial](/extend/generic-
 Generic Extractor allows you to extract data from an API into Keboola only by configuring it.
 No programming skills or additional tools are required. You just need to do two easy things before you start:
 
-- Learn how to [write JSON](/extend/generic-extractor/tutorial/json/).
+- Familiarity with [JSON format](/extend/generic-extractor/tutorial/json/).
 - Have the documentation of your chosen API at hand. The API should be [RESTful](/extend/generic-extractor/tutorial/rest/)
 and, more or less, follow the HTTP specification.
 
@@ -29,6 +36,12 @@ and, more or less, follow the HTTP specification.
 Again, if you are new to Generic Extractor, we strongly suggest you go through the
 [Generic Extractor tutorial](/extend/generic-extractor/tutorial/). It shows the basic principles, as well as
 the most important features.
+
+With the new convenient user interface, you can set up and test the connection in a few clicks 
+just like you are used to in some other popular API development tools. 
+
+Features such as cURL import, request tests, output mapping generator or dynamic function templates and evaluation make the configuration process as easy as ever.
+
 
 If you intend to develop a more complicated configuration, check out how to
 [run Generic Extractor locally](/extend/generic-extractor/running/).

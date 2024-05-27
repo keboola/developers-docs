@@ -11,6 +11,11 @@ Now it's time to clean up the response.
 
 This is the initial configuration:
 
+{: .image-popup}
+![Whole cfg](/extend/generic-extractor/tutorial/mapping_all.png)
+
+**In JSON:**
+
 {% highlight json %}
 {
     "parameters": {
@@ -38,14 +43,20 @@ This is the initial configuration:
                     "children": [
                         {
                             "endpoint": "campaigns/{campaign_id}/send-checklist",
-                            "dataField": "items",
+                            "dataField": {
+                                  "path": "items",
+                                  "delimiter": "."
+                                },
                             "placeholders": {
                                 "campaign_id": "id"
                             }
                         },
                         {
                             "endpoint": "campaigns/{campaign_id}/content",
-                            "dataField": ".",
+                            "dataField": {
+                                  "path": ".",
+                                  "delimiter": "."
+                                },
                             "placeholders": {
                                 "campaign_id": "id"
                             }
@@ -69,25 +80,103 @@ unpaged `/content` resource. This may ultimately lead to duplicates because the 
 resource is terminated only after the resource returns the same response twice.*
 
 ## Mapping
+
 A mapping defines the shape of Generic Extractor outputs. It is stored
 in the `config.mappings` property and is identified by the resource data type. 
-When a resource is assigned an internal `dataType`, a mapping can be created 
-for it. To be able to use a mapping, first define a `dataType` in the job property. 
-For example:
+When a resource is assigned an internal  `Result Name` (`dataType`), a mapping can be created 
+for it. To be able to use a mapping, first define a `Result Name` (`dataType`) in the job property. 
+
+### UI 
+
+In the UI the mapping can be created in the `Mapping section` by clicking `Create Mapping` toggle.
+
+{: .image-popup}
+![Create mapping](/extend/generic-extractor/tutorial/create_mapping_toggle.png)
+
+You may opt to generate the mapping automatically by clicking the `Infer Mapping` button in the top right corner. 
+
+This operation will generate a mapping based on the sample response of the endpoint. 
+
+{: .image-popup}
+![Create mapping](/extend/generic-extractor/tutorial/create_mapping.png)
 
 
-{% highlight json %}
-{
-    "endpoint": "campaigns/{campaign_id}/content",
-    "dataField": ".",
-    "dataType": "content",
-    "placeholders": {
-        "campaign_id": "id"
+#### Primary key
+
+You can specify `.` separated path of the elements in the response to create a primary key. **NOTE** if you are mapping child jobs, 
+the parent keys will automatically be included.
+
+#### Nesting level
+
+Currently, the automatic detection outputs only single table mapping. You can control the nesting level by specifying 
+the `Nesting Level` property. For example, a depth of 1 transforms `{"address": {"street": "Main", "details": {"postcode": "170 00"}}}` into two columns: `address_street` and `address_details`. 
+All elements that have ambiguous type or are beyond the specified depth are stored in a single column as JSON, e.g. with the [`force_type`](https://developers.keboola.com/extend/generic-extractor/configuration/config/mappings/#mapping-without-processing) option.
+
+
+For example, if you click to generate mapping on the `Campaigns` enpoint with level 2 and primary key `id` you will get this result
+(note the link between the `Result Name` (`dataType`) and mappings key):
+
+```
+"mappings": {"campaigns": {
+  "id": {
+    "mapping": {
+      "destination": "id",
+      "primaryKey": true
     }
-}
-{% endhighlight %}
+  },
+  "web_id": "web_id",
+  "type": "type",
+  "create_time": "create_time",
+  "archive_url": "archive_url",
+  "long_archive_url": "long_archive_url",
+  "status": "status",
+  "emails_sent": "emails_sent",
+  "send_time": "send_time",
+  "content_type": "content_type",
+  "needs_block_refresh": "needs_block_refresh",
+  "resendable": "resendable",
+  "recipients.list_id": "recipients_list_id",
+  "recipients.list_is_active": "recipients_list_is_active",
+  "recipients.list_name": "recipients_list_name",
+  "recipients.segment_text": "recipients_segment_text",
+  "recipients.recipient_count": "recipients_recipient_count",
+  "settings.subject_line": "settings_subject_line",
+  "settings.title": "settings_title",
+  "settings.from_name": "settings_from_name",
+  "settings.reply_to": "settings_reply_to",
+  "settings.use_conversation": "settings_use_conversation",
+  "settings.to_name": "settings_to_name",
+  "settings.folder_id": "settings_folder_id",
+  "settings.authenticate": "settings_authenticate",
+  "settings.auto_footer": "settings_auto_footer",
+  "settings.inline_css": "settings_inline_css",
+  "settings.auto_tweet": "settings_auto_tweet",
+  "settings.fb_comments": "settings_fb_comments",
+  "settings.timewarp": "settings_timewarp",
+  "settings.template_id": "settings_template_id",
+  "settings.drag_and_drop": "settings_drag_and_drop",
+  "tracking.opens": "tracking_opens",
+  "tracking.html_clicks": "tracking_html_clicks",
+  "tracking.text_clicks": "tracking_text_clicks",
+  "tracking.goal_tracking": "tracking_goal_tracking",
+  "tracking.ecomm360": "tracking_ecomm360",
+  "tracking.google_analytics": "tracking_google_analytics",
+  "tracking.clicktale": "tracking_clicktale",
+  "delivery_status.enabled": "delivery_status_enabled",
+  "_links": {
+    "type": "column",
+    "mapping": {
+      "destination": "links"
+    },
+    "forceType": true
+  }
 
-The value of the `dataType` property is an arbitrary name. Apart from identifying
+}}
+```
+
+### JSON
+
+The value of the `Result Name` (`dataType`) property is an arbitrary name. Apart from identifying
 the resource type, it is also used as the **output table name**. If you run
 the job, the content will be stored in `in.c-ge-tutorial.content`.
 
