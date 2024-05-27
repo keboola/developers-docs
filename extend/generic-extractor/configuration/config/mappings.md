@@ -72,6 +72,38 @@ The following configuration shows a sample mapping configuration for dataType `u
 }
 {% endhighlight %}
 
+### User Interface
+
+
+In the UI the mapping can be created for each endpoint in the `Endpoints`.`Mapping section` by clicking `Create Mapping` toggle.
+
+{: .image-popup}
+![Create mapping](/extend/generic-extractor/tutorial/create_mapping_toggle.png)
+
+#### Mapping Detection
+
+You may opt to generate the mapping automatically by clicking the `Infer Mapping` button in the top right corner. 
+
+This operation will generate a mapping based on the sample response of the endpoint and may help as a starting point for further manual adjustments. 
+
+In most cases this method is sufficient and doesn't require any additional edits.
+
+{: .image-popup}
+![Create mapping](/extend/generic-extractor/tutorial/create_mapping.png)
+
+
+##### Primary key
+
+You can specify `.` separated path of the elements in the response to create a primary key. **NOTE** if you are mapping child jobs, 
+the parent keys will automatically be included.
+
+##### Nesting level
+
+Currently, the automatic detection outputs only single table mapping. You can control the nesting level by specifying 
+the `Nesting Level` property. For example, a depth of 1 transforms `{"address": {"street": "Main", "details": {"postcode": "170 00"}}}` into two columns: `address_street` and `address_details`. 
+All elements that have ambiguous type or are beyond the specified depth are stored in a single column as JSON, e.g. with the [`force_type`](https://developers.keboola.com/extend/generic-extractor/configuration/config/mappings/#mapping-without-processing) option.
+
+
 ### Column Mapping
 Column mapping represents a basic mapping type which allows you to select extracted
 columns, rename them and optionally set a primary key on them. The mapping

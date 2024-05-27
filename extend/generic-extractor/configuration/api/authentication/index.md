@@ -20,18 +20,25 @@ and then sends them in the URL or headers of each API request.
 crossover between the [OAuth 2.0](/extend/generic-extractor/configuration/api/authentication/oauth20/) and
 [Login](/extend/generic-extractor/configuration/api/authentication/login/) authentication.
 
-**NOTE** In the [UI](/extend/generic-extractor/configuration/#user-interface) you have also available additional authentication methods that are implemented as a template:
-- Bearer Token
-- Basi Authentication
-- API Key
-- oAuth 2.0 Client Credentials
+**NOTE** The [UI](/extend/generic-extractor/configuration/#user-interface) also offers additional authentication methods that are implemented as a template:
+- [Bearer Token](/extend/generic-extractor/configuration/api/authentication/bearer_token/)
+- [API Key](/extend/generic-extractor/configuration/api/authentication/api_key/)
+- [oAuth 2.0 Client Credentials](/extend/generic-extractor/configuration/api/authentication/oauth_cc/)
 
 Use the authentication method supported by the target API. If the API supports multiple
 authentication methods, the [URL Query](/extend/generic-extractor/configuration/api/authentication/query/) and
 [Basic HTTP](/extend/generic-extractor/configuration/api/authentication/basic/) methods are the easiest to set up; but they
 are also the least secure.
 
-An example authentication configuration looks like this:
+**User Interface**
+
+Most of the authentication methods are available via the user interface:
+
+{: .image-popup}
+![Auth ui](/extend/generic-extractor/configuration/api/authentication/auth_ui.png)
+
+
+An example authentication JSON configuration looks like this:
 
 {% highlight json %}
 {

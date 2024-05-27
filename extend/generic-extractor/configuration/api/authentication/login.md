@@ -9,6 +9,18 @@ permalink: /extend/generic-extractor/configuration/api/authentication/login/
 Use the Login authentication to send a one-time **login request** to obtain temporary credentials
 for authentication of all the other API requests.
 
+
+## User Interface
+
+Note that this configuration option is not yet covered. And you can add the JSON configuration using the `Custom` auth method.
+
+{: .image-popup}
+![Login](/extend/generic-extractor/configuration/api/authentication/login.png)
+
+However, this method is reused in the oAuth 2.0 Client Credentials authentication method available in the UI.
+
+## JSON
+
 A sample Login authentication looks like this:
 
 {% highlight json %}
@@ -63,6 +75,8 @@ The following configuration parameters are supported for the `login` type of aut
 Note that the values in `apiRequest.headers` and `apiRequest.query` take precedence over the values specified in the
 `api.http.defaultOptions.headers` (see an [example](#parameter-overriding)). If `expires` is not set, the login request
 is called only once before all other requests. To call the login request before every request (e.g., to obtain access token from refresh token), set `"expires": 0`.
+
+
 
 ## Examples
 Below are several examples showing you how to use various login authentication related features in Generic Extractor.

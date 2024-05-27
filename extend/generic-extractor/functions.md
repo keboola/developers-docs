@@ -89,6 +89,22 @@ These forms can be combined freely. They can be also nested in a virtually unlim
 }
 {% endhighlight %}
 
+### User Interface
+
+In the User Interface you may create functions in the `User Parameters` or `User Data` sections. 
+You can also create the functions directly from other configuration contexts, e.g. when defining the Query Parameters on endpoint.
+
+Aside from predefined functions, the UI also offers most common templates, that you can use.
+
+{: .image-popup}
+![img.png](/extend/generic-extractor/functions.png)
+
+The UI also offers a convenient way to evaluate the function and see the result.
+
+{: .image-popup}
+![img.png](/extend/generic-extractor/function_eval.gif)
+
+
 ## Supported Functions
 
 ### md5

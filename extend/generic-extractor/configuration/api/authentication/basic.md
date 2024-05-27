@@ -5,7 +5,18 @@ permalink: /extend/generic-extractor/configuration/api/authentication/basic/
 
 Basic Authentication provides the [HTTP Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication)
 method. It requires entering a username and password in the configuration and sends the encoded values in the 
-`Authorization` header. A sample Basic authentication looks like this:
+`Authorization` header. 
+
+### User Interface
+
+In the user interface you simply select the `Basic Authorization` method and fill in the username and password.
+
+### JSON 
+
+A sample Basic authentication looks like this:
+
+{: .image-popup}
+![Basic](/extend/generic-extractor/configuration/api/authentication/basic.png)
 
 {% highlight json %}
 {
@@ -30,6 +41,8 @@ a custom authorization header, use the [Default Headers option](/extend/generic-
 ## Configuration Parameters
 This `basic` type of authentication has no configuration parameters. The login and password must be provided in the 
 [`config` section](/extend/generic-extractor/configuration/config/) of the Generic Extractor configuration.
+
+
 
 ## Basic Configuration Example
 Assume you have an API which requires you to use the HTTP Basic authentication to send the login and password in 

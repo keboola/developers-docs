@@ -16,12 +16,13 @@ have its documentation at hand. You also need the
 ## Configuration
 Generic Extractor configuration is written in [JSON format](/extend/generic-extractor/tutorial/json/)
 and is composed of [several sections](/extend/generic-extractor/configuration/#configuration-sections) (a
-[configuration map](/extend/generic-extractor/map/) for navigation is available).
+[configuration map](/extend/generic-extractor/map/) for navigation is available). 
 
-The main parts of the configuration and their nesting are shown in the following schema:
+There is a [User Interface](/extend/generic-extractor/configuration/#user-interface) available that can help you with the configuration
+ and generates the JSON configuration for you.
 
-{: .image-popup}
-![Schema - Generic Extractor configuration](/extend/generic-extractor/generic-intro.png)
+
+
 
 ### Base Configuration
 
@@ -190,7 +191,12 @@ creates a new table which has the column `JSON_parentId` with that value so that
 
 
 
-#### JSON
+### Final JSON Configuration
+
+The main parts of the configuration and their nesting are shown in the following schema:
+
+{: .image-popup}
+![Schema - Generic Extractor configuration](/extend/generic-extractor/generic-intro.png)
 
 Resulting JSON configuration will look like this:
 

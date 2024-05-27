@@ -30,7 +30,7 @@ Features such as cURL import, request tests, output mapping generator or dynamic
 You can switch between the JSON representation and User interface in the upper right corner of the configuration editor.
 
 {: .image-popup}
-![UI Switch](/extend/generic-extractor/configuration/ui_switch.png)]
+![UI Switch](/extend/generic-extractor/configuration/ui_switch.png)
 
 #### Backward compatibility
 

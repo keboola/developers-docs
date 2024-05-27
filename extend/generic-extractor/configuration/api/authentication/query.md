@@ -9,6 +9,19 @@ This is most often used with APIs which are authenticated using API tokens and
 signatures. Dynamic values of query parameters can be generated using 
 [user functions](/extend/generic-extractor/functions/). 
 
+
+## User Interface
+
+In the user interface, you simply select the `Query` method and fill in the key-value pairs of the query parameters.
+
+{: .image-popup}
+![img.png](/extend/generic-extractor/configuration/api/authentication/query.png)
+
+**NOTE** Unless you need multiple parameters it may be more suitable to use the [API Key authentication method](/extend/generic-extractor/configuration/api/authentication/api_key/.
+
+
+## JSON
+
 A sample Query authentication configuration looks like this:
 
 {% highlight json %}
