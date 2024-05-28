@@ -9,7 +9,7 @@ method. It requires entering a username and password in the configuration and se
 
 ### User Interface
 
-In the user interface you simply select the `Basic Authorization` method and fill in the username and password.
+In the user interface, you simply select the `Basic Authorization` method and enter the username and password.
 
 ### JSON 
 
