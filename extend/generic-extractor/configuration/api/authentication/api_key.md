@@ -1,11 +1,11 @@
 ---
-title: Api Key Authentication
+title: API Key Authentication
 permalink: /extend/generic-extractor/configuration/api/authentication/api_key/
 ---
 
-Api Key token authentication is a method of sending a token in either a header or query parameter of each API request.
+API Key token authentication sends a token in either a header or query parameter of each API request.
 
-e.g. Headers: `X-StorageApi-Token:your_token`
+E.g., Headers: `X-StorageApi-Token:your_token`
 
 This method is available through UI. You can select the `Api Key Auth` method and fill in the token.
 
@@ -14,14 +14,14 @@ This method is available through UI. You can select the `Api Key Auth` method an
 
 ### Configuration parameters
 
-- `Key` - arbitrary name of the header or query parameter key. e.g. `X-StorageApi-Token`
+- `Key` - arbitrary name of the header or query parameter key, e.g., `X-StorageApi-Token`
 - `Token` - the actual token value
 - `Add to` - where to add the token, either to the headers or query parameters
 
 
 ### JSON
 
-In the underlying JSON the Api Key is implemented as follows:
+In the underlying JSON, the API Key is implemented as follows:
 
 Place your token into the `config.#__AUTH_TOKEN` parameter. The `Authorization` header is then constructed using the `concat` function.
 
