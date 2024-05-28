@@ -3,7 +3,7 @@ title: Bearer Token Authentication
 permalink: /extend/generic-extractor/configuration/api/authentication/bearer_token/
 ---
 
-Bearer token authentication is a method of sending a token in the `Authorization` header of each API request.
+Bearer token authentication sends a token in the `Authorization` header of each API request.
 
 This method is available through UI. You can select the `Bearer Token` method and fill in the token.
 
@@ -14,7 +14,7 @@ This method is available through UI. You can select the `Bearer Token` method an
 
 ### JSON
 
-In the underlying JSON the Bearer Token is implemented as follows:
+In the underlying JSON, the Bearer Token is implemented as follows:
 
 Place your token into the `config.#__BEARER_TOKEN` parameter. The `Authorization` header is then constructed using the `concat` function.
 
