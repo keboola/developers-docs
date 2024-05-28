@@ -12,7 +12,7 @@ for authentication of all the other API requests.
 
 ## User Interface
 
-Note that this configuration option is not yet covered. And you can add the JSON configuration using the `Custom` auth method.
+Note that this configuration option is not yet covered. You can add the JSON configuration using the `Custom` auth method.
 
 {: .image-popup}
 ![Login](/extend/generic-extractor/configuration/api/authentication/login.png)
