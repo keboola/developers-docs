@@ -154,7 +154,7 @@ items:
                         title: Bearer Token
 
                       - url: /extend/generic-extractor/configuration/api/authentication/api_key/
-                        title: Api Key
+                        title: API Key
 
                       - url: /extend/generic-extractor/configuration/api/authentication/login/
                         title: Login
