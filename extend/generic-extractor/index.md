@@ -17,7 +17,7 @@ of configuring and testing the configuration. With it, you can build
 an entirely new extractor for Keboola in **less than an hour**.
 
 {: .image-popup}
-![Generic Extractor - UI Animation](/components/extractors/other/generic/animation.gif)
+![Generic Extractor - UI](/extend/generic-extractor/ui.png)
 
 To get started quickly, follow our [Generic Extractor tutorial](/extend/generic-extractor/tutorial).
 
