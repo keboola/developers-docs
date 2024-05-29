@@ -6,17 +6,17 @@ permalink: /extend/generic-extractor/functions/
 * TOC
 {:toc}
 
-Functions are simple pre-defined functions which
+Functions are simple pre-defined functions that
 
 - allow you to add extra flexibility when needed.
-- can be used in several places of the Generic Extractor configuration to introduce dynamically generated values instead of
+- can be used in several places in the Generic Extractor configuration to introduce dynamically generated values instead of
 those provided statically.
-- allow referencing the already existing values in the configuration instead of copying them.
-- are advantageous, and sometimes necessary, when [publishing your configuration as a new component](/extend/generic-extractor/publish/).
+- allow referencing the existing values in the configuration instead of copying them.
+- are advantageous and sometimes necessary when [publishing your configuration as a new component](/extend/generic-extractor/publish/).
 
 ## Configuration
 A function is used instead of a simple value in specific parts of the Generic Extractor configuration (see [below](#function-contexts)).
-The function configuration is an object with the properties `function` (one of the [available function names](#supported-functions) and `args`
+A function configuration is an object with the properties `function` (one of the [available function names](#supported-functions) and `args`
 (function arguments), for example:
 
 {% highlight json %}
@@ -88,6 +88,21 @@ These forms can be combined freely. They can be also nested in a virtually unlim
     }
 }
 {% endhighlight %}
+
+### User Interface
+You may create functions in the user interface's `User Parameters` or `User Data` sections. 
+You can also create the functions directly from other configuration contexts, e.g., when defining the query parameters on the endpoint.
+
+Aside from predefined functions, the UI also offers the most common templates that you can use.
+
+{: .image-popup}
+![img.png](/extend/generic-extractor/functions.png)
+
+The UI also offers a convenient way to evaluate the function and see the results.
+
+{: .image-popup}
+![img.png](/extend/generic-extractor/function_eval.gif)
+
 
 ## Supported Functions
 

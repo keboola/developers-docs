@@ -3,6 +3,10 @@ title: OAuth 1.0 Authentication
 permalink: /extend/generic-extractor/configuration/api/authentication/oauth10/
 ---
 
+
+
+**Note** that this configuration option is not yet supported and the test endpoint button will not work.
+
 OAuth 1.0 authentication is one of the [two OAuth methods](/extend/generic-extractor/configuration/api/authentication/#oauth) and
 is supported only for [published components](/extend/generic-extractor/publish/).
 It is configured by setting the `type` key to `oauth10`:

@@ -15,7 +15,7 @@ only one campaign. You should now create some more campaigns (you do not have to
 
 If the API has consistent pagination for all resources (which the
 [MailChimp API has](https://mailchimp.com/developer/guides/get-started-with-mailchimp-api-3/#Parameters)),
-then the pagination is defined in the `api` section of the configuration.
+then the pagination is defined in the `Pagination` section of the endpoint configuration (or in the `api` section in the underlying JSON).
 
 ## Preparation
 The MailChimp API uses the [`offset` pagination method](https://mailchimp.com/developer/guides/get-started-with-mailchimp-api-3/#Parameters);
@@ -31,6 +31,44 @@ The offset pagination method is configured with the following basic properties:
 
 So for MailChimp, configure the pagination this way:
 
+- Click `Create New Pagination` in the Endpoint's Pagination section:
+
+{: .image-popup}
+![Create pagination.png](/extend/generic-extractor/tutorial/img.png)
+
+- Name your pagination and select the Offset method:
+
+![Pagination](/extend/generic-extractor/tutorial/pagination.png)
+
+### JSON
+
+The resulting JSON configuration will look like this:
+
+{% highlight json %}
+"api": {
+    "baseUrl": "https://us13.api.mailchimp.com/3.0/",
+    "authentication": {
+      "type": "basic"
+    },
+    "pagination": {
+      "method": "multiple",
+      "scrollers": {
+        "default": {
+          "method": "offset",
+          "limit": 100,
+          "limitParam": "count",
+          "offsetParam": "offset",
+          "firstPageParams": true,
+          "offsetFromJob": false
+        }
+      }
+    }
+}
+
+{% endhighlight %}
+
+Alternatively you can use single pagination method instead of scroller when configuring manually:
+
 {% highlight json %}
 "api": {
     "baseUrl": "https://us13.api.mailchimp.com/3.0/",
@@ -45,74 +83,62 @@ So for MailChimp, configure the pagination this way:
 },
 {% endhighlight %}
 
-## Running
-Now make sure that you have more than one campaign in your account. The entire Generic Extractor  
-configuration will look like this:
+The entire Generic Extractor configuration will look like this:
 
 {% highlight json %}
 {
-    "parameters": {
-        "api": {
-            "baseUrl": "https://us13.api.mailchimp.com/3.0/",
-            "authentication": {
-                "type": "basic"
-            },
-            "pagination": {
-                "method": "offset",
-                "offsetParam": "offset",
-                "limitParam": "count"
-            }            
-        },
-        "config": {
-            "username": "dummy",
-            "#password": "c40xxxxxxxxxxxxxxxxxxxxxxxxxxxxx-us13",
-            "outputBucket": "ge-tutorial",
-            "jobs": [
-                {
-                    "endpoint": "campaigns",
-                    "dataField": "campaigns"
-                }
-            ]
+  "api": {
+    "baseUrl": "https://us13.api.mailchimp.com/3.0/",
+    "authentication": {
+      "type": "basic"
+    },
+    "pagination": {
+      "method": "multiple",
+      "scrollers": {
+        "default": {
+          "method": "offset",
+          "limit": 100,
+          "limitParam": "count",
+          "offsetParam": "offset",
+          "firstPageParams": true,
+          "offsetFromJob": false
         }
+      }
     }
+  },
+  "config": {
+    "outputBucket": "ge-tutorial",
+    "incrementalOutput": false,
+    "jobs": [
+      {
+        "__NAME": "campaigns",
+        "endpoint": "campaigns",
+        "method": "GET",
+        "dataType": "campaigns",
+        "dataField": {
+          "path": ".",
+          "delimiter": "."
+        }
+      }
+    ],
+    "__AUTH_METHOD": "basic",
+    "username": "dummy",
+    "#password": "c40xxxxxxxxxxxxxxxxxxxxxxxxxxxxx-us13"
+  }
 }
 {% endhighlight %}
+
+**NOTE** The `__` prefixed parameters are for internal use by the UI and should not be modified. 
+Also, they have no effect on component functionality
+
+## Running
+
+Now make sure that you have more than one campaign in your account. 
 
 ## Testing
 Because you probably have less than ten (the default page size) campaigns in your MailChimp account, 
 there is no way to tell whether the pagination works or not. Let's make sure then, by setting the `limit` 
 to 1 and turning the `debug` mode on, that you can see all the requests sent by Generic Extractor.
-
-{% highlight json %}
-{
-    "parameters": {
-        "api": {
-            "baseUrl": "https://us13.api.mailchimp.com/3.0/",
-            "authentication": {
-                "type": "basic"
-            },
-            "pagination": {
-                "method": "offset",
-                "offsetParam": "offset",
-                "limitParam": "count",
-                "limit": 1
-            }            
-        },
-        "config": {
-            "debug": true,
-            "username": "dummy",
-            "#password": "c40xxxxxxxxxxxxxxxxxxxxxxxxxxxxx-us13",
-            "outputBucket": "ge-tutorial",
-            "jobs": [
-                {
-                    "endpoint": "campaigns",
-                    "dataField": "campaigns"
-                }
-            ]
-        }
-    }
-}
-{% endhighlight %}
 
 Run the configuration and review the events produced by the job. You should see something like this:
 

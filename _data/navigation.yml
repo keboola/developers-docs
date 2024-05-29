@@ -150,8 +150,17 @@ items:
                       - url: /extend/generic-extractor/configuration/api/authentication/basic/
                         title: Basic
 
+                      - url: /extend/generic-extractor/configuration/api/authentication/bearer_token/
+                        title: Bearer Token
+
+                      - url: /extend/generic-extractor/configuration/api/authentication/api_key/
+                        title: API Key
+
                       - url: /extend/generic-extractor/configuration/api/authentication/login/
                         title: Login
+
+                      - url: /extend/generic-extractor/configuration/api/authentication/oauth_cc/
+                        title: OAuth 2.0 Client Credentials
 
                       - url: /extend/generic-extractor/configuration/api/authentication/oauth10/
                         title: OAuth 1.0

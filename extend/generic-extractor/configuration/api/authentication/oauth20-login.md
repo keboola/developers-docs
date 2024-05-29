@@ -6,6 +6,8 @@ permalink: /extend/generic-extractor/configuration/api/authentication/oauth20-lo
 * TOC
 {:toc}
 
+**Note** that this configuration option is not yet supported and the test endpoint button will not work.
+
 The OAuth Login method is useful when you need to send a one-time **login request** to obtain temporary credentials
 for authentication of all the other API requests. A sample OAuth Login authentication looks like this:
 
