@@ -69,7 +69,7 @@ This is the initial configuration:
 }
 {% endhighlight %}
 
-It extracts MailChimp campaigns together with the `send-checklist` items and campaign `content`. 
+It extracts MailChimp campaigns with the `send-checklist` items and campaign `content`. 
 However, you are probably not interested in some parts of the content resource. Also, the table contains duplicates.
 
 ***Technical note on duplicates:** If you examine the job events, you will see 
@@ -83,16 +83,16 @@ resource is only terminated after the resource returns the same response twice.*
 A mapping defines the shape of Generic Extractor outputs. It is stored
 in the `config.mappings` property and is identified by the resource data type. 
 When a resource is assigned an internal  `Result Name` (`dataType`), a mapping can be created 
-for it. To be able to use a mapping, first define a `Result Name` (`dataType`) in the job property. 
+for it. To use a mapping, first define a `Result Name` (`dataType`) in the job property. 
 
 ### UI 
 
-In the UI, the mapping can be created in the `Mapping section` by clicking the `Create Mapping` toggle.
+The mapping can be created in the `Mapping section` in the UI by clicking the `Create Mapping` toggle.
 
 {: .image-popup}
 ![Create mapping](/extend/generic-extractor/tutorial/create_mapping_toggle.png)
 
-You may opt to generate the mapping automatically by clicking the**Infer Mapping** button in the top right corner. 
+You may generate the mapping automatically by clicking the**Infer Mapping** button in the top right corner. 
 
 This operation will generate a mapping based on the sample response of the endpoint. 
 
@@ -101,12 +101,13 @@ This operation will generate a mapping based on the sample response of the endpo
 
 
 #### Primary key
-You can specifya `.` separated path of the elements in the response to create a primary key. ***NOTE:** If you are mapping child jobs, 
+To create a primary key, you can specify a `.` separated path of the elements in the response. ***Note:** If you are mapping child jobs, 
 the parent keys will automatically be included.*
 
 #### Nesting level
 Currently, the automatic detection outputs only single table mapping. You can control the nesting level by specifying 
-the `Nesting Level` property. For example, a depth of 1 transforms `{"address": {"street": "Main", "details": {"postcode": "170 00"}}}` into two columns: `address_street` and `address_details`. 
+the `Nesting Level` property. For example, a depth of 1 transforms `{"address": {"street": "Main", "details": {"postcode": "170 00"}}}` into two columns: 
+`address_street` and `address_details`. 
 All elements that have ambiguous types or are beyond the specified depth are stored in a single column as JSON, e.g., with the [`force_type`](https://developers.keboola.com/extend/generic-extractor/configuration/config/mappings/#mapping-without-processing) option.
 
 For example, if you click to generate mapping on the `Campaigns` endpoint with level 2 and primary key `id`, you will get this result
@@ -189,8 +190,8 @@ Each mapping item is identified by the property name of the resource and must co
         }
 {% endhighlight %}
 
-The above mapping setting defines that for the `content` data type, the 
-resource property `plain_text` will be stored in the table column `text`. No other
+The above mapping setting defines that the 
+resource property `plain_text` will be stored in the table column `text` for the `content` data type. No other
 properties of the content resource will be imported. In other words, the mapping defines
 all columns of the output table.
 
@@ -214,14 +215,14 @@ campaign content, use a mapping like this:
 }
 {% endhighlight %}
 
-Note that the `destination` value is arbitrary, but it must be a valid column name.
+Note that the `destination` value is arbitrary but must be a valid column name.
 The data type name (`content`) must match the value of the `dataType` property 
-as defined in some of the jobs.
+as defined in some jobs.
 
 ## Parent Reference
 The above mapping works, but it is missing the campaign ID, and you cannot
-match the content to some campaign records. Therefore, you need to extract the campaign ID 
-from the context (i.e., from the job parameter). This can be done using a special `user` mapping.
+match the content to some campaign records. Therefore, you must extract the campaign ID 
+from the context (i.e., the job parameter). This can be done using a special `user` mapping.
 
 When the mapping `type` is set to `user`, use the special prefix `parent_` to refer to
 a `placeholder` defined in the job. You can create the following mapping:
@@ -325,7 +326,7 @@ have been chosen arbitrarily when the configuration was created:
 ![Configuration Schema](/extend/generic-extractor/tutorial/configuration-schema.svg)
 
 ## Summary
-Mapping lets you define precisely what the extraction output will look like; it also 
+Mapping lets you precisely define what the extraction output will look like; it also 
 defines primary keys. 
 
 If you do a one-time ad-hoc extraction, you may skip setting up the mapping and clean 

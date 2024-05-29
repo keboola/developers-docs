@@ -18,8 +18,8 @@ If the API has consistent pagination for all resources (which the
 then the pagination is defined in the `Pagination` section of the endpoint configuration (or in the `api` section in the underlying JSON).
 
 ## Preparation
-The MailChimp API uses the [`offset` pagination method](https://mailchimp.com/developer/guides/get-started-with-mailchimp-api-3/#Parameters);
-it means that each page has a fixed `limit` (by default 10 items), and you need to use the offset to move 
+The MailChimp API uses the [`offset` pagination method](https://mailchimp.com/developer/guides/get-started-with-mailchimp-api-3/#Parameters),
+which means that each page has a fixed `limit` (by default 10 items), and you need to use the offset to move 
 that fixed-size page over the next set of results. For the first page, the `offset` is 0, for the second 
 page, the `offset` is 10. This is the same kind of pagination as in SQL.
 
@@ -29,7 +29,7 @@ The offset pagination method is configured with the following basic properties:
 - `offsetParam` --- name of the API parameter which defines the [page offset](https://mailchimp.com/developer/guides/get-started-with-mailchimp-api-3/#Parameters)
 - `limitParam` -- name of the API parameters which define the [page size (limit)](https://mailchimp.com/developer/guides/get-started-with-mailchimp-api-3/#Parameters)
 
-So for MailChimp, configure the pagination this way:
+So, for MailChimp, configure the pagination this way:
 
 - Click `Create New Pagination` in the Endpoint's Pagination section:
 
@@ -67,7 +67,7 @@ The resulting JSON configuration will look like this:
 
 {% endhighlight %}
 
-Alternatively you can use single pagination method instead of scroller when configuring manually:
+Alternatively, you can use a single pagination method instead of a scroller when configuring manually:
 
 {% highlight json %}
 "api": {
@@ -128,17 +128,17 @@ The entire Generic Extractor configuration will look like this:
 }
 {% endhighlight %}
 
-**NOTE** The `__` prefixed parameters are for internal use by the UI and should not be modified. 
-Also, they have no effect on component functionality
+***Note:** The `__` prefixed parameters are for internal use by the UI and should not be modified. 
+Also, they have no effect on component functionality.*
 
 ## Running
 
-Now make sure that you have more than one campaign in your account. 
+Now, make sure that you have more than one campaign in your account. 
 
 ## Testing
-Because you probably have less than ten (the default page size) campaigns in your MailChimp account, 
-there is no way to tell whether the pagination works or not. Let's make sure then, by setting the `limit` 
-to 1 and turning the `debug` mode on, that you can see all the requests sent by Generic Extractor.
+Because you probably have fewer than ten (the default page size) campaigns in your MailChimp account, 
+there is no way to tell whether the pagination works. Let's make sure by setting the `limit` 
+to 1 and turning the `debug` mode on so that you can see all the requests sent by Generic Extractor.
 
 Run the configuration and review the events produced by the job. You should see something like this:
 
@@ -149,7 +149,7 @@ The oldest events are at the bottom, so you can see that the extractor started b
 
     GET /3.0/campaigns/?count=1&offset=0
 
-Then it continued with 
+Then, it continued with 
 
     GET /3.0/campaigns/?count=1&offset=1
     GET /3.0/campaigns/?count=1&offset=2
