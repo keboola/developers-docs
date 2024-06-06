@@ -29,6 +29,7 @@ The following environment variables are injected in the container:
  - `KBC_PROJECT_FEATURE_GATES`: Comma separated list of feature gates activated for the current project. Feature gates are considered internal and they may disappear without notice. We recommend that you check with our support before relying on any feature gates.
  - `KBC_COMPONENT_RUN_MODE`: Either `run` or `debug`. The value `debug` is used in case debug mode was used to run the job
  https://developers.keboola.com/extend/component/running/#debugging. This environment variable can be useful for example to switch the component to a more verbose logging.
+ - `KBC_DATA_TYPE_SUPPORT`: Either `authoritative`, `hints` or `none`. The value `authoritative` means that the component generates columns with data types in schema node. The value `hints` means that the component generates columns without data types in schema node. The value `none` means that the component generates name of columns in columns node. 
  
  The following variables are available only if "Forwards token" and "Forwards token details" are
  enabled in [component configuration](https://components.keboola.com/) (and approved by us):
