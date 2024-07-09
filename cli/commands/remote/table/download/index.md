@@ -45,7 +45,7 @@ kbc remote table download [table] [flags]
   The `json` format is only supported in projects with the Snowflake backend.
 
 `--header`
-: First line of the CSV file contains the column names.
+: First line of the CSV file contains column names.
 
 `--limit <int>`
 : Limit the number of exported rows. A value of 0 means no limit. (default 0)
