@@ -574,31 +574,6 @@ This will download with files with matching `.zip` **and** having the `docker-de
     /data/in/files/75807657_fooBarBaz.zip
     /data/in/files/75807657_fooBarBaz.zip.manifest
 
-#### Input mapping --- run ID
-Use the `filter_by_run_id` option to select only the files which are related to the job
-currently being executed. If `filter_by_run_id` is specified, we will download only those files which
-satisfy the filter (either `tags` or `query`) **and** were uploaded by a parent job (a job with same
-or parent runId). This allows you to further limit downloaded files only to those related to a
-current chain of jobs.
-
-{% highlight json %}
-{
-    "storage": {
-        "input": {
-            "files": [
-                {
-                    "tags": ["fooBar"],
-                    "filter_by_run_id": true
-                }
-            ]
-        }
-    }
-}
-{% endhighlight %}
-
-This will download only files with the `fooBar` tag that were produced by a parent job to
-the currently running Docker.
-
 #### Output mapping --- basic
 Define additional properties for uploaded files in the output mapping configuration.
 If that file is not present in the `/data/out/files` folder, an error will be thrown.
