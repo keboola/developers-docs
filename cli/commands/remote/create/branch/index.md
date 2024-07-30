@@ -24,7 +24,7 @@ A branch cannot be created locally, it must be created directly in the project f
 : Name of the branch to be created
 
 `--output-json <string>`
-: Output as JSON file
+: Output as a JSON file
 
 
 [Global Options](/cli/commands/#global-options)
