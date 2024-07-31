@@ -1,6 +1,6 @@
 ---
-title: Example Use Cases
-permalink: /cli/example-use-cases/
+title: DevOps Use Cases
+permalink: /cli/devops-use-cases/
 ---
 
 * TOC
@@ -20,7 +20,7 @@ map each Git branch to a particular GUI Dev branch and use Git to perform the me
 branches.
 
 {: .image-popup}
-![branch_management.png](/cli/example-use-cases/branch_management.png)
+![branch_management.png](/cli/devops-use-cases/branch_management.png)
 
 ### Tutorial
 
@@ -32,7 +32,7 @@ branches.
 - Select only the main branch in this case
 
   {: .image-popup}
-  ![init.png](/cli/example-use-cases/init.png)
+  ![init.png](/cli/devops-use-cases/init.png)
 
 2. Initialize the GitHub repository using `git init` command
 
@@ -51,18 +51,26 @@ Now you can link the current branch to an actual Keboola Dev Branch:
 1. Create a new dev branch named new-feature. The following command will create a remote branch off the production
    branch
 
-```shell
-kbc remote create branch --aaa
-```
+    ```shell
+    kbc remote create branch --output-json
+    ```
 
-2. Override the destination branch be setting the `KBC_BRANCH_ID` environment variable.
-    - The newly created branch ID is available in the resulting file
+2. Obtain the newly created branch ID
+    The newly created branch ID is available in the resulting file
+    ```json
+    {
+      "newBranchId": 123
+    }
+    ```
+   
 
-```shell
-export KBC_BRANCH_ID=1234
-```
+3. Override the destination branch be setting the `KBC_BRANCH_ID` environment variable.
+    
+    ```shell
+    export KBC_BRANCH_ID=123
+    ```
 
-3. Run `kbc push`, to synchronize the local changes.
+4. Run `kbc push`, to synchronize the local changes.
 
 Any changes that you perform in the remote branch will be now synchronized back using the `kbc pull` command as long as
 the `KBC_BRANCH_ID` variable is set.
@@ -72,7 +80,7 @@ the `KBC_BRANCH_ID` variable is set.
 Once you are ready, you can commit the changes and compare to the main branch and eventually merge the new branch to
 your main.
 
-**WARNING:** once you switch back to the main branch, do not forget to unset the `KBC_BRANCH_ID` (via
+**WARNING:** once you switch back to the main branch, do not forget to unset the `KBC_BRANCH_ID` (using
 the `unset KBC_BRANCH_ID` command) variable so the `kbc push/pull` commands run against the main branch again.
 
 ## Deployment to multiple projects
@@ -82,7 +90,7 @@ the Dev/Prod Manager example use case. You can leverage this for instance to dis
 “template”) into multiple ones to start from.
 
 {: .image-popup}
-![project_deploy.png](/cli/example-use-cases/project_deploy.png)
+![project_deploy.png](/cli/devops-use-cases/project_deploy.png)
 
 ### Tutorial
 
@@ -92,7 +100,7 @@ the Dev/Prod Manager example use case. You can leverage this for instance to dis
 - Select only the main branch in this case
 
   {: .image-popup}
-  ![init.png](/cli/example-use-cases/init.png)
+  ![init.png](/cli/devops-use-cases/init.png)
 
 2. **Obtain the main branch ID**
 
@@ -105,7 +113,7 @@ the Dev/Prod Manager example use case. You can leverage this for instance to dis
    *xxx/branch/{BRANCH_ID}/xx*)
 
    {: .image-popup}
-   ![devtools.png](/cli/example-use-cases/devtools.png)
+   ![devtools.png](/cli/devops-use-cases/devtools.png)
 
    Now you can perform `kbc push` and the project definition will get transferred into the main branch of the selected
    project.
@@ -135,7 +143,7 @@ according to their needs and allows for testing entire pipelines across multiple
 environments.
 
 {: .image-popup}
-![devprod.png](/cli/example-use-cases/devprod.png)
+![devprod.png](/cli/devops-use-cases/devprod.png)
 
 ### High-level Workflow
 
@@ -145,7 +153,7 @@ To implement the above suggested setup, we need the following tools:
 - **GitHub & Git Actions** - Versioning system to hold the project representations and define deployment rules and validations.
 
 {: .image-popup}
-![dev_prod_flow.png](/cli/example-use-cases/dev_prod_flow.png)
+![dev_prod_flow.png](/cli/devops-use-cases/dev_prod_flow.png)
 
 We have prepared a sample [Streamlit application](https://github.com/keboola/cli-based-sync-generator) 
 that can be deployed as a [DataApp](https://help.keboola.com/components/data-apps/#git-repository) in the Keboola environment to help with the initialisation process.
@@ -153,4 +161,4 @@ that can be deployed as a [DataApp](https://help.keboola.com/components/data-app
 This application includes GitHub actions that allow you to manage this scenario. It is expected that users modify this flow to their needs
 
 
-To learn about the full use case, please refer to [this blog post](), where we describe the workflow in depth.
+To learn about the full use case, please refer to [this blog post](https://www.keboola.com/blog/keboola-dev-prod-lifecycle-via-git), where we describe the workflow in depth.
