@@ -479,8 +479,8 @@ items:
                     title: env
       - url: /cli/github-integration/
         title: GitHub Integration
-      - url: /cli/example-use-cases/
-        title: Example Use Cases
+      - url: /cli/devops-use-cases/
+        title: DevOps Use Cases
       - url: /cli/templates/
         title: Templates
         items:

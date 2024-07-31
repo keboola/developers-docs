@@ -23,10 +23,6 @@ You can set up and test the connection in a few clicks, just like you are used t
 
 Features such as cURL import, request tests, output mapping generator, or dynamic function templates and evaluation make the configuration process as easy as ever.
 
-
-{: .image-popup}
-![Generic Extractor - UI Animation](/components/extractors/other/generic/animation.gif)
-
 You can switch between the JSON representation and the user interface in the upper right corner of the configuration editor.
 
 {: .image-popup}
