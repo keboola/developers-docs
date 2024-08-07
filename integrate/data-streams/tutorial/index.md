@@ -8,13 +8,13 @@ redirect_from: /integrate/push-data/tutorial/
 {:toc}
 
 
-In this tutorial, we will set up a receiver for the [`issues`](https://docs.github.com/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#issues) event from GitHub Webhooks. This will allow you to monitor and analyse activity relating to issues in any of your GitHub repositories.
+In this tutorial, we will set up a source for the [`issues`](https://docs.github.com/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#issues) event from GitHub Webhooks. This will allow you to monitor and analyse activity relating to issues in any of your GitHub repositories.
 
 You will need your project's master token, and a GitHub repository in which you have the `Admin` role.
 
 ### Creating a Receiver
 
-To start ingesting events, you must first create a receiver. Send the following payload to the `https://buffer.keboola.com/v1/receivers` endpoint:
+To start ingesting events, you must first create a source. Send the following payload to the `https://stream.keboola.com/v1/branches/{branchId}/sources` endpoint:
 ```
 {
   "name": "Github Issues",
@@ -35,6 +35,13 @@ To start ingesting events, you must first create a receiver. Send the following 
           { "type": "body", "name": "body" },
           { "type": "headers", "name": "headers" },
           {
+            "type": "json",
+            "name": "id",
+            "path": "issue.id",
+            "defaultValue": "undefined", 
+            "rawString": true
+          },
+          {
             "type": "template",
             "name": "template",
             "template": {
@@ -54,16 +61,16 @@ You can do this using `curl`, or anything else that allows you to send an HTTP r
 $ curl --header 'Content-Type: application/json' \
        --header 'X-StorageApi-Token: <YOUR_TOKEN>' \
        --data '{ ...the payload above... }' \
-       https://buffer.keboola.com/v1/receivers
+       https://stream.keboola.com/v1/branches/{branchId}/sources
 ```
 
 The response will contain the task that has been created:
 ```
 {
   "id": "2023-02-16T16:04:39.570Z_Pg7U4",
-  "receiverId": "github-issues",
-  "url": "https://buffer.keboola.com/v1/receivers/github-issues/tasks/receiver.create/2023-02-16T16:04:39.570Z_Pg7U4",
-  "type": "receiver.create",
+  "sourceId": "github-issues",
+  "url": "https://stream.keboola.com/v1/branches/{branchId}/sources/github-issues/tasks/source.create/2023-02-16T16:04:39.570Z_Pg7U4",
+  "type": "source.create",
   "createdAt": "2023-02-17T11:20:57.406Z",
   "isFinished": false,
   "result": ""
@@ -74,22 +81,22 @@ You can query the task's status by querying the `url` field and wait until the `
 ```
 {
   "id": "2023-02-16T16:04:39.570Z_Pg7U4",
-  "receiverId": "github-issues",
-  "url": "https://buffer.keboola.com/v1/receivers/github-issues/tasks/receiver.create/2023-02-16T16:04:39.570Z_Pg7U4",
-  "type": "receiver.create",
+  "sourceId": "github-issues",
+  "url": "https://stream.keboola.com/v1/branches/{branchId}/sources/github-issues/tasks/source.create/2023-02-16T16:04:39.570Z_Pg7U4",
+  "type": "source.create",
   "createdAt": "2023-02-17T11:20:57.406Z",
   "finishedAt": "2023-02-17T11:20:57.753Z",
   "isFinished": true,
   "duration": 343,
-  "result": "receiver created"
+  "result": "source created"
 }
 ```
 
-Upon success, query the receiver url `https://buffer.keboola.com/v1/receivers/github-issues` and the response will contain the receiver you've just created:
+Upon success, query the source url `https://stream.keboola.com/v1/branches/{branchId}/sources/github-issues` and the response will contain the source you've just created:
 ```
 {
   "id": "github-issues",
-  "url": "https://buffer.keboola.com/v1/import/<YOUR_PROJECT_ID>/github-issues/<SECRET>"
+  "url": "https://stream.keboola.com/v1/import/<YOUR_PROJECT_ID>/github-issues/<SECRET>"
   "name": "Github Issues",
   "exports": [
     {
@@ -113,6 +120,13 @@ Upon success, query the receiver url `https://buffer.keboola.com/v1/receivers/gi
           { "type": "body", "name": "body" },
           { "type": "headers", "name": "headers" },
           {
+            "type": "json",
+            "name": "id",
+            "path": "issue.id",
+            "defaultValue": "undefined", 
+            "rawString": true
+          },
+          {
             "type": "template",
             "name": "template",
             "template": {
@@ -127,7 +141,7 @@ Upon success, query the receiver url `https://buffer.keboola.com/v1/receivers/gi
 }
 ```
 
-The most important part of the response is the `url` field. This is the endpoint you will point your GitHub webhook to. Once you've created the receiver and obtained its `url` field, you are ready to configure the GitHub webhook.
+The most important part of the response is the `url` field. This is the endpoint you will point your GitHub webhook to. Once you've created the source and obtained its `url` field, you are ready to configure the GitHub webhook.
 
 ### Configuring the Github Webhook
 
@@ -143,7 +157,7 @@ Click `Add webhook`.
 
 ![Github add webhook](./gh-settings-webhook-add.png)
 
-Enter the receiver `url` into the `Payload URL` field, and set the `Content Type` to `application/json`.
+Enter the source `url` into the `Payload URL` field, and set the `Content Type` to `application/json`.
 
 ![Github webhook form](./gh-settings-webhook-form.png)
 
@@ -154,7 +168,7 @@ For `Which events would you like to trigger this webhook?`, click `Let me select
 
 Click `Add webhook` at the bottom of the page.
 
-Any events related to issues in your repository will now be buffered by the receiver, and uploaded to your table every minute.
+Any events related to issues in your repository will now be buffered by the source, and uploaded to your table every minute.
 
 To see your integration at work, head over to your repository and [open a few issues](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue).
 
@@ -180,4 +194,4 @@ And finally, you can take a look at the destination table's data sample to find 
 ## Next Steps
 
 - [Data Streams Overview](/integrate/data-streams/overview/)
-- [Buffer API Reference](https://buffer.keboola.com/v1/documentation/)
+- [Stream API Reference](https://stream.keboola.com/v1/documentation/)

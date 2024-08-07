@@ -9,11 +9,11 @@ redirect_from: /integrate/push-data/overview/
 * TOC
 {:toc}
 
-A receiver represents an endpoint for receiving events.
+A source represents an endpoint for receiving events.
 
-Receivers are managed using the Buffer API. The full API reference is available at https://buffer.keboola.com/v1/documentation/, and the OpenAPI specification is available at https://buffer.keboola.com/v1/documentation/openapi3.json.
+Sources are managed using the Stream API. The full API reference is available at https://stream.keboola.com/v1/documentation/, and the OpenAPI specification is available at https://stream.keboola.com/v1/documentation/openapi3.json.
 
-Events are received using HTTP. Receivers are associated with a maximum of 20 `exports`. Each export represents a `mapping` from event data to `columns` in a destination `table`. Data may be mapped using pre-defined mappings, or a custom `template`.
+Events are received using HTTP. Sources are associated with a maximum of 20 `sinks`. Each sink represents a `mapping` from event data to `columns` in a destination `table`. Data may be mapped using pre-defined mappings, or a custom `template`.
 
 ## Columns
 
@@ -25,18 +25,35 @@ Events are received using HTTP. Receivers are associated with a maximum of 20 `e
 
 The available column types are:
 
-|Type|Description|
-|:-|:-|
-| `id`| event ID |
-| `datetime` | time of the event |
-| `ip` | IP of the event sender |
-| `body` | the unaltered event body |
-| `headers` | the unaltered request headers |
+|Type| Description                                |
+|:-|:-------------------------------------------|
+| `id`| event ID                                   |
+| `datetime` | time of the event                          |
+| `ip` | IP of the event sender                     |
+| `body` | the unaltered event body                   |
+| `headers` | the unaltered request headers              |
+| `path` | a field from json object                   |
 | `template` | a custom mapping using a template language |
+
+### Path
+
+The `path` column type can be used to fetch a single field from a `json` object. Optionally you can use `rawString` option to remove the quotes around a json string or a `defaultValue` option to define a value when the field doesn't exist.
+
+```json
+{
+  "type": "json",
+  "name": "id",
+  "path": "issue.id",
+  "defaultValue": "undefined", 
+  "rawString": true
+}
+```
 
 ### Template (Jsonnet)
 
-The `template` column type currently only supports the `jsonnet` templating language.The following `jsonnet` globals are available:
+Note: It is recommended to use the much faster `path` type instead of `jsonnet` function `Body(string)` when possible. 
+
+The `template` column type currently only supports the `jsonnet` templating language. The following `jsonnet` globals are available:
 
 |Name|Description|Usage example|Example value|
 |:-|:-|:-|:-|
@@ -54,7 +71,7 @@ The `template` column type currently only supports the `jsonnet` templating lang
 
 ### Conditions
 
-Incoming events are immediately mapped to the schema defined in each export, and each new row is appended to a CSV file. This CSV file is stored in your Keboola project. When certain conditions are met, the data from the file is uploaded to the destination table, and the file is cleared. These `conditions` are defined by the export:
+Incoming events are immediately mapped to the schema defined in each sink, and each new row is appended to a CSV file. This CSV file is stored in your Keboola project. When certain conditions are met, the data from the file is uploaded to the destination table, and the file is cleared. These `conditions` are defined by the sink:
 
 | Condition | Minimum | Maximum | Default |
 | :- | :-: | :-: | :-: |
@@ -62,37 +79,37 @@ Incoming events are immediately mapped to the schema defined in each export, and
 | `size` | 100 B | 50 MB | 5 MB |
 | `count` | 1 | 10 million | 1 thousand |
 
-## Create Receivers and Exports
+## Create Sources and Sinks
 
-Receivers may be created using the [`POST /v1/receivers`](https://buffer.keboola.com/v1/documentation/#/configuration/CreateReceiver) endpoint.
+Sources may be created using the [`POST /v1/branches/{branchId}/sources`](https://stream.keboola.com/v1/documentation/#/configuration/CreateSource) endpoint.
 
-If a receiver or export `id` is omitted, it will be generated from the corresponding `name` field.
+If a source or sink `id` is omitted, it will be generated from the corresponding `name` field.
 
-A receiver may be created without any exports. The exports can then be created separately using the [`POST /v1/receivers/{receiverId}/exports`](https://buffer.keboola.com/v1/documentation/#/configuration/CreateExport) endpoint.
+A source may be created without any sinks. The sinks can then be created separately using the [`POST /v1/branches/{branchId}/sources/{sourceId}/sinks`](https://stream.keboola.com/v1/documentation/#/configuration/CreateSink) endpoint.
 
-***Warning**: Events sent to a receiver without any exports will be permanently lost. This is because data is buffered per export, not per receiver.*
+***Warning**: Events sent to a source without any sinks will be permanently lost. This is because data is buffered per sink, not per source.*
 
-The requests are asynchronous and create a task that must be completed before the receiver or export is ready to use. The task status can be checked using the [`GET /v1/receivers/{receiverId}/tasks/{taskId}`](https://buffer.keboola.com/v1/documentation/#/configuration/GetTask) endpoint.
+The requests are asynchronous and create a task that must be completed before the source or sink is ready to use. The task status can be checked using the [`GET /v1/branches/{branchId}/sources/{sourceId}/tasks/{taskId}`](https://stream.keboola.com/v1/documentation/#/configuration/GetTask) endpoint.
 
-Export tables are created if they do not exist. If they already exist, the schema defined by `export.columns` must match the existing schema. If the table schema is manually altered and it no longer matches, the upload from staging storage to the table will fail. The data is kept in the staging storage for up to 7 days during which you can recover any failures.
+Sink tables are created if they do not exist. If they already exist, the schema defined by `sink.columns` must match the existing schema. If the table schema is manually altered and it no longer matches, the upload from staging storage to the table will fail. The data is kept in the staging storage for up to 7 days during which you can recover any failures.
 
-## Delete Receivers and Exports
+## Delete Sources and Sinks
 
-Receivers may be deleted using the [`DELETE /v1/receivers/{receiverId}`](https://buffer.keboola.com/v1/documentation/#/configuration/DeleteReceiver) endpoint. Exports may be deleted using the [`DELETE /v1/receivers/{receiverId}/exports/{exportId}`](https://buffer.keboola.com/v1/documentation/#/configuration/DeleteExport) endpoint.
+Sources may be deleted using the [`DELETE /v1/branches/{branchId}/sources/{sourceId}`](https://stream.keboola.com/v1/documentation/#/configuration/DeleteSource) endpoint. Sinks may be deleted using the [`DELETE /v1/branches/{branchId}/sources/{sourceId}/sinks/{sinkId}`](https://stream.keboola.com/v1/documentation/#/configuration/DeleteSink) endpoint.
 
-## Update Receivers and Exports
+## Update Sources and Sinks
 
-A receiver may be updated using the [`PATCH /v1/receivers/{receiverId}`](https://buffer.keboola.com/v1/documentation/#/configuration/UpdateReceiver) endpoint. Exports maybe updated using the [`PATCH /v1/receivers/{receiverId}/exports/{exportId}`](https://buffer.keboola.com/v1/documentation/#/configuration/UpdateExport) endpoint.
+A source may be updated using the [`PATCH /v1/branches/{branchId}/sources/{sourceId}`](https://stream.keboola.com/v1/documentation/#/configuration/UpdateSource) endpoint. Sinks maybe updated using the [`PATCH /v1/branches/{branchId}/sources/{sourceId}/sinks/{sinkId}`](https://stream.keboola.com/v1/documentation/#/configuration/UpdateSink) endpoint.
 
-The `UpdateReceiver` endpoint may only update the receiver's name. Exports may only be updated separately.
+The `UpdateSource` endpoint may only update the source's name. Sinks may only be updated separately.
 
-If an export's `mapping.tableId` is updated, it is handled the same way as in the create operation. If the table exists, `mapping.columns` must match the existing table's schema. If the table does not exist, it is created.
+If a sink's `mapping.tableId` is updated, it is handled the same way as in the create operation. If the table exists, `mapping.columns` must match the existing table's schema. If the table does not exist, it is created.
 
 ## Tokens
 
-A token is generated for each receiver export. These tokens have the minimum possible scope, which is a `write` permission for the bucket in which the destination table is stored. You can see these tokens at `https://connection.keboola.com/admin/projects/<project-id>/tokens-settings`. Their description is in the format `[_internal] Buffer Export <export-id> for Receiver <receiver-id>`.
+A token is generated for each source sink. These tokens have the minimum possible scope, which is a `write` permission for the bucket in which the destination table is stored. You can see these tokens at `https://connection.keboola.com/admin/projects/<project-id>/tokens-settings`. Their description is in the format `[_internal] Stream Sink <sink-id> for Source <source-id>`.
 
-These tokens should not be deleted or refreshed manually. To refresh tokens, use the [`POST /v1/receivers/{receiverId}/tokens/refresh`](https://buffer.keboola.com/v1/documentation/#/configuration/RefreshReceiverTokens) endpoint.
+These tokens should not be deleted or refreshed manually. To refresh tokens, use the [`POST /v1/branches/{branchId}/sources/{sourceId}/tokens/refresh`](https://stream.keboola.com/v1/documentation/#/configuration/RefreshSourceTokens) endpoint.
 
 ## Kafka Integration
 To connect Keboola with [Apache Kafka®](https://kafka.apache.org/) and ingest data from Kafka topics via data streams, use the Kafka Connect HTTP Sink Connector
@@ -114,4 +131,4 @@ The Kafka Connect HTTP Sink Connector acts as a bridge, seamlessly integrating K
 ## Next Steps
 
 - [Data Streams Tutorial](/integrate/data-streams/tutorial/)
-- [Buffer API Reference](https://buffer.keboola.com/v1/documentation/)
+- [Stream API Reference](https://stream.keboola.com/v1/documentation/)
