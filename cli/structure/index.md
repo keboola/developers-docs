@@ -120,8 +120,10 @@ of the configuration.
 Example of `config.json` for Generic Extractor:
 ```json
 {
-  "api": {
+  "parameters": {
+    "api": {
       "baseUrl": "https://wikipedia.org"
+    } 
   }
 }
 ```
