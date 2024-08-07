@@ -48,15 +48,15 @@ git checkout -b new-feature
 
 Now, you can link the current branch to an actual Keboola development branch:
 
-1. Create a new dev branch named new-feature. The following command will create a remote branch off the production
+1. Create a new Keboola Dev Branch named `new-feature`. The following command will create a remote branch off the production
    branch.
 
     ```shell
-    kbc remote create branch --output-json
+    kbc remote create branch -n new-feature --output-json new_branch.json 
     ```
 
 2. Obtain the newly created branch ID.
-    The newly created branch ID can be found in the resulting file.
+    The newly created branch ID can be found in the resulting file `new_branch.json`.
     ```json
     {
       "newBranchId": 123
