@@ -36,7 +36,7 @@ branches.
 
 2. Initialize the GitHub repository using the `git init` command.
 
-Now, you can perform `kbc push` or `kbc pull` as normal, enabling you to merge the main with the main branch.
+Now, you can perform `kbc push` or `kbc pull` as normal, enabling you to sync the production development branch into main.
 
 #### Creating a new branch
 
