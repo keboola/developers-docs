@@ -39,7 +39,7 @@ This instructs docker to create two containers: `server` and `client`. The impor
  the `server` container to the `client` container with the DNS name `log-server`. When you run the above setup (the current
  directory should be the root of the docs-example-logging-php repository) with
 
-    docker-compose up
+    docker compose up
 
  you will obtain an output like this:
 
