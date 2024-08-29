@@ -12,9 +12,9 @@ permalink: /cli/commands/local/template/upgrade/
 kbc local template upgrade [flags]
 ```
 
-Upgrades the existing [template](/cli/templates/structure/#template) to the [project directory](/cli/structure/).
+Upgrades the existing [template](/cli/templates/structure/#template) in the [project directory](/cli/structure/).
 Changes are made only locally. To save changes to the project, run [kbc sync push](/cli/commands/sync/push/) afterwards.
-You will be prompted for a target branch and [user inputs](/cli/templates/structure/inputs/).
+You will be prompted to select a target branch and provide [user inputs](/cli/templates/structure/inputs/).
 
 ### Options
 
@@ -25,13 +25,13 @@ You will be prompted for a target branch and [user inputs](/cli/templates/struct
 : print what needs to be done
 
 `-f, --inputs-file string <string>`
-: JSON file with inputs values
+: JSON file with input values
 
 `-i, --instance string <string>`
 : instance ID of the template to upgrade
 
 `-V, --version string <string>`
-: target version, default latest stable version
+: target version; the default is the latest stable version
 
 [Global Options](/cli/commands/#global-options)
 
