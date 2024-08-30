@@ -1,12 +1,12 @@
 ---
-title: Use Template
+title: Upgrade Template
 permalink: /cli/commands/local/template/upgrade/
 ---
 
 * TOC
 {:toc}
 
-**Use a [template](/cli/templates/structure/#template) in the [local directory](/cli/structure/).**
+**Upgrade a [template](/cli/templates/structure/#template) in the [local directory](/cli/structure/).**
 
 ```
 kbc local template upgrade [flags]
