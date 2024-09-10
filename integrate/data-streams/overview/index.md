@@ -91,7 +91,7 @@ A source may be created without any sinks. The sinks can then be created separat
 
 The requests are asynchronous and create a task that must be completed before the source or sink is ready to use. The task status can be checked using the [`GET /v1/branches/{branchId}/sources/{sourceId}/tasks/{taskId}`](https://stream.keboola.com/v1/documentation/#/configuration/GetTask) endpoint.
 
-Sink tables are created if they do not exist. If they already exist, the schema defined by `sink.columns` must match the existing schema. If the table schema is manually altered and it no longer matches, the upload from staging storage to the table will fail. The data is kept in the staging storage for up to 7 days during which you can recover any failures.
+Sink tables are created if they do not exist. If they already exist, the schema defined by `sink.columns` must match the existing schema. If the table schema is manually altered and it no longer matches, the import from staging storage to the table will fail. The data is kept in the staging storage for up to 7 days during which you can recover any failures.
 
 ## Delete Sources and Sinks
 
