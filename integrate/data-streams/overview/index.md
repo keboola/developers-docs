@@ -109,7 +109,7 @@ If a sink's `mapping.tableId` is updated, it is handled the same way as in the c
 
 A token is generated for each source sink. These tokens have the minimum possible scope, which is a `write` permission for the bucket in which the destination table is stored. You can see these tokens at `https://connection.keboola.com/admin/projects/<project-id>/tokens-settings`. Their description is in the format `[_internal] Stream Sink <source-id>/<sink-id>`.
 
-These tokens should not be deleted or refreshed manually. To refresh tokens, use the [`POST /v1/branches/{branchId}/sources/{sourceId}/tokens/refresh`](https://stream.keboola.com/v1/documentation/#/configuration/RefreshSourceTokens) endpoint.
+These tokens should not be deleted or refreshed manually. To refresh tokens, you can disable and re-enable the Sink.
 
 ## Kafka Integration
 To connect Keboola with [Apache Kafka®](https://kafka.apache.org/) and ingest data from Kafka topics via data streams, use the Kafka Connect HTTP Sink Connector
