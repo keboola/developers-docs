@@ -68,7 +68,7 @@ Repository manifest structure:
 - Component ID `keboola.wr-db-snowflake` is used for AWS stacks.
 - Component ID `keboola.wr-snowflake-blob-storage` is used for Azure stacks.
 - Please use:
-  - Placeholder `<keboola.wr-db-snowflake>` in the `repository.json` in the `components` list.
+  - Placeholder `"<keboola.wr-snowflake>"` in the `repository.json` in the `components` list.
   - Jsonnet function `SnowflakeWriterComponentId()` in [Jsonnet Files](/cli/templates/structure/jsonnet-files/).
 
 #### Example
