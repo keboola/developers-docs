@@ -71,13 +71,13 @@ The `template` column type currently only supports the `jsonnet` templating lang
 
 ### Conditions
 
-Incoming events are immediately mapped to the schema defined in each sink, and each new row is appended to a CSV file. This CSV file is stored in your Keboola project. When certain conditions are met, the data from the file is uploaded to the destination table, and the file is cleared. These `conditions` are defined by the sink:
+Incoming events are immediately mapped to the schema defined in each sink, and each new row is appended to a CSV file. This CSV file is stored in your Keboola project. When certain conditions are met, the data from the file is imported to the destination table. These `conditions` are defined by the sink:
 
-| Condition | Minimum | Maximum | Default |
-| :- | :-: | :-: | :-: |
-| `time` | 30 seconds | 24 hours | 5 minutes |
-| `size` | 100 B | 50 MB | 5 MB |
-| `count` | 1 | 10 million | 1 thousand |
+| Condition | Minimum |  Maximum   |   Default   |
+| :- | :-: |:----------:|:-----------:|
+| `time` | 30 seconds |  24 hours  |  1 minute   |
+| `size` | 100 B |   500 MB   |    50 MB    |
+| `count` | 1 | 10 million | 50 thousand |
 
 ## Create Sources and Sinks
 
