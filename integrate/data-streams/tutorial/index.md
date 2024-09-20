@@ -12,7 +12,7 @@ In this tutorial, we will set up a source for the [`issues`](https://docs.github
 
 You will need your project's master token, and a GitHub repository in which you have the `Admin` role.
 
-### Creating a Receiver
+### Creating a Source
 
 To start ingesting events, you must first create a source. Send the following payload to the `https://stream.keboola.com/v1/branches/{branchId}/sources` endpoint:
 ```
