@@ -35,7 +35,7 @@ To start ingesting events, you must first create a source. Send the following pa
           { "type": "body", "name": "body" },
           { "type": "headers", "name": "headers" },
           {
-            "type": "json",
+            "type": "path",
             "name": "id",
             "path": "issue.id",
             "defaultValue": "undefined", 
@@ -120,7 +120,7 @@ Upon success, query the source url `https://stream.keboola.com/v1/branches/{bran
           { "type": "body", "name": "body" },
           { "type": "headers", "name": "headers" },
           {
-            "type": "json",
+            "type": "path",
             "name": "id",
             "path": "issue.id",
             "defaultValue": "undefined", 
