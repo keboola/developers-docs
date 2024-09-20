@@ -96,7 +96,7 @@ Upon success, query the source url `https://stream.keboola.com/v1/branches/{bran
 ```
 {
   "id": "github-issues",
-  "url": "https://stream.keboola.com/v1/import/<YOUR_PROJECT_ID>/github-issues/<SECRET>"
+  "url": "https://stream.keboola.com/stream/<YOUR_PROJECT_ID>/github-issues/<SECRET>"
   "name": "Github Issues",
   "exports": [
     {
@@ -142,6 +142,8 @@ Upon success, query the source url `https://stream.keboola.com/v1/branches/{bran
 ```
 
 The most important part of the response is the `url` field. This is the endpoint you will point your GitHub webhook to. Once you've created the source and obtained its `url` field, you are ready to configure the GitHub webhook.
+
+Normally the url only returns a short response to reduce traffic. You can add `?verbose=true` to the url to receive more information about what happened with the request. Note that this makes the response slower so it is recommended to only use this parameter for testing purposes.
 
 ### Configuring the Github Webhook
 
