@@ -115,6 +115,22 @@ The import conditions mentioned above can be accessed using the [`GET /v1/branch
 
 Same settings also exist for a sink. Use the [`GET /v1/branches/{branchId}/sources/{sourceId}/sinks/{sinkId}/settings`](https://stream.keboola.com/v1/documentation/#/configuration/GetSinkSettings) endpoint and [`PATCH /v1/branches/{branchId}/sources/{sourceId}/sinks/{sinkId}/settings`](https://stream.keboola.com/v1/documentation/#/configuration/PatchSinkSettings) endpoint in that case.
 
+## Delivery guarantees
+
+Depending on your use-case you may need different delivery guarantees for your stream. Follow the guide-lines below to ensure the desired outcome.
+
+### At most once
+
+To ensure no record is delivered twice, make sure that the client doesn't have retries when sending the records. In this case it's beneficial to use the settings endpoints to set `"storage.level.local.encoding.sync.wait"` to `false` in order to increase the throughput.
+
+### At least once
+
+In order to have every record delivered at least once, the client needs to implement retries for sending the records. Also use the settings endpoints to make sure that `"storage.level.local.encoding.sync.wait"` is set to `true` (default behavior). Note that this settings guarantees that the record was written to the local disk. It may still be lost in case of a hardware failure of the disk since there is no replication at the moment.
+
+### Exactly once
+
+Follow the instructions above for "At least once" delivery. Additionally, you need to have a primary key defined in your stream in order for Keboola to automatically deduplicate the records.
+
 ## Tokens
 
 A token is generated for each source sink. These tokens have the minimum possible scope, which is a `write` permission for the bucket in which the destination table is stored. You can see these tokens at `https://connection.keboola.com/admin/projects/<project-id>/tokens-settings`. Their description is in the format `[_internal] Stream Sink <source-id>/<sink-id>`.
