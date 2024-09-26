@@ -19,13 +19,26 @@ If you don't provide the `version` parameter, the default version will be used.
 
 The command must be run in the [repository directory](/cli/templates/structure#repository).
 
-It requires at least one existing project in a public Keboola stack defined in the environment variable `TEST_KBC_PROJECTS`,
-accepting projects in the format `storage_api_host|project_id|project_token` and divided by `;`. 
+It requires at least one existing project in a public Keboola stack defined in the environment variable `KBC_TEST_PROJECTS_FILE`.
 
-For example: 
+For example:
 ```
-TEST_KBC_PROJECTS="connection.keboola.com|1234|project-1234-token;host2|id2|token2;...."
+KBC_TEST_PROJECTS_FILE=./projects.json
 ``` 
+
+Projects file for example:
+```json
+[
+  {
+    "host": "connection.keboola.com",
+    "project": 12345,
+    "stagingStorage": "s3",
+    "backend": "snowflake",
+    "token": "XXXX",
+    "legacyTransformation": true
+  }
+]
+```
 
 ## Options
 
@@ -34,6 +47,9 @@ TEST_KBC_PROJECTS="connection.keboola.com|1234|project-1234-token;host2|id2|toke
 
 `--inputs-file <string>`
 : Path to a file with the template inputs
+
+`--test-projects-file <string>`
+: File containing projects that could be used for templates
 
 `--verbose <bool>`
 : Show details (default false)
