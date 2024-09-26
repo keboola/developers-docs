@@ -83,6 +83,8 @@ When certain conditions are met, the data from the file is imported to the desti
 | `size` | 100 B |   500 MB   |    50 MB    |
 | `count` | 1 | 10 million | 50 thousand |
 
+If you change the conditions, all waiting files are imported immediately. Afterward the stream behaves according to the new conditions.
+
 ## Create Sources and Sinks
 
 Sources may be created using the [`POST /v1/branches/{branchId}/sources`](https://stream.keboola.com/v1/documentation/#/configuration/CreateSource) endpoint.
