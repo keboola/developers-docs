@@ -125,7 +125,7 @@ To ensure no record is delivered twice, make sure that the client doesn't have r
 
 ### At least once
 
-In order to have every record delivered at least once, the client needs to implement retries for sending the records. Also use the settings endpoints to make sure that `"storage.level.local.encoding.sync.wait"` is set to `true` (default behavior). Note that this settings guarantees that the record was written to the local disk. It may still be lost in case of a hardware failure of the disk since there is no replication at the moment.
+In order to have every record delivered at least once, the client needs to implement retries for sending the records. Also use the settings endpoints to make sure that `"storage.level.local.encoding.sync.wait"` is set to `true` (default behavior). Note that this settings guarantees that the record was written to the local disk.
 
 ### Exactly once
 
