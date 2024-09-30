@@ -100,13 +100,15 @@ The sync action code has to return the following stdout (JSON string):
 ```json
 {
   "message": "###This is display text. \n\n It can contain **Markdown** notation. ",
-  "type": "info", //possible values: success, info, warning, danger
-  "status": "success" // this is required and will never be other value than "success"
+  "type": "info", //possible values: success, info, warning, error, table
+  "status": "success" // possible values: success, error
 }
 ```
 
 
 When used in Python, you can use the [ValidationResult](https://github.com/keboola/python-component#validationresult) class as a return value.
+
+**NOTE** If status: error is used the message will always be displayed as an error message.
 
 #### Example
 
