@@ -7,33 +7,49 @@ permalink: /cli/commands/template/test/create/
 {:toc}
 
 **Create [template](/cli/templates/structure/#template) tests in the [repository directory]((/cli/templates/structure/#repository)). 
-See [Tests Structure](/cli/templates/tests/) for more details.**
+See the [test structure](/cli/templates/tests/) for more details.**
 
 ```
 kbc template test create [template] [version] [flags]
 ```
 
-The command will create a test for the specified template.
+This command creates a test for the specified template.
 
-If you don't provide the `version` parameter, the default version will be used.
+If you do not provide the `version` parameter, the default version will be used.
 
-The command must be run in the [repository directory](/cli/templates/structure#repository).
+This command must be run in the [repository directory](/cli/templates/structure#repository).
 
-It requires at least one existing project in a public Keboola stack defined in the environment variable `TEST_KBC_PROJECTS`,
-accepting projects in the format `storage_api_host|project_id|project_token` and divided by `;`. 
+It requires at least one existing project in a public Keboola stack, defined in the environment variable `KBC_TEST_PROJECTS_FILE`.
 
-For example: 
+For example:
 ```
-TEST_KBC_PROJECTS="connection.keboola.com|1234|project-1234-token;host2|id2|token2;...."
+KBC_TEST_PROJECTS_FILE=./projects.json
 ``` 
+
+Example project file:
+```json
+[
+  {
+    "host": "connection.keboola.com",
+    "project": 12345,
+    "stagingStorage": "s3",
+    "backend": "snowflake",
+    "token": "XXXX",
+    "legacyTransformation": true
+  }
+]
+```
 
 ## Options
 
 `--test-name <string>`
-: Run only a test with a specified name
+: Run only the test with the specified name
 
 `--inputs-file <string>`
-: Path to a file with the template inputs
+: Path to the file containing the template inputs
+
+`--test-projects-file <string>`
+: File containing the projects available for templates
 
 `--verbose <bool>`
 : Show details (default false)
