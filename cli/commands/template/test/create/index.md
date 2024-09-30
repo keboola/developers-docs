@@ -7,26 +7,26 @@ permalink: /cli/commands/template/test/create/
 {:toc}
 
 **Create [template](/cli/templates/structure/#template) tests in the [repository directory]((/cli/templates/structure/#repository)). 
-See [Tests Structure](/cli/templates/tests/) for more details.**
+See the [test structure](/cli/templates/tests/) for more details.**
 
 ```
 kbc template test create [template] [version] [flags]
 ```
 
-The command will create a test for the specified template.
+This command creates a test for the specified template.
 
-If you don't provide the `version` parameter, the default version will be used.
+If you do not provide the `version` parameter, the default version will be used.
 
-The command must be run in the [repository directory](/cli/templates/structure#repository).
+This command must be run in the [repository directory](/cli/templates/structure#repository).
 
-It requires at least one existing project in a public Keboola stack defined in the environment variable `KBC_TEST_PROJECTS_FILE`.
+It requires at least one existing project in a public Keboola stack, defined in the environment variable `KBC_TEST_PROJECTS_FILE`.
 
 For example:
 ```
 KBC_TEST_PROJECTS_FILE=./projects.json
 ``` 
 
-Projects file for example:
+Example project file:
 ```json
 [
   {
@@ -43,13 +43,13 @@ Projects file for example:
 ## Options
 
 `--test-name <string>`
-: Run only a test with a specified name
+: Run only the test with the specified name
 
 `--inputs-file <string>`
-: Path to a file with the template inputs
+: Path to the file containing the template inputs
 
 `--test-projects-file <string>`
-: File containing projects that could be used for templates
+: File containing the projects available for templates
 
 `--verbose <bool>`
 : Show details (default false)
