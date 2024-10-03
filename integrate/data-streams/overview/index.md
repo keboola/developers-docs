@@ -129,10 +129,6 @@ To ensure no record is delivered twice, make sure that the client doesn't have r
 
 In order to have every record delivered at least once, the client needs to implement retries for sending the records. Also use the settings endpoints to make sure that `"storage.level.local.encoding.sync.wait"` is set to `true` (default behavior). Note that this settings guarantees that the record was written to the local disk.
 
-### Exactly once
-
-Follow the instructions above for "At least once" delivery. Additionally, you need to have a primary key defined in your stream in order for Keboola to automatically deduplicate the records.
-
 ## Tokens
 
 A token is generated for each source sink. These tokens have the minimum possible scope, which is a `write` permission for the bucket in which the destination table is stored. You can see these tokens at `https://connection.keboola.com/admin/projects/<project-id>/tokens-settings`. Their description is in the format `[_internal] Stream Sink <source-id>/<sink-id>`.
