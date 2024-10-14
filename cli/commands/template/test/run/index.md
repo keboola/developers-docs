@@ -13,11 +13,11 @@ See [Test Structure](/cli/templates/tests/) for more details.**
 kbc template test run [template] [version] [flags]
 ```
 
-The command will run tests for a specified template or all templates in the repository (if you do not provide the `template` parameter).
+This command runs tests for a specified template or all templates in the repository (if you do not provide the `template` parameter).
 
 If you provide `template` but not the `version` parameter, the default version will be used.
 
-The command must be run in the [repository directory](/cli/templates/structure#repository).
+This command must be run in the [repository directory](/cli/templates/structure#repository).
 
 It requires at least one existing project in a public Keboola stack defined in the environment variable `KBC_TEST_PROJECTS_FILE`. 
 
@@ -26,7 +26,7 @@ For example:
 KBC_TEST_PROJECTS_FILE=./projects.json
 ``` 
 
-Projects file for example:
+This is an example of a projects file:
 ```json
 [
   {
@@ -49,10 +49,10 @@ Projects file for example:
 : Run only remote tests (default false)
 
 `--test-name <string>`
-: Run only a test with a specified name
+: Run only the test with the specified name
 
 `--test-projects-file <string>`
-: File containing projects that could be used for templates
+: File containing the projects available for templates
 
 `--verbose <bool>`
 : Show details about running tests (default false)

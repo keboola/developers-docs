@@ -4,12 +4,13 @@ permalink: /integrate/data-streams/
 redirect_from: /integrate/push-data/
 ---
 
-* TOC
-{:toc}
+<div class="clearfix"></div>
+<div class="alert alert-warning" role="alert">
+    <i class="fas fa-exclamation-circle"></i>
+    <strong>Warning:</strong> Data Streams is an <strong>experimental feature</strong>.
+</div>
 
-**Warning: "Data Streams" is an experimental feature.**
-
-The Keboola Stream API allows you to ingest small and frequent events into your project's storage.
+The Keboola Stream API allows you to ingest small, frequent events into your project's storage.
 
 ![data streams diagram](./push_data.drawio.png)
 
