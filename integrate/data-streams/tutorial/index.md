@@ -161,8 +161,6 @@ Click `Add webhook`.
 
 Enter the source `url` into the `Payload URL` field, and set the `Content Type` to `application/json`.
 
-![Github webhook form](./gh-settings-webhook-form.png)
-
 For `Which events would you like to trigger this webhook?`, click `Let me select individual events`, then find `Issues` and tick it:
 
 ![Github webhook let me select individual events selected](./gh-settings-webhook-individual-events.png)
