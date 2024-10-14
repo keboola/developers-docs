@@ -8,11 +8,11 @@ redirect_from: /integrate/push-data/tutorial/
 {:toc}
 
 
-In this tutorial, we will set up a source for the [`issues`](https://docs.github.com/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#issues) event from GitHub Webhooks. This will allow you to monitor and analyse activity relating to issues in any of your GitHub repositories.
+In this tutorial, we will set up a source for the [`issues`](https://docs.github.com/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#issues) event from GitHub Webhooks. This will allow you to monitor and analyze activity related to issues in any of your GitHub repositories.
 
-You will need your project's master token, and a GitHub repository in which you have the `Admin` role.
+You will need your project's master token, and a GitHub repository where you have the `Admin` role.
 
-### Creating a Source
+## Creating a Source
 
 To start ingesting events, you must first create a source. Send the following payload to the `https://stream.keboola.com/v1/branches/{branchId}/sources` endpoint:
 ```
@@ -92,7 +92,7 @@ You can query the task's status by querying the `url` field and wait until the `
 }
 ```
 
-Upon success, query the source url `https://stream.keboola.com/v1/branches/{branchId}/sources/github-issues` and the response will contain the source you've just created:
+Upon success, query the source URL `https://stream.keboola.com/v1/branches/{branchId}/sources/github-issues`, and the response will contain the source you've just created:
 ```
 {
   "id": "github-issues",
@@ -141,11 +141,11 @@ Upon success, query the source url `https://stream.keboola.com/v1/branches/{bran
 }
 ```
 
-The most important part of the response is the `url` field. This is the endpoint you will point your GitHub webhook to. Once you've created the source and obtained its `url` field, you are ready to configure the GitHub webhook.
+The most important part of the response is the `url` field. This is the endpoint to which you will point your GitHub webhook. Once you've created the source and obtained its `url` field, you are ready to configure the GitHub webhook.
 
-Normally the url only returns a short response to reduce traffic. You can add `?verbose=true` to the url to receive more information about what happened with the request. Note that this makes the response slower so it is recommended to only use this parameter for testing purposes.
+Normally, the URL only returns a short response to reduce traffic. You can add `?verbose=true` to the URL to receive more information about what happened with the request. Note that this makes the response slower, so we recommend using this parameter for testing purposes only.
 
-### Configuring the Github Webhook
+## Configuring the Github Webhook
 
 Go to the `Settings` tab of your repository.
 
@@ -174,21 +174,21 @@ Any events related to issues in your repository will now be buffered by the sour
 
 To see your integration at work, head over to your repository and [open a few issues](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue).
 
-### Results
+## Results
 
 The following token was generated.
 
 ![Keboola token settings screenshot showing the generated token](./token.png)
 
-This token only has the minimal set of permissions, which in this case is access to a single bucket, and the ability to manipulate files. Currently, files are used as staging storage in order to prevent data loss. You can see these files in your project's Storage.
+This token only has the minimal set of permissions, which, in this case, is access to a single bucket and the ability to manipulate files. Currently, files are used as staging storage to prevent data loss. You can see these files in your project's Storage.
 
 ![Keboola storage file](./github_webhook_export_file.png)
 
-Because the table `in.c-github-issues` did not exist, it was created.
+Since the table `in.c-github-issues` did not exist, it was created.
 
 ![Keboola storage table](./github_webhook_export_table.png)
 
-And finally, you can take a look at the destination table's data sample to find your data, ready for further processing.
+Finally, you can take a look at the destination table's data sample to find your data, ready for further processing.
 
 ![Keboola storage table sample data](./github_webhook_export_table_data.png)
 
