@@ -52,7 +52,8 @@ The `schema` field allow you to create a table with Native Data Types columns.
 Each object in the `schema` array represents one column:
 - The `name` field specifies the column name.
 - The `data_type` field defines the data type for different storage systems, referred to as "Native Types".
-- The `base` type is always required, while other types like Snowflake and BigQuery are optional.
+  - The `base` type is always required and can have values specified in the [Base Types documentation](https://help.keboola.com/storage/tables/data-types/#base-types). 
+  - Other types like Snowflake and BigQuery are optional and allows you to specify settings for a particular database backend.
 - The `nullable` field indicates if the column can be null.
 - The `primary_key` field specifies if the column is a primary key.
 - The `description` field provides a description of the column.
