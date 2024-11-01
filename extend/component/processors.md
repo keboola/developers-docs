@@ -126,6 +126,21 @@ will run **after** this particular configuration of the Email Attachment extract
 but **before** its results are loaded into Storage. When the processor is finished, its outputs are loaded
 into Storage as if they were the outputs of the extractor itself.
 
+### Specifying Processor Version
+
+You can also specify a particular version of the processor by adding an optional `tag` parameter in the `definition`. This parameter lets you select a specific version to use:
+
+{% highlight json %}
+{
+    "definition": {
+        "component": "keboola.processor-skip-lines",
+        "tag": "1.0.0"
+    }
+}
+{% endhighlight %}
+
+If the tag parameter is omitted, the processor will automatically run in the latest released version.
+
 To save the configuration, you need to use the [Update Configuration API call](https://keboola.docs.apiary.io/#reference/components-and-configurations/manage-configurations/update-configuration).
 When updating the configuration, you must provide `componentId`, `configurationId`, and the actual contents of
 the configuration in the `configuration` form field. Make sure to supply only the **contents** of the `configuration`
@@ -290,4 +305,3 @@ Create a custom processor to put the header in:
 
 Finally, the Anvil CRM writer can send the result to the CRM system. Or you can have the header function be part of the
 writer itself. That decision should be made depending on whether the header must always be present (part of the writer) or is optional (processor).
-
