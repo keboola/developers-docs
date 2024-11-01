@@ -128,7 +128,7 @@ into Storage as if they were the outputs of the extractor itself.
 
 ### Specifying Processor Version
 
-You can also specify a particular version of the processor by adding an optional `tag` parameter in the `definition`. This parameter lets you select a specific version to use:
+You can specify a particular version of the processor by adding an optional `tag` parameter in the `definition`. This parameter allows you to select a specific version:
 
 {% highlight json %}
 {
@@ -139,9 +139,9 @@ You can also specify a particular version of the processor by adding an optional
 }
 {% endhighlight %}
 
-If the tag parameter is omitted, the processor will automatically run in the latest released version.
+If the tag parameter is omitted, the processor will automatically use the latest released version.
 
-To save the configuration, you need to use the [Update Configuration API call](https://keboola.docs.apiary.io/#reference/components-and-configurations/manage-configurations/update-configuration).
+To save the configuration, use the [Update Configuration API call](https://keboola.docs.apiary.io/#reference/components-and-configurations/manage-configurations/update-configuration).
 When updating the configuration, you must provide `componentId`, `configurationId`, and the actual contents of
 the configuration in the `configuration` form field. Make sure to supply only the **contents** of the `configuration`
 node and to properly escape the form data.
