@@ -5,10 +5,6 @@ redirect_from: /integrate/push-data/
 ---
 
 <div class="clearfix"></div>
-<div class="alert alert-warning" role="alert">
-    <i class="fas fa-exclamation-circle"></i>
-    <strong>Warning:</strong> Data Streams is an <strong>experimental feature</strong>.
-</div>
 
 The Keboola Stream API allows you to ingest small, frequent events into your project's storage.
 
