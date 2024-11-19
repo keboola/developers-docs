@@ -231,23 +231,23 @@ items:
               - url: /extend/common-interface/manifest-files/in-tables-manifests/
                 title: IN tables
 
+              - url: /extend/common-interface/manifest-files/in-files-manifests/
+                title: IN files
+
+              - url: /extend/common-interface/manifest-files/in-files-s3-staging/
+                title: IN files S3 staging
+
+              - url: /extend/common-interface/manifest-files/in-files-abs-staging/
+                title: IN files ABS staging
+
               - url: /extend/common-interface/manifest-files/out-tables-manifests/
                 title: OUT tables
 
               - url: /extend/common-interface/manifest-files/out-tables-manifests-native-types/
                 title: OUT tables with Native Types
 
-              - url: /extend/common-interface/manifest-files/in-files-manifests/
-                title: IN files
-
               - url: /extend/common-interface/manifest-files/out-files-manifests/
                 title: OUT files
-
-              - url: /extend/common-interface/manifest-files/s3-staging/
-                title: S3 staging
-
-              - url: /extend/common-interface/manifest-files/abs-staging/
-                title: ABS staging
 
           - url: /extend/common-interface/oauth/
             title: OAuth2

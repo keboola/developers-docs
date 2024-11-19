@@ -3,6 +3,15 @@ title: /data/out/tables manifests with Native Types
 permalink: /extend/common-interface/manifest-files/out-tables-manifests-native-types/
 ---
 
+Native Types provide a structured way for components to define their handling of data types, referred to as “Native Types.”
+
+The level of type handling is specified by the dataTypeSupport property, which can take one of three values:
+- Authoritative: The component reliably enforces specific data types.
+- Hints: The component provides type suggestions that may not always be reliable.
+- None: Represents the legacy state with no explicit type handling.
+
+This design overcomes limitations in current settings, where all components automatically produce typed tables when a project switches to Native Types. For instance, Data Sources that output unreliable type hints (e.g., an int column containing values like N/A) can now explicitly signal their limitations, reducing downstream issues.
+
 An output table manifest sets options for transferring a table to Storage. The following examples list available
 manifest fields; **all of them are optional**. The `destination` field overrides the table name generated
 from the file name; it can (and commonly is) overridden by the end-user configuration.
@@ -16,6 +25,7 @@ from the file name; it can (and commonly is) overridden by the end-user configur
     "manifest_type": "output",
     "has_header": true,
     "table_metadata": ...
+    "schema": ...
 }
 {% endhighlight %}
 
@@ -48,16 +58,16 @@ Using this option makes sense only with [incremental loads](/extend/generic-extr
 }
 {% endhighlight %}
 
-The `schema` field allow you to create a table with Native Data Types columns.
+The `schema` [optional] field allow you to create a table with Native Data Types columns.
 Each object in the `schema` array represents one column:
-- The `name` field specifies the column name.
-- The `data_type` field defines the data type for different storage systems, referred to as "Native Types".
-  - The `base` type is always required and can have values specified in the [Base Types documentation](https://help.keboola.com/storage/tables/data-types/#base-types). 
+- The `name` [required] field specifies the column name.
+- The `data_type` [optional] field defines the data type for different [storage backends](https://help.keboola.com/storage/#storage-data), referred to as "Native Types".
+  - The `base` [required] type is always required and can have values specified in the [Base Types documentation](https://help.keboola.com/storage/tables/data-types/#base-types). 
   - Other types like Snowflake and BigQuery are optional and allows you to specify settings for a particular database backend.
-- The `nullable` field indicates if the column can be null.
-- The `primary_key` field specifies if the column is a primary key.
-- The `description` field provides a description of the column.
-- The `metadata` field allows setting additional metadata for the column.
+- The `nullable` [optional] field indicates if the column can be null.
+- The `primary_key` [optional] field specifies if the column is a primary key.
+- The `description` [optional] field provides a description of the column.
+- The `metadata` [optional] field allows setting additional metadata for the column.
 
 {% highlight json %}
 {
@@ -83,7 +93,7 @@ Each object in the `schema` array represents one column:
             },
             "nullable": false,
             "primary_key": true,
-            "description": "This is a primary key",
+            "description": "Optional description of the column",
             "metadata": {
                 "KBC.description": "This is a primary key",
                 "KBC.someOther": "value"
@@ -116,12 +126,14 @@ When you use the table (e.g., in the Snowflake writer), you'll see the data type
 {: .image-popup}
 ![Screenshot - Set Column Data Type](/extend/common-interface/manifest-files/column-data-type-use.png)
 
-Note that the column type setting is, in all cases, only a metadata setting. It does not affect the actual
-stored data. The data is converted only when writing or copying (e.g., to a transformation or a writer).
+The data is converted only when writing or copying (e.g., to a transformation or a writer).
 That means that you can extract an *integer* column, mark it as a *timestamp* in storage and write it as
 an *integer* into a target database (though you'll be offered to write it as a timestamp).
 
-You access both the source and base type metadata through the corresponding [API](https://keboola.docs.apiary.io/#reference/metadata).
+You access both the source and base data type through the corresponding [API](https://keboola.docs.apiary.io/#reference/tables/manage-tables/table-detail).
+
+## Nullable Conversion
+Nullable conversion, which transforms an empty string originating from data into a null value, refers to the process where a textual value consisting solely of an empty string `""` is replaced with the value null.
 
 ## Data Type Conversions
 As described above, the **source data type** is converted to a **base data type** stored in metadata storage. The base type is then converted to the **target data type**. The following tables show mappings for each base type. The mapping

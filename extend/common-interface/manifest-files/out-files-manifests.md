@@ -10,7 +10,6 @@ manifest fields; all of them are optional.
 
 {% highlight json %}
 {
-  "is_public": true,
   "is_permanent": true,
   "is_encrypted": true,
   "notify": false,

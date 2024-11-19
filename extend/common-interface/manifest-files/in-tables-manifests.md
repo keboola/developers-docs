@@ -3,7 +3,8 @@ title: /data/in/tables manifests
 permalink: /extend/common-interface/manifest-files/in-tables-manifests/
 ---
 
-An input table manifest stores metadata about a downloaded table. For example, a table
+An input table manifest stores metadata about a downloaded table from Storage Tables to the component’s working directory.
+For example, a table
 with the ID `in.c-docker-demo.data` will be downloaded into
 `/in/tables/in.c-docker-demo.data.csv` (unless stated otherwise in the
 [input mapping](/extend/common-interface/config-file/) and a manifest file

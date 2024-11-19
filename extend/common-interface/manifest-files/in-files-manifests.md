@@ -5,7 +5,7 @@ permalink: /extend/common-interface/manifest-files/in-files-manifests/
 
 #### `/data/in/files` manifests
 
-An input file manifest stores metadata about a downloaded file.
+An input file manifest stores metadata about a downloaded file from Storage Files to the component’s working directory.
 
 {% highlight json %}
 {

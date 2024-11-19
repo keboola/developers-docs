@@ -1,10 +1,10 @@
 ---
 title: S3 Staging
-permalink: /extend/common-interface/manifest-files/S3-staging/
+permalink: /extend/common-interface/manifest-files/in-files-s3-staging/
 ---
 
 When using [AWS S3 for direct data exchange](/extend/common-interface/folders/#exchanging-data-via-s3),
-the manifest files will contain an additional `s3` section with
+the manifest files in the component’s working directory will contain an additional `s3` section with
 credentials for downloading the actual file data.
 
 {% highlight json %}

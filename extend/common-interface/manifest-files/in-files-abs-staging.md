@@ -1,10 +1,10 @@
 ---
 title: ABS Staging
-permalink: /extend/common-interface/manifest-files/abs-staging/
+permalink: /extend/common-interface/manifest-files/in-files-abs-staging/
 ---
 
 When using [Azure Blob Storage for direct data exchange](/extend/common-interface/folders/#exchanging-data-via-abs),
-the manifest files will contain an additional `abs` section with
+the manifest files in the component’s working directory will contain an additional `abs` section with
 credentials for downloading the actual file data.
 
 {% highlight json %}
