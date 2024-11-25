@@ -31,8 +31,11 @@ A more detailed description can be found in the chapters below.
 🟫 .env.local                   - contains Storage API token
 🟫 .env.dist                    - template for .env.local
 📂 .keboola                     - project metadata directory
-┗ 🟦 manifest.json              - object IDs, paths, naming and other configuration
-┗ 🟦 project.json               - project cache for local commands which contains backends, features, etc.
+┣ 🟦 manifest.json              - object IDs, paths, naming and other configuration
+┣ 🟦 project.json               - project cache for local commands which contains backends, 
+┃                                 features, etc.
+┗ 🟫 .kbcignore                 - optional file containing paths of configurations 
+                                  to be ignored from CLI sync
 🟩 description.md               - project description
 📂 [branch-name]                - branch directory, e.g., main
 ┣ 🟦 meta.json
@@ -403,6 +406,59 @@ This is its basic structure:
   ],
   "defaultBranchId": 123
 }
+```
+## .kbcignore
+
+You can exclude configurations from the sync process by creating a `.kbcignore` file in the `.keboola` directory.
+ 
+It is a plain text file where each line represents a path to a configuration or configuration row in the following form: 
+`{component_id}/{configuration_id}/{row_id}` where the `row_id` is optional and applicable only to [row-based configurations](https://help.keboola.com/components/#configuration-rows).
+
+Example of a `.kbcignore` file:
+    
+```
+keboola.python-transformation-v2/1197618481
+keboola.keboola.wr-db-snowflake/1196309603/1196309605
+```
+
+The above example will exclude:
+
+- Configuration of Python Transformation (`keboola.python-transformation-v2`)  with the ID `1197618481` 
+- Row  ID `1196309605` in the configuration of the Snowflake Writer (`keboola.keboola.wr-db-snowflake`) with the ID `1196309603`. 
+
+This means that commands `kbc sync pull` and `kbc sync push` will not synchronize these configurations.
+
+**`kbc push` operation**
+
+The `kbc push` command will ignore the configuration and will not push it back to the project, even if the configuration is present or modified in the folder structure locally. 
+You will be presented with the following log message:
+
+```
+➜ kbc pull
+Plan for "push" operation:
+  × main/transformation/keboola.python-transformation-v2/dev-l0-sample-data - IGNORED
+Skipped remote objects deletion, use "--force" to delete them.
+Push done.
+```
+
+The log will mark the configurations that were ignored (even if they are not present in the local folder structure)
+
+**`kbc pull` operation**
+
+The `kbc pull` command will ignore the matched configurations and will not pull them from the project. 
+
+<div class="clearfix"></div><div class="alert alert-warning">
+    <p><strong>Warning:</strong><br>
+        If the matched configuration is already present locally, it will be deleted both from the filesystem and manifest.json.</p>
+</div>
+
+
+If the configuration was already present locally, you will be presented with the following log message, marking the deletion of the matched configurations:
+```
+Plan for "pull" operation:
+  × C main/writer/keboola.wr-db-snowflake/my-snowflake-data-destination
+  × R main/writer/keboola.wr-db-snowflake/my-snowflake-data-destination/rows/test-sheet1
+Pull done.
 ```
 
 ## Next Steps
