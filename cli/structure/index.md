@@ -434,7 +434,7 @@ The `kbc push` command will ignore the configuration and will not push it back t
 You will be presented with the following log message:
 
 ```
-➜ kbc pull
+➜ kbc push
 Plan for "push" operation:
   × main/transformation/keboola.python-transformation-v2/dev-l0-sample-data - IGNORED
 Skipped remote objects deletion, use "--force" to delete them.
@@ -455,6 +455,7 @@ The `kbc pull` command will ignore the matched configurations and will not pull 
 
 If the configuration was already present locally, you will be presented with the following log message, marking the deletion of the matched configurations:
 ```
+➜ kbc pull
 Plan for "pull" operation:
   × C main/writer/keboola.wr-db-snowflake/my-snowflake-data-destination
   × R main/writer/keboola.wr-db-snowflake/my-snowflake-data-destination/rows/test-sheet1
