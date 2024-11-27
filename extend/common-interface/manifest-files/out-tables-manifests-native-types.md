@@ -24,6 +24,7 @@ from the file name; it can (and commonly is) overridden by the end-user configur
     "enclosure": "\"",
     "manifest_type": "output",
     "has_header": true,
+    "description": "Best table",
     "table_metadata": ...
     "schema": ...
 }
@@ -39,7 +40,6 @@ filled by the Id of the running component (e.g., `keboola.ex-db-snowflake`).
 {
     ...
     "table_metadata": {
-        "KBC.description": "Best table",
         "something else": "a value"
     }
 }
@@ -95,8 +95,8 @@ Each object in the `schema` array represents one column:
             "primary_key": true,
             "description": "Optional description of the column",
             "metadata": {
-                "KBC.description": "This is a primary key",
-                "KBC.someOther": "value"
+                "KBC.someColumnMetadata": "value1"
+                "KBC.someOther": "value2"
             }
         }
     ]
