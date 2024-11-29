@@ -43,7 +43,7 @@ For example, transformations are represented by native files. A more detailed de
 ┃       ┗ 🟩 description.md
 ┗ 📂 [component-type]           - e.g., extractor, app, ...
   ┗ 📂 [component-id]           - e.g., keboola.ex-db-oracle
-    ┗ 📂 [config-name]          - configuration directory, e.g., raw-data
+    ┗ 📂 [config-name]          - configuration directory (e.g., "raw-data")
       ┣ 🟦 config.json           
       ┣ 🟦 meta.json    
       ┣ 🟩 description.md    
@@ -81,8 +81,8 @@ For example, transformations are represented by native files. A more detailed de
 
 ## Branches
 
-The tool works with [dev branches](/components/branches/) by default. You can specify which branches from the project 
-you want to work with locally during the [init](/cli/commands/sync/init/) command. Alternatively, you can ignore the dev branches concept and work exclusively
+The tool works with [development branches](/components/branches/) by default. You can specify which branches from the project 
+you want to work with locally during the [init](/cli/commands/sync/init/) command. Alternatively, you can ignore the development branches concept and work exclusively
 with the main branch. However, note that all configurations will then be stored in the `main` directory.
 
 The main branch directory is simply named `main` and does not include the branch ID. This makes it easily distinguishable from the other branches.
@@ -322,12 +322,12 @@ this file manually.
       - `type` = `dir`
       - `name`: Repository name
       - `url`: Absolute or relative path to a local directory
-        - Relative path must be relative to the project directory
+        - Relative path must be relative to the project directory.
     - Git-based repository:
       - `type` = `git`
       - `name`: Repository name
       - `url`: URL of the Git repository
-        - e.g., `https://github.com/keboola/keboola-as-code-templates.git`
+        - E.g., `https://github.com/keboola/keboola-as-code-templates.git`
       - `ref`: Git `branch` or `tag` (e.g., `main` or `v1.2.3`)
 - `branches`: List of used branches
   - `id`: Branch ID
@@ -343,8 +343,8 @@ this file manually.
 
 ### Naming
 
-Names of the directories of different configuration types are subject to the rules defined in 
-the [manifest](/cli/structure/#manifest) under the `naming` section. These are the default values:
+Directory names for configurations follow the rules in the [manifest](/cli/structure/#manifest) under the `naming` section.  
+These are the default values:
 
 ```json
 {
@@ -359,7 +359,7 @@ the [manifest](/cli/structure/#manifest) under the `naming` section. These are t
   }
 ```
 
-If you want to include object IDs in directory names, use these values:
+To include object IDs in directory names, use these values:
 
 ```json
 {
@@ -374,18 +374,19 @@ If you want to include object IDs in directory names, use these values:
   }
 ```
 
-You can change them according to your wishes and let the project directory be rebuilt using the
-[fix-paths](/cli/commands/local/fix-paths/) command.
+Use the [fix-paths](/cli/commands/local/fix-paths/) command to rebuild the directory structure with updated naming rules.
 
 ## Project Cache
 
-The project cache is stored in the project file `.keboola/project.json`. Local commands use it because they don't call authorized requests to the Storage API.
+The project cache is stored in `.keboola/project.json` and is used by local commands without making authorized requests to the Storage API.
 
 This is its basic structure:
 
-- `backends` - list of the project backends
-- `features` - list of the project features
-- `defaultBranchId` - ID of the default branch
+- `backends`: List of project backends
+- `features`: List of project features
+- `defaultBranchId`: ID of the default branch
+
+Example:
 
 ```json
 {
@@ -403,29 +404,29 @@ This is its basic structure:
 ```
 ## .kbcignore
 
-You can exclude configurations from the sync process by creating a `.kbcignore` file in the `.keboola` directory.
+You can exclude specific configurations from the sync process by creating a `.kbcignore` file in the `.keboola` directory.
  
-It is a plain text file where each line represents a path to a configuration or configuration row in the following form: 
-`{component_id}/{configuration_id}/{row_id}` where the `row_id` is optional and applicable only to [row-based configurations](https://help.keboola.com/components/#configuration-rows).
+It is a plain text file where each line specifies a path to a configuration or configuration row in the format 
+`{component_id}/{configuration_id}/{row_id}`. The `row_id` is optional for [row-based configurations](https://help.keboola.com/components/#configuration-rows).
 
-Example of a `.kbcignore` file:
+Example `.kbcignore` file:
     
 ```
 keboola.python-transformation-v2/1197618481
 keboola.keboola.wr-db-snowflake/1196309603/1196309605
 ```
 
-The above example will exclude:
+This excludes:
 
-- Configuration of Python Transformation (`keboola.python-transformation-v2`)  with the ID `1197618481` 
-- Row  ID `1196309605` in the configuration of the Snowflake Writer (`keboola.keboola.wr-db-snowflake`) with the ID `1196309603`. 
+- The configuration of the Python transformation (`keboola.python-transformation-v2`)  with the ID `1197618481`. 
+- Row  ID `1196309605` in the configuration of the Snowflake writer (`keboola.keboola.wr-db-snowflake`) with the ID `1196309603`.
 
-This means that commands `kbc sync pull` and `kbc sync push` will not synchronize these configurations.
+As a result, the `kbc sync pull` and `kbc sync push` commands will not synchronize these configurations.
 
 **`kbc push` operation**
 
-The `kbc push` command will ignore the configuration and will not push it back to the project, even if the configuration is present or modified in the folder structure locally. 
-You will be presented with the following log message:
+The `kbc push` command will skip the excluded configurations and will not push them back to the project, even if they exist or have been modified in the local folder structure. 
+The log will display the following message:
 
 ```
 ➜ kbc push
@@ -435,19 +436,20 @@ Skipped remote objects deletion, use "--force" to delete them.
 Push done.
 ```
 
-The log will mark the configurations that were ignored (even if they are not present in the local folder structure)
+The log clearly identifies configurations that were ignored, even if they are absent in the local folder structure.
 
 **`kbc pull` operation**
 
-The `kbc pull` command will ignore the matched configurations and will not pull them from the project. 
+The `kbc pull` command will exclude the matched configurations and not pull them from the project. 
 
 <div class="clearfix"></div><div class="alert alert-warning">
     <p><strong>Warning:</strong><br>
-        If the matched configuration is already present locally, it will be deleted both from the filesystem and manifest.json.</p>
+        If the matched configuration is already present locally, it will be deleted from both the filesystem and manifest.json.</p>
 </div>
 
 
-If the configuration was already present locally, you will be presented with the following log message, marking the deletion of the matched configurations:
+If the configuration was already present locally, the log will indicate its deletion as shown below:
+
 ```
 ➜ kbc pull
 Plan for "pull" operation:
