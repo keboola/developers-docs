@@ -184,7 +184,7 @@ first_table = input_tables[0]
 logging.info(f'The first table named: "{first_table.name}" is at path: {first_table.full_path}')
 
 # get information from table manifest
-logging.info(f'The first table has following columns defined in the manifest {first_table.columns}')
+logging.info(f'The first table has following columns defined in the manifest {first_table.column_names}')
 
 ```
 
@@ -228,8 +228,7 @@ for table in tables:
 
 The component may define output [manifest files](https://developers.keboola.com/extend/common-interface/manifest-files/#dataouttables-manifests) 
 that define options on storing the results back to the Keboola Storage. This library provides methods that simplifies 
-the manifest file creation and allows defining the export options and metadata of the result table using helper objects `TableDefinition` 
-and `TableMetadata`.
+the manifest file creation and allows defining the export options.
 
 `TableDefinition` object serves as a result container containing all the information needed to store the Table into the Storage. 
 It contains the manifest file representation and initializes all attributes available in the manifest.
@@ -241,28 +240,53 @@ Also it is possible to create the container for the output table using the `Comm
 
 ```python
 from keboola.component import CommonInterface
-from keboola.component import dao
+from keboola.component.dao import ColumnDefinition, DataType, SupportedDataTypes, BaseType
 
 # init the interface
-ci = CommonInterface()
+ci = CommonInterface(data_folder_path='data')
 
 # create container for the result
-result_table = ci.create_out_table_definition('my_new_result_table', primary_key=['id'], incremental=True)
+out = ci.create_out_table_definition("testDef",
+                                     schema=['foo', 'bar'],
+                                     destination='some-destination',
+                                     primary_key=['foo'],
+                                     incremental=True,
+                                     delete_where={'column': 'lilly',
+                                                   'values': ['a', 'b'],
+                                                   'operator': 'eq'})
+
+# update column
+out.update_column('foo',
+                  ColumnDefinition(data_types=BaseType(dtype=SupportedDataTypes.INTEGER, length='20')))
+
+# add new columns
+out.add_column('note', ColumnDefinition(nullable=False))
+out.add_column('test1')
+out.add_columns(['test2', 'test3', 'test4'])
+
+# add new typed column
+out.add_column('id', ColumnDefinition(primary_key=True,
+                                      data_types={'snowflake': DataType(dtype="INTEGER", length='200')})
+               )
+
+out.add_columns({
+    'phone': ColumnDefinition(primary_key=True,
+                              data_types={'snowflake': DataType(dtype="INTEGER", length='200'),
+                                          'bigquery': DataType(dtype="BIGINT")}),
+    'new2': ColumnDefinition(data_types={'snowflake': DataType(dtype="INTEGER", length='200')}),
+                 })
+
+# delete columns
+out.delete_column('bar')
+out.delete_columns(['test2', 'test3'])
+
 
 # write some content
-with open(result_table.full_path, 'w') as result:
+with open(out.full_path, 'w') as result:
     result.write('line')
-
-# add some metadata
-result_table.table_metadata.add_table_description('My new table description')
-# add column datatype
-result_table.table_metadata.add_column_data_type('id', dao.SupportedDataTypes.STRING, 
-                                                 source_data_type='VARCHAR(100)', 
-                                                 nullable=True,
-                                                 length=100)
-
+    
 # write manifest
-ci.write_tabledef_manifest(result_table)
+ci.write_manifest(out)
 ```
 
 
