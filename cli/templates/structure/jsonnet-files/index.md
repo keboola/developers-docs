@@ -103,6 +103,12 @@ Example:
 **`HasProjectBackend(backend string) bool`**
 
 - Returns `true` if the backend is available; otherwise, it returns `false`.
+
+--------------------------------------
+
+**`RandomID() string`**
+
+- Returns a random ID truncated to 8 characters.
   
 
 ## Next Steps
