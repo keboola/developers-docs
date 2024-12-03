@@ -7,7 +7,7 @@ permalink: /cli/templates/structure/jsonnet-files/
 {:toc}
 
 All project [JSON files](/cli/structure/) are in a template defined by [Jsonnet](https://jsonnet.org/) files.
-Jsonnet is based on JSON syntax. Valid JSON is also valid Jsonnet.
+Jsonnet builds on JSON syntax, meaning that valid JSON is also valid Jsonnet.
 In addition, Jsonnet offers more language constructs, such as [conditions, cycles, and variables](https://jsonnet.org/learning/tutorial.html).
 
 
@@ -23,9 +23,9 @@ In addition to the [standard Jsonnet functions](https://jsonnet.org/ref/stdlib.h
 - In a template, each configuration has a human-readable name, e.g., `my-config`.
 - When applying a template, a human-readable ID is replaced with a generated unique ID, e.g., `5038695485`.
 - As a result, it is possible to create multiple instances of a template.
-- The `ConfigId` function is primarily used in the [template manifest](/cli/templates/structure/#repository-manifest) but can be used in any Jsonnet file.
+- The `ConfigId` function is most commonly used in the [template manifest](/cli/templates/structure/#repository-manifest), but it can also be applied in any Jsonnet file.
 
-For example, a bucket ID that contains a configuration ID can be composed in this way:
+For example, you can compose a bucket ID containing a configuration ID as follows:
 ```jsonnet
 {
  storage: {
@@ -99,8 +99,8 @@ Example:
 - Returns `componentId` of the Snowflake writer.
   - Returns `keboola.wr-db-snowflake` for AWS stacks.
   - Returns `keboola.wr-snowflake-blob-storage` for Azure stacks.
-  - Returns `keboola.wr-db-snowflake-gcs` for GCP stacks and BigQuery backend.
-  - Returns `keboola.wr-db-snowflake-gcs-s3` for GCP stacks and Snowflake backend.
+  - Returns `keboola.wr-db-snowflake-gcs` for GCP stacks and the BigQuery backend.
+  - Returns `keboola.wr-db-snowflake-gcs-s3` for GCP stacks and the Snowflake backend.
 
 --------------------------------------
 
