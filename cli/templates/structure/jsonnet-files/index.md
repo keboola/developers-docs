@@ -76,6 +76,7 @@ Example:
 
 - Returns the ID of the current template instance.
 - E.g., `V1StGXR8IZ5jdHi6BAmyT`
+- This function doesn't work for the preview endpoint.
 
 --------------------------------------
 
@@ -97,6 +98,8 @@ Example:
 - Returns `componentId` of the Snowflake writer.
   - Returns `keboola.wr-db-snowflake` for AWS stacks.
   - Returns `keboola.wr-snowflake-blob-storage` for Azure stacks.
+  - Returns `keboola.wr-db-snowflake-gcs` for GCP stacks and BigQuery backend.
+  - Returns `keboola.wr-db-snowflake-gcs-s3` for GCP stacks and Snowflake backend.
 
 --------------------------------------
 
