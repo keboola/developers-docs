@@ -76,7 +76,7 @@ Example:
 
 - Returns the ID of the current template instance.
 - E.g., `V1StGXR8IZ5jdHi6BAmyT`
-- This function doesn't work for the preview endpoint.
+- This function is not supported in the preview endpoint, which is used for simple template configurations that do not have InstanceIDs.
 
 --------------------------------------
 
@@ -84,6 +84,7 @@ Example:
 
 - Returns the ID of the current template instance shortened to 8 characters.
 - E.g., `V1StGXR8`
+- This function is not supported in the preview endpoint, which is used for simple template configurations that do not have InstanceIDs.
 
 --------------------------------------
 
