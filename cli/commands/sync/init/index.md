@@ -33,7 +33,7 @@ It will allow you to create GitHub Actions workflows in the directory.
 : Allow usage of `KBC_PROJECT_ID` and `KBC_BRANCH_ID` environment variables for future operations.  
 Sets `true` to the `allowTargetEnv` field in the [manifest.json](/cli/structure/#manifest).
 
-`-b, --allowed-branches <string>`
+`-b, --branches <string>`
 : Comma-separated list of branch IDs or name globs (use "*" for all) for branches you want to work with locally (default "main"); other branches in the project will be ignored.
 
 `--ci-main-branch <string>`

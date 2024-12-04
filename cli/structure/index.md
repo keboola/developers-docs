@@ -6,53 +6,49 @@ permalink: /cli/structure/
 * TOC
 {:toc}
 
-Initial configuration of your local directory can be done using the [init command](/cli/commands/sync/init/). It initiates 
+The initial configuration of your local directory can be done using the [init command](/cli/commands/sync/init/). This command initializes 
 the directory and pulls configurations from the project.
 
-The **Storage API token** to your project is stored in the file `.env.local` under the `KBC_STORAGE_API_TOKEN` directive. 
-Currently, it is necessary to use [Master tokens](https://help.keboola.com/management/project/tokens/#master-tokens).
-Your token must be secret, so the file `.env.local` is included in the `.gitignore` file.
+The **Storage API token** for your project is stored in the `.env.local` file under the `KBC_STORAGE_API_TOKEN` directive. 
+Currently, you must use a [master token](https://help.keboola.com/management/project/tokens/#master-tokens).
+To maintain security, `.env.local` is automatically included in the .gitignore file to prevent it from being committed to your Git repository.
 
-[Manifest - Naming](#naming) defines directory names.
-It is usually not necessary to change this setting. 
-It is guaranteed that each object (branch, config, row) will have its unique directory, 
-even if the objects have the same name.
+[Manifest - Naming](#naming) defines directory names. Typically, this setting does not need to be changed. 
+Each object (branch, configuration, row) is guaranteed to have a unique directory, even if objects share the same name.
 
-
-The following is an example of a default project directory structure. 
-Some files and directories are specific to the component type. 
-For example, transformations are represented by native files.
-A more detailed description can be found in the chapters below.
+Below is an example of a default project directory structure. Some files and directories are specific to the component type. 
+For example, transformations are represented by native files. A more detailed description can be found in the chapters below.
 
 <br>
 
 ```
-🟫 .gitignore                   - excludes ".env.local" from git repository
-🟫 .env.local                   - contains Storage API token
-🟫 .env.dist                    - template for .env.local
+🟫 .gitignore                   - excludes ".env.local" from the Git repository
+🟫 .env.local                   - contains the Storage API token
+🟫 .env.dist                    - template for ".env.local"
 📂 .keboola                     - project metadata directory
-┗ 🟦 manifest.json              - object IDs, paths, naming and other configuration
-┗ 🟦 project.json               - project cache for local commands which contains backends, features, etc.
+┣ 🟦 manifest.json              - contains object IDs, paths, naming and other configuration details
+┣ 🟦 project.json               - project cache for local commands, including backends and features
+┗ 🟫 .kbcignore                 - optional file listing paths to configurations to exclude from CLI sync
 🟩 description.md               - project description
-📂 [branch-name]                - branch directory, e.g., main
-┣ 🟦 meta.json
-┣ 🟩 description.md
-┣ 📂 _shared                    - shared codes directory
-┃ ┗ 📂 [target-component]       - target, e.g., keboola.python-transfomation
+📂 [branch-name]                - branch directory (e.g., "main")
+┣ 🟦 meta.json                  
+┣ 🟩 description.md             
+┣ 📂 _shared                    - shared code directory
+┃ ┗ 📂 [target-component]       - target component (e.g., "keboola.python-transfomation")
 ┃   ┗ 📂 codes      
 ┃     ┗ 📂[code-name]           - shared code directory
-┃       ┣ 🟫 code.[ext]         - native file, e.g., ".sql" or ".py"
+┃       ┣ 🟫 code.[ext]         - native file (e.g., ".sql" or ".py")
 ┃       ┣ 🟦 config.json    
 ┃       ┣ 🟦 meta.json   
 ┃       ┗ 🟩 description.md
 ┗ 📂 [component-type]           - e.g., extractor, app, ...
   ┗ 📂 [component-id]           - e.g., keboola.ex-db-oracle
-    ┗ 📂 [config-name]          - configuration directory, e.g., raw-data
+    ┗ 📂 [config-name]          - configuration directory (e.g., "raw-data")
       ┣ 🟦 config.json           
       ┣ 🟦 meta.json    
       ┣ 🟩 description.md    
       ┣ 📂 rows                 - only if the configuration has some rows
-      ┃ ┗ 📂 [row-name]         - configuration row directory, e.g., prod-fact-table
+      ┃ ┗ 📂 [row-name]         - configuration row directory (e.g., "prod-fact-table")
       ┃   ┣ 🟦 config.json     
       ┃   ┣ 🟦 meta.json
       ┃   ┗ 🟩 description.md
@@ -60,7 +56,7 @@ A more detailed description can be found in the chapters below.
       ┃ ┗ 📂 001-block-1        - block directory
       ┃   ┣ 🟦 meta.json   
       ┃   ┗ 📂 001-code-1       - code directory
-      ┃     ┣ 🟫 code.[ext]     - native file, e.g., ".sql" or ".py"
+      ┃     ┣ 🟫 code.[ext]     - native file (e.g., ".sql" or ".py")
       ┃     ┗ 🟦 meta.json   
       ┣ 📂 phases               - only if the configuration is an orchestration
       ┃ ┗ 📂 001-phase          - phase directory
@@ -72,8 +68,8 @@ A more detailed description can be found in the chapters below.
       ┃   ┣ 🟦 config.json     
       ┃   ┣ 🟦 meta.json
       ┃   ┗ 🟩 description.md
-      ┗ 📂 variables            - only if the configuration has defined some variables
-        ┣ 🟦 config.json        - variables definition, name and type
+      ┗ 📂 variables            - only if the configuration has some variables defined
+        ┣ 🟦 config.json        - variable definition, name, and type
         ┣ 🟦 meta.json
         ┣ 🟩 description.md
         ┗ 📂 values             - multiple sets of values can be defined
@@ -85,15 +81,16 @@ A more detailed description can be found in the chapters below.
 
 ## Branches
 
-The tool works with [dev branches](/components/branches/) by default. You can choose the branches from the project 
-you want to work with locally in the [init](/cli/commands/sync/init/) command. You can ignore the dev branches concept and work with 
-the main branch only, of course. But note that all its configurations will be stored in the directory `main`.
+The tool works with [development branches](/components/branches/) by default. You can specify which branches from the project 
+you want to work with locally during the [init](/cli/commands/sync/init/) command. Alternatively, you can ignore the development branches concept and work exclusively
+with the main branch. However, note that all configurations will then be stored in the `main` directory.
 
-The directory of the main branch is called simply `main` and does not contain the branch ID. This way, it is easily 
-distinguishable from the other branches.
+The main branch directory is simply named `main` and does not include the branch ID. This makes it easily distinguishable from the other branches.
 
-The directory contains `description.md` where you can write the description formatted in [Markdown](https://www.markdownguide.org/) 
-and `meta.json` containing the name of the branch and flag if it is the default or not.
+Each branch directory contains:
+
+- `description.md`: Use this file to write a branch description formatted in [Markdown](https://www.markdownguide.org/).
+- `meta.json`: Contains the name of the branch and a flag indicating whether it is the default branch.
 
 Example of `meta.json`:
 ```json
@@ -103,7 +100,7 @@ Example of `meta.json`:
 }
 ```
 
-Then there are directories thematically grouping components: `extractor`, `other`, `transformation`, `writer`.
+Within the branch directory, configurations are organized into thematic directories: `extractor`, `other`, `transformation`, and `writer`.
 
 Example of a branch folder with components configurations:
 
@@ -113,11 +110,13 @@ Example of a branch folder with components configurations:
 
 ## Configurations
 
-The directory of each configuration contains `config.json` with parameters specific for each component, `description.md`, 
-where you can write a description formatted in [Markdown](https://www.markdownguide.org/) and `meta.json` containing the name 
-of the configuration.
+Each configuration directory contains the following files:
 
-Example of `config.json` for Generic Extractor:
+- `config.json`: Includes parameters specific to the component.
+- `description.md`: A description file formatted in [Markdown](https://www.markdownguide.org/).
+- `meta.json`: Contains the name of the configuration.
+
+Example of `config.json` for the Generic extractor:
 ```json
 {
   "parameters": {
@@ -135,15 +134,14 @@ Example of `meta.json`:
 }
 ```
 
-Configuration directories can be copied freely inside the project and between other projects. Their IDs are stored 
-in the [manifest](/cli/structure/#manifest). So after the copy & paste, make sure to run 
-the [persist command](/cli/commands/local/persist/), which generates a new ID for the configuration and saves it in the manifest.
+Configuration directories can be copied freely within the project and between projects. Their IDs are stored 
+in the [manifest](/cli/structure/#manifest). After copying, run the [persist command](/cli/commands/local/persist/) to generate a new ID for the configuration and update it in the manifest.
 
 ## Configuration Rows
 
-The directory structure of configuration rows is the same as the configuration itself. The component configuration
-contains a directory `rows` that includes a directory for each row. That directory contains `config.json`, 
-`description.md` and `meta.json`.
+The directory structure for configuration rows is identical to that of configurations. The component configuration
+includes a `rows` directory, which contains a subdirectory for each row. Each row directory includes `config.json`, 
+`description.md`, and `meta.json`.
 
 Example of `meta.json`:
 ```json
@@ -160,8 +158,8 @@ Example of a Google Drive extractor configuration:
 
 ## Transformations
 
-In addition to other configurations, the transformations directories contain a `blocks` directory and in it a list of codes.
-Codes are stored in native files according to the type of transformation. I.e., Snowflake transformations store the codes
+In addition to standard configurations, transformation directories include a `blocks` directory containing a list of codes.
+Codes are stored as native files corresponding to the transformation type. For example, Snowflake transformations store codes
 in `.sql` files.
 
 Example of a Snowflake transformation configuration:
@@ -171,15 +169,15 @@ Example of a Snowflake transformation configuration:
 
 ## Variables
 
-The [variables](https://help.keboola.com/transformations/variables/#variables) directory in addition to the standard 
-configuration layout contains the directory `values`.
+The [variables](https://help.keboola.com/transformations/variables/#variables) directory, in addition to the standard 
+configuration layout, contains a `values` subdirectory.
 
-Let's say you have these two variables in your transformation:
+For example, suppose you have the following two variables in your transformation:
 
 {: .image-popup}
 ![Screenshot -- Variables in the UI](/cli/structure/variables-ui.jpg)
 
-When you [pull](/cli/commands/sync/pull/) them to the local directory, it will look like this:
+When you [pull](/cli/commands/sync/pull/) them to the local directory, the structure will look like this:
 
 {: .image-popup}
 ![Screenshot -- Configuration directory with the variables](/cli/structure/variables-directory.jpg)
@@ -221,9 +219,9 @@ Default values configuration in `variables/values/default/config.json`:
 ## Shared Code
 
 [Shared code](https://help.keboola.com/transformations/variables/#shared-code) blocks are stored in the branch directory 
-under the `_shared` subdirectory so that they can be reused between different configurations.
+under the `_shared` subdirectory, enabling reuse across different configurations.
 
-If you create shared code from your block:
+If you create shared code from a block:
 
 {: .image-popup}
 ![Screenshot -- Shared code directory](/cli/structure/shared-code-ui.jpg)
@@ -233,7 +231,7 @@ It will move to the `_shared` directory:
 {: .image-popup}
 ![Screenshot -- Shared code directory](/cli/structure/shared-code-directory.jpg)
 
-And the code in the transformation file `blocks/block-1/join/code.sql` will be changed to:
+The code in the transformation file `blocks/block-1/join/code.sql` will then be replaced with:
 
 {: .image-popup}
 ![Screenshot -- Shared code code](/cli/structure/shared-code-code.jpg)
@@ -241,16 +239,16 @@ And the code in the transformation file `blocks/block-1/join/code.sql` will be c
 
 ## Schedules
 
-[Orchestrator](https://help.keboola.com/orchestrator/running) or any other component can have a schedule to be run 
-automatically and periodically. The schedule resides in a configuration directory.
+The [Orchestrator](https://help.keboola.com/orchestrator/running) or any other component can have a schedule to run 
+automatically and periodically. The schedule configuration is stored within a specific directory.
 
 {: .image-popup}
 ![Screenshot -- Scheduler directory](/cli/structure/scheduler-directory.jpg)
 
-The schedule's `config.json` contains the [crontab](https://crontab.guru/) format of the schedule, timezone, and flag 
-if it should be enabled or not. 
+The `config.json` file for the schedule contains the schedule in [crontab](https://crontab.guru/) format, the timezone, and a flag 
+indiciating whether the schedule is enabled. 
 
-This example shows a schedule to be run at minute 40 past every hour:
+For example, the following configuration runs at the 40th minute of every hour:
 
 ```json
 {
@@ -267,14 +265,14 @@ This example shows a schedule to be run at minute 40 past every hour:
 
 ## Orchestrations
 
-The Orchestrator directories contain the `phases` directory and in it a list of tasks.
+Orchestrator directories include the `phases` directory, which contains a list of tasks for execution.
 
 Example:
 
 {: .image-popup}
-![Screenshot -- An orchestration directory](/cli/structure/directory-orchestration-example.jpg)
+![Screenshot -- An orchestration directory](/cli/structure/directory-orchestration-example.png)
 
-A `phase.json` example:
+Example `phase.json`:
 
 ```json
 {
@@ -285,7 +283,7 @@ A `phase.json` example:
 }
 ```
 
-A `task.json` example:
+Example `task.json`:
 
 ```json
 {
@@ -299,55 +297,65 @@ A `task.json` example:
 }
 ```
 
+**Using `kbcdir.jsonnet` for different orchestration phases:**  
+
+The `kbcdir.jsonnet` file can be used to specify which directories in the phases folder should be ignored for different project backends. By setting the `isIgnored` value to true in the file, you can exclude specific directories.
+
+Example `kbcdir.jsonnet`:
+```jsonnet
+{
+  "isIgnored":false 
+}
+```
+
 ## Manifest
 
-The local state of the project is stored in the manifest file `.keboola/manifest.json`. It is not recommended to modify
+The local state of the project is stored in the `.keboola/manifest.json` file. It is not recommended to modify
 this file manually.
 
-This is its basic structure:
+### Basic Manifest Structure
 
-- `version` - current major version, now `2`
-- `project` - information about the project
-  - `id` - ID of the project
-  - `apiHost` - URL of the Keboola instance (e.g., `connection.keboola.com`)
-- `allowTargetEnv` - boolean, default `false`
-  - If `true`, environment variables `KBC_PROJECT_ID` and `KBC_BRANCH_ID` can be used to temporary override the target project and branch.
-  - The IDs in the manifest will remain unchanged.
-  - Mapping is bidirectional, it is performed on the manifest save and load.
-  - See also the [--allow-target-env](/cli/commands/sync/init/#options) option of the [kbc sync init](/cli/commands/sync/init/) command.
-- `sortBy` - name of the configuration property used for sorting (default `id`)
-- `naming` - rules for directory names, [see the details](/cli/structure/#naming)
-- `allowedBranches` - array of branches to work with
-- `ignoredComponents` - array of components to not work with
-- `templates`
+- `version`: Current major version (e.g., `2`)
+- `project`: Information about the project
+  - `id`: ID of the project
+  - `apiHost`: URL of the Keboola instance (e.g., `connection.keboola.com`)
+- `allowTargetEnv`: Boolean (default: `false`)
+  - If `true`, allows environment variables `KBC_PROJECT_ID` and `KBC_BRANCH_ID` to temporary override the target project and branch without modifying the manifest.
+  - The mapping is bidirectional and occurs during the manifest's save and load operations.
+  - For more information, see the [--allow-target-env](/cli/commands/sync/init/#options) option in the [kbc sync init](/cli/commands/sync/init/) command.
+- `sortBy`: Property name used for sorting configurations (default: `id`)
+- `naming`: Rules for directory naming ([see details](/cli/structure/#naming))
+- `allowedBranches`: Array of branches to work with
+- `ignoredComponents`: Array of components to exclude
+- `templates`: 
   - `repositories` (*array*):
-    - local repository:
+    - Local repository:
       - `type` = `dir`
-      - `name` - repository name
-      - `url` - absolute or relative path to a local directory
-        - relative path must be relative to the project directory
-    - git repository:
+      - `name`: Repository name
+      - `url`: Absolute or relative path to a local directory
+        - Relative path must be relative to the project directory.
+    - Git-based repository:
       - `type` = `git`
-      - `name` - repository name
-      - `url` - URL of the git repository
-        - e.g. `https://github.com/keboola/keboola-as-code-templates.git`
-      - `ref` - git `branch` or `tag`, e.g. `main` or `v1.2.3`
-- `branches` - array of used branches
-  - `id` - ID of the branch
-  - `path` - name of the directory containing the branch configuration (e.g., `main`)
-- `configurations` - array of component configurations
-  - `branchId` - ID of the branch the configuration belongs to
-  - `componentId` - ID of the component (e.g., `keboola.ex-aws-s3`)
-  - `id` - ID of the configuration
-  - `path` - path to the configuration in the local directory (e.g., `extractor/keboola.ex-aws-s3/7241111/my-aws-s3-data-source`)
-  - `rows` - array of configuration rows (if the component supports rows)
-    - `id` - ID of the row
-    - `path` - path to the row from the configuration directory (e.g., `rows/cities`)
+      - `name`: Repository name
+      - `url`: URL of the Git repository
+        - E.g., `https://github.com/keboola/keboola-as-code-templates.git`
+      - `ref`: Git `branch` or `tag` (e.g., `main` or `v1.2.3`)
+- `branches`: List of used branches
+  - `id`: Branch ID
+  - `path`: Directory name (e.g., `main`)
+- `configurations`: List of component configurations
+  - `branchId`: Branch ID
+  - `componentId`: Component ID (e.g., `keboola.ex-aws-s3`)
+  - `id`: Configuration ID
+  - `path`: Path to the configuration in the local directory (e.g., `extractor/keboola.ex-aws-s3/7241111/my-aws-s3-data-source`)
+  - `rows`: List of configuration rows (if the component supports rows)
+    - `id`: Row ID
+    - `path`: Path to the row from the configuration directory (e.g., `rows/cities`)
 
 ### Naming
 
-Names of the directories of different configuration types are subject to the rules defined in 
-the [manifest](/cli/structure/#manifest) under the `naming` section. These are the default values:
+Directory names for configurations follow the rules in the [manifest](/cli/structure/#manifest) under the `naming` section.  
+These are the default values:
 
 ```json
 {
@@ -362,7 +370,7 @@ the [manifest](/cli/structure/#manifest) under the `naming` section. These are t
   }
 ```
 
-If you want to include object IDs in directory names, use these values:
+To include object IDs in directory names, use these values:
 
 ```json
 {
@@ -377,18 +385,19 @@ If you want to include object IDs in directory names, use these values:
   }
 ```
 
-You can change them according to your wishes and let the project directory be rebuilt using the
-[fix-paths](/cli/commands/local/fix-paths/) command.
+Use the [fix-paths](/cli/commands/local/fix-paths/) command to rebuild the directory structure with updated naming rules.
 
 ## Project Cache
 
-The project cache is stored in the project file `.keboola/project.json`. Local commands use it because they don't call authorized requests to the Storage API.
+The project cache is stored in `.keboola/project.json` and is used by local commands without making authorized requests to the Storage API.
 
 This is its basic structure:
 
-- `backends` - list of the project backends
-- `features` - list of the project features
-- `defaultBranchId` - ID of the default branch
+- `backends`: List of project backends
+- `features`: List of project features
+- `defaultBranchId`: ID of the default branch
+
+Example:
 
 ```json
 {
@@ -403,6 +412,61 @@ This is its basic structure:
   ],
   "defaultBranchId": 123
 }
+```
+## .kbcignore
+
+You can exclude specific configurations from the sync process by creating a `.kbcignore` file in the `.keboola` directory.
+ 
+It is a plain text file where each line specifies a path to a configuration or configuration row in the format 
+`{component_id}/{configuration_id}/{row_id}`. The `row_id` is optional for [row-based configurations](https://help.keboola.com/components/#configuration-rows).
+
+Example `.kbcignore` file:
+    
+```
+keboola.python-transformation-v2/1197618481
+keboola.keboola.wr-db-snowflake/1196309603/1196309605
+```
+
+This excludes:
+
+- The configuration of the Python transformation (`keboola.python-transformation-v2`)  with the ID `1197618481`. 
+- Row  ID `1196309605` in the configuration of the Snowflake writer (`keboola.keboola.wr-db-snowflake`) with the ID `1196309603`.
+
+As a result, the `kbc sync pull` and `kbc sync push` commands will not synchronize these configurations.
+
+**`kbc push` operation**
+
+The `kbc push` command will skip the excluded configurations and will not push them back to the project, even if they exist or have been modified in the local folder structure. 
+The log will display the following message:
+
+```
+➜ kbc push
+Plan for "push" operation:
+  × main/transformation/keboola.python-transformation-v2/dev-l0-sample-data - IGNORED
+Skipped remote objects deletion, use "--force" to delete them.
+Push done.
+```
+
+The log clearly identifies configurations that were ignored, even if they are absent in the local folder structure.
+
+**`kbc pull` operation**
+
+The `kbc pull` command will exclude the matched configurations and not pull them from the project. 
+
+<div class="clearfix"></div><div class="alert alert-warning">
+    <p><strong>Warning:</strong><br>
+        If the matched configuration is already present locally, it will be deleted from both the filesystem and manifest.json.</p>
+</div>
+
+
+If the configuration was already present locally, the log will indicate its deletion as shown below:
+
+```
+➜ kbc pull
+Plan for "pull" operation:
+  × C main/writer/keboola.wr-db-snowflake/my-snowflake-data-destination
+  × R main/writer/keboola.wr-db-snowflake/my-snowflake-data-destination/rows/test-sheet1
+Pull done.
 ```
 
 ## Next Steps
