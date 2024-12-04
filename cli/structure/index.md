@@ -270,7 +270,7 @@ Orchestrator directories include the `phases` directory, which contains a list o
 Example:
 
 {: .image-popup}
-![Screenshot -- An orchestration directory](/cli/structure/directory-orchestration-example.jpg)
+![Screenshot -- An orchestration directory](/cli/structure/directory-orchestration-example.png)
 
 Example `phase.json`:
 
@@ -294,6 +294,17 @@ Example `task.json`:
   },
   "continueOnFailure": false,
   "enabled": true
+}
+```
+
+**Using `kbcdir.jsonnet` for different orchestration phases:**  
+
+The `kbcdir.jsonnet` file can be used to specify which directories in the phases folder should be ignored for different project backends. By setting the `isIgnored` value to true in the file, you can exclude specific directories.
+
+Example `kbcdir.jsonnet`:
+```jsonnet
+{
+  "isIgnored":false 
 }
 ```
 
