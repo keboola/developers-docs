@@ -297,9 +297,11 @@ Example `task.json`:
 }
 ```
 
-Using `kbcdir.jsonnet` for different orchestration phases. Individual directories in the phases folder that are intended for a different backend of the project can be ignored by setting the value to true in the file.
+**Using `kbcdir.jsonnet` for different orchestration phases:**  
 
-A `kbcdir.jsonnet` example:
+The `kbcdir.jsonnet` file can be used to specify which directories in the phases folder should be ignored for different project backends. By setting the `isIgnored` value to true in the file, you can exclude specific directories.
+
+Example `kbcdir.jsonnet`:
 ```jsonnet
 {
   "isIgnored":false 
