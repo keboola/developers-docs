@@ -186,11 +186,11 @@ See an [example](#api-default-parameters).
 
 
 ### hash
-Similar to hash_hmac function but requires only 2 arguments (no secret key required):
+This function works similarly to the `hash_hmac` function but requires only two arguments (no secret key required):
 
-1. Name of a hashing algorithm (see the
-   [list of supported algorithms](https://www.php.net/manual/en/function.hash-algos.php#refsect1-function.hash-algos-examples))
-2. Value to hash
+1. The name of a hashing algorithm (see the
+   [list of supported algorithms](https://www.php.net/manual/en/function.hash-algos.php#refsect1-function.hash-algos-examples)).
+2. The value to hash.
 
 {% highlight json %}
 {
