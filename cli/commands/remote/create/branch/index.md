@@ -32,7 +32,7 @@ A branch cannot be created locally, it must be created directly in the project f
 ### Examples
 
 ```
-➜ kbc create branch -n try1
+➜ kbc remote create branch -n try1
 
 The branch was successfully created.
 Pulling objects to the local directory.
