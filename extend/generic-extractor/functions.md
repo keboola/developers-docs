@@ -184,6 +184,24 @@ The above will return `d868d581b2f2edd09e8e7ce12c00723b3fcffb6a5d74c40eae9d94181
 
 See an [example](#api-default-parameters).
 
+
+### hash
+This function works similarly to the `hash_hmac` function but requires only two arguments (no secret key required):
+
+1. The name of a hashing algorithm (see the
+   [list of supported algorithms](https://www.php.net/manual/en/function.hash-algos.php#refsect1-function.hash-algos-examples)).
+2. The value to hash.
+
+{% highlight json %}
+{
+    "function": "hash",
+    "args": [
+        "sha256",
+        "12345abcd5678efgh90ijk"
+    ]
+}
+{% endhighlight %}
+
 ### time
 The [`time` function](https://www.php.net/manual/en/function.time.php) returns the current time as a
 [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time).
