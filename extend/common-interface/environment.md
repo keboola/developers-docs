@@ -32,7 +32,7 @@ The following environment variables are injected into the container:
    - `hints`: The component generates columns without data types in the schema node.
    - `none`: The component generates only column names in the columns node. 
 
- ### Additional Variables for Forwarded Token and Token Details
+### Additional Variables for Forwarded Token and Token Details
  
  The following variables are available only if "Forwards token" and "Forwards token details" are
  enabled in the [component configuration](https://components.keboola.com/) (and approved by Keboola):
