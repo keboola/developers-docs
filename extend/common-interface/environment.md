@@ -62,4 +62,4 @@ Both STDOUT and [STDERR](https://en.wikipedia.org/wiki/Standard_streams#Standard
 
 ### Modifying Error Behavior
 To report all errors as User Errors regardless of the exit code, set `no_application_errors` in the [component configuration](https://components.keboola.com/).
-See the [implementation notes](/extend/component/implementation/) for tips on distinguishing between a User Errors and Application Errors.
+See the [implementation notes](/extend/component/implementation/) for tips on distinguishing between User Errors and Application Errors.
