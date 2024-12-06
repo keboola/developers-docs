@@ -33,6 +33,7 @@ The following environment variables are injected into the container:
    - `none`: The component generates only column names in the columns node. 
 
  ### Additional Variables for Forwarded Token and Token Details
+ 
  The following variables are available only if "Forwards token" and "Forwards token details" are
  enabled in the [component configuration](https://components.keboola.com/) (and approved by Keboola):
 
@@ -61,5 +62,4 @@ Both STDOUT and [STDERR](https://en.wikipedia.org/wiki/Standard_streams#Standard
 
 ### Modifying Error Behavior
 To report all errors as User Errors regardless of the exit code, set `no_application_errors` in the [component configuration](https://components.keboola.com/).
-See the [implementation notes](/extend/component/implementation/) for tips on distinguishing 
-between a User Errors and Application Errors.
+See the [implementation notes](/extend/component/implementation/) for tips on distinguishing between User Errors and Application Errors.
