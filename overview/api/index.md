@@ -17,6 +17,7 @@ The main APIs for our components are:
 
 | API | Description |
 |---|---|
+| [Apps Proxy API](https://hub.keboola.com/_proxy/api/v1/documentation/) | The Keboola Application proxy server for Data Applications. |
 | [Keboola Storage API](https://keboola.docs.apiary.io/) | [Storage](/integrate/storage/) is the main Keboola component storing all data. |
 | [Keboola Management API](https://keboolamanagementapi.docs.apiary.io/) | API managing Keboola projects and users (and notifications and features). |
 | [Encryption API](https://keboolaencryption.docs.apiary.io/#) | Provides [Encryption](/overview/encryption/). |

@@ -273,6 +273,12 @@ items:
           - url: /extend/publish/checklist/
             title: Checklist
 
+      - url: /extend/apps
+        title: Create data and inspect data apps
+        items:
+          - url: /extend/apps/proxy
+            title: Apps proxy API
+
   - url: /integrate/
     title: Integration
     items:
