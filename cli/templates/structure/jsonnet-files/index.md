@@ -6,7 +6,7 @@ permalink: /cli/templates/structure/jsonnet-files/
 * TOC
 {:toc}
 
-All project [JSON files](/cli/structure/) are in a template defined by [Jsonnet](https://jsonnet.org/) files.
+All project [JSON files](/cli/structure/) in a template are defined by [Jsonnet](https://jsonnet.org/) files.
 Jsonnet builds on JSON syntax, meaning that valid JSON is also valid Jsonnet.
 In addition, Jsonnet offers more language constructs, such as [conditions, cycles, and variables](https://jsonnet.org/learning/tutorial.html).
 
@@ -19,13 +19,14 @@ In addition to the [standard Jsonnet functions](https://jsonnet.org/ref/stdlib.h
 
 **`ConfigId(string configId) string`**
 
-- Replaces a configuration human-readable ID with a generated unique ID.
-- In a template, each configuration has a human-readable name, e.g., `my-config`.
-- When applying a template, a human-readable ID is replaced with a generated unique ID, e.g., `5038695485`.
-- As a result, it is possible to create multiple instances of a template.
-- The `ConfigId` function is most commonly used in the [template manifest](/cli/templates/structure/#repository-manifest), but it can also be applied in any Jsonnet file.
+- Replaces a human-readable configuration ID with a generated unique ID.
+- In a template, each configuration has a human-readable name (e.g., `my-config`).
+- When applying a template, the human-readable ID is replaced with a generated unique ID (e.g., `5038695485`).
+- This allows a creation of multiple instances of a template.
+- The `ConfigId` function is primarily used in the [template manifest](/cli/templates/structure/#repository-manifest) but can also be applied in any Jsonnet file.
 
-For example, you can compose a bucket ID containing a configuration ID as follows:
+Example: 
+<br>Composing a bucket ID containing a configuration ID:
 ```jsonnet
 {
  storage: {
@@ -42,16 +43,16 @@ For example, you can compose a bucket ID containing a configuration ID as follow
 
 **`ConfigRowId(string rowId) string`**
 
-- Replaces a configuration row human-readable ID by a generated unique ID.
-- Similar to `ConfigId`, but for configuration rows.
+- Replaces a human-readable configuration row ID with a generated unique ID.
+- Similar to `ConfigId`, but applies to configuration rows.
 
 --------------------------------------
 
 **`Input(string inputId) string`**
 
 - Returns the value of the [user input](/cli/templates/structure/inputs/).
-- If the input is hidden because the [showIf](/cli/templates/structure/inputs/#show-if) condition was evaluated as `false`:
-  - The function returns an empty value for the input type, e.g., `0` for `int`, `false` for `bool`, etc.
+- If the input is hidden because the [showIf](/cli/templates/structure/inputs/#show-if) condition evaluated to `false`:
+  - The function returns a default empty value based on the input type (e.g., `0` for `int`, `false` for `bool`, etc.).
 
 Example:
 ```jsonnet
@@ -68,45 +69,46 @@ Example:
 
 **`InputIsAvailable(string inputId) string`**
 
-- Returns `true` if the input has been filled in by the user and `false` if the step has been skipped or `showIf = false`.
+- Returns `true` if the input has been filled by the user.
+- Return `false` if the step was skipped or `showIf = false`.
 
 --------------------------------------
 
 **`InstanceId() string`**
 
 - Returns the ID of the current template instance.
-- E.g., `V1StGXR8IZ5jdHi6BAmyT`
+- Example: `V1StGXR8IZ5jdHi6BAmyT`
 - This function is not supported in the preview endpoint, which is used for simple template configurations that do not have InstanceIDs.
 
 --------------------------------------
 
 **`InstanceIdShort() string`**
 
-- Returns the ID of the current template instance shortened to 8 characters.
-- E.g., `V1StGXR8`
-- This function is not supported in the preview endpoint, which is used for simple template configurations that do not have InstanceIDs.
-
+- Returns the shortend ID of the current template instance (8 characters).
+- Example: `V1StGXR8`
+- This function is not supported in the preview endpoint.
+  
 --------------------------------------
 
 **`ComponentIsAvailable(string componentId) bool`**
 
-- Returns `true` if the component is available; otherwise, it returns `false`.
+- Returns `true` if the component is available, otherwise returns `false`.
 
 --------------------------------------
 
 **`SnowflakeWriterComponentId() string`**
 
-- Returns `componentId` of the Snowflake writer.
-  - Returns `keboola.wr-db-snowflake` for AWS stacks.
-  - Returns `keboola.wr-snowflake-blob-storage` for Azure stacks.
-  - Returns `keboola.wr-db-snowflake-gcs` for GCP stacks and the BigQuery backend.
-  - Returns `keboola.wr-db-snowflake-gcs-s3` for GCP stacks and the Snowflake backend.
-- This function is not supported in the `inputs.jsonnet`, because before template loading, the project backends are not known.
+- Returns the component ID of the Snowflake writer based on the stack.
+  - AWS: `keboola.wr-db-snowflake`
+  - Azure: `keboola.wr-snowflake-blob-storage`
+  - GCP stacks (BigQuery backend): `keboola.wr-db-snowflake-gcs`
+  - GCP stacks (Snowflake backend): `keboola.wr-db-snowflake-gcs-s3`
+- This function is not supported in the `inputs.jsonnet` because project backends are unknown before template loading.
 --------------------------------------
 
 **`HasProjectBackend(backend string) bool`**
 
-- Returns `true` if the backend is available; otherwise, it returns `false`.
+- Returns `true` if the specified backend is available, otherwise returns `false`.
 
 --------------------------------------
 
