@@ -101,7 +101,7 @@ Example:
   - Returns `keboola.wr-snowflake-blob-storage` for Azure stacks.
   - Returns `keboola.wr-db-snowflake-gcs` for GCP stacks and the BigQuery backend.
   - Returns `keboola.wr-db-snowflake-gcs-s3` for GCP stacks and the Snowflake backend.
-
+- This function is not supported in the `inputs.jsonnet`, because before template loading, the project backends are not known.
 --------------------------------------
 
 **`HasProjectBackend(backend string) bool`**

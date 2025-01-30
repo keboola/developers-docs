@@ -30,6 +30,7 @@ The template needs to contain at least one group with one step.
     - `icon` - component or common icon, [read more](#icons) 
     - `name` string - name of the step
     - `description` string - step description
+    - `backend` string (optional) - step backend, used to filter transformations for different backends.
     - `dialogName` string - name of the step presented to the user in the UI dialog (`name` is used if empty)
     - `dialogDescription` string - description of the step presented to the user in the UI dialog (`description` is used if empty)
     - `inputs` - array of inputs definitions
@@ -106,6 +107,16 @@ The icon is defined as a string and can have one of these forms:
 - `component:<component-id>` eg., `component:keboola.ex-onedrive` - the component icon is used.
 - `common:<icon-name>`, eg. `common:upload` - an icon from the predefined set is used
   - these icons are currently supported: `upload`, `download`, `settings`, `import`
+  
+
+**Snowflake writer (data destination) component ID differs** on AWS, Azure and GCP stacks because staging storage differs.
+
+- Component ID `keboola.wr-db-snowflake` is used for AWS stacks.
+- Component ID `keboola.wr-snowflake-blob-storage` is used for Azure stacks.
+- Component ID `keboola.wr-db-snowflake-gcs` is used for GCP and the BigQuery backend.
+- Component ID `keboola.wr-db-snowflake-gcs-s3` is used for GCP and the Snowflake backend.
+- Please use:
+  - Placeholder `"<keboola.wr-snowflake>"` in the `inputs.jsonnet` for a field `icon`.
 
 ### Rules
 
