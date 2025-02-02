@@ -252,8 +252,7 @@ A sample configuration file might look like this:
                     "incremental": false,
                     "colummns": [],
                     "primary_key": [],
-                    "delete_where_values": [],
-                    "delete_where_operator": "eq",
+                    "delete_where": [],
                     "delimiter": ",",
                     "enclosure": "\""
                 },
@@ -520,7 +519,7 @@ and you want to output that table even if the job fails then you can use the `wr
 #### Output mapping --- delete rows
 Delete data from the `destination` table before uploading the CSV file (only makes sense with `incremental: true`).
 
-The `delete_where` parameter provides a flexible way to specify which records should be deleted before loading new data. It supports time-based filters and multiple filter conditions:
+The `delete_where` parameter provides a flexible way to specify which records should be deleted from the target table before loading new data into it. It supports time-based filters and multiple filter conditions:
 
 {% highlight json %}
 {
