@@ -598,7 +598,7 @@ Here's a basic example of deleting records with a specific status:
                                 {
                                     "column": "Status",
                                     "operator": "eq",
-                                    "values_from_set": ["Closed"]
+                                    "values_from_set": ["Closed", "Cancelled"]
                                 }
                             ]
                         }
@@ -609,6 +609,109 @@ Here's a basic example of deleting records with a specific status:
     }
 }
 {% endhighlight %}
+
+This configuration performs a DELETE operation equivalent to the following SQL:
+
+```sql
+DELETE FROM "out.c-main.Leads"
+WHERE "Status" IN ('Closed', 'Cancelled')
+```
+
+When using `operator: "ne"` (not equals), the operation will use SQL's NOT IN clause instead of IN. For example, if you specify `values_from_set: ["Active", "Pending"]` with `operator: "ne"`, it will delete all records where the column value is NOT one of the specified values.
+
+##### Multiple Filters
+Multiple filters in a single `where_filters` array are combined using AND operator. For example:
+
+{% highlight json %}
+{
+    "storage": {
+        "output": {
+            "tables": [
+                {
+                    "source": "data.csv",
+                    "destination": "out.c-main.Leads",
+                    "incremental": true,
+                    "delete_where": [
+                        {
+                            "where_filters": [
+                                {
+                                    "column": "Status",
+                                    "operator": "eq",
+                                    "values_from_set": ["Closed", "Cancelled"]
+                                },
+                                {
+                                    "column": "Region",
+                                    "operator": "ne",
+                                    "values_from_set": ["EU"]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
+{% endhighlight %}
+
+This configuration performs a DELETE operation equivalent to the following SQL:
+
+```sql
+DELETE FROM "out.c-main.Leads"
+WHERE "Status" IN ('Closed', 'Cancelled')
+  AND "Region" NOT IN ('EU')
+```
+
+**Important Note:** Multiple rules in the `delete_where` array are processed independently (as separate DELETE statements)
+
+##### Independent Rules Processing
+When multiple rules are specified in the `delete_where` array, each rule is processed as a separate DELETE statement. For example:
+
+{% highlight json %}
+{
+    "storage": {
+        "output": {
+            "tables": [
+                {
+                    "source": "data.csv",
+                    "destination": "out.c-main.Leads",
+                    "incremental": true,
+                    "delete_where": [
+                        {
+                            "where_filters": [
+                                {
+                                    "column": "Status",
+                                    "operator": "eq",
+                                    "values_from_set": ["Closed"]
+                                }
+                            ]
+                        },
+                        {
+                            "where_filters": [
+                                {
+                                    "column": "Region",
+                                    "operator": "eq",
+                                    "values_from_set": ["EU"]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
+{% endhighlight %}
+
+This configuration performs two separate DELETE operations equivalent to:
+
+```sql
+DELETE FROM "out.c-main.Leads"
+WHERE "Status" IN ('Closed');
+
+DELETE FROM "out.c-main.Leads"
+WHERE "Region" IN ('EU');
+```
 
 ##### Legacy Delete Configuration (Deprecated)
 For backward compatibility, the following parameters are still supported but not recommended for new implementations:
