@@ -252,8 +252,7 @@ A sample configuration file might look like this:
                     "incremental": false,
                     "colummns": [],
                     "primary_key": [],
-                    "delete_where_values": [],
-                    "delete_where_operator": "eq",
+                    "delete_where": [],
                     "delimiter": ",",
                     "enclosure": "\""
                 },
@@ -301,9 +300,10 @@ The tables element in a configuration of the **output mapping** is an array and 
   - `incremental`
   - `columns`
   - `primary_key`
-  - `delete_where_column`
-  - `delete_where_operator`
-  - `delete_where_values`
+  - `delete_where` - Defines rules for deleting records before loading new data
+  - `delete_where_column` - **[DEPRECATED]** Use `delete_where` instead
+  - `delete_where_operator` - **[DEPRECATED]** Use `delete_where` instead
+  - `delete_where_values` - **[DEPRECATED]** Use `delete_where` instead
   - `delimiter`
   - `enclosure`
   - `write_always`
@@ -517,8 +517,203 @@ and you want to output that table even if the job fails then you can use the `wr
 {% endhighlight %}
 
 #### Output mapping --- delete rows
-Delete data from the `destination` table before uploading the CSV
-file (only makes sense with `incremental: true`).
+Delete data from the `destination` table before uploading the CSV file (only makes sense with `incremental: true`).
+
+The `delete_where` parameter provides a flexible way to specify which records should be deleted from the target table before loading new data into it. It supports time-based filters and multiple filter conditions:
+
+{% highlight json %}
+{
+    "storage": {
+        "output": {
+            "tables": [
+                {
+                    "source": "data.csv",
+                    "destination": "out.c-main.Leads",
+                    "incremental": true,
+                    "delete_where": [
+                        {
+                            "changed_since": "-7 days",
+                            "changed_until": "-2 days",
+                            "where_filters": [
+                                {
+                                    "column": "Status",
+                                    "operator": "eq",
+                                    "values_from_set": ["Closed"]
+                                },
+                                {
+                                    "column": "Status",
+                                    "operator": "eq",
+                                    "values_from_workspace": {
+                                        "workspace_id": "123",
+                                        "table": "statuses",
+                                        "column": "status_name"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
+{% endhighlight %}
+
+**Parameters:**
+
+- `changed_since` (optional) - Starting point for time-based deletion. Can be specified as:
+  - Relative time (e.g., "-2 days", "-1 month")
+  - Unix timestamp (e.g., "1360138863")
+  - ISO 8601 date (e.g., "2013-02-12T15:19:21+00:00")
+- `changed_until` (optional) - End point for time-based deletion. Accepts the same formats as `changed_since`
+- `where_filters` (optional) - Array of filter conditions:
+  - `column` - Name of the column to filter on
+  - `operator` - One of: `eq` (equals), `ne` (not equals)
+  - `values_from_set` - Array of specific values to match against
+  - `values_from_workspace` - Reference values from a workspace table:
+    - `workspace_id` - ID of the workspace. Optional when exchanging data through [database workspace](/extend/common-interface/folders/#exchanging-data-via-database-workspace)
+    - `table` - Name of the table in the workspace.
+    - `column` - Name of the column containing values. If not specified, the column name from `where_filters.column` will be used
+
+**Note:** For each `where_filters` item, you must use only one method to specify values - either `values_from_set` or `values_from_workspace`. Using multiple value sources in a single filter is not allowed.
+
+You can combine multiple rules and filters to create complex deletion conditions. Each rule in the `delete_where` array is processed independently.
+
+##### Simple Example
+Here's a basic example of deleting records with a specific status:
+
+{% highlight json %}
+{
+    "storage": {
+        "output": {
+            "tables": [
+                {
+                    "source": "data.csv",
+                    "destination": "out.c-main.Leads",
+                    "incremental": true,
+                    "delete_where": [
+                        {
+                            "where_filters": [
+                                {
+                                    "column": "Status",
+                                    "operator": "eq",
+                                    "values_from_set": ["Closed", "Cancelled"]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
+{% endhighlight %}
+
+This configuration performs a DELETE operation equivalent to the following SQL:
+
+```sql
+DELETE FROM "out.c-main.Leads"
+WHERE "Status" IN ('Closed', 'Cancelled')
+```
+
+When using `operator: "ne"` (not equals), the operation will use SQL's NOT IN clause instead of IN. For example, if you specify `values_from_set: ["Active", "Pending"]` with `operator: "ne"`, it will delete all records where the column value is NOT one of the specified values.
+
+##### Multiple Filters
+Multiple filters in a single `where_filters` array are combined using AND operator. For example:
+
+{% highlight json %}
+{
+    "storage": {
+        "output": {
+            "tables": [
+                {
+                    "source": "data.csv",
+                    "destination": "out.c-main.Leads",
+                    "incremental": true,
+                    "delete_where": [
+                        {
+                            "where_filters": [
+                                {
+                                    "column": "Status",
+                                    "operator": "eq",
+                                    "values_from_set": ["Closed", "Cancelled"]
+                                },
+                                {
+                                    "column": "Region",
+                                    "operator": "ne",
+                                    "values_from_set": ["EU"]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
+{% endhighlight %}
+
+This configuration performs a DELETE operation equivalent to the following SQL:
+
+```sql
+DELETE FROM "out.c-main.Leads"
+WHERE "Status" IN ('Closed', 'Cancelled')
+  AND "Region" NOT IN ('EU')
+```
+
+**Important Note:** Multiple rules in the `delete_where` array are processed independently (as separate DELETE statements)
+
+##### Independent Rules Processing
+When multiple rules are specified in the `delete_where` array, each rule is processed as a separate DELETE statement. For example:
+
+{% highlight json %}
+{
+    "storage": {
+        "output": {
+            "tables": [
+                {
+                    "source": "data.csv",
+                    "destination": "out.c-main.Leads",
+                    "incremental": true,
+                    "delete_where": [
+                        {
+                            "where_filters": [
+                                {
+                                    "column": "Status",
+                                    "operator": "eq",
+                                    "values_from_set": ["Closed"]
+                                }
+                            ]
+                        },
+                        {
+                            "where_filters": [
+                                {
+                                    "column": "Region",
+                                    "operator": "eq",
+                                    "values_from_set": ["EU"]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
+{% endhighlight %}
+
+This configuration performs two separate DELETE operations equivalent to:
+
+```sql
+DELETE FROM "out.c-main.Leads"
+WHERE "Status" IN ('Closed');
+
+DELETE FROM "out.c-main.Leads"
+WHERE "Region" IN ('EU');
+```
+
+##### Legacy Delete Configuration (Deprecated)
+For backward compatibility, the following parameters are still supported but not recommended for new implementations:
 
 {% highlight json %}
 {

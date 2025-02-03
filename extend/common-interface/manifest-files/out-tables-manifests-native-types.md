@@ -52,9 +52,17 @@ Using this option makes sense only with [incremental loads](/extend/generic-extr
 {% highlight json %}
 {
     ...
-    "delete_where_column": "column name",
-    "delete_where_values": ["value1", "value2"],
-    "delete_where_operator": "eq"
+    "delete_where": [
+        {
+            "where_filters": [
+                {
+                    "column": "column name",
+                    "operator": "eq",
+                    "values_from_set": ["value1", "value2"]
+                }
+            ]
+        }
+    ]
 }
 {% endhighlight %}
 
