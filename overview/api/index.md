@@ -99,10 +99,6 @@ Otherwise, you may encounter `Invalid Token` or unauthorized errors. The *author
             "url": "https://sandboxes.keboola.com"
         },
         {
-            "id": "mlflow",
-            "url": "https://mlflow.keboola.com"
-        },
-        {
             "id": "spark",
             "url": "https://spark.keboola.com"
         },
@@ -136,7 +132,6 @@ The services listed above are:
 - `billing` --- Service for Computing Credits
 - `encryption` --- Service for [Encryption](https://developers.keboola.com/overview/encryption/)
 - `sandboxes` --- Workspace Manager Service
-- `mlflow` --- MLFlow Models Manager Service
 - `scheduler` --- [Service for Configuring Schedules](https://developers.keboola.com/automate/set-schedule/)
 - `sync-actions` --- [Service for Running Synchronous Actions](/extend/common-interface/actions/)
 - `notification` --- Service for Configuring Job Notifications
@@ -162,9 +157,6 @@ and in application integrations, we strongly suggest using the above API call.
 | Importer               | `import`       | EU Frankfurt AWS | https://import.eu-central-1.keboola.com             |
 | Importer               | `import`       | EU Ireland Azure | https://import.north-europe.azure.keboola.com       |
 | Importer               | `import`       | EU Frankfurt GCP | https://import.europe-west3.gcp.keboola.com         |
-| MLFlow                 | `mlflow`       | US Virginia AWS  | https://mlflow.keboola.com                          |
-| MLFlow                 | `mlflow`       | EU Frankfurt AWS | https://mlflow.eu-central-1.keboola.com             |
-| MLFlow                 | `mlflow`       | EU Ireland Azure | https://mlflow.north-europe.azure.keboola.com       |
 | Notification           | `notification` | US Virginia AWS  | https://notification.keboola.com                    |
 | Notification           | `notification` | US Virginia GCP  | https://notification.us-east4.gcp.keboola.com       |
 | Notification           | `notification` | EU Frankfurt AWS | https://notification.eu-central-1.keboola.com       |
