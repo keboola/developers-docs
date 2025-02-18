@@ -59,7 +59,7 @@ At the moment, all [Storage](https://help.keboola.com/storage/) related operatio
 
 These commands can be used to manage the [buckets](https://help.keboola.com/storage/buckets/) and [tables](https://help.keboola.com/storage/tables/) in your project:
 - To create a new bucket, use the [create bucket](/cli/commands/remote/create/bucket/) command. 
-- To create a new table, use the [create table](/cli/commands/remote/create/table/) command.
+- To create a new table, use the [create table](/cli/commands/remote/table/create) command.
 
 The resulting [tables](https://help.keboola.com/storage/tables/) will be empty, so you may want to use:
 - The [table import](/cli/commands/remote/table/import/) command to import data. 
