@@ -100,10 +100,23 @@ The sync action code has to return the following stdout (JSON string):
 ```json
 {
   "message": "###This is display text. \n\n It can contain **Markdown** notation. ",
-  "type": "info", //possible values: success, info, warning, danger
-  "status": "success" // this is required and will never be other value than "success"
+  "type": "info", //possible values: success, info, warning, error, table
+  "status": "success" // possible values: success, error. Error will be always rendered as error type.
 }
 ```
+
+#### Custom Icons
+
+Markdown supports special status icons that are rendered in Keboola UI style. The following icons are supported:
+
+```
+![success]()
+![warning]()
+![error]()
+```
+
+![status_icons.png](/extend/component/ui-options/ui-examples/status_icons.png)
+
 
 
 When used in Python, you can use the [ValidationResult](https://github.com/keboola/python-component#validationresult) class as a return value.
