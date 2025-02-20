@@ -421,8 +421,6 @@ items:
                     title: branch
                   - url: /cli/commands/remote/create/bucket/
                     title: bucket
-                  - url: /cli/commands/remote/create/table/
-                    title: table
               - url: /cli/commands/remote/file/
                 title: file
                 items:

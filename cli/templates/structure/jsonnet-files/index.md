@@ -104,6 +104,7 @@ Example:
   - GCP stacks (BigQuery backend): `keboola.wr-db-snowflake-gcs`
   - GCP stacks (Snowflake backend): `keboola.wr-db-snowflake-gcs-s3`
 - This function is not supported in the `inputs.jsonnet` because project backends are unknown before template loading.
+
 --------------------------------------
 
 **`HasProjectBackend(backend string) bool`**
