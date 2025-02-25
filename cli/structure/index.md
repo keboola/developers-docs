@@ -216,6 +216,42 @@ Default values configuration in `variables/values/default/config.json`:
 }
 ```
 
+## Configuration Variables Overview
+
+### One-to-One Relationship Variable Types
+
+1. **`variablesFor`**: This relation links a set of variables to a specific configuration or object that requires
+   them to function properly. It ensures the dependency between variables and their target is clearly defined.
+
+2. **`variablesFrom`**: This type indicates that variables are derived or used from another configuration,
+   allowing shared or inherited data between objects. It helps track the source of the variables.
+
+3. **`variablesValuesFor`**: This relation connects specific variable values to a configuration, often used in
+   scenarios like environment-specific settings. It enables precise association and management of variable values.
+
+4. **`variablesValuesFrom`**: It represents a connection where values are inherited from another configuration,
+   supporting reusability and consistent data sharing across objects. This avoids redundancy in value definitions.
+
+### Many-to-One Relationship Variable Types
+
+5. **`sharedCodeVariablesFor`**: Links shared code with associated variables, allowing multiple configurations to
+   refer to common logic. It promotes reuse and reduces duplication.
+
+6. **`sharedCodeVariablesFrom`**: This defines that variables are sourced from shared code, ensuring consistent
+   integration with centralized reusable logic. It maintains modularity and cohesion.
+
+7. **`schedulerFor`**: Connects a configuration to a scheduler, indicating tasks that need to be
+   timed or executed automatically. Commonly used in orchestration or automation setups.
+
+8. **`usedInOrchestrator`**: Marks an object as used within an orchestrator, linking configurations or components
+   required in workflows or pipelines. It ensures proper integration of orchestrated processes.
+
+9. **`usedInConfigInputMapping`**: Denotes that a configuration is used for input data mapping, linking data
+   sources to transformations. Essential for aligning inputs with the appropriate configurations.
+
+10. **`usedInRowInputMapping`**: Similar to `usedInConfigInputMapping`, but applies to input mapping at
+    the row level within a configuration. It allows fine-grained control of input relationships.
+
 ## Shared Code
 
 [Shared code](https://help.keboola.com/transformations/variables/#shared-code) blocks are stored in the branch directory 
