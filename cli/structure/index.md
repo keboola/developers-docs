@@ -247,7 +247,7 @@ Default values configuration in `variables/values/default/config.json`:
    required in workflows or pipelines. It ensures proper integration of orchestrated processes.
 
 9. **`usedInConfigInputMapping`**: Denotes that a configuration is used for input data mapping, linking data
-   sources to transformations. Essential for aligning inputs with the appropriate configurations.
+   sources to transformations. It is essential for aligning inputs with the appropriate configurations.
 
 10. **`usedInRowInputMapping`**: Similar to `usedInConfigInputMapping`, but applies to input mapping at
     the row level within a configuration. It allows fine-grained control of input relationships.
