@@ -19,26 +19,20 @@ The main APIs for our components are:
 |---|---|
 | [Keboola Storage API](https://keboola.docs.apiary.io/) | [Storage](/integrate/storage/) is the main Keboola component storing all data. |
 | [Keboola Management API](https://keboolamanagementapi.docs.apiary.io/) | API managing Keboola projects and users (and notifications and features). |
-| [Encryption API](https://keboolaencryption.docs.apiary.io/#) | Provides [Encryption](/overview/encryption/). |
-| [Docker Runner API](https://kebooladocker.docs.apiary.io/#) | [Docker Runner](/extend/docker-runner/) is the component running other Keboola components. |
-| [JSON Parser API](https://jsonparserapi.docs.apiary.io/#) | JSON Parser is a service [converting JSON files to CSV](https://json-parser.keboola.com/). |
-| [Transformation API](https://keboolatransformationapi.docs.apiary.io/#) | [Transformations](/integrate/transformations/) is the component running [SQL/R/Python transformations](https://help.keboola.com/manipulation/transformations/). |
-| [Provisioning API](https://provisioningapi.docs.apiary.io/#) | Provisioning is a service creating accounts for [sandboxes](https://help.keboola.com/manipulation/transformations/sandbox/), [transformations](https://help.keboola.com/manipulation/transformations/) and database writers. |
-| [Provisioning Management API](https://provisioningmanagementapi.docs.apiary.io/#) | API managing servers for [sandboxes](https://help.keboola.com/manipulation/transformations/sandbox/), [transformations](https://help.keboola.com/manipulation/transformations/). |
-| [Syrup Queue API](https://syrupqueue.docs.apiary.io/#) | Syrup Queue is a component managing [Jobs](/integrate/jobs/). Being replaced by Queue API. |
-| [Queue API](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api) | Queue is a service for [running components](/extend/docker-runner/) and managing [Jobs](/integrate/jobs/). |
-| [OAuth Broker API](https://oauthapi3.docs.apiary.io/#) | OAuth Broker is a component managing [OAuth authorizations](/extend/common-interface/oauth/#authorize) of other components. |
-| [Orchestrator API](https://keboolaorchestratorv2api.docs.apiary.io/#) | Orchestrator is a component used for [automating and scheduling tasks](https://help.keboola.com/tutorial/automate/) in your project. Note: This applies to legacy orchestrations only. For Orchestrator V2, please refer to the [Storage API](/integrate/storage/). |
-| [Importer API](https://app.swaggerhub.com/apis-docs/keboola/import) | [Importer](/integrate/storage/api/importer/) is a helper service for easy table imports |
-| [Developer Portal API](https://kebooladeveloperportal.docs.apiary.io/#) | Developer Portal is an application separated from Keboola for [creating components](/extend/component/). |
 | [Billing API](https://keboolabillingapi.docs.apiary.io/#) | Billing API for Pay as You Go projects. |
-| [Workspaces API](https://sandboxes.keboola.com/documentation) | Workspaces API for V2 workspaces. |
-| [Synchronous Actions API](https://app.swaggerhub.com/apis/odinuv/sync-actions) | API to trigger [Synchronous Actions](/extend/common-interface/actions/). This is a partial replacement of Docker Runner API and may not be available on all stacks. |
-| [Scheduler API](https://app.swaggerhub.com/apis/odinuv/scheduler) | API to automate configurations |
-| [Notifications API](https://app.swaggerhub.com/apis/odinuv/notifications-service) | API to subscribe to events, e.g., failed orchestrations (replacement for Orchestrator API) |
-| [Templates API](https://templates.keboola.com/v1/documentation/) | The Keboola Templates API allows you to apply a [template](/cli/templates/). |
+| [Developer Portal API](https://kebooladeveloperportal.docs.apiary.io/#) | Developer Portal is an application separated from Keboola for [creating components](/extend/component/). |
+| [Encryption API](https://keboolaencryption.docs.apiary.io/#) | Provides [Encryption](/overview/encryption/). |
+| [Importer API](https://app.swaggerhub.com/apis-docs/keboola/import) | [Importer](/integrate/storage/api/importer/) is a helper service for easy table imports. |
+| [Notifications API](https://app.swaggerhub.com/apis/odinuv/notifications-service) | API to subscribe to events, e.g., failed orchestrations.
+| [OAuth Broker API](https://oauthapi3.docs.apiary.io/#) | OAuth Broker is a component managing [OAuth authorizations](/extend/common-interface/oauth/#authorize) of other components. |
+| [Queue API](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api) | Queue is a service for [running components](/extend/docker-runner/) and managing [Jobs](/integrate/jobs/). |
+| [Scheduler API](https://app.swaggerhub.com/apis/odinuv/scheduler) | API to automate configurations. |
 | [Stream API](https://stream.keboola.com/v1/documentation/) | The Keboola Stream API allows you to ingest small and frequent events into your project’s storage. |
+| [Synchronous Actions API](https://app.swaggerhub.com/apis/odinuv/sync-actions) | API to trigger [Synchronous Actions](/extend/common-interface/actions/). This is a partial replacement of Docker Runner API and may not be available on all stacks. |
+| [Templates API](https://templates.keboola.com/v1/documentation/) | The Keboola Templates API allows you to apply a [template](/cli/templates/). |
 | [Vault](https://vault.keboola.com/docs/swagger.yaml) | Service handling variables & credentials storage. |
+| [Workspaces API](https://sandboxes.keboola.com/documentation) | Workspaces API for V2 workspaces. |
+
 
 If you're unsure which API to use, refer to our [integration guide](/integrate/). It describes the roles of different APIs and contains examples of commonly
 performed actions.
