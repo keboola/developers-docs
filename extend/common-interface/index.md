@@ -21,6 +21,8 @@ In addition to that, [Docker Runner](/extend/docker-runner/) provides tools for
 
 To quickly get the picture, have a look a [random sample data folder](/extend/data.zip).
 
+Our Python library [PyPi](https://pypi.org/project/keboola.component/) provides a convenient way how to interact with the Common Interface. Learn more in the [documentation](https://keboola.github.io/python-component/index.html#header-submodules).
+
 ### Component Limits
 Even though you can define your own limits for your component, all components are also subject to the following service limits:
 
