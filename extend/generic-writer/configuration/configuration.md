@@ -379,7 +379,7 @@ Defines how to process the input and how the sent content should look like.
   See [example 021](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/docs/examples/021-simple-json-url-encoded-form/)
 - `BINARY` - input table is sent as binary data (just like `curl --data-binary`).
   See [example](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/tests/functional/binary_simple/)
-- `BINARY-GZ` - input is sent as gzipped binary data.
+- `BINARY_GZ` - input is sent as gzipped binary data.
   See [example](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/tests/functional/binary_gz/)
 - `EMPTY_REQUEST` - sends just empty requests. Usefull for triggerring webhooks, DELETE calls, etc. As many requests as
   there are rows on the input are sent. Useful with `iterate_by_columns` enabled to trigger multiple endpoints.
