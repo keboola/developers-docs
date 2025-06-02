@@ -143,10 +143,6 @@ The primary way to run the server locally is by executing `uv` or `uvx` command 
 
 2.  **Run the server (example using Python module directly for testing CLI manually)**:
     ```bash
-    uv run keboola_mcp_server --api-url $KBC_API_URL
-    ```
-    OR
-    ```bash
     uvx keboola_mcp_server --api-url $KBC_API_URL
     ```
     The `KBC_API_URL` was set as environment variable but could be inserted manually using your actual Keboola API URL.
