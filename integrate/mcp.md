@@ -8,12 +8,14 @@ For information on using MCP within the Keboola UI, please see [help.keboola.com
 
 ## Integrate with Existing MCP Clients
 
-Integration to existing MCP clients typically involves configuring the client with your Keboola project details and API tokens/ Oauth provider. Here is list of the popular MCP clients:
+Integration to existing MCP clients typically involves configuring the client with your Keboola project details and API tokens/OAuth provider. Popular MCP clients include:
 
 *   [Claude](https://claude.ai/)
 *   [Cursor](https://cursor.com/)
 *   [RooCode](https://roocode.com/)
 *   [Windsurf](https://codeium.com/windsurf)
+
+
 
 ### Claude Messages API with MCP Connector (Beta)
 
@@ -37,7 +39,7 @@ If you are developing your own MCP client or integrating MCP capabilities into a
 
 For detailed instructions and SDKs for building your own MCP client, refer to the official [Model Context Protocol documentation for client developers](https://modelcontextprotocol.io/quickstart/client).
 
-Information on supported transports (e.g., stdio, HTTP+SSE) and any specific requirements for custom client integration will be detailed in this section. You can find more information about the Keboola MCP server, including how it can be run and configured, in its [GitHub repository](https://github.com/keboola/mcp-server).
+Information on supported transports (e.g., `stdio`, `HTTP+SSE`) is provided in the 'MCP Server Capabilities' section below. For more details on the Keboola MCP server, including how it can be run and configured for custom client integration, please refer to its [GitHub repository](https://github.com/keboola/mcp-server).
 
 ## MCP Server Capabilities
 
@@ -48,7 +50,7 @@ The Keboola MCP Server supports several core concepts of the Model Context Proto
 | Transports  | ✅        | Supports `stdio` and `HTTP+SSE` for client communication.                                              |
 | Prompts     | ✅        | Processes natural language prompts from MCP clients to interact with Keboola.                          |
 | Tools       | ✅        | Provides a rich set of tools for storage operations, component management, SQL execution, job control. |
-| Resources   | ❌        | Exposes Keboola project data, configurations, components, transformations, and jobs as resources.      |
+| Resources   | ❌        | Exposing Keboola project entities (data, configurations, etc.) as formal MCP Resources is not currently supported.      |
 | Sampling    | ❌        | Advanced sampling techniques are not explicitly supported by the server itself.                        |
 | Roots       | ❌        | The concept of 'Roots' as defined in general MCP is not a specific feature of the Keboola MCP server.  |
 
@@ -100,7 +102,7 @@ Before proceeding, ensure you have Docker installed on your system. You can find
           "command": "docker",
           "args": [
             "run",
-            "--it", 
+            "-it", 
             "--rm", 
             "-e", "KBC_STORAGE_TOKEN", 
             "-e", "KBC_WORKSPACE_SCHEMA", 
@@ -109,7 +111,7 @@ Before proceeding, ensure you have Docker installed on your system. You can find
           ],
           "env": {
             "KBC_STORAGE_TOKEN": "YOUR_KEBOOLA_STORAGE_TOKEN",
-            "KBC_WORKSPACE_SCHEMA": "YOUR_KEBOOLA_STORAGE_TOKEN"
+            "KBC_WORKSPACE_SCHEMA": "YOUR_WORKSPACE_SCHEMA"
           }
         }
       }
@@ -120,11 +122,11 @@ Before proceeding, ensure you have Docker installed on your system. You can find
     *   Replace placeholders like `YOUR_KEBOOLA_STORAGE_TOKEN`, `YOUR_WORKSPACE_SCHEMA`, and the Keboola API URL.
     *   The client (Cursor) passes the `KBC_STORAGE_TOKEN` and `KBC_WORKSPACE_SCHEMA` from its `env` block to the `docker run` command through the `-e` flags. The `--api-url` is passed directly as an argument to the `keboola/mcp-server` entrypoint.
 
-## Running Keboola MCP Server Locally Using Python
+## Running Keboola MCP Server Locally Using `uv`
 
 While MCP clients like Cursor or Claude typically manage the MCP server automatically, you might want to run the Keboola MCP Server locally for development, testing, or when using a custom client.
 
-The primary way to run the server locally is by executing `uv` or `uvx` command with [Keboola MCP Server GitHub repository](https://github.com/keboola/mcp-server). Make sure you have Python 3.10+ and `uv` installed.
+The primary way to run the server locally is by using `uv` or `uvx` to execute the `keboola_mcp_server` package. More information about the server is available in its [Keboola MCP Server GitHub repository](https://github.com/keboola/mcp-server). Make sure you have Python 3.10+ and `uv` installed.
 
 1.  **Set up environment variables:**
     Before running the server, you need to configure the following environment variables:
@@ -141,23 +143,23 @@ The primary way to run the server locally is by executing `uv` or `uvx` command 
     Example:
     `GOOGLE_APPLICATION_CREDENTIALS="/path/to/your/credentials.json"`
 
-2.  **Run the server (example using Python module directly for testing CLI manually)**:
+2.  **Run the server**:
     ```bash
     uvx keboola_mcp_server --api-url $KBC_API_URL
     ```
-    The `KBC_API_URL` was set as environment variable but could be inserted manually using your actual Keboola API URL.
-    The server will typically start and listen for connections on host `localhost:8000`. For normal use with supported clients like Claude or Cursor, you usually don't need to run this command manually as they handle the server lifecycle.
+    The `KBC_API_URL` was set as an environment variable but could be inserted manually using your actual Keboola API URL.
+    The command shown starts the server communicating via `stdio`. To run the server in `HTTP+SSE` mode, which would listen on a network host and port (e.g., `localhost:8000`), additional configuration arguments to `keboola_mcp_server` would be required. For normal use with supported clients like Claude or Cursor, you usually don't need to run this command manually as they handle the server lifecycle.
 
 ### Connecting a Client to a Localhost Instance
 
 When you run the Keboola MCP Server manually, it will typically listen on `stdio` or a specific HTTP port if configured for `HTTP+SSE`.
 
-*   **For `stdio` based clients**: The client application needs to be configured to launch the local MCP server executable (the Python script in this case) and communicate with it over standard input/output.
-*   **For `HTTP+SSE` based clients**: If you configure the MCP server to run in HTTP mode (not the default for local Python execution without further arguments), your client would connect to the specified host and port (e.g., `http://localhost:8000?storage_token=XXX&workspace_schema=YYY`).
+*   **For `stdio` based clients**: The client application needs to be configured to launch the local MCP server executable (the `keboola_mcp_server` executable in this case) and communicate with it over standard input/output.
+*   **For `HTTP+SSE` based clients**: If you configure the MCP server to run in HTTP mode (not the default for local `uvx` execution without further arguments), your client would connect to the specified host and port (e.g., `http://localhost:8000?storage_token=XXX&workspace_schema=YYY`).
 
 ### Cursor IDE Connection
 
-Cursor is designed to work seamlessly with the Keboola MCP Server. In most cases, Cursor will automatically manage the server lifecycle (downloading and running it) when you configure Keboola as an MCP data source within Cursor's settings.
+If you are running the Keboola MCP Server locally using `uvx` (as described in this section), you can configure your Cursor IDE to connect to this local instance. This is useful for development or testing with a custom server version.
 
 1.  **Open Cursor settings.**
 2.  **Navigate to the MCP section within settings.**
