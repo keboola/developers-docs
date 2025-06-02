@@ -15,6 +15,20 @@ Integration to existing MCP clients typically involves configuring the client wi
 *   [RooCode](https://roocode.com/)
 *   [Windsurf](https://codeium.com/windsurf)
 
+### Claude Messages API with MCP Connector (Beta)
+
+Anthropic offers a beta feature, the [MCP connector](https://docs.anthropic.com/en/docs/agents-and-tools/mcp-connector), which enables you to connect to remote MCP servers (such as the Keboola MCP Server) directly through Claude's Messages API. This method bypasses the need for a separate, standalone MCP client if you are already using the Claude Messages API.
+
+**Key features of this integration:**
+
+*   **Direct API Calls**: You configure connections to MCP servers by including the `mcp_servers` parameter in your API requests to Claude.
+*   **Tool Calling**: The primary MCP functionality currently supported through this connector is tool usage.
+*   **Accessibility**: The target MCP server needs to be publicly accessible over HTTP.
+
+This approach can simplify your architecture if you're building applications that programmatically interact with Claude and need to leverage MCP-enabled tools without managing an additional client layer.
+
+For complete details, API examples, and configuration options, please consult the [official Anthropic MCP connector documentation](https://docs.anthropic.com/en/docs/agents-and-tools/mcp-connector).
+
 The Keboola MCP Server facilitates this by acting as a bridge, translating natural language queries from your client into actions within your Keboola environment. For a comprehensive list of clients supporting the Model Context Protocol, please visit [list of available clients](https://modelcontextprotocol.io/clients).
 
 ## Integrate with Your Own MCP Client
