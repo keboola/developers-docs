@@ -3,6 +3,9 @@ title: Keboola MCP Integration
 permalink: /integrate/mcp/
 ---
 
+> The Keboola MCP Server is available at [github.com/keboola/mcp-server](https://github.com/keboola/mcp-server).
+> If this integration works well for you, please consider giving the repository a ⭐️!
+
 This section describes how to integrate with Keboola using the Model Context Protocol (MCP).
 For information on using MCP within the Keboola UI, please see [help.keboola.com/mcp](https://help.keboola.com/mcp).
 
@@ -15,7 +18,7 @@ Integration to existing MCP clients typically involves configuring the client wi
 *   [RooCode](https://roocode.com/)
 *   [Windsurf](https://codeium.com/windsurf)
 
-
+The Keboola MCP Server facilitates this by acting as a bridge, translating natural language queries from your client into actions within your Keboola environment. For a comprehensive list of clients supporting the Model Context Protocol, please visit [list of available clients](https://modelcontextprotocol.io/clients).
 
 ### Claude Messages API with MCP Connector (Beta)
 
@@ -31,7 +34,46 @@ This approach can simplify your architecture if you're building applications tha
 
 For complete details, API examples, and configuration options, please consult the [official Anthropic MCP connector documentation](https://docs.anthropic.com/en/docs/agents-and-tools/mcp-connector).
 
-The Keboola MCP Server facilitates this by acting as a bridge, translating natural language queries from your client into actions within your Keboola environment. For a comprehensive list of clients supporting the Model Context Protocol, please visit [list of available clients](https://modelcontextprotocol.io/clients).
+## Integrate with AI Agents
+
+Modern AI-agent frameworks can connect directly to the Keboola MCP Server and expose all of its tools inside your
+agents. This unlocks fully-automated data workflows driven by natural-language instructions.
+
+### OpenAI Agents SDK (Python)
+
+The [OpenAI Agents SDK](https://openai.github.io/openai-agents-python/mcp/) ships with first-class MCP support. Simply
+start the Keboola MCP Server (locally via `uvx` or remotely over HTTP+SSE) and register it with the SDK:
+
+```python
+from openai_agents_python import Agent
+from openai_agents_python.mcp import MCPServerStdio
+
+async with MCPServerStdio(
+    params={"command": "uvx", "args": ["keboola_mcp_server"]}
+) as mcp:
+    agent = Agent(
+        name="Assistant",
+        instructions="Use the Keboola tools to achieve the task",
+        mcp_servers=[mcp],
+    )
+    await agent.run("Load yesterday's CSV into Snowflake")
+```
+
+The SDK automatically calls `list_tools()` on the server, making every Keboola operation available to the model.
+
+### LangChain
+
+[LangChain](https://python.langchain.com/docs/) does not yet include a built-in MCP connector, but you can integrate by:
+
+1. Running the Keboola MCP Server, or attaching to our deployed instance `https://mcp.REGION.keboola.com`.
+2. Mapping each entry from `list_tools()` to a `Tool` in LangChain.
+3. Adding those tools to an `AgentExecutor`.
+
+Because the server returns standard JSON schemas, the mapping is straightforward and can be handled with a
+lightweight wrapper. Native MCP support is already under discussion in the LangChain community.
+
+### Other frameworks
+* **[Crew AI](https://crewai.com)** – Provide crew members with Keboola tool definitions and route tool invocations through the MCP server's
 
 ## Integrate with Your Own MCP Client
 
@@ -102,11 +144,11 @@ Before proceeding, ensure you have Docker installed on your system. You can find
           "command": "docker",
           "args": [
             "run",
-            "-it", 
-            "--rm", 
-            "-e", "KBC_STORAGE_TOKEN", 
-            "-e", "KBC_WORKSPACE_SCHEMA", 
-            "keboola/mcp-server:latest", 
+            "-it",
+            "--rm",
+            "-e", "KBC_STORAGE_TOKEN",
+            "-e", "KBC_WORKSPACE_SCHEMA",
+            "keboola/mcp-server:latest",
             "--api-url", "https://connection.YOUR_REGION.keboola.com"
           ],
           "env": {
@@ -117,72 +159,73 @@ Before proceeding, ensure you have Docker installed on your system. You can find
       }
     }
     ```
-    **Note:**
-    *   Ensure Docker is running on your system.
-    *   Replace placeholders like `YOUR_KEBOOLA_STORAGE_TOKEN`, `YOUR_WORKSPACE_SCHEMA`, and the Keboola API URL.
-    *   The client (Cursor) passes the `KBC_STORAGE_TOKEN` and `KBC_WORKSPACE_SCHEMA` from its `env` block to the `docker run` command through the `-e` flags. The `--api-url` is passed directly as an argument to the `keboola/mcp-server` entrypoint.
 
-## Running Keboola MCP Server Locally Using `uv`
+    **Note:**
+    * Ensure Docker is running on your system.
+    * Replace placeholders like `YOUR_KEBOOLA_STORAGE_TOKEN`, `YOUR_WORKSPACE_SCHEMA`, and the Keboola API URL.
+    * The client (Cursor) passes the `KBC_STORAGE_TOKEN` and `KBC_WORKSPACE_SCHEMA` from its `env` block to the `docker run` command through the `-e` flags. The `--api-url` is passed directly as an argument to the `keboola/mcp-server` entrypoint.
+
+## Running Keboola MCP Server Locally Using uv command
 
 While MCP clients like Cursor or Claude typically manage the MCP server automatically, you might want to run the Keboola MCP Server locally for development, testing, or when using a custom client.
 
 The primary way to run the server locally is by using `uv` or `uvx` to execute the `keboola_mcp_server` package. More information about the server is available in its [Keboola MCP Server GitHub repository](https://github.com/keboola/mcp-server). Make sure you have Python 3.10+ and `uv` installed.
 
-1.  **Set up environment variables:**
-    Before running the server, you need to configure the following environment variables:
-    *   `KBC_STORAGE_TOKEN`: Your Keboola Storage API token.
-    *   `KBC_WORKSPACE_SCHEMA`: Your Keboola project's workspace schema (for SQL queries).
-    *   `KBC_API_URL`: Your Keboola instance API URL (e.g., `https://connection.keboola.com` or `https://connection.YOUR_REGION.keboola.com`).
+1. **Set up environment variables:**  
+   Before running the server, you need to configure the following environment variables:
+   * `KBC_STORAGE_TOKEN`: Your Keboola Storage API token.
+   * `KBC_WORKSPACE_SCHEMA`: Your Keboola project's workspace schema (for SQL queries).
+   * `KBC_API_URL`: Your Keboola instance API URL (e.g., `https://connection.keboola.com` or `https://connection.YOUR_REGION.keboola.com`).
 
-    Refer to the [Keboola Tokens](https://help.keboola.com/management/project/tokens/) and [Keboola workspaces manipulation](https://help.keboola.com/tutorial/manipulate/workspace/) for detailed instructions on obtaining these values.
+   Refer to the [Keboola Tokens](https://help.keboola.com/management/project/tokens/) and [Keboola workspaces manipulation](https://help.keboola.com/tutorial/manipulate/workspace/) for detailed instructions on obtaining these values.
 
-    **1.1. Additional Setup for BigQuery Users**
+   **1.1. Additional Setup for BigQuery Users**  
+   If your Keboola project uses BigQuery as its backend, you will also need to set up the `GOOGLE_APPLICATION_CREDENTIALS` environment variable. This variable should point to the JSON file containing your Google Cloud service account key that has the necessary permissions to access your BigQuery data.
 
-    If your Keboola project uses BigQuery as its backend, you will also need to set up the `GOOGLE_APPLICATION_CREDENTIALS` environment variable. This variable should point to the JSON file containing your Google Cloud service account key that has the necessary permissions to access your BigQuery data.
+   Example:  
+   `GOOGLE_APPLICATION_CREDENTIALS="/path/to/your/credentials.json"`
 
-    Example:
-    `GOOGLE_APPLICATION_CREDENTIALS="/path/to/your/credentials.json"`
+2. **Run the server:**
 
-2.  **Run the server**:
-    ```bash
-    uvx keboola_mcp_server --api-url $KBC_API_URL
-    ```
-    The `KBC_API_URL` was set as an environment variable but could be inserted manually using your actual Keboola API URL.
-    The command shown starts the server communicating via `stdio`. To run the server in `HTTP+SSE` mode, which would listen on a network host and port (e.g., `localhost:8000`), additional configuration arguments to `keboola_mcp_server` would be required. For normal use with supported clients like Claude or Cursor, you usually don't need to run this command manually as they handle the server lifecycle.
+```bash
+uvx keboola_mcp_server --api-url $KBC_API_URL
+```
+
+The `KBC_API_URL` was set as an environment variable but can also be provided manually. The command starts the server communicating via `stdio`. To run the server in `HTTP+SSE` mode (listening on a network host/port such as `localhost:8000`), pass the appropriate flags to `keboola_mcp_server`. For day-to-day use with clients like Claude or Cursor you usually do not need to run this command manually, as they handle the server lifecycle.
 
 ### Connecting a Client to a Localhost Instance
 
-When you run the Keboola MCP Server manually, it will typically listen on `stdio` or a specific HTTP port if configured for `HTTP+SSE`.
+When you run the Keboola MCP Server manually, it will typically listen on `stdio` or on a specific HTTP port if configured for `HTTP+SSE`.
 
-*   **For `stdio` based clients**: The client application needs to be configured to launch the local MCP server executable (the `keboola_mcp_server` executable in this case) and communicate with it over standard input/output.
-*   **For `HTTP+SSE` based clients**: If you configure the MCP server to run in HTTP mode (not the default for local `uvx` execution without further arguments), your client would connect to the specified host and port (e.g., `http://localhost:8000?storage_token=XXX&workspace_schema=YYY`).
+* **`stdio`-based clients:** Configure the client application to launch the local `keboola_mcp_server` executable and communicate over standard input/output.
+* **`HTTP+SSE`-based clients:** If you start the server in HTTP mode, your client should connect to the specified host and port (e.g., `http://localhost:8000?storage_token=XXX&workspace_schema=YYY`).
 
 ### Cursor IDE Connection
 
-If you are running the Keboola MCP Server locally using `uvx` (as described in this section), you can configure your Cursor IDE to connect to this local instance. This is useful for development or testing with a custom server version.
+If you are running the Keboola MCP Server locally using `uvx`, you can configure Cursor IDE to connect to this local instance. This is useful for development or testing with a custom server build.
 
-1.  **Open Cursor settings.**
-2.  **Navigate to the MCP section within settings.**
-3.  **Add or configure your Keboola project.** You will likely need to provide your `KBC_STORAGE_TOKEN`, `KBC_WORKSPACE_SCHEMA` along with defining API URL.
+1. **Open Cursor settings.**
+2. **Navigate to the MCP section within settings.**
+3. **Add or configure your Keboola project.** Provide your `KBC_STORAGE_TOKEN`, `KBC_WORKSPACE_SCHEMA` and the API URL.
 
-    Here is an example of how you might configure Cursor to use the Keboola MCP Server. This configuration would typically be in a JSON settings file within Cursor (e.g., `mcp_servers.json` or a similar configuration file provided by Cursor):
+Example `mcp_servers.json` snippet:
 
-    ```json
-    {
-      "mcpServers": {
-        "keboola": {
-          "command": "uvx",
-          "args": [
-            "keboola_mcp_server",
-            "--api-url", "https://connection.YOUR_REGION.keboola.com"
-          ],
-          "env": {
-            "KBC_STORAGE_TOKEN": "your_keboola_storage_token",
-            "KBC_WORKSPACE_SCHEMA": "your_workspace_schema"
-          }
-        }
+```json
+{
+  "mcpServers": {
+    "keboola": {
+      "command": "uvx",
+      "args": [
+        "keboola_mcp_server",
+        "--api-url", "https://connection.YOUR_REGION.keboola.com"
+      ],
+      "env": {
+        "KBC_STORAGE_TOKEN": "your_keboola_storage_token",
+        "KBC_WORKSPACE_SCHEMA": "your_workspace_schema"
       }
     }
-    ```
+  }
+}
+```
 
-Always refer to the latest Cursor documentation for the most up-to-date instructions on configuring external MCP servers. 
+Always refer to the latest Cursor documentation for the most up-to-date instructions on configuring external MCP servers.
