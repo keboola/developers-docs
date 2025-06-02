@@ -333,6 +333,9 @@ items:
           - url: /integrate/data-streams/overview/
             title: Overview
 
+      - url: /integrate/mcp/
+        title: MCP Integration
+
   - url: /automate/
     title: Automation/Common Tasks
     items:
