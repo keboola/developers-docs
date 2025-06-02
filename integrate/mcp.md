@@ -157,7 +157,7 @@ The primary way to run the server locally is by executing `uv` or `uvx` command 
 When you run the Keboola MCP Server manually, it will typically listen on `stdio` or a specific HTTP port if configured for `HTTP+SSE`.
 
 *   **For `stdio` based clients**: The client application needs to be configured to launch the local MCP server executable (the Python script in this case) and communicate with it over standard input/output.
-*   **For `HTTP+SSE` based clients**: If you configure the MCP server to run in HTTP mode (not the default for local Python execution without further arguments), your client would connect to the specified host and port (e.g., `http://localhost:PORT`).
+*   **For `HTTP+SSE` based clients**: If you configure the MCP server to run in HTTP mode (not the default for local Python execution without further arguments), your client would connect to the specified host and port (e.g., `http://localhost:8000?storage_token=XXX&workspace_schema=YYY`).
 
 ### Cursor IDE Connection
 
