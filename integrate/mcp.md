@@ -186,7 +186,5 @@ Cursor is designed to work seamlessly with the Keboola MCP Server. In most cases
       }
     }
     ```
-    **Note:**
-    *   The exact command (`uvx`) and arguments might vary based on how `keboola_mcp_server` is installed and made available in your environment if you are pointing to a globally installed version. If using a local development version, the `command` and `args` would point to your local Python script and its execution, as described in the "Running Keboola MCP Server Locally" section.
 
 Always refer to the latest Cursor documentation for the most up-to-date instructions on configuring external MCP servers. 
