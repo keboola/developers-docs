@@ -152,7 +152,7 @@ The primary way to run the server locally is by cloning the [Keboola MCP Server 
 
 4.  **Run the server (example using Python module directly for testing CLI manually)**:
     ```bash
-    uv run python -m src.keboola_mcp_server.cli --api-url $KBC_API_URL
+    uv run keboola_mcp_server --api-url $KBC_API_URL
     ```
     The `KBC_API_URL` was set as environment variable but could be inserted manually using your actual Keboola API URL.
     The server will typically start and listen for connections on host `localhost:8000`. For normal use with supported clients like Claude or Cursor, you usually don't need to run this command manually as they handle the server lifecycle.
