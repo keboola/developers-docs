@@ -124,18 +124,9 @@ Before proceeding, ensure you have Docker installed on your system. You can find
 
 While MCP clients like Cursor or Claude typically manage the MCP server automatically, you might want to run the Keboola MCP Server locally for development, testing, or when using a custom client.
 
-The primary way to run the server locally is by cloning the [Keboola MCP Server GitHub repository](https://github.com/keboola/mcp-server) and running it using Python. Make sure you have Python 3.10+ and `uv` installed.
+The primary way to run the server locally is by executing `uv` or `uvx` command with [Keboola MCP Server GitHub repository](https://github.com/keboola/mcp-server). Make sure you have Python 3.10+ and `uv` installed.
 
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/keboola/mcp-server.git
-    cd mcp-server
-    ```
-2.  **Install dependencies (including for development/testing if needed)**:
-    ```bash
-    uv sync --extra dev 
-    ```
-3.  **Set up environment variables:**
+1.  **Set up environment variables:**
     Before running the server, you need to configure the following environment variables:
     *   `KBC_STORAGE_TOKEN`: Your Keboola Storage API token.
     *   `KBC_WORKSPACE_SCHEMA`: Your Keboola project's workspace schema (for SQL queries).
@@ -143,16 +134,20 @@ The primary way to run the server locally is by cloning the [Keboola MCP Server 
 
     Refer to the [Keboola Tokens](https://help.keboola.com/management/project/tokens/) and [Keboola workspaces manipulation](https://help.keboola.com/tutorial/manipulate/workspace/) for detailed instructions on obtaining these values.
 
-    **3.1. Additional Setup for BigQuery Users**
+    **1.1. Additional Setup for BigQuery Users**
 
     If your Keboola project uses BigQuery as its backend, you will also need to set up the `GOOGLE_APPLICATION_CREDENTIALS` environment variable. This variable should point to the JSON file containing your Google Cloud service account key that has the necessary permissions to access your BigQuery data.
 
     Example:
     `GOOGLE_APPLICATION_CREDENTIALS="/path/to/your/credentials.json"`
 
-4.  **Run the server (example using Python module directly for testing CLI manually)**:
+2.  **Run the server (example using Python module directly for testing CLI manually)**:
     ```bash
     uv run keboola_mcp_server --api-url $KBC_API_URL
+    ```
+    OR
+    ```bash
+    uvx keboola_mcp_server --api-url $KBC_API_URL
     ```
     The `KBC_API_URL` was set as environment variable but could be inserted manually using your actual Keboola API URL.
     The server will typically start and listen for connections on host `localhost:8000`. For normal use with supported clients like Claude or Cursor, you usually don't need to run this command manually as they handle the server lifecycle.
