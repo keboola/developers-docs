@@ -11,7 +11,7 @@ For information on using MCP within the Keboola UI, please see [help.keboola.com
 
 ## Integrate with Existing MCP Clients
 
-Integration to existing MCP clients typically involves configuring the client with your Keboola project details and API tokens/OAuth provider. Popular MCP clients include:
+Integration with existing MCP clients typically involves configuring the client with your Keboola project details and API tokens/OAuth provider. Popular MCP clients include:
 
 *   [Claude](https://claude.ai/)
 *   [Cursor](https://cursor.com/)
@@ -36,8 +36,8 @@ For complete details, API examples, and configuration options, please consult th
 
 ## Integrate with AI Agents
 
-Modern AI-agent frameworks can connect directly to the Keboola MCP Server and expose all of its tools inside your
-agents. This unlocks fully-automated data workflows driven by natural-language instructions.
+Modern AI agent frameworks can connect directly to the Keboola MCP Server and expose all of its tools inside your
+agents. This unlocks fully automated data workflows driven by natural-language instructions.
 
 ### OpenAI Agents SDK (Python)
 
@@ -73,7 +73,7 @@ Because the server returns standard JSON schemas, the mapping is straightforward
 lightweight wrapper. Native MCP support is already under discussion in the LangChain community.
 
 ### Other frameworks
-* **[Crew AI](https://crewai.com)** – Provide crew members with Keboola tool definitions and route tool invocations through the MCP server's
+* **[Crew AI](https://crewai.com)** – Provide crew members with Keboola tool definitions and route tool invocations through the MCP server.
 
 ## Integrate with Your Own MCP Client
 
@@ -177,7 +177,7 @@ The primary way to run the server locally is by using `uv` or `uvx` to execute t
    * `KBC_WORKSPACE_SCHEMA`: Your Keboola project's workspace schema (for SQL queries).
    * `KBC_API_URL`: Your Keboola instance API URL (e.g., `https://connection.keboola.com` or `https://connection.YOUR_REGION.keboola.com`).
 
-   Refer to the [Keboola Tokens](https://help.keboola.com/management/project/tokens/) and [Keboola workspaces manipulation](https://help.keboola.com/tutorial/manipulate/workspace/) for detailed instructions on obtaining these values.
+   Refer to the [Keboola Tokens](https://help.keboola.com/management/project/tokens/) and [Keboola workspace manipulation](https://help.keboola.com/tutorial/manipulate/workspace/) for detailed instructions on obtaining these values.
 
    **1.1. Additional Setup for BigQuery Users**  
    If your Keboola project uses BigQuery as its backend, you will also need to set up the `GOOGLE_APPLICATION_CREDENTIALS` environment variable. This variable should point to the JSON file containing your Google Cloud service account key that has the necessary permissions to access your BigQuery data.
@@ -202,22 +202,22 @@ When you run the Keboola MCP Server manually, it will typically listen on `stdio
 
 ## Using the Keboola Remote Server Deployment
 
-Keboola MCP Server is also hosted in every multi-tenant stack with oAuth authentication support. In case your AI assistant supports remote connection and oAuth, 
+Keboola MCP Server is also hosted in every multi-tenant stack with OAuth authentication support. In case your AI assistant supports remote connection and OAuth, 
 you can connect to Keboola's MCP Server by following these steps:
 
 <div class="clearfix"></div><div class="alert alert-warning">
-<b>Note</b> that when using the remote server with oAuth, you will get the permissions that match the users role in Keboola. 
-At this moment, <b>if you wish to control permissions  more granularly</b>, it is recommended to use the local deployment and specify your own <b>Storage Token</b> and <b>Workspace Schema.</b>
+<b>Note</b> that when using the remote server with OAuth, you will get the permissions that match the user's role in Keboola. 
+At this moment, <b>if you wish to control permissions more granularly</b>, it is recommended to use the local deployment and specify your own <b>Storage Token</b> and <b>Workspace Schema.</b>
 </div>
 1. Obtain the remote server URL of the stack `https://mcp.<YOUR_REGION>.keboola.com/sse`.
-   - You can find the url in your Keboola [project settings](/management/project/), e.g. navigate to `Users & Settings` > `MCP Server`
+   - You can find the URL in your Keboola [project settings](/management/project/), e.g. navigate to `Users & Settings` > `MCP Server`
      - In there you can also find specific instructions for various clients.
 2. Copy the server URL and paste it into your AI assistant's settings.
 3. Once you save the settings and refresh your AI assistant, you will be prompted to authenticate with your Keboola account and select the project you want to connect to.
 
 ### Remote Server Setup via mcp-remote adapter
 
-Some of the AI Assistants or MCP Clients do not support the remote oauth connection yet. 
+Some of the AI Assistants or MCP Clients do not support the remote OAuth connection yet. 
 In that case you can still connect to the remote instance using the [`mcp-remote`](https://github.com/geelen/mcp-remote) adapter.
 
 
@@ -246,7 +246,7 @@ In that case you can still connect to the remote instance using the [`mcp-remote
       }
     }
     ```
-3. **Login**
+3. **Log in**
 
 Once you save the settings and refresh your AI assistant, you will be prompted to authenticate with your Keboola account and select the project you want to connect to.
 
