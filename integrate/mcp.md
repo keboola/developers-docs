@@ -7,7 +7,7 @@ permalink: /integrate/mcp/
 > If this integration works well for you, please consider giving the repository a ⭐️!
 
 This section describes how to integrate with Keboola using the Model Context Protocol (MCP).
-For information on using MCP within the Keboola UI, please see [help.keboola.com/mcp](https://help.keboola.com/mcp).
+For information on using MCP within the Keboola UI, please see [help.keboola.com/ai/mcp-server/](https://help.keboola.com/ai/mcp-server/).
 
 ## Integrate with Existing MCP Clients
 
