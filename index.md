@@ -24,6 +24,7 @@ In this documentation, we will show you how to
 	- Use Keboola as a [data-handling backbone](/overview/api/) for your product.
 	- Wrap Keboola in your own UI for your customers.
 	- Control whole data processing pipeline within Keboola from the [outside](/integrate/).
+	- Leverage natural language to build data pipelines and interact with your Keboola project using the [Model Context Protocol (MCP)](/integrate/mcp/).
 - [**Extend Keboola by building your own components**](/extend/) for your own use or for other Keboola users and customers.
 	- [Extend Keboola with arbitrary Docker images](/extend/component/).
 	- Build your own [extractors](/extend/generic-extractor/) for services we do not support yet.

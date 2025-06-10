@@ -73,3 +73,10 @@ Apart from the above common API, some components offer other API calls:
   - [Storage](/integrate/storage/)
   - [Transformations](/integrate/transformations/)
 
+## Model Context Protocol
+Keboola supports the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction), which allows AI agents and other AI assistants to interact with your Keboola projects. This enables you to leverage natural language to perform various operations within Keboola.
+
+Our own [Keboola MCP Server](https://github.com/keboola/mcp-server) acts as a bridge between your Keboola project and modern AI tools. It exposes Keboola features like storage access, SQL transformations, and job triggers as callable tools for various MCP clients. Provides information about available components on stacks and can fetch documentation of any component using natural language queries using any MCP client.
+
+To learn more about integrating with MCP, see the [MCP integration guide](/integrate/mcp/).
+
