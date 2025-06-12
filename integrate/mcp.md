@@ -7,15 +7,15 @@ permalink: /integrate/mcp/
 > If this integration works well for you, please consider giving the repository a ⭐️!
 
 This section describes how to integrate with Keboola using the Model Context Protocol (MCP).
-For information on using MCP within the Keboola UI, please see [help.keboola.com/ai/mcp-server/](https://help.keboola.com/ai/mcp-server/).
+For information on using MCP within the Keboola UI, please see [help.keboola.com/ai/mcp-server](https://help.keboola.com/ai/mcp-server).
 
 ## Integrate with Existing MCP Clients
 
 Integration with existing MCP clients typically involves configuring the client with your Keboola project details and API tokens/OAuth provider. Popular MCP clients include:
 
-*   [Claude](https://claude.ai/)
-*   [Cursor](https://cursor.com/)
-*   [RooCode](https://roocode.com/)
+*   [Claude](https://claude.ai)
+*   [Cursor](https://cursor.com)
+*   [RooCode](https://roocode.com)
 *   [Windsurf](https://codeium.com/windsurf)
 
 The Keboola MCP Server facilitates this by acting as a bridge, translating natural language queries from your client into actions within your Keboola environment. For a comprehensive list of clients supporting the Model Context Protocol, please visit [list of available clients](https://modelcontextprotocol.io/clients).
