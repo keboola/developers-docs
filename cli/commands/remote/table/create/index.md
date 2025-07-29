@@ -87,6 +87,7 @@ Edit or replace this part of the text with your definition. Keep the same format
   definition:
     type: VARCHAR
     nullable: false
+    length: 500
   basetype: STRING
 - name: name
   definition:
@@ -115,7 +116,8 @@ Example JSON file:
       "name": "id",
       "definition": {
         "type": "VARCHAR",
-        "nullable": false
+        "nullable": false,
+        "length": "500"
       },
       "basetype": "STRING"
     },
