@@ -44,4 +44,5 @@ curl --location --request POST 'https://queue.keboola.com/jobs' \
 
 Take care to use the right endpoint depending on which [Stack](https://help.keboola.com/overview/#stacks) are you using. 
 You'll see `Invalid access token` error message if you are using the wrong endpoint or token. Read more about 
-the concept of [Jobs](/integrate/jobs/).
+the concept of [Jobs](/integrate/jobs/). 
+
