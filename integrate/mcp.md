@@ -42,7 +42,7 @@ agents. This unlocks fully automated data workflows driven by natural-language i
 ### OpenAI Agents SDK (Python)
 
 The [OpenAI Agents SDK](https://openai.github.io/openai-agents-python/mcp/) ships with first-class MCP support. Simply
-start the Keboola MCP Server (locally via `uvx` or remotely over HTTP+SSE) and register it with the SDK:
+start the Keboola MCP Server (locally via `uvx` or remotely over Streamable HTTP) and register it with the SDK:
 
 ```python
 from openai_agents_python import Agent
@@ -81,7 +81,7 @@ If you are developing your own MCP client or integrating MCP capabilities into a
 
 For detailed instructions and SDKs for building your own MCP client, refer to the official [Model Context Protocol documentation for client developers](https://modelcontextprotocol.io/quickstart/client).
 
-Information on supported transports (e.g., `stdio`, `HTTP+SSE`) is provided in the 'MCP Server Capabilities' section below. For more details on the Keboola MCP server, including how it can be run and configured for custom client integration, please refer to its [GitHub repository](https://github.com/keboola/mcp-server).
+Information on supported transports (e.g., `stdio`, `Streamable HTTP`) is provided in the 'MCP Server Capabilities' section below. For more details on the Keboola MCP server, including how it can be run and configured for custom client integration, please refer to its [GitHub repository](https://github.com/keboola/mcp-server).
 
 ## MCP Server Capabilities
 
@@ -89,7 +89,7 @@ The Keboola MCP Server supports several core concepts of the Model Context Proto
 
 | Concept     | Supported | Notes                                                                                                  |
 |-------------|-----------|--------------------------------------------------------------------------------------------------------|
-| Transports  | ✅        | Supports `stdio` and `HTTP+SSE` for client communication.                                              |
+| Transports  | ✅        | Supports `stdio` and `Streamable HTTP` for client communication.                                              |
 | Prompts     | ✅        | Processes natural language prompts from MCP clients to interact with Keboola.                          |
 | Tools       | ✅        | Provides a rich set of tools for storage operations, component management, SQL execution, job control. |
 | Resources   | ❌        | Exposing Keboola project entities (data, configurations, etc.) as formal MCP Resources is not currently supported.      |
@@ -191,14 +191,14 @@ The primary way to run the server locally is by using `uv` or `uvx` to execute t
 uvx keboola_mcp_server --api-url $KBC_API_URL
 ```
 
-The `KBC_API_URL` was set as an environment variable but can also be provided manually. The command starts the server communicating via `stdio`. To run the server in `HTTP+SSE` mode (listening on a network host/port such as `localhost:8000`), pass the appropriate flags to `keboola_mcp_server`. For day-to-day use with clients like Claude or Cursor you usually do not need to run this command manually, as they handle the server lifecycle.
+The `KBC_API_URL` was set as an environment variable but can also be provided manually. The command starts the server communicating via `stdio`. To run the server in `Streamable HTTP` mode (listening on a network host/port such as `localhost:8000`), pass the appropriate flags to `keboola_mcp_server`. For day-to-day use with clients like Claude or Cursor you usually do not need to run this command manually, as they handle the server lifecycle.
 
 ### Connecting a Client to a Localhost Instance
 
-When you run the Keboola MCP Server manually, it will typically listen on `stdio` or on a specific HTTP port if configured for `HTTP+SSE`.
+When you run the Keboola MCP Server manually, it will typically listen on `stdio` or on a specific HTTP port if configured for `Streamable HTTP`.
 
 * **`stdio`-based clients:** Configure the client application to launch the local `keboola_mcp_server` executable and communicate over standard input/output.
-* **`HTTP+SSE`-based clients:** If you start the server in HTTP mode, your client should connect to the specified host and port (e.g., `http://localhost:8000?storage_token=XXX&workspace_schema=YYY`).
+* **`Streamable HTTP`-based clients:** If you start the server in HTTP mode, your client should connect to the specified host and port (e.g., `http://localhost:8000/mcp?storage_token=XXX&workspace_schema=YYY`).
 
 ## Using the Keboola Remote Server Deployment
 
@@ -209,7 +209,7 @@ you can connect to Keboola's MCP Server by following these steps:
 <b>Note</b> that when using the remote server with OAuth, you will get the permissions that match the user's role in Keboola. 
 At this moment, <b>if you wish to control permissions more granularly</b>, it is recommended to use the local deployment and specify your own <b>Storage Token</b> and <b>Workspace Schema.</b>
 </div>
-1. Obtain the remote server URL of the stack `https://mcp.<YOUR_REGION>.keboola.com/sse`.
+1. Obtain the remote server URL of the stack `https://mcp.<YOUR_REGION>.keboola.com/mcp`.
    - You can find the URL in your Keboola [project settings](/management/project/), e.g. navigate to `Users & Settings` > `MCP Server`
      - In there you can also find specific instructions for various clients.
 2. Copy the server URL and paste it into your AI assistant's settings.
@@ -240,7 +240,7 @@ In that case you can still connect to the remote instance using the [`mcp-remote
           "command": "npx",
           "args": [
             "mcp-remote",
-            "https://mcp.<YOUR_REGION>.keboola.com/sse"
+            "https://mcp.<YOUR_REGION>.keboola.com/mcp"
           ]
         }
       }
