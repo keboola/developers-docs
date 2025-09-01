@@ -82,23 +82,6 @@ The above code will create the following user interface:
 {: .image-popup}
 ![Tooltip screenshot](/extend/component/ui-options/ui-examples/tooltip_normal.png)
 
-**Tooltip With Documentation Link**
-
-```json
-{
-  "options": {
-    "documentation": {
-      "link": "absolute_url",
-      "tooltip": "custom tooltip, default is Open documentation"
-    }
-  }
-}
-```
-
-
-{: .image-popup}
-![Tooltip Link screenshot](/extend/component/ui-options/ui-examples/tooltip_link.png)
-
 
 ### Multi Selection
 
