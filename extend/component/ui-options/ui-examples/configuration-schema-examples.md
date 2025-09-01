@@ -59,6 +59,30 @@ The above code will create the following user interface:
 ![Checkboxes screenshot](/extend/component/ui-options/ui-examples/checkbox.png)
 
 
+### Tooltips
+
+Additional description with optional links
+
+```json
+{
+  "test_tooltip": {
+    "type": "string",
+    "title": "Example tooltip",
+    "options": {
+      "tooltip": "custom tooltip, default is Open documentation"
+    },
+    "description": "Test value.",
+    "propertyOrder": 1
+  }
+}
+```
+
+The above code will create the following user interface:
+
+{: .image-popup}
+![Tooltip screenshot](/extend/component/ui-options/ui-examples/tooltip_normal.png)
+
+
 ### Multi Selection
 
 ```json
