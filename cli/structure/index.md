@@ -443,7 +443,6 @@ Example:
   "features": [
     "workspace-snowflake-dynamic-backend-size",
     "input-mapping-read-only-storage",
-    "syrup-jobs-limit-10",
     "oauth-v3"
   ],
   "defaultBranchId": 123

@@ -77,7 +77,6 @@ It will give you something like this:
             "emptyConfiguration": {},
             "uiOptions": {},
             "configurationDescription": null,
-            "uri": "https://syrup.keboola.com/docker/keboola.ex-aws-s3",
             "documentationUrl": "https://help.keboola.com/extractors/other/aws-s3/"
         }
     ],

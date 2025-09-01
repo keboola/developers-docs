@@ -47,8 +47,11 @@ When running the request with valid parameters, you should receive a response si
 {% highlight json %}
 {
     "id": "176883685",
-    "url": "https://syrup.keboola.com/queue/job/176883685",
-    "status": "waiting"
+    "status": "waiting",
+    "mode": "run",
+    "tag": "1.2.3",
+    "isFinished": false,
+    "url": "https://queue.keboola.com/jobs/176883685"
 }
 {% endhighlight %}
 

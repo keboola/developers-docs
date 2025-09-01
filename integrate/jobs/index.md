@@ -298,7 +298,6 @@ A snippet of the response is below:
     "type": "extractor",
     "name": "Snowflake",
     "description": "Cloud-Native Elastic Data Warehouse Service",
-    "uri": "https://syrup.keboola.com/docker/keboola.ex-db-snowflake",
     "documentationUrl": "https://github.com/keboola/db-extractor-snowflake/blob/master/README.md",
     "configurations": [
         {

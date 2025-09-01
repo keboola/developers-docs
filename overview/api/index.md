@@ -69,10 +69,6 @@ Otherwise, you may encounter `Invalid Token` or unauthorized errors. The *author
             "url": "https://import.keboola.com"
         },
         {
-            "id": "syrup",
-            "url": "https://syrup.keboola.com"
-        },
-        {
             "id": "oauth",
             "url": "https://oauth.keboola.com"
         },
@@ -120,7 +116,6 @@ The services listed above are:
 
 - `docker-runner` --- [Legacy Service for Running Sync Actions](/extend/common-interface/actions/)
 - `import` --- [Storage Importer Service](/integrate/storage/api/importer/)
-- `syrup` --- [Service for Running Components](/extend/docker-runner/)
 - `oauth` --- [OAuth Manager Service](/extend/common-interface/oauth/)
 - `queue` --- [Service for Running Components](/extend/docker-runner/)
 - `billing` --- Service for Computing Credits
@@ -222,5 +217,12 @@ The collection contains code examples in various languages; the requests can als
 You can use the cURL CLI to create simple scripts for interacting with Keboola APIs. For example, to [run a job](/integrate/jobs/):
 
 {% highlight shell %}
-curl --data "{\"config\": \"sampledatabase\"}" --header "X-StorageAPI-Token: YourStorageToken" https://syrup.keboola.com/keboola.ex-db-mysql/run
+curl --location --request POST 'https://queue.keboola.com/jobs' \
+--header 'X-StorageApi-Token: YourStorageToken' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "mode": "run",
+    "component": "keboola.ex-db-mysql",
+    "config": "sampledatabase"
+}'
 {% endhighlight %}
