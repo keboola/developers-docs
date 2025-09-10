@@ -15,23 +15,24 @@ Many of these APIs require a *Storage API token*, specified in the `X-StorageApi
 All parts of the Keboola platform can be controlled via an API.
 The main APIs for our components are:
 
-| API | Description |
-|---|---|
-| [Keboola Storage API](https://keboola.docs.apiary.io/) | [Storage](/integrate/storage/) is the main Keboola component storing all data. |
-| [Keboola Management API](https://keboolamanagementapi.docs.apiary.io/) | API managing Keboola projects and users (and notifications and features). |
-| [Billing API](https://keboolabillingapi.docs.apiary.io/#) | Billing API for Pay as You Go projects. |
-| [Developer Portal API](https://kebooladeveloperportal.docs.apiary.io/#) | Developer Portal is an application separated from Keboola for [creating components](/extend/component/). |
-| [Encryption API](https://keboolaencryption.docs.apiary.io/#) | Provides [Encryption](/overview/encryption/). |
-| [Importer API](https://app.swaggerhub.com/apis-docs/keboola/import) | [Importer](/integrate/storage/api/importer/) is a helper service for easy table imports. |
-| [Notifications API](https://app.swaggerhub.com/apis/odinuv/notifications-service) | API to subscribe to events, e.g., failed orchestrations.
-| [OAuth Broker API](https://oauthapi3.docs.apiary.io/#) | OAuth Broker is a component managing [OAuth authorizations](/extend/common-interface/oauth/#authorize) of other components. |
-| [Queue API](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api) | Queue is a service for [running components](/extend/docker-runner/) and managing [Jobs](/integrate/jobs/). |
-| [Scheduler API](https://app.swaggerhub.com/apis/odinuv/scheduler) | API to automate configurations. |
-| [Stream API](https://stream.keboola.com/v1/documentation/) | The Keboola Stream API allows you to ingest small and frequent events into your project’s storage. |
-| [Synchronous Actions API](https://app.swaggerhub.com/apis/odinuv/sync-actions) | API to trigger [Synchronous Actions](/extend/common-interface/actions/). This is a partial replacement of Docker Runner API and may not be available on all stacks. |
-| [Templates API](https://templates.keboola.com/v1/documentation/) | The Keboola Templates API allows you to apply a [template](/cli/templates/). |
-| [Vault](https://vault.keboola.com/docs/swagger.yaml) | Service handling variables & credentials storage. |
-| [Workspaces API](https://sandboxes.keboola.com/documentation) | Workspaces API for V2 workspaces. |
+| API                                                                               | Description                                                                                                                                                         |
+|-----------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Keboola Storage API](https://keboola.docs.apiary.io/)                            | [Storage](/integrate/storage/) is the main Keboola component storing all data.                                                                                      |
+| [Keboola Management API](https://keboolamanagementapi.docs.apiary.io/)            | API managing Keboola projects and users (and notifications and features).                                                                                           |
+| [Billing API](https://keboolabillingapi.docs.apiary.io/#)                         | Billing API for Pay as You Go projects.                                                                                                                             |
+| [Developer Portal API](https://kebooladeveloperportal.docs.apiary.io/#)           | Developer Portal is an application separated from Keboola for [creating components](/extend/component/).                                                            |
+| [Encryption API](https://keboolaencryption.docs.apiary.io/#)                      | Provides [Encryption](/overview/encryption/).                                                                                                                       |
+| [Importer API](https://app.swaggerhub.com/apis-docs/keboola/import)               | [Importer](/integrate/storage/api/importer/) is a helper service for easy table imports.                                                                            |
+| [Notifications API](https://app.swaggerhub.com/apis/odinuv/notifications-service) | API to subscribe to events, e.g., failed orchestrations.                                                                                                            |                                                                                                            
+| [OAuth Broker API](https://oauthapi3.docs.apiary.io/#)                            | OAuth Broker is a component managing [OAuth authorizations](/extend/common-interface/oauth/#authorize) of other components.                                         |
+| [Query API](https://query.keboola.com/api/v1/documentation)                       | Query is a service for running SQL queries on Snowflake and BigQuery.                                                                                               |
+| [Queue API](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api)           | Queue is a service for [running components](/extend/docker-runner/) and managing [Jobs](/integrate/jobs/).                                                          |
+| [Scheduler API](https://app.swaggerhub.com/apis/odinuv/scheduler)                 | API to automate configurations.                                                                                                                                     |
+| [Stream API](https://stream.keboola.com/v1/documentation/)                        | The Keboola Stream API allows you to ingest small and frequent events into your project’s storage.                                                                  |
+| [Synchronous Actions API](https://app.swaggerhub.com/apis/odinuv/sync-actions)    | API to trigger [Synchronous Actions](/extend/common-interface/actions/). This is a partial replacement of Docker Runner API and may not be available on all stacks. |
+| [Templates API](https://templates.keboola.com/v1/documentation/)                  | The Keboola Templates API allows you to apply a [template](/cli/templates/).                                                                                        |
+| [Vault](https://vault.keboola.com/docs/swagger.yaml)                              | Service handling variables & credentials storage.                                                                                                                   |
+| [Workspaces API](https://sandboxes.keboola.com/documentation)                     | Workspaces API for V2 workspaces.                                                                                                                                   |
 
 
 If you're unsure which API to use, refer to our [integration guide](/integrate/). It describes the roles of different APIs and contains examples of commonly
