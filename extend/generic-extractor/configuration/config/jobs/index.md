@@ -227,6 +227,7 @@ as entered in the configuration. For the above defined `params` property, the re
 {% endhighlight %}
 
 With the POST method, also [pagination](/extend/generic-extractor/configuration/api/pagination/) parameters are sent in the request body, and **not as URL query parameters**. If your API requires pagination parameters in the query, use the GET method or Custom Python component instead.
+This method **does not support** function evaluation when `param` is a list of objects.
 
 Also, the `Content-Type: application/json` HTTP header is added to the request.
 See our [examples](/extend/generic-extractor/configuration/config/jobs/#examples-with-http-methods-and-parameters).
