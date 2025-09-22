@@ -48,6 +48,9 @@ Sets `true` to the `allowTargetEnv` field in the [manifest.json](/cli/structure/
 `--ci-validate <bool>`
 : Create a workflow to validate all branches on change (default true)
 
+`--skip-workflows`
+: Skip the interactive GitHub workflow setup
+
 `-H, --storage-api-host <string>` 
 : Keboola instance URL, e.g., "connection.keboola.com"
 
