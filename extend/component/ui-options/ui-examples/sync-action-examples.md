@@ -173,14 +173,8 @@ When used in Python, the method does not need to return anything, or it can just
 {
     "test_connection": {
       "type": "button",
-      "format": "sync-action",
-      "propertyOrder": 30,
-      "options": {
-        "async": {
-          "label": "TEST CONNECTION",
-          "action": "validate_connection"
-        }
-      }
+      "format": "test-connection",
+      "propertyOrder": 30
     }
 }
 ```
