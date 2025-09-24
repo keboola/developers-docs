@@ -7,7 +7,8 @@ permalink: /cli/github-integration/
 {:toc}
 
 The tool can generate workflows for GitHub Actions within commands [init](/cli/commands/sync/init/) 
-and [workflows](/cli/commands/ci/workflows/).
+and [workflows](/cli/commands/ci/workflows/). For automated CI/CD scenarios, use the `--skip-workflows` flag 
+with the init command to bypass interactive workflow setup prompts.
 
 Secret `KBC_STORAGE_API_TOKEN` with your master token needs to be added to the GitHub 
 [secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository).

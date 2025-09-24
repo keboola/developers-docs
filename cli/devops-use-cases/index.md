@@ -26,7 +26,7 @@ branches.
 
 #### Initialization
 
-1. First, let’s initialize a GitHub repository with a single main branch via the `kbc init --allow-target-env` command.
+1. First, let's initialize a GitHub repository with a single main branch via the `kbc init --allow-target-env --skip-workflows` command.
 
 - Fill in all parameters as usual.
 - Select only the main branch in this case.
@@ -93,7 +93,7 @@ the Dev/Prod Manager example use case. You can use this, for instance, to distri
 
 ### Tutorial
 
-1. First, let’s **create a GitHub repository** with a single main branch via the `kbc init --allow-target-env` command:
+1. First, let's **create a GitHub repository** with a single main branch via the `kbc init --allow-target-env --skip-workflows` command:
 
 - Fill in all parameters as usual.
 - Select only the main branch in this case.
