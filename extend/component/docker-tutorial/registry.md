@@ -11,11 +11,8 @@ redirect_from:
 
 An important part of the Docker ecosystem is a **Docker registry**. It acts as a folder of images, taking
 care of their storing and building.
-[Docker Hub](https://hub.docker.com/) is the official Docker registry.
-
-For reliability reasons, we strongly recommend to use the [Amazon AWS ECR](https://aws.amazon.com/ecr/)
-[provisioned by the **Keboola Developer Portal**](/extend/component/deployment/).
-We also support Docker Hub and [Quay](https://quay.io/), both public and private repositories.
+For reliability reasons, we use the [Amazon AWS ECR](https://aws.amazon.com/ecr/)
+[provisioned by the **Keboola Developer Portal**](/extend/component/deployment/). This is the only supported Docker registry for Keboola components.
 
 ## Working with Registry
 In order to run an image, **pull** (`docker pull`) the image to your machine. The `docker run`
@@ -88,4 +85,4 @@ trigger a new build of the Docker image. Also note that the image automatically 
 or branch name. So, when you push a commit to the `master` branch, you will get an image with a tag `master` (which
 will move away from any older image builds). When creating a `1.0.0` tag, you will get an image with a `1.0.0` tag.
 
-When using images in Keboola, we **highly recommend to use our [ECR repository](/extend/component/deployment/)**.
+When using images in Keboola, you must use our [ECR repository](/extend/component/deployment/).

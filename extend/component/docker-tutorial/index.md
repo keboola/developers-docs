@@ -34,10 +34,9 @@ Docker Images are created by executing the instructions written in a **Dockerfil
 file consisting mostly of shell commands which must be executed to prepare the application for running.
 Docker images can be based on other images. So if
 you need minor modification to a system, you do not have to build the whole thing from scratch. If you want Images to be
-reused, *push* your Dockerfile to a **Docker registry**. The registries ([Dockerhub](https://hub.docker.com/),
-[Quay](https://quay.io/)) will build the image; anyone interested in using it can download it.
-[AWS ECR](https://aws.amazon.com/ecr/) is a private repository and has no build triggers. You need to push the images manually or
-using a [deploy script](/extend/component/deployment/) in your CI pipeline.
+reused, *push* your Dockerfile to a **Docker registry**. For Keboola components, we use
+[AWS ECR](https://aws.amazon.com/ecr/). You need to push the images using a 
+[deploy script](/extend/component/deployment/) in your CI pipeline.
 
 Docker image names are based on the following scheme: `registry-name/account-name/image-name:tag` where _registry-name_
 and _account-name_ can sometimes be omitted. For example, you can refer to a Docker _hello-world_ image as: `hello-world`

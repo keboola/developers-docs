@@ -75,11 +75,11 @@ configuration you want to execute. For example:
 
 Then run Generic Extractor in the current directory by executing the following command on *nix systems:
 
-    docker run -v ($pwd):/data quay.io/keboola/generic-extractor:latest
+    docker run -v ($pwd):/data 147946154733.dkr.ecr.us-east-1.amazonaws.com/developer-portal-v2/ex-generic-v2:latest
 
 or on Windows:
 
-    docker run -v %cd%:/data quay.io/keboola/generic-extractor:latest
+    docker run -v %cd%:/data 147946154733.dkr.ecr.us-east-1.amazonaws.com/developer-portal-v2/ex-generic-v2:latest
 
 You should see:
 
