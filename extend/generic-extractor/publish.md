@@ -36,9 +36,7 @@ have created the component, edit it, and fill in the following details:
     - **Region** -- leave empty
 - **UI options** --- set to `genericTemplatesUI`
 
-For a list of available tags, see the [Generic Extractor GitHub repository](https://github.com/keboola/generic-extractor/) or
-[Generic Extractor Quay repository](https://quay.io/repository/keboola/generic-extractor/), both of which contain the same tags
-as the above AWS ECR repository. It is also possible to use the `latest` tag, which points to the highest available tag. However,
+For a list of available tags, see the [Generic Extractor GitHub repository](https://github.com/keboola/generic-extractor/). It is also possible to use the `latest` tag, which points to the highest available tag. However,
 we recommend that you configure your component with a specific tag and update it manually to avoid problems with breaking changes
 in future Generic Extractor releases.
 

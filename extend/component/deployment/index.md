@@ -299,8 +299,7 @@ allows you to obtain the repository for a component and push credentials to that
 [running components](/extend/component/running/#running-a-component), for example, how to obtain the AWS registry credentials.
 If you want to get even more low level, you can use the [Developer Portal API](https://kebooladeveloperportal.docs.apiary.io/#) directly.
 It also allows you to [generate credentials for a service account](https://kebooladeveloperportal.docs.apiary.io/#reference/0/vendor/create-service-account)
-programmatically. Apart from our AWS ECR registry, we also support running images stored in [Quay.io](https://quay.io/repository/)
-and [Docker Hub](https://hub.docker.com/) registries.
+programmatically. We use our AWS ECR registry for hosting all component images.
 
 ## Test Live Configurations
 Testing your component can be simply added as part of the script in `.travis.yml` file. See an example in

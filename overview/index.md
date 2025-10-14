@@ -21,7 +21,7 @@ The following chart shows how Keboola is structured. All Keboola parts are brief
 Everything you can do in the Keboola UI can be done programatically using the API of the corresponding component.
 All of our components have API documentation on [Apiary](https://keboola.docs.apiary.io/#) and
 most of them have a public [Github repository](https://github.com/keboola/).
-Our Docker components are built either on [DockerHub](https://github.com/keboola/), [Quay](https://quay.io/organization/keboola) or privately on [AWS ECR](https://aws.amazon.com/ecr/).
+Our Docker components are built on [AWS ECR](https://aws.amazon.com/ecr/).
 
 This means that there are virtually **endless possibilities of what can be done with Keboola programmatically**.
 

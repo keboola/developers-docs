@@ -236,9 +236,7 @@ We offer free hosting of your Docker images in the **[Amazon Container Registry 
 All repositories in AWS ECR are private. When you create your component using the method shown above, we
 have just provisioned you with the Docker image hosting and you do not need to worry about it any more.
 
-We also support the DockerHub and Quay.io registries, both public and private. However, as they are more prone to
-outages and beyond our control, we recommend using our reliable AWS ECR. Use DockerHub or Quay.io only if you,
-for instance, want the image to be public.
+AWS ECR is the **only supported registry** for Keboola components, providing reliable hosting for all Docker images.
 
 ## Summary
 You have just created your own Keboola component. Although it does not do much, it shows the easiest path
