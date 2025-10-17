@@ -295,3 +295,68 @@ Example `mcp_servers.json` snippet:
 | EU Frankfurt GCP (europe-west3) | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5ldXJvcGUtd2VzdDMuZ2NwLmtlYm9vbGEuY29tL3NzZSJ9)       |
 
 Always refer to the latest Cursor documentation for the most up-to-date instructions on configuring external MCP servers.
+
+## Claude Code CLI Connection
+
+Claude Code is a command-line interface tool that enables you to interact with Claude directly from your terminal. You can easily connect it to the Keboola MCP Server using the `claude mcp add` command format.
+
+### Prerequisites
+
+Before installing the Keboola MCP Server integration for Claude Code, ensure you have Node.js installed on your system. You can download it from [https://nodejs.org](https://nodejs.org).
+
+### Installation
+
+To install the Keboola MCP Server for Claude Code, run the following command in your terminal. Replace `<YOUR_REGION>` with your specific Keboola region:
+
+```bash
+claude mcp add keboola npx mcp-remote https://mcp.<YOUR_REGION>.keboola.com/mcp
+```
+
+### Region-specific Installation Commands
+
+Use the appropriate command based on your Keboola stack:
+
+**US Virginia AWS (default):**
+```bash
+claude mcp add keboola npx mcp-remote https://mcp.keboola.com/mcp
+```
+
+**US Virginia GCP (us-east4):**
+```bash
+claude mcp add keboola npx mcp-remote https://mcp.us-east4.gcp.keboola.com/mcp
+```
+
+**EU Frankfurt AWS (eu-central-1):**
+```bash
+claude mcp add keboola npx mcp-remote https://mcp.eu-central-1.keboola.com/mcp
+```
+
+**EU Ireland Azure (north-europe):**
+```bash
+claude mcp add keboola npx mcp-remote https://mcp.north-europe.azure.keboola.com/mcp
+```
+
+**EU Frankfurt GCP (europe-west3):**
+```bash
+claude mcp add keboola npx mcp-remote https://mcp.europe-west3.gcp.keboola.com/mcp
+```
+
+### Using Keboola MCP Server in Claude Code
+
+Once the installation is complete, you can use the Keboola MCP Server in Claude Code:
+
+1. Start a conversation in Claude Code
+2. Type `/mcp` to access MCP tools
+3. Select the Keboola tools you want to use
+4. Begin interacting with your Keboola project
+
+### Authentication Flow
+
+The first time you use the Keboola MCP Server in Claude Code, the OAuth authentication flow will automatically initiate:
+
+1. A browser window will open with the Keboola login page
+2. Log in with your Keboola account credentials
+3. Select the project you want to connect to
+4. Authorize the connection
+
+After successful authentication, the connection is established and you can begin using Keboola tools directly from your terminal through Claude Code. The authentication persists across sessions, so you won't need to re-authenticate unless you explicitly disconnect or your credentials expire.
