@@ -300,16 +300,12 @@ Always refer to the latest Cursor documentation for the most up-to-date instruct
 
 Claude Code is a command-line interface tool that enables you to interact with Claude directly from your terminal. You can easily connect it to the Keboola MCP Server using the `claude mcp add` command format.
 
-### Prerequisites
-
-Before installing the Keboola MCP Server integration for Claude Code, ensure you have Node.js installed on your system. You can download it from [https://nodejs.org](https://nodejs.org).
-
 ### Installation
 
 To install the Keboola MCP Server for Claude Code, run the following command in your terminal. Replace `<YOUR_REGION>` with your specific Keboola region:
 
 ```bash
-claude mcp add keboola npx mcp-remote https://mcp.<YOUR_REGION>.keboola.com/mcp
+claude mcp add --transport http keboola https://mcp.<YOUR_REGION>.keboola.com/mcp
 ```
 
 ### Region-specific Installation Commands
@@ -318,27 +314,27 @@ Use the appropriate command based on your Keboola stack:
 
 **US Virginia AWS (default):**
 ```bash
-claude mcp add keboola npx mcp-remote https://mcp.keboola.com/mcp
+claude mcp add --transport http keboola https://mcp.keboola.com/mcp
 ```
 
 **US Virginia GCP (us-east4):**
 ```bash
-claude mcp add keboola npx mcp-remote https://mcp.us-east4.gcp.keboola.com/mcp
+claude mcp add --transport http keboola https://mcp.us-east4.gcp.keboola.com/mcp
 ```
 
 **EU Frankfurt AWS (eu-central-1):**
 ```bash
-claude mcp add keboola npx mcp-remote https://mcp.eu-central-1.keboola.com/mcp
+claude mcp add --transport http keboola https://mcp.eu-central-1.keboola.com/mcp
 ```
 
 **EU Ireland Azure (north-europe):**
 ```bash
-claude mcp add keboola npx mcp-remote https://mcp.north-europe.azure.keboola.com/mcp
+claude mcp add --transport http keboola https://mcp.north-europe.azure.keboola.com/mcp
 ```
 
 **EU Frankfurt GCP (europe-west3):**
 ```bash
-claude mcp add keboola npx mcp-remote https://mcp.europe-west3.gcp.keboola.com/mcp
+claude mcp add --transport http keboola https://mcp.europe-west3.gcp.keboola.com/mcp
 ```
 
 ### Using Keboola MCP Server in Claude Code
