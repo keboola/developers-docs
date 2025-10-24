@@ -160,3 +160,44 @@ that can be deployed as a [Data App](https://help.keboola.com/components/data-ap
 This application includes GitHub actions that allow you to manage this scenario. It is expected that users will modify this flow to their needs.
 
 To learn about the full use case, please refer to [this blog post](https://www.keboola.com/blog/keboola-dev-prod-lifecycle-via-git), where we describe the workflow in depth.
+
+## UI-Only Sync Workflow
+
+When working in a purely UI-based workflow where all changes are made in the Keboola user interface and no local development occurs in the Git repository, you may encounter rename conflicts during pull operations.
+
+### Rename Conflicts
+
+Rename conflicts occur when configurations are renamed in a chain. For example:
+- Configuration A is renamed to B in the UI
+- Configuration C is renamed to A in the UI
+
+When pulling these changes, the standard `kbc pull` command will fail because it tries to rename C to A, but A still exists (it hasn't been renamed to B yet in the local operation order).
+
+### Using --cleanup-rename-conflicts
+
+For UI-only workflows, use the `--cleanup-rename-conflicts` flag:
+
+```shell
+kbc pull --cleanup-rename-conflicts
+```
+
+This flag enables cleanup mode, which:
+1. Detects when a rename destination already exists
+2. Removes the conflicting destination
+3. Proceeds with the rename operation
+
+This is safe for UI-only workflows because there are no uncommitted local changes that could be lost.
+
+<div class="clearfix"></div><div class="alert alert-warning" role="alert" markdown="1">
+<strong>Important:</strong><br>
+Only use `--cleanup-rename-conflicts` when you are working in a purely UI-based workflow with no local development. Files removed during cleanup cannot be recovered unless they exist in the remote Keboola project. If you make local changes to configurations outside of the UI, do not use this flag as it may permanently delete your uncommitted work.
+</div>
+
+### When NOT to Use This Flag
+
+Do **not** use `--cleanup-rename-conflicts` if:
+- You are making local changes to configurations in your Git repository
+- You are following a Git-based development workflow
+- You have uncommitted local modifications
+
+For Git-based development workflows, standard `kbc pull` and `kbc push` operations handle renames correctly without requiring cleanup mode.

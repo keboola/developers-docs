@@ -15,25 +15,26 @@ Many of these APIs require a *Storage API token*, specified in the `X-StorageApi
 All parts of the Keboola platform can be controlled via an API.
 The main APIs for our components are:
 
-| API                                                                               | Description                                                                                                                                                         |
-|-----------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Keboola Storage API](https://keboola.docs.apiary.io/)                            | [Storage](/integrate/storage/) is the main Keboola component storing all data.                                                                                      |
-| [Keboola Management API](https://keboolamanagementapi.docs.apiary.io/)            | API managing Keboola projects and users (and notifications and features).                                                                                           |
-| [Billing API](https://keboolabillingapi.docs.apiary.io/#)                         | Billing API for Pay as You Go projects.                                                                                                                             |
-| [Developer Portal API](https://kebooladeveloperportal.docs.apiary.io/#)           | Developer Portal is an application separated from Keboola for [creating components](/extend/component/).                                                            |
-| [Encryption API](https://keboolaencryption.docs.apiary.io/#)                      | Provides [Encryption](/overview/encryption/).                                                                                                                       |
-| [Importer API](https://app.swaggerhub.com/apis-docs/keboola/import)               | [Importer](/integrate/storage/api/importer/) is a helper service for easy table imports.                                                                            |
-| [Notifications API](https://app.swaggerhub.com/apis/odinuv/notifications-service) | API to subscribe to events, e.g., failed orchestrations.                                                                                                            |                                                                                                            
-| [OAuth Broker API](https://oauthapi3.docs.apiary.io/#)                            | OAuth Broker is a component managing [OAuth authorizations](/extend/common-interface/oauth/#authorize) of other components.                                         |
-| [Query API](https://query.keboola.com/api/v1/documentation)                       | Query is a service for running SQL queries on Snowflake and BigQuery.                                                                                               |
-| [Queue API](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api)           | Queue is a service for [running components](/extend/docker-runner/) and managing [Jobs](/integrate/jobs/).                                                          |
-| [Scheduler API](https://app.swaggerhub.com/apis/odinuv/scheduler)                 | API to automate configurations.                                                                                                                                     |
-| [Stream API](https://stream.keboola.com/v1/documentation/)                        | The Keboola Stream API allows you to ingest small and frequent events into your project’s storage.                                                                  |
-| [Synchronous Actions API](https://app.swaggerhub.com/apis/odinuv/sync-actions)    | API to trigger [Synchronous Actions](/extend/common-interface/actions/). This is a partial replacement of Docker Runner API and may not be available on all stacks. |
-| [Templates API](https://templates.keboola.com/v1/documentation/)                  | The Keboola Templates API allows you to apply a [template](/cli/templates/).                                                                                        |
-| [Vault](https://vault.keboola.com/docs/swagger.yaml)                              | Service handling variables & credentials storage.                                                                                                                   |
-| [Workspaces API](https://sandboxes.keboola.com/documentation)                     | Workspaces API for V2 workspaces.                                                                                                                                   |
-
+| API                                                                                                         | Description                                                                                                                                                         |
+|-------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Keboola Storage API](https://keboola.docs.apiary.io/)                                                      | [Storage](/integrate/storage/) is the main Keboola component storing all data.                                                                                      |
+| [Keboola Management API](https://keboolamanagementapi.docs.apiary.io/)                                      | API managing Keboola projects and users (and notifications and features).                                                                                           |
+| [AI API](https://ai.keboola.com/docs/swagger.yaml)                                                          | API for supporting AI features.                                                                                                                                     |
+| [Billing API](https://keboolabillingapi.docs.apiary.io/#)                                                   | Billing API for Pay as You Go projects.                                                                                                                             |
+| [Developer Portal API](https://kebooladeveloperportal.docs.apiary.io/#)                                     | Developer Portal is an application separated from Keboola for [creating components](/extend/component/).                                                            |
+| [Editor API](https://editor.keboola.com/docs/swagger.yaml)                                                  | API for managing SQL editor sessions.                                                                                                                               |
+| [Encryption API](https://keboolaencryption.docs.apiary.io/#)                                                | Provides [Encryption](/overview/encryption/).                                                                                                                       |
+| [Importer API](https://app.swaggerhub.com/apis-docs/keboola/import)                                         | [Importer](/integrate/storage/api/importer/) is a helper service for easy table imports.                                                                            |
+| [Notifications API](https://app.swaggerhub.com/apis/odinuv/notifications-service)                           | API to subscribe to events, e.g., failed orchestrations.                                                                                                            |
+| [OAuth Broker API](https://oauthapi3.docs.apiary.io/#)                                                      | OAuth Broker is a component managing [OAuth authorizations](/extend/common-interface/oauth/#authorize) of other components.                                         |
+| [Query API](https://query.keboola.com/api/v1/documentation)                                                 | Query is a service for running SQL queries on Snowflake and BigQuery.                                                                                               |
+| [Queue API](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api)                                     | Queue is a service for [running components](/extend/docker-runner/) and managing [Jobs](/integrate/jobs/).                                                          |
+| [Scheduler API](https://app.swaggerhub.com/apis/odinuv/scheduler)                                           | API to automate configurations.                                                                                                                                     |
+| [Stream API](https://stream.keboola.com/v1/documentation/)                                                  | The Keboola Stream API allows you to ingest small and frequent events into your project's storage.                                                                  |
+| [Synchronous Actions API](https://app.swaggerhub.com/apis/odinuv/sync-actions)                              | API to trigger [Synchronous Actions](/extend/common-interface/actions/). This is a partial replacement of Docker Runner API and may not be available on all stacks. |
+| [Templates API](https://templates.keboola.com/v1/documentation/)                                            | The Keboola Templates API allows you to apply a [template](/cli/templates/).                                                                                        |
+| [Vault](https://vault.keboola.com/docs/swagger.yaml)                                                        | Service handling variables & credentials storage.                                                                                                                   |
+| [Workspaces API](https://sandboxes.keboola.com/documentation)                                               | Workspaces API for V2 workspaces.                                                                                                                                   |
 
 If you're unsure which API to use, refer to our [integration guide](/integrate/). It describes the roles of different APIs and contains examples of commonly
 performed actions.
@@ -62,10 +63,6 @@ Otherwise, you may encounter `Invalid Token` or unauthorized errors. The *author
     ...,
   "services": [
         {
-            "id": "docker-runner",
-            "url": "https://docker-runner.keboola.com"
-        },
-        {
             "id": "import",
             "url": "https://import.keboola.com"
         },
@@ -88,10 +85,6 @@ Otherwise, you may encounter `Invalid Token` or unauthorized errors. The *author
         {
             "id": "sandboxes",
             "url": "https://sandboxes.keboola.com"
-        },
-        {
-            "id": "spark",
-            "url": "https://spark.keboola.com"
         },
         {
             "id": "scheduler",
@@ -132,11 +125,26 @@ and in application integrations, we strongly suggest using the above API call.
 
 | API                    | Service        | Region           | URL                                                 |
 |------------------------|----------------|------------------|-----------------------------------------------------|
+| AI                     | `ai`           | US Virginia AWS  | https://ai.keboola.com                              |
+| AI                     | `ai`           | US Virginia GCP  | https://ai.us-east4.gcp.keboola.com                 |
+| AI                     | `ai`           | EU Frankfurt AWS | https://ai.eu-central-1.keboola.com                 |
+| AI                     | `ai`           | EU Ireland Azure | https://ai.north-europe.azure.keboola.com           |
+| AI                     | `ai`           | EU Frankfurt GCP | https://ai.europe-west3.gcp.keboola.com             |
 | Billing                | `billing`      | US Virginia AWS  | https://billing.keboola.com                         |
 | Billing                | `billing`      | US Virginia GCP  | https://billing.us-east4.gcp.keboola.com            |
 | Billing                | `billing`      | EU Frankfurt AWS | https://billing.eu-central-1.keboola.com            |
 | Billing                | `billing`      | EU Ireland Azure | https://billing.north-europe.azure.keboola.com      |
 | Billing                | `billing`      | EU Frankfurt GCP | https://billing.europe-west3.gcp.keboola.com        |
+| Developer Portal       | `developer`    | US Virginia AWS  | https://developer.keboola.com                       |
+| Developer Portal       | `developer`    | US Virginia GCP  | https://developer.us-east4.gcp.keboola.com          |
+| Developer Portal       | `developer`    | EU Frankfurt AWS | https://developer.eu-central-1.keboola.com          |
+| Developer Portal       | `developer`    | EU Ireland Azure | https://developer.north-europe.azure.keboola.com    |
+| Developer Portal       | `developer`    | EU Frankfurt GCP | https://developer.europe-west3.gcp.keboola.com      |
+| Editor                 | `editor`       | US Virginia AWS  | https://editor.keboola.com                          |
+| Editor                 | `editor`       | US Virginia GCP  | https://editor.us-east4.gcp.keboola.com             |
+| Editor                 | `editor`       | EU Frankfurt AWS | https://editor.eu-central-1.keboola.com             |
+| Editor                 | `editor`       | EU Ireland Azure | https://editor.north-europe.azure.keboola.com       |
+| Editor                 | `editor`       | EU Frankfurt GCP | https://editor.europe-west3.gcp.keboola.com         |
 | Encryption             | `encryption`   | US Virginia AWS  | https://encryption.keboola.com                      |
 | Encryption             | `encryption`   | US Virginia GCP  | https://encryption.us-east4.gcp.keboola.com         |
 | Encryption             | `encryption`   | EU Frankfurt AWS | https://encryption.eu-central-1.keboola.com         |
@@ -147,6 +155,11 @@ and in application integrations, we strongly suggest using the above API call.
 | Importer               | `import`       | EU Frankfurt AWS | https://import.eu-central-1.keboola.com             |
 | Importer               | `import`       | EU Ireland Azure | https://import.north-europe.azure.keboola.com       |
 | Importer               | `import`       | EU Frankfurt GCP | https://import.europe-west3.gcp.keboola.com         |
+| Management             | `management`   | US Virginia AWS  | https://management.keboola.com                      |
+| Management             | `management`   | US Virginia GCP  | https://management.us-east4.gcp.keboola.com         |
+| Management             | `management`   | EU Frankfurt AWS | https://management.eu-central-1.keboola.com         |
+| Management             | `management`   | EU Ireland Azure | https://management.north-europe.azure.keboola.com   |
+| Management             | `management`   | EU Frankfurt GCP | https://management.europe-west3.gcp.keboola.com     |
 | Notification           | `notification` | US Virginia AWS  | https://notification.keboola.com                    |
 | Notification           | `notification` | US Virginia GCP  | https://notification.us-east4.gcp.keboola.com       |
 | Notification           | `notification` | EU Frankfurt AWS | https://notification.eu-central-1.keboola.com       |
@@ -157,6 +170,11 @@ and in application integrations, we strongly suggest using the above API call.
 | OAuth                  | `oauth`        | EU Frankfurt AWS | https://oauth.eu-central-1.keboola.com              |
 | OAuth                  | `oauth`        | EU Ireland Azure | https://oauth.north-europe.azure.keboola.com        |
 | OAuth                  | `oauth`        | EU Frankfurt GCP | https://oauth.europe-west3.gcp.keboola.com          |
+| Query                  | `query`        | US Virginia AWS  | https://query.keboola.com                           |
+| Query                  | `query`        | US Virginia GCP  | https://query.us-east4.gcp.keboola.com              |
+| Query                  | `query`        | EU Frankfurt AWS | https://query.eu-central-1.keboola.com              |
+| Query                  | `query`        | EU Ireland Azure | https://query.north-europe.azure.keboola.com        |
+| Query                  | `query`        | EU Frankfurt GCP | https://query.europe-west3.gcp.keboola.com          |
 | Queue                  | `queue`        | US Virginia AWS  | https://queue.keboola.com                           |
 | Queue                  | `queue`        | US Virginia GCP  | https://queue.us-east4.gcp.keboola.com              |
 | Queue                  | `queue`        | EU Frankfurt AWS | https://queue.eu-central-1.keboola.com              |
@@ -172,6 +190,11 @@ and in application integrations, we strongly suggest using the above API call.
 | Storage                |                | EU Frankfurt AWS | https://connection.eu-central-1.keboola.com/        |
 | Storage                |                | EU Ireland Azure | https://connection.north-europe.azure.keboola.com/  |
 | Storage                |                | EU Frankfurt GCP | https://connection.europe-west3.gcp.keboola.com/    |
+| Stream                 | `stream`       | US Virginia AWS  | https://stream.keboola.com                          |
+| Stream                 | `stream`       | US Virginia GCP  | https://stream.us-east4.gcp.keboola.com             |
+| Stream                 | `stream`       | EU Frankfurt AWS | https://stream.eu-central-1.keboola.com             |
+| Stream                 | `stream`       | EU Ireland Azure | https://stream.north-europe.azure.keboola.com       |
+| Stream                 | `stream`       | EU Frankfurt GCP | https://stream.europe-west3.gcp.keboola.com         |
 | Sync Actions           | `sync-actions` | US Virginia AWS  | https://sync-actions.keboola.com/                   |
 | Sync Actions           | `sync-actions` | US Virginia GCP  | https://sync-actions.us-east4.gcp.keboola.com       |
 | Sync Actions           | `sync-actions` | EU Frankfurt AWS | https://sync-actions.eu-central-1.keboola.com       |
@@ -182,6 +205,11 @@ and in application integrations, we strongly suggest using the above API call.
 | Templates              | `templates`    | EU Frankfurt AWS | https://templates.eu-central-1.keboola.com          |
 | Templates              | `templates`    | EU Ireland Azure | https://templates.north-europe.azure.keboola.com    |
 | Templates              | `templates`    | EU Frankfurt GCP | https://templates.europe-west3.gcp.keboola.com      |
+| Vault                  | `vault`        | US Virginia AWS  | https://vault.keboola.com                           |
+| Vault                  | `vault`        | US Virginia GCP  | https://vault.us-east4.gcp.keboola.com              |
+| Vault                  | `vault`        | EU Frankfurt AWS | https://vault.eu-central-1.keboola.com              |
+| Vault                  | `vault`        | EU Ireland Azure | https://vault.north-europe.azure.keboola.com        |
+| Vault                  | `vault`        | EU Frankfurt GCP | https://vault.europe-west3.gcp.keboola.com          |
 | Workspaces / Sandboxes | `sandboxes`    | US Virginia AWS  | https://sandboxes.keboola.com                       |
 | Workspaces / Sandboxes | `sandboxes`    | US Virginia GCP  | https://sandboxes.us-east4.gcp.keboola.com          |
 | Workspaces / Sandboxes | `sandboxes`    | EU Frankfurt AWS | https://sandboxes.eu-central-1.keboola.com          |
