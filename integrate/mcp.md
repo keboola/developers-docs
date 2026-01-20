@@ -96,6 +96,75 @@ The Keboola MCP Server supports several core concepts of the Model Context Proto
 | Sampling    | ❌        | Advanced sampling techniques are not explicitly supported by the server itself.                        |
 | Roots       | ❌        | The concept of 'Roots' as defined in general MCP is not a specific feature of the Keboola MCP server.  |
 
+## Tool Authorization and Access Control
+
+When connecting to the Keboola MCP Server via HTTP-based transports (Streamable HTTP, SSE), you can control which tools are available to clients using HTTP headers. This is useful for restricting AI agent capabilities, enforcing compliance policies, or providing customer-specific access controls.
+
+<div class="clearfix"></div><div class="alert alert-info">
+<b>Note:</b> Tool authorization headers only apply to HTTP-based transports. They are not available when using the <code>stdio</code> transport for local execution.
+</div>
+
+### Authorization Headers
+
+The following HTTP headers control tool access:
+
+| Header | Description | Example Value |
+|--------|-------------|---------------|
+| `X-Allowed-Tools` | Comma-separated list of tool names to allow. Only these tools will be available. | `get_configs,get_buckets,query_data` |
+| `X-Disallowed-Tools` | Comma-separated list of tool names to exclude. These tools will be removed from the available set. | `create_config,run_job` |
+| `X-Read-Only-Mode` | When set to `true`, `1`, or `yes`, restricts access to read-only tools only. | `true` |
+
+### Filter Behavior
+
+When multiple headers are present, filters are applied in the following order:
+
+1. **Allowed tools filter**: If `X-Allowed-Tools` is specified, only those tools are initially available.
+2. **Read-only intersection**: If `X-Read-Only-Mode` is enabled, the available tools are intersected with the read-only tools set.
+3. **Disallowed exclusion**: Tools listed in `X-Disallowed-Tools` are removed from the final set.
+
+Empty headers are treated as no restriction/exclusion (backward compatible behavior).
+
+### Read-Only Tools
+
+The following 15 tools are classified as read-only (they do not modify data):
+
+| Category | Tools |
+|----------|-------|
+| Components | `get_configs`, `get_components`, `get_config_examples` |
+| Flows | `get_flows`, `get_flow_examples`, `get_flow_schema` |
+| Storage | `get_buckets`, `get_tables` |
+| SQL | `query_data` |
+| Data Apps | `get_data_apps` |
+| Jobs | `get_jobs` |
+| Search | `search`, `find_component_id` |
+| Project | `get_project_info` |
+| Documentation | `docs_query` |
+
+### Use Cases
+
+**AI Agent Restrictions**: When integrating AI agents (like Devin, Cursor, or custom agents) with your Keboola project, you may want to limit their capabilities. For example, allowing an agent to query and explore data but preventing it from creating or modifying configurations:
+
+```
+X-Read-Only-Mode: true
+```
+
+**Compliance and Security**: For environments with strict data governance requirements, you can create customer-specific access profiles. For example, allowing only specific tools while explicitly blocking others:
+
+```
+X-Allowed-Tools: get_buckets,get_tables,query_data,search
+X-Disallowed-Tools: run_job
+```
+
+**Combined Restrictions**: You can combine all three headers for fine-grained control. For example, to allow only a subset of read-only tools:
+
+```
+X-Allowed-Tools: get_configs,get_buckets,get_tables,query_data,create_config
+X-Read-Only-Mode: true
+X-Disallowed-Tools: query_data
+```
+
+This configuration would result in only `get_configs`, `get_buckets`, and `get_tables` being available (the intersection of allowed and read-only, minus the disallowed).
+
 ## Recommended Way to Execute Keboola MCP Server Locally
 
 For a consistent and isolated environment, running the Keboola MCP Server via [Docker](https://docker.com/get-started/) is often the recommended approach for local execution, especially if you don't want to manage Python environments directly or are integrating with clients that can manage Docker containers. Docker allows applications to be packaged with all their dependencies into a standardized unit for software development.
