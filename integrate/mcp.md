@@ -98,7 +98,7 @@ The Keboola MCP Server supports several core concepts of the Model Context Proto
 
 ## Tool Authorization and Access Control
 
-When connecting to the Keboola MCP Server via HTTP-based transports (Streamable HTTP, SSE), you can control which tools are available to clients using HTTP headers. This is useful for restricting AI agent capabilities, enforcing compliance policies, or providing customer-specific access controls.
+When connecting to the [Keboola MCP Server](/ai/mcp-server/) via HTTP-based transports (Streamable HTTP, SSE), you can control which tools are available to clients using HTTP headers. This is useful for restricting AI agent capabilities, enforcing compliance policies, or providing customer-specific access controls.
 
 <div class="clearfix"></div><div class="alert alert-info">
 <b>Note:</b> Tool authorization headers only apply to HTTP-based transports. They are not available when using the <code>stdio</code> transport for local execution.
@@ -363,4 +363,4 @@ Example `mcp_servers.json` snippet:
 | EU Ireland Azure (north-europe) | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5ub3J0aC1ldXJvcGUuYXp1cmUua2Vib29sYS5jb20vc3NlIn0%3D) |
 | EU Frankfurt GCP (europe-west3) | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5ldXJvcGUtd2VzdDMuZ2NwLmtlYm9vbGEuY29tL3NzZSJ9)       |
 
-Always refer to the latest Cursor documentation for the most up-to-date instructions on configuring external MCP servers.
+Always refer to your MCP client's documentation for the most up-to-date instructions on configuring external MCP servers.
