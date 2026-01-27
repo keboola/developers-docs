@@ -5,7 +5,7 @@ permalink: /integrate/mcp/
 
 <div class="alert alert-warning" role="alert">
     <i class="fas fa-exclamation-triangle"></i>
-    <strong>SSE Transport Deprecation:</strong> The SSE transport for MCP Server will be deprecated in 3 months. Please migrate to Streamable HTTP transport using <code>/mcp</code> endpoints instead of <code>/sse</code>. Streamable HTTP provides bidirectional streaming for improved performance and reliability.
+    <strong>SSE Transport Deprecation:</strong> The SSE transport for MCP Server will be deprecated on 01.04.2026. Please migrate to Streamable HTTP transport using <code>/mcp</code> endpoints instead of <code>/sse</code>. Streamable HTTP provides bidirectional streaming for improved performance and reliability.
 </div>
 
 > The Keboola MCP Server is available at [github.com/keboola/mcp-server](https://github.com/keboola/mcp-server).
@@ -94,7 +94,7 @@ The Keboola MCP Server supports several core concepts of the Model Context Proto
 
 | Concept     | Supported | Notes                                                                                                  |
 |-------------|-----------|--------------------------------------------------------------------------------------------------------|
-| Transports  | ✅        | Supports `stdio` and `Streamable HTTP` (recommended) for client communication. SSE is deprecated and will be removed in 3 months. |
+| Transports  | ✅        | Supports `stdio` and `Streamable HTTP` (recommended) for client communication. SSE is deprecated and will be removed on 01.04.2026. |
 | Prompts     | ✅        | Processes natural language prompts from MCP clients to interact with Keboola.                          |
 | Tools       | ✅        | Provides a rich set of tools for storage operations, component management, SQL execution, job control. |
 | Resources   | ❌        | Exposing Keboola project entities (data, configurations, etc.) as formal MCP Resources is not currently supported.      |
