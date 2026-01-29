@@ -306,6 +306,9 @@ items:
               - url: /integrate/storage/api/tde-exporter/
                 title: TDE Exporter
 
+              - url: /integrate/storage/api/workspaces/
+                title: Workspaces API
+
       - url: /integrate/jobs/
         title: Component Jobs
 
