@@ -90,6 +90,10 @@ kbc help local create row
 | [kbc dbt generate profile](/cli/commands/dbt/generate/profile/) | Generate profiles for use with dbt. |
 | [kbc dbt generate sources](/cli/commands/dbt/generate/sources/) | Generate sources for use with dbt. |
 | [kbc dbt generate env](/cli/commands/dbt/generate/env/) | Generate environment variables for use with dbt. |
+| | |
+| **[kbc llm](/cli/commands/llm/) (BETA)** | **Export project data to AI-optimized format.** |
+| [kbc llm init](/cli/commands/llm/init/) | Initialize a new local directory for LLM export. |
+| [kbc llm export](/cli/commands/llm/export/) | Export project data to AI-optimized twin format. |
 
 ## Aliases
 
