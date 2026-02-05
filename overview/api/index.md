@@ -10,8 +10,9 @@ All our [Keboola components](/overview/) have a public API on [apiary](https://a
 API. Most of our APIs accept and return data in JSON format.
 Many of these APIs require a *Storage API token*, specified in the `X-StorageApi-Token` header.
 
-{: .alert .alert-warning}
-**Note:** The Apiary documentation service (provided by Oracle) may experience intermittent outages. If you encounter issues accessing the Apiary-hosted documentation, please refer to the alternative source links provided in the API table below.
+<div class="clearfix"></div><div class="alert alert-warning">
+<b>Note:</b> The Apiary documentation service (provided by Oracle) may experience intermittent outages. If you encounter issues accessing the Apiary-hosted documentation, please refer to the alternative source links provided in the API table below.
+</div>
 
 ## List of Keboola APIs
 
