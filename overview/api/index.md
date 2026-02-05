@@ -10,6 +10,10 @@ All our [Keboola components](/overview/) have a public API on [apiary](https://a
 API. Most of our APIs accept and return data in JSON format.
 Many of these APIs require a *Storage API token*, specified in the `X-StorageApi-Token` header.
 
+<div class="clearfix"></div><div class="alert alert-warning">
+<b>Note:</b> The Apiary documentation service (provided by Oracle) may experience intermittent outages. If you encounter issues accessing the Apiary-hosted documentation, please refer to the alternative source links provided in the API table below.
+</div>
+
 ## List of Keboola APIs
 
 All parts of the Keboola platform can be controlled via an API.
@@ -17,8 +21,8 @@ The main APIs for our components are:
 
 | API                                                                                                         | Description                                                                                                                                                         |
 |-------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Keboola Storage API](https://keboola.docs.apiary.io/)                                                      | [Storage](/integrate/storage/) is the main Keboola component storing all data.                                                                                      |
-| [Keboola Management API](https://keboolamanagementapi.docs.apiary.io/)                                      | API managing Keboola projects and users (and notifications and features).                                                                                           |
+| [Keboola Storage API](https://keboola.docs.apiary.io/) ([source](https://github.com/keboola/storage-api-php-client/blob/master/apiary.apib)) | [Storage](/integrate/storage/) is the main Keboola component storing all data.                                                                                      |
+| [Keboola Management API](https://api.keboola.com/?service=manage#overview)                                | API managing Keboola projects and users (and notifications and features).                                                                                           |
 | [AI API](https://ai.keboola.com/docs/swagger.yaml)                                                          | API for supporting AI features.                                                                                                                                     |
 | [Billing API](https://keboolabillingapi.docs.apiary.io/#)                                                   | Billing API for Pay as You Go projects.                                                                                                                             |
 | [Developer Portal API](https://kebooladeveloperportal.docs.apiary.io/#)                                     | Developer Portal is an application separated from Keboola for [creating components](/extend/component/).                                                            |
