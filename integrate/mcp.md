@@ -3,6 +3,11 @@ title: Keboola MCP Integration
 permalink: /integrate/mcp/
 ---
 
+<div class="alert alert-warning" role="alert">
+    <i class="fas fa-exclamation-triangle"></i>
+    <strong>SSE Transport Deprecation:</strong> The SSE transport for MCP Server will be deprecated on 01.04.2026. Please migrate to Streamable HTTP transport using <code>/mcp</code> endpoints instead of <code>/sse</code>. Streamable HTTP provides bidirectional streaming for improved performance and reliability.
+</div>
+
 > The Keboola MCP Server is available at [github.com/keboola/mcp-server](https://github.com/keboola/mcp-server).
 > If this integration works well for you, please consider giving the repository a ⭐️!
 
@@ -89,7 +94,7 @@ The Keboola MCP Server supports several core concepts of the Model Context Proto
 
 | Concept     | Supported | Notes                                                                                                  |
 |-------------|-----------|--------------------------------------------------------------------------------------------------------|
-| Transports  | ✅        | Supports `stdio` and `Streamable HTTP` for client communication.                                              |
+| Transports  | ✅        | Supports `stdio` and `Streamable HTTP` (recommended) for client communication. SSE is deprecated and will be removed on 01.04.2026. |
 | Prompts     | ✅        | Processes natural language prompts from MCP clients to interact with Keboola.                          |
 | Tools       | ✅        | Provides a rich set of tools for storage operations, component management, SQL execution, job control. |
 | Resources   | ❌        | Exposing Keboola project entities (data, configurations, etc.) as formal MCP Resources is not currently supported.      |
@@ -98,7 +103,7 @@ The Keboola MCP Server supports several core concepts of the Model Context Proto
 
 ## Tool Authorization and Access Control
 
-When connecting to the [Keboola MCP Server](/ai/mcp-server/) via HTTP-based transports (Streamable HTTP, SSE), you can control which tools are available to clients using HTTP headers. This is useful for restricting AI agent capabilities, enforcing compliance policies, or providing customer-specific access controls.
+When connecting to the [Keboola MCP Server](/ai/mcp-server/) via HTTP-based transports (Streamable HTTP recommended; SSE is deprecated), you can control which tools are available to clients using HTTP headers. This is useful for restricting AI agent capabilities, enforcing compliance policies, or providing customer-specific access controls.
 
 <div class="clearfix"></div><div class="alert alert-info">
 <b>Note:</b> Tool authorization headers only apply to HTTP-based transports. They are not available when using the <code>stdio</code> transport for local execution.
@@ -355,12 +360,12 @@ Example `mcp_servers.json` snippet:
 
 **Alternatively**, click the button related to your region to use the remote deployment:
 
-| Stack (Region)                  | Cursor Deeplink                                                                                                                                                                                         |
-|---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| US Virginia AWS (default)       | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5rZWJvb2xhLmNvbS9zc2UifQ%3D%3D)                       |
-| US Virginia GCP (us-east4)      | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC51cy1lYXN0NC5nY3Aua2Vib29sYS5jb20vc3NlIn0%3D)         |
-| EU Frankfurt AWS (eu-central-1) | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5ldS1jZW50cmFsLTEua2Vib29sYS5jb20vc3NlIn0%3D)         |
-| EU Ireland Azure (north-europe) | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5ub3J0aC1ldXJvcGUuYXp1cmUua2Vib29sYS5jb20vc3NlIn0%3D) |
-| EU Frankfurt GCP (europe-west3) | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5ldXJvcGUtd2VzdDMuZ2NwLmtlYm9vbGEuY29tL3NzZSJ9)       |
+| Stack (Region)                  | Cursor Deeplink                                                                                                                                                                                                         |
+|---------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| US Virginia AWS (default)       | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5rZWJvb2xhLmNvbS9tY3AifQ%3D%3D)                       |
+| US Virginia GCP (us-east4)      | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC51cy1lYXN0NC5nY3Aua2Vib29sYS5jb20vbWNwIn0%3D)         |
+| EU Frankfurt AWS (eu-central-1) | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5ldS1jZW50cmFsLTEua2Vib29sYS5jb20vbWNwIn0%3D)         |
+| EU Ireland Azure (north-europe) | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5ub3J0aC1ldXJvcGUuYXp1cmUua2Vib29sYS5jb20vbWNwIn0%3D) |
+| EU Frankfurt GCP (europe-west3) | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5ldXJvcGUtd2VzdDMuZ2NwLmtlYm9vbGEuY29tL21jcCJ9)       |
 
 Always refer to your MCP client's documentation for the most up-to-date instructions on configuring external MCP servers.
