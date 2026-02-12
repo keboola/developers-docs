@@ -195,11 +195,14 @@ tagged the release `0.0.7-test`, you can run the configuration `354678919` by is
 following API call:
 
     curl -X POST \
-    https://syrup.keboola.com/docker/keboola-test.ex-docs-tutorial/run/tag/0.0.7-test \
+    https://queue.keboola.com/jobs \
     -H 'Content-Type: application/json' \
     -H 'X-StorageApi-Token: your-token' \
     -d '{
-    "config": "354678919"
+    "component": "keboola-test.ex-docs-tutorial",
+    "config": "354678919",
+    "tag": "0.0.7-test",
+    "mode": "run"
     }'
 
 In the job detail -- under **Parameters & Results**, , you'll see that a specific tag was requested. In the job events, you can then
