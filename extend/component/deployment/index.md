@@ -342,10 +342,9 @@ before_script:
   - docker tag $APP_IMAGE:latest $REPOSITORY:test
   - eval $(docker run --rm -e KBC_DEVELOPERPORTAL_USERNAME -e KBC_DEVELOPERPORTAL_PASSWORD -e KBC_DEVELOPERPORTAL_URL quay.io/keboola/developer-portal-cli-v2:latest ecr:get-login $KBC_DEVELOPERPORTAL_VENDOR $KBC_DEVELOPERPORTAL_APP)
   - docker push $REPOSITORY:test
-  - docker pull quay.io/keboola/syrup-cli:latest
 
 script:
-  - docker run --rm -e KBC_STORAGE_TOKEN quay.io/keboola/syrup-cli:latest run-job $KBC_DEVELOPERPORTAL_APP $KBC_APP_TEST_CONFIG test
+  - curl --location --request POST "https://queue.keboola.com/jobs" --header "X-StorageApi-Token:$KBC_STORAGE_TOKEN" --header "Content-Type:application/json" --data-raw '{"component":"'"$KBC_DEVELOPERPORTAL_APP"'","config":"'"$KBC_APP_TEST_CONFIG"'","tag":"test","mode":"run"}'
 
 after_success:
   - docker images
@@ -368,8 +367,7 @@ The commands above
 - tag the image as `test`.
 - get the command to login to the registry (`ecr:get-login`) and execute it (i.e., log in).
 - push the image to the registry.
-- pull the job runner CLI client ([Syrup PHP CLI](https://github.com/keboola/syrup-php-cli)).
-- run the specified test job on Keboola using the `/{component}/{config}/run/tag/{tag}` -- [Keboola Docker API](https://kebooladocker.docs.apiary.io/#reference/run/create-a-job-with-image/run-job). The tag used is `test`.
+- run the specified test job on Keboola using the [Queue API](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api). The tag used is `test`.
 
 If you want to run multiple test jobs, simply repeat the command with the different configuration IDs
 that you would like to test.
