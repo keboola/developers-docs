@@ -450,7 +450,7 @@ Example:
 ```
 ## .kbcignore
 
-You can exclude specific configurations from the sync process by creating a `.kbcignore` file in the `.keboola` directory.
+You can exclude specific configurations, configuration rows, or individual fields from the sync process by creating a `.kbcignore` file in the `.keboola` directory.
  
 It is a plain text file where each line specifies either:
 
@@ -504,17 +504,17 @@ keboola.scheduler/801234567:schedule.cronTab
 
 Field-level ignore is **bidirectional**:
 
-- **`kbc push`**: The remote value of the ignored field is kept. Any local change to that field is discarded before
+- **`kbc sync push`**: The remote value of the ignored field is kept. Any local change to that field is discarded before
   the diff is computed, so the field is never pushed.
-- **`kbc pull`**: The local value of the ignored field is kept. Any remote change to that field is discarded before
+- **`kbc sync pull`**: The local value of the ignored field is kept. Any remote change to that field is discarded before
   the diff is computed, so the field is never pulled.
 
 In both cases the rest of the configuration is synchronized normally.
 
-<div class="clearfix"></div><div class="alert alert-info">
+<div class="clearfix"></div><div class="alert alert-info" role="alert">
     <p><strong>Note:</strong><br>
         The field-level ignore format requires exactly two path segments before the colon
-        (<code>componentID/configID</code>). The field name must not be empty or start/end with a dot.</p>
+        (<code>{component_id}/{configuration_id}</code>). The field name must not be empty or start/end with a dot.</p>
 </div>
 
 ### Configuration-Level Ignore
