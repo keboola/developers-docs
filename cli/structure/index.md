@@ -452,8 +452,14 @@ Example:
 
 You can exclude specific configurations from the sync process by creating a `.kbcignore` file in the `.keboola` directory.
  
-It is a plain text file where each line specifies a path to a configuration or configuration row in the format 
-`{component_id}/{configuration_id}/{row_id}`. The `row_id` is optional for [row-based configurations](https://help.keboola.com/components/#configuration-rows).
+It is a plain text file where each line specifies either:
+
+- A path to a **configuration or configuration row** to exclude entirely, in the format `{component_id}/{configuration_id}/{row_id}` (the `row_id` is optional for [row-based configurations](https://help.keboola.com/components/#configuration-rows)).
+- A **field-level ignore** rule in the format `{component_id}/{configuration_id}:{field_name}`, which excludes a single field from synchronization while keeping the rest of the configuration managed by the CLI.
+
+Comments (lines starting with `#`) and empty lines are ignored.
+
+### Configuration and Row Ignore
 
 Example `.kbcignore` file:
     
@@ -468,6 +474,50 @@ This excludes:
 - Row  ID `1196309605` in the configuration of the Snowflake writer (`keboola.keboola.wr-db-snowflake`) with the ID `1196309603`.
 
 As a result, the `kbc sync pull` and `kbc sync push` commands will not synchronize these configurations.
+
+### Field-Level Ignore
+
+In addition to ignoring entire configurations or rows, you can ignore **individual fields** within a configuration.
+This is useful when you want to manage most of a configuration via the CLI but let a specific field be controlled
+exclusively in the Keboola UI (or vice versa).
+
+The syntax is:
+
+```
+{component_id}/{configuration_id}:{field_name}
+```
+
+Where `field_name` is either:
+
+- A **struct-level field** of the configuration — currently `isDisabled` is supported.
+- A **dot-notation content key** referring to a path inside the configuration's `config.json` content, e.g., `schedule.cronTab`.
+
+Example `.kbcignore` with field-level rules:
+
+```
+# Ignore the isDisabled flag — let the UI control whether this config is enabled
+ex-generic-v2/798412456:isDisabled
+
+# Ignore the cron schedule — let the UI control the schedule timing
+keboola.scheduler/801234567:schedule.cronTab
+```
+
+Field-level ignore is **bidirectional**:
+
+- **`kbc push`**: The remote value of the ignored field is kept. Any local change to that field is discarded before
+  the diff is computed, so the field is never pushed.
+- **`kbc pull`**: The local value of the ignored field is kept. Any remote change to that field is discarded before
+  the diff is computed, so the field is never pulled.
+
+In both cases the rest of the configuration is synchronized normally.
+
+<div class="clearfix"></div><div class="alert alert-info">
+    <p><strong>Note:</strong><br>
+        The field-level ignore format requires exactly two path segments before the colon
+        (<code>componentID/configID</code>). The field name must not be empty or start/end with a dot.</p>
+</div>
+
+### Configuration-Level Ignore
 
 **`kbc push` operation**
 
