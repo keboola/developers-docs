@@ -410,7 +410,7 @@ In some cases, a different set of options is available for different types of th
 JSON Schema allows to define different schemas based on selection. 
 This may be useful in the configuration rows scenario, where each row could represent a different type of Report, Endpoint, etc.
 
-This can be achieved via [dependencies](https://github.com/json-editor/json-editor#dependencies).* 
+This can be achieved via `options.dependencies`. When the dependency conditions are met, the field is shown; otherwise it is hidden.
 
 
 ```json
@@ -461,5 +461,186 @@ You can also react on multiple array values or on multiple elements at the same 
     ],
     "filtered": false
   }
+}
+```
+
+You can also reference nested fields using dot notation with a `root.` prefix:
+
+```json
+"options": {
+  "dependencies": {
+    "root.credentials.#api_token": ""
+  }
+}
+```
+
+This shows the field only when the `#api_token` field inside the `credentials` object is empty.
+
+
+### Radio Buttons
+
+Use `format: "radio"` with an `enum` to render radio buttons instead of a dropdown:
+
+```json
+{
+    "output_format": {
+        "type": "string",
+        "title": "Output Format",
+        "enum": ["csv", "json", "parquet"],
+        "format": "radio",
+        "default": "csv",
+        "propertyOrder": 1
+    }
+}
+```
+
+
+### Date Picker
+
+Use `format: "date"` for a date input with a calendar picker. Values are stored as `YYYY-MM-DD` strings:
+
+```json
+{
+    "start_date": {
+        "type": "string",
+        "title": "Start Date",
+        "format": "date",
+        "propertyOrder": 1
+    }
+}
+```
+
+
+### Grid Layout
+
+Use `format: "grid"` or `format: "grid-strict"` on an object to arrange its properties in a responsive 12-column grid.
+Each property can specify `options.grid_columns` (1–12) to control its width. Use `options.grid_break` to force a new row:
+
+```json
+{
+    "connection": {
+        "type": "object",
+        "title": "Connection",
+        "format": "grid-strict",
+        "properties": {
+            "host": {
+                "type": "string",
+                "title": "Hostname",
+                "propertyOrder": 1,
+                "options": { "grid_columns": 8 }
+            },
+            "port": {
+                "type": "integer",
+                "title": "Port",
+                "propertyOrder": 2,
+                "options": { "grid_columns": 4 }
+            },
+            "database": {
+                "type": "string",
+                "title": "Database",
+                "propertyOrder": 3,
+                "options": { "grid_break": true }
+            }
+        }
+    }
+}
+```
+
+
+### Collapsible Sections
+
+Use `options.collapsed` on an object to make it collapsible. Set `options.disable_collapse` to prevent the user from collapsing it:
+
+```json
+{
+    "advanced": {
+        "type": "object",
+        "title": "Advanced Settings",
+        "options": {
+            "collapsed": true
+        },
+        "properties": {
+            "timeout": { "type": "integer", "title": "Timeout" }
+        }
+    }
+}
+```
+
+
+### Disabled Fields
+
+Use `options.enabled: false` to render a field as read-only:
+
+```json
+{
+    "locked_field": {
+        "type": "string",
+        "title": "Locked Value",
+        "default": "Cannot be changed",
+        "options": {
+            "enabled": false
+        }
+    }
+}
+```
+
+
+### Info Blocks
+
+Use `format: "info"` to display a static informational message. The `title` property is used as the message text:
+
+```json
+{
+    "notice": {
+        "title": "This component requires an API token to function.",
+        "format": "info",
+        "propertyOrder": 1
+    }
+}
+```
+
+#### Alert Type
+
+By default, info blocks render as an informational (blue) alert. Use `options.alert_type` to change the visual style. Supported values: `"info"` (default), `"warning"`, `"error"`, `"success"`.
+
+```json
+{
+    "missing_token_warning": {
+        "title": "WARNING: API token is required!",
+        "format": "info",
+        "options": {
+            "alert_type": "warning"
+        }
+    }
+}
+```
+
+```json
+{
+    "config_error": {
+        "title": "Configuration is invalid.",
+        "description": "Please check the required fields below.",
+        "format": "info",
+        "options": {
+            "alert_type": "error"
+        }
+    }
+}
+```
+
+Info blocks can be combined with `options.dependencies` to show warnings conditionally:
+
+```json
+{
+    "missing_token_warning": {
+        "title": "WARNING: API token is required!",
+        "format": "info",
+        "options": {
+            "alert_type": "warning",
+            "dependencies": {
+                "root.credentials.#api_token": ""
+            }
+        }
+    }
 }
 ```
