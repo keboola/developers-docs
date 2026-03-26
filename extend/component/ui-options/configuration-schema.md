@@ -29,7 +29,7 @@ in [UI Element Examples](/extend/component/ui-options/configuration-schema/examp
 
 ### Supported Formats
 
-The following `format` values are supported in property definitions:
+The following `format` values are supported in property definitions. The **Type** column shows the underlying JSON Schema `type`; italicized entries are descriptive notes, not literal `type` values.
 
 | Format | Type | Description |
 |---|---|---|
@@ -39,15 +39,14 @@ The following `format` values are supported in property definitions:
 | `date` | string | Date picker input |
 | `checkbox` | boolean | Checkbox toggle |
 | `radio` | string | Radio button group (requires `enum`) |
-| `select` | array | Multi-select dropdown (with `uniqueItems: true`) |
 | `trim` | string | Standard text input with automatic whitespace trimming |
 | `grid` / `grid-strict` | object | Responsive grid layout for grouped fields |
 | `tabs` / `tabs-top` / `categories` | object | Tabbed layout for grouped fields |
 | `table` | array | Editable table for arrays of objects |
-| `info` | any | Static informational alert (uses `title` as message) |
+| `info` | *any JSON Schema type* | Static informational alert (uses `title` as message; Keboola UI extension) |
 | `ssh-editor` | object | SSH key/form editor |
-| `sync-action` | button | Action button triggering a sync action |
-| `test-connection` | button | Connection test button |
+| `sync-action` | *Keboola UI button widget* | Action button triggering a sync action (not a JSON Schema `type`) |
+| `test-connection` | *Keboola UI button widget* | Connection test button (not a JSON Schema `type`) |
 
 ### Supported Options
 
@@ -56,10 +55,11 @@ The following `options` keys can be used in property definitions:
 | Option | Description |
 |---|---|
 | `options.async` | Dynamic option loading via sync actions. See [Sync Action Examples](/extend/component/ui-options/configuration-schema/sync-action-examples/). |
-| `options.dependencies` | Conditional field visibility based on other field values. See [Dynamic Options](/extend/component/ui-options/configuration-schema/examples/#changing-set-of-options-dynamically-based-on-selection). |
+| `options.dependencies` | Conditional field visibility based on other field values. See [Dynamic Options](/extend/component/ui-options/configuration-schema/examples/#conditionally-showing-fields-based-on-selection). |
 | `options.tags` | Enable tag-style input for multi-select arrays |
 | `options.creatable` | Allow user-created values in select dropdowns |
-| `options.tooltip` | Help text displayed as a tooltip |
+| `options.tooltip` | Help text displayed as a tooltip icon next to the field label. Supports Markdown syntax. |
+| `options.documentation` | Documentation link rendered as a book icon next to the field label. Value: `{ "link": "https://...", "tooltip": "optional hover text" }` |
 | `options.enum_titles` | Display labels for `enum` values |
 | `options.hidden` | Hide the field from the UI |
 | `options.collapsed` | Start object sections in collapsed state |
@@ -143,8 +143,30 @@ The form above can be created using this JSON Schema:
 {% endhighlight %}
 
 ### Links Example
-If you want to provide links to external resources, keep in mind that the configuration schema does not support markdown,
-but it has a `links` feature. The above example can be modified so that the links are clickable:
+
+***Note:** The `links` feature is deprecated. Use `options.documentation` instead (see [Supported Options](#supported-options)).*
+
+If you want to provide links to external resources, use `options.documentation` to add a clickable documentation icon next to the field label:
+
+{% highlight json %}
+{
+    "dateFrom": {
+        "title": "Date from",
+        "type": "string",
+        "description": "Any date accepted by the strtotime function",
+        "options": {
+            "documentation": {
+                "link": "https://www.php.net/manual/en/function.strtotime.php",
+                "tooltip": "strtotime Documentation"
+            }
+        }
+    }
+}
+{% endhighlight %}
+
+#### Legacy links feature (deprecated)
+
+The old `links` property is **no longer supported**. If you have existing schemas using it, migrate to `options.documentation`:
 
 {% highlight json %}
 {
@@ -209,8 +231,14 @@ Which renders like this:
 {: .image-popup}
 ![Configuration Schema with links](/extend/component/ui-options/configuration-schema-2.png)
 
+### Legacy Features
+
+The following features are still supported for backwards compatibility but have preferred alternatives:
+
+- **`enumSource` / `watch`** — Dynamic enum population based on other field values. For new schemas, prefer `options.async` with sync actions instead. See [Sync Action Examples](/extend/component/ui-options/configuration-schema/sync-action-examples/#autoload).
+
 ### Deprecated Features
 
 The following features from the legacy JSON Editor library are **no longer supported**:
 
-- **`enumSource` / `watch`** — Dynamic enum population based on other field values. Use `options.async` with `autoload` instead for cascading dropdowns. See [Sync Action Examples](/extend/component/ui-options/configuration-schema/sync-action-examples/#autoload).
+- **`links`** — Clickable links on field descriptions. Use `options.documentation` with `link` and optional `tooltip` instead.

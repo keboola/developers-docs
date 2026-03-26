@@ -404,11 +404,11 @@ The above code will create the following user interface:
 ![optional block](/extend/component/ui-options/ui-examples/optional_block_array.gif)
 
 
-### Changing Set of Options Dynamically Based on Selection
+### Conditionally Showing Fields Based on Selection
 
-In some cases, a different set of options is available for different types of the same object, e.g., Report type. 
-JSON Schema allows to define different schemas based on selection. 
-This may be useful in the configuration rows scenario, where each row could represent a different type of Report, Endpoint, etc.
+In some cases, additional options should only be shown when a related setting is enabled, e.g., when a particular report feature is turned on.
+JSON Schema UI options allow you to control field visibility based on the values of other fields.
+This may be useful in configuration rows, where each row can expose extra options depending on how a user configures it.
 
 This can be achieved via `options.dependencies`. When the dependency conditions are met, the field is shown; otherwise it is hidden.
 
@@ -476,6 +476,39 @@ You can also reference nested fields using dot notation with a `root.` prefix:
 
 This shows the field only when the `#api_token` field inside the `credentials` object is empty.
 
+
+### Tooltips and Documentation Links
+
+Use `options.tooltip` to add a help icon next to the field label. The tooltip content supports **Markdown** syntax:
+
+```json
+{
+    "api_key": {
+        "type": "string",
+        "title": "API Key",
+        "options": {
+            "tooltip": "Your API key from the [dashboard](https://example.com/dashboard).\n\n**Note:** Keep this value secret."
+        }
+    }
+}
+```
+
+Use `options.documentation` to add a clickable documentation link icon:
+
+```json
+{
+    "query": {
+        "type": "string",
+        "title": "SQL Query",
+        "options": {
+            "documentation": {
+                "link": "https://docs.example.com/sql-reference",
+                "tooltip": "Open SQL reference"
+            }
+        }
+    }
+}
+```
 
 ### Radio Buttons
 
