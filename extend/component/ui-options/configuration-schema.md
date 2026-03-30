@@ -89,11 +89,9 @@ side by side. This is the fastest way to iterate on your schema during developme
 
 1. Open any component configuration page in the Keboola UI (e.g., `https://connection.keboola.com/admin/projects/<project-id>/components/<component-id>/<config-id>`).
 2. Press **Ctrl+D** (or **Alt+D** / **Option+D** on Mac) while on the configuration page.
-3. A resizable side panel opens with a code editor containing the current configuration schema JSON.
-4. Edit the schema in the panel — the form on the page updates in real time as you type.
-5. Use the **arrow button** in the panel toolbar to move the editor to the left or right side of the screen.
-6. Click the **checkmark button** to apply the schema override for the current browser session.
-7. Press **Ctrl+D** again (or click the **close button**) to hide the editor.
+3. Use the **arrow button** in the panel toolbar to move the editor to the left or right side of the screen.
+4. Click the **checkmark button** to apply the schema override for the current browser session.
+5. Press **Ctrl+D** again (or click the **close button**) to hide the editor.
 
 This editor uses the same [RJSF](https://rjsf-team.github.io/react-jsonschema-form/) rendering library as the production UI,
 so what you see in the editor is exactly what end users will see. The override is local to your browser session — it does not
