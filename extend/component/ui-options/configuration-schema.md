@@ -99,9 +99,6 @@ This editor uses the same [RJSF](https://rjsf-team.github.io/react-jsonschema-fo
 so what you see in the editor is exactly what end users will see. The override is local to your browser session — it does not
 change the schema registered in the Developer Portal.
 
-*Note: The JSON schema preview that was previously available in the Developer Portal UI has been removed, as it did not
-support the full range of Keboola UI extensions and rendered most schemas incorrectly.*
-
 ### Generating Schemas with AI Kit
 
 You can also use the **build-component-ui** skill from the
