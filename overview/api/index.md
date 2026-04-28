@@ -22,23 +22,23 @@ The main APIs for our components are:
 | API                                                                                                         | Description                                                                                                                                                         |
 |-------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [Keboola Storage API](https://keboola.docs.apiary.io/) ([source](https://github.com/keboola/storage-api-php-client/blob/master/apiary.apib)) | [Storage](/integrate/storage/) is the main Keboola component storing all data.                                                                                      |
-| [Keboola Management API](https://api.keboola.com/?service=manage#overview)                                | API managing Keboola projects and users (and notifications and features).                                                                                           |
-| [AI API](https://ai.keboola.com/docs/swagger.yaml)                                                          | API for supporting AI features.                                                                                                                                     |
-| [Billing API](https://keboolabillingapi.docs.apiary.io/#)                                                   | Billing API for Pay as You Go projects.                                                                                                                             |
+| [Keboola Management API](https://api.keboola.com/?service=manage)                                          | API managing Keboola projects and users (and notifications and features).                                                                                           |
+| [AI API](https://api.keboola.com/?service=ai)                                                               | API for supporting AI features.                                                                                                                                     |
+| [Billing API](https://api.keboola.com/?service=billing)                                                     | Billing API for Pay as You Go projects.                                                                                                                             |
 | [Developer Portal API](https://kebooladeveloperportal.docs.apiary.io/#)                                     | Developer Portal is an application separated from Keboola for [creating components](/extend/component/).                                                            |
-| [Editor API](https://editor.keboola.com/docs/swagger.yaml)                                                  | API for managing SQL editor sessions.                                                                                                                               |
-| [Encryption API](https://keboolaencryption.docs.apiary.io/#)                                                | Provides [Encryption](/overview/encryption/).                                                                                                                       |
-| [Importer API](https://app.swaggerhub.com/apis-docs/keboola/import)                                         | [Importer](/integrate/storage/api/importer/) is a helper service for easy table imports.                                                                            |
-| [Notifications API](https://app.swaggerhub.com/apis/odinuv/notifications-service)                           | API to subscribe to events, e.g., failed orchestrations.                                                                                                            |
-| [OAuth Broker API](https://oauthapi3.docs.apiary.io/#)                                                      | OAuth Broker is a component managing [OAuth authorizations](/extend/common-interface/oauth/#authorize) of other components.                                         |
-| [Query API](https://query.keboola.com/api/v1/documentation)                                                 | Query is a service for running SQL queries on Snowflake. BigQuery support is planned but not yet available.                                                         |
-| [Queue API](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api)                                     | Queue is a service for [running components](/extend/docker-runner/) and managing [Jobs](/integrate/jobs/).                                                          |
-| [Scheduler API](https://app.swaggerhub.com/apis/odinuv/scheduler)                                           | API to automate configurations.                                                                                                                                     |
-| [Stream API](https://stream.keboola.com/v1/documentation/)                                                  | The Keboola Stream API allows you to ingest small and frequent events into your project's storage.                                                                  |
-| [Synchronous Actions API](https://app.swaggerhub.com/apis/odinuv/sync-actions)                              | API to trigger [Synchronous Actions](/extend/common-interface/actions/). This is a partial replacement of Docker Runner API and may not be available on all stacks. |
-| [Templates API](https://templates.keboola.com/v1/documentation/)                                            | The Keboola Templates API allows you to apply a [template](/cli/templates/).                                                                                        |
-| [Vault](https://vault.keboola.com/docs/swagger.yaml)                                                        | Service handling variables & credentials storage.                                                                                                                   |
-| [Workspaces API](https://sandboxes.keboola.com/documentation)                                               | Workspaces API for V2 workspaces.                                                                                                                                   |
+| [Editor API](https://api.keboola.com/?service=editor)                                                       | API for managing SQL editor sessions.                                                                                                                               |
+| [Encryption API](https://api.keboola.com/?service=encryption)                                               | Provides [Encryption](/overview/encryption/).                                                                                                                       |
+| [Importer API](https://api.keboola.com/?service=import)                                                     | [Importer](/integrate/storage/api/importer/) is a helper service for easy table imports.                                                                            |
+| [Notifications API](https://api.keboola.com/?service=notification)                                          | API to subscribe to events, e.g., failed orchestrations.                                                                                                            |
+| [OAuth Broker API](https://api.keboola.com/?service=oauth)                                                  | OAuth Broker is a component managing [OAuth authorizations](/extend/common-interface/oauth/#authorize) of other components.                                         |
+| [Query API](https://api.keboola.com/?service=query)                                                 | Query is a service for running SQL queries on Snowflake. BigQuery support is planned but not yet available.                                                         |
+| [Queue API](https://api.keboola.com/?service=job-queue)                                                     | Queue is a service for [running components](/extend/docker-runner/) and managing [Jobs](/integrate/jobs/).                                                          |
+| [Sandboxes Service API](https://api.keboola.com/?service=sandboxes-service)                                 | API for managing Apps and Python/R workspaces.                                                                                                 |
+| [Scheduler API](https://api.keboola.com/?service=scheduler)                                                 | API to automate configurations.                                                                                                                                     |
+| [Stream API](https://api.keboola.com/?service=stream)                                                       | The Keboola Stream API allows you to ingest small and frequent events into your project's storage.                                                                  |
+| [Synchronous Actions API](https://api.keboola.com/?service=sync-actions)                                    | API to trigger [Synchronous Actions](/extend/common-interface/actions/). This is a partial replacement of Docker Runner API and may not be available on all stacks. |
+| [Templates API](https://api.keboola.com/?service=templates)                                                 | The Keboola Templates API allows you to apply a [template](/cli/templates/).                                                                                        |
+| [Vault](https://api.keboola.com/?service=vault)                                                             | Service handling variables & credentials storage.                                                                                                                   |
 
 If you're unsure which API to use, refer to our [integration guide](/integrate/). It describes the roles of different APIs and contains examples of commonly
 performed actions.
@@ -87,10 +87,6 @@ Otherwise, you may encounter `Invalid Token` or unauthorized errors. The *author
             "url": "https://encryption.keboola.com"
         },
         {
-            "id": "sandboxes",
-            "url": "https://sandboxes.keboola.com"
-        },
-        {
             "id": "scheduler",
             "url": "https://scheduler.keboola.com"
         },
@@ -118,7 +114,6 @@ The services listed above are:
 - `queue` --- [Service for Running Components](/extend/docker-runner/)
 - `billing` --- Service for Computing Credits
 - `encryption` --- Service for [Encryption](https://developers.keboola.com/overview/encryption/)
-- `sandboxes` --- Workspace Manager Service
 - `scheduler` --- [Service for Configuring Schedules](https://developers.keboola.com/automate/set-schedule/)
 - `sync-actions` --- [Service for Running Synchronous Actions](/extend/common-interface/actions/)
 - `notification` --- Service for Configuring Job Notifications
@@ -214,11 +209,6 @@ and in application integrations, we strongly suggest using the above API call.
 | Vault                  | `vault`        | EU Frankfurt AWS | https://vault.eu-central-1.keboola.com              |
 | Vault                  | `vault`        | EU Ireland Azure | https://vault.north-europe.azure.keboola.com        |
 | Vault                  | `vault`        | EU Frankfurt GCP | https://vault.europe-west3.gcp.keboola.com          |
-| Workspaces / Sandboxes | `sandboxes`    | US Virginia AWS  | https://sandboxes.keboola.com                       |
-| Workspaces / Sandboxes | `sandboxes`    | US Virginia GCP  | https://sandboxes.us-east4.gcp.keboola.com          |
-| Workspaces / Sandboxes | `sandboxes`    | EU Frankfurt AWS | https://sandboxes.eu-central-1.keboola.com          |
-| Workspaces / Sandboxes | `sandboxes`    | EU Ireland Azure | https://sandboxes.north-europe.azure.keboola.com    |
-| Workspaces / Sandboxes | `sandboxes`    | EU Frankfurt GCP | https://sandboxes.europe-west3.gcp.keboola.com      |
 
 
 ***Important**: Each stack also uses its own set of [IP addresses](https://help.keboola.com/extractors/ip-addresses/).*
