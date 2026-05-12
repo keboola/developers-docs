@@ -19,6 +19,12 @@ Many of these APIs require a *Storage API token*, specified in the `X-StorageApi
 All parts of the Keboola platform can be controlled via an API.
 The main APIs for our components are:
 
+<div class="alert alert-info">
+<b>Note:</b> The <code>api.keboola.com</code> links in the table below open the API documentation portal for the <b>US Virginia AWS</b> stack.
+If you are using a different stack, navigate to your stack's API portal first — see <a href="#api-documentation-portals">API Documentation Portals</a> below — and then select the service there.
+Using a portal for a different stack than your token's stack will result in <code>Invalid Token</code> errors.
+</div>
+
 | API                                                                                                         | Description                                                                                                                                                         |
 |-------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [Keboola Storage API](https://keboola.docs.apiary.io/) ([source](https://github.com/keboola/storage-api-php-client/blob/master/apiary.apib)) | [Storage](/integrate/storage/) is the main Keboola component storing all data.                                                                                      |
@@ -53,13 +59,27 @@ either multi-tenant or single-tenant. Current multi-tenant stacks are:
 - EU Ireland Azure – [connection.north-europe.azure.keboola.com](https://connection.north-europe.azure.keboola.com/)
 - EU Frankfurt GCP - [connection.europe-west3.gcp.keboola.com](https://connection.europe-west3.gcp.keboola.com/)
 
-Each stack operates as an independent instance of Keboola services.
-In all the API documentation above, the AWS US stack is used.
-
-Single-tenant stacks are available for a single enterprise customer, with a domain name 
+Each stack operates as an independent instance of Keboola services with its own data, users, and tokens.
+Single-tenant stacks are available for a single enterprise customer, with a domain name
 in the format `connection.CUSTOMER_NAME.keboola.com`.
 
-If you are using another stack, modify the endpoints accordingly.
+### API Documentation Portals
+
+The API documentation portal (`api.*`) is deployed independently per stack. Always use the portal
+for your own stack — tokens are not valid across stacks, and using the wrong portal will cause
+`Invalid Token` errors when trying out API calls.
+
+| Stack | API Documentation Portal |
+|---|---|
+| US Virginia AWS | [api.keboola.com](https://api.keboola.com/) |
+| EU Frankfurt AWS | [api.eu-central-1.keboola.com](https://api.eu-central-1.keboola.com/) |
+| EU Ireland Azure | [api.north-europe.azure.keboola.com](https://api.north-europe.azure.keboola.com/) |
+| EU Frankfurt GCP | [api.europe-west3.gcp.keboola.com](https://api.europe-west3.gcp.keboola.com/) |
+| US Virginia GCP | [api.us-east4.gcp.keboola.com](https://api.us-east4.gcp.keboola.com/) |
+
+### Service Endpoints
+
+If you are calling the APIs directly (not through the portal), modify the hostname accordingly.
 Otherwise, you may encounter `Invalid Token` or unauthorized errors. The *authoritative list* of available endpoints is provided by the [Storage API Index Call](https://keboola.docs.apiary.io/#reference/miscellaneous/api-index/component-list). The following is a sample response:
 
 {% highlight json %}
