@@ -19,10 +19,11 @@ Many of these APIs require a *Storage API token*, specified in the `X-StorageApi
 All parts of the Keboola platform can be controlled via an API.
 The main APIs for our components are:
 
-{: .alert .alert-info}
-**Note:** The links in the table below open the API documentation portal for the **AWS US** stack (`api.keboola.com`).
-If you are using a different stack, navigate to your stack's API portal first — see [API Documentation Portals](#api-documentation-portals) below — and then select the service there.
-Using a portal for a different stack than your token's stack will result in `Invalid Token` errors.
+<div class="alert alert-info">
+<b>Note:</b> The <code>api.keboola.com</code> links in the table below open the API documentation portal for the <b>US Virginia AWS</b> stack.
+If you are using a different stack, navigate to your stack's API portal first — see <a href="#api-documentation-portals">API Documentation Portals</a> below — and then select the service there.
+Using a portal for a different stack than your token's stack will result in <code>Invalid Token</code> errors.
+</div>
 
 | API                                                                                                         | Description                                                                                                                                                         |
 |-------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
