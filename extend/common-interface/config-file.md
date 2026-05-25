@@ -796,20 +796,38 @@ If that file is not present in the `/data/out/files` folder, an error will be th
 
 #### Incremental processing
 
-**DEPRECATED:** The `processed_tags` setting described below is **deprecated**. It is not compatible with
-the [development branches](/extend/common-interface/development-branches/) feature, because a job running
+**DEPRECATED:** The `processed_tags` setting is **deprecated**. It is not compatible with the
+[development branches](/extend/common-interface/development-branches/) feature, because a job running
 in a development branch cannot write tags back to files in production storage. New configurations should
 not use `processed_tags`, and the UI no longer offers it. Existing configurations continue to work;
-affected projects will be contacted before any breaking change. See
-[Alternatives to `processed_tags`](#alternatives-to-processed_tags) below for recommended replacements.
+affected projects will be contacted before any breaking change.
 
-Docker containers may be used to process unknown files incrementally. This means that when a container is run,
-it will download any files not yet downloaded and process them. To achieve this behavior, it is necessary
-to select only the files which have not been processed yet and tag the processed files.
-To achieve the former, use a proper
-[Elasticsearch query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax).
-The latter is achieved using the `processed_tags` setting. The `processed_tags` setting is an array of tags
-which will be added to the **input** files once they are downloaded. A sample contents of `configData`:
+To process files incrementally, use one of the supported alternatives below.
+
+##### Recommended alternatives
+
+- **Storage tables with incremental loading** --- if your files are tabular, ingest them into a Storage table
+  once and read them incrementally via table input mapping with `changed_since` and the `_timestamp` system
+  column. See [Incremental processing](https://help.keboola.com/storage/tables/#incremental-processing).
+  Recommended replacement for most pipelines.
+- **Time-bounded query** --- replace "mark as processed" with a time window in the query, e.g.
+  `tags:toprocess AND created:>=now-1d`. Works for file-only pipelines where files must stay as files.
+- **[State file](#state-file)** --- track processed file IDs in your component's state file instead of in
+  Storage tags. Works in both production and development branches and gives you full control over what counts
+  as "processed".
+- **Explicit `file_ids`** --- if the caller already knows which files should be processed, pass the IDs
+  directly in the input mapping.
+
+##### Legacy `processed_tags` reference (deprecated)
+
+The following describes how `processed_tags` worked. It is retained as a reference for existing configurations
+only — **do not use this approach for new configurations**.
+
+Docker containers could be used to process unknown files incrementally by selecting only files that had not
+yet been processed and tagging them after download. The former was achieved with a proper
+[Elasticsearch query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax);
+the latter using the `processed_tags` setting — an array of tags added to the **input** files once they were
+downloaded. A sample `configData`:
 
 {% highlight json %}
 {
@@ -826,22 +844,6 @@ which will be added to the **input** files once they are downloaded. A sample co
 }
 {% endhighlight %}
 
-The above request will download every file with the `toprocess` tag **except** for the files having the `downloaded` tag. 
-It will mark each such file with the `downloaded` tag; therefore the query will exclude them on the next run.
-This allows you to set up an incremental file processing pipeline.
-
-##### Alternatives to `processed_tags`
-
-For new incremental file pipelines, use one of the following instead of `processed_tags`:
-
-- **Storage tables with incremental loading** --- if your files are tabular, ingest them into a Storage table
-  once and read them incrementally via table input mapping with `changed_since` and the `_timestamp` system
-  column. See [Incremental processing](https://help.keboola.com/storage/tables/#incremental-processing).
-  Recommended replacement for most pipelines.
-- **Time-bounded query** --- replace "mark as processed" with a time window in the query, e.g.
-  `tags:toprocess AND created:>=now-1d`. Works for file-only pipelines where files must stay as files.
-- **[State file](#state-file)** --- track processed file IDs in your component's state file instead of in
-  Storage tags. Works in both production and development branches and gives you full control over what counts
-  as "processed".
-- **Explicit `file_ids`** --- if the caller already knows which files should be processed, pass the IDs
-  directly in the input mapping.
+The above request downloaded every file with the `toprocess` tag **except** for files that already had the
+`downloaded` tag, and marked each downloaded file with `downloaded` so the query excluded it on subsequent
+runs.
