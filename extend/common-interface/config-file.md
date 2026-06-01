@@ -795,6 +795,16 @@ If that file is not present in the `/data/out/files` folder, an error will be th
 {% endhighlight %}
 
 #### Incremental processing
+
+**Deprecated:** The `processed_tags` setting is deprecated and is not compatible with
+[development branches](/extend/common-interface/development-branches/), because a job running in a
+development branch cannot write tags back to files in production storage. New configurations should not
+use it, and the UI no longer offers it. Existing configurations continue to work. To process files
+incrementally, use [incremental file processing](https://help.keboola.com/transformations/mappings/#incremental-file-processing)
+instead.
+
+The following describes the legacy `processed_tags` behavior, retained for reference only.
+
 Docker containers may be used to process unknown files incrementally. This means that when a container is run,
 it will download any files not yet downloaded and process them. To achieve this behavior, it is necessary
 to select only the files which have not been processed yet and tag the processed files.
@@ -818,6 +828,6 @@ which will be added to the **input** files once they are downloaded. A sample co
 }
 {% endhighlight %}
 
-The above request will download every file with the `toprocess` tag **except** for the files having the `downloaded` tag. 
+The above request will download every file with the `toprocess` tag **except** for the files having the `downloaded` tag.
 It will mark each such file with the `downloaded` tag; therefore the query will exclude them on the next run.
 This allows you to set up an incremental file processing pipeline.
