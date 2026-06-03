@@ -86,7 +86,8 @@ all of them are optional:
 - `storage` --- configuration of [input and output mapping](/extend/common-interface/folders/); specific options correspond to the options of the
 [unload data](https://keboola.docs.apiary.io/#reference/tables/unload-data-asynchronously) and
 [load data](https://keboola.docs.apiary.io/#reference/tables/load-data-asynchronously) API calls.
-- `runtime` --- configuration for modifying some image parameters at run time
+- `runtime` --- [runtime settings](/integrate/jobs/#job-runtime-configuration) (`tag`, `backend`, `parallelism`); most notably `runtime.tag`
+pins the Docker image tag that jobs of this configuration run, which is the usual way of testing a development build of a component
 - `processors` --- configuration of [Processors](/extend/component/processors/)
 - `authorization` --- OAuth authorization [injected to the configuration](/extend/common-interface/oauth/); not stored in the component configuration
 - `image_parameters` --- an arbitrary object passed from the [component](/extend/component/); not stored in the component configuration
