@@ -244,7 +244,7 @@ Use the `forceRun` mode to run a configuration that is disabled. The `debug` can
 ### Job Runtime configuration
 You may provide runtime settings for a job. Runtime settings do not affect what the job does, they affect how the job does it. The available runtime settings are:
 
-- `backend` --- the Snowflake warehouse used for the job; currently affects mostly Snowflake transformations. Available values for backend size come from the [Workspace Create API call](https://keboola.docs.apiary.io/#reference/workspaces/workspaces-collection/create-workspace) and are `small`, `medium`, `large`.
+- `backend.type` --- for Snowflake transformations this is the size of the [Snowflake warehouse](https://github.com/keboola/developers-docs/pull/380/changes) used for the job; otherwise it affects the [container size](https://help.keboola.com/transformations/python-plain/#dynamic-backends). Available values for backend type are `small`, `medium`, `large`.
 - `parallelism` --- runs [Configuration Rows](https://help.keboola.com/components/#configuration-rows) (if present in the configuration) in parallel. Allowed values are integer values and `infinity`, which runs all rows in parallel. When not specified, the rows are run sequentially.
 - `tag` --- runs the component with a specific version of code. This is mostly used during component development, testing and debugging.
 
