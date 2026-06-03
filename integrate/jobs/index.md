@@ -242,18 +242,34 @@ When creating a job, you need to provide `mode`. This can be one of `run`, `forc
 Use the `forceRun` mode to run a configuration that is disabled. The `debug` can be used during [Component Development & Debugging](https://developers.keboola.com/extend/component/tutorial/debugging/).
 
 ### Job Runtime configuration
-You may provide runtime settings for a job. Runtime settings do not affect what the job does, it affects how the job does it. Current 
-available runtime settings are `backend` and `parallelism`. The `backend` parameter defines what Snowflake warehouse is used for the job and currently
-affects mostly Snowflake transformations. Available values for backend size come from [Workspace Create API call](https://keboola.docs.apiary.io/#reference/workspaces/workspaces-collection/create-workspace) and are `small`, `medium`, `large`. 
+You may provide runtime settings for a job. Runtime settings do not affect what the job does, they affect how the job does it. The available runtime settings are:
 
-The `parallelism` allows to run [Configuration Rows](https://help.keboola.com/components/#configuration-rows) (if present in the configuration) in
-parallel. Allowed values are integer values and `infinity` which runs all rows in parallel. When parallelism is not specified, the rows are run sequentially. 
-You may also specify `tag` if you want to run the component with a specific version of code. This is mostly used during component development, testing 
-and debugging.
+- `backend` --- the Snowflake warehouse used for the job; currently affects mostly Snowflake transformations. Available values for backend size come from the [Workspace Create API call](https://keboola.docs.apiary.io/#reference/workspaces/workspaces-collection/create-workspace) and are `small`, `medium`, `large`.
+- `parallelism` --- runs [Configuration Rows](https://help.keboola.com/components/#configuration-rows) (if present in the configuration) in parallel. Allowed values are integer values and `infinity`, which runs all rows in parallel. When not specified, the rows are run sequentially.
+- `tag` --- runs the component with a specific version of code. This is mostly used during component development, testing and debugging.
 
 Runtime parameters can be specified on various levels. The values can be specified in the component configuration. They can also be specified 
 when creating a job, in which case it overrides the configuration. It may also be specified for an orchestration, in which case it overrides what is specified 
 in individual jobs of that orchestration.
+
+When stored in the component configuration, the runtime settings live in a top-level `runtime` node of the configuration JSON --- a sibling of `parameters`, 
+not inside it. For example, to pin all jobs of a configuration to a specific image tag:
+
+{% highlight json %}
+{
+    "parameters": {
+        "...": "..."
+    },
+    "runtime": {
+        "tag": "my-branch-3"
+    }
+}
+{% endhighlight %}
+
+Jobs of this configuration then run the given image tag (the job detail shows the resolved value in its `tag` field) until the `runtime.tag` key 
+is removed from the configuration. This is the usual way of testing a development build of a component in a single project without affecting 
+other projects --- the tag in the [Developer Portal](/extend/publish/) stays untouched. Do not forget to remove the key when done; a pinned 
+configuration keeps running the old image even after new versions of the component are released.
 
 ### Job Type
 Job can be of one of the four types `standard`, `container`, `phaseContainer` and `orchestrationContainer`. The `standard` is something which does actual work.
