@@ -27,7 +27,7 @@ Using a portal for a different stack than your token's stack will result in <cod
 
 | API                                                                                                         | Description                                                                                                                                                         |
 |-------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Keboola Storage API](https://keboola.docs.apiary.io/) ([source](https://github.com/keboola/storage-api-php-client/blob/master/apiary.apib)) | [Storage](/integrate/storage/) is the main Keboola component storing all data.                                                                                      |
+| [Keboola Storage API](https://api.keboola.com/?service=storage) ([source](https://github.com/keboola/storage-api-php-client/blob/master/apiary.apib)) | [Storage](/integrate/storage/) is the main Keboola component storing all data.                                                                                      |
 | [Keboola Management API](https://api.keboola.com/?service=manage)                                          | API managing Keboola projects and users (and notifications and features).                                                                                           |
 | [AI API](https://api.keboola.com/?service=ai)                                                               | API for supporting AI features.                                                                                                                                     |
 | [Billing API](https://api.keboola.com/?service=billing)                                                     | Billing API for Pay as You Go projects.                                                                                                                             |
@@ -37,7 +37,7 @@ Using a portal for a different stack than your token's stack will result in <cod
 | [Importer API](https://api.keboola.com/?service=import)                                                     | [Importer](/integrate/storage/api/importer/) is a helper service for easy table imports.                                                                            |
 | [Notifications API](https://api.keboola.com/?service=notification)                                          | API to subscribe to events, e.g., failed orchestrations.                                                                                                            |
 | [OAuth Broker API](https://api.keboola.com/?service=oauth)                                                  | OAuth Broker is a component managing [OAuth authorizations](/extend/common-interface/oauth/#authorize) of other components.                                         |
-| [Query API](https://api.keboola.com/?service=query)                                                 | Query is a service for running SQL queries on Snowflake. BigQuery support is planned but not yet available.                                                         |
+| [Query API](https://api.keboola.com/?service=query)                                                 | Query is a service for running SQL queries on Snowflake and BigQuery.                                                         |
 | [Queue API](https://api.keboola.com/?service=job-queue)                                                     | Queue is a service for [running components](/extend/docker-runner/) and managing [Jobs](/integrate/jobs/).                                                          |
 | [Sandboxes Service API](https://api.keboola.com/?service=sandboxes-service)                                 | API for managing Apps and Python/R workspaces.                                                                                                 |
 | [Scheduler API](https://api.keboola.com/?service=scheduler)                                                 | API to automate configurations.                                                                                                                                     |
@@ -80,7 +80,7 @@ for your own stack — tokens are not valid across stacks, and using the wrong p
 ### Service Endpoints
 
 If you are calling the APIs directly (not through the portal), modify the hostname accordingly.
-Otherwise, you may encounter `Invalid Token` or unauthorized errors. The *authoritative list* of available endpoints is provided by the [Storage API Index Call](https://keboola.docs.apiary.io/#reference/miscellaneous/api-index/component-list). The following is a sample response:
+Otherwise, you may encounter `Invalid Token` or unauthorized errors. The *authoritative list* of available endpoints is provided by the [Storage API Index Call](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/components/-componentId-). The following is a sample response:
 
 {% highlight json %}
 {
