@@ -154,7 +154,7 @@ achieve more advanced processing.
 
 ### Available Processors
 You can obtain a list of available processors using the
-[Developer Portal UI](https://components.keboola.com/components) or the [List Components Public API](https://api.keboola.com/?service=developer-portal)
+[Developer Portal UI](https://components.keboola.com/components) or the [List Components Public API](https://api.keboola.com/?service=developer-portal#get-/apps)
 of the Developer Portal. The important parts are `id`, which is required for configuration,
 and `documentationUrl`, which describes additional parameters of the processor.
 

@@ -45,7 +45,7 @@ This means that once worked your way through one component, you have seen them a
 [our repositories](/overview/repositories/).
 Apart from that common features, some components define additional [synchronous actions](/extend/common-interface/actions/).
 This (and many other information) can be retrieved using the [Developer Portal API](https://api.keboola.com/?service=developer-portal)
-(specifically the [Get app detail call](https://api.keboola.com/?service=developer-portal)
+(specifically the [Get app detail call](https://api.keboola.com/?service=developer-portal#get-/apps/-app-)
 which lists all components available in Keboola.
 
 ### Running Jobs

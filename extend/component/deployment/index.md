@@ -298,7 +298,7 @@ we recommend using the [Developer Portal CLI client](https://github.com/keboola/
 allows you to obtain the repository for a component and push credentials to that repository. See the chapter about
 [running components](/extend/component/running/#running-a-component), for example, how to obtain the AWS registry credentials.
 If you want to get even more low level, you can use the [Developer Portal API](https://api.keboola.com/?service=developer-portal) directly.
-It also allows you to [generate credentials for a service account](https://api.keboola.com/?service=developer-portal)
+It also allows you to [generate credentials for a service account](https://api.keboola.com/?service=developer-portal#post-/vendors/-vendor-/credentials)
 programmatically. We use our AWS ECR registry for hosting all component images.
 
 ## Test Live Configurations
