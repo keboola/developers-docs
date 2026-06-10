@@ -44,8 +44,8 @@ This means that once worked your way through one component, you have seen them a
 **Most of our components are open source**. If you are interested in their code, have a look at
 [our repositories](/overview/repositories/).
 Apart from that common features, some components define additional [synchronous actions](/extend/common-interface/actions/).
-This (and many other information) can be retrieved using the [Developer Portal API](https://kebooladeveloperportal.docs.apiary.io/#)
-(specifically the [Get app detail call](https://kebooladeveloperportal.docs.apiary.io/#reference/0/public-api/get-app-detail)
+This (and many other information) can be retrieved using the [Developer Portal API](https://api.keboola.com/?service=developer-portal)
+(specifically the [Get app detail call](https://api.keboola.com/?service=developer-portal)
 which lists all components available in Keboola.
 
 ### Running Jobs

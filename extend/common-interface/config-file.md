@@ -98,8 +98,8 @@ The component will receive the following `image_parameters` in the configuration
 }
 {% endhighlight %}
 
-When working with the API, note that the [Developer Portal API](https://kebooladeveloperportal.docs.apiary.io/)
-(specifically the [Component Detail API call](https://kebooladeveloperportal.docs.apiary.io/#reference/0/app/get-app-detail))
+When working with the API, note that the [Developer Portal API](https://api.keboola.com/?service=developer-portal)
+(specifically the [Component Detail API call](https://api.keboola.com/?service=developer-portal))
 shows separate `stack_parameters` and `image_parameters`, because the API is region agnostic.
 
 However, when working with the [Storage API](https://keboola.docs.apiary.io/)

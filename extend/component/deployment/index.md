@@ -116,7 +116,7 @@ fi
 {% endhighlight %}
 
 The script uses our [Developer Portal CLI tool](https://github.com/keboola/developer-portal-cli-v2) to communicate with
-the [Developer Portal API](https://kebooladeveloperportal.docs.apiary.io/#). The tool itself is provided as a Docker
+the [Developer Portal API](https://api.keboola.com/?service=developer-portal). The tool itself is provided as a Docker
 image `quay.io/keboola/developer-portal-cli-v2`. The entire script uses the following environment variables:
 
 - `KBC_DEVELOPERPORTAL_USERNAME` -- Service account user name
@@ -297,8 +297,8 @@ As in the [above script](/extend/component/deployment/#deploy-script),
 we recommend using the [Developer Portal CLI client](https://github.com/keboola/developer-portal-cli-v2). This CLI tool (runnable in Docker or PHP)
 allows you to obtain the repository for a component and push credentials to that repository. See the chapter about
 [running components](/extend/component/running/#running-a-component), for example, how to obtain the AWS registry credentials.
-If you want to get even more low level, you can use the [Developer Portal API](https://kebooladeveloperportal.docs.apiary.io/#) directly.
-It also allows you to [generate credentials for a service account](https://kebooladeveloperportal.docs.apiary.io/#reference/0/vendor/create-service-account)
+If you want to get even more low level, you can use the [Developer Portal API](https://api.keboola.com/?service=developer-portal) directly.
+It also allows you to [generate credentials for a service account](https://api.keboola.com/?service=developer-portal)
 programmatically. We use our AWS ECR registry for hosting all component images.
 
 ## Test Live Configurations
