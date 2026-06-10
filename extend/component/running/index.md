@@ -207,7 +207,7 @@ need to do a couple of things. Let's assume you want to run the `keboola-test.ex
 already [prepared the data directory](#preparing-the-data-folder).
 
 The next step is to obtain the repository settings and credentials from the
-[Developer Portal](https://components.keboola.com/). You can either use the [API](https://kebooladeveloperportal.docs.apiary.io/#) or
+[Developer Portal](https://components.keboola.com/). You can either use the [API](https://api.keboola.com/?service=developer-portal) or
 the [CLI](https://github.com/keboola/developer-portal-cli-v2). The CLI is easier to use. First set your service account credentials
 in the environment:
 

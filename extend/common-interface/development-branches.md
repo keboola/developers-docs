@@ -50,6 +50,6 @@ certain jobs in development branches based on the component’s features:
 * **dev-branch-job-blocked**: These components are not permitted to run in development branches under any circumstances.
 * **dev-mapping-allowed**: These components are allowed to use development buckets in their default branch input mappings, which is typically restricted. 
 
-For details on a component’s features, you can consult the [Developer Portal API](https://kebooladeveloperportal.docs.apiary.io/#reference/0/public-api/get-app-detail) or the [Component List in Storage API](https://keboola.docs.apiary.io/#reference/miscellaneous/api-index/component-list). 
+For details on a component’s features, you can consult the [Developer Portal API](https://api.keboola.com/?service=developer-portal#get-/apps/-app-) or the [Component List in Storage API](https://keboola.docs.apiary.io/#reference/miscellaneous/api-index/component-list). 
 
 To request changes to your component's features, please use the support button in your project to contact our support team. 
