@@ -10,7 +10,7 @@ Configuration files are one of the [possible channels](/extend/common-interface/
 between components and Keboola.
 
 To create a sample configuration file (together with the data directory),
-use the [Debug API call](https://api.keboola.com/?service=job-queue#post-/jobs) via the
+use the [Run Job API call in debug mode](https://api.keboola.com/?service=job-queue#post-/jobs) via the
 [Docker Runner API](https://api.keboola.com/?service=job-queue).
 You will get a zip archive containing all the resources you need in your component.
 
@@ -133,7 +133,7 @@ The component reads the input state file and writes any content to the output st
 file (valid JSON) that
 will be available to the next API call. A missing or an empty file will remove the state value.
 A state object is saved to configuration storage only when actually running the app
-(not in [debug API calls](https://api.keboola.com/?service=job-queue#post-/jobs). The state must be a valid JSON file.
+(not when using the [Run Job API call in debug mode](https://api.keboola.com/?service=job-queue#post-/jobs)). The state must be a valid JSON file.
 [Encryption](/overview/encryption/#encrypting-data-with-api) is applied to the state the same way it is applied to
 configurations, `KBC::ProjectSecure::` ciphers are used. 
 
@@ -216,7 +216,7 @@ write the usage file regularly** during the component run, not only at the end.
 validated and a wrong format will cause a component failure.*
 
 ## Examples
-To create an example configuration, use the [Debug API call](/extend/component/running/#preparing-the-data-folder). You will get a
+To create an example configuration, use the [Run Job API call in debug mode](/extend/component/running/#preparing-the-data-folder). You will get a
 `stage_0.zip` archive in your **Storage** > **File Uploads**, which will contain the `config.json` file.
 You can also use these configuration structure to create an API request for
 actually [running a component](https://api.keboola.com/?service=job-queue#post-/jobs).

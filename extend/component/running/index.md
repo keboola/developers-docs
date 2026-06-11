@@ -102,7 +102,7 @@ is designed to do that.
 
 We recommend that you use the [API console or Postman](/overview/api/) to call the API.
 A [collection of examples](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb) of the
-Debug API calls is available in Postman Docs.
+Run Job API call in debug mode is available in Postman Docs.
 
 ### Prepare
 [Create a table](https://help.keboola.com/tutorial/load/) in Keboola Storage.
@@ -268,7 +268,7 @@ This is a known [bug in Docker](https://github.com/docker/for-win/issues/1306), 
 
 ## Running Transformations
 Both R and Python transformations are implemented as Docker components. They can be run
-locally as well. Use the [Debug API](/extend/component/running/#preparing-the-data-folder) call to obtain the data directory.
+locally as well. Use the [Run Job API call in debug mode](/extend/component/running/#preparing-the-data-folder) to obtain the data directory.
 In the [API call](https://api.keboola.com/?service=job-queue#post-/jobs), specify the full
 configuration (using the `configData` node). See [examples](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb)
 for both R and Python transformations.

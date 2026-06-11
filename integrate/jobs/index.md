@@ -490,7 +490,7 @@ If configuration rows are used, then the above is repeated for each configuratio
 This API call does not upload any tables or files to Storage. I.e. when the component finishes, its output is discarded and the output mapping to storage 
 is not performed. This makes this API call generally very safe to call, because it cannot break the Keboola project in any way. However, keep 
 in mind, that if the component has any outside side effects, these will get executed. This applies typically to writers which will write the data 
-into the external system even with this debug API call.
+into the external system even when running in debug mode.
 
 Note that the snapshot archive will contain all files in the data folder including any temporary files produced be the component. The snapshot will not 
 contain the output state.json file. This is because the snapshot is made before a component is run where the out state of the previous component is 

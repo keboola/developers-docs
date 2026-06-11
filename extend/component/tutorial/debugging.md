@@ -41,7 +41,7 @@ In the [API call](https://api.keboola.com/?service=job-queue#post-/jobs), either
 full configuration (using the `configData` node) or refer to an existing configuration
 of the component (using the `config` node). See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb).
 
-The Debug API call will prepare the data folder for the component, put it inside an archive and upload it to Keboola Storage.
+The Run Job API call in debug mode will prepare the data folder for the component, put it inside an archive and upload it to Keboola Storage.
 When running the request with valid parameters, you should receive a response similar to this:
 
 {% highlight json %}
@@ -62,7 +62,7 @@ When the job finishes, you'll see a `stage_0.zip` file uploaded to your project.
 {: .image-popup}
 ![Screenshot -- Job Tags](/extend/component/tutorial/debug-2.png)
 
-You can send the Debug API call with a reference to an existing configuration id, or you can also supply the configuration directly in
+You can send the Run Job API call in debug mode with a reference to an existing configuration id, or you can also supply the configuration directly in
 the API request. In such case, use the `configData` attribute in the request body, e.g.:
 
 {% highlight json %}
@@ -169,7 +169,7 @@ This means that the directory with the component code will shadow the one inside
 instruction in `Dockerfile`) and you will run the current code in the image environment.
 
 ## Running Specific Tags
-The Debug API call is very powerful but it always runs the production version of component. There are cases where you might want to
+The Run Job API call in debug mode is very powerful but it always runs the production version of the component. There are cases where you might want to
 run a test or development version of a component. In such situations, an alternative may be to run a specific image tag.
 
 Let's say that you need to list all files on input for some reason. Following the
