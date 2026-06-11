@@ -6,7 +6,7 @@ permalink: /extend/component/tutorial/debugging/
 * TOC
 {:toc}
 
-Because all components [run in an isolated environment](/extend/docker-runner/), it may be harder to debug them. There is no way to
+Because all components [run in an isolated environment](/extend/job-queue/), it may be harder to debug them. There is no way to
 examine the component while it is running. However, there are some options how the production environment can be
 replicated locally, so that you can analyze what is happening if something is not right.
 
@@ -32,7 +32,7 @@ You should be able to trace the tag to a specific version of your source code.
 ### Step 1 -- Obtain Sample Data and Configuration
 Data between Keboola and your Docker image are exchanged using [CSV files](/extend/common-interface/) in
 designated [directories](/extend/common-interface/folders/); they will be
-injected into the image when you [run it](/extend/docker-runner/). To simulate this, download an archive containing the data files
+injected into the image when you [run it](/extend/job-queue/). To simulate this, download an archive containing the data files
 and [configuration](/extend/common-interface/config-file/) in the exact same format you get in the production environment.
 
 Use the [Create Job API](https://api.keboola.com/?service=job-queue#post-/jobs).

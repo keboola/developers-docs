@@ -10,7 +10,7 @@ In this part of the [tutorial](/extend/component/tutorial/), you will see how to
 Similarly to [input mapping](/extend/component/tutorial/input-mapping/), the output mapping
 defines what data your component produces in the end users' project. A component cannot directly
 write data to the project [Storage](https://help.keboola.com/storage/);
-the produced data are stored in the end users' project when the component [finishes](/extend/docker-runner/).
+the produced data are stored in the end users' project when the component [finishes](/extend/job-queue/).
 
 Output mapping is therefore used when your application needs to send data to the customer
 project -- these are typically **extractors** and **applications**. Implementing the input mapping requires three steps:

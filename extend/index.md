@@ -42,7 +42,7 @@ A [component](/extend/component/) can be used as:
 - **Writer**, pushing data into new systems and consumption methods. It does not generate any data in Keboola projects.
 - **Processor**, adjusting the inputs or outputs of other components. It has to be run together with one of the above components.
 
-All components are run using [Docker Runner](/extend/docker-runner/), a component that takes
+All components are run using [Job Queue](/extend/job-queue/), a service that takes
 care of their authentication, starting, stopping, isolation, reading data from and writing it to Keboola Storage. They must adhere to the
 [common interface](/extend/common-interface/). Creating components requires an elementary knowledge of [Docker](https://www.docker.com/why-docker).
 They can be implemented in virtually any programming language and be fully customized and tailored to anyone's needs.

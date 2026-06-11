@@ -11,7 +11,7 @@ between components and Keboola.
 
 To create a sample configuration file (together with the data directory),
 use the [Run Job API call in debug mode](https://api.keboola.com/?service=job-queue#post-/jobs) via the
-[Docker Runner API](https://api.keboola.com/?service=job-queue).
+[Job Queue API](https://api.keboola.com/?service=job-queue).
 You will get a zip archive containing all the resources you need in your component.
 
 All configuration files are always stored in `JSON` format.

@@ -18,16 +18,18 @@ First, store the [API endpoints](/overview/api/) as environment variables, so we
 
 We will need:
 - [Storage API](/integrate/storage/api/) to store the variable definitions and the extractor configuration -
-- [Docker Runner API](/extend/docker-runner/) to run the extractor job from the configuration.
+- [Job Queue API](/extend/job-queue/) to run the extractor job from the configuration.
+
+The host names depend on your [stack](/overview/api/#stacks-and-endpoints):
 
 ```shell
 export STORAGE_API_HOST="https://connection.keboola.com"
-export RUNNER_API_HOST="https://docker-runner.keboola.com"
+export JOB_QUEUE_HOST="https://queue.keboola.com"
 ```
 
 ## Obtain Storage API Token
 
-A [Storage API Token](https://help.keboola.com/management/project/tokens/) is needed to interact with the Storage and Docker Runner APIs.
+A [Storage API Token](https://help.keboola.com/management/project/tokens/) is needed to interact with the [Keboola APIs](/overview/api/#list-of-keboola-apis).
 
 Obtain a Storage API token from the user interface of your project, see this [Guide](https://help.keboola.com/management/project/tokens).
 
@@ -170,13 +172,15 @@ curl --include \
      --header "X-StorageApi-Token: $TOKEN" \
      --data-binary '
         {
+            "component": "'$COMPONENT_ID'",
             "config": "'$EXTRACTOR_CONFIG_ID'",
+            "mode": "run",
             "variableValuesData": {
                 "values": '$VARIABLES_VALUES'
             }
         }
      ' \
-"$RUNNER_API_HOST/docker/$COMPONENT_ID/run"
+"$JOB_QUEUE_HOST/jobs"
 ```
 
 ## Check the job result

@@ -34,7 +34,7 @@ Set `"version": 3` to use the latest OAuth Broker API. The old OAuth V2 API is d
 {% endhighlight %}
 
 ## Authorize
-[Docker Runner](/extend/docker-runner/) then retrieves, decrypts and injects the credentials to the
+[Job Queue](/extend/job-queue/) then retrieves, decrypts and injects the credentials to the
 configuration file in the `authorization.oauth_api.credentials` attribute.
 
 {% highlight json %}

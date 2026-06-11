@@ -20,7 +20,7 @@ separate component would bring an overhead of maintaining both the extractor's D
 
 ## Solution
 For each Component, you can specify other actions (apart from the default `run`). These
-actions will be executed using the same Docker image, but [Docker Runner](/extend/docker-runner/) will wait for its execution and use
+actions will be executed using the same Docker image, but [Job Queue](/extend/job-queue/) will wait for its execution and use
 the returned value as the API response. So, these additional actions are executed *synchronously* and have a very
 limited execution time (maximum 30 seconds). These actions also cannot access Storage.
 
@@ -48,8 +48,6 @@ Do not specify the `action` attribute in the request body, it is already in the 
 }
 
 {% endhighlight %}
-
-**Important: use https://docker-runner.keboola.com/ for calling this part of the API.**
 
 ### Return Values
 

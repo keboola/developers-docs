@@ -43,8 +43,8 @@ Apart from this basic usage, the common interface offers many more features:
 - Logging configuration
 - Etc.
 
-Our [Docker Runner component](/extend/docker-runner/) makes sure that the common interface is honoured
-from our side. It also takes care of executing your component in its own [isolated environment](/extend/docker-runner/).
+Our [Job Queue](/extend/job-queue/) service makes sure that the common interface is honoured
+from our side. It also takes care of executing your component in its own [isolated environment](/extend/job-queue/).
 
 ## Requirements
 Before you start developing a new component, you should

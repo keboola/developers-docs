@@ -1,29 +1,28 @@
 ---
-title: Docker Runner
-permalink: /extend/docker-runner/
+title: Job Queue
+permalink: /extend/job-queue/
 redirect_from:
-    - /integrate/docker-bundle/
-    - /integrate/docker-runner/
+    - /extend/docker-runner/
 ---
 
 * TOC
 {:toc}
 
-Docker Runner is a core [Keboola component](/overview/#important-components), which
-provides an interface for running other Keboola components. Every component in Keboola is
+Job Queue is a core Keboola Service, which
+provides an interface for running Keboola components. Every component in Keboola is
 represented by a [Docker image](/extend/component/docker-tutorial/).
 Running a component means creating and executing an [asynchronous job](/integrate/jobs/).
 
 Developing functionality in [Docker](https://www.docker.com/) allows you to focus only on the application logic; all communication
-with the [Storage API](https://keboola.docs.apiary.io/#) will be handled by Docker Runner. You can encapsulate any application into a Docker image
+with the [Storage API](https://keboola.docs.apiary.io/#) will be handled by Job Queue. You can encapsulate any application into a Docker image
 following a set of rules that will allow you to integrate the application into Keboola.
 
-There is a [predefined interface](/extend/common-interface/) with Docker Runner, consisting
+There is a [predefined interface](/extend/common-interface/) with Job Queue, consisting
 mainly of a [folder structure](/extend/common-interface/folders/) and a [serialized configuration file](/extend/common-interface/config-file/).
-All [components](/extend/component/), including our internal R and Python Transformations, are run using Docker Runner.
+All [components](/extend/component/), including our internal R and Python Transformations, are run using Job Queue.
 
 ## Workflow
-The Docker Runner functionality can be described in the following steps:
+The Job Queue functionality can be described in the following steps:
 
 - Download and build the specified Docker image.
 - Download all [tables](/extend/common-interface/folders/#dataintables-folder) and [files](/extend/common-interface/folders/#datainfiles-folder) specified in the input mapping from Storage.
@@ -35,10 +34,10 @@ The Docker Runner functionality can be described in the following steps:
 [files](/extend/common-interface/folders/#dataoutfiles-folder) in the output mapping to Storage.
 - Delete the container and all temporary files.
 
-When the component execution is finished, Docker Runner automatically collects the exit code and the content of STDOUT and STDERR.
+When the component execution is finished, Job Queue automatically collects the exit code and the content of STDOUT and STDERR.
 The following schema illustrates the workflow of running a dockerized component.
 
-![Docker Workflow](/extend/docker-runner/docker-runner.svg)
+![Docker Workflow](/extend/job-queue/docker-runner.svg)
 
 ### Features
 The component is responsible for these processes:
@@ -47,16 +46,16 @@ The component is responsible for these processes:
 - Writing the results to the predefined folders and files
 - Proper handling of success/error results by setting an appropriate exit code
 
-Docker Runner is responsible for the following processes:
+Job Queue is responsible for the following processes:
 
-- **Authentication:** Docker Runner makes sure the component is run by authorized users/tokens.
+- **Authentication:** Job Queue makes sure the component is run by authorized users/tokens.
 It is not possible to run a component anonymously. The component does not have an access to the Keboola token
 itself, and it receives only limited information about the project and the end-user.
-- **Starting and stopping** the component: Docker Runner will boot a Docker container which contains the
+- **Starting and stopping** the component: Job Queue will boot a Docker container which contains the
 component. This ensures the component runs in a precisely defined environment, which is guaranteed to
 be the same for each component run. No component state is preserved (with the exception of the
 [state file](/extend/common-interface/config-file/#state-file).
-- **Reading and writing data** to Keboola Storage: Docker Runner ensures a custom component
+- **Reading and writing data** to Keboola Storage: Job Queue ensures a custom component
 cannot access arbitrary data in the project. It will only receive the input mapping defined by the end user;
 and only those outputs defined in the output mapping by the end user will be written to the project.
 - **Component isolation**: Each component is run in its own Docker container, which is isolated from other
@@ -64,8 +63,7 @@ containers; the component cannot be affected by other running components. It may
 to have no network access.
 
 ## API
-The Docker Runner API is described in the [Job Queue API](https://api.keboola.com/?service=job-queue). Docker Runner
-has API calls to
+The [Job Queue API](https://api.keboola.com/?service=job-queue) has API calls to
 
 - run a [component](/extend/component/).
 - [encrypt values](/overview/encryption/).
@@ -74,7 +72,7 @@ has API calls to
 - run a [component](/extend/component/) with a [specified Docker image tag](https://api.keboola.com/?service=job-queue#post-/jobs), usable for [testing images](/extend/component/deployment/#test-live-configurations).
 
 ## Configuration
-Components executed by Docker Runner store their configurations in
+Components executed by Job Queue store their configurations in
 [Storage API components configurations](https://keboola.docs.apiary.io/#reference/components-and-configurations).
 
 When creating the configuration, use

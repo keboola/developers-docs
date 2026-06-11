@@ -34,11 +34,11 @@ Using a portal for a different stack than your token's stack will result in <cod
 | [Notifications API](https://api.keboola.com/?service=notification)                                          | API to subscribe to events, e.g., failed orchestrations.                                                                                                            |
 | [OAuth Broker API](https://api.keboola.com/?service=oauth)                                                  | OAuth Broker is a component managing [OAuth authorizations](/extend/common-interface/oauth/#authorize) of other components.                                         |
 | [Query API](https://api.keboola.com/?service=query)                                                 | Query is a service for running SQL queries on Snowflake and BigQuery.                                                         |
-| [Queue API](https://api.keboola.com/?service=job-queue)                                                     | Queue is a service for [running components](/extend/docker-runner/) and managing [Jobs](/integrate/jobs/).                                                          |
+| [Queue API](https://api.keboola.com/?service=job-queue)                                                     | Queue is a service for [running components](/extend/job-queue/) and managing [Jobs](/integrate/jobs/).                                                          |
 | [Sandboxes Service API](https://api.keboola.com/?service=sandboxes-service)                                 | API for managing Apps and Python/R workspaces.                                                                                                 |
 | [Scheduler API](https://api.keboola.com/?service=scheduler)                                                 | API to automate configurations.                                                                                                                                     |
 | [Stream API](https://api.keboola.com/?service=stream)                                                       | The Keboola Stream API allows you to ingest small and frequent events into your project's storage.                                                                  |
-| [Synchronous Actions API](https://api.keboola.com/?service=sync-actions)                                    | API to trigger [Synchronous Actions](/extend/common-interface/actions/). This is a partial replacement of Docker Runner API and may not be available on all stacks. |
+| [Synchronous Actions API](https://api.keboola.com/?service=sync-actions)                                    | API to trigger [Synchronous Actions](/extend/common-interface/actions/). |
 | [Templates API](https://api.keboola.com/?service=templates)                                                 | The Keboola Templates API allows you to apply a [template](/cli/templates/).                                                                                        |
 | [Vault](https://api.keboola.com/?service=vault)                                                             | Service handling variables & credentials storage.                                                                                                                   |
 
@@ -124,10 +124,9 @@ Otherwise, you may encounter `Invalid Token` or unauthorized errors. The *author
 
 The services listed above are:
 
-- `docker-runner` --- [Legacy Service for Running Sync Actions](/extend/common-interface/actions/)
 - `import` --- [Storage Importer Service](/integrate/storage/api/importer/)
 - `oauth` --- [OAuth Manager Service](/extend/common-interface/oauth/)
-- `queue` --- [Service for Running Components](/extend/docker-runner/)
+- `queue` --- [Service for Running Components](/extend/job-queue/)
 - `billing` --- Service for Computing Credits
 - `encryption` --- Service for [Encryption](https://developers.keboola.com/overview/encryption/)
 - `scheduler` --- [Service for Configuring Schedules](https://developers.keboola.com/automate/set-schedule/)
