@@ -74,12 +74,12 @@ Then you can inspect the container with standard OS (CentOS) commands and/or run
 After you have mastered this step, you can run any Docker component on your machine.
 
 ## Debugging
-There are two API calls available for debugging purposes:
+There are two main variants of the Run Job API call useful for debugging purposes:
 
-  - [Debug](https://kebooladocker.docs.apiary.io/#reference/debug/debug-component/create-a-debug-job)
-  - [Run Tag](https://kebooladocker.docs.apiary.io/#reference/run/create-a-job-with-image/create-a-dry-run-job)
+  - Debug
+  - Run Tag
 
-The [Debug](https://kebooladocker.docs.apiary.io/#reference/debug) API call is useful for obtaining an
+The [Run Job](https://api.keboola.com/?service=job-queue#post-/jobs) API call is useful for obtaining an
 environment configuration for a component. It will create a snapshot of the
 [data folder](/extend/common-interface/folders/)
 (including input mapping and configuration files) and then it will upload the snapshot to the [Files section](https://help.keboola.com/storage/file-uploads/)
@@ -88,8 +88,7 @@ This gives you snapshots of the data directory before and after a component is r
 API call does not write any tables or files (other than the archive) to the Keboola project, so it is very safe to run. Note however that
 any side effects of the component are still performed (e.g. writers still write data to their destination).
 
-The [Run Tag](https://kebooladocker.docs.apiary.io/#reference/run/create-a-job-with-image/create-a-dry-run-job)
-API call allows you to run a job in the production environment but using a specific tag of the Docker image.
+The Run Job API call also allows you to run a job in the production environment but using a specific tag of the Docker image.
 This means you can test your unreleased image on real configurations in real projects without affecting
 any users using that component. See the [tutorial](/extend/component/tutorial/debugging/#running-specific-tags)
 for instructions.
@@ -98,10 +97,10 @@ for instructions.
 In order to run and debug a Keboola component (including [R](https://help.keboola.com/manipulation/transformations/r/) and [Python](https://help.keboola.com/manipulation/transformations/python/) Transformations)
 on your own computer, you need to manually supply the component with
 a [data folder and configuration file](/extend/common-interface/). The above mentioned
-[Debug API call](https://kebooladocker.docs.apiary.io/#reference/debug/debug-component/create-a-debug-job)
+[Run Job API call](https://api.keboola.com/?service=job-queue#post-/jobs)
 is designed to do that.
 
-We recommend that you use [Apiary or Postman](/overview/api/) to call the API.
+We recommend that you use the [API console or Postman](/overview/api/) to call the API.
 A [collection of examples](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb) of the
 Debug API calls is available in Postman Docs.
 
@@ -270,7 +269,7 @@ This is a known [bug in Docker](https://github.com/docker/for-win/issues/1306), 
 ## Running Transformations
 Both R and Python transformations are implemented as Docker components. They can be run
 locally as well. Use the [Debug API](/extend/component/running/#preparing-the-data-folder) call to obtain the data directory.
-In the [API call](https://kebooladocker.docs.apiary.io/#reference/debug/debug-component/create-a-debug-job), specify the full
+In the [API call](https://api.keboola.com/?service=job-queue#post-/jobs), specify the full
 configuration (using the `configData` node). See [examples](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb)
 for both R and Python transformations.
 

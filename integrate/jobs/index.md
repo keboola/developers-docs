@@ -288,7 +288,7 @@ which might be useful when working with jobs:
 
 - [Create configurations](https://keboola.docs.apiary.io/#reference/components-and-configurations/component-configurations/create-configuration)
 - [List Job Events](https://keboola.docs.apiary.io/#reference/events/events/events-list)
-- [Encrypt values](https://keboolaencryption.docs.apiary.io/#reference/encrypt/encryption/encrypt-data)
+- [Encrypt values](https://api.keboola.com/?service=encryption#post-/encrypt)
 - [Run Synchronous Actions](https://app.swaggerhub.com/apis/odinuv/sync-actions/1.0.0#/default/post_actions)
 - [Subscribe to Job Events](https://app.swaggerhub.com/apis/odinuv/notifications-service/1.1.0#/Project%20Subscriptions/createSubscription)
 - [Schedule jobs](https://app.swaggerhub.com/apis/odinuv/scheduler/1.0.0#/schedules/activate)

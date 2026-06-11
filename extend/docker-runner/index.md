@@ -64,14 +64,14 @@ containers; the component cannot be affected by other running components. It may
 to have no network access.
 
 ## API
-The Docker Runner API is described on [Apiary.io](https://kebooladocker.docs.apiary.io/#). Docker Runner
+The Docker Runner API is described in the [Job Queue API](https://api.keboola.com/?service=job-queue). Docker Runner
 has API calls to
 
 - run a [component](/extend/component/).
 - [encrypt values](/overview/encryption/).
 - [prepare the data folder](/extend/component/running/#preparing-the-data-folder).
 - run [component actions](/extend/common-interface/actions/).
-- run a [component](/extend/component/) with a [specified Docker image tag](https://kebooladocker.docs.apiary.io/#reference/run/create-a-job-with-image/run-job), usable for [testing images](/extend/component/deployment/#test-live-configurations).
+- run a [component](/extend/component/) with a [specified Docker image tag](https://api.keboola.com/?service=job-queue#post-/jobs), usable for [testing images](/extend/component/deployment/#test-live-configurations).
 
 ## Configuration
 Components executed by Docker Runner store their configurations in

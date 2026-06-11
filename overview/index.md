@@ -55,7 +55,7 @@ Each component has a `/run` API call that accepts either a reference to componen
 [queues an asynchronous job](/integrate/jobs/).
 
 For more details, see
-[full API description](https://kebooladocker.docs.apiary.io/#reference/run/run-job).
+[full API description](https://api.keboola.com/?service=job-queue#post-/jobs).
 
 ### Components Configuration
 All components store their configuration in [Storage](/integrate/storage/). Management of the

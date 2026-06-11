@@ -22,8 +22,8 @@ depends fully on your component code (or Dockerfile). If you want to use a diffe
 **use the [`KBC_DATADIR` environment variable](/extend/common-interface/environment/#environment-variables)**. In production,
 this variable will always be set to `/data/`. During development, you can set it to your liking.
 
-To create a data folder sample, use the [Debug API](/extend/component/running/#preparing-the-data-folder) call via the
-[Docker Runner API](https://kebooladocker.docs.apiary.io/#reference/debug).
+To create a data folder sample, use the [Debug mode](/extend/component/running/#preparing-the-data-folder) on the
+[Create Job API](https://api.keboola.com/?service=job-queue#post-/jobs).
 All the resources you need in your component will be provided in a ZIP archive.
 
 The predefined data exchange folder structure is as follows:

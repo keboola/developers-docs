@@ -18,8 +18,8 @@ The following environment variables are injected into the container:
  - `KBC_RUNID`: The RunId from Storage; links all events within an API call (useful for logging).
  - `KBC_PROJECTID`: The ID of the project in Keboola within a [Keboola stack](/overview/api/#regions-and-endpoints).
  - `KBC_STACKID`: The ID of the [Keboola stack](/overview/api/#regions-and-endpoints).
- - `KBC_CONFIGID`: The ID of the configuration, or a hash of configuration data if the configuration is not named (e.g., when `configData` is used in an [API call](https://kebooladocker.docs.apiary.io/#reference/run/create-a-job/run-job)).
- - `KBC_CONFIGVERSION`: The version of the configuration, or empty if unnamed (whne `configData` is used in the [API call](https://kebooladocker.docs.apiary.io/#reference/run/create-a-job/run-job)).
+ - `KBC_CONFIGID`: The ID of the configuration, or a hash of configuration data if the configuration is not named (e.g., when `configData` is used in an [API call](https://api.keboola.com/?service=job-queue#post-/jobs)).
+ - `KBC_CONFIGVERSION`: The version of the configuration, or empty if unnamed (when `configData` is used in the [API call](https://api.keboola.com/?service=job-queue#post-/jobs)).
  - `KBC_COMPONENTID`: The ID of the component.
  - `KBC_CONFIGROWID`: The ID of the configuration row, if available.
  - `KBC_BRANCHID`: The ID of the [development branch](https://keboola.docs.apiary.io/#reference/development-branches/branches).

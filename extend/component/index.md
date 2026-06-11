@@ -53,7 +53,7 @@ Before you start developing a new component, you should
 - get yourself acquainted with [Docker](/extend/component/docker-tutorial/). You should be
 able to [run `docker`](/extend/component/docker-tutorial/setup/) commands. Strictly speaking, you can get away
 with not using them, but it will certainly speed things up for you.
-- be able to send API requests. Although you can use the [Apiary](https://apiary.io/) client console, we
+- be able to send API requests. Although you can use the [api.keboola.com](https://api.keboola.com/) console, we
 recommend using [Postman](https://www.getpostman.com/) as it is
 more convenient. A list of [sample requests](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest)
 is available.
@@ -92,12 +92,6 @@ The expected behavior of the above component types can be described in more deta
 - Transformation -- represents a transformation engine. The UI treats these components specially and expects that they have similar capabilities
 and configuration options. These are created by Keboola. If you wish to bring your own, please contact us first.
 - Other -- this component type has a special role in the UI, it has no standard component UI. Notable "other" components are:
-    - `orchestrator` -- [Orchestrator service](https://help.keboola.com/orchestrator/) configurations. To work with either configurations or jobs, use the [dedicated API](https://keboolaorchestratorv2api.docs.apiary.io/#).
-    - `transformation` -- [Transformation service](https://help.keboola.com/transformations/) configurations. To work with configurations, use the standard [configurations API](https://keboola.docs.apiary.io/#reference/components-and-configurations). To work with jobs, 
-    use the [dedicated API](https://keboolatransformationapi.docs.apiary.io/#).    
-    - `provisioning` -- [Sandbox provisioning service](https://help.keboola.com/transformations/sandbox/). No configurations can be made. 
-    To work with jobs, use the [dedicated API](https://provisioningapi.docs.apiary.io/#).
-    - `keboola.oauth-v2` -- [OAuth integration service](/extend/common-interface/oauth/). Neither configurations nor jobs can be made. Use the [dedicated API](https://provisioningapi.docs.apiary.io/#) to work with the service.
     - `keboola.variables` -- Component for storing [variables](/integrate/variables/) configurations. Use the standard [configurations API](https://keboola.docs.apiary.io/#reference/components-and-configurations). No jobs can be made.
     - `keboola.storage` -- Placeholder component for actions from Storage service. Neither configurations nor jobs can be made. Use the
     [dedicated API](https://keboola.docs.apiary.io/) to work with Storage.

@@ -54,7 +54,7 @@ However, there are two other ways to try it as a component, as described below.
 The first option is to call the [generate action](/extend/component/code-patterns/interface#generate-action) via the API:
 
 - You can test that the component returns the desired results based on the specified inputs.
-- Use the [Run Component Action](https://kebooladocker.docs.apiary.io/#reference/actions/run-custom-component-action/process-action) API call.
+- Use the [Run Component Action](https://api.keboola.com/?service=sync-actions#post-/actions) API call.
 - An [API token](https://help.keboola.com/management/project/tokens/) is needed.
 
 ### Modify Transformation via API

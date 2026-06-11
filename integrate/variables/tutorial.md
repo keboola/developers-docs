@@ -162,7 +162,7 @@ In this example are values of the variables part of the run job request.
 
 For other ways to define values see the [Variables documentation](/integrate/variables/#variable-values).
 
-Use [Run Job API call](https://kebooladocker.docs.apiary.io/#reference/run/create-a-job/run-job) to run *extractor configuration*.
+Use [Run Job API call](https://api.keboola.com/?service=job-queue#post-/jobs) to run *extractor configuration*.
 ```shell
 curl --include \
      --request POST \

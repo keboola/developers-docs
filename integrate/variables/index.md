@@ -140,10 +140,7 @@ will be interpreted as (assuming the variables `alias=batman` and `size=big` are
 
 
 ## Example Using Python Transformations
-In this example, we will configure a Python transformation using variables. Note that we are using the new 
-transformations and bypassing the current 
-[Transformation Service](https://keboolatransformationapi.docs.apiary.io/#). Such configurations are not 
-supported in the UI yet.
+In this example, we will configure a Python transformation using variables.
 
 ### Step 1 -- Create Variable Configuration
 Use the [Create Configuration API call](https://keboola.docs.apiary.io/#reference/components-and-configurations/component-configurations/create-configuration) 

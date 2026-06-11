@@ -67,7 +67,7 @@ will be transformed to:
 {% endhighlight %}
 
 ## Encrypting Data with API
-The [Encryption API](https://keboolaencryption.docs.apiary.io/#reference/encrypt/encryption/encrypt-data) can handle
+The [Encryption API](https://api.keboola.com/?service=encryption#post-/encrypt) can handle
 both strings and arbitrary JSON data. For strings, the entire string is encrypted. In JSON data,
 only scalar keys starting with `#` are encrypted. For example, encrypting the following:
 
@@ -104,15 +104,8 @@ yields
 
 The `Content-Type` header in the request differentiates whether the body is treated as a string (`text/plain`) or JSON (`application/json`).
 
-Use the [Console in Apiary](https://keboolaencryption.docs.apiary.io/#reference/encrypt/encryption/encrypt-data?console=1) to
-call the API resource endpoint.
-
-{: .image-popup}
-![Console screenshot](/overview/encryption-console.png)
-
 ### Encryption Parameters
-The [Encryption API](https://keboolaencryption.docs.apiary.io/#reference/encrypt/encryption/encrypt-data)
-accepts the following **optional** parameters:
+The Encryption API accepts the following **optional** parameters:
 
 - `componentId` --- ID of a [Keboola component](/extend/component/tutorial/#creating-a-component),
 - `projectId` --- ID of a Keboola project,
