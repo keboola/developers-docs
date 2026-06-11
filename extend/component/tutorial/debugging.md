@@ -122,8 +122,7 @@ Use the following command to run the image:
     docker run --volume=physicalhostpath:/data/ imageTag
 
 An image tag is the tag you supplied in the `--tag` parameter for `docker build` (`my-component` in the above example).
-The physical host path depends on the system you are running. If in doubt,
-see [Setting Up Docker](/extend/component/docker-tutorial/setup/#sharing-files). In our example image with default Windows
+The physical host path depends on the system you are running. In our example image with default Windows
 installation of Docker, this would be:
 
     docker run --volume=C:\Users\JohnDoe\data\:/data/ my-component
@@ -153,7 +152,7 @@ For instance:
 This will override the default command specified in the `Dockerfile` -- `CMD ["python", "-u", "/code/main.py"]`
 to launch [Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell)) instead. The [`-i` and `-t` flags](https://docs.docker.com/engine/reference/commandline/run/)
 ensure that the container runs in an interactive mode.
-You can then inspect the container contents: 'ls /data/'. For more details, see [Howto](/extend/component/docker-tutorial/howto/).
+You can then inspect the container contents: 'ls /data/'.
 
 ### Step 4 -- Modify
 Chances are that you want to modify the component code often. If you modify the component code, you have to rebuild the

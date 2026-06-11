@@ -10,7 +10,7 @@ redirect_from:
 
 Job Queue is a core Keboola Service, which
 provides an interface for running Keboola components. Every component in Keboola is
-represented by a [Docker image](/extend/component/docker-tutorial/).
+represented by a Docker image.
 Running a component means creating and executing an [asynchronous job](/integrate/jobs/).
 
 Developing functionality in [Docker](https://www.docker.com/) allows you to focus only on the application logic; all communication

@@ -13,9 +13,9 @@ One of the great advantages of dockerized components is that the components alwa
 same environment defined by the Docker image. When running in Keboola, there are, however, some outside
 environment bindings for you to take care of.
 
-Before you start, make sure you have [Docker set up correctly](/extend/component/docker-tutorial/setup/),
-particularly that you know your **host path** for [sharing files](/extend/component/docker-tutorial/setup#sharing-files)
-and that you understand the basic concepts of creating a [Dockerized application](/extend/component/docker-tutorial/howto/).
+Before you start, make sure you have Docker set up correctly,
+particularly that you know your **host path** for sharing files
+and that you understand the basic concepts of creating a Dockerized application.
 In this guide, we will use `/user/johndoe/data/` as the **host path** containing the
 [data folder](/extend/common-interface/folders/).
 
@@ -282,4 +282,4 @@ To run [Python transformations](https://quay.io/repository/keboola/python-transf
     docker run --volume=/user/johndoe/data/:/data --memory=4000m --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-123 quay.io/keboola/python-transformation:latest
 
 The transformation will run automatically and produce results. If you want to get into
-the container interactively, use the [`--entrypoint`](/extend/component/docker-tutorial/howto/) parameter.
+the container interactively, use the `--entrypoint` parameter.

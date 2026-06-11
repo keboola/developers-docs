@@ -50,8 +50,8 @@ from our side. It also takes care of executing your component in its own [isolat
 Before you start developing a new component, you should
 
 - have a [Keboola project](/#development-project) where you can test your code.
-- get yourself acquainted with [Docker](/extend/component/docker-tutorial/). You should be
-able to [run `docker`](/extend/component/docker-tutorial/setup/) commands. Strictly speaking, you can get away
+- get yourself acquainted with Docker. You should be
+able to run `docker` commands. Strictly speaking, you can get away
 with not using them, but it will certainly speed things up for you.
 - be able to send API requests. Although you can use the [api.keboola.com](https://api.keboola.com/) console, we
 recommend using [Postman](https://www.getpostman.com/) as it is
@@ -99,9 +99,6 @@ and configuration options. These are created by Keboola. If you wish to bring yo
 ## Next Steps
 - Create a [developer account](/extend/component/tutorial/#before-you-start) so that you can create your own components.
 - Follow our [tutorial](/extend/component/tutorial/) to build a "Hello, World!" component in 10 minutes.
-- If new to Docker, follow a [quick introduction](/extend/component/docker-tutorial/),
-along with a [guide to setting up Docker](/extend/component/docker-tutorial/setup/) and a
-[guide to building dockerized applications](/extend/component/docker-tutorial/howto/).
 - Follow the [next steps](/extend/component/tutorial/input-mapping/) of the tutorial to understand how your component interacts with Keboola.
 - See more about [testing and debugging of components](/extend/component/tutorial/debugging/) in the Keboola environment.
 - Request [publication](/extend/publish/) of your component. 

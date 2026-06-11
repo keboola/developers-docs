@@ -18,7 +18,7 @@ To integrate your own components into Keboola, use the following links:
 
 It's important to know that 
 
-- the component code is wrapped in a [Docker](/extend/component/docker-tutorial/) image.
+- the component code is wrapped in a Docker image.
 - each component gets a [configuration file](#configuration).
 - the correct exit code must be used; read about [return values](/extend/common-interface/environment/#return-values) and
     [how to handle user and application errors](/extend/common-interface/actions/#handling-user-and-application-errors).
@@ -56,7 +56,7 @@ Code patterns do not implement the **run** action. They only implement the **gen
 The expected behavior of the **generate** action:
 
 - The action is started by the [Run Component Action](https://api.keboola.com/?service=sync-actions#post-/actions) API call.
-- The `CMD` process defined in the `Dockerfile` is [started in the container](/extend/component/docker-tutorial/#running-docker-images-in-kbc).
+- The `CMD` process defined in the `Dockerfile` is started in the container.
 - The component generates a transformation code based on the [configuration](#configuration).
 - The result is written in the [output format](#output-format) to `stdout`.
 - The process will end successfully with `exit code = 0` (or with another [return value](/extend/common-interface/environment/#return-values) if an error occurs).

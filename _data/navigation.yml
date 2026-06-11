@@ -17,18 +17,6 @@ items:
       - url: /extend/component/
         title: Components
         items:
-          - url: /extend/component/docker-tutorial/
-            title: About Docker
-            items:
-              - url: /extend/component/docker-tutorial/setup/
-                title: Installation and Running
-
-              - url: /extend/component/docker-tutorial/howto/
-                title: Creating Dockerized App
-
-              - url: /extend/component/docker-tutorial/registry/
-                title: Docker Registry
-
           - url: /extend/component/tutorial/
             title: Tutorial
             items:

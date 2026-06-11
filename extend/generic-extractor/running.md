@@ -43,7 +43,7 @@ be turned on in production configurations.
 ## Running Locally
 If you are working on a complicated configuration, or developing a new component based on
 Generic Extractor, running every configuration from the Keboola UI may be slow and tedious.
-You may run Generic Extractor locally, provided that you have access to [Docker](/extend/component/docker-tutorial/).
+You may run Generic Extractor locally, provided that you have access to Docker.
 The following is **not necessary** to run or configure Generic Extractor in Keboola.
 
 ### Run Built Version
