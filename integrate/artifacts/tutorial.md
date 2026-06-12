@@ -13,7 +13,7 @@ But these principles would work inside any component.
 In the examples, we use the `curl` console tool to interact with our APIs.
 
 *Note: `artifacts` feature needs to be enabled in your project. Please contact [support@keboola.com](mailto:support@keboola.com) to enable the feature in your project*
-*Note 2: `artifacts` configuration can be created or edited only via [Configuration API](https://keboola.docs.apiary.io/#reference/components-and-configurations/component-configurations/create-configuration) for now*
+*Note 2: `artifacts` configuration can be created or edited only via [Configuration API](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/components/-componentId-/configs) for now*
 
 ## Examples
 

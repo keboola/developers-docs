@@ -61,7 +61,7 @@ export VARIABLE_CONFIG='
 '
 ```
 
-Use [Create Configuration API call](https://keboola.docs.apiary.io/#reference/components-and-configurations/component-configurations/create-configuration) to store *variable configuration*.
+Use [Create Configuration API call](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/components/-componentId-/configs) to store *variable configuration*.
 ```shell
 curl --include \
      --request POST \
@@ -123,7 +123,7 @@ export EXTRACTOR_CONFIG='
 {% endraw %}
 ```
 
-Use [Create Configuration API call](https://keboola.docs.apiary.io/#reference/components-and-configurations/component-configurations/create-configuration) to store extractor configuration.
+Use [Create Configuration API call](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/components/-componentId-/configs) to store extractor configuration.
 ```shell
 curl --include \
      --request POST \

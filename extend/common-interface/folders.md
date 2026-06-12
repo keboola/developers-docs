@@ -210,7 +210,7 @@ are always saved to the directory structure.
 *Note: this is a preview feature and may change considerably in future.*
 *Note: currently only Azure Blob Storage workspaces (abs-workspace) are supported for this type and those only work with Synapse storage backend
 
-The component may also exchange data with a provisioned file workspace (Azure Blob Storage) [using Workspaces](https://keboola.docs.apiary.io/#reference/workspaces).
+The component may also exchange data with a provisioned file workspace (Azure Blob Storage) [using Workspaces](https://api.keboola.com/?service=storage#tag--Workspaces).
 This mode of operation can be enabled by setting the **Staging storage input** or **Staging storage output** option
 to **Workspace ABS**. A filesystem workspace is an isolated file storage to which data are loaded before the component job is run (when staging storage input is set)
 and unloaded from when the job finishes (when staging storage output is set).

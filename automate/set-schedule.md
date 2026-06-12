@@ -23,7 +23,7 @@ config: 493493
 ```
 
 To create a schedule, you have to create the schedule configuration first using the 
-[Create Configuration API call](https://keboola.docs.apiary.io/#reference/components-and-configurations/component-configurations/create-configuration).
+[Create Configuration API call](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/components/-componentId-/configs).
 With the contents similar to this:
 
 ```json
