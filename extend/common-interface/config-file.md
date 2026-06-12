@@ -102,8 +102,8 @@ When working with the API, note that the [Developer Portal API](https://api.kebo
 (specifically the [Component Detail API call](https://api.keboola.com/?service=developer-portal#get-/vendors/-vendor-/apps/-app-))
 shows separate `stack_parameters` and `image_parameters`, because the API is region agnostic.
 
-However, when working with the [Storage API](https://keboola.docs.apiary.io/)
-(specifically the [Component list API call](https://keboola.docs.apiary.io/#reference/miscellaneous/api-index/component-list)),
+However, when working with the [Storage API](https://api.keboola.com/?service=storage)
+(specifically the [Component list API call](https://api.keboola.com/?service=storage#get-/v2/storage)),
 the `stack_parameters` and `image_parameters` values are already merged and only those designated for the
 current region are visible.
 
@@ -139,13 +139,13 @@ configurations, `KBC::ProjectSecure::` ciphers are used.
 
 ### State File Properties
 Because the state is stored as part of a
-[component configuration](https://keboola.docs.apiary.io/#reference/components-and-configurations),
+[component configuration](https://api.keboola.com/?service=storage#tag--Component-Configurations),
 the value of the state object is somewhat limited (should not generally exceed 1MB). It should not
 be used to store large amounts of data.
 
 Also, the end-user cannot easily access the data through the UI.
 The data can be, however, modified outside of the component itself using the
-[component configuration](https://keboola.docs.apiary.io/#reference/components-and-configurations) API calls.
+[component configuration](https://api.keboola.com/?service=storage#tag--Component-Configurations) API calls.
 Note however that the content in the contents of the state file is nested:
 
 I.e., assume that the component generates a state file with the following contents:
@@ -391,7 +391,7 @@ Download 2 days of data from the `in.c-storage.StoredData` table to `/data/table
 {% endhighlight %}
 
 #### Input mapping --- column types
-This is applicable only to [workspace mapping](/extend/common-interface/folders/#exchanging-data-via-workspace), for CSV files this setting has no effect. The `column_types` setting maps to [Storage API load options](https://keboola.docs.apiary.io/#reference/workspaces/load-data/load-data). It also acts the same way as `columns` setting allowing you to limit the table columns.
+This is applicable only to [workspace mapping](/extend/common-interface/folders/#exchanging-data-via-workspace), for CSV files this setting has no effect. The `column_types` setting maps to [Storage API load options](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/workspaces/-workspaceId-/load). It also acts the same way as `columns` setting allowing you to limit the table columns.
 If both `column_types` and `columns` setting are used, then the listed columns must match. If you omit `columns` and use only `column_types` (recommended) then `columns` will be propagated automatically from `column_types`.
 
 {% highlight json %}

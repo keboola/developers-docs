@@ -19,7 +19,7 @@ The following chart shows how Keboola is structured. All Keboola parts are brief
 
 ## Working with Keboola
 Everything you can do in the Keboola UI can be done programatically using the API of the corresponding component.
-All of our components have API documentation on [Apiary](https://keboola.docs.apiary.io/#) and
+All of our components have API documentation on [api.keboola.com](https://api.keboola.com/) and
 most of them have a public [Github repository](https://github.com/keboola/).
 Our Docker components are built on [AWS ECR](https://aws.amazon.com/ecr/).
 
@@ -48,7 +48,7 @@ For more details, see
 ### Components Configuration
 All components store their configuration in [Storage](/integrate/storage/). Management of the
 configurations is done through
-[Storage Components Configurations API](https://keboola.docs.apiary.io/#reference/components-and-configurations).
+[Storage Components Configurations API](https://api.keboola.com/?service=storage#tag--Component-Configurations).
 Stored configurations can be referenced in `/run` API calls.
 
 Configuration can be defined with a JSON schema stored within the Component detail.

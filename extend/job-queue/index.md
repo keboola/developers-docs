@@ -14,7 +14,7 @@ represented by a Docker image.
 Running a component means creating and executing an [asynchronous job](/integrate/jobs/).
 
 Developing functionality in [Docker](https://www.docker.com/) allows you to focus only on the application logic; all communication
-with the [Storage API](https://keboola.docs.apiary.io/#) will be handled by Job Queue. You can encapsulate any application into a Docker image
+with the [Storage API](https://api.keboola.com/?service=storage) will be handled by Job Queue. You can encapsulate any application into a Docker image
 following a set of rules that will allow you to integrate the application into Keboola.
 
 There is a [predefined interface](/extend/common-interface/) with Job Queue, consisting
@@ -73,7 +73,7 @@ The [Job Queue API](https://api.keboola.com/?service=job-queue) has API calls to
 
 ## Configuration
 Components executed by Job Queue store their configurations in
-[Storage API components configurations](https://keboola.docs.apiary.io/#reference/components-and-configurations).
+[Storage API components configurations](https://api.keboola.com/?service=storage#tag--Component-Configurations).
 
 When creating the configuration, use
 [this JSON schema](https://github.com/keboola/docker-bundle/blob/master/Resources/schemas/configuration.json)
@@ -83,7 +83,7 @@ all of them are optional:
 - `parameters` --- an arbitrary object passed to the dockerized application itself
 - `storage` --- configuration of [input and output mapping](/extend/common-interface/folders/); specific options correspond to the options of the
 [unload data](https://keboola.docs.apiary.io/#reference/tables/unload-data-asynchronously) and
-[load data](https://keboola.docs.apiary.io/#reference/tables/load-data-asynchronously) API calls.
+[load data](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/tables/-id-/import-async) API calls.
 - `runtime` --- [runtime settings](/integrate/jobs/#job-runtime-configuration) (`tag`, `backend`, `parallelism`); most notably `runtime.tag`
 pins the Docker image tag that jobs of this configuration run, which is the usual way of testing a development build of a component
 - `processors` --- configuration of [Processors](/extend/component/processors/)

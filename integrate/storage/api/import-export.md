@@ -13,10 +13,10 @@ Storage is a layer on top of a [database backend](https://help.keboola.com/stora
 
 To upload a table, take the following steps:
 
-- Request a [file upload](https://keboola.docs.apiary.io/#reference/files/upload-file/create-file-resource) from
+- Request a [file upload](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/files/prepare) from
 Keboola File Storage. You will be given a destination for the uploaded file on an S3 server.
 - Upload the file there. When the upload is finished, the data file will be available in the *File Uploads* section.
-- Initiate an [asynchronous table import](https://keboola.docs.apiary.io/#reference/tables/load-data-asynchronously/import-data-from-csv-file-asynchronously)
+- Initiate an [asynchronous table import](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/tables/-id-/import-async)
 from the uploaded file (use it as the `dataFileId` parameter) into the destination table.
 The import is asynchronous, so the request only creates a job and you need to poll for its results.
 The imported files must conform to the [RFC4180 Specification](https://tools.ietf.org/html/rfc4180).
@@ -27,12 +27,12 @@ The imported files must conform to the [RFC4180 Specification](https://tools.iet
 Exporting a table from Storage is analogous to its importing. First, data is [asynchronously
 exported](https://keboola.docs.apiary.io/#reference/tables/unload-data-asynchronously/asynchronous-export) from
 Table Storage into File Uploads. Then you can request to [download
-the file](https://keboola.docs.apiary.io/#reference/files/manage-files/file-detail), which will give you
+the file](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/files/-fileId-), which will give you
 access to an S3 server for the actual file download.
 
 ### Manually Uploading a File
 To upload a file to Keboola File Storage, follow the instructions outlined in the
-[API documentation](https://keboola.docs.apiary.io/#reference/files/upload-file/create-file-resource).
+[API documentation](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/files/prepare).
 First create a file resource; to create a new file called
 [`new-file.csv`](/integrate/storage/new-table.csv) with `52` bytes, call:
 
@@ -104,9 +104,9 @@ aws s3 cp new-table.csv s3://kbc-sapi-files/exp-15/1134/files/2016/06/22/1927266
 {% endhighlight %}
 
 After that, import the file into Table Storage, by calling either
-[Create Table API call](https://keboola.docs.apiary.io/#reference/tables/create-table-asynchronously/create-new-table-from-csv-file-asynchronously)
+[Create Table API call](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/buckets/-id-/tables-async)
 (for a new table) or
-[Load Data API call](https://keboola.docs.apiary.io/#reference/tables/load-data-asynchronously/import-data-from-csv-file-asynchronously)
+[Load Data API call](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/tables/-id-/import-async)
 (for an existing table).
 
 {% highlight bash %}
@@ -166,15 +166,15 @@ The above will return a response similar to this:
 {% endhighlight %}
 
 After that, import the file into Table Storage by calling either
-[Create Table API call](https://keboola.docs.apiary.io/#reference/tables/create-table-asynchronously/create-new-table-from-csv-file-asynchronously)
+[Create Table API call](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/buckets/-id-/tables-async)
 (for a new table) or
-[Load Data API call](https://keboola.docs.apiary.io/#reference/tables/load-data-asynchronously/import-data-from-csv-file-asynchronously)
+[Load Data API call](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/tables/-id-/import-async)
 (for an existing table).
 
 ### Working with Sliced Files
 Depending on the backend and table size, the data file may be sliced into chunks.
 Requirements for uploading sliced files are described in the respective part of the
-[API documentation](https://keboola.docs.apiary.io/#reference/files/upload-file/create-file-resource).
+[API documentation](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/files/prepare).
 
 When you attempt to download a sliced file, you will instead obtain its manifest
 listing the individual parts. Download the parts individually and join them
@@ -184,7 +184,7 @@ our [TableExporter class](https://github.com/keboola/storage-api-php-client/blob
 **Important:** When exporting a table through the *Table* --- *Export* UI, the file will
 be already merged and listed in the *File Uploads* section with the `storage-merged-export` tag.
 
-If you want to download a sliced file, [get credentials](https://keboola.docs.apiary.io/#reference/files/manage-files/file-detail)
+If you want to download a sliced file, [get credentials](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/files/-fileId-)
 to download the file from AWS S3. Assuming that the file ID is 192611596, for example, call
 
 {% highlight bash %}

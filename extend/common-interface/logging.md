@@ -26,7 +26,7 @@ By default -- unless you have turned on [GELF logging](/extend/common-interface/
 [component configuration](https://components.keboola.com/),
 [Job Queue](/extend/job-queue/) listens to [STDOUT](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_.28stdout.29)
 and [STDERR](https://en.wikipedia.org/wiki/Standard_streams#Standard_error_.28stderr.29)
-of the component and forwards the STDOUT content live to [Storage API Events](https://keboola.docs.apiary.io/#reference/events)
+of the component and forwards the STDOUT content live to [Storage API Events](https://api.keboola.com/?service=storage#tag--Events)
 (log level `info`). The content of STDERR is collected and added (if not empty) as the last event of the job with level `error`.
 The events are displayed in a [Job detail](https://help.keboola.com/management/jobs/).
 

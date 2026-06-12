@@ -104,7 +104,7 @@ the Dev/Prod Manager example use case. You can use this, for instance, to distri
 2. **Obtain the main branch ID**:
 
    To get the destination project main branch ID, you can use
-   the [List Branches API call](https://keboola.docs.apiary.io/#reference/development-branches/branches/list-branches)
+   the [List Branches API call](https://api.keboola.com/?service=storage#get-/v2/storage/dev-branches)
    and search for a branch named `main`.
 
    Alternatively, from any component configuration, go to the Developer Tools (`F12` in Chrome)

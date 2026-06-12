@@ -9,12 +9,12 @@ permalink: /integrate/storage/api/
 If you are new to Keboola, you should make yourself familiar with
 the [Storage component](https://help.keboola.com/storage/) before you start using it.
 For a general introduction to working with Keboola APIs, see the [API Introduction](/overview/api/).
-[Storage API](https://keboola.docs.apiary.io/) provides a number of functions. These are the most important ones:
+[Storage API](https://api.keboola.com/?service=storage) provides a number of functions. These are the most important ones:
 
-- [Component configurations](https://keboola.docs.apiary.io/#reference/components-and-configurations)
-- [Storage tables](https://keboola.docs.apiary.io/#reference/tables)
-- [File uploads](https://keboola.docs.apiary.io/#reference/files)
-- [Storage buckets](https://keboola.docs.apiary.io/#reference/buckets)
+- [Component configurations](https://api.keboola.com/?service=storage#tag--Component-Configurations)
+- [Storage tables](https://api.keboola.com/?service=storage#tag--Tables)
+- [File uploads](https://api.keboola.com/?service=storage#tag--Files)
+- [Storage buckets](https://api.keboola.com/?service=storage#tag--Buckets)
 
 Virtually, all API calls require a [Storage API token](https://help.keboola.com/storage/tokens/) to
 be passed as the `X-StorageApi-Token` header.
