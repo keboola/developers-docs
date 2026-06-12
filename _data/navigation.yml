@@ -264,8 +264,8 @@ items:
           - url: /extend/common-interface/development-branches/
             title: Development branches
 
-      - url: /extend/docker-runner/
-        title: Docker Runner
+      - url: /extend/job-queue/
+        title: Job Queue
 
       - url: /extend/publish/
         title: Publishing Component

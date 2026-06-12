@@ -20,18 +20,16 @@ separate component would bring an overhead of maintaining both the extractor's D
 
 ## Solution
 For each Component, you can specify other actions (apart from the default `run`). These
-actions will be executed using the same Docker image, but [Docker Runner](/extend/docker-runner/) will wait for its execution and use
+actions will be executed using the same Docker image, but [Job Queue](/extend/job-queue/) will wait for its execution and use
 the returned value as the API response. So, these additional actions are executed *synchronously* and have a very
 limited execution time (maximum 30 seconds). These actions also cannot access Storage.
-
-![Docker Actions overview](/extend/common-interface/docker-sync-actions.svg)
 
 The [configuration file](/extend/common-interface/config-file/#configuration-file-structure)
 contains the `action` property with the name of the currently executed action. Just grab the value and act accordingly.
 All actions must be explicitly specified in the component configuration in [Developer Portal](https://components.keboola.com/).
 
 ## Running Actions
-Actions are available through the [API](https://kebooladocker.docs.apiary.io/#reference/actions/run-custom-component-action).
+Actions are available through the [API](https://api.keboola.com/?service=sync-actions#post-/actions).
 They do not load the configuration from Storage, so you need to fully specify the whole configuration in the request body.
 If any of your parameters are encrypted, they will be decrypted before they are passed to your component.
 
@@ -48,8 +46,6 @@ Do not specify the `action` attribute in the request body, it is already in the 
 }
 
 {% endhighlight %}
-
-**Important: use https://docker-runner.keboola.com/ for calling this part of the API.**
 
 ### Return Values
 

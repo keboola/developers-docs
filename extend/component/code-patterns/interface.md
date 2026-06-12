@@ -55,7 +55,7 @@ Code patterns do not implement the **run** action. They only implement the **gen
 
 The expected behavior of the **generate** action:
 
-- The action is started by the [Run Component Action](https://kebooladocker.docs.apiary.io/#reference/actions/run-custom-component-action/) API call.
+- The action is started by the [Run Component Action](https://api.keboola.com/?service=sync-actions#post-/actions) API call.
 - The `CMD` process defined in the `Dockerfile` is [started in the container](/extend/component/docker-tutorial/#running-docker-images-in-kbc).
 - The component generates a transformation code based on the [configuration](#configuration).
 - The result is written in the [output format](#output-format) to `stdout`.

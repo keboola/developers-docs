@@ -6,7 +6,7 @@ permalink: /extend/component/tutorial/debugging/
 * TOC
 {:toc}
 
-Because all components [run in an isolated environment](/extend/docker-runner/), it may be harder to debug them. There is no way to
+Because all components [run in an isolated environment](/extend/job-queue/), it may be harder to debug them. There is no way to
 examine the component while it is running. However, there are some options how the production environment can be
 replicated locally, so that you can analyze what is happening if something is not right.
 
@@ -32,16 +32,16 @@ You should be able to trace the tag to a specific version of your source code.
 ### Step 1 -- Obtain Sample Data and Configuration
 Data between Keboola and your Docker image are exchanged using [CSV files](/extend/common-interface/) in
 designated [directories](/extend/common-interface/folders/); they will be
-injected into the image when you [run it](/extend/docker-runner/). To simulate this, download an archive containing the data files
+injected into the image when you [run it](/extend/job-queue/). To simulate this, download an archive containing the data files
 and [configuration](/extend/common-interface/config-file/) in the exact same format you get in the production environment.
 
-Use the [Debug API call](https://kebooladocker.docs.apiary.io/#reference/debug/debug-component/create-a-debug-job).
+Use the [Create Job API](https://api.keboola.com/?service=job-queue#post-/jobs).
 You can see it in our [API request collection](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb).
-In the [API call](https://kebooladocker.docs.apiary.io/#reference/debug/debug-component/create-a-debug-job), either specify the
+In the [API call](https://api.keboola.com/?service=job-queue#post-/jobs), either specify the
 full configuration (using the `configData` node) or refer to an existing configuration
 of the component (using the `config` node). See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb).
 
-The Debug API call will prepare the data folder for the component, put it inside an archive and upload it to Keboola Storage.
+The Run Job API call in debug mode will prepare the data folder for the component, put it inside an archive and upload it to Keboola Storage.
 When running the request with valid parameters, you should receive a response similar to this:
 
 {% highlight json %}
@@ -62,7 +62,7 @@ When the job finishes, you'll see a `stage_0.zip` file uploaded to your project.
 {: .image-popup}
 ![Screenshot -- Job Tags](/extend/component/tutorial/debug-2.png)
 
-You can send the Debug API call with a reference to an existing configuration id, or you can also supply the configuration directly in
+You can send the Run Job API call in debug mode with a reference to an existing configuration id, or you can also supply the configuration directly in
 the API request. In such case, use the `configData` attribute in the request body, e.g.:
 
 {% highlight json %}
@@ -169,7 +169,7 @@ This means that the directory with the component code will shadow the one inside
 instruction in `Dockerfile`) and you will run the current code in the image environment.
 
 ## Running Specific Tags
-The Debug API call is very powerful but it always runs the production version of component. There are cases where you might want to
+The Run Job API call in debug mode is very powerful but it always runs the production version of the component. There are cases where you might want to
 run a test or development version of a component. In such situations, an alternative may be to run a specific image tag.
 
 Let's say that you need to list all files on input for some reason. Following the
@@ -188,7 +188,7 @@ Since you are debugging, it is not wise to add this for all customers. Therefore
 the code and tag it with a **non-**[normal version tag](https://semver.org/#spec-item-2), for example, `0.0.7-test`.
 Such a tag will be deployed as a Docker image, but it won't (automatically) update in the
 Developer Portal. That means the previous tag will be still used for all jobs. However, you can
-run the new tag manually, using the [Run Tag API call](https://kebooladocker.docs.apiary.io/#reference/run/create-a-job-with-image/run-job). Again, feel free to use our [collection](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb).
+run the new tag manually, using the [Run Job API call](https://api.keboola.com/?service=job-queue#post-/jobs). Again, feel free to use our [collection](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb).
 
 If you added the above debug code to the component `keboola-test.ex-docs-tutorial` and
 tagged the release `0.0.7-test`, you can run the configuration `354678919` by issuing the

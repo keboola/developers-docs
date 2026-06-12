@@ -25,18 +25,6 @@ Our Docker components are built on [AWS ECR](https://aws.amazon.com/ecr/).
 
 This means that there are virtually **endless possibilities of what can be done with Keboola programmatically**.
 
-## Important Components
-There are some components which are probably more important than others:
-
-- [Storage](/integrate/storage/) component which is used to store all data in your Keboola projects (data in tables,
-file uploads, configurations and logs)
-- [Docker Runner](/extend/docker-runner) component which is used internally to run almost all
-[components](/extend/component/); therefore all extractors, writers and applications share its features
-- [Transformations](https://help.keboola.com/transformations/) component which encapsulates all types of transformations (SQL with
-various backends, R, Python)
-- [Orchestrator](/automate/) component which takes care of grouping different tasks together and
-running them regularly at scheduled times
-
 ## Component Common Features
 All components share some common behaviour such as [*Component Configuration*](/integrate/storage/api/configurations/)
 [Running Jobs](/integrate/jobs/), which allows each component to be run in [Orchestrations](https://help.keboola.com/orchestrator/).
@@ -55,7 +43,7 @@ Each component has a `/run` API call that accepts either a reference to componen
 [queues an asynchronous job](/integrate/jobs/).
 
 For more details, see
-[full API description](https://kebooladocker.docs.apiary.io/#reference/run/run-job).
+[full API description](https://api.keboola.com/?service=job-queue#post-/jobs).
 
 ### Components Configuration
 All components store their configuration in [Storage](/integrate/storage/). Management of the
@@ -64,7 +52,7 @@ configurations is done through
 Stored configurations can be referenced in `/run` API calls.
 
 Configuration can be defined with a JSON schema stored within the Component detail.
-Docker Components without their own schemas can use a generic [Docker Component schema](/extend/docker-runner/#configuration).
+Docker Components without their own schemas can use a generic [Docker Component schema](/extend/job-queue/#configuration).
 
 ## Specific Components
 

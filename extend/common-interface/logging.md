@@ -24,13 +24,13 @@ structured information (not only a plain text string).
 ## Standard Output and Standard Error
 By default -- unless you have turned on [GELF logging](/extend/common-interface/logging/#gelf-logger) in the
 [component configuration](https://components.keboola.com/),
-[Docker Runner](/extend/docker-runner) listens to [STDOUT](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_.28stdout.29)
+[Job Queue](/extend/job-queue/) listens to [STDOUT](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_.28stdout.29)
 and [STDERR](https://en.wikipedia.org/wiki/Standard_streams#Standard_error_.28stderr.29)
 of the component and forwards the STDOUT content live to [Storage API Events](https://keboola.docs.apiary.io/#reference/events)
 (log level `info`). The content of STDERR is collected and added (if not empty) as the last event of the job with level `error`.
 The events are displayed in a [Job detail](https://help.keboola.com/management/jobs/).
 
-The entire output from a component is filter for sensitive values. The [Runner](/extend/docker-runner/)
+The entire output from a component is filter for sensitive values. The [Job Queue](/extend/job-queue/)
 keeps track of all encrypted values and if it encounters them in the component output, it replaces
 them by `[hidden]` placeholder. This prevents accidental leaking of sensitive information for
 example in exception traces.
@@ -44,7 +44,7 @@ The messages can be sent over several transports and you can specify whether the
 
 ### Setting Up
 If you turn on GELF logging in the [component configuration](https://components.keboola.com/),
-our [Docker Runner](/extend/docker-runner/) will listen
+our [Job Queue](/extend/job-queue/) will listen
 for messages on the **transport** you specify ([UDP](https://en.wikipedia.org/wiki/User_Datagram_Protocol),
 [TCP](https://en.wikipedia.org/wiki/Transmission_Control_Protocol) and
 [HTTP](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol) are supported).
@@ -75,7 +75,7 @@ Default settings for message visibilities:
 Since GELF is sort of a standard format for structured logs, there are a [number of libraries](https://marketplace.graylog.org/addons?kind=gelf)
 available for client implementation. The following examples show how to use the GELF logger in some common languages.
 Always use the `KBC_LOGGER_ADDR` and `KBC_LOGGER_PORT` environment variables in your client,
-which will be injected into your component by our Docker Runner.
+which will be injected into your component by our Job Queue.
 
 **Important:** Never rely on the default logger settings.
 

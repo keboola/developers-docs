@@ -12,7 +12,7 @@ redirect_from:
 Processors are additional components which may be used **before or after** running an arbitrary component
 (extractor, writer, etc.). 
 
-When [Docker Runner](/extend/docker-runner/) runs a Docker image (a container is created), a processor
+When [Job Queue](/extend/job-queue/) runs a Docker image (a container is created), a processor
 may be used to **pre-process the inputs** (files or tables) supplied to that container, or it may be used to **post-process
 the container outputs**. For example, if an extractor extracts CSV data in a non-UTF8 encoding, you can use the
 [`iconv` processor](https://github.com/keboola/processor-iconv/blob/master/README.md) as a post-processor to

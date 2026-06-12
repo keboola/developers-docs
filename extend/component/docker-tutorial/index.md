@@ -50,11 +50,11 @@ easily, so they do not always need to refer to the same build. The general conve
 tag points to the same (latest) build and is movable.
 
 ## Running Docker Images in Keboola
-We have wrapped Docker in our [Docker Runner component](/extend/docker-runner/). The component
-runs [components](/extend/component/) Docker images. Docker Runner
-has an [API](/extend/docker-runner/#api)
+We have wrapped Docker in our [Job Queue](/extend/job-queue/) service. It
+runs [components](/extend/component/) Docker images. Job Queue
+has an [API](/extend/job-queue/#api)
 which allows to run Docker Images and encrypt arbitrary values.
-[Docker Runner](/extend/docker-runner/) takes
+[Job Queue](/extend/job-queue/) takes
 care of injecting the right data, creating, running, and terminating the container, and uploading
 the result data to Keboola Storage. All images to be run in Keboola must have an `ENTRYPOINT` or `CMD`.
 

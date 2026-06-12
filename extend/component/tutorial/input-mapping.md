@@ -32,7 +32,7 @@ take up to 5 minutes to propagate to all Keboola instances.
 You also need to modify the source code so that it works with the input data. The data from input mapping will be available in the
 [`/data/in/tables/`](/extend/common-interface/folders/#folder-dataintables) and
 [`/data/in/files`](/extend/common-interface/folders/#folder-datainfiles) folders when the component is
-[run](/extend/docker-runner/). This is almost identical to writing
+[run](/extend/job-queue/). This is almost identical to writing
 [Transformation code](https://help.keboola.com/manipulation/transformations/) -- the only difference is that you need to
 use absolute paths (or the [`KBC_DATADIR`](/extend/common-interface/environment/#environment-variables) environment variable).
 
