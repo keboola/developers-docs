@@ -39,7 +39,6 @@ Using a portal for a different stack than your token's stack will result in <cod
 | [Scheduler API](https://api.keboola.com/?service=scheduler)                                                 | API to automate configurations.                                                                                                                                     |
 | [Stream API](https://api.keboola.com/?service=stream)                                                       | The Keboola Stream API allows you to ingest small and frequent events into your project's storage.                                                                  |
 | [Synchronous Actions API](https://api.keboola.com/?service=sync-actions)                                    | API to trigger [Synchronous Actions](/extend/common-interface/actions/). |
-| [Templates API](https://api.keboola.com/?service=templates)                                                 | The Keboola Templates API allows you to apply a [template](/cli/templates/).                                                                                        |
 | [Vault](https://api.keboola.com/?service=vault)                                                             | Service handling variables & credentials storage.                                                                                                                   |
 
 If you're unsure which API to use, refer to our [integration guide](/integrate/). It describes the roles of different APIs and contains examples of commonly
@@ -113,10 +112,6 @@ Otherwise, you may encounter `Invalid Token` or unauthorized errors. The *author
         {
             "id": "notification",
             "url": "https://notification.keboola.com"
-        },
-        {
-            "id": "templates",
-            "url": "https://templates.keboola.com"
         }
     ],
 }
@@ -132,7 +127,6 @@ The services listed above are:
 - `scheduler` --- [Service for Configuring Schedules](https://developers.keboola.com/automate/set-schedule/)
 - `sync-actions` --- [Service for Running Synchronous Actions](/extend/common-interface/actions/)
 - `notification` --- Service for Configuring Job Notifications
-- `templates` --- [Service for Applying Templates](https://developers.keboola.com/cli/templates/)
 
 For convenience, the following table lists active services and their URLs, though for an authoritative answer 
 and in application integrations, we strongly suggest using the above API call.
@@ -214,11 +208,6 @@ and in application integrations, we strongly suggest using the above API call.
 | Sync Actions           | `sync-actions` | EU Frankfurt AWS | https://sync-actions.eu-central-1.keboola.com       |
 | Sync Actions           | `sync-actions` | EU Ireland Azure | https://sync-actions.north-europe.azure.keboola.com |
 | Sync Actions           | `sync-actions` | EU Frankfurt GCP | https://sync-actions.europe-west3.gcp.keboola.com   |
-| Templates              | `templates`    | US Virginia AWS  | https://templates.keboola.com                       |
-| Templates              | `templates`    | US Virginia GCP  | https://templates.us-east4.gcp.keboola.com          |
-| Templates              | `templates`    | EU Frankfurt AWS | https://templates.eu-central-1.keboola.com          |
-| Templates              | `templates`    | EU Ireland Azure | https://templates.north-europe.azure.keboola.com    |
-| Templates              | `templates`    | EU Frankfurt GCP | https://templates.europe-west3.gcp.keboola.com      |
 | Vault                  | `vault`        | US Virginia AWS  | https://vault.keboola.com                           |
 | Vault                  | `vault`        | US Virginia GCP  | https://vault.us-east4.gcp.keboola.com              |
 | Vault                  | `vault`        | EU Frankfurt AWS | https://vault.eu-central-1.keboola.com              |
