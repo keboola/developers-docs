@@ -16,6 +16,8 @@ Decryption occurs solely during the serialization of configuration to the Docker
 configuration file. The decrypted data are stored on the Docker host drive and are promptly 
 deleted after the container's completion. The component code exclusively accesses the decrypted data.
 
+***Note:** Encryption applies only to configuration keys prefixed with `#` in components that support them. **Transformation code has no encryption facility** — any value written directly into transformation code (for example, a [Python transformation](https://help.keboola.com/transformations/python-plain/)) is stored as plaintext. Keep credentials in a component that supports `#`-encrypted parameters, such as [Custom Python](https://help.keboola.com/components/applications/custom-python/).*
+
 ## UI Interaction
 When saving arbitrary configuration data, if a key is prefixed with the `#` character, the associated value is automatically encrypted.
 For instance, consider the following configuration:
