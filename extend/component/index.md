@@ -12,17 +12,16 @@ redirect_from:
 {:toc}
 
 Components allow you to [extend](/extend/) Keboola.
-The data interface to components is very similar to [Transformations](https://help.keboola.com/manipulation/transformations/) --- data is exchanged as
+The data interface to components is very similar to [Transformations](https://help.keboola.com/transformations/) --- data is exchanged as
 CSV files in [designated directories](/extend/common-interface/).
 
 ### Intro to Component Creation
 As a developer, you implement the application logic in a language of your choice and store it in a
 git repository. The component must adhere to our [common interface](/extend/common-interface/).
-To start quickly, use our component generators for [Python](https://github.com/keboola/cookiecutter-python-component) or [PHP, R, CI pipelines](https://github.com/keboola/component-generator) that can generate a skeleton of the component for you. We also provide libraries to help you with implementation in
-[R](https://github.com/keboola/r-docker-application),
-[Python](https://github.com/keboola/python-component), and
+To start quickly, use our component generators for [Python](https://github.com/keboola/cookiecutter-python-component) or [PHP, CI pipelines](https://github.com/keboola/component-generator) that can generate a skeleton of the component for you. We also provide libraries to help you with implementation in
+[Python](https://github.com/keboola/python-component) and
 [PHP](https://github.com/keboola/php-docker-application).
-Check our example component in [Python](https://github.com/keboola/cookiecutter-python-component/tree/main/%7B%7Bcookiecutter.repository_folder_name%7D%7D) or [PHP](https://github.com/keboola/docker-demo-app).
+Check our example component in [Python](https://github.com/keboola/cookiecutter-python-component/tree/main/%7B%7Bcookiecutter.repository_folder_name%7D%7D).
 
 The main part of the [common interface](/extend/common-interface/) is the specification how 
 [CSV files and designated folders](/extend/common-interface/folders/) are used to exchange data between Keboola and components:

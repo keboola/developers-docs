@@ -286,7 +286,7 @@ If no default values are set and none of the `variablesValuesId` or `variableVal
 will be raised.
 
 #### Option 1 -- Rely on default variables
-If you created the default values, you can now directly run the job. Use the [Create Job API call](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api/1.2.4#/Jobs/createJob)
+If you created the default values, you can now directly run the job. Use the [Create Job API call](https://api.keboola.com/?service=job-queue#job-queue/tag/jobs/POST/jobs)
 with the following body:
 
 {% highlight json %}
@@ -516,7 +516,7 @@ values. You can either rely on the stored values (either at the component config
 or you can provide the values at runtime.
 
 #### Option 1 -- Rely on stored values
-Use the [Run Job API call](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api/1.2.4#/Jobs/createJob) 
+Use the [Run Job API call](https://api.keboola.com/?service=job-queue#job-queue/tag/jobs/POST/jobs) 
 to run an orchestration. In its simplest form, the request body needs to contain just the ID of the orchestration
 (obtained in the previous step):
 
@@ -531,7 +531,7 @@ to run an orchestration. In its simplest form, the request body needs to contain
 As long as the variable values can be found somewhere, this is sufficient. See [an example](https://documenter.getpostman.com/view/3086797/77h845D?version=latest#3ebdc3f5-a940-4f0d-860b-ec311f704a7e).
 
 #### Option 2 -- Provide values
-Use the [Run Job API call](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api/1.2.4#/Jobs/createJob) 
+Use the [Run Job API call](https://api.keboola.com/?service=job-queue#job-queue/tag/jobs/POST/jobs) 
 to run an orchestration. Additionally, you can use the `variableValuesId` or `variableValuesData` property 
 to override variable values set to individual tasks. The calling convention is the same as shown in the 
 [basic job run](/integrate/variables/#step-4--run-job). The same rules also apply, notably that you can't 

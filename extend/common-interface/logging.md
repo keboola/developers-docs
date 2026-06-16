@@ -79,9 +79,6 @@ which will be injected into your component by our Job Queue.
 
 **Important:** Never rely on the default logger settings.
 
-When developing your component, you may want to use the [GELF server for development](/extend/common-interface/logging/development/) to
-test the logging.
-
 #### PHP
 For PHP, use the official [GELF client](https://github.com/bzikarsky/gelf-php) library. To install it, use
 
@@ -101,8 +98,7 @@ $logger = new \Gelf\Logger($transport);
 $logger->emergency("A sample emergency message", ["some" => ["structured" => "data"]]);
 {% endhighlight %}
 
-You can see the complete component in
-a [sample repository](https://github.com/keboola/docs-example-logging-php). For other transports, use the
+For other transports, use the
 `UdpTransport` or `HttpTransport` class (AMQP transport is not supported yet). For additional examples on using the library,
 see its [official documentation](https://github.com/bzikarsky/gelf-php).
 

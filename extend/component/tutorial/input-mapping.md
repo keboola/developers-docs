@@ -33,7 +33,7 @@ You also need to modify the source code so that it works with the input data. Th
 [`/data/in/tables/`](/extend/common-interface/folders/#folder-dataintables) and
 [`/data/in/files`](/extend/common-interface/folders/#folder-datainfiles) folders when the component is
 [run](/extend/job-queue/). This is almost identical to writing
-[Transformation code](https://help.keboola.com/manipulation/transformations/) -- the only difference is that you need to
+[Transformation code](https://help.keboola.com/transformations/) -- the only difference is that you need to
 use absolute paths (or the [`KBC_DATADIR`](/extend/common-interface/environment/#environment-variables) environment variable).
 
 Therefore you can modify the [example component](/extend/component/tutorial/) code to, for instance, the

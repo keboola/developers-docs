@@ -14,7 +14,7 @@ a deployment pipeline set up. This article explains in more detail how the pipel
 alternative set ups. Assuming your component is similar to the [example component](https://github.com/keboola/ex-docs-tutorial)
 created in the [tutorial](/extend/component/tutorial/), you see the following behavior:
 
-- Every commit & push to the git repository triggers a build on [Travis](https://docs.travis-ci.com/).
+- Every commit & push to the git repository triggers a build.
 - Every new tag pushes the built image into our [AWS ECR registry](https://aws.amazon.com/ecr/).
 - Every [normal version tag](https://semver.org/#spec-item-2) (x.y.z) updates the image tag in the [Developer Portal](https://components.keboola.com/) and subsequently makes the image available in Keboola.
 
@@ -367,7 +367,7 @@ The commands above
 - tag the image as `test`.
 - get the command to login to the registry (`ecr:get-login`) and execute it (i.e., log in).
 - push the image to the registry.
-- run the specified test job on Keboola using the [Queue API](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api). The tag used is `test`.
+- run the specified test job on Keboola using the [Queue API](https://api.keboola.com/?service=job-queue#job-queue). The tag used is `test`.
 
 If you want to run multiple test jobs, simply repeat the command with the different configuration IDs
 that you would like to test.
@@ -378,5 +378,4 @@ The Docker image will be built and tested using the `test` tag, and if all succe
 with the `x.y.z` tag into Keboola --- a new version will be available in production.
 You can see the [Python code](https://github.com/keboola/component-generator/tree/master/templates/python-tests) or
 [PHP code](https://github.com/keboola/component-generator/tree/master/templates/php-component/) in our
-[Templates repository](https://github.com/keboola/component-generator/tree/master/templates)
-or in our [Docker Demo App](https://github.com/keboola/docker-demo-app) GitHub repository.
+[Templates repository](https://github.com/keboola/component-generator/tree/master/templates).

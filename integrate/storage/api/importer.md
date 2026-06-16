@@ -34,7 +34,7 @@ files [directly to S3](/integrate/storage/api/import-export/#manually-uploading-
 - `escapedBy` (optional) CSV escape character; empty by default.
 - `incremental` (optional) If incremental is set to 0 (its default), the target table is truncated before each import.
 
-Full list of avaialable parameters is available in the [API documentation](https://app.swaggerhub.com/apis-docs/keboola/import/1.0.0).
+Full list of avaialable parameters is available in the [API documentation](https://api.keboola.com/?service=import#import).
 
 ## Examples
 To load data incrementally (append new data to existing contents):

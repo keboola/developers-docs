@@ -107,7 +107,7 @@ An example request response will contain:
 ```
 
 The important field is `id` (with value `10850624` in the above example). In the second step, you need to activate 
-the schedule via the [Activate Schedule API call](https://app.swaggerhub.com/apis/odinuv/scheduler/1.0.0#/schedules/activate)
+the schedule via the [Activate Schedule API call](https://api.keboola.com/?service=scheduler#scheduler/tag/schedules/POST/schedules)
 with he following body:
 
 ```json
@@ -228,7 +228,7 @@ You'll obtain the following example:
 }
 ```
 
-The created configuration has id `10852379`. You can now [Activate the Schedule](https://app.swaggerhub.com/apis/odinuv/scheduler/1.0.0#/schedules/activate)
+The created configuration has id `10852379`. You can now [Activate the Schedule](https://api.keboola.com/?service=scheduler#scheduler/tag/schedules/POST/schedules)
 with he following body:
 
 ```json
@@ -252,7 +252,7 @@ curl --location --request POST 'https://scheduler.keboola.com/schedules' \
 This also demonstrates that you can set multiple schedules for a single configuration. In this case, the configuration 
 `10852379` of the `keboola.ex-db-snowflake` will be executed at the beginning of every hour. Then the row `48094` of 
 this configuration will also be executed every 10 minutes. To list the schedules use the 
-[Get Schedules API call](https://app.swaggerhub.com/apis/odinuv/scheduler/1.0.0#/schedules/get_schedules) --
+[Get Schedules API call](https://api.keboola.com/?service=scheduler#scheduler/tag/schedules/GET/schedules) --
 (see [example](https://documenter.getpostman.com/view/3086797/77h845D#6e0f31b1-9d50-4b51-9570-5334936d569c)). You'll get
 a response similar to this:
 

@@ -36,53 +36,8 @@ as they can substantially simplify your component code. We also recommend that y
 [Python](/extend/component/implementation/python/#using-the-kbc-package),
 [R](/extend/component/implementation/r/#using-the-kbc-package),
 and [PHP](/extend/component/implementation/php/#using-the-kbc-package).
-
-## Docker
 You may use any Docker image you see fit. We recommend to base your images on those from an [official repository](https://hub.docker.com/search?q=&type=image)
 because they are the most stable ones.
-
-We publicly provide images for transformations and sandboxes.
-They both share the same common ancestor image with a couple
-of pre-installed packages (that saves a lot of time when building the image yourself).
-This means that the images for R and Python share the same common code base and always use the
-exact same version of R and Python respectively.
-
-Ancestor images:
-
-- docker-custom-r:
-[Quay](https://quay.io/repository/keboola/docker-custom-r),
-[Dockerfile](https://github.com/keboola/docker-custom-r) --
-Custom R Image
-- docker-custom-python:
-[Quay](https://quay.io/repository/keboola/docker-custom-python),
-[Dockerfile](https://github.com/keboola/docker-custom-python) --
-Custom Python Image
-
-Transformations:
-
-- python-transformation:
-[Quay](https://quay.io/repository/keboola/python-transformation),
-[Dockerfile](https://github.com/keboola/python-transformation) --
-Image for Python transformations
-- r-transformation:
-[Quay](https://quay.io/repository/keboola/r-transformation),
-[Dockerfile](https://github.com/keboola/r-transformation) --
-Image for R transformations
-
-Sandboxes:
-
-- docker-jupyter:
-[Quay](https://quay.io/repository/keboola/docker-jupyter),
-[Dockerfile](https://github.com/keboola/docker-jupyter) --
-Image for Python Jupyter Sandbox
-- docker-rstudio:
-[Quay](https://quay.io/repository/keboola/docker-rstudio),
-[Dockerfile](https://github.com/keboola/docker-rstudio) --
-Image for RStudio Sandbox
-
-All of the repositories use [Semantic versioning](http://semver.org/) tags. These are always fixed to a specific image build.
-Additionally, the `latest` tag is available and always points to the latest tagged build. That means that the `latest` tag
-can be used safely (though it refers to different versions over time).
 
 ## Memory
 Keboola [components](/extend/component/) can be used to process substantial amounts of data (i.e., dozens of gigabytes), which are not

@@ -27,7 +27,7 @@ as restricted token as possible -- in this case limit it to to the component wit
 {: .image-popup}
 ![Screenshot -- Token Settings](/automate/token-settings.png)
 
-Then use the [Create Job API call](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api/1.2.4#/Jobs/createJob) to 
+Then use the [Create Job API call](https://api.keboola.com/?service=job-queue#job-queue/tag/jobs/POST/jobs) to 
 create a job with the same parameters 
 (see [example](https://documenter.getpostman.com/view/3086797/77h845D#fd60aa15-485c-4922-8536-c2ba2f27e8ea)):
 

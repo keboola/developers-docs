@@ -99,7 +99,7 @@ apk add --upgrade keboola-cli
 
 ### WinGet
 
-If you don't have App Installer available on your system, either install it [from the Microsoft Store](https://apps.microsoft.com/store/detail/app-installer) or [download directly](https://winget.run/) before continuing.
+If you don't have App Installer available on your system, either install it [from the Microsoft Store](https://apps.microsoft.com/detail/9NBLGGH4NNS1) or [download directly](https://winget.run/) before continuing.
 
 Install:
 
