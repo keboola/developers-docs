@@ -19,7 +19,7 @@ All configuration files are always stored in `JSON` format.
 ## Configuration File Structure
 Each configuration file has the following root nodes:
 
-- `storage`: Contains both the input and output [mapping](https://help.keboola.com/manipulation/transformations/mappings/) for both files and tables.
+- `storage`: Contains both the input and output [mapping](https://help.keboola.com/transformations/mappings/) for both files and tables.
 This section is important if your component uses a dynamic input/output mapping.
 Simple components can be created with a static input/output mapping.
 They do not use this configuration section at all (see [Tutorial](/extend/component/tutorial/)).
@@ -290,7 +290,7 @@ The tables element in a configuration of the **input mapping** is an array and s
 - `limit`
 
 The output mapping parameters are similar
-to the [Transformation API output mapping ](https://help.keboola.com/manipulation/transformations/).
+to the [Transformation API output mapping ](https://help.keboola.com/transformations/).
 `destination` is the only required parameter. If `source` is not set, the CSV file is expected to have the same name
 as the `destination` table.
 The tables element in a configuration of the **output mapping** is an array and supports the following attributes:

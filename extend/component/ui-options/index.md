@@ -25,7 +25,7 @@ The configuration provided in this input is available in the `parameters` sectio
 Defining a [configuration schema](/extend/component/ui-options/configuration-schema/) will replace the JSON text area with a form.
 
 ## genericDockerUI-tableInput
-This flag provides a UI for setting the table input [mapping](https://help.keboola.com/manipulation/transformations/mappings/).
+This flag provides a UI for setting the table input [mapping](https://help.keboola.com/transformations/mappings/).
 You can set the following options:
 
 - *Source* --- the name of the table in Storage
@@ -47,7 +47,7 @@ The configuration provided in this input is available in the `storage.input` sec
 [configuration file](/extend/common-interface/config-file/#configuration-file-structure).
 
 ## genericDockerUI-tableOutput
-This flag provides a UI for setting the table output [mapping](https://help.keboola.com/manipulation/transformations/mappings/). This UI part **should not be used**
+This flag provides a UI for setting the table output [mapping](https://help.keboola.com/transformations/mappings/). This UI part **should not be used**
 if the component is using the [default bucket](/extend/common-interface/folders/#default-bucket) setting.
 
 With this UI, you can set the following options:

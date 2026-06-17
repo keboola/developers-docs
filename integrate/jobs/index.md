@@ -15,7 +15,7 @@ The job execution and queuing are fully automatic. The job execution is asynchro
 - *create* (run) a job, and
 - *wait* for it to finish.
 
-The core API for working with jobs is the [Queue API](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api/). It provides operations for 
+The core API for working with jobs is the [Queue API](https://api.keboola.com/?service=job-queue#job-queue). It provides operations for 
 running/creating, terminating and listing jobs. 
 [Components](/overview/) differ in their upper limits on how long a job can be executing and how much memory it is allowed to consume.
 These limits are set by the component developer and act primarily as a safeguard. 
@@ -283,15 +283,15 @@ contains phase jobs of that orchestration. What these job types have in common i
 behavior can be further controlled by the `onError` setting. You cannot specify job type when creating a job, it is selected automatically as needed.
 
 ## Working with the Jobs API
-The main API to run the jobs is [Job Queue API](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api). There are some API calls from other services 
+The main API to run the jobs is [Job Queue API](https://api.keboola.com/?service=job-queue#job-queue). There are some API calls from other services 
 which might be useful when working with jobs:
 
 - [Create configurations](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/components/-componentId-/configs)
 - [List Job Events](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/events)
 - [Encrypt values](https://api.keboola.com/?service=encryption#post-/encrypt)
-- [Run Synchronous Actions](https://app.swaggerhub.com/apis/odinuv/sync-actions/1.0.0#/default/post_actions)
-- [Subscribe to Job Events](https://app.swaggerhub.com/apis/odinuv/notifications-service/1.1.0#/Project%20Subscriptions/createSubscription)
-- [Schedule jobs](https://app.swaggerhub.com/apis/odinuv/scheduler/1.0.0#/schedules/activate)
+- [Run Synchronous Actions](https://api.keboola.com/?service=sync-actions#sync-actions/POST/actions)
+- [Subscribe to Job Events](https://api.keboola.com/?service=notification#notification/tag/project-subscriptions/POST/project-subscriptions)
+- [Schedule jobs](https://api.keboola.com/?service=scheduler#scheduler/tag/schedules/POST/schedules)
 
 The component jobs are asynchronous operations, this means that you create it and then you have to actively wait for the result. Note that there 
 are other *unrelated* cases of asynchronous operations in Keboola Platform which are in principle the same, but may differ in little details. 
@@ -347,7 +347,7 @@ From there, the important part is the `id` field and `configurations.id` field. 
 above, there is a database extractor with the `id` `keboola.ex-db-snowflake` and a
 configuration with the id `554424643`.
 
-Then use the [create a job](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api/1.2.4#/Jobs/createJob)
+Then use the [create a job](https://api.keboola.com/?service=job-queue#job-queue/tag/jobs/POST/jobs)
 API call and pass the configuration ID and component ID in request body:
 
 ```json
@@ -410,7 +410,7 @@ From the above response, the most important part is `url`, which gives you the U
 [Job status polling](https://en.wikipedia.org/wiki/Polling_(computer_science)).
 
 ### Job Polling
-If you want to get the actual job result, poll the [Job API](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api/1.2.4#/Jobs/getJob)
+If you want to get the actual job result, poll the [Job API](https://api.keboola.com/?service=job-queue#job-queue/tag/jobs/GET/jobs/{jobId})
 for the current state of the job. See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb).
 
 You will receive a response in the same format as when you crated the job:

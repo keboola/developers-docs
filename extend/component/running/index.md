@@ -94,7 +94,7 @@ any users using that component. See the [tutorial](/extend/component/tutorial/de
 for instructions.
 
 ## Preparing Data folder
-In order to run and debug a Keboola component (including [R](https://help.keboola.com/manipulation/transformations/r/) and [Python](https://help.keboola.com/manipulation/transformations/python/) Transformations)
+In order to run and debug a Keboola component (including [R](https://help.keboola.com/transformations/r/) and [Python](https://help.keboola.com/transformations/python/) Transformations)
 on your own computer, you need to manually supply the component with
 a [data folder and configuration file](/extend/common-interface/). The above mentioned
 [Run Job API call](https://api.keboola.com/?service=job-queue#post-/jobs)

@@ -35,12 +35,12 @@ The predefined data exchange folder structure is as follows:
 
 This folder structure is always available to your component.
 Do not put arbitrary files in the `/data/` folder as they will be uploaded into the user project
-(or cause errors in the output [mapping](https://help.keboola.com/manipulation/transformations/mappings/)).
+(or cause errors in the output [mapping](https://help.keboola.com/transformations/mappings/)).
 For working or temporary files, use the `/tmp/` folder. Other directories have 10GB of free space in total.
 
 ### Folder /data/in/tables/
 
-The folder contains tables defined in the input [mapping](https://help.keboola.com/manipulation/transformations/mappings/);
+The folder contains tables defined in the input [mapping](https://help.keboola.com/transformations/mappings/);
 they are serialized in the CSV format:
 
   - string enclosure `"`

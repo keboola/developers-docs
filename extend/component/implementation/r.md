@@ -14,7 +14,7 @@ The [R base image](https://hub.docker.com/r/rocker/r-base/) does not keep older 
 If you want to use the same environment as in transformations, use [our image](#docker).
 
 ## Working with CSV Files
-We recommend that you follow the guidelines for the [R transformation](https://help.keboola.com/manipulation/transformations/r/#development-tutorial).
+We recommend that you follow the guidelines for the [R transformation](https://help.keboola.com/transformations/r/#development-tutorial).
 The standard R functions for CSV files work without problems:
 
 {% highlight R %}
