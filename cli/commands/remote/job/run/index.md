@@ -22,7 +22,7 @@ If no `@tag` is specified, the default version of the component is used.
 : Keboola instance URL, e.g., `connection.keboola.com`
 
 `--timeout <string>`
-: How long to wait for the job to finish (default `2m`)
+: How long to wait for the job to finish (default `5m`)
   
   Specified as a sequence of decimal numbers with unit suffixes, e.g., `5m10s` or `1.5h`.  
   Available units are `ms`, `s`, `m`, and `h`.

@@ -18,6 +18,9 @@ It is run automatically after [pull](/cli/commands/sync/pull/).
 
 ## Options
 
+`--cleanup`
+: Remove conflicting destination paths during rename
+
 `--dry-run`
 : Preview all paths that would be affected
 
