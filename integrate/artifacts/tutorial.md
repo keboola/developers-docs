@@ -202,7 +202,7 @@ The configuration producing artifact needs to be in a phase that precedes the co
    print(glob.glob("/data/artifacts/in/shared/*/*")) 
    ```
    
-   Run curl command to create the configurtion:
+   Run curl command to create the configuration:
    
    ```shell
     curl -X POST "$STORAGE_API_HOST/v2/storage/branch/default/components/keboola.python-transformation-v2/configs" \

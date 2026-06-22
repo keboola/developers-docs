@@ -99,7 +99,7 @@ Full configuration example with all artifact types:
         "limit": 5
       }
     },
-    "orchestration": {
+    "shared": {
       "enabled": true
     }
   }
