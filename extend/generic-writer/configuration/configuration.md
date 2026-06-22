@@ -136,7 +136,7 @@ components.
 
 ### Default Headers
 
-Allows you to define default query parameters that are being sent with each req This is mostly useful for
+Allows you to define default headers that are being sent with each request. This is mostly useful for
 creating Generic Writer templates and registered components.
 
 **NOTE** That you can reference parameters defined in `user_parameters` using the `{"attr":"SOME_KEY"}` syntax.
@@ -198,7 +198,7 @@ See [example 024](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/
 #### BearerToken
 
 Authorization using the `Bearer token` in the header. E.g. each request will be sent with
-header: `"authorization": "Bearer XXXX""`
+header: `"authorization": "Bearer XXXX"`
 
 **Example**:
 
@@ -220,7 +220,7 @@ See [example 030](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/
 
 ### SSL Verification
 
-Allows turning of the SSL certificate verification. Use with caution. When set to false, the certificate verification is
+Allows turning off the SSL certificate verification. Use with caution. When set to false, the certificate verification is
 turned off.
 
 ```json
@@ -245,7 +245,7 @@ For more information, refer to [requests docs](https://requests.readthedocs.io/e
 ## User Parameters
 
 In this section you can defined user parameters to be used in various contexts, e.g. passwords. This is also
-the place to use the [dynamic functions]().
+the place to use the [dynamic functions](/extend/generic-writer/configuration/#dynamic-functions).
 
 It allows referencing another values from `user_parameters` referenced by `{"attr":"par"}` notation.
 
@@ -309,7 +309,7 @@ A relative path of the endpoint. The final request URL is `base_url` and `endpoi
 e.g. when `base_url` is set to `https://example.com/api` and `endpoint_path` to `/customer` the resulting URL
 is `https://example.com/api/customer`
 
-**NOTE** That it is possible to change the `enpoint_path` dynamically
+**NOTE** That it is possible to change the `endpoint_path` dynamically
 using [iteration columns](/extend/generic-writer/configuration/#iterate-by-columns) e.g. `/orders/[[id]]` as seen
 in [example 005](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/docs/examples/005-json-iterations/)
 
@@ -324,7 +324,7 @@ in [example 005](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/s
 
 ### Headers
 
-Allows you to define default query parameters that are being sent with each request.
+Allows you to define request headers that are being sent with each request.
 
 **NOTE** That you can reference parameters defined in `user_parameters` using the `{"attr":"SOME_KEY"}` syntax.
 
