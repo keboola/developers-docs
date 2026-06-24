@@ -40,7 +40,7 @@ Sets `true` to the `allowTargetEnv` field in the [manifest.json](/cli/structure/
 : Name of the main branch for push/pull workflows (default "main")
 
 `--ci-pull <bool>`
-: Create a workflow to sync the main branch from the project every 5 minutes (default true)
+: Create a workflow to sync the main branch from the project each hour (default true)
 
 `--ci-push <bool>`
 : Create a workflow to push changes in the main branch to the project (default true)

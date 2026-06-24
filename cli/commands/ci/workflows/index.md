@@ -15,7 +15,7 @@ kbc ci workflows [flags]
 You will be prompted to choose which workflows you want to generate:
 - `validate` - validates all branches on change
 - `push` - pushes each change in the main branch to the project
-- `pull` - pulls the main branch from the project every five minutes
+- `pull` - pulls the main branch from the project each hour
 
 ## Options
 
@@ -23,7 +23,7 @@ You will be prompted to choose which workflows you want to generate:
 : Name of the main branch for push/pull workflows (default "main")
 
 `--ci-pull <bool>`
-: Create a workflow to sync the main branch from the project every five minutes (default true)
+: Create a workflow to sync the main branch from the project each hour (default true)
 
 `--ci-push <bool>`
 : Create a workflow to push changes in the main branch to the project (default true)

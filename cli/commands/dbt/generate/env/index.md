@@ -6,10 +6,10 @@ permalink: /cli/commands/dbt/generate/env/
 * TOC
 {:toc}
 
-**Generates sources in the dbt project directory.**
+**Generates environment variables for use with dbt.**
 
 ```
-kbc dbt generate sources [flags]
+kbc dbt generate env [flags]
 ```
 
 The command must be run in a directory with a dbt project (i.e., containing `dbt_project.yml`) or its subdirectory.
