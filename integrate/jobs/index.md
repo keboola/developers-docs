@@ -188,7 +188,7 @@ When you create a job it is in the `created` state. In a success scenario it wil
  That means `waiting` or `created` jobs do not have any costs associated with them, they represent a plan of what is going to happen.
 
  The states `terminated`, `cancelled`, `success` and `error` are final and end the job transitions. When a job is in final state, the `isFinished` flag is true.
- The job object is both immutable and eventually consistent. Once you create a job, you cannot change any of it's properties. Any changing properties are
+ The job object is both immutable and eventually consistent. Once you create a job, you cannot change any of its properties. Any changing properties are
  self-modifying and they will stop modifying once the job reaches one of the final states. 
 
 Apart from the `status` field, the job also has `desiredStatus` field. This is either `processing` or `terminating`. The desired status is 
@@ -210,7 +210,7 @@ Jobs may be nested without limits. The parent-child relationship itself is a wea
 special outside of UI grouping and the function that terminating a parent job issues a termination request to all its children. 
 Running a job as a child of another job does not by itself cause the parent to wait for child 
 completion or any other added functionality.
-Such functionality is implemented in specific components (e.g. Orchestrator) or for specific [job types](todo).
+Such functionality is implemented in specific components (e.g. Orchestrator) or for specific [job types](#job-type).
 
 ### Job Configuration
 To create a job, you must provide the [configuration](https://help.keboola.com/components/) to run. A configuration is always tied to a specific 
@@ -413,7 +413,7 @@ From the above response, the most important part is `url`, which gives you the U
 If you want to get the actual job result, poll the [Job API](https://api.keboola.com/?service=job-queue#job-queue/tag/jobs/GET/jobs/{jobId})
 for the current state of the job. See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb).
 
-You will receive a response in the same format as when you crated the job:
+You will receive a response in the same format as when you created the job:
 
 ```json
 {
@@ -485,7 +485,7 @@ of what the data folder looked like before the component started. If processors 
 - `stage_2` file with contents of the data folder before processor C was run
 - `stage_output` file with contents of the data folder before output mapping was about to be performed (after C finished).
 
-If configuration rows are used, then the above is repeated for each configuration row. If the job finishes with and error, only the stages before the error are uploaded.
+If configuration rows are used, then the above is repeated for each configuration row. If the job finishes with an error, only the stages before the error are uploaded.
 
 This API call does not upload any tables or files to Storage. I.e. when the component finishes, its output is discarded and the output mapping to storage 
 is not performed. This makes this API call generally very safe to call, because it cannot break the Keboola project in any way. However, keep 

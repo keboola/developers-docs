@@ -226,7 +226,7 @@ and [output](/extend/common-interface/config-file/#output-mapping--basic) mappin
                 ]
             }
         ]
-    }
+    },
     "variables_id": "807968875",
     "variables_values_id": "807952812"
 }
@@ -379,7 +379,7 @@ where you can verify that the variables were replaced.
 </details>
 
 #### Option 2 -- Run a job with stored values
-Similarly to the [default values](http://localhost:4000/integrate/variables/#step-2--create-default-values-for-variable), 
+Similarly to the [default values](/integrate/variables/#step-2--create-default-values-for-variable), 
 you can store another set of values. Let's add another configuration row to the *existing* variable configuration:
 
 {% highlight json %}
@@ -407,7 +407,7 @@ the ID of the value row in `variableValuesId`:
 {% highlight json %}
 {
     "component": "keboola.python-transformation-v2",
-    "config": "807968875,
+    "config": "807968875",
     "mode": "run",
     "variableValuesId": "807957572"
 }

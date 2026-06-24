@@ -46,7 +46,7 @@ The `path` column type can be used to fetch a single field from a `JSON` object.
 
 ```json
 {
-  "type": "json",
+  "type": "path",
   "name": "id",
   "path": "issue.id",
   "defaultValue": "undefined", 
