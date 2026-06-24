@@ -123,8 +123,8 @@ The services listed above are:
 - `oauth` --- [OAuth Manager Service](/extend/common-interface/oauth/)
 - `queue` --- [Service for Running Components](/extend/job-queue/)
 - `billing` --- Service for Computing Credits
-- `encryption` --- Service for [Encryption](https://developers.keboola.com/overview/encryption/)
-- `scheduler` --- [Service for Configuring Schedules](https://developers.keboola.com/automate/set-schedule/)
+- `encryption` --- Service for [Encryption](/overview/encryption/)
+- `scheduler` --- [Service for Configuring Schedules](/automate/set-schedule/)
 - `sync-actions` --- [Service for Running Synchronous Actions](/extend/common-interface/actions/)
 - `notification` --- Service for Configuring Job Notifications
 
@@ -174,7 +174,7 @@ and in application integrations, we strongly suggest using the above API call.
 | Notification           | `notification` | EU Ireland Azure | https://notification.north-europe.azure.keboola.com |
 | Notification           | `notification` | EU Frankfurt GCP | https://notification.europe-west3.gcp.keboola.com   |
 | OAuth                  | `oauth`        | US Virginia AWS  | https://oauth.keboola.com                           |
-| OAuth                  | `oauth`        | US Virginia GCP  | https://oauth.europe-west3.gcp.keboola.com          |
+| OAuth                  | `oauth`        | US Virginia GCP  | https://oauth.us-east4.gcp.keboola.com              |
 | OAuth                  | `oauth`        | EU Frankfurt AWS | https://oauth.eu-central-1.keboola.com              |
 | OAuth                  | `oauth`        | EU Ireland Azure | https://oauth.north-europe.azure.keboola.com        |
 | OAuth                  | `oauth`        | EU Frankfurt GCP | https://oauth.europe-west3.gcp.keboola.com          |
