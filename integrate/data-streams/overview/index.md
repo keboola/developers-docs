@@ -21,7 +21,12 @@ Events are received via HTTP. Each source can be associated with up to 20 `sinks
 |---|---|---|
 | `name` | string | Name of the column. Names must be unique. |
 | `type` | string | The type of the column. Available types and their descriptions are listed below. |
-| `primaryKey` | boolean | Make this column a primary key. Multiple columns may be part of the primary key at the same time. |
+
+***Note:** Data streams do not support primary keys. Every incoming event is appended to the
+destination table and no deduplication happens on import. If you need unique rows (e.g., one row
+per event ID), handle deduplication downstream: create a deduplication transformation that reads
+the stream table and writes the result to a new table whose output mapping primary key performs
+the deduplication on load, and schedule it to run regularly with a conditional flow.*
 
 The available column types are:
 
