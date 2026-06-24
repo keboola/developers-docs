@@ -108,7 +108,7 @@ An example request response will contain:
 
 The important field is `id` (with value `10850624` in the above example). In the second step, you need to activate 
 the schedule via the [Activate Schedule API call](https://api.keboola.com/?service=scheduler#scheduler/tag/schedules/POST/schedules)
-with he following body:
+with the following body:
 
 ```json
 {
@@ -116,7 +116,7 @@ with he following body:
 }
 ```
 
-See an [example](https://documenter.getpostman.com/view/3086797/77h845D#130cbfc4-4dd5-4f6d-99c0-2444c48ee551)):
+See an [example](https://documenter.getpostman.com/view/3086797/77h845D#130cbfc4-4dd5-4f6d-99c0-2444c48ee551):
 
 ```bash
 curl --location --request POST 'https://scheduler.azure.keboola.com/schedules' \
@@ -229,7 +229,7 @@ You'll obtain the following example:
 ```
 
 The created configuration has id `10852379`. You can now [Activate the Schedule](https://api.keboola.com/?service=scheduler#scheduler/tag/schedules/POST/schedules)
-with he following body:
+with the following body:
 
 ```json
 {
@@ -237,7 +237,7 @@ with he following body:
 }
 ```
 
-See an [example](https://documenter.getpostman.com/view/3086797/77h845D#130cbfc4-4dd5-4f6d-99c0-2444c48ee551)):
+See an [example](https://documenter.getpostman.com/view/3086797/77h845D#130cbfc4-4dd5-4f6d-99c0-2444c48ee551):
 
 ```bash
 curl --location --request POST 'https://scheduler.keboola.com/schedules' \
