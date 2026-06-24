@@ -250,15 +250,15 @@ A sample configuration file might look like this:
                     "source": "destination.csv",
                     "destination": "out.c-main.test",
                     "incremental": false,
-                    "colummns": [],
+                    "columns": [],
                     "primary_key": [],
                     "delete_where": [],
                     "delimiter": ",",
                     "enclosure": "\""
                 },
                 {
-                    "source": "write-alwayss.csv",
-                    "destination": "out.c-main.output-even-on-error"
+                    "source": "write-always.csv",
+                    "destination": "out.c-main.output-even-on-error",
                     "write_always": true
                 }
             ],
