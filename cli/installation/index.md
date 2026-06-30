@@ -6,176 +6,62 @@ permalink: /cli/installation/
 * TOC
 {:toc}
 
-The recommended way to install Keboola CLI is with one of the package managers listed below.
-This allows you to easily upgrade to a new version.
-
-Alternatively, you can:
-- Download precompiled binaries from [cli-dist.keboola.com](https://cli-dist.keboola.com/?prefix=zip/). 
-- Or build binary from [source code](#build-from-source).
-
-Changelog can be found at [github.com/keboola/keboola-as-code/releases](https://github.com/keboola/keboola-as-code/releases).
-
-## macOS
-
-Installation on macOS is managed by Homebrew. If you don't have Homebrew available on your system,
-[install it](https://docs.brew.sh/Installation.html) before continuing.
-
-Install:
+Install the Keboola CLI (`kbagent`) with a single command on macOS, Linux, or WSL:
 
 ```bash
-brew tap keboola/keboola-cli
-brew install keboola-cli
-kbc --version
+curl -LsSf https://raw.githubusercontent.com/keboola/cli/main/install.sh | sh
 ```
 
-Upgrade:
+The installer first bootstraps [`uv`](https://docs.astral.sh/uv/) (a fast Python package manager) if it is missing,
+then runs on uv's own managed Python — so **no system Python or version setup is required**. It installs a prebuilt
+wheel from the latest GitHub release, which takes a few seconds rather than building from source.
+
+By default the install includes the optional `[server]` extras (the web UI and scheduled agent tasks). For a
+CLI-only install, set `KBAGENT_NO_SERVER=1` before running the command.
+
+## Verify
 
 ```bash
-brew upgrade keboola-cli
+kbagent doctor
 ```
 
-## Debian / Ubuntu
+`kbagent doctor` checks your token validity, CLI version, the bundled MCP server, and the Claude Code plugin. Use
+`kbagent doctor --fix` to auto-fix common issues.
 
-Install:
+## Install from source or pin a version
+
+To build from source or pin a specific ref, install directly with `uv`:
 
 ```bash
-sudo wget -P /etc/apt/trusted.gpg.d https://cli-dist.keboola.com/deb/keboola.gpg
-echo "deb https://cli-dist.keboola.com/deb /" | sudo tee /etc/apt/sources.list.d/keboola.list
-sudo apt-get update
-sudo apt-get install keboola-cli
-kbc --version
+uv tool install git+https://github.com/keboola/cli
 ```
 
-Upgrade:
+## Optional web UI
+
+`kbagent` ships an optional browser dashboard that covers everything the CLI exposes — projects, configs, storage,
+jobs, flows, schedules, MCP tools, lineage, and scheduled AI agents with a cost/token timeline:
 
 ```bash
-sudo apt-get update
-sudo apt-get install keboola-cli
+uv tool install --with 'keboola-cli[server]' 'git+https://github.com/keboola/cli'
+kbagent serve --ui
+# Open the URL printed at startup — the browser is auto-authenticated.
 ```
 
-## Fedora
+See the [web server documentation](https://github.com/keboola/cli/blob/main/docs/web-server.md) for the full setup
+and endpoint reference.
 
-Install:
+## Auto-updates
 
-```bash
-sudo rpm --import https://cli-dist.keboola.com/rpm/keboola.gpg
-echo "[keboola]
-name=keboola
-baseurl=https://cli-dist.keboola.com/rpm
-enabled=1
-gpgcheck=1
-gpgkey=https://cli-dist.keboola.com/rpm/keboola.gpg
-" | sudo tee /etc/yum.repos.d/keboola.repo
-sudo dnf install keboola-cli
-kbc --version
-```
+`kbagent` self-updates itself **and** its bundled `keboola-mcp-server` dependency on every launch, so you are never
+running against a stale MCP server. After an update it shows what changed; run `kbagent changelog` to see the full
+history. To opt out, set `export KBAGENT_AUTO_UPDATE=false`, or update manually with `kbagent update`.
 
-Upgrade:
+## Next steps
 
-```bash
-sudo dnf update keboola-cli
-```
+- [Getting Started](/cli/getting-started/) — connect a project and run your first commands.
+- [Commands & Capabilities](/cli/commands/) — what the CLI can do.
 
-## Alpine
+## Looking for the old kbc CLI?
 
-Install:
-
-```bash
-echo "https://cli-dist.keboola.com/apk" | sudo tee -a /etc/apk/repositories
-sudo wget -P /etc/apk/keys/ https://cli-dist.keboola.com/apk/keboola.rsa.pub
-sudo apk update
-sudo apk add keboola-cli
-kbc --version
-```
-
-Upgrade:
-
-```bash
-apk update
-apk add --upgrade keboola-cli
-```
-
-## Windows
-
-### WinGet
-
-If you don't have App Installer available on your system, either install it [from the Microsoft Store](https://apps.microsoft.com/detail/9NBLGGH4NNS1) or [download directly](https://winget.run/) before continuing.
-
-Install:
-
-```shell
-winget install Keboola.KeboolaCLI
-kbc --version
-```
-
-Upgrade:
-
-```shell
-winget upgrade Keboola.KeboolaCLI
-```
-
-
-### Chocolatey
-
-If you don't have Chocolatey available on your system, [install it](https://chocolatey.org/install) before continuing.
-
-Install:
-
-```shell
-choco install keboola-cli
-kbc --version
-```
-
-Upgrade:
-
-```shell
-choco upgrade keboola-cli
-```
-
-### Scoop
-
-If you don't have Scoop available on your system, [install it](https://scoop.sh/) before continuing.
-
-Install:
-
-```shell
-scoop bucket add keboola https://github.com/keboola/scoop-keboola-cli.git
-scoop install keboola/keboola-cli
-kbc --version
-```
-
-Upgrade:
-
-```shell
-scoop update keboola/keboola-cli
-```
-
-### Download
-
-Use a [msi installer](https://cli-dist.keboola.com/?prefix=msi/) or a [precompiled binary](https://cli-dist.keboola.com/?prefix=zip/). 
-
-## Build From Source
-
-1. Install the [Go environment](https://golang.org/doc/install) (if you haven't done so already).
-2. Clone the source from GitHub:
-```
-git clone https://github.com/keboola/keboola-as-code
-cd keboola-as-code
-```
-
-3. Run the build:  
-On Linux or macOS:
-```
-go build -o target/kbc ./cmd/kbc/main.go
-```
-On Windows:
-```
-go build -o target/kbc.exe ./cmd/kbc/main.go
-```
-
-4. Binary is located in `target/kbc` or `target/kbc.exe`.
-
-## Next Steps
-
-- [Getting Started](/cli/getting-started/)
-- [Commands](/cli/commands/)
+Installation instructions for the deprecated Go CLI (`kbc`, "Keboola as Code") have moved to
+[Legacy CLI → Installation](/cli/legacy/installation/).
