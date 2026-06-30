@@ -340,124 +340,262 @@ items:
         title: Installation
       - url: /cli/getting-started/
         title: Getting Started
-      - url: /cli/structure/
-        title: Structure
+      - url: /cli/tutorial/
+        title: Tutorial
       - url: /cli/commands/
         title: Commands
         items:
-          - url: /cli/commands/help/
-            title: help
-          - url: /cli/commands/status/
-            title: status
+          - url: /cli/commands/setup/
+            title: Setup & Info
+          - url: /cli/commands/project/
+            title: Projects & Members
+          - url: /cli/commands/org/
+            title: Organization
+          - url: /cli/commands/permissions/
+            title: Permissions
+          - url: /cli/commands/feature/
+            title: Feature Flags
+          - url: /cli/commands/component/
+            title: Components
+          - url: /cli/commands/config/
+            title: Configurations
+          - url: /cli/commands/search/
+            title: Search
+          - url: /cli/commands/job/
+            title: Jobs
+          - url: /cli/commands/storage/
+            title: Storage
+          - url: /cli/commands/stream/
+            title: Data Streams
+          - url: /cli/commands/lineage/
+            title: Lineage
+          - url: /cli/commands/sharing/
+            title: Sharing
+          - url: /cli/commands/branch/
+            title: Development Branches
+          - url: /cli/commands/workspace/
+            title: Workspaces
+          - url: /cli/commands/data-app/
+            title: Data Apps
+          - url: /cli/commands/mcp/
+            title: MCP Tools
+          - url: /cli/commands/kai/
+            title: Kai (AI Assistant)
+          - url: /cli/commands/flow/
+            title: Flows
+          - url: /cli/commands/schedule/
+            title: Schedules
           - url: /cli/commands/sync/
-            title: sync
+            title: Sync (GitOps)
+          - url: /cli/commands/encrypt/
+            title: Encryption
+          - url: /cli/commands/dev-portal/
+            title: Developer Portal
+          - url: /cli/commands/semantic-layer/
+            title: Semantic Layer
+          - url: /cli/commands/serve/
+            title: Server & Self-Call HTTP
+          - url: /cli/commands/agent/
+            title: Agent Tasks
+          - url: /cli/commands/reference/
+            title: Global Flags, Environment & Exit Codes
+      - url: /cli/guides/
+        title: Guides
+        items:
+          - url: /cli/guides/agent-tasks-cli-workflow/
+            title: Agent Tasks CLI
+          - url: /cli/guides/agent-tasks-rest-workflow/
+            title: Agent Tasks REST
+          - url: /cli/guides/branch-workflow/
+            title: Branch
+          - url: /cli/guides/config-metadata-workflow/
+            title: Config Metadata
+          - url: /cli/guides/data-app-workflow/
+            title: Data App
+          - url: /cli/guides/dev-portal-workflow/
+            title: Dev Portal
+          - url: /cli/guides/encrypt-workflow/
+            title: Encrypt
+          - url: /cli/guides/flow-workflow/
+            title: Flow
+          - url: /cli/guides/kai-workflow/
+            title: Kai
+          - url: /cli/guides/library-workflow/
+            title: Library
+          - url: /cli/guides/lineage-deep-workflow/
+            title: Lineage Deep
+          - url: /cli/guides/mcp-workflow/
+            title: MCP
+          - url: /cli/guides/member-workflow/
+            title: Member
+          - url: /cli/guides/permissions-workflow/
+            title: Permissions
+          - url: /cli/guides/reading-synced-data/
+            title: Reading Synced Data
+          - url: /cli/guides/safe-write-workflow/
+            title: Safe Write
+          - url: /cli/guides/scaffold-workflow/
+            title: Scaffold
+          - url: /cli/guides/schedule-workflow/
+            title: Schedule
+          - url: /cli/guides/semantic-layer-workflow/
+            title: Semantic Layer
+          - url: /cli/guides/sharing-workflow/
+            title: Sharing
+          - url: /cli/guides/sql-migration-workflow/
+            title: SQL Migration
+          - url: /cli/guides/storage-describe-workflow/
+            title: Storage Describe
+          - url: /cli/guides/storage-files-workflow/
+            title: Storage Files
+          - url: /cli/guides/storage-types-workflow/
+            title: Storage Types
+          - url: /cli/guides/stream-workflow/
+            title: Stream
+          - url: /cli/guides/sync-workflow/
+            title: Sync
+          - url: /cli/guides/sync-rows-workflow/
+            title: Sync Rows
+          - url: /cli/guides/typify-table-workflow/
+            title: Typify Table
+          - url: /cli/guides/variables-workflow/
+            title: Variables
+          - url: /cli/guides/workspace-workflow/
+            title: Workspace
+          - url: /cli/guides/gotchas/
+            title: Gotchas
+      - url: /cli/use-cases/
+        title: Use Cases
+      - url: /cli/web-server/
+        title: Web Server & Dashboard
+      - url: /cli/sdk/
+        title: Python SDK
+      - url: /cli/ai-agents/
+        title: AI Agents & Permissions
+      - url: /cli/legacy/
+        title: Legacy CLI (deprecated)
+        items:
+          - url: /cli/legacy/installation/
+            title: Installation
+          - url: /cli/legacy/getting-started/
+            title: Getting Started
+          - url: /cli/legacy/structure/
+            title: Structure
+          - url: /cli/legacy/commands/
+            title: Commands
             items:
-              - url: /cli/commands/sync/init/
-                title: init
-              - url: /cli/commands/sync/pull/
-                title: pull
-              - url: /cli/commands/sync/push/
-                title: push
-              - url: /cli/commands/sync/diff/
-                title: diff
-          - url: /cli/commands/ci/
-            title: ci
-            items:
-              - url: /cli/commands/ci/workflows/
-                title: workflows
-          - url: /cli/commands/local/
-            title: local
-            items:
-              - url: /cli/commands/local/create/
-                title: create
+              - url: /cli/legacy/commands/help/
+                title: help
+              - url: /cli/legacy/commands/status/
+                title: status
+              - url: /cli/legacy/commands/sync/
+                title: sync
                 items:
-                  - url: /cli/commands/local/create/config/
-                    title: config
-                  - url: /cli/commands/local/create/row/
-                    title: row
-              - url: /cli/commands/local/persist/
-                title: persist
-              - url: /cli/commands/local/encrypt/
-                title: encrypt
-              - url: /cli/commands/local/validate/
-                title: validate
+                  - url: /cli/legacy/commands/sync/init/
+                    title: init
+                  - url: /cli/legacy/commands/sync/pull/
+                    title: pull
+                  - url: /cli/legacy/commands/sync/push/
+                    title: push
+                  - url: /cli/legacy/commands/sync/diff/
+                    title: diff
+              - url: /cli/legacy/commands/ci/
+                title: ci
                 items:
-                  - url: /cli/commands/local/validate/config/
-                    title: config
-                  - url: /cli/commands/local/validate/row/
-                    title: row
-                  - url: /cli/commands/local/validate/schema/
-                    title: schema
-              - url: /cli/commands/local/fix-paths/
-                title: fix-paths
-          - url: /cli/commands/remote/
-            title: remote
-            items:
-              - url: /cli/commands/remote/create/
-                title: create
+                  - url: /cli/legacy/commands/ci/workflows/
+                    title: workflows
+              - url: /cli/legacy/commands/local/
+                title: local
                 items:
-                  - url: /cli/commands/remote/create/branch/
-                    title: branch
-                  - url: /cli/commands/remote/create/bucket/
-                    title: bucket
-              - url: /cli/commands/remote/file/
-                title: file
-                items:
-                  - url: /cli/commands/remote/file/download/
-                    title: download
-                  - url: /cli/commands/remote/file/upload/
-                    title: upload
-              - url: /cli/commands/remote/job/
-                title: job
-                items:
-                  - url: /cli/commands/remote/job/run/
-                    title: run
-              - url: /cli/commands/remote/table/
-                title: table
-                items:
-                  - url: /cli/commands/remote/table/create/
+                  - url: /cli/legacy/commands/local/create/
                     title: create
-                  - url: /cli/commands/remote/table/upload/
-                    title: upload
-                  - url: /cli/commands/remote/table/download/
-                    title: download
-                  - url: /cli/commands/remote/table/preview/
-                    title: preview
-                  - url: /cli/commands/remote/table/detail/
-                    title: detail
-                  - url: /cli/commands/remote/table/import/
-                    title: import
-                  - url: /cli/commands/remote/table/unload/
-                    title: unload
-              - url: /cli/commands/remote/workspace/
-                title: workspace
+                    items:
+                      - url: /cli/legacy/commands/local/create/config/
+                        title: config
+                      - url: /cli/legacy/commands/local/create/row/
+                        title: row
+                  - url: /cli/legacy/commands/local/persist/
+                    title: persist
+                  - url: /cli/legacy/commands/local/encrypt/
+                    title: encrypt
+                  - url: /cli/legacy/commands/local/validate/
+                    title: validate
+                    items:
+                      - url: /cli/legacy/commands/local/validate/config/
+                        title: config
+                      - url: /cli/legacy/commands/local/validate/row/
+                        title: row
+                      - url: /cli/legacy/commands/local/validate/schema/
+                        title: schema
+                  - url: /cli/legacy/commands/local/fix-paths/
+                    title: fix-paths
+              - url: /cli/legacy/commands/remote/
+                title: remote
                 items:
-                  - url: /cli/commands/remote/workspace/create/
+                  - url: /cli/legacy/commands/remote/create/
                     title: create
-                  - url: /cli/commands/remote/workspace/delete/
-                    title: delete
-                  - url: /cli/commands/remote/workspace/detail/
-                    title: detail
-                  - url: /cli/commands/remote/workspace/list/
-                    title: list
-          - url: /cli/commands/dbt/
+                    items:
+                      - url: /cli/legacy/commands/remote/create/branch/
+                        title: branch
+                      - url: /cli/legacy/commands/remote/create/bucket/
+                        title: bucket
+                  - url: /cli/legacy/commands/remote/file/
+                    title: file
+                    items:
+                      - url: /cli/legacy/commands/remote/file/download/
+                        title: download
+                      - url: /cli/legacy/commands/remote/file/upload/
+                        title: upload
+                  - url: /cli/legacy/commands/remote/job/
+                    title: job
+                    items:
+                      - url: /cli/legacy/commands/remote/job/run/
+                        title: run
+                  - url: /cli/legacy/commands/remote/table/
+                    title: table
+                    items:
+                      - url: /cli/legacy/commands/remote/table/create/
+                        title: create
+                      - url: /cli/legacy/commands/remote/table/upload/
+                        title: upload
+                      - url: /cli/legacy/commands/remote/table/download/
+                        title: download
+                      - url: /cli/legacy/commands/remote/table/preview/
+                        title: preview
+                      - url: /cli/legacy/commands/remote/table/detail/
+                        title: detail
+                      - url: /cli/legacy/commands/remote/table/import/
+                        title: import
+                      - url: /cli/legacy/commands/remote/table/unload/
+                        title: unload
+                  - url: /cli/legacy/commands/remote/workspace/
+                    title: workspace
+                    items:
+                      - url: /cli/legacy/commands/remote/workspace/create/
+                        title: create
+                      - url: /cli/legacy/commands/remote/workspace/delete/
+                        title: delete
+                      - url: /cli/legacy/commands/remote/workspace/detail/
+                        title: detail
+                      - url: /cli/legacy/commands/remote/workspace/list/
+                        title: list
+              - url: /cli/legacy/commands/dbt/
+                title: dbt
+                items:
+                  - url: /cli/legacy/commands/dbt/init/
+                    title: init
+                  - url: /cli/legacy/commands/dbt/generate/
+                    title: generate
+                    items:
+                      - url: /cli/legacy/commands/dbt/generate/profile/
+                        title: profile
+                      - url: /cli/legacy/commands/dbt/generate/sources/
+                        title: sources
+                      - url: /cli/legacy/commands/dbt/generate/env/
+                        title: env
+          - url: /cli/legacy/github-integration/
+            title: GitHub Integration
+          - url: /cli/legacy/devops-use-cases/
+            title: DevOps Use Cases
+          - url: /cli/legacy/dbt/
             title: dbt
-            items:
-              - url: /cli/commands/dbt/init/
-                title: init
-              - url: /cli/commands/dbt/generate/
-                title: generate
-                items:
-                  - url: /cli/commands/dbt/generate/profile/
-                    title: profile
-                  - url: /cli/commands/dbt/generate/sources/
-                    title: sources
-                  - url: /cli/commands/dbt/generate/env/
-                    title: env
-      - url: /cli/github-integration/
-        title: GitHub Integration
-      - url: /cli/devops-use-cases/
-        title: DevOps Use Cases
-      - url: /cli/dbt/
-        title: dbt
-
