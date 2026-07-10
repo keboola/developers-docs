@@ -379,7 +379,7 @@ where you can verify that the variables were replaced.
 </details>
 
 #### Option 2 -- Run a job with stored values
-Similarly to the [default values](http://localhost:4000/integrate/variables/#step-2--create-default-values-for-variable), 
+Similarly to the [default values](/integrate/variables/#step-2--create-default-values-for-variables), 
 you can store another set of values. Let's add another configuration row to the *existing* variable configuration:
 
 {% highlight json %}

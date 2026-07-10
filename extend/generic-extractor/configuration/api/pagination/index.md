@@ -118,7 +118,7 @@ situations can arise:
 
 - Most common --- API returns an **empty page**; scrolling with
 [`pagenum`](/extend/generic-extractor/configuration/api/pagination/pagenum/) and
-[`offset` methods](/extend/generic-extractor/configuration/api/pagination/pagenum/) will stop, and other methods will probably stop
+[`offset` methods](/extend/generic-extractor/configuration/api/pagination/offset/) will stop, and other methods will probably stop
 too (depends on how empty the response is).
 - Less common --- API returns an **error** --- in this case a different stopping condition such as [`nextFlag`](#next-page-flag) or
 [`forceStop`](#force-stop) has to be used.

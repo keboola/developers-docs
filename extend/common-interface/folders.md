@@ -156,8 +156,7 @@ will contain only manifest files, extended with an additional
 
 *Note: this is a preview feature and may change considerably in the future.*
 
-The component may also exchange data with Storage [using Workspaces](https://keboola.docs.apiary.
-io/#reference/workspaces).
+The component may also exchange data with Storage [using Workspaces](https://keboola.docs.apiary.io/#reference/workspaces).
 This mode of operation can be enabled by setting the **Staging storage input** or **Staging storage output** option
 to **Workspace Snowflake**, **Workspace Redshift**, or **Workspace Synapse**. A workspace is an isolated database to 
 which data are loaded before the component job is run and unloaded when the job finishes. The workspace is created just before the job starts and is
@@ -197,7 +196,7 @@ Notice that some of the values might be empty for different workspace backends (
 They will be always present, though.
 
 When exchanging data via workspace, there are couple of differences to loading data into files:
-- Loading to workspaces supports only [storage tables](/storage/tables/), [storage files](/storage/file-uploads/)
+- Loading to workspaces supports only [storage tables](https://help.keboola.com/storage/tables/), [storage files](https://help.keboola.com/storage/files/)
 are always saved to the directory structure.
 - The `days` attribute is not supported for filtering table, use `changed_since` instead.
 - [Automatic Incremental Processing](https://help.keboola.com/storage/tables/#automatic-incremental-processing) (also known as Adaptive Input Mapping) is not supported.
@@ -217,7 +216,7 @@ and unloaded from when the job finishes (when staging storage output is set).
 The workspace is created just before the job starts and is deleted when the job is terminated.
 
 If this option is enabled, the data and the manifests will be loaded to the azure storage blob container under the 
-data folder similarly to how it does when using the default [local filesystem](extend/common-interface/folders/#root-folder-data).
+data folder similarly to how it does when using the default [local filesystem](/extend/common-interface/folders/#root-folder-data).
 
 ### Files
 Files are loaded into the workspace as `[file name]/[file ID]`.  For example, if a file 'test.txt' with ID '12345' is in 
@@ -229,9 +228,9 @@ the input mapping then the file will appear in the storage blob container with U
 Synapse only exports tables as sliced files.
 So for example, if you set as table input mapping the table `in.c-main.my-input` as source and `my-input.csv` as 
 destination then in the ABS workspace you will find it with the following structure:
-- [containerName]/data/in/tables/my-inpupt.csv/[random identifier1].txt
-- [containerName]/data/in/tables/my-inpupt.csv/[random identifier2].txt
-- [containerName]/data/in/tables/my-inpupt.csv/[random identifier3].txt
+- [containerName]/data/in/tables/my-input.csv/[random identifier1].txt
+- [containerName]/data/in/tables/my-input.csv/[random identifier2].txt
+- [containerName]/data/in/tables/my-input.csv/[random identifier3].txt
   
 ### Mappings
 
@@ -239,7 +238,7 @@ To sum up, below is a sample storage configuration and where the files are writt
 
 | Direction | Source | Destination |
 | --- | --- | --- |
-| input | in.c-main.my-table-from-abs-workspace | Many slices like `[abs-workspace-root]/data/in/tables/my-inpupt-table.csv/[random identifier].txt` |
+| input | in.c-main.my-table-from-abs-workspace | Many slices like `[abs-workspace-root]/data/in/tables/my-input-table.csv/[random identifier].txt` |
 | input | file with tag `my-input-files` named `input-file.txt` | `[abs-workspace-root]/data/in/files/test.txt/12345` |
 | output | `[abs-workspace-root]/data/out/tables/my-output-table.csv` | out.c-main.my-table-from-abs-workspace |
 | output | `[abs-workspace-root]/data/out/files/my-file.txt` | file `my-file.txt` with tag `uploaded-from-abs-workspace` |

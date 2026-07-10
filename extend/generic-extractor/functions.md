@@ -43,7 +43,7 @@ a configuration value in three possible ways:
 {% highlight json %}
 {
     ...,
-    "baseUrl": "http://example.com/
+    "baseUrl": "http://example.com/"
 }
 {% endhighlight %}
 

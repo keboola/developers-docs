@@ -81,7 +81,7 @@ For example, transformations are represented by native files. A more detailed de
 
 ## Branches
 
-The tool works with [development branches](/components/branches/) by default. You can specify which branches from the project 
+The tool works with [development branches](https://help.keboola.com/components/branches/) by default. You can specify which branches from the project 
 you want to work with locally during the [init](/cli/commands/sync/init/) command. Alternatively, you can ignore the development branches concept and work exclusively
 with the main branch. However, note that all configurations will then be stored in the `main` directory.
 
