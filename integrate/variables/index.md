@@ -234,7 +234,7 @@ and [output](/extend/common-interface/config-file/#output-mapping--basic) mappin
 {% endhighlight %}
 
 The `variables_id` property contains the ID of the [variable configuration](/integrate/variables/#step-1--create-variables-configuration) - e.g., `807968875`. The
-`variables_values_id` property is optional and contains the ID of the [row with default values](/integrate/variables/#step-2--create-default-values-for-variable) - e.g., `807952812`.
+`variables_values_id` property is optional and contains the ID of the [row with default values](/integrate/variables/#step-2--create-default-values-for-variables) - e.g., `807952812`.
 The `parameters` section contains a script with the following Python code:
 
 {% highlight python %}
