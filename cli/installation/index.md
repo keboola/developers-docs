@@ -6,6 +6,8 @@ permalink: /cli/installation/
 * TOC
 {:toc}
 
+{% include legacy-cli-notice.html legacy_url="/cli/legacy/installation/" %}
+
 Install the Keboola CLI (`kbagent`) with a single command on macOS, Linux, or WSL:
 
 ```bash

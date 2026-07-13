@@ -6,6 +6,8 @@ permalink: /cli/getting-started/
 * TOC
 {:toc}
 
+{% include legacy-cli-notice.html legacy_url="/cli/legacy/getting-started/" %}
+
 This guide assumes you have already [installed the CLI](/cli/installation/). Next you connect one or more projects,
 verify the setup, and run your first commands. `kbagent` is stateless — there is no directory to create and no `init`
 to run.

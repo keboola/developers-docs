@@ -6,6 +6,8 @@ permalink: /cli/commands/
 * TOC
 {:toc}
 
+{% include legacy-cli-notice.html legacy_url="/cli/legacy/commands/" %}
+
 # kbagent Command Reference
 
 All commands support `--json` for structured output. Multi-project flags (`--project`) can be repeated.

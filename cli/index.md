@@ -6,6 +6,8 @@ permalink: /cli/
 * TOC
 {:toc}
 
+{% include legacy-cli-notice.html legacy_url="/cli/legacy/" %}
+
 The **Keboola CLI** (`kbagent`) is a single command-line tool to manage all your Keboola projects. It is stateless
 (no project clone or `init` — run it from any directory), works across multiple projects at once, and is designed to be
 driven by AI agents such as Claude Code, Cursor, and Gemini — while working great standalone too.

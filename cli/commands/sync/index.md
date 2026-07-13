@@ -6,6 +6,8 @@ permalink: /cli/commands/sync/
 * TOC
 {:toc}
 
+{% include legacy-cli-notice.html legacy_url="/cli/legacy/commands/sync/" %}
+
 ## sync init
 
 ```
