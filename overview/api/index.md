@@ -72,6 +72,32 @@ for your own stack — tokens are not valid across stacks, and using the wrong p
 | EU Frankfurt GCP | [api.europe-west3.gcp.keboola.com](https://api.europe-west3.gcp.keboola.com/) |
 | US Virginia GCP | [api.us-east4.gcp.keboola.com](https://api.us-east4.gcp.keboola.com/) |
 
+### Machine-Readable API Index
+
+For agentic usage and tooling (AI agents, MCP servers, CI), each stack's API portal also publishes a
+machine-readable index of its APIs at `https://api.<stack>/apis.json` — for example,
+[api.keboola.com/apis.json](https://api.keboola.com/apis.json). The index lists each available service with
+its base `apiUrl` and a link to its OpenAPI specification (`openApiSpecUrl`), so tools can discover and load
+the specs programmatically:
+
+{% highlight json %}
+{
+  "stack": "keboola.com",
+  "services": [
+    {
+      "id": "storage",
+      "name": "Storage API",
+      "apiUrl": "https://connection.keboola.com",
+      "openApiSpecUrl": "https://api.keboola.com/specs/storage.json"
+    }
+  ]
+}
+{% endhighlight %}
+
+The index is stack-specific (excluded services are omitted). The raw specs under `/specs/` keep their original
+`servers`, so consumers should use the `apiUrl` from the index as the base URL. The `openApiSpecUrl` extension
+mirrors the source document (`.json` or `.yaml`) — use the exact URL from the index rather than assuming one.
+
 ### Service Endpoints
 
 If you are calling the APIs directly (not through the portal), modify the hostname accordingly.
