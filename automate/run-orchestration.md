@@ -29,7 +29,7 @@ run the API requests (if you don't have one already). We recommend to create a t
 components. Though you can list the components used in the orchestration, this leads to a fragile setup when
 modifying the orchestration may need the modification of the the token too.
 
-Then use the [Create Job API call](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api/1.2.4#/Jobs/createJob) to 
+Then use the [Create Job API call](https://api.keboola.com/?service=job-queue#job-queue/tag/jobs/POST/jobs) to 
 create a job with the same parameters 
 (see [example](https://documenter.getpostman.com/view/3086797/77h845D#3e71b131-afd4-44be-9831-6534e581f2e0)):
 

@@ -80,7 +80,7 @@ flexibility when needed.
 
 Generic Extractor can be run from within the [**Keboola user interface**](/extend/generic-extractor/running/) (only
 configuration [JSON](/extend/generic-extractor/tutorial/json/) is needed), or [**locally**](/extend/generic-extractor/running/#running-locally)
-([Docker](/extend/component/docker-tutorial/) is needed).
+(Docker is needed).
 
 ### Configuration Map
 The following sample configuration shows various configuration options and their nesting.

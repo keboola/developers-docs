@@ -54,7 +54,7 @@ However, there are two other ways to try it as a component, as described below.
 The first option is to call the [generate action](/extend/component/code-patterns/interface#generate-action) via the API:
 
 - You can test that the component returns the desired results based on the specified inputs.
-- Use the [Run Component Action](https://kebooladocker.docs.apiary.io/#reference/actions/run-custom-component-action/process-action) API call.
+- Use the [Run Component Action](https://api.keboola.com/?service=sync-actions#post-/actions) API call.
 - An [API token](https://help.keboola.com/management/project/tokens/) is needed.
 
 ### Modify Transformation via API
@@ -88,7 +88,7 @@ You have created an empty transformation.
 
 **Set the code pattern to the transformation via [Storage API](/overview/api/).**
 
-Load the configuration in the JSON format via the [Configuration Detail](https://keboola.docs.apiary.io/#reference/components-and-configurations/manage-configurations/configuration-detail) API call.
+Load the configuration in the JSON format via the [Configuration Detail](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/components/-componentId-/configs/-configurationId-) API call.
 
 ```
 curl \ 
@@ -121,7 +121,7 @@ It is necessary to set the **ID of the code pattern component** to the configura
 }
 ```
 
-Update the configuration via the [Update Configuration](https://keboola.docs.apiary.io/#reference/components-and-configurations/manage-configurations/update-configuration) API call. 
+Update the configuration via the [Update Configuration](https://api.keboola.com/?service=storage#put-/v2/storage/branch/-branchId-/components/-componentId-/configs/-configurationId-) API call. 
 JSON must be url-encoded.
 
 ```

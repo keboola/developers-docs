@@ -31,8 +31,8 @@ from the file name; it can (and commonly is) overridden by the end-user configur
 {% endhighlight %}
 
 The `table_metadata` fields allow you to set
-[Metadata](https://keboola.docs.apiary.io/#reference/metadata) for the table.
-The `table_metadata` field corresponds to the [Table Metadata API call](https://keboola.docs.apiary.io/#reference/metadata/table-metadata/create-or-update).
+Metadata for the table.
+The `table_metadata` field corresponds to the [Table Metadata API call](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/tables/-id-/metadata).
 The `key` and `value` of the object are passed directly to the API; the `provider` value is
 filled by the Id of the running component (e.g., `keboola.ex-db-snowflake`).
 
@@ -138,7 +138,7 @@ The data is converted only when writing or copying (e.g., to a transformation or
 That means that you can extract an *integer* column, mark it as a *timestamp* in storage and write it as
 an *integer* into a target database (though you'll be offered to write it as a timestamp).
 
-You access both the source and base data type through the corresponding [API](https://keboola.docs.apiary.io/#reference/tables/manage-tables/table-detail).
+You access both the source and base data type through the corresponding [API](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/tables/-id-).
 
 ## Nullable Conversion
 Nullable conversion, which transforms an empty string originating from data into a null value, refers to the process where a textual value consisting solely of an empty string `""` is replaced with the value null.

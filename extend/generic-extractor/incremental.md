@@ -80,7 +80,7 @@ See [example [EX107]](https://github.com/keboola/generic-extractor/tree/master/d
 
 The last successful time is stored in the [configuration state](/extend/common-interface/config-file/#state-file).
 If for some reason you need to reset it, 
-[update the configuration via API](https://keboola.docs.apiary.io/#reference/components-and-configurations/manage-configurations/update-configuration).
+[update the configuration via API](https://api.keboola.com/?service=storage#put-/v2/storage/branch/-branchId-/components/-componentId-/configs/-configurationId-).
 
 ### Previous Start Date
 If an API similar to the one in the [above example](#previous-start-example) requires the date to be 

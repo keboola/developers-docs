@@ -15,7 +15,7 @@ that your component has a configuration field:
 
 You can use this field to pass arbitrary configuration parameters to your component.
 The parameters will be available in the [/data/config.json](/extend/common-interface/config-file/) file provided to the
-component when it is [run](/extend/docker-runner/).
+component when it is [run](/extend/job-queue/).
 
 Note: if you don't want to hard-code the [`/data/` directory](/extend/common-interface/folders/#root-folder-data) use the [`KBC_DATADIR`](/extend/common-interface/environment/#environment-variables) environment variable.
 

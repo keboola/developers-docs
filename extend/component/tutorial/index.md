@@ -12,6 +12,11 @@ redirect_from:
 In this tutorial, you will create a simple "Hello, World!" component which runs in
 Keboola.
 
+A Keboola component is a Docker image. When a job runs, the [Job Queue](/extend/job-queue/) executes the image's
+`ENTRYPOINT` or `CMD`, so your image must define one of them. Component images are stored in Amazon AWS ECR
+provisioned by the [Developer Portal](https://components.keboola.com/) --- the only supported registry --- and are
+pushed there by the [deploy script](/extend/component/deployment/) in your CI pipeline.
+
 ## Before You Start
 You need to have a computer with working [Docker](https://www.docker.com/why-docker) to develop the Keboola component code.
 To be able to create new components, you also need to have an account in the [Keboola Developer Portal](https://components.keboola.com/),
@@ -161,7 +166,7 @@ In the above example, we chose the `simple-python` template, which contains the 
 
 - template.md -- description of the template files
 - main.py -- a "Hello, World!" Python script
-- Dockerfile -- a [Dockerfile](/extend/component/docker-tutorial/) defining the environment in which the script runs
+- Dockerfile -- a Dockerfile defining the environment in which the script runs
 - deploy.sh -- a Bash script to deploy the component to Keboola
 
 For Travis CI template contain:
@@ -231,7 +236,7 @@ run timeout of **1 hour**. If you need to change those limits, please
 
 ## Component Repository
 The component repository is a crucial part of the component setting because it
-actually defines what [Docker image](/extend/component/docker-tutorial/) will be used when running the component.
+actually defines what Docker image will be used when running the component.
 We offer free hosting of your Docker images in the **[Amazon Container Registry (AWS ECR)](https://aws.amazon.com/ecr/)** under our own account.
 All repositories in AWS ECR are private. When you create your component using the method shown above, we
 have just provisioned you with the Docker image hosting and you do not need to worry about it any more.

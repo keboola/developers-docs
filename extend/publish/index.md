@@ -11,7 +11,7 @@ redirect_from:
 
 As described in the [architecture overview](/overview/), Keboola consists of many different components.
 Only those components that are published in our **Component List** are generally available in Keboola.
-The list can be found in our [Storage Component API](https://keboola.docs.apiary.io/#) in the dedicated [Components section](https://keboola.docs.apiary.io/#reference/components-and-configurations/list-components).
+The list can be found in our [Storage Component API](https://api.keboola.com/?service=storage#get-/v2/storage) in the dedicated [Components section](https://api.keboola.com/?service=storage#get-/v2/storage).
 The list of components is managed using the Keboola [Developer Portal](https://components.keboola.com/).
 
 That being said, any Keboola user can use any component, unless
@@ -25,7 +25,7 @@ navigate you through creating an account in the [Developer Portal](https://compo
 
 ## Publishing Component
 A non-published component can be used without limitations, but it is not offered in the Keboola UI. It can only be used via
-the [API](https://keboola.docs.apiary.io/#reference/components-and-configurations) or by directly visiting a link with the 
+the [API](https://api.keboola.com/?service=storage#tag--Component-Configurations) or by directly visiting a link with the 
 specific component ID:
 
     https://connection.keboola.com/admin/projects/{PROJECT_ID}/extractors/{COMPONENT_ID}

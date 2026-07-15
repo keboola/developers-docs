@@ -26,7 +26,6 @@ To start ingesting events, you must first create a source. Send the following pa
         "tableId": "in.c-github.issues",
         "columns": [
           {
-            "primaryKey": true,
             "type": "id",
             "name": "id"
           },
@@ -111,7 +110,6 @@ Upon success, query the source URL `https://stream.keboola.com/v1/branches/{bran
         "tableId": "in.c-github.issues",
         "columns": [
           {
-            "primaryKey": true,
             "type": "id",
             "name": "id"
           },

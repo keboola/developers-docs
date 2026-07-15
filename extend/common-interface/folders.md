@@ -22,8 +22,8 @@ depends fully on your component code (or Dockerfile). If you want to use a diffe
 **use the [`KBC_DATADIR` environment variable](/extend/common-interface/environment/#environment-variables)**. In production,
 this variable will always be set to `/data/`. During development, you can set it to your liking.
 
-To create a data folder sample, use the [Debug API](/extend/component/running/#preparing-the-data-folder) call via the
-[Docker Runner API](https://kebooladocker.docs.apiary.io/#reference/debug).
+To create a data folder sample, use the [Debug mode](/extend/component/running/#preparing-the-data-folder) on the
+[Create Job API](https://api.keboola.com/?service=job-queue#post-/jobs).
 All the resources you need in your component will be provided in a ZIP archive.
 
 The predefined data exchange folder structure is as follows:
@@ -35,12 +35,12 @@ The predefined data exchange folder structure is as follows:
 
 This folder structure is always available to your component.
 Do not put arbitrary files in the `/data/` folder as they will be uploaded into the user project
-(or cause errors in the output [mapping](https://help.keboola.com/manipulation/transformations/mappings/)).
+(or cause errors in the output [mapping](https://help.keboola.com/transformations/mappings/)).
 For working or temporary files, use the `/tmp/` folder. Other directories have 10GB of free space in total.
 
 ### Folder /data/in/tables/
 
-The folder contains tables defined in the input [mapping](https://help.keboola.com/manipulation/transformations/mappings/);
+The folder contains tables defined in the input [mapping](https://help.keboola.com/transformations/mappings/);
 they are serialized in the CSV format:
 
   - string enclosure `"`
@@ -210,7 +210,7 @@ are always saved to the directory structure.
 *Note: this is a preview feature and may change considerably in future.*
 *Note: currently only Azure Blob Storage workspaces (abs-workspace) are supported for this type and those only work with Synapse storage backend
 
-The component may also exchange data with a provisioned file workspace (Azure Blob Storage) [using Workspaces](https://keboola.docs.apiary.io/#reference/workspaces).
+The component may also exchange data with a provisioned file workspace (Azure Blob Storage) [using Workspaces](https://api.keboola.com/?service=storage#tag--Workspaces).
 This mode of operation can be enabled by setting the **Staging storage input** or **Staging storage output** option
 to **Workspace ABS**. A filesystem workspace is an isolated file storage to which data are loaded before the component job is run (when staging storage input is set)
 and unloaded from when the job finishes (when staging storage output is set).

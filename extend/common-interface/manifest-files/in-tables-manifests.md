@@ -33,5 +33,7 @@ contents:
 {% endhighlight %}
 
 The `name` node refers to the name of the component configuration.
-The `metadata` and `column_metadata` fields contains
-[Metadata](https://keboola.docs.apiary.io/#reference/metadata) for the table and its columns.
+The `metadata` and `column_metadata` fields contain
+Metadata for the table and its columns.
+The `metadata` field corresponds to the [Table Metadata API call](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/tables/-id-/metadata).
+The `column_metadata` field corresponds to the [Column Metadata API call](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/columns/-id-/metadata).

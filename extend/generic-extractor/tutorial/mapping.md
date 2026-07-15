@@ -330,7 +330,7 @@ Mapping lets you precisely define what the extraction output will look like; it 
 defines primary keys. 
 
 If you do a one-time ad-hoc extraction, you may skip setting up the mapping and clean 
-the extracted data later in [Transformations](https://help.keboola.com/manipulation/transformations/). 
+the extracted data later in [Transformations](https://help.keboola.com/transformations/). 
 However, if you intend to use your configuration regularly or want to make it into a component, 
 setting up a mapping is recommended.
 

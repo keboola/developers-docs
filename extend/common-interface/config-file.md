@@ -10,8 +10,8 @@ Configuration files are one of the [possible channels](/extend/common-interface/
 between components and Keboola.
 
 To create a sample configuration file (together with the data directory),
-use the [Debug API call](/extend/component/running/#preparing-the-data-folder) via the
-[Docker Runner API](https://kebooladocker.docs.apiary.io/#reference/sandbox/input-data).
+use the [Run Job API call in debug mode](https://api.keboola.com/?service=job-queue#post-/jobs) via the
+[Job Queue API](https://api.keboola.com/?service=job-queue).
 You will get a zip archive containing all the resources you need in your component.
 
 All configuration files are always stored in `JSON` format.
@@ -19,7 +19,7 @@ All configuration files are always stored in `JSON` format.
 ## Configuration File Structure
 Each configuration file has the following root nodes:
 
-- `storage`: Contains both the input and output [mapping](https://help.keboola.com/manipulation/transformations/mappings/) for both files and tables.
+- `storage`: Contains both the input and output [mapping](https://help.keboola.com/transformations/mappings/) for both files and tables.
 This section is important if your component uses a dynamic input/output mapping.
 Simple components can be created with a static input/output mapping.
 They do not use this configuration section at all (see [Tutorial](/extend/component/tutorial/)).
@@ -98,12 +98,12 @@ The component will receive the following `image_parameters` in the configuration
 }
 {% endhighlight %}
 
-When working with the API, note that the [Developer Portal API](https://kebooladeveloperportal.docs.apiary.io/)
-(specifically the [Component Detail API call](https://kebooladeveloperportal.docs.apiary.io/#reference/0/app/get-app-detail))
+When working with the API, note that the [Developer Portal API](https://api.keboola.com/?service=developer-portal)
+(specifically the [Component Detail API call](https://api.keboola.com/?service=developer-portal#get-/vendors/-vendor-/apps/-app-))
 shows separate `stack_parameters` and `image_parameters`, because the API is region agnostic.
 
-However, when working with the [Storage API](https://keboola.docs.apiary.io/)
-(specifically the [Component list API call](https://keboola.docs.apiary.io/#reference/miscellaneous/api-index/component-list)),
+However, when working with the [Storage API](https://api.keboola.com/?service=storage)
+(specifically the [Component list API call](https://api.keboola.com/?service=storage#get-/v2/storage)),
 the `stack_parameters` and `image_parameters` values are already merged and only those designated for the
 current region are visible.
 
@@ -114,7 +114,7 @@ the encrypted values must always be stored in *Stack Parameters*, because cipher
 
 As with configurations, the encrypted values must be prefixed with the hash sign `#`. However, unlike in Keboola configurations,
 you **have to encrypt values manually via the API** -- they will not be encrypted automatically when you store *Stack Parameters*!
-When using the [encryption API](https://keboolaencryption.docs.apiary.io/#), provide only the `componentId`
+When using the [encryption API](https://api.keboola.com/?service=encryption#post-/encrypt), provide only the `componentId`
 parameter (using `projectId` or `configId` will make the cipher unusable).
 Also take care to use the correct [API URL](https://developers.keboola.com/overview/api/#regions-and-endpoints) to obtain
 ciphers for each region you need.
@@ -133,19 +133,19 @@ The component reads the input state file and writes any content to the output st
 file (valid JSON) that
 will be available to the next API call. A missing or an empty file will remove the state value.
 A state object is saved to configuration storage only when actually running the app
-(not in [debug API calls](https://kebooladocker.docs.apiary.io/#reference/debug). The state must be a valid JSON file.
+(not when using the [Run Job API call in debug mode](https://api.keboola.com/?service=job-queue#post-/jobs)). The state must be a valid JSON file.
 [Encryption](/overview/encryption/#encrypting-data-with-api) is applied to the state the same way it is applied to
 configurations, `KBC::ProjectSecure::` ciphers are used. 
 
 ### State File Properties
 Because the state is stored as part of a
-[component configuration](https://keboola.docs.apiary.io/#reference/components-and-configurations),
+[component configuration](https://api.keboola.com/?service=storage#tag--Component-Configurations),
 the value of the state object is somewhat limited (should not generally exceed 1MB). It should not
 be used to store large amounts of data.
 
 Also, the end-user cannot easily access the data through the UI.
 The data can be, however, modified outside of the component itself using the
-[component configuration](https://keboola.docs.apiary.io/#reference/components-and-configurations) API calls.
+[component configuration](https://api.keboola.com/?service=storage#tag--Component-Configurations) API calls.
 Note however that the content in the contents of the state file is nested:
 
 I.e., assume that the component generates a state file with the following contents:
@@ -216,10 +216,10 @@ write the usage file regularly** during the component run, not only at the end.
 validated and a wrong format will cause a component failure.*
 
 ## Examples
-To create an example configuration, use the [Debug API call](/extend/component/running/#preparing-the-data-folder). You will get a
+To create an example configuration, use the [Run Job API call in debug mode](/extend/component/running/#preparing-the-data-folder). You will get a
 `stage_0.zip` archive in your **Storage** > **File Uploads**, which will contain the `config.json` file.
 You can also use these configuration structure to create an API request for
-actually [running a component](https://kebooladocker.docs.apiary.io/#reference/run/create-a-job).
+actually [running a component](https://api.keboola.com/?service=job-queue#post-/jobs).
 If you want to manually pass configuration options in the API request, be sure to wrap it around in the `configData` node.
 
 A sample configuration file might look like this:
@@ -290,7 +290,7 @@ The tables element in a configuration of the **input mapping** is an array and s
 - `limit`
 
 The output mapping parameters are similar
-to the [Transformation API output mapping ](https://help.keboola.com/manipulation/transformations/).
+to the [Transformation API output mapping ](https://help.keboola.com/transformations/).
 `destination` is the only required parameter. If `source` is not set, the CSV file is expected to have the same name
 as the `destination` table.
 The tables element in a configuration of the **output mapping** is an array and supports the following attributes:
@@ -391,7 +391,7 @@ Download 2 days of data from the `in.c-storage.StoredData` table to `/data/table
 {% endhighlight %}
 
 #### Input mapping --- column types
-This is applicable only to [workspace mapping](/extend/common-interface/folders/#exchanging-data-via-workspace), for CSV files this setting has no effect. The `column_types` setting maps to [Storage API load options](https://keboola.docs.apiary.io/#reference/workspaces/load-data/load-data). It also acts the same way as `columns` setting allowing you to limit the table columns.
+This is applicable only to [workspace mapping](/extend/common-interface/folders/#exchanging-data-via-workspace), for CSV files this setting has no effect. The `column_types` setting maps to [Storage API load options](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/workspaces/-workspaceId-/load). It also acts the same way as `columns` setting allowing you to limit the table columns.
 If both `column_types` and `columns` setting are used, then the listed columns must match. If you omit `columns` and use only `column_types` (recommended) then `columns` will be propagated automatically from `column_types`.
 
 {% highlight json %}

@@ -15,7 +15,7 @@ tableName = 'my-new-table'
 print('\nCreating upload file')
 
 # Create a new file in Storage
-# See https://keboola.docs.apiary.io/#reference/files/upload-file/create-file-resource
+# See https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/files/prepare
 response = requests.post(
     'https://connection.keboola.com/v2/storage/files/prepare',
     data={
@@ -47,7 +47,7 @@ s3.Bucket(parsed['uploadParams']['bucket']).put_object(Key=parsed['uploadParams'
 print('\nCreating table')
 
 # Load data from file into the Storage table
-# See https://keboola.docs.apiary.io/#reference/tables/create-table-asynchronously/create-new-table-from-csv-file-asynchronously
+# See https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/buckets/-id-/tables-async
 response = requests.post(
     'https://connection.keboola.com/v2/storage/buckets/%s/tables-async' % bucketName,
     data={'name': tableName, 'dataFileId': fileId, 'delimiter': ',', 'enclosure': '"'},
@@ -62,7 +62,7 @@ if (parsed['status'] == 'error'):
 status = parsed['status']
 while (status == 'waiting') or (status == 'processing'):
     print('\nWaiting for import to finish')
-    # See https://keboola.docs.apiary.io/#reference/jobs/manage-jobs/job-detail
+    # See https://api.keboola.com/?service=storage#get-/v2/storage/jobs/-jobId-
     response = requests.get(parsed['url'], headers={'X-StorageApi-Token': storageToken})
     jobParsed = json.loads(response.content.decode('utf-8'))
     status = jobParsed['status']

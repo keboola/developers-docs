@@ -13,7 +13,7 @@ Use the [official images](https://hub.docker.com/_/python/) if possible. Usually
 smallest and fastest. We recommend using [our templates](https://github.com/keboola/component-generator/tree/master/templates).
 
 ## Working with CSV Files
-We advise you to follow the guidelines for the [Python transformation](https://help.keboola.com/manipulation/transformations/python/#development-tutorial).
+We advise you to follow the guidelines for the [Python transformation](https://help.keboola.com/transformations/python/#development-tutorial).
 
 The build-in CSV functions for Python work well except when the data in the CSV file contain a null character. This is
 [usually fixed](https://stackoverflow.com/questions/4166070/python-csv-error-line-contains-null-byte) by

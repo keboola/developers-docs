@@ -10,7 +10,7 @@ In this part of the [tutorial](/extend/component/tutorial/), you will see how to
 Similarly to [input mapping](/extend/component/tutorial/input-mapping/), the output mapping
 defines what data your component produces in the end users' project. A component cannot directly
 write data to the project [Storage](https://help.keboola.com/storage/);
-the produced data are stored in the end users' project when the component [finishes](/extend/docker-runner/).
+the produced data are stored in the end users' project when the component [finishes](/extend/job-queue/).
 
 Output mapping is therefore used when your application needs to send data to the customer
 project -- these are typically **extractors** and **applications**. Implementing the input mapping requires three steps:
@@ -24,7 +24,7 @@ it can be configured similarly to the input mapping (using the [`genericDockerUI
 using the [Default bucket](/extend/common-interface/folders/#default-bucket) option. The latter means that all tables produced in the
 `/data/out/tables/` folder will be uploaded to a [Storage bucket](https://help.keboola.com/storage/buckets/) with a generated name.
 This is almost identical to writing
-[Transformation code](https://help.keboola.com/manipulation/transformations/) -- the only difference is that you need to
+[Transformation code](https://help.keboola.com/transformations/) -- the only difference is that you need to
 use absolute paths (or the [`KBC_DATADIR`](/extend/common-interface/environment/#environment-variables) environment variable).
 
 ## Configuring Default Bucket

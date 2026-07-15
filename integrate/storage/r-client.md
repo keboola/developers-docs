@@ -6,7 +6,7 @@ permalink: /integrate/storage/r-client/
 * TOC
 {:toc}
 
-The R client library is a [Storage API client](https://keboola.docs.apiary.io/) which you can use in your R code.
+The R client library is a [Storage API client](https://api.keboola.com/?service=storage) which you can use in your R code.
 The current implementation supports all basic data manipulations:
 
 - Importing data

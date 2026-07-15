@@ -6,13 +6,9 @@ permalink: /overview/api/
 * TOC
 {:toc}
 
-All our [Keboola components](/overview/) have a public API on [apiary](https://apiary.io/). We recommend using either the Apiary Console or Postman Client for sending requests to our
+All our [Keboola services](/overview/) have a public API on [api.keboola.com](https://api.keboola.com/). We recommend using either the API Console or Postman Client for sending requests to our
 API. Most of our APIs accept and return data in JSON format.
 Many of these APIs require a *Storage API token*, specified in the `X-StorageApi-Token` header.
-
-<div class="clearfix"></div><div class="alert alert-warning">
-<b>Note:</b> The Apiary documentation service (provided by Oracle) may experience intermittent outages. If you encounter issues accessing the Apiary-hosted documentation, please refer to the alternative source links provided in the API table below.
-</div>
 
 ## List of Keboola APIs
 
@@ -27,23 +23,22 @@ Using a portal for a different stack than your token's stack will result in <cod
 
 | API                                                                                                         | Description                                                                                                                                                         |
 |-------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Keboola Storage API](https://keboola.docs.apiary.io/) ([source](https://github.com/keboola/storage-api-php-client/blob/master/apiary.apib)) | [Storage](/integrate/storage/) is the main Keboola component storing all data.                                                                                      |
+| [Keboola Storage API](https://api.keboola.com/?service=storage) ([source](https://github.com/keboola/storage-api-php-client/blob/master/apiary.apib)) | [Storage](/integrate/storage/) is the main Keboola component storing all data.                                                                                      |
 | [Keboola Management API](https://api.keboola.com/?service=manage)                                          | API managing Keboola projects and users (and notifications and features).                                                                                           |
 | [AI API](https://api.keboola.com/?service=ai)                                                               | API for supporting AI features.                                                                                                                                     |
 | [Billing API](https://api.keboola.com/?service=billing)                                                     | Billing API for Pay as You Go projects.                                                                                                                             |
-| [Developer Portal API](https://kebooladeveloperportal.docs.apiary.io/#)                                     | Developer Portal is an application separated from Keboola for [creating components](/extend/component/).                                                            |
+| [Developer Portal API](https://api.keboola.com/?service=developer-portal)                                   | Developer Portal is an application separated from Keboola for [creating components](/extend/component/).                                                            |
 | [Editor API](https://api.keboola.com/?service=editor)                                                       | API for managing SQL editor sessions.                                                                                                                               |
 | [Encryption API](https://api.keboola.com/?service=encryption)                                               | Provides [Encryption](/overview/encryption/).                                                                                                                       |
 | [Importer API](https://api.keboola.com/?service=import)                                                     | [Importer](/integrate/storage/api/importer/) is a helper service for easy table imports.                                                                            |
 | [Notifications API](https://api.keboola.com/?service=notification)                                          | API to subscribe to events, e.g., failed orchestrations.                                                                                                            |
 | [OAuth Broker API](https://api.keboola.com/?service=oauth)                                                  | OAuth Broker is a component managing [OAuth authorizations](/extend/common-interface/oauth/#authorize) of other components.                                         |
-| [Query API](https://api.keboola.com/?service=query)                                                 | Query is a service for running SQL queries on Snowflake. BigQuery support is planned but not yet available.                                                         |
-| [Queue API](https://api.keboola.com/?service=job-queue)                                                     | Queue is a service for [running components](/extend/docker-runner/) and managing [Jobs](/integrate/jobs/).                                                          |
+| [Query API](https://api.keboola.com/?service=query)                                                 | Query is a service for running SQL queries on Snowflake and BigQuery.                                                         |
+| [Queue API](https://api.keboola.com/?service=job-queue)                                                     | Queue is a service for [running components](/extend/job-queue/) and managing [Jobs](/integrate/jobs/).                                                          |
 | [Sandboxes Service API](https://api.keboola.com/?service=sandboxes-service)                                 | API for managing Apps and Python/R workspaces.                                                                                                 |
 | [Scheduler API](https://api.keboola.com/?service=scheduler)                                                 | API to automate configurations.                                                                                                                                     |
 | [Stream API](https://api.keboola.com/?service=stream)                                                       | The Keboola Stream API allows you to ingest small and frequent events into your project's storage.                                                                  |
-| [Synchronous Actions API](https://api.keboola.com/?service=sync-actions)                                    | API to trigger [Synchronous Actions](/extend/common-interface/actions/). This is a partial replacement of Docker Runner API and may not be available on all stacks. |
-| [Templates API](https://api.keboola.com/?service=templates)                                                 | The Keboola Templates API allows you to apply a [template](/cli/templates/).                                                                                        |
+| [Synchronous Actions API](https://api.keboola.com/?service=sync-actions)                                    | API to trigger [Synchronous Actions](/extend/common-interface/actions/). |
 | [Vault](https://api.keboola.com/?service=vault)                                                             | Service handling variables & credentials storage.                                                                                                                   |
 
 If you're unsure which API to use, refer to our [integration guide](/integrate/). It describes the roles of different APIs and contains examples of commonly
@@ -77,10 +72,36 @@ for your own stack — tokens are not valid across stacks, and using the wrong p
 | EU Frankfurt GCP | [api.europe-west3.gcp.keboola.com](https://api.europe-west3.gcp.keboola.com/) |
 | US Virginia GCP | [api.us-east4.gcp.keboola.com](https://api.us-east4.gcp.keboola.com/) |
 
+### Machine-Readable API Index
+
+For agentic usage and tooling (AI agents, MCP servers, CI), each stack's API portal also publishes a
+machine-readable index of its APIs at `https://api.<stack>/apis.json` — for example,
+[api.keboola.com/apis.json](https://api.keboola.com/apis.json). The index lists each available service with
+its base `apiUrl` and a link to its OpenAPI specification (`openApiSpecUrl`), so tools can discover and load
+the specs programmatically:
+
+{% highlight json %}
+{
+  "stack": "keboola.com",
+  "services": [
+    {
+      "id": "storage",
+      "name": "Storage API",
+      "apiUrl": "https://connection.keboola.com",
+      "openApiSpecUrl": "https://api.keboola.com/specs/storage.json"
+    }
+  ]
+}
+{% endhighlight %}
+
+The index is stack-specific (excluded services are omitted). The raw specs under `/specs/` keep their original
+`servers`, so consumers should use the `apiUrl` from the index as the base URL. The `openApiSpecUrl` extension
+mirrors the source document (`.json` or `.yaml`) — use the exact URL from the index rather than assuming one.
+
 ### Service Endpoints
 
 If you are calling the APIs directly (not through the portal), modify the hostname accordingly.
-Otherwise, you may encounter `Invalid Token` or unauthorized errors. The *authoritative list* of available endpoints is provided by the [Storage API Index Call](https://keboola.docs.apiary.io/#reference/miscellaneous/api-index/component-list). The following is a sample response:
+Otherwise, you may encounter `Invalid Token` or unauthorized errors. The *authoritative list* of available endpoints is provided by the [Storage API Index Call](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/components/-componentId-). The following is a sample response:
 
 {% highlight json %}
 {
@@ -117,10 +138,6 @@ Otherwise, you may encounter `Invalid Token` or unauthorized errors. The *author
         {
             "id": "notification",
             "url": "https://notification.keboola.com"
-        },
-        {
-            "id": "templates",
-            "url": "https://templates.keboola.com"
         }
     ],
 }
@@ -128,16 +145,14 @@ Otherwise, you may encounter `Invalid Token` or unauthorized errors. The *author
 
 The services listed above are:
 
-- `docker-runner` --- [Legacy Service for Running Sync Actions](/extend/common-interface/actions/)
 - `import` --- [Storage Importer Service](/integrate/storage/api/importer/)
 - `oauth` --- [OAuth Manager Service](/extend/common-interface/oauth/)
-- `queue` --- [Service for Running Components](/extend/docker-runner/)
+- `queue` --- [Service for Running Components](/extend/job-queue/)
 - `billing` --- Service for Computing Credits
 - `encryption` --- Service for [Encryption](https://developers.keboola.com/overview/encryption/)
 - `scheduler` --- [Service for Configuring Schedules](https://developers.keboola.com/automate/set-schedule/)
 - `sync-actions` --- [Service for Running Synchronous Actions](/extend/common-interface/actions/)
 - `notification` --- Service for Configuring Job Notifications
-- `templates` --- [Service for Applying Templates](https://developers.keboola.com/cli/templates/)
 
 For convenience, the following table lists active services and their URLs, though for an authoritative answer 
 and in application integrations, we strongly suggest using the above API call.
@@ -219,11 +234,6 @@ and in application integrations, we strongly suggest using the above API call.
 | Sync Actions           | `sync-actions` | EU Frankfurt AWS | https://sync-actions.eu-central-1.keboola.com       |
 | Sync Actions           | `sync-actions` | EU Ireland Azure | https://sync-actions.north-europe.azure.keboola.com |
 | Sync Actions           | `sync-actions` | EU Frankfurt GCP | https://sync-actions.europe-west3.gcp.keboola.com   |
-| Templates              | `templates`    | US Virginia AWS  | https://templates.keboola.com                       |
-| Templates              | `templates`    | US Virginia GCP  | https://templates.us-east4.gcp.keboola.com          |
-| Templates              | `templates`    | EU Frankfurt AWS | https://templates.eu-central-1.keboola.com          |
-| Templates              | `templates`    | EU Ireland Azure | https://templates.north-europe.azure.keboola.com    |
-| Templates              | `templates`    | EU Frankfurt GCP | https://templates.europe-west3.gcp.keboola.com      |
 | Vault                  | `vault`        | US Virginia AWS  | https://vault.keboola.com                           |
 | Vault                  | `vault`        | US Virginia GCP  | https://vault.us-east4.gcp.keboola.com              |
 | Vault                  | `vault`        | EU Frankfurt AWS | https://vault.eu-central-1.keboola.com              |

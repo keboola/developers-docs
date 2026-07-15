@@ -20,7 +20,7 @@ manifest fields; all of them are optional.
 }
 {% endhighlight %}
 
-These parameters can be used (taken from [Storage API File Import](https://keboola.docs.apiary.io/#reference/files/upload-file/create-file-resource)):
+These parameters can be used (taken from [Storage API File Import](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/files/prepare)):
 
 - If `is_permanent` is false, the file will be automatically deleted after 15 days.
 - When `notify` is true, the members of the project will be notified that a file has been uploaded to the project.

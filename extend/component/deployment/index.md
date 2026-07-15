@@ -14,7 +14,7 @@ a deployment pipeline set up. This article explains in more detail how the pipel
 alternative set ups. Assuming your component is similar to the [example component](https://github.com/keboola/ex-docs-tutorial)
 created in the [tutorial](/extend/component/tutorial/), you see the following behavior:
 
-- Every commit & push to the git repository triggers a build on [Travis](https://docs.travis-ci.com/).
+- Every commit & push to the git repository triggers a build.
 - Every new tag pushes the built image into our [AWS ECR registry](https://aws.amazon.com/ecr/).
 - Every [normal version tag](https://semver.org/#spec-item-2) (x.y.z) updates the image tag in the [Developer Portal](https://components.keboola.com/) and subsequently makes the image available in Keboola.
 
@@ -116,7 +116,7 @@ fi
 {% endhighlight %}
 
 The script uses our [Developer Portal CLI tool](https://github.com/keboola/developer-portal-cli-v2) to communicate with
-the [Developer Portal API](https://kebooladeveloperportal.docs.apiary.io/#). The tool itself is provided as a Docker
+the [Developer Portal API](https://api.keboola.com/?service=developer-portal). The tool itself is provided as a Docker
 image `quay.io/keboola/developer-portal-cli-v2`. The entire script uses the following environment variables:
 
 - `KBC_DEVELOPERPORTAL_USERNAME` -- Service account user name
@@ -297,8 +297,8 @@ As in the [above script](/extend/component/deployment/#deploy-script),
 we recommend using the [Developer Portal CLI client](https://github.com/keboola/developer-portal-cli-v2). This CLI tool (runnable in Docker or PHP)
 allows you to obtain the repository for a component and push credentials to that repository. See the chapter about
 [running components](/extend/component/running/#running-a-component), for example, how to obtain the AWS registry credentials.
-If you want to get even more low level, you can use the [Developer Portal API](https://kebooladeveloperportal.docs.apiary.io/#) directly.
-It also allows you to [generate credentials for a service account](https://kebooladeveloperportal.docs.apiary.io/#reference/0/vendor/create-service-account)
+If you want to get even more low level, you can use the [Developer Portal API](https://api.keboola.com/?service=developer-portal) directly.
+It also allows you to [generate credentials for a service account](https://api.keboola.com/?service=developer-portal#post-/vendors/-vendor-/credentials)
 programmatically. We use our AWS ECR registry for hosting all component images.
 
 ## Test Live Configurations
@@ -367,7 +367,7 @@ The commands above
 - tag the image as `test`.
 - get the command to login to the registry (`ecr:get-login`) and execute it (i.e., log in).
 - push the image to the registry.
-- run the specified test job on Keboola using the [Queue API](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api). The tag used is `test`.
+- run the specified test job on Keboola using the [Queue API](https://api.keboola.com/?service=job-queue#job-queue). The tag used is `test`.
 
 If you want to run multiple test jobs, simply repeat the command with the different configuration IDs
 that you would like to test.
@@ -378,5 +378,4 @@ The Docker image will be built and tested using the `test` tag, and if all succe
 with the `x.y.z` tag into Keboola --- a new version will be available in production.
 You can see the [Python code](https://github.com/keboola/component-generator/tree/master/templates/python-tests) or
 [PHP code](https://github.com/keboola/component-generator/tree/master/templates/php-component/) in our
-[Templates repository](https://github.com/keboola/component-generator/tree/master/templates)
-or in our [Docker Demo App](https://github.com/keboola/docker-demo-app) GitHub repository.
+[Templates repository](https://github.com/keboola/component-generator/tree/master/templates).

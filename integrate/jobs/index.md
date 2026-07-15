@@ -15,7 +15,7 @@ The job execution and queuing are fully automatic. The job execution is asynchro
 - *create* (run) a job, and
 - *wait* for it to finish.
 
-The core API for working with jobs is the [Queue API](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api/). It provides operations for 
+The core API for working with jobs is the [Queue API](https://api.keboola.com/?service=job-queue#job-queue). It provides operations for 
 running/creating, terminating and listing jobs. 
 [Components](/overview/) differ in their upper limits on how long a job can be executing and how much memory it is allowed to consume.
 These limits are set by the component developer and act primarily as a safeguard. 
@@ -218,18 +218,18 @@ To create a job, you must provide the [configuration](https://help.keboola.com/c
 
 A configuration can be provided in multiple ways. The easiest is to provide a reference to 
 a stored configuration ID using the `config` field as shown above. Configurations can be stored and listed using the 
-[Component Configurations API endpoint](https://keboola.docs.apiary.io/#reference/components-and-configurations/component-configurations/list-configurations).
+[Component Configurations API endpoint](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/components/-componentId-/configs).
 When using a configuration which contains [Configuration Rows](https://help.keboola.com/components/#configuration-rows), the job can optionally execute 
 only certain rows. Use the `configRowIds` field to list row IDs to execute. Note that if you do not list any rows, then all rows will be executed except 
 for disabled rows. When you enumerate rows to execute, then the enumerated rows will be executed even if they are disabled. To run a job of 
-a configuration in a branch, provide the [branch ID](https://keboola.docs.apiary.io/#reference/development-branches/branches/list-branches) 
+a configuration in a branch, provide the [branch ID](https://api.keboola.com/?service=storage#get-/v2/storage/dev-branches) 
 in the `branchId` field. If you do not provide `branchId`, then the default branch is used. 
 Take care that only the **combination of component ID, configuration ID and branch ID is unique**. It is possible for two configurations with the 
 same ID to exist (either for different component or for a different branch).
 
 Another option is to provide the entire configuration in the `configData` field. In that case the whole configuration data
 has to be provided in the request. If you are retrieving a 
-[stored configuration](https://keboola.docs.apiary.io/#reference/components-and-configurations/manage-configurations/configuration-detail), take 
+[stored configuration](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/components/-componentId-/configs/-configurationId-), take 
 note that the configuration data is the contents of the `configuration` node and not the entire 
 response. When using the `configData` field, the `configRowIds` and `branchId` values are ignored. When using the `configData` field the `config` field 
 is ignored for the purpose of reading the configuration, but may still be required in case the component is using 
@@ -283,27 +283,27 @@ contains phase jobs of that orchestration. What these job types have in common i
 behavior can be further controlled by the `onError` setting. You cannot specify job type when creating a job, it is selected automatically as needed.
 
 ## Working with the Jobs API
-The main API to run the jobs is [Job Queue API](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api). There are some API calls from other services 
+The main API to run the jobs is [Job Queue API](https://api.keboola.com/?service=job-queue#job-queue). There are some API calls from other services 
 which might be useful when working with jobs:
 
-- [Create configurations](https://keboola.docs.apiary.io/#reference/components-and-configurations/component-configurations/create-configuration)
-- [List Job Events](https://keboola.docs.apiary.io/#reference/events/events/events-list)
-- [Encrypt values](https://keboolaencryption.docs.apiary.io/#reference/encrypt/encryption/encrypt-data)
-- [Run Synchronous Actions](https://app.swaggerhub.com/apis/odinuv/sync-actions/1.0.0#/default/post_actions)
-- [Subscribe to Job Events](https://app.swaggerhub.com/apis/odinuv/notifications-service/1.1.0#/Project%20Subscriptions/createSubscription)
-- [Schedule jobs](https://app.swaggerhub.com/apis/odinuv/scheduler/1.0.0#/schedules/activate)
+- [Create configurations](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/components/-componentId-/configs)
+- [List Job Events](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/events)
+- [Encrypt values](https://api.keboola.com/?service=encryption#post-/encrypt)
+- [Run Synchronous Actions](https://api.keboola.com/?service=sync-actions#sync-actions/POST/actions)
+- [Subscribe to Job Events](https://api.keboola.com/?service=notification#notification/tag/project-subscriptions/POST/project-subscriptions)
+- [Schedule jobs](https://api.keboola.com/?service=scheduler#scheduler/tag/schedules/POST/schedules)
 
 The component jobs are asynchronous operations, this means that you create it and then you have to actively wait for the result. Note that there 
 are other *unrelated* cases of asynchronous operations in Keboola Platform which are in principle the same, but may differ in little details. 
 The most common one is:
-[Storage Jobs](https://keboola.docs.apiary.io/#reference/jobs/manage-jobs/job-detail), triggered, for instance, by
-[asynchronous imports](https://keboola.docs.apiary.io/#reference/tables/create-table-asynchronously/create-new-table-from-csv-file-asynchronously)
+[Storage Jobs](https://api.keboola.com/?service=storage#get-/v2/storage/jobs/-jobId-), triggered, for instance, by
+[asynchronous imports](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/buckets/-id-/tables-async)
 or [exports](https://keboola.docs.apiary.io/#reference/tables/unload-data-asynchronously/asynchronous-export)
 
 ### Run a Job
 You need to know the *component Id* and *configuration Id* to create a job. You can get these from the UI links. To use the API to obtain a 
 list of all components available in the project, and their configuration, you can use the
-[Get components](https://keboola.docs.apiary.io/#reference/components-and-configurations/list-components/get-components).
+[Get components](https://api.keboola.com/?service=storage#get-/v2/storage).
 See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb).
 A snippet of the response is below:
 
@@ -347,7 +347,7 @@ From there, the important part is the `id` field and `configurations.id` field. 
 above, there is a database extractor with the `id` `keboola.ex-db-snowflake` and a
 configuration with the id `554424643`.
 
-Then use the [create a job](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api/1.2.4#/Jobs/createJob)
+Then use the [create a job](https://api.keboola.com/?service=job-queue#job-queue/tag/jobs/POST/jobs)
 API call and pass the configuration ID and component ID in request body:
 
 ```json
@@ -410,7 +410,7 @@ From the above response, the most important part is `url`, which gives you the U
 [Job status polling](https://en.wikipedia.org/wiki/Polling_(computer_science)).
 
 ### Job Polling
-If you want to get the actual job result, poll the [Job API](https://app.swaggerhub.com/apis-docs/keboola/job-queue-api/1.2.4#/Jobs/getJob)
+If you want to get the actual job result, poll the [Job API](https://api.keboola.com/?service=job-queue#job-queue/tag/jobs/GET/jobs/{jobId})
 for the current state of the job. See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb).
 
 You will receive a response in the same format as when you crated the job:
@@ -490,7 +490,7 @@ If configuration rows are used, then the above is repeated for each configuratio
 This API call does not upload any tables or files to Storage. I.e. when the component finishes, its output is discarded and the output mapping to storage 
 is not performed. This makes this API call generally very safe to call, because it cannot break the Keboola project in any way. However, keep 
 in mind, that if the component has any outside side effects, these will get executed. This applies typically to writers which will write the data 
-into the external system even with this debug API call.
+into the external system even when running in debug mode.
 
 Note that the snapshot archive will contain all files in the data folder including any temporary files produced be the component. The snapshot will not 
 contain the output state.json file. This is because the snapshot is made before a component is run where the out state of the previous component is 

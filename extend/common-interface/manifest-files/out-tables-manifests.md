@@ -47,9 +47,9 @@ table is imported. See an [example](/extend/common-interface/config-file/#output
 Using this option makes sense only with [incremental loads](/extend/generic-extractor/incremental/).
 
 The `metadata` and `column_metadata` fields allow you to set
-[Metadata](https://keboola.docs.apiary.io/#reference/metadata) for the table and its columns.
-The `metadata` field corresponds to the [Table Metadata API call](https://keboola.docs.apiary.io/#reference/metadata/table-metadata/create-or-update).
-The `column_metadata` field corresponds to the [Column Metadata API call](https://keboola.docs.apiary.io/#reference/metadata/column-metadata/create-or-update).
+Metadata for the table and its columns.
+The `metadata` field corresponds to the [Table Metadata API call](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/tables/-id-/metadata).
+The `column_metadata` field corresponds to the [Column Metadata API call](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/columns/-id-/metadata).
 In both cases, the `key` and `value` are passed directly to the API; the `provider` value is
 filled by the Id of the running component (e.g., `keboola.ex-db-snowflake`).
 

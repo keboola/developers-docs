@@ -16,7 +16,7 @@ Optionally, you can use
 * the [OAuth](/extend/common-interface/oauth/) part of the configuration file, and
 * [actions](/extend/common-interface/actions/) for quick synchronous tasks.
 
-In addition to that, [Docker Runner](/extend/docker-runner/) provides tools for
+In addition to that, [Job Queue](/extend/job-queue/) provides tools for
 [encryption](/overview/encryption) and [OAuth2 authorization](/extend/common-interface/oauth/).
 
 To quickly get the picture, have a look a [random sample data folder](/extend/data.zip).

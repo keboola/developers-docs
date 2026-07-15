@@ -14,9 +14,9 @@ in the correct format, check for format inconsistencies, and choose different me
 operation you wish to perform on the data. The platform scales the needed resources automatically across various 
 types of data (structured, semi-structured, and non-structured) and processes.
 
-The whole environment tracks all the [operational metadata](https://keboola.docs.apiary.io/#reference/events) 
+The whole environment tracks all the [operational metadata](https://api.keboola.com/?service=storage#tag--Events) 
 and can be accessed without needing a server via APIs. This is useful when automating development, testing and 
-production run of data jobs with automatic controls of [pipelines](https://keboola.docs.apiary.io/#reference/development-branches).
+production run of data jobs with automatic controls of [pipelines](https://api.keboola.com/?service=storage#get-/v2/storage/dev-branches/-id-).
 
 As Storage API is part of the wider Keboola platform, it is an essential element in providing coherent data 
 fabric across clouds, users, services, and on premise.
