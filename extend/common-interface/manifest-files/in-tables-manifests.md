@@ -20,15 +20,61 @@ contents:
   "created": "2015-01-25T01:35:14+0100",
   "last_change_date": "2015-01-25T01:35:14+0100",
   "last_import_date": "2015-01-25T01:35:14+0100",
-  "table_metadata": {
+  "description": "My table description",
+  "metadata": {
     "KBC.createdBy.component.id": "keboola.python-transformation",
-    "KBC.createdBy.configuration.id": "123456",
+    "KBC.createdBy.configuration.id": "123456"
   },
   "column_metadata": {
     "id": [],
     "name": [],
     "text": []
-  }
+  },
+  "schema": [
+    {
+      "name": "id",
+      "data_type": {
+        "base": {
+          "type": "INTEGER"
+        },
+        "snowflake": {
+          "type": "NUMBER",
+          "length": "38,0"
+        }
+      },
+      "nullable": false,
+      "primary_key": true,
+      "description": "Identifier of the record"
+    },
+    {
+      "name": "name",
+      "data_type": {
+        "base": {
+          "type": "STRING"
+        },
+        "snowflake": {
+          "type": "VARCHAR",
+          "length": "16777216"
+        }
+      },
+      "nullable": true,
+      "primary_key": false
+    },
+    {
+      "name": "text",
+      "data_type": {
+        "base": {
+          "type": "STRING"
+        },
+        "snowflake": {
+          "type": "VARCHAR",
+          "length": "16777216"
+        }
+      },
+      "nullable": true,
+      "primary_key": false
+    }
+  ]
 }
 {% endhighlight %}
 
@@ -37,3 +83,25 @@ The `metadata` and `column_metadata` fields contain
 Metadata for the table and its columns.
 The `metadata` field corresponds to the [Table Metadata API call](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/tables/-id-/metadata).
 The `column_metadata` field corresponds to the [Column Metadata API call](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/columns/-id-/metadata).
+
+The `description` field contains the table description. It is read primarily from the table's
+native description field; when that field is empty, it falls back to the `KBC.description` value
+in the table `metadata`. The field is omitted when no description is available.
+
+The `schema` field describes the columns of the downloaded table, including their data types. It is
+built from the [table definition](https://help.keboola.com/storage/tables/data-types/). The columns it
+lists, and their order, match the `columns` node. Each object in the `schema` array represents one column:
+- The `name` field specifies the column name.
+- The `data_type` field describes the column's data type. The `base` type is the backend-agnostic
+  [base type](https://help.keboola.com/storage/tables/data-types/#base-types); an additional key named
+  after the table's [storage backend](https://help.keboola.com/storage/#storage-data) (e.g., `snowflake`,
+  `bigquery`) carries the type as it exists on that backend, together with its `length` and `default`
+  when set. This field is omitted for columns that are not typed.
+- The `nullable` field indicates whether the column can contain null values.
+- The `primary_key` field indicates whether the column is part of the table's primary key.
+- The `description` field contains the column description, read primarily from the column's native
+  description field and falling back to its `KBC.description` metadata. It is omitted when no description
+  is available.
+
+The `schema` field uses the same structure as the
+[output table manifest schema](/extend/common-interface/manifest-files/out-tables-manifests-native-types/).
