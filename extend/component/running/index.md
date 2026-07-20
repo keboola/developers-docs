@@ -20,7 +20,7 @@ In this guide, we will use `/user/johndoe/data/` as the **host path** containing
 [data folder](/extend/common-interface/folders/).
 
 You can also run your component in your own environment. In that case, set the `KBC_DATADIR` environment
-variable to point to the data folder. With this approach, you loose the advantage of the properly defined
+variable to point to the data folder. With this approach, you lose the advantage of the properly defined
 environment, but in some cases, it may be a nice shortcut.
 
 For more details on how to develop a component, see the corresponding [tutorial](/extend/component/tutorial/),
@@ -93,7 +93,7 @@ This means you can test your unreleased image on real configurations in real pro
 any users using that component. See the [tutorial](/extend/component/tutorial/debugging/#running-specific-tags)
 for instructions.
 
-## Preparing Data folder
+## Preparing the Data folder
 In order to run and debug a Keboola component (including [R](https://help.keboola.com/transformations/r/) and [Python](https://help.keboola.com/transformations/python/) Transformations)
 on your own computer, you need to manually supply the component with
 a [data folder and configuration file](/extend/common-interface/). The above mentioned
@@ -199,7 +199,7 @@ the component locally. You should now be able to run the component with it:
     docker run --volume=/user/johndoe/data/:/data --memory=4000m --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-123 -i -t --entrypoint=/bin/bash quay.io/keboola/keboola-test.ex-docs-tutorial
 
 
-## Running Component
+## Running a Component
 If you want to run a component during development, it is the easiest to build it locally and
 [run the built version](/extend/component/tutorial/debugging/). If you want to run a production code component, you
 need to do a couple of things. Let's assume you want to run the `keboola-test.ex-docs-tutorial` component and you have

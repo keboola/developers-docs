@@ -15,7 +15,7 @@ have its documentation at hand. You also need the
 
 ## Configuration
 Generic Extractor configuration is written in [JSON format](/extend/generic-extractor/tutorial/json/)
-and comprises [several sections](/extend/generic-extractor/configuration/#configuration-sections) (a
+and comprises [several sections](/extend/generic-extractor/configuration/#json-configuration-sections) (a
 [configuration map](/extend/generic-extractor/map/) for navigation is available). 
 
 A [user interface](/extend/generic-extractor/configuration/#user-interface) is available that can help you with the configuration
@@ -192,7 +192,7 @@ The resulting JSON configuration will look like this:
             "authentication": {
                 "type": "basic"
             }
-        }
+        },
         "config": {
             "username": "dummy",
             "#password": "c40xxxxxxxxxxxxxxxxxxxxxxxxxxxxx-us13",

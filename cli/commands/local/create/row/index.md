@@ -62,4 +62,4 @@ Created new config row "main/extractor/keboola.ex-db-mysql/invoices/rows/custome
 
 - [All Commands](/cli/commands/)
 - [Create Configuration](/cli/commands/local/create/config/)
-- [Create Branch](/cli/commands/remote/create/brabch/)
+- [Create Branch](/cli/commands/remote/create/branch/)

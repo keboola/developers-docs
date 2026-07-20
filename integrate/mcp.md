@@ -98,7 +98,7 @@ The Keboola MCP Server supports several core concepts of the Model Context Proto
 
 ## Tool Authorization and Access Control
 
-When connecting to the [Keboola MCP Server](/ai/mcp-server/) via the Streamable HTTP transport, you can control which tools are available to clients using HTTP headers. This is useful for restricting AI agent capabilities, enforcing compliance policies, or providing customer-specific access controls.
+When connecting to the [Keboola MCP Server](https://help.keboola.com/ai/mcp-server/) via the Streamable HTTP transport, you can control which tools are available to clients using HTTP headers. This is useful for restricting AI agent capabilities, enforcing compliance policies, or providing customer-specific access controls.
 
 <div class="clearfix"></div><div class="alert alert-info">
 <b>Note:</b> Tool authorization headers only apply to HTTP-based transports. They are not available when using the <code>stdio</code> transport for local execution.
@@ -279,7 +279,7 @@ you can connect to Keboola's MCP Server by following these steps:
 At this moment, <b>if you wish to control permissions more granularly</b>, it is recommended to use the local deployment and specify your own <b>Storage Token</b> and <b>Workspace Schema.</b>
 </div>
 1. Obtain the remote server URL of the stack `https://mcp.<YOUR_REGION>.keboola.com/mcp`.
-   - You can find the URL in your Keboola [project settings](/management/project/), e.g. navigate to `Users & Settings` > `MCP Server`
+   - You can find the URL in your Keboola [project settings](https://help.keboola.com/management/project/), e.g. navigate to `Users & Settings` > `MCP Server`
      - In there you can also find specific instructions for various clients.
 2. Copy the server URL and paste it into your AI assistant's settings.
 3. Once you save the settings and refresh your AI assistant, you will be prompted to authenticate with your Keboola account and select the project you want to connect to.
