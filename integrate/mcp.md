@@ -159,6 +159,10 @@ For a consistent and isolated environment, running the Keboola MCP Server via [D
 
 Before proceeding, ensure you have Docker installed on your system. You can find installation guides on the [official Docker website](https://docs.docker.com/engine/install/).
 
+<div class="clearfix"></div><div class="alert alert-warning">
+<b>Deprecation notice:</b> The <code>KBC_STORAGE_TOKEN</code> examples below still work, but static-token configuration is deprecated — see <a href="#authenticating-without-a-static-storage-token-browser-login">Authenticating Without a Static Storage Token</a>.
+</div>
+
 1.  **Pull the latest image:**
     ```bash
     docker pull keboola/mcp-server:latest
@@ -230,7 +234,7 @@ The primary way to run the server locally is by using `uv` or `uvx` to execute t
 
 1. **Set up environment variables:**  
    Before running the server, you need to configure the following environment variables:
-   * `KBC_STORAGE_TOKEN`: Your Keboola Storage API token.
+   * `KBC_STORAGE_TOKEN`: Your Keboola Storage API token. **Deprecated** — see [Authenticating Without a Static Storage Token](#authenticating-without-a-static-storage-token-browser-login) below for the recommended browser login flow.
    * `KBC_WORKSPACE_SCHEMA`: Your Keboola project's workspace schema (for SQL queries).
    * `KBC_STORAGE_API_URL`: Your Keboola instance API URL (e.g., `https://connection.keboola.com` or `https://connection.YOUR_REGION.keboola.com`).
 
@@ -251,6 +255,10 @@ uvx keboola_mcp_server --api-url $KBC_STORAGE_API_URL
 The `KBC_STORAGE_API_URL` was set as an environment variable but can also be provided manually. The command starts the server communicating via `stdio`. To run the server in `Streamable HTTP` mode (listening on a network host/port such as `localhost:8000`), pass the appropriate flags to `keboola_mcp_server`. For day-to-day use with clients like Claude or Cursor you usually do not need to run this command manually, as they handle the server lifecycle.
 
 ### Authenticating Without a Static Storage Token (Browser Login)
+
+<div class="clearfix"></div><div class="alert alert-warning">
+<b>Deprecation notice:</b> Configuring the MCP server with a static <code>KBC_STORAGE_TOKEN</code> is deprecated in favor of the browser login flow below. It still works today — there is a deprecation period while existing setups migrate — but support for it will be removed in a future release. Please switch to <code>login</code>/<code>logout</code> now if you're setting up a new integration.
+</div>
 
 Instead of setting a static `KBC_STORAGE_TOKEN`, you can sign in once with your browser; the server stores the session and refreshes it automatically:
 
