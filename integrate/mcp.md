@@ -126,19 +126,7 @@ Empty headers are treated as no restriction/exclusion (backward compatible behav
 
 ### Read-Only Tools
 
-The following 15 tools are classified as read-only (they do not modify data):
-
-| Category | Tools |
-|----------|-------|
-| Components | `get_configs`, `get_components`, `get_config_examples` |
-| Flows | `get_flows`, `get_flow_examples`, `get_flow_schema` |
-| Storage | `get_buckets`, `get_tables` |
-| SQL | `query_data` |
-| Data Apps | `get_data_apps` |
-| Jobs | `get_jobs` |
-| Search | `search`, `find_component_id` |
-| Project | `get_project_info` |
-| Documentation | `docs_query` |
+Read-only tools are those annotated with `readOnlyHint=True` — they only retrieve information and never modify your Keboola project. The set of read-only tools changes as tools are added, so rather than duplicating the list here, see the auto-generated [TOOLS.md](https://github.com/keboola/mcp-server/blob/main/TOOLS.md) file in the repository (look for `**Annotations**: read-only` under each tool).
 
 ### Use Cases
 
@@ -244,7 +232,7 @@ The primary way to run the server locally is by using `uv` or `uvx` to execute t
    Before running the server, you need to configure the following environment variables:
    * `KBC_STORAGE_TOKEN`: Your Keboola Storage API token.
    * `KBC_WORKSPACE_SCHEMA`: Your Keboola project's workspace schema (for SQL queries).
-   * `KBC_API_URL`: Your Keboola instance API URL (e.g., `https://connection.keboola.com` or `https://connection.YOUR_REGION.keboola.com`).
+   * `KBC_STORAGE_API_URL`: Your Keboola instance API URL (e.g., `https://connection.keboola.com` or `https://connection.YOUR_REGION.keboola.com`).
 
    Refer to the [Keboola Tokens](https://help.keboola.com/management/project/tokens/) and [Keboola workspace manipulation](https://help.keboola.com/tutorial/manipulate/workspace/) for detailed instructions on obtaining these values.
 
@@ -257,10 +245,41 @@ The primary way to run the server locally is by using `uv` or `uvx` to execute t
 2. **Run the server:**
 
 ```bash
-uvx keboola_mcp_server --api-url $KBC_API_URL
+uvx keboola_mcp_server --api-url $KBC_STORAGE_API_URL
 ```
 
-The `KBC_API_URL` was set as an environment variable but can also be provided manually. The command starts the server communicating via `stdio`. To run the server in `Streamable HTTP` mode (listening on a network host/port such as `localhost:8000`), pass the appropriate flags to `keboola_mcp_server`. For day-to-day use with clients like Claude or Cursor you usually do not need to run this command manually, as they handle the server lifecycle.
+The `KBC_STORAGE_API_URL` was set as an environment variable but can also be provided manually. The command starts the server communicating via `stdio`. To run the server in `Streamable HTTP` mode (listening on a network host/port such as `localhost:8000`), pass the appropriate flags to `keboola_mcp_server`. For day-to-day use with clients like Claude or Cursor you usually do not need to run this command manually, as they handle the server lifecycle.
+
+### Authenticating Without a Static Storage Token (Browser Login)
+
+Instead of setting a static `KBC_STORAGE_TOKEN`, you can sign in once with your browser; the server stores the session and refreshes it automatically:
+
+```bash
+uvx keboola_mcp_server login --api-url https://connection.YOUR_REGION.keboola.com
+```
+
+This saves a stack-wide session to `~/.keboola/mcp/credentials.json` (readable only by you). Afterwards, start the server with only `KBC_STORAGE_API_URL` set — no token required. Which project(s) to work on is then chosen from within the conversation itself (see [Working Across Multiple Projects](#working-across-multiple-projects) below), not at login time.
+
+| Command | What it does |
+|---------|--------------|
+| `login --api-url <url>` | Sign in to a stack |
+| `login --force` | Sign in again / switch account |
+| `login --show-token` | Print the current session token (debugging) |
+| `logout [--api-url <url>] [--all]` | Remove the stored session for a stack (or all stacks) |
+
+Starting the server over `stdio` in an interactive terminal with no stored session runs this browser login automatically. MCP clients (Claude, Cursor, ...) launch the server in the background where a browser can't open, so run `login` once yourself first.
+
+For containers or CI where a browser login isn't possible, supply a Keboola [access or personal access token](https://help.keboola.com/management/project/tokens/) directly via `KBC_STORAGE_TOKEN` (or the `X-StorageAPI-Token` header), together with `KBC_PROJECT_ID` (or the `X-KBC-ProjectId` header) to select the project. These stack-wide programmatic tokens are prefixed `kbc_at_` (access token) or `kbc_pat_` (personal access token); a legacy project-bound Storage token does not need `KBC_PROJECT_ID`, since the project is already encoded in the token itself.
+
+### Working Across Multiple Projects
+
+A stack-wide programmatic token (`kbc_at_`/`kbc_pat_`, obtained via browser login or issued directly) can access more than one Keboola project. In that case the assistant should:
+
+1. Call `get_accessible_projects` to list every project the token can reach.
+2. Ask the user whether to operate across all of them or a chosen subset.
+3. Call `set_project_scope` with the selected `project_ids` (and optionally `read_only=true` to mint a read-only scoped token).
+
+`set_project_scope` mints a scoped access token narrowed to the chosen projects. Read-only tools then run against every scoped project in a single call; write operations always target the first scoped project only — re-scope first to write elsewhere. Because the server does not keep session state between calls on the stateless HTTP transport, `set_project_scope` and `get_accessible_projects` return a `scope_token` that must be resent as the `scope_token` argument on every subsequent tool call in the conversation (OAuth-authenticated sessions are the exception — the server persists the scope server-side for those, so no resending is needed).
 
 ### Connecting a Client to a Localhost Instance
 
