@@ -13,7 +13,7 @@ permalink: /cli/commands/local/validate/row/
 kbc local validate row component.id row.json [flags]
 ```
 
-Each [component](/extend/component/) definition optionally contains a **schema of the configuration row `parameters` key**.
+Each [component](https://help.keboola.com/extend/component/) definition optionally contains a **schema of the configuration row `parameters` key**.
 
 The command validates the content of the specified JSON file against the schema.
 It can be used both in a project [local directory](/cli/structure/) and also separately.

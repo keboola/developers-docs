@@ -16,7 +16,7 @@ as an orchestration task. After the exporter finishes, the resulting TDE files w
 *Storage* --- *File uploads* section where you can download them via UI or [API](/integrate/storage/api/import-export/).
 
 ##  Running the Component
-The TDE Exporter is a Keboola [component](/extend/component/) supporting both
+The TDE Exporter is a Keboola [component](https://help.keboola.com/extend/component/) supporting both
 [stored](/integrate/storage/api/configurations/) and
 custom configurations supplied directly in the `run` request.
 
@@ -35,7 +35,7 @@ Then [create a job](/integrate/jobs/) with the specified configuration:
 
 ### Custom Configuration
 You can specify the entire configuration in the API call. The JSON configuration conforms
-to the [general configuration format](/extend/common-interface/config-file/). The specific part
+to the [general configuration format](https://help.keboola.com/extend/common-interface/config-file/). The specific part
 is only the `parameters` section. A sample request to the `in.c-main.old-table` export table would look like this:
 
 {% highlight json %}

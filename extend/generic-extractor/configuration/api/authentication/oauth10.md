@@ -117,4 +117,4 @@ The full configuration is, e.g.:
 {% endhighlight %}
 
 See [example [EX102]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/102-oauth1) or
-learn [more about Keboola-OAuth integration](/extend/common-interface/oauth).
+learn [more about Keboola-OAuth integration](https://help.keboola.com/extend/common-interface/oauth/).
