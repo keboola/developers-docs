@@ -18,7 +18,7 @@ The following chart shows how Keboola is structured. All Keboola parts are brief
 ![Overview of Keboola Components](/kbc_structure.png){: .img-responsive}
 
 ## Working with Keboola
-Everything you can do in the Keboola UI can be done programatically using the API of the corresponding component.
+Everything you can do in the Keboola UI can be done programmatically using the API of the corresponding component.
 All of our components have API documentation on [api.keboola.com](https://api.keboola.com/) and
 most of them have a public [Github repository](https://github.com/keboola/).
 Our Docker components are built on [AWS ECR](https://aws.amazon.com/ecr/).
@@ -28,7 +28,7 @@ This means that there are virtually **endless possibilities of what can be done 
 ## Component Common Features
 All components share some common behaviour such as [*Component Configuration*](/integrate/storage/api/configurations/)
 [Running Jobs](/integrate/jobs/), which allows each component to be run in [Orchestrations](https://help.keboola.com/orchestrator/).
-This means that once worked your way through one component, you have seen them all.
+This means that once you've worked your way through one component, you have seen them all.
 **Most of our components are open source**. If you are interested in their code, have a look at
 [our repositories](/overview/repositories/).
 Apart from that common features, some components define additional [synchronous actions](/extend/common-interface/actions/).

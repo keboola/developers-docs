@@ -19,7 +19,7 @@ curl --request POST --header "X-StorageApi-Token:storage-token" --form "tableId=
 {% endhighlight %}
 
 Using the Storage API Importer is the easiest way to upload data into Storage (except for
-using one of the [API clients](/integrate/storage/#clients)). However, the disadvantage is that the whole data file
+using one of the [API clients](/integrate/storage/#storage-api-clients)). However, the disadvantage is that the whole data file
 has to be posted in a single HTTP request. **The maximum limit for a file size is 2GB and the transfer time is 45 minutes**.
 This means that for substantially large files (usually more than hundreds of MB)
 you may experience timeouts. If that happens, use the above outlined approach and upload the
@@ -34,7 +34,7 @@ files [directly to S3](/integrate/storage/api/import-export/#manually-uploading-
 - `escapedBy` (optional) CSV escape character; empty by default.
 - `incremental` (optional) If incremental is set to 0 (its default), the target table is truncated before each import.
 
-Full list of avaialable parameters is available in the [API documentation](https://api.keboola.com/?service=import#import).
+Full list of available parameters is available in the [API documentation](https://api.keboola.com/?service=import#import).
 
 ## Examples
 To load data incrementally (append new data to existing contents):
