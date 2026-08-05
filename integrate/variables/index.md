@@ -226,7 +226,7 @@ and [output](/extend/common-interface/config-file/#output-mapping--basic) mappin
                 ]
             }
         ]
-    }
+    },
     "variables_id": "807968875",
     "variables_values_id": "807952812"
 }
@@ -407,7 +407,7 @@ the ID of the value row in `variableValuesId`:
 {% highlight json %}
 {
     "component": "keboola.python-transformation-v2",
-    "config": "807968875,
+    "config": "807968875",
     "mode": "run",
     "variableValuesId": "807957572"
 }
