@@ -14,7 +14,8 @@ kbc local persist [flags]
 
 Or shorter:
 ```
-kbc p [flags]
+kbc persist [flags]
+kbc pt [flags]
 ```
 
 Propagate changes in the [local directory](/cli/structure/) to the manifest. When you manually create a configuration or a row (e.g., by 
