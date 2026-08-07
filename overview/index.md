@@ -66,5 +66,5 @@ Keboola supports the [Model Context Protocol (MCP)](https://modelcontextprotocol
 
 Our own [Keboola MCP Server](https://github.com/keboola/mcp-server) acts as a bridge between your Keboola project and modern AI tools. It exposes Keboola features like storage access, SQL transformations, and job triggers as callable tools for various MCP clients. Provides information about available components on stacks and can fetch documentation of any component using natural language queries using any MCP client.
 
-To learn more about integrating with MCP, see the [MCP integration guide](/integrate/mcp/).
+To learn more about integrating with MCP, see the [MCP Server documentation](https://help.keboola.com/ai/mcp-server/).
 
