@@ -14,7 +14,7 @@ This enables sharing the API extractor between various projects and simplifies i
 ## Configuration Considerations
 Before converting your configuration to a universally available component, consider
 what values in the configuration should be provided by the end-user (typically authentication values).
-Then design a [configuration schema](/extend/component/ui-options/configuration-schema/) for setting
+Then design a [configuration schema](https://help.keboola.com/extend/component/ui-options/configuration-schema/) for setting
 those values. You can [test the schema online](http://jeremydorn.com/json-editor/) ([alternative](https://mozilla-services.github.io/react-jsonschema-form/)).
 The values obtained from the end user will be stored in the [`config` property](/extend/generic-extractor/configuration/config/).
 Modify your configuration to read those values from there.
@@ -25,7 +25,7 @@ Also, try to make the extractor [work incrementally](/extend/generic-extractor/i
 if possible.
 
 ## Publishing
-To publish your Generic Extractor configuration, you need to [create a new component](/extend/component/tutorial/) in
+To publish your Generic Extractor configuration, you need to [create a new component](https://help.keboola.com/extend/component/tutorial/) in
 the [Developer Portal](https://components.keboola.com/). Choose an appropriate name and the type `extractor`. Once you
 have created the component, edit it, and fill in the following details:
 
@@ -41,7 +41,7 @@ we recommend that you configure your component with a specific tag and update it
 in future Generic Extractor releases.
 
 Because the UI is assumed to be `genericTemplatesUI`, provide a
-[**configuration schema**](/extend/component/ui-options/configuration-schema/) and
+[**configuration schema**](https://help.keboola.com/extend/component/ui-options/configuration-schema/) and
 a **template** to be used in conjunction with the schema. Optionally, the template UI may also contain an interface to
 negotiate [OAuth authentication](/extend/generic-extractor/configuration/api/authentication/#oauth).
 An example of the template UI is shown in the picture below.
@@ -62,7 +62,7 @@ section. Other sections, such as [`api`](/extend/generic-extractor/configuration
 
 You can review existing templates in their [GitHub repository](https://github.com/keboola/kbc-ui-templates/tree/master/resources).
 If you feel confident, you can send a pull request with your templates, otherwise submit it when requesting the
-[publication of your component](/extend/publish/).
+[publication of your component](https://help.keboola.com/extend/publish/).
 
 ## Example
 Let's say you have the following working API configuration
@@ -132,7 +132,7 @@ For each of the values, create a parameter of the appropriate type:
 
 The parameter names are completely arbitrary. However, they must not conflict with existing
 configuration properties of [Generic Extractor](/extend/generic-extractor/configuration/config/) (e.g., `jobs`, `mappings`).
-Now create a [configuration schema](/extend/component/ui-options/configuration-schema/) for the four parameters.
+Now create a [configuration schema](https://help.keboola.com/extend/component/ui-options/configuration-schema/) for the four parameters.
 
 {% highlight json %}
 {

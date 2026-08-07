@@ -78,7 +78,7 @@ If you run it every hour, it will extract the data modified within the last hour
 Should one of the runs fail or be skipped for any reason, the extraction will pick up where it ended the last time it was successful. 
 See [example [EX107]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/107-incremental-load).
 
-The last successful time is stored in the [configuration state](/extend/common-interface/config-file/#state-file).
+The last successful time is stored in the [configuration state](https://help.keboola.com/extend/common-interface/config-file/#state-file).
 If for some reason you need to reset it, 
 [update the configuration via API](https://api.keboola.com/?service=storage#put-/v2/storage/branch/-branchId-/components/-componentId-/configs/-configurationId-).
 
