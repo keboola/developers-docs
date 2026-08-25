@@ -5,8 +5,14 @@ permalink: /extend/
 
 As an open system consisting of many built-in, interoperating components,
 such as Storage or Extractors, [Keboola](/overview/) can be easily extended.
-We encourage you to [**build your own components**](/extend/component/tutorial), whether for
+We encourage you to [**build your own components**](https://help.keboola.com/extend/component/tutorial/), whether for
 your own use or to be offered to other Keboola users and customers.
+
+<div class="alert alert-info">
+<b>Note:</b> Component development documentation — components, the common interface, Job Queue and publishing —
+now lives at <a href="https://help.keboola.com/extend/">help.keboola.com/extend/</a>. The old URLs here redirect there.
+Generic Extractor and Generic Writer are still documented on this site.
+</div>
 
 * TOC
 {:toc}
@@ -34,7 +40,7 @@ Depending on your role, extending Keboola offers various advantages:
     - Let Keboola be in charge of the billing.
 
 ## Component
-A [component](/extend/component/) can be used as:
+A [component](https://help.keboola.com/extend/component/) can be used as:
 
 - **Extractor**, allowing customers to get data from new sources. It only processes input tables from external sources (usually API).
 - **Application**, further enriching the data or adding value in new ways. It processes input tables stored as CSV files or database tables and generates result tables as CSV files or database tables.
@@ -42,11 +48,11 @@ A [component](/extend/component/) can be used as:
 - **Writer**, pushing data into new systems and consumption methods. It does not generate any data in Keboola projects.
 - **Processor**, adjusting the inputs or outputs of other components. It has to be run together with one of the above components.
 
-All components are run using [Job Queue](/extend/job-queue/), a service that takes
+All components are run using [Job Queue](https://help.keboola.com/extend/job-queue/), a service that takes
 care of their authentication, starting, stopping, isolation, reading data from and writing it to Keboola Storage. They must adhere to the
-[common interface](/extend/common-interface/). Creating components requires an elementary knowledge of [Docker](https://www.docker.com/why-docker).
+[common interface](https://help.keboola.com/extend/common-interface/). Creating components requires an elementary knowledge of [Docker](https://www.docker.com/why-docker).
 They can be implemented in virtually any programming language and be fully customized and tailored to anyone's needs.
-They also support OAuth authorization. To get started with building a component, see our [**tutorial**](/extend/component/tutorial/).
+They also support OAuth authorization. To get started with building a component, see our [**tutorial**](https://help.keboola.com/extend/component/tutorial/).
 
 ## Generic Extractor
 [Generic Extractor](/extend/generic-extractor/) is a Keboola component acting like a

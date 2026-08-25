@@ -74,7 +74,7 @@ has three child properties:
 
 Note that the properties `appKey` and `#appSecret` must exist even if not used by the API; set them
 to empty strings. For more information about OAuth 2, see the [official documentation](https://oauth.net/2/)
-or learn [more about Keboola-OAuth integration](/extend/common-interface/oauth).
+or learn [more about Keboola-OAuth integration](https://help.keboola.com/extend/common-interface/oauth/).
 
 ## Configuration Parameters
 The following configuration parameters are supported for the `oauth20` authentication type:
