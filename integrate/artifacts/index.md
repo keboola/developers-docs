@@ -8,7 +8,7 @@ permalink: /integrate/artifacts/
 
 *Note: This is a preview feature and as such may change considerably in the future. The project must have an `artifacts` feature enabled.*
 
-**Artifacts** are additional files that can be produced or consumed by a [component](/extend/component). 
+**Artifacts** are additional files that can be produced or consumed by a [component](https://help.keboola.com/extend/component/). 
 
 See [Tutorial](/integrate/artifacts/tutorial) for step-by-step example.
 

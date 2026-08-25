@@ -58,7 +58,7 @@ includes configuring the HTTP method and parameters. The `jobs` configuration is
 The `outputBucket` option defines the name of the [Storage Bucket](https://help.keboola.com/storage/buckets/)
 in which the extracted tables will be stored. The configuration is **required** unless
 the extractor is [published](/extend/generic-extractor/publish/) as a standalone component with the
-[Default Bucket](/extend/common-interface/folders/#default-bucket) option.
+[Default Bucket](https://help.keboola.com/extend/common-interface/folders/#default-bucket) option.
 
 The following configuration will make Generic Extractor put all extracted tables in the `ge-tutorial` bucket
 (the names of the tables are defined by the [`dataType`](/extend/generic-extractor/configuration/config/jobs/#dataType) setting):

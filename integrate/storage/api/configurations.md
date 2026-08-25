@@ -197,22 +197,22 @@ configuration of the `keboola.ex-aws-s3` component. You will receive a response 
 The actual component configuration is split into three parts:
 
 - `configuration` node, containing an arbitrary component configuration
-- `state` node, containing a component [state file](/extend/common-interface/config-file/#state-file)
+- `state` node, containing a component [state file](https://help.keboola.com/extend/common-interface/config-file/#state-file)
 - `rows` node, containing iterations of `configuration` and `state`
 
 The important part is the ID of the configuration you want to work with. In the following examples, we will use
 `364479526`.
 
 ### Configuration
-The `configuration` node maps to the [configuration file](/extend/common-interface/config-file/#configuration-file-structure).
+The `configuration` node maps to the [configuration file](https://help.keboola.com/extend/common-interface/config-file/#configuration-file-structure).
 It can contain the `storage`, `parameters`, `processors` and `authorization` child nodes (the `image_parameters` and `action` nodes found in the config file
 are injected at runtime and are not stored in the configuration). The `authorization` node is set in the configuration only when
-[credentials injection](/extend/common-interface/oauth/#credentials-injection) should be used, otherwise it is also set during the runtime.
-The `processors` node defines the [processors and their configuration](/extend/component/processors/).
+[credentials injection](https://help.keboola.com/extend/common-interface/oauth/#credentials-injection) should be used, otherwise it is also set during the runtime.
+The `processors` node defines the [processors and their configuration](https://help.keboola.com/extend/component/processors/).
 The most common sub-nodes stored in the `configuration` node are therefore `parameters` (containing an arbitrary component configuration)
-and `storage` (containing [input](/extend/component/tutorial/input-mapping/) and [output mapping](/extend/component/tutorial/output-mapping/)).
+and `storage` (containing [input](https://help.keboola.com/extend/component/tutorial/input-mapping/) and [output mapping](https://help.keboola.com/extend/component/tutorial/output-mapping/)).
 Both are transferred to the
-configuration file without modification; that means that the [`storage` configuration](/extend/common-interface/config-file/#configuration-file-structure)
+configuration file without modification; that means that the [`storage` configuration](https://help.keboola.com/extend/common-interface/config-file/#configuration-file-structure)
 is directly usable in the `configuration` node. The `parameters` node is fully dependent on the component and has no universal specification or rules.
 
 In the above example, the `configuration` node contains the following:
@@ -235,7 +235,7 @@ there are rows. For each row, the `configuration` node from `root` and the `conf
 the latter overwriting the former in the case of conflict.
 
 Given the above configuration, the **effective configuration** passed to the component
-[configuration file](/extend/common-interface/config-file/#configuration-file-structure) will be as follows:
+[configuration file](https://help.keboola.com/extend/common-interface/config-file/#configuration-file-structure) will be as follows:
 
 {% highlight json %}
 {
@@ -279,7 +279,7 @@ iterable part which is repeated many times. Keep in mind that configurations hea
 in the UI**.
 
 ### State
-The `state` node contains the content of the [state file](/extend/common-interface/config-file/#state-file). The
+The `state` node contains the content of the [state file](https://help.keboola.com/extend/common-interface/config-file/#state-file). The
 `state` is read from the state file and then supplied to the state file on the next run. In the above configuration,
 the state is:
 
@@ -307,7 +307,7 @@ which will return all the configuration details. This means
 
 - the configuration itself (`configuration`) --- [section on configuration](#modifying-a-configuration) follows;
 - configuration rows (`rows`) --- additional data of the configuration; and
-- configuration state (`state`) --- [component state](/extend/common-interface/config-file/#state-file).
+- configuration state (`state`) --- [component state](https://help.keboola.com/extend/common-interface/config-file/#state-file).
 
 Please note that the contents
 of the `configuration`, `rows` and `state` sections depend purely on the component itself. See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb).

@@ -27,18 +27,18 @@ Using a portal for a different stack than your token's stack will result in <cod
 | [Keboola Management API](https://api.keboola.com/?service=manage)                                          | API managing Keboola projects and users (and notifications and features).                                                                                           |
 | [AI API](https://api.keboola.com/?service=ai)                                                               | API for supporting AI features.                                                                                                                                     |
 | [Billing API](https://api.keboola.com/?service=billing)                                                     | Billing API for Pay as You Go projects.                                                                                                                             |
-| [Developer Portal API](https://api.keboola.com/?service=developer-portal)                                   | Developer Portal is an application separated from Keboola for [creating components](/extend/component/).                                                            |
+| [Developer Portal API](https://api.keboola.com/?service=developer-portal)                                   | Developer Portal is an application separated from Keboola for [creating components](https://help.keboola.com/extend/component/).                                                            |
 | [Editor API](https://api.keboola.com/?service=editor)                                                       | API for managing SQL editor sessions.                                                                                                                               |
 | [Encryption API](https://api.keboola.com/?service=encryption)                                               | Provides [Encryption](/overview/encryption/).                                                                                                                       |
 | [Importer API](https://api.keboola.com/?service=import)                                                     | [Importer](/integrate/storage/api/importer/) is a helper service for easy table imports.                                                                            |
 | [Notifications API](https://api.keboola.com/?service=notification)                                          | API to subscribe to events, e.g., failed orchestrations.                                                                                                            |
-| [OAuth Broker API](https://api.keboola.com/?service=oauth)                                                  | OAuth Broker is a component managing [OAuth authorizations](/extend/common-interface/oauth/#authorize) of other components.                                         |
+| [OAuth Broker API](https://api.keboola.com/?service=oauth)                                                  | OAuth Broker is a component managing [OAuth authorizations](https://help.keboola.com/extend/common-interface/oauth/#authorize) of other components.                                         |
 | [Query API](https://api.keboola.com/?service=query)                                                 | Query is a service for running SQL queries on Snowflake and BigQuery.                                                         |
-| [Queue API](https://api.keboola.com/?service=job-queue)                                                     | Queue is a service for [running components](/extend/job-queue/) and managing [Jobs](/integrate/jobs/).                                                          |
+| [Queue API](https://api.keboola.com/?service=job-queue)                                                     | Queue is a service for [running components](https://help.keboola.com/extend/job-queue/) and managing [Jobs](/integrate/jobs/).                                                          |
 | [Sandboxes Service API](https://api.keboola.com/?service=sandboxes-service)                                 | API for managing Apps and Python/R workspaces.                                                                                                 |
 | [Scheduler API](https://api.keboola.com/?service=scheduler)                                                 | API to automate configurations.                                                                                                                                     |
 | [Stream API](https://api.keboola.com/?service=stream)                                                       | The Keboola Stream API allows you to ingest small and frequent events into your project's storage.                                                                  |
-| [Synchronous Actions API](https://api.keboola.com/?service=sync-actions)                                    | API to trigger [Synchronous Actions](/extend/common-interface/actions/). |
+| [Synchronous Actions API](https://api.keboola.com/?service=sync-actions)                                    | API to trigger [Synchronous Actions](https://help.keboola.com/extend/common-interface/actions/). |
 | [Vault](https://api.keboola.com/?service=vault)                                                             | Service handling variables & credentials storage.                                                                                                                   |
 
 If you're unsure which API to use, refer to our [integration guide](/integrate/). It describes the roles of different APIs and contains examples of commonly
@@ -146,12 +146,12 @@ Otherwise, you may encounter `Invalid Token` or unauthorized errors. The *author
 The services listed above are:
 
 - `import` --- [Storage Importer Service](/integrate/storage/api/importer/)
-- `oauth` --- [OAuth Manager Service](/extend/common-interface/oauth/)
-- `queue` --- [Service for Running Components](/extend/job-queue/)
+- `oauth` --- [OAuth Manager Service](https://help.keboola.com/extend/common-interface/oauth/)
+- `queue` --- [Service for Running Components](https://help.keboola.com/extend/job-queue/)
 - `billing` --- Service for Computing Credits
 - `encryption` --- Service for [Encryption](/overview/encryption/)
 - `scheduler` --- [Service for Configuring Schedules](/automate/set-schedule/)
-- `sync-actions` --- [Service for Running Synchronous Actions](/extend/common-interface/actions/)
+- `sync-actions` --- [Service for Running Synchronous Actions](https://help.keboola.com/extend/common-interface/actions/)
 - `notification` --- Service for Configuring Job Notifications
 
 For convenience, the following table lists active services and their URLs, though for an authoritative answer 

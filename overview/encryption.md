@@ -107,7 +107,7 @@ The `Content-Type` header in the request differentiates whether the body is trea
 ### Encryption Parameters
 The Encryption API accepts the following **optional** parameters:
 
-- `componentId` --- ID of a [Keboola component](/extend/component/tutorial/#creating-a-component),
+- `componentId` --- ID of a [Keboola component](https://help.keboola.com/extend/component/tutorial/#creating-component),
 - `projectId` --- ID of a Keboola project,
 - `configId` --- ID of a component configuration, and
 - `branchType` --- Branch type --- either `default` (meaning the default production branch) or `dev` (meaning any development branch other than the production).

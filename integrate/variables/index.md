@@ -188,8 +188,8 @@ See an [example](https://documenter.getpostman.com/view/3086797/77h845D?version=
 
 ### Step 3 -- Create Main Configuration
 Now it is time to create the actual configuration which will contain a Python transformation.
-Use the following configuration body. The `storage` section describes the standard [input](/extend/common-interface/config-file/#input-mapping--basic) 
-and [output](/extend/common-interface/config-file/#output-mapping--basic) mapping.
+Use the following configuration body. The `storage` section describes the standard [input](https://help.keboola.com/extend/common-interface/config-file/#input-mapping--basic) 
+and [output](https://help.keboola.com/extend/common-interface/config-file/#output-mapping--basic) mapping.
 
 {% highlight json %}
 {% raw %}
@@ -315,7 +315,7 @@ values, e.g.:
 |Italybatman|4139387742|
 |Romaniabatman|654126042|
 
-The events of the job will contain the contents of the [configuration file](/extend/common-interface/config-file/) 
+The events of the job will contain the contents of the [configuration file](https://help.keboola.com/extend/common-interface/config-file/) 
 where you can verify that the variables were replaced.
 
 <details>
