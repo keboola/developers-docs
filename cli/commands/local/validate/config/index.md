@@ -7,13 +7,13 @@ permalink: /cli/commands/local/validate/config/
 {:toc}
 
 
-**Validate a [configuration JSON file](/extend/common-interface/config-file/).**
+**Validate a [configuration JSON file](https://help.keboola.com/extend/common-interface/config-file/).**
 
 ```
 kbc local validate config component.id config.json [flags]
 ```
 
-Each [component](/extend/component/) definition optionally contains a **schema of the configuration `parameters` key**.
+Each [component](https://help.keboola.com/extend/component/) definition optionally contains a **schema of the configuration `parameters` key**.
 
 The command validates the content of the specified JSON file against the schema. 
 It can be used both in a project [local directory](/cli/structure/) and also separately.

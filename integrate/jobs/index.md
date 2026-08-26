@@ -214,7 +214,7 @@ Such functionality is implemented in specific components (e.g. Orchestrator) or 
 
 ### Job Configuration
 To create a job, you must provide the [configuration](https://help.keboola.com/components/) to run. A configuration is always tied to a specific 
-[component](/extend/component/).
+[component](https://help.keboola.com/extend/component/).
 
 A configuration can be provided in multiple ways. The easiest is to provide a reference to 
 a stored configuration ID using the `config` field as shown above. Configurations can be stored and listed using the 
@@ -233,13 +233,13 @@ has to be provided in the request. If you are retrieving a
 note that the configuration data is the contents of the `configuration` node and not the entire 
 response. When using the `configData` field, the `configRowIds` and `branchId` values are ignored. When using the `configData` field the `config` field 
 is ignored for the purpose of reading the configuration, but may still be required in case the component is using 
-[Default Bucket](https://developers.keboola.com/extend/component/tutorial/output-mapping/#configuring-default-bucket). In that case, the 
+[Default Bucket](https://help.keboola.com/extend/component/tutorial/output-mapping/#configuring-default-bucket). In that case, the 
 configuration referenced in `config` is used to generate the name of the output bucket. It still holds that configuration data is not read from it. 
 That means that `configData` always fully overrides the `config` field.
 
 ### Job Mode
 When creating a job, you need to provide `mode`. This can be one of `run`, `forceRun` and `debug`. The basic `mode` choice is `run`. 
-Use the `forceRun` mode to run a configuration that is disabled. The `debug` can be used during [Component Development & Debugging](https://developers.keboola.com/extend/component/tutorial/debugging/).
+Use the `forceRun` mode to run a configuration that is disabled. The `debug` can be used during [Component Development & Debugging](https://help.keboola.com/extend/component/tutorial/debugging/).
 
 ### Job Runtime configuration
 You may provide runtime settings for a job. Runtime settings do not affect what the job does, they affect how the job does it. The available runtime settings are:
@@ -268,7 +268,7 @@ not inside it. For example, to pin all jobs of a configuration to a specific ima
 
 Jobs of this configuration then run the given image tag (the job detail shows the resolved value in its `tag` field) until the `runtime.tag` key 
 is removed from the configuration. This is the usual way of testing a development build of a component in a single project without affecting 
-other projects --- the tag in the [Developer Portal](/extend/publish/) stays untouched. Do not forget to remove the key when done; a pinned 
+other projects --- the tag in the [Developer Portal](https://help.keboola.com/extend/publish/) stays untouched. Do not forget to remove the key when done; a pinned 
 configuration keeps running the old image even after new versions of the component are released.
 
 ### Job Type
@@ -465,7 +465,7 @@ to one of the finished states or until `isFinished` is true.
 
 ### Run a Debug job
 To run a debug job, use `debug` for the mode. Optionally you can provide the component version which should run
-to [live test](/extend/component/deployment/#test-live-configurations) an image.
+to [live test](https://help.keboola.com/extend/component/deployment/#test-live-configurations) an image.
 
 ```json
 {
@@ -477,7 +477,7 @@ to [live test](/extend/component/deployment/#test-live-configurations) an image.
 ```
 
 The debug mode creates a job that prepares the data folder including the serialized configuration files. Then it compresses the 
-[data folder](/extend/component/running/#preparing-the-data-folder) and uploads it to your project's Files in Storage. This way you will get a snapshot 
+[data folder](https://help.keboola.com/extend/component/running/#preparing-data-folder) and uploads it to your project's Files in Storage. This way you will get a snapshot 
 of what the data folder looked like before the component started. If processors are used, a snapshot of the data folder is created before each processor. After the entire component finishes, another snapshot is made. For example, if you run component A with processor B and C in the after section, you will receive:
 
 - `stage_0` file with contents of the data folder before component A was run
