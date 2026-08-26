@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+{%- comment -%}
+Overrides the template jekyll-redirect-from ships with, for every page carrying
+`redirect_to` or `redirect_from`. The plugin only injects its own template when
+the site has no `redirect` layout of its own (see Generator#generate).
+
+The redirect still fires immediately — this markup is what a reader sees when it
+does not (JS off, meta refresh blocked, printed copy), so it has to say where the
+page went on its own.
+{%- endcomment -%}
+{%- assign target = page.redirect.to -%}
+{%- assign target_label = target | remove: "https://" | remove: "http://" -%}
+{%- assign moved_to_help = false -%}
+{%- if target contains "help.keboola.com" -%}{%- assign moved_to_help = true -%}{%- endif -%}
+{%- comment -%} Same path on the other host, or a genuinely different one? {%- endcomment -%}
+{%- assign target_path = target | remove: "https://help.keboola.com" -%}
+{%- assign same_path = false -%}
+{%- if target_path == page.redirect.from -%}{%- assign same_path = true -%}{%- endif -%}
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{% if moved_to_help %}Moved to the Keboola help docs{% else %}Redirecting&hellip;{% endif %} | Keboola Developers Knowledge Base</title>
+	<link rel="canonical" href="{{ target }}">
+	<meta name="robots" content="noindex">
+	<script>location.replace("{{ target }}")</script>
+	<meta http-equiv="refresh" content="0; url={{ target }}">
+	<style>
+		body { margin: 0; padding: 3rem 1.5rem; color: #333; background: #fff;
+		       font: 16px/1.6 Lato, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
+		.box { max-width: 34rem; margin: 0 auto; }
+		.logo { height: 34px; margin-bottom: 2.5rem; }
+		h1 { margin: 0 0 1rem; font-size: 1.6rem; font-weight: 700; }
+		p { margin: 0 0 1rem; }
+		a { color: #337ab7; }
+		.target { display: block; margin: 1.5rem 0; padding: .9rem 1.1rem;
+		          background: #f5f5f5; border-left: 3px solid #337ab7;
+		          word-break: break-all; font-weight: 700; }
+		.muted { color: #777; font-size: .9rem; }
+	</style>
+</head>
+<body>
+	<div class="box">
+		<a href="/"><img class="logo" src="/assets/img/logo.png" alt="Keboola"></a>
+		{% if moved_to_help %}
+		<h1>This page has moved</h1>
+		<p>
+			{% if page.title %}<strong>{{ page.title }}</strong> is{% else %}This page is{% endif %}
+			now part of the Keboola documentation at <a href="https://help.keboola.com/">help.keboola.com</a>,
+			alongside the rest of the product documentation.{% if same_path %}
+			The path did not change &mdash; only the host.{% endif %}
+		</p>
+		<a class="target" href="{{ target }}">{{ target_label }}</a>
+		<p class="muted">
+			Taking you there now &mdash; use the link above if nothing happens.
+			Please update any bookmarks, links or component <code>documentation_url</code>s pointing here.
+		</p>
+		{% else %}
+		<h1>This page has a new address</h1>
+		<a class="target" href="{{ target }}">{{ target_label }}</a>
+		<p class="muted">Taking you there now &mdash; use the link above if nothing happens.</p>
+		{% endif %}
+	</div>
+</body>
+</html>

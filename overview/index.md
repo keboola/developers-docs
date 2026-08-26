@@ -31,7 +31,7 @@ All components share some common behaviour such as [*Component Configuration*](/
 This means that once worked your way through one component, you have seen them all.
 **Most of our components are open source**. If you are interested in their code, have a look at
 [our repositories](/overview/repositories/).
-Apart from that common features, some components define additional [synchronous actions](/extend/common-interface/actions/).
+Apart from that common features, some components define additional [synchronous actions](https://help.keboola.com/extend/common-interface/actions/).
 This (and many other information) can be retrieved using the [Developer Portal API](https://api.keboola.com/?service=developer-portal)
 (specifically the [Get app detail call](https://api.keboola.com/?service=developer-portal#get-/apps/-app-)
 which lists all components available in Keboola.
@@ -52,7 +52,7 @@ configurations is done through
 Stored configurations can be referenced in `/run` API calls.
 
 Configuration can be defined with a JSON schema stored within the Component detail.
-Docker Components without their own schemas can use a generic [Docker Component schema](/extend/job-queue/#configuration).
+Docker Components without their own schemas can use a generic [Docker Component schema](https://help.keboola.com/extend/job-queue/#configuration).
 
 ## Specific Components
 
@@ -66,5 +66,5 @@ Keboola supports the [Model Context Protocol (MCP)](https://modelcontextprotocol
 
 Our own [Keboola MCP Server](https://github.com/keboola/mcp-server) acts as a bridge between your Keboola project and modern AI tools. It exposes Keboola features like storage access, SQL transformations, and job triggers as callable tools for various MCP clients. Provides information about available components on stacks and can fetch documentation of any component using natural language queries using any MCP client.
 
-To learn more about integrating with MCP, see the [MCP integration guide](/integrate/mcp/).
+To learn more about integrating with MCP, see the [MCP Server documentation](https://help.keboola.com/ai/mcp-server/).
 
