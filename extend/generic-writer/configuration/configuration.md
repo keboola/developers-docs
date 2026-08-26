@@ -40,7 +40,7 @@ The data can be sent in two ways:
   contexts, e.g. passwords. Supports dynamic functions.
 - [**request_parameters**](/extend/generic-writer/configuration/#request-parameters) --- [REQUIRED] HTTP parameters of the request
     - [**method**](/extend/generic-writer/configuration/#method) --- [REQUIRED] defines the HTTP method of the requests.
-    - [**endpoint_path**](/extend/generic-writer/configuration/#enpoint-path) --- [REQUIRED] relative path of the endpoint.
+    - [**endpoint_path**](/extend/generic-writer/configuration/#endpoint-path) --- [REQUIRED] relative path of the endpoint.
     - [**query_parameters**](/extend/generic-writer/configuration/#query-parameters) --- query parameters sent with each
       request
     - [**headers**](/extend/generic-writer/configuration/#headers) --- headers sent with each request

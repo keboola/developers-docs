@@ -210,7 +210,7 @@ Jobs may be nested without limits. The parent-child relationship itself is a wea
 special outside of UI grouping and the function that terminating a parent job issues a termination request to all its children. 
 Running a job as a child of another job does not by itself cause the parent to wait for child 
 completion or any other added functionality.
-Such functionality is implemented in specific components (e.g. Orchestrator) or for specific [job types](todo).
+Such functionality is implemented in specific components (e.g. Orchestrator) or for specific [job types](/integrate/jobs/#job-type).
 
 ### Job Configuration
 To create a job, you must provide the [configuration](https://help.keboola.com/components/) to run. A configuration is always tied to a specific 

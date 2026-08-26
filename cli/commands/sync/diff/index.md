@@ -28,7 +28,7 @@ kbc d [flags]
 ## Examples
 
 When you change a configuration option of one component (e.g., an output table for a sheet 
-in the [Google Drive extractor](/components/extractors/storage/google-drive/)), the output will look like this:
+in the [Google Drive extractor](https://help.keboola.com/components/extractors/storage/google-drive/)), the output will look like this:
 
 ```
 ➜ kbc diff

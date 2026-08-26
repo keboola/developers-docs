@@ -59,7 +59,7 @@ Docker Components without their own schemas can use a generic [Docker Component 
 Apart from the above common API, some components offer other API calls:
 
   - [Storage](/integrate/storage/)
-  - [Transformations](/integrate/transformations/)
+  - [Transformations](https://help.keboola.com/transformations/)
 
 ## Model Context Protocol
 Keboola supports the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction), which allows AI agents and other AI assistants to interact with your Keboola projects. This enables you to leverage natural language to perform various operations within Keboola.
