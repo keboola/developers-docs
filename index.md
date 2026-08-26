@@ -27,7 +27,7 @@ In this documentation, we will show you how to
 	- Leverage natural language to build data pipelines and interact with your Keboola project using the [Model Context Protocol (MCP)](https://help.keboola.com/ai/mcp-server/).
 - [**Extend Keboola by building your own components**](/extend/) for your own use or for other Keboola users and customers.
 	- [Extend Keboola with arbitrary Docker images](https://help.keboola.com/extend/component/).
-	- Build your own [extractors](/extend/generic-extractor/) for services we do not support yet.
+	- Build your own [extractors](https://help.keboola.com/components/extractors/generic-extractor/) for services we do not support yet.
 - [**Automate your processes**](/automate/) to run any component in specified intervals or at specified times of the day.
 	- Control any component of Keboola [programmatically](/integrate/jobs/) (for example, you can trigger data load when something happens in your system).
 
