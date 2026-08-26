@@ -10,8 +10,9 @@ your own use or to be offered to other Keboola users and customers.
 
 <div class="alert alert-info">
 <b>Note:</b> Component development documentation — components, the common interface, Job Queue and publishing —
-now lives at <a href="https://help.keboola.com/extend/">help.keboola.com/extend/</a>. The old URLs here redirect there.
-Generic Extractor and Generic Writer are still documented on this site.
+now lives at <a href="https://help.keboola.com/extend/">help.keboola.com/extend/</a>. Generic Extractor and
+Generic Writer now live under <a href="https://help.keboola.com/components/">help.keboola.com/components/</a>.
+The old URLs here redirect there.
 </div>
 
 * TOC
