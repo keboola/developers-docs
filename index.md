@@ -20,7 +20,7 @@ such as Extractors, Storage or Writers, that are orchestrated together through (
 In this documentation, we will show you how to
 
 - [**Integrate Keboola with other systems**](/integrate/).
-	- Use Keboola just to exchange data (using the [Storage API](/integrate/storage/)).
+	- Use Keboola just to exchange data (using the [Storage API](https://help.keboola.com/storage/api/)).
 	- Use Keboola as a [data-handling backbone](/overview/api/) for your product.
 	- Wrap Keboola in your own UI for your customers.
 	- Control whole data processing pipeline within Keboola from the [outside](/integrate/).

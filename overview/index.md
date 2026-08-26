@@ -26,7 +26,7 @@ Our Docker components are built on [AWS ECR](https://aws.amazon.com/ecr/).
 This means that there are virtually **endless possibilities of what can be done with Keboola programmatically**.
 
 ## Component Common Features
-All components share some common behaviour such as [*Component Configuration*](/integrate/storage/api/configurations/)
+All components share some common behaviour such as [*Component Configuration*](https://help.keboola.com/storage/api/configurations/)
 [Running Jobs](/integrate/jobs/), which allows each component to be run in [Orchestrations](https://help.keboola.com/orchestrator/).
 This means that once worked your way through one component, you have seen them all.
 **Most of our components are open source**. If you are interested in their code, have a look at
@@ -46,7 +46,7 @@ For more details, see
 [full API description](https://api.keboola.com/?service=job-queue#post-/jobs).
 
 ### Components Configuration
-All components store their configuration in [Storage](/integrate/storage/). Management of the
+All components store their configuration in [Storage](https://help.keboola.com/storage/api/). Management of the
 configurations is done through
 [Storage Components Configurations API](https://api.keboola.com/?service=storage#tag--Component-Configurations).
 Stored configurations can be referenced in `/run` API calls.
@@ -58,7 +58,7 @@ Docker Components without their own schemas can use a generic [Docker Component 
 
 Apart from the above common API, some components offer other API calls:
 
-  - [Storage](/integrate/storage/)
+  - [Storage](https://help.keboola.com/storage/api/)
   - [Transformations](/integrate/transformations/)
 
 ## Model Context Protocol
