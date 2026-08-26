@@ -13,15 +13,6 @@ items:
 
   - url: /extend/
     title: Extending Keboola
-    items:
-      - url: /extend/generic-writer/
-        title: Generic Writer
-        items:
-          - url: /extend/generic-writer/configuration/
-            title: Configuration
-
-          - url: /extend/generic-writer/configuration-examples/
-            title: Configuration Examples
 
   - url: /integrate/
     title: Integration
