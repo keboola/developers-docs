@@ -23,7 +23,19 @@ page went on its own.
 	<title>{% if moved_to_help %}Moved to the Keboola help docs{% else %}Redirecting&hellip;{% endif %} | Keboola Developers Knowledge Base</title>
 	<link rel="canonical" href="{{ target }}">
 	<meta name="robots" content="noindex">
-	<script>location.replace("{{ target }}")</script>
+	{%- comment -%}
+	Carry the URL fragment across the redirect: a reader following a deep link
+	like /extend/generic-extractor/configuration/#retry should land on that
+	section of the help page, not at its top. The meta refresh below is the
+	no-JS fallback and cannot forward the fragment (browsers drop it).
+	{%- endcomment -%}
+	<script>
+		var target = "{{ target }}";
+		if (target.indexOf("#") < 0 && location.hash) {
+			target += location.hash;
+		}
+		location.replace(target);
+	</script>
 	<meta http-equiv="refresh" content="0; url={{ target }}">
 	<style>
 		body { margin: 0; padding: 3rem 1.5rem; color: #333; background: #fff;

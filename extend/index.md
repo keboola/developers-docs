@@ -10,8 +10,9 @@ your own use or to be offered to other Keboola users and customers.
 
 <div class="alert alert-info">
 <b>Note:</b> Component development documentation — components, the common interface, Job Queue and publishing —
-now lives at <a href="https://help.keboola.com/extend/">help.keboola.com/extend/</a>. The old URLs here redirect there.
-Generic Extractor and Generic Writer are still documented on this site.
+now lives at <a href="https://help.keboola.com/extend/">help.keboola.com/extend/</a>. Generic Extractor and
+Generic Writer now live under <a href="https://help.keboola.com/components/">help.keboola.com/components/</a>.
+The old URLs here redirect there.
 </div>
 
 * TOC
@@ -55,12 +56,12 @@ They can be implemented in virtually any programming language and be fully custo
 They also support OAuth authorization. To get started with building a component, see our [**tutorial**](https://help.keboola.com/extend/component/tutorial/).
 
 ## Generic Extractor
-[Generic Extractor](/extend/generic-extractor/) is a Keboola component acting like a
-customizable [HTTP REST client](/extend/generic-extractor/tutorial/rest/). It can be configured to extract data 
+[Generic Extractor](https://help.keboola.com/components/extractors/generic-extractor/) is a Keboola component acting like a
+customizable [HTTP REST client](https://help.keboola.com/components/extractors/generic-extractor/tutorial/rest/). It can be configured to extract data 
 from virtually any API and offers a vast amount of configuration options. With Generic Extractor, you can build an 
 entirely new extractor for Keboola in less than an hour. 
 
-Components based on Generic Extractor are built using [JSON configuration](/extend/generic-extractor/tutorial/) and a
-[published template](/extend/generic-extractor/publish/). They have a predefined UI, require no knowledge of Docker or
+Components based on Generic Extractor are built using [JSON configuration](https://help.keboola.com/components/extractors/generic-extractor/tutorial/) and a
+[published template](https://help.keboola.com/components/extractors/generic-extractor/publish/). They have a predefined UI, require no knowledge of Docker or
 other tools, and they use a Keboola owned [repository](https://github.com/keboola/kbc-ui-templates/). To get 
-started with Generic Extractor, see our [**tutorial**](/extend/generic-extractor/tutorial/).
+started with Generic Extractor, see our [**tutorial**](https://help.keboola.com/components/extractors/generic-extractor/tutorial/).

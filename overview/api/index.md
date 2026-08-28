@@ -23,14 +23,14 @@ Using a portal for a different stack than your token's stack will result in <cod
 
 | API                                                                                                         | Description                                                                                                                                                         |
 |-------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Keboola Storage API](https://api.keboola.com/?service=storage) ([source](https://github.com/keboola/storage-api-php-client/blob/master/apiary.apib)) | [Storage](/integrate/storage/) is the main Keboola component storing all data.                                                                                      |
+| [Keboola Storage API](https://api.keboola.com/?service=storage) ([source](https://github.com/keboola/storage-api-php-client/blob/master/apiary.apib)) | [Storage](https://help.keboola.com/storage/api/) is the main Keboola component storing all data.                                                                                      |
 | [Keboola Management API](https://api.keboola.com/?service=manage)                                          | API managing Keboola projects and users (and notifications and features).                                                                                           |
 | [AI API](https://api.keboola.com/?service=ai)                                                               | API for supporting AI features.                                                                                                                                     |
 | [Billing API](https://api.keboola.com/?service=billing)                                                     | Billing API for Pay as You Go projects.                                                                                                                             |
 | [Developer Portal API](https://api.keboola.com/?service=developer-portal)                                   | Developer Portal is an application separated from Keboola for [creating components](https://help.keboola.com/extend/component/).                                                            |
 | [Editor API](https://api.keboola.com/?service=editor)                                                       | API for managing SQL editor sessions.                                                                                                                               |
 | [Encryption API](https://api.keboola.com/?service=encryption)                                               | Provides [Encryption](/overview/encryption/).                                                                                                                       |
-| [Importer API](https://api.keboola.com/?service=import)                                                     | [Importer](/integrate/storage/api/importer/) is a helper service for easy table imports.                                                                            |
+| [Importer API](https://api.keboola.com/?service=import)                                                     | [Importer](https://help.keboola.com/storage/api/importer/) is a helper service for easy table imports.                                                                            |
 | [Notifications API](https://api.keboola.com/?service=notification)                                          | API to subscribe to events, e.g., failed orchestrations.                                                                                                            |
 | [OAuth Broker API](https://api.keboola.com/?service=oauth)                                                  | OAuth Broker is a component managing [OAuth authorizations](https://help.keboola.com/extend/common-interface/oauth/#authorize) of other components.                                         |
 | [Query API](https://api.keboola.com/?service=query)                                                 | Query is a service for running SQL queries on Snowflake and BigQuery.                                                         |
@@ -145,7 +145,7 @@ Otherwise, you may encounter `Invalid Token` or unauthorized errors. The *author
 
 The services listed above are:
 
-- `import` --- [Storage Importer Service](/integrate/storage/api/importer/)
+- `import` --- [Storage Importer Service](https://help.keboola.com/storage/api/importer/)
 - `oauth` --- [OAuth Manager Service](https://help.keboola.com/extend/common-interface/oauth/)
 - `queue` --- [Service for Running Components](https://help.keboola.com/extend/job-queue/)
 - `billing` --- Service for Computing Credits
