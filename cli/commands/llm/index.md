@@ -1,39 +1,7 @@
 ---
 title: LLM Commands (BETA)
 permalink: /cli/commands/llm/
+redirect_to: https://github.com/keboola/keboola-as-code
 ---
 
-* TOC
-{:toc}
-
-<div class="alert alert-info" role="alert">
-<strong>BETA:</strong> The LLM commands are currently in beta. Features and output format may change.
-</div>
-
-**Export project data to AI-optimized format for use with AI assistants and LLMs.**
-
-The `kbc llm` commands create a "twin format" representation of your Keboola project,
-designed for AI assistants to understand and work with your data pipelines.
-
-```
-kbc llm [command]
-```
-
-## Workflow
-
-1. **Initialize** - Run `kbc llm init` to set up the local directory
-2. **Export** - Run `kbc llm export` to generate AI-optimized project data
-
-## Available Commands
-
-|---
-| Command | Description
-|-|-|-
-| [kbc llm init](/cli/commands/llm/init/) | Initialize a new local directory for LLM export. |
-| [kbc llm export](/cli/commands/llm/export/) | Export project data to AI-optimized twin format. |
-
-## Next Steps
-
-- [LLM Init](/cli/commands/llm/init/)
-- [LLM Export](/cli/commands/llm/export/)
-- [All Commands](/cli/commands/)
+The Keboola as Code CLI documentation has been retired. The tool itself lives at [keboola/keboola-as-code](https://github.com/keboola/keboola-as-code). This page's content remains in this repository's git history.

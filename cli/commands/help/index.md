@@ -1,28 +1,7 @@
 ---
 title: Help Command
 permalink: /cli/commands/help/
+redirect_to: https://github.com/keboola/keboola-as-code
 ---
 
-* TOC
-{:toc}
-
-**Shows help for any command.**
-
-```
-kbc help [command] [flags]
-```
-
-## Options
-
-[Global Options](/cli/commands/#global-options)
-
-## Example
-
-```
-kbc help local create config
-```
-
-## Next Steps
-
-- [All Commands](/cli/commands/)
-- [Init](/cli/commands/sync/init/)
+The Keboola as Code CLI documentation has been retired. The tool itself lives at [keboola/keboola-as-code](https://github.com/keboola/keboola-as-code). This page's content remains in this repository's git history.
