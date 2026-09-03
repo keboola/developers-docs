@@ -1,18 +1,7 @@
 ---
 title: CI Command
 permalink: /cli/commands/ci/
+redirect_to: https://github.com/keboola/keboola-as-code/blob/main/docs/user-docs/commands/ci.md
 ---
 
-* TOC
-{:toc}
-
-Commands to manage the CI/CD pipeline.
-
-```
-kbc ci [command]
-```
-
-|---
-| Command | Description
-|-|-|-
-| [kbc ci workflows](/cli/commands/ci/workflows/) | Generate workflows for [GitHub Actions integration](/cli/github-integration/). |
+This page has moved to the [Keboola as Code repository](https://github.com/keboola/keboola-as-code/blob/main/docs/user-docs/commands/ci.md).

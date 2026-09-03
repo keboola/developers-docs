@@ -1,18 +1,7 @@
 ---
 title: Job Commands
 permalink: /cli/commands/remote/job/
+redirect_to: https://github.com/keboola/keboola-as-code/blob/main/docs/user-docs/commands/remote/job.md
 ---
 
-* TOC
-{:toc}
-
-**Manage [jobs](https://help.keboola.com/management/jobs/) directly in the [project](/cli/#subsystems).**
-
-```
-kbc remote job [command]
-```
-
-|---
-| Command | Description
-|-|-|-
-| [kbc remote job run](/cli/commands/remote/job/run/) | Run a job. |
+This page has moved to the [Keboola as Code repository](https://github.com/keboola/keboola-as-code/blob/main/docs/user-docs/commands/remote/job.md).

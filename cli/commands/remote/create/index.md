@@ -1,21 +1,7 @@
 ---
 title: Create Remote Object
 permalink: /cli/commands/remote/create/
+redirect_to: https://github.com/keboola/keboola-as-code/blob/main/docs/user-docs/commands/remote/create.md
 ---
 
-* TOC
-{:toc}
-
-**Create an object directly in the [project](/cli/#subsystems).**
-
-```
-kbc remote create [command]
-```
-
-Shows an interactive dialog if you do not enter a sub-command.
-
-|---
-| Command | Description
-|-|-|-
-| [kbc remote create branch](/cli/commands/remote/create/branch/) | Create a new [branch](https://help.keboola.com/components/branches/) from the `main` branch. |
-| [kbc remote create bucket](/cli/commands/remote/create/bucket/) | Create a new [bucket](https://help.keboola.com/storage/buckets/). |
+This page has moved to the [Keboola as Code repository](https://github.com/keboola/keboola-as-code/blob/main/docs/user-docs/commands/remote/create.md).

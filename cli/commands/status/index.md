@@ -1,54 +1,7 @@
 ---
 title: Status Command
 permalink: /cli/commands/status/
+redirect_to: https://github.com/keboola/keboola-as-code/blob/main/docs/user-docs/commands/status.md
 ---
 
-* TOC
-{:toc}
-
-**Show information about the current working directory.**
-
-```
-kbc status [flags]
-```
-
-## Options
-
-[Global Options](/cli/commands/#global-options)
-
-## Examples
-
-Status of a project directory:
-```
-➜ kbc status
-Project directory:  /home/kbc-project
-Working directory:  .
-Manifest path:      .keboola/manifest.json
-```
-
-Status of a template repository directory:
-```
-➜ kbc status
-Repository directory:  /home/kbc-repository
-Working directory:     .
-Manifest path:         .keboola/repository.json
-```
-
-Status of a template directory:
-```
-➜ kbc status
-Template directory:    /home/kbc-repository/my-template/v1
-Working directory:     .
-Manifest path:         src/manifest.jsonnet
-```
-
-Status of an unknown directory:
-```
-Directory "/home/kbc-test" is not a project or template repository.
-```
-
-
-## Next Steps
-
-- [All Commands](/cli/commands/)
-- [Init](/cli/commands/sync/init/)
+This page has moved to the [Keboola as Code repository](https://github.com/keboola/keboola-as-code/blob/main/docs/user-docs/commands/status.md).

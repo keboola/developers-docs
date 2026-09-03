@@ -1,21 +1,7 @@
 ---
 title: Sync Command
 permalink: /cli/commands/sync/
+redirect_to: https://github.com/keboola/keboola-as-code/blob/main/docs/user-docs/commands/sync.md
 ---
 
-* TOC
-{:toc}
-
-**Synchronization between a [local directory](/cli/structure/) and a [project](/cli/#subsystems).**
-
-```
-kbc sync [command]
-```
-
-|---
-| Command | Description
-|-|-|-
-| [kbc sync init](/cli/commands/sync/init/) | Initialize a new local directory and run `kbc sync pull`. |
-| [kbc sync pull](/cli/commands/sync/pull/) | Sync a project to the local directory. |
-| [kbc sync push](/cli/commands/sync/push/) | Sync the local directory to the project. |
-| [kbc sync diff](/cli/commands/sync/diff/) | Show differences between the local directory and the project. |
+This page has moved to the [Keboola as Code repository](https://github.com/keboola/keboola-as-code/blob/main/docs/user-docs/commands/sync.md).
