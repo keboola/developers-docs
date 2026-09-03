@@ -1,7 +1,7 @@
 ---
 title: LLM Commands (BETA)
 permalink: /cli/commands/llm/
-redirect_to: https://github.com/keboola/keboola-as-code/blob/main/docs/user-docs/commands/llm.md
+redirect_to: https://github.com/keboola/keboola-as-code
 ---
 
-This page has moved to the [Keboola as Code repository](https://github.com/keboola/keboola-as-code/blob/main/docs/user-docs/commands/llm.md).
+The Keboola as Code CLI documentation has been retired. The tool itself lives at [keboola/keboola-as-code](https://github.com/keboola/keboola-as-code). This page's content remains in this repository's git history.
