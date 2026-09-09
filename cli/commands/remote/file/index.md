@@ -1,19 +1,7 @@
 ---
 title: File Commands
 permalink: /cli/commands/remote/file/
+redirect_to: https://github.com/keboola/keboola-as-code
 ---
 
-* TOC
-  {:toc}
-
-**Manage [files](https://help.keboola.com/storage/files/) directly in the [project](/cli/#subsystems).**
-
-```
-kbc remote file [command]
-```
-
-|---
-| Command | Description
-|-|-|-
-| [kbc remote file download](/cli/commands/remote/file/download/) | Download a [file](https://help.keboola.com/storage/files/) from Storage. |
-| [kbc remote file upload](/cli/commands/remote/file/upload/) | Upload a [file](https://help.keboola.com/storage/files/) to Storage. |
+The Keboola as Code CLI documentation has been retired. The tool itself lives at [keboola/keboola-as-code](https://github.com/keboola/keboola-as-code). This page's content remains in this repository's git history.
