@@ -1,12 +1,5 @@
 ---
 title: Orchestrator
 permalink: /integrate/orchestrator/
+redirect_to: https://help.keboola.com/flows/
 ---
-
-{% comment %}
-spusteni jobu
-API pro konfiguraci, nepouzivat normalni api
-custom joby
-
-sloucit s /automate/
-{% endcomment %}
