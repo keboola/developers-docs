@@ -4,51 +4,18 @@ items:
 
   - url: /overview/
     title: Keboola Overview
-    items:
-      - url: /overview/api/
-        title: Our APIs
-
-      - url: /overview/encryption/
-        title: Encryption
 
   - url: /extend/
-    title: Extending Keboola
+    title: Extending Keboola (moved)
 
   - url: /integrate/
-    title: Integration
+    title: Integration (moved)
     items:
-      - url: /integrate/jobs/
-        title: Component Jobs
-
-      - url: /integrate/artifacts/
-        title: Artifacts
-        items:
-          - url: /integrate/artifacts/tutorial/
-            title: Tutorial
-
       - url: /integrate/database/
         title: SSH Tunnel for Database Extractors
 
-      - url: /integrate/data-streams/
-        title: Data Streams
-        items:
-          - url: /integrate/data-streams/tutorial/
-            title: Tutorial
-
-          - url: /integrate/data-streams/overview/
-            title: Overview
-
   - url: /automate/
-    title: Automation/Common Tasks
-    items:
-      - url: /automate/run-job/
-        title: Run Job
-
-      - url: /automate/run-orchestration/
-        title: Run Orchestration
-
-      - url: /automate/set-schedule/
-        title: Set Schedule
+    title: Automation (moved)
 
   - url: /cli/
     title: CLI (moved)
